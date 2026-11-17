@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","contextTypes":["FRAMES","FRAMES"],"description":"__Description__","eventBridgeDelivery":"ENABLED","id":"__Id__","name":"__Name__","references":["__Member__","__Member__"],"requestExpression":"__RequestExpression__","responseExpression":"__ResponseExpression__","status":"CREATING","tags":{"key0":"__Value__"},"target":{"bedrock":{"api":"INVOKE_MODEL","model":"__Model__"}}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","description":"__Description__","name":"__Name__","operatingSystem":"__OperatingSystem__","remoteSourceActionID":"__RemoteSourceActionID__","ssmParameterName":"__SsmParameterName__","tags":{"key0":"__Value__"},"timeoutSeconds":1},{"arn":"__Arn__","description":"__Description__","name":"__Name__","operatingSystem":"__OperatingSystem__","remoteSourceActionID":"__RemoteSourceActionID__","ssmParameterName":"__SsmParameterName__","tags":{"key0":"__Value__"},"timeoutSeconds":1}],"nextToken":"__NextToken__"}

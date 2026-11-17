@@ -7026,7 +7026,7 @@ var _ErrorResults_member *smithy.Schema
 var Evaluation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Evaluation",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 14)
 var Evaluation_EvaluationId *smithy.Schema
 
 var Evaluation_EvaluationArn *smithy.Schema
@@ -7048,6 +7048,12 @@ var Evaluation_LastModifiedTime *smithy.Schema
 var Evaluation_EvaluationType *smithy.Schema
 
 var Evaluation_Tags *smithy.Schema
+
+var Evaluation_ItemEnablementStatus *smithy.Schema
+
+var Evaluation_SourceResolutionStatus *smithy.Schema
+
+var Evaluation_SourceValues *smithy.Schema
 
 var EvaluationAcknowledgement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7171,6 +7177,22 @@ var EvaluationContactParticipant_ContactParticipantRole *smithy.Schema
 
 var EvaluationContactParticipant_ContactParticipantId *smithy.Schema
 
+var EvaluationEnablementStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationEnablementStatus",
+}, smithy.ShapeTypeEnum, 2)
+var EvaluationEnablementStatus_ENABLED *smithy.Schema
+
+var EvaluationEnablementStatus_DISABLED *smithy.Schema
+
+var _EvaluationEnablementStatusMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationEnablementStatusMap",
+}, smithy.ShapeTypeMap, 2)
+var _EvaluationEnablementStatusMap_key *smithy.Schema
+
+var _EvaluationEnablementStatusMap_value *smithy.Schema
+
 var EvaluationForm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationForm",
@@ -7216,6 +7238,30 @@ var EvaluationForm_LatestValidationStatus *smithy.Schema
 var EvaluationForm_LastValidationTime *smithy.Schema
 
 var EvaluationForm_AIVersion *smithy.Schema
+
+var EvaluationFormAiMetricsField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormAiMetricsField",
+}, smithy.ShapeTypeEnum, 10)
+var EvaluationFormAiMetricsField_AI_SESSION_IS_HANDED_OFF *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_SESSION_SELF_SERVICE_DURATION *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_SESSION_GOAL_SUCCESS_RATE *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_SESSION_COMPLETENESS_SCORE *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_SESSION_FAITHFULNESS_SCORE *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_AGENT_MAX_PROMPT_LATENCY *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_TOOL_MAX_LATENCY *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_TOOL_SELECTION_ACCURACY *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_TOOL_PARAMETER_ACCURACY *smithy.Schema
+
+var EvaluationFormAiMetricsField_AI_TOOL_UTILIZATION_ACCURACY *smithy.Schema
 
 var _EvaluationFormAIVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7264,6 +7310,57 @@ var EvaluationFormAutoEvaluationConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var EvaluationFormAutoEvaluationConfiguration_Enabled *smithy.Schema
 
+var _EvaluationFormContactAttributeKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormContactAttributeKey",
+}, smithy.ShapeTypeString, 0)
+
+var EvaluationFormContactField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormContactField",
+}, smithy.ShapeTypeEnum, 21)
+var EvaluationFormContactField_CATEGORIES *smithy.Schema
+
+var EvaluationFormContactField_AGENT_ARN *smithy.Schema
+
+var EvaluationFormContactField_QUEUE_ARN *smithy.Schema
+
+var EvaluationFormContactField_ROUTING_PROFILE_ARN *smithy.Schema
+
+var EvaluationFormContactField_CHANNEL *smithy.Schema
+
+var EvaluationFormContactField_INITIATION_METHOD *smithy.Schema
+
+var EvaluationFormContactField_IS_QUEUED *smithy.Schema
+
+var EvaluationFormContactField_OVERALL_CUSTOMER_SENTIMENT_SCORE *smithy.Schema
+
+var EvaluationFormContactField_OVERALL_AGENT_SENTIMENT_SCORE *smithy.Schema
+
+var EvaluationFormContactField_CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT *smithy.Schema
+
+var EvaluationFormContactField_CUSTOMER_SENTIMENT_SCORE_WITH_AGENT *smithy.Schema
+
+var EvaluationFormContactField_NON_TALK_TIME *smithy.Schema
+
+var EvaluationFormContactField_NON_TALK_TIME_PERCENTAGE *smithy.Schema
+
+var EvaluationFormContactField_NUMBER_OF_INTERRUPTIONS *smithy.Schema
+
+var EvaluationFormContactField_CONTACT_DURATION *smithy.Schema
+
+var EvaluationFormContactField_AGENT_INTERACTION_DURATION *smithy.Schema
+
+var EvaluationFormContactField_CUSTOMER_HOLD_TIME *smithy.Schema
+
+var EvaluationFormContactField_LONGEST_HOLD_DURATION *smithy.Schema
+
+var EvaluationFormContactField_NUMBER_OF_HOLDS *smithy.Schema
+
+var EvaluationFormContactField_AGENT_INTERACTION_AND_HOLD_DURATION *smithy.Schema
+
+var EvaluationFormContactField_RECORDING_MEDIA_STREAM_TYPES *smithy.Schema
+
 var EvaluationFormContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormContent",
@@ -7296,6 +7393,27 @@ var _EvaluationFormDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormDescription",
 }, smithy.ShapeTypeString, 0)
+
+var _EvaluationFormEnablementBooleanValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormEnablementBooleanValue",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _EvaluationFormEnablementNumericValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormEnablementNumericValue",
+}, smithy.ShapeTypeDouble, 0)
+
+var _EvaluationFormEnablementStringValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormEnablementStringValue",
+}, smithy.ShapeTypeString, 0)
+
+var EvaluationFormEvaluationMetadataField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormEvaluationMetadataField",
+}, smithy.ShapeTypeEnum, 1)
+var EvaluationFormEvaluationMetadataField_EVALUATION_TYPE *smithy.Schema
 
 var _EvaluationFormId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7371,24 +7489,50 @@ var EvaluationFormItemEnablementOperator_AND *smithy.Schema
 var EvaluationFormItemEnablementSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormItemEnablementSource",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 7)
 var EvaluationFormItemEnablementSource_Type *smithy.Schema
 
 var EvaluationFormItemEnablementSource_RefId *smithy.Schema
 
+var EvaluationFormItemEnablementSource_ContactField *smithy.Schema
+
+var EvaluationFormItemEnablementSource_ContactAttributeKey *smithy.Schema
+
+var EvaluationFormItemEnablementSource_SegmentAttributeKey *smithy.Schema
+
+var EvaluationFormItemEnablementSource_EvaluationMetadataField *smithy.Schema
+
+var EvaluationFormItemEnablementSource_AiMetricsField *smithy.Schema
+
 var EvaluationFormItemEnablementSourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormItemEnablementSourceType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 5)
 var EvaluationFormItemEnablementSourceType_QUESTION_REF_ID *smithy.Schema
+
+var EvaluationFormItemEnablementSourceType_CONTACT *smithy.Schema
+
+var EvaluationFormItemEnablementSourceType_EVALUATION_METADATA *smithy.Schema
+
+var EvaluationFormItemEnablementSourceType_FORM_METADATA *smithy.Schema
+
+var EvaluationFormItemEnablementSourceType_AI_METRICS *smithy.Schema
 
 var EvaluationFormItemEnablementSourceValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormItemEnablementSourceValue",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 6)
 var EvaluationFormItemEnablementSourceValue_Type *smithy.Schema
 
 var EvaluationFormItemEnablementSourceValue_RefId *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValue_StringValue *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValue_NumericValue *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValue_BooleanValue *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValue_DateTimeValue *smithy.Schema
 
 var _EvaluationFormItemEnablementSourceValueList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7399,8 +7543,16 @@ var _EvaluationFormItemEnablementSourceValueList_member *smithy.Schema
 var EvaluationFormItemEnablementSourceValueType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormItemEnablementSourceValueType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 5)
 var EvaluationFormItemEnablementSourceValueType_OPTION_REF_ID *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValueType_STRING_VALUE *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValueType_NUMERIC_VALUE *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValueType_BOOLEAN_VALUE *smithy.Schema
+
+var EvaluationFormItemEnablementSourceValueType_DATETIME_VALUE *smithy.Schema
 
 var _EvaluationFormItemsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7411,7 +7563,7 @@ var _EvaluationFormItemsList_member *smithy.Schema
 var EvaluationFormItemSourceValuesComparator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormItemSourceValuesComparator",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 10)
 var EvaluationFormItemSourceValuesComparator_IN *smithy.Schema
 
 var EvaluationFormItemSourceValuesComparator_NOT_IN *smithy.Schema
@@ -7419,6 +7571,18 @@ var EvaluationFormItemSourceValuesComparator_NOT_IN *smithy.Schema
 var EvaluationFormItemSourceValuesComparator_ALL_IN *smithy.Schema
 
 var EvaluationFormItemSourceValuesComparator_EXACT *smithy.Schema
+
+var EvaluationFormItemSourceValuesComparator_GREATER_THAN *smithy.Schema
+
+var EvaluationFormItemSourceValuesComparator_LESS_THAN *smithy.Schema
+
+var EvaluationFormItemSourceValuesComparator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
+
+var EvaluationFormItemSourceValuesComparator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
+
+var EvaluationFormItemSourceValuesComparator_EQUAL_TO *smithy.Schema
+
+var EvaluationFormItemSourceValuesComparator_NOT_EQUAL_TO *smithy.Schema
 
 var _EvaluationFormItemWeight = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7813,10 +7977,12 @@ var EvaluationFormQuestionAutomationAnswerSource_SourceType *smithy.Schema
 var EvaluationFormQuestionAutomationAnswerSourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormQuestionAutomationAnswerSourceType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var EvaluationFormQuestionAutomationAnswerSourceType_CONTACT_LENS_DATA *smithy.Schema
 
 var EvaluationFormQuestionAutomationAnswerSourceType_GEN_AI *smithy.Schema
+
+var EvaluationFormQuestionAutomationAnswerSourceType_CONDITION *smithy.Schema
 
 var _EvaluationFormQuestionInstructions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -7985,7 +8151,7 @@ var _EvaluationFormSearchSummaryList_member *smithy.Schema
 var EvaluationFormSection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormSection",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var EvaluationFormSection_Title *smithy.Schema
 
 var EvaluationFormSection_RefId *smithy.Schema
@@ -8000,9 +8166,16 @@ var EvaluationFormSection_IsExcludedFromScoring *smithy.Schema
 
 var EvaluationFormSection_ScoreThresholds *smithy.Schema
 
+var EvaluationFormSection_Enablement *smithy.Schema
+
 var _EvaluationFormSectionTitle = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormSectionTitle",
+}, smithy.ShapeTypeString, 0)
+
+var _EvaluationFormSegmentAttributeKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationFormSegmentAttributeKey",
 }, smithy.ShapeTypeString, 0)
 
 var EvaluationFormSingleSelectQuestionAutomation = smithy.NewSchema(smithy.ShapeID{
@@ -8018,8 +8191,10 @@ var EvaluationFormSingleSelectQuestionAutomation_AnswerSource *smithy.Schema
 var EvaluationFormSingleSelectQuestionAutomationOption = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationFormSingleSelectQuestionAutomationOption",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var EvaluationFormSingleSelectQuestionAutomationOption_RuleCategory *smithy.Schema
+
+var EvaluationFormSingleSelectQuestionAutomationOption_AutomationRule *smithy.Schema
 
 var _EvaluationFormSingleSelectQuestionAutomationOptionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -8258,6 +8433,16 @@ var _EvaluationId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EvaluationId",
 }, smithy.ShapeTypeString, 0)
 
+var EvaluationItemResolutionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationItemResolutionStatus",
+}, smithy.ShapeTypeEnum, 3)
+var EvaluationItemResolutionStatus_PENDING *smithy.Schema
+
+var EvaluationItemResolutionStatus_RESOLVED *smithy.Schema
+
+var EvaluationItemResolutionStatus_FAILED *smithy.Schema
+
 var EvaluationMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationMetadata",
@@ -8312,16 +8497,40 @@ var EvaluationQuestionAnswerAnalysisDetails_ContactLens *smithy.Schema
 var EvaluationQuestionAnswerAnalysisType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationQuestionAnswerAnalysisType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var EvaluationQuestionAnswerAnalysisType_CONTACT_LENS_DATA *smithy.Schema
 
 var EvaluationQuestionAnswerAnalysisType_GEN_AI *smithy.Schema
+
+var EvaluationQuestionAnswerAnalysisType_CONDITION *smithy.Schema
 
 var EvaluationQuestionInputDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "EvaluationQuestionInputDetails",
 }, smithy.ShapeTypeStructure, 1)
 var EvaluationQuestionInputDetails_TranscriptType *smithy.Schema
+
+var EvaluationResolvedSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationResolvedSource",
+}, smithy.ShapeTypeStructure, 3)
+var EvaluationResolvedSource_Source *smithy.Schema
+
+var EvaluationResolvedSource_Status *smithy.Schema
+
+var EvaluationResolvedSource_Values *smithy.Schema
+
+var _EvaluationResolvedSourceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationResolvedSourceList",
+}, smithy.ShapeTypeList, 1)
+var _EvaluationResolvedSourceList_member *smithy.Schema
+
+var _EvaluationResolvedSourceValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "EvaluationResolvedSourceValueList",
+}, smithy.ShapeTypeList, 1)
+var _EvaluationResolvedSourceValueList_member *smithy.Schema
 
 var EvaluationReviewConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -11408,7 +11617,7 @@ var _NumberValueList_member *smithy.Schema
 var NumericQuestionPropertyAutomationLabel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "NumericQuestionPropertyAutomationLabel",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 22)
 var NumericQuestionPropertyAutomationLabel_OVERALL_CUSTOMER_SENTIMENT_SCORE *smithy.Schema
 
 var NumericQuestionPropertyAutomationLabel_OVERALL_AGENT_SENTIMENT_SCORE *smithy.Schema
@@ -11434,6 +11643,24 @@ var NumericQuestionPropertyAutomationLabel_LONGEST_HOLD_DURATION *smithy.Schema
 var NumericQuestionPropertyAutomationLabel_NUMBER_OF_HOLDS *smithy.Schema
 
 var NumericQuestionPropertyAutomationLabel_AGENT_INTERACTION_AND_HOLD_DURATION *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_SESSION_SELF_SERVICE_DURATION *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_SESSION_GOAL_SUCCESS_RATE *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_SESSION_COMPLETENESS_SCORE *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_SESSION_FAITHFULNESS_SCORE *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_AGENT_MAX_PROMPT_LATENCY *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_TOOL_MAX_LATENCY *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_TOOL_SELECTION_ACCURACY *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_TOOL_PARAMETER_ACCURACY *smithy.Schema
+
+var NumericQuestionPropertyAutomationLabel_AI_TOOL_UTILIZATION_ACCURACY *smithy.Schema
 
 var NumericQuestionPropertyValueAutomation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -15390,6 +15617,14 @@ var _SingleSelectOptions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SingleSelectOptions",
 }, smithy.ShapeTypeList, 1)
 var _SingleSelectOptions_member *smithy.Schema
+
+var SingleSelectQuestionAutomationRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "SingleSelectQuestionAutomationRule",
+}, smithy.ShapeTypeStructure, 2)
+var SingleSelectQuestionAutomationRule_Condition *smithy.Schema
+
+var SingleSelectQuestionAutomationRule_OptionRefId *smithy.Schema
 
 var SingleSelectQuestionRuleCategoryAutomation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -28829,6 +29064,8 @@ func init() {
 
 	EvaluationQuestionAnswerAnalysisType_GEN_AI = EvaluationQuestionAnswerAnalysisType.AddMember("GEN_AI", smithyprelude.Unit)
 
+	EvaluationQuestionAnswerAnalysisType_CONDITION = EvaluationQuestionAnswerAnalysisType.AddMember("CONDITION", smithyprelude.Unit)
+
 	EvaluationSuggestedAnswerTranscriptMillisecondOffsets_BeginOffsetMillis = EvaluationSuggestedAnswerTranscriptMillisecondOffsets.AddMember("BeginOffsetMillis", _EvaluationSuggestedAnswerTranscriptMillisOffset)
 
 	EvaluationTranscriptPointOfInterest_MillisecondOffsets = EvaluationTranscriptPointOfInterest.AddMember("MillisecondOffsets", EvaluationSuggestedAnswerTranscriptMillisecondOffsets)
@@ -28903,6 +29140,140 @@ func init() {
 
 	EvaluationType_CALIBRATION = EvaluationType.AddMember("CALIBRATION", smithyprelude.Unit)
 
+	EvaluationEnablementStatus_ENABLED = EvaluationEnablementStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	EvaluationEnablementStatus_DISABLED = EvaluationEnablementStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	_EvaluationEnablementStatusMap_key = _EvaluationEnablementStatusMap.AddMember("key", _ReferenceId)
+
+	_EvaluationEnablementStatusMap_value = _EvaluationEnablementStatusMap.AddMember("value", EvaluationEnablementStatus)
+
+	EvaluationItemResolutionStatus_PENDING = EvaluationItemResolutionStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	EvaluationItemResolutionStatus_RESOLVED = EvaluationItemResolutionStatus.AddMember("RESOLVED", smithyprelude.Unit)
+
+	EvaluationItemResolutionStatus_FAILED = EvaluationItemResolutionStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceType_QUESTION_REF_ID = EvaluationFormItemEnablementSourceType.AddMember("QUESTION_REF_ID", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceType_CONTACT = EvaluationFormItemEnablementSourceType.AddMember("CONTACT", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceType_EVALUATION_METADATA = EvaluationFormItemEnablementSourceType.AddMember("EVALUATION_METADATA", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceType_FORM_METADATA = EvaluationFormItemEnablementSourceType.AddMember("FORM_METADATA", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceType_AI_METRICS = EvaluationFormItemEnablementSourceType.AddMember("AI_METRICS", smithyprelude.Unit)
+
+	EvaluationFormContactField_CATEGORIES = EvaluationFormContactField.AddMember("CATEGORIES", smithyprelude.Unit)
+
+	EvaluationFormContactField_AGENT_ARN = EvaluationFormContactField.AddMember("AGENT_ARN", smithyprelude.Unit)
+
+	EvaluationFormContactField_QUEUE_ARN = EvaluationFormContactField.AddMember("QUEUE_ARN", smithyprelude.Unit)
+
+	EvaluationFormContactField_ROUTING_PROFILE_ARN = EvaluationFormContactField.AddMember("ROUTING_PROFILE_ARN", smithyprelude.Unit)
+
+	EvaluationFormContactField_CHANNEL = EvaluationFormContactField.AddMember("CHANNEL", smithyprelude.Unit)
+
+	EvaluationFormContactField_INITIATION_METHOD = EvaluationFormContactField.AddMember("INITIATION_METHOD", smithyprelude.Unit)
+
+	EvaluationFormContactField_IS_QUEUED = EvaluationFormContactField.AddMember("IS_QUEUED", smithyprelude.Unit)
+
+	EvaluationFormContactField_OVERALL_CUSTOMER_SENTIMENT_SCORE = EvaluationFormContactField.AddMember("OVERALL_CUSTOMER_SENTIMENT_SCORE", smithyprelude.Unit)
+
+	EvaluationFormContactField_OVERALL_AGENT_SENTIMENT_SCORE = EvaluationFormContactField.AddMember("OVERALL_AGENT_SENTIMENT_SCORE", smithyprelude.Unit)
+
+	EvaluationFormContactField_CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT = EvaluationFormContactField.AddMember("CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT", smithyprelude.Unit)
+
+	EvaluationFormContactField_CUSTOMER_SENTIMENT_SCORE_WITH_AGENT = EvaluationFormContactField.AddMember("CUSTOMER_SENTIMENT_SCORE_WITH_AGENT", smithyprelude.Unit)
+
+	EvaluationFormContactField_NON_TALK_TIME = EvaluationFormContactField.AddMember("NON_TALK_TIME", smithyprelude.Unit)
+
+	EvaluationFormContactField_NON_TALK_TIME_PERCENTAGE = EvaluationFormContactField.AddMember("NON_TALK_TIME_PERCENTAGE", smithyprelude.Unit)
+
+	EvaluationFormContactField_NUMBER_OF_INTERRUPTIONS = EvaluationFormContactField.AddMember("NUMBER_OF_INTERRUPTIONS", smithyprelude.Unit)
+
+	EvaluationFormContactField_CONTACT_DURATION = EvaluationFormContactField.AddMember("CONTACT_DURATION", smithyprelude.Unit)
+
+	EvaluationFormContactField_AGENT_INTERACTION_DURATION = EvaluationFormContactField.AddMember("AGENT_INTERACTION_DURATION", smithyprelude.Unit)
+
+	EvaluationFormContactField_CUSTOMER_HOLD_TIME = EvaluationFormContactField.AddMember("CUSTOMER_HOLD_TIME", smithyprelude.Unit)
+
+	EvaluationFormContactField_LONGEST_HOLD_DURATION = EvaluationFormContactField.AddMember("LONGEST_HOLD_DURATION", smithyprelude.Unit)
+
+	EvaluationFormContactField_NUMBER_OF_HOLDS = EvaluationFormContactField.AddMember("NUMBER_OF_HOLDS", smithyprelude.Unit)
+
+	EvaluationFormContactField_AGENT_INTERACTION_AND_HOLD_DURATION = EvaluationFormContactField.AddMember("AGENT_INTERACTION_AND_HOLD_DURATION", smithyprelude.Unit)
+
+	EvaluationFormContactField_RECORDING_MEDIA_STREAM_TYPES = EvaluationFormContactField.AddMember("RECORDING_MEDIA_STREAM_TYPES", smithyprelude.Unit)
+
+	EvaluationFormEvaluationMetadataField_EVALUATION_TYPE = EvaluationFormEvaluationMetadataField.AddMember("EVALUATION_TYPE", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_SESSION_IS_HANDED_OFF = EvaluationFormAiMetricsField.AddMember("AI_SESSION_IS_HANDED_OFF", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_SESSION_SELF_SERVICE_DURATION = EvaluationFormAiMetricsField.AddMember("AI_SESSION_SELF_SERVICE_DURATION", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_SESSION_GOAL_SUCCESS_RATE = EvaluationFormAiMetricsField.AddMember("AI_SESSION_GOAL_SUCCESS_RATE", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_SESSION_COMPLETENESS_SCORE = EvaluationFormAiMetricsField.AddMember("AI_SESSION_COMPLETENESS_SCORE", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_SESSION_FAITHFULNESS_SCORE = EvaluationFormAiMetricsField.AddMember("AI_SESSION_FAITHFULNESS_SCORE", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_AGENT_MAX_PROMPT_LATENCY = EvaluationFormAiMetricsField.AddMember("AI_AGENT_MAX_PROMPT_LATENCY", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_TOOL_MAX_LATENCY = EvaluationFormAiMetricsField.AddMember("AI_TOOL_MAX_LATENCY", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_TOOL_SELECTION_ACCURACY = EvaluationFormAiMetricsField.AddMember("AI_TOOL_SELECTION_ACCURACY", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_TOOL_PARAMETER_ACCURACY = EvaluationFormAiMetricsField.AddMember("AI_TOOL_PARAMETER_ACCURACY", smithyprelude.Unit)
+
+	EvaluationFormAiMetricsField_AI_TOOL_UTILIZATION_ACCURACY = EvaluationFormAiMetricsField.AddMember("AI_TOOL_UTILIZATION_ACCURACY", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSource_Type = EvaluationFormItemEnablementSource.AddMember("Type", EvaluationFormItemEnablementSourceType)
+
+	EvaluationFormItemEnablementSource_RefId = EvaluationFormItemEnablementSource.AddMember("RefId", _ReferenceId)
+
+	EvaluationFormItemEnablementSource_ContactField = EvaluationFormItemEnablementSource.AddMember("ContactField", EvaluationFormContactField)
+
+	EvaluationFormItemEnablementSource_ContactAttributeKey = EvaluationFormItemEnablementSource.AddMember("ContactAttributeKey", _EvaluationFormContactAttributeKey)
+
+	EvaluationFormItemEnablementSource_SegmentAttributeKey = EvaluationFormItemEnablementSource.AddMember("SegmentAttributeKey", _EvaluationFormSegmentAttributeKey)
+
+	EvaluationFormItemEnablementSource_EvaluationMetadataField = EvaluationFormItemEnablementSource.AddMember("EvaluationMetadataField", EvaluationFormEvaluationMetadataField)
+
+	EvaluationFormItemEnablementSource_AiMetricsField = EvaluationFormItemEnablementSource.AddMember("AiMetricsField", EvaluationFormAiMetricsField)
+
+	EvaluationFormItemEnablementSourceValueType_OPTION_REF_ID = EvaluationFormItemEnablementSourceValueType.AddMember("OPTION_REF_ID", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceValueType_STRING_VALUE = EvaluationFormItemEnablementSourceValueType.AddMember("STRING_VALUE", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceValueType_NUMERIC_VALUE = EvaluationFormItemEnablementSourceValueType.AddMember("NUMERIC_VALUE", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceValueType_BOOLEAN_VALUE = EvaluationFormItemEnablementSourceValueType.AddMember("BOOLEAN_VALUE", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceValueType_DATETIME_VALUE = EvaluationFormItemEnablementSourceValueType.AddMember("DATETIME_VALUE", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementSourceValue_Type = EvaluationFormItemEnablementSourceValue.AddMember("Type", EvaluationFormItemEnablementSourceValueType)
+
+	EvaluationFormItemEnablementSourceValue_RefId = EvaluationFormItemEnablementSourceValue.AddMember("RefId", _ReferenceId)
+
+	EvaluationFormItemEnablementSourceValue_StringValue = EvaluationFormItemEnablementSourceValue.AddMember("StringValue", _EvaluationFormEnablementStringValue)
+
+	EvaluationFormItemEnablementSourceValue_NumericValue = EvaluationFormItemEnablementSourceValue.AddMember("NumericValue", _EvaluationFormEnablementNumericValue)
+
+	EvaluationFormItemEnablementSourceValue_BooleanValue = EvaluationFormItemEnablementSourceValue.AddMember("BooleanValue", _EvaluationFormEnablementBooleanValue)
+
+	EvaluationFormItemEnablementSourceValue_DateTimeValue = EvaluationFormItemEnablementSourceValue.AddMember("DateTimeValue", _Timestamp)
+
+	_EvaluationResolvedSourceValueList_member = _EvaluationResolvedSourceValueList.AddMember("member", EvaluationFormItemEnablementSourceValue)
+
+	EvaluationResolvedSource_Source = EvaluationResolvedSource.AddMember("Source", EvaluationFormItemEnablementSource)
+
+	EvaluationResolvedSource_Status = EvaluationResolvedSource.AddMember("Status", EvaluationItemResolutionStatus)
+
+	EvaluationResolvedSource_Values = EvaluationResolvedSource.AddMember("Values", _EvaluationResolvedSourceValueList)
+
+	_EvaluationResolvedSourceList_member = _EvaluationResolvedSourceList.AddMember("member", EvaluationResolvedSource)
+
 	Evaluation_EvaluationId = Evaluation.AddMember("EvaluationId", _ResourceId)
 
 	Evaluation_EvaluationArn = Evaluation.AddMember("EvaluationArn", _ARN)
@@ -28924,6 +29295,12 @@ func init() {
 	Evaluation_EvaluationType = Evaluation.AddMember("EvaluationType", EvaluationType)
 
 	Evaluation_Tags = Evaluation.AddMember("Tags", _TagMap)
+
+	Evaluation_ItemEnablementStatus = Evaluation.AddMember("ItemEnablementStatus", _EvaluationEnablementStatusMap)
+
+	Evaluation_SourceResolutionStatus = Evaluation.AddMember("SourceResolutionStatus", EvaluationItemResolutionStatus)
+
+	Evaluation_SourceValues = Evaluation.AddMember("SourceValues", _EvaluationResolvedSourceList)
 
 	EvaluationAcknowledgementSummary_AcknowledgedTime = EvaluationAcknowledgementSummary.AddMember("AcknowledgedTime", _Timestamp)
 
@@ -28949,6 +29326,58 @@ func init() {
 
 	_EvaluationFormScoreThresholdList_member = _EvaluationFormScoreThresholdList.AddMember("member", EvaluationFormScoreThreshold)
 
+	_EvaluationFormItemEnablementSourceValueList_member = _EvaluationFormItemEnablementSourceValueList.AddMember("member", EvaluationFormItemEnablementSourceValue)
+
+	EvaluationFormItemSourceValuesComparator_IN = EvaluationFormItemSourceValuesComparator.AddMember("IN", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_NOT_IN = EvaluationFormItemSourceValuesComparator.AddMember("NOT_IN", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_ALL_IN = EvaluationFormItemSourceValuesComparator.AddMember("ALL_IN", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_EXACT = EvaluationFormItemSourceValuesComparator.AddMember("EXACT", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_GREATER_THAN = EvaluationFormItemSourceValuesComparator.AddMember("GREATER_THAN", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_LESS_THAN = EvaluationFormItemSourceValuesComparator.AddMember("LESS_THAN", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_GREATER_THAN_OR_EQUAL_TO = EvaluationFormItemSourceValuesComparator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_LESS_THAN_OR_EQUAL_TO = EvaluationFormItemSourceValuesComparator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_EQUAL_TO = EvaluationFormItemSourceValuesComparator.AddMember("EQUAL_TO", smithyprelude.Unit)
+
+	EvaluationFormItemSourceValuesComparator_NOT_EQUAL_TO = EvaluationFormItemSourceValuesComparator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementExpression_Source = EvaluationFormItemEnablementExpression.AddMember("Source", EvaluationFormItemEnablementSource)
+
+	EvaluationFormItemEnablementExpression_Values = EvaluationFormItemEnablementExpression.AddMember("Values", _EvaluationFormItemEnablementSourceValueList)
+
+	EvaluationFormItemEnablementExpression_Comparator = EvaluationFormItemEnablementExpression.AddMember("Comparator", EvaluationFormItemSourceValuesComparator)
+
+	EvaluationFormItemEnablementConditionOperand_Expression = EvaluationFormItemEnablementConditionOperand.AddMember("Expression", EvaluationFormItemEnablementExpression)
+
+	EvaluationFormItemEnablementConditionOperand_Condition = EvaluationFormItemEnablementConditionOperand.AddMember("Condition", EvaluationFormItemEnablementCondition)
+
+	_EvaluationFormItemEnablementConditionOperandList_member = _EvaluationFormItemEnablementConditionOperandList.AddMember("member", EvaluationFormItemEnablementConditionOperand)
+
+	EvaluationFormItemEnablementOperator_OR = EvaluationFormItemEnablementOperator.AddMember("OR", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementOperator_AND = EvaluationFormItemEnablementOperator.AddMember("AND", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementCondition_Operands = EvaluationFormItemEnablementCondition.AddMember("Operands", _EvaluationFormItemEnablementConditionOperandList)
+
+	EvaluationFormItemEnablementCondition_Operator = EvaluationFormItemEnablementCondition.AddMember("Operator", EvaluationFormItemEnablementOperator)
+
+	EvaluationFormItemEnablementAction_DISABLE = EvaluationFormItemEnablementAction.AddMember("DISABLE", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementAction_ENABLE = EvaluationFormItemEnablementAction.AddMember("ENABLE", smithyprelude.Unit)
+
+	EvaluationFormItemEnablementConfiguration_Condition = EvaluationFormItemEnablementConfiguration.AddMember("Condition", EvaluationFormItemEnablementCondition)
+
+	EvaluationFormItemEnablementConfiguration_Action = EvaluationFormItemEnablementConfiguration.AddMember("Action", EvaluationFormItemEnablementAction)
+
+	EvaluationFormItemEnablementConfiguration_DefaultAction = EvaluationFormItemEnablementConfiguration.AddMember("DefaultAction", EvaluationFormItemEnablementAction)
+
 	EvaluationFormSection_Title = EvaluationFormSection.AddMember("Title", _EvaluationFormSectionTitle)
 
 	EvaluationFormSection_RefId = EvaluationFormSection.AddMember("RefId", _ReferenceId)
@@ -28962,6 +29391,8 @@ func init() {
 	EvaluationFormSection_IsExcludedFromScoring = EvaluationFormSection.AddMember("IsExcludedFromScoring", _Boolean)
 
 	EvaluationFormSection_ScoreThresholds = EvaluationFormSection.AddMember("ScoreThresholds", _EvaluationFormScoreThresholdList)
+
+	EvaluationFormSection_Enablement = EvaluationFormSection.AddMember("Enablement", EvaluationFormItemEnablementConfiguration)
 
 	EvaluationFormQuestionType_TEXT = EvaluationFormQuestionType.AddMember("TEXT", smithyprelude.Unit)
 
@@ -29017,11 +29448,31 @@ func init() {
 
 	NumericQuestionPropertyAutomationLabel_AGENT_INTERACTION_AND_HOLD_DURATION = NumericQuestionPropertyAutomationLabel.AddMember("AGENT_INTERACTION_AND_HOLD_DURATION", smithyprelude.Unit)
 
+	NumericQuestionPropertyAutomationLabel_AI_SESSION_SELF_SERVICE_DURATION = NumericQuestionPropertyAutomationLabel.AddMember("AI_SESSION_SELF_SERVICE_DURATION", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_SESSION_GOAL_SUCCESS_RATE = NumericQuestionPropertyAutomationLabel.AddMember("AI_SESSION_GOAL_SUCCESS_RATE", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_SESSION_COMPLETENESS_SCORE = NumericQuestionPropertyAutomationLabel.AddMember("AI_SESSION_COMPLETENESS_SCORE", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_SESSION_FAITHFULNESS_SCORE = NumericQuestionPropertyAutomationLabel.AddMember("AI_SESSION_FAITHFULNESS_SCORE", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_AGENT_MAX_PROMPT_LATENCY = NumericQuestionPropertyAutomationLabel.AddMember("AI_AGENT_MAX_PROMPT_LATENCY", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_TOOL_MAX_LATENCY = NumericQuestionPropertyAutomationLabel.AddMember("AI_TOOL_MAX_LATENCY", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_TOOL_SELECTION_ACCURACY = NumericQuestionPropertyAutomationLabel.AddMember("AI_TOOL_SELECTION_ACCURACY", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_TOOL_PARAMETER_ACCURACY = NumericQuestionPropertyAutomationLabel.AddMember("AI_TOOL_PARAMETER_ACCURACY", smithyprelude.Unit)
+
+	NumericQuestionPropertyAutomationLabel_AI_TOOL_UTILIZATION_ACCURACY = NumericQuestionPropertyAutomationLabel.AddMember("AI_TOOL_UTILIZATION_ACCURACY", smithyprelude.Unit)
+
 	NumericQuestionPropertyValueAutomation_Label = NumericQuestionPropertyValueAutomation.AddMember("Label", NumericQuestionPropertyAutomationLabel)
 
 	EvaluationFormQuestionAutomationAnswerSourceType_CONTACT_LENS_DATA = EvaluationFormQuestionAutomationAnswerSourceType.AddMember("CONTACT_LENS_DATA", smithyprelude.Unit)
 
 	EvaluationFormQuestionAutomationAnswerSourceType_GEN_AI = EvaluationFormQuestionAutomationAnswerSourceType.AddMember("GEN_AI", smithyprelude.Unit)
+
+	EvaluationFormQuestionAutomationAnswerSourceType_CONDITION = EvaluationFormQuestionAutomationAnswerSourceType.AddMember("CONDITION", smithyprelude.Unit)
 
 	EvaluationFormQuestionAutomationAnswerSource_SourceType = EvaluationFormQuestionAutomationAnswerSource.AddMember("SourceType", EvaluationFormQuestionAutomationAnswerSourceType)
 
@@ -29065,7 +29516,13 @@ func init() {
 
 	SingleSelectQuestionRuleCategoryAutomation_OptionRefId = SingleSelectQuestionRuleCategoryAutomation.AddMember("OptionRefId", _ReferenceId)
 
+	SingleSelectQuestionAutomationRule_Condition = SingleSelectQuestionAutomationRule.AddMember("Condition", EvaluationFormItemEnablementCondition)
+
+	SingleSelectQuestionAutomationRule_OptionRefId = SingleSelectQuestionAutomationRule.AddMember("OptionRefId", _ReferenceId)
+
 	EvaluationFormSingleSelectQuestionAutomationOption_RuleCategory = EvaluationFormSingleSelectQuestionAutomationOption.AddMember("RuleCategory", SingleSelectQuestionRuleCategoryAutomation)
+
+	EvaluationFormSingleSelectQuestionAutomationOption_AutomationRule = EvaluationFormSingleSelectQuestionAutomationOption.AddMember("AutomationRule", SingleSelectQuestionAutomationRule)
 
 	_EvaluationFormSingleSelectQuestionAutomationOptionList_member = _EvaluationFormSingleSelectQuestionAutomationOptionList.AddMember("member", EvaluationFormSingleSelectQuestionAutomationOption)
 
@@ -29138,58 +29595,6 @@ func init() {
 	EvaluationFormQuestionTypeProperties_Text = EvaluationFormQuestionTypeProperties.AddMember("Text", EvaluationFormTextQuestionProperties)
 
 	EvaluationFormQuestionTypeProperties_MultiSelect = EvaluationFormQuestionTypeProperties.AddMember("MultiSelect", EvaluationFormMultiSelectQuestionProperties)
-
-	EvaluationFormItemEnablementSourceType_QUESTION_REF_ID = EvaluationFormItemEnablementSourceType.AddMember("QUESTION_REF_ID", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementSource_Type = EvaluationFormItemEnablementSource.AddMember("Type", EvaluationFormItemEnablementSourceType)
-
-	EvaluationFormItemEnablementSource_RefId = EvaluationFormItemEnablementSource.AddMember("RefId", _ReferenceId)
-
-	EvaluationFormItemEnablementSourceValueType_OPTION_REF_ID = EvaluationFormItemEnablementSourceValueType.AddMember("OPTION_REF_ID", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementSourceValue_Type = EvaluationFormItemEnablementSourceValue.AddMember("Type", EvaluationFormItemEnablementSourceValueType)
-
-	EvaluationFormItemEnablementSourceValue_RefId = EvaluationFormItemEnablementSourceValue.AddMember("RefId", _ReferenceId)
-
-	_EvaluationFormItemEnablementSourceValueList_member = _EvaluationFormItemEnablementSourceValueList.AddMember("member", EvaluationFormItemEnablementSourceValue)
-
-	EvaluationFormItemSourceValuesComparator_IN = EvaluationFormItemSourceValuesComparator.AddMember("IN", smithyprelude.Unit)
-
-	EvaluationFormItemSourceValuesComparator_NOT_IN = EvaluationFormItemSourceValuesComparator.AddMember("NOT_IN", smithyprelude.Unit)
-
-	EvaluationFormItemSourceValuesComparator_ALL_IN = EvaluationFormItemSourceValuesComparator.AddMember("ALL_IN", smithyprelude.Unit)
-
-	EvaluationFormItemSourceValuesComparator_EXACT = EvaluationFormItemSourceValuesComparator.AddMember("EXACT", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementExpression_Source = EvaluationFormItemEnablementExpression.AddMember("Source", EvaluationFormItemEnablementSource)
-
-	EvaluationFormItemEnablementExpression_Values = EvaluationFormItemEnablementExpression.AddMember("Values", _EvaluationFormItemEnablementSourceValueList)
-
-	EvaluationFormItemEnablementExpression_Comparator = EvaluationFormItemEnablementExpression.AddMember("Comparator", EvaluationFormItemSourceValuesComparator)
-
-	EvaluationFormItemEnablementConditionOperand_Expression = EvaluationFormItemEnablementConditionOperand.AddMember("Expression", EvaluationFormItemEnablementExpression)
-
-	EvaluationFormItemEnablementConditionOperand_Condition = EvaluationFormItemEnablementConditionOperand.AddMember("Condition", EvaluationFormItemEnablementCondition)
-
-	_EvaluationFormItemEnablementConditionOperandList_member = _EvaluationFormItemEnablementConditionOperandList.AddMember("member", EvaluationFormItemEnablementConditionOperand)
-
-	EvaluationFormItemEnablementOperator_OR = EvaluationFormItemEnablementOperator.AddMember("OR", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementOperator_AND = EvaluationFormItemEnablementOperator.AddMember("AND", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementCondition_Operands = EvaluationFormItemEnablementCondition.AddMember("Operands", _EvaluationFormItemEnablementConditionOperandList)
-
-	EvaluationFormItemEnablementCondition_Operator = EvaluationFormItemEnablementCondition.AddMember("Operator", EvaluationFormItemEnablementOperator)
-
-	EvaluationFormItemEnablementAction_DISABLE = EvaluationFormItemEnablementAction.AddMember("DISABLE", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementAction_ENABLE = EvaluationFormItemEnablementAction.AddMember("ENABLE", smithyprelude.Unit)
-
-	EvaluationFormItemEnablementConfiguration_Condition = EvaluationFormItemEnablementConfiguration.AddMember("Condition", EvaluationFormItemEnablementCondition)
-
-	EvaluationFormItemEnablementConfiguration_Action = EvaluationFormItemEnablementConfiguration.AddMember("Action", EvaluationFormItemEnablementAction)
-
-	EvaluationFormItemEnablementConfiguration_DefaultAction = EvaluationFormItemEnablementConfiguration.AddMember("DefaultAction", EvaluationFormItemEnablementAction)
 
 	QuestionPointsConfiguration_MaxPointValue = QuestionPointsConfiguration.AddMember("MaxPointValue", _PointValue)
 

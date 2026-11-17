@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConnectorSummaries":[{"Arn":"__Arn__","CreatedTimeStamp":1,"Name":"__Name__","Provider":"AZURE"},{"Arn":"__Arn__","CreatedTimeStamp":1,"Name":"__Name__","Provider":"AZURE"}],"NextToken":"__NextToken__"}

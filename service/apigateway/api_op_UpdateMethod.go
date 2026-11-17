@@ -97,12 +97,15 @@ type UpdateMethodOutput struct {
 	// any method scopes matches a claimed scope in the access token. Otherwise, the
 	// invocation is not authorized. When the method scope is configured, the client
 	// must provide an access token instead of an identity token for authorization
-	// purposes.
+	// purposes. The scopes are also used with a JWT authorizer. When scopes are
+	// configured, the scope (or scp ) claim of the token must contain at least one of
+	// the configured scopes.
 	AuthorizationScopes []string
 
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
-	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
-	// COGNITO_USER_POOLS for using a Cognito user pool.
+	// for using Amazon Web Services IAM permissions, CUSTOM for using a custom
+	// authorizer, COGNITO_USER_POOLS for using a Cognito user pool, or JWT for using
+	// a JWT authorizer.
 	AuthorizationType *string
 
 	// The identifier of an Authorizer to use on this method. The authorizationType

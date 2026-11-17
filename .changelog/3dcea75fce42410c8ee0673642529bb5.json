@@ -1,0 +1,8 @@
+{
+    "id": "3dcea75f-ce42-410c-8ee0-673642529bb5",
+    "type": "feature",
+    "description": "For the S3 operations AbortMultipartUpload, CreateMultipartUpload, ListParts, UploadPart, UploadPartCopy, the Object Version ID is returned as a response header, if the bucket has versioning enabled. For ListMultipartUploads, it will be returned in the response body.",
+    "modules": [
+        "service/s3"
+    ]
+}

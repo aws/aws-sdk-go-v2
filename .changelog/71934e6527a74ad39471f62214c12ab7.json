@@ -1,0 +1,8 @@
+{
+    "id": "71934e65-27a7-4ad3-9471-f62214c12ab7",
+    "type": "feature",
+    "description": "AWS Lambda durable functions now supports pausing, resuming, and deleting durable executions with the new PauseDurableExecution, ResumeDurableExecution, and DeleteDurableExecution APIs.",
+    "modules": [
+        "service/lambda"
+    ]
+}

@@ -97,12 +97,12 @@ type GetIntegrationOutput struct {
 	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling types.ContentHandlingStrategy
 
-	// Specifies the credentials required for the integration, if any. For AWS
-	// integrations, three options are available. To specify an IAM Role for API
-	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
-	// the caller's identity be passed through from the request, specify the string
-	// arn:aws:iam::\*:user/\* . To use resource-based permissions on supported Amazon
-	// Web Services services, specify null.
+	// Specifies the credentials required for the integration, if any. For Amazon Web
+	// Services integrations, three options are available. To specify an IAM Role for
+	// API Gateway to assume, use the role's Amazon Resource Name (ARN). To require
+	// that the caller's identity be passed through from the request, specify the
+	// string arn:aws:iam::\*:user/\* . To use resource-based permissions on supported
+	// Amazon Web Services services, specify null.
 	Credentials *string
 
 	// Specifies the integration's HTTP method type. For the Type property, if you
@@ -114,7 +114,7 @@ type GetIntegrationOutput struct {
 	// Specifies the integration's responses.
 	IntegrationResponses map[string]types.IntegrationResponse
 
-	//  The ALB or NLB listener to send the request to.
+	//  The ALB or NLB ARN to send the request to.
 	IntegrationTarget *string
 
 	// Specifies how the method request body of an unmapped content type will be

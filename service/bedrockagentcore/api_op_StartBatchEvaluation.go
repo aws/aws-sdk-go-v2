@@ -49,6 +49,15 @@ type StartBatchEvaluationInput struct {
 	// ignores the request, but does not return an error.
 	ClientToken *string
 
+	// The configuration for running the scenarios in a dataset against an agent
+	// before evaluating the resulting sessions. When you specify this field, the batch
+	// evaluation runs each scenario in the dataset against the agent. It then
+	// evaluates the sessions that the agent produces. You must also specify evaluators
+	// and a dataSourceConfig that uses cloudWatchLogs . Configure cloudWatchLogs with
+	// the service name and log groups that the agent uses for its traces. You can't
+	// specify insights or an onlineEvaluationConfigSource data source with this field.
+	DatasetExecutionConfig *types.DatasetExecutionConfig
+
 	// The description of the batch evaluation.
 	Description *string
 
@@ -92,6 +101,11 @@ func (v *StartBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DataSourceConfig != nil {
 		serializeDataSourceConfig(s, schemas.StartBatchEvaluationRequest_dataSourceConfig, v.DataSourceConfig)
+	}
+	if v.DatasetExecutionConfig != nil {
+		s.WriteStruct(schemas.StartBatchEvaluationRequest_datasetExecutionConfig)
+		v.DatasetExecutionConfig.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.StartBatchEvaluationRequest_description, *v.Description)

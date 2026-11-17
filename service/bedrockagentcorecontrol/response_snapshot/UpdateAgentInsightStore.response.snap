@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentInsightStoreArn":"__AgentInsightStoreArn__","agentInsightStoreId":"__AgentInsightStoreId__","enablementStatus":"ENABLED","failureReason":"__FailureReason__","status":"ACTIVE","updatedAt":946684800}

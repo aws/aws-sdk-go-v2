@@ -2264,7 +2264,7 @@ var ConflictException_resourceType *smithy.Schema
 var Connector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "Connector",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 16)
 var Connector_connectorArn *smithy.Schema
 
 var Connector_name *smithy.Schema
@@ -2292,6 +2292,10 @@ var Connector_scopeConfiguration *smithy.Schema
 var Connector_tags *smithy.Schema
 
 var Connector_autoInstallVMScanner *smithy.Schema
+
+var Connector_gcpRegions *smithy.Schema
+
+var Connector_gcpScopeConfiguration *smithy.Schema
 
 var _ConnectorArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -2327,8 +2331,10 @@ var _ConnectorArnList_member *smithy.Schema
 var ConnectorCloudProvider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ConnectorCloudProvider",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var ConnectorCloudProvider_AZURE *smithy.Schema
+
+var ConnectorCloudProvider_GCP *smithy.Schema
 
 var ConnectorContainerImageScanConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -3856,6 +3862,90 @@ var _FunctionName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FunctionName",
 }, smithy.ShapeTypeString, 0)
 
+var GcpCapabilityScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpCapabilityScope",
+}, smithy.ShapeTypeStructure, 4)
+var GcpCapabilityScope_scopeType *smithy.Schema
+
+var GcpCapabilityScope_scopeValues *smithy.Schema
+
+var GcpCapabilityScope_state *smithy.Schema
+
+var GcpCapabilityScope_stateReason *smithy.Schema
+
+var GcpCapabilityScopeInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpCapabilityScopeInput",
+}, smithy.ShapeTypeStructure, 2)
+var GcpCapabilityScopeInput_scopeType *smithy.Schema
+
+var GcpCapabilityScopeInput_scopeValues *smithy.Schema
+
+var GcpProviderDetailCreate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpProviderDetailCreate",
+}, smithy.ShapeTypeStructure, 4)
+var GcpProviderDetailCreate_awsConfigConnectorArn *smithy.Schema
+
+var GcpProviderDetailCreate_scopeConfiguration *smithy.Schema
+
+var GcpProviderDetailCreate_gcpRegions *smithy.Schema
+
+var GcpProviderDetailCreate_autoInstallVMScanner *smithy.Schema
+
+var GcpProviderDetailUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpProviderDetailUpdate",
+}, smithy.ShapeTypeStructure, 3)
+var GcpProviderDetailUpdate_gcpRegions *smithy.Schema
+
+var GcpProviderDetailUpdate_scopeConfiguration *smithy.Schema
+
+var GcpProviderDetailUpdate_autoInstallVMScanner *smithy.Schema
+
+var _GcpRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpRegion",
+}, smithy.ShapeTypeString, 0)
+
+var _GcpRegionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpRegionList",
+}, smithy.ShapeTypeList, 1)
+var _GcpRegionList_member *smithy.Schema
+
+var GcpScopeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpScopeConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var GcpScopeConfiguration_vmScanning *smithy.Schema
+
+var GcpScopeConfiguration_containerImageScanning *smithy.Schema
+
+var GcpScopeConfiguration_serverlessScanning *smithy.Schema
+
+var GcpScopeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpScopeConfigurationInput",
+}, smithy.ShapeTypeStructure, 3)
+var GcpScopeConfigurationInput_vmScanning *smithy.Schema
+
+var GcpScopeConfigurationInput_containerImageScanning *smithy.Schema
+
+var GcpScopeConfigurationInput_serverlessScanning *smithy.Schema
+
+var _GcpScopeValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpScopeValue",
+}, smithy.ShapeTypeString, 0)
+
+var _GcpScopeValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GcpScopeValueList",
+}, smithy.ShapeTypeList, 1)
+var _GcpScopeValueList_member *smithy.Schema
+
 var _GetCisScanResultDetailsMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "GetCisScanResultDetailsMaxResults",
@@ -4836,14 +4926,18 @@ var ProviderComparison_EQUALS *smithy.Schema
 var ProviderDetailCreate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ProviderDetailCreate",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var ProviderDetailCreate_azure *smithy.Schema
+
+var ProviderDetailCreate_gcp *smithy.Schema
 
 var ProviderDetailUpdate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ProviderDetailUpdate",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var ProviderDetailUpdate_azure *smithy.Schema
+
+var ProviderDetailUpdate_gcp *smithy.Schema
 
 var ProviderFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -5343,10 +5437,14 @@ var ScopeState_DISABLED *smithy.Schema
 var ScopeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ScopeType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 4)
 var ScopeType_TENANT *smithy.Schema
 
 var ScopeType_SUBSCRIPTION *smithy.Schema
+
+var ScopeType_ORGANIZATION *smithy.Schema
+
+var ScopeType_PROJECT *smithy.Schema
 
 var _ScopeValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -8567,6 +8665,10 @@ func init() {
 
 	ScopeType_SUBSCRIPTION = ScopeType.AddMember("SUBSCRIPTION", smithyprelude.Unit)
 
+	ScopeType_ORGANIZATION = ScopeType.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	ScopeType_PROJECT = ScopeType.AddMember("PROJECT", smithyprelude.Unit)
+
 	_ScopeValueList_member = _ScopeValueList.AddMember("member", _ScopeValue)
 
 	ScopeConfigurationInput_scopeType = ScopeConfigurationInput.AddMember("scopeType", ScopeType)
@@ -9261,6 +9363,8 @@ func init() {
 
 	ConnectorCloudProvider_AZURE = ConnectorCloudProvider.AddMember("AZURE", smithyprelude.Unit)
 
+	ConnectorCloudProvider_GCP = ConnectorCloudProvider.AddMember("GCP", smithyprelude.Unit)
+
 	EnablementStatus_ENABLED = EnablementStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	EnablementStatus_PENDING_ENABLEMENT = EnablementStatus.AddMember("PENDING_ENABLEMENT", smithyprelude.Unit)
@@ -9299,6 +9403,24 @@ func init() {
 
 	_ConnectorTagMap_value = _ConnectorTagMap.AddMember("value", _ConnectorTagValue)
 
+	_GcpRegionList_member = _GcpRegionList.AddMember("member", _GcpRegion)
+
+	_GcpScopeValueList_member = _GcpScopeValueList.AddMember("member", _GcpScopeValue)
+
+	GcpCapabilityScope_scopeType = GcpCapabilityScope.AddMember("scopeType", ScopeType)
+
+	GcpCapabilityScope_scopeValues = GcpCapabilityScope.AddMember("scopeValues", _GcpScopeValueList)
+
+	GcpCapabilityScope_state = GcpCapabilityScope.AddMember("state", ScopeState)
+
+	GcpCapabilityScope_stateReason = GcpCapabilityScope.AddMember("stateReason", smithyprelude.String)
+
+	GcpScopeConfiguration_vmScanning = GcpScopeConfiguration.AddMember("vmScanning", GcpCapabilityScope)
+
+	GcpScopeConfiguration_containerImageScanning = GcpScopeConfiguration.AddMember("containerImageScanning", GcpCapabilityScope)
+
+	GcpScopeConfiguration_serverlessScanning = GcpScopeConfiguration.AddMember("serverlessScanning", GcpCapabilityScope)
+
 	Connector_connectorArn = Connector.AddMember("connectorArn", _ConnectorArn)
 
 	Connector_name = Connector.AddMember("name", _ConnectorName)
@@ -9326,6 +9448,10 @@ func init() {
 	Connector_tags = Connector.AddMember("tags", _ConnectorTagMap)
 
 	Connector_autoInstallVMScanner = Connector.AddMember("autoInstallVMScanner", smithyprelude.Boolean)
+
+	Connector_gcpRegions = Connector.AddMember("gcpRegions", _GcpRegionList)
+
+	Connector_gcpScopeConfiguration = Connector.AddMember("gcpScopeConfiguration", GcpScopeConfiguration)
 
 	ConnectorArnComparison_EQUALS = ConnectorArnComparison.AddMember("EQUALS", smithyprelude.Unit)
 
@@ -10259,6 +10385,30 @@ func init() {
 
 	_FreeTrialInfoErrorList_member = _FreeTrialInfoErrorList.AddMember("member", FreeTrialInfoError)
 
+	GcpCapabilityScopeInput_scopeType = GcpCapabilityScopeInput.AddMember("scopeType", ScopeType)
+
+	GcpCapabilityScopeInput_scopeValues = GcpCapabilityScopeInput.AddMember("scopeValues", _GcpScopeValueList)
+
+	GcpScopeConfigurationInput_vmScanning = GcpScopeConfigurationInput.AddMember("vmScanning", GcpCapabilityScopeInput)
+
+	GcpScopeConfigurationInput_containerImageScanning = GcpScopeConfigurationInput.AddMember("containerImageScanning", GcpCapabilityScopeInput)
+
+	GcpScopeConfigurationInput_serverlessScanning = GcpScopeConfigurationInput.AddMember("serverlessScanning", GcpCapabilityScopeInput)
+
+	GcpProviderDetailCreate_awsConfigConnectorArn = GcpProviderDetailCreate.AddMember("awsConfigConnectorArn", _AwsConfigConnectorArn)
+
+	GcpProviderDetailCreate_scopeConfiguration = GcpProviderDetailCreate.AddMember("scopeConfiguration", GcpScopeConfigurationInput)
+
+	GcpProviderDetailCreate_gcpRegions = GcpProviderDetailCreate.AddMember("gcpRegions", _GcpRegionList)
+
+	GcpProviderDetailCreate_autoInstallVMScanner = GcpProviderDetailCreate.AddMember("autoInstallVMScanner", smithyprelude.Boolean)
+
+	GcpProviderDetailUpdate_gcpRegions = GcpProviderDetailUpdate.AddMember("gcpRegions", _GcpRegionList)
+
+	GcpProviderDetailUpdate_scopeConfiguration = GcpProviderDetailUpdate.AddMember("scopeConfiguration", GcpScopeConfigurationInput)
+
+	GcpProviderDetailUpdate_autoInstallVMScanner = GcpProviderDetailUpdate.AddMember("autoInstallVMScanner", smithyprelude.Boolean)
+
 	_IntegrationSummaries_member = _IntegrationSummaries.AddMember("member", CodeSecurityIntegrationSummary)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
@@ -10375,7 +10525,11 @@ func init() {
 
 	ProviderDetailCreate_azure = ProviderDetailCreate.AddMember("azure", AzureProviderDetailCreate)
 
+	ProviderDetailCreate_gcp = ProviderDetailCreate.AddMember("gcp", GcpProviderDetailCreate)
+
 	ProviderDetailUpdate_azure = ProviderDetailUpdate.AddMember("azure", AzureProviderDetailUpdate)
+
+	ProviderDetailUpdate_gcp = ProviderDetailUpdate.AddMember("gcp", GcpProviderDetailUpdate)
 
 	_RelatedVulnerabilities_member = _RelatedVulnerabilities.AddMember("member", _RelatedVulnerability)
 

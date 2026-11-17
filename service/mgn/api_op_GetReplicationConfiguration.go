@@ -97,6 +97,11 @@ type GetReplicationConfigurationOutput struct {
 	// Replication Configuration name.
 	Name *string
 
+	// Indicates the location of replication snapshots when the staging area subnet is
+	// on an AWS Outpost. OUTPOST keeps replication snapshots on the Outpost, and
+	// REGION stores them in the AWS Region.
+	OutpostSnapshotLocation types.OutpostSnapshotLocation
+
 	// Replication Configuration replicated disks.
 	ReplicatedDisks []types.ReplicationConfigurationReplicatedDisk
 
@@ -166,6 +171,9 @@ func (v *GetReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSeria
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.ReplicationConfiguration_name, *v.Name)
+	}
+	if v.OutpostSnapshotLocation != "" {
+		s.WriteString(schemas.ReplicationConfiguration_outpostSnapshotLocation, string(v.OutpostSnapshotLocation))
 	}
 	if v.ReplicatedDisks != nil {
 		serializeReplicationConfigurationReplicatedDisks(s, schemas.ReplicationConfiguration_replicatedDisks, v.ReplicatedDisks)
@@ -245,6 +253,13 @@ func (v *GetReplicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializ
 		case schemas.ReplicationConfiguration_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.ReplicationConfiguration_name, v.Name)
+		case schemas.ReplicationConfiguration_outpostSnapshotLocation:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfiguration_outpostSnapshotLocation, &ev); err != nil {
+				return err
+			}
+			v.OutpostSnapshotLocation = types.OutpostSnapshotLocation(ev)
+			return nil
 		case schemas.ReplicationConfiguration_replicatedDisks:
 			return deserializeReplicationConfigurationReplicatedDisks(d, schemas.ReplicationConfiguration_replicatedDisks, &v.ReplicatedDisks)
 		case schemas.ReplicationConfiguration_replicationServerInstanceType:

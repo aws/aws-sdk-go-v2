@@ -1016,6 +1016,30 @@ func TestUpdateResponseSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteDurableExecution(t *testing.T) {
+	want := &DeleteDurableExecutionOutput{
+		DeletionRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteDurableExecution, schemas.DeleteDurableExecutionResponse, schemas.DeleteDurableExecutionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteDurableExecution.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteEventSourceMapping(t *testing.T) {
 	want := &DeleteEventSourceMappingOutput{
 		UUID:                           ptr.String("__UUID__"),
@@ -1576,6 +1600,12 @@ func TestUpdateResponseSnapshot_GetDurableExecution(t *testing.T) {
 			RetentionPeriodInDays: ptr.Int32(1),
 			ExecutionTimeout:      ptr.Int32(1),
 		},
+		PauseDetails: &types.PauseDetails{
+			PauseRequestTimestamp:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Reason:                 ptr.String("__Reason__"),
+			ExecutionTimeoutPaused: ptr.Bool(true),
+		},
+		ExpectedExecutionTimeoutTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AWSGirApiService)
 	opSchema := smithy.NewOperationSchema(schemas.GetDurableExecution, schemas.GetDurableExecutionResponse, schemas.GetDurableExecutionResponse)
@@ -1848,6 +1878,21 @@ func TestUpdateResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 						Truncated: ptr.Bool(true),
 					},
 				},
+				ExecutionPausedDetails: &types.ExecutionPausedDetails{
+					PauseRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventPauseReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+					ExecutionTimeoutPaused: ptr.Bool(true),
+				},
+				ExecutionResumedDetails: &types.ExecutionResumedDetails{
+					ResumeRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventResumeReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+				},
 			},
 			{
 				EventType:      types.EventType("ExecutionStarted"),
@@ -2094,6 +2139,21 @@ func TestUpdateResponseSnapshot_GetDurableExecutionHistory(t *testing.T) {
 								"__Member__",
 							},
 						},
+						Truncated: ptr.Bool(true),
+					},
+				},
+				ExecutionPausedDetails: &types.ExecutionPausedDetails{
+					PauseRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventPauseReason{
+						Payload:   ptr.String("__Payload__"),
+						Truncated: ptr.Bool(true),
+					},
+					ExecutionTimeoutPaused: ptr.Bool(true),
+				},
+				ExecutionResumedDetails: &types.ExecutionResumedDetails{
+					ResumeRequestTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Reason: &types.EventResumeReason{
+						Payload:   ptr.String("__Payload__"),
 						Truncated: ptr.Bool(true),
 					},
 				},
@@ -4922,6 +4982,28 @@ func TestUpdateResponseSnapshot_ListVersionsByFunction(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_PauseDurableExecution(t *testing.T) {
+	want := &PauseDurableExecutionOutput{}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.PauseDurableExecution, schemas.PauseDurableExecutionResponse, schemas.PauseDurableExecutionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PauseDurableExecution.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PublishLayerVersion(t *testing.T) {
 	want := &PublishLayerVersionOutput{
 		Content: &types.LayerVersionContentOutput{
@@ -5391,6 +5473,28 @@ func TestUpdateResponseSnapshot_RemovePermission(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("RemovePermission.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ResumeDurableExecution(t *testing.T) {
+	want := &ResumeDurableExecutionOutput{}
+	proto := restjson1.New(schemas.AWSGirApiService)
+	opSchema := smithy.NewOperationSchema(schemas.ResumeDurableExecution, schemas.ResumeDurableExecutionResponse, schemas.ResumeDurableExecutionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ResumeDurableExecution.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

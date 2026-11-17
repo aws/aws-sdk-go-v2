@@ -1283,6 +1283,61 @@ func (EntityType) Values() []EntityType {
 	}
 }
 
+type EvaluationEnablementStatus string
+
+// Enum values for EvaluationEnablementStatus
+const (
+	EvaluationEnablementStatusEnabled  EvaluationEnablementStatus = "ENABLED"
+	EvaluationEnablementStatusDisabled EvaluationEnablementStatus = "DISABLED"
+)
+
+// Values returns all known values for EvaluationEnablementStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationEnablementStatus) Values() []EvaluationEnablementStatus {
+	return []EvaluationEnablementStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type EvaluationFormAiMetricsField string
+
+// Enum values for EvaluationFormAiMetricsField
+const (
+	EvaluationFormAiMetricsFieldAiSessionIsHandedOff         EvaluationFormAiMetricsField = "AI_SESSION_IS_HANDED_OFF"
+	EvaluationFormAiMetricsFieldAiSessionSelfServiceDuration EvaluationFormAiMetricsField = "AI_SESSION_SELF_SERVICE_DURATION"
+	EvaluationFormAiMetricsFieldAiSessionGoalSuccessRate     EvaluationFormAiMetricsField = "AI_SESSION_GOAL_SUCCESS_RATE"
+	EvaluationFormAiMetricsFieldAiSessionCompletenessScore   EvaluationFormAiMetricsField = "AI_SESSION_COMPLETENESS_SCORE"
+	EvaluationFormAiMetricsFieldAiSessionFaithfulnessScore   EvaluationFormAiMetricsField = "AI_SESSION_FAITHFULNESS_SCORE"
+	EvaluationFormAiMetricsFieldAiAgentMaxPromptLatency      EvaluationFormAiMetricsField = "AI_AGENT_MAX_PROMPT_LATENCY"
+	EvaluationFormAiMetricsFieldAiToolMaxLatency             EvaluationFormAiMetricsField = "AI_TOOL_MAX_LATENCY"
+	EvaluationFormAiMetricsFieldAiToolSelectionAccuracy      EvaluationFormAiMetricsField = "AI_TOOL_SELECTION_ACCURACY"
+	EvaluationFormAiMetricsFieldAiToolParameterAccuracy      EvaluationFormAiMetricsField = "AI_TOOL_PARAMETER_ACCURACY"
+	EvaluationFormAiMetricsFieldAiToolUtilizationAccuracy    EvaluationFormAiMetricsField = "AI_TOOL_UTILIZATION_ACCURACY"
+)
+
+// Values returns all known values for EvaluationFormAiMetricsField. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormAiMetricsField) Values() []EvaluationFormAiMetricsField {
+	return []EvaluationFormAiMetricsField{
+		"AI_SESSION_IS_HANDED_OFF",
+		"AI_SESSION_SELF_SERVICE_DURATION",
+		"AI_SESSION_GOAL_SUCCESS_RATE",
+		"AI_SESSION_COMPLETENESS_SCORE",
+		"AI_SESSION_FAITHFULNESS_SCORE",
+		"AI_AGENT_MAX_PROMPT_LATENCY",
+		"AI_TOOL_MAX_LATENCY",
+		"AI_TOOL_SELECTION_ACCURACY",
+		"AI_TOOL_PARAMETER_ACCURACY",
+		"AI_TOOL_UTILIZATION_ACCURACY",
+	}
+}
+
 type EvaluationFormAIVersionStatus string
 
 // Enum values for EvaluationFormAIVersionStatus
@@ -1304,6 +1359,81 @@ func (EvaluationFormAIVersionStatus) Values() []EvaluationFormAIVersionStatus {
 		"PREVIEW",
 		"ACTIVE",
 		"DEPRECATED",
+	}
+}
+
+type EvaluationFormContactField string
+
+// Enum values for EvaluationFormContactField
+const (
+	EvaluationFormContactFieldCategories                         EvaluationFormContactField = "CATEGORIES"
+	EvaluationFormContactFieldAgentArn                           EvaluationFormContactField = "AGENT_ARN"
+	EvaluationFormContactFieldQueueArn                           EvaluationFormContactField = "QUEUE_ARN"
+	EvaluationFormContactFieldRoutingProfileArn                  EvaluationFormContactField = "ROUTING_PROFILE_ARN"
+	EvaluationFormContactFieldChannel                            EvaluationFormContactField = "CHANNEL"
+	EvaluationFormContactFieldInitiationMethod                   EvaluationFormContactField = "INITIATION_METHOD"
+	EvaluationFormContactFieldIsQueued                           EvaluationFormContactField = "IS_QUEUED"
+	EvaluationFormContactFieldOverallCustomerSentimentScore      EvaluationFormContactField = "OVERALL_CUSTOMER_SENTIMENT_SCORE"
+	EvaluationFormContactFieldOverallAgentSentimentScore         EvaluationFormContactField = "OVERALL_AGENT_SENTIMENT_SCORE"
+	EvaluationFormContactFieldCustomerSentimentScoreWithoutAgent EvaluationFormContactField = "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT"
+	EvaluationFormContactFieldCustomerSentimentScoreWithAgent    EvaluationFormContactField = "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT"
+	EvaluationFormContactFieldNonTalkTime                        EvaluationFormContactField = "NON_TALK_TIME"
+	EvaluationFormContactFieldNonTalkTimePercentage              EvaluationFormContactField = "NON_TALK_TIME_PERCENTAGE"
+	EvaluationFormContactFieldNumberOfInterruptions              EvaluationFormContactField = "NUMBER_OF_INTERRUPTIONS"
+	EvaluationFormContactFieldContactDuration                    EvaluationFormContactField = "CONTACT_DURATION"
+	EvaluationFormContactFieldAgentInteractionDuration           EvaluationFormContactField = "AGENT_INTERACTION_DURATION"
+	EvaluationFormContactFieldCustomerHoldTime                   EvaluationFormContactField = "CUSTOMER_HOLD_TIME"
+	EvaluationFormContactFieldLongestHoldDuration                EvaluationFormContactField = "LONGEST_HOLD_DURATION"
+	EvaluationFormContactFieldNumberOfHolds                      EvaluationFormContactField = "NUMBER_OF_HOLDS"
+	EvaluationFormContactFieldAgentInteractionAndHoldDuration    EvaluationFormContactField = "AGENT_INTERACTION_AND_HOLD_DURATION"
+	EvaluationFormContactFieldRecordingMediaStreamTypes          EvaluationFormContactField = "RECORDING_MEDIA_STREAM_TYPES"
+)
+
+// Values returns all known values for EvaluationFormContactField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormContactField) Values() []EvaluationFormContactField {
+	return []EvaluationFormContactField{
+		"CATEGORIES",
+		"AGENT_ARN",
+		"QUEUE_ARN",
+		"ROUTING_PROFILE_ARN",
+		"CHANNEL",
+		"INITIATION_METHOD",
+		"IS_QUEUED",
+		"OVERALL_CUSTOMER_SENTIMENT_SCORE",
+		"OVERALL_AGENT_SENTIMENT_SCORE",
+		"CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT",
+		"CUSTOMER_SENTIMENT_SCORE_WITH_AGENT",
+		"NON_TALK_TIME",
+		"NON_TALK_TIME_PERCENTAGE",
+		"NUMBER_OF_INTERRUPTIONS",
+		"CONTACT_DURATION",
+		"AGENT_INTERACTION_DURATION",
+		"CUSTOMER_HOLD_TIME",
+		"LONGEST_HOLD_DURATION",
+		"NUMBER_OF_HOLDS",
+		"AGENT_INTERACTION_AND_HOLD_DURATION",
+		"RECORDING_MEDIA_STREAM_TYPES",
+	}
+}
+
+type EvaluationFormEvaluationMetadataField string
+
+// Enum values for EvaluationFormEvaluationMetadataField
+const (
+	EvaluationFormEvaluationMetadataFieldEvaluationType EvaluationFormEvaluationMetadataField = "EVALUATION_TYPE"
+)
+
+// Values returns all known values for EvaluationFormEvaluationMetadataField. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationFormEvaluationMetadataField) Values() []EvaluationFormEvaluationMetadataField {
+	return []EvaluationFormEvaluationMetadataField{
+		"EVALUATION_TYPE",
 	}
 }
 
@@ -1351,7 +1481,11 @@ type EvaluationFormItemEnablementSourceType string
 
 // Enum values for EvaluationFormItemEnablementSourceType
 const (
-	EvaluationFormItemEnablementSourceTypeQuestionRefId EvaluationFormItemEnablementSourceType = "QUESTION_REF_ID"
+	EvaluationFormItemEnablementSourceTypeQuestionRefId      EvaluationFormItemEnablementSourceType = "QUESTION_REF_ID"
+	EvaluationFormItemEnablementSourceTypeContact            EvaluationFormItemEnablementSourceType = "CONTACT"
+	EvaluationFormItemEnablementSourceTypeEvaluationMetadata EvaluationFormItemEnablementSourceType = "EVALUATION_METADATA"
+	EvaluationFormItemEnablementSourceTypeFormMetadata       EvaluationFormItemEnablementSourceType = "FORM_METADATA"
+	EvaluationFormItemEnablementSourceTypeAiMetrics          EvaluationFormItemEnablementSourceType = "AI_METRICS"
 )
 
 // Values returns all known values for EvaluationFormItemEnablementSourceType.
@@ -1362,6 +1496,10 @@ const (
 func (EvaluationFormItemEnablementSourceType) Values() []EvaluationFormItemEnablementSourceType {
 	return []EvaluationFormItemEnablementSourceType{
 		"QUESTION_REF_ID",
+		"CONTACT",
+		"EVALUATION_METADATA",
+		"FORM_METADATA",
+		"AI_METRICS",
 	}
 }
 
@@ -1369,7 +1507,11 @@ type EvaluationFormItemEnablementSourceValueType string
 
 // Enum values for EvaluationFormItemEnablementSourceValueType
 const (
-	EvaluationFormItemEnablementSourceValueTypeOptionRefId EvaluationFormItemEnablementSourceValueType = "OPTION_REF_ID"
+	EvaluationFormItemEnablementSourceValueTypeOptionRefId   EvaluationFormItemEnablementSourceValueType = "OPTION_REF_ID"
+	EvaluationFormItemEnablementSourceValueTypeStringValue   EvaluationFormItemEnablementSourceValueType = "STRING_VALUE"
+	EvaluationFormItemEnablementSourceValueTypeNumericValue  EvaluationFormItemEnablementSourceValueType = "NUMERIC_VALUE"
+	EvaluationFormItemEnablementSourceValueTypeBooleanValue  EvaluationFormItemEnablementSourceValueType = "BOOLEAN_VALUE"
+	EvaluationFormItemEnablementSourceValueTypeDatetimeValue EvaluationFormItemEnablementSourceValueType = "DATETIME_VALUE"
 )
 
 // Values returns all known values for
@@ -1380,6 +1522,10 @@ const (
 func (EvaluationFormItemEnablementSourceValueType) Values() []EvaluationFormItemEnablementSourceValueType {
 	return []EvaluationFormItemEnablementSourceValueType{
 		"OPTION_REF_ID",
+		"STRING_VALUE",
+		"NUMERIC_VALUE",
+		"BOOLEAN_VALUE",
+		"DATETIME_VALUE",
 	}
 }
 
@@ -1387,10 +1533,16 @@ type EvaluationFormItemSourceValuesComparator string
 
 // Enum values for EvaluationFormItemSourceValuesComparator
 const (
-	EvaluationFormItemSourceValuesComparatorIn    EvaluationFormItemSourceValuesComparator = "IN"
-	EvaluationFormItemSourceValuesComparatorNotIn EvaluationFormItemSourceValuesComparator = "NOT_IN"
-	EvaluationFormItemSourceValuesComparatorAllIn EvaluationFormItemSourceValuesComparator = "ALL_IN"
-	EvaluationFormItemSourceValuesComparatorExact EvaluationFormItemSourceValuesComparator = "EXACT"
+	EvaluationFormItemSourceValuesComparatorIn                   EvaluationFormItemSourceValuesComparator = "IN"
+	EvaluationFormItemSourceValuesComparatorNotIn                EvaluationFormItemSourceValuesComparator = "NOT_IN"
+	EvaluationFormItemSourceValuesComparatorAllIn                EvaluationFormItemSourceValuesComparator = "ALL_IN"
+	EvaluationFormItemSourceValuesComparatorExact                EvaluationFormItemSourceValuesComparator = "EXACT"
+	EvaluationFormItemSourceValuesComparatorGreaterThan          EvaluationFormItemSourceValuesComparator = "GREATER_THAN"
+	EvaluationFormItemSourceValuesComparatorLessThan             EvaluationFormItemSourceValuesComparator = "LESS_THAN"
+	EvaluationFormItemSourceValuesComparatorGreaterThanOrEqualTo EvaluationFormItemSourceValuesComparator = "GREATER_THAN_OR_EQUAL_TO"
+	EvaluationFormItemSourceValuesComparatorLessThanOrEqualTo    EvaluationFormItemSourceValuesComparator = "LESS_THAN_OR_EQUAL_TO"
+	EvaluationFormItemSourceValuesComparatorEqualTo              EvaluationFormItemSourceValuesComparator = "EQUAL_TO"
+	EvaluationFormItemSourceValuesComparatorNotEqualTo           EvaluationFormItemSourceValuesComparator = "NOT_EQUAL_TO"
 )
 
 // Values returns all known values for EvaluationFormItemSourceValuesComparator.
@@ -1404,6 +1556,12 @@ func (EvaluationFormItemSourceValuesComparator) Values() []EvaluationFormItemSou
 		"NOT_IN",
 		"ALL_IN",
 		"EXACT",
+		"GREATER_THAN",
+		"LESS_THAN",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"LESS_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
 	}
 }
 
@@ -1677,6 +1835,7 @@ type EvaluationFormQuestionAutomationAnswerSourceType string
 const (
 	EvaluationFormQuestionAutomationAnswerSourceTypeContactLensData EvaluationFormQuestionAutomationAnswerSourceType = "CONTACT_LENS_DATA"
 	EvaluationFormQuestionAutomationAnswerSourceTypeGenAi           EvaluationFormQuestionAutomationAnswerSourceType = "GEN_AI"
+	EvaluationFormQuestionAutomationAnswerSourceTypeCondition       EvaluationFormQuestionAutomationAnswerSourceType = "CONDITION"
 )
 
 // Values returns all known values for
@@ -1688,6 +1847,7 @@ func (EvaluationFormQuestionAutomationAnswerSourceType) Values() []EvaluationFor
 	return []EvaluationFormQuestionAutomationAnswerSourceType{
 		"CONTACT_LENS_DATA",
 		"GEN_AI",
+		"CONDITION",
 	}
 }
 
@@ -1837,12 +1997,35 @@ func (EvaluationFormVersionStatus) Values() []EvaluationFormVersionStatus {
 	}
 }
 
+type EvaluationItemResolutionStatus string
+
+// Enum values for EvaluationItemResolutionStatus
+const (
+	EvaluationItemResolutionStatusPending  EvaluationItemResolutionStatus = "PENDING"
+	EvaluationItemResolutionStatusResolved EvaluationItemResolutionStatus = "RESOLVED"
+	EvaluationItemResolutionStatusFailed   EvaluationItemResolutionStatus = "FAILED"
+)
+
+// Values returns all known values for EvaluationItemResolutionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationItemResolutionStatus) Values() []EvaluationItemResolutionStatus {
+	return []EvaluationItemResolutionStatus{
+		"PENDING",
+		"RESOLVED",
+		"FAILED",
+	}
+}
+
 type EvaluationQuestionAnswerAnalysisType string
 
 // Enum values for EvaluationQuestionAnswerAnalysisType
 const (
 	EvaluationQuestionAnswerAnalysisTypeContactLensData EvaluationQuestionAnswerAnalysisType = "CONTACT_LENS_DATA"
 	EvaluationQuestionAnswerAnalysisTypeGenAi           EvaluationQuestionAnswerAnalysisType = "GEN_AI"
+	EvaluationQuestionAnswerAnalysisTypeCondition       EvaluationQuestionAnswerAnalysisType = "CONDITION"
 )
 
 // Values returns all known values for EvaluationQuestionAnswerAnalysisType. Note
@@ -1854,6 +2037,7 @@ func (EvaluationQuestionAnswerAnalysisType) Values() []EvaluationQuestionAnswerA
 	return []EvaluationQuestionAnswerAnalysisType{
 		"CONTACT_LENS_DATA",
 		"GEN_AI",
+		"CONDITION",
 	}
 }
 
@@ -3127,6 +3311,15 @@ const (
 	NumericQuestionPropertyAutomationLabelLongestHoldDuration                NumericQuestionPropertyAutomationLabel = "LONGEST_HOLD_DURATION"
 	NumericQuestionPropertyAutomationLabelNumberOfHolds                      NumericQuestionPropertyAutomationLabel = "NUMBER_OF_HOLDS"
 	NumericQuestionPropertyAutomationLabelAgentInteractionAndHoldDuration    NumericQuestionPropertyAutomationLabel = "AGENT_INTERACTION_AND_HOLD_DURATION"
+	NumericQuestionPropertyAutomationLabelAiSessionSelfServiceDuration       NumericQuestionPropertyAutomationLabel = "AI_SESSION_SELF_SERVICE_DURATION"
+	NumericQuestionPropertyAutomationLabelAiSessionGoalSuccessRate           NumericQuestionPropertyAutomationLabel = "AI_SESSION_GOAL_SUCCESS_RATE"
+	NumericQuestionPropertyAutomationLabelAiSessionCompletenessScore         NumericQuestionPropertyAutomationLabel = "AI_SESSION_COMPLETENESS_SCORE"
+	NumericQuestionPropertyAutomationLabelAiSessionFaithfulnessScore         NumericQuestionPropertyAutomationLabel = "AI_SESSION_FAITHFULNESS_SCORE"
+	NumericQuestionPropertyAutomationLabelAiAgentMaxPromptLatency            NumericQuestionPropertyAutomationLabel = "AI_AGENT_MAX_PROMPT_LATENCY"
+	NumericQuestionPropertyAutomationLabelAiToolMaxLatency                   NumericQuestionPropertyAutomationLabel = "AI_TOOL_MAX_LATENCY"
+	NumericQuestionPropertyAutomationLabelAiToolSelectionAccuracy            NumericQuestionPropertyAutomationLabel = "AI_TOOL_SELECTION_ACCURACY"
+	NumericQuestionPropertyAutomationLabelAiToolParameterAccuracy            NumericQuestionPropertyAutomationLabel = "AI_TOOL_PARAMETER_ACCURACY"
+	NumericQuestionPropertyAutomationLabelAiToolUtilizationAccuracy          NumericQuestionPropertyAutomationLabel = "AI_TOOL_UTILIZATION_ACCURACY"
 )
 
 // Values returns all known values for NumericQuestionPropertyAutomationLabel.
@@ -3149,6 +3342,15 @@ func (NumericQuestionPropertyAutomationLabel) Values() []NumericQuestionProperty
 		"LONGEST_HOLD_DURATION",
 		"NUMBER_OF_HOLDS",
 		"AGENT_INTERACTION_AND_HOLD_DURATION",
+		"AI_SESSION_SELF_SERVICE_DURATION",
+		"AI_SESSION_GOAL_SUCCESS_RATE",
+		"AI_SESSION_COMPLETENESS_SCORE",
+		"AI_SESSION_FAITHFULNESS_SCORE",
+		"AI_AGENT_MAX_PROMPT_LATENCY",
+		"AI_TOOL_MAX_LATENCY",
+		"AI_TOOL_SELECTION_ACCURACY",
+		"AI_TOOL_PARAMETER_ACCURACY",
+		"AI_TOOL_UTILIZATION_ACCURACY",
 	}
 }
 

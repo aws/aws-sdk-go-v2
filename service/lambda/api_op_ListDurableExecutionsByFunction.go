@@ -64,8 +64,26 @@ type ListDurableExecutionsByFunctionInput struct {
 	// Filter executions that started before this timestamp (ISO 8601 format).
 	StartedBefore *time.Time
 
-	// Filter executions by status. Valid values: RUNNING, SUCCEEDED, FAILED,
-	// TIMED_OUT, STOPPED.
+	// Filters the executions by status. Specify one of the following values:
+	//
+	//   - RUNNING – The execution is running or waiting for pending operations to
+	//   complete.
+	//
+	//   - PAUSING – The execution is waiting for an in-progress invocation to reach
+	//   its next checkpoint before it pauses.
+	//
+	//   - PAUSED – The execution is paused, and Lambda doesn't invoke your function.
+	//
+	//   - SUCCEEDED – The execution completed successfully.
+	//
+	//   - FAILED – The execution completed with an error.
+	//
+	//   - TIMED_OUT – The execution exceeded its execution timeout.
+	//
+	//   - STOPPED – A StopDurableExecution request stopped the execution.
+	//
+	//   - DELETING – A DeleteDurableExecution request is deleting the execution and
+	//   its data.
 	Statuses []types.ExecutionStatus
 
 	noSmithyDocumentSerde

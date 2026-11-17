@@ -11,10 +11,10 @@ import (
 
 //	Deletes the DomainNameAccessAssociation resource.
 //
-// Only the AWS account that created the DomainNameAccessAssociation resource can
-// delete it. To stop an access association source in another AWS account from
-// accessing your private custom domain name, use the
-// RejectDomainNameAccessAssociation operation.
+// Only the Amazon Web Services account that created the
+// DomainNameAccessAssociation resource can delete it. To stop an access
+// association source in another Amazon Web Services account from accessing your
+// private custom domain name, use the RejectDomainNameAccessAssociation operation.
 func (c *Client) DeleteDomainNameAccessAssociation(ctx context.Context, params *DeleteDomainNameAccessAssociationInput, optFns ...func(*Options)) (*DeleteDomainNameAccessAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteDomainNameAccessAssociationInput{}

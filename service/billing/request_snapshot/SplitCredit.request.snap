@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.SplitCredit
+
+{"clientToken":"__ClientToken__","creditId":"__CreditId__","dryRun":true,"portions":[{"amount":"__Amount__","description":"__Description__"},{"amount":"__Amount__","description":"__Description__"}]}

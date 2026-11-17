@@ -10556,7 +10556,9 @@ func TestCheckRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -11797,6 +11799,10 @@ func TestCheckRequestSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 				},
 			},
 		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
+		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
 		PeerVpcId:   ptr.String("__PeerVpcId__"),
@@ -12002,6 +12008,58 @@ func TestCheckRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -12082,6 +12140,58 @@ func TestCheckRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -15963,6 +16073,14 @@ func TestCheckRequestSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -34377,6 +34495,38 @@ func TestCheckRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *t
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPeeringAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -35281,12 +35431,16 @@ func TestCheckRequestSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	}
@@ -35518,6 +35672,58 @@ func TestCheckRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),
@@ -51278,7 +51484,9 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -52519,6 +52727,10 @@ func TestUpdateRequestSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 				},
 			},
 		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
+		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
 		PeerVpcId:   ptr.String("__PeerVpcId__"),
@@ -52724,6 +52936,58 @@ func TestUpdateRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -52804,6 +53068,58 @@ func TestUpdateRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -56685,6 +57001,14 @@ func TestUpdateRequestSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -75099,6 +75423,38 @@ func TestUpdateRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPeeringAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -76003,12 +76359,16 @@ func TestUpdateRequestSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	}
@@ -76240,6 +76600,58 @@ func TestUpdateRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),

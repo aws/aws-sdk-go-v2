@@ -232,6 +232,26 @@ func serializeGlobalReplicationGroupMemberList(s smithy.ShapeSerializer, schema 
 	s.CloseList()
 }
 
+func serializeIntegrationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Integration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIntegrationRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []IntegrationRequest) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1236,6 +1256,50 @@ func deserializeGlobalReplicationGroupMemberList(d smithy.ShapeDeserializer, s *
 		}
 
 		vv = GlobalReplicationGroupMember{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIntegrationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Integration) error {
+	*v = make([]Integration, 0)
+	var vv Integration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Integration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Integration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIntegrationRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IntegrationRequest) error {
+	*v = make([]IntegrationRequest, 0)
+	var vv IntegrationRequest
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero IntegrationRequest
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = IntegrationRequest{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

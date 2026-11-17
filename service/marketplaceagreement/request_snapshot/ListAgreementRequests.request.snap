@@ -1,0 +1,7 @@
+POST /service/AWSMPCommerceService_v20200301/operation/ListAgreementRequests
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gcatalogk__Catalog__jmaxResultsinextTokenm__NextToken__jresourceIdn__ResourceId__fstatuseDRAFTÿ

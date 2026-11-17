@@ -1,0 +1,8 @@
+{
+    "id": "0ec16351-b551-461a-864a-a0d8ec80a0f1",
+    "type": "feature",
+    "description": "Added the NestedVirtualization and EnableEndUserAdvisor self-service permissions. Use them with ModifySelfservicePermissions to turn nested virtualization and End User Advisor on or off for a directory, and view the settings with DescribeWorkspaceDirectories. End User Advisor is on by default.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

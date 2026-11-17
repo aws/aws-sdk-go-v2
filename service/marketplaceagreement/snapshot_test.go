@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcceptAgreementApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptAgreementApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptAgreementApproval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AcceptAgreementCancellationRequest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptAgreementCancellationRequest(context.Background(), nil, func(o *Options) {
@@ -146,6 +158,18 @@ func TestCheckSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelAgreementRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelAgreementRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelAgreementRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAgreementRequest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgreementRequest(context.Background(), nil, func(o *Options) {
@@ -170,11 +194,35 @@ func TestCheckSnapshot_DescribeAgreement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAgreementApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgreementApproval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgreementCancellationRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAgreementCancellationRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgreementContacts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementContacts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgreementContacts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +254,42 @@ func TestCheckSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAgreementRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgreementRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgreementRequestApprovalPlans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementRequestApprovalPlans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgreementRequestApprovalPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgreementRequestTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementRequestTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgreementRequestTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgreementTerms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgreementTerms(context.Background(), nil, func(o *Options) {
@@ -223,6 +307,18 @@ func TestCheckSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 	_, err := svc.GetBillingAdjustmentRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetBillingAdjustmentRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgreementApprovals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgreementApprovals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgreementApprovals")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -278,11 +374,35 @@ func TestCheckSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAgreementRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgreementRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgreementRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBillingAdjustmentRequests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBillingAdjustmentRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RejectAgreementApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectAgreementApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectAgreementApproval")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +470,18 @@ func TestCheckSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartAgreementApprovals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAgreementApprovals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAgreementApprovals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePurchaseOrders(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePurchaseOrders(context.Background(), nil, func(o *Options) {
@@ -361,6 +493,18 @@ func TestCheckSnapshot_UpdatePurchaseOrders(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AcceptAgreementApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptAgreementApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptAgreementApproval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AcceptAgreementCancellationRequest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptAgreementCancellationRequest(context.Background(), nil, func(o *Options) {
@@ -445,6 +589,18 @@ func TestUpdateSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelAgreementRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelAgreementRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelAgreementRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAgreementRequest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgreementRequest(context.Background(), nil, func(o *Options) {
@@ -469,11 +625,35 @@ func TestUpdateSnapshot_DescribeAgreement(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAgreementApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgreementApproval")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgreementCancellationRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAgreementCancellationRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgreementContacts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementContacts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgreementContacts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -505,6 +685,42 @@ func TestUpdateSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAgreementRequest(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementRequest(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgreementRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgreementRequestApprovalPlans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementRequestApprovalPlans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgreementRequestApprovalPlans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgreementRequestTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgreementRequestTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgreementRequestTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAgreementTerms(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgreementTerms(context.Background(), nil, func(o *Options) {
@@ -522,6 +738,18 @@ func TestUpdateSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 	_, err := svc.GetBillingAdjustmentRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBillingAdjustmentRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgreementApprovals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgreementApprovals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgreementApprovals")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -577,11 +805,35 @@ func TestUpdateSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAgreementRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgreementRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgreementRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBillingAdjustmentRequests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBillingAdjustmentRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RejectAgreementApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectAgreementApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectAgreementApproval")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -642,6 +894,18 @@ func TestUpdateSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 	_, err := svc.SendAgreementPaymentRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendAgreementPaymentRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAgreementApprovals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAgreementApprovals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAgreementApprovals")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

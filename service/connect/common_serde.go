@@ -148,6 +148,12 @@ func serializeEvaluationFormQuestionTypeProperties(s smithy.ShapeSerializer, sch
 
 func serializeEvaluationFormSingleSelectQuestionAutomationOption(s smithy.ShapeSerializer, schema *smithy.Schema, v types.EvaluationFormSingleSelectQuestionAutomationOption) {
 	switch vv := v.(type) {
+	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule:
+		s.WriteUnion(schema, schemas.EvaluationFormSingleSelectQuestionAutomationOption_AutomationRule)
+		s.WriteStruct(schemas.EvaluationFormSingleSelectQuestionAutomationOption_AutomationRule)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory:
 		s.WriteUnion(schema, schemas.EvaluationFormSingleSelectQuestionAutomationOption_RuleCategory)
 		s.WriteStruct(schemas.EvaluationFormSingleSelectQuestionAutomationOption_RuleCategory)
@@ -515,6 +521,10 @@ func deserializeEvaluationFormQuestionTypeProperties(d smithy.ShapeDeserializer,
 func deserializeEvaluationFormSingleSelectQuestionAutomationOption(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.EvaluationFormSingleSelectQuestionAutomationOption) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.EvaluationFormSingleSelectQuestionAutomationOption_AutomationRule:
+			vv := &types.EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.EvaluationFormSingleSelectQuestionAutomationOption_RuleCategory:
 			vv := &types.EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory{}
 			*v = vv
@@ -1945,6 +1955,26 @@ func serializeEvaluationFormValidationFindingList(s smithy.ShapeSerializer, sche
 }
 
 func serializeEvaluationFormVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EvaluationFormVersionSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEvaluationResolvedSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EvaluationResolvedSource) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEvaluationResolvedSourceValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EvaluationFormItemEnablementSourceValue) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -6835,6 +6865,50 @@ func deserializeEvaluationFormVersionSummaryList(d smithy.ShapeDeserializer, s *
 		}
 
 		vv = types.EvaluationFormVersionSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEvaluationResolvedSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EvaluationResolvedSource) error {
+	*v = make([]types.EvaluationResolvedSource, 0)
+	var vv types.EvaluationResolvedSource
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EvaluationResolvedSource
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EvaluationResolvedSource{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEvaluationResolvedSourceValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EvaluationFormItemEnablementSourceValue) error {
+	*v = make([]types.EvaluationFormItemEnablementSourceValue, 0)
+	var vv types.EvaluationFormItemEnablementSourceValue
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EvaluationFormItemEnablementSourceValue
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EvaluationFormItemEnablementSourceValue{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -11753,6 +11827,15 @@ func serializeEvaluationAnswersOutputMap(s smithy.ShapeSerializer, schema *smith
 	s.CloseMap()
 }
 
+func serializeEvaluationEnablementStatusMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.EvaluationEnablementStatus) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeEvaluationNotesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.EvaluationNote) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -12085,6 +12168,27 @@ func deserializeEvaluationAnswersOutputMap(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeEvaluationEnablementStatusMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.EvaluationEnablementStatus) error {
+	*v = make(map[string]types.EvaluationEnablementStatus)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EvaluationEnablementStatus
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = types.EvaluationEnablementStatus(vv)
 		return nil
 	})
 }

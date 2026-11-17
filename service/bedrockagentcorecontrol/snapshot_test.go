@@ -794,6 +794,18 @@ func TestCheckSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAgentInsightStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentInsightStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentInsightStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -1207,6 +1219,18 @@ func TestCheckSnapshot_GetWorkloadIdentity(t *testing.T) {
 	_, err := svc.GetWorkloadIdentity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetWorkloadIdentity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentInsightStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentInsightStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentInsightStores")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1795,6 +1819,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentInsightStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentInsightStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentInsightStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2857,6 +2893,18 @@ func TestUpdateSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAgentInsightStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentInsightStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentInsightStore")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -3270,6 +3318,18 @@ func TestUpdateSnapshot_GetWorkloadIdentity(t *testing.T) {
 	_, err := svc.GetWorkloadIdentity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetWorkloadIdentity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentInsightStores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentInsightStores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentInsightStores")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3858,6 +3918,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentInsightStore(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentInsightStore(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentInsightStore")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1700,6 +1700,52 @@ func TestCheckResponseSnapshot_RedeemCredits(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SplitCredit(t *testing.T) {
+	want := &SplitCreditOutput{
+		ParentCreditId: ptr.String("__ParentCreditId__"),
+		ChildCredits: []types.ChildCredit{
+			{
+				CreditId: ptr.String("__CreditId__"),
+				Amount:   ptr.String("__Amount__"),
+			},
+			{
+				CreditId: ptr.String("__CreditId__"),
+				Amount:   ptr.String("__Amount__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SplitCredit.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SplitCredit(context.Background(), &SplitCreditInput{
+		CreditId: ptr.String("__CreditId__"),
+		Portions: []types.SplitPortion{
+			{
+				Amount:      ptr.String("__Amount__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Amount:      ptr.String("__Amount__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SplitCredit.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -1728,6 +1774,36 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "TagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_TransferCredit(t *testing.T) {
+	want := &TransferCreditOutput{
+		SourceCreditId:       ptr.String("__SourceCreditId__"),
+		NewCreditId:          ptr.String("__NewCreditId__"),
+		DestinationAccountId: ptr.String("__DestinationAccountId__"),
+		Amount:               ptr.String("__Amount__"),
+		DryRun:               ptr.Bool(true),
+	}
+	status, header, body, err := serdeRespReadSnapshot("TransferCredit.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.TransferCredit(context.Background(), &TransferCreditInput{
+		CreditId:             ptr.String("__CreditId__"),
+		DestinationAccountId: ptr.String("__DestinationAccountId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		DryRun:               ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "TransferCredit.response", err)
 	}
 }
 

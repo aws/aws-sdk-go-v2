@@ -753,7 +753,8 @@ func TestCheckResponseSnapshot_PutRumEvents(t *testing.T) {
 				Details:   ptr.String("__Details__"),
 			},
 		},
-		Alias: ptr.String("__Alias__"),
+		Alias:           ptr.String("__Alias__"),
+		SessionMetadata: ptr.String("__SessionMetadata__"),
 	})
 	if err != nil {
 		t.Fatal(err)

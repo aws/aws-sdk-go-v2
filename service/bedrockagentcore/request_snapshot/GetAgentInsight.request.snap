@@ -1,0 +1,3 @@
+GET /agentinsights/__AgentInsightId__?applicationName=__ApplicationName__
+
+

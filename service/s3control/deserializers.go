@@ -16563,6 +16563,58 @@ func awsRestxml_deserializeDocumentInclude(v **types.Include, decoder smithyxml.
 	return nil
 }
 
+func awsRestxml_deserializeDocumentIntAccessTiers(v **types.IntAccessTiers, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.IntAccessTiers
+	if *v == nil {
+		sv = &types.IntAccessTiers{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.IsEnabled = xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentInternalServiceException(v **types.InternalServiceException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26058,6 +26110,12 @@ func awsRestxml_deserializeDocumentStorageLensConfiguration(v **types.StorageLen
 				return err
 			}
 
+		case strings.EqualFold("CostAndUsageReportsPublish", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentStorageLensCostAndUsageReportsPublish(&sv.CostAndUsageReportsPublish, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("DataExport", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentStorageLensDataExport(&sv.DataExport, nodeDecoder); err != nil {
@@ -26092,6 +26150,12 @@ func awsRestxml_deserializeDocumentStorageLensConfiguration(v **types.StorageLen
 		case strings.EqualFold("Include", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentInclude(&sv.Include, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("IntAccessTiers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentIntAccessTiers(&sv.IntAccessTiers, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -26219,6 +26283,176 @@ func awsRestxml_deserializeDocumentStorageLensConfigurationListUnwrapped(v *[]ty
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentStorageLensCostAndUsageReportsPrefixLevel(v **types.StorageLensCostAndUsageReportsPrefixLevel, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.StorageLensCostAndUsageReportsPrefixLevel
+	if *v == nil {
+		sv = &types.StorageLensCostAndUsageReportsPrefixLevel{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.IsEnabled = xtv
+			}
+
+		case strings.EqualFold("SelectionCriteria", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentStorageLensCostAndUsageReportsSelectionCriteria(&sv.SelectionCriteria, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentStorageLensCostAndUsageReportsPublish(v **types.StorageLensCostAndUsageReportsPublish, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.StorageLensCostAndUsageReportsPublish
+	if *v == nil {
+		sv = &types.StorageLensCostAndUsageReportsPublish{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("PrefixLevel", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentStorageLensCostAndUsageReportsPrefixLevel(&sv.PrefixLevel, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentStorageLensCostAndUsageReportsSelectionCriteria(v **types.StorageLensCostAndUsageReportsSelectionCriteria, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.StorageLensCostAndUsageReportsSelectionCriteria
+	if *v == nil {
+		sv = &types.StorageLensCostAndUsageReportsSelectionCriteria{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("MaxDepth", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxDepth = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinDepth", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinDepth = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentStorageLensDataExport(v **types.StorageLensDataExport, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

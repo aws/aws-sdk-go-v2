@@ -1,0 +1,8 @@
+{
+    "id": "393917f3-cbff-4f42-bb9d-3e4e189afd13",
+    "type": "feature",
+    "description": "Adds a new image scan status for images that exceed the maximum size supported by Amazon ECR enhanced scanning.",
+    "modules": [
+        "service/ecr"
+    ]
+}

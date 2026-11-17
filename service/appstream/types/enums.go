@@ -31,6 +31,7 @@ const (
 	ActionDomainPasswordSignin         Action = "DOMAIN_PASSWORD_SIGNIN"
 	ActionDomainSmartCardSignin        Action = "DOMAIN_SMART_CARD_SIGNIN"
 	ActionAutoTimeZoneRedirection      Action = "AUTO_TIME_ZONE_REDIRECTION"
+	ActionSmartCardRedirection         Action = "SMART_CARD_REDIRECTION"
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
@@ -47,6 +48,7 @@ func (Action) Values() []Action {
 		"DOMAIN_PASSWORD_SIGNIN",
 		"DOMAIN_SMART_CARD_SIGNIN",
 		"AUTO_TIME_ZONE_REDIRECTION",
+		"SMART_CARD_REDIRECTION",
 	}
 }
 

@@ -1445,6 +1445,7 @@ func TestCheckRequestSnapshot_PutCaseEventConfiguration(t *testing.T) {
 							Id: ptr.String("__Id__"),
 						},
 					},
+					AutoIncludeFields: types.AutoIncludeFields("All"),
 				},
 				RelatedItemData: &types.RelatedItemEventIncludedData{
 					IncludeContent: ptr.Bool(true),
@@ -3343,6 +3344,7 @@ func TestUpdateRequestSnapshot_PutCaseEventConfiguration(t *testing.T) {
 							Id: ptr.String("__Id__"),
 						},
 					},
+					AutoIncludeFields: types.AutoIncludeFields("All"),
 				},
 				RelatedItemData: &types.RelatedItemEventIncludedData{
 					IncludeContent: ptr.Bool(true),

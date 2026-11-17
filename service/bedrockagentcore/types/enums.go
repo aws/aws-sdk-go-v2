@@ -56,6 +56,47 @@ func (ABTestStatus) Values() []ABTestStatus {
 	}
 }
 
+type AgentInsightArchiveStatus string
+
+// Enum values for AgentInsightArchiveStatus
+const (
+	AgentInsightArchiveStatusActive   AgentInsightArchiveStatus = "ACTIVE"
+	AgentInsightArchiveStatusArchived AgentInsightArchiveStatus = "ARCHIVED"
+)
+
+// Values returns all known values for AgentInsightArchiveStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInsightArchiveStatus) Values() []AgentInsightArchiveStatus {
+	return []AgentInsightArchiveStatus{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
+
+type AgentInsightCustomerMetadataStatus string
+
+// Enum values for AgentInsightCustomerMetadataStatus
+const (
+	AgentInsightCustomerMetadataStatusAvailable              AgentInsightCustomerMetadataStatus = "AVAILABLE"
+	AgentInsightCustomerMetadataStatusCustomerKeyUnavailable AgentInsightCustomerMetadataStatus = "CUSTOMER_KEY_UNAVAILABLE"
+	AgentInsightCustomerMetadataStatusUnavailable            AgentInsightCustomerMetadataStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for AgentInsightCustomerMetadataStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInsightCustomerMetadataStatus) Values() []AgentInsightCustomerMetadataStatus {
+	return []AgentInsightCustomerMetadataStatus{
+		"AVAILABLE",
+		"CUSTOMER_KEY_UNAVAILABLE",
+		"UNAVAILABLE",
+	}
+}
+
 type AutomationStreamStatus string
 
 // Enum values for AutomationStreamStatus
@@ -351,6 +392,37 @@ func (Currency) Values() []Currency {
 	}
 }
 
+type DatasetGenerationStatus string
+
+// Enum values for DatasetGenerationStatus
+const (
+	// The generation is running.
+	DatasetGenerationStatusInProgress DatasetGenerationStatus = "IN_PROGRESS"
+	// The generation finished and added its examples to the dataset's draft.
+	DatasetGenerationStatusCompleted DatasetGenerationStatus = "COMPLETED"
+	// The generation finished, but some sessions failed. See errorDetails for the
+	// errors.
+	DatasetGenerationStatusCompletedWithErrors DatasetGenerationStatus = "COMPLETED_WITH_ERRORS"
+	// The generation failed. See failureReason for the reason.
+	DatasetGenerationStatusFailed DatasetGenerationStatus = "FAILED"
+	// The generation record is being deleted.
+	DatasetGenerationStatusDeleting DatasetGenerationStatus = "DELETING"
+)
+
+// Values returns all known values for DatasetGenerationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetGenerationStatus) Values() []DatasetGenerationStatus {
+	return []DatasetGenerationStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
+		"DELETING",
+	}
+}
+
 type DescriptorType string
 
 // Enum values for DescriptorType
@@ -443,6 +515,58 @@ func (FindingTargetType) Values() []FindingTargetType {
 		"SPAN_ID",
 		"TRACE_ID",
 		"SPAN_NAME",
+	}
+}
+
+type GenerationFilterOperator string
+
+// Enum values for GenerationFilterOperator
+const (
+	GenerationFilterOperatorEquals             GenerationFilterOperator = "Equals"
+	GenerationFilterOperatorNotEquals          GenerationFilterOperator = "NotEquals"
+	GenerationFilterOperatorGreaterThan        GenerationFilterOperator = "GreaterThan"
+	GenerationFilterOperatorLessThan           GenerationFilterOperator = "LessThan"
+	GenerationFilterOperatorGreaterThanOrEqual GenerationFilterOperator = "GreaterThanOrEqual"
+	GenerationFilterOperatorLessThanOrEqual    GenerationFilterOperator = "LessThanOrEqual"
+	GenerationFilterOperatorContains           GenerationFilterOperator = "Contains"
+	GenerationFilterOperatorNotContains        GenerationFilterOperator = "NotContains"
+)
+
+// Values returns all known values for GenerationFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GenerationFilterOperator) Values() []GenerationFilterOperator {
+	return []GenerationFilterOperator{
+		"Equals",
+		"NotEquals",
+		"GreaterThan",
+		"LessThan",
+		"GreaterThanOrEqual",
+		"LessThanOrEqual",
+		"Contains",
+		"NotContains",
+	}
+}
+
+type GroundTruthField string
+
+// Enum values for GroundTruthField
+const (
+	// The agent's final response.
+	GroundTruthFieldExpectedResponse GroundTruthField = "expected_response"
+	// The sequence of tool calls the agent made.
+	GroundTruthFieldExpectedTrajectory GroundTruthField = "expected_trajectory"
+)
+
+// Values returns all known values for GroundTruthField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroundTruthField) Values() []GroundTruthField {
+	return []GroundTruthField{
+		"expected_response",
+		"expected_trajectory",
 	}
 }
 
@@ -1144,6 +1268,221 @@ func (RecordExpiryAction) Values() []RecordExpiryAction {
 	}
 }
 
+type RedactionIdentifier string
+
+// Enum values for RedactionIdentifier
+const (
+	RedactionIdentifierAddress                             RedactionIdentifier = "ADDRESS"
+	RedactionIdentifierAwsSecretKey                        RedactionIdentifier = "AWS_SECRET_KEY"
+	RedactionIdentifierBankAccountNumberDe                 RedactionIdentifier = "BANK_ACCOUNT_NUMBER_DE"
+	RedactionIdentifierBankAccountNumberEs                 RedactionIdentifier = "BANK_ACCOUNT_NUMBER_ES"
+	RedactionIdentifierBankAccountNumberFr                 RedactionIdentifier = "BANK_ACCOUNT_NUMBER_FR"
+	RedactionIdentifierBankAccountNumberGb                 RedactionIdentifier = "BANK_ACCOUNT_NUMBER_GB"
+	RedactionIdentifierBankAccountNumberIt                 RedactionIdentifier = "BANK_ACCOUNT_NUMBER_IT"
+	RedactionIdentifierBankAccountNumberUs                 RedactionIdentifier = "BANK_ACCOUNT_NUMBER_US"
+	RedactionIdentifierCepCodeBr                           RedactionIdentifier = "CEP_CODE_BR"
+	RedactionIdentifierCnpjBr                              RedactionIdentifier = "CNPJ_BR"
+	RedactionIdentifierCpfCodeBr                           RedactionIdentifier = "CPF_CODE_BR"
+	RedactionIdentifierCreditCardExpiration                RedactionIdentifier = "CREDIT_CARD_EXPIRATION"
+	RedactionIdentifierCreditCardMagneticStripe            RedactionIdentifier = "CREDIT_CARD_MAGNETIC_STRIPE"
+	RedactionIdentifierCreditCardNumber                    RedactionIdentifier = "CREDIT_CARD_NUMBER"
+	RedactionIdentifierCreditCardSecurityCode              RedactionIdentifier = "CREDIT_CARD_SECURITY_CODE"
+	RedactionIdentifierDateOfBirth                         RedactionIdentifier = "DATE_OF_BIRTH"
+	RedactionIdentifierDriversLicenseAt                    RedactionIdentifier = "DRIVERS_LICENSE_AT"
+	RedactionIdentifierDriversLicenseAu                    RedactionIdentifier = "DRIVERS_LICENSE_AU"
+	RedactionIdentifierDriversLicenseBe                    RedactionIdentifier = "DRIVERS_LICENSE_BE"
+	RedactionIdentifierDriversLicenseBg                    RedactionIdentifier = "DRIVERS_LICENSE_BG"
+	RedactionIdentifierDriversLicenseCa                    RedactionIdentifier = "DRIVERS_LICENSE_CA"
+	RedactionIdentifierDriversLicenseCy                    RedactionIdentifier = "DRIVERS_LICENSE_CY"
+	RedactionIdentifierDriversLicenseCz                    RedactionIdentifier = "DRIVERS_LICENSE_CZ"
+	RedactionIdentifierDriversLicenseDe                    RedactionIdentifier = "DRIVERS_LICENSE_DE"
+	RedactionIdentifierDriversLicenseDk                    RedactionIdentifier = "DRIVERS_LICENSE_DK"
+	RedactionIdentifierDriversLicenseEe                    RedactionIdentifier = "DRIVERS_LICENSE_EE"
+	RedactionIdentifierDriversLicenseEs                    RedactionIdentifier = "DRIVERS_LICENSE_ES"
+	RedactionIdentifierDriversLicenseFi                    RedactionIdentifier = "DRIVERS_LICENSE_FI"
+	RedactionIdentifierDriversLicenseFr                    RedactionIdentifier = "DRIVERS_LICENSE_FR"
+	RedactionIdentifierDriversLicenseGb                    RedactionIdentifier = "DRIVERS_LICENSE_GB"
+	RedactionIdentifierDriversLicenseGr                    RedactionIdentifier = "DRIVERS_LICENSE_GR"
+	RedactionIdentifierDriversLicenseHr                    RedactionIdentifier = "DRIVERS_LICENSE_HR"
+	RedactionIdentifierDriversLicenseHu                    RedactionIdentifier = "DRIVERS_LICENSE_HU"
+	RedactionIdentifierDriversLicenseIe                    RedactionIdentifier = "DRIVERS_LICENSE_IE"
+	RedactionIdentifierDriversLicenseIt                    RedactionIdentifier = "DRIVERS_LICENSE_IT"
+	RedactionIdentifierDriversLicenseLt                    RedactionIdentifier = "DRIVERS_LICENSE_LT"
+	RedactionIdentifierDriversLicenseLu                    RedactionIdentifier = "DRIVERS_LICENSE_LU"
+	RedactionIdentifierDriversLicenseLv                    RedactionIdentifier = "DRIVERS_LICENSE_LV"
+	RedactionIdentifierDriversLicenseMt                    RedactionIdentifier = "DRIVERS_LICENSE_MT"
+	RedactionIdentifierDriversLicenseNl                    RedactionIdentifier = "DRIVERS_LICENSE_NL"
+	RedactionIdentifierDriversLicensePl                    RedactionIdentifier = "DRIVERS_LICENSE_PL"
+	RedactionIdentifierDriversLicensePt                    RedactionIdentifier = "DRIVERS_LICENSE_PT"
+	RedactionIdentifierDriversLicenseRo                    RedactionIdentifier = "DRIVERS_LICENSE_RO"
+	RedactionIdentifierDriversLicenseSe                    RedactionIdentifier = "DRIVERS_LICENSE_SE"
+	RedactionIdentifierDriversLicenseSi                    RedactionIdentifier = "DRIVERS_LICENSE_SI"
+	RedactionIdentifierDriversLicenseSk                    RedactionIdentifier = "DRIVERS_LICENSE_SK"
+	RedactionIdentifierDriversLicenseUs                    RedactionIdentifier = "DRIVERS_LICENSE_US"
+	RedactionIdentifierDrugEnforcementAgencyNumberUs       RedactionIdentifier = "DRUG_ENFORCEMENT_AGENCY_NUMBER_US"
+	RedactionIdentifierElectoralRollNumberGb               RedactionIdentifier = "ELECTORAL_ROLL_NUMBER_GB"
+	RedactionIdentifierEmailAddress                        RedactionIdentifier = "EMAIL_ADDRESS"
+	RedactionIdentifierHealthInsuranceCardNumberEu         RedactionIdentifier = "HEALTH_INSURANCE_CARD_NUMBER_EU"
+	RedactionIdentifierHealthInsuranceClaimNumberUs        RedactionIdentifier = "HEALTH_INSURANCE_CLAIM_NUMBER_US"
+	RedactionIdentifierHealthInsuranceNumberFr             RedactionIdentifier = "HEALTH_INSURANCE_NUMBER_FR"
+	RedactionIdentifierHealthcareProcedureCodeUs           RedactionIdentifier = "HEALTHCARE_PROCEDURE_CODE_US"
+	RedactionIdentifierIndividualTaxIdentificationNumberUs RedactionIdentifier = "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US"
+	RedactionIdentifierInseeCodeFr                         RedactionIdentifier = "INSEE_CODE_FR"
+	RedactionIdentifierIpAddress                           RedactionIdentifier = "IP_ADDRESS"
+	RedactionIdentifierLatLong                             RedactionIdentifier = "LAT_LONG"
+	RedactionIdentifierMedicareBeneficiaryNumberUs         RedactionIdentifier = "MEDICARE_BENEFICIARY_NUMBER_US"
+	RedactionIdentifierName                                RedactionIdentifier = "NAME"
+	RedactionIdentifierNationalDrugCodeUs                  RedactionIdentifier = "NATIONAL_DRUG_CODE_US"
+	RedactionIdentifierNationalIdentificationNumberDe      RedactionIdentifier = "NATIONAL_IDENTIFICATION_NUMBER_DE"
+	RedactionIdentifierNationalIdentificationNumberEs      RedactionIdentifier = "NATIONAL_IDENTIFICATION_NUMBER_ES"
+	RedactionIdentifierNationalIdentificationNumberIt      RedactionIdentifier = "NATIONAL_IDENTIFICATION_NUMBER_IT"
+	RedactionIdentifierNationalInsuranceNumberGb           RedactionIdentifier = "NATIONAL_INSURANCE_NUMBER_GB"
+	RedactionIdentifierNationalProviderIdUs                RedactionIdentifier = "NATIONAL_PROVIDER_ID_US"
+	RedactionIdentifierNhsNumberGb                         RedactionIdentifier = "NHS_NUMBER_GB"
+	RedactionIdentifierNieNumberEs                         RedactionIdentifier = "NIE_NUMBER_ES"
+	RedactionIdentifierNifNumberEs                         RedactionIdentifier = "NIF_NUMBER_ES"
+	RedactionIdentifierOpenSshPrivateKey                   RedactionIdentifier = "OPEN_SSH_PRIVATE_KEY"
+	RedactionIdentifierPassportNumberCa                    RedactionIdentifier = "PASSPORT_NUMBER_CA"
+	RedactionIdentifierPassportNumberDe                    RedactionIdentifier = "PASSPORT_NUMBER_DE"
+	RedactionIdentifierPassportNumberEs                    RedactionIdentifier = "PASSPORT_NUMBER_ES"
+	RedactionIdentifierPassportNumberFr                    RedactionIdentifier = "PASSPORT_NUMBER_FR"
+	RedactionIdentifierPassportNumberGb                    RedactionIdentifier = "PASSPORT_NUMBER_GB"
+	RedactionIdentifierPassportNumberIt                    RedactionIdentifier = "PASSPORT_NUMBER_IT"
+	RedactionIdentifierPassportNumberUs                    RedactionIdentifier = "PASSPORT_NUMBER_US"
+	RedactionIdentifierPermanentResidenceNumberCa          RedactionIdentifier = "PERMANENT_RESIDENCE_NUMBER_CA"
+	RedactionIdentifierPersonalHealthNumberCa              RedactionIdentifier = "PERSONAL_HEALTH_NUMBER_CA"
+	RedactionIdentifierPgpPrivateKey                       RedactionIdentifier = "PGP_PRIVATE_KEY"
+	RedactionIdentifierPhoneNumberBr                       RedactionIdentifier = "PHONE_NUMBER_BR"
+	RedactionIdentifierPhoneNumberDe                       RedactionIdentifier = "PHONE_NUMBER_DE"
+	RedactionIdentifierPhoneNumberEs                       RedactionIdentifier = "PHONE_NUMBER_ES"
+	RedactionIdentifierPhoneNumberFr                       RedactionIdentifier = "PHONE_NUMBER_FR"
+	RedactionIdentifierPhoneNumberGb                       RedactionIdentifier = "PHONE_NUMBER_GB"
+	RedactionIdentifierPhoneNumberIt                       RedactionIdentifier = "PHONE_NUMBER_IT"
+	RedactionIdentifierPhoneNumberUs                       RedactionIdentifier = "PHONE_NUMBER_US"
+	RedactionIdentifierPkcsPrivateKey                      RedactionIdentifier = "PKCS_PRIVATE_KEY"
+	RedactionIdentifierPostalCodeCa                        RedactionIdentifier = "POSTAL_CODE_CA"
+	RedactionIdentifierPuttyPrivateKey                     RedactionIdentifier = "PUTTY_PRIVATE_KEY"
+	RedactionIdentifierRgNumberBr                          RedactionIdentifier = "RG_NUMBER_BR"
+	RedactionIdentifierSocialInsuranceNumberCa             RedactionIdentifier = "SOCIAL_INSURANCE_NUMBER_CA"
+	RedactionIdentifierSsnEs                               RedactionIdentifier = "SSN_ES"
+	RedactionIdentifierSsnUs                               RedactionIdentifier = "SSN_US"
+	RedactionIdentifierTaxIdDe                             RedactionIdentifier = "TAX_ID_DE"
+	RedactionIdentifierTaxIdEs                             RedactionIdentifier = "TAX_ID_ES"
+	RedactionIdentifierTaxIdFr                             RedactionIdentifier = "TAX_ID_FR"
+	RedactionIdentifierTaxIdGb                             RedactionIdentifier = "TAX_ID_GB"
+	RedactionIdentifierVehicleIdentificationNumber         RedactionIdentifier = "VEHICLE_IDENTIFICATION_NUMBER"
+	RedactionIdentifierZipCodeUs                           RedactionIdentifier = "ZIP_CODE_US"
+)
+
+// Values returns all known values for RedactionIdentifier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RedactionIdentifier) Values() []RedactionIdentifier {
+	return []RedactionIdentifier{
+		"ADDRESS",
+		"AWS_SECRET_KEY",
+		"BANK_ACCOUNT_NUMBER_DE",
+		"BANK_ACCOUNT_NUMBER_ES",
+		"BANK_ACCOUNT_NUMBER_FR",
+		"BANK_ACCOUNT_NUMBER_GB",
+		"BANK_ACCOUNT_NUMBER_IT",
+		"BANK_ACCOUNT_NUMBER_US",
+		"CEP_CODE_BR",
+		"CNPJ_BR",
+		"CPF_CODE_BR",
+		"CREDIT_CARD_EXPIRATION",
+		"CREDIT_CARD_MAGNETIC_STRIPE",
+		"CREDIT_CARD_NUMBER",
+		"CREDIT_CARD_SECURITY_CODE",
+		"DATE_OF_BIRTH",
+		"DRIVERS_LICENSE_AT",
+		"DRIVERS_LICENSE_AU",
+		"DRIVERS_LICENSE_BE",
+		"DRIVERS_LICENSE_BG",
+		"DRIVERS_LICENSE_CA",
+		"DRIVERS_LICENSE_CY",
+		"DRIVERS_LICENSE_CZ",
+		"DRIVERS_LICENSE_DE",
+		"DRIVERS_LICENSE_DK",
+		"DRIVERS_LICENSE_EE",
+		"DRIVERS_LICENSE_ES",
+		"DRIVERS_LICENSE_FI",
+		"DRIVERS_LICENSE_FR",
+		"DRIVERS_LICENSE_GB",
+		"DRIVERS_LICENSE_GR",
+		"DRIVERS_LICENSE_HR",
+		"DRIVERS_LICENSE_HU",
+		"DRIVERS_LICENSE_IE",
+		"DRIVERS_LICENSE_IT",
+		"DRIVERS_LICENSE_LT",
+		"DRIVERS_LICENSE_LU",
+		"DRIVERS_LICENSE_LV",
+		"DRIVERS_LICENSE_MT",
+		"DRIVERS_LICENSE_NL",
+		"DRIVERS_LICENSE_PL",
+		"DRIVERS_LICENSE_PT",
+		"DRIVERS_LICENSE_RO",
+		"DRIVERS_LICENSE_SE",
+		"DRIVERS_LICENSE_SI",
+		"DRIVERS_LICENSE_SK",
+		"DRIVERS_LICENSE_US",
+		"DRUG_ENFORCEMENT_AGENCY_NUMBER_US",
+		"ELECTORAL_ROLL_NUMBER_GB",
+		"EMAIL_ADDRESS",
+		"HEALTH_INSURANCE_CARD_NUMBER_EU",
+		"HEALTH_INSURANCE_CLAIM_NUMBER_US",
+		"HEALTH_INSURANCE_NUMBER_FR",
+		"HEALTHCARE_PROCEDURE_CODE_US",
+		"INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US",
+		"INSEE_CODE_FR",
+		"IP_ADDRESS",
+		"LAT_LONG",
+		"MEDICARE_BENEFICIARY_NUMBER_US",
+		"NAME",
+		"NATIONAL_DRUG_CODE_US",
+		"NATIONAL_IDENTIFICATION_NUMBER_DE",
+		"NATIONAL_IDENTIFICATION_NUMBER_ES",
+		"NATIONAL_IDENTIFICATION_NUMBER_IT",
+		"NATIONAL_INSURANCE_NUMBER_GB",
+		"NATIONAL_PROVIDER_ID_US",
+		"NHS_NUMBER_GB",
+		"NIE_NUMBER_ES",
+		"NIF_NUMBER_ES",
+		"OPEN_SSH_PRIVATE_KEY",
+		"PASSPORT_NUMBER_CA",
+		"PASSPORT_NUMBER_DE",
+		"PASSPORT_NUMBER_ES",
+		"PASSPORT_NUMBER_FR",
+		"PASSPORT_NUMBER_GB",
+		"PASSPORT_NUMBER_IT",
+		"PASSPORT_NUMBER_US",
+		"PERMANENT_RESIDENCE_NUMBER_CA",
+		"PERSONAL_HEALTH_NUMBER_CA",
+		"PGP_PRIVATE_KEY",
+		"PHONE_NUMBER_BR",
+		"PHONE_NUMBER_DE",
+		"PHONE_NUMBER_ES",
+		"PHONE_NUMBER_FR",
+		"PHONE_NUMBER_GB",
+		"PHONE_NUMBER_IT",
+		"PHONE_NUMBER_US",
+		"PKCS_PRIVATE_KEY",
+		"POSTAL_CODE_CA",
+		"PUTTY_PRIVATE_KEY",
+		"RG_NUMBER_BR",
+		"SOCIAL_INSURANCE_NUMBER_CA",
+		"SSN_ES",
+		"SSN_US",
+		"TAX_ID_DE",
+		"TAX_ID_ES",
+		"TAX_ID_FR",
+		"TAX_ID_GB",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+		"ZIP_CODE_US",
+	}
+}
+
 type RegistryRecordStatus string
 
 // Enum values for RegistryRecordStatus
@@ -1188,6 +1527,36 @@ func (ResourceContentType) Values() []ResourceContentType {
 	}
 }
 
+type ResultAggregation string
+
+// Enum values for ResultAggregation
+const (
+	// Uses the lowest score.
+	ResultAggregationMin ResultAggregation = "Min"
+	// Uses the highest score.
+	ResultAggregationMax ResultAggregation = "Max"
+	// Uses the average score.
+	ResultAggregationMean ResultAggregation = "Mean"
+	// Matches when every result has the label.
+	ResultAggregationAllMatch ResultAggregation = "AllMatch"
+	// Matches when at least one result has the label.
+	ResultAggregationAnyMatch ResultAggregation = "AnyMatch"
+)
+
+// Values returns all known values for ResultAggregation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResultAggregation) Values() []ResultAggregation {
+	return []ResultAggregation{
+		"Min",
+		"Max",
+		"Mean",
+		"AllMatch",
+		"AnyMatch",
+	}
+}
+
 type ResultDestination string
 
 // Enum values for ResultDestination
@@ -1227,6 +1596,29 @@ func (Role) Values() []Role {
 		"USER",
 		"TOOL",
 		"OTHER",
+	}
+}
+
+type ScenarioType string
+
+// Enum values for ScenarioType
+const (
+	// A fixed list of turns, with an optional expected response and expected
+	// trajectory.
+	ScenarioTypeFixed ScenarioType = "FIXED"
+	// A conversation driven by a simulated user, described by an actor profile, an
+	// initial input and a maximum number of turns.
+	ScenarioTypeDynamic ScenarioType = "DYNAMIC"
+)
+
+// Values returns all known values for ScenarioType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScenarioType) Values() []ScenarioType {
+	return []ScenarioType{
+		"FIXED",
+		"DYNAMIC",
 	}
 }
 

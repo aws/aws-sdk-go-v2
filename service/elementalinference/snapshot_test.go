@@ -98,6 +98,42 @@ func TestCheckSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateQuestionSetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuestionSetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateQuestionSetVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateScheduleAction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateScheduleAction(context.Background(), nil, func(o *Options) {
@@ -139,6 +175,42 @@ func TestCheckSnapshot_DeleteFeedPolicy(t *testing.T) {
 	_, err := svc.DeleteFeedPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteQuestionSetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuestionSetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteQuestionSetVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +302,30 @@ func TestCheckSnapshot_GetFixture(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDictionaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
@@ -247,6 +343,42 @@ func TestCheckSnapshot_ListFeeds(t *testing.T) {
 	_, err := svc.ListFeeds(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFeeds")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFunctions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFunctions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFunctions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQuestionSets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuestionSets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQuestionSets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListQuestionSetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuestionSetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListQuestionSetVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -349,6 +481,30 @@ func TestCheckSnapshot_UpdateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateFeed(context.Background(), nil, func(o *Options) {
@@ -378,6 +534,42 @@ func TestUpdateSnapshot_CreateFeed(t *testing.T) {
 	_, err := svc.CreateFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateQuestionSetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateQuestionSetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateQuestionSetVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -426,6 +618,42 @@ func TestUpdateSnapshot_DeleteFeedPolicy(t *testing.T) {
 	_, err := svc.DeleteFeedPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteFeedPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteQuestionSetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteQuestionSetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteQuestionSetVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -517,6 +745,30 @@ func TestUpdateSnapshot_GetFixture(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQuestionSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDictionaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
@@ -534,6 +786,42 @@ func TestUpdateSnapshot_ListFeeds(t *testing.T) {
 	_, err := svc.ListFeeds(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFeeds")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFunctions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFunctions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFunctions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQuestionSets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuestionSets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQuestionSets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListQuestionSetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListQuestionSetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListQuestionSetVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -630,6 +918,30 @@ func TestUpdateSnapshot_UpdateFeed(t *testing.T) {
 	_, err := svc.UpdateFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQuestionSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQuestionSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQuestionSet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

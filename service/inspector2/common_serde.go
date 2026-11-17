@@ -243,6 +243,12 @@ func serializeProviderDetailCreate(s smithy.ShapeSerializer, schema *smithy.Sche
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.ProviderDetailCreateMemberGcp:
+		s.WriteUnion(schema, schemas.ProviderDetailCreate_gcp)
+		s.WriteStruct(schemas.ProviderDetailCreate_gcp)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -251,6 +257,12 @@ func serializeProviderDetailUpdate(s smithy.ShapeSerializer, schema *smithy.Sche
 	case *types.ProviderDetailUpdateMemberAzure:
 		s.WriteUnion(schema, schemas.ProviderDetailUpdate_azure)
 		s.WriteStruct(schemas.ProviderDetailUpdate_azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ProviderDetailUpdateMemberGcp:
+		s.WriteUnion(schema, schemas.ProviderDetailUpdate_gcp)
+		s.WriteStruct(schemas.ProviderDetailUpdate_gcp)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -486,6 +498,10 @@ func deserializeProviderDetailCreate(d smithy.ShapeDeserializer, s *smithy.Schem
 			vv := &types.ProviderDetailCreateMemberAzure{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ProviderDetailCreate_gcp:
+			vv := &types.ProviderDetailCreateMemberGcp{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
@@ -496,6 +512,10 @@ func deserializeProviderDetailUpdate(d smithy.ShapeDeserializer, s *smithy.Schem
 		switch ms {
 		case schemas.ProviderDetailUpdate_azure:
 			vv := &types.ProviderDetailUpdateMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ProviderDetailUpdate_gcp:
+			vv := &types.ProviderDetailUpdateMemberGcp{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1279,6 +1299,22 @@ func serializeFreeTrialInfoList(s smithy.ShapeSerializer, schema *smithy.Schema,
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGcpRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeGcpScopeValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -3523,6 +3559,48 @@ func deserializeFreeTrialInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 
 		vv = types.FreeTrialInfo{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGcpRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGcpScopeValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

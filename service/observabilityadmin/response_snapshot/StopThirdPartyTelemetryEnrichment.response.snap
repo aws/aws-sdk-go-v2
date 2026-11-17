@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Name":"__Name__","Status":"Initializing","StatusReason":"__StatusReason__","TelemetrySource":"Azure"}

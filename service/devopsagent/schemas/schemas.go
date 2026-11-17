@@ -183,6 +183,13 @@ var GetBacklogTask = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/backlog/agent-space/{agentSpaceId}/tasks/{taskId}",
 	Code: 200})
 
+var GetChat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "GetChat",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/agents/agent-space/{agentSpaceId}/chat/get/{executionId}",
+	Code: 200})
+
 var GetOperatorApp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "GetOperatorApp",
@@ -405,6 +412,13 @@ var UpdateBacklogTask = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateBacklogTask",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/backlog/agent-space/{agentSpaceId}/tasks/{taskId}",
+	Code: 200})
+
+var UpdateChat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "UpdateChat",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/agents/agent-space/{agentSpaceId}/chat/{executionId}",
 	Code: 200})
 
 var UpdateGoal = smithy.NewSchema(smithy.ShapeID{
@@ -923,20 +937,32 @@ var CapabilityConfiguration_triggerFilterGroups *smithy.Schema
 var CapabilityType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "CapabilityType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 4)
 var CapabilityType_RELEASE_READINESS_REVIEW *smithy.Schema
 
 var CapabilityType_RELEASE_READINESS_REVIEW_AUTOMATED_TESTING *smithy.Schema
+
+var CapabilityType_CODE_CHANGE_RISK_ANALYSIS *smithy.Schema
+
+var CapabilityType_CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING *smithy.Schema
 
 var _CertificateString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "CertificateString",
 }, smithy.ShapeTypeString, 0)
 
+var ChatArchiveStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "ChatArchiveStatus",
+}, smithy.ShapeTypeEnum, 2)
+var ChatArchiveStatus_ACTIVE *smithy.Schema
+
+var ChatArchiveStatus_ARCHIVED *smithy.Schema
+
 var ChatExecution = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "ChatExecution",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ChatExecution_executionId *smithy.Schema
 
 var ChatExecution_createdAt *smithy.Schema
@@ -944,6 +970,8 @@ var ChatExecution_createdAt *smithy.Schema
 var ChatExecution_updatedAt *smithy.Schema
 
 var ChatExecution_summary *smithy.Schema
+
+var ChatExecution_archiveStatus *smithy.Schema
 
 var _ChatExecutionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -969,9 +997,17 @@ var _ClientSecret = smithy.NewSchema(smithy.ShapeID{
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
+
+var ConflictException_reason *smithy.Schema
+
+var ConflictExceptionReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "ConflictExceptionReason",
+}, smithy.ShapeTypeEnum, 1)
+var ConflictExceptionReason_CHAT_ARCHIVED *smithy.Schema
 
 var ContentSizeExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -3158,7 +3194,7 @@ var _TaskStatusList_member *smithy.Schema
 var TaskType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "TaskType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var TaskType_INVESTIGATION *smithy.Schema
 
 var TaskType_EVALUATION *smithy.Schema
@@ -3166,6 +3202,8 @@ var TaskType_EVALUATION *smithy.Schema
 var TaskType_RELEASE_READINESS_REVIEW *smithy.Schema
 
 var TaskType_RELEASE_TESTING *smithy.Schema
+
+var TaskType_CODE_CHANGE_RISK_ANALYSIS *smithy.Schema
 
 var _TaskTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -3899,6 +3937,28 @@ var GetBacklogTaskResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetBacklogTaskResponse_task *smithy.Schema
 
+var GetChatRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "GetChatRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetChatRequest_agentSpaceId *smithy.Schema
+
+var GetChatRequest_executionId *smithy.Schema
+
+var GetChatResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "GetChatResponse",
+}, smithy.ShapeTypeStructure, 5)
+var GetChatResponse_executionId *smithy.Schema
+
+var GetChatResponse_summary *smithy.Schema
+
+var GetChatResponse_createdAt *smithy.Schema
+
+var GetChatResponse_updatedAt *smithy.Schema
+
+var GetChatResponse_archiveStatus *smithy.Schema
+
 var GetOperatorAppInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "GetOperatorAppInput",
@@ -4108,7 +4168,7 @@ var ListBacklogTasksResponse_nextToken *smithy.Schema
 var ListChatsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "ListChatsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListChatsRequest_agentSpaceId *smithy.Schema
 
 var ListChatsRequest_userId *smithy.Schema
@@ -4116,6 +4176,8 @@ var ListChatsRequest_userId *smithy.Schema
 var ListChatsRequest_maxResults *smithy.Schema
 
 var ListChatsRequest_nextToken *smithy.Schema
+
+var ListChatsRequest_archiveStatus *smithy.Schema
 
 var ListChatsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -4521,6 +4583,32 @@ var UpdateBacklogTaskResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateBacklogTaskResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateBacklogTaskResponse_task *smithy.Schema
+
+var UpdateChatRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "UpdateChatRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateChatRequest_agentSpaceId *smithy.Schema
+
+var UpdateChatRequest_executionId *smithy.Schema
+
+var UpdateChatRequest_summary *smithy.Schema
+
+var UpdateChatRequest_archiveStatus *smithy.Schema
+
+var UpdateChatRequest_clientToken *smithy.Schema
+
+var UpdateChatResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "UpdateChatResponse",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateChatResponse_executionId *smithy.Schema
+
+var UpdateChatResponse_summary *smithy.Schema
+
+var UpdateChatResponse_updatedAt *smithy.Schema
+
+var UpdateChatResponse_archiveStatus *smithy.Schema
 
 var UpdateGoalRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -5156,6 +5244,10 @@ func init() {
 
 	CapabilityType_RELEASE_READINESS_REVIEW_AUTOMATED_TESTING = CapabilityType.AddMember("RELEASE_READINESS_REVIEW_AUTOMATED_TESTING", smithyprelude.Unit)
 
+	CapabilityType_CODE_CHANGE_RISK_ANALYSIS = CapabilityType.AddMember("CODE_CHANGE_RISK_ANALYSIS", smithyprelude.Unit)
+
+	CapabilityType_CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING = CapabilityType.AddMember("CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING", smithyprelude.Unit)
+
 	TriggerEvent_PULL_REQUEST_READY_FOR_REVIEW = TriggerEvent.AddMember("PULL_REQUEST_READY_FOR_REVIEW", smithyprelude.Unit)
 
 	TriggerEvent_PULL_REQUEST_DRAFT = TriggerEvent.AddMember("PULL_REQUEST_DRAFT", smithyprelude.Unit)
@@ -5204,6 +5296,10 @@ func init() {
 
 	AuthFlow_IDP = AuthFlow.AddMember("IDP", smithyprelude.Unit)
 
+	ChatArchiveStatus_ACTIVE = ChatArchiveStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ChatArchiveStatus_ARCHIVED = ChatArchiveStatus.AddMember("ARCHIVED", smithyprelude.Unit)
+
 	ChatExecution_executionId = ChatExecution.AddMember("executionId", _ResourceId)
 
 	ChatExecution_createdAt = ChatExecution.AddMember("createdAt", smithyprelude.Timestamp)
@@ -5212,9 +5308,15 @@ func init() {
 
 	ChatExecution_summary = ChatExecution.AddMember("summary", smithyprelude.String)
 
+	ChatExecution_archiveStatus = ChatExecution.AddMember("archiveStatus", ChatArchiveStatus)
+
 	_ChatExecutionList_member = _ChatExecutionList.AddMember("member", ChatExecution)
 
+	ConflictExceptionReason_CHAT_ARCHIVED = ConflictExceptionReason.AddMember("CHAT_ARCHIVED", smithyprelude.Unit)
+
 	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
+
+	ConflictException_reason = ConflictException.AddMember("reason", ConflictExceptionReason)
 
 	ContentSizeExceededException_message = ContentSizeExceededException.AddMember("message", smithyprelude.String)
 
@@ -6074,6 +6176,8 @@ func init() {
 
 	TaskType_RELEASE_TESTING = TaskType.AddMember("RELEASE_TESTING", smithyprelude.Unit)
 
+	TaskType_CODE_CHANGE_RISK_ANALYSIS = TaskType.AddMember("CODE_CHANGE_RISK_ANALYSIS", smithyprelude.Unit)
+
 	TaskStatus_PENDING_TRIAGE = TaskStatus.AddMember("PENDING_TRIAGE", smithyprelude.Unit)
 
 	TaskStatus_LINKED = TaskStatus.AddMember("LINKED", smithyprelude.Unit)
@@ -6468,6 +6572,20 @@ func init() {
 
 	GetBacklogTaskResponse_task = GetBacklogTaskResponse.AddMember("task", Task)
 
+	GetChatRequest_agentSpaceId = GetChatRequest.AddMember("agentSpaceId", _AgentSpaceIdentifier, &smithytraits.HTTPLabel{})
+
+	GetChatRequest_executionId = GetChatRequest.AddMember("executionId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	GetChatResponse_executionId = GetChatResponse.AddMember("executionId", _ResourceId)
+
+	GetChatResponse_summary = GetChatResponse.AddMember("summary", smithyprelude.String)
+
+	GetChatResponse_createdAt = GetChatResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	GetChatResponse_updatedAt = GetChatResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	GetChatResponse_archiveStatus = GetChatResponse.AddMember("archiveStatus", ChatArchiveStatus)
+
 	GetOperatorAppInput_agentSpaceId = GetOperatorAppInput.AddMember("agentSpaceId", _AgentSpaceId, &smithytraits.HTTPLabel{})
 
 	GetOperatorAppOutput_operatorAppUrl = GetOperatorAppOutput.AddMember("operatorAppUrl", _OperatorAppUrl)
@@ -6593,6 +6711,8 @@ func init() {
 	ListChatsRequest_maxResults = ListChatsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListChatsRequest_nextToken = ListChatsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListChatsRequest_archiveStatus = ListChatsRequest.AddMember("archiveStatus", ChatArchiveStatus, &smithytraits.HTTPQuery{Name: "archiveStatus"})
 
 	ListChatsResponse_executions = ListChatsResponse.AddMember("executions", _ChatExecutionList)
 
@@ -6831,6 +6951,24 @@ func init() {
 	UpdateBacklogTaskRequest_clientToken = UpdateBacklogTaskRequest.AddMember("clientToken", smithyprelude.String)
 
 	UpdateBacklogTaskResponse_task = UpdateBacklogTaskResponse.AddMember("task", Task)
+
+	UpdateChatRequest_agentSpaceId = UpdateChatRequest.AddMember("agentSpaceId", _AgentSpaceIdentifier, &smithytraits.HTTPLabel{})
+
+	UpdateChatRequest_executionId = UpdateChatRequest.AddMember("executionId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateChatRequest_summary = UpdateChatRequest.AddMember("summary", smithyprelude.String)
+
+	UpdateChatRequest_archiveStatus = UpdateChatRequest.AddMember("archiveStatus", ChatArchiveStatus)
+
+	UpdateChatRequest_clientToken = UpdateChatRequest.AddMember("clientToken", smithyprelude.String)
+
+	UpdateChatResponse_executionId = UpdateChatResponse.AddMember("executionId", _ResourceId)
+
+	UpdateChatResponse_summary = UpdateChatResponse.AddMember("summary", smithyprelude.String)
+
+	UpdateChatResponse_updatedAt = UpdateChatResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	UpdateChatResponse_archiveStatus = UpdateChatResponse.AddMember("archiveStatus", ChatArchiveStatus)
 
 	UpdateGoalRequest_agentSpaceId = UpdateGoalRequest.AddMember("agentSpaceId", _AgentSpaceIdentifier, &smithytraits.HTTPLabel{})
 

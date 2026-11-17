@@ -1,0 +1,5 @@
+POST /DeleteRemoteSourceAction
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","remoteSourceActionID":"__RemoteSourceActionID__"}

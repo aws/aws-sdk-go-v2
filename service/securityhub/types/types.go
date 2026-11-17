@@ -40457,11 +40457,12 @@ func (v *CspmHealthCheck) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // The cloud provider configuration for creating a connector. This is a union type
-// that currently supports Azure.
+// that currently supports Azure and GCP.
 //
 // The following types satisfy this interface:
 //
 //	CspmProviderConfigurationMemberAzure
+//	CspmProviderConfigurationMemberGCP
 type CspmProviderConfiguration interface {
 	isCspmProviderConfiguration()
 }
@@ -40483,12 +40484,30 @@ func (v *CspmProviderConfigurationMemberAzure) Deserialize(d smithy.ShapeDeseria
 	return v.Value.Deserialize(d)
 }
 
+// The GCP provider configuration.
+type CspmProviderConfigurationMemberGCP struct {
+	Value GcpProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CspmProviderConfigurationMemberGCP) isCspmProviderConfiguration() {}
+func (v *CspmProviderConfigurationMemberGCP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CspmProviderConfiguration_GCP)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CspmProviderConfigurationMemberGCP) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The detailed cloud provider configuration for a connector. This is a union type
-// that currently supports Azure.
+// that currently supports Azure and GCP.
 //
 // The following types satisfy this interface:
 //
 //	CspmProviderDetailMemberAzure
+//	CspmProviderDetailMemberGCP
 type CspmProviderDetail interface {
 	isCspmProviderDetail()
 }
@@ -40507,6 +40526,23 @@ func (v *CspmProviderDetailMemberAzure) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *CspmProviderDetailMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The GCP provider detail.
+type CspmProviderDetailMemberGCP struct {
+	Value GcpDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*CspmProviderDetailMemberGCP) isCspmProviderDetail() {}
+func (v *CspmProviderDetailMemberGCP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CspmProviderDetail_GCP)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CspmProviderDetailMemberGCP) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -40567,11 +40603,12 @@ func (v *CspmProviderSummary) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // The cloud provider configuration for updating a connector. This is a union type
-// that currently supports Azure.
+// that currently supports Azure and GCP.
 //
 // The following types satisfy this interface:
 //
 //	CspmProviderUpdateConfigurationMemberAzure
+//	CspmProviderUpdateConfigurationMemberGCP
 type CspmProviderUpdateConfiguration interface {
 	isCspmProviderUpdateConfiguration()
 }
@@ -40590,6 +40627,23 @@ func (v *CspmProviderUpdateConfigurationMemberAzure) Serialize(s smithy.ShapeSer
 	s.CloseStruct()
 }
 func (v *CspmProviderUpdateConfigurationMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The GCP update configuration.
+type CspmProviderUpdateConfigurationMemberGCP struct {
+	Value GcpUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CspmProviderUpdateConfigurationMemberGCP) isCspmProviderUpdateConfiguration() {}
+func (v *CspmProviderUpdateConfigurationMemberGCP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CspmProviderUpdateConfiguration_GCP)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CspmProviderUpdateConfigurationMemberGCP) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -42706,6 +42760,212 @@ func (v *FreeTrialStatus) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = FreeTrialStatusValue(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The detailed GCP configuration for a connector.
+type GcpDetail struct {
+
+	// The ARN of the multi-cloud configuration connector used to establish the
+	// connection to GCP.
+	//
+	// This member is required.
+	AWSConfigConnectorArn *string
+
+	// The list of GCP regions being monitored.
+	//
+	// This member is required.
+	GCPRegions []string
+
+	// The scope configuration that defines which GCP resources are monitored.
+	//
+	// This member is required.
+	ScopeConfiguration *GcpScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSConfigConnectorArn != nil {
+		s.WriteString(schemas.GcpDetail_AWSConfigConnectorArn, *v.AWSConfigConnectorArn)
+	}
+	if v.GCPRegions != nil {
+		serializeGcpRegionList(s, schemas.GcpDetail_GCPRegions, v.GCPRegions)
+	}
+	if v.ScopeConfiguration != nil {
+		s.WriteStruct(schemas.GcpDetail_ScopeConfiguration)
+		v.ScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpDetail_AWSConfigConnectorArn:
+			v.AWSConfigConnectorArn = new(string)
+			return d.ReadString(schemas.GcpDetail_AWSConfigConnectorArn, v.AWSConfigConnectorArn)
+		case schemas.GcpDetail_GCPRegions:
+			return deserializeGcpRegionList(d, schemas.GcpDetail_GCPRegions, &v.GCPRegions)
+		case schemas.GcpDetail_ScopeConfiguration:
+			v.ScopeConfiguration = &GcpScopeConfiguration{}
+			return v.ScopeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration for connecting to a GCP environment.
+type GcpProviderConfiguration struct {
+
+	// The ARN of the multi-cloud configuration connector used to establish the
+	// connection to GCP.
+	//
+	// This member is required.
+	AWSConfigConnectorArn *string
+
+	// The list of GCP regions to monitor.
+	//
+	// This member is required.
+	GCPRegions []string
+
+	// The scope configuration that defines which GCP resources are monitored.
+	//
+	// This member is required.
+	ScopeConfiguration *GcpScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpProviderConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpProviderConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpProviderConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSConfigConnectorArn != nil {
+		s.WriteString(schemas.GcpProviderConfiguration_AWSConfigConnectorArn, *v.AWSConfigConnectorArn)
+	}
+	if v.GCPRegions != nil {
+		serializeGcpRegionList(s, schemas.GcpProviderConfiguration_GCPRegions, v.GCPRegions)
+	}
+	if v.ScopeConfiguration != nil {
+		s.WriteStruct(schemas.GcpProviderConfiguration_ScopeConfiguration)
+		v.ScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpProviderConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpProviderConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpProviderConfiguration_AWSConfigConnectorArn:
+			v.AWSConfigConnectorArn = new(string)
+			return d.ReadString(schemas.GcpProviderConfiguration_AWSConfigConnectorArn, v.AWSConfigConnectorArn)
+		case schemas.GcpProviderConfiguration_GCPRegions:
+			return deserializeGcpRegionList(d, schemas.GcpProviderConfiguration_GCPRegions, &v.GCPRegions)
+		case schemas.GcpProviderConfiguration_ScopeConfiguration:
+			v.ScopeConfiguration = &GcpScopeConfiguration{}
+			return v.ScopeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The scope configuration for a GCP connector, defining the organization or
+// project scope.
+type GcpScopeConfiguration struct {
+
+	// The type of scope. Valid values are ORGANIZATION and PROJECT .
+	//
+	// This member is required.
+	ScopeType GcpScopeType
+
+	// The list of scope values. Use an organization ID when the scope type is
+	// ORGANIZATION , or project IDs when the scope type is PROJECT .
+	ScopeValues []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpScopeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpScopeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpScopeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScopeType != "" {
+		s.WriteString(schemas.GcpScopeConfiguration_ScopeType, string(v.ScopeType))
+	}
+	if v.ScopeValues != nil {
+		serializeScopeValueList(s, schemas.GcpScopeConfiguration_ScopeValues, v.ScopeValues)
+	}
+}
+func (v *GcpScopeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpScopeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpScopeConfiguration_ScopeType:
+			var ev string
+			if err := d.ReadString(schemas.GcpScopeConfiguration_ScopeType, &ev); err != nil {
+				return err
+			}
+			v.ScopeType = GcpScopeType(ev)
+			return nil
+		case schemas.GcpScopeConfiguration_ScopeValues:
+			return deserializeScopeValueList(d, schemas.GcpScopeConfiguration_ScopeValues, &v.ScopeValues)
+		}
+		return nil
+	})
+}
+
+// The configuration for updating a GCP connector's scope and regions.
+type GcpUpdateConfiguration struct {
+
+	// The updated list of GCP regions to monitor.
+	//
+	// This member is required.
+	GCPRegions []string
+
+	// The updated scope configuration.
+	//
+	// This member is required.
+	ScopeConfiguration *GcpScopeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpUpdateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpUpdateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpUpdateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GCPRegions != nil {
+		serializeGcpRegionList(s, schemas.GcpUpdateConfiguration_GCPRegions, v.GCPRegions)
+	}
+	if v.ScopeConfiguration != nil {
+		s.WriteStruct(schemas.GcpUpdateConfiguration_ScopeConfiguration)
+		v.ScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpUpdateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpUpdateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpUpdateConfiguration_GCPRegions:
+			return deserializeGcpRegionList(d, schemas.GcpUpdateConfiguration_GCPRegions, &v.GCPRegions)
+		case schemas.GcpUpdateConfiguration_ScopeConfiguration:
+			v.ScopeConfiguration = &GcpScopeConfiguration{}
+			return v.ScopeConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -46620,6 +46880,7 @@ func (v *PropagatingVgwSetDetails) Deserialize(d smithy.ShapeDeserializer) error
 // The following types satisfy this interface:
 //
 //	ProviderConfigurationMemberAzure
+//	ProviderConfigurationMemberGCP
 //	ProviderConfigurationMemberJiraCloud
 //	ProviderConfigurationMemberServiceNow
 type ProviderConfiguration interface {
@@ -46641,6 +46902,24 @@ func (v *ProviderConfigurationMemberAzure) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ProviderConfigurationMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings required to establish a CSPM integration with Google
+// Cloud Platform (GCP).
+type ProviderConfigurationMemberGCP struct {
+	Value GcpProviderConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderConfigurationMemberGCP) isProviderConfiguration() {}
+func (v *ProviderConfigurationMemberGCP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderConfiguration_GCP)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProviderConfigurationMemberGCP) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -46684,6 +46963,7 @@ func (v *ProviderConfigurationMemberServiceNow) Deserialize(d smithy.ShapeDeseri
 // The following types satisfy this interface:
 //
 //	ProviderDetailMemberAzure
+//	ProviderDetailMemberGCP
 //	ProviderDetailMemberJiraCloud
 //	ProviderDetailMemberServiceNow
 type ProviderDetail interface {
@@ -46704,6 +46984,23 @@ func (v *ProviderDetailMemberAzure) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ProviderDetailMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details about a Google Cloud Platform (GCP) CSPM integration.
+type ProviderDetailMemberGCP struct {
+	Value GcpDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailMemberGCP) isProviderDetail() {}
+func (v *ProviderDetailMemberGCP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderDetail_GCP)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProviderDetailMemberGCP) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -46802,6 +47099,7 @@ func (v *ProviderSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // The following types satisfy this interface:
 //
 //	ProviderUpdateConfigurationMemberAzure
+//	ProviderUpdateConfigurationMemberGCP
 //	ProviderUpdateConfigurationMemberJiraCloud
 //	ProviderUpdateConfigurationMemberServiceNow
 type ProviderUpdateConfiguration interface {
@@ -46823,6 +47121,24 @@ func (v *ProviderUpdateConfigurationMemberAzure) Serialize(s smithy.ShapeSeriali
 	s.CloseStruct()
 }
 func (v *ProviderUpdateConfigurationMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The parameters required to update the configuration for a Google Cloud Platform
+// (GCP) CSPM integration.
+type ProviderUpdateConfigurationMemberGCP struct {
+	Value GcpUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderUpdateConfigurationMemberGCP) isProviderUpdateConfiguration() {}
+func (v *ProviderUpdateConfigurationMemberGCP) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderUpdateConfiguration_GCP)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProviderUpdateConfigurationMemberGCP) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -48872,6 +49188,9 @@ type ResourceDetails struct {
 	// Details about a container resource related to a finding.
 	Container *ContainerDetails
 
+	// Details about a GCP resource that is related to a finding.
+	GcpResource document.Interface
+
 	// Details about a resource that are not available in a type-specific details
 	// object. Use the Other object in the following cases.
 	//
@@ -49392,6 +49711,9 @@ func (v *ResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Container.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.GcpResource != nil {
+		s.WriteDocument(schemas.ResourceDetails_GcpResource, &smithydocument.Opaque{Value: v.GcpResource})
+	}
 	if v.Other != nil {
 		serializeFieldMap(s, schemas.ResourceDetails_Other, v.Other)
 	}
@@ -49705,6 +50027,15 @@ func (v *ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceDetails_Container:
 			v.Container = &ContainerDetails{}
 			return v.Container.Deserialize(d)
+		case schemas.ResourceDetails_GcpResource:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ResourceDetails_GcpResource, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.GcpResource = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
 		case schemas.ResourceDetails_Other:
 			return deserializeFieldMap(d, schemas.ResourceDetails_Other, &v.Other)
 		}
@@ -52235,7 +52566,7 @@ type SecurityControl struct {
 	Parameters map[string]ParameterConfiguration
 
 	// The cloud provider whose resources the security control evaluates. For example,
-	// AWS or Azure .
+	// AWS , Azure , or GCP .
 	Provider SecurityControlsProvider
 
 	//  Identifies whether customizable properties of a security control are reflected
@@ -52447,7 +52778,7 @@ type SecurityControlDefinition struct {
 	ParameterDefinitions map[string]ParameterDefinition
 
 	// The cloud provider whose resources the security control evaluates. For example,
-	// AWS or Azure .
+	// AWS , Azure , or GCP .
 	Provider SecurityControlsProvider
 
 	noSmithyDocumentSerde
@@ -54108,8 +54439,8 @@ type Standard struct {
 	// The name of the standard.
 	Name *string
 
-	// The cloud provider whose resources the standard evaluates. For example, AWS or
-	// Azure .
+	// The cloud provider whose resources the standard evaluates. For example, AWS ,
+	// Azure , or GCP .
 	Provider StandardsProvider
 
 	// The ARN of the standard.
@@ -54805,8 +55136,8 @@ type StandardsSubscription struct {
 	// This member is required.
 	StandardsSubscriptionArn *string
 
-	// The cloud provider whose resources the standard evaluates. For example, AWS or
-	// Azure .
+	// The cloud provider whose resources the standard evaluates. For example, AWS ,
+	// Azure , or GCP .
 	Provider StandardsProvider
 
 	// Specifies whether you can retrieve information about and configure individual

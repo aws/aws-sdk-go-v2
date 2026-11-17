@@ -107,6 +107,8 @@ const (
 	CapabilityTypeReleaseReadinessReview CapabilityType = "RELEASE_READINESS_REVIEW"
 	// Release readiness review automated testing capability.
 	CapabilityTypeReleaseReadinessReviewAutomatedTesting CapabilityType = "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"
+	CapabilityTypeCodeChangeRiskAnalysis                 CapabilityType = "CODE_CHANGE_RISK_ANALYSIS"
+	CapabilityTypeCodeChangeRiskAnalysisAutomatedTesting CapabilityType = "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"
 )
 
 // Values returns all known values for CapabilityType. Note that this can be
@@ -117,6 +119,44 @@ func (CapabilityType) Values() []CapabilityType {
 	return []CapabilityType{
 		"RELEASE_READINESS_REVIEW",
 		"RELEASE_READINESS_REVIEW_AUTOMATED_TESTING",
+		"CODE_CHANGE_RISK_ANALYSIS",
+		"CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING",
+	}
+}
+
+type ChatArchiveStatus string
+
+// Enum values for ChatArchiveStatus
+const (
+	ChatArchiveStatusActive   ChatArchiveStatus = "ACTIVE"
+	ChatArchiveStatusArchived ChatArchiveStatus = "ARCHIVED"
+)
+
+// Values returns all known values for ChatArchiveStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChatArchiveStatus) Values() []ChatArchiveStatus {
+	return []ChatArchiveStatus{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
+
+type ConflictExceptionReason string
+
+// Enum values for ConflictExceptionReason
+const (
+	ConflictExceptionReasonChatArchived ConflictExceptionReason = "CHAT_ARCHIVED"
+)
+
+// Values returns all known values for ConflictExceptionReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConflictExceptionReason) Values() []ConflictExceptionReason {
+	return []ConflictExceptionReason{
+		"CHAT_ARCHIVED",
 	}
 }
 
@@ -848,7 +888,8 @@ const (
 	// Task for reviewing changes for production readiness
 	TaskTypeReleaseReadinessReview TaskType = "RELEASE_READINESS_REVIEW"
 	// Task for automated release testing
-	TaskTypeReleaseTesting TaskType = "RELEASE_TESTING"
+	TaskTypeReleaseTesting         TaskType = "RELEASE_TESTING"
+	TaskTypeCodeChangeRiskAnalysis TaskType = "CODE_CHANGE_RISK_ANALYSIS"
 )
 
 // Values returns all known values for TaskType. Note that this can be expanded in
@@ -861,6 +902,7 @@ func (TaskType) Values() []TaskType {
 		"EVALUATION",
 		"RELEASE_READINESS_REVIEW",
 		"RELEASE_TESTING",
+		"CODE_CHANGE_RISK_ANALYSIS",
 	}
 }
 

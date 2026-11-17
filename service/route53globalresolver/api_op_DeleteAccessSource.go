@@ -62,11 +62,6 @@ type DeleteAccessSourceOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The IP address or CIDR range of the deleted access source.
-	//
-	// This member is required.
-	Cidr *string
-
 	// The date and time when the access source was originally created.
 	//
 	// This member is required.
@@ -81,11 +76,6 @@ type DeleteAccessSourceOutput struct {
 	//
 	// This member is required.
 	Id *string
-
-	// The IP address type of the deleted access source (IPv4 or IPv6).
-	//
-	// This member is required.
-	IpAddressType types.IpAddressType
 
 	// The DNS protocol that was permitted for the deleted access source.
 	//
@@ -102,8 +92,21 @@ type DeleteAccessSourceOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The IP address or CIDR range of the deleted access source.
+	Cidr *string
+
+	// The ID of the core network endpoint associated with this access source.
+	CoreNetworkEndpointId *string
+
+	// The IP address type of the deleted access source. Valid values are IPV4, IPV6,
+	// and NONE.
+	IpAddressType types.IpAddressType
+
 	// The name of the deleted access source.
 	Name *string
+
+	// The name of the segment associated with this access source.
+	Segment *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -124,6 +127,9 @@ func (v *DeleteAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cidr != nil {
 		s.WriteString(schemas.DeleteAccessSourceOutput_cidr, *v.Cidr)
 	}
+	if v.CoreNetworkEndpointId != nil {
+		s.WriteString(schemas.DeleteAccessSourceOutput_coreNetworkEndpointId, *v.CoreNetworkEndpointId)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DeleteAccessSourceOutput_createdAt, *v.CreatedAt)
 	}
@@ -142,6 +148,9 @@ func (v *DeleteAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.DeleteAccessSourceOutput_protocol, string(v.Protocol))
 	}
+	if v.Segment != nil {
+		s.WriteString(schemas.DeleteAccessSourceOutput_segment, *v.Segment)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DeleteAccessSourceOutput_status, string(v.Status))
 	}
@@ -158,6 +167,9 @@ func (v *DeleteAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.DeleteAccessSourceOutput_cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.DeleteAccessSourceOutput_cidr, v.Cidr)
+		case schemas.DeleteAccessSourceOutput_coreNetworkEndpointId:
+			v.CoreNetworkEndpointId = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_coreNetworkEndpointId, v.CoreNetworkEndpointId)
 		case schemas.DeleteAccessSourceOutput_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.DeleteAccessSourceOutput_createdAt, v.CreatedAt)
@@ -184,6 +196,9 @@ func (v *DeleteAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.Protocol = types.DnsProtocol(ev)
 			return nil
+		case schemas.DeleteAccessSourceOutput_segment:
+			v.Segment = new(string)
+			return d.ReadString(schemas.DeleteAccessSourceOutput_segment, v.Segment)
 		case schemas.DeleteAccessSourceOutput_status:
 			var ev string
 			if err := d.ReadString(schemas.DeleteAccessSourceOutput_status, &ev); err != nil {

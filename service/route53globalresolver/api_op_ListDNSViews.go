@@ -70,8 +70,8 @@ func (v *ListDNSViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type ListDNSViewsOutput struct {
 
-	// An array of information about the DNS views, such as whether DNSSEC is enabled,
-	// creation time, etc.
+	// An array of information about the DNS views, such as whether DNSSEC is enabled
+	// and the creation time.
 	//
 	// This member is required.
 	DnsViews []types.DNSViewSummary

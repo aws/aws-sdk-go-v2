@@ -2500,11 +2500,13 @@ func TestCheckRequestSnapshot_ModifySelfservicePermissions(t *testing.T) {
 	input := &ModifySelfservicePermissionsInput{
 		ResourceId: ptr.String("__ResourceId__"),
 		SelfservicePermissions: &types.SelfservicePermissions{
-			RestartWorkspace:   types.ReconnectEnum("ENABLED"),
-			IncreaseVolumeSize: types.ReconnectEnum("ENABLED"),
-			ChangeComputeType:  types.ReconnectEnum("ENABLED"),
-			SwitchRunningMode:  types.ReconnectEnum("ENABLED"),
-			RebuildWorkspace:   types.ReconnectEnum("ENABLED"),
+			RestartWorkspace:     types.ReconnectEnum("ENABLED"),
+			IncreaseVolumeSize:   types.ReconnectEnum("ENABLED"),
+			ChangeComputeType:    types.ReconnectEnum("ENABLED"),
+			SwitchRunningMode:    types.ReconnectEnum("ENABLED"),
+			RebuildWorkspace:     types.ReconnectEnum("ENABLED"),
+			NestedVirtualization: types.ReconnectEnum("ENABLED"),
+			EnableEndUserAdvisor: types.ReconnectEnum("ENABLED"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5674,11 +5676,13 @@ func TestUpdateRequestSnapshot_ModifySelfservicePermissions(t *testing.T) {
 	input := &ModifySelfservicePermissionsInput{
 		ResourceId: ptr.String("__ResourceId__"),
 		SelfservicePermissions: &types.SelfservicePermissions{
-			RestartWorkspace:   types.ReconnectEnum("ENABLED"),
-			IncreaseVolumeSize: types.ReconnectEnum("ENABLED"),
-			ChangeComputeType:  types.ReconnectEnum("ENABLED"),
-			SwitchRunningMode:  types.ReconnectEnum("ENABLED"),
-			RebuildWorkspace:   types.ReconnectEnum("ENABLED"),
+			RestartWorkspace:     types.ReconnectEnum("ENABLED"),
+			IncreaseVolumeSize:   types.ReconnectEnum("ENABLED"),
+			ChangeComputeType:    types.ReconnectEnum("ENABLED"),
+			SwitchRunningMode:    types.ReconnectEnum("ENABLED"),
+			RebuildWorkspace:     types.ReconnectEnum("ENABLED"),
+			NestedVirtualization: types.ReconnectEnum("ENABLED"),
+			EnableEndUserAdvisor: types.ReconnectEnum("ENABLED"),
 		},
 	}
 	body := &bytes.Buffer{}

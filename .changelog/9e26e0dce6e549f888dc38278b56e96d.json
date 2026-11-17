@@ -1,0 +1,8 @@
+{
+    "id": "9e26e0dc-e6e5-49f8-88dc-38278b56e96d",
+    "type": "feature",
+    "description": "This release adds Microsoft Azure connectors, third-party telemetry enrichment and StartTelemetryPipelineRefresh, to discover Azure resources, enrich their telemetry and refresh external-cloud pipelines.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

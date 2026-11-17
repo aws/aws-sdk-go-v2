@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcknowledgeDeadLetterQueueRecords struct {
+}
+
+func (*validateOpAcknowledgeDeadLetterQueueRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcknowledgeDeadLetterQueueRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcknowledgeDeadLetterQueueRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcknowledgeDeadLetterQueueRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAcknowledgeQueueRecords struct {
+}
+
+func (*validateOpAcknowledgeQueueRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcknowledgeQueueRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcknowledgeQueueRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcknowledgeQueueRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddTagsToStream struct {
 }
 
@@ -45,6 +85,26 @@ func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateQueue struct {
+}
+
+func (*validateOpCreateQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQueueInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +170,26 @@ func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteQueue struct {
+}
+
+func (*validateOpDeleteQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourcePolicy struct {
 }
 
@@ -145,6 +225,26 @@ func (m *validateOpDescribeChannel) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQueue struct {
+}
+
+func (*validateOpDescribeQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQueueInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +390,26 @@ func (m *validateOpListChannels) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListQueues struct {
+}
+
+func (*validateOpListQueues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListShards struct {
 }
 
@@ -430,6 +550,46 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReceiveDeadLetterQueueRecords struct {
+}
+
+func (*validateOpReceiveDeadLetterQueueRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReceiveDeadLetterQueueRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReceiveDeadLetterQueueRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReceiveDeadLetterQueueRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpReceiveQueueRecords struct {
+}
+
+func (*validateOpReceiveQueueRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReceiveQueueRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReceiveQueueRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReceiveQueueRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterStreamConsumer struct {
 }
 
@@ -465,6 +625,26 @@ func (m *validateOpRemoveTagsFromStream) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveTagsFromStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestoreDeadLetterQueueRecords struct {
+}
+
+func (*validateOpRestoreDeadLetterQueueRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreDeadLetterQueueRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreDeadLetterQueueRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreDeadLetterQueueRecordsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +810,26 @@ func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDeadLetterQueueRecordsVisibility struct {
+}
+
+func (*validateOpUpdateDeadLetterQueueRecordsVisibility) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDeadLetterQueueRecordsVisibility) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDeadLetterQueueRecordsVisibilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDeadLetterQueueRecordsVisibilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMaxRecordSize struct {
 }
 
@@ -645,6 +845,46 @@ func (m *validateOpUpdateMaxRecordSize) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateMaxRecordSizeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueue struct {
+}
+
+func (*validateOpUpdateQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueRecordsVisibility struct {
+}
+
+func (*validateOpUpdateQueueRecordsVisibility) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueRecordsVisibility) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueRecordsVisibilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueRecordsVisibilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,12 +970,24 @@ func (m *validateOpUpdateStreamWarmThroughput) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcknowledgeDeadLetterQueueRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcknowledgeDeadLetterQueueRecords{}, middleware.After)
+}
+
+func addOpAcknowledgeQueueRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcknowledgeQueueRecords{}, middleware.After)
+}
+
 func addOpAddTagsToStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTagsToStream{}, middleware.After)
 }
 
 func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
+}
+
+func addOpCreateQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQueue{}, middleware.After)
 }
 
 func addOpCreateStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -750,12 +1002,20 @@ func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
 }
 
+func addOpDeleteQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQueue{}, middleware.After)
+}
+
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
 }
 
 func addOpDescribeChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeChannel{}, middleware.After)
+}
+
+func addOpDescribeQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQueue{}, middleware.After)
 }
 
 func addOpDisableEnhancedMonitoringValidationMiddleware(stack *middleware.Stack) error {
@@ -786,6 +1046,10 @@ func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListChannels{}, middleware.After)
 }
 
+func addOpListQueuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueues{}, middleware.After)
+}
+
 func addOpListShardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListShards{}, middleware.After)
 }
@@ -814,12 +1078,24 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
+func addOpReceiveDeadLetterQueueRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReceiveDeadLetterQueueRecords{}, middleware.After)
+}
+
+func addOpReceiveQueueRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReceiveQueueRecords{}, middleware.After)
+}
+
 func addOpRegisterStreamConsumerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterStreamConsumer{}, middleware.After)
 }
 
 func addOpRemoveTagsFromStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTagsFromStream{}, middleware.After)
+}
+
+func addOpRestoreDeadLetterQueueRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreDeadLetterQueueRecords{}, middleware.After)
 }
 
 func addOpSplitShardValidationMiddleware(stack *middleware.Stack) error {
@@ -854,8 +1130,20 @@ func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
 }
 
+func addOpUpdateDeadLetterQueueRecordsVisibilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDeadLetterQueueRecordsVisibility{}, middleware.After)
+}
+
 func addOpUpdateMaxRecordSizeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMaxRecordSize{}, middleware.After)
+}
+
+func addOpUpdateQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueue{}, middleware.After)
+}
+
+func addOpUpdateQueueRecordsVisibilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueRecordsVisibility{}, middleware.After)
 }
 
 func addOpUpdateShardCountValidationMiddleware(stack *middleware.Stack) error {
@@ -872,6 +1160,70 @@ func addOpUpdateStreamRecordDistributionStrategyValidationMiddleware(stack *midd
 
 func addOpUpdateStreamWarmThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStreamWarmThroughput{}, middleware.After)
+}
+
+func validateAcknowledgeDeadLetterQueueRecordsRequestEntry(v *types.AcknowledgeDeadLetterQueueRecordsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeDeadLetterQueueRecordsRequestEntry"}
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcknowledgeDeadLetterQueueRecordsRequestEntryList(v []types.AcknowledgeDeadLetterQueueRecordsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeDeadLetterQueueRecordsRequestEntryList"}
+	for i := range v {
+		if err := validateAcknowledgeDeadLetterQueueRecordsRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcknowledgeQueueRecordsRequestEntry(v *types.AcknowledgeQueueRecordsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeQueueRecordsRequestEntry"}
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcknowledgeQueueRecordsRequestEntryList(v []types.AcknowledgeQueueRecordsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeQueueRecordsRequestEntryList"}
+	for i := range v {
+		if err := validateAcknowledgeQueueRecordsRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateChannelEncryptionConfiguration(v *types.ChannelEncryptionConfiguration) error {
@@ -999,6 +1351,21 @@ func validateCloudWatchLogsUpdateInput(v *types.CloudWatchLogsUpdateInput) error
 	}
 }
 
+func validateDeadLetterConfiguration(v *types.DeadLetterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeadLetterConfiguration"}
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeadLetterQueueS3Configuration(v *types.DeadLetterQueueS3Configuration) error {
 	if v == nil {
 		return nil
@@ -1118,6 +1485,107 @@ func validatePutRecordsRequestEntryList(v []types.PutRecordsRequestEntry) error 
 	}
 }
 
+func validateQueueAttributes(v *types.QueueAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueAttributes"}
+	if v.DeadLetterConfiguration != nil {
+		if err := validateDeadLetterConfiguration(v.DeadLetterConfiguration); err != nil {
+			invalidParams.AddNested("DeadLetterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueueStartingPosition(v *types.QueueStartingPosition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueStartingPosition"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueueStreamConfiguration(v *types.QueueStreamConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueStreamConfiguration"}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
+	}
+	if v.StartingPosition != nil {
+		if err := validateQueueStartingPosition(v.StartingPosition); err != nil {
+			invalidParams.AddNested("StartingPosition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueueStreamConfigurationList(v []types.QueueStreamConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueStreamConfigurationList"}
+	for i := range v {
+		if err := validateQueueStreamConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueueStreamFilter(v *types.QueueStreamFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueStreamFilter"}
+	if v.StreamARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueueStreamFilterList(v []types.QueueStreamFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueStreamFilterList"}
+	for i := range v {
+		if err := validateQueueStreamFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRecordConfiguration(v *types.RecordConfiguration) error {
 	if v == nil {
 		return nil
@@ -1125,6 +1593,38 @@ func validateRecordConfiguration(v *types.RecordConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RecordConfiguration"}
 	if len(v.RecordFormatType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RecordFormatType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRestoreDeadLetterQueueRecordsRequestEntry(v *types.RestoreDeadLetterQueueRecordsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreDeadLetterQueueRecordsRequestEntry"}
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRestoreDeadLetterQueueRecordsRequestEntryList(v []types.RestoreDeadLetterQueueRecordsRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreDeadLetterQueueRecordsRequestEntryList"}
+	for i := range v {
+		if err := validateRestoreDeadLetterQueueRecordsRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1357,6 +1857,120 @@ func validateStreamModeDetails(v *types.StreamModeDetails) error {
 	}
 }
 
+func validateUpdateDeadLetterQueueRecordsVisibilityRequestEntry(v *types.UpdateDeadLetterQueueRecordsVisibilityRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeadLetterQueueRecordsVisibilityRequestEntry"}
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	}
+	if v.VisibilityTimeoutSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibilityTimeoutSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateDeadLetterQueueRecordsVisibilityRequestEntryList(v []types.UpdateDeadLetterQueueRecordsVisibilityRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeadLetterQueueRecordsVisibilityRequestEntryList"}
+	for i := range v {
+		if err := validateUpdateDeadLetterQueueRecordsVisibilityRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateQueueRecordsVisibilityRequestEntry(v *types.UpdateQueueRecordsVisibilityRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueRecordsVisibilityRequestEntry"}
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	}
+	if v.VisibilityTimeoutSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibilityTimeoutSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateQueueRecordsVisibilityRequestEntryList(v []types.UpdateQueueRecordsVisibilityRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueRecordsVisibilityRequestEntryList"}
+	for i := range v {
+		if err := validateUpdateQueueRecordsVisibilityRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcknowledgeDeadLetterQueueRecordsInput(v *AcknowledgeDeadLetterQueueRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeDeadLetterQueueRecordsInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateAcknowledgeDeadLetterQueueRecordsRequestEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcknowledgeQueueRecordsInput(v *AcknowledgeQueueRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcknowledgeQueueRecordsInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateAcknowledgeQueueRecordsRequestEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsToStreamInput(v *AddTagsToStreamInput) error {
 	if v == nil {
 		return nil
@@ -1417,6 +2031,33 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 }
 
+func validateOpCreateQueueInput(v *CreateQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQueueInput"}
+	if v.QueueName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueName"))
+	}
+	if v.StreamConfigurationList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamConfigurationList"))
+	} else if v.StreamConfigurationList != nil {
+		if err := validateQueueStreamConfigurationList(v.StreamConfigurationList); err != nil {
+			invalidParams.AddNested("StreamConfigurationList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueueAttributes != nil {
+		if err := validateQueueAttributes(v.QueueAttributes); err != nil {
+			invalidParams.AddNested("QueueAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateStreamInput(v *CreateStreamInput) error {
 	if v == nil {
 		return nil
@@ -1467,6 +2108,21 @@ func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
 	}
 }
 
+func validateOpDeleteQueueInput(v *DeleteQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueueInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1489,6 +2145,21 @@ func validateOpDescribeChannelInput(v *DescribeChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelInput"}
 	if v.ChannelARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQueueInput(v *DescribeQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQueueInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1597,6 +2268,23 @@ func validateOpListChannelsInput(v *ListChannelsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListChannelsInput"}
 	if v.StreamFilter != nil {
 		if err := validateStreamFilterList(v.StreamFilter); err != nil {
+			invalidParams.AddNested("StreamFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueuesInput(v *ListQueuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueuesInput"}
+	if v.StreamFilter != nil {
+		if err := validateQueueStreamFilterList(v.StreamFilter); err != nil {
 			invalidParams.AddNested("StreamFilter", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1724,6 +2412,36 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 }
 
+func validateOpReceiveDeadLetterQueueRecordsInput(v *ReceiveDeadLetterQueueRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReceiveDeadLetterQueueRecordsInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpReceiveQueueRecordsInput(v *ReceiveQueueRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReceiveQueueRecordsInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRegisterStreamConsumerInput(v *RegisterStreamConsumerInput) error {
 	if v == nil {
 		return nil
@@ -1749,6 +2467,28 @@ func validateOpRemoveTagsFromStreamInput(v *RemoveTagsFromStreamInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveTagsFromStreamInput"}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreDeadLetterQueueRecordsInput(v *RestoreDeadLetterQueueRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreDeadLetterQueueRecordsInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateRestoreDeadLetterQueueRecordsRequestEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1921,6 +2661,28 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 	}
 }
 
+func validateOpUpdateDeadLetterQueueRecordsVisibilityInput(v *UpdateDeadLetterQueueRecordsVisibilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeadLetterQueueRecordsVisibilityInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateUpdateDeadLetterQueueRecordsVisibilityRequestEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateMaxRecordSizeInput(v *UpdateMaxRecordSizeInput) error {
 	if v == nil {
 		return nil
@@ -1928,6 +2690,50 @@ func validateOpUpdateMaxRecordSizeInput(v *UpdateMaxRecordSizeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMaxRecordSizeInput"}
 	if v.MaxRecordSizeInKiB == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxRecordSizeInKiB"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueInput(v *UpdateQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if v.QueueAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueAttributes"))
+	} else if v.QueueAttributes != nil {
+		if err := validateQueueAttributes(v.QueueAttributes); err != nil {
+			invalidParams.AddNested("QueueAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueRecordsVisibilityInput(v *UpdateQueueRecordsVisibilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueRecordsVisibilityInput"}
+	if v.QueueARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueARN"))
+	}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateUpdateQueueRecordsVisibilityRequestEntryList(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

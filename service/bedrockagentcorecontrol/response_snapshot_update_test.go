@@ -3495,6 +3495,40 @@ func TestUpdateResponseSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetAgentInsightStore(t *testing.T) {
+	want := &GetAgentInsightStoreOutput{
+		AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+		AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+		Status:               types.AgentInsightStoreStatus("ACTIVE"),
+		EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+		EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+			Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCoreControl)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentInsightStore, schemas.GetAgentInsightStoreResponse, schemas.GetAgentInsightStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentInsightStore.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetAgentRuntime(t *testing.T) {
 	want := &GetAgentRuntimeOutput{
 		AgentRuntimeArn:     ptr.String("__AgentRuntimeArn__"),
@@ -4296,17 +4330,22 @@ func TestUpdateResponseSnapshot_GetConsentPortal(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetDataset(t *testing.T) {
 	want := &GetDatasetOutput{
-		DatasetArn:           ptr.String("__DatasetArn__"),
-		DatasetId:            ptr.String("__DatasetId__"),
-		DatasetVersion:       ptr.String("__DatasetVersion__"),
-		DatasetName:          ptr.String("__DatasetName__"),
-		Description:          ptr.String("__Description__"),
-		Status:               types.DatasetStatus("CREATING"),
-		DraftStatus:          types.DraftStatus("MODIFIED"),
-		FailureReason:        ptr.String("__FailureReason__"),
-		SchemaType:           types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
-		KmsKeyArn:            ptr.String("__KmsKeyArn__"),
-		ExampleCount:         ptr.Int64(1),
+		DatasetArn:     ptr.String("__DatasetArn__"),
+		DatasetId:      ptr.String("__DatasetId__"),
+		DatasetVersion: ptr.String("__DatasetVersion__"),
+		DatasetName:    ptr.String("__DatasetName__"),
+		Description:    ptr.String("__Description__"),
+		Status:         types.DatasetStatus("CREATING"),
+		DraftStatus:    types.DraftStatus("MODIFIED"),
+		FailureReason:  ptr.String("__FailureReason__"),
+		SchemaType:     types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
+		KmsKeyArn:      ptr.String("__KmsKeyArn__"),
+		ExampleCount:   ptr.Int64(1),
+		ExampleCountByField: &types.ExampleCountByField{
+			Turns:        ptr.Int64(1),
+			Input:        ptr.Int64(1),
+			ActorProfile: ptr.Int64(1),
+		},
 		DownloadUrl:          ptr.String("__DownloadUrl__"),
 		DownloadUrlExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -6569,6 +6608,56 @@ func TestUpdateResponseSnapshot_GetWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListAgentInsightStores(t *testing.T) {
+	want := &ListAgentInsightStoresOutput{
+		AgentInsightStores: []types.AgentInsightStoreSummary{
+			{
+				AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+				AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+				Status:               types.AgentInsightStoreStatus("ACTIVE"),
+				EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+				EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+					Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+				AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+				Status:               types.AgentInsightStoreStatus("ACTIVE"),
+				EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+				EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+					Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCoreControl)
+	opSchema := smithy.NewOperationSchema(schemas.ListAgentInsightStores, schemas.ListAgentInsightStoresResponse, schemas.ListAgentInsightStoresResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAgentInsightStores.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListAgentRuntimeEndpoints(t *testing.T) {
 	want := &ListAgentRuntimeEndpointsOutput{
 		RuntimeEndpoints: []types.AgentRuntimeEndpoint{
@@ -7164,12 +7253,22 @@ func TestUpdateResponseSnapshot_ListDatasetVersions(t *testing.T) {
 			{
 				DatasetVersion: ptr.String("__DatasetVersion__"),
 				ExampleCount:   ptr.Int64(1),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				DatasetVersion: ptr.String("__DatasetVersion__"),
 				ExampleCount:   ptr.Int64(1),
-				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -7206,8 +7305,13 @@ func TestUpdateResponseSnapshot_ListDatasets(t *testing.T) {
 				DraftStatus:  types.DraftStatus("MODIFIED"),
 				SchemaType:   types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
 				ExampleCount: ptr.Int64(1),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				DatasetArn:   ptr.String("__DatasetArn__"),
@@ -7218,8 +7322,13 @@ func TestUpdateResponseSnapshot_ListDatasets(t *testing.T) {
 				DraftStatus:  types.DraftStatus("MODIFIED"),
 				SchemaType:   types.DatasetSchemaType("AGENTCORE_EVALUATION_PREDEFINED_V1"),
 				ExampleCount: ptr.Int64(1),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExampleCountByField: &types.ExampleCountByField{
+					Turns:        ptr.Int64(1),
+					Input:        ptr.Int64(1),
+					ActorProfile: ptr.Int64(1),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -9202,6 +9311,35 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateAgentInsightStore(t *testing.T) {
+	want := &UpdateAgentInsightStoreOutput{
+		AgentInsightStoreArn: ptr.String("__AgentInsightStoreArn__"),
+		AgentInsightStoreId:  ptr.String("__AgentInsightStoreId__"),
+		Status:               types.AgentInsightStoreStatus("ACTIVE"),
+		EnablementStatus:     types.AgentInsightStoreEnablementStatus("ENABLED"),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:        ptr.String("__FailureReason__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCoreControl)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateAgentInsightStore, schemas.UpdateAgentInsightStoreResponse, schemas.UpdateAgentInsightStoreResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateAgentInsightStore.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

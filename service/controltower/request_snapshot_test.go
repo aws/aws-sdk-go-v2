@@ -697,6 +697,10 @@ func TestCheckRequestSnapshot_ListEnabledBaselines(t *testing.T) {
 				types.EnabledBaselineDriftStatus("IN_SYNC"),
 				types.EnabledBaselineDriftStatus("IN_SYNC"),
 			},
+			SourceDriftStatuses: []types.EnabledBaselineDriftStatus{
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+			},
 		},
 		NextToken:       ptr.String("__NextToken__"),
 		MaxResults:      ptr.Int32(1),
@@ -1611,6 +1615,10 @@ func TestUpdateRequestSnapshot_ListEnabledBaselines(t *testing.T) {
 				types.EnablementStatus("SUCCEEDED"),
 			},
 			InheritanceDriftStatuses: []types.EnabledBaselineDriftStatus{
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+				types.EnabledBaselineDriftStatus("IN_SYNC"),
+			},
+			SourceDriftStatuses: []types.EnabledBaselineDriftStatus{
 				types.EnabledBaselineDriftStatus("IN_SYNC"),
 				types.EnabledBaselineDriftStatus("IN_SYNC"),
 			},

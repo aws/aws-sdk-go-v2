@@ -1,0 +1,8 @@
+{
+    "id": "0bd6f333-bb78-4ee2-8a6e-bdb2e7fc24ea",
+    "type": "feature",
+    "description": "Adds support for In-Session SmartCard Redirection for Windows Multi-Session fleets",
+    "modules": [
+        "service/appstream"
+    ]
+}

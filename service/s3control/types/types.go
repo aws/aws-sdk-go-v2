@@ -653,6 +653,25 @@ type Include struct {
 	noSmithyDocumentSerde
 }
 
+// The container for S3 Storage Lens Intelligent-Tiering access tier metrics. When
+// enabled, S3 Storage Lens produces metrics for each individual S3
+// Intelligent-Tiering access tier instead of reporting a single aggregate value
+// for the INTELLIGENT_TIERING storage class.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+type IntAccessTiers struct {
+
+	// A container that indicates whether S3 Storage Lens Intelligent-Tiering access
+	// tier metrics are enabled.
+	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
 // A container element for the job configuration and status information returned
 // by a Describe Job request.
 type JobDescriptor struct {
@@ -3058,6 +3077,10 @@ type StorageLensConfiguration struct {
 	// configuration.
 	AwsOrg *StorageLensAwsOrg
 
+	// A container for the configuration used to publish S3 Storage Lens cost data to
+	// Amazon Web Services Cost and Usage Reports (Amazon Web Services CUR).
+	CostAndUsageReportsPublish *StorageLensCostAndUsageReportsPublish
+
 	// A container to specify the properties of your S3 Storage Lens metrics export
 	// including, the destination, schema and format.
 	DataExport *StorageLensDataExport
@@ -3073,6 +3096,9 @@ type StorageLensConfiguration struct {
 	// A container for what is included in this configuration. This container can only
 	// be valid if there is no Exclude container submitted, and it's not empty.
 	Include *Include
+
+	// A container element for S3 Storage Lens Intelligent-Tiering access tier metrics.
+	IntAccessTiers *IntAccessTiers
 
 	// A container for all prefix delimiters that are used for object keys in this S3
 	// Storage Lens configuration. The prefix delimiters determine how S3 Storage Lens
@@ -3093,6 +3119,57 @@ type StorageLensConfiguration struct {
 	// property is read-only and follows the following format:
 	// arn:aws:s3:us-east-1:example-account-id:storage-lens/your-dashboard-name
 	StorageLensArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A container for the prefix-level configuration that determines the prefixes for
+// which S3 Storage Lens publishes cost data to Amazon Web Services Cost and Usage
+// Reports (Amazon Web Services CUR).
+type StorageLensCostAndUsageReportsPrefixLevel struct {
+
+	// Indicates whether prefix-level cost data publishing to Amazon Web Services CUR
+	// is enabled.
+	//
+	// This member is required.
+	IsEnabled bool
+
+	// A container for the selection criteria that determines the prefix depths for
+	// which cost data is published to Amazon Web Services CUR.
+	SelectionCriteria *StorageLensCostAndUsageReportsSelectionCriteria
+
+	noSmithyDocumentSerde
+}
+
+// A container for the configuration used to publish S3 Storage Lens cost data to
+// Amazon Web Services Cost and Usage Reports (Amazon Web Services CUR).
+type StorageLensCostAndUsageReportsPublish struct {
+
+	// A container for the prefix-level configuration that determines the prefixes for
+	// which S3 Storage Lens publishes cost data to Amazon Web Services CUR.
+	PrefixLevel *StorageLensCostAndUsageReportsPrefixLevel
+
+	noSmithyDocumentSerde
+}
+
+// A container for the selection criteria used by the S3 Storage Lens Amazon Web
+// Services Cost and Usage Reports (Amazon Web Services CUR) publish configuration.
+// The selection criteria specifies the minimum and maximum prefix depth (both
+// inclusive) for which cost data is published to Amazon Web Services CUR. You must
+// provide both MinDepth and MaxDepth together, or neither; MinDepth must be less
+// than or equal to MaxDepth , and the difference must not exceed 4. If neither is
+// provided, MinDepth defaults to 1 and MaxDepth defaults to 3 .
+type StorageLensCostAndUsageReportsSelectionCriteria struct {
+
+	// The maximum prefix depth (inclusive) for which cost data is published to Amazon
+	// Web Services CUR. You must provide both MinDepth and MaxDepth together, or
+	// neither. If neither is provided, MaxDepth defaults to 3 .
+	MaxDepth *int32
+
+	// The minimum prefix depth (inclusive) for which cost data is published to Amazon
+	// Web Services CUR. You must provide both MinDepth and MaxDepth together, or
+	// neither. If neither is provided, MinDepth defaults to 1 .
+	MinDepth *int32
 
 	noSmithyDocumentSerde
 }

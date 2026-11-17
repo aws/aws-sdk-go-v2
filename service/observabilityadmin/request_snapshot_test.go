@@ -223,6 +223,9 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -253,6 +256,11 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 						Region: ptr.String("__Region__"),
 					},
 				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -278,6 +286,44 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateConnector(t *testing.T) {
+	input := &CreateConnectorInput{
+		ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+			Value: types.AzureConnectorConfiguration{
+				TenantIdentifier: ptr.String("__TenantIdentifier__"),
+				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Name:    ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateConnector"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -930,6 +976,33 @@ func TestCheckRequestSnapshot_DeleteCentralizationRuleForOrganization(t *testing
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteConnector(t *testing.T) {
+	input := &DeleteConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteDatasetIntegration(t *testing.T) {
 	input := &DeleteDatasetIntegrationInput{
 		Arn: ptr.String("__Arn__"),
@@ -1088,6 +1161,88 @@ func TestCheckRequestSnapshot_GetCentralizationRuleForOrganization(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetConnector(t *testing.T) {
+	input := &GetConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetConnectorTelemetryManifest(t *testing.T) {
+	input := &GetConnectorTelemetryManifestInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConnectorTelemetryManifest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConnectorTelemetryManifest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetConnectorTelemetrySetup(t *testing.T) {
+	input := &GetConnectorTelemetrySetupInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Format:              types.SetupFormat("BICEP"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConnectorTelemetrySetup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConnectorTelemetrySetup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1302,6 +1457,33 @@ func TestCheckRequestSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetThirdPartyTelemetryEnrichment(t *testing.T) {
+	input := &GetThirdPartyTelemetryEnrichmentInput{
+		TelemetryEnrichmentIdentifier: ptr.String("__TelemetryEnrichmentIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetThirdPartyTelemetryEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetThirdPartyTelemetryEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	input := &ListCentralizationRulesForOrganizationInput{
 		RuleNamePrefix: ptr.String("__RuleNamePrefix__"),
@@ -1332,6 +1514,34 @@ func TestCheckRequestSnapshot_ListCentralizationRulesForOrganization(t *testing.
 	}
 }
 
+func TestCheckRequestSnapshot_ListConnectors(t *testing.T) {
+	input := &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListConnectors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConnectors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDatasetIntegrations(t *testing.T) {
 	input := &ListDatasetIntegrationsInput{
 		MaxResults: ptr.Int32(1),
@@ -1356,6 +1566,42 @@ func TestCheckRequestSnapshot_ListDatasetIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetIntegrations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResourcesByConnector(t *testing.T) {
+	input := &ListResourcesByConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Selector: &types.ConnectorQueryMemberAzure{
+			Value: &types.AzureConnectorQueryMemberManagementGroups{
+				Value: types.AzureManagementGroupsQuery{
+					ParentManagementGroupId: ptr.String("__ParentManagementGroupId__"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourcesByConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcesByConnector"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1591,6 +1837,208 @@ func TestCheckRequestSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListThirdPartyTelemetryEnrichments(t *testing.T) {
+	input := &ListThirdPartyTelemetryEnrichmentsInput{
+		Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListThirdPartyTelemetryEnrichments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListThirdPartyTelemetryEnrichments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutConnectorTelemetryManifest(t *testing.T) {
+	input := &PutConnectorTelemetryManifestInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Manifest: &types.TelemetryManifest{
+			Source: &types.TelemetryManifestSourceMemberAzure{
+				Value: []types.AzureScopeItem{
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Infrastructure: &types.TelemetryManifestInfrastructureMemberAzure{
+				Value: types.AzureInfrastructure{
+					SubscriptionId: ptr.String("__SubscriptionId__"),
+					EventHubs: []types.AzureEventHubConfiguration{
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+					},
+					FlowLogs: &types.AzureFlowLogsInfrastructureMemberCustomerManaged{
+						Value: types.AzureCustomerManagedFlowLogs{
+							StorageAccounts: []types.AzureFlowLogStorageAccountScope{
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ExpectedVersion: ptr.Int64(1),
+		ClientToken:     ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutConnectorTelemetryManifest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutConnectorTelemetryManifest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartTelemetryEnrichment(t *testing.T) {
 	input := &StartTelemetryEnrichmentInput{}
 	body := &bytes.Buffer{}
@@ -1678,6 +2126,68 @@ func TestCheckRequestSnapshot_StartTelemetryEvaluationForOrganization(t *testing
 	}
 }
 
+func TestCheckRequestSnapshot_StartTelemetryPipelineRefresh(t *testing.T) {
+	input := &StartTelemetryPipelineRefreshInput{
+		PipelineIdentifier: ptr.String("__PipelineIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTelemetryPipelineRefresh(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTelemetryPipelineRefresh"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartThirdPartyTelemetryEnrichment(t *testing.T) {
+	input := &StartThirdPartyTelemetryEnrichmentInput{
+		Name: ptr.String("__Name__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationInputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationInput{
+				AwsConfigConnectorArn: ptr.String("__AwsConfigConnectorArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartThirdPartyTelemetryEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartThirdPartyTelemetryEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StopTelemetryEnrichment(t *testing.T) {
 	input := &StopTelemetryEnrichmentInput{}
 	body := &bytes.Buffer{}
@@ -1749,6 +2259,33 @@ func TestCheckRequestSnapshot_StopTelemetryEvaluationForOrganization(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTelemetryEvaluationForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopThirdPartyTelemetryEnrichment(t *testing.T) {
+	input := &StopThirdPartyTelemetryEnrichmentInput{
+		TelemetryEnrichmentIdentifier: ptr.String("__TelemetryEnrichmentIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopThirdPartyTelemetryEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopThirdPartyTelemetryEnrichment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1872,6 +2409,9 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -1899,6 +2439,11 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -2550,6 +3095,9 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -2580,6 +3128,11 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 						Region: ptr.String("__Region__"),
 					},
 				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -2605,6 +3158,44 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateConnector(t *testing.T) {
+	input := &CreateConnectorInput{
+		ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+			Value: types.AzureConnectorConfiguration{
+				TenantIdentifier: ptr.String("__TenantIdentifier__"),
+				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Name:    ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateConnector"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3257,6 +3848,33 @@ func TestUpdateRequestSnapshot_DeleteCentralizationRuleForOrganization(t *testin
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteConnector(t *testing.T) {
+	input := &DeleteConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteDatasetIntegration(t *testing.T) {
 	input := &DeleteDatasetIntegrationInput{
 		Arn: ptr.String("__Arn__"),
@@ -3415,6 +4033,88 @@ func TestUpdateRequestSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCentralizationRuleForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetConnector(t *testing.T) {
+	input := &GetConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetConnectorTelemetryManifest(t *testing.T) {
+	input := &GetConnectorTelemetryManifestInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConnectorTelemetryManifest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConnectorTelemetryManifest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetConnectorTelemetrySetup(t *testing.T) {
+	input := &GetConnectorTelemetrySetupInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Format:              types.SetupFormat("BICEP"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetConnectorTelemetrySetup(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetConnectorTelemetrySetup"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3629,6 +4329,33 @@ func TestUpdateRequestSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetThirdPartyTelemetryEnrichment(t *testing.T) {
+	input := &GetThirdPartyTelemetryEnrichmentInput{
+		TelemetryEnrichmentIdentifier: ptr.String("__TelemetryEnrichmentIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetThirdPartyTelemetryEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetThirdPartyTelemetryEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	input := &ListCentralizationRulesForOrganizationInput{
 		RuleNamePrefix: ptr.String("__RuleNamePrefix__"),
@@ -3659,6 +4386,34 @@ func TestUpdateRequestSnapshot_ListCentralizationRulesForOrganization(t *testing
 	}
 }
 
+func TestUpdateRequestSnapshot_ListConnectors(t *testing.T) {
+	input := &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListConnectors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListConnectors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDatasetIntegrations(t *testing.T) {
 	input := &ListDatasetIntegrationsInput{
 		MaxResults: ptr.Int32(1),
@@ -3683,6 +4438,42 @@ func TestUpdateRequestSnapshot_ListDatasetIntegrations(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetIntegrations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResourcesByConnector(t *testing.T) {
+	input := &ListResourcesByConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Selector: &types.ConnectorQueryMemberAzure{
+			Value: &types.AzureConnectorQueryMemberManagementGroups{
+				Value: types.AzureManagementGroupsQuery{
+					ParentManagementGroupId: ptr.String("__ParentManagementGroupId__"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourcesByConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcesByConnector"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3918,6 +4709,208 @@ func TestUpdateRequestSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListThirdPartyTelemetryEnrichments(t *testing.T) {
+	input := &ListThirdPartyTelemetryEnrichmentsInput{
+		Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListThirdPartyTelemetryEnrichments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListThirdPartyTelemetryEnrichments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutConnectorTelemetryManifest(t *testing.T) {
+	input := &PutConnectorTelemetryManifestInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Manifest: &types.TelemetryManifest{
+			Source: &types.TelemetryManifestSourceMemberAzure{
+				Value: []types.AzureScopeItem{
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Infrastructure: &types.TelemetryManifestInfrastructureMemberAzure{
+				Value: types.AzureInfrastructure{
+					SubscriptionId: ptr.String("__SubscriptionId__"),
+					EventHubs: []types.AzureEventHubConfiguration{
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+					},
+					FlowLogs: &types.AzureFlowLogsInfrastructureMemberCustomerManaged{
+						Value: types.AzureCustomerManagedFlowLogs{
+							StorageAccounts: []types.AzureFlowLogStorageAccountScope{
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ExpectedVersion: ptr.Int64(1),
+		ClientToken:     ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutConnectorTelemetryManifest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutConnectorTelemetryManifest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartTelemetryEnrichment(t *testing.T) {
 	input := &StartTelemetryEnrichmentInput{}
 	body := &bytes.Buffer{}
@@ -4005,6 +4998,68 @@ func TestUpdateRequestSnapshot_StartTelemetryEvaluationForOrganization(t *testin
 	}
 }
 
+func TestUpdateRequestSnapshot_StartTelemetryPipelineRefresh(t *testing.T) {
+	input := &StartTelemetryPipelineRefreshInput{
+		PipelineIdentifier: ptr.String("__PipelineIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTelemetryPipelineRefresh(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTelemetryPipelineRefresh"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartThirdPartyTelemetryEnrichment(t *testing.T) {
+	input := &StartThirdPartyTelemetryEnrichmentInput{
+		Name: ptr.String("__Name__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationInputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationInput{
+				AwsConfigConnectorArn: ptr.String("__AwsConfigConnectorArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartThirdPartyTelemetryEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartThirdPartyTelemetryEnrichment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StopTelemetryEnrichment(t *testing.T) {
 	input := &StopTelemetryEnrichmentInput{}
 	body := &bytes.Buffer{}
@@ -4076,6 +5131,33 @@ func TestUpdateRequestSnapshot_StopTelemetryEvaluationForOrganization(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTelemetryEvaluationForOrganization"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopThirdPartyTelemetryEnrichment(t *testing.T) {
+	input := &StopThirdPartyTelemetryEnrichmentInput{
+		TelemetryEnrichmentIdentifier: ptr.String("__TelemetryEnrichmentIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopThirdPartyTelemetryEnrichment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopThirdPartyTelemetryEnrichment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4199,6 +5281,9 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -4226,6 +5311,11 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},

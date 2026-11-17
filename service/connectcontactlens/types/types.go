@@ -712,6 +712,9 @@ type Transcript struct {
 	// List of positions where issues were detected on the transcript.
 	IssuesDetected []IssueDetected
 
+	// The language code detected for this piece of transcript, for example, en-US .
+	LanguageCode *string
+
 	// The sentiment detected for this piece of transcript.
 	Sentiment SentimentValue
 
@@ -740,6 +743,9 @@ func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IssuesDetected != nil {
 		serializeIssuesDetected(s, schemas.Transcript_IssuesDetected, v.IssuesDetected)
 	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.Transcript_LanguageCode, *v.LanguageCode)
+	}
 	if v.ParticipantId != nil {
 		s.WriteString(schemas.Transcript_ParticipantId, *v.ParticipantId)
 	}
@@ -767,6 +773,9 @@ func (v *Transcript) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Transcript_Id, v.Id)
 		case schemas.Transcript_IssuesDetected:
 			return deserializeIssuesDetected(d, schemas.Transcript_IssuesDetected, &v.IssuesDetected)
+		case schemas.Transcript_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.Transcript_LanguageCode, v.LanguageCode)
 		case schemas.Transcript_ParticipantId:
 			v.ParticipantId = new(string)
 			return d.ReadString(schemas.Transcript_ParticipantId, v.ParticipantId)

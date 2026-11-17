@@ -1627,7 +1627,7 @@ var _CoreNetworkChangeList_member *smithy.Schema
 var CoreNetworkChangeValues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "CoreNetworkChangeValues",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var CoreNetworkChangeValues_SegmentName *smithy.Schema
 
 var CoreNetworkChangeValues_NetworkFunctionGroupName *smithy.Schema
@@ -1661,6 +1661,8 @@ var CoreNetworkChangeValues_PeerEdgeLocations *smithy.Schema
 var CoreNetworkChangeValues_AttachmentId *smithy.Schema
 
 var CoreNetworkChangeValues_RoutingPolicyAssociationDetails *smithy.Schema
+
+var CoreNetworkChangeValues_MultipathResilience *smithy.Schema
 
 var CoreNetworkEdge = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -2251,6 +2253,22 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
 	Name:      "MaxResults",
 }, smithy.ShapeTypeInteger, 0)
+
+var MultipathResilienceChangeValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "MultipathResilienceChangeValues",
+}, smithy.ShapeTypeStructure, 2)
+var MultipathResilienceChangeValues_Mode *smithy.Schema
+
+var MultipathResilienceChangeValues_EdgeSets *smithy.Schema
+
+var MultipathResilienceMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networkmanager",
+	Name:      "MultipathResilienceMode",
+}, smithy.ShapeTypeEnum, 2)
+var MultipathResilienceMode_BEST_EFFORT *smithy.Schema
+
+var MultipathResilienceMode_DISABLED *smithy.Schema
 
 var NatGatewaySupportState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networkmanager",
@@ -5964,6 +5982,14 @@ func init() {
 
 	_RoutingPolicyAssociationDetailsList_member = _RoutingPolicyAssociationDetailsList.AddMember("member", RoutingPolicyAssociationDetail)
 
+	MultipathResilienceMode_BEST_EFFORT = MultipathResilienceMode.AddMember("BEST_EFFORT", smithyprelude.Unit)
+
+	MultipathResilienceMode_DISABLED = MultipathResilienceMode.AddMember("DISABLED", smithyprelude.Unit)
+
+	MultipathResilienceChangeValues_Mode = MultipathResilienceChangeValues.AddMember("Mode", MultipathResilienceMode)
+
+	MultipathResilienceChangeValues_EdgeSets = MultipathResilienceChangeValues.AddMember("EdgeSets", _EdgeSetList)
+
 	CoreNetworkChangeValues_SegmentName = CoreNetworkChangeValues.AddMember("SegmentName", _ConstrainedString)
 
 	CoreNetworkChangeValues_NetworkFunctionGroupName = CoreNetworkChangeValues.AddMember("NetworkFunctionGroupName", _ConstrainedString)
@@ -5997,6 +6023,8 @@ func init() {
 	CoreNetworkChangeValues_AttachmentId = CoreNetworkChangeValues.AddMember("AttachmentId", _ConstrainedString)
 
 	CoreNetworkChangeValues_RoutingPolicyAssociationDetails = CoreNetworkChangeValues.AddMember("RoutingPolicyAssociationDetails", _RoutingPolicyAssociationDetailsList)
+
+	CoreNetworkChangeValues_MultipathResilience = CoreNetworkChangeValues.AddMember("MultipathResilience", MultipathResilienceChangeValues)
 
 	CoreNetworkChange_Type = CoreNetworkChange.AddMember("Type", ChangeType)
 

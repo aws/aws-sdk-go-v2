@@ -220,6 +220,9 @@ func ExampleProviderDetailCreate_outputUsage() {
 	case *types.ProviderDetailCreateMemberAzure:
 		_ = v.Value // Value is types.AzureProviderDetailCreate
 
+	case *types.ProviderDetailCreateMemberGcp:
+		_ = v.Value // Value is types.GcpProviderDetailCreate
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -230,6 +233,7 @@ func ExampleProviderDetailCreate_outputUsage() {
 }
 
 var _ *types.AzureProviderDetailCreate
+var _ *types.GcpProviderDetailCreate
 
 func ExampleProviderDetailUpdate_outputUsage() {
 	var union types.ProviderDetailUpdate
@@ -237,6 +241,9 @@ func ExampleProviderDetailUpdate_outputUsage() {
 	switch v := union.(type) {
 	case *types.ProviderDetailUpdateMemberAzure:
 		_ = v.Value // Value is types.AzureProviderDetailUpdate
+
+	case *types.ProviderDetailUpdateMemberGcp:
+		_ = v.Value // Value is types.GcpProviderDetailUpdate
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -248,6 +255,7 @@ func ExampleProviderDetailUpdate_outputUsage() {
 }
 
 var _ *types.AzureProviderDetailUpdate
+var _ *types.GcpProviderDetailUpdate
 
 func ExampleSchedule_outputUsage() {
 	var union types.Schedule

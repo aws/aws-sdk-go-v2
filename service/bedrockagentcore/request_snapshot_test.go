@@ -721,6 +721,34 @@ func TestCheckRequestSnapshot_DeleteCapacityProviderSession(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteDatasetGeneration(t *testing.T) {
+	input := &DeleteDatasetGenerationInput{
+		DatasetId:    ptr.String("__DatasetId__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDatasetGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDatasetGeneration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteEvent(t *testing.T) {
 	input := &DeleteEventInput{
 		MemoryId:  ptr.String("__MemoryId__"),
@@ -1015,6 +1043,34 @@ func TestCheckRequestSnapshot_GetAgentCard(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetAgentInsight(t *testing.T) {
+	input := &GetAgentInsightInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		AgentInsightId:  ptr.String("__AgentInsightId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentInsight(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentInsight"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetBatchEvaluation(t *testing.T) {
 	input := &GetBatchEvaluationInput{
 		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
@@ -1094,6 +1150,34 @@ func TestCheckRequestSnapshot_GetCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCodeInterpreterSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetDatasetGeneration(t *testing.T) {
+	input := &GetDatasetGenerationInput{
+		DatasetId:    ptr.String("__DatasetId__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDatasetGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDatasetGeneration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1717,6 +1801,37 @@ func TestCheckRequestSnapshot_ListActors(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListAgentInsights(t *testing.T) {
+	input := &ListAgentInsightsInput{
+		ApplicationName:   ptr.String("__ApplicationName__"),
+		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
+		ArchiveStatus:     types.AgentInsightArchiveStatus("ACTIVE"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListBatchEvaluations(t *testing.T) {
 	input := &ListBatchEvaluationsInput{
 		MaxResults: ptr.Int32(1),
@@ -1801,6 +1916,35 @@ func TestCheckRequestSnapshot_ListCodeInterpreterSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCodeInterpreterSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListDatasetGenerations(t *testing.T) {
+	input := &ListDatasetGenerationsInput{
+		DatasetId:  ptr.String("__DatasetId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetGenerations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetGenerations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2413,6 +2557,18 @@ func TestCheckRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
+		DatasetExecutionConfig: &types.DatasetExecutionConfig{
+			Dataset: &types.DatasetSource{
+				DatasetId:      ptr.String("__DatasetId__"),
+				DatasetVersion: ptr.String("__DatasetVersion__"),
+			},
+			AgentInvocation: &types.AgentInvocationConfigMemberAgentCoreRuntime{
+				Value: types.AgentCoreRuntimeInvocation{
+					AgentRuntimeEndpointArn: ptr.String("__AgentRuntimeEndpointArn__"),
+					RequestTemplate:         ptr.String("__RequestTemplate__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2650,6 +2806,148 @@ func TestCheckRequestSnapshot_StartCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartCodeInterpreterSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartDatasetGeneration(t *testing.T) {
+	input := &StartDatasetGenerationInput{
+		DatasetId:    ptr.String("__DatasetId__"),
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		ScenarioType: types.ScenarioType("FIXED"),
+		Source: &types.GenerationSourceMemberTraceGeneration{
+			Value: types.TraceGenerationSource{
+				SourceConfig: &types.TraceSourceConfigMemberCloudWatchLogs{
+					Value: types.CloudWatchLogsSourceConfig{
+						LogGroupNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LogGroupNamePrefixes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ServiceNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Selection: &types.GenerationSelectionMemberFilters{
+					Value: types.GenerationFilters{
+						AttributeFilters: []types.GenerationAttributeFilter{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+							},
+						},
+						TurnCount: &types.TurnCountRange{
+							Min: ptr.Int32(1),
+							Max: ptr.Int32(1),
+						},
+						EvaluatorFilters: []types.EvaluatorFilter{
+							{
+								EvaluatorId:             ptr.String("__EvaluatorId__"),
+								EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+								Operator:                types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+								Aggregation: types.ResultAggregation("Min"),
+							},
+							{
+								EvaluatorId:             ptr.String("__EvaluatorId__"),
+								EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+								Operator:                types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+								Aggregation: types.ResultAggregation("Min"),
+							},
+						},
+					},
+				},
+				Sampling: &types.GenerationSamplingConfig{
+					MaxScenarios: ptr.Int32(1),
+				},
+				GroundTruth: &types.GroundTruthConfig{
+					Fields: []types.GroundTruthField{
+						types.GroundTruthField("expected_response"),
+						types.GroundTruthField("expected_response"),
+					},
+					QualityFilters: []types.EvaluatorFilter{
+						{
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+							Operator:                types.GenerationFilterOperator("Equals"),
+							Value: &types.GenerationFilterValueMemberStringValue{
+								Value: "__GenerationFilterValueMemberStringValue__",
+							},
+							Aggregation: types.ResultAggregation("Min"),
+						},
+						{
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+							Operator:                types.GenerationFilterOperator("Equals"),
+							Value: &types.GenerationFilterValueMemberStringValue{
+								Value: "__GenerationFilterValueMemberStringValue__",
+							},
+							Aggregation: types.ResultAggregation("Min"),
+						},
+					},
+				},
+				RedactionConfiguration: &types.RedactionConfiguration{
+					Identifiers: []types.RedactionIdentifier{
+						types.RedactionIdentifier("ADDRESS"),
+						types.RedactionIdentifier("ADDRESS"),
+					},
+					CustomDataIdentifiers: []types.CustomDataIdentifier{
+						{
+							Name:  ptr.String("__Name__"),
+							Regex: ptr.String("__Regex__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Regex: ptr.String("__Regex__"),
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartDatasetGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDatasetGeneration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2926,6 +3224,35 @@ func TestCheckRequestSnapshot_UpdateABTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateABTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAgentInsight(t *testing.T) {
+	input := &UpdateAgentInsightInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		AgentInsightId:  ptr.String("__AgentInsightId__"),
+		ArchiveStatus:   types.AgentInsightArchiveStatus("ACTIVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentInsight(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentInsight"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3477,6 +3804,34 @@ func TestUpdateRequestSnapshot_DeleteCapacityProviderSession(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteDatasetGeneration(t *testing.T) {
+	input := &DeleteDatasetGenerationInput{
+		DatasetId:    ptr.String("__DatasetId__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDatasetGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDatasetGeneration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteEvent(t *testing.T) {
 	input := &DeleteEventInput{
 		MemoryId:  ptr.String("__MemoryId__"),
@@ -3771,6 +4126,34 @@ func TestUpdateRequestSnapshot_GetAgentCard(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAgentInsight(t *testing.T) {
+	input := &GetAgentInsightInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		AgentInsightId:  ptr.String("__AgentInsightId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentInsight(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentInsight"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetBatchEvaluation(t *testing.T) {
 	input := &GetBatchEvaluationInput{
 		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
@@ -3850,6 +4233,34 @@ func TestUpdateRequestSnapshot_GetCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCodeInterpreterSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetDatasetGeneration(t *testing.T) {
+	input := &GetDatasetGenerationInput{
+		DatasetId:    ptr.String("__DatasetId__"),
+		GenerationId: ptr.String("__GenerationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDatasetGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDatasetGeneration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4473,6 +4884,37 @@ func TestUpdateRequestSnapshot_ListActors(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListAgentInsights(t *testing.T) {
+	input := &ListAgentInsightsInput{
+		ApplicationName:   ptr.String("__ApplicationName__"),
+		BatchEvaluationId: ptr.String("__BatchEvaluationId__"),
+		ArchiveStatus:     types.AgentInsightArchiveStatus("ACTIVE"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListBatchEvaluations(t *testing.T) {
 	input := &ListBatchEvaluationsInput{
 		MaxResults: ptr.Int32(1),
@@ -4557,6 +4999,35 @@ func TestUpdateRequestSnapshot_ListCodeInterpreterSessions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCodeInterpreterSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListDatasetGenerations(t *testing.T) {
+	input := &ListDatasetGenerationsInput{
+		DatasetId:  ptr.String("__DatasetId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListDatasetGenerations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListDatasetGenerations"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5169,6 +5640,18 @@ func TestUpdateRequestSnapshot_StartBatchEvaluation(t *testing.T) {
 				ResultDestination: types.ResultDestination("DEDICATED_LOG_GROUP"),
 			},
 		},
+		DatasetExecutionConfig: &types.DatasetExecutionConfig{
+			Dataset: &types.DatasetSource{
+				DatasetId:      ptr.String("__DatasetId__"),
+				DatasetVersion: ptr.String("__DatasetVersion__"),
+			},
+			AgentInvocation: &types.AgentInvocationConfigMemberAgentCoreRuntime{
+				Value: types.AgentCoreRuntimeInvocation{
+					AgentRuntimeEndpointArn: ptr.String("__AgentRuntimeEndpointArn__"),
+					RequestTemplate:         ptr.String("__RequestTemplate__"),
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5406,6 +5889,148 @@ func TestUpdateRequestSnapshot_StartCodeInterpreterSession(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartCodeInterpreterSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartDatasetGeneration(t *testing.T) {
+	input := &StartDatasetGenerationInput{
+		DatasetId:    ptr.String("__DatasetId__"),
+		Name:         ptr.String("__Name__"),
+		Description:  ptr.String("__Description__"),
+		ScenarioType: types.ScenarioType("FIXED"),
+		Source: &types.GenerationSourceMemberTraceGeneration{
+			Value: types.TraceGenerationSource{
+				SourceConfig: &types.TraceSourceConfigMemberCloudWatchLogs{
+					Value: types.CloudWatchLogsSourceConfig{
+						LogGroupNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LogGroupNamePrefixes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ServiceNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Selection: &types.GenerationSelectionMemberFilters{
+					Value: types.GenerationFilters{
+						AttributeFilters: []types.GenerationAttributeFilter{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+							},
+						},
+						TurnCount: &types.TurnCountRange{
+							Min: ptr.Int32(1),
+							Max: ptr.Int32(1),
+						},
+						EvaluatorFilters: []types.EvaluatorFilter{
+							{
+								EvaluatorId:             ptr.String("__EvaluatorId__"),
+								EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+								Operator:                types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+								Aggregation: types.ResultAggregation("Min"),
+							},
+							{
+								EvaluatorId:             ptr.String("__EvaluatorId__"),
+								EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+								Operator:                types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+								Aggregation: types.ResultAggregation("Min"),
+							},
+						},
+					},
+				},
+				Sampling: &types.GenerationSamplingConfig{
+					MaxScenarios: ptr.Int32(1),
+				},
+				GroundTruth: &types.GroundTruthConfig{
+					Fields: []types.GroundTruthField{
+						types.GroundTruthField("expected_response"),
+						types.GroundTruthField("expected_response"),
+					},
+					QualityFilters: []types.EvaluatorFilter{
+						{
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+							Operator:                types.GenerationFilterOperator("Equals"),
+							Value: &types.GenerationFilterValueMemberStringValue{
+								Value: "__GenerationFilterValueMemberStringValue__",
+							},
+							Aggregation: types.ResultAggregation("Min"),
+						},
+						{
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+							Operator:                types.GenerationFilterOperator("Equals"),
+							Value: &types.GenerationFilterValueMemberStringValue{
+								Value: "__GenerationFilterValueMemberStringValue__",
+							},
+							Aggregation: types.ResultAggregation("Min"),
+						},
+					},
+				},
+				RedactionConfiguration: &types.RedactionConfiguration{
+					Identifiers: []types.RedactionIdentifier{
+						types.RedactionIdentifier("ADDRESS"),
+						types.RedactionIdentifier("ADDRESS"),
+					},
+					CustomDataIdentifiers: []types.CustomDataIdentifier{
+						{
+							Name:  ptr.String("__Name__"),
+							Regex: ptr.String("__Regex__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Regex: ptr.String("__Regex__"),
+						},
+					},
+				},
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartDatasetGeneration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDatasetGeneration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5682,6 +6307,35 @@ func TestUpdateRequestSnapshot_UpdateABTest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateABTest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAgentInsight(t *testing.T) {
+	input := &UpdateAgentInsightInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		AgentInsightId:  ptr.String("__AgentInsightId__"),
+		ArchiveStatus:   types.AgentInsightArchiveStatus("ACTIVE"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentInsight(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentInsight"); err != nil {
 		t.Fatal(err)
 	}
 }

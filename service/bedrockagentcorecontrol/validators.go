@@ -1230,6 +1230,26 @@ func (m *validateOpDeleteWorkloadIdentity) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAgentInsightStore struct {
+}
+
+func (*validateOpGetAgentInsightStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentInsightStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentInsightStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentInsightStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAgentRuntimeEndpoint struct {
 }
 
@@ -2470,6 +2490,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAgentInsightStore struct {
+}
+
+func (*validateOpUpdateAgentInsightStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentInsightStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentInsightStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentInsightStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAgentRuntimeEndpoint struct {
 }
 
@@ -3254,6 +3294,10 @@ func addOpDeleteWorkloadIdentityValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteWorkloadIdentity{}, middleware.After)
 }
 
+func addOpGetAgentInsightStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentInsightStore{}, middleware.After)
+}
+
 func addOpGetAgentRuntimeEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAgentRuntimeEndpoint{}, middleware.After)
 }
@@ -3502,6 +3546,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAgentInsightStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentInsightStore{}, middleware.After)
+}
+
 func addOpUpdateAgentRuntimeEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentRuntimeEndpoint{}, middleware.After)
 }
@@ -3643,6 +3691,21 @@ func validateActions(v []types.Action) error {
 		if err := validateAction(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentInsightStoreEncryptionConfiguration(v *types.AgentInsightStoreEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentInsightStoreEncryptionConfiguration"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10157,15 +10220,10 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
 	}
-	if v.Source == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Source"))
-	} else if v.Source != nil {
+	if v.Source != nil {
 		if err := validateDataSourceType(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.SchemaType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11198,6 +11256,21 @@ func validateOpDeleteWorkloadIdentityInput(v *DeleteWorkloadIdentityInput) error
 	}
 }
 
+func validateOpGetAgentInsightStoreInput(v *GetAgentInsightStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentInsightStoreInput"}
+	if v.AgentInsightStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentInsightStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAgentRuntimeEndpointInput(v *GetAgentRuntimeEndpointInput) error {
 	if v == nil {
 		return nil
@@ -12197,6 +12270,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentInsightStoreInput(v *UpdateAgentInsightStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentInsightStoreInput"}
+	if v.AgentInsightStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentInsightStoreId"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateAgentInsightStoreEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

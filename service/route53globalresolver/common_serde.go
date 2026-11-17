@@ -87,6 +87,36 @@ func serializeBatchUpdateFirewallRuleOutputItems(s smithy.ShapeSerializer, schem
 	s.CloseList()
 }
 
+func serializeCoreNetworkEndpointDnsIpInputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CoreNetworkEndpointDnsIpInputItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCoreNetworkEndpointDnsIpItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CoreNetworkEndpointDnsIpItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCoreNetworkEndpoints(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CoreNetworkEndpointsItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDNSViews(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DNSViewSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -201,6 +231,16 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeUpdateIpAddressList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UpdateIpAddressEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -382,6 +422,72 @@ func deserializeBatchUpdateFirewallRuleOutputItems(d smithy.ShapeDeserializer, s
 		}
 
 		vv = types.BatchUpdateFirewallRuleOutputItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCoreNetworkEndpointDnsIpInputItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CoreNetworkEndpointDnsIpInputItem) error {
+	*v = make([]types.CoreNetworkEndpointDnsIpInputItem, 0)
+	var vv types.CoreNetworkEndpointDnsIpInputItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CoreNetworkEndpointDnsIpInputItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CoreNetworkEndpointDnsIpInputItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCoreNetworkEndpointDnsIpItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CoreNetworkEndpointDnsIpItem) error {
+	*v = make([]types.CoreNetworkEndpointDnsIpItem, 0)
+	var vv types.CoreNetworkEndpointDnsIpItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CoreNetworkEndpointDnsIpItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CoreNetworkEndpointDnsIpItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCoreNetworkEndpoints(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CoreNetworkEndpointsItem) error {
+	*v = make([]types.CoreNetworkEndpointsItem, 0)
+	var vv types.CoreNetworkEndpointsItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CoreNetworkEndpointsItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CoreNetworkEndpointsItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -663,6 +769,28 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateIpAddressList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UpdateIpAddressEntry) error {
+	*v = make([]types.UpdateIpAddressEntry, 0)
+	var vv types.UpdateIpAddressEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UpdateIpAddressEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.UpdateIpAddressEntry{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

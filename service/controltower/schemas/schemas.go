@@ -478,8 +478,10 @@ var EnabledBaselineDriftStatusSummary_types *smithy.Schema
 var EnabledBaselineDriftTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.controltower",
 	Name:      "EnabledBaselineDriftTypes",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var EnabledBaselineDriftTypes_inheritance *smithy.Schema
+
+var EnabledBaselineDriftTypes_source *smithy.Schema
 
 var _EnabledBaselineEnablementStatuses = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.controltower",
@@ -490,7 +492,7 @@ var _EnabledBaselineEnablementStatuses_member *smithy.Schema
 var EnabledBaselineFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.controltower",
 	Name:      "EnabledBaselineFilter",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var EnabledBaselineFilter_targetIdentifiers *smithy.Schema
 
 var EnabledBaselineFilter_baselineIdentifiers *smithy.Schema
@@ -500,6 +502,8 @@ var EnabledBaselineFilter_parentIdentifiers *smithy.Schema
 var EnabledBaselineFilter_statuses *smithy.Schema
 
 var EnabledBaselineFilter_inheritanceDriftStatuses *smithy.Schema
+
+var EnabledBaselineFilter_sourceDriftStatuses *smithy.Schema
 
 var EnabledBaselineInheritanceDrift = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.controltower",
@@ -551,6 +555,12 @@ var _EnabledBaselines = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EnabledBaselines",
 }, smithy.ShapeTypeList, 1)
 var _EnabledBaselines_member *smithy.Schema
+
+var EnabledBaselineSourceDrift = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.controltower",
+	Name:      "EnabledBaselineSourceDrift",
+}, smithy.ShapeTypeStructure, 1)
+var EnabledBaselineSourceDrift_status *smithy.Schema
 
 var EnabledBaselineSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.controltower",
@@ -1581,7 +1591,11 @@ func init() {
 
 	EnabledBaselineInheritanceDrift_status = EnabledBaselineInheritanceDrift.AddMember("status", EnabledBaselineDriftStatus)
 
+	EnabledBaselineSourceDrift_status = EnabledBaselineSourceDrift.AddMember("status", EnabledBaselineDriftStatus)
+
 	EnabledBaselineDriftTypes_inheritance = EnabledBaselineDriftTypes.AddMember("inheritance", EnabledBaselineInheritanceDrift)
+
+	EnabledBaselineDriftTypes_source = EnabledBaselineDriftTypes.AddMember("source", EnabledBaselineSourceDrift)
 
 	EnabledBaselineDriftStatusSummary_types = EnabledBaselineDriftStatusSummary.AddMember("types", EnabledBaselineDriftTypes)
 
@@ -1634,6 +1648,8 @@ func init() {
 	EnabledBaselineFilter_statuses = EnabledBaselineFilter.AddMember("statuses", _EnabledBaselineEnablementStatuses)
 
 	EnabledBaselineFilter_inheritanceDriftStatuses = EnabledBaselineFilter.AddMember("inheritanceDriftStatuses", _EnabledBaselineDriftStatuses)
+
+	EnabledBaselineFilter_sourceDriftStatuses = EnabledBaselineFilter.AddMember("sourceDriftStatuses", _EnabledBaselineDriftStatuses)
 
 	EnabledBaselineParameter_key = EnabledBaselineParameter.AddMember("key", smithyprelude.String)
 

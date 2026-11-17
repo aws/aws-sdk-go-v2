@@ -29,6 +29,27 @@ var CreateFeed = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/feed",
 	Code: 202})
 
+var CreateFunction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateFunction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/function",
+	Code: 202})
+
+var CreateQuestionSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateQuestionSet",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/question-set",
+	Code: 200})
+
+var CreateQuestionSetVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateQuestionSetVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/question-set/{id}/versions",
+	Code: 200})
+
 var CreateScheduleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "CreateScheduleAction",
@@ -56,6 +77,27 @@ var DeleteFeedPolicy = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/feed/{id}/policy",
 	Code: 204})
+
+var DeleteFunction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteFunction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/function/{id}",
+	Code: 202})
+
+var DeleteQuestionSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteQuestionSet",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/question-set/{id}",
+	Code: 200})
+
+var DeleteQuestionSetVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteQuestionSetVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/question-set/{id}/versions/{questionSetVersion}",
+	Code: 200})
 
 var DeleteScheduleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -106,6 +148,20 @@ var GetFixture = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/fixtures/{fixtureId}",
 	Code: 200})
 
+var GetFunction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "GetFunction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/function/{id}",
+	Code: 200})
+
+var GetQuestionSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "GetQuestionSet",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/question-set/{id}",
+	Code: 200})
+
 var ListDictionaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "ListDictionaries",
@@ -118,6 +174,27 @@ var ListFeeds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListFeeds",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/feeds",
+	Code: 200})
+
+var ListFunctions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListFunctions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/functions",
+	Code: 200})
+
+var ListQuestionSets = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListQuestionSets",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/question-sets",
+	Code: 200})
+
+var ListQuestionSetVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListQuestionSetVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/question-set/{id}/versions",
 	Code: 200})
 
 var ListScheduleActions = smithy.NewSchema(smithy.ShapeID{
@@ -176,6 +253,20 @@ var UpdateFeed = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/feed/{id}",
 	Code: 200})
 
+var UpdateFunction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateFunction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/v1/function/{id}",
+	Code: 200})
+
+var UpdateQuestionSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateQuestionSet",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/v1/question-set/{id}",
+	Code: 200})
+
 var _ElementalInference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "ElementalInference",
@@ -203,6 +294,42 @@ var _AssociatedResourceName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociatedResourceName",
 }, smithy.ShapeTypeString, 0)
 
+var BedrockApi = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "BedrockApi",
+}, smithy.ShapeTypeEnum, 1)
+var BedrockApi_INVOKE_MODEL *smithy.Schema
+
+var BedrockFunctionTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "BedrockFunctionTarget",
+}, smithy.ShapeTypeStructure, 2)
+var BedrockFunctionTarget_api *smithy.Schema
+
+var BedrockFunctionTarget_model *smithy.Schema
+
+var _ChooseOneOptionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ChooseOneOptionList",
+}, smithy.ShapeTypeList, 1)
+var _ChooseOneOptionList_member *smithy.Schema
+
+var ChooseOneQuestion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ChooseOneQuestion",
+}, smithy.ShapeTypeStructure, 3)
+var ChooseOneQuestion_name *smithy.Schema
+
+var ChooseOneQuestion_question *smithy.Schema
+
+var ChooseOneQuestion_options *smithy.Schema
+
+var _ChooseOneQuestionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ChooseOneQuestionList",
+}, smithy.ShapeTypeList, 1)
+var _ChooseOneQuestionList_member *smithy.Schema
+
 var ClippingConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "ClippingConfig",
@@ -210,6 +337,17 @@ var ClippingConfig = smithy.NewSchema(smithy.ShapeID{
 var ClippingConfig_callbackMetadata *smithy.Schema
 
 var ClippingConfig_dataSourceConfiguration *smithy.Schema
+
+var ClippingSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ClippingSettings",
+}, smithy.ShapeTypeStructure, 1)
+var ClippingSettings_outputName *smithy.Schema
+
+var ClipTrigger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ClipTrigger",
+}, smithy.ShapeTypeStructure, 0)
 
 var Competitor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -232,13 +370,39 @@ var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
 
+var ContextType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ContextType",
+}, smithy.ShapeTypeEnum, 4)
+var ContextType_FRAMES *smithy.Schema
+
+var ContextType_SUBTITLES *smithy.Schema
+
+var ContextType_CONTEXTUAL_METADATA *smithy.Schema
+
+var ContextType_CLIP_METADATA *smithy.Schema
+
+var _ContextTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ContextTypeList",
+}, smithy.ShapeTypeList, 1)
+var _ContextTypeList_member *smithy.Schema
+
 var ContextualMetadataConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "ContextualMetadataConfig",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ContextualMetadataConfig_summaryGeneration *smithy.Schema
 
 var ContextualMetadataConfig_extendedAnalysis *smithy.Schema
+
+var ContextualMetadataConfig_customQuestions *smithy.Schema
+
+var ContextualMetadataSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ContextualMetadataSettings",
+}, smithy.ShapeTypeStructure, 1)
+var ContextualMetadataSettings_outputName *smithy.Schema
 
 var CreateOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -263,6 +427,14 @@ var CroppingConfig = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CroppingConfig",
 }, smithy.ShapeTypeStructure, 1)
 var CroppingConfig_templateGroups *smithy.Schema
+
+var CustomQuestionsConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CustomQuestionsConfig",
+}, smithy.ShapeTypeStructure, 2)
+var CustomQuestionsConfig_shot *smithy.Schema
+
+var CustomQuestionsConfig_scene *smithy.Schema
 
 var DataSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -342,6 +514,14 @@ var _DictionarySummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DictionarySummaryList",
 }, smithy.ShapeTypeList, 1)
 var _DictionarySummaryList_member *smithy.Schema
+
+var EventBridgeDeliveryMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "EventBridgeDeliveryMode",
+}, smithy.ShapeTypeEnum, 2)
+var EventBridgeDeliveryMode_ENABLED *smithy.Schema
+
+var EventBridgeDeliveryMode_DISABLED *smithy.Schema
 
 var ExtendedAnalysisMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -428,6 +608,12 @@ var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FilterValueList_member *smithy.Schema
 
+var FixedIntervalTrigger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FixedIntervalTrigger",
+}, smithy.ShapeTypeStructure, 1)
+var FixedIntervalTrigger_intervalSeconds *smithy.Schema
+
 var FixedModeScheduleActionStartSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "FixedModeScheduleActionStartSettings",
@@ -465,6 +651,117 @@ var _FixtureSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FixtureSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _FixtureSummaryList_member *smithy.Schema
+
+var FrameSamplingMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FrameSamplingMode",
+}, smithy.ShapeTypeEnum, 3)
+var FrameSamplingMode_FIRST *smithy.Schema
+
+var FrameSamplingMode_UNIFORM *smithy.Schema
+
+var FrameSamplingMode_LAST *smithy.Schema
+
+var FrameSamplingStrategy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FrameSamplingStrategy",
+}, smithy.ShapeTypeStructure, 2)
+var FrameSamplingStrategy_mode *smithy.Schema
+
+var FrameSamplingStrategy_count *smithy.Schema
+
+var FrameSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FrameSettings",
+}, smithy.ShapeTypeStructure, 2)
+var FrameSettings_frameSampling *smithy.Schema
+
+var FrameSettings_frameSize *smithy.Schema
+
+var FrameSize = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FrameSize",
+}, smithy.ShapeTypeStructure, 2)
+var FrameSize_widthPixels *smithy.Schema
+
+var FrameSize_heightPixels *smithy.Schema
+
+var _FunctionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionArn",
+}, smithy.ShapeTypeString, 0)
+
+var FunctionConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionConfig",
+}, smithy.ShapeTypeStructure, 6)
+var FunctionConfig_functionArn *smithy.Schema
+
+var FunctionConfig_trigger *smithy.Schema
+
+var FunctionConfig_frameSettings *smithy.Schema
+
+var FunctionConfig_subtitlingSettings *smithy.Schema
+
+var FunctionConfig_contextualMetadataSettings *smithy.Schema
+
+var FunctionConfig_clippingSettings *smithy.Schema
+
+var _FunctionDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionDescription",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _FunctionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionId",
+}, smithy.ShapeTypeString, 0)
+
+var FunctionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionStatus",
+}, smithy.ShapeTypeEnum, 5)
+var FunctionStatus_CREATING *smithy.Schema
+
+var FunctionStatus_AVAILABLE *smithy.Schema
+
+var FunctionStatus_REFERENCED *smithy.Schema
+
+var FunctionStatus_DELETING *smithy.Schema
+
+var FunctionStatus_DELETED *smithy.Schema
+
+var FunctionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionSummary",
+}, smithy.ShapeTypeStructure, 7)
+var FunctionSummary_arn *smithy.Schema
+
+var FunctionSummary_id *smithy.Schema
+
+var FunctionSummary_name *smithy.Schema
+
+var FunctionSummary_description *smithy.Schema
+
+var FunctionSummary_status *smithy.Schema
+
+var FunctionSummary_target *smithy.Schema
+
+var FunctionSummary_contextTypes *smithy.Schema
+
+var _FunctionSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _FunctionSummaryList_member *smithy.Schema
+
+var FunctionTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "FunctionTarget",
+}, smithy.ShapeTypeUnion, 2)
+var FunctionTarget_bedrock *smithy.Schema
+
+var FunctionTarget_passthrough *smithy.Schema
 
 var GatewayTimedOutException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -505,10 +802,25 @@ var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 500})
 var InternalServerErrorException_message *smithy.Schema
 
+var _JsonataExpression = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "JsonataExpression",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _OptionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "OptionName",
+}, smithy.ShapeTypeString, 0)
+
+var _OptionText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "OptionText",
+}, smithy.ShapeTypeString, 0)
+
 var OutputConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "OutputConfig",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 5)
 var OutputConfig_cropping *smithy.Schema
 
 var OutputConfig_clipping *smithy.Schema
@@ -517,6 +829,8 @@ var OutputConfig_subtitling *smithy.Schema
 
 var OutputConfig_contextualMetadata *smithy.Schema
 
+var OutputConfig_function *smithy.Schema
+
 var OutputStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "OutputStatus",
@@ -524,6 +838,11 @@ var OutputStatus = smithy.NewSchema(smithy.ShapeID{
 var OutputStatus_ENABLED *smithy.Schema
 
 var OutputStatus_DISABLED *smithy.Schema
+
+var PassthroughFunctionTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "PassthroughFunctionTarget",
+}, smithy.ShapeTypeStructure, 0)
 
 var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -539,6 +858,98 @@ var ProfanityFilterMode_DISABLED *smithy.Schema
 var ProfanityFilterMode_CENSOR *smithy.Schema
 
 var ProfanityFilterMode_DROP *smithy.Schema
+
+var _PublishedQuestionSetVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "PublishedQuestionSetVersion",
+}, smithy.ShapeTypeString, 0)
+
+var _QuestionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionName",
+}, smithy.ShapeTypeString, 0)
+
+var QuestionOption = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionOption",
+}, smithy.ShapeTypeStructure, 2)
+var QuestionOption_name *smithy.Schema
+
+var QuestionOption_text *smithy.Schema
+
+var _QuestionSetArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetArn",
+}, smithy.ShapeTypeString, 0)
+
+var _QuestionSetId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetId",
+}, smithy.ShapeTypeString, 0)
+
+var QuestionSetReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetReference",
+}, smithy.ShapeTypeStructure, 2)
+var QuestionSetReference_questionSetId *smithy.Schema
+
+var QuestionSetReference_version *smithy.Schema
+
+var _QuestionSetSha256 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetSha256",
+}, smithy.ShapeTypeString, 0)
+
+var QuestionSetSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetSummary",
+}, smithy.ShapeTypeStructure, 4)
+var QuestionSetSummary_arn *smithy.Schema
+
+var QuestionSetSummary_id *smithy.Schema
+
+var QuestionSetSummary_name *smithy.Schema
+
+var QuestionSetSummary_latestVersion *smithy.Schema
+
+var _QuestionSetSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _QuestionSetSummaryList_member *smithy.Schema
+
+var _QuestionSetVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetVersion",
+}, smithy.ShapeTypeString, 0)
+
+var _QuestionSetVersionDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetVersionDescription",
+}, smithy.ShapeTypeString, 0)
+
+var QuestionSetVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetVersionSummary",
+}, smithy.ShapeTypeStructure, 4)
+var QuestionSetVersionSummary_version *smithy.Schema
+
+var QuestionSetVersionSummary_description *smithy.Schema
+
+var QuestionSetVersionSummary_sha256 *smithy.Schema
+
+var QuestionSetVersionSummary_lastModifiedAt *smithy.Schema
+
+var _QuestionSetVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionSetVersionSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _QuestionSetVersionSummaryList_member *smithy.Schema
+
+var _QuestionText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "QuestionText",
+}, smithy.ShapeTypeString, 0)
 
 var RemoveClippingDataSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -572,6 +983,11 @@ var _S3Uri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "S3Uri",
 }, smithy.ShapeTypeString, 0)
+
+var SceneTrigger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "SceneTrigger",
+}, smithy.ShapeTypeStructure, 0)
 
 var ScheduleAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -669,6 +1085,11 @@ var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 503})
 var ServiceUnavailableException_message *smithy.Schema
 
+var ShotTrigger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ShotTrigger",
+}, smithy.ShapeTypeStructure, 0)
+
 var _StringList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "StringList",
@@ -686,6 +1107,12 @@ var SubtitlingConfig_aspectRatio *smithy.Schema
 var SubtitlingConfig_dictionary *smithy.Schema
 
 var SubtitlingConfig_profanityFilter *smithy.Schema
+
+var SubtitlingSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "SubtitlingSettings",
+}, smithy.ShapeTypeStructure, 1)
+var SubtitlingSettings_outputName *smithy.Schema
 
 var SummaryGenerationMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -768,6 +1195,18 @@ var TranscriptionLanguage_SPA *smithy.Schema
 
 var TranscriptionLanguage_POR *smithy.Schema
 
+var Trigger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "Trigger",
+}, smithy.ShapeTypeUnion, 4)
+var Trigger_fixedInterval *smithy.Schema
+
+var Trigger_perShot *smithy.Schema
+
+var Trigger_perScene *smithy.Schema
+
+var Trigger_perClip *smithy.Schema
+
 var UpdateClippingDataSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "UpdateClippingDataSourceConfiguration",
@@ -810,6 +1249,42 @@ var ValidationException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var ValidationException_message *smithy.Schema
+
+var _YesNoPerOptionOptionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "YesNoPerOptionOptionList",
+}, smithy.ShapeTypeList, 1)
+var _YesNoPerOptionOptionList_member *smithy.Schema
+
+var YesNoPerOptionQuestion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "YesNoPerOptionQuestion",
+}, smithy.ShapeTypeStructure, 3)
+var YesNoPerOptionQuestion_name *smithy.Schema
+
+var YesNoPerOptionQuestion_question *smithy.Schema
+
+var YesNoPerOptionQuestion_options *smithy.Schema
+
+var _YesNoPerOptionQuestionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "YesNoPerOptionQuestionList",
+}, smithy.ShapeTypeList, 1)
+var _YesNoPerOptionQuestionList_member *smithy.Schema
+
+var YesNoQuestion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "YesNoQuestion",
+}, smithy.ShapeTypeStructure, 2)
+var YesNoQuestion_name *smithy.Schema
+
+var YesNoQuestion_question *smithy.Schema
+
+var _YesNoQuestionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "YesNoQuestionList",
+}, smithy.ShapeTypeList, 1)
+var _YesNoQuestionList_member *smithy.Schema
 
 var AssociateFeedRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -895,6 +1370,132 @@ var CreateFeedResponse_association *smithy.Schema
 
 var CreateFeedResponse_tags *smithy.Schema
 
+var CreateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateFunctionRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateFunctionRequest_name *smithy.Schema
+
+var CreateFunctionRequest_target *smithy.Schema
+
+var CreateFunctionRequest_requestExpression *smithy.Schema
+
+var CreateFunctionRequest_responseExpression *smithy.Schema
+
+var CreateFunctionRequest_description *smithy.Schema
+
+var CreateFunctionRequest_eventBridgeDelivery *smithy.Schema
+
+var CreateFunctionRequest_tags *smithy.Schema
+
+var CreateFunctionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateFunctionResponse",
+}, smithy.ShapeTypeStructure, 12)
+var CreateFunctionResponse_name *smithy.Schema
+
+var CreateFunctionResponse_target *smithy.Schema
+
+var CreateFunctionResponse_requestExpression *smithy.Schema
+
+var CreateFunctionResponse_responseExpression *smithy.Schema
+
+var CreateFunctionResponse_description *smithy.Schema
+
+var CreateFunctionResponse_eventBridgeDelivery *smithy.Schema
+
+var CreateFunctionResponse_arn *smithy.Schema
+
+var CreateFunctionResponse_id *smithy.Schema
+
+var CreateFunctionResponse_status *smithy.Schema
+
+var CreateFunctionResponse_references *smithy.Schema
+
+var CreateFunctionResponse_contextTypes *smithy.Schema
+
+var CreateFunctionResponse_tags *smithy.Schema
+
+var CreateQuestionSetRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateQuestionSetRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateQuestionSetRequest_yesNo *smithy.Schema
+
+var CreateQuestionSetRequest_yesNoPerOption *smithy.Schema
+
+var CreateQuestionSetRequest_chooseOne *smithy.Schema
+
+var CreateQuestionSetRequest_name *smithy.Schema
+
+var CreateQuestionSetRequest_tags *smithy.Schema
+
+var CreateQuestionSetResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateQuestionSetResponse",
+}, smithy.ShapeTypeStructure, 12)
+var CreateQuestionSetResponse_yesNo *smithy.Schema
+
+var CreateQuestionSetResponse_yesNoPerOption *smithy.Schema
+
+var CreateQuestionSetResponse_chooseOne *smithy.Schema
+
+var CreateQuestionSetResponse_arn *smithy.Schema
+
+var CreateQuestionSetResponse_id *smithy.Schema
+
+var CreateQuestionSetResponse_name *smithy.Schema
+
+var CreateQuestionSetResponse_version *smithy.Schema
+
+var CreateQuestionSetResponse_description *smithy.Schema
+
+var CreateQuestionSetResponse_latestVersion *smithy.Schema
+
+var CreateQuestionSetResponse_sha256 *smithy.Schema
+
+var CreateQuestionSetResponse_references *smithy.Schema
+
+var CreateQuestionSetResponse_tags *smithy.Schema
+
+var CreateQuestionSetVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateQuestionSetVersionRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CreateQuestionSetVersionRequest_id *smithy.Schema
+
+var CreateQuestionSetVersionRequest_sha256 *smithy.Schema
+
+var CreateQuestionSetVersionRequest_description *smithy.Schema
+
+var CreateQuestionSetVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "CreateQuestionSetVersionResponse",
+}, smithy.ShapeTypeStructure, 12)
+var CreateQuestionSetVersionResponse_yesNo *smithy.Schema
+
+var CreateQuestionSetVersionResponse_yesNoPerOption *smithy.Schema
+
+var CreateQuestionSetVersionResponse_chooseOne *smithy.Schema
+
+var CreateQuestionSetVersionResponse_arn *smithy.Schema
+
+var CreateQuestionSetVersionResponse_id *smithy.Schema
+
+var CreateQuestionSetVersionResponse_name *smithy.Schema
+
+var CreateQuestionSetVersionResponse_version *smithy.Schema
+
+var CreateQuestionSetVersionResponse_description *smithy.Schema
+
+var CreateQuestionSetVersionResponse_latestVersion *smithy.Schema
+
+var CreateQuestionSetVersionResponse_sha256 *smithy.Schema
+
+var CreateQuestionSetVersionResponse_references *smithy.Schema
+
+var CreateQuestionSetVersionResponse_tags *smithy.Schema
+
 var CreateScheduleActionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "CreateScheduleActionRequest",
@@ -958,6 +1559,49 @@ var DeleteFeedPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteFeedPolicyRequest",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteFeedPolicyRequest_id *smithy.Schema
+
+var DeleteFunctionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteFunctionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteFunctionRequest_id *smithy.Schema
+
+var DeleteFunctionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteFunctionResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteFunctionResponse_arn *smithy.Schema
+
+var DeleteFunctionResponse_id *smithy.Schema
+
+var DeleteFunctionResponse_status *smithy.Schema
+
+var DeleteQuestionSetRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteQuestionSetRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteQuestionSetRequest_id *smithy.Schema
+
+var DeleteQuestionSetResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteQuestionSetResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteQuestionSetResponse_arn *smithy.Schema
+
+var DeleteQuestionSetResponse_id *smithy.Schema
+
+var DeleteQuestionSetVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteQuestionSetVersionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteQuestionSetVersionRequest_id *smithy.Schema
+
+var DeleteQuestionSetVersionRequest_questionSetVersion *smithy.Schema
+
+var DeleteQuestionSetVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "DeleteQuestionSetVersionResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteScheduleActionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -1089,6 +1733,76 @@ var GetFixtureResponse_status *smithy.Schema
 
 var GetFixtureResponse_competitors *smithy.Schema
 
+var GetFunctionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "GetFunctionRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetFunctionRequest_id *smithy.Schema
+
+var GetFunctionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "GetFunctionResponse",
+}, smithy.ShapeTypeStructure, 12)
+var GetFunctionResponse_name *smithy.Schema
+
+var GetFunctionResponse_target *smithy.Schema
+
+var GetFunctionResponse_requestExpression *smithy.Schema
+
+var GetFunctionResponse_responseExpression *smithy.Schema
+
+var GetFunctionResponse_description *smithy.Schema
+
+var GetFunctionResponse_eventBridgeDelivery *smithy.Schema
+
+var GetFunctionResponse_arn *smithy.Schema
+
+var GetFunctionResponse_id *smithy.Schema
+
+var GetFunctionResponse_status *smithy.Schema
+
+var GetFunctionResponse_references *smithy.Schema
+
+var GetFunctionResponse_contextTypes *smithy.Schema
+
+var GetFunctionResponse_tags *smithy.Schema
+
+var GetQuestionSetRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "GetQuestionSetRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetQuestionSetRequest_id *smithy.Schema
+
+var GetQuestionSetRequest_questionSetVersion *smithy.Schema
+
+var GetQuestionSetResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "GetQuestionSetResponse",
+}, smithy.ShapeTypeStructure, 12)
+var GetQuestionSetResponse_yesNo *smithy.Schema
+
+var GetQuestionSetResponse_yesNoPerOption *smithy.Schema
+
+var GetQuestionSetResponse_chooseOne *smithy.Schema
+
+var GetQuestionSetResponse_arn *smithy.Schema
+
+var GetQuestionSetResponse_id *smithy.Schema
+
+var GetQuestionSetResponse_name *smithy.Schema
+
+var GetQuestionSetResponse_version *smithy.Schema
+
+var GetQuestionSetResponse_description *smithy.Schema
+
+var GetQuestionSetResponse_latestVersion *smithy.Schema
+
+var GetQuestionSetResponse_sha256 *smithy.Schema
+
+var GetQuestionSetResponse_references *smithy.Schema
+
+var GetQuestionSetResponse_tags *smithy.Schema
+
 var ListDictionariesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "ListDictionariesRequest",
@@ -1120,6 +1834,56 @@ var ListFeedsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListFeedsResponse_feeds *smithy.Schema
 
 var ListFeedsResponse_nextToken *smithy.Schema
+
+var ListFunctionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListFunctionsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListFunctionsRequest_maxResults *smithy.Schema
+
+var ListFunctionsRequest_nextToken *smithy.Schema
+
+var ListFunctionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListFunctionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListFunctionsResponse_functions *smithy.Schema
+
+var ListFunctionsResponse_nextToken *smithy.Schema
+
+var ListQuestionSetsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListQuestionSetsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListQuestionSetsRequest_maxResults *smithy.Schema
+
+var ListQuestionSetsRequest_nextToken *smithy.Schema
+
+var ListQuestionSetsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListQuestionSetsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListQuestionSetsResponse_questionSets *smithy.Schema
+
+var ListQuestionSetsResponse_nextToken *smithy.Schema
+
+var ListQuestionSetVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListQuestionSetVersionsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListQuestionSetVersionsRequest_id *smithy.Schema
+
+var ListQuestionSetVersionsRequest_maxResults *smithy.Schema
+
+var ListQuestionSetVersionsRequest_nextToken *smithy.Schema
+
+var ListQuestionSetVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "ListQuestionSetVersionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListQuestionSetVersionsResponse_versions *smithy.Schema
+
+var ListQuestionSetVersionsResponse_nextToken *smithy.Schema
 
 var ListScheduleActionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -1268,6 +2032,94 @@ var UpdateFeedResponse_association *smithy.Schema
 
 var UpdateFeedResponse_tags *smithy.Schema
 
+var UpdateFunctionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateFunctionRequest",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateFunctionRequest_id *smithy.Schema
+
+var UpdateFunctionRequest_name *smithy.Schema
+
+var UpdateFunctionRequest_target *smithy.Schema
+
+var UpdateFunctionRequest_requestExpression *smithy.Schema
+
+var UpdateFunctionRequest_responseExpression *smithy.Schema
+
+var UpdateFunctionRequest_description *smithy.Schema
+
+var UpdateFunctionRequest_eventBridgeDelivery *smithy.Schema
+
+var UpdateFunctionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateFunctionResponse",
+}, smithy.ShapeTypeStructure, 12)
+var UpdateFunctionResponse_name *smithy.Schema
+
+var UpdateFunctionResponse_target *smithy.Schema
+
+var UpdateFunctionResponse_requestExpression *smithy.Schema
+
+var UpdateFunctionResponse_responseExpression *smithy.Schema
+
+var UpdateFunctionResponse_description *smithy.Schema
+
+var UpdateFunctionResponse_eventBridgeDelivery *smithy.Schema
+
+var UpdateFunctionResponse_arn *smithy.Schema
+
+var UpdateFunctionResponse_id *smithy.Schema
+
+var UpdateFunctionResponse_status *smithy.Schema
+
+var UpdateFunctionResponse_references *smithy.Schema
+
+var UpdateFunctionResponse_contextTypes *smithy.Schema
+
+var UpdateFunctionResponse_tags *smithy.Schema
+
+var UpdateQuestionSetRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateQuestionSetRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateQuestionSetRequest_id *smithy.Schema
+
+var UpdateQuestionSetRequest_yesNo *smithy.Schema
+
+var UpdateQuestionSetRequest_yesNoPerOption *smithy.Schema
+
+var UpdateQuestionSetRequest_chooseOne *smithy.Schema
+
+var UpdateQuestionSetRequest_name *smithy.Schema
+
+var UpdateQuestionSetResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elementalinference",
+	Name:      "UpdateQuestionSetResponse",
+}, smithy.ShapeTypeStructure, 12)
+var UpdateQuestionSetResponse_yesNo *smithy.Schema
+
+var UpdateQuestionSetResponse_yesNoPerOption *smithy.Schema
+
+var UpdateQuestionSetResponse_chooseOne *smithy.Schema
+
+var UpdateQuestionSetResponse_arn *smithy.Schema
+
+var UpdateQuestionSetResponse_id *smithy.Schema
+
+var UpdateQuestionSetResponse_name *smithy.Schema
+
+var UpdateQuestionSetResponse_version *smithy.Schema
+
+var UpdateQuestionSetResponse_description *smithy.Schema
+
+var UpdateQuestionSetResponse_latestVersion *smithy.Schema
+
+var UpdateQuestionSetResponse_sha256 *smithy.Schema
+
+var UpdateQuestionSetResponse_references *smithy.Schema
+
+var UpdateQuestionSetResponse_tags *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
@@ -1277,11 +2129,33 @@ func init() {
 
 	AspectRatio_height = AspectRatio.AddMember("height", smithyprelude.Integer)
 
+	BedrockApi_INVOKE_MODEL = BedrockApi.AddMember("INVOKE_MODEL", smithyprelude.Unit)
+
+	BedrockFunctionTarget_api = BedrockFunctionTarget.AddMember("api", BedrockApi)
+
+	BedrockFunctionTarget_model = BedrockFunctionTarget.AddMember("model", smithyprelude.String)
+
+	QuestionOption_name = QuestionOption.AddMember("name", _OptionName)
+
+	QuestionOption_text = QuestionOption.AddMember("text", _OptionText)
+
+	_ChooseOneOptionList_member = _ChooseOneOptionList.AddMember("member", QuestionOption)
+
+	ChooseOneQuestion_name = ChooseOneQuestion.AddMember("name", _QuestionName)
+
+	ChooseOneQuestion_question = ChooseOneQuestion.AddMember("question", _QuestionText)
+
+	ChooseOneQuestion_options = ChooseOneQuestion.AddMember("options", _ChooseOneOptionList)
+
+	_ChooseOneQuestionList_member = _ChooseOneQuestionList.AddMember("member", ChooseOneQuestion)
+
 	DataSourceConfiguration_fixtureId = DataSourceConfiguration.AddMember("fixtureId", _FixtureId)
 
 	ClippingConfig_callbackMetadata = ClippingConfig.AddMember("callbackMetadata", _ResourceDescription)
 
 	ClippingConfig_dataSourceConfiguration = ClippingConfig.AddMember("dataSourceConfiguration", DataSourceConfiguration)
+
+	ClippingSettings_outputName = ClippingSettings.AddMember("outputName", _ResourceName)
 
 	Competitor_name = Competitor.AddMember("name", smithyprelude.String)
 
@@ -1291,6 +2165,16 @@ func init() {
 
 	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
 
+	ContextType_FRAMES = ContextType.AddMember("FRAMES", smithyprelude.Unit)
+
+	ContextType_SUBTITLES = ContextType.AddMember("SUBTITLES", smithyprelude.Unit)
+
+	ContextType_CONTEXTUAL_METADATA = ContextType.AddMember("CONTEXTUAL_METADATA", smithyprelude.Unit)
+
+	ContextType_CLIP_METADATA = ContextType.AddMember("CLIP_METADATA", smithyprelude.Unit)
+
+	_ContextTypeList_member = _ContextTypeList.AddMember("member", ContextType)
+
 	SummaryGenerationMode_ENABLED = SummaryGenerationMode.AddMember("ENABLED", smithyprelude.Unit)
 
 	SummaryGenerationMode_DISABLED = SummaryGenerationMode.AddMember("DISABLED", smithyprelude.Unit)
@@ -1299,9 +2183,21 @@ func init() {
 
 	ExtendedAnalysisMode_DISABLED = ExtendedAnalysisMode.AddMember("DISABLED", smithyprelude.Unit)
 
+	QuestionSetReference_questionSetId = QuestionSetReference.AddMember("questionSetId", _QuestionSetId)
+
+	QuestionSetReference_version = QuestionSetReference.AddMember("version", _QuestionSetVersion)
+
+	CustomQuestionsConfig_shot = CustomQuestionsConfig.AddMember("shot", QuestionSetReference)
+
+	CustomQuestionsConfig_scene = CustomQuestionsConfig.AddMember("scene", QuestionSetReference)
+
 	ContextualMetadataConfig_summaryGeneration = ContextualMetadataConfig.AddMember("summaryGeneration", SummaryGenerationMode)
 
 	ContextualMetadataConfig_extendedAnalysis = ContextualMetadataConfig.AddMember("extendedAnalysis", ExtendedAnalysisMode)
+
+	ContextualMetadataConfig_customQuestions = ContextualMetadataConfig.AddMember("customQuestions", CustomQuestionsConfig)
+
+	ContextualMetadataSettings_outputName = ContextualMetadataSettings.AddMember("outputName", _ResourceName)
 
 	_TemplateUriList_member = _TemplateUriList.AddMember("member", _S3Uri)
 
@@ -1345,6 +2241,48 @@ func init() {
 
 	SubtitlingConfig_profanityFilter = SubtitlingConfig.AddMember("profanityFilter", ProfanityFilterMode)
 
+	FixedIntervalTrigger_intervalSeconds = FixedIntervalTrigger.AddMember("intervalSeconds", smithyprelude.Integer)
+
+	Trigger_fixedInterval = Trigger.AddMember("fixedInterval", FixedIntervalTrigger)
+
+	Trigger_perShot = Trigger.AddMember("perShot", ShotTrigger)
+
+	Trigger_perScene = Trigger.AddMember("perScene", SceneTrigger)
+
+	Trigger_perClip = Trigger.AddMember("perClip", ClipTrigger)
+
+	FrameSamplingMode_FIRST = FrameSamplingMode.AddMember("FIRST", smithyprelude.Unit)
+
+	FrameSamplingMode_UNIFORM = FrameSamplingMode.AddMember("UNIFORM", smithyprelude.Unit)
+
+	FrameSamplingMode_LAST = FrameSamplingMode.AddMember("LAST", smithyprelude.Unit)
+
+	FrameSamplingStrategy_mode = FrameSamplingStrategy.AddMember("mode", FrameSamplingMode)
+
+	FrameSamplingStrategy_count = FrameSamplingStrategy.AddMember("count", smithyprelude.Integer)
+
+	FrameSize_widthPixels = FrameSize.AddMember("widthPixels", smithyprelude.Integer)
+
+	FrameSize_heightPixels = FrameSize.AddMember("heightPixels", smithyprelude.Integer)
+
+	FrameSettings_frameSampling = FrameSettings.AddMember("frameSampling", FrameSamplingStrategy)
+
+	FrameSettings_frameSize = FrameSettings.AddMember("frameSize", FrameSize)
+
+	SubtitlingSettings_outputName = SubtitlingSettings.AddMember("outputName", _ResourceName)
+
+	FunctionConfig_functionArn = FunctionConfig.AddMember("functionArn", _FunctionArn)
+
+	FunctionConfig_trigger = FunctionConfig.AddMember("trigger", Trigger)
+
+	FunctionConfig_frameSettings = FunctionConfig.AddMember("frameSettings", FrameSettings)
+
+	FunctionConfig_subtitlingSettings = FunctionConfig.AddMember("subtitlingSettings", SubtitlingSettings)
+
+	FunctionConfig_contextualMetadataSettings = FunctionConfig.AddMember("contextualMetadataSettings", ContextualMetadataSettings)
+
+	FunctionConfig_clippingSettings = FunctionConfig.AddMember("clippingSettings", ClippingSettings)
+
 	OutputConfig_cropping = OutputConfig.AddMember("cropping", CroppingConfig)
 
 	OutputConfig_clipping = OutputConfig.AddMember("clipping", ClippingConfig)
@@ -1352,6 +2290,8 @@ func init() {
 	OutputConfig_subtitling = OutputConfig.AddMember("subtitling", SubtitlingConfig)
 
 	OutputConfig_contextualMetadata = OutputConfig.AddMember("contextualMetadata", ContextualMetadataConfig)
+
+	OutputConfig_function = OutputConfig.AddMember("function", FunctionConfig)
 
 	OutputStatus_ENABLED = OutputStatus.AddMember("ENABLED", smithyprelude.Unit)
 
@@ -1405,6 +2345,10 @@ func init() {
 
 	_DictionarySummaryList_member = _DictionarySummaryList.AddMember("member", DictionarySummary)
 
+	EventBridgeDeliveryMode_ENABLED = EventBridgeDeliveryMode.AddMember("ENABLED", smithyprelude.Unit)
+
+	EventBridgeDeliveryMode_DISABLED = EventBridgeDeliveryMode.AddMember("DISABLED", smithyprelude.Unit)
+
 	FeedAssociation_associatedResourceName = FeedAssociation.AddMember("associatedResourceName", _AssociatedResourceName)
 
 	_FeedReferences_member = _FeedReferences.AddMember("member", _FeedId)
@@ -1455,6 +2399,36 @@ func init() {
 
 	_FixtureSummaryList_member = _FixtureSummaryList.AddMember("member", FixtureSummary)
 
+	FunctionStatus_CREATING = FunctionStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	FunctionStatus_AVAILABLE = FunctionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
+
+	FunctionStatus_REFERENCED = FunctionStatus.AddMember("REFERENCED", smithyprelude.Unit)
+
+	FunctionStatus_DELETING = FunctionStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	FunctionStatus_DELETED = FunctionStatus.AddMember("DELETED", smithyprelude.Unit)
+
+	FunctionTarget_bedrock = FunctionTarget.AddMember("bedrock", BedrockFunctionTarget)
+
+	FunctionTarget_passthrough = FunctionTarget.AddMember("passthrough", PassthroughFunctionTarget)
+
+	FunctionSummary_arn = FunctionSummary.AddMember("arn", _FunctionArn)
+
+	FunctionSummary_id = FunctionSummary.AddMember("id", _FunctionId)
+
+	FunctionSummary_name = FunctionSummary.AddMember("name", _ResourceName)
+
+	FunctionSummary_description = FunctionSummary.AddMember("description", _FunctionDescription)
+
+	FunctionSummary_status = FunctionSummary.AddMember("status", FunctionStatus)
+
+	FunctionSummary_target = FunctionSummary.AddMember("target", FunctionTarget)
+
+	FunctionSummary_contextTypes = FunctionSummary.AddMember("contextTypes", _ContextTypeList)
+
+	_FunctionSummaryList_member = _FunctionSummaryList.AddMember("member", FunctionSummary)
+
 	GatewayTimedOutException_message = GatewayTimedOutException.AddMember("message", smithyprelude.String)
 
 	GetOutput_name = GetOutput.AddMember("name", _ResourceName)
@@ -1470,6 +2444,26 @@ func init() {
 	_GetOutputList_member = _GetOutputList.AddMember("member", GetOutput)
 
 	InternalServerErrorException_message = InternalServerErrorException.AddMember("message", smithyprelude.String)
+
+	QuestionSetSummary_arn = QuestionSetSummary.AddMember("arn", _QuestionSetArn)
+
+	QuestionSetSummary_id = QuestionSetSummary.AddMember("id", _QuestionSetId)
+
+	QuestionSetSummary_name = QuestionSetSummary.AddMember("name", _ResourceName)
+
+	QuestionSetSummary_latestVersion = QuestionSetSummary.AddMember("latestVersion", _QuestionSetVersion)
+
+	_QuestionSetSummaryList_member = _QuestionSetSummaryList.AddMember("member", QuestionSetSummary)
+
+	QuestionSetVersionSummary_version = QuestionSetVersionSummary.AddMember("version", _QuestionSetVersion)
+
+	QuestionSetVersionSummary_description = QuestionSetVersionSummary.AddMember("description", _QuestionSetVersionDescription)
+
+	QuestionSetVersionSummary_sha256 = QuestionSetVersionSummary.AddMember("sha256", _QuestionSetSha256)
+
+	QuestionSetVersionSummary_lastModifiedAt = QuestionSetVersionSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
+
+	_QuestionSetVersionSummaryList_member = _QuestionSetVersionSummaryList.AddMember("member", QuestionSetVersionSummary)
 
 	RemoveClippingDataSourceConfiguration_outputName = RemoveClippingDataSourceConfiguration.AddMember("outputName", _ResourceName)
 
@@ -1553,6 +2547,22 @@ func init() {
 
 	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
 
+	_YesNoPerOptionOptionList_member = _YesNoPerOptionOptionList.AddMember("member", QuestionOption)
+
+	YesNoPerOptionQuestion_name = YesNoPerOptionQuestion.AddMember("name", _QuestionName)
+
+	YesNoPerOptionQuestion_question = YesNoPerOptionQuestion.AddMember("question", _QuestionText)
+
+	YesNoPerOptionQuestion_options = YesNoPerOptionQuestion.AddMember("options", _YesNoPerOptionOptionList)
+
+	_YesNoPerOptionQuestionList_member = _YesNoPerOptionQuestionList.AddMember("member", YesNoPerOptionQuestion)
+
+	YesNoQuestion_name = YesNoQuestion.AddMember("name", _QuestionName)
+
+	YesNoQuestion_question = YesNoQuestion.AddMember("question", _QuestionText)
+
+	_YesNoQuestionList_member = _YesNoQuestionList.AddMember("member", YesNoQuestion)
+
 	AssociateFeedRequest_id = AssociateFeedRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
 
 	AssociateFeedRequest_associatedResourceName = AssociateFeedRequest.AddMember("associatedResourceName", _AssociatedResourceName)
@@ -1613,6 +2623,108 @@ func init() {
 
 	CreateFeedResponse_tags = CreateFeedResponse.AddMember("tags", _TagMap)
 
+	CreateFunctionRequest_name = CreateFunctionRequest.AddMember("name", _ResourceName)
+
+	CreateFunctionRequest_target = CreateFunctionRequest.AddMember("target", FunctionTarget)
+
+	CreateFunctionRequest_requestExpression = CreateFunctionRequest.AddMember("requestExpression", _JsonataExpression)
+
+	CreateFunctionRequest_responseExpression = CreateFunctionRequest.AddMember("responseExpression", _JsonataExpression)
+
+	CreateFunctionRequest_description = CreateFunctionRequest.AddMember("description", _FunctionDescription)
+
+	CreateFunctionRequest_eventBridgeDelivery = CreateFunctionRequest.AddMember("eventBridgeDelivery", EventBridgeDeliveryMode)
+
+	CreateFunctionRequest_tags = CreateFunctionRequest.AddMember("tags", _TagMap)
+
+	CreateFunctionResponse_name = CreateFunctionResponse.AddMember("name", _ResourceName)
+
+	CreateFunctionResponse_target = CreateFunctionResponse.AddMember("target", FunctionTarget)
+
+	CreateFunctionResponse_requestExpression = CreateFunctionResponse.AddMember("requestExpression", _JsonataExpression)
+
+	CreateFunctionResponse_responseExpression = CreateFunctionResponse.AddMember("responseExpression", _JsonataExpression)
+
+	CreateFunctionResponse_description = CreateFunctionResponse.AddMember("description", _FunctionDescription)
+
+	CreateFunctionResponse_eventBridgeDelivery = CreateFunctionResponse.AddMember("eventBridgeDelivery", EventBridgeDeliveryMode)
+
+	CreateFunctionResponse_arn = CreateFunctionResponse.AddMember("arn", _FunctionArn)
+
+	CreateFunctionResponse_id = CreateFunctionResponse.AddMember("id", _FunctionId)
+
+	CreateFunctionResponse_status = CreateFunctionResponse.AddMember("status", FunctionStatus)
+
+	CreateFunctionResponse_references = CreateFunctionResponse.AddMember("references", _FeedReferences)
+
+	CreateFunctionResponse_contextTypes = CreateFunctionResponse.AddMember("contextTypes", _ContextTypeList)
+
+	CreateFunctionResponse_tags = CreateFunctionResponse.AddMember("tags", _TagMap)
+
+	CreateQuestionSetRequest_yesNo = CreateQuestionSetRequest.AddMember("yesNo", _YesNoQuestionList)
+
+	CreateQuestionSetRequest_yesNoPerOption = CreateQuestionSetRequest.AddMember("yesNoPerOption", _YesNoPerOptionQuestionList)
+
+	CreateQuestionSetRequest_chooseOne = CreateQuestionSetRequest.AddMember("chooseOne", _ChooseOneQuestionList)
+
+	CreateQuestionSetRequest_name = CreateQuestionSetRequest.AddMember("name", _ResourceName)
+
+	CreateQuestionSetRequest_tags = CreateQuestionSetRequest.AddMember("tags", _TagMap)
+
+	CreateQuestionSetResponse_yesNo = CreateQuestionSetResponse.AddMember("yesNo", _YesNoQuestionList)
+
+	CreateQuestionSetResponse_yesNoPerOption = CreateQuestionSetResponse.AddMember("yesNoPerOption", _YesNoPerOptionQuestionList)
+
+	CreateQuestionSetResponse_chooseOne = CreateQuestionSetResponse.AddMember("chooseOne", _ChooseOneQuestionList)
+
+	CreateQuestionSetResponse_arn = CreateQuestionSetResponse.AddMember("arn", _QuestionSetArn)
+
+	CreateQuestionSetResponse_id = CreateQuestionSetResponse.AddMember("id", _QuestionSetId)
+
+	CreateQuestionSetResponse_name = CreateQuestionSetResponse.AddMember("name", _ResourceName)
+
+	CreateQuestionSetResponse_version = CreateQuestionSetResponse.AddMember("version", _QuestionSetVersion)
+
+	CreateQuestionSetResponse_description = CreateQuestionSetResponse.AddMember("description", _QuestionSetVersionDescription)
+
+	CreateQuestionSetResponse_latestVersion = CreateQuestionSetResponse.AddMember("latestVersion", _QuestionSetVersion)
+
+	CreateQuestionSetResponse_sha256 = CreateQuestionSetResponse.AddMember("sha256", _QuestionSetSha256)
+
+	CreateQuestionSetResponse_references = CreateQuestionSetResponse.AddMember("references", _FeedReferences)
+
+	CreateQuestionSetResponse_tags = CreateQuestionSetResponse.AddMember("tags", _TagMap)
+
+	CreateQuestionSetVersionRequest_id = CreateQuestionSetVersionRequest.AddMember("id", _QuestionSetId, &smithytraits.HTTPLabel{})
+
+	CreateQuestionSetVersionRequest_sha256 = CreateQuestionSetVersionRequest.AddMember("sha256", _QuestionSetSha256)
+
+	CreateQuestionSetVersionRequest_description = CreateQuestionSetVersionRequest.AddMember("description", _QuestionSetVersionDescription)
+
+	CreateQuestionSetVersionResponse_yesNo = CreateQuestionSetVersionResponse.AddMember("yesNo", _YesNoQuestionList)
+
+	CreateQuestionSetVersionResponse_yesNoPerOption = CreateQuestionSetVersionResponse.AddMember("yesNoPerOption", _YesNoPerOptionQuestionList)
+
+	CreateQuestionSetVersionResponse_chooseOne = CreateQuestionSetVersionResponse.AddMember("chooseOne", _ChooseOneQuestionList)
+
+	CreateQuestionSetVersionResponse_arn = CreateQuestionSetVersionResponse.AddMember("arn", _QuestionSetArn)
+
+	CreateQuestionSetVersionResponse_id = CreateQuestionSetVersionResponse.AddMember("id", _QuestionSetId)
+
+	CreateQuestionSetVersionResponse_name = CreateQuestionSetVersionResponse.AddMember("name", _ResourceName)
+
+	CreateQuestionSetVersionResponse_version = CreateQuestionSetVersionResponse.AddMember("version", _QuestionSetVersion)
+
+	CreateQuestionSetVersionResponse_description = CreateQuestionSetVersionResponse.AddMember("description", _QuestionSetVersionDescription)
+
+	CreateQuestionSetVersionResponse_latestVersion = CreateQuestionSetVersionResponse.AddMember("latestVersion", _QuestionSetVersion)
+
+	CreateQuestionSetVersionResponse_sha256 = CreateQuestionSetVersionResponse.AddMember("sha256", _QuestionSetSha256)
+
+	CreateQuestionSetVersionResponse_references = CreateQuestionSetVersionResponse.AddMember("references", _FeedReferences)
+
+	CreateQuestionSetVersionResponse_tags = CreateQuestionSetVersionResponse.AddMember("tags", _TagMap)
+
 	CreateScheduleActionRequest_id = CreateScheduleActionRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
 
 	CreateScheduleActionRequest_actionName = CreateScheduleActionRequest.AddMember("actionName", _ResourceName)
@@ -1648,6 +2760,24 @@ func init() {
 	DeleteFeedResponse_status = DeleteFeedResponse.AddMember("status", FeedStatus)
 
 	DeleteFeedPolicyRequest_id = DeleteFeedPolicyRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
+
+	DeleteFunctionRequest_id = DeleteFunctionRequest.AddMember("id", _FunctionId, &smithytraits.HTTPLabel{})
+
+	DeleteFunctionResponse_arn = DeleteFunctionResponse.AddMember("arn", _FunctionArn)
+
+	DeleteFunctionResponse_id = DeleteFunctionResponse.AddMember("id", _FunctionId)
+
+	DeleteFunctionResponse_status = DeleteFunctionResponse.AddMember("status", FunctionStatus)
+
+	DeleteQuestionSetRequest_id = DeleteQuestionSetRequest.AddMember("id", _QuestionSetId, &smithytraits.HTTPLabel{})
+
+	DeleteQuestionSetResponse_arn = DeleteQuestionSetResponse.AddMember("arn", _QuestionSetArn)
+
+	DeleteQuestionSetResponse_id = DeleteQuestionSetResponse.AddMember("id", _QuestionSetId)
+
+	DeleteQuestionSetVersionRequest_id = DeleteQuestionSetVersionRequest.AddMember("id", _QuestionSetId, &smithytraits.HTTPLabel{})
+
+	DeleteQuestionSetVersionRequest_questionSetVersion = DeleteQuestionSetVersionRequest.AddMember("questionSetVersion", _PublishedQuestionSetVersion, &smithytraits.HTTPLabel{})
 
 	DeleteScheduleActionRequest_id = DeleteScheduleActionRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
 
@@ -1723,6 +2853,60 @@ func init() {
 
 	GetFixtureResponse_competitors = GetFixtureResponse.AddMember("competitors", _CompetitorList)
 
+	GetFunctionRequest_id = GetFunctionRequest.AddMember("id", _FunctionId, &smithytraits.HTTPLabel{})
+
+	GetFunctionResponse_name = GetFunctionResponse.AddMember("name", _ResourceName)
+
+	GetFunctionResponse_target = GetFunctionResponse.AddMember("target", FunctionTarget)
+
+	GetFunctionResponse_requestExpression = GetFunctionResponse.AddMember("requestExpression", _JsonataExpression)
+
+	GetFunctionResponse_responseExpression = GetFunctionResponse.AddMember("responseExpression", _JsonataExpression)
+
+	GetFunctionResponse_description = GetFunctionResponse.AddMember("description", _FunctionDescription)
+
+	GetFunctionResponse_eventBridgeDelivery = GetFunctionResponse.AddMember("eventBridgeDelivery", EventBridgeDeliveryMode)
+
+	GetFunctionResponse_arn = GetFunctionResponse.AddMember("arn", _FunctionArn)
+
+	GetFunctionResponse_id = GetFunctionResponse.AddMember("id", _FunctionId)
+
+	GetFunctionResponse_status = GetFunctionResponse.AddMember("status", FunctionStatus)
+
+	GetFunctionResponse_references = GetFunctionResponse.AddMember("references", _FeedReferences)
+
+	GetFunctionResponse_contextTypes = GetFunctionResponse.AddMember("contextTypes", _ContextTypeList)
+
+	GetFunctionResponse_tags = GetFunctionResponse.AddMember("tags", _TagMap)
+
+	GetQuestionSetRequest_id = GetQuestionSetRequest.AddMember("id", _QuestionSetId, &smithytraits.HTTPLabel{})
+
+	GetQuestionSetRequest_questionSetVersion = GetQuestionSetRequest.AddMember("questionSetVersion", _QuestionSetVersion, &smithytraits.HTTPQuery{Name: "questionSetVersion"})
+
+	GetQuestionSetResponse_yesNo = GetQuestionSetResponse.AddMember("yesNo", _YesNoQuestionList)
+
+	GetQuestionSetResponse_yesNoPerOption = GetQuestionSetResponse.AddMember("yesNoPerOption", _YesNoPerOptionQuestionList)
+
+	GetQuestionSetResponse_chooseOne = GetQuestionSetResponse.AddMember("chooseOne", _ChooseOneQuestionList)
+
+	GetQuestionSetResponse_arn = GetQuestionSetResponse.AddMember("arn", _QuestionSetArn)
+
+	GetQuestionSetResponse_id = GetQuestionSetResponse.AddMember("id", _QuestionSetId)
+
+	GetQuestionSetResponse_name = GetQuestionSetResponse.AddMember("name", _ResourceName)
+
+	GetQuestionSetResponse_version = GetQuestionSetResponse.AddMember("version", _QuestionSetVersion)
+
+	GetQuestionSetResponse_description = GetQuestionSetResponse.AddMember("description", _QuestionSetVersionDescription)
+
+	GetQuestionSetResponse_latestVersion = GetQuestionSetResponse.AddMember("latestVersion", _QuestionSetVersion)
+
+	GetQuestionSetResponse_sha256 = GetQuestionSetResponse.AddMember("sha256", _QuestionSetSha256)
+
+	GetQuestionSetResponse_references = GetQuestionSetResponse.AddMember("references", _FeedReferences)
+
+	GetQuestionSetResponse_tags = GetQuestionSetResponse.AddMember("tags", _TagMap)
+
 	ListDictionariesRequest_maxResults = ListDictionariesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListDictionariesRequest_nextToken = ListDictionariesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -1738,6 +2922,32 @@ func init() {
 	ListFeedsResponse_feeds = ListFeedsResponse.AddMember("feeds", _FeedSummaryList)
 
 	ListFeedsResponse_nextToken = ListFeedsResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListFunctionsRequest_maxResults = ListFunctionsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListFunctionsRequest_nextToken = ListFunctionsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListFunctionsResponse_functions = ListFunctionsResponse.AddMember("functions", _FunctionSummaryList)
+
+	ListFunctionsResponse_nextToken = ListFunctionsResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListQuestionSetsRequest_maxResults = ListQuestionSetsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListQuestionSetsRequest_nextToken = ListQuestionSetsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListQuestionSetsResponse_questionSets = ListQuestionSetsResponse.AddMember("questionSets", _QuestionSetSummaryList)
+
+	ListQuestionSetsResponse_nextToken = ListQuestionSetsResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListQuestionSetVersionsRequest_id = ListQuestionSetVersionsRequest.AddMember("id", _QuestionSetId, &smithytraits.HTTPLabel{})
+
+	ListQuestionSetVersionsRequest_maxResults = ListQuestionSetVersionsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListQuestionSetVersionsRequest_nextToken = ListQuestionSetVersionsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListQuestionSetVersionsResponse_versions = ListQuestionSetVersionsResponse.AddMember("versions", _QuestionSetVersionSummaryList)
+
+	ListQuestionSetVersionsResponse_nextToken = ListQuestionSetVersionsResponse.AddMember("nextToken", smithyprelude.String)
 
 	ListScheduleActionsRequest_id = ListScheduleActionsRequest.AddMember("id", _FeedId, &smithytraits.HTTPLabel{})
 
@@ -1828,5 +3038,77 @@ func init() {
 	UpdateFeedResponse_association = UpdateFeedResponse.AddMember("association", FeedAssociation)
 
 	UpdateFeedResponse_tags = UpdateFeedResponse.AddMember("tags", _TagMap)
+
+	UpdateFunctionRequest_id = UpdateFunctionRequest.AddMember("id", _FunctionId, &smithytraits.HTTPLabel{})
+
+	UpdateFunctionRequest_name = UpdateFunctionRequest.AddMember("name", _ResourceName)
+
+	UpdateFunctionRequest_target = UpdateFunctionRequest.AddMember("target", FunctionTarget)
+
+	UpdateFunctionRequest_requestExpression = UpdateFunctionRequest.AddMember("requestExpression", _JsonataExpression)
+
+	UpdateFunctionRequest_responseExpression = UpdateFunctionRequest.AddMember("responseExpression", _JsonataExpression)
+
+	UpdateFunctionRequest_description = UpdateFunctionRequest.AddMember("description", _FunctionDescription)
+
+	UpdateFunctionRequest_eventBridgeDelivery = UpdateFunctionRequest.AddMember("eventBridgeDelivery", EventBridgeDeliveryMode)
+
+	UpdateFunctionResponse_name = UpdateFunctionResponse.AddMember("name", _ResourceName)
+
+	UpdateFunctionResponse_target = UpdateFunctionResponse.AddMember("target", FunctionTarget)
+
+	UpdateFunctionResponse_requestExpression = UpdateFunctionResponse.AddMember("requestExpression", _JsonataExpression)
+
+	UpdateFunctionResponse_responseExpression = UpdateFunctionResponse.AddMember("responseExpression", _JsonataExpression)
+
+	UpdateFunctionResponse_description = UpdateFunctionResponse.AddMember("description", _FunctionDescription)
+
+	UpdateFunctionResponse_eventBridgeDelivery = UpdateFunctionResponse.AddMember("eventBridgeDelivery", EventBridgeDeliveryMode)
+
+	UpdateFunctionResponse_arn = UpdateFunctionResponse.AddMember("arn", _FunctionArn)
+
+	UpdateFunctionResponse_id = UpdateFunctionResponse.AddMember("id", _FunctionId)
+
+	UpdateFunctionResponse_status = UpdateFunctionResponse.AddMember("status", FunctionStatus)
+
+	UpdateFunctionResponse_references = UpdateFunctionResponse.AddMember("references", _FeedReferences)
+
+	UpdateFunctionResponse_contextTypes = UpdateFunctionResponse.AddMember("contextTypes", _ContextTypeList)
+
+	UpdateFunctionResponse_tags = UpdateFunctionResponse.AddMember("tags", _TagMap)
+
+	UpdateQuestionSetRequest_id = UpdateQuestionSetRequest.AddMember("id", _QuestionSetId, &smithytraits.HTTPLabel{})
+
+	UpdateQuestionSetRequest_yesNo = UpdateQuestionSetRequest.AddMember("yesNo", _YesNoQuestionList)
+
+	UpdateQuestionSetRequest_yesNoPerOption = UpdateQuestionSetRequest.AddMember("yesNoPerOption", _YesNoPerOptionQuestionList)
+
+	UpdateQuestionSetRequest_chooseOne = UpdateQuestionSetRequest.AddMember("chooseOne", _ChooseOneQuestionList)
+
+	UpdateQuestionSetRequest_name = UpdateQuestionSetRequest.AddMember("name", _ResourceName)
+
+	UpdateQuestionSetResponse_yesNo = UpdateQuestionSetResponse.AddMember("yesNo", _YesNoQuestionList)
+
+	UpdateQuestionSetResponse_yesNoPerOption = UpdateQuestionSetResponse.AddMember("yesNoPerOption", _YesNoPerOptionQuestionList)
+
+	UpdateQuestionSetResponse_chooseOne = UpdateQuestionSetResponse.AddMember("chooseOne", _ChooseOneQuestionList)
+
+	UpdateQuestionSetResponse_arn = UpdateQuestionSetResponse.AddMember("arn", _QuestionSetArn)
+
+	UpdateQuestionSetResponse_id = UpdateQuestionSetResponse.AddMember("id", _QuestionSetId)
+
+	UpdateQuestionSetResponse_name = UpdateQuestionSetResponse.AddMember("name", _ResourceName)
+
+	UpdateQuestionSetResponse_version = UpdateQuestionSetResponse.AddMember("version", _QuestionSetVersion)
+
+	UpdateQuestionSetResponse_description = UpdateQuestionSetResponse.AddMember("description", _QuestionSetVersionDescription)
+
+	UpdateQuestionSetResponse_latestVersion = UpdateQuestionSetResponse.AddMember("latestVersion", _QuestionSetVersion)
+
+	UpdateQuestionSetResponse_sha256 = UpdateQuestionSetResponse.AddMember("sha256", _QuestionSetSha256)
+
+	UpdateQuestionSetResponse_references = UpdateQuestionSetResponse.AddMember("references", _FeedReferences)
+
+	UpdateQuestionSetResponse_tags = UpdateQuestionSetResponse.AddMember("tags", _TagMap)
 
 }

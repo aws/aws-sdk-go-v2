@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"constructID":"__ConstructID__","createdAt":946684800,"insightID":"__InsightID__","insightLevel":"RUN","insightMessage":{"code":"__Code__","message":"__Message__","topic":"__Topic__"},"insightType":"INTENT_GAP","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","producerID":"__ProducerID__","producerName":"MAPPING","producerType":"JOB","segmentID":"__SegmentID__"},{"constructID":"__ConstructID__","createdAt":946684800,"insightID":"__InsightID__","insightLevel":"RUN","insightMessage":{"code":"__Code__","message":"__Message__","topic":"__Topic__"},"insightType":"INTENT_GAP","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","producerID":"__ProducerID__","producerName":"MAPPING","producerType":"JOB","segmentID":"__SegmentID__"}],"nextToken":"__NextToken__"}

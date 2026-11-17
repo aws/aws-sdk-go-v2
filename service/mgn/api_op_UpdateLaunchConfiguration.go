@@ -56,6 +56,9 @@ type UpdateLaunchConfigurationInput struct {
 	// Update Launch configuration licensing request.
 	Licensing *types.Licensing
 
+	// Launch configuration map auto tagging key.
+	MapAutoTaggingKey *string
+
 	// Launch configuration map auto tagging MPE ID.
 	MapAutoTaggingMpeID *string
 
@@ -100,6 +103,9 @@ func (v *UpdateLaunchConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 		s.WriteStruct(schemas.UpdateLaunchConfigurationRequest_licensing)
 		v.Licensing.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.MapAutoTaggingKey != nil {
+		s.WriteString(schemas.UpdateLaunchConfigurationRequest_mapAutoTaggingKey, *v.MapAutoTaggingKey)
 	}
 	if v.MapAutoTaggingMpeID != nil {
 		s.WriteString(schemas.UpdateLaunchConfigurationRequest_mapAutoTaggingMpeID, *v.MapAutoTaggingMpeID)
@@ -151,6 +157,9 @@ func (v *UpdateLaunchConfigurationInput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.UpdateLaunchConfigurationRequest_licensing:
 			v.Licensing = &types.Licensing{}
 			return v.Licensing.Deserialize(d)
+		case schemas.UpdateLaunchConfigurationRequest_mapAutoTaggingKey:
+			v.MapAutoTaggingKey = new(string)
+			return d.ReadString(schemas.UpdateLaunchConfigurationRequest_mapAutoTaggingKey, v.MapAutoTaggingKey)
 		case schemas.UpdateLaunchConfigurationRequest_mapAutoTaggingMpeID:
 			v.MapAutoTaggingMpeID = new(string)
 			return d.ReadString(schemas.UpdateLaunchConfigurationRequest_mapAutoTaggingMpeID, v.MapAutoTaggingMpeID)
@@ -197,6 +206,9 @@ type UpdateLaunchConfigurationOutput struct {
 
 	// Launch configuration OS licensing.
 	Licensing *types.Licensing
+
+	// Map auto tagging key.
+	MapAutoTaggingKey *string
 
 	// Map auto tagging MPE ID.
 	MapAutoTaggingMpeID *string
@@ -249,6 +261,9 @@ func (v *UpdateLaunchConfigurationOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.Licensing.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MapAutoTaggingKey != nil {
+		s.WriteString(schemas.LaunchConfiguration_mapAutoTaggingKey, *v.MapAutoTaggingKey)
+	}
 	if v.MapAutoTaggingMpeID != nil {
 		s.WriteString(schemas.LaunchConfiguration_mapAutoTaggingMpeID, *v.MapAutoTaggingMpeID)
 	}
@@ -299,6 +314,9 @@ func (v *UpdateLaunchConfigurationOutput) Deserialize(d smithy.ShapeDeserializer
 		case schemas.LaunchConfiguration_licensing:
 			v.Licensing = &types.Licensing{}
 			return v.Licensing.Deserialize(d)
+		case schemas.LaunchConfiguration_mapAutoTaggingKey:
+			v.MapAutoTaggingKey = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_mapAutoTaggingKey, v.MapAutoTaggingKey)
 		case schemas.LaunchConfiguration_mapAutoTaggingMpeID:
 			v.MapAutoTaggingMpeID = new(string)
 			return d.ReadString(schemas.LaunchConfiguration_mapAutoTaggingMpeID, v.MapAutoTaggingMpeID)

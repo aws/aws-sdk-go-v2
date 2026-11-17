@@ -36,6 +36,9 @@ type ListDatasetVersionsInput struct {
 	// This member is required.
 	DatasetId *string
 
+	//  A filter to apply to the dataset versions.
+	Filter *types.ListDatasetVersionsFilter
+
 	//  The maximum number of versions to return per page.
 	MaxResults *int32
 
@@ -54,6 +57,11 @@ func (v *ListDatasetVersionsInput) Serialize(s smithy.ShapeSerializer) {
 func (v *ListDatasetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetId != nil {
 		s.WriteString(schemas.ListDatasetVersionsRequest_datasetId, *v.DatasetId)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDatasetVersionsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDatasetVersionsRequest_maxResults, *v.MaxResults)

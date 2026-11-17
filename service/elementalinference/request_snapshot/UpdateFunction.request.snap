@@ -1,0 +1,5 @@
+PATCH /v1/function/__Id__
+
+Content-Type: application/json
+
+{"description":"__Description__","eventBridgeDelivery":"ENABLED","name":"__Name__","requestExpression":"__RequestExpression__","responseExpression":"__ResponseExpression__","target":{"bedrock":{"api":"INVOKE_MODEL","model":"__Model__"}}}

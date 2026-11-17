@@ -341,8 +341,7 @@ func (v *KMSAccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// The request was rejected because the specified customer master key (CMK) isn't
-// enabled.
+// The request was rejected because the specified KMS key isn't enabled.
 type KMSDisabledException struct {
 	Message *string
 
@@ -785,9 +784,57 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// Specifies that you tried to invoke this API for a data stream with the
-// on-demand capacity mode. This API is only supported for data streams with the
-// provisioned capacity mode.
+// The request was denied because the request rate is too high. Reduce the
+// frequency of your requests, and retry them with exponential backoff.
+type ThrottlingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The request failed validation. For example, a parameter value is not valid, a
+// combination of parameters is not supported, or the operation is not supported
+// for the stream's capacity mode. The error message describes the specific reason.
 type ValidationException struct {
 	Message *string
 

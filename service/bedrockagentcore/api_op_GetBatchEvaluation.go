@@ -80,6 +80,12 @@ type GetBatchEvaluationOutput struct {
 	// The data source configuration specifying where agent traces are pulled from.
 	DataSourceConfig types.DataSourceConfig
 
+	// The details of the dataset and agent that the batch evaluation ran, including
+	// the dataset version and agent runtime version that the service resolved when the
+	// batch evaluation started. This field is present only if the batch evaluation was
+	// started with a datasetExecutionConfig .
+	DatasetExecutionDetails *types.DatasetExecutionDetails
+
 	// The description of the batch evaluation.
 	Description *string
 
@@ -152,6 +158,11 @@ func (v *GetBatchEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSourceConfig != nil {
 		serializeDataSourceConfig(s, schemas.GetBatchEvaluationResponse_dataSourceConfig, v.DataSourceConfig)
 	}
+	if v.DatasetExecutionDetails != nil {
+		s.WriteStruct(schemas.GetBatchEvaluationResponse_datasetExecutionDetails)
+		v.DatasetExecutionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetBatchEvaluationResponse_description, *v.Description)
 	}
@@ -217,6 +228,9 @@ func (v *GetBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error
 			return d.ReadTime(schemas.GetBatchEvaluationResponse_createdAt, v.CreatedAt)
 		case schemas.GetBatchEvaluationResponse_dataSourceConfig:
 			return deserializeDataSourceConfig(d, schemas.GetBatchEvaluationResponse_dataSourceConfig, &v.DataSourceConfig)
+		case schemas.GetBatchEvaluationResponse_datasetExecutionDetails:
+			v.DatasetExecutionDetails = &types.DatasetExecutionDetails{}
+			return v.DatasetExecutionDetails.Deserialize(d)
 		case schemas.GetBatchEvaluationResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.GetBatchEvaluationResponse_description, v.Description)

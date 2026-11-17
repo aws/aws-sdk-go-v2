@@ -1,0 +1,8 @@
+{
+    "id": "b3a6d592-3682-4475-815e-a1e70e2dfd09",
+    "type": "feature",
+    "description": "Add SessionMetadata to PutRumEvents for attributes that apply to every event in a batch, such as browser, device, and operating system.",
+    "modules": [
+        "service/rum"
+    ]
+}

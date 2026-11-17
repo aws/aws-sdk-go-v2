@@ -1,0 +1,8 @@
+{
+    "id": "d72c2277-a8e3-4a05-8f65-047b777f2e0e",
+    "type": "feature",
+    "description": "Adds AWS Cloud WAN support to Route 53 Global Resolver via new core network endpoint APIs to connect a global resolver to a core network, segment-based access sources, and a publicIpStatus setting to disable public IPs so a resolver is reachable only over Cloud WAN.",
+    "modules": [
+        "service/route53globalresolver"
+    ]
+}

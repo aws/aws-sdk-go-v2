@@ -281,6 +281,16 @@ func serializeChargeAccountList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeChildCredits(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChildCredit) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeContractAccountList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContractAccount) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -491,6 +501,16 @@ func serializeShareableAccountIds(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSplitPortions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SplitPortion) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -957,6 +977,28 @@ func deserializeChargeAccountList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = types.ChargeAccount{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeChildCredits(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ChildCredit) error {
+	*v = make([]types.ChildCredit, 0)
+	var vv types.ChildCredit
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChildCredit
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ChildCredit{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1456,6 +1498,28 @@ func deserializeShareableAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSplitPortions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SplitPortion) error {
+	*v = make([]types.SplitPortion, 0)
+	var vv types.SplitPortion
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SplitPortion
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SplitPortion{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

@@ -889,6 +889,14 @@ func TestCheckRequestSnapshot_CreateServerlessCache(t *testing.T) {
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
 		ConnectionType:         types.ConnectionType("vpc"),
+		Integrations: []types.IntegrationRequest{
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3924,6 +3932,14 @@ func TestUpdateRequestSnapshot_CreateServerlessCache(t *testing.T) {
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
 		ConnectionType:         types.ConnectionType("vpc"),
+		Integrations: []types.IntegrationRequest{
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

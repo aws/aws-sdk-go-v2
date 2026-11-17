@@ -1,0 +1,8 @@
+{
+    "id": "08229ae5-b3aa-491f-9ea6-94a97116567e",
+    "type": "feature",
+    "description": "PutCaseEventConfiguration now supports an optional autoIncludeFields attribute on case event included data. Set it to All, System, or Custom to automatically include a category of case fields in case event data, combined as a union with any fields you list explicitly.",
+    "modules": [
+        "service/connectcases"
+    ]
+}

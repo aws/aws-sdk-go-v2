@@ -408,6 +408,342 @@ func (v *AgentCardDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The configuration for invoking an agent hosted on AgentCore Runtime. Each
+// scenario runs in its own runtime session, and the turns of a scenario are sent
+// in order within that session. The batch evaluation uses your credentials to read
+// the agent runtime endpoint and the dataset, invoke the agent runtime, and read
+// the resulting traces. You must have permission for these actions.
+type AgentCoreRuntimeInvocation struct {
+
+	// The Amazon Resource Name (ARN) of the agent runtime endpoint to invoke. Specify
+	// an endpoint in the same account and Region as the batch evaluation. The service
+	// requires the endpoint and its agent runtime version to be ready. The agent
+	// runtime must use the HTTP protocol and IAM inbound authorization.
+	//
+	// This member is required.
+	AgentRuntimeEndpointArn *string
+
+	// A JSON object template for the request payload sent to the agent for each turn.
+	// The template must contain the placeholder {{turn.input}} exactly once, as the
+	// complete value of a JSON string and not as a field name. The service replaces
+	// the placeholder with the input of the turn. If the input isn't a string, the
+	// service inserts it as a JSON value. If you don't specify a template, the service
+	// uses {"prompt": "{{turn.input}}"} .
+	RequestTemplate *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentCoreRuntimeInvocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentCoreRuntimeInvocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentCoreRuntimeInvocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentRuntimeEndpointArn != nil {
+		s.WriteString(schemas.AgentCoreRuntimeInvocation_agentRuntimeEndpointArn, *v.AgentRuntimeEndpointArn)
+	}
+	if v.RequestTemplate != nil {
+		s.WriteString(schemas.AgentCoreRuntimeInvocation_requestTemplate, *v.RequestTemplate)
+	}
+}
+func (v *AgentCoreRuntimeInvocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentCoreRuntimeInvocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentCoreRuntimeInvocation_agentRuntimeEndpointArn:
+			v.AgentRuntimeEndpointArn = new(string)
+			return d.ReadString(schemas.AgentCoreRuntimeInvocation_agentRuntimeEndpointArn, v.AgentRuntimeEndpointArn)
+		case schemas.AgentCoreRuntimeInvocation_requestTemplate:
+			v.RequestTemplate = new(string)
+			return d.ReadString(schemas.AgentCoreRuntimeInvocation_requestTemplate, v.RequestTemplate)
+		}
+		return nil
+	})
+}
+
+// The details of the agent hosted on AgentCore Runtime that a batch evaluation
+// invoked.
+type AgentCoreRuntimeInvocationDetails struct {
+
+	// The Amazon Resource Name (ARN) of the agent runtime endpoint that the batch
+	// evaluation invoked.
+	//
+	// This member is required.
+	AgentRuntimeEndpointArn *string
+
+	// The version of the agent runtime that the endpoint pointed to when the batch
+	// evaluation started. If you update the endpoint after the batch evaluation
+	// starts, each later turn uses the version that the endpoint points to when the
+	// turn runs.
+	//
+	// This member is required.
+	AgentRuntimeVersion *string
+
+	// The request payload template that the batch evaluation used for each turn. If
+	// the request didn't specify a template, this is the default template.
+	RequestTemplate *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentCoreRuntimeInvocationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentCoreRuntimeInvocationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentCoreRuntimeInvocationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentRuntimeEndpointArn != nil {
+		s.WriteString(schemas.AgentCoreRuntimeInvocationDetails_agentRuntimeEndpointArn, *v.AgentRuntimeEndpointArn)
+	}
+	if v.AgentRuntimeVersion != nil {
+		s.WriteString(schemas.AgentCoreRuntimeInvocationDetails_agentRuntimeVersion, *v.AgentRuntimeVersion)
+	}
+	if v.RequestTemplate != nil {
+		s.WriteString(schemas.AgentCoreRuntimeInvocationDetails_requestTemplate, *v.RequestTemplate)
+	}
+}
+func (v *AgentCoreRuntimeInvocationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentCoreRuntimeInvocationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentCoreRuntimeInvocationDetails_agentRuntimeEndpointArn:
+			v.AgentRuntimeEndpointArn = new(string)
+			return d.ReadString(schemas.AgentCoreRuntimeInvocationDetails_agentRuntimeEndpointArn, v.AgentRuntimeEndpointArn)
+		case schemas.AgentCoreRuntimeInvocationDetails_agentRuntimeVersion:
+			v.AgentRuntimeVersion = new(string)
+			return d.ReadString(schemas.AgentCoreRuntimeInvocationDetails_agentRuntimeVersion, v.AgentRuntimeVersion)
+		case schemas.AgentCoreRuntimeInvocationDetails_requestTemplate:
+			v.RequestTemplate = new(string)
+			return d.ReadString(schemas.AgentCoreRuntimeInvocationDetails_requestTemplate, v.RequestTemplate)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about an Amazon Bedrock AgentCore Agent Insight,
+// including its label, description, and creation time. This structure is returned
+// by ListAgentInsights ; use GetAgentInsight to retrieve the sample sessions and
+// root causes for a specific insight.
+type AgentInsightSummary struct {
+
+	// The unique identifier of the Agent Insight.
+	//
+	// This member is required.
+	AgentInsightId *string
+
+	// The application that the Agent Insight belongs to.
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// Specifies whether the Agent Insight is active or archived. Valid values:
+	//
+	//   - ACTIVE - The insight is currently active.
+	//
+	//   - ARCHIVED - The insight has been archived.
+	//
+	// This member is required.
+	ArchiveStatus AgentInsightArchiveStatus
+
+	// The date and time when the Agent Insight was first created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Specifies whether customer-encrypted metadata is available for the Agent
+	// Insight.
+	//
+	// This member is required.
+	CustomerMetadataStatus AgentInsightCustomerMetadataStatus
+
+	// A generated description of the Agent Insight that explains the detected pattern
+	// and its observed behavior across sessions.
+	//
+	// This member is required.
+	Description *string
+
+	// A generated display label for the Agent Insight. This is a human-readable
+	// summary of the detected pattern, not an identifier.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of insight.
+	//
+	// This member is required.
+	Type InsightType
+
+	// The date and time when the Agent Insight was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The number of sessions affected by the insight pattern.
+	AffectedSessionCount *int32
+
+	// The Batch Evaluation that produced this Insight, when applicable.
+	BatchEvaluationId *string
+
+	// The most recent date and time when the insight pattern was observed.
+	LastSeenAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentInsightSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentInsightSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedSessionCount != nil {
+		s.WriteInt32(schemas.AgentInsightSummary_affectedSessionCount, *v.AffectedSessionCount)
+	}
+	if v.AgentInsightId != nil {
+		s.WriteString(schemas.AgentInsightSummary_agentInsightId, *v.AgentInsightId)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.AgentInsightSummary_applicationName, *v.ApplicationName)
+	}
+	if v.ArchiveStatus != "" {
+		s.WriteString(schemas.AgentInsightSummary_archiveStatus, string(v.ArchiveStatus))
+	}
+	if v.BatchEvaluationId != nil {
+		s.WriteString(schemas.AgentInsightSummary_batchEvaluationId, *v.BatchEvaluationId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AgentInsightSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CustomerMetadataStatus != "" {
+		s.WriteString(schemas.AgentInsightSummary_customerMetadataStatus, string(v.CustomerMetadataStatus))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AgentInsightSummary_description, *v.Description)
+	}
+	if v.LastSeenAt != nil {
+		s.WriteTime(schemas.AgentInsightSummary_lastSeenAt, *v.LastSeenAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AgentInsightSummary_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AgentInsightSummary_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AgentInsightSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AgentInsightSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentInsightSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentInsightSummary_affectedSessionCount:
+			v.AffectedSessionCount = new(int32)
+			return d.ReadInt32(schemas.AgentInsightSummary_affectedSessionCount, v.AffectedSessionCount)
+		case schemas.AgentInsightSummary_agentInsightId:
+			v.AgentInsightId = new(string)
+			return d.ReadString(schemas.AgentInsightSummary_agentInsightId, v.AgentInsightId)
+		case schemas.AgentInsightSummary_applicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.AgentInsightSummary_applicationName, v.ApplicationName)
+		case schemas.AgentInsightSummary_archiveStatus:
+			var ev string
+			if err := d.ReadString(schemas.AgentInsightSummary_archiveStatus, &ev); err != nil {
+				return err
+			}
+			v.ArchiveStatus = AgentInsightArchiveStatus(ev)
+			return nil
+		case schemas.AgentInsightSummary_batchEvaluationId:
+			v.BatchEvaluationId = new(string)
+			return d.ReadString(schemas.AgentInsightSummary_batchEvaluationId, v.BatchEvaluationId)
+		case schemas.AgentInsightSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgentInsightSummary_createdAt, v.CreatedAt)
+		case schemas.AgentInsightSummary_customerMetadataStatus:
+			var ev string
+			if err := d.ReadString(schemas.AgentInsightSummary_customerMetadataStatus, &ev); err != nil {
+				return err
+			}
+			v.CustomerMetadataStatus = AgentInsightCustomerMetadataStatus(ev)
+			return nil
+		case schemas.AgentInsightSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AgentInsightSummary_description, v.Description)
+		case schemas.AgentInsightSummary_lastSeenAt:
+			v.LastSeenAt = new(time.Time)
+			return d.ReadTime(schemas.AgentInsightSummary_lastSeenAt, v.LastSeenAt)
+		case schemas.AgentInsightSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AgentInsightSummary_name, v.Name)
+		case schemas.AgentInsightSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.AgentInsightSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = InsightType(ev)
+			return nil
+		case schemas.AgentInsightSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgentInsightSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The agent that the batch evaluation invokes with each scenario in the dataset.
+//
+// The following types satisfy this interface:
+//
+//	AgentInvocationConfigMemberAgentCoreRuntime
+type AgentInvocationConfig interface {
+	isAgentInvocationConfig()
+}
+
+// The configuration for invoking an agent hosted on AgentCore Runtime.
+type AgentInvocationConfigMemberAgentCoreRuntime struct {
+	Value AgentCoreRuntimeInvocation
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentInvocationConfigMemberAgentCoreRuntime) isAgentInvocationConfig() {}
+func (v *AgentInvocationConfigMemberAgentCoreRuntime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentInvocationConfig_agentCoreRuntime)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentInvocationConfigMemberAgentCoreRuntime) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The agent that a batch evaluation invoked with each scenario in the dataset.
+//
+// The following types satisfy this interface:
+//
+//	AgentInvocationDetailsMemberAgentCoreRuntime
+type AgentInvocationDetails interface {
+	isAgentInvocationDetails()
+}
+
+// The details of the agent hosted on AgentCore Runtime that the batch evaluation
+// invoked.
+type AgentInvocationDetailsMemberAgentCoreRuntime struct {
+	Value AgentCoreRuntimeInvocationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentInvocationDetailsMemberAgentCoreRuntime) isAgentInvocationDetails() {}
+func (v *AgentInvocationDetailsMemberAgentCoreRuntime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentInvocationDetails_agentCoreRuntime)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentInvocationDetailsMemberAgentCoreRuntime) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The agent skills descriptor configuration for a registry record.
 type AgentSkillsDescriptor struct {
 
@@ -752,6 +1088,40 @@ func (v *BasicAuth) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.BasicAuth_secretArn:
 			v.SecretArn = new(string)
 			return d.ReadString(schemas.BasicAuth_secretArn, v.SecretArn)
+		}
+		return nil
+	})
+}
+
+// A batch evaluation source for a dataset generation. The generation reads the
+// sessions the batch evaluation evaluated, so there is no time window.
+type BatchEvaluationSourceConfig struct {
+
+	// The Amazon Resource Name (ARN) of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchEvaluationSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchEvaluationSourceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchEvaluationSourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchEvaluationArn != nil {
+		s.WriteString(schemas.BatchEvaluationSourceConfig_batchEvaluationArn, *v.BatchEvaluationArn)
+	}
+}
+func (v *BatchEvaluationSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchEvaluationSourceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchEvaluationSourceConfig_batchEvaluationArn:
+			v.BatchEvaluationArn = new(string)
+			return d.ReadString(schemas.BatchEvaluationSourceConfig_batchEvaluationArn, v.BatchEvaluationArn)
 		}
 		return nil
 	})
@@ -1850,6 +2220,78 @@ func (v *CloudWatchLogsSource) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeLogGroupNameList(d, schemas.CloudWatchLogsSource_logGroupNames, &v.LogGroupNames)
 		case schemas.CloudWatchLogsSource_serviceNames:
 			return deserializeEvaluationStringList(d, schemas.CloudWatchLogsSource_serviceNames, &v.ServiceNames)
+		}
+		return nil
+	})
+}
+
+// A CloudWatch Logs source for a dataset generation. Specify either logGroupNames
+// or logGroupNamePrefixes .
+type CloudWatchLogsSourceConfig struct {
+
+	// The service name of the agent, which matches the service.name resource
+	// attribute in its traces. Specify exactly one.
+	//
+	// This member is required.
+	ServiceNames []string
+
+	// The end of the time window to read sessions from. The default is the time the
+	// generation starts.
+	EndTime *time.Time
+
+	// Prefixes of the names of the log groups to read, from 1 to 5. You can't specify
+	// this together with logGroupNames .
+	LogGroupNamePrefixes []string
+
+	// The names of the log groups to read, from 1 to 5. You can't specify this
+	// together with logGroupNamePrefixes .
+	LogGroupNames []string
+
+	// The start of the time window to read sessions from. The default is 7 days
+	// before endTime .
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogsSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogsSourceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogsSourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CloudWatchLogsSourceConfig_endTime, *v.EndTime)
+	}
+	if v.LogGroupNamePrefixes != nil {
+		serializeCloudWatchLogsSourceConfigLogGroupNamePrefixesList(s, schemas.CloudWatchLogsSourceConfig_logGroupNamePrefixes, v.LogGroupNamePrefixes)
+	}
+	if v.LogGroupNames != nil {
+		serializeCloudWatchLogsSourceConfigLogGroupNamesList(s, schemas.CloudWatchLogsSourceConfig_logGroupNames, v.LogGroupNames)
+	}
+	if v.ServiceNames != nil {
+		serializeServiceNameList(s, schemas.CloudWatchLogsSourceConfig_serviceNames, v.ServiceNames)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CloudWatchLogsSourceConfig_startTime, *v.StartTime)
+	}
+}
+func (v *CloudWatchLogsSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogsSourceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogsSourceConfig_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.CloudWatchLogsSourceConfig_endTime, v.EndTime)
+		case schemas.CloudWatchLogsSourceConfig_logGroupNamePrefixes:
+			return deserializeCloudWatchLogsSourceConfigLogGroupNamePrefixesList(d, schemas.CloudWatchLogsSourceConfig_logGroupNamePrefixes, &v.LogGroupNamePrefixes)
+		case schemas.CloudWatchLogsSourceConfig_logGroupNames:
+			return deserializeCloudWatchLogsSourceConfigLogGroupNamesList(d, schemas.CloudWatchLogsSourceConfig_logGroupNames, &v.LogGroupNames)
+		case schemas.CloudWatchLogsSourceConfig_serviceNames:
+			return deserializeServiceNameList(d, schemas.CloudWatchLogsSourceConfig_serviceNames, &v.ServiceNames)
+		case schemas.CloudWatchLogsSourceConfig_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CloudWatchLogsSourceConfig_startTime, v.StartTime)
 		}
 		return nil
 	})
@@ -2973,6 +3415,52 @@ func (v *CryptoX402PaymentOutput) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// A custom data identifier, defined by a regular expression.
+type CustomDataIdentifier struct {
+
+	// The name of the custom data identifier. It can't be the same as the name of a
+	// managed data identifier.
+	//
+	// This member is required.
+	Name *string
+
+	// The regular expression that matches the data to mask. Lookahead and lookbehind
+	// aren't supported.
+	//
+	// This member is required.
+	Regex *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomDataIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomDataIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomDataIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CustomDataIdentifier_name, *v.Name)
+	}
+	if v.Regex != nil {
+		s.WriteString(schemas.CustomDataIdentifier_regex, *v.Regex)
+	}
+}
+func (v *CustomDataIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomDataIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomDataIdentifier_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CustomDataIdentifier_name, v.Name)
+		case schemas.CustomDataIdentifier_regex:
+			v.Regex = new(string)
+			return d.ReadString(schemas.CustomDataIdentifier_regex, v.Regex)
+		}
+		return nil
+	})
+}
+
 // A custom descriptor configuration for a registry record.
 type CustomDescriptor struct {
 
@@ -2999,6 +3487,306 @@ func (v *CustomDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CustomDescriptor_inlineContent:
 			v.InlineContent = new(string)
 			return d.ReadString(schemas.CustomDescriptor_inlineContent, v.InlineContent)
+		}
+		return nil
+	})
+}
+
+// Identifies the dataset and the version of it that a batch evaluation ran.
+type DatasetDetails struct {
+
+	// The unique identifier of the dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// The version of the dataset that the batch evaluation ran. If the request didn't
+	// specify a version, this is the latest published version when the batch
+	// evaluation started.
+	//
+	// This member is required.
+	DatasetVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatasetDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DatasetDetails_datasetId, *v.DatasetId)
+	}
+	if v.DatasetVersion != nil {
+		s.WriteString(schemas.DatasetDetails_datasetVersion, *v.DatasetVersion)
+	}
+}
+func (v *DatasetDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetDetails_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DatasetDetails_datasetId, v.DatasetId)
+		case schemas.DatasetDetails_datasetVersion:
+			v.DatasetVersion = new(string)
+			return d.ReadString(schemas.DatasetDetails_datasetVersion, v.DatasetVersion)
+		}
+		return nil
+	})
+}
+
+// The configuration for running the scenarios in a dataset against an agent as
+// part of a batch evaluation.
+type DatasetExecutionConfig struct {
+
+	// Specifies the agent runtime endpoint and the request template that the batch
+	// evaluation uses to invoke the agent for each scenario in the dataset.
+	//
+	// This member is required.
+	AgentInvocation AgentInvocationConfig
+
+	// The dataset whose scenarios are sent to the agent. The dataset must use the
+	// predefined evaluation schema, and the version that runs must contain between 1
+	// and 1,000 scenarios.
+	//
+	// This member is required.
+	Dataset *DatasetSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatasetExecutionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetExecutionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetExecutionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentInvocation != nil {
+		serializeAgentInvocationConfig(s, schemas.DatasetExecutionConfig_agentInvocation, v.AgentInvocation)
+	}
+	if v.Dataset != nil {
+		s.WriteStruct(schemas.DatasetExecutionConfig_dataset)
+		v.Dataset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatasetExecutionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetExecutionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetExecutionConfig_agentInvocation:
+			return deserializeAgentInvocationConfig(d, schemas.DatasetExecutionConfig_agentInvocation, &v.AgentInvocation)
+		case schemas.DatasetExecutionConfig_dataset:
+			v.Dataset = &DatasetSource{}
+			return v.Dataset.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The details of the dataset and agent that a batch evaluation ran.
+type DatasetExecutionDetails struct {
+
+	// The agent that the batch evaluation invoked.
+	//
+	// This member is required.
+	AgentInvocation AgentInvocationDetails
+
+	// The dataset and the version of it that the batch evaluation ran.
+	//
+	// This member is required.
+	Dataset *DatasetDetails
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatasetExecutionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetExecutionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetExecutionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentInvocation != nil {
+		serializeAgentInvocationDetails(s, schemas.DatasetExecutionDetails_agentInvocation, v.AgentInvocation)
+	}
+	if v.Dataset != nil {
+		s.WriteStruct(schemas.DatasetExecutionDetails_dataset)
+		v.Dataset.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DatasetExecutionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetExecutionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetExecutionDetails_agentInvocation:
+			return deserializeAgentInvocationDetails(d, schemas.DatasetExecutionDetails_agentInvocation, &v.AgentInvocation)
+		case schemas.DatasetExecutionDetails_dataset:
+			v.Dataset = &DatasetDetails{}
+			return v.Dataset.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A summary of a dataset generation. To get its counts and the request it was
+// started with, call GetDatasetGeneration .
+type DatasetGenerationSummary struct {
+
+	// The time at which the dataset generation started.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// The unique identifier of the dataset generation.
+	//
+	// This member is required.
+	GenerationId *string
+
+	// The name of the dataset generation.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of scenario the generation produces.
+	//
+	// This member is required.
+	ScenarioType ScenarioType
+
+	// The status of the dataset generation.
+	//
+	// This member is required.
+	Status DatasetGenerationStatus
+
+	// The time at which the dataset generation finished. Present only when the
+	// generation has finished.
+	CompletedAt *time.Time
+
+	// The description of the dataset generation.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatasetGenerationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetGenerationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetGenerationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.DatasetGenerationSummary_completedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DatasetGenerationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DatasetGenerationSummary_datasetId, *v.DatasetId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DatasetGenerationSummary_description, *v.Description)
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.DatasetGenerationSummary_generationId, *v.GenerationId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DatasetGenerationSummary_name, *v.Name)
+	}
+	if v.ScenarioType != "" {
+		s.WriteString(schemas.DatasetGenerationSummary_scenarioType, string(v.ScenarioType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DatasetGenerationSummary_status, string(v.Status))
+	}
+}
+func (v *DatasetGenerationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetGenerationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetGenerationSummary_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.DatasetGenerationSummary_completedAt, v.CompletedAt)
+		case schemas.DatasetGenerationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DatasetGenerationSummary_createdAt, v.CreatedAt)
+		case schemas.DatasetGenerationSummary_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DatasetGenerationSummary_datasetId, v.DatasetId)
+		case schemas.DatasetGenerationSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DatasetGenerationSummary_description, v.Description)
+		case schemas.DatasetGenerationSummary_generationId:
+			v.GenerationId = new(string)
+			return d.ReadString(schemas.DatasetGenerationSummary_generationId, v.GenerationId)
+		case schemas.DatasetGenerationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DatasetGenerationSummary_name, v.Name)
+		case schemas.DatasetGenerationSummary_scenarioType:
+			var ev string
+			if err := d.ReadString(schemas.DatasetGenerationSummary_scenarioType, &ev); err != nil {
+				return err
+			}
+			v.ScenarioType = ScenarioType(ev)
+			return nil
+		case schemas.DatasetGenerationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DatasetGenerationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatasetGenerationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Identifies the dataset and the version of it to run.
+type DatasetSource struct {
+
+	// The unique identifier of the dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	// The number of a published version of the dataset. You can't run the DRAFT
+	// version. If you don't specify a version, the batch evaluation uses the latest
+	// published version.
+	DatasetVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DatasetSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DatasetSource_datasetId, *v.DatasetId)
+	}
+	if v.DatasetVersion != nil {
+		s.WriteString(schemas.DatasetSource_datasetVersion, *v.DatasetVersion)
+	}
+}
+func (v *DatasetSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetSource_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DatasetSource_datasetId, v.DatasetId)
+		case schemas.DatasetSource_datasetVersion:
+			v.DatasetVersion = new(string)
+			return d.ReadString(schemas.DatasetSource_datasetVersion, v.DatasetVersion)
 		}
 		return nil
 	})
@@ -3791,6 +4579,90 @@ func (v *Evaluator) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Evaluator_evaluatorId:
 			v.EvaluatorId = new(string)
 			return d.ReadString(schemas.Evaluator_evaluatorId, v.EvaluatorId)
+		}
+		return nil
+	})
+}
+
+// A condition on a session's evaluation result.
+type EvaluatorFilter struct {
+
+	// The unique identifier of the evaluator whose result to compare.
+	//
+	// This member is required.
+	EvaluatorId *string
+
+	// How to compare the evaluation result with value .
+	//
+	// This member is required.
+	Operator GenerationFilterOperator
+
+	// The value to compare the evaluation result with. Use doubleValue for a score
+	// and stringValue for a label. booleanValue isn't supported.
+	//
+	// This member is required.
+	Value GenerationFilterValue
+
+	// How to combine the evaluator's per-trace or per-span results into one result
+	// for the session. Required for an evaluator that scores traces or spans. Don't
+	// specify it for an evaluator that scores sessions.
+	Aggregation ResultAggregation
+
+	// The dimension of the evaluator's result to compare. Required for an evaluator
+	// that scores more than one dimension. Don't specify it for any other evaluator.
+	EvaluationDimensionName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EvaluatorFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluatorFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluatorFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aggregation != "" {
+		s.WriteString(schemas.EvaluatorFilter_aggregation, string(v.Aggregation))
+	}
+	if v.EvaluationDimensionName != nil {
+		s.WriteString(schemas.EvaluatorFilter_evaluationDimensionName, *v.EvaluationDimensionName)
+	}
+	if v.EvaluatorId != nil {
+		s.WriteString(schemas.EvaluatorFilter_evaluatorId, *v.EvaluatorId)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.EvaluatorFilter_operator, string(v.Operator))
+	}
+	if v.Value != nil {
+		serializeGenerationFilterValue(s, schemas.EvaluatorFilter_value, v.Value)
+	}
+}
+func (v *EvaluatorFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluatorFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluatorFilter_aggregation:
+			var ev string
+			if err := d.ReadString(schemas.EvaluatorFilter_aggregation, &ev); err != nil {
+				return err
+			}
+			v.Aggregation = ResultAggregation(ev)
+			return nil
+		case schemas.EvaluatorFilter_evaluationDimensionName:
+			v.EvaluationDimensionName = new(string)
+			return d.ReadString(schemas.EvaluatorFilter_evaluationDimensionName, v.EvaluationDimensionName)
+		case schemas.EvaluatorFilter_evaluatorId:
+			v.EvaluatorId = new(string)
+			return d.ReadString(schemas.EvaluatorFilter_evaluatorId, v.EvaluatorId)
+		case schemas.EvaluatorFilter_operator:
+			var ev string
+			if err := d.ReadString(schemas.EvaluatorFilter_operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = GenerationFilterOperator(ev)
+			return nil
+		case schemas.EvaluatorFilter_value:
+			return deserializeGenerationFilterValue(d, schemas.EvaluatorFilter_value, &v.Value)
 		}
 		return nil
 	})
@@ -4961,6 +5833,641 @@ func (v *GatewayFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.GatewayFilter_targetPaths:
 			return deserializeTargetPathList(d, schemas.GatewayFilter_targetPaths, &v.TargetPaths)
+		}
+		return nil
+	})
+}
+
+// A condition on a session attribute.
+type GenerationAttributeFilter struct {
+
+	// The attribute key.
+	//
+	// This member is required.
+	Key *string
+
+	// How to compare the attribute with value .
+	//
+	// This member is required.
+	Operator GenerationFilterOperator
+
+	// The value to compare the attribute with.
+	//
+	// This member is required.
+	Value GenerationFilterValue
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationAttributeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationAttributeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationAttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.GenerationAttributeFilter_key, *v.Key)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.GenerationAttributeFilter_operator, string(v.Operator))
+	}
+	if v.Value != nil {
+		serializeGenerationFilterValue(s, schemas.GenerationAttributeFilter_value, v.Value)
+	}
+}
+func (v *GenerationAttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationAttributeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationAttributeFilter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GenerationAttributeFilter_key, v.Key)
+		case schemas.GenerationAttributeFilter_operator:
+			var ev string
+			if err := d.ReadString(schemas.GenerationAttributeFilter_operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = GenerationFilterOperator(ev)
+			return nil
+		case schemas.GenerationAttributeFilter_value:
+			return deserializeGenerationFilterValue(d, schemas.GenerationAttributeFilter_value, &v.Value)
+		}
+		return nil
+	})
+}
+
+// The failures in a dataset generation that share an error code.
+type GenerationErrorDetail struct {
+
+	// The number of sessions and traces that failed with this error code. Absent for
+	// a generation that finished before failures were counted by code. In that case,
+	// sessionIds is a sample.
+	Count *int32
+
+	// The error code, for example ACCESS_DENIED or EXPIRED_CREDENTIALS . New codes can
+	// be added.
+	ErrorCode *string
+
+	// A description of the error.
+	ErrorMessage *string
+
+	// Up to 10 of the sessions that failed with this error code. Each entry is a
+	// session ID, or the ID of a trace named in the request.
+	SessionIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.GenerationErrorDetail_count, *v.Count)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.GenerationErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GenerationErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+	if v.SessionIds != nil {
+		serializeGenerationErrorSessionIdList(s, schemas.GenerationErrorDetail_sessionIds, v.SessionIds)
+	}
+}
+func (v *GenerationErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationErrorDetail_count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.GenerationErrorDetail_count, v.Count)
+		case schemas.GenerationErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.GenerationErrorDetail_errorCode, v.ErrorCode)
+		case schemas.GenerationErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GenerationErrorDetail_errorMessage, v.ErrorMessage)
+		case schemas.GenerationErrorDetail_sessionIds:
+			return deserializeGenerationErrorSessionIdList(d, schemas.GenerationErrorDetail_sessionIds, &v.SessionIds)
+		}
+		return nil
+	})
+}
+
+// Conditions that a session must meet to be selected. A session must meet every
+// condition you specify. Attribute and turn count filters work with any source.
+// Evaluator filters need a source that has evaluation results.
+type GenerationFilters struct {
+
+	// Attribute conditions, up to 5. A session must meet all of them. An attribute on
+	// a span matches when any span in the session meets the condition.
+	AttributeFilters []GenerationAttributeFilter
+
+	// Conditions on evaluation results, up to 10. A session must meet all of them.
+	// You can use these only with an onlineEvaluation or batchEvaluation source. A
+	// cloudWatchLogs source has no evaluation results.
+	EvaluatorFilters []EvaluatorFilter
+
+	// The range of turns a session can have. For example, set max to 1 for
+	// single-turn sessions only, or min to 2 for multi-turn sessions only. Sessions
+	// with more than 100 turns are never selected.
+	TurnCount *TurnCountRange
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeFilters != nil {
+		serializeGenerationAttributeFilterList(s, schemas.GenerationFilters_attributeFilters, v.AttributeFilters)
+	}
+	if v.EvaluatorFilters != nil {
+		serializeEvaluatorFilterList(s, schemas.GenerationFilters_evaluatorFilters, v.EvaluatorFilters)
+	}
+	if v.TurnCount != nil {
+		s.WriteStruct(schemas.GenerationFilters_turnCount)
+		v.TurnCount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GenerationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationFilters_attributeFilters:
+			return deserializeGenerationAttributeFilterList(d, schemas.GenerationFilters_attributeFilters, &v.AttributeFilters)
+		case schemas.GenerationFilters_evaluatorFilters:
+			return deserializeEvaluatorFilterList(d, schemas.GenerationFilters_evaluatorFilters, &v.EvaluatorFilters)
+		case schemas.GenerationFilters_turnCount:
+			v.TurnCount = &TurnCountRange{}
+			return v.TurnCount.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The value a filter compares with. Specify exactly one. Attribute filters
+// support all three types. Evaluator filters support stringValue and doubleValue .
+//
+// The following types satisfy this interface:
+//
+//	GenerationFilterValueMemberBooleanValue
+//	GenerationFilterValueMemberDoubleValue
+//	GenerationFilterValueMemberStringValue
+type GenerationFilterValue interface {
+	isGenerationFilterValue()
+}
+
+// A Boolean value.
+type GenerationFilterValueMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationFilterValueMemberBooleanValue) isGenerationFilterValue() {}
+func (v *GenerationFilterValueMemberBooleanValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.GenerationFilterValue_booleanValue, v.Value)
+}
+func (v *GenerationFilterValueMemberBooleanValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.GenerationFilterValue_booleanValue, &v.Value)
+}
+
+// A numeric value.
+type GenerationFilterValueMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationFilterValueMemberDoubleValue) isGenerationFilterValue() {}
+func (v *GenerationFilterValueMemberDoubleValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.GenerationFilterValue_doubleValue, v.Value)
+}
+func (v *GenerationFilterValueMemberDoubleValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.GenerationFilterValue_doubleValue, &v.Value)
+}
+
+// A string value.
+type GenerationFilterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationFilterValueMemberStringValue) isGenerationFilterValue() {}
+func (v *GenerationFilterValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.GenerationFilterValue_stringValue, v.Value)
+}
+func (v *GenerationFilterValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.GenerationFilterValue_stringValue, &v.Value)
+}
+
+// The number of session and trace IDs a dataset generation was started with.
+type GenerationIdentifierCounts struct {
+
+	// The number of session IDs in the request.
+	SessionIdCount *int32
+
+	// The number of trace IDs in the request.
+	TraceIdCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationIdentifierCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationIdentifierCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationIdentifierCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionIdCount != nil {
+		s.WriteInt32(schemas.GenerationIdentifierCounts_sessionIdCount, *v.SessionIdCount)
+	}
+	if v.TraceIdCount != nil {
+		s.WriteInt32(schemas.GenerationIdentifierCounts_traceIdCount, *v.TraceIdCount)
+	}
+}
+func (v *GenerationIdentifierCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationIdentifierCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationIdentifierCounts_sessionIdCount:
+			v.SessionIdCount = new(int32)
+			return d.ReadInt32(schemas.GenerationIdentifierCounts_sessionIdCount, v.SessionIdCount)
+		case schemas.GenerationIdentifierCounts_traceIdCount:
+			v.TraceIdCount = new(int32)
+			return d.ReadInt32(schemas.GenerationIdentifierCounts_traceIdCount, v.TraceIdCount)
+		}
+		return nil
+	})
+}
+
+// The sessions and traces to generate examples from. Specify at least one session
+// ID or trace ID. A session with more than 100 turns is reported as an error and
+// produces no example.
+type GenerationIdentifiers struct {
+
+	// The IDs of the sessions to use, up to 25.
+	SessionIds []string
+
+	// The IDs of the traces to use, up to 25.
+	TraceIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationIdentifiers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationIdentifiers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionIds != nil {
+		serializeGenerationSessionIdList(s, schemas.GenerationIdentifiers_sessionIds, v.SessionIds)
+	}
+	if v.TraceIds != nil {
+		serializeGenerationTraceIdList(s, schemas.GenerationIdentifiers_traceIds, v.TraceIds)
+	}
+}
+func (v *GenerationIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationIdentifiers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationIdentifiers_sessionIds:
+			return deserializeGenerationSessionIdList(d, schemas.GenerationIdentifiers_sessionIds, &v.SessionIds)
+		case schemas.GenerationIdentifiers_traceIds:
+			return deserializeGenerationTraceIdList(d, schemas.GenerationIdentifiers_traceIds, &v.TraceIds)
+		}
+		return nil
+	})
+}
+
+// Counts of the sessions, scenarios and examples a dataset generation has
+// processed.
+type GenerationResults struct {
+
+	// The number of added examples that have reference fields.
+	ExamplesWithGroundTruth *int32
+
+	// The number of examples added to the dataset's draft.
+	ExamplesWritten *int32
+
+	// The number of scenarios left out as duplicates, of each other or of examples
+	// already in the draft.
+	ScenariosDeduplicated *int32
+
+	// The number of scenarios generated.
+	ScenariosGenerated *int32
+
+	// The number of sessions dropped because of an error. See errorDetails for the
+	// errors.
+	SessionsFailed *int32
+
+	// The number of sessions that matched the filters or were named in the request,
+	// before sampling. This includes sessions that later failed.
+	SessionsMatched *int32
+
+	// The number of sessions left after sampling.
+	SessionsSelected *int32
+
+	// The number of sessions left out because an evaluator filter had no result to
+	// compare, either because the session wasn't evaluated yet or because the
+	// evaluation failed.
+	SessionsUnscored *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationResults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationResults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationResults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExamplesWithGroundTruth != nil {
+		s.WriteInt32(schemas.GenerationResults_examplesWithGroundTruth, *v.ExamplesWithGroundTruth)
+	}
+	if v.ExamplesWritten != nil {
+		s.WriteInt32(schemas.GenerationResults_examplesWritten, *v.ExamplesWritten)
+	}
+	if v.ScenariosDeduplicated != nil {
+		s.WriteInt32(schemas.GenerationResults_scenariosDeduplicated, *v.ScenariosDeduplicated)
+	}
+	if v.ScenariosGenerated != nil {
+		s.WriteInt32(schemas.GenerationResults_scenariosGenerated, *v.ScenariosGenerated)
+	}
+	if v.SessionsFailed != nil {
+		s.WriteInt32(schemas.GenerationResults_sessionsFailed, *v.SessionsFailed)
+	}
+	if v.SessionsMatched != nil {
+		s.WriteInt32(schemas.GenerationResults_sessionsMatched, *v.SessionsMatched)
+	}
+	if v.SessionsSelected != nil {
+		s.WriteInt32(schemas.GenerationResults_sessionsSelected, *v.SessionsSelected)
+	}
+	if v.SessionsUnscored != nil {
+		s.WriteInt32(schemas.GenerationResults_sessionsUnscored, *v.SessionsUnscored)
+	}
+}
+func (v *GenerationResults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationResults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationResults_examplesWithGroundTruth:
+			v.ExamplesWithGroundTruth = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_examplesWithGroundTruth, v.ExamplesWithGroundTruth)
+		case schemas.GenerationResults_examplesWritten:
+			v.ExamplesWritten = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_examplesWritten, v.ExamplesWritten)
+		case schemas.GenerationResults_scenariosDeduplicated:
+			v.ScenariosDeduplicated = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_scenariosDeduplicated, v.ScenariosDeduplicated)
+		case schemas.GenerationResults_scenariosGenerated:
+			v.ScenariosGenerated = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_scenariosGenerated, v.ScenariosGenerated)
+		case schemas.GenerationResults_sessionsFailed:
+			v.SessionsFailed = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_sessionsFailed, v.SessionsFailed)
+		case schemas.GenerationResults_sessionsMatched:
+			v.SessionsMatched = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_sessionsMatched, v.SessionsMatched)
+		case schemas.GenerationResults_sessionsSelected:
+			v.SessionsSelected = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_sessionsSelected, v.SessionsSelected)
+		case schemas.GenerationResults_sessionsUnscored:
+			v.SessionsUnscored = new(int32)
+			return d.ReadInt32(schemas.GenerationResults_sessionsUnscored, v.SessionsUnscored)
+		}
+		return nil
+	})
+}
+
+// How many scenarios a dataset generation produces.
+type GenerationSamplingConfig struct {
+
+	// The maximum number of scenarios to generate, from 1 to 1,000. The default is
+	// 100. The generation produces at most one scenario for each selected session. The
+	// dataset's draft examples plus this value can't be more than 1,000.
+	MaxScenarios *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerationSamplingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSamplingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationSamplingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxScenarios != nil {
+		s.WriteInt32(schemas.GenerationSamplingConfig_maxScenarios, *v.MaxScenarios)
+	}
+}
+func (v *GenerationSamplingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationSamplingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationSamplingConfig_maxScenarios:
+			v.MaxScenarios = new(int32)
+			return d.ReadInt32(schemas.GenerationSamplingConfig_maxScenarios, v.MaxScenarios)
+		}
+		return nil
+	})
+}
+
+// How a dataset generation chooses sessions. Specify exactly one: filters, to
+// have AgentCore find matching sessions, or identifiers, to name the sessions and
+// traces yourself. Sessions and traces you name aren't filtered further.
+//
+// The following types satisfy this interface:
+//
+//	GenerationSelectionMemberFilters
+//	GenerationSelectionMemberIdentifiers
+type GenerationSelection interface {
+	isGenerationSelection()
+}
+
+// Conditions that a session must meet to be selected.
+type GenerationSelectionMemberFilters struct {
+	Value GenerationFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationSelectionMemberFilters) isGenerationSelection() {}
+func (v *GenerationSelectionMemberFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSelection_filters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GenerationSelectionMemberFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The sessions and traces to use.
+type GenerationSelectionMemberIdentifiers struct {
+	Value GenerationIdentifiers
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationSelectionMemberIdentifiers) isGenerationSelection() {}
+func (v *GenerationSelectionMemberIdentifiers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSelection_identifiers)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GenerationSelectionMemberIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// How a dataset generation was asked to choose sessions. Filters are returned as
+// submitted. Session and trace IDs are returned as counts, and the IDs themselves
+// are never returned.
+//
+// The following types satisfy this interface:
+//
+//	GenerationSelectionRecordMemberFilters
+//	GenerationSelectionRecordMemberIdentifiers
+type GenerationSelectionRecord interface {
+	isGenerationSelectionRecord()
+}
+
+// The filters the generation was started with.
+type GenerationSelectionRecordMemberFilters struct {
+	Value GenerationFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationSelectionRecordMemberFilters) isGenerationSelectionRecord() {}
+func (v *GenerationSelectionRecordMemberFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSelectionRecord_filters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GenerationSelectionRecordMemberFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The number of session and trace IDs the generation was started with.
+type GenerationSelectionRecordMemberIdentifiers struct {
+	Value GenerationIdentifierCounts
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationSelectionRecordMemberIdentifiers) isGenerationSelectionRecord() {}
+func (v *GenerationSelectionRecordMemberIdentifiers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSelectionRecord_identifiers)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GenerationSelectionRecordMemberIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The source of a dataset generation.
+//
+// The following types satisfy this interface:
+//
+//	GenerationSourceMemberTraceGeneration
+type GenerationSource interface {
+	isGenerationSource()
+}
+
+// Generates examples from your agent's traces.
+type GenerationSourceMemberTraceGeneration struct {
+	Value TraceGenerationSource
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationSourceMemberTraceGeneration) isGenerationSource() {}
+func (v *GenerationSourceMemberTraceGeneration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSource_traceGeneration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GenerationSourceMemberTraceGeneration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The source a dataset generation was started with.
+//
+// The following types satisfy this interface:
+//
+//	GenerationSourceRecordMemberTraceGeneration
+type GenerationSourceRecord interface {
+	isGenerationSourceRecord()
+}
+
+// The trace source the generation was started with.
+type GenerationSourceRecordMemberTraceGeneration struct {
+	Value TraceGenerationRecord
+
+	noSmithyDocumentSerde
+}
+
+func (*GenerationSourceRecordMemberTraceGeneration) isGenerationSourceRecord() {}
+func (v *GenerationSourceRecordMemberTraceGeneration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationSourceRecord_traceGeneration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *GenerationSourceRecordMemberTraceGeneration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Reference fields to copy from the sessions into the generated examples.
+type GroundTruthConfig struct {
+
+	// The reference fields to copy. Values are copied from the session as observed,
+	// not generated.
+	//
+	// This member is required.
+	Fields []GroundTruthField
+
+	// Evaluator conditions that a selected session must also meet to have reference
+	// fields copied. If you don't specify these, the generation uses the evaluator
+	// filters from selection . If the selection names sessions and traces by ID, every
+	// selected session gets reference fields. Specify an empty list to give every
+	// selected session reference fields. You can't specify quality filters with a
+	// cloudWatchLogs source.
+	QualityFilters []EvaluatorFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *GroundTruthConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroundTruthConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroundTruthConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fields != nil {
+		serializeGroundTruthFieldList(s, schemas.GroundTruthConfig_fields, v.Fields)
+	}
+	if v.QualityFilters != nil {
+		serializeEvaluatorFilterList(s, schemas.GroundTruthConfig_qualityFilters, v.QualityFilters)
+	}
+}
+func (v *GroundTruthConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroundTruthConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroundTruthConfig_fields:
+			return deserializeGroundTruthFieldList(d, schemas.GroundTruthConfig_fields, &v.Fields)
+		case schemas.GroundTruthConfig_qualityFilters:
+			return deserializeEvaluatorFilterList(d, schemas.GroundTruthConfig_qualityFilters, &v.QualityFilters)
 		}
 		return nil
 	})
@@ -10402,6 +11909,59 @@ func (v *OnlineEvaluationConfigSource) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// An online evaluation source for a dataset generation.
+type OnlineEvaluationSourceConfig struct {
+
+	// The Amazon Resource Name (ARN) of the online evaluation configuration.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	// The end of the time window to read sessions from. The default is the time the
+	// generation starts.
+	EndTime *time.Time
+
+	// The start of the time window to read sessions from. The default is 7 days
+	// before endTime .
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *OnlineEvaluationSourceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnlineEvaluationSourceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnlineEvaluationSourceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.OnlineEvaluationSourceConfig_endTime, *v.EndTime)
+	}
+	if v.OnlineEvaluationConfigArn != nil {
+		s.WriteString(schemas.OnlineEvaluationSourceConfig_onlineEvaluationConfigArn, *v.OnlineEvaluationConfigArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.OnlineEvaluationSourceConfig_startTime, *v.StartTime)
+	}
+}
+func (v *OnlineEvaluationSourceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnlineEvaluationSourceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnlineEvaluationSourceConfig_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.OnlineEvaluationSourceConfig_endTime, v.EndTime)
+		case schemas.OnlineEvaluationSourceConfig_onlineEvaluationConfigArn:
+			v.OnlineEvaluationConfigArn = new(string)
+			return d.ReadString(schemas.OnlineEvaluationSourceConfig_onlineEvaluationConfigArn, v.OnlineEvaluationConfigArn)
+		case schemas.OnlineEvaluationSourceConfig_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.OnlineEvaluationSourceConfig_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Contains the configuration for reusing agent traces from an online evaluation
 // configuration for recommendation analysis. Because online evaluation is a
 // continuous stream, a time range specifies which evaluated sessions the
@@ -11797,6 +13357,89 @@ func (v *RecordExpirySpecificationMemberRecordExpiryDurationDays) Serialize(s sm
 }
 func (v *RecordExpirySpecificationMemberRecordExpiryDurationDays) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadInt32(schemas.RecordExpirySpecification_recordExpiryDurationDays, &v.Value)
+}
+
+// Sensitive data to mask in generated examples. Nothing is redacted unless you
+// specify at least one identifier. Each character of a match is replaced with * ,
+// so a masked value keeps its length. If detection fails, the generation fails and
+// no examples are written.
+type RedactionConfiguration struct {
+
+	// Custom data identifiers to apply, up to 10. You can use custom identifiers
+	// without any managed identifiers.
+	CustomDataIdentifiers []CustomDataIdentifier
+
+	// The managed data identifiers to apply. These match the CloudWatch Logs managed
+	// data identifiers.
+	Identifiers []RedactionIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (v *RedactionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDataIdentifiers != nil {
+		serializeCustomDataIdentifierList(s, schemas.RedactionConfiguration_customDataIdentifiers, v.CustomDataIdentifiers)
+	}
+	if v.Identifiers != nil {
+		serializeRedactionIdentifierList(s, schemas.RedactionConfiguration_identifiers, v.Identifiers)
+	}
+}
+func (v *RedactionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedactionConfiguration_customDataIdentifiers:
+			return deserializeCustomDataIdentifierList(d, schemas.RedactionConfiguration_customDataIdentifiers, &v.CustomDataIdentifiers)
+		case schemas.RedactionConfiguration_identifiers:
+			return deserializeRedactionIdentifierList(d, schemas.RedactionConfiguration_identifiers, &v.Identifiers)
+		}
+		return nil
+	})
+}
+
+// A summary of what redaction found in a dataset generation. It contains counts
+// only, never the masked data.
+type RedactionSummary struct {
+
+	// The number of matches for each data identifier.
+	FindingCounts map[string]int32
+
+	// The number of scenarios scanned for sensitive data.
+	ScenariosScanned *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RedactionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedactionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedactionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingCounts != nil {
+		serializeFindingCountMap(s, schemas.RedactionSummary_findingCounts, v.FindingCounts)
+	}
+	if v.ScenariosScanned != nil {
+		s.WriteInt32(schemas.RedactionSummary_scenariosScanned, *v.ScenariosScanned)
+	}
+}
+func (v *RedactionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedactionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedactionSummary_findingCounts:
+			return deserializeFindingCountMap(d, schemas.RedactionSummary_findingCounts, &v.FindingCounts)
+		case schemas.RedactionSummary_scenariosScanned:
+			v.ScenariosScanned = new(int32)
+			return d.ReadInt32(schemas.RedactionSummary_scenariosScanned, v.ScenariosScanned)
+		}
+		return nil
+	})
 }
 
 // Summary information about a registry record.
@@ -14302,6 +15945,262 @@ func (v *ToolsFileSystemConfigurationMemberS3FilesConfiguration) Deserialize(d s
 	return v.Value.Deserialize(d)
 }
 
+// The trace source a dataset generation was started with.
+type TraceGenerationRecord struct {
+
+	// The reference fields the generation copies into the examples. If the request
+	// didn't specify quality filters, the filters the generation applies are returned
+	// here.
+	GroundTruth *GroundTruthConfig
+
+	// The sensitive data the generation masks in the examples.
+	RedactionConfiguration *RedactionConfiguration
+
+	// How many scenarios the generation produces.
+	Sampling *GenerationSamplingConfig
+
+	// How the generation chooses sessions. Filters are returned as submitted, with
+	// the resolved maximum turn count. Session and trace IDs are returned as counts.
+	// If this is absent, the request had no selection.
+	Selection GenerationSelectionRecord
+
+	// Where the generation reads sessions from, including the resolved time window.
+	SourceConfig TraceSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *TraceGenerationRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceGenerationRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TraceGenerationRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroundTruth != nil {
+		s.WriteStruct(schemas.TraceGenerationRecord_groundTruth)
+		v.GroundTruth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedactionConfiguration != nil {
+		s.WriteStruct(schemas.TraceGenerationRecord_redactionConfiguration)
+		v.RedactionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sampling != nil {
+		s.WriteStruct(schemas.TraceGenerationRecord_sampling)
+		v.Sampling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Selection != nil {
+		serializeGenerationSelectionRecord(s, schemas.TraceGenerationRecord_selection, v.Selection)
+	}
+	if v.SourceConfig != nil {
+		serializeTraceSourceConfig(s, schemas.TraceGenerationRecord_sourceConfig, v.SourceConfig)
+	}
+}
+func (v *TraceGenerationRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TraceGenerationRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TraceGenerationRecord_groundTruth:
+			v.GroundTruth = &GroundTruthConfig{}
+			return v.GroundTruth.Deserialize(d)
+		case schemas.TraceGenerationRecord_redactionConfiguration:
+			v.RedactionConfiguration = &RedactionConfiguration{}
+			return v.RedactionConfiguration.Deserialize(d)
+		case schemas.TraceGenerationRecord_sampling:
+			v.Sampling = &GenerationSamplingConfig{}
+			return v.Sampling.Deserialize(d)
+		case schemas.TraceGenerationRecord_selection:
+			return deserializeGenerationSelectionRecord(d, schemas.TraceGenerationRecord_selection, &v.Selection)
+		case schemas.TraceGenerationRecord_sourceConfig:
+			return deserializeTraceSourceConfig(d, schemas.TraceGenerationRecord_sourceConfig, &v.SourceConfig)
+		}
+		return nil
+	})
+}
+
+// Settings for generating examples from your agent's traces.
+type TraceGenerationSource struct {
+
+	// Where to read the sessions from.
+	//
+	// This member is required.
+	SourceConfig TraceSourceConfig
+
+	// Reference fields to copy from the sessions into the examples. If you don't
+	// specify this, the examples have no reference fields.
+	GroundTruth *GroundTruthConfig
+
+	// Sensitive data to mask in the examples. If you don't specify this, nothing is
+	// redacted.
+	RedactionConfiguration *RedactionConfiguration
+
+	// How many scenarios to generate from the selected sessions.
+	Sampling *GenerationSamplingConfig
+
+	// How to choose sessions from the source. If you don't specify a selection, the
+	// generation uses every session in the source and time window that has at most 100
+	// turns.
+	Selection GenerationSelection
+
+	noSmithyDocumentSerde
+}
+
+func (v *TraceGenerationSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceGenerationSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TraceGenerationSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroundTruth != nil {
+		s.WriteStruct(schemas.TraceGenerationSource_groundTruth)
+		v.GroundTruth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedactionConfiguration != nil {
+		s.WriteStruct(schemas.TraceGenerationSource_redactionConfiguration)
+		v.RedactionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sampling != nil {
+		s.WriteStruct(schemas.TraceGenerationSource_sampling)
+		v.Sampling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Selection != nil {
+		serializeGenerationSelection(s, schemas.TraceGenerationSource_selection, v.Selection)
+	}
+	if v.SourceConfig != nil {
+		serializeTraceSourceConfig(s, schemas.TraceGenerationSource_sourceConfig, v.SourceConfig)
+	}
+}
+func (v *TraceGenerationSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TraceGenerationSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TraceGenerationSource_groundTruth:
+			v.GroundTruth = &GroundTruthConfig{}
+			return v.GroundTruth.Deserialize(d)
+		case schemas.TraceGenerationSource_redactionConfiguration:
+			v.RedactionConfiguration = &RedactionConfiguration{}
+			return v.RedactionConfiguration.Deserialize(d)
+		case schemas.TraceGenerationSource_sampling:
+			v.Sampling = &GenerationSamplingConfig{}
+			return v.Sampling.Deserialize(d)
+		case schemas.TraceGenerationSource_selection:
+			return deserializeGenerationSelection(d, schemas.TraceGenerationSource_selection, &v.Selection)
+		case schemas.TraceGenerationSource_sourceConfig:
+			return deserializeTraceSourceConfig(d, schemas.TraceGenerationSource_sourceConfig, &v.SourceConfig)
+		}
+		return nil
+	})
+}
+
+// Where a dataset generation reads sessions from. Specify exactly one source.
+//
+// The following types satisfy this interface:
+//
+//	TraceSourceConfigMemberBatchEvaluation
+//	TraceSourceConfigMemberCloudWatchLogs
+//	TraceSourceConfigMemberOnlineEvaluation
+type TraceSourceConfig interface {
+	isTraceSourceConfig()
+}
+
+// Reads sessions, with their evaluation results, from a batch evaluation.
+type TraceSourceConfigMemberBatchEvaluation struct {
+	Value BatchEvaluationSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceSourceConfigMemberBatchEvaluation) isTraceSourceConfig() {}
+func (v *TraceSourceConfigMemberBatchEvaluation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceSourceConfig_batchEvaluation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TraceSourceConfigMemberBatchEvaluation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Reads sessions from CloudWatch Logs log groups.
+type TraceSourceConfigMemberCloudWatchLogs struct {
+	Value CloudWatchLogsSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceSourceConfigMemberCloudWatchLogs) isTraceSourceConfig() {}
+func (v *TraceSourceConfigMemberCloudWatchLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceSourceConfig_cloudWatchLogs)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TraceSourceConfigMemberCloudWatchLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Reads sessions, with their evaluation results, from an online evaluation
+// configuration.
+type TraceSourceConfigMemberOnlineEvaluation struct {
+	Value OnlineEvaluationSourceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceSourceConfigMemberOnlineEvaluation) isTraceSourceConfig() {}
+func (v *TraceSourceConfigMemberOnlineEvaluation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceSourceConfig_onlineEvaluation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TraceSourceConfigMemberOnlineEvaluation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A range of turn counts. Each bound is from 1 to 100, and min can't be greater
+// than max .
+type TurnCountRange struct {
+
+	// The maximum number of turns. The default is 100.
+	Max *int32
+
+	// The minimum number of turns.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TurnCountRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TurnCountRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TurnCountRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteInt32(schemas.TurnCountRange_max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt32(schemas.TurnCountRange_min, *v.Min)
+	}
+}
+func (v *TurnCountRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TurnCountRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TurnCountRange_max:
+			v.Max = new(int32)
+			return d.ReadInt32(schemas.TurnCountRange_max, v.Max)
+		case schemas.TurnCountRange_min:
+			v.Min = new(int32)
+			return d.ReadInt32(schemas.TurnCountRange_min, v.Min)
+		}
+		return nil
+	})
+}
+
 // The OAuth2.0 token or user ID that was used to generate the workload access
 // token used for initiating the user authorization flow to retrieve OAuth2.0
 // tokens.
@@ -14936,6 +16835,8 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isABTestEvaluationConfig()                {}
+func (*UnknownUnionMember) isAgentInvocationConfig()                 {}
+func (*UnknownUnionMember) isAgentInvocationDetails()                {}
 func (*UnknownUnionMember) isAgentTracesConfig()                     {}
 func (*UnknownUnionMember) isBrowserAction()                         {}
 func (*UnknownUnionMember) isBrowserActionResult()                   {}
@@ -14951,6 +16852,11 @@ func (*UnknownUnionMember) isEvaluationMetadata()                    {}
 func (*UnknownUnionMember) isEvaluationTarget()                      {}
 func (*UnknownUnionMember) isExtractionJobMessages()                 {}
 func (*UnknownUnionMember) isFilterValue()                           {}
+func (*UnknownUnionMember) isGenerationFilterValue()                 {}
+func (*UnknownUnionMember) isGenerationSelection()                   {}
+func (*UnknownUnionMember) isGenerationSelectionRecord()             {}
+func (*UnknownUnionMember) isGenerationSource()                      {}
+func (*UnknownUnionMember) isGenerationSourceRecord()                {}
 func (*UnknownUnionMember) isGroundTruthSource()                     {}
 func (*UnknownUnionMember) isGroundTruthTurnInput()                  {}
 func (*UnknownUnionMember) isHarnessContentBlock()                   {}
@@ -14996,4 +16902,5 @@ func (*UnknownUnionMember) isSystemPromptConfig()                    {}
 func (*UnknownUnionMember) isToolDescriptionConfig()                 {}
 func (*UnknownUnionMember) isToolDescriptionSource()                 {}
 func (*UnknownUnionMember) isToolsFileSystemConfiguration()          {}
+func (*UnknownUnionMember) isTraceSourceConfig()                     {}
 func (*UnknownUnionMember) isUserIdentifier()                        {}

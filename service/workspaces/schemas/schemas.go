@@ -2389,7 +2389,7 @@ var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
 var SelfservicePermissions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "SelfservicePermissions",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var SelfservicePermissions_RestartWorkspace *smithy.Schema
 
 var SelfservicePermissions_IncreaseVolumeSize *smithy.Schema
@@ -2399,6 +2399,10 @@ var SelfservicePermissions_ChangeComputeType *smithy.Schema
 var SelfservicePermissions_SwitchRunningMode *smithy.Schema
 
 var SelfservicePermissions_RebuildWorkspace *smithy.Schema
+
+var SelfservicePermissions_NestedVirtualization *smithy.Schema
+
+var SelfservicePermissions_EnableEndUserAdvisor *smithy.Schema
 
 var SessionConnectionState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -5747,6 +5751,10 @@ func init() {
 	SelfservicePermissions_SwitchRunningMode = SelfservicePermissions.AddMember("SwitchRunningMode", ReconnectEnum)
 
 	SelfservicePermissions_RebuildWorkspace = SelfservicePermissions.AddMember("RebuildWorkspace", ReconnectEnum)
+
+	SelfservicePermissions_NestedVirtualization = SelfservicePermissions.AddMember("NestedVirtualization", ReconnectEnum)
+
+	SelfservicePermissions_EnableEndUserAdvisor = SelfservicePermissions.AddMember("EnableEndUserAdvisor", ReconnectEnum)
 
 	SamlStatusEnum_DISABLED = SamlStatusEnum.AddMember("DISABLED", smithyprelude.Unit)
 

@@ -1,0 +1,8 @@
+{
+    "id": "2a3b0f27-c03a-4f1b-b689-b2e15ca9164e",
+    "type": "feature",
+    "description": "AWS Control Tower now reports source drift when an enabled baseline no longer matches the landing zone's configuration.",
+    "modules": [
+        "service/controltower"
+    ]
+}

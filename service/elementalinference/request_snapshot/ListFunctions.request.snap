@@ -1,0 +1,3 @@
+GET /v1/functions?maxResults=1&nextToken=__NextToken__
+
+

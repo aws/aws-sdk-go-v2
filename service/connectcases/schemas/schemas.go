@@ -453,6 +453,11 @@ var AuditMergeMetadata_primaryCaseId *smithy.Schema
 
 var AuditMergeMetadata_secondaryCaseId *smithy.Schema
 
+var _AutoIncludeFields = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "AutoIncludeFields",
+}, smithy.ShapeTypeString, 0)
+
 var BasicLayout = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "BasicLayout",
@@ -617,8 +622,10 @@ var _CaseArn = smithy.NewSchema(smithy.ShapeID{
 var CaseEventIncludedData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "CaseEventIncludedData",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CaseEventIncludedData_fields *smithy.Schema
+
+var CaseEventIncludedData_autoIncludeFields *smithy.Schema
 
 var CaseFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -3118,6 +3125,8 @@ func init() {
 	_FieldIdentifierList_member = _FieldIdentifierList.AddMember("member", FieldIdentifier)
 
 	CaseEventIncludedData_fields = CaseEventIncludedData.AddMember("fields", _FieldIdentifierList)
+
+	CaseEventIncludedData_autoIncludeFields = CaseEventIncludedData.AddMember("autoIncludeFields", _AutoIncludeFields)
 
 	FieldValueUnion_stringValue = FieldValueUnion.AddMember("stringValue", smithyprelude.String)
 

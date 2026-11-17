@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Artifacts":[{"Content":"__Content__","ContentType":"__ContentType__","FileName":"__FileName__","Format":"BICEP"},{"Content":"__Content__","ContentType":"__ContentType__","FileName":"__FileName__","Format":"BICEP"}],"Format":"BICEP","ManifestVersion":1,"Provider":"AZURE","RequiredPermissionsToApply":["__Member__","__Member__"]}

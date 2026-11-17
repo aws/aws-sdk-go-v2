@@ -7,10 +7,35 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
 )
 
+func ExampleOperationConfigurationUnion_outputUsage() {
+	var union types.OperationConfigurationUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OperationConfigurationUnionMemberSecurityGroup:
+		_ = v.Value // Value is types.SecurityGroupConfiguration
+
+	case *types.OperationConfigurationUnionMemberSecurityGroupRule:
+		_ = v.Value // Value is types.SecurityGroupRuleConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SecurityGroupConfiguration
+var _ *types.SecurityGroupRuleConfiguration
+
 func ExampleOperationUnion_outputUsage() {
 	var union types.OperationUnion
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.OperationUnionMemberCreate:
+		_ = v.Value // Value is types.CreateOperation
+
 	case *types.OperationUnionMemberDelete:
 		_ = v.Value // Value is types.DeleteOperation
 
@@ -23,6 +48,9 @@ func ExampleOperationUnion_outputUsage() {
 	case *types.OperationUnionMemberUpdate:
 		_ = v.Value // Value is types.UpdateOperation
 
+	case *types.OperationUnionMemberUpdateV2:
+		_ = v.Value // Value is types.UpdateOperationV2
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -34,8 +62,36 @@ func ExampleOperationUnion_outputUsage() {
 
 var _ *types.DeleteOperation
 var _ *types.SplitOperation
+var _ *types.CreateOperation
+var _ *types.UpdateOperationV2
 var _ *types.UpdateOperation
 var _ *types.MergeOperation
+
+func ExampleSegmentOperation_outputUsage() {
+	var union types.SegmentOperation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SegmentOperationMemberCreate:
+		_ = v.Value // Value is types.SegmentCreateOperation
+
+	case *types.SegmentOperationMemberDelete:
+		_ = v.Value // Value is types.SegmentDeleteOperation
+
+	case *types.SegmentOperationMemberUpdate:
+		_ = v.Value // Value is types.SegmentUpdateOperation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SegmentCreateOperation
+var _ *types.SegmentUpdateOperation
+var _ *types.SegmentDeleteOperation
 
 func ExampleSsmExternalParameter_outputUsage() {
 	var union types.SsmExternalParameter

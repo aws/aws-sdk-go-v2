@@ -1,0 +1,8 @@
+{
+    "id": "b274f379-3f8f-4b87-b2bc-0c066f909f87",
+    "type": "feature",
+    "description": "AWS Elemental Inference now supports functions, for running your own analysis on feed media, and question sets, for custom decisions on contextual metadata shots and scenes.",
+    "modules": [
+        "service/elementalinference"
+    ]
+}

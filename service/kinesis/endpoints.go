@@ -302,6 +302,17 @@ type EndpointParameters struct {
 	// Parameter is required.
 	ChannelARN *string
 
+	// The ARN of the Kinesis queue
+	//
+	// Parameter is required.
+	QueueARN *string
+
+	// The type of Kinesis resource targeted by the operation (e.g., queue). Used for
+	// endpoint routing.
+	//
+	// Defaults to  if no value is provided.
+	ResourceType *string
+
 	// The AWS AccountId used for the request.
 	//
 	// Parameter is
@@ -321,6 +332,10 @@ type EndpointParameters struct {
 
 // ValidateRequired validates required parameters are set.
 func (p EndpointParameters) ValidateRequired() error {
+	if p.ResourceType == nil {
+		return fmt.Errorf("parameter ResourceType is required")
+	}
+
 	if p.UseDualStack == nil {
 		return fmt.Errorf("parameter UseDualStack is required")
 	}
@@ -335,6 +350,10 @@ func (p EndpointParameters) ValidateRequired() error {
 // WithDefaults returns a shallow copy of EndpointParameterswith default values
 // applied to members where applicable.
 func (p EndpointParameters) WithDefaults() EndpointParameters {
+	if p.ResourceType == nil {
+		p.ResourceType = ptr.String("")
+	}
+
 	if p.UseDualStack == nil {
 		p.UseDualStack = ptr.Bool(false)
 	}
@@ -347,25 +366,30 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 
 const bddRoot int32 = 2
 
-var bddNodes = [465]int32{
-	-1, 1, -1, 0, 3, 4, 1, 5, 4, 9, 154, 100000073, 2, 143, 6, 3, 143, 7, 4, 8, 12, 5, 9, 12, 6, 10, 12, 7, 11, 12, 8, 109, 12, 9, 154, 13, 10, 93, 14, 11, 77, 15, 30, 49, 16, 31, 30, 17, 32, 18, 146, 33, 19, 29, 35, 29, 20, 36, 21, 100000061, 56, 22, 100000017, 63, 25, 23, 64, 24, 100000060, 66, 100000059, 100000007, 64, 27, 26, 65, 100000058, 100000005, 65, 28, 100000003, 66, 100000057, 100000002, 55, 100000062, 146, 34, 31, 100000028, 37, 32, 100000027, 38, 33, 100000026, 39, 34, 100000056, 40, 35, 100000024, 41, 100000024, 36, 42, 37, 100000055, 43, 38, 100000054, 56, 39, 100000017, 59, 40, 100000046, 60, 41, 100000045, 61, 100000053, 42, 63, 45, 43, 64, 44, 100000052, 66, 100000051, 100000007, 64, 47, 46, 65, 100000050, 100000005, 65, 48, 100000003, 66, 100000049, 100000002, 44, 50, 100000028, 45, 51, 100000027, 46, 52, 100000026, 47, 53, 100000048, 48, 54, 100000024, 49, 100000024, 55, 50, 68, 56, 51, 57, 100000036, 52, 58, 100000047, 56, 59, 100000017, 57, 60, 100000046, 58, 61, 100000045, 63, 64, 62, 64, 63, 100000044, 66, 100000043, 100000007, 64, 66, 65, 65, 100000042, 100000005, 65, 67, 100000003, 66, 100000041, 100000002, 52, 69, 100000047, 56, 70, 100000017, 63, 73, 71, 64, 72, 100000040, 66, 100000039, 100000007, 64, 75, 74, 65, 100000038, 100000005, 65, 76, 100000003, 66, 100000037, 100000002, 12, 78, 100000028, 17, 79, 100000027, 18, 80, 100000026, 19, 81, 100000035, 20, 82, 100000024, 21, 100000024, 83, 24, 84, 100000034, 26, 85, 100000033, 56, 86, 100000017, 63, 89, 87, 64, 88, 100000032, 66, 100000031, 100000007, 64, 91, 90, 65, 100000030, 100000005, 65, 92, 100000003, 66, 100000029, 100000002, 22, 94, 100000028, 23, 95, 100000027, 25, 96, 100000026, 27, 97, 100000025, 28, 98, 100000024, 29, 100000024, 99, 53, 100, 100000023, 54, 101, 100000022, 56, 102, 100000017, 63, 105, 103, 64, 104, 100000021, 66, 100000020, 100000007, 64, 107, 106, 65, 100000019, 100000005, 65, 108, 100000003, 66, 100000018, 100000002, 9, 110, 114, 13, 111, 113, 14, 112, 113, 15, 135, 113, 16, 115, 114, 56, 117, 100000017, 56, 116, 100000017, 62, 124, 117, 63, 120, 118, 64, 119, 100000016, 66, 100000015, 100000007, 64, 122, 121, 65, 100000014, 100000005, 65, 123, 100000003, 66, 100000013, 100000002, 63, 129, 125, 64, 127, 126, 68, 100000012, 100000016, 66, 128, 100000007, 68, 100000011, 100000015, 64, 132, 130, 65, 131, 100000005, 68, 100000010, 100000014, 65, 133, 100000003, 66, 134, 100000002, 68, 100000009, 100000013, 56, 136, 100000017, 63, 139, 137, 64, 138, 100000008, 66, 100000006, 100000007, 64, 141, 140, 65, 100000004, 100000005, 65, 142, 100000003, 66, 100000001, 100000002, 9, 154, 144, 32, 145, 146, 55, 100000063, 146, 63, 149, 147, 64, 148, 100000072, 66, 100000071, 100000007, 64, 152, 150, 65, 151, 100000005, 67, 100000069, 100000070, 65, 153, 100000068, 66, 100000067, 100000068, 63, 100000064, 155, 64, 100000065, 100000066}
+var bddNodes = [711]int32{
+	-1, 1, -1, 0, 3, 4, 1, 7, 4, 9, 236, 5, 47, 6, 100000095, 59, 100000095, 100000074, 2, 193, 8, 3, 193, 9, 4, 10, 14, 5, 11, 14, 6, 12, 14, 7, 13, 14, 8, 156, 14, 9, 236, 15, 10, 140, 16, 11, 124, 17, 12, 80, 18, 45, 61, 19, 47, 42, 20, 49, 21, 201, 52, 22, 41, 53, 41, 23, 55, 24, 100000083, 59, 33, 25, 71, 26, 100000017, 79, 29, 27, 80, 28, 100000082, 82, 100000081, 100000007, 80, 31, 30, 81, 100000080, 100000005, 81, 32, 100000003, 82, 100000079, 100000002, 71, 34, 100000017, 79, 37, 35, 80, 36, 100000078, 82, 100000077, 100000007, 80, 39, 38, 81, 100000076, 100000005, 81, 40, 100000003, 82, 100000075, 100000002, 54, 100000084, 201, 59, 43, 100000074, 60, 44, 100000028, 61, 45, 100000027, 62, 46, 100000026, 63, 47, 100000073, 64, 48, 100000024, 65, 100000024, 49, 66, 50, 100000072, 67, 51, 100000071, 71, 52, 100000017, 73, 53, 100000052, 74, 54, 100000051, 79, 57, 55, 80, 56, 100000070, 82, 100000069, 100000007, 80, 59, 58, 81, 100000068, 100000005, 81, 60, 100000003, 82, 100000067, 100000002, 48, 62, 100000028, 50, 63, 100000027, 51, 64, 100000026, 56, 65, 100000066, 57, 66, 100000024, 58, 100000024, 67, 69, 68, 100000065, 70, 69, 100000064, 71, 70, 100000017, 72, 71, 100000046, 75, 72, 100000045, 78, 100000063, 73, 79, 76, 74, 80, 75, 100000062, 82, 100000061, 100000007, 80, 78, 77, 81, 100000060, 100000005, 81, 79, 100000003, 82, 100000059, 100000002, 14, 81, 100000028, 34, 82, 100000027, 36, 83, 100000026, 38, 84, 100000054, 39, 85, 100000024, 40, 100000024, 86, 41, 115, 87, 42, 102, 88, 43, 89, 100000036, 44, 90, 100000053, 46, 92, 91, 71, 100000052, 100000017, 68, 94, 93, 71, 100000051, 100000017, 71, 95, 100000017, 79, 98, 96, 80, 97, 100000050, 82, 100000049, 100000007, 80, 100, 99, 81, 100000048, 100000005, 81, 101, 100000003, 82, 100000047, 100000002, 44, 103, 100000053, 46, 105, 104, 71, 100000046, 100000017, 68, 107, 106, 71, 100000045, 100000017, 71, 108, 100000017, 79, 111, 109, 80, 110, 100000044, 82, 100000043, 100000007, 80, 113, 112, 81, 100000042, 100000005, 81, 114, 100000003, 82, 100000041, 100000002, 44, 116, 100000053, 71, 117, 100000017, 79, 120, 118, 80, 119, 100000040, 82, 100000039, 100000007, 80, 122, 121, 81, 100000038, 100000005, 81, 123, 100000003, 82, 100000037, 100000002, 13, 125, 100000028, 16, 126, 100000027, 17, 127, 100000026, 18, 128, 100000035, 19, 129, 100000024, 20, 100000024, 130, 25, 131, 100000034, 26, 132, 100000033, 71, 133, 100000017, 79, 136, 134, 80, 135, 100000032, 82, 100000031, 100000007, 80, 138, 137, 81, 100000030, 100000005, 81, 139, 100000003, 82, 100000029, 100000002, 27, 141, 100000028, 28, 142, 100000027, 29, 143, 100000026, 30, 144, 100000025, 31, 145, 100000024, 32, 100000024, 146, 35, 147, 100000023, 37, 148, 100000022, 71, 149, 100000017, 79, 152, 150, 80, 151, 100000021, 82, 100000020, 100000007, 80, 154, 153, 81, 100000019, 100000005, 81, 155, 100000003, 82, 100000018, 100000002, 9, 157, 161, 21, 158, 160, 22, 159, 160, 23, 185, 160, 24, 169, 161, 71, 162, 100000017, 79, 165, 163, 80, 164, 100000016, 82, 100000015, 100000007, 80, 167, 166, 81, 100000014, 100000005, 81, 168, 100000003, 82, 100000013, 100000002, 71, 170, 100000017, 79, 177, 171, 80, 174, 172, 84, 173, 100000016, 85, 100000012, 100000016, 82, 175, 100000007, 84, 176, 100000015, 85, 100000011, 100000015, 80, 181, 178, 81, 179, 100000005, 84, 180, 100000014, 85, 100000010, 100000014, 81, 182, 100000003, 82, 183, 100000002, 84, 184, 100000013, 85, 100000009, 100000013, 71, 186, 100000017, 79, 189, 187, 80, 188, 100000008, 82, 100000006, 100000007, 80, 191, 190, 81, 100000004, 100000005, 81, 192, 100000003, 82, 100000001, 100000002, 9, 236, 194, 12, 195, 198, 14, 196, 198, 15, 197, 198, 33, 222, 198, 47, 210, 199, 49, 200, 201, 54, 100000085, 201, 59, 229, 202, 79, 205, 203, 80, 204, 100000094, 82, 100000093, 100000007, 80, 208, 206, 81, 207, 100000005, 83, 100000091, 100000092, 81, 209, 100000090, 82, 100000089, 100000090, 59, 211, 100000074, 60, 212, 100000028, 61, 213, 100000027, 62, 214, 100000026, 63, 215, 100000073, 64, 216, 100000024, 65, 100000024, 217, 66, 218, 100000072, 67, 219, 100000071, 71, 220, 100000017, 73, 221, 100000052, 74, 229, 100000051, 34, 223, 100000027, 36, 224, 100000026, 38, 225, 100000054, 44, 226, 100000053, 71, 227, 100000017, 76, 228, 100000052, 77, 229, 100000051, 79, 232, 230, 80, 231, 100000058, 82, 100000057, 100000007, 80, 234, 233, 81, 100000056, 100000005, 81, 235, 100000003, 82, 100000055, 100000002, 79, 100000086, 237, 80, 100000087, 100000088}
 
 type conditionContext struct {
 	PartitionResult                *awsrulesfn.PartitionConfig
 	StreamIdSuffixValue            *string
 	StreamIdPrefixValue            *string
 	arn_ssa_2                      *awsrulesfn.ARN
+	arn_ssa_4                      *awsrulesfn.ARN
+	isoArnType                     *string
+	arnType_ssa_2                  *string
 	HttpsCustomEndpointSuffixValue *string
 	PlainCustomEndpointSuffixValue *string
-	arnType_ssa_2                  *string
-	arn_ssa_4                      *awsrulesfn.ARN
+	arn_ssa_5                      *awsrulesfn.ARN
 	arnType_ssa_1                  *string
+	arnType_ssa_3                  *string
+	resourceId_ssa_1               *string
 	arn_ssa_1                      *awsrulesfn.ARN
 	arnType_ssa_4                  *string
 	arn_ssa_3                      *awsrulesfn.ARN
-	arnType_ssa_3                  *string
-	resourceId_ssa_1               *string
+	arnType_ssa_5                  *string
 	resourceId_ssa_2               *string
+	resourceId_ssa_3               *string
+	isoResourceId                  *string
 }
 
 func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
@@ -417,187 +441,241 @@ func evalCondition(idx int, params *EndpointParameters, c *conditionContext) boo
 	case 11:
 		return params.ConsumerARN != nil
 	case 12:
+		return params.ResourceARN != nil
+	case 13:
 		if v := awsrulesfn.ParseARN(*params.ConsumerARN); v != nil {
 			c.arn_ssa_2 = v
 			return true
 		}
 		return false
-	case 13:
+	case 14:
+		if v := awsrulesfn.ParseARN(*params.ResourceARN); v != nil {
+			c.arn_ssa_4 = v
+			return true
+		}
+		return false
+	case 15:
+		if v := c.arn_ssa_4.ResourceId.Get(0); v != nil {
+			c.isoArnType = v
+			return true
+		}
+		return false
+	case 16:
+		return rulesfn.IsValidHostLabel(c.arn_ssa_2.AccountId, false)
+	case 17:
+		return rulesfn.IsValidHostLabel(c.arn_ssa_2.Region, false)
+	case 18:
+		return c.arn_ssa_2.Service == "kinesis"
+	case 19:
+		if v := c.arn_ssa_2.ResourceId.Get(0); v != nil {
+			c.arnType_ssa_2 = v
+			return true
+		}
+		return false
+	case 20:
+		return *c.arnType_ssa_2 == ""
+	case 21:
 		if v := rulesfn.SubString(*params.Endpoint, 15, 20, false); v != nil {
 			c.HttpsCustomEndpointSuffixValue = v
 			return true
 		}
 		return false
-	case 14:
-		return func() string {
-			if v := rulesfn.SubString(*params.Endpoint, 15, 16, false); v != nil {
-				return *v
-			}
-			return ""
-		}() == "-"
-	case 15:
+	case 22:
 		return func() string {
 			if v := rulesfn.SubString(*params.Endpoint, 20, 21, false); v != nil {
 				return *v
 			}
 			return ""
 		}() == "."
-	case 16:
+	case 23:
+		return func() string {
+			if v := rulesfn.SubString(*params.Endpoint, 15, 16, false); v != nil {
+				return *v
+			}
+			return ""
+		}() == "-"
+	case 24:
 		if v := rulesfn.SubString(*params.Endpoint, 7, 12, false); v != nil {
 			c.PlainCustomEndpointSuffixValue = v
 			return true
 		}
 		return false
-	case 17:
-		return rulesfn.IsValidHostLabel(c.arn_ssa_2.AccountId, false)
-	case 18:
-		return rulesfn.IsValidHostLabel(c.arn_ssa_2.Region, false)
-	case 19:
-		return c.arn_ssa_2.Service == "kinesis"
-	case 20:
-		if v := c.arn_ssa_2.ResourceId.Get(0); v != nil {
-			c.arnType_ssa_2 = v
-			return true
-		}
-		return false
-	case 21:
-		return *c.arnType_ssa_2 == ""
-	case 22:
-		if v := awsrulesfn.ParseARN(*params.StreamARN); v != nil {
-			c.arn_ssa_4 = v
-			return true
-		}
-		return false
-	case 23:
-		return rulesfn.IsValidHostLabel(c.arn_ssa_4.AccountId, false)
-	case 24:
-		return *c.arnType_ssa_2 == "stream"
 	case 25:
-		return rulesfn.IsValidHostLabel(c.arn_ssa_4.Region, false)
+		return *c.arnType_ssa_2 == "stream"
 	case 26:
 		return c.PartitionResult.Name == c.arn_ssa_2.Partition
 	case 27:
-		return c.arn_ssa_4.Service == "kinesis"
+		if v := awsrulesfn.ParseARN(*params.StreamARN); v != nil {
+			c.arn_ssa_5 = v
+			return true
+		}
+		return false
 	case 28:
-		if v := c.arn_ssa_4.ResourceId.Get(0); v != nil {
+		return rulesfn.IsValidHostLabel(c.arn_ssa_5.AccountId, false)
+	case 29:
+		return rulesfn.IsValidHostLabel(c.arn_ssa_5.Region, false)
+	case 30:
+		return c.arn_ssa_5.Service == "kinesis"
+	case 31:
+		if v := c.arn_ssa_5.ResourceId.Get(0); v != nil {
 			c.arnType_ssa_1 = v
 			return true
 		}
 		return false
-	case 29:
-		return *c.arnType_ssa_1 == ""
-	case 30:
-		return params.ResourceARN != nil
-	case 31:
-		return params.ChannelARN != nil
 	case 32:
-		return params.AccountIdEndpointMode != nil
+		return *c.arnType_ssa_1 == ""
 	case 33:
-		return params.AccountId != nil
+		return *c.isoArnType == "queue"
 	case 34:
+		return rulesfn.IsValidHostLabel(c.arn_ssa_4.AccountId, false)
+	case 35:
+		return *c.arnType_ssa_1 == "stream"
+	case 36:
+		return rulesfn.IsValidHostLabel(c.arn_ssa_4.Region, false)
+	case 37:
+		return c.PartitionResult.Name == c.arn_ssa_5.Partition
+	case 38:
+		return c.arn_ssa_4.Service == "kinesis"
+	case 39:
+		if v := c.arn_ssa_4.ResourceId.Get(0); v != nil {
+			c.arnType_ssa_3 = v
+			return true
+		}
+		return false
+	case 40:
+		return *c.arnType_ssa_3 == ""
+	case 41:
+		return *c.arnType_ssa_3 == "stream"
+	case 42:
+		return *c.arnType_ssa_3 == "channel"
+	case 43:
+		return *c.arnType_ssa_3 == "queue"
+	case 44:
+		return c.PartitionResult.Name == c.arn_ssa_4.Partition
+	case 45:
+		return params.ChannelARN != nil
+	case 46:
+		if v := c.arn_ssa_4.ResourceId.Get(1); v != nil {
+			c.resourceId_ssa_1 = v
+			return true
+		}
+		return false
+	case 47:
+		return params.QueueARN != nil
+	case 48:
 		if v := awsrulesfn.ParseARN(*params.ChannelARN); v != nil {
 			c.arn_ssa_1 = v
 			return true
 		}
 		return false
-	case 35:
-		return *params.AccountIdEndpointMode == "disabled"
-	case 36:
-		return rulesfn.IsValidHostLabel(*params.AccountId, false)
-	case 37:
+	case 49:
+		return params.AccountIdEndpointMode != nil
+	case 50:
 		return rulesfn.IsValidHostLabel(c.arn_ssa_1.AccountId, false)
-	case 38:
+	case 51:
 		return rulesfn.IsValidHostLabel(c.arn_ssa_1.Region, false)
-	case 39:
+	case 52:
+		return params.AccountId != nil
+	case 53:
+		return *params.AccountIdEndpointMode == "disabled"
+	case 54:
+		return *params.AccountIdEndpointMode == "required"
+	case 55:
+		return rulesfn.IsValidHostLabel(*params.AccountId, false)
+	case 56:
 		return c.arn_ssa_1.Service == "kinesis"
-	case 40:
+	case 57:
 		if v := c.arn_ssa_1.ResourceId.Get(0); v != nil {
 			c.arnType_ssa_4 = v
 			return true
 		}
 		return false
-	case 41:
+	case 58:
 		return *c.arnType_ssa_4 == ""
-	case 42:
-		return *c.arnType_ssa_4 == "channel"
-	case 43:
-		return c.PartitionResult.Name == c.arn_ssa_1.Partition
-	case 44:
-		if v := awsrulesfn.ParseARN(*params.ResourceARN); v != nil {
+	case 59:
+		return *params.ResourceType == "queue"
+	case 60:
+		if v := awsrulesfn.ParseARN(*params.QueueARN); v != nil {
 			c.arn_ssa_3 = v
 			return true
 		}
 		return false
-	case 45:
+	case 61:
 		return rulesfn.IsValidHostLabel(c.arn_ssa_3.AccountId, false)
-	case 46:
+	case 62:
 		return rulesfn.IsValidHostLabel(c.arn_ssa_3.Region, false)
-	case 47:
+	case 63:
 		return c.arn_ssa_3.Service == "kinesis"
-	case 48:
+	case 64:
 		if v := c.arn_ssa_3.ResourceId.Get(0); v != nil {
-			c.arnType_ssa_3 = v
+			c.arnType_ssa_5 = v
 			return true
 		}
 		return false
-	case 49:
-		return *c.arnType_ssa_3 == ""
-	case 50:
-		return *c.arnType_ssa_3 == "stream"
-	case 51:
-		return *c.arnType_ssa_3 == "channel"
-	case 52:
+	case 65:
+		return *c.arnType_ssa_5 == ""
+	case 66:
+		return *c.arnType_ssa_5 == "queue"
+	case 67:
 		return c.PartitionResult.Name == c.arn_ssa_3.Partition
-	case 53:
-		return *c.arnType_ssa_1 == "stream"
-	case 54:
-		return c.PartitionResult.Name == c.arn_ssa_4.Partition
-	case 55:
-		return *params.AccountIdEndpointMode == "required"
-	case 56:
-		return params.OperationType != nil
-	case 57:
-		if v := c.arn_ssa_3.ResourceId.Get(1); v != nil {
-			c.resourceId_ssa_1 = v
-			return true
-		}
-		return false
-	case 58:
+	case 68:
 		return rulesfn.IsValidHostLabel(*c.resourceId_ssa_1, false)
-	case 59:
+	case 69:
+		return *c.arnType_ssa_4 == "channel"
+	case 70:
+		return c.PartitionResult.Name == c.arn_ssa_1.Partition
+	case 71:
+		return params.OperationType != nil
+	case 72:
 		if v := c.arn_ssa_1.ResourceId.Get(1); v != nil {
 			c.resourceId_ssa_2 = v
 			return true
 		}
 		return false
-	case 60:
+	case 73:
+		if v := c.arn_ssa_3.ResourceId.Get(1); v != nil {
+			c.resourceId_ssa_3 = v
+			return true
+		}
+		return false
+	case 74:
+		return rulesfn.IsValidHostLabel(*c.resourceId_ssa_3, false)
+	case 75:
 		return rulesfn.IsValidHostLabel(*c.resourceId_ssa_2, false)
-	case 61:
+	case 76:
+		if v := c.arn_ssa_4.ResourceId.Get(1); v != nil {
+			c.isoResourceId = v
+			return true
+		}
+		return false
+	case 77:
+		return rulesfn.IsValidHostLabel(*c.isoResourceId, false)
+	case 78:
 		return *params.OperationType == "data"
-	case 62:
-		return func() string {
-			if v := rulesfn.SubString(*params.Endpoint, 7, 8, false); v != nil {
-				return *v
-			}
-			return ""
-		}() == "-"
-	case 63:
+	case 79:
 		return *params.UseFIPS == true
-	case 64:
+	case 80:
 		return *params.UseDualStack == true
-	case 65:
+	case 81:
 		return c.PartitionResult.SupportsFIPS == true
-	case 66:
+	case 82:
 		return c.PartitionResult.SupportsDualStack == true
-	case 67:
+	case 83:
 		return c.PartitionResult.Name == "aws-us-gov"
-	case 68:
+	case 84:
 		return func() string {
 			if v := rulesfn.SubString(*params.Endpoint, 12, 13, false); v != nil {
 				return *v
 			}
 			return ""
 		}() == "."
+	case 85:
+		return func() string {
+			if v := rulesfn.SubString(*params.Endpoint, 7, 8, false); v != nil {
+				return *v
+			}
+			return ""
+		}() == "-"
 	}
 	return false
 }
@@ -912,7 +990,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_4.AccountId)
+			out.WriteString(c.arn_ssa_5.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis-fips.")
@@ -933,7 +1011,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_4.AccountId)
+			out.WriteString(c.arn_ssa_5.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis-fips.")
@@ -954,7 +1032,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_4.AccountId)
+			out.WriteString(c.arn_ssa_5.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis.")
@@ -975,7 +1053,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_4.AccountId)
+			out.WriteString(c.arn_ssa_5.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis.")
@@ -996,7 +1074,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Partition: ")
-			out.WriteString(c.arn_ssa_4.Partition)
+			out.WriteString(c.arn_ssa_5.Partition)
 			out.WriteString(" from ARN doesn't match with partition name: ")
 			out.WriteString(c.PartitionResult.Name)
 			out.WriteString(".")
@@ -1016,7 +1094,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Invalid ARN: The ARN was not for the Kinesis service, found: ")
-			out.WriteString(c.arn_ssa_4.Service)
+			out.WriteString(c.arn_ssa_5.Service)
 			out.WriteString(".")
 			return out.String()
 		}())
@@ -1141,14 +1219,14 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			var out strings.Builder
 			out.WriteString("Invalid ARN: Unsupported resource type `")
 			out.WriteString(*c.arnType_ssa_3)
-			out.WriteString("`. Expected: stream or channel")
+			out.WriteString("`. Expected: stream, channel, or queue.")
 			return out.String()
 		}())
 	case 37:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_3.AccountId)
+			out.WriteString(c.arn_ssa_4.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis-fips.")
@@ -1169,7 +1247,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_3.AccountId)
+			out.WriteString(c.arn_ssa_4.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis-fips.")
@@ -1190,7 +1268,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_3.AccountId)
+			out.WriteString(c.arn_ssa_4.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis.")
@@ -1211,7 +1289,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(c.arn_ssa_3.AccountId)
+			out.WriteString(c.arn_ssa_4.AccountId)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
 			out.WriteString("-kinesis.")
@@ -1317,31 +1395,55 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 	case 46:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: Missing channel id.")
 	case 47:
-		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+		uriString := func() string {
 			var out strings.Builder
-			out.WriteString("Partition: ")
-			out.WriteString(c.arn_ssa_3.Partition)
-			out.WriteString(" from ARN doesn't match with partition name: ")
-			out.WriteString(c.PartitionResult.Name)
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_1)
 			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
 			return out.String()
-		}())
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
 	case 48:
-		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+		uriString := func() string {
 			var out strings.Builder
-			out.WriteString("Invalid ARN: The ARN was not for the Kinesis service, found: ")
-			out.WriteString(c.arn_ssa_3.Service)
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_1)
 			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
 			return out.String()
-		}())
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
 	case 49:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(*c.resourceId_ssa_2)
+			out.WriteString(*c.resourceId_ssa_1)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
-			out.WriteString("-kinesis-fips.")
+			out.WriteString("-kinesis-queues.")
 			out.WriteString(*params.Region)
 			out.WriteString(".")
 			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
@@ -1359,10 +1461,10 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
-			out.WriteString(*c.resourceId_ssa_2)
+			out.WriteString(*c.resourceId_ssa_1)
 			out.WriteString(".")
 			out.WriteString(*params.OperationType)
-			out.WriteString("-kinesis-fips.")
+			out.WriteString("-kinesis-queues.")
 			out.WriteString(*params.Region)
 			out.WriteString(".")
 			out.WriteString(c.PartitionResult.DnsSuffix)
@@ -1377,6 +1479,138 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			Headers: http.Header{},
 		}, nil
 	case 51:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: Invalid queue id.")
+	case 52:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: Missing queue id.")
+	case 53:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Partition: ")
+			out.WriteString(c.arn_ssa_4.Partition)
+			out.WriteString(" from ARN doesn't match with partition name: ")
+			out.WriteString(c.PartitionResult.Name)
+			out.WriteString(".")
+			return out.String()
+		}())
+	case 54:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Invalid ARN: The ARN was not for the Kinesis service, found: ")
+			out.WriteString(c.arn_ssa_4.Service)
+			out.WriteString(".")
+			return out.String()
+		}())
+	case 55:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 56:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 57:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://kinesis-queues.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 58:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://kinesis-queues.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 59:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_2)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 60:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_2)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 61:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -1397,7 +1631,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 52:
+	case 62:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -1418,9 +1652,9 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 53:
+	case 63:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "ChannelARN does not support the `data` operation type.")
-	case 54:
+	case 64:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Partition: ")
@@ -1430,7 +1664,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString(".")
 			return out.String()
 		}())
-	case 55:
+	case 65:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Invalid ARN: ChannelARN only supports `channel` arn types, found: `")
@@ -1438,7 +1672,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString("`.")
 			return out.String()
 		}())
-	case 56:
+	case 66:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Invalid ARN: The ARN was not for the Kinesis service, found: ")
@@ -1446,7 +1680,231 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString(".")
 			return out.String()
 		}())
-	case 57:
+	case 67:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_3)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 68:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_3)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 69:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_3)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 70:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*c.resourceId_ssa_3)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 71:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Partition: ")
+			out.WriteString(c.arn_ssa_3.Partition)
+			out.WriteString(" from ARN doesn't match with partition name: ")
+			out.WriteString(c.PartitionResult.Name)
+			out.WriteString(".")
+			return out.String()
+		}())
+	case 72:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Invalid ARN: QueueARN only supports `queue` ARN types, found: `")
+			out.WriteString(*c.arnType_ssa_5)
+			out.WriteString("`.")
+			return out.String()
+		}())
+	case 73:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Invalid ARN: The ARN was not for the Kinesis service, found: ")
+			out.WriteString(c.arn_ssa_3.Service)
+			out.WriteString(".")
+			return out.String()
+		}())
+	case 74:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: ResourceType must be \"queue\" when QueueARN is set.")
+	case 75:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				out.Set("metricValues", []interface{}{
+					"O",
+				})
+				return out
+			}(),
+		}, nil
+	case 76:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				out.Set("metricValues", []interface{}{
+					"O",
+				})
+				return out
+			}(),
+		}, nil
+	case 77:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				out.Set("metricValues", []interface{}{
+					"O",
+				})
+				return out
+			}(),
+		}, nil
+	case 78:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.AccountId)
+			out.WriteString(".")
+			out.WriteString(*params.OperationType)
+			out.WriteString("-kinesis-queues.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				out.Set("metricValues", []interface{}{
+					"O",
+				})
+				return out
+			}(),
+		}, nil
+	case 79:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -1474,7 +1932,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				return out
 			}(),
 		}, nil
-	case 58:
+	case 80:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -1502,7 +1960,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				return out
 			}(),
 		}, nil
-	case 59:
+	case 81:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -1530,7 +1988,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				return out
 			}(),
 		}, nil
-	case 60:
+	case 82:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -1558,17 +2016,17 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				return out
 			}(),
 		}, nil
-	case 61:
+	case 83:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid account id.")
-	case 62:
+	case 84:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded")
-	case 63:
+	case 85:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: AccountIdEndpointMode is required but account endpoints are not supported in this partition")
-	case 64:
+	case 86:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
-	case 65:
+	case 87:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
-	case 66:
+	case 88:
 		uriString := *params.Endpoint
 		uri, err := url.Parse(uriString)
 		if err != nil {
@@ -1578,7 +2036,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 67:
+	case 89:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://kinesis-fips.")
@@ -1595,9 +2053,9 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 68:
+	case 90:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
-	case 69:
+	case 91:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://kinesis.")
@@ -1613,7 +2071,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 70:
+	case 92:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://kinesis-fips.")
@@ -1630,7 +2088,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 71:
+	case 93:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://kinesis.")
@@ -1647,7 +2105,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 72:
+	case 94:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://kinesis.")
@@ -1664,7 +2122,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			URI:     *uri,
 			Headers: http.Header{},
 		}, nil
-	case 73:
+	case 95:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
 	}
 	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)

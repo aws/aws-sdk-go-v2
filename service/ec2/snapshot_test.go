@@ -8690,6 +8690,18 @@ func TestCheckSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.
 	}
 }
 
+func TestCheckSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayPeeringAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
@@ -18630,6 +18642,18 @@ func TestUpdateSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing
 	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayPeeringAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

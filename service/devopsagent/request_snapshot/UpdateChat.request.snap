@@ -1,0 +1,5 @@
+PATCH /agents/agent-space/__AgentSpaceId__/chat/__ExecutionId__
+
+Content-Type: application/json
+
+{"archiveStatus":"ACTIVE","clientToken":"__ClientToken__","summary":"__Summary__"}

@@ -55,6 +55,9 @@ const (
 	AggregationResourceTypeMicrosoftComputeVirtualMachines                  AggregationResourceType = "Microsoft.Compute/virtualMachines"
 	AggregationResourceTypeMicrosoftContainerRegistryRegistryContainerImage AggregationResourceType = "Microsoft.ContainerRegistry/registry/containerImage"
 	AggregationResourceTypeMicrosoftWebSites                                AggregationResourceType = "Microsoft.Web/sites"
+	AggregationResourceTypeCloudfunctionsGoogleapisComFunction              AggregationResourceType = "cloudfunctions.googleapis.com/Function"
+	AggregationResourceTypeComputeGoogleapisComInstance                     AggregationResourceType = "compute.googleapis.com/Instance"
+	AggregationResourceTypeArtifactregistryGoogleapisComDockerImage         AggregationResourceType = "artifactregistry.googleapis.com/DockerImage"
 )
 
 // Values returns all known values for AggregationResourceType. Note that this can
@@ -70,6 +73,9 @@ func (AggregationResourceType) Values() []AggregationResourceType {
 		"Microsoft.Compute/virtualMachines",
 		"Microsoft.ContainerRegistry/registry/containerImage",
 		"Microsoft.Web/sites",
+		"cloudfunctions.googleapis.com/Function",
+		"compute.googleapis.com/Instance",
+		"artifactregistry.googleapis.com/DockerImage",
 	}
 }
 
@@ -711,6 +717,7 @@ type CloudProvider string
 const (
 	CloudProviderAws           CloudProvider = "AWS"
 	CloudProviderAzure         CloudProvider = "AZURE"
+	CloudProviderGcp           CloudProvider = "GCP"
 	CloudProviderNotApplicable CloudProvider = "NOT_APPLICABLE"
 )
 
@@ -722,6 +729,7 @@ func (CloudProvider) Values() []CloudProvider {
 	return []CloudProvider{
 		"AWS",
 		"AZURE",
+		"GCP",
 		"NOT_APPLICABLE",
 	}
 }
@@ -853,6 +861,7 @@ type ConnectorCloudProvider string
 // Enum values for ConnectorCloudProvider
 const (
 	ConnectorCloudProviderAzure ConnectorCloudProvider = "AZURE"
+	ConnectorCloudProviderGcp   ConnectorCloudProvider = "GCP"
 )
 
 // Values returns all known values for ConnectorCloudProvider. Note that this can
@@ -862,6 +871,7 @@ const (
 func (ConnectorCloudProvider) Values() []ConnectorCloudProvider {
 	return []ConnectorCloudProvider{
 		"AZURE",
+		"GCP",
 	}
 }
 
@@ -1063,6 +1073,10 @@ const (
 	CoverageResourceTypeMicrosoftWebSites                                     CoverageResourceType = "Microsoft.Web/sites"
 	CoverageResourceTypeMicrosoftContainerRegistryRegistries                  CoverageResourceType = "Microsoft.ContainerRegistry/registries"
 	CoverageResourceTypeMachineImage                                          CoverageResourceType = "MACHINE_IMAGE"
+	CoverageResourceTypeCloudfunctionsGoogleapisComFunction                   CoverageResourceType = "cloudfunctions.googleapis.com/Function"
+	CoverageResourceTypeComputeGoogleapisComInstance                          CoverageResourceType = "compute.googleapis.com/Instance"
+	CoverageResourceTypeArtifactregistryGoogleapisComRepository               CoverageResourceType = "artifactregistry.googleapis.com/Repository"
+	CoverageResourceTypeArtifactregistryGoogleapisComDockerImage              CoverageResourceType = "artifactregistry.googleapis.com/DockerImage"
 )
 
 // Values returns all known values for CoverageResourceType. Note that this can be
@@ -1082,6 +1096,10 @@ func (CoverageResourceType) Values() []CoverageResourceType {
 		"Microsoft.Web/sites",
 		"Microsoft.ContainerRegistry/registries",
 		"MACHINE_IMAGE",
+		"cloudfunctions.googleapis.com/Function",
+		"compute.googleapis.com/Instance",
+		"artifactregistry.googleapis.com/Repository",
+		"artifactregistry.googleapis.com/DockerImage",
 	}
 }
 
@@ -2195,6 +2213,7 @@ type Provider string
 const (
 	ProviderAws   Provider = "AWS"
 	ProviderAzure Provider = "AZURE"
+	ProviderGcp   Provider = "GCP"
 )
 
 // Values returns all known values for Provider. Note that this can be expanded in
@@ -2205,6 +2224,7 @@ func (Provider) Values() []Provider {
 	return []Provider{
 		"AWS",
 		"AZURE",
+		"GCP",
 	}
 }
 
@@ -2407,6 +2427,9 @@ const (
 	ResourceTypeMicrosoftContainerRegistryRegistryContainerImage ResourceType = "Microsoft.ContainerRegistry/registry/containerImage"
 	ResourceTypeMicrosoftWebSites                                ResourceType = "Microsoft.Web/sites"
 	ResourceTypeMachineImage                                     ResourceType = "MACHINE_IMAGE"
+	ResourceTypeCloudfunctionsGoogleapisComFunction              ResourceType = "cloudfunctions.googleapis.com/Function"
+	ResourceTypeComputeGoogleapisComInstance                     ResourceType = "compute.googleapis.com/Instance"
+	ResourceTypeArtifactregistryGoogleapisComDockerImage         ResourceType = "artifactregistry.googleapis.com/DockerImage"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -2424,6 +2447,9 @@ func (ResourceType) Values() []ResourceType {
 		"Microsoft.ContainerRegistry/registry/containerImage",
 		"Microsoft.Web/sites",
 		"MACHINE_IMAGE",
+		"cloudfunctions.googleapis.com/Function",
+		"compute.googleapis.com/Instance",
+		"artifactregistry.googleapis.com/DockerImage",
 	}
 }
 
@@ -2750,6 +2776,8 @@ type ScopeType string
 const (
 	ScopeTypeTenant       ScopeType = "TENANT"
 	ScopeTypeSubscription ScopeType = "SUBSCRIPTION"
+	ScopeTypeOrganization ScopeType = "ORGANIZATION"
+	ScopeTypeProject      ScopeType = "PROJECT"
 )
 
 // Values returns all known values for ScopeType. Note that this can be expanded
@@ -2760,6 +2788,8 @@ func (ScopeType) Values() []ScopeType {
 	return []ScopeType{
 		"TENANT",
 		"SUBSCRIPTION",
+		"ORGANIZATION",
+		"PROJECT",
 	}
 }
 
@@ -3027,6 +3057,11 @@ const (
 	UsageTypeAzureVmAgentBasedInstanceHours UsageType = "AZURE_VM_AGENT_BASED_INSTANCE_HOURS"
 	UsageTypeAzureServerlessFunctionHours   UsageType = "AZURE_SERVERLESS_FUNCTION_HOURS"
 	UsageTypeEc2AmiHours                    UsageType = "EC2_AMI_HOURS"
+	UsageTypeEc2AmiOneShotScan              UsageType = "EC2_AMI_ONE_SHOT_SCAN"
+	UsageTypeGcpVmAgentBasedInstanceHours   UsageType = "GCP_VM_AGENT_BASED_INSTANCE_HOURS"
+	UsageTypeGcpCloudRunHours               UsageType = "GCP_CLOUD_RUN_HOURS"
+	UsageTypeGcpContainerImageInitialScan   UsageType = "GCP_CONTAINER_IMAGE_INITIAL_SCAN"
+	UsageTypeGcpContainerImageRescan        UsageType = "GCP_CONTAINER_IMAGE_RESCAN"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded
@@ -3049,6 +3084,11 @@ func (UsageType) Values() []UsageType {
 		"AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
 		"AZURE_SERVERLESS_FUNCTION_HOURS",
 		"EC2_AMI_HOURS",
+		"EC2_AMI_ONE_SHOT_SCAN",
+		"GCP_VM_AGENT_BASED_INSTANCE_HOURS",
+		"GCP_CLOUD_RUN_HOURS",
+		"GCP_CONTAINER_IMAGE_INITIAL_SCAN",
+		"GCP_CONTAINER_IMAGE_RESCAN",
 	}
 }
 

@@ -681,6 +681,10 @@ type EnabledBaselineDriftTypes struct {
 	// the account is moved.
 	Inheritance *EnabledBaselineInheritanceDrift
 
+	// Source drift occurs when an enabled baseline no longer matches the landing
+	// zone's configuration.
+	Source *EnabledBaselineSourceDrift
+
 	noSmithyDocumentSerde
 }
 
@@ -696,6 +700,11 @@ func (v *EnabledBaselineDriftTypes) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Inheritance.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.EnabledBaselineDriftTypes_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *EnabledBaselineDriftTypes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnabledBaselineDriftTypes, func(s *smithy.Schema) error {
@@ -703,6 +712,9 @@ func (v *EnabledBaselineDriftTypes) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.EnabledBaselineDriftTypes_inheritance:
 			v.Inheritance = &EnabledBaselineInheritanceDrift{}
 			return v.Inheritance.Deserialize(d)
+		case schemas.EnabledBaselineDriftTypes_source:
+			v.Source = &EnabledBaselineSourceDrift{}
+			return v.Source.Deserialize(d)
 		}
 		return nil
 	})
@@ -722,6 +734,9 @@ type EnabledBaselineFilter struct {
 	// An optional filter that sets up a list of parentIdentifiers to filter the
 	// results of the ListEnabledBaseline output.
 	ParentIdentifiers []string
+
+	// A list of EnabledBaselineDriftStatus items for enabled baselines.
+	SourceDriftStatuses []EnabledBaselineDriftStatus
 
 	// A list of EnablementStatus items.
 	Statuses []EnablementStatus
@@ -748,6 +763,9 @@ func (v *EnabledBaselineFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentIdentifiers != nil {
 		serializeEnabledBaselineParentIdentifiers(s, schemas.EnabledBaselineFilter_parentIdentifiers, v.ParentIdentifiers)
 	}
+	if v.SourceDriftStatuses != nil {
+		serializeEnabledBaselineDriftStatuses(s, schemas.EnabledBaselineFilter_sourceDriftStatuses, v.SourceDriftStatuses)
+	}
 	if v.Statuses != nil {
 		serializeEnabledBaselineEnablementStatuses(s, schemas.EnabledBaselineFilter_statuses, v.Statuses)
 	}
@@ -764,6 +782,8 @@ func (v *EnabledBaselineFilter) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeEnabledBaselineDriftStatuses(d, schemas.EnabledBaselineFilter_inheritanceDriftStatuses, &v.InheritanceDriftStatuses)
 		case schemas.EnabledBaselineFilter_parentIdentifiers:
 			return deserializeEnabledBaselineParentIdentifiers(d, schemas.EnabledBaselineFilter_parentIdentifiers, &v.ParentIdentifiers)
+		case schemas.EnabledBaselineFilter_sourceDriftStatuses:
+			return deserializeEnabledBaselineDriftStatuses(d, schemas.EnabledBaselineFilter_sourceDriftStatuses, &v.SourceDriftStatuses)
 		case schemas.EnabledBaselineFilter_statuses:
 			return deserializeEnabledBaselineEnablementStatuses(d, schemas.EnabledBaselineFilter_statuses, &v.Statuses)
 		case schemas.EnabledBaselineFilter_targetIdentifiers:
@@ -904,6 +924,42 @@ func (v *EnabledBaselineParameterSummary) Deserialize(d smithy.ShapeDeserializer
 			if ov, ok := dv.(smithydocument.Opaque); ok {
 				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
 			}
+			return nil
+		}
+		return nil
+	})
+}
+
+// The source drift summary for the enabled baseline. Source drift occurs when an
+// enabled baseline no longer matches the landing zone's configuration.
+type EnabledBaselineSourceDrift struct {
+
+	// The source drift status for the enabled baseline.
+	Status EnabledBaselineDriftStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *EnabledBaselineSourceDrift) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineSourceDrift)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineSourceDrift) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.EnabledBaselineSourceDrift_status, string(v.Status))
+	}
+}
+func (v *EnabledBaselineSourceDrift) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineSourceDrift, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineSourceDrift_status:
+			var ev string
+			if err := d.ReadString(schemas.EnabledBaselineSourceDrift_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EnabledBaselineDriftStatus(ev)
 			return nil
 		}
 		return nil

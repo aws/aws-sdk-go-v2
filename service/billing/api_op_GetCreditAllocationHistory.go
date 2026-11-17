@@ -39,13 +39,18 @@ type GetCreditAllocationHistoryInput struct {
 	// This member is required.
 	AccountId *string
 
-	// Inclusive end date as Unix epoch seconds.
+	// The exclusive end date of the range, in Unix epoch seconds. To get one billing
+	// month, set startDate to the first day of that month. Then set endDate to the
+	// first day of the next month. Use 00:00 UTC for both.
 	//
 	// This member is required.
 	EndDate *time.Time
 
-	// Inclusive start date as Unix epoch seconds. Must be on or before endDate . The
-	// range from startDate to endDate cannot exceed 24 billing months.
+	// The inclusive start date of the range, in Unix epoch seconds. This value must
+	// be earlier than endDate . You get credit allocations for bills whose billing
+	// period starts on or after startDate and before endDate . If startDate is in the
+	// middle of a billing period, that period isn't included. The range can't exceed
+	// 24 calendar months.
 	//
 	// This member is required.
 	StartDate *time.Time

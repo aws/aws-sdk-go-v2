@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Creates an agreement request that acts as a quote for the terms you want to
@@ -52,6 +53,11 @@ type CreateAgreementRequestInput struct {
 	// This member is required.
 	RequestedTerms []types.RequestedTerm
 
+	// The contact information of the acceptor.
+	//
+	// Don't provide this parameter if the intent is AMEND .
+	AcceptorContact *types.AcceptorContact
+
 	// The agreement proposal signed by the proposer. The proposal includes the
 	// requested resources and the terms that outline an agreement outcome.
 	//
@@ -81,6 +87,11 @@ func (v *CreateAgreementRequestInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAgreementRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptorContact != nil {
+		s.WriteStruct(schemas.CreateAgreementRequestInput_acceptorContact)
+		v.AcceptorContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.AgreementProposalIdentifier != nil {
 		s.WriteString(schemas.CreateAgreementRequestInput_agreementProposalIdentifier, *v.AgreementProposalIdentifier)
 	}
@@ -109,9 +120,41 @@ type CreateAgreementRequestOutput struct {
 	// with AcceptAgreementRequest to accept the agreement.
 	AgreementRequestId *string
 
+	// The type of agreement (for example, PurchaseAgreement ).
+	AgreementType *string
+
+	// Indicates whether the agreement request requires approval before it can be
+	// accepted. Values are REQUIRED and NOT_REQUIRED .
+	ApprovalRequirement types.ApprovalRequirement
+
 	// Provides details of the charges associated with the agreement request. This is
 	// only applicable when a request is created for PurchaseAgreement .
 	ChargeSummary *types.ChargeSummary
+
+	// The date and time when the agreement request was created.
+	CreatedAt *time.Time
+
+	// The current status of the agreement request. Possible values include:
+	//
+	//   - DRAFT – The agreement request has been created but not yet submitted for
+	//   approval.
+	//
+	//   - PENDING_APPROVAL – The agreement request is waiting for one or more
+	//   approvers to decide.
+	//
+	//   - APPROVED – All required approvals have been granted, but the agreement
+	//   request wasn't accepted automatically. Call AcceptAgreementRequest to accept
+	//   it. If the call fails, its error explains why.
+	//
+	//   - ACCEPTED – The agreement request has been accepted and the resulting
+	//   agreement has been created.
+	//
+	//   - REJECTED – At least one approver rejected the agreement request. It won't
+	//   proceed.
+	//
+	//   - CANCELLED – The agreement request was cancelled before completion, by the
+	//   acceptor or because the acceptor's account left its AWS organization.
+	Status types.AgreementRequestStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -129,10 +172,22 @@ func (v *CreateAgreementRequestOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AgreementRequestId != nil {
 		s.WriteString(schemas.CreateAgreementRequestOutput_agreementRequestId, *v.AgreementRequestId)
 	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.CreateAgreementRequestOutput_agreementType, *v.AgreementType)
+	}
+	if v.ApprovalRequirement != "" {
+		s.WriteString(schemas.CreateAgreementRequestOutput_approvalRequirement, string(v.ApprovalRequirement))
+	}
 	if v.ChargeSummary != nil {
 		s.WriteStruct(schemas.CreateAgreementRequestOutput_chargeSummary)
 		v.ChargeSummary.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateAgreementRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateAgreementRequestOutput_status, string(v.Status))
 	}
 }
 func (v *CreateAgreementRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
@@ -141,9 +196,29 @@ func (v *CreateAgreementRequestOutput) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.CreateAgreementRequestOutput_agreementRequestId:
 			v.AgreementRequestId = new(string)
 			return d.ReadString(schemas.CreateAgreementRequestOutput_agreementRequestId, v.AgreementRequestId)
+		case schemas.CreateAgreementRequestOutput_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.CreateAgreementRequestOutput_agreementType, v.AgreementType)
+		case schemas.CreateAgreementRequestOutput_approvalRequirement:
+			var ev string
+			if err := d.ReadString(schemas.CreateAgreementRequestOutput_approvalRequirement, &ev); err != nil {
+				return err
+			}
+			v.ApprovalRequirement = types.ApprovalRequirement(ev)
+			return nil
 		case schemas.CreateAgreementRequestOutput_chargeSummary:
 			v.ChargeSummary = &types.ChargeSummary{}
 			return v.ChargeSummary.Deserialize(d)
+		case schemas.CreateAgreementRequestOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAgreementRequestOutput_createdAt, v.CreatedAt)
+		case schemas.CreateAgreementRequestOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateAgreementRequestOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgreementRequestStatus(ev)
+			return nil
 		}
 		return nil
 	})

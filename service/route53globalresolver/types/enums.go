@@ -250,6 +250,7 @@ type IpAddressType string
 const (
 	IpAddressTypeIpv4 IpAddressType = "IPV4"
 	IpAddressTypeIpv6 IpAddressType = "IPV6"
+	IpAddressTypeNone IpAddressType = "NONE"
 )
 
 // Values returns all known values for IpAddressType. Note that this can be
@@ -260,6 +261,7 @@ func (IpAddressType) Values() []IpAddressType {
 	return []IpAddressType{
 		"IPV4",
 		"IPV6",
+		"NONE",
 	}
 }
 
@@ -292,6 +294,50 @@ func (ProfileResourceStatus) Values() []ProfileResourceStatus {
 	}
 }
 
+type PublicIpStatus string
+
+// Enum values for PublicIpStatus
+const (
+	PublicIpStatusEnabledReserved  PublicIpStatus = "ENABLED_RESERVED"
+	PublicIpStatusDisabledReserved PublicIpStatus = "DISABLED_RESERVED"
+	PublicIpStatusDisabledReleased PublicIpStatus = "DISABLED_RELEASED"
+)
+
+// Values returns all known values for PublicIpStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PublicIpStatus) Values() []PublicIpStatus {
+	return []PublicIpStatus{
+		"ENABLED_RESERVED",
+		"DISABLED_RESERVED",
+		"DISABLED_RELEASED",
+	}
+}
+
+type RegionScopeType string
+
+// Enum values for RegionScopeType
+const (
+	// The IP address applies to all Amazon Web Services Regions in which the core
+	// network endpoint is available.
+	RegionScopeTypeAll RegionScopeType = "ALL"
+	// The IP address applies only to the specific Amazon Web Services Regions that
+	// you identify in the regions field.
+	RegionScopeTypeRegional RegionScopeType = "REGIONAL"
+)
+
+// Values returns all known values for RegionScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegionScopeType) Values() []RegionScopeType {
+	return []RegionScopeType{
+		"ALL",
+		"REGIONAL",
+	}
+}
+
 type TokenStatus string
 
 // Enum values for TokenStatus
@@ -310,6 +356,31 @@ func (TokenStatus) Values() []TokenStatus {
 		"CREATING",
 		"OPERATIONAL",
 		"DELETING",
+	}
+}
+
+type UpdateIpAddressOperation string
+
+// Enum values for UpdateIpAddressOperation
+const (
+	// Adds a new DNS IP address to the core network endpoint.
+	UpdateIpAddressOperationAdd UpdateIpAddressOperation = "ADD"
+	// Removes an existing DNS IP address from the core network endpoint.
+	UpdateIpAddressOperationRemove UpdateIpAddressOperation = "REMOVE"
+	// Updates the configuration of an existing DNS IP address on the core network
+	// endpoint.
+	UpdateIpAddressOperationUpdate UpdateIpAddressOperation = "UPDATE"
+)
+
+// Values returns all known values for UpdateIpAddressOperation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateIpAddressOperation) Values() []UpdateIpAddressOperation {
+	return []UpdateIpAddressOperation{
+		"ADD",
+		"REMOVE",
+		"UPDATE",
 	}
 }
 

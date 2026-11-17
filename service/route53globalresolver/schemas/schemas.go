@@ -50,6 +50,13 @@ var CreateAccessToken = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tokens/{dnsViewId}",
 	Code: 200})
 
+var CreateCoreNetworkEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CreateCoreNetworkEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/core-network-endpoints",
+	Code: 200})
+
 var CreateDNSView = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "CreateDNSView",
@@ -90,6 +97,13 @@ var DeleteAccessToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteAccessToken",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tokens/{accessTokenId}",
+	Code: 200})
+
+var DeleteCoreNetworkEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "DeleteCoreNetworkEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/core-network-endpoints/{coreNetworkEndpointId}",
 	Code: 200})
 
 var DeleteDNSView = smithy.NewSchema(smithy.ShapeID{
@@ -155,6 +169,13 @@ var GetAccessToken = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tokens/{accessTokenId}",
 	Code: 200})
 
+var GetCoreNetworkEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "GetCoreNetworkEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/core-network-endpoints/{coreNetworkEndpointId}",
+	Code: 200})
+
 var GetDNSView = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "GetDNSView",
@@ -216,6 +237,13 @@ var ListAccessTokens = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAccessTokens",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tokens/dns-view/{dnsViewId}",
+	Code: 200})
+
+var ListCoreNetworkEndpoints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "ListCoreNetworkEndpoints",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/core-network-endpoints",
 	Code: 200})
 
 var ListDNSViews = smithy.NewSchema(smithy.ShapeID{
@@ -309,6 +337,13 @@ var UpdateAccessToken = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tokens/{accessTokenId}",
 	Code: 200})
 
+var UpdateCoreNetworkEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "UpdateCoreNetworkEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/core-network-endpoints/{coreNetworkEndpointId}",
+	Code: 200})
+
 var UpdateDNSView = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "UpdateDNSView",
@@ -367,10 +402,12 @@ var _AccessSources_member *smithy.Schema
 var AccessSourcesItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "AccessSourcesItem",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var AccessSourcesItem_arn *smithy.Schema
 
 var AccessSourcesItem_cidr *smithy.Schema
+
+var AccessSourcesItem_coreNetworkEndpointId *smithy.Schema
 
 var AccessSourcesItem_createdAt *smithy.Schema
 
@@ -383,6 +420,8 @@ var AccessSourcesItem_name *smithy.Schema
 var AccessSourcesItem_dnsViewId *smithy.Schema
 
 var AccessSourcesItem_protocol *smithy.Schema
+
+var AccessSourcesItem_segment *smithy.Schema
 
 var AccessSourcesItem_status *smithy.Schema
 
@@ -692,6 +731,78 @@ var ConflictException_resourceId *smithy.Schema
 
 var ConflictException_resourceType *smithy.Schema
 
+var CoreNetworkEndpointDnsIpInputItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CoreNetworkEndpointDnsIpInputItem",
+}, smithy.ShapeTypeStructure, 5)
+var CoreNetworkEndpointDnsIpInputItem_ipv4Address *smithy.Schema
+
+var CoreNetworkEndpointDnsIpInputItem_ipv6Address *smithy.Schema
+
+var CoreNetworkEndpointDnsIpInputItem_dnsLabel *smithy.Schema
+
+var CoreNetworkEndpointDnsIpInputItem_regionScope *smithy.Schema
+
+var CoreNetworkEndpointDnsIpInputItem_regions *smithy.Schema
+
+var _CoreNetworkEndpointDnsIpInputItems = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CoreNetworkEndpointDnsIpInputItems",
+}, smithy.ShapeTypeList, 1)
+var _CoreNetworkEndpointDnsIpInputItems_member *smithy.Schema
+
+var CoreNetworkEndpointDnsIpItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CoreNetworkEndpointDnsIpItem",
+}, smithy.ShapeTypeStructure, 6)
+var CoreNetworkEndpointDnsIpItem_ipv4Address *smithy.Schema
+
+var CoreNetworkEndpointDnsIpItem_ipv6Address *smithy.Schema
+
+var CoreNetworkEndpointDnsIpItem_dnsLabel *smithy.Schema
+
+var CoreNetworkEndpointDnsIpItem_dnsName *smithy.Schema
+
+var CoreNetworkEndpointDnsIpItem_regionScope *smithy.Schema
+
+var CoreNetworkEndpointDnsIpItem_regions *smithy.Schema
+
+var _CoreNetworkEndpointDnsIpItems = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CoreNetworkEndpointDnsIpItems",
+}, smithy.ShapeTypeList, 1)
+var _CoreNetworkEndpointDnsIpItems_member *smithy.Schema
+
+var _CoreNetworkEndpoints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CoreNetworkEndpoints",
+}, smithy.ShapeTypeList, 1)
+var _CoreNetworkEndpoints_member *smithy.Schema
+
+var CoreNetworkEndpointsItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CoreNetworkEndpointsItem",
+}, smithy.ShapeTypeStructure, 10)
+var CoreNetworkEndpointsItem_arn *smithy.Schema
+
+var CoreNetworkEndpointsItem_availableRegions *smithy.Schema
+
+var CoreNetworkEndpointsItem_coreNetworkArn *smithy.Schema
+
+var CoreNetworkEndpointsItem_createdAt *smithy.Schema
+
+var CoreNetworkEndpointsItem_globalResolverId *smithy.Schema
+
+var CoreNetworkEndpointsItem_id *smithy.Schema
+
+var CoreNetworkEndpointsItem_ipAddresses *smithy.Schema
+
+var CoreNetworkEndpointsItem_name *smithy.Schema
+
+var CoreNetworkEndpointsItem_status *smithy.Schema
+
+var CoreNetworkEndpointsItem_updatedAt *smithy.Schema
+
 var CRResourceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "CRResourceStatus",
@@ -713,6 +824,16 @@ var DnsAdvancedProtection_DGA *smithy.Schema
 var DnsAdvancedProtection_DNS_TUNNELING *smithy.Schema
 
 var DnsAdvancedProtection_DICTIONARY_DGA *smithy.Schema
+
+var _DnsLabel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "DnsLabel",
+}, smithy.ShapeTypeString, 0)
+
+var _DnsName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "DnsName",
+}, smithy.ShapeTypeString, 0)
 
 var DnsProtocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -918,7 +1039,7 @@ var _GlobalResolvers_member *smithy.Schema
 var GlobalResolversItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "GlobalResolversItem",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var GlobalResolversItem_id *smithy.Schema
 
 var GlobalResolversItem_arn *smithy.Schema
@@ -946,6 +1067,8 @@ var GlobalResolversItem_ipv4Addresses *smithy.Schema
 var GlobalResolversItem_ipv6Addresses *smithy.Schema
 
 var GlobalResolversItem_ipAddressType *smithy.Schema
+
+var GlobalResolversItem_publicIpStatus *smithy.Schema
 
 var _HostedZoneAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1005,10 +1128,12 @@ var InternalServerException_retryAfterSeconds *smithy.Schema
 var IpAddressType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var IpAddressType_IPV4 *smithy.Schema
 
 var IpAddressType_IPV6 *smithy.Schema
+
+var IpAddressType_NONE *smithy.Schema
 
 var _IPv4Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1073,6 +1198,16 @@ var ProfileResourceStatus_DISABLED *smithy.Schema
 
 var ProfileResourceStatus_DELETING *smithy.Schema
 
+var PublicIpStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "PublicIpStatus",
+}, smithy.ShapeTypeEnum, 3)
+var PublicIpStatus_ENABLED_RESERVED *smithy.Schema
+
+var PublicIpStatus_DISABLED_RESERVED *smithy.Schema
+
+var PublicIpStatus_DISABLED_RELEASED *smithy.Schema
+
 var _Region = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "Region",
@@ -1083,6 +1218,14 @@ var _Regions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Regions",
 }, smithy.ShapeTypeList, 1)
 var _Regions_member *smithy.Schema
+
+var RegionScopeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "RegionScopeType",
+}, smithy.ShapeTypeEnum, 2)
+var RegionScopeType_ALL *smithy.Schema
+
+var RegionScopeType_REGIONAL *smithy.Schema
 
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1119,6 +1262,11 @@ var ResourceNotFoundException_message *smithy.Schema
 var ResourceNotFoundException_resourceId *smithy.Schema
 
 var ResourceNotFoundException_resourceType *smithy.Schema
+
+var _SegmentName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "SegmentName",
+}, smithy.ShapeTypeString, 0)
 
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1228,6 +1376,38 @@ var TokenStatus_CREATING *smithy.Schema
 var TokenStatus_OPERATIONAL *smithy.Schema
 
 var TokenStatus_DELETING *smithy.Schema
+
+var UpdateIpAddressEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "UpdateIpAddressEntry",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateIpAddressEntry_operation *smithy.Schema
+
+var UpdateIpAddressEntry_ipv4Address *smithy.Schema
+
+var UpdateIpAddressEntry_ipv6Address *smithy.Schema
+
+var UpdateIpAddressEntry_dnsLabel *smithy.Schema
+
+var UpdateIpAddressEntry_regionScope *smithy.Schema
+
+var UpdateIpAddressEntry_regions *smithy.Schema
+
+var _UpdateIpAddressList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "UpdateIpAddressList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateIpAddressList_member *smithy.Schema
+
+var UpdateIpAddressOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "UpdateIpAddressOperation",
+}, smithy.ShapeTypeEnum, 3)
+var UpdateIpAddressOperation_ADD *smithy.Schema
+
+var UpdateIpAddressOperation_REMOVE *smithy.Schema
+
+var UpdateIpAddressOperation_UPDATE *smithy.Schema
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1341,7 +1521,7 @@ var BatchUpdateFirewallRuleOutput_successes *smithy.Schema
 var CreateAccessSourceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "CreateAccessSourceInput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 9)
 var CreateAccessSourceInput_cidr *smithy.Schema
 
 var CreateAccessSourceInput_clientToken *smithy.Schema
@@ -1349,6 +1529,10 @@ var CreateAccessSourceInput_clientToken *smithy.Schema
 var CreateAccessSourceInput_ipAddressType *smithy.Schema
 
 var CreateAccessSourceInput_name *smithy.Schema
+
+var CreateAccessSourceInput_coreNetworkEndpointId *smithy.Schema
+
+var CreateAccessSourceInput_segment *smithy.Schema
 
 var CreateAccessSourceInput_dnsViewId *smithy.Schema
 
@@ -1359,7 +1543,7 @@ var CreateAccessSourceInput_tags *smithy.Schema
 var CreateAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "CreateAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var CreateAccessSourceOutput_arn *smithy.Schema
 
 var CreateAccessSourceOutput_cidr *smithy.Schema
@@ -1369,6 +1553,10 @@ var CreateAccessSourceOutput_createdAt *smithy.Schema
 var CreateAccessSourceOutput_id *smithy.Schema
 
 var CreateAccessSourceOutput_ipAddressType *smithy.Schema
+
+var CreateAccessSourceOutput_coreNetworkEndpointId *smithy.Schema
+
+var CreateAccessSourceOutput_segment *smithy.Schema
 
 var CreateAccessSourceOutput_name *smithy.Schema
 
@@ -1415,6 +1603,46 @@ var CreateAccessTokenOutput_name *smithy.Schema
 var CreateAccessTokenOutput_status *smithy.Schema
 
 var CreateAccessTokenOutput_value *smithy.Schema
+
+var CreateCoreNetworkEndpointInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CreateCoreNetworkEndpointInput",
+}, smithy.ShapeTypeStructure, 6)
+var CreateCoreNetworkEndpointInput_clientToken *smithy.Schema
+
+var CreateCoreNetworkEndpointInput_coreNetworkArn *smithy.Schema
+
+var CreateCoreNetworkEndpointInput_globalResolverId *smithy.Schema
+
+var CreateCoreNetworkEndpointInput_ipAddresses *smithy.Schema
+
+var CreateCoreNetworkEndpointInput_name *smithy.Schema
+
+var CreateCoreNetworkEndpointInput_tags *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "CreateCoreNetworkEndpointOutput",
+}, smithy.ShapeTypeStructure, 10)
+var CreateCoreNetworkEndpointOutput_arn *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_availableRegions *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_coreNetworkArn *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_createdAt *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_globalResolverId *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_id *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_ipAddresses *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_name *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_status *smithy.Schema
+
+var CreateCoreNetworkEndpointOutput_updatedAt *smithy.Schema
 
 var CreateDNSViewInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1573,12 +1801,14 @@ var CreateFirewallRuleOutput_updatedAt *smithy.Schema
 var CreateGlobalResolverInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "CreateGlobalResolverInput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateGlobalResolverInput_clientToken *smithy.Schema
 
 var CreateGlobalResolverInput_description *smithy.Schema
 
 var CreateGlobalResolverInput_ipAddressType *smithy.Schema
+
+var CreateGlobalResolverInput_publicIpStatus *smithy.Schema
 
 var CreateGlobalResolverInput_name *smithy.Schema
 
@@ -1591,7 +1821,7 @@ var CreateGlobalResolverInput_tags *smithy.Schema
 var CreateGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "CreateGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var CreateGlobalResolverOutput_id *smithy.Schema
 
 var CreateGlobalResolverOutput_arn *smithy.Schema
@@ -1605,6 +1835,8 @@ var CreateGlobalResolverOutput_description *smithy.Schema
 var CreateGlobalResolverOutput_dnsName *smithy.Schema
 
 var CreateGlobalResolverOutput_ipAddressType *smithy.Schema
+
+var CreateGlobalResolverOutput_publicIpStatus *smithy.Schema
 
 var CreateGlobalResolverOutput_ipv4Addresses *smithy.Schema
 
@@ -1629,10 +1861,12 @@ var DeleteAccessSourceInput_accessSourceId *smithy.Schema
 var DeleteAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "DeleteAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var DeleteAccessSourceOutput_arn *smithy.Schema
 
 var DeleteAccessSourceOutput_cidr *smithy.Schema
+
+var DeleteAccessSourceOutput_coreNetworkEndpointId *smithy.Schema
 
 var DeleteAccessSourceOutput_createdAt *smithy.Schema
 
@@ -1645,6 +1879,8 @@ var DeleteAccessSourceOutput_name *smithy.Schema
 var DeleteAccessSourceOutput_dnsViewId *smithy.Schema
 
 var DeleteAccessSourceOutput_protocol *smithy.Schema
+
+var DeleteAccessSourceOutput_segment *smithy.Schema
 
 var DeleteAccessSourceOutput_status *smithy.Schema
 
@@ -1665,6 +1901,36 @@ var DeleteAccessTokenOutput_id *smithy.Schema
 var DeleteAccessTokenOutput_status *smithy.Schema
 
 var DeleteAccessTokenOutput_deletedAt *smithy.Schema
+
+var DeleteCoreNetworkEndpointInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "DeleteCoreNetworkEndpointInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteCoreNetworkEndpointInput_coreNetworkEndpointId *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "DeleteCoreNetworkEndpointOutput",
+}, smithy.ShapeTypeStructure, 10)
+var DeleteCoreNetworkEndpointOutput_arn *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_availableRegions *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_coreNetworkArn *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_createdAt *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_globalResolverId *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_id *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_ipAddresses *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_name *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_status *smithy.Schema
+
+var DeleteCoreNetworkEndpointOutput_updatedAt *smithy.Schema
 
 var DeleteDNSViewInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -1905,10 +2171,12 @@ var GetAccessSourceInput_accessSourceId *smithy.Schema
 var GetAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "GetAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var GetAccessSourceOutput_arn *smithy.Schema
 
 var GetAccessSourceOutput_cidr *smithy.Schema
+
+var GetAccessSourceOutput_coreNetworkEndpointId *smithy.Schema
 
 var GetAccessSourceOutput_createdAt *smithy.Schema
 
@@ -1921,6 +2189,8 @@ var GetAccessSourceOutput_name *smithy.Schema
 var GetAccessSourceOutput_dnsViewId *smithy.Schema
 
 var GetAccessSourceOutput_protocol *smithy.Schema
+
+var GetAccessSourceOutput_segment *smithy.Schema
 
 var GetAccessSourceOutput_status *smithy.Schema
 
@@ -1957,6 +2227,36 @@ var GetAccessTokenOutput_status *smithy.Schema
 var GetAccessTokenOutput_updatedAt *smithy.Schema
 
 var GetAccessTokenOutput_value *smithy.Schema
+
+var GetCoreNetworkEndpointInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "GetCoreNetworkEndpointInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetCoreNetworkEndpointInput_coreNetworkEndpointId *smithy.Schema
+
+var GetCoreNetworkEndpointOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "GetCoreNetworkEndpointOutput",
+}, smithy.ShapeTypeStructure, 10)
+var GetCoreNetworkEndpointOutput_arn *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_availableRegions *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_coreNetworkArn *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_createdAt *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_globalResolverId *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_id *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_ipAddresses *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_name *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_status *smithy.Schema
+
+var GetCoreNetworkEndpointOutput_updatedAt *smithy.Schema
 
 var GetDNSViewInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -2077,7 +2377,7 @@ var GetGlobalResolverInput_globalResolverId *smithy.Schema
 var GetGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "GetGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var GetGlobalResolverOutput_id *smithy.Schema
 
 var GetGlobalResolverOutput_arn *smithy.Schema
@@ -2105,6 +2405,8 @@ var GetGlobalResolverOutput_ipv4Addresses *smithy.Schema
 var GetGlobalResolverOutput_ipv6Addresses *smithy.Schema
 
 var GetGlobalResolverOutput_ipAddressType *smithy.Schema
+
+var GetGlobalResolverOutput_publicIpStatus *smithy.Schema
 
 var GetHostedZoneAssociationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -2207,6 +2509,24 @@ var ListAccessTokensOutput = smithy.NewSchema(smithy.ShapeID{
 var ListAccessTokensOutput_nextToken *smithy.Schema
 
 var ListAccessTokensOutput_accessTokens *smithy.Schema
+
+var ListCoreNetworkEndpointsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "ListCoreNetworkEndpointsInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListCoreNetworkEndpointsInput_maxResults *smithy.Schema
+
+var ListCoreNetworkEndpointsInput_nextToken *smithy.Schema
+
+var ListCoreNetworkEndpointsInput_filters *smithy.Schema
+
+var ListCoreNetworkEndpointsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "ListCoreNetworkEndpointsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListCoreNetworkEndpointsOutput_nextToken *smithy.Schema
+
+var ListCoreNetworkEndpointsOutput_coreNetworkEndpoints *smithy.Schema
 
 var ListDNSViewsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -2391,10 +2711,12 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateAccessSourceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "UpdateAccessSourceInput",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateAccessSourceInput_accessSourceId *smithy.Schema
 
 var UpdateAccessSourceInput_cidr *smithy.Schema
+
+var UpdateAccessSourceInput_dnsViewId *smithy.Schema
 
 var UpdateAccessSourceInput_ipAddressType *smithy.Schema
 
@@ -2405,10 +2727,12 @@ var UpdateAccessSourceInput_protocol *smithy.Schema
 var UpdateAccessSourceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "UpdateAccessSourceOutput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateAccessSourceOutput_arn *smithy.Schema
 
 var UpdateAccessSourceOutput_cidr *smithy.Schema
+
+var UpdateAccessSourceOutput_coreNetworkEndpointId *smithy.Schema
 
 var UpdateAccessSourceOutput_createdAt *smithy.Schema
 
@@ -2421,6 +2745,8 @@ var UpdateAccessSourceOutput_name *smithy.Schema
 var UpdateAccessSourceOutput_dnsViewId *smithy.Schema
 
 var UpdateAccessSourceOutput_protocol *smithy.Schema
+
+var UpdateAccessSourceOutput_segment *smithy.Schema
 
 var UpdateAccessSourceOutput_status *smithy.Schema
 
@@ -2441,6 +2767,40 @@ var UpdateAccessTokenOutput = smithy.NewSchema(smithy.ShapeID{
 var UpdateAccessTokenOutput_id *smithy.Schema
 
 var UpdateAccessTokenOutput_name *smithy.Schema
+
+var UpdateCoreNetworkEndpointInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "UpdateCoreNetworkEndpointInput",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateCoreNetworkEndpointInput_coreNetworkEndpointId *smithy.Schema
+
+var UpdateCoreNetworkEndpointInput_name *smithy.Schema
+
+var UpdateCoreNetworkEndpointInput_updateIpAddresses *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53globalresolver",
+	Name:      "UpdateCoreNetworkEndpointOutput",
+}, smithy.ShapeTypeStructure, 10)
+var UpdateCoreNetworkEndpointOutput_arn *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_availableRegions *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_coreNetworkArn *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_createdAt *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_globalResolverId *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_id *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_ipAddresses *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_name *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_status *smithy.Schema
+
+var UpdateCoreNetworkEndpointOutput_updatedAt *smithy.Schema
 
 var UpdateDNSViewInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -2575,7 +2935,7 @@ var UpdateFirewallRuleOutput_updatedAt *smithy.Schema
 var UpdateGlobalResolverInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "UpdateGlobalResolverInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpdateGlobalResolverInput_globalResolverId *smithy.Schema
 
 var UpdateGlobalResolverInput_name *smithy.Schema
@@ -2586,12 +2946,14 @@ var UpdateGlobalResolverInput_description *smithy.Schema
 
 var UpdateGlobalResolverInput_ipAddressType *smithy.Schema
 
+var UpdateGlobalResolverInput_publicIpStatus *smithy.Schema
+
 var UpdateGlobalResolverInput_regions *smithy.Schema
 
 var UpdateGlobalResolverOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
 	Name:      "UpdateGlobalResolverOutput",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var UpdateGlobalResolverOutput_id *smithy.Schema
 
 var UpdateGlobalResolverOutput_arn *smithy.Schema
@@ -2619,6 +2981,8 @@ var UpdateGlobalResolverOutput_ipv4Addresses *smithy.Schema
 var UpdateGlobalResolverOutput_ipv6Addresses *smithy.Schema
 
 var UpdateGlobalResolverOutput_ipAddressType *smithy.Schema
+
+var UpdateGlobalResolverOutput_publicIpStatus *smithy.Schema
 
 var UpdateHostedZoneAssociationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53globalresolver",
@@ -2657,6 +3021,8 @@ func init() {
 
 	IpAddressType_IPV6 = IpAddressType.AddMember("IPV6", smithyprelude.Unit)
 
+	IpAddressType_NONE = IpAddressType.AddMember("NONE", smithyprelude.Unit)
+
 	DnsProtocol_DO53 = DnsProtocol.AddMember("DO53", smithyprelude.Unit)
 
 	DnsProtocol_DOH = DnsProtocol.AddMember("DOH", smithyprelude.Unit)
@@ -2675,6 +3041,8 @@ func init() {
 
 	AccessSourcesItem_cidr = AccessSourcesItem.AddMember("cidr", _Cidr)
 
+	AccessSourcesItem_coreNetworkEndpointId = AccessSourcesItem.AddMember("coreNetworkEndpointId", _ResourceId)
+
 	AccessSourcesItem_createdAt = AccessSourcesItem.AddMember("createdAt", _ISO8601TimeString)
 
 	AccessSourcesItem_id = AccessSourcesItem.AddMember("id", _ResourceId)
@@ -2686,6 +3054,8 @@ func init() {
 	AccessSourcesItem_dnsViewId = AccessSourcesItem.AddMember("dnsViewId", _ResourceId)
 
 	AccessSourcesItem_protocol = AccessSourcesItem.AddMember("protocol", DnsProtocol)
+
+	AccessSourcesItem_segment = AccessSourcesItem.AddMember("segment", _SegmentName)
 
 	AccessSourcesItem_status = AccessSourcesItem.AddMember("status", CRResourceStatus)
 
@@ -2915,6 +3285,60 @@ func init() {
 
 	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
 
+	RegionScopeType_ALL = RegionScopeType.AddMember("ALL", smithyprelude.Unit)
+
+	RegionScopeType_REGIONAL = RegionScopeType.AddMember("REGIONAL", smithyprelude.Unit)
+
+	_Regions_member = _Regions.AddMember("member", _Region)
+
+	CoreNetworkEndpointDnsIpInputItem_ipv4Address = CoreNetworkEndpointDnsIpInputItem.AddMember("ipv4Address", _IPv4Address)
+
+	CoreNetworkEndpointDnsIpInputItem_ipv6Address = CoreNetworkEndpointDnsIpInputItem.AddMember("ipv6Address", _IPv6Address)
+
+	CoreNetworkEndpointDnsIpInputItem_dnsLabel = CoreNetworkEndpointDnsIpInputItem.AddMember("dnsLabel", _DnsLabel)
+
+	CoreNetworkEndpointDnsIpInputItem_regionScope = CoreNetworkEndpointDnsIpInputItem.AddMember("regionScope", RegionScopeType)
+
+	CoreNetworkEndpointDnsIpInputItem_regions = CoreNetworkEndpointDnsIpInputItem.AddMember("regions", _Regions)
+
+	_CoreNetworkEndpointDnsIpInputItems_member = _CoreNetworkEndpointDnsIpInputItems.AddMember("member", CoreNetworkEndpointDnsIpInputItem)
+
+	CoreNetworkEndpointDnsIpItem_ipv4Address = CoreNetworkEndpointDnsIpItem.AddMember("ipv4Address", _IPv4Address)
+
+	CoreNetworkEndpointDnsIpItem_ipv6Address = CoreNetworkEndpointDnsIpItem.AddMember("ipv6Address", _IPv6Address)
+
+	CoreNetworkEndpointDnsIpItem_dnsLabel = CoreNetworkEndpointDnsIpItem.AddMember("dnsLabel", _DnsLabel)
+
+	CoreNetworkEndpointDnsIpItem_dnsName = CoreNetworkEndpointDnsIpItem.AddMember("dnsName", _DnsName)
+
+	CoreNetworkEndpointDnsIpItem_regionScope = CoreNetworkEndpointDnsIpItem.AddMember("regionScope", RegionScopeType)
+
+	CoreNetworkEndpointDnsIpItem_regions = CoreNetworkEndpointDnsIpItem.AddMember("regions", _Regions)
+
+	_CoreNetworkEndpointDnsIpItems_member = _CoreNetworkEndpointDnsIpItems.AddMember("member", CoreNetworkEndpointDnsIpItem)
+
+	CoreNetworkEndpointsItem_arn = CoreNetworkEndpointsItem.AddMember("arn", _ResourceArn)
+
+	CoreNetworkEndpointsItem_availableRegions = CoreNetworkEndpointsItem.AddMember("availableRegions", _Regions)
+
+	CoreNetworkEndpointsItem_coreNetworkArn = CoreNetworkEndpointsItem.AddMember("coreNetworkArn", _ResourceArn)
+
+	CoreNetworkEndpointsItem_createdAt = CoreNetworkEndpointsItem.AddMember("createdAt", _ISO8601TimeString)
+
+	CoreNetworkEndpointsItem_globalResolverId = CoreNetworkEndpointsItem.AddMember("globalResolverId", _ResourceId)
+
+	CoreNetworkEndpointsItem_id = CoreNetworkEndpointsItem.AddMember("id", _ResourceId)
+
+	CoreNetworkEndpointsItem_ipAddresses = CoreNetworkEndpointsItem.AddMember("ipAddresses", _CoreNetworkEndpointDnsIpItems)
+
+	CoreNetworkEndpointsItem_name = CoreNetworkEndpointsItem.AddMember("name", _ResourceName)
+
+	CoreNetworkEndpointsItem_status = CoreNetworkEndpointsItem.AddMember("status", CRResourceStatus)
+
+	CoreNetworkEndpointsItem_updatedAt = CoreNetworkEndpointsItem.AddMember("updatedAt", _ISO8601TimeString)
+
+	_CoreNetworkEndpoints_member = _CoreNetworkEndpoints.AddMember("member", CoreNetworkEndpointsItem)
+
 	DnsSecValidationType_ENABLED = DnsSecValidationType.AddMember("ENABLED", smithyprelude.Unit)
 
 	DnsSecValidationType_DISABLED = DnsSecValidationType.AddMember("DISABLED", smithyprelude.Unit)
@@ -3033,11 +3457,15 @@ func init() {
 
 	GlobalResolverIpAddressType_DUAL_STACK = GlobalResolverIpAddressType.AddMember("DUAL_STACK", smithyprelude.Unit)
 
-	_Regions_member = _Regions.AddMember("member", _Region)
-
 	_IPv4Addresses_member = _IPv4Addresses.AddMember("member", _IPv4Address)
 
 	_IPv6Addresses_member = _IPv6Addresses.AddMember("member", _IPv6Address)
+
+	PublicIpStatus_ENABLED_RESERVED = PublicIpStatus.AddMember("ENABLED_RESERVED", smithyprelude.Unit)
+
+	PublicIpStatus_DISABLED_RESERVED = PublicIpStatus.AddMember("DISABLED_RESERVED", smithyprelude.Unit)
+
+	PublicIpStatus_DISABLED_RELEASED = PublicIpStatus.AddMember("DISABLED_RELEASED", smithyprelude.Unit)
 
 	GlobalResolversItem_id = GlobalResolversItem.AddMember("id", _ResourceId)
 
@@ -3066,6 +3494,8 @@ func init() {
 	GlobalResolversItem_ipv6Addresses = GlobalResolversItem.AddMember("ipv6Addresses", _IPv6Addresses)
 
 	GlobalResolversItem_ipAddressType = GlobalResolversItem.AddMember("ipAddressType", GlobalResolverIpAddressType)
+
+	GlobalResolversItem_publicIpStatus = GlobalResolversItem.AddMember("publicIpStatus", PublicIpStatus)
 
 	_GlobalResolvers_member = _GlobalResolvers.AddMember("member", GlobalResolversItem)
 
@@ -3165,6 +3595,26 @@ func init() {
 
 	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
 
+	UpdateIpAddressOperation_ADD = UpdateIpAddressOperation.AddMember("ADD", smithyprelude.Unit)
+
+	UpdateIpAddressOperation_REMOVE = UpdateIpAddressOperation.AddMember("REMOVE", smithyprelude.Unit)
+
+	UpdateIpAddressOperation_UPDATE = UpdateIpAddressOperation.AddMember("UPDATE", smithyprelude.Unit)
+
+	UpdateIpAddressEntry_operation = UpdateIpAddressEntry.AddMember("operation", UpdateIpAddressOperation)
+
+	UpdateIpAddressEntry_ipv4Address = UpdateIpAddressEntry.AddMember("ipv4Address", _IPv4Address)
+
+	UpdateIpAddressEntry_ipv6Address = UpdateIpAddressEntry.AddMember("ipv6Address", _IPv6Address)
+
+	UpdateIpAddressEntry_dnsLabel = UpdateIpAddressEntry.AddMember("dnsLabel", _DnsLabel)
+
+	UpdateIpAddressEntry_regionScope = UpdateIpAddressEntry.AddMember("regionScope", RegionScopeType)
+
+	UpdateIpAddressEntry_regions = UpdateIpAddressEntry.AddMember("regions", _Regions)
+
+	_UpdateIpAddressList_member = _UpdateIpAddressList.AddMember("member", UpdateIpAddressEntry)
+
 	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
 
 	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
@@ -3233,6 +3683,10 @@ func init() {
 
 	CreateAccessSourceInput_name = CreateAccessSourceInput.AddMember("name", _ResourceNameShort)
 
+	CreateAccessSourceInput_coreNetworkEndpointId = CreateAccessSourceInput.AddMember("coreNetworkEndpointId", _ResourceId)
+
+	CreateAccessSourceInput_segment = CreateAccessSourceInput.AddMember("segment", _SegmentName)
+
 	CreateAccessSourceInput_dnsViewId = CreateAccessSourceInput.AddMember("dnsViewId", _ResourceId)
 
 	CreateAccessSourceInput_protocol = CreateAccessSourceInput.AddMember("protocol", DnsProtocol)
@@ -3248,6 +3702,10 @@ func init() {
 	CreateAccessSourceOutput_id = CreateAccessSourceOutput.AddMember("id", _ResourceId)
 
 	CreateAccessSourceOutput_ipAddressType = CreateAccessSourceOutput.AddMember("ipAddressType", IpAddressType)
+
+	CreateAccessSourceOutput_coreNetworkEndpointId = CreateAccessSourceOutput.AddMember("coreNetworkEndpointId", _ResourceId)
+
+	CreateAccessSourceOutput_segment = CreateAccessSourceOutput.AddMember("segment", _SegmentName)
 
 	CreateAccessSourceOutput_name = CreateAccessSourceOutput.AddMember("name", _ResourceNameShort)
 
@@ -3286,6 +3744,38 @@ func init() {
 	CreateAccessTokenOutput_status = CreateAccessTokenOutput.AddMember("status", TokenStatus)
 
 	CreateAccessTokenOutput_value = CreateAccessTokenOutput.AddMember("value", _AccessTokenValue)
+
+	CreateCoreNetworkEndpointInput_clientToken = CreateCoreNetworkEndpointInput.AddMember("clientToken", _ClientToken)
+
+	CreateCoreNetworkEndpointInput_coreNetworkArn = CreateCoreNetworkEndpointInput.AddMember("coreNetworkArn", _ResourceArn)
+
+	CreateCoreNetworkEndpointInput_globalResolverId = CreateCoreNetworkEndpointInput.AddMember("globalResolverId", _ResourceId)
+
+	CreateCoreNetworkEndpointInput_ipAddresses = CreateCoreNetworkEndpointInput.AddMember("ipAddresses", _CoreNetworkEndpointDnsIpInputItems)
+
+	CreateCoreNetworkEndpointInput_name = CreateCoreNetworkEndpointInput.AddMember("name", _ResourceName)
+
+	CreateCoreNetworkEndpointInput_tags = CreateCoreNetworkEndpointInput.AddMember("tags", _Tags)
+
+	CreateCoreNetworkEndpointOutput_arn = CreateCoreNetworkEndpointOutput.AddMember("arn", _ResourceArn)
+
+	CreateCoreNetworkEndpointOutput_availableRegions = CreateCoreNetworkEndpointOutput.AddMember("availableRegions", _Regions)
+
+	CreateCoreNetworkEndpointOutput_coreNetworkArn = CreateCoreNetworkEndpointOutput.AddMember("coreNetworkArn", _ResourceArn)
+
+	CreateCoreNetworkEndpointOutput_createdAt = CreateCoreNetworkEndpointOutput.AddMember("createdAt", _ISO8601TimeString)
+
+	CreateCoreNetworkEndpointOutput_globalResolverId = CreateCoreNetworkEndpointOutput.AddMember("globalResolverId", _ResourceId)
+
+	CreateCoreNetworkEndpointOutput_id = CreateCoreNetworkEndpointOutput.AddMember("id", _ResourceId)
+
+	CreateCoreNetworkEndpointOutput_ipAddresses = CreateCoreNetworkEndpointOutput.AddMember("ipAddresses", _CoreNetworkEndpointDnsIpItems)
+
+	CreateCoreNetworkEndpointOutput_name = CreateCoreNetworkEndpointOutput.AddMember("name", _ResourceName)
+
+	CreateCoreNetworkEndpointOutput_status = CreateCoreNetworkEndpointOutput.AddMember("status", CRResourceStatus)
+
+	CreateCoreNetworkEndpointOutput_updatedAt = CreateCoreNetworkEndpointOutput.AddMember("updatedAt", _ISO8601TimeString)
 
 	CreateDNSViewInput_globalResolverId = CreateDNSViewInput.AddMember("globalResolverId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -3423,6 +3913,8 @@ func init() {
 
 	CreateGlobalResolverInput_ipAddressType = CreateGlobalResolverInput.AddMember("ipAddressType", GlobalResolverIpAddressType)
 
+	CreateGlobalResolverInput_publicIpStatus = CreateGlobalResolverInput.AddMember("publicIpStatus", PublicIpStatus)
+
 	CreateGlobalResolverInput_name = CreateGlobalResolverInput.AddMember("name", _ResourceName)
 
 	CreateGlobalResolverInput_observabilityRegion = CreateGlobalResolverInput.AddMember("observabilityRegion", _Region)
@@ -3445,6 +3937,8 @@ func init() {
 
 	CreateGlobalResolverOutput_ipAddressType = CreateGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
 
+	CreateGlobalResolverOutput_publicIpStatus = CreateGlobalResolverOutput.AddMember("publicIpStatus", PublicIpStatus)
+
 	CreateGlobalResolverOutput_ipv4Addresses = CreateGlobalResolverOutput.AddMember("ipv4Addresses", _IPv4Addresses)
 
 	CreateGlobalResolverOutput_ipv6Addresses = CreateGlobalResolverOutput.AddMember("ipv6Addresses", _IPv6Addresses)
@@ -3465,6 +3959,8 @@ func init() {
 
 	DeleteAccessSourceOutput_cidr = DeleteAccessSourceOutput.AddMember("cidr", _Cidr)
 
+	DeleteAccessSourceOutput_coreNetworkEndpointId = DeleteAccessSourceOutput.AddMember("coreNetworkEndpointId", _ResourceId)
+
 	DeleteAccessSourceOutput_createdAt = DeleteAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
 
 	DeleteAccessSourceOutput_id = DeleteAccessSourceOutput.AddMember("id", _ResourceId)
@@ -3477,6 +3973,8 @@ func init() {
 
 	DeleteAccessSourceOutput_protocol = DeleteAccessSourceOutput.AddMember("protocol", DnsProtocol)
 
+	DeleteAccessSourceOutput_segment = DeleteAccessSourceOutput.AddMember("segment", _SegmentName)
+
 	DeleteAccessSourceOutput_status = DeleteAccessSourceOutput.AddMember("status", CRResourceStatus)
 
 	DeleteAccessSourceOutput_updatedAt = DeleteAccessSourceOutput.AddMember("updatedAt", _ISO8601TimeString)
@@ -3488,6 +3986,28 @@ func init() {
 	DeleteAccessTokenOutput_status = DeleteAccessTokenOutput.AddMember("status", TokenStatus)
 
 	DeleteAccessTokenOutput_deletedAt = DeleteAccessTokenOutput.AddMember("deletedAt", _ISO8601TimeString)
+
+	DeleteCoreNetworkEndpointInput_coreNetworkEndpointId = DeleteCoreNetworkEndpointInput.AddMember("coreNetworkEndpointId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	DeleteCoreNetworkEndpointOutput_arn = DeleteCoreNetworkEndpointOutput.AddMember("arn", _ResourceArn)
+
+	DeleteCoreNetworkEndpointOutput_availableRegions = DeleteCoreNetworkEndpointOutput.AddMember("availableRegions", _Regions)
+
+	DeleteCoreNetworkEndpointOutput_coreNetworkArn = DeleteCoreNetworkEndpointOutput.AddMember("coreNetworkArn", _ResourceArn)
+
+	DeleteCoreNetworkEndpointOutput_createdAt = DeleteCoreNetworkEndpointOutput.AddMember("createdAt", _ISO8601TimeString)
+
+	DeleteCoreNetworkEndpointOutput_globalResolverId = DeleteCoreNetworkEndpointOutput.AddMember("globalResolverId", _ResourceId)
+
+	DeleteCoreNetworkEndpointOutput_id = DeleteCoreNetworkEndpointOutput.AddMember("id", _ResourceId)
+
+	DeleteCoreNetworkEndpointOutput_ipAddresses = DeleteCoreNetworkEndpointOutput.AddMember("ipAddresses", _CoreNetworkEndpointDnsIpItems)
+
+	DeleteCoreNetworkEndpointOutput_name = DeleteCoreNetworkEndpointOutput.AddMember("name", _ResourceName)
+
+	DeleteCoreNetworkEndpointOutput_status = DeleteCoreNetworkEndpointOutput.AddMember("status", CRResourceStatus)
+
+	DeleteCoreNetworkEndpointOutput_updatedAt = DeleteCoreNetworkEndpointOutput.AddMember("updatedAt", _ISO8601TimeString)
 
 	DeleteDNSViewInput_dnsViewId = DeleteDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -3669,6 +4189,8 @@ func init() {
 
 	GetAccessSourceOutput_cidr = GetAccessSourceOutput.AddMember("cidr", _Cidr)
 
+	GetAccessSourceOutput_coreNetworkEndpointId = GetAccessSourceOutput.AddMember("coreNetworkEndpointId", _ResourceId)
+
 	GetAccessSourceOutput_createdAt = GetAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
 
 	GetAccessSourceOutput_id = GetAccessSourceOutput.AddMember("id", _ResourceId)
@@ -3680,6 +4202,8 @@ func init() {
 	GetAccessSourceOutput_dnsViewId = GetAccessSourceOutput.AddMember("dnsViewId", _ResourceId)
 
 	GetAccessSourceOutput_protocol = GetAccessSourceOutput.AddMember("protocol", DnsProtocol)
+
+	GetAccessSourceOutput_segment = GetAccessSourceOutput.AddMember("segment", _SegmentName)
 
 	GetAccessSourceOutput_status = GetAccessSourceOutput.AddMember("status", CRResourceStatus)
 
@@ -3708,6 +4232,28 @@ func init() {
 	GetAccessTokenOutput_updatedAt = GetAccessTokenOutput.AddMember("updatedAt", _ISO8601TimeString)
 
 	GetAccessTokenOutput_value = GetAccessTokenOutput.AddMember("value", _AccessTokenValue)
+
+	GetCoreNetworkEndpointInput_coreNetworkEndpointId = GetCoreNetworkEndpointInput.AddMember("coreNetworkEndpointId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	GetCoreNetworkEndpointOutput_arn = GetCoreNetworkEndpointOutput.AddMember("arn", _ResourceArn)
+
+	GetCoreNetworkEndpointOutput_availableRegions = GetCoreNetworkEndpointOutput.AddMember("availableRegions", _Regions)
+
+	GetCoreNetworkEndpointOutput_coreNetworkArn = GetCoreNetworkEndpointOutput.AddMember("coreNetworkArn", _ResourceArn)
+
+	GetCoreNetworkEndpointOutput_createdAt = GetCoreNetworkEndpointOutput.AddMember("createdAt", _ISO8601TimeString)
+
+	GetCoreNetworkEndpointOutput_globalResolverId = GetCoreNetworkEndpointOutput.AddMember("globalResolverId", _ResourceId)
+
+	GetCoreNetworkEndpointOutput_id = GetCoreNetworkEndpointOutput.AddMember("id", _ResourceId)
+
+	GetCoreNetworkEndpointOutput_ipAddresses = GetCoreNetworkEndpointOutput.AddMember("ipAddresses", _CoreNetworkEndpointDnsIpItems)
+
+	GetCoreNetworkEndpointOutput_name = GetCoreNetworkEndpointOutput.AddMember("name", _ResourceName)
+
+	GetCoreNetworkEndpointOutput_status = GetCoreNetworkEndpointOutput.AddMember("status", CRResourceStatus)
+
+	GetCoreNetworkEndpointOutput_updatedAt = GetCoreNetworkEndpointOutput.AddMember("updatedAt", _ISO8601TimeString)
 
 	GetDNSViewInput_dnsViewId = GetDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -3825,6 +4371,8 @@ func init() {
 
 	GetGlobalResolverOutput_ipAddressType = GetGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
 
+	GetGlobalResolverOutput_publicIpStatus = GetGlobalResolverOutput.AddMember("publicIpStatus", PublicIpStatus)
+
 	GetHostedZoneAssociationInput_hostedZoneAssociationId = GetHostedZoneAssociationInput.AddMember("hostedZoneAssociationId", _ResourceId, &smithytraits.HTTPLabel{})
 
 	GetHostedZoneAssociationOutput_id = GetHostedZoneAssociationOutput.AddMember("id", _ResourceId)
@@ -3886,6 +4434,16 @@ func init() {
 	ListAccessTokensOutput_nextToken = ListAccessTokensOutput.AddMember("nextToken", smithyprelude.String)
 
 	ListAccessTokensOutput_accessTokens = ListAccessTokensOutput.AddMember("accessTokens", _AccessTokens)
+
+	ListCoreNetworkEndpointsInput_maxResults = ListCoreNetworkEndpointsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
+
+	ListCoreNetworkEndpointsInput_nextToken = ListCoreNetworkEndpointsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next_token"})
+
+	ListCoreNetworkEndpointsInput_filters = ListCoreNetworkEndpointsInput.AddMember("filters", _Filters, &smithytraits.HTTPQueryParams{})
+
+	ListCoreNetworkEndpointsOutput_nextToken = ListCoreNetworkEndpointsOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListCoreNetworkEndpointsOutput_coreNetworkEndpoints = ListCoreNetworkEndpointsOutput.AddMember("coreNetworkEndpoints", _CoreNetworkEndpoints)
 
 	ListDNSViewsInput_maxResults = ListDNSViewsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "max_results"})
 
@@ -3981,6 +4539,8 @@ func init() {
 
 	UpdateAccessSourceInput_cidr = UpdateAccessSourceInput.AddMember("cidr", _Cidr)
 
+	UpdateAccessSourceInput_dnsViewId = UpdateAccessSourceInput.AddMember("dnsViewId", _ResourceId)
+
 	UpdateAccessSourceInput_ipAddressType = UpdateAccessSourceInput.AddMember("ipAddressType", IpAddressType)
 
 	UpdateAccessSourceInput_name = UpdateAccessSourceInput.AddMember("name", _ResourceNameShort)
@@ -3990,6 +4550,8 @@ func init() {
 	UpdateAccessSourceOutput_arn = UpdateAccessSourceOutput.AddMember("arn", _ResourceArn)
 
 	UpdateAccessSourceOutput_cidr = UpdateAccessSourceOutput.AddMember("cidr", _Cidr)
+
+	UpdateAccessSourceOutput_coreNetworkEndpointId = UpdateAccessSourceOutput.AddMember("coreNetworkEndpointId", _ResourceId)
 
 	UpdateAccessSourceOutput_createdAt = UpdateAccessSourceOutput.AddMember("createdAt", _ISO8601TimeString)
 
@@ -4003,6 +4565,8 @@ func init() {
 
 	UpdateAccessSourceOutput_protocol = UpdateAccessSourceOutput.AddMember("protocol", DnsProtocol)
 
+	UpdateAccessSourceOutput_segment = UpdateAccessSourceOutput.AddMember("segment", _SegmentName)
+
 	UpdateAccessSourceOutput_status = UpdateAccessSourceOutput.AddMember("status", CRResourceStatus)
 
 	UpdateAccessSourceOutput_updatedAt = UpdateAccessSourceOutput.AddMember("updatedAt", _ISO8601TimeString)
@@ -4014,6 +4578,32 @@ func init() {
 	UpdateAccessTokenOutput_id = UpdateAccessTokenOutput.AddMember("id", _ResourceId)
 
 	UpdateAccessTokenOutput_name = UpdateAccessTokenOutput.AddMember("name", _ResourceNameShort)
+
+	UpdateCoreNetworkEndpointInput_coreNetworkEndpointId = UpdateCoreNetworkEndpointInput.AddMember("coreNetworkEndpointId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateCoreNetworkEndpointInput_name = UpdateCoreNetworkEndpointInput.AddMember("name", _ResourceName)
+
+	UpdateCoreNetworkEndpointInput_updateIpAddresses = UpdateCoreNetworkEndpointInput.AddMember("updateIpAddresses", _UpdateIpAddressList)
+
+	UpdateCoreNetworkEndpointOutput_arn = UpdateCoreNetworkEndpointOutput.AddMember("arn", _ResourceArn)
+
+	UpdateCoreNetworkEndpointOutput_availableRegions = UpdateCoreNetworkEndpointOutput.AddMember("availableRegions", _Regions)
+
+	UpdateCoreNetworkEndpointOutput_coreNetworkArn = UpdateCoreNetworkEndpointOutput.AddMember("coreNetworkArn", _ResourceArn)
+
+	UpdateCoreNetworkEndpointOutput_createdAt = UpdateCoreNetworkEndpointOutput.AddMember("createdAt", _ISO8601TimeString)
+
+	UpdateCoreNetworkEndpointOutput_globalResolverId = UpdateCoreNetworkEndpointOutput.AddMember("globalResolverId", _ResourceId)
+
+	UpdateCoreNetworkEndpointOutput_id = UpdateCoreNetworkEndpointOutput.AddMember("id", _ResourceId)
+
+	UpdateCoreNetworkEndpointOutput_ipAddresses = UpdateCoreNetworkEndpointOutput.AddMember("ipAddresses", _CoreNetworkEndpointDnsIpItems)
+
+	UpdateCoreNetworkEndpointOutput_name = UpdateCoreNetworkEndpointOutput.AddMember("name", _ResourceName)
+
+	UpdateCoreNetworkEndpointOutput_status = UpdateCoreNetworkEndpointOutput.AddMember("status", CRResourceStatus)
+
+	UpdateCoreNetworkEndpointOutput_updatedAt = UpdateCoreNetworkEndpointOutput.AddMember("updatedAt", _ISO8601TimeString)
 
 	UpdateDNSViewInput_dnsViewId = UpdateDNSViewInput.AddMember("dnsViewId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -4131,6 +4721,8 @@ func init() {
 
 	UpdateGlobalResolverInput_ipAddressType = UpdateGlobalResolverInput.AddMember("ipAddressType", GlobalResolverIpAddressType)
 
+	UpdateGlobalResolverInput_publicIpStatus = UpdateGlobalResolverInput.AddMember("publicIpStatus", PublicIpStatus)
+
 	UpdateGlobalResolverInput_regions = UpdateGlobalResolverInput.AddMember("regions", _Regions)
 
 	UpdateGlobalResolverOutput_id = UpdateGlobalResolverOutput.AddMember("id", _ResourceId)
@@ -4160,6 +4752,8 @@ func init() {
 	UpdateGlobalResolverOutput_ipv6Addresses = UpdateGlobalResolverOutput.AddMember("ipv6Addresses", _IPv6Addresses)
 
 	UpdateGlobalResolverOutput_ipAddressType = UpdateGlobalResolverOutput.AddMember("ipAddressType", GlobalResolverIpAddressType)
+
+	UpdateGlobalResolverOutput_publicIpStatus = UpdateGlobalResolverOutput.AddMember("publicIpStatus", PublicIpStatus)
 
 	UpdateHostedZoneAssociationInput_hostedZoneAssociationId = UpdateHostedZoneAssociationInput.AddMember("hostedZoneAssociationId", _ResourceId, &smithytraits.HTTPLabel{})
 

@@ -362,6 +362,18 @@ func TestCheckSnapshot_GetBacklogTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetChat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetChat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetOperatorApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetOperatorApp(context.Background(), nil, func(o *Options) {
@@ -746,6 +758,18 @@ func TestCheckSnapshot_UpdateBacklogTask(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateChat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateChat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateGoal(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateGoal(context.Background(), nil, func(o *Options) {
@@ -1110,6 +1134,18 @@ func TestUpdateSnapshot_GetBacklogTask(t *testing.T) {
 	_, err := svc.GetBacklogTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBacklogTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetChat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetChat")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1494,6 +1530,18 @@ func TestUpdateSnapshot_UpdateBacklogTask(t *testing.T) {
 	_, err := svc.UpdateBacklogTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateBacklogTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateChat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateChat")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

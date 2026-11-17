@@ -129,6 +129,174 @@ func (v *AgentCardDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the encryption mode and key configuration used to encrypt new Agent
+// Insights in an Agent Insight Store.
+type AgentInsightStoreEncryptionConfiguration struct {
+
+	// Specifies the encryption mode used to protect new Agent Insights.
+	//
+	// This member is required.
+	Mode AgentInsightStoreEncryptionMode
+
+	// Specifies the Amazon Resource Name (ARN) of the customer managed AWS KMS key
+	// that you use to encrypt new Agent Insights. This field is required when mode is
+	// CUSTOMER_MANAGED_KMS and cannot be specified when mode is AWS_OWNED_KMS_KEY .
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentInsightStoreEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentInsightStoreEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentInsightStoreEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.AgentInsightStoreEncryptionConfiguration_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.AgentInsightStoreEncryptionConfiguration_mode, string(v.Mode))
+	}
+}
+func (v *AgentInsightStoreEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentInsightStoreEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentInsightStoreEncryptionConfiguration_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.AgentInsightStoreEncryptionConfiguration_kmsKeyArn, v.KmsKeyArn)
+		case schemas.AgentInsightStoreEncryptionConfiguration_mode:
+			var ev string
+			if err := d.ReadString(schemas.AgentInsightStoreEncryptionConfiguration_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AgentInsightStoreEncryptionMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Contains summary information about an Agent Insight Store.
+type AgentInsightStoreSummary struct {
+
+	// The Amazon Resource Name (ARN) of the Agent Insight Store.
+	//
+	// This member is required.
+	AgentInsightStoreArn *string
+
+	// The unique identifier of the Agent Insight Store.
+	//
+	// This member is required.
+	AgentInsightStoreId *string
+
+	// The date and time when the Agent Insight Store was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Specifies whether the Agent Insight Store accepts new Agent Insights. The
+	// default value is enabled.
+	//
+	// This member is required.
+	EnablementStatus AgentInsightStoreEnablementStatus
+
+	// Specifies the encryption mode and key configuration that encrypts new Agent
+	// Insights and protects the data at rest.
+	//
+	// This member is required.
+	EncryptionConfiguration *AgentInsightStoreEncryptionConfiguration
+
+	// The current lifecycle status of the Agent Insight Store. Valid values:
+	//
+	// ACTIVE The store is available.
+	//
+	// UPDATING The service is applying a requested change.
+	//
+	// INACTIVE The store does not accept new Agent Insights.
+	//
+	// ERROR The store requires intervention.
+	//
+	// This member is required.
+	Status AgentInsightStoreStatus
+
+	// The date and time when the Agent Insight Store was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentInsightStoreSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentInsightStoreSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentInsightStoreSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentInsightStoreArn != nil {
+		s.WriteString(schemas.AgentInsightStoreSummary_agentInsightStoreArn, *v.AgentInsightStoreArn)
+	}
+	if v.AgentInsightStoreId != nil {
+		s.WriteString(schemas.AgentInsightStoreSummary_agentInsightStoreId, *v.AgentInsightStoreId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AgentInsightStoreSummary_createdAt, *v.CreatedAt)
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.AgentInsightStoreSummary_enablementStatus, string(v.EnablementStatus))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.AgentInsightStoreSummary_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgentInsightStoreSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AgentInsightStoreSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AgentInsightStoreSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentInsightStoreSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentInsightStoreSummary_agentInsightStoreArn:
+			v.AgentInsightStoreArn = new(string)
+			return d.ReadString(schemas.AgentInsightStoreSummary_agentInsightStoreArn, v.AgentInsightStoreArn)
+		case schemas.AgentInsightStoreSummary_agentInsightStoreId:
+			v.AgentInsightStoreId = new(string)
+			return d.ReadString(schemas.AgentInsightStoreSummary_agentInsightStoreId, v.AgentInsightStoreId)
+		case schemas.AgentInsightStoreSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgentInsightStoreSummary_createdAt, v.CreatedAt)
+		case schemas.AgentInsightStoreSummary_enablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.AgentInsightStoreSummary_enablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = AgentInsightStoreEnablementStatus(ev)
+			return nil
+		case schemas.AgentInsightStoreSummary_encryptionConfiguration:
+			v.EncryptionConfiguration = &AgentInsightStoreEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.AgentInsightStoreSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AgentInsightStoreSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgentInsightStoreStatus(ev)
+			return nil
+		case schemas.AgentInsightStoreSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgentInsightStoreSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Contains information about an agent runtime. An agent runtime is the execution
 // environment for a Amazon Bedrock AgentCore Agent.
 type AgentRuntime struct {
@@ -5187,11 +5355,6 @@ type DatasetSummary struct {
 	// This member is required.
 	ExampleCount *int64
 
-	//  The schema type of the dataset.
-	//
-	// This member is required.
-	SchemaType DatasetSchemaType
-
 	//  The current status of the dataset.
 	//
 	// This member is required.
@@ -5207,6 +5370,13 @@ type DatasetSummary struct {
 
 	//  Publish synchronization state. Only authoritative when status is ACTIVE.
 	DraftStatus DraftStatus
+
+	//  The number of examples that have each field, for the DRAFT. Absent when the
+	// counts are unknown.
+	ExampleCountByField *ExampleCountByField
+
+	//  The schema type of the dataset.
+	SchemaType DatasetSchemaType
 
 	noSmithyDocumentSerde
 }
@@ -5238,6 +5408,11 @@ func (v *DatasetSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExampleCount != nil {
 		s.WriteInt64(schemas.DatasetSummary_exampleCount, *v.ExampleCount)
+	}
+	if v.ExampleCountByField != nil {
+		s.WriteStruct(schemas.DatasetSummary_exampleCountByField)
+		v.ExampleCountByField.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.SchemaType != "" {
 		s.WriteString(schemas.DatasetSummary_schemaType, string(v.SchemaType))
@@ -5277,6 +5452,9 @@ func (v *DatasetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DatasetSummary_exampleCount:
 			v.ExampleCount = new(int64)
 			return d.ReadInt64(schemas.DatasetSummary_exampleCount, v.ExampleCount)
+		case schemas.DatasetSummary_exampleCountByField:
+			v.ExampleCountByField = &ExampleCountByField{}
+			return v.ExampleCountByField.Deserialize(d)
 		case schemas.DatasetSummary_schemaType:
 			var ev string
 			if err := d.ReadString(schemas.DatasetSummary_schemaType, &ev); err != nil {
@@ -5317,6 +5495,10 @@ type DatasetVersionSummary struct {
 	// This member is required.
 	ExampleCount *int64
 
+	//  The number of examples that have each field, for this version. Absent when the
+	// counts are unknown.
+	ExampleCountByField *ExampleCountByField
+
 	noSmithyDocumentSerde
 }
 
@@ -5336,6 +5518,11 @@ func (v *DatasetVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExampleCount != nil {
 		s.WriteInt64(schemas.DatasetVersionSummary_exampleCount, *v.ExampleCount)
 	}
+	if v.ExampleCountByField != nil {
+		s.WriteStruct(schemas.DatasetVersionSummary_exampleCountByField)
+		v.ExampleCountByField.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *DatasetVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatasetVersionSummary, func(s *smithy.Schema) error {
@@ -5349,6 +5536,9 @@ func (v *DatasetVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DatasetVersionSummary_exampleCount:
 			v.ExampleCount = new(int64)
 			return d.ReadInt64(schemas.DatasetVersionSummary_exampleCount, v.ExampleCount)
+		case schemas.DatasetVersionSummary_exampleCountByField:
+			v.ExampleCountByField = &ExampleCountByField{}
+			return v.ExampleCountByField.Deserialize(d)
 		}
 		return nil
 	})
@@ -7106,6 +7296,144 @@ func (v *EvaluatorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EvaluatorSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.EvaluatorSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+//	The number of examples that have each field. An example can have more than one
+//
+// of these fields, so the counts can add up to more than exampleCount .
+type ExampleCountByField struct {
+
+	//  The number of examples that have actor_profile .
+	//
+	// This member is required.
+	ActorProfile *int64
+
+	//  The number of examples that have input .
+	//
+	// This member is required.
+	Input *int64
+
+	//  The number of examples that have turns .
+	//
+	// This member is required.
+	Turns *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExampleCountByField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExampleCountByField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExampleCountByField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorProfile != nil {
+		s.WriteInt64(schemas.ExampleCountByField_actorProfile, *v.ActorProfile)
+	}
+	if v.Input != nil {
+		s.WriteInt64(schemas.ExampleCountByField_input, *v.Input)
+	}
+	if v.Turns != nil {
+		s.WriteInt64(schemas.ExampleCountByField_turns, *v.Turns)
+	}
+}
+func (v *ExampleCountByField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExampleCountByField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExampleCountByField_actorProfile:
+			v.ActorProfile = new(int64)
+			return d.ReadInt64(schemas.ExampleCountByField_actorProfile, v.ActorProfile)
+		case schemas.ExampleCountByField_input:
+			v.Input = new(int64)
+			return d.ReadInt64(schemas.ExampleCountByField_input, v.Input)
+		case schemas.ExampleCountByField_turns:
+			v.Turns = new(int64)
+			return d.ReadInt64(schemas.ExampleCountByField_turns, v.Turns)
+		}
+		return nil
+	})
+}
+
+//	A condition on the number of examples that have the given fields. The count
+//
+// includes each example that has at least one of the fields in anyOf .
+type ExampleCountByFieldCondition struct {
+
+	//  The fields to count. An example counts if it has at least one of these fields.
+	// Required.
+	AnyOf []ExampleField
+
+	//  The maximum count, inclusive.
+	Max *int64
+
+	//  The minimum count, inclusive.
+	Min *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExampleCountByFieldCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExampleCountByFieldCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExampleCountByFieldCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnyOf != nil {
+		serializeExampleFieldList(s, schemas.ExampleCountByFieldCondition_anyOf, v.AnyOf)
+	}
+	if v.Max != nil {
+		s.WriteInt64(schemas.ExampleCountByFieldCondition_max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteInt64(schemas.ExampleCountByFieldCondition_min, *v.Min)
+	}
+}
+func (v *ExampleCountByFieldCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExampleCountByFieldCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExampleCountByFieldCondition_anyOf:
+			return deserializeExampleFieldList(d, schemas.ExampleCountByFieldCondition_anyOf, &v.AnyOf)
+		case schemas.ExampleCountByFieldCondition_max:
+			v.Max = new(int64)
+			return d.ReadInt64(schemas.ExampleCountByFieldCondition_max, v.Max)
+		case schemas.ExampleCountByFieldCondition_min:
+			v.Min = new(int64)
+			return d.ReadInt64(schemas.ExampleCountByFieldCondition_min, v.Min)
+		}
+		return nil
+	})
+}
+
+// A condition on the fields of an example.
+type ExampleFieldCondition struct {
+
+	//  Matches examples that have at least one of these fields. Required.
+	AnyOf []ExampleField
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExampleFieldCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExampleFieldCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExampleFieldCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnyOf != nil {
+		serializeExampleFieldList(s, schemas.ExampleFieldCondition_anyOf, v.AnyOf)
+	}
+}
+func (v *ExampleFieldCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExampleFieldCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExampleFieldCondition_anyOf:
+			return deserializeExampleFieldList(d, schemas.ExampleFieldCondition_anyOf, &v.AnyOf)
 		}
 		return nil
 	})
@@ -13501,6 +13829,107 @@ func (v *LinkedinOauth2ProviderConfigOutput) Deserialize(d smithy.ShapeDeseriali
 			return d.ReadString(schemas.LinkedinOauth2ProviderConfigOutput_clientId, v.ClientId)
 		case schemas.LinkedinOauth2ProviderConfigOutput_oauthDiscovery:
 			return deserializeOauth2Discovery(d, schemas.LinkedinOauth2ProviderConfigOutput_oauthDiscovery, &v.OauthDiscovery)
+		}
+		return nil
+	})
+}
+
+// A filter for ListDatasetExamples .
+type ListDatasetExamplesFilter struct {
+
+	//  Returns only examples that meet at least one of these conditions. Examples
+	// last written before example field filtering was available never match.
+	ExampleFields []ExampleFieldCondition
+
+	//  Returns only examples created by this dataset generation. Specify one ID.
+	GenerationIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListDatasetExamplesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetExamplesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetExamplesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExampleFields != nil {
+		serializeExampleFieldConditionList(s, schemas.ListDatasetExamplesFilter_exampleFields, v.ExampleFields)
+	}
+	if v.GenerationIds != nil {
+		serializeDatasetGenerationIdList(s, schemas.ListDatasetExamplesFilter_generationIds, v.GenerationIds)
+	}
+}
+func (v *ListDatasetExamplesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetExamplesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetExamplesFilter_exampleFields:
+			return deserializeExampleFieldConditionList(d, schemas.ListDatasetExamplesFilter_exampleFields, &v.ExampleFields)
+		case schemas.ListDatasetExamplesFilter_generationIds:
+			return deserializeDatasetGenerationIdList(d, schemas.ListDatasetExamplesFilter_generationIds, &v.GenerationIds)
+		}
+		return nil
+	})
+}
+
+// A filter for ListDatasets .
+type ListDatasetsFilter struct {
+
+	//  Returns only datasets whose DRAFT example counts meet at least one of these
+	// conditions.
+	ExampleCountByField []ExampleCountByFieldCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListDatasetsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExampleCountByField != nil {
+		serializeExampleCountByFieldConditionList(s, schemas.ListDatasetsFilter_exampleCountByField, v.ExampleCountByField)
+	}
+}
+func (v *ListDatasetsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetsFilter_exampleCountByField:
+			return deserializeExampleCountByFieldConditionList(d, schemas.ListDatasetsFilter_exampleCountByField, &v.ExampleCountByField)
+		}
+		return nil
+	})
+}
+
+// A filter for ListDatasetVersions .
+type ListDatasetVersionsFilter struct {
+
+	//  Returns only versions whose example counts meet at least one of these
+	// conditions.
+	ExampleCountByField []ExampleCountByFieldCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListDatasetVersionsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetVersionsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetVersionsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExampleCountByField != nil {
+		serializeExampleCountByFieldConditionList(s, schemas.ListDatasetVersionsFilter_exampleCountByField, v.ExampleCountByField)
+	}
+}
+func (v *ListDatasetVersionsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetVersionsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetVersionsFilter_exampleCountByField:
+			return deserializeExampleCountByFieldConditionList(d, schemas.ListDatasetVersionsFilter_exampleCountByField, &v.ExampleCountByField)
 		}
 		return nil
 	})

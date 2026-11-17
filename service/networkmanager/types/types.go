@@ -2034,6 +2034,10 @@ type CoreNetworkChangeValues struct {
 	// The inside IP addresses used for core network change values.
 	InsideCidrBlocks []string
 
+	// The change in multipath resilience configuration in the core network change
+	// values.
+	MultipathResilience *MultipathResilienceChangeValues
+
 	// The network function group name if the change event is associated with a
 	// network function group.
 	NetworkFunctionGroupName *string
@@ -2098,6 +2102,11 @@ func (v *CoreNetworkChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InsideCidrBlocks != nil {
 		serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_InsideCidrBlocks, v.InsideCidrBlocks)
 	}
+	if v.MultipathResilience != nil {
+		s.WriteStruct(schemas.CoreNetworkChangeValues_MultipathResilience)
+		v.MultipathResilience.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.NetworkFunctionGroupName != nil {
 		s.WriteString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
 	}
@@ -2150,6 +2159,9 @@ func (v *CoreNetworkChangeValues) Deserialize(d smithy.ShapeDeserializer) error 
 			return deserializeExternalRegionCodeList(d, schemas.CoreNetworkChangeValues_EdgeLocations, &v.EdgeLocations)
 		case schemas.CoreNetworkChangeValues_InsideCidrBlocks:
 			return deserializeConstrainedStringList(d, schemas.CoreNetworkChangeValues_InsideCidrBlocks, &v.InsideCidrBlocks)
+		case schemas.CoreNetworkChangeValues_MultipathResilience:
+			v.MultipathResilience = &MultipathResilienceChangeValues{}
+			return v.MultipathResilience.Deserialize(d)
 		case schemas.CoreNetworkChangeValues_NetworkFunctionGroupName:
 			v.NetworkFunctionGroupName = new(string)
 			return d.ReadString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
@@ -3454,6 +3466,49 @@ func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Location_Longitude:
 			v.Longitude = new(string)
 			return d.ReadString(schemas.Location_Longitude, v.Longitude)
+		}
+		return nil
+	})
+}
+
+// Information about a change in multipath resilience.
+type MultipathResilienceChangeValues struct {
+
+	// A set of two edge locations.
+	EdgeSets [][]string
+
+	// The mode (best-effort/disabled) of multipath resilience.
+	Mode MultipathResilienceMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *MultipathResilienceChangeValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultipathResilienceChangeValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultipathResilienceChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeSets != nil {
+		serializeEdgeSetList(s, schemas.MultipathResilienceChangeValues_EdgeSets, v.EdgeSets)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.MultipathResilienceChangeValues_Mode, string(v.Mode))
+	}
+}
+func (v *MultipathResilienceChangeValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultipathResilienceChangeValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultipathResilienceChangeValues_EdgeSets:
+			return deserializeEdgeSetList(d, schemas.MultipathResilienceChangeValues_EdgeSets, &v.EdgeSets)
+		case schemas.MultipathResilienceChangeValues_Mode:
+			var ev string
+			if err := d.ReadString(schemas.MultipathResilienceChangeValues_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = MultipathResilienceMode(ev)
+			return nil
 		}
 		return nil
 	})

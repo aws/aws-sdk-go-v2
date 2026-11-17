@@ -90,6 +90,157 @@ func serializeAcceptedTerm(s smithy.ShapeSerializer, schema *smithy.Schema, v Ac
 	}
 }
 
+func serializeAgreementApprovalPlan(s smithy.ShapeSerializer, schema *smithy.Schema, v AgreementApprovalPlan) {
+	switch vv := v.(type) {
+	case *AgreementApprovalPlanMemberBuyerAgreementApprovalPlan:
+		s.WriteUnion(schema, schemas.AgreementApprovalPlan_buyerAgreementApprovalPlan)
+		s.WriteStruct(schemas.AgreementApprovalPlan_buyerAgreementApprovalPlan)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeAgreementApprovalPlanInput(s smithy.ShapeSerializer, schema *smithy.Schema, v AgreementApprovalPlanInput) {
+	switch vv := v.(type) {
+	case *AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput:
+		s.WriteUnion(schema, schemas.AgreementApprovalPlanInput_buyerAgreementApprovalPlanInput)
+		s.WriteStruct(schemas.AgreementApprovalPlanInput_buyerAgreementApprovalPlanInput)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeAgreementRequestTerm(s smithy.ShapeSerializer, schema *smithy.Schema, v AgreementRequestTerm) {
+	switch vv := v.(type) {
+	case *AgreementRequestTermMemberByolPricingTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_byolPricingTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_byolPricingTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberConfigurableUpfrontPricingTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_configurableUpfrontPricingTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_configurableUpfrontPricingTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberFixedUpfrontPricingTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_fixedUpfrontPricingTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_fixedUpfrontPricingTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberFreeTrialPricingTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_freeTrialPricingTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_freeTrialPricingTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberLegalTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_legalTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_legalTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberNetPaymentTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_netPaymentTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_netPaymentTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberPaymentScheduleTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_paymentScheduleTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_paymentScheduleTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberRecurringPaymentTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_recurringPaymentTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_recurringPaymentTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberRenewalTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_renewalTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_renewalTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberSupportTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_supportTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_supportTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberUsageBasedPricingTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_usageBasedPricingTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_usageBasedPricingTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberValidityTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_validityTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_validityTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *AgreementRequestTermMemberVariablePaymentTerm:
+		s.WriteUnion(schema, schemas.AgreementRequestTerm_variablePaymentTerm)
+		s.WriteStruct(schemas.AgreementRequestTerm_variablePaymentTerm)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeApprover(s smithy.ShapeSerializer, schema *smithy.Schema, v Approver) {
+	switch vv := v.(type) {
+	case *ApproverMemberAwsOrganizationAdminApprover:
+		s.WriteUnion(schema, schemas.Approver_awsOrganizationAdminApprover)
+		s.WriteStruct(schemas.Approver_awsOrganizationAdminApprover)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ApproverMemberEmailApprover:
+		s.WriteUnion(schema, schemas.Approver_emailApprover)
+		s.WriteStruct(schemas.Approver_emailApprover)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ApproverMemberProcurementToolApprover:
+		s.WriteUnion(schema, schemas.Approver_procurementToolApprover)
+		s.WriteStruct(schemas.Approver_procurementToolApprover)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeApproverOutcome(s smithy.ShapeSerializer, schema *smithy.Schema, v ApproverOutcome) {
+	switch vv := v.(type) {
+	case *ApproverOutcomeMemberAwsOrganizationApproverOutcome:
+		s.WriteUnion(schema, schemas.ApproverOutcome_awsOrganizationApproverOutcome)
+		s.WriteStruct(schemas.ApproverOutcome_awsOrganizationApproverOutcome)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ApproverOutcomeMemberEmailApproverOutcome:
+		s.WriteUnion(schema, schemas.ApproverOutcome_emailApproverOutcome)
+		s.WriteStruct(schemas.ApproverOutcome_emailApproverOutcome)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ApproverOutcomeMemberProcurementToolApproverOutcome:
+		s.WriteUnion(schema, schemas.ApproverOutcome_procurementToolApproverOutcome)
+		s.WriteStruct(schemas.ApproverOutcome_procurementToolApproverOutcome)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializePriceIncrease(s smithy.ShapeSerializer, schema *smithy.Schema, v PriceIncrease) {
 	switch vv := v.(type) {
 	case *PriceIncreaseMemberFixedPercentage:
@@ -201,6 +352,130 @@ func deserializeAcceptedTerm(d smithy.ShapeDeserializer, s *smithy.Schema, v *Ac
 	})
 }
 
+func deserializeAgreementApprovalPlan(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgreementApprovalPlan) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgreementApprovalPlan_buyerAgreementApprovalPlan:
+			vv := &AgreementApprovalPlanMemberBuyerAgreementApprovalPlan{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAgreementApprovalPlanInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgreementApprovalPlanInput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgreementApprovalPlanInput_buyerAgreementApprovalPlanInput:
+			vv := &AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAgreementRequestTerm(d smithy.ShapeDeserializer, s *smithy.Schema, v *AgreementRequestTerm) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgreementRequestTerm_byolPricingTerm:
+			vv := &AgreementRequestTermMemberByolPricingTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_configurableUpfrontPricingTerm:
+			vv := &AgreementRequestTermMemberConfigurableUpfrontPricingTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_fixedUpfrontPricingTerm:
+			vv := &AgreementRequestTermMemberFixedUpfrontPricingTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_freeTrialPricingTerm:
+			vv := &AgreementRequestTermMemberFreeTrialPricingTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_legalTerm:
+			vv := &AgreementRequestTermMemberLegalTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_netPaymentTerm:
+			vv := &AgreementRequestTermMemberNetPaymentTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_paymentScheduleTerm:
+			vv := &AgreementRequestTermMemberPaymentScheduleTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_recurringPaymentTerm:
+			vv := &AgreementRequestTermMemberRecurringPaymentTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_renewalTerm:
+			vv := &AgreementRequestTermMemberRenewalTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_supportTerm:
+			vv := &AgreementRequestTermMemberSupportTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_usageBasedPricingTerm:
+			vv := &AgreementRequestTermMemberUsageBasedPricingTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_validityTerm:
+			vv := &AgreementRequestTermMemberValidityTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AgreementRequestTerm_variablePaymentTerm:
+			vv := &AgreementRequestTermMemberVariablePaymentTerm{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeApprover(d smithy.ShapeDeserializer, s *smithy.Schema, v *Approver) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.Approver_awsOrganizationAdminApprover:
+			vv := &ApproverMemberAwsOrganizationAdminApprover{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Approver_emailApprover:
+			vv := &ApproverMemberEmailApprover{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.Approver_procurementToolApprover:
+			vv := &ApproverMemberProcurementToolApprover{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeApproverOutcome(d smithy.ShapeDeserializer, s *smithy.Schema, v *ApproverOutcome) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ApproverOutcome_awsOrganizationApproverOutcome:
+			vv := &ApproverOutcomeMemberAwsOrganizationApproverOutcome{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ApproverOutcome_emailApproverOutcome:
+			vv := &ApproverOutcomeMemberEmailApproverOutcome{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ApproverOutcome_procurementToolApproverOutcome:
+			vv := &ApproverOutcomeMemberProcurementToolApproverOutcome{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializePriceIncrease(d smithy.ShapeDeserializer, s *smithy.Schema, v *PriceIncrease) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -257,6 +532,52 @@ func serializeAcceptedTermList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeAgreementApprovalPlanInputs(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementApprovalPlanInput) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeAgreementApprovalPlanInput(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeAgreementApprovalPlans(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementApprovalPlan) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeAgreementApprovalPlan(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeAgreementApprovalPurchaseOrders(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementApprovalPurchaseOrder) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAgreementApprovalResources(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementApprovalResource) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAgreementApprovalSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementApprovalSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAgreementCancellationRequestSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementCancellationRequestSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -283,6 +604,24 @@ func serializeAgreementInvoiceLineItemGroupSummaries(s smithy.ShapeSerializer, s
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAgreementRequestSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementRequestSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAgreementRequestTermList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgreementRequestTerm) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeAgreementRequestTerm(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -337,6 +676,62 @@ func serializeBillingAdjustmentSummaryList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeBuyerAgreementApprovalGroups(s smithy.ShapeSerializer, schema *smithy.Schema, v []BuyerAgreementApprovalGroup) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBuyerAgreementApprovalLevels(s smithy.ShapeSerializer, schema *smithy.Schema, v []BuyerAgreementApprovalLevel) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBuyerAgreementApprovalPlanGroups(s smithy.ShapeSerializer, schema *smithy.Schema, v []BuyerAgreementApprovalPlanGroup) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBuyerAgreementApprovalPlanLevels(s smithy.ShapeSerializer, schema *smithy.Schema, v []BuyerAgreementApprovalPlanLevel) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBuyerApproverOutcomes(s smithy.ShapeSerializer, schema *smithy.Schema, v []ApproverOutcome) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeApproverOutcome(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeBuyerApprovers(s smithy.ShapeSerializer, schema *smithy.Schema, v []Approver) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeApprover(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
 func serializeCharges(s smithy.ShapeSerializer, schema *smithy.Schema, v []Charge) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -353,6 +748,14 @@ func serializeConfigurableUpfrontRateCardList(s smithy.ShapeSerializer, schema *
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeContactTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ContactType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -564,6 +967,114 @@ func deserializeAcceptedTermList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeAgreementApprovalPlanInputs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementApprovalPlanInput) error {
+	*v = make([]AgreementApprovalPlanInput, 0)
+	var vv AgreementApprovalPlanInput
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementApprovalPlanInput
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeAgreementApprovalPlanInput(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgreementApprovalPlans(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementApprovalPlan) error {
+	*v = make([]AgreementApprovalPlan, 0)
+	var vv AgreementApprovalPlan
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementApprovalPlan
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeAgreementApprovalPlan(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgreementApprovalPurchaseOrders(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementApprovalPurchaseOrder) error {
+	*v = make([]AgreementApprovalPurchaseOrder, 0)
+	var vv AgreementApprovalPurchaseOrder
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementApprovalPurchaseOrder
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AgreementApprovalPurchaseOrder{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgreementApprovalResources(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementApprovalResource) error {
+	*v = make([]AgreementApprovalResource, 0)
+	var vv AgreementApprovalResource
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementApprovalResource
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AgreementApprovalResource{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgreementApprovalSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementApprovalSummary) error {
+	*v = make([]AgreementApprovalSummary, 0)
+	var vv AgreementApprovalSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementApprovalSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AgreementApprovalSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeAgreementCancellationRequestSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementCancellationRequestSummary) error {
 	*v = make([]AgreementCancellationRequestSummary, 0)
 	var vv AgreementCancellationRequestSummary
@@ -622,6 +1133,49 @@ func deserializeAgreementInvoiceLineItemGroupSummaries(d smithy.ShapeDeserialize
 
 		vv = AgreementInvoiceLineItemGroupSummary{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgreementRequestSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementRequestSummary) error {
+	*v = make([]AgreementRequestSummary, 0)
+	var vv AgreementRequestSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementRequestSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AgreementRequestSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgreementRequestTermList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgreementRequestTerm) error {
+	*v = make([]AgreementRequestTerm, 0)
+	var vv AgreementRequestTerm
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgreementRequestTerm
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeAgreementRequestTerm(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -740,6 +1294,136 @@ func deserializeBillingAdjustmentSummaryList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializeBuyerAgreementApprovalGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BuyerAgreementApprovalGroup) error {
+	*v = make([]BuyerAgreementApprovalGroup, 0)
+	var vv BuyerAgreementApprovalGroup
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BuyerAgreementApprovalGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = BuyerAgreementApprovalGroup{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBuyerAgreementApprovalLevels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BuyerAgreementApprovalLevel) error {
+	*v = make([]BuyerAgreementApprovalLevel, 0)
+	var vv BuyerAgreementApprovalLevel
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BuyerAgreementApprovalLevel
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = BuyerAgreementApprovalLevel{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBuyerAgreementApprovalPlanGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BuyerAgreementApprovalPlanGroup) error {
+	*v = make([]BuyerAgreementApprovalPlanGroup, 0)
+	var vv BuyerAgreementApprovalPlanGroup
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BuyerAgreementApprovalPlanGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = BuyerAgreementApprovalPlanGroup{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBuyerAgreementApprovalPlanLevels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BuyerAgreementApprovalPlanLevel) error {
+	*v = make([]BuyerAgreementApprovalPlanLevel, 0)
+	var vv BuyerAgreementApprovalPlanLevel
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero BuyerAgreementApprovalPlanLevel
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = BuyerAgreementApprovalPlanLevel{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBuyerApproverOutcomes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ApproverOutcome) error {
+	*v = make([]ApproverOutcome, 0)
+	var vv ApproverOutcome
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ApproverOutcome
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeApproverOutcome(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBuyerApprovers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Approver) error {
+	*v = make([]Approver, 0)
+	var vv Approver
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Approver
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeApprover(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCharges(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Charge) error {
 	*v = make([]Charge, 0)
 	var vv Charge
@@ -780,6 +1464,27 @@ func deserializeConfigurableUpfrontRateCardList(d smithy.ShapeDeserializer, s *s
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContactTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContactType) error {
+	*v = make([]ContactType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ContactType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, ContactType(vv))
 		return nil
 	})
 }

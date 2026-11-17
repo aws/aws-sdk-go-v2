@@ -193,6 +193,50 @@ func (PartitionTransform) Values() []PartitionTransform {
 	}
 }
 
+type QueueStartingPositionType string
+
+// Enum values for QueueStartingPositionType
+const (
+	QueueStartingPositionTypeTrimHorizon QueueStartingPositionType = "TRIM_HORIZON"
+	QueueStartingPositionTypeLatest      QueueStartingPositionType = "LATEST"
+	QueueStartingPositionTypeAtTimestamp QueueStartingPositionType = "AT_TIMESTAMP"
+)
+
+// Values returns all known values for QueueStartingPositionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueueStartingPositionType) Values() []QueueStartingPositionType {
+	return []QueueStartingPositionType{
+		"TRIM_HORIZON",
+		"LATEST",
+		"AT_TIMESTAMP",
+	}
+}
+
+type QueueStatus string
+
+// Enum values for QueueStatus
+const (
+	QueueStatusCreating QueueStatus = "CREATING"
+	QueueStatusActive   QueueStatus = "ACTIVE"
+	QueueStatusUpdating QueueStatus = "UPDATING"
+	QueueStatusDeleting QueueStatus = "DELETING"
+)
+
+// Values returns all known values for QueueStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueueStatus) Values() []QueueStatus {
+	return []QueueStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type RecordDistributionStrategy string
 
 // Enum values for RecordDistributionStrategy
@@ -406,5 +450,24 @@ func (StreamStatus) Values() []StreamStatus {
 		"DELETING",
 		"ACTIVE",
 		"UPDATING",
+	}
+}
+
+type TargetType string
+
+// Enum values for TargetType
+const (
+	TargetTypeBuiltIn TargetType = "BUILT_IN"
+	TargetTypeNone    TargetType = "NONE"
+)
+
+// Values returns all known values for TargetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetType) Values() []TargetType {
+	return []TargetType{
+		"BUILT_IN",
+		"NONE",
 	}
 }
