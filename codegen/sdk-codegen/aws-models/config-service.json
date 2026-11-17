@@ -2458,6 +2458,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains the name or Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.</p>"
                     }
+                },
+                "Type": {
+                    "target": "com.amazonaws.configservice#ConformancePackType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the conformance pack. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM</code> – A custom conformance pack.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED</code> – A managed conformance pack.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.configservice#ConformancePackSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the identifier of the managed conformance pack that Config deploys in your account.</p>\n         <note>\n            <p>This field applies only to managed conformance packs. Custom conformance packs leave it empty.</p>\n         </note>"
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.configservice#ConformancePackScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object of type <code>ConformancePackScope</code>, which contains the tag key and optional tag value that defines which resources trigger an evaluation for the Config rules in the managed conformance pack.</p>\n         <note>\n            <p>Managed conformance packs with a scope populate this field. Custom conformance packs leave it empty.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -2577,7 +2595,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input parameters in the form of key-value pairs for the conformance pack, both of which you define. \n\t\t\tKeys can have a maximum character length of 255 characters, and values can have a maximum length of 4096 characters.</p>"
+                "smithy.api#documentation": "<p>Input parameters in the form of key-value pairs for the conformance pack, both of which you define. \n        For managed conformance packs, keys can have a maximum character length of 255 characters, and values can have a maximum length of 1024 characters. \n        For custom conformance packs, keys can have a maximum character length of 255 characters, and values can have a maximum length of 4096 characters.</p>"
             }
         },
         "com.amazonaws.configservice#ConformancePackInputParameters": {
@@ -2588,7 +2606,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 60
+                    "max": 330
                 }
             }
         },
@@ -2688,6 +2706,51 @@
                 }
             }
         },
+        "com.amazonaws.configservice#ConformancePackScope": {
+            "type": "structure",
+            "members": {
+                "TagKey": {
+                    "target": "com.amazonaws.configservice#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key that applies to only those Amazon Web Services resources that you want to trigger an evaluation for the rules in the conformance pack. Defines the <a>Scope$TagKey</a> of all Config rules in the conformance pack. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.configservice#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value that applies to only those Amazon Web Services resources that you want to trigger an evaluation for the rules in the conformance pack. If you do not specify a value for <code>TagValue</code>, \n\t\t\tresources that have the tag key <code>TagKey</code> trigger an evaluation, regardless of the tag value. Defines the <a>Scope$TagValue</a> of all Config rules in the conformance pack. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines which resources trigger an evaluation for the Config rules in a conformance pack. The scope is a tag key, or a combination of a tag key and value, that is applied to every rule in the conformance pack.\n\t\t\tSpecify a scope to constrain which resources trigger an evaluation for the rules. Otherwise, evaluations of rules in the conformance pack are triggered when any resource in your recording group changes in configuration.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackSource": {
+            "type": "structure",
+            "members": {
+                "SourceIdentifier": {
+                    "target": "com.amazonaws.configservice#ConformancePackSourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A predefined identifier for a managed conformance pack. The identifier specifies which managed conformance pack Config deploys in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the identifier of the managed conformance pack that Config deploys in your account.</p>"
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackSourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.configservice#ConformancePackState": {
             "type": "enum",
             "members": {
@@ -2707,6 +2770,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_COMPLETE"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
                     }
                 },
                 "DELETE_IN_PROGRESS": {
@@ -2750,15 +2831,14 @@
                 "ConformancePackState": {
                     "target": "com.amazonaws.configservice#ConformancePackState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates deployment status of conformance pack.</p>\n         <p>Config sets the state of the conformance pack to:</p>\n         <ul>\n            <li>\n               <p>CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.</p>\n            </li>\n            <li>\n               <p>CREATE_COMPLETE when a conformance pack has been successfully created in your account.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED when a conformance pack creation failed in your account.</p>\n            </li>\n            <li>\n               <p>DELETE_IN_PROGRESS when a conformance pack deletion is in progress. </p>\n            </li>\n            <li>\n               <p>DELETE_FAILED when a conformance pack deletion failed in your account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates deployment status of conformance pack.</p>\n         <p>Config sets the state of the conformance pack to:</p>\n         <ul>\n            <li>\n               <p>CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.</p>\n            </li>\n            <li>\n               <p>CREATE_COMPLETE when a conformance pack has been successfully created in your account.</p>\n            </li>\n            <li>\n               <p>CREATE_FAILED when a conformance pack creation failed in your account.</p>\n            </li>\n            <li>\n               <p>UPDATE_IN_PROGRESS when a conformance pack update is in progress for an account.</p>\n            </li>\n            <li>\n               <p>UPDATE_COMPLETE when a conformance pack has been successfully updated in your account.</p>\n            </li>\n            <li>\n               <p>UPDATE_FAILED when a conformance pack update failed in your account.</p>\n            </li>\n            <li>\n               <p>DELETE_IN_PROGRESS when a conformance pack deletion is in progress. </p>\n            </li>\n            <li>\n               <p>DELETE_FAILED when a conformance pack deletion failed in your account.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "StackArn": {
                     "target": "com.amazonaws.configservice#StackArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of CloudFormation stack. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of CloudFormation stack. </p>\n         <note>\n            <p>Custom conformance packs populate this field. Managed conformance packs leave it empty.</p>\n         </note>"
                     }
                 },
                 "ConformancePackStatusReason": {
@@ -2778,6 +2858,12 @@
                     "target": "com.amazonaws.configservice#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>Last time when conformation pack creation and update was successful.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.configservice#ConformancePackType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the conformance pack. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM</code> – A custom conformance pack.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED</code> – A managed conformance pack.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2819,6 +2905,35 @@
             "traits": {
                 "smithy.api#documentation": "<p>You have specified a template that is not valid or supported.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackType": {
+            "type": "enum",
+            "members": {
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#ConformancePackTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#ConformancePackType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.configservice#Connector": {
@@ -4974,6 +5089,12 @@
                         "smithy.api#documentation": "<p>Comma-separated list of conformance pack names.</p>"
                     }
                 },
+                "Filters": {
+                    "target": "com.amazonaws.configservice#DescribeConformancePacksFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a filtered list of custom or managed conformance pack statuses. By default, if the filter is not defined, Config returns details for all your conformance packs.</p>"
+                    }
+                },
                 "Limit": {
                     "target": "com.amazonaws.configservice#PageSizeLimit",
                     "traits": {
@@ -5044,6 +5165,20 @@
                 }
             }
         },
+        "com.amazonaws.configservice#DescribeConformancePacksFilters": {
+            "type": "structure",
+            "members": {
+                "Types": {
+                    "target": "com.amazonaws.configservice#ConformancePackTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results by conformance pack type. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM</code> – A custom conformance pack.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MANAGED</code> – A managed conformance pack.</p>\n            </li>\n         </ul>\n         <p>If you specify both values, Config returns conformance packs of either type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for filtering results from <a>DescribeConformancePacks</a> and <a>DescribeConformancePackStatus</a> by conformance pack type.</p>"
+            }
+        },
         "com.amazonaws.configservice#DescribeConformancePacksRequest": {
             "type": "structure",
             "members": {
@@ -5051,6 +5186,12 @@
                     "target": "com.amazonaws.configservice#ConformancePackNamesList",
                     "traits": {
                         "smithy.api#documentation": "<p>Comma-separated list of conformance pack names for which you want details. If you do not specify any names, Config returns details for all your conformance packs. </p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.configservice#DescribeConformancePacksFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a filtered list of custom or managed conformance packs. By default, if the filter is not defined, Config returns details for all your conformance packs.</p>"
                     }
                 },
                 "Limit": {
@@ -10892,7 +11033,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across an organization.\n\t\t\tFor information on how many conformance packs you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <important>\n            <p>When you use <code>PutConformancePack</code> to deploy conformance packs in your account,\n\t\t\t\tthe operation can create Config rules and remediation actions without\n\t\t\t\trequiring <code>config:PutConfigRule</code> or\n\t\t\t\t\t<code>config:PutRemediationConfigurations</code> permissions in your account IAM\n\t\t\t\tpolicies.</p>\n            <p>This API uses the <code>AWSServiceRoleForConfigConforms</code> service-linked role in your\n\t\t\t\taccount to create conformance pack resources. This service-linked role includes the\n\t\t\t\tpermissions to create Config rules and remediation configurations, even\n\t\t\t\tif your account IAM policies explicitly deny these actions.</p>\n         </important>\n         <p>This API creates a service-linked role <code>AWSServiceRoleForConfigConforms</code> in your account. \n\t\tThe service-linked role is created only when the role does not exist in your account. </p>\n         <note>\n            <p>You must specify only one of the follow parameters: <code>TemplateS3Uri</code>, <code>TemplateBody</code> or <code>TemplateSSMDocumentDetails</code>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>\n               <code>PutConformancePack</code> is an idempotent API. Subsequent requests won't create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across an organization.\n\t\t\tFor information on how many conformance packs you can have per account, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html\">\n               <b>Service Limits</b>\n            </a> in the <i>Config Developer Guide</i>.</p>\n         <important>\n            <p>When you use <code>PutConformancePack</code> to deploy conformance packs in your account,\n\t\t\t\tthe operation can create Config rules and remediation actions without\n\t\t\t\trequiring <code>config:PutConfigRule</code> or\n\t\t\t\t\t<code>config:PutRemediationConfigurations</code> permissions in your account IAM\n\t\t\t\tpolicies.</p>\n            <p>This API uses the <code>AWSServiceRoleForConfigConforms</code> service-linked role in your\n\t\t\t\taccount to create conformance pack resources. This service-linked role includes the\n\t\t\t\tpermissions to create Config rules and remediation configurations, even\n\t\t\t\tif your account IAM policies explicitly deny these actions.</p>\n         </important>\n         <p>This API creates a service-linked role <code>AWSServiceRoleForConfigConforms</code> in your account. \n\t\tThe service-linked role is created only when the role does not exist in your account. </p>\n         <note>\n            <p>For custom conformance packs, you must specify only one of <code>TemplateS3Uri</code>, <code>TemplateBody</code>, <code>TemplateSSMDocumentDetails</code>.</p>\n            <p>For managed conformance packs, you must specify <code>Source</code>. Do not specify <code>TemplateS3Uri</code>, <code>TemplateBody</code>, <code>TemplateSSMDocumentDetails</code>, <code>DeliveryS3Bucket</code>, or <code>DeliveryS3KeyPrefix</code>.</p>\n         </note>\n         <note>\n            <p>\n               <b>Tags are added at creation and cannot be updated with this operation</b>\n            </p>\n            <p>\n               <code>PutConformancePack</code> is an idempotent API. Subsequent requests won't create a duplicate resource if one was already created. If a following request has different <code>tags</code> values,\n\t\t\tConfig will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>tags</code> will not be updated, even if they are different.</p>\n            <p>Use <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html\">TagResource</a> and <a href=\"https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html\">UntagResource</a> to update tags after creation.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutConformancePackRequest": {
@@ -10932,7 +11073,7 @@
                 "ConformancePackInputParameters": {
                     "target": "com.amazonaws.configservice#ConformancePackInputParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>ConformancePackInputParameter</code> objects.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>ConformancePackInputParameter</code> objects. Custom conformance packs can have at most 60 input parameters. \n        Managed conformance packs can have at most 330 input parameters.</p>"
                     }
                 },
                 "TemplateSSMDocumentDetails": {
@@ -10945,6 +11086,18 @@
                     "target": "com.amazonaws.configservice#TagsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags for the conformance pack. Each tag consists of a key and an optional value, both of which you define.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.configservice#ConformancePackSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object of type <code>ConformancePackSource</code>, which contains the identifier of the managed conformance pack that you want to deploy. If you specify a source, Config creates a managed conformance pack. \n\t\t\tManaged conformance packs are predefined collections of Config rules that are created and maintained by Amazon Web Services.</p>\n         <note>\n            <p>If you specify a source, you cannot specify <code>TemplateS3Uri</code>, <code>TemplateBody</code>, <code>TemplateSSMDocumentDetails</code>, <code>DeliveryS3Bucket</code>, or <code>DeliveryS3KeyPrefix</code>.\n\t\t\tYou cannot convert an existing conformance pack between a managed conformance pack and a custom conformance pack. You also cannot change the source of an existing managed conformance pack.</p>\n         </note>"
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.configservice#ConformancePackScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object of type <code>ConformancePackScope</code> that defines which resources can trigger an evaluation for Config rules in the conformance pack. The scope can include a tag key and optional tag value. \n            Specify a scope to constrain the resources that can trigger an evaluation for rules in the conformance pack. If you do not specify a scope, all rules in the conformance pack are unscoped.</p>\n         <note>\n            <p>This field is optional and is supported only for managed conformance packs. If you specify a scope, you must also specify <code>Source</code>.</p>\n         </note>"
                     }
                 }
             },

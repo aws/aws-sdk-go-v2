@@ -6200,6 +6200,96 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#DeleteDurableExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#DeleteDurableExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#DeleteDurableExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Lambda durable execution",
+                    "relativeDocumentation": "API_DeleteDurableExecution.html",
+                    "resources": {
+                        "required": {
+                            "durable execution": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a completed Lambda <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a> and its data. The execution must be in a terminal state (<code>SUCCEEDED</code>, <code>FAILED</code>, <code>STOPPED</code>, or <code>TIMED_OUT</code>). Otherwise, this operation returns a <code>ResourceConflictException</code>.</p> <p>The execution has <code>DELETING</code> status until the deletion finishes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-delete.html\">Deleting durable executions</a>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "feature:delete-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#DeleteDurableExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "DurableExecutionArn": {
+                    "target": "com.amazonaws.lambda#DurableExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the durable execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:delete-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:delete-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#DeleteDurableExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "DeletionRequestTimestamp": {
+                    "target": "com.amazonaws.lambda#ExecutionTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when Lambda accepted the deletion request (ISO 8601 format).</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:delete-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:delete-durable-execution"
+                ]
+            }
+        },
         "com.amazonaws.lambda#DeleteEventSourceMapping": {
             "type": "operation",
             "input": {
@@ -7171,10 +7261,19 @@
                     "target": "com.amazonaws.lambda#CheckpointDurableExecution"
                 },
                 {
+                    "target": "com.amazonaws.lambda#DeleteDurableExecution"
+                },
+                {
                     "target": "com.amazonaws.lambda#GetDurableExecutionHistory"
                 },
                 {
                     "target": "com.amazonaws.lambda#GetDurableExecutionState"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PauseDurableExecution"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResumeDurableExecution"
                 },
                 {
                     "target": "com.amazonaws.lambda#StopDurableExecution"
@@ -8150,6 +8249,24 @@
                             "feature:public"
                         ]
                     }
+                },
+                "ExecutionPausedDetails": {
+                    "target": "com.amazonaws.lambda#ExecutionPausedDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of an <code>ExecutionPaused</code> event.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ExecutionResumedDetails": {
+                    "target": "com.amazonaws.lambda#ExecutionResumedDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of an <code>ExecutionResumed</code> event.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -8229,6 +8346,35 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#EventPauseReason": {
+            "type": "structure",
+            "members": {
+                "Payload": {
+                    "target": "com.amazonaws.lambda#PauseReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that you provided when you paused the execution. This field is only present if you set <code>IncludeExecutionData</code> to <code>true</code> in the request.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Truncated": {
+                    "target": "com.amazonaws.lambda#Truncated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Lambda omitted the reason from the response because <code>IncludeExecutionData</code> is <code>false</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reason for pausing a durable execution, as recorded in the execution history.</p>",
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
         "com.amazonaws.lambda#EventResult": {
             "type": "structure",
             "members": {
@@ -8255,6 +8401,35 @@
                 "smithy.api#documentation": "<p>Result information for an event.</p>",
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#EventResumeReason": {
+            "type": "structure",
+            "members": {
+                "Payload": {
+                    "target": "com.amazonaws.lambda#ResumeReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that you provided when you resumed the execution. This field is only present if you set <code>IncludeExecutionData</code> to <code>true</code> in the request.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Truncated": {
+                    "target": "com.amazonaws.lambda#Truncated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Lambda omitted the reason from the response because <code>IncludeExecutionData</code> is <code>false</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reason for resuming a durable execution, as recorded in the execution history.</p>",
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
                 ]
             }
         },
@@ -9044,6 +9219,24 @@
                             "feature:public"
                         ]
                     }
+                },
+                "ExecutionPaused": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExecutionPaused",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ExecutionResumed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExecutionResumed",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -9208,6 +9401,76 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#ExecutionPausedDetails": {
+            "type": "structure",
+            "members": {
+                "PauseRequestTimestamp": {
+                    "target": "com.amazonaws.lambda#ExecutionTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you requested the pause, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.lambda#EventPauseReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that you provided when you paused the execution.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ExecutionTimeoutPaused": {
+                    "target": "com.amazonaws.lambda#ExecutionTimeoutPaused",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the pause also paused the execution timeout.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a> that paused. The event timestamp is when the execution paused.</p>",
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#ExecutionResumedDetails": {
+            "type": "structure",
+            "members": {
+                "ResumeRequestTimestamp": {
+                    "target": "com.amazonaws.lambda#ExecutionTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you requested the resume, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.lambda#EventResumeReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that you provided when you resumed the execution.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a> that resumed. The event timestamp is when the execution resumed.</p>",
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
         "com.amazonaws.lambda#ExecutionStartedDetails": {
             "type": "structure",
             "members": {
@@ -9284,6 +9547,33 @@
                         "smithy.api#enumValue": "STOPPED",
                         "smithy.api#tags": [
                             "feature:public"
+                        ]
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING",
+                        "smithy.api#tags": [
+                            "feature:delete-durable-execution"
+                        ]
+                    }
+                },
+                "PAUSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSING",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAUSED",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
                         ]
                     }
                 }
@@ -9385,6 +9675,14 @@
                 },
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#ExecutionTimeoutPaused": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
                 ]
             }
         },
@@ -11603,7 +11901,7 @@
                 "Status": {
                     "target": "com.amazonaws.lambda#ExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the durable execution. Valid values are <code>RUNNING</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, <code>TIMED_OUT</code>, and <code>STOPPED</code>.</p>",
+                        "smithy.api#documentation": "<p>The durable execution has one of the following statuses:</p> <ul> <li> <p> <code>RUNNING</code> – The execution is running or waiting for pending operations to complete.</p> </li> <li> <p> <code>PAUSING</code> – The execution is waiting for an in-progress invocation to reach its next checkpoint before it pauses.</p> </li> <li> <p> <code>PAUSED</code> – The execution is paused, and Lambda doesn't invoke your function.</p> </li> <li> <p> <code>SUCCEEDED</code> – The execution completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The execution completed with an error.</p> </li> <li> <p> <code>TIMED_OUT</code> – The execution exceeded its execution timeout.</p> </li> <li> <p> <code>STOPPED</code> – A <code>StopDurableExecution</code> request stopped the execution.</p> </li> <li> <p> <code>DELETING</code> – A <code>DeleteDurableExecution</code> request is deleting the execution and its data.</p> </li> </ul>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "feature:public"
@@ -11652,6 +11950,24 @@
                         "smithy.api#documentation": "<p>Configuration settings for the durable execution, including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.</p>",
                         "smithy.api#tags": [
                             "feature:public"
+                        ]
+                    }
+                },
+                "PauseDetails": {
+                    "target": "com.amazonaws.lambda#PauseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the pause, including when you requested it and whether it pauses the execution timeout. This field is only present when the execution status is <code>PAUSING</code> or <code>PAUSED</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ExpectedExecutionTimeoutTimestamp": {
+                    "target": "com.amazonaws.lambda#ExecutionTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the durable execution will time out, in Unix timestamp format. This value includes any extension from time the execution spent paused. While the execution is paused with its execution timeout paused, this value is 366 days after the start time. This field isn't present for completed executions.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
                         ]
                     }
                 }
@@ -17323,7 +17639,7 @@
                 "Statuses": {
                     "target": "com.amazonaws.lambda#ExecutionStatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter executions by status. Valid values: RUNNING, SUCCEEDED, FAILED, TIMED_OUT, STOPPED.</p>",
+                        "smithy.api#documentation": "<p>Filters the executions by status. Specify one of the following values:</p> <ul> <li> <p> <code>RUNNING</code> – The execution is running or waiting for pending operations to complete.</p> </li> <li> <p> <code>PAUSING</code> – The execution is waiting for an in-progress invocation to reach its next checkpoint before it pauses.</p> </li> <li> <p> <code>PAUSED</code> – The execution is paused, and Lambda doesn't invoke your function.</p> </li> <li> <p> <code>SUCCEEDED</code> – The execution completed successfully.</p> </li> <li> <p> <code>FAILED</code> – The execution completed with an error.</p> </li> <li> <p> <code>TIMED_OUT</code> – The execution exceeded its execution timeout.</p> </li> <li> <p> <code>STOPPED</code> – A <code>StopDurableExecution</code> request stopped the execution.</p> </li> <li> <p> <code>DELETING</code> – A <code>DeleteDurableExecution</code> request is deleting the execution and its data.</p> </li> </ul>",
                         "smithy.api#httpQuery": "Statuses",
                         "smithy.api#tags": [
                             "feature:public"
@@ -20211,6 +20527,179 @@
                 ]
             }
         },
+        "com.amazonaws.lambda#PauseDetails": {
+            "type": "structure",
+            "members": {
+                "PauseRequestTimestamp": {
+                    "target": "com.amazonaws.lambda#ExecutionTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you requested the pause, in <a href=\"https://www.w3.org/TR/NOTE-datetime\">ISO-8601 format</a> (YYYY-MM-DDThh:mm:ss.sTZD).</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.lambda#PauseReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that you provided when you paused the execution. This field is only present if you set <code>IncludeExecutionData</code> to <code>true</code> in the request.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ExecutionTimeoutPaused": {
+                    "target": "com.amazonaws.lambda#ExecutionTimeoutPaused",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the pause also pauses the execution timeout.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a> that is pausing or paused.</p>",
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#PauseDurableExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#PauseDurableExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#PauseDurableExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to pause an AWS Lambda durable execution",
+                    "relativeDocumentation": "API_PauseDurableExecution.html",
+                    "resources": {
+                        "required": {
+                            "durable execution": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Pauses a running <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a>. While an execution is paused, Lambda doesn't invoke your function, but pending operations such as waits and callbacks continue to complete.</p> <p>If an invocation is in progress, the execution status changes to <code>PAUSING</code> until the invocation reaches its next checkpoint, and then changes to <code>PAUSED</code>. This operation returns a successful response while the execution status is still <code>RUNNING</code>, and the status changes when Lambda processes the request. For more information about pausing executions, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-pause-resume.html\">Pausing and resuming durable executions</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/pause",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#PauseDurableExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "DurableExecutionArn": {
+                    "target": "com.amazonaws.lambda#DurableExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the durable execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lambda#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide so that the request completes no more than one time. If you repeat a request with the same client token and parameters within 15 minutes, Lambda doesn't pause the execution again and returns a successful response instead of an error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.lambda#PauseReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why you're pausing the execution. Lambda records the reason in the execution history.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ExecutionTimeoutPaused": {
+                    "target": "com.amazonaws.lambda#ExecutionTimeoutPaused",
+                    "traits": {
+                        "smithy.api#default": true,
+                        "smithy.api#documentation": "<p>Specifies whether to pause the execution timeout while the execution is paused. If <code>true</code>, Lambda extends the execution timeout by the time the execution spends paused. An execution with a paused timeout still times out 366 days after it started. The default value is <code>true</code>.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#PauseDurableExecutionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#PauseReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
         "com.amazonaws.lambda#PerExecutionEnvironmentMaxConcurrency": {
             "type": "integer",
             "traits": {
@@ -22675,6 +23164,129 @@
             "traits": {
                 "smithy.api#tags": [
                     "feature:public"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#ResumeDurableExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#ResumeDurableExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#ResumeDurableExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#KMSNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to resume a paused AWS Lambda durable execution",
+                    "relativeDocumentation": "API_ResumeDurableExecution.html",
+                    "resources": {
+                        "required": {
+                            "durable execution": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Resumes a paused <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a>. If the pause interrupted an invocation, or an operation completed while the execution was paused, Lambda invokes your function. Otherwise, the execution continues to wait for its pending operations.</p> <p>If the execution status is <code>PAUSING</code>, this operation cancels the pause, and the in-progress invocation continues. This operation returns a successful response while the execution status is still <code>PAUSED</code> or <code>PAUSING</code>, and the status changes to <code>RUNNING</code> when Lambda processes the request. For more information about resuming executions, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-pause-resume.html\">Pausing and resuming durable executions</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/resume",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#ResumeDurableExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "DurableExecutionArn": {
+                    "target": "com.amazonaws.lambda#DurableExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the durable execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lambda#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide so that the request completes no more than one time. If you repeat a request with the same client token and parameters within 15 minutes, Lambda doesn't resume the execution again and returns a successful response instead of an error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.lambda#ResumeReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why you're resuming the execution. Lambda records the reason in the execution history.</p>",
+                        "smithy.api#tags": [
+                            "feature:pause-resume-durable-execution"
+                        ]
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#ResumeDurableExecutionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
+                ]
+            }
+        },
+        "com.amazonaws.lambda#ResumeReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {},
+                "smithy.api#tags": [
+                    "feature:pause-resume-durable-execution"
                 ]
             }
         },
@@ -25232,7 +25844,7 @@
                         }
                     }
                 },
-                "smithy.api#documentation": "<p>Stops a running <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a>. The execution transitions to STOPPED status and cannot be resumed. Any in-progress operations are terminated.</p>",
+                "smithy.api#documentation": "<p>Stops a running or paused <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html\">durable execution</a>. The execution transitions to STOPPED status and cannot be resumed. Any in-progress operations are terminated.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2025-12-01/durable-executions/{DurableExecutionArn}/stop",
@@ -27933,7 +28545,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies how long to pause the durable execution.</p>",
+                "smithy.api#documentation": "<p>Specifies how long the durable execution waits.</p>",
                 "smithy.api#tags": [
                     "feature:public"
                 ]

@@ -16,6 +16,9 @@
             "version": "2020-03-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.marketplaceagreement#AcceptAgreementApproval"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#AcceptAgreementCancellationRequest"
                 },
                 {
@@ -37,13 +40,22 @@
                     "target": "com.amazonaws.marketplaceagreement#CancelAgreementPaymentRequest"
                 },
                 {
+                    "target": "com.amazonaws.marketplaceagreement#CancelAgreementRequest"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#CreateAgreementRequest"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#DescribeAgreement"
                 },
                 {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementApproval"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#GetAgreementCancellationRequest"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementContacts"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#GetAgreementEntitlements"
@@ -52,10 +64,22 @@
                     "target": "com.amazonaws.marketplaceagreement#GetAgreementPaymentRequest"
                 },
                 {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementRequest"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestApprovalPlans"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestTerms"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#GetAgreementTerms"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#GetBillingAdjustmentRequest"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ListAgreementApprovals"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#ListAgreementCancellationRequests"
@@ -70,7 +94,13 @@
                     "target": "com.amazonaws.marketplaceagreement#ListAgreementPaymentRequests"
                 },
                 {
+                    "target": "com.amazonaws.marketplaceagreement#ListAgreementRequests"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#ListBillingAdjustmentRequests"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#RejectAgreementApproval"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#RejectAgreementCancellationRequest"
@@ -86,6 +116,9 @@
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#SendAgreementPaymentRequest"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#StartAgreementApprovals"
                 },
                 {
                     "target": "com.amazonaws.marketplaceagreement#UpdatePurchaseOrders"
@@ -918,6 +951,77 @@
                 }
             }
         },
+        "com.amazonaws.marketplaceagreement#AcceptAgreementApproval": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#AcceptAgreementApprovalInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#AcceptAgreementApprovalOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows the management account or a delegated administrator of the buyer's AWS organization to approve an agreement approval that is in <code>PENDING_APPROVAL</code> status, as the organization administrator approver or on behalf of another approver. Once every level is approved, the agreement approval transitions to <code>APPROVED</code> status. You can optionally provide purchase order references and a note.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Approve an agreement approval",
+                        "input": {
+                            "buyerAgreementApprovalApproverInput": {
+                                "agreementApprovalId": "apr-EXAMPLE9s0t1u2v3w4x",
+                                "purchaseOrders": [
+                                    {
+                                        "chargeId": "ch-EXAMPLE4b4296145c3EXAMPLE56",
+                                        "purchaseOrderReference": "PO-123"
+                                    }
+                                ],
+                                "note": "Approved. Budget confirmed for this fiscal year."
+                            }
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AcceptAgreementApprovalInput": {
+            "type": "structure",
+            "members": {
+                "buyerAgreementApprovalApproverInput": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalApproverInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval decision for an agreement approval that the buyer's organization requires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AcceptAgreementApprovalOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#AcceptAgreementCancellationRequest": {
             "type": "operation",
             "input": {
@@ -1166,6 +1270,9 @@
                     "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.marketplaceagreement#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
                 },
                 {
@@ -1271,7 +1378,7 @@
                 "freeTrialPricingTerm": {
                     "target": "com.amazonaws.marketplaceagreement#FreeTrialPricingTerm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren’t charged anything within a specified limit.</p>"
+                        "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren't charged anything within a specified limit.</p>"
                     }
                 },
                 "fixedUpfrontPricingTerm": {
@@ -1315,6 +1422,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of the party accepting the agreement terms. This is commonly the buyer for <code>PurchaseAgreement</code>.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AcceptorContact": {
+            "type": "structure",
+            "members": {
+                "firstName": {
+                    "target": "com.amazonaws.marketplaceagreement#PersonName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the acceptor contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.marketplaceagreement#PersonName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the acceptor contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.marketplaceagreement#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the acceptor contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "companyName": {
+                    "target": "com.amazonaws.marketplaceagreement#ContactCompanyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the company that the acceptor contact represents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "countryCode": {
+                    "target": "com.amazonaws.marketplaceagreement#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO-3166 two-letter country code for the acceptor contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contact information of the acceptor.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.marketplaceagreement#AccessDeniedException": {
@@ -1376,6 +1527,473 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "INVALID_ACCESS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalDeployedOnAws": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^apr-[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalLevelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalNote": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalOfferId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\S{1,64}$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalOfferSetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^\\S{1,50}$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPartyType": {
+            "type": "enum",
+            "members": {
+                "REQUESTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUESTER"
+                    }
+                },
+                "AWS_ORGANIZATION_ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_ORGANIZATION_ADMIN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPlan": {
+            "type": "union",
+            "members": {
+                "buyerAgreementApprovalPlan": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An approval plan that the buyer's organization requires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An approval plan that applies to an agreement request.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPlanInput": {
+            "type": "union",
+            "members": {
+                "buyerAgreementApprovalPlanInput": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An approval plan that the buyer's organization requires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The approval plan to start an agreement approval for.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPlanInputs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlanInput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPlanReference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^aplan-[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPlans": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlan"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalProposalSummary": {
+            "type": "structure",
+            "members": {
+                "offerId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalOfferId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the offer in AWS Marketplace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "offerSetId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalOfferSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the offer set containing this offer.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources involved in the agreement.</p>"
+                    }
+                },
+                "visibilityScope": {
+                    "target": "com.amazonaws.marketplaceagreement#OfferVisibilityScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the offer. Valid values are <code>PUBLIC</code> and <code>PRIVATE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the proposal received from the proposer.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalProposer": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.marketplaceagreement#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the proposer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "legalName": {
+                    "target": "com.amazonaws.marketplaceagreement#ProposerLegalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The legal name of the proposer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the party proposing the agreement terms. This is commonly the seller for <code>PurchaseAgreement</code>.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrder": {
+            "type": "structure",
+            "members": {
+                "chargeId": {
+                    "target": "com.amazonaws.marketplaceagreement#ChargeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the charge to associate the purchase order with. Use <code>GetAgreementRequest</code> to retrieve the charges of the agreement request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "purchaseOrderReference": {
+                    "target": "com.amazonaws.marketplaceagreement#PurchaseOrderReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The purchase order reference to associate with the charge.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A purchase order reference for a charge on the agreement request.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrder"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 86
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalRequester": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.marketplaceagreement#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the requester, which is the buyer of the agreement request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The account that started an agreement approval.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalResource": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the resource, which is the product (for example, <code>SaaSProduct</code>, <code>AmiProduct</code>, <code>ContainerProduct</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the product.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deployedOnAws": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalDeployedOnAws",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the product is deployed on AWS (for example, <code>DEPLOYED</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource involved in the agreement, such as a product.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_/-]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[^\\p{C}]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementApprovalResource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementApprovalSummary"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalSummary": {
+            "type": "structure",
+            "members": {
+                "approvalType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the agreement approval. The only value is <code>BUYER_AGREEMENT_APPROVAL</code>, an approval that the buyer's organization requires before the agreement request can be accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request that the agreement approval is for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementApprovalId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement approval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the agreement approval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement approval. Possible values include <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, <code>EXPIRED</code>, and <code>CANCELLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement approval was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement approval was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when approvers could start acting on the agreement approval.</p>"
+                    }
+                },
+                "expiresAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement approval expires if it isn't approved or rejected.</p>"
+                    }
+                },
+                "approvalNeededBy": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time by which the agreement approval must be completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary view of an agreement approval.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementApprovalType": {
+            "type": "enum",
+            "members": {
+                "BUYER_AGREEMENT_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUYER_AGREEMENT_APPROVAL"
                     }
                 }
             }
@@ -1809,6 +2427,192 @@
                 "smithy.api#pattern": "^ar-[A-Za-z0-9]+$"
             }
         },
+        "com.amazonaws.marketplaceagreement#AgreementRequestStatus": {
+            "type": "enum",
+            "members": {
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
+                    }
+                },
+                "PENDING_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementRequestSummary": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request.</p>"
+                    }
+                },
+                "agreementType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agreement (for example, <code>PurchaseAgreement</code>).</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement request. Possible values include <code>DRAFT</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>ACCEPTED</code>, <code>REJECTED</code>, and <code>CANCELLED</code>.</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement that the agreement request is for.</p>"
+                    }
+                },
+                "proposalSummary": {
+                    "target": "com.amazonaws.marketplaceagreement#ProposalSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the proposal received from the proposer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary view of an agreement request.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementRequestSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementRequestSummary"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementRequestTerm": {
+            "type": "union",
+            "members": {
+                "legalTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#LegalTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the list of text agreements proposed to the acceptors. An example is the end user license agreement (EULA).</p>"
+                    }
+                },
+                "supportTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#SupportTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the customer support available for the acceptors when they purchase the software.</p>"
+                    }
+                },
+                "renewalTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#RenewalTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines that on graceful expiration of the agreement (when the agreement ends on its pre-defined end date), a new agreement will be created using the accepted terms on the existing agreement. In other words, the agreement will be renewed. Presence of <code>RenewalTerm</code> in the offer document means that auto-renewal is allowed. The acceptor will have the option to accept or decline auto-renewal at the offer acceptance/agreement creation. The acceptor can also change this flag from <code>True</code> to <code>False</code> or <code>False</code> to <code>True</code>, within the limits set by <code>LockoutPeriod</code> and <code>MaxRenewals</code>. Setting the flag to <code>True</code> doesn't by itself guarantee that the agreement renews, because the proposer can also opt out.</p>"
+                    }
+                },
+                "usageBasedPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#UsageBasedPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a usage-based pricing model (typically, pay-as-you-go pricing), where the customers are charged based on product usage.</p>"
+                    }
+                },
+                "configurableUpfrontPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#ConfigurableUpfrontPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a prepaid payment model that allows buyers to configure the entitlements they want to purchase and the duration.</p>"
+                    }
+                },
+                "byolPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#ByolPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables you and your customers to move your existing agreements to AWS Marketplace. The customer won't be charged for product usage in AWS Marketplace because they already paid for the product outside of AWS Marketplace.</p>"
+                    }
+                },
+                "recurringPaymentTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#RecurringPaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a pricing model where customers are charged a fixed recurring price at the end of each billing period.</p>"
+                    }
+                },
+                "validityTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#ValidityTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the conditions that will keep an agreement created from this offer valid.</p>"
+                    }
+                },
+                "paymentScheduleTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#PaymentScheduleTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines an installment-based pricing model where customers are charged a fixed price on different dates during the agreement validity period. This is used most commonly for flexible payment schedule pricing.</p>"
+                    }
+                },
+                "freeTrialPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#FreeTrialPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren't charged anything within a specified limit.</p>"
+                    }
+                },
+                "fixedUpfrontPricingTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#FixedUpfrontPricingTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a pre-paid pricing model where the customers are charged a fixed upfront amount.</p>"
+                    }
+                },
+                "variablePaymentTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#VariablePaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a payment model where sellers can submit variable payment requests up to a maximum charge amount, with configurable approval strategies and expiration timelines.</p>"
+                    }
+                },
+                "netPaymentTerm": {
+                    "target": "com.amazonaws.marketplaceagreement#NetPaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the net payment due period for the agreement, specifying when payment is due after an invoice is issued.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A subset of terms proposed by the proposer, which have been requested by the acceptor as part of the agreement request.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementRequestTermList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#AgreementRequestTerm"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AgreementRequestTermsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.marketplaceagreement#AgreementResourceType": {
             "type": "string",
             "traits": {
@@ -1912,7 +2716,7 @@
                 "endTime": {
                     "target": "com.amazonaws.marketplaceagreement#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when the agreement ends. The field is <code>null</code> for pay-as-you-go agreements, which don’t have end dates.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the agreement ends. The field is <code>null</code> for pay-as-you-go agreements, which don't have end dates.</p>"
                     }
                 },
                 "lastUpdateTime": {
@@ -1980,6 +2784,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the free trial of the agreement ends. This field is present only when the agreement includes a free trial.</p> <p>For an agreement that includes both a free trial and usage-based pricing, the agreement converts to paid usage at this time.</p>"
                     }
+                },
+                "includesContactOfType": {
+                    "target": "com.amazonaws.marketplaceagreement#ContactTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of contact information on file for the agreement. For example, <code>ACCEPTOR</code> indicates that the acceptor's contact information is on file, which you can retrieve with <code>GetAgreementContacts</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1992,6 +2802,136 @@
                 "target": "com.amazonaws.marketplaceagreement#AgreementViewSummary"
             }
         },
+        "com.amazonaws.marketplaceagreement#ApprovalRequirement": {
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "NOT_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_REQUIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Approver": {
+            "type": "union",
+            "members": {
+                "emailApprover": {
+                    "target": "com.amazonaws.marketplaceagreement#EmailApprover",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An approver who is identified by an email address.</p>"
+                    }
+                },
+                "procurementToolApprover": {
+                    "target": "com.amazonaws.marketplaceagreement#ProcurementToolApprover",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A procurement system that approves through the buyer's procurement integration.</p>"
+                    }
+                },
+                "awsOrganizationAdminApprover": {
+                    "target": "com.amazonaws.marketplaceagreement#AwsOrganizationAdminApprover",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The administrators of the buyer's AWS organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An approver in an approval plan.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ApproverName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ApproverOutcome": {
+            "type": "union",
+            "members": {
+                "emailApproverOutcome": {
+                    "target": "com.amazonaws.marketplaceagreement#EmailApproverOutcome",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decision of an approver who is identified by an email address.</p>"
+                    }
+                },
+                "procurementToolApproverOutcome": {
+                    "target": "com.amazonaws.marketplaceagreement#ProcurementToolApproverOutcome",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decision of a procurement system.</p>"
+                    }
+                },
+                "awsOrganizationApproverOutcome": {
+                    "target": "com.amazonaws.marketplaceagreement#AwsOrganizationApproverOutcome",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decision of the administrators of the buyer's AWS organization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An approver in an agreement approval and the approver's decision.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ApproverOutcomeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^aprout-[A-Za-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ApproverOutcomeStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "PENDING_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplaceagreement#AwsArn": {
             "type": "string",
             "traits": {
@@ -2000,6 +2940,61 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AwsOrganizationAdminApprover": {
+            "type": "structure",
+            "members": {
+                "organizationId": {
+                    "target": "com.amazonaws.marketplaceagreement#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An approver that represents the administrators of the buyer's AWS organization. The management account or a delegated administrator of the organization can decide for this approver.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#AwsOrganizationApproverOutcome": {
+            "type": "structure",
+            "members": {
+                "note": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalNote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The note that the approver provided with the decision.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decision status of the approver. Possible values include <code>QUEUED</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, <code>EXPIRED</code>, and <code>SKIPPED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the decision was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approverOutcomeId": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of this approver in the agreement approval.</p>"
+                    }
+                },
+                "purchaseOrders": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The purchase order references that the approver provided with the decision.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The decision of the administrators of the buyer's AWS organization. The management account or a delegated administrator of the organization makes this decision.</p>"
             }
         },
         "com.amazonaws.marketplaceagreement#BatchCreateBillingAdjustmentError": {
@@ -2444,6 +3439,400 @@
                 "smithy.api#pattern": "^(.)+$"
             }
         },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApproval": {
+            "type": "structure",
+            "members": {
+                "approvalType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the agreement approval, which is <code>BUYER_AGREEMENT_APPROVAL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementApprovalId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement approval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the agreement approval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request that the agreement approval is for. Use <code>GetAgreementRequest</code> to retrieve the agreement request details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement approval. Possible values include <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, <code>EXPIRED</code>, and <code>CANCELLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requester": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalRequester",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that started the agreement approval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement approval was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement approval was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when approvers could start acting on the agreement approval.</p>"
+                    }
+                },
+                "expiresAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement approval expires if it isn't approved or rejected.</p>"
+                    }
+                },
+                "approvalNeededBy": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time by which the agreement approval must be completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "levels": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalLevels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval levels, in the order they are evaluated. Approvers at a level can act only after the previous level is approved. Each level lists its approvers and the decision of each one.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "planInput": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval plan and the note that the requester provided in <code>StartAgreementApprovals</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "proposer": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalProposer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the party proposing the agreement terms. This is commonly the seller for <code>PurchaseAgreement</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "proposalSummary": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalProposalSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the proposal received from the proposer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an approval that the buyer's organization requires before the agreement request can be accepted, including the approval levels and the decision of each approver.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalApproverInput": {
+            "type": "structure",
+            "members": {
+                "agreementApprovalId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement approval to approve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "purchaseOrders": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of purchase order references to associate with charges on the agreement request.</p>"
+                    }
+                },
+                "note": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalNote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional note that explains the decision (1-1000 characters).</p>"
+                    }
+                },
+                "approverOutcomeIdToOverride": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>approverOutcomeId</code> of the approver to decide on behalf of. You must be the management account or a delegated administrator of your AWS organization to set this field. Use <code>GetAgreementApproval</code> to retrieve the <code>approverOutcomeId</code> of each approver.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The approval decision for an agreement approval.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalCriteria": {
+            "type": "structure",
+            "members": {
+                "requiredApprovalCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of approvers in the group who must approve before the level is approved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The approval criteria for a group of approvers.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalGroup": {
+            "type": "structure",
+            "members": {
+                "approvalCriteria": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of approvers in the group who must approve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approvers": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerApproverOutcomes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approvers in the group and the decision of each one.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A group of approvers, the number of approvals the group requires, and the decision of each approver.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalLevel": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalLevelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the level.</p>"
+                    }
+                },
+                "groups": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group of approvers at this level.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A level of an agreement approval, with the decision of each approver.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalLevels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalLevel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlan": {
+            "type": "structure",
+            "members": {
+                "planReference": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlanReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the approval plan. Pass it in <code>StartAgreementApprovals</code> to start an agreement approval for this plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the approval plan.</p>"
+                    }
+                },
+                "levels": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanLevels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval levels of the plan, in the order they are evaluated. Approvers at a level can act only after the previous level is approved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An approval plan that the buyer's organization requires, with its approval levels and the approvers at each level.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanGroup": {
+            "type": "structure",
+            "members": {
+                "approvalCriteria": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of approvers in the group who must approve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approvers": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerApprovers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approvers in the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A group of approvers and the number of approvals the group requires.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanInput": {
+            "type": "structure",
+            "members": {
+                "planReference": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlanReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the approval plan. Use <code>GetAgreementRequestApprovalPlans</code> to retrieve the approval plans of the agreement request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requesterNote": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalNote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional note for the approvers, such as the business reason for the purchase (1-1000 characters).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The approval plan to start an agreement approval for, and an optional note for the approvers.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanLevel": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalLevelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the level.</p>"
+                    }
+                },
+                "groups": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group of approvers at this level.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A level of an approval plan.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanLevels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalPlanLevel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalRejectionInput": {
+            "type": "structure",
+            "members": {
+                "agreementApprovalId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement approval to reject.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "note": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalNote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the rejection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approverOutcomeIdToOverride": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>approverOutcomeId</code> of the approver to decide on behalf of. You must be the management account or a delegated administrator of your AWS organization to set this field. Use <code>GetAgreementApproval</code> to retrieve the <code>approverOutcomeId</code> of each approver.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rejection decision for an agreement approval.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerApproverOutcomes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#ApproverOutcome"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#BuyerApprovers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#Approver"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.marketplaceagreement#ByolPricingTerm": {
             "type": "structure",
             "members": {
@@ -2462,6 +3851,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Enables you and your customers to move your existing agreements to AWS Marketplace. The customer won't be charged for product usage in AWS Marketplace because they already paid for the product outside of AWS Marketplace.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CallerIdentity": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.marketplaceagreement#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM principal that made the call.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identity of a caller.</p>"
             }
         },
         "com.amazonaws.marketplaceagreement#CancelAgreement": {
@@ -2771,6 +4175,70 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.marketplaceagreement#CancelAgreementRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#CancelAgreementRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#CancelAgreementRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows buyers (acceptors) to cancel an agreement request that is in <code>PENDING_APPROVAL</code> status, or in <code>APPROVED</code> status when no agreement has been created from it. Once cancelled, the agreement request transitions to <code>CANCELLED</code> status and its open agreement approvals are cancelled.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Cancel an agreement request",
+                        "input": {
+                            "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CancelAgreementRequestInput": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CancelAgreementRequestOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#Catalog": {
             "type": "string",
             "traits": {
@@ -2871,7 +4339,7 @@
                 "currencyCode": {
                     "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The three-letter currency code for all charges (e.g., USD).</p>"
+                        "smithy.api#documentation": "<p>The three-letter currency code for all charges (for example, USD).</p>"
                     }
                 },
                 "newAgreementValue": {
@@ -2937,7 +4405,7 @@
                 "type": {
                     "target": "com.amazonaws.marketplaceagreement#UnversionedTermType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Category of selector.</p>"
+                        "smithy.api#documentation": "<p>Category of the term.</p>"
                     }
                 },
                 "id": {
@@ -3077,6 +4545,40 @@
                 "smithy.api#documentation": "<p>Defines limits on how the term can be configured by acceptors. </p>"
             }
         },
+        "com.amazonaws.marketplaceagreement#ContactCompanyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(.)+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ContactType": {
+            "type": "enum",
+            "members": {
+                "ACCEPTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTOR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ContactTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#ContactType"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#CountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
         "com.amazonaws.marketplaceagreement#CreateAgreementRequest": {
             "type": "operation",
             "input": {
@@ -3153,6 +4655,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for tax estimation in the agreement request response.</p>"
                     }
+                },
+                "acceptorContact": {
+                    "target": "com.amazonaws.marketplaceagreement#AcceptorContact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact information of the acceptor.</p> <important> <p>Don't provide this parameter if the intent is <code>AMEND</code>.</p> </important>"
+                    }
                 }
             },
             "traits": {
@@ -3168,10 +4676,34 @@
                         "smithy.api#documentation": "<p>The unique identifier of the agreement request created. Use this identifier with <code>AcceptAgreementRequest</code> to accept the agreement.</p>"
                     }
                 },
+                "agreementType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agreement (for example, <code>PurchaseAgreement</code>).</p>"
+                    }
+                },
                 "chargeSummary": {
                     "target": "com.amazonaws.marketplaceagreement#ChargeSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides details of the charges associated with the agreement request. This is only applicable when a request is created for <code>PurchaseAgreement</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement request. Possible values include:</p> <ul> <li> <p> <code>DRAFT</code> – The agreement request has been created but not yet submitted for approval.</p> </li> <li> <p> <code>PENDING_APPROVAL</code> – The agreement request is waiting for one or more approvers to decide.</p> </li> <li> <p> <code>APPROVED</code> – All required approvals have been granted, but the agreement request wasn't accepted automatically. Call <code>AcceptAgreementRequest</code> to accept it. If the call fails, its error explains why.</p> </li> <li> <p> <code>ACCEPTED</code> – The agreement request has been accepted and the resulting agreement has been created.</p> </li> <li> <p> <code>REJECTED</code> – At least one approver rejected the agreement request. It won't proceed.</p> </li> <li> <p> <code>CANCELLED</code> – The agreement request was cancelled before completion, by the acceptor or because the acceptor's account left its AWS organization.</p> </li> </ul>"
+                    }
+                },
+                "approvalRequirement": {
+                    "target": "com.amazonaws.marketplaceagreement#ApprovalRequirement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the agreement request requires approval before it can be accepted. Values are <code>REQUIRED</code> and <code>NOT_REQUIRED</code>.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement request was created.</p>"
                     }
                 }
             },
@@ -3369,7 +4901,7 @@
                 "type": {
                     "target": "com.amazonaws.marketplaceagreement#BoundedString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Category of the document. Document types include:</p> <ul> <li> <p> <code>CustomEula</code> – A custom EULA provided by you as seller. A URL for a EULA stored in an accessible Amazon S3 bucket is required for this document type.</p> </li> <li> <p> <code>CustomDsa</code> – A custom Data Subscription Agreement (DSA) provided by you as seller. A URL for a DSA stored in an accessible Amazon S3 bucket is required for this document type.</p> </li> <li> <p> <code>StandardEula</code> – The Standard Contract for AWS Marketplace (SCMP). For more information about SCMP, see the AWS Marketplace Seller Guide. You don’t provide a URL for this type because it’s managed by AWS Marketplace.</p> </li> <li> <p> <code>StandardDsa</code> – DSA for AWS Marketplace. For more information about the DSA, see the AWS Data Exchange User Guide. You don’t provide a URL for this type because it’s managed by AWS Marketplace.</p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Category of the document. Document types include:</p> <ul> <li> <p> <code>CustomEula</code> – A custom EULA provided by you as seller. A URL for a EULA stored in an accessible Amazon S3 bucket is required for this document type.</p> </li> <li> <p> <code>CustomDsa</code> – A custom Data Subscription Agreement (DSA) provided by you as seller. A URL for a DSA stored in an accessible Amazon S3 bucket is required for this document type.</p> </li> <li> <p> <code>StandardEula</code> – The Standard Contract for AWS Marketplace (SCMP). For more information about SCMP, see the AWS Marketplace Seller Guide. You don't provide a URL for this type because it's managed by AWS Marketplace.</p> </li> <li> <p> <code>StandardDsa</code> – DSA for AWS Marketplace. For more information about the DSA, see the AWS Data Exchange User Guide. You don't provide a URL for this type because it's managed by AWS Marketplace.</p> </li> </ul>"
                     }
                 },
                 "url": {
@@ -3393,6 +4925,97 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.marketplaceagreement#DocumentItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#EmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#EmailApprover": {
+            "type": "structure",
+            "members": {
+                "emailAddress": {
+                    "target": "com.amazonaws.marketplaceagreement#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the approver.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the approver.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An approver who is identified by an email address.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#EmailApproverOutcome": {
+            "type": "structure",
+            "members": {
+                "note": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalNote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The note that the approver provided with the decision.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decision status of the approver. Possible values include <code>QUEUED</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, <code>EXPIRED</code>, and <code>SKIPPED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the decision was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approverOutcomeId": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of this approver in the agreement approval. An administrator of the buyer's AWS organization passes it as <code>approverOutcomeIdToOverride</code> to decide on the approver's behalf.</p>"
+                    }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.marketplaceagreement#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the approver.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the approver.</p>"
+                    }
+                },
+                "purchaseOrders": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The purchase order references that the approver provided with the decision.</p>"
+                    }
+                },
+                "overriddenBy": {
+                    "target": "com.amazonaws.marketplaceagreement#CallerIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity that decided on the approver's behalf. This field is empty unless an administrator of the buyer's AWS organization decided for the approver.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The decision of an approver who is identified by an email address.</p>"
             }
         },
         "com.amazonaws.marketplaceagreement#EndTimeBehavior": {
@@ -3591,6 +5214,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides an aggregated view of estimated tax information for this specific charge.</p>"
                     }
+                },
+                "purchaseOrderReference": {
+                    "target": "com.amazonaws.marketplaceagreement#PurchaseOrderReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The purchase order reference associated with the charge, if any.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3754,7 +5383,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren’t charged anything within a specified limit.</p>"
+                "smithy.api#documentation": "<p>Defines a short-term free pricing model where the buyers aren't charged anything within a specified limit.</p>"
             }
         },
         "com.amazonaws.marketplaceagreement#FreeTrialSummary": {
@@ -3769,6 +5398,131 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about the free trial of an agreement, including when the free trial ends.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementApproval": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementApprovalInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementApprovalOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific agreement approval, including its approval levels, the approvers at each level, and the decision of each approver. The acceptor, or the management account or a delegated administrator of the acceptor's AWS organization, can call this operation.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get an agreement approval",
+                        "input": {
+                            "agreementApprovalId": "apr-EXAMPLE9s0t1u2v3w4x"
+                        },
+                        "output": {
+                            "buyerAgreementApproval": {
+                                "approvalType": "BUYER_AGREEMENT_APPROVAL",
+                                "agreementApprovalId": "apr-EXAMPLE9s0t1u2v3w4x",
+                                "name": "Example Analytics Platform sold by Example Corp",
+                                "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78",
+                                "status": "PENDING_APPROVAL",
+                                "requester": {
+                                    "accountId": "123456789010"
+                                },
+                                "createdAt": 1736935800,
+                                "updatedAt": 1737022200,
+                                "startedAt": 1736935800,
+                                "expiresAt": 1739527800,
+                                "approvalNeededBy": 1739527800,
+                                "levels": [
+                                    {
+                                        "name": "Budget owner review",
+                                        "groups": [
+                                            {
+                                                "approvalCriteria": {
+                                                    "requiredApprovalCount": 1
+                                                },
+                                                "approvers": [
+                                                    {
+                                                        "awsOrganizationApproverOutcome": {
+                                                            "approverOutcomeId": "aprout-EXAMPLE1e2f3g4h5i6j",
+                                                            "status": "PENDING_APPROVAL",
+                                                            "updatedAt": 1737022200
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "planInput": {
+                                    "planReference": "aplan-EXAMPLE7g8h9i0j1k2l",
+                                    "requesterNote": "Annual subscription for the data platform team."
+                                },
+                                "proposer": {
+                                    "accountId": "444455556666",
+                                    "legalName": "Example Corp"
+                                },
+                                "proposalSummary": {
+                                    "offerId": "ABCDEFGHIJKLMNOP123",
+                                    "resources": [
+                                        {
+                                            "id": "0EXAMPLE-8ce8-4814-bcf1-636EXAMPLEb5",
+                                            "type": "SaaSProduct",
+                                            "name": "Example Analytics Platform",
+                                            "deployedOnAws": "DEPLOYED"
+                                        }
+                                    ],
+                                    "visibilityScope": "PRIVATE"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementApprovalInput": {
+            "type": "structure",
+            "members": {
+                "agreementApprovalId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement approval to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementApprovalOutput": {
+            "type": "structure",
+            "members": {
+                "buyerAgreementApproval": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApproval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the agreement approval, when it is a <code>BUYER_AGREEMENT_APPROVAL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplaceagreement#GetAgreementCancellationRequest": {
@@ -3890,6 +5644,82 @@
                     "target": "com.amazonaws.marketplaceagreement#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the cancellation request was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementContacts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementContactsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementContactsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Obtains details about the acceptor's contact information for an active agreement that you participate in as the proposer, acceptor, or manufacturer.</p> <note> <p>If the acceptor's contact information isn't available, the operation succeeds but doesn't return <code>acceptorContact</code>. This happens when the acceptor didn't provide it, the information was removed, or the agreement isn't active.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the contacts captured on an agreement",
+                        "input": {
+                            "agreementId": "agmt-xxxxxxx"
+                        },
+                        "output": {
+                            "acceptorContact": {
+                                "firstName": "xx",
+                                "lastName": "xx",
+                                "emailAddress": "xxx@example.com",
+                                "companyName": "Example Corp",
+                                "countryCode": "US"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementContactsInput": {
+            "type": "structure",
+            "members": {
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementContactsOutput": {
+            "type": "structure",
+            "members": {
+                "acceptorContact": {
+                    "target": "com.amazonaws.marketplaceagreement#AcceptorContact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact information that the acceptor provided when creating the agreement.</p>"
                     }
                 }
             },
@@ -4098,6 +5928,452 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the payment request was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about a specific agreement request, including its status, intent, approval requirement, and charges. The acceptor, or the management account or a delegated administrator of the acceptor's AWS organization, can call this operation.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get an agreement request",
+                        "input": {
+                            "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78"
+                        },
+                        "output": {
+                            "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78",
+                            "agreementType": "PurchaseAgreement",
+                            "status": "PENDING_APPROVAL",
+                            "approvalRequirement": "REQUIRED",
+                            "intent": "NEW",
+                            "createdAt": 1736935800,
+                            "chargeSummary": {
+                                "currencyCode": "USD",
+                                "newAgreementValue": "100",
+                                "expectedCharges": [
+                                    {
+                                        "id": "ch-EXAMPLE4b4296145c3EXAMPLE56",
+                                        "purchaseOrderReference": "PO-123",
+                                        "amount": "100",
+                                        "timing": "ON_ACCEPTANCE"
+                                    }
+                                ],
+                                "itemizedCharges": [
+                                    {
+                                        "dimensionKey": "AdminUsers",
+                                        "newQuantity": 5,
+                                        "oldQuantity": 0,
+                                        "incrementalChargeAmount": "50",
+                                        "chargeReference": "ch-EXAMPLE4b4296145c3EXAMPLE56"
+                                    },
+                                    {
+                                        "dimensionKey": "ReadOnlyUsers",
+                                        "newQuantity": 10,
+                                        "oldQuantity": 0,
+                                        "incrementalChargeAmount": "50",
+                                        "chargeReference": "ch-EXAMPLE4b4296145c3EXAMPLE56"
+                                    }
+                                ]
+                            },
+                            "proposer": {
+                                "accountId": "444455556666"
+                            },
+                            "proposalSummary": {
+                                "resources": [
+                                    {
+                                        "id": "0EXAMPLE-8ce8-4814-bcf1-636EXAMPLEb5",
+                                        "type": "SaaSProduct"
+                                    }
+                                ],
+                                "offerId": "ABCDEFGHIJKLMNOP123"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestApprovalPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestApprovalPlansInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestApprovalPlansOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the approval plans that apply to an agreement request. Only the acceptor of the agreement request can call this operation. Each approval plan lists its approval levels and the approvers at each level. Pass the <code>planReference</code> of an approval plan to <code>StartAgreementApprovals</code> to start an agreement approval for it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the approval plans of an agreement request",
+                        "input": {
+                            "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78"
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "buyerAgreementApprovalPlan": {
+                                        "planReference": "aplan-EXAMPLE7g8h9i0j1k2l",
+                                        "name": "Software purchases over 10000 USD",
+                                        "levels": [
+                                            {
+                                                "name": "Budget owner review",
+                                                "groups": [
+                                                    {
+                                                        "approvalCriteria": {
+                                                            "requiredApprovalCount": 1
+                                                        },
+                                                        "approvers": [
+                                                            {
+                                                                "awsOrganizationAdminApprover": {
+                                                                    "organizationId": "o-exampleab12"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestApprovalPlansInput": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request to retrieve the approval plans for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of approval plans to return in a single response (1-50). Default is 10.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestApprovalPlansOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlans",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>AgreementApprovalPlan</code> objects, one for each approval plan that applies to the agreement request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used for pagination. The field is <code>null</code> if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestInput": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestOutput": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request.</p>"
+                    }
+                },
+                "agreementType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agreement (for example, <code>PurchaseAgreement</code>).</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the agreement request. Possible values include:</p> <ul> <li> <p> <code>DRAFT</code> – The agreement request has been created but not yet submitted for approval.</p> </li> <li> <p> <code>PENDING_APPROVAL</code> – The agreement request is waiting for one or more approvers to decide.</p> </li> <li> <p> <code>APPROVED</code> – All required approvals have been granted, but the agreement request wasn't accepted automatically. Call <code>AcceptAgreementRequest</code> to accept it. If the call fails, its error explains why.</p> </li> <li> <p> <code>ACCEPTED</code> – The agreement request has been accepted and the resulting agreement has been created.</p> </li> <li> <p> <code>REJECTED</code> – At least one approver rejected the agreement request. It won't proceed.</p> </li> <li> <p> <code>CANCELLED</code> – The agreement request was cancelled before completion, by the acceptor or because the acceptor's account left its AWS organization.</p> </li> </ul>"
+                    }
+                },
+                "approvalRequirement": {
+                    "target": "com.amazonaws.marketplaceagreement#ApprovalRequirement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the agreement request requires approval before it can be accepted. Values are <code>REQUIRED</code> and <code>NOT_REQUIRED</code>.</p>"
+                    }
+                },
+                "agreementId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement that the agreement request is for.</p>"
+                    }
+                },
+                "intent": {
+                    "target": "com.amazonaws.marketplaceagreement#Intent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The purpose and desired outcome of the agreement request.</p> <ul> <li> <p> <code>NEW</code> – Creates a new agreement for terms in the request.</p> </li> <li> <p> <code>AMEND</code> – Modifies an existing agreement with terms that are accepted in the request.</p> </li> <li> <p> <code>REPLACE</code> – Creates a new agreement with accepted terms and replaces the existing agreement.</p> </li> </ul>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the agreement request was created.</p>"
+                    }
+                },
+                "chargeSummary": {
+                    "target": "com.amazonaws.marketplaceagreement#ChargeSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details of the charges associated with the agreement request. This is only applicable when a request is created for <code>PurchaseAgreement</code>.</p>"
+                    }
+                },
+                "proposer": {
+                    "target": "com.amazonaws.marketplaceagreement#Proposer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the party proposing the agreement terms. This is commonly the seller for <code>PurchaseAgreement</code>.</p>"
+                    }
+                },
+                "proposalSummary": {
+                    "target": "com.amazonaws.marketplaceagreement#ProposalSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the proposal received from the proposer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestTerms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestTermsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#GetAgreementRequestTermsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the terms proposed for an agreement request, such as pricing, legal, and renewal terms. The acceptor, or the management account or a delegated administrator of the acceptor's AWS organization, can call this operation. This operation is similar to <code>GetAgreementTerms</code>, but it takes an <code>agreementRequestId</code> instead of an <code>agreementId</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the terms of an agreement request",
+                        "input": {
+                            "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78"
+                        },
+                        "output": {
+                            "terms": [
+                                {
+                                    "legalTerm": {
+                                        "type": "LegalTerm",
+                                        "id": "term-EXAMPLE3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f",
+                                        "documents": [
+                                            {
+                                                "type": "CustomEula",
+                                                "url": "URL"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "configurableUpfrontPricingTerm": {
+                                        "type": "ConfigurableUpfrontPricingTerm",
+                                        "id": "term-EXAMPLE1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d",
+                                        "currencyCode": "USD",
+                                        "rateCards": [
+                                            {
+                                                "selector": {
+                                                    "type": "Duration",
+                                                    "value": "P12M"
+                                                },
+                                                "constraints": {
+                                                    "multipleDimensionSelection": "Allowed",
+                                                    "quantityConfiguration": "Allowed"
+                                                },
+                                                "rateCard": [
+                                                    {
+                                                        "dimensionKey": "AdminUsers",
+                                                        "price": "10"
+                                                    },
+                                                    {
+                                                        "dimensionKey": "ReadOnlyUsers",
+                                                        "price": "5"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "configuration": {
+                                            "selectorValue": "P12M",
+                                            "dimensions": [
+                                                {
+                                                    "dimensionKey": "AdminUsers",
+                                                    "dimensionValue": 5
+                                                },
+                                                {
+                                                    "dimensionKey": "ReadOnlyUsers",
+                                                    "dimensionValue": 10
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "renewalTerm": {
+                                        "type": "RenewalTerm",
+                                        "id": "term-EXAMPLE2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e",
+                                        "configuration": {
+                                            "enableAutoRenew": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "terms"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestTermsInput": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestTermsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of terms to return in the response.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#GetAgreementRequestTermsOutput": {
+            "type": "structure",
+            "members": {
+                "terms": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestTermList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The terms proposed for the agreement request. The terms are fixed when the agreement request is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used for pagination. The field is <code>null</code> if there are no more results.</p>"
                     }
                 }
             },
@@ -4552,7 +6828,7 @@
                 "id": {
                     "target": "com.amazonaws.marketplaceagreement#TermId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifer for the term.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the term.</p>"
                     }
                 },
                 "documents": {
@@ -4575,6 +6851,134 @@
                         "smithy.api#enumValue": "INVOICE_ID"
                     }
                 }
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementApprovals": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#ListAgreementApprovalsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#ListAgreementApprovalsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists agreement approvals available to you as a buyer. Use <code>REQUESTER</code> as the <code>partyType</code> to list the agreement approvals that your account started. Use <code>AWS_ORGANIZATION_ADMIN</code> to list the agreement approvals in your AWS organization, if your account is the management account or a delegated administrator of the organization. You can filter the results by agreement request, approval type, and status.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List agreement approvals",
+                        "input": {
+                            "partyType": "REQUESTER",
+                            "status": "PENDING_APPROVAL",
+                            "maxResults": 10
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "approvalType": "BUYER_AGREEMENT_APPROVAL",
+                                    "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78",
+                                    "agreementApprovalId": "apr-EXAMPLE9s0t1u2v3w4x",
+                                    "name": "Example Analytics Platform sold by Example Corp",
+                                    "status": "PENDING_APPROVAL",
+                                    "createdAt": 1736935800,
+                                    "updatedAt": 1737022200,
+                                    "startedAt": 1736935800,
+                                    "expiresAt": 1739527800,
+                                    "approvalNeededBy": 1739527800
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementApprovalsInput": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplaceagreement#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to filter agreement approvals by catalog (for example, <code>AWSMarketplace</code>).</p>"
+                    }
+                },
+                "partyType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The party type for the agreement approvals. Required parameter. Use <code>REQUESTER</code> to list agreement approvals for agreement requests that you created, or <code>AWS_ORGANIZATION_ADMIN</code> to list agreement approvals as an AWS Organizations administrator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to filter agreement approvals for a specific agreement request.</p>"
+                    }
+                },
+                "approvalType": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to filter agreement approvals by type. The only valid value is <code>BUYER_AGREEMENT_APPROVAL</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to filter agreement approvals by status. Valid values include <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, <code>EXPIRED</code>, and <code>CANCELLED</code>. If you don't specify a status, agreement approvals of all statuses are returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of agreement approvals to return in a single response (1-50). Default is 20.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementApprovalsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>AgreementApprovalSummary</code> objects containing summary information about each agreement approval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used for pagination. The field is <code>null</code> if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplaceagreement#ListAgreementCancellationRequests": {
@@ -5048,6 +7452,124 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.marketplaceagreement#ListAgreementRequests": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#ListAgreementRequestsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#ListAgreementRequestsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists agreement requests available to you as a buyer (acceptor). You can filter the results by <code>catalog</code>, <code>status</code>, and <code>resourceId</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List agreement requests",
+                        "input": {
+                            "status": "PENDING_APPROVAL",
+                            "maxResults": 10
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78",
+                                    "agreementType": "PurchaseAgreement",
+                                    "status": "PENDING_APPROVAL",
+                                    "proposalSummary": {
+                                        "resources": [
+                                            {
+                                                "id": "0EXAMPLE-8ce8-4814-bcf1-636EXAMPLEb5",
+                                                "type": "SaaSProduct"
+                                            }
+                                        ],
+                                        "offerId": "ABCDEFGHIJKLMNOP123"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementRequestsInput": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplaceagreement#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list agreement requests by catalog (for example, <code>AWSMarketplace</code>).</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list agreement requests by status. Valid values include <code>DRAFT</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>ACCEPTED</code>, <code>REJECTED</code>, and <code>CANCELLED</code>. If you don't specify a status, agreement requests of all statuses are returned.</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to list agreement requests for a specific resource, such as a product.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplaceagreement#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of agreement requests to return in a single response (1-50). Default is 20.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ListAgreementRequestsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>AgreementRequestSummary</code> objects containing summary information about each agreement request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplaceagreement#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used for pagination. The field is <code>null</code> if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#ListBillingAdjustmentRequests": {
             "type": "operation",
             "input": {
@@ -5241,6 +7763,23 @@
                 "smithy.api#pattern": "^\\S{1,50}$"
             }
         },
+        "com.amazonaws.marketplaceagreement#OfferVisibilityScope": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplaceagreement#OffsetDuration": {
             "type": "string",
             "traits": {
@@ -5249,6 +7788,16 @@
                     "max": 6
                 },
                 "smithy.api#pattern": "^P(\\d{1,4}M|\\d{1,4}D)$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#OrganizationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 34
+                },
+                "smithy.api#pattern": "^o-[a-z0-9]{10,32}$"
             }
         },
         "com.amazonaws.marketplaceagreement#PartyType": {
@@ -5541,6 +8090,17 @@
                 "smithy.api#documentation": "<p>A range of price increase percentages that the proposer can choose from before the adjustment deadline of the agreement.</p> <p> <code>MinValue</code> will be less than <code>MaxValue</code>, and <code>DefaultValue</code> will fall within the range. When the proposer authorizes a single percentage instead of a range, <code>PriceIncrease</code> is a <code>FixedPercentage</code> rather than a <code>PercentageRange</code>.</p>"
             }
         },
+        "com.amazonaws.marketplaceagreement#PersonName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^(.)+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#PositiveAmountUpto8Decimals": {
             "type": "string",
             "traits": {
@@ -5604,12 +8164,90 @@
                 "currencyCode": {
                     "target": "com.amazonaws.marketplaceagreement#CurrencyCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The 3-letter ISO 4217 currency code (e.g., <code>USD</code>, <code>EUR</code>, <code>JPY</code>).</p>"
+                        "smithy.api#documentation": "<p>The 3-letter ISO 4217 currency code (for example, <code>USD</code>, <code>EUR</code>, <code>JPY</code>).</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Monetary amounts associated with an invoice line item group.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#PrincipalArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[^:]+:[^:]+:[^:]*:[^:]*:.+$"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ProcurementToolApprover": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the procurement system.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A procurement system that approves through the buyer's procurement integration.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ProcurementToolApproverOutcome": {
+            "type": "structure",
+            "members": {
+                "note": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalNote",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The note that the approver provided with the decision.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The decision status of the approver. Possible values include <code>QUEUED</code>, <code>PENDING_APPROVAL</code>, <code>APPROVED</code>, <code>REJECTED</code>, <code>EXPIRED</code>, and <code>SKIPPED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.marketplaceagreement#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the decision was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "approverOutcomeId": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverOutcomeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of this approver in the agreement approval. An administrator of the buyer's AWS organization passes it as <code>approverOutcomeIdToOverride</code> to decide on the approver's behalf.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.marketplaceagreement#ApproverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the procurement system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "purchaseOrders": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The purchase order references that the approver provided with the decision.</p>"
+                    }
+                },
+                "overriddenBy": {
+                    "target": "com.amazonaws.marketplaceagreement#CallerIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity that decided on the procurement system's behalf. This field is empty unless an administrator of the buyer's AWS organization decided for the procurement system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The decision of a procurement system.</p>"
             }
         },
         "com.amazonaws.marketplaceagreement#ProposalSummary": {
@@ -5650,6 +8288,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details of the party proposing the agreement terms,. This is commonly the seller for <code>PurchaseAgreement</code>. </p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#ProposerLegalName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[^\\p{C}]+$"
             }
         },
         "com.amazonaws.marketplaceagreement#PurchaseOrder": {
@@ -5717,7 +8365,7 @@
                 "price": {
                     "target": "com.amazonaws.marketplaceagreement#BoundedString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Per unit price for the product dimension that’s used for calculating the amount to be charged.</p>"
+                        "smithy.api#documentation": "<p>Per unit price for the product dimension that's used for calculating the amount to be charged.</p>"
                     }
                 }
             },
@@ -5776,7 +8424,73 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9+/=.:_-]+$"
+                "smithy.api#pattern": "^[A-Za-z0-9+/=.:_-]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RejectAgreementApproval": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#RejectAgreementApprovalInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#RejectAgreementApprovalOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows the management account or a delegated administrator of the buyer's AWS organization to reject an agreement approval that is in <code>PENDING_APPROVAL</code> status, as the organization administrator approver or on behalf of another approver. Once rejected, the agreement approval and its agreement request transition to <code>REJECTED</code> status. You must provide a reason for the rejection.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Reject an agreement approval",
+                        "input": {
+                            "buyerAgreementApprovalRejectionInput": {
+                                "agreementApprovalId": "apr-EXAMPLE9s0t1u2v3w4x",
+                                "note": "Rejected. This purchase isn't in the approved budget."
+                            }
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RejectAgreementApprovalInput": {
+            "type": "structure",
+            "members": {
+                "buyerAgreementApprovalRejectionInput": {
+                    "target": "com.amazonaws.marketplaceagreement#BuyerAgreementApprovalRejectionInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rejection decision for an agreement approval that the buyer's organization requires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#RejectAgreementApprovalOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplaceagreement#RejectAgreementCancellationRequest": {
@@ -6290,6 +9004,18 @@
                     "traits": {
                         "smithy.api#enumValue": "BillingAdjustmentRequest"
                     }
+                },
+                "AGREEMENT_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AgreementApproval"
+                    }
+                },
+                "AGREEMENT_REQUEST_APPROVAL_PLAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AgreementRequestApprovalPlan"
+                    }
                 }
             }
         },
@@ -6369,7 +9095,7 @@
                 "filters": {
                     "target": "com.amazonaws.marketplaceagreement#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter name and value pair used to return a specific list of results.</p> <p>The following filters are supported:</p> <ul> <li> <p> <code>ResourceIdentifier</code> – The unique identifier of the resource.</p> </li> <li> <p> <code>ResourceType</code> – Type of the resource, which is the product (<code>AmiProduct</code>, <code>ContainerProduct</code>, <code>SaaSProduct</code>, <code>ProfessionalServicesProduct</code>, or <code>MachineLearningProduct</code>).</p> </li> <li> <p> <code>PartyType</code> – The party type of the caller. Use <code>Proposer</code> or <code>Acceptor</code>.</p> </li> <li> <p> <code>AcceptorAccountId</code> – The AWS account ID of the party accepting the agreement terms.</p> </li> <li> <p> <code>OfferId</code> – The unique identifier of the offer in which the terms are registered in the agreement token.</p> </li> <li> <p> <code>Status</code> – The current status of the agreement. Values include <code>ACTIVE</code>, <code>CANCELLED</code>, <code>EXPIRED</code>, <code>RENEWED</code>, <code>REPLACED</code>, and <code>TERMINATED</code>.</p> </li> <li> <p> <code>BeforeEndTime</code> – A date used to filter agreements with a date before the <code>endTime</code> of an agreement.</p> </li> <li> <p> <code>AfterEndTime</code> – A date used to filter agreements with a date after the <code>endTime</code> of an agreement.</p> </li> <li> <p> <code>BeforeStartTime</code> – A date used to filter agreements with a date before the <code>startTime</code> of an agreement.</p> </li> <li> <p> <code>AfterStartTime</code> – A date used to filter agreements with a date after the <code>startTime</code> of an agreement.</p> </li> <li> <p> <code>BeforeLastUpdateTime</code> – A date used to filter agreements with a date before the <code>lastUpdateTime</code> of an agreement.</p> </li> <li> <p> <code>AfterLastUpdateTime</code> – A date used to filter agreements with a date after the <code>lastUpdateTime</code> of an agreement.</p> </li> <li> <p> <code>AgreementType</code> – The type of agreement. Supported value includes <code>PurchaseAgreement</code>.</p> </li> <li> <p> <code>OfferSetId</code> – A unique identifier for the offer set containing this offer. All agreements created from offers in this set include this identifier as context.</p> </li> <li> <p> <code>EndTimeBehaviorType</code> – What happens to the agreement when it reaches its end date. Values include <code>RENEW</code>, <code>REPLACE</code>, and <code>EXPIRE</code>.</p> </li> <li> <p> <code>EndTimeBehaviorReasonCode</code> – The reason why the agreement doesn't renew at its end date. Values include <code>PROPOSER_RENEW_OPTED_OUT</code>, <code>ACCEPTOR_RENEW_OPTED_OUT</code>, <code>NO_RENEWAL_TERM</code>, and <code>RENEWAL_LIMIT_EXHAUSTED</code>.</p> </li> <li> <p> <code>InitialAgreementId</code> – The unique identifier of the very first agreement in a chain of related agreements. Use this filter to return every agreement in the same chain.</p> </li> <li> <p> <code>LicenseArn</code> – The Amazon Resource Name (ARN) of the AWS License Manager license associated with an entitlement granted by the agreement.</p> </li> </ul> <p>A proposer can use any combination of the preceding filters along with <code>AgreementType</code>, which is required.</p> <p>The following filter combinations are supported when the <code>PartyType</code> is <code>Acceptor</code>:</p> <ul> <li> <p> <code>AgreementType</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>Status</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> + <code>Status</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceType</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceType</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> + <code>Status</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> + <code>Status</code> + <code>EndTime</code> </p> </li> </ul> <note> <p>To filter by <code>EndTime</code>, you can use <code>BeforeEndTime</code>, <code>AfterEndTime</code>, or both.</p> </note>"
+                        "smithy.api#documentation": "<p>The filter name and value pair used to return a specific list of results.</p> <p>The following filters are supported:</p> <ul> <li> <p> <code>ResourceIdentifier</code> – The unique identifier of the resource.</p> </li> <li> <p> <code>ResourceType</code> – Type of the resource, which is the product (<code>AmiProduct</code>, <code>ContainerProduct</code>, <code>SaaSProduct</code>, <code>ProfessionalServicesProduct</code>, or <code>MachineLearningProduct</code>).</p> </li> <li> <p> <code>PartyType</code> – The party type of the caller. Use <code>Proposer</code> or <code>Acceptor</code>.</p> </li> <li> <p> <code>AcceptorAccountId</code> – The AWS account ID of the party accepting the agreement terms.</p> </li> <li> <p> <code>OfferId</code> – The unique identifier of the offer in which the terms are registered in the agreement token.</p> </li> <li> <p> <code>Status</code> – The current status of the agreement. Values include <code>ACTIVE</code>, <code>CANCELLED</code>, <code>EXPIRED</code>, <code>RENEWED</code>, <code>REPLACED</code>, and <code>TERMINATED</code>.</p> </li> <li> <p> <code>BeforeEndTime</code> – A date used to filter agreements with a date before the <code>endTime</code> of an agreement.</p> </li> <li> <p> <code>AfterEndTime</code> – A date used to filter agreements with a date after the <code>endTime</code> of an agreement.</p> </li> <li> <p> <code>BeforeStartTime</code> – A date used to filter agreements with a date before the <code>startTime</code> of an agreement.</p> </li> <li> <p> <code>AfterStartTime</code> – A date used to filter agreements with a date after the <code>startTime</code> of an agreement.</p> </li> <li> <p> <code>BeforeLastUpdateTime</code> – A date used to filter agreements with a date before the <code>lastUpdateTime</code> of an agreement.</p> </li> <li> <p> <code>AfterLastUpdateTime</code> – A date used to filter agreements with a date after the <code>lastUpdateTime</code> of an agreement.</p> </li> <li> <p> <code>AgreementType</code> – The type of agreement. Supported value includes <code>PurchaseAgreement</code>.</p> </li> <li> <p> <code>OfferSetId</code> – A unique identifier for the offer set containing this offer. All agreements created from offers in this set include this identifier as context.</p> </li> <li> <p> <code>EndTimeBehaviorType</code> – What happens to the agreement when it reaches its end date. Values include <code>RENEW</code>, <code>REPLACE</code>, and <code>EXPIRE</code>.</p> </li> <li> <p> <code>EndTimeBehaviorReasonCode</code> – The reason why the agreement doesn't renew at its end date. Values include <code>PROPOSER_RENEW_OPTED_OUT</code>, <code>ACCEPTOR_RENEW_OPTED_OUT</code>, <code>NO_RENEWAL_TERM</code>, and <code>RENEWAL_LIMIT_EXHAUSTED</code>.</p> </li> <li> <p> <code>InitialAgreementId</code> – The unique identifier of the very first agreement in a chain of related agreements. Use this filter to return every agreement in the same chain.</p> </li> <li> <p> <code>LicenseArn</code> – The Amazon Resource Name (ARN) of the AWS License Manager license associated with an entitlement granted by the agreement.</p> </li> <li> <p> <code>IncludesContactOfType</code> – The type of contact information on file for the agreement. Supported value includes <code>ACCEPTOR</code>.</p> </li> </ul> <p>A proposer can use any combination of the preceding filters along with <code>AgreementType</code>, which is required.</p> <p>The following filter combinations are supported when the <code>PartyType</code> is <code>Acceptor</code>:</p> <ul> <li> <p> <code>AgreementType</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>Status</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceIdentifier</code> + <code>Status</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceType</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>ResourceType</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferId</code> + <code>Status</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> + <code>EndTime</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> + <code>Status</code> </p> </li> <li> <p> <code>AgreementType</code> + <code>OfferSetId</code> + <code>Status</code> + <code>EndTime</code> </p> </li> </ul> <note> <p>To filter by <code>EndTime</code>, you can use <code>BeforeEndTime</code>, <code>AfterEndTime</code>, or both.</p> </note>"
                     }
                 },
                 "sort": {
@@ -6802,6 +9528,119 @@
                 }
             }
         },
+        "com.amazonaws.marketplaceagreement#StartAgreementApprovals": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceagreement#StartAgreementApprovalsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceagreement#StartAgreementApprovalsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceagreement#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceagreement#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows buyers (acceptors) to start the approvals that their organization requires for an agreement request. You start one agreement approval for each approval plan that you specify. Use <code>GetAgreementRequestApprovalPlans</code> to retrieve the approval plans of the agreement request. Once the agreement approvals start, the agreement request transitions to <code>PENDING_APPROVAL</code> status.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start agreement approvals",
+                        "input": {
+                            "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78",
+                            "planInputs": [
+                                {
+                                    "buyerAgreementApprovalPlanInput": {
+                                        "planReference": "aplan-EXAMPLE7g8h9i0j1k2l",
+                                        "requesterNote": "Annual subscription for the data platform team."
+                                    }
+                                }
+                            ],
+                            "purchaseOrders": [
+                                {
+                                    "chargeId": "ch-EXAMPLE4b4296145c3EXAMPLE56",
+                                    "purchaseOrderReference": "PO-123"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "approvalSummaries": [
+                                {
+                                    "approvalType": "BUYER_AGREEMENT_APPROVAL",
+                                    "agreementRequestId": "ar-EXAMPLE4a539b123d4EXAMPLE78",
+                                    "agreementApprovalId": "apr-EXAMPLE9s0t1u2v3w4x",
+                                    "name": "Example Analytics Platform sold by Example Corp",
+                                    "status": "PENDING_APPROVAL",
+                                    "createdAt": 1736935800,
+                                    "updatedAt": 1736935800,
+                                    "startedAt": 1736935800,
+                                    "expiresAt": 1739527800,
+                                    "approvalNeededBy": 1739527800
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.marketplaceagreement#StartAgreementApprovalsInput": {
+            "type": "structure",
+            "members": {
+                "agreementRequestId": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agreement request to start approvals for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "planInputs": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPlanInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval plans to start agreement approvals for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "purchaseOrders": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalPurchaseOrders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of purchase order references to associate with charges on the agreement request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplaceagreement#StartAgreementApprovalsOutput": {
+            "type": "structure",
+            "members": {
+                "approvalSummaries": {
+                    "target": "com.amazonaws.marketplaceagreement#AgreementApprovalSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>AgreementApprovalSummary</code> objects, one for each agreement approval that was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplaceagreement#SupportTerm": {
             "type": "structure",
             "members": {
@@ -6966,6 +9805,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BILLING_PERIOD"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
                     }
                 }
             }
@@ -7151,6 +9996,48 @@
         "com.amazonaws.marketplaceagreement#ValidationExceptionReason": {
             "type": "enum",
             "members": {
+                "CLOSED_AGREEMENT_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOSED_AGREEMENT_APPROVAL"
+                    }
+                },
+                "QUEUED_AGREEMENT_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED_AGREEMENT_APPROVAL"
+                    }
+                },
+                "INVALID_AGREEMENT_APPROVAL_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_AGREEMENT_APPROVAL_ID"
+                    }
+                },
+                "MISSING_AGREEMENT_APPROVAL_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_AGREEMENT_APPROVAL_ID"
+                    }
+                },
+                "DUPLICATE_PLAN_REFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_PLAN_REFERENCE"
+                    }
+                },
+                "INVALID_PLAN_INPUTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PLAN_INPUTS"
+                    }
+                },
+                "PENDING_APPROVAL_AGREEMENT_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL_AGREEMENT_REQUEST"
+                    }
+                },
                 "MISSING_BILLING_ADJUSTMENTS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -7565,6 +10452,12 @@
                         "smithy.api#enumValue": "EXPIRED_AGREEMENT_PROPOSAL"
                     }
                 },
+                "INVALID_ACCEPTOR_CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ACCEPTOR_CONTACT"
+                    }
+                },
                 "MISSING_MANDATORY_TERMS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -7637,10 +10530,76 @@
                         "smithy.api#enumValue": "DUPLICATE_AGREEMENT_IN_ORGANIZATION"
                     }
                 },
+                "MISSING_AWS_LICENSE_MANAGER_USER_SUBSCRIPTIONS_SLR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_AWS_LICENSE_MANAGER_USER_SUBSCRIPTIONS_SLR"
+                    }
+                },
                 "MISSING_PURCHASE_ORDER_REFERENCE": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MISSING_PURCHASE_ORDER_REFERENCE"
+                    }
+                },
+                "INVALID_RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RESOURCE_ID"
+                    }
+                },
+                "CLOSED_AGREEMENT_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOSED_AGREEMENT_REQUEST"
+                    }
+                },
+                "INCOMPATIBLE_AGREEMENT_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCOMPATIBLE_AGREEMENT_REQUEST"
+                    }
+                },
+                "REJECTED_BY_AGREEMENT_APPROVAL_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED_BY_AGREEMENT_APPROVAL_POLICY"
+                    }
+                },
+                "MISSING_PLAN_INPUTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_PLAN_INPUTS"
+                    }
+                },
+                "INVALID_APPROVER_OUTCOME_ID_TO_OVERRIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_APPROVER_OUTCOME_ID_TO_OVERRIDE"
+                    }
+                },
+                "INVALID_NOTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NOTE"
+                    }
+                },
+                "MISSING_NOTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_NOTE"
+                    }
+                },
+                "INVALID_APPROVAL_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_APPROVAL_TYPE"
+                    }
+                },
+                "MISSING_SORT_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_SORT_BY"
                     }
                 }
             }
@@ -7663,19 +10622,19 @@
                 "agreementDuration": {
                     "target": "com.amazonaws.marketplaceagreement#BoundedString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the duration that the agreement remains active. If <code>AgreementStartDate</code> isn’t provided, the agreement duration is relative to the agreement signature time. The duration is represented in the ISO_8601 format.</p>"
+                        "smithy.api#documentation": "<p>Defines the duration that the agreement remains active. If <code>AgreementStartDate</code> isn't provided, the agreement duration is relative to the agreement signature time. The duration is represented in the ISO_8601 format.</p>"
                     }
                 },
                 "agreementStartDate": {
                     "target": "com.amazonaws.marketplaceagreement#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the date when agreement starts. The agreement starts at 00:00:00.000 UTC on the date provided. If <code>AgreementStartDate</code> isn’t provided, the agreement start date is determined based on agreement signature time.</p>"
+                        "smithy.api#documentation": "<p>Defines the date when agreement starts. The agreement starts at 00:00:00.000 UTC on the date provided. If <code>AgreementStartDate</code> isn't provided, the agreement start date is determined based on agreement signature time.</p>"
                     }
                 },
                 "agreementEndDate": {
                     "target": "com.amazonaws.marketplaceagreement#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the date when the agreement ends. The agreement ends at 23:59:59.999 UTC on the date provided. If <code>AgreementEndDate</code> isn’t provided, the agreement end date is determined by the validity of individual terms.</p>"
+                        "smithy.api#documentation": "<p>Defines the date when the agreement ends. The agreement ends at 23:59:59.999 UTC on the date provided. If <code>AgreementEndDate</code> isn't provided, the agreement end date is determined by the validity of individual terms.</p>"
                     }
                 }
             },
@@ -7734,7 +10693,7 @@
                 "expirationDuration": {
                     "target": "com.amazonaws.marketplaceagreement#ISO8601Duration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the duration after which a payment request is automatically approved if no further action is taken. This only applies when the payment request approval strategy is set to <code>AUTO_APPROVE_ON_EXPIRATION</code>. The duration is represented in the ISO_8601 format (e.g., P10D for 10 days).</p>"
+                        "smithy.api#documentation": "<p>Defines the duration after which a payment request is automatically approved if no further action is taken. This only applies when the payment request approval strategy is set to <code>AUTO_APPROVE_ON_EXPIRATION</code>. The duration is represented in the ISO_8601 format (for example, P10D for 10 days).</p>"
                     }
                 }
             },

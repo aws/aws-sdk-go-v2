@@ -153,6 +153,105 @@
                 "smithy.api#pattern": "^[\\w \\-\\.',@:;/]*$"
             }
         },
+        "com.amazonaws.elementalinference#BedrockApi": {
+            "type": "enum",
+            "members": {
+                "INVOKE_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVOKE_MODEL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#BedrockFunctionTarget": {
+            "type": "structure",
+            "members": {
+                "api": {
+                    "target": "com.amazonaws.elementalinference#BedrockApi",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Bedrock API to call. The only valid value is INVOKE_MODEL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "model": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model to invoke. Specify one of the following:</p> <ul> <li> <p>A model ID.</p> </li> <li> <p>An inference profile ID.</p> </li> <li> <p>The ARN of a custom model.</p> </li> <li> <p>The ARN of a provisioned model.</p> </li> </ul> <p>Elemental Inference invokes the model in the Region of the feed. To use a model in other Regions, specify a cross-Region inference profile ID. A custom or provisioned model must be in the Region of the feed. </p> <p>The request expression must produce a request body that this model accepts, and the model must accept the kind of media that the request expression references. For example, a text-only model can't accept a request that references media.frames. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        },
+                        "smithy.api#pattern": "^([a-z0-9-]{1,63}[.][a-z0-9-.:]{1,76}|arn:aws:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:(custom-model|provisioned-model)/.+)$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon Bedrock model to invoke. Elemental Inference invokes the model in your account by assuming the feed's access role, so a feed that runs this function must specify an accessRoleArn. The invocation is subject to your Amazon Bedrock quotas and appears on your bill. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ChooseOneOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#QuestionOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of the options of a chooseOne question.</p>",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#ChooseOneQuestion": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#QuestionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the question. The name must be unique among all the questions in the version, across all question types. The name can be up to 64 characters. It must start with a letter or an underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and underscores. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "question": {
+                    "target": "com.amazonaws.elementalinference#QuestionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the question. The text can be up to 256 bytes, encoded in UTF-8. It can contain letters in any language, combining marks, digits, spaces, and the following characters: <code>. , ? ! ' \" ( ) - : ; / &amp; %</code>, plus the curly apostrophe and quotation marks (U+2019, U+201C, and U+201D). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that Elemental Inference chooses from. You can specify from 2 to 26 options. The question counts as one item toward the limit of 100 scored items in a version, regardless of how many options it has. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A question that you ask Elemental Inference, which answers by choosing one of its options. You specify it in the chooseOne array of a question set. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ChooseOneQuestionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#ChooseOneQuestion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of ChooseOneQuestion objects.</p>",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#ClipTrigger": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The perClip trigger, which runs the function each time an event clipping output reports events. Events that the output reports together share one run, and media.clip.events contains all of them. To choose this trigger, set perClip to an empty object. </p> <p>Specify clippingSettings to name the event clipping output that reports the events. You can't use this trigger with a function that references media.transcript or media.contextual. </p>"
+            }
+        },
         "com.amazonaws.elementalinference#ClippingConfig": {
             "type": "structure",
             "members": {
@@ -171,6 +270,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the clip feature.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ClippingSettings": {
+            "type": "structure",
+            "members": {
+                "outputName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an ENABLED event clipping output on this feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The event clipping output on this feed that provides events for a perClip trigger and media.clip for a function. Specify this structure for a perClip trigger, and for a function that references media.clip on a fixedInterval trigger. </p> <p>If the function output is ENABLED, the output that you name must also be ENABLED.</p>"
             }
         },
         "com.amazonaws.elementalinference#Competitor": {
@@ -221,6 +335,49 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.elementalinference#ContextType": {
+            "type": "enum",
+            "members": {
+                "FRAMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRAMES"
+                    }
+                },
+                "SUBTITLES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTITLES"
+                    }
+                },
+                "CONTEXTUAL_METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTEXTUAL_METADATA"
+                    }
+                },
+                "CLIP_METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIP_METADATA"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One kind of media context that a function reads. Elemental Inference derives this value from the media paths that the request expression references: </p> <ul> <li> <p>FRAMES – Derived from media.frames.</p> </li> <li> <p>SUBTITLES – Derived from media.transcript.</p> </li> <li> <p>CONTEXTUAL_METADATA – Derived from media.contextual.</p> </li> <li> <p>CLIP_METADATA – Derived from media.clip.</p> </li> </ul> <p>A request expression can reference at most one of SUBTITLES, CONTEXTUAL_METADATA, and CLIP_METADATA, in addition to FRAMES. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ContextTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#ContextType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.elementalinference#ContextualMetadataConfig": {
             "type": "structure",
             "members": {
@@ -233,12 +390,33 @@
                 "extendedAnalysis": {
                     "target": "com.amazonaws.elementalinference#ExtendedAnalysisMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates extended analysis of the media content for this output. Extended analysis identifies the people, environments, brands, and on-screen text in the media content. This setting is independent of <code>summaryGeneration</code>. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference populates the people, environments, brands, and on-screen text fields. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't populate the people, environments, brands, and on-screen text fields. </p> </li> </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference generates extended analysis of the media content for this output. Extended analysis identifies the people, environments, brands, and on-screen text in the media content. This setting is independent of <code>summaryGeneration</code>. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED (default) – Elemental Inference populates the people, environments, brands, and on-screen text fields. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't populate the people, environments, brands, and on-screen text fields. </p> </li> </ul> <p>If you specify <code>customQuestions</code>, you must set this property to DISABLED. </p>"
+                    }
+                },
+                "customQuestions": {
+                    "target": "com.amazonaws.elementalinference#CustomQuestionsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The question sets that you ask Elemental Inference about each shot, each scene, or both, in this output. </p> <p>If you specify customQuestions, you must also set extendedAnalysis to DISABLED. If you omit extendedAnalysis, it defaults to ENABLED, and the request fails. </p> <p>While a feed references a version of a question set, you can't delete that version or the question set. </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output configuration settings for the contextual metadata feature. Use this structure when the feed output generates metadata that describes the media content. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#ContextualMetadataSettings": {
+            "type": "structure",
+            "members": {
+                "outputName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an ENABLED contextual metadata output on this feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contextual metadata output on this feed that provides scenes for a perScene trigger and media.contextual for a function. Specify this structure for a perScene trigger, and for a function that references media.contextual on a perShot trigger. </p> <p>If the function output is ENABLED, the output that you name must also be ENABLED.</p>"
             }
         },
         "com.amazonaws.elementalinference#CreateDictionary": {
@@ -554,6 +732,218 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#CreateFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#CreateFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#CreateFunctionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a new inference function",
+                    "createsResources": [
+                        "function"
+                    ],
+                    "resources": {
+                        "required": {}
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a function. A function analyzes a feed by building a request from the feed's media and metadata, optionally sending that request to an Amazon Bedrock model in your account, and publishing the result to the feed's metadata timeline. </p> <p>A function runs only after you attach it to a feed as a function output. For more information, see <a href=\"https://docs.aws.amazon.com/elemental-inference/latest/userguide/functions.html\">Using functions</a> in the <i>AWS Elemental Inference User Guide</i>. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/function",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for this function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.elementalinference#FunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the request that the function builds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that builds the request. Elemental Inference evaluates it against the media object of the feed, which holds the media and metadata that the function asked for. Maximum length: 5,120 characters. </p> <p>When you save the function, Elemental Inference evaluates the expression against sample media and rejects it if the evaluation fails. For a Bedrock target, the result must be a JSON object; Elemental Inference doesn't check that the object is a valid request body for the model. The expression can reference at most one of media.transcript, media.contextual, and media.clip. For a passthrough target, it can't reference media.frames. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5120
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "responseExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that selects what to store. Elemental Inference evaluates it against the result as its root: the model response for a Bedrock target, or the output of the request expression for a passthrough target. If a function has no response expression, Elemental Inference stores the entire result. Maximum length: 5,120 characters. </p> <p>When you save the function, Elemental Inference checks that the expression is valid JSONata. For a passthrough target, it also evaluates the request and response expressions together against sample media, and rejects them if they produce no value. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the function. Maximum length: 1,024 characters.</p>"
+                    }
+                },
+                "eventBridgeDelivery": {
+                    "target": "com.amazonaws.elementalinference#EventBridgeDeliveryMode",
+                    "traits": {
+                        "smithy.api#default": "DISABLED",
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference also sends this function's results to Amazon EventBridge. Elemental Inference sends a result only when the result is a JSON object with a top-level <code>eventBridge</code> field set to <code>true</code>. It sends the result, unchanged, as a Function Metadata Generated event to the default event bus in your account, after the result is available from GetMetadata. If the result is larger than 64 KB, the event has <code>resultOmitted</code> set to <code>true</code> in place of the result. </p> <p>Valid values:</p> <ul> <li> <p>ENABLED – Elemental Inference sends each marked result as an event.</p> </li> <li> <p>DISABLED (default) – Elemental Inference doesn't send events.</p> </li> </ul> <p>For a Bedrock target, ENABLED requires a response expression, because the model response itself never has a top-level <code>eventBridge</code> field. A feed output that runs a function with ENABLED can't use a fixedInterval trigger shorter than 4 seconds. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with this function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateFunctionResponse": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.elementalinference#FunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the request that the function builds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that builds the request. Elemental Inference evaluates it against the media object of the feed, which holds the media and metadata that the function asked for. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5120
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "responseExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that selects what to store. Elemental Inference evaluates it against the result as its root: the model response for a Bedrock target, or the output of the request expression for a passthrough target. If a function has no response expression, Elemental Inference stores the entire result. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the function.</p>"
+                    }
+                },
+                "eventBridgeDelivery": {
+                    "target": "com.amazonaws.elementalinference#EventBridgeDeliveryMode",
+                    "traits": {
+                        "smithy.api#default": "DISABLED",
+                        "smithy.api#documentation": "<p>Indicates whether Elemental Inference also sends this function's results to Amazon EventBridge. With ENABLED, each result that is a JSON object with a top-level <code>eventBridge</code> field set to <code>true</code> is also sent as a Function Metadata Generated event to the default event bus in your account. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#FunctionStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The status of the function. A successful request returns CREATING. The function is ready to use as soon as the request succeeds. </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The IDs of the feeds that have a function output, enabled or disabled, that references this function. While this list isn't empty, the function can't be deleted, and its name and target can't be changed. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "contextTypes": {
+                    "target": "com.amazonaws.elementalinference#ContextTypeList",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The kinds of media context that this function uses. Elemental Inference derives this field from the media paths that the request expression references; you can't set it. An empty list means that the expression references no media, so Elemental Inference supplies none at run time. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#CreateOutput": {
             "type": "structure",
             "members": {
@@ -593,6 +983,354 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elementalinference#CreateOutput"
+            }
+        },
+        "com.amazonaws.elementalinference#CreateQuestionSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#CreateQuestionSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#CreateQuestionSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a new question set",
+                    "createsResources": [
+                        "question-set"
+                    ],
+                    "resources": {
+                        "required": {}
+                    }
+                },
+                "smithy.api#documentation": "<p>Creates a question set. Use a question set to get answers about content that's specific to your business, in addition to the built-in contextual metadata classifications. A question set contains your own questions. You ask Elemental Inference these questions about each shot or scene of the media in a contextual metadata output, and Elemental Inference answers each question with scores. To use a question set, reference it in the customQuestions property of the contextual metadata configuration of a feed output. </p> <p>CreateQuestionSet creates the question set with a DRAFT version that contains the questions in the request. To change DRAFT, use UpdateQuestionSet. To publish DRAFT as a numbered version, use CreateQuestionSetVersion. You can't change a published version. </p> <p>A question set can contain the following types of questions. You must specify at least one question. </p> <ul> <li> <p>yesNo – Elemental Inference answers yes or no.</p> </li> <li> <p>yesNoPerOption – Elemental Inference answers yes or no for each option.</p> </li> <li> <p>chooseOne – Elemental Inference chooses one of the options.</p> </li> </ul> <p>A version can contain up to 100 scored items, where each yesNo question, each option of a yesNoPerOption question, and each chooseOne question counts as one item. The name of each question must be unique across all three types. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/question-set",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateQuestionSetRequest": {
+            "type": "structure",
+            "members": {
+                "yesNo": {
+                    "target": "com.amazonaws.elementalinference#YesNoQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of questions that Elemental Inference answers with yes or no. You can specify up to 50 yesNo questions. An empty array is the same as omitting this property. </p>"
+                    }
+                },
+                "yesNoPerOption": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of questions that you ask about each of their options. Elemental Inference answers yes or no for each option. You can specify up to 10 yesNoPerOption questions. An empty array is the same as omitting this property. </p>"
+                    }
+                },
+                "chooseOne": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of questions that Elemental Inference answers by choosing one of their options. You can specify up to 10 chooseOne questions. An empty array is the same as omitting this property. </p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-friendly name for this question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional tags to associate with the question set. You can also add tags later, using TagResource. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateQuestionSetResponse": {
+            "type": "structure",
+            "members": {
+                "yesNo": {
+                    "target": "com.amazonaws.elementalinference#YesNoQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNo questions that you specified in the request, in the order that you specified them. Elemental Inference doesn't return this property if the request didn't include any yesNo questions. </p>"
+                    }
+                },
+                "yesNoPerOption": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNoPerOption questions that you specified in the request, in the order that you specified them. Elemental Inference doesn't return this property if the request didn't include any yesNoPerOption questions. </p>"
+                    }
+                },
+                "chooseOne": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chooseOne questions that you specified in the request, in the order that you specified them. Elemental Inference doesn't return this property if the request didn't include any chooseOne questions. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID that Elemental Inference assigns to the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you specified in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that this response describes. For CreateQuestionSet, the version is always DRAFT. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the version. Elemental Inference doesn't return this property for CreateQuestionSet, because the DRAFT version has no description. </p>"
+                    }
+                },
+                "latestVersion": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the highest version that you have published for this question set. Elemental Inference doesn't return this property for CreateQuestionSet, because a new question set has no published versions. </p>"
+                    }
+                },
+                "sha256": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSha256",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The SHA-256 hash of the DRAFT version, as 64 lowercase hexadecimal characters. The hash covers the name of the question set and its questions. You can specify this value in a CreateQuestionSetVersion request, so that Elemental Inference publishes DRAFT only if it hasn't changed. </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A list of feed IDs that reference this version of the question set. For a new question set, the list is empty. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags that you included when you created the question set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateQuestionSetVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#CreateQuestionSetVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#CreateQuestionSetVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a version of a question set"
+                },
+                "smithy.api#documentation": "<p>Publishes the DRAFT version of the specified question set as a new version. The new version has the same name and questions as DRAFT, and you can't change it. DRAFT doesn't change, so you can continue to update it. </p> <p>Version numbers start at 1, and each new version has the next number. Elemental Inference never reuses a version number, even after you delete that version. </p> <p>If DRAFT hasn't changed since the latest published version, Elemental Inference doesn't create a version. Instead, it returns the latest version. A change to the name of the question set counts as a change to DRAFT. </p> <p>A question set can have a limited number of versions. If the question set already has the maximum number of versions, Elemental Inference returns ServiceQuotaExceededException. To free space for a new version, delete a version that you no longer need, or create a new question set. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/question-set/{id}/versions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateQuestionSetVersionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set whose DRAFT version you want to publish.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sha256": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA-256 hash of the DRAFT version that you want to publish, as returned by GetQuestionSet or UpdateQuestionSet. If you specify this value, Elemental Inference publishes DRAFT only if its current hash matches. If it doesn't match, because DRAFT changed after you retrieved it, the request fails with ConflictException. </p> <p>If you don't specify this value, Elemental Inference publishes DRAFT as it is when it receives the request. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the new version. You can't change the description after Elemental Inference publishes the version. If DRAFT hasn't changed since the latest version, Elemental Inference ignores this value and returns the latest version with its existing description. </p> <p>The description can be up to 256 characters. It can contain the letters A-Z and a-z, the digits 0-9, underscores, spaces, and the following characters: <code>- . ' , @ : ;</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#CreateQuestionSetVersionResponse": {
+            "type": "structure",
+            "members": {
+                "yesNo": {
+                    "target": "com.amazonaws.elementalinference#YesNoQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNo questions in this version. Elemental Inference doesn't return this property if the version has no yesNo questions. </p>"
+                    }
+                },
+                "yesNoPerOption": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNoPerOption questions in this version. Elemental Inference doesn't return this property if the version has no yesNoPerOption questions. </p>"
+                    }
+                },
+                "chooseOne": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chooseOne questions in this version. Elemental Inference doesn't return this property if the version has no chooseOne questions. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the question set at this version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the version that Elemental Inference published. If DRAFT hadn't changed since the latest version, this is the number of that existing version. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the version. For a new version, this is the description that you specified in the request. If DRAFT hadn't changed since the latest version, this is the description of that existing version. Elemental Inference doesn't return this property if the version has no description. </p>"
+                    }
+                },
+                "latestVersion": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the highest version that you have published for this question set. It's the same as version. </p>"
+                    }
+                },
+                "sha256": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSha256",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The SHA-256 hash of the version, as 64 lowercase hexadecimal characters. It's the same as the hash of the DRAFT version that Elemental Inference published. </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A list of feed IDs that reference this version of the question set. For a new version, the list is empty. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the question set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elementalinference#CreateScheduleAction": {
@@ -735,6 +1473,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the crop feature.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#CustomQuestionsConfig": {
+            "type": "structure",
+            "members": {
+                "shot": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a question set to ask Elemental Inference about each shot.</p>"
+                    }
+                },
+                "scene": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a question set to ask Elemental Inference about each scene.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The question sets that you ask Elemental Inference about the media in a contextual metadata output. You must specify at least one of shot or scene. They can reference the same version of the same question set. </p>"
             }
         },
         "com.amazonaws.elementalinference#DataSourceConfiguration": {
@@ -996,6 +1754,243 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#DeleteFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#DeleteFunctionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an inference function"
+                },
+                "smithy.api#documentation": "<p>Deletes a function. If any feed still references the function, the operation returns a ConflictException. A disabled function output still references the function. Use GetFunction to find those feeds, then remove the function output from each one with UpdateFeed, or delete the feed, before retrying. </p> <p>Deleting a function doesn't delete the metadata that it has already produced.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/function/{id}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteFunctionResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#FunctionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the function. A successful request returns DELETING. Elemental Inference removes the function before it returns the response. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteQuestionSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#DeleteQuestionSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#DeleteQuestionSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a question set"
+                },
+                "smithy.api#documentation": "<p>Deletes the specified question set, including its DRAFT version and all its published versions. You can't delete a question set while any feed references any of its versions, including an archived feed. You must first remove the question set from the customQuestions configuration of each feed output that references it, or delete those feeds. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/question-set/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteQuestionSetRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteQuestionSetResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the deleted question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deleted question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteQuestionSetVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#DeleteQuestionSetVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#DeleteQuestionSetVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a version of a question set"
+                },
+                "smithy.api#documentation": "<p>Deletes a published version of the specified question set. You can't delete a version while a feed references it, including an archived feed. You can't restore a deleted version, and Elemental Inference doesn't reuse its number. </p> <p>You can't delete the DRAFT version on its own. To delete DRAFT, delete the question set by using DeleteQuestionSet. </p> <p>Deleting a version doesn't change the latestVersion of the question set, even if you delete the highest version. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/question-set/{id}/versions/{questionSetVersion}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteQuestionSetVersionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set that contains the version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "questionSetVersion": {
+                    "target": "com.amazonaws.elementalinference#PublishedQuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the published version to delete. You can't specify DRAFT.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#DeleteQuestionSetVersionResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -1409,6 +2404,12 @@
                 },
                 {
                     "target": "com.amazonaws.elementalinference#FeedResource"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#FunctionResource"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#QuestionSetResource"
                 }
             ],
             "traits": {
@@ -2265,6 +3266,26 @@
                 }
             }
         },
+        "com.amazonaws.elementalinference#EventBridgeDeliveryMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Whether Elemental Inference sends a function's marked results to Amazon EventBridge.</p> <ul> <li> <p>ENABLED – Elemental Inference sends each result that is a JSON object with a top-level <code>eventBridge</code> field set to <code>true</code> as an event. </p> </li> <li> <p>DISABLED – Elemental Inference doesn't send events.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.elementalinference#ExportDictionaryEntries": {
             "type": "operation",
             "input": {
@@ -2585,6 +3606,25 @@
                 }
             }
         },
+        "com.amazonaws.elementalinference#FixedIntervalTrigger": {
+            "type": "structure",
+            "members": {
+                "intervalSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of content, in seconds, between runs of the function. Valid range: 1 to 60. For a function with eventBridgeDelivery set to ENABLED, the minimum is 4. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 60
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings of the fixedInterval trigger, which runs the function once for every intervalSeconds of content. A function that references media.transcript must use this trigger. You can't use this trigger with a function that references media.contextual. </p> <p>If the function references media.transcript, specify subtitlingSettings. If the function references media.clip, specify clippingSettings. Each run then receives the events that the event clipping output reported during the interval, in media.clip.events. </p>"
+            }
+        },
         "com.amazonaws.elementalinference#FixedModeScheduleActionStartSettings": {
             "type": "structure",
             "members": {
@@ -2668,6 +3708,341 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elementalinference#FixtureSummary"
+            }
+        },
+        "com.amazonaws.elementalinference#FrameSamplingMode": {
+            "type": "enum",
+            "members": {
+                "FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST"
+                    }
+                },
+                "UNIFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIFORM"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#FrameSamplingStrategy": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.elementalinference#FrameSamplingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which frames of the window to send: FIRST (the first frames), UNIFORM (frames spread evenly across the window), or LAST (the last frames). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "count": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of frames to send on each run. Valid range: 1 to 64. The default is 1. Each frame adds to the size of the model request and to what the model charges for it. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 64
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how Elemental Inference chooses frames from the media of each run, and how many frames it chooses. The media of a run is the interval, shot, scene, or clips that the run covers. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#FrameSettings": {
+            "type": "structure",
+            "members": {
+                "frameSampling": {
+                    "target": "com.amazonaws.elementalinference#FrameSamplingStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method for choosing which frames to send.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "frameSize": {
+                    "target": "com.amazonaws.elementalinference#FrameSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size to resize each frame to. If you omit this structure, frames keep their source size. Smaller frames reduce the size of the model request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The frames that a function receives in media.frames on each run: which frames, how many, and at what size. Elemental Inference applies these settings only to a function that references media.frames. </p> <p>When you add or change the function output, Elemental Inference estimates the size of the frames and rejects settings whose frames won't fit in one model request. To send more frames in each request, specify a smaller frameSize. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#FrameSize": {
+            "type": "structure",
+            "members": {
+                "widthPixels": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of each frame, in pixels. Valid range: 1 to 1280.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1280
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "heightPixels": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The height of each frame, in pixels. Valid range: 1 to 720.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 720
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dimensions, in pixels, of each frame that a function sends. Elemental Inference resizes each frame to exactly this width and height. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::ElementalInference::Function",
+                    "service": "com.amazonaws.elementalinference#ElementalInference",
+                    "resource": "com.amazonaws.elementalinference#FunctionResource"
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionConfig": {
+            "type": "structure",
+            "members": {
+                "functionArn": {
+                    "target": "com.amazonaws.elementalinference#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the function to run. The function must exist in the same account and the same Region as the feed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "trigger": {
+                    "target": "com.amazonaws.elementalinference#Trigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines when the function runs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "frameSettings": {
+                    "target": "com.amazonaws.elementalinference#FrameSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frames to send on each run: how many, which ones, and at what size. Applies to a function that references media.frames. If you omit this structure, Elemental Inference sends the first frame of the window, at its source size. </p>"
+                    }
+                },
+                "subtitlingSettings": {
+                    "target": "com.amazonaws.elementalinference#SubtitlingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The smart subtitles output on this feed to read the transcript from. Required for a function that references media.transcript. </p>"
+                    }
+                },
+                "contextualMetadataSettings": {
+                    "target": "com.amazonaws.elementalinference#ContextualMetadataSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual metadata output on this feed to read scenes and classifications from. Required for a perScene trigger, and for a function that references media.contextual on a perShot trigger. </p>"
+                    }
+                },
+                "clippingSettings": {
+                    "target": "com.amazonaws.elementalinference#ClippingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event clipping output on this feed to read clips from. Required for a perClip trigger, and for a function that references media.clip. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration settings for a function. Use this structure to run a function on this feed. The name of the output is the name that you pass to GetMetadata to read the results. </p> <p>Include the settings that the function's media context and trigger require. Elemental Inference ignores settings that neither uses. It also rejects settings whose frames are estimated to exceed the size of a single model request. </p> <p>A feed that has an enabled function output must also have an enabled cropping, clipping, subtitling, or contextual metadata output. A feed that runs a function with a Bedrock target must specify an accessRoleArn. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\w \\-\\.',@:;]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z0-9]{19}$"
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.elementalinference#CreateFunction"
+            },
+            "read": {
+                "target": "com.amazonaws.elementalinference#GetFunction"
+            },
+            "update": {
+                "target": "com.amazonaws.elementalinference#UpdateFunction"
+            },
+            "delete": {
+                "target": "com.amazonaws.elementalinference#DeleteFunction"
+            },
+            "list": {
+                "target": "com.amazonaws.elementalinference#ListFunctions"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "function/{id}"
+                },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "Function"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "function",
+                    "relativeDocumentation": "elemental-inference-configuration.html"
+                },
+                "smithy.api#documentation": "A customer-authored inference function attachable to a feed as an output",
+                "smithy.api#suppress": [
+                    "UnstableTrait.aws.cloudformation#cfnResource",
+                    "UnstableTrait.aws.api#taggable"
+                ]
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "REFERENCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERENCED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a function.</p> <ul> <li> <p>CREATING – CreateFunction returns this status. The function is ready to use as soon as the request succeeds. </p> </li> <li> <p>AVAILABLE – No feed references the function. Every property can be changed, and the function can be deleted. </p> </li> <li> <p>REFERENCED – At least one feed references the function, so the function can't be deleted. Only the expressions and the description can be changed, and eventBridgeDelivery can be set to DISABLED but not to ENABLED. The request expression must keep referencing the same media context. </p> </li> <li> <p>DELETING – DeleteFunction returns this status. The function is removed as soon as the request succeeds. </p> </li> <li> <p>DELETED – Not currently returned.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the function.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#FunctionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.elementalinference#FunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the request that the function builds.</p>"
+                    }
+                },
+                "contextTypes": {
+                    "target": "com.amazonaws.elementalinference#ContextTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The kinds of media context that this function uses. Elemental Inference derives this field from the media paths that the request expression references; you can't set it. An empty list means that the expression references no media, so Elemental Inference supplies none at run time. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains identifying and configuration details for a function, including its name, target, status, and derived media context.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#FunctionSummary"
+            }
+        },
+        "com.amazonaws.elementalinference#FunctionTarget": {
+            "type": "union",
+            "members": {
+                "bedrock": {
+                    "target": "com.amazonaws.elementalinference#BedrockFunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Send the request to an Amazon Bedrock model.</p>"
+                    }
+                },
+                "passthrough": {
+                    "target": "com.amazonaws.elementalinference#PassthroughFunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Send the request nowhere. Use this target to reshape the metadata that Elemental Inference already produces, with no model invocation and no model charges. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination for the request that a function builds. Specify exactly one member.</p>"
             }
         },
         "com.amazonaws.elementalinference#GatewayTimedOutException": {
@@ -3160,6 +4535,163 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#GetFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#GetFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#GetFunctionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get inference function details"
+                },
+                "smithy.api#documentation": "<p>Retrieves the details of a function, including its expressions, the media context that Elemental Inference derived from the request expression, and the feeds that currently reference it. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/function/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetFunctionResponse": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.elementalinference#FunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the request that the function builds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that builds the request. Elemental Inference evaluates it against the media object of the feed, which holds the media and metadata that the function asked for. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5120
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "responseExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that selects what to store. Elemental Inference evaluates it against the result as its root: the model response for a Bedrock target, or the output of the request expression for a passthrough target. If a function has no response expression, Elemental Inference stores the entire result. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the function.</p>"
+                    }
+                },
+                "eventBridgeDelivery": {
+                    "target": "com.amazonaws.elementalinference#EventBridgeDeliveryMode",
+                    "traits": {
+                        "smithy.api#default": "DISABLED",
+                        "smithy.api#documentation": "<p>Indicates whether Elemental Inference also sends this function's results to Amazon EventBridge. With ENABLED, each result that is a JSON object with a top-level <code>eventBridge</code> field set to <code>true</code> is also sent as a Function Metadata Generated event to the default event bus in your account. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#FunctionStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The status of the function.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The IDs of the feeds that have a function output, enabled or disabled, that references this function. While this list isn't empty, the function can't be deleted, and its name and target can't be changed. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "contextTypes": {
+                    "target": "com.amazonaws.elementalinference#ContextTypeList",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The kinds of media context that this function uses. Elemental Inference derives this field from the media paths that the request expression references; you can't set it. An empty list means that the expression references no media, so Elemental Inference supplies none at run time. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#GetOutput": {
             "type": "structure",
             "members": {
@@ -3211,6 +4743,160 @@
                 "target": "com.amazonaws.elementalinference#GetOutput"
             }
         },
+        "com.amazonaws.elementalinference#GetQuestionSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#GetQuestionSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#GetQuestionSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get question set details"
+                },
+                "smithy.api#documentation": "<p>Retrieves information about the specified question set at one version. By default, GetQuestionSet returns the DRAFT version. To retrieve a published version, specify questionSetVersion. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/question-set/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetQuestionSetRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "questionSetVersion": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the question set to retrieve: DRAFT or the number of a published version. If you don't specify a version, Elemental Inference returns DRAFT. </p>",
+                        "smithy.api#httpQuery": "questionSetVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#GetQuestionSetResponse": {
+            "type": "structure",
+            "members": {
+                "yesNo": {
+                    "target": "com.amazonaws.elementalinference#YesNoQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNo questions in this version. Elemental Inference doesn't return this property if the version has no yesNo questions. </p>"
+                    }
+                },
+                "yesNoPerOption": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNoPerOption questions in this version. Elemental Inference doesn't return this property if the version has no yesNoPerOption questions. </p>"
+                    }
+                },
+                "chooseOne": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chooseOne questions in this version. Elemental Inference doesn't return this property if the version has no chooseOne questions. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the question set at this version. For a published version, this is the name that the question set had when the version was published. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that this response describes: DRAFT or the number of a published version. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description that you specified when you published this version. Elemental Inference doesn't return this property for DRAFT, or for a version that you published without a description. </p>"
+                    }
+                },
+                "latestVersion": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the highest version that you have published for this question set, even if you have since deleted that version. Elemental Inference doesn't return this property if you haven't published a version. </p>"
+                    }
+                },
+                "sha256": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSha256",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The SHA-256 hash of this version, as 64 lowercase hexadecimal characters. The hash covers the name of the question set and its questions at this version. For DRAFT, you can specify this value in a CreateQuestionSetVersion request, so that Elemental Inference publishes DRAFT only if it hasn't changed. </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A list of feed IDs that reference this version of the question set. The list doesn't include feeds that reference other versions. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the question set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#IamRoleArn": {
             "type": "string",
             "traits": {
@@ -3236,6 +4922,15 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.elementalinference#JsonataExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5120
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.elementalinference#ListDictionaries": {
@@ -3432,6 +5127,281 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#ListFunctions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#ListFunctionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#ListFunctionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list inference functions in the account"
+                },
+                "smithy.api#documentation": "<p>Lists the functions in this account, in this Region. Each entry is a summary. To get the expressions of a function, use GetFunction. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/functions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "functions",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListFunctionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of functions to return in one response. Valid range: 1 to 100. The default is 100. </p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the page of results to return. Use the nextToken value from a previous response. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListFunctionsResponse": {
+            "type": "structure",
+            "members": {
+                "functions": {
+                    "target": "com.amazonaws.elementalinference#FunctionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of function summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use in a subsequent request to get the next page of results. This field is absent when there are no more results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListQuestionSetVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#ListQuestionSetVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#ListQuestionSetVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list the versions of a question set"
+                },
+                "smithy.api#documentation": "<p>Lists the versions of the specified question set. The list starts with the DRAFT version, followed by the published versions from the highest version number to the lowest. The list doesn't include deleted versions. </p> <p>The response doesn't include the questions in each version. To retrieve them, use GetQuestionSet and specify questionSetVersion. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/question-set/{id}/versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "versions",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListQuestionSetVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set whose versions you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per API request. Valid range: 1 to 100.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the next batch of results to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListQuestionSetVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "versions": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of QuestionSetVersionSummary objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListQuestionSets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#ListQuestionSetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#ListQuestionSetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list question sets in the account"
+                },
+                "smithy.api#documentation": "<p>Lists the question sets in your account. The response doesn't include the questions in each question set. To retrieve them, use GetQuestionSet. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/question-sets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "questionSets",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListQuestionSetsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per API request. Valid range: 1 to 100.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies the next batch of results to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#ListQuestionSetsResponse": {
+            "type": "structure",
+            "members": {
+                "questionSets": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of QuestionSetSummary objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#ListScheduleActions": {
             "type": "operation",
             "input": {
@@ -3604,6 +5574,24 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#OptionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of an option. The name can be up to 64 characters. It must start with a letter or an underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and underscores. </p>",
+                "smithy.api#pattern": "^[A-Za-z_][A-Za-z0-9_]{0,63}$"
+            }
+        },
+        "com.amazonaws.elementalinference#OptionText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The text of an option. The text can be up to 16 bytes, encoded in UTF-8.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{N} .,?!'\"’“”()\\-:;/&%]*$"
+            }
+        },
         "com.amazonaws.elementalinference#OutputConfig": {
             "type": "union",
             "members": {
@@ -3630,6 +5618,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The output config type that applies to the contextual metadata feature.</p>"
                     }
+                },
+                "function": {
+                    "target": "com.amazonaws.elementalinference#FunctionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output config type that applies to a function.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3651,6 +5645,13 @@
                         "smithy.api#enumValue": "DISABLED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elementalinference#PassthroughFunctionTarget": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A target that invokes nothing. Elemental Inference evaluates your request expression, then evaluates your response expression against that result. If the function has no response expression, Elemental Inference stores the result of the request expression. </p> <p>A passthrough function can't reference media.frames. It also needs no access role on the feed. </p>"
             }
         },
         "com.amazonaws.elementalinference#PolicyDocument": {
@@ -3683,6 +5684,17 @@
                         "smithy.api#enumValue": "DROP"
                     }
                 }
+            }
+        },
+        "com.amazonaws.elementalinference#PublishedQuestionSetVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The number of a published version of a question set.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[1-9][0-9]*$"
             }
         },
         "com.amazonaws.elementalinference#PutFeedPolicy": {
@@ -3761,6 +5773,260 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#QuestionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a question. The name can be up to 64 characters. It must start with a letter or an underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and underscores. </p>",
+                "smithy.api#pattern": "^[A-Za-z_][A-Za-z0-9_]{0,63}$"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionOption": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#OptionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the option. The name must be unique among the options of the question. The name can be up to 64 characters. It must start with a letter or an underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and underscores. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "text": {
+                    "target": "com.amazonaws.elementalinference#OptionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the option. The text must be unique among the options of the question, ignoring case. The text can be up to 16 bytes, encoded in UTF-8. It can contain the same characters as the text of a question. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An option in a yesNoPerOption question or a chooseOne question.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::ElementalInference::QuestionSet",
+                    "service": "com.amazonaws.elementalinference#ElementalInference",
+                    "resource": "com.amazonaws.elementalinference#QuestionSetResource"
+                },
+                "smithy.api#documentation": "<p>The ARN of a question set.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of a question set.</p>",
+                "smithy.api#pattern": "^[a-z0-9]{19}$"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetReference": {
+            "type": "structure",
+            "members": {
+                "questionSetId": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set. The question set must be in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the question set: DRAFT or the number of a published version. The version must exist. </p> <p>If you specify DRAFT, the output uses the current DRAFT questions and picks up changes that you make later by using UpdateQuestionSet. To keep the questions for the output fixed, specify a published version. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies one version of a question set. You specify it in CustomQuestionsConfig.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.elementalinference#CreateQuestionSet"
+            },
+            "read": {
+                "target": "com.amazonaws.elementalinference#GetQuestionSet"
+            },
+            "update": {
+                "target": "com.amazonaws.elementalinference#UpdateQuestionSet"
+            },
+            "delete": {
+                "target": "com.amazonaws.elementalinference#DeleteQuestionSet"
+            },
+            "list": {
+                "target": "com.amazonaws.elementalinference#ListQuestionSets"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.elementalinference#CreateQuestionSetVersion"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#DeleteQuestionSetVersion"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ListQuestionSetVersions"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "question-set/{id}"
+                },
+                "aws.api#taggable": {
+                    "property": "tags"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "QuestionSet"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "question-set",
+                    "relativeDocumentation": "elemental-inference-configuration.html"
+                },
+                "smithy.api#documentation": "A versioned set of customer-defined questions asked about video shots or scenes",
+                "smithy.api#suppress": [
+                    "UnstableTrait.aws.cloudformation#cfnResource",
+                    "UnstableTrait.aws.api#taggable"
+                ]
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetSha256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The SHA-256 hash of a version of a question set, as 64 lowercase hexadecimal characters. </p>",
+                "smithy.api#pattern": "^[a-f0-9]{64}$"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "latestVersion": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the highest version that you have published for this question set, even if you have since deleted that version. Elemental Inference doesn't return this property if you haven't published a version. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a question set. Used in the ListQuestionSets response. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#QuestionSetSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of QuestionSetSummary objects.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A version of a question set: DRAFT or the number of a published version.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^(DRAFT|[1-9][0-9]*)$"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetVersionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A description of a published version of a question set.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\w \\-\\.',@:;]*$"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetVersionSummary": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version: DRAFT or the number of a published version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description that you specified when you published this version. Elemental Inference doesn't return this property for DRAFT, or for a version that you published without a description. </p>"
+                    }
+                },
+                "sha256": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSha256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA-256 hash of this version, as 64 lowercase hexadecimal characters. The hash covers the name of the question set and its questions at this version. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For DRAFT, the time when you created the question set or last updated DRAFT. For a published version, the time when you published it. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about one version of a question set. Used in the ListQuestionSetVersions response. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionSetVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#QuestionSetVersionSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of QuestionSetVersionSummary objects.</p>"
+            }
+        },
+        "com.amazonaws.elementalinference#QuestionText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The text of a question. The text can be up to 256 bytes, encoded in UTF-8.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{N} .,?!'\"’“”()\\-:;/&%]*$"
+            }
+        },
         "com.amazonaws.elementalinference#RemoveClippingDataSourceConfiguration": {
             "type": "structure",
             "members": {
@@ -3782,7 +6048,7 @@
                 "aws.api#arnReference": {
                     "type": "AWS::Elemental-Inference::Resource"
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:elemental-inference[a-z\\-]*:[a-z0-9\\-]+:[0-9]{12}:[a-z]+/[a-zA-Z0-9]{1,19}$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:elemental-inference[a-z\\-]*:[a-z0-9\\-]+:[0-9]{12}:[a-z\\-]+/[a-zA-Z0-9]{1,19}$"
             }
         },
         "com.amazonaws.elementalinference#ResourceDescription": {
@@ -3824,6 +6090,13 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"
+            }
+        },
+        "com.amazonaws.elementalinference#SceneTrigger": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The perScene trigger, which runs the function once for each scene that a contextual metadata output reports. The function runs after the scene ends, with the media of that scene. To choose this trigger, set perScene to an empty object. </p> <p>Specify contextualMetadataSettings to name the contextual metadata output that reports the scenes. You can't use this trigger with a function that references media.transcript or media.clip. </p>"
             }
         },
         "com.amazonaws.elementalinference#ScheduleAction": {
@@ -4177,6 +6450,13 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.elementalinference#ShotTrigger": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The perShot trigger, which runs the function once for each shot that Elemental Inference detects in the video. The function runs after the shot ends, with the media of that shot. To choose this trigger, set perShot to an empty object. The feed must have a video input. </p> <p>You can't use this trigger with a function that references media.transcript or media.clip. If the function references media.contextual, specify contextualMetadataSettings. </p>"
+            }
+        },
         "com.amazonaws.elementalinference#StringList": {
             "type": "list",
             "member": {
@@ -4214,6 +6494,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A type of OutputConfig, used when the output in a feed is for the smart subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to generate live TTML subtitles from the audio in your source media. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#SubtitlingSettings": {
+            "type": "structure",
+            "members": {
+                "outputName": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an ENABLED smart subtitles output on this feed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The smart subtitles output on this feed that a function reads media.transcript from. Specify this structure for a function that references media.transcript. That function must use a fixedInterval trigger. </p> <p>If the function output is ENABLED, the output that you name must also be ENABLED.</p>"
             }
         },
         "com.amazonaws.elementalinference#SummaryGenerationMode": {
@@ -4296,7 +6591,8 @@
                         "optional": {
                             "dictionary": {},
                             "feed": {},
-                            "function": {}
+                            "function": {},
+                            "question-set": {}
                         }
                     }
                 },
@@ -4462,6 +6758,38 @@
                 }
             }
         },
+        "com.amazonaws.elementalinference#Trigger": {
+            "type": "union",
+            "members": {
+                "fixedInterval": {
+                    "target": "com.amazonaws.elementalinference#FixedIntervalTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run the function at a fixed interval of content. This is the only trigger for a function that references media.transcript. Can't be used with a function that references media.contextual. </p>"
+                    }
+                },
+                "perShot": {
+                    "target": "com.amazonaws.elementalinference#ShotTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run the function once for each shot that Elemental Inference detects. Can't be used with a function that references media.transcript or media.clip. </p>"
+                    }
+                },
+                "perScene": {
+                    "target": "com.amazonaws.elementalinference#SceneTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run the function once for each scene boundary that a contextual metadata output reports. Requires contextualMetadataSettings. Can't be used with a function that references media.transcript or media.clip. </p>"
+                    }
+                },
+                "perClip": {
+                    "target": "com.amazonaws.elementalinference#ClipTrigger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Run the function once for each clip that an event clipping output detects. Requires clippingSettings. Can't be used with a function that references media.transcript or media.contextual. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines when a function runs. Specify exactly one member.</p>"
+            }
+        },
         "com.amazonaws.elementalinference#UntagResource": {
             "type": "operation",
             "input": {
@@ -4500,7 +6828,8 @@
                         "optional": {
                             "dictionary": {},
                             "feed": {},
-                            "function": {}
+                            "function": {},
+                            "question-set": {}
                         }
                     }
                 },
@@ -4856,6 +7185,206 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elementalinference#UpdateFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#UpdateFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#UpdateFunctionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update inference function configuration"
+                },
+                "smithy.api#documentation": "<p>Updates a function. Include only the parameters that you want to change; parameters that you don't include aren't affected. Elemental Inference validates the updated expressions in the same way as CreateFunction. </p> <p>While a feed references the function, you can change only its expressions and its description, and you can set eventBridgeDelivery to DISABLED but not to ENABLED. The request expression must keep referencing the same media context, as reported in contextTypes. Changing an expression changes the behavior of every feed that references the function. </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v1/function/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#UpdateFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the function. You can't change the name while the function is referenced by a feed. </p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.elementalinference#FunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new target for the function. You can't change the target while the function is referenced by a feed. </p>"
+                    }
+                },
+                "requestExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new request expression for the function. Elemental Inference derives contextTypes again from the new expression. While a feed references the function, the new expression must reference the same media context as the current one. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5120
+                        }
+                    }
+                },
+                "responseExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new response expression for the function. To remove the response expression, specify an empty string. A function with a Bedrock target and eventBridgeDelivery set to ENABLED must keep a response expression. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the function.</p>"
+                    }
+                },
+                "eventBridgeDelivery": {
+                    "target": "com.amazonaws.elementalinference#EventBridgeDeliveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Elemental Inference also sends this function's marked results to Amazon EventBridge, as described for CreateFunction. If you omit this parameter, the current value is kept. While a feed references the function, you can change this value to DISABLED, but not to ENABLED. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#UpdateFunctionResponse": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.elementalinference#FunctionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the request that the function builds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that builds the request. Elemental Inference evaluates it against the media object of the feed, which holds the media and metadata that the function asked for. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5120
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "responseExpression": {
+                    "target": "com.amazonaws.elementalinference#JsonataExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSONata expression that selects what to store. Elemental Inference evaluates it against the result as its root: the model response for a Bedrock target, or the output of the request expression for a passthrough target. If a function has no response expression, Elemental Inference stores the entire result. </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the function.</p>"
+                    }
+                },
+                "eventBridgeDelivery": {
+                    "target": "com.amazonaws.elementalinference#EventBridgeDeliveryMode",
+                    "traits": {
+                        "smithy.api#default": "DISABLED",
+                        "smithy.api#documentation": "<p>Indicates whether Elemental Inference also sends this function's results to Amazon EventBridge. With ENABLED, each result that is a JSON object with a top-level <code>eventBridge</code> field set to <code>true</code> is also sent as a Function Metadata Generated event to the default event bus in your account. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#FunctionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.elementalinference#FunctionStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The status of the function.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The IDs of the feeds that have a function output, enabled or disabled, that references this function. While this list isn't empty, the function can't be deleted, and its name and target can't be changed. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "contextTypes": {
+                    "target": "com.amazonaws.elementalinference#ContextTypeList",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The kinds of media context that this function uses. Elemental Inference derives this field from the media paths that the request expression references; you can't set it. An empty list means that the expression references no media, so Elemental Inference supplies none at run time. </p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#UpdateOutput": {
             "type": "structure",
             "members": {
@@ -4929,6 +7458,180 @@
                 "smithy.api#documentation": "<p>Enables or disables an output at the action's scheduled time. This is a type of ScheduleActionOperation. </p>"
             }
         },
+        "com.amazonaws.elementalinference#UpdateQuestionSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elementalinference#UpdateQuestionSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elementalinference#UpdateQuestionSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elementalinference#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#TooManyRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elementalinference#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a question set"
+                },
+                "smithy.api#documentation": "<p>Updates the DRAFT version of the specified question set. UpdateQuestionSet doesn't create a version and doesn't change published versions. To publish the updated DRAFT as a new version, use CreateQuestionSetVersion. </p> <p>UpdateQuestionSet replaces questions one type at a time. For each of yesNo, yesNoPerOption, and chooseOne: if you omit the array, DRAFT keeps its questions of that type. If you include the array, it replaces all the questions of that type in DRAFT. If you include an empty array, DRAFT no longer has questions of that type. The updated DRAFT must follow the same rules as in CreateQuestionSet, and Elemental Inference applies those rules to the questions that DRAFT keeps as well as to the questions in the request. </p> <p>Feeds that reference the DRAFT version use the updated questions. To make sure that the questions for a feed don't change, reference a published version instead. </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v1/question-set/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.elementalinference#UpdateQuestionSetRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "yesNo": {
+                    "target": "com.amazonaws.elementalinference#YesNoQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of questions that Elemental Inference answers with yes or no, to replace all the yesNo questions in DRAFT. You can specify up to 50 yesNo questions. If not specified, the yesNo questions are not changed. To remove all the yesNo questions, specify an empty array. </p>"
+                    }
+                },
+                "yesNoPerOption": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of questions that you ask about each of their options, to replace all the yesNoPerOption questions in DRAFT. You can specify up to 10 yesNoPerOption questions. If not specified, the yesNoPerOption questions are not changed. To remove all the yesNoPerOption questions, specify an empty array. </p>"
+                    }
+                },
+                "chooseOne": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of questions that Elemental Inference answers by choosing one of their options, to replace all the chooseOne questions in DRAFT. You can specify up to 10 chooseOne questions. If not specified, the chooseOne questions are not changed. To remove all the chooseOne questions, specify an empty array. </p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the question set. If not specified, the name is not changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elementalinference#UpdateQuestionSetResponse": {
+            "type": "structure",
+            "members": {
+                "yesNo": {
+                    "target": "com.amazonaws.elementalinference#YesNoQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNo questions in this version. Elemental Inference doesn't return this property if the version has no yesNo questions. </p>"
+                    }
+                },
+                "yesNoPerOption": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The yesNoPerOption questions in this version. Elemental Inference doesn't return this property if the version has no yesNoPerOption questions. </p>"
+                    }
+                },
+                "chooseOne": {
+                    "target": "com.amazonaws.elementalinference#ChooseOneQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chooseOne questions in this version. Elemental Inference doesn't return this property if the version has no chooseOne questions. </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.elementalinference#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated or original name of the question set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that this response describes. For UpdateQuestionSet, the version is always DRAFT. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the version. Elemental Inference doesn't return this property for UpdateQuestionSet, because the DRAFT version has no description. </p>"
+                    }
+                },
+                "latestVersion": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the highest version that you have published for this question set, even if you have since deleted that version. Elemental Inference doesn't return this property if you haven't published a version. </p>"
+                    }
+                },
+                "sha256": {
+                    "target": "com.amazonaws.elementalinference#QuestionSetSha256",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The SHA-256 hash of the DRAFT version after the update, as 64 lowercase hexadecimal characters. The hash covers the name of the question set and its questions, so it changes when you rename the question set. You can specify this value in a CreateQuestionSetVersion request, so that Elemental Inference publishes DRAFT only if it hasn't changed since this update. </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "references": {
+                    "target": "com.amazonaws.elementalinference#FeedReferences",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A list of feed IDs that reference the DRAFT version of the question set.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait.aws.cloudformation#cfnExcludeProperty"
+                        ]
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.elementalinference#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the question set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elementalinference#ValidationException": {
             "type": "structure",
             "members": {
@@ -4943,6 +7646,94 @@
                 "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the service. Check the error message for details about which parameter or field is invalid and correct the request before retrying. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.elementalinference#YesNoPerOptionOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#QuestionOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of the options of a yesNoPerOption question.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#YesNoPerOptionQuestion": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#QuestionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the question. The name must be unique among all the questions in the version, across all question types. The name can be up to 64 characters. It must start with a letter or an underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and underscores. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "question": {
+                    "target": "com.amazonaws.elementalinference#QuestionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the question. The text can be up to 256 bytes, encoded in UTF-8. It can contain letters in any language, combining marks, digits, spaces, and the following characters: <code>. , ? ! ' \" ( ) - : ; / &amp; %</code>, plus the curly apostrophe and quotation marks (U+2019, U+201C, and U+201D). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.elementalinference#YesNoPerOptionOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options that you ask the question about. You can specify from 1 to 50 options. Each option counts as one item toward the limit of 100 scored items in a version. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A question that you ask Elemental Inference separately about each of its options. Elemental Inference answers yes or no for each option. Word the question so that it fits any of the options. For example, ask Is this overlay visible? with one option for each overlay. You specify it in the yesNoPerOption array of a question set. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#YesNoPerOptionQuestionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#YesNoPerOptionQuestion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of YesNoPerOptionQuestion objects.</p>",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.elementalinference#YesNoQuestion": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.elementalinference#QuestionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the question. The name must be unique among all the questions in the version, across all question types. The name can be up to 64 characters. It must start with a letter or an underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and underscores. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "question": {
+                    "target": "com.amazonaws.elementalinference#QuestionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the question. The text can be up to 256 bytes, encoded in UTF-8. It can contain letters in any language, combining marks, digits, spaces, and the following characters: <code>. , ? ! ' \" ( ) - : ; / &amp; %</code>, plus the curly apostrophe and quotation marks (U+2019, U+201C, and U+201D). </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A question that you ask Elemental Inference, which answers with yes or no. You specify it in the yesNo array of a question set. </p>"
+            }
+        },
+        "com.amazonaws.elementalinference#YesNoQuestionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elementalinference#YesNoQuestion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of YesNoQuestion objects.</p>",
+                "smithy.api#length": {
+                    "max": 50
+                }
             }
         }
     }

@@ -10550,6 +10550,12 @@
                     "traits": {
                         "smithy.api#enumValue": "IMAGE_ARCHIVED"
                     }
+                },
+                "IMAGE_SIZE_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_SIZE_EXCEEDED"
+                    }
                 }
             }
         },

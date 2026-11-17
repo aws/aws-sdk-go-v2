@@ -1386,6 +1386,18 @@
                         "smithy.api#documentation": "<p>Release readiness review automated testing capability.</p>",
                         "smithy.api#enumValue": "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"
                     }
+                },
+                "CODE_CHANGE_RISK_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE_CHANGE_RISK_ANALYSIS"
+                    }
+                },
+                "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE_CHANGE_RISK_ANALYSIS_AUTOMATED_TESTING"
+                    }
                 }
             },
             "traits": {
@@ -1399,6 +1411,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 32768
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#ChatArchiveStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
                 }
             }
         },
@@ -1429,6 +1458,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Summary or title of the chat</p>"
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.devopsagent#ChatArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the chat execution is archived or active.</p>"
                     }
                 }
             },
@@ -1486,12 +1521,29 @@
                         "smithy.api#documentation": "<p>Detailed error message describing the conflict.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "reason": {
+                    "target": "com.amazonaws.devopsagent#ConflictExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A machine-readable reason code that explains why the request conflicted with the current state of the resource. For example, <code>CHAT_ARCHIVED</code> indicates that the request acted on a chat that is archived. This field is absent when no specific reason applies.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request conflicts with the current state of the resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.devopsagent#ConflictExceptionReason": {
+            "type": "enum",
+            "members": {
+                "CHAT_ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHAT_ARCHIVED"
+                    }
+                }
             }
         },
         "com.amazonaws.devopsagent#ContentSizeExceededException": {
@@ -3186,6 +3238,9 @@
                     "target": "com.amazonaws.devopsagent#GetBacklogTask"
                 },
                 {
+                    "target": "com.amazonaws.devopsagent#GetChat"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#GetRecommendation"
                 },
                 {
@@ -3250,6 +3305,9 @@
                 },
                 {
                     "target": "com.amazonaws.devopsagent#UpdateBacklogTask"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#UpdateChat"
                 },
                 {
                     "target": "com.amazonaws.devopsagent#UpdateGoal"
@@ -5052,6 +5110,117 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Response structure containing the requested backlog task</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetChat": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#GetChatRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#GetChatResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a chat",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Retrieves the details of a chat execution, including its execution ID, summary, timestamps, and archive status.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/agents/agent-space/{agentSpaceId}/chat/get/{executionId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetChatRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the chat execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the chat execution to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#GetChatResponse": {
+            "type": "structure",
+            "members": {
+                "executionId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the chat execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the chat execution.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the chat execution was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the chat execution was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.devopsagent#ChatArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the chat execution is archived or active.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -7023,6 +7192,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#InternalServerException"
                 },
                 {
@@ -7092,6 +7264,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Token for pagination</p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.devopsagent#ChatArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The archive status to filter by. Use this parameter to list only archived chat executions or only active ones.</p>",
+                        "smithy.api#httpQuery": "archiveStatus"
                     }
                 }
             },
@@ -11330,6 +11509,9 @@
                     "target": "com.amazonaws.devopsagent#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.devopsagent#InternalServerException"
                 },
                 {
@@ -13141,6 +13323,12 @@
                         "smithy.api#documentation": "<p>Task for automated release testing</p>",
                         "smithy.api#enumValue": "RELEASE_TESTING"
                     }
+                },
+                "CODE_CHANGE_RISK_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE_CHANGE_RISK_ANALYSIS"
+                    }
                 }
             },
             "traits": {
@@ -14271,6 +14459,141 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Response structure containing the updated task</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateChat": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsagent#UpdateChatRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsagent#UpdateChatResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsagent#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsagent#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a chat",
+                    "resources": {
+                        "required": {
+                            "AgentSpaceResource": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Updates a chat execution. You can use this operation to change the chat execution's summary or to archive or unarchive it.</p><p>Archiving a chat execution hides it from the default chat list. Unarchiving a chat execution restores it to the default chat list.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "dp."
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/agents/agent-space/{agentSpaceId}/chat/{executionId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateChatRequest": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "com.amazonaws.devopsagent#AgentSpaceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space that contains the chat execution to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the chat execution to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new summary to set for the chat execution.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        }
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.devopsagent#ChatArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The archive status to set for the chat execution. Use this parameter to archive the chat execution, hiding it from the default chat list, or to unarchive it, restoring it to the default chat list.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[\\x21-\\x7E]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.devopsagent#UpdateChatResponse": {
+            "type": "structure",
+            "members": {
+                "executionId": {
+                    "target": "com.amazonaws.devopsagent#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated chat execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the chat execution after the update.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the chat execution was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.devopsagent#ChatArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The archive status of the chat execution after the update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
