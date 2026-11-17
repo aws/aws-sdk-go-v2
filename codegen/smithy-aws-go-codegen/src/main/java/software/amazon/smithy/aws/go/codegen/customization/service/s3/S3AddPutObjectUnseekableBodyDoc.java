@@ -76,7 +76,7 @@ public class S3AddPutObjectUnseekableBodyDoc implements GoIntegration {
                         .addTraits(member.getAllTraits().values())
                         .addTrait(new DocumentationTrait(finalCurrentDocs +
                                 "For using values that are not seekable (io.Seeker) see, " +
-                                "https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#unseekable-streaming-input"));
+                                "https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/sdk-utilities-s3.html#unseekable-streaming-input"));
             });
 
             builder.addShape(parentBuilder.build());

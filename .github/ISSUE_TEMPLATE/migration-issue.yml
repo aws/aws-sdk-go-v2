@@ -16,7 +16,7 @@ body:
     attributes:
       label: Pre-Migration Checklist
       options:
-        - label: I've read the [Migration Guide](https://aws.github.io/aws-sdk-go-v2/docs/migrating/).
+        - label: I've read the [Migration Guide](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/migrate-gosdk.html).
           required: true
         - label: I've checked [AWS Forums](https://forums.aws.amazon.com) and [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-go) for similar migration issues.
           required: true
