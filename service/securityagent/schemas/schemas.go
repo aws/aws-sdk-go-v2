@@ -526,6 +526,13 @@ var ListThreats = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/ListThreats",
 	Code: 200})
 
+var ResumePentestJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ResumePentestJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ResumePentestJob",
+	Code: 200})
+
 var StartCodeRemediation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "StartCodeRemediation",
@@ -1833,12 +1840,14 @@ var _EndpointList_member *smithy.Schema
 var ErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ErrorCode_CLIENT_ERROR *smithy.Schema
 
 var ErrorCode_INTERNAL_ERROR *smithy.Schema
 
 var ErrorCode_STOPPED_BY_USER *smithy.Schema
+
+var ErrorCode_PAUSED_BY_USER *smithy.Schema
 
 var ErrorInformation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -2358,12 +2367,16 @@ var _JiraSiteUrl = smithy.NewSchema(smithy.ShapeID{
 var JobStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 7)
 var JobStatus_IN_PROGRESS *smithy.Schema
 
 var JobStatus_STOPPING *smithy.Schema
 
 var JobStatus_STOPPED *smithy.Schema
+
+var JobStatus_PAUSING *smithy.Schema
+
+var JobStatus_PAUSED *smithy.Schema
 
 var JobStatus_FAILED *smithy.Schema
 
@@ -2630,7 +2643,7 @@ var _PentestIdList_member *smithy.Schema
 var PentestJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "PentestJob",
-}, smithy.ShapeTypeStructure, 36)
+}, smithy.ShapeTypeStructure, 37)
 var PentestJob_pentestJobId *smithy.Schema
 
 var PentestJob_pentestId *smithy.Schema
@@ -2699,6 +2712,8 @@ var PentestJob_cicdConfiguration *smithy.Schema
 
 var PentestJob_testScope *smithy.Schema
 
+var PentestJob_version *smithy.Schema
+
 var PentestJob_createdAt *smithy.Schema
 
 var PentestJob_updatedAt *smithy.Schema
@@ -2718,7 +2733,7 @@ var _PentestJobList_member *smithy.Schema
 var PentestJobSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "PentestJobSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var PentestJobSummary_pentestJobId *smithy.Schema
 
 var PentestJobSummary_pentestId *smithy.Schema
@@ -2734,6 +2749,8 @@ var PentestJobSummary_updatedAt *smithy.Schema
 var PentestJobSummary_jobType *smithy.Schema
 
 var PentestJobSummary_reportUrl *smithy.Schema
+
+var PentestJobSummary_version *smithy.Schema
 
 var _PentestJobSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -5871,6 +5888,42 @@ var ListThreatsOutput_threats *smithy.Schema
 
 var ListThreatsOutput_nextToken *smithy.Schema
 
+var ResumePentestJobInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ResumePentestJobInput",
+}, smithy.ShapeTypeStructure, 7)
+var ResumePentestJobInput_agentSpaceId *smithy.Schema
+
+var ResumePentestJobInput_pentestJobId *smithy.Schema
+
+var ResumePentestJobInput_actors *smithy.Schema
+
+var ResumePentestJobInput_networkTrafficConfig *smithy.Schema
+
+var ResumePentestJobInput_vpcConfig *smithy.Schema
+
+var ResumePentestJobInput_maxTaskHours *smithy.Schema
+
+var ResumePentestJobInput_copyConfigFromPentest *smithy.Schema
+
+var ResumePentestJobOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ResumePentestJobOutput",
+}, smithy.ShapeTypeStructure, 7)
+var ResumePentestJobOutput_title *smithy.Schema
+
+var ResumePentestJobOutput_status *smithy.Schema
+
+var ResumePentestJobOutput_createdAt *smithy.Schema
+
+var ResumePentestJobOutput_updatedAt *smithy.Schema
+
+var ResumePentestJobOutput_pentestId *smithy.Schema
+
+var ResumePentestJobOutput_pentestJobId *smithy.Schema
+
+var ResumePentestJobOutput_version *smithy.Schema
+
 var StartCodeRemediationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "StartCodeRemediationInput",
@@ -5990,10 +6043,12 @@ var StopCodeReviewJobOutput = smithy.NewSchema(smithy.ShapeID{
 var StopPentestJobInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "StopPentestJobInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StopPentestJobInput_agentSpaceId *smithy.Schema
 
 var StopPentestJobInput_pentestJobId *smithy.Schema
+
+var StopPentestJobInput_pause *smithy.Schema
 
 var StopPentestJobOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -6836,6 +6891,8 @@ func init() {
 
 	ErrorCode_STOPPED_BY_USER = ErrorCode.AddMember("STOPPED_BY_USER", smithyprelude.Unit)
 
+	ErrorCode_PAUSED_BY_USER = ErrorCode.AddMember("PAUSED_BY_USER", smithyprelude.Unit)
+
 	BatchDisassociateFindingIssueError_findingId = BatchDisassociateFindingIssueError.AddMember("findingId", smithyprelude.String)
 
 	BatchDisassociateFindingIssueError_code = BatchDisassociateFindingIssueError.AddMember("code", ErrorCode)
@@ -7161,6 +7218,10 @@ func init() {
 	JobStatus_STOPPING = JobStatus.AddMember("STOPPING", smithyprelude.Unit)
 
 	JobStatus_STOPPED = JobStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	JobStatus_PAUSING = JobStatus.AddMember("PAUSING", smithyprelude.Unit)
+
+	JobStatus_PAUSED = JobStatus.AddMember("PAUSED", smithyprelude.Unit)
 
 	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
 
@@ -7996,6 +8057,8 @@ func init() {
 
 	PentestJob_testScope = PentestJob.AddMember("testScope", TestScope)
 
+	PentestJob_version = PentestJob.AddMember("version", smithyprelude.String)
+
 	PentestJob_createdAt = PentestJob.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	PentestJob_updatedAt = PentestJob.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
@@ -8019,6 +8082,8 @@ func init() {
 	PentestJobSummary_jobType = PentestJobSummary.AddMember("jobType", JobType)
 
 	PentestJobSummary_reportUrl = PentestJobSummary.AddMember("reportUrl", smithyprelude.String)
+
+	PentestJobSummary_version = PentestJobSummary.AddMember("version", smithyprelude.String)
 
 	_PentestJobSummaryList_member = _PentestJobSummaryList.AddMember("member", PentestJobSummary)
 
@@ -9540,6 +9605,34 @@ func init() {
 
 	ListThreatsOutput_nextToken = ListThreatsOutput.AddMember("nextToken", _NextToken)
 
+	ResumePentestJobInput_agentSpaceId = ResumePentestJobInput.AddMember("agentSpaceId", smithyprelude.String)
+
+	ResumePentestJobInput_pentestJobId = ResumePentestJobInput.AddMember("pentestJobId", smithyprelude.String)
+
+	ResumePentestJobInput_actors = ResumePentestJobInput.AddMember("actors", _ActorList)
+
+	ResumePentestJobInput_networkTrafficConfig = ResumePentestJobInput.AddMember("networkTrafficConfig", NetworkTrafficConfig)
+
+	ResumePentestJobInput_vpcConfig = ResumePentestJobInput.AddMember("vpcConfig", VpcConfig)
+
+	ResumePentestJobInput_maxTaskHours = ResumePentestJobInput.AddMember("maxTaskHours", smithyprelude.Double)
+
+	ResumePentestJobInput_copyConfigFromPentest = ResumePentestJobInput.AddMember("copyConfigFromPentest", smithyprelude.Boolean)
+
+	ResumePentestJobOutput_title = ResumePentestJobOutput.AddMember("title", smithyprelude.String)
+
+	ResumePentestJobOutput_status = ResumePentestJobOutput.AddMember("status", JobStatus)
+
+	ResumePentestJobOutput_createdAt = ResumePentestJobOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ResumePentestJobOutput_updatedAt = ResumePentestJobOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	ResumePentestJobOutput_pentestId = ResumePentestJobOutput.AddMember("pentestId", smithyprelude.String)
+
+	ResumePentestJobOutput_pentestJobId = ResumePentestJobOutput.AddMember("pentestJobId", smithyprelude.String)
+
+	ResumePentestJobOutput_version = ResumePentestJobOutput.AddMember("version", smithyprelude.String)
+
 	StartCodeRemediationInput_agentSpaceId = StartCodeRemediationInput.AddMember("agentSpaceId", smithyprelude.String)
 
 	StartCodeRemediationInput_pentestJobId = StartCodeRemediationInput.AddMember("pentestJobId", smithyprelude.String)
@@ -9617,6 +9710,8 @@ func init() {
 	StopPentestJobInput_agentSpaceId = StopPentestJobInput.AddMember("agentSpaceId", smithyprelude.String)
 
 	StopPentestJobInput_pentestJobId = StopPentestJobInput.AddMember("pentestJobId", smithyprelude.String)
+
+	StopPentestJobInput_pause = StopPentestJobInput.AddMember("pause", smithyprelude.Boolean)
 
 	StopThreatModelJobInput_agentSpaceId = StopThreatModelJobInput.AddMember("agentSpaceId", smithyprelude.String)
 

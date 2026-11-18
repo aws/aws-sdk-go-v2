@@ -1144,6 +1144,7 @@ type PopulateIntermediateTableAnalysisType string
 // Enum values for PopulateIntermediateTableAnalysisType
 const (
 	PopulateIntermediateTableAnalysisTypeQuery PopulateIntermediateTableAnalysisType = "QUERY"
+	PopulateIntermediateTableAnalysisTypeJob   PopulateIntermediateTableAnalysisType = "JOB"
 )
 
 // Values returns all known values for PopulateIntermediateTableAnalysisType. Note
@@ -1154,6 +1155,7 @@ const (
 func (PopulateIntermediateTableAnalysisType) Values() []PopulateIntermediateTableAnalysisType {
 	return []PopulateIntermediateTableAnalysisType{
 		"QUERY",
+		"JOB",
 	}
 }
 

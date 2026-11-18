@@ -82,6 +82,7 @@
         "api_op_ListThreatModelJobs.go",
         "api_op_ListThreatModels.go",
         "api_op_ListThreats.go",
+        "api_op_ResumePentestJob.go",
         "api_op_StartCodeRemediation.go",
         "api_op_StartCodeReviewJob.go",
         "api_op_StartPentestJob.go",

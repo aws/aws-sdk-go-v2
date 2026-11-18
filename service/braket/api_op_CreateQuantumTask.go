@@ -52,7 +52,32 @@ type CreateQuantumTaskInput struct {
 	OutputS3Bucket *string
 
 	// The key prefix for the location in the S3 bucket to store quantum task results
-	// in.
+	// in. For example, results/ . Must not contain path traversal sequences such as
+	// ../ or ./ . The following characters are not valid in the key prefix:
+	//
+	//   - Braces ( { or } )
+	//
+	//   - Brackets ( [ or ] )
+	//
+	//   - Less than or greater than sign ( < or > )
+	//
+	//   - Backslash ( \ )
+	//
+	//   - Vertical bar or pipe ( | )
+	//
+	//   - Caret or circumflex ( ^ )
+	//
+	//   - Tilde ( ~ )
+	//
+	//   - Grave accent or backtick ( ` )
+	//
+	//   - Percent character ( % )
+	//
+	//   - Pound sign ( # )
+	//
+	//   - Quotation mark ( " )
+	//
+	//   - Non-printable ASCII characters (128–255 decimal characters)
 	//
 	// This member is required.
 	OutputS3KeyPrefix *string

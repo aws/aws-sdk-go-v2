@@ -3074,6 +3074,101 @@ func TestCheckRequestSnapshot_ListThreats(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ResumePentestJob(t *testing.T) {
+	input := &ResumePentestJobInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		PentestJobId: ptr.String("__PentestJobId__"),
+		Actors: []types.Actor{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Uris: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Authentication: &types.Authentication{
+					ProviderType: types.AuthenticationProviderType("SECRETS_MANAGER"),
+					Value:        ptr.String("__Value__"),
+				},
+				Description:          ptr.String("__Description__"),
+				EnableEmailMfa:       ptr.Bool(true),
+				MfaForwardingAddress: ptr.String("__MfaForwardingAddress__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Uris: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Authentication: &types.Authentication{
+					ProviderType: types.AuthenticationProviderType("SECRETS_MANAGER"),
+					Value:        ptr.String("__Value__"),
+				},
+				Description:          ptr.String("__Description__"),
+				EnableEmailMfa:       ptr.Bool(true),
+				MfaForwardingAddress: ptr.String("__MfaForwardingAddress__"),
+			},
+		},
+		NetworkTrafficConfig: &types.NetworkTrafficConfig{
+			Rules: []types.NetworkTrafficRule{
+				{
+					Effect:                 types.NetworkTrafficRuleEffect("ALLOW"),
+					Pattern:                ptr.String("__Pattern__"),
+					NetworkTrafficRuleType: types.NetworkTrafficRuleType("URL"),
+				},
+				{
+					Effect:                 types.NetworkTrafficRuleEffect("ALLOW"),
+					Pattern:                ptr.String("__Pattern__"),
+					NetworkTrafficRuleType: types.NetworkTrafficRuleType("URL"),
+				},
+			},
+			CustomHeaders: []types.CustomHeader{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		VpcConfig: &types.VpcConfig{
+			VpcArn: ptr.String("__VpcArn__"),
+			SecurityGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxTaskHours:          ptr.Float64(1.0),
+		CopyConfigFromPentest: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResumePentestJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResumePentestJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartCodeRemediation(t *testing.T) {
 	input := &StartCodeRemediationInput{
 		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
@@ -3247,6 +3342,7 @@ func TestCheckRequestSnapshot_StopPentestJob(t *testing.T) {
 	input := &StopPentestJobInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		PentestJobId: ptr.String("__PentestJobId__"),
+		Pause:        ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7311,6 +7407,101 @@ func TestUpdateRequestSnapshot_ListThreats(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ResumePentestJob(t *testing.T) {
+	input := &ResumePentestJobInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		PentestJobId: ptr.String("__PentestJobId__"),
+		Actors: []types.Actor{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Uris: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Authentication: &types.Authentication{
+					ProviderType: types.AuthenticationProviderType("SECRETS_MANAGER"),
+					Value:        ptr.String("__Value__"),
+				},
+				Description:          ptr.String("__Description__"),
+				EnableEmailMfa:       ptr.Bool(true),
+				MfaForwardingAddress: ptr.String("__MfaForwardingAddress__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Uris: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Authentication: &types.Authentication{
+					ProviderType: types.AuthenticationProviderType("SECRETS_MANAGER"),
+					Value:        ptr.String("__Value__"),
+				},
+				Description:          ptr.String("__Description__"),
+				EnableEmailMfa:       ptr.Bool(true),
+				MfaForwardingAddress: ptr.String("__MfaForwardingAddress__"),
+			},
+		},
+		NetworkTrafficConfig: &types.NetworkTrafficConfig{
+			Rules: []types.NetworkTrafficRule{
+				{
+					Effect:                 types.NetworkTrafficRuleEffect("ALLOW"),
+					Pattern:                ptr.String("__Pattern__"),
+					NetworkTrafficRuleType: types.NetworkTrafficRuleType("URL"),
+				},
+				{
+					Effect:                 types.NetworkTrafficRuleEffect("ALLOW"),
+					Pattern:                ptr.String("__Pattern__"),
+					NetworkTrafficRuleType: types.NetworkTrafficRuleType("URL"),
+				},
+			},
+			CustomHeaders: []types.CustomHeader{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		VpcConfig: &types.VpcConfig{
+			VpcArn: ptr.String("__VpcArn__"),
+			SecurityGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxTaskHours:          ptr.Float64(1.0),
+		CopyConfigFromPentest: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResumePentestJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResumePentestJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartCodeRemediation(t *testing.T) {
 	input := &StartCodeRemediationInput{
 		AgentSpaceId:    ptr.String("__AgentSpaceId__"),
@@ -7484,6 +7675,7 @@ func TestUpdateRequestSnapshot_StopPentestJob(t *testing.T) {
 	input := &StopPentestJobInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		PentestJobId: ptr.String("__PentestJobId__"),
+		Pause:        ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

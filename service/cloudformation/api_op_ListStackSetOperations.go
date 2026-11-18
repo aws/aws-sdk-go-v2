@@ -13,6 +13,10 @@ import (
 
 // Returns summary information about operations performed on a StackSet.
 //
+// Reports role provisioning and stack instances deployment progress in
+// StatusDetails.Stages . The breakdown for each Amazon Web Services Region is
+// available only from DescribeStackSetOperation.
+//
 // This API provides eventually consistent reads meaning it may take some time but
 // will eventually return the most up-to-date data.
 func (c *Client) ListStackSetOperations(ctx context.Context, params *ListStackSetOperationsInput, optFns ...func(*Options)) (*ListStackSetOperationsOutput, error) {

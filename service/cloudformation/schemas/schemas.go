@@ -741,6 +741,11 @@ var CallAs_SELF *smithy.Schema
 
 var CallAs_DELEGATED_ADMIN *smithy.Schema
 
+var _CancelledStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "CancelledStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
+
 var _Capabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "Capabilities",
@@ -997,6 +1002,16 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientToken",
 }, smithy.ShapeTypeString, 0)
 
+var _CompletedAccountsCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "CompletedAccountsCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _CompletedStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "CompletedStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
+
 var ConcurrencyMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "ConcurrencyMode",
@@ -1250,6 +1265,11 @@ var _ExportValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "ExportValue",
 }, smithy.ShapeTypeString, 0)
+
+var _FailedAccountsCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "FailedAccountsCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var _FailedEventsFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -2133,6 +2153,16 @@ var _ParameterValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ParameterValue",
 }, smithy.ShapeTypeString, 0)
 
+var _PendingAccountsCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "PendingAccountsCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _PendingStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "PendingStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
+
 var _PercentageCompleted = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "PercentageCompleted",
@@ -2286,6 +2316,53 @@ var _Region = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "Region",
 }, smithy.ShapeTypeString, 0)
+
+var RegionalStackInstancesDeployment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RegionalStackInstancesDeployment",
+}, smithy.ShapeTypeStructure, 9)
+var RegionalStackInstancesDeployment_Status *smithy.Schema
+
+var RegionalStackInstancesDeployment_SucceededStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_FailedStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_CompletedStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_PendingStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_CancelledStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_SkippedStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_TotalStackInstancesCount *smithy.Schema
+
+var RegionalStackInstancesDeployment_PercentageCompleted *smithy.Schema
+
+var RegionalStages = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RegionalStages",
+}, smithy.ShapeTypeStructure, 1)
+var RegionalStages_RegionalStackInstancesDeployment *smithy.Schema
+
+var RegionalStatusDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RegionalStatusDetail",
+}, smithy.ShapeTypeStructure, 1)
+var RegionalStatusDetail_Stages *smithy.Schema
+
+var _RegionalStatusDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RegionalStatusDetails",
+}, smithy.ShapeTypeMap, 2)
+var _RegionalStatusDetails_key *smithy.Schema
+
+var _RegionalStatusDetails_value *smithy.Schema
+
+var _RegionalTotalStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RegionalTotalStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var RegionConcurrencyType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -2910,6 +2987,22 @@ var _RoleARN2 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RoleARN2",
 }, smithy.ShapeTypeString, 0)
 
+var RoleProvisioning = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "RoleProvisioning",
+}, smithy.ShapeTypeStructure, 6)
+var RoleProvisioning_Status *smithy.Schema
+
+var RoleProvisioning_SucceededAccountsCount *smithy.Schema
+
+var RoleProvisioning_FailedAccountsCount *smithy.Schema
+
+var RoleProvisioning_CompletedAccountsCount *smithy.Schema
+
+var RoleProvisioning_PendingAccountsCount *smithy.Schema
+
+var RoleProvisioning_PercentageCompleted *smithy.Schema
+
 var RollbackConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "RollbackConfiguration",
@@ -2997,6 +3090,11 @@ var _Scope = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Scope",
 }, smithy.ShapeTypeList, 1)
 var _Scope_member *smithy.Schema
+
+var _SkippedStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "SkippedStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var Stack = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -3309,6 +3407,31 @@ var StackInstanceResourceDriftsSummary_PropertyDifferences *smithy.Schema
 var StackInstanceResourceDriftsSummary_StackResourceDriftStatus *smithy.Schema
 
 var StackInstanceResourceDriftsSummary_Timestamp *smithy.Schema
+
+var StackInstancesDeployment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StackInstancesDeployment",
+}, smithy.ShapeTypeStructure, 8)
+var StackInstancesDeployment_Status *smithy.Schema
+
+var StackInstancesDeployment_SucceededStackInstancesCount *smithy.Schema
+
+var StackInstancesDeployment_FailedStackInstancesCount *smithy.Schema
+
+var StackInstancesDeployment_CompletedStackInstancesCount *smithy.Schema
+
+var StackInstancesDeployment_PendingStackInstancesCount *smithy.Schema
+
+var StackInstancesDeployment_CancelledStackInstancesCount *smithy.Schema
+
+var StackInstancesDeployment_SkippedStackInstancesCount *smithy.Schema
+
+var StackInstancesDeployment_PercentageCompleted *smithy.Schema
+
+var _StackInstancesDeploymentFailedStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StackInstancesDeploymentFailedStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var StackInstanceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -3859,7 +3982,7 @@ var StackSetNotFoundException_Message *smithy.Schema
 var StackSetOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "StackSetOperation",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var StackSetOperation_OperationId *smithy.Schema
 
 var StackSetOperation_StackSetId *smithy.Schema
@@ -3887,6 +4010,8 @@ var StackSetOperation_StackSetDriftDetectionDetails *smithy.Schema
 var StackSetOperation_StatusReason *smithy.Schema
 
 var StackSetOperation_StatusDetails *smithy.Schema
+
+var StackSetOperation_RegionalStatusDetails *smithy.Schema
 
 var StackSetOperationAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -3973,7 +4098,13 @@ var StackSetOperationStatus_QUEUED *smithy.Schema
 var StackSetOperationStatusDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "StackSetOperationStatusDetails",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 4)
+var StackSetOperationStatusDetails_Stages *smithy.Schema
+
+var StackSetOperationStatusDetails_TotalAccountsCount *smithy.Schema
+
+var StackSetOperationStatusDetails_TotalStackInstancesCount *smithy.Schema
+
 var StackSetOperationStatusDetails_FailedStackInstancesCount *smithy.Schema
 
 var _StackSetOperationStatusReason = smithy.NewSchema(smithy.ShapeID{
@@ -4006,6 +4137,11 @@ var StackSetOperationSummary_StatusReason *smithy.Schema
 var StackSetOperationSummary_StatusDetails *smithy.Schema
 
 var StackSetOperationSummary_OperationPreferences *smithy.Schema
+
+var _StackSetOperationTotalStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StackSetOperationTotalStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var StackSetStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -4144,6 +4280,37 @@ var _StageList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _StageList_member *smithy.Schema
 
+var _StagePercentageCompleted = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StagePercentageCompleted",
+}, smithy.ShapeTypeDouble, 0)
+
+var Stages = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "Stages",
+}, smithy.ShapeTypeStructure, 2)
+var Stages_RoleProvisioning *smithy.Schema
+
+var Stages_StackInstancesDeployment *smithy.Schema
+
+var StageStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StageStatus",
+}, smithy.ShapeTypeEnum, 7)
+var StageStatus_PENDING *smithy.Schema
+
+var StageStatus_NOT_APPLICABLE *smithy.Schema
+
+var StageStatus_NOT_STARTED *smithy.Schema
+
+var StageStatus_IN_PROGRESS *smithy.Schema
+
+var StageStatus_SUCCEEDED *smithy.Schema
+
+var StageStatus_PARTIAL_SUCCESS *smithy.Schema
+
+var StageStatus_FAILED *smithy.Schema
+
 var StaleRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "StaleRequestException",
@@ -4157,6 +4324,16 @@ var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "StatusMessage",
 }, smithy.ShapeTypeString, 0)
+
+var _SucceededAccountsCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "SucceededAccountsCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _SucceededStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "SucceededStackInstancesCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var _SupportedMajorVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -4330,6 +4507,11 @@ var TokenAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.AWSQueryError{ErrorCode: "TokenAlreadyExistsException",
 		StatusCode: 400})
 var TokenAlreadyExistsException_Message *smithy.Schema
+
+var _TotalAccountsCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "TotalAccountsCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var _TotalStackInstancesCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -7540,6 +7722,46 @@ func init() {
 
 	PublisherStatus_UNVERIFIED = PublisherStatus.AddMember("UNVERIFIED", smithyprelude.Unit)
 
+	StageStatus_PENDING = StageStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	StageStatus_NOT_APPLICABLE = StageStatus.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
+	StageStatus_NOT_STARTED = StageStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
+
+	StageStatus_IN_PROGRESS = StageStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	StageStatus_SUCCEEDED = StageStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	StageStatus_PARTIAL_SUCCESS = StageStatus.AddMember("PARTIAL_SUCCESS", smithyprelude.Unit)
+
+	StageStatus_FAILED = StageStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	RegionalStackInstancesDeployment_Status = RegionalStackInstancesDeployment.AddMember("Status", StageStatus)
+
+	RegionalStackInstancesDeployment_SucceededStackInstancesCount = RegionalStackInstancesDeployment.AddMember("SucceededStackInstancesCount", _SucceededStackInstancesCount)
+
+	RegionalStackInstancesDeployment_FailedStackInstancesCount = RegionalStackInstancesDeployment.AddMember("FailedStackInstancesCount", _StackInstancesDeploymentFailedStackInstancesCount)
+
+	RegionalStackInstancesDeployment_CompletedStackInstancesCount = RegionalStackInstancesDeployment.AddMember("CompletedStackInstancesCount", _CompletedStackInstancesCount)
+
+	RegionalStackInstancesDeployment_PendingStackInstancesCount = RegionalStackInstancesDeployment.AddMember("PendingStackInstancesCount", _PendingStackInstancesCount)
+
+	RegionalStackInstancesDeployment_CancelledStackInstancesCount = RegionalStackInstancesDeployment.AddMember("CancelledStackInstancesCount", _CancelledStackInstancesCount)
+
+	RegionalStackInstancesDeployment_SkippedStackInstancesCount = RegionalStackInstancesDeployment.AddMember("SkippedStackInstancesCount", _SkippedStackInstancesCount)
+
+	RegionalStackInstancesDeployment_TotalStackInstancesCount = RegionalStackInstancesDeployment.AddMember("TotalStackInstancesCount", _RegionalTotalStackInstancesCount)
+
+	RegionalStackInstancesDeployment_PercentageCompleted = RegionalStackInstancesDeployment.AddMember("PercentageCompleted", _StagePercentageCompleted)
+
+	RegionalStages_RegionalStackInstancesDeployment = RegionalStages.AddMember("RegionalStackInstancesDeployment", RegionalStackInstancesDeployment)
+
+	RegionalStatusDetail_Stages = RegionalStatusDetail.AddMember("Stages", RegionalStages)
+
+	_RegionalStatusDetails_key = _RegionalStatusDetails.AddMember("key", _Region)
+
+	_RegionalStatusDetails_value = _RegionalStatusDetails.AddMember("value", RegionalStatusDetail)
+
 	RegionConcurrencyType_SEQUENTIAL = RegionConcurrencyType.AddMember("SEQUENTIAL", smithyprelude.Unit)
 
 	RegionConcurrencyType_PARALLEL = RegionConcurrencyType.AddMember("PARALLEL", smithyprelude.Unit)
@@ -7703,6 +7925,18 @@ func init() {
 	_ResourceTypes_member = _ResourceTypes.AddMember("member", _ResourceType)
 
 	_RetainResources_member = _RetainResources.AddMember("member", _LogicalResourceId)
+
+	RoleProvisioning_Status = RoleProvisioning.AddMember("Status", StageStatus)
+
+	RoleProvisioning_SucceededAccountsCount = RoleProvisioning.AddMember("SucceededAccountsCount", _SucceededAccountsCount)
+
+	RoleProvisioning_FailedAccountsCount = RoleProvisioning.AddMember("FailedAccountsCount", _FailedAccountsCount)
+
+	RoleProvisioning_CompletedAccountsCount = RoleProvisioning.AddMember("CompletedAccountsCount", _CompletedAccountsCount)
+
+	RoleProvisioning_PendingAccountsCount = RoleProvisioning.AddMember("PendingAccountsCount", _PendingAccountsCount)
+
+	RoleProvisioning_PercentageCompleted = RoleProvisioning.AddMember("PercentageCompleted", _StagePercentageCompleted)
 
 	RollbackTrigger_Arn = RollbackTrigger.AddMember("Arn", _Arn)
 
@@ -7987,6 +8221,22 @@ func init() {
 	StackInstanceResourceDriftsSummary_Timestamp = StackInstanceResourceDriftsSummary.AddMember("Timestamp", _Timestamp)
 
 	_StackInstanceResourceDriftsSummaries_member = _StackInstanceResourceDriftsSummaries.AddMember("member", StackInstanceResourceDriftsSummary)
+
+	StackInstancesDeployment_Status = StackInstancesDeployment.AddMember("Status", StageStatus)
+
+	StackInstancesDeployment_SucceededStackInstancesCount = StackInstancesDeployment.AddMember("SucceededStackInstancesCount", _SucceededStackInstancesCount)
+
+	StackInstancesDeployment_FailedStackInstancesCount = StackInstancesDeployment.AddMember("FailedStackInstancesCount", _StackInstancesDeploymentFailedStackInstancesCount)
+
+	StackInstancesDeployment_CompletedStackInstancesCount = StackInstancesDeployment.AddMember("CompletedStackInstancesCount", _CompletedStackInstancesCount)
+
+	StackInstancesDeployment_PendingStackInstancesCount = StackInstancesDeployment.AddMember("PendingStackInstancesCount", _PendingStackInstancesCount)
+
+	StackInstancesDeployment_CancelledStackInstancesCount = StackInstancesDeployment.AddMember("CancelledStackInstancesCount", _CancelledStackInstancesCount)
+
+	StackInstancesDeployment_SkippedStackInstancesCount = StackInstancesDeployment.AddMember("SkippedStackInstancesCount", _SkippedStackInstancesCount)
+
+	StackInstancesDeployment_PercentageCompleted = StackInstancesDeployment.AddMember("PercentageCompleted", _StagePercentageCompleted)
 
 	StackInstanceSummary_StackSetId = StackInstanceSummary.AddMember("StackSetId", _StackSetId)
 
@@ -8318,6 +8568,16 @@ func init() {
 
 	StackSetOperationPreferences_ConcurrencyMode = StackSetOperationPreferences.AddMember("ConcurrencyMode", ConcurrencyMode)
 
+	Stages_RoleProvisioning = Stages.AddMember("RoleProvisioning", RoleProvisioning)
+
+	Stages_StackInstancesDeployment = Stages.AddMember("StackInstancesDeployment", StackInstancesDeployment)
+
+	StackSetOperationStatusDetails_Stages = StackSetOperationStatusDetails.AddMember("Stages", Stages)
+
+	StackSetOperationStatusDetails_TotalAccountsCount = StackSetOperationStatusDetails.AddMember("TotalAccountsCount", _TotalAccountsCount)
+
+	StackSetOperationStatusDetails_TotalStackInstancesCount = StackSetOperationStatusDetails.AddMember("TotalStackInstancesCount", _StackSetOperationTotalStackInstancesCount)
+
 	StackSetOperationStatusDetails_FailedStackInstancesCount = StackSetOperationStatusDetails.AddMember("FailedStackInstancesCount", _FailedStackInstancesCount)
 
 	StackSetOperation_OperationId = StackSetOperation.AddMember("OperationId", _ClientRequestToken)
@@ -8347,6 +8607,8 @@ func init() {
 	StackSetOperation_StatusReason = StackSetOperation.AddMember("StatusReason", _StackSetOperationStatusReason)
 
 	StackSetOperation_StatusDetails = StackSetOperation.AddMember("StatusDetails", StackSetOperationStatusDetails)
+
+	StackSetOperation_RegionalStatusDetails = StackSetOperation.AddMember("RegionalStatusDetails", _RegionalStatusDetails)
 
 	StackSetOperationResultStatus_PENDING = StackSetOperationResultStatus.AddMember("PENDING", smithyprelude.Unit)
 

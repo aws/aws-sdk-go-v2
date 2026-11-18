@@ -950,6 +950,18 @@ func TestCheckSnapshot_ListThreats(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ResumePentestJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResumePentestJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResumePentestJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartCodeRemediation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartCodeRemediation(context.Background(), nil, func(o *Options) {
@@ -2094,6 +2106,18 @@ func TestUpdateSnapshot_ListThreats(t *testing.T) {
 	_, err := svc.ListThreats(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListThreats")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResumePentestJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResumePentestJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResumePentestJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

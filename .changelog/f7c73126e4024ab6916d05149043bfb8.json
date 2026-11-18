@@ -1,0 +1,8 @@
+{
+    "id": "f7c73126-e402-4ab6-916d-05149043bfb8",
+    "type": "feature",
+    "description": "Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

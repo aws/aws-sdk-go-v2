@@ -322,6 +322,72 @@ func (v *DeviceQueueInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Provides information about the reason for the current status of a device.
+type DeviceStatusReason struct {
+
+	// The reason code for the current status of the device.
+	//
+	// This member is required.
+	Reason DeviceStatusReasonCode
+
+	// The time of the most recent update to the device status reason.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The estimated time at which the current status reason will end.
+	EstimatedEndAt *time.Time
+
+	// The time at which the device status reason started.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeviceStatusReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceStatusReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceStatusReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedEndAt != nil {
+		s.WriteTime(schemas.DeviceStatusReason_estimatedEndAt, *v.EstimatedEndAt)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.DeviceStatusReason_reason, string(v.Reason))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.DeviceStatusReason_startedAt, *v.StartedAt)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DeviceStatusReason_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DeviceStatusReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceStatusReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceStatusReason_estimatedEndAt:
+			v.EstimatedEndAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceStatusReason_estimatedEndAt, v.EstimatedEndAt)
+		case schemas.DeviceStatusReason_reason:
+			var ev string
+			if err := d.ReadString(schemas.DeviceStatusReason_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = DeviceStatusReasonCode(ev)
+			return nil
+		case schemas.DeviceStatusReason_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceStatusReason_startedAt, v.StartedAt)
+		case schemas.DeviceStatusReason_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeviceStatusReason_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Includes information about the device.
 type DeviceSummary struct {
 
@@ -1280,21 +1346,40 @@ func (v *SearchDevicesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A filter used to search for Amazon Braket hybrid jobs.
+// A filter used to search for Amazon Braket hybrid jobs. You can combine multiple
+// filters in a single request, except that jobArn cannot be combined with any
+// other filter.
 type SearchJobsFilter struct {
 
-	// The name of the hybrid job parameter to filter based on. Filter name can be
-	// either jobArn or createdAt .
+	// The name of the hybrid job parameter to filter based on. Supported filter names:
+	//
+	// jobArn — Filter by the job ARN. Supports the EQUAL operator only. Cannot be
+	// combined with other filters.
+	//
+	// jobName — Filter by the job name. Supports the EQUAL operator for exact match,
+	// or the CONTAINS operator for substring match. For example, use CONTAINS with a
+	// value of my-experiment to find all jobs whose name includes "my-experiment".
+	//
+	// deviceArn — Filter by the target device. Supports the EQUAL operator only. The
+	// value can be a device ARN (for example,
+	// arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1 ) or a local simulator
+	// identifier (for example, local:braket/default ).
+	//
+	// createdAt — Filter by the job creation time. Supports the EQUAL , GT , GTE , LT
+	// , LTE , and BETWEEN operators. Values must be in RFC 3339 date-time format.
 	//
 	// This member is required.
 	Name *string
 
-	// An operator to use for the filter.
+	// An operator to use for the filter. The supported operators depend on the filter
+	// name. See the name parameter for details.
 	//
 	// This member is required.
 	Operator SearchJobsFilterOperator
 
 	// The values used to filter hybrid jobs based on the filter name and operator.
+	// Each filter accepts an array of values. Most filters accept a single value,
+	// except createdAt with the BETWEEN operator, which requires exactly two values.
 	//
 	// This member is required.
 	Values []string
@@ -1402,7 +1487,8 @@ func (v *SearchQuantumTasksFilter) Deserialize(d smithy.ShapeDeserializer) error
 // down results based on specific attributes.
 type SearchSpendingLimitsFilter struct {
 
-	// The name of the field to filter on. Currently only supports deviceArn .
+	// The name of the field to filter on. Currently supports deviceArn and
+	// spendingLimitArn .
 	//
 	// This member is required.
 	Name *string

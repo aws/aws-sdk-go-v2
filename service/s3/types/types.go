@@ -1130,10 +1130,10 @@ type DeleteMarkerEntry struct {
 
 // Specifies whether Amazon S3 replicates delete markers. If you specify a Filter
 // in your replication configuration, you must also include a
-// DeleteMarkerReplication element. If your Filter includes a Tag element, the
-// DeleteMarkerReplication Status must be set to Disabled, because Amazon S3 does
-// not support replicating delete markers for tag-based rules. For an example
-// configuration, see [Basic Rule Configuration].
+// DeleteMarkerReplication element. If your Filter includes a Tag element,
+// including within a Not or Or element, the DeleteMarkerReplication Status must
+// be set to Disabled, because Amazon S3 does not support replicating delete
+// markers for tag-based rules. For an example configuration, see [Basic Rule Configuration].
 //
 // For more information about delete marker replication, see [Basic Rule Configuration].
 //
@@ -1269,6 +1269,10 @@ type EncryptionConfiguration struct {
 	//
 	// [Asymmetric keys in Amazon Web Services KMS]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
 	ReplicaKmsKeyID *string
+
+	// Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+	// destination Amazon Web Services Region to encrypt the replica.
+	UseSourceMultiRegionKey *UseSourceMultiRegionKey
 
 	noSmithyDocumentSerde
 }
@@ -4133,10 +4137,10 @@ type ReplicationRule struct {
 
 	// Specifies whether Amazon S3 replicates delete markers. If you specify a Filter
 	// in your replication configuration, you must also include a
-	// DeleteMarkerReplication element. If your Filter includes a Tag element, the
-	// DeleteMarkerReplication Status must be set to Disabled, because Amazon S3 does
-	// not support replicating delete markers for tag-based rules. For an example
-	// configuration, see [Basic Rule Configuration].
+	// DeleteMarkerReplication element. If your Filter includes a Tag element,
+	// including within a Not or Or element, the DeleteMarkerReplication Status must
+	// be set to Disabled, because Amazon S3 does not support replicating delete
+	// markers for tag-based rules. For an example configuration, see [Basic Rule Configuration].
 	//
 	// For more information about delete marker replication, see [Basic Rule Configuration].
 	//
@@ -4156,7 +4160,7 @@ type ReplicationRule struct {
 	ExistingObjectReplication *ExistingObjectReplication
 
 	// A filter that identifies the subset of objects to which the replication rule
-	// applies. A Filter must specify exactly one Prefix , Tag , or an And child
+	// applies. A Filter must specify exactly one Prefix , Tag , And , or Not child
 	// element.
 	Filter *ReplicationRuleFilter
 
@@ -4209,6 +4213,10 @@ type ReplicationRule struct {
 //     And tag.
 type ReplicationRuleAndOperator struct {
 
+	// A container for specifying filters that exclude matching objects from the
+	// replication rule.
+	Not *ReplicationRuleNotOperator
+
 	// An object key name prefix that identifies the subset of objects to which the
 	// rule applies.
 	Prefix *string
@@ -4220,7 +4228,7 @@ type ReplicationRuleAndOperator struct {
 }
 
 // A filter that identifies the subset of objects to which the replication rule
-// applies. A Filter must specify exactly one Prefix , Tag , or an And child
+// applies. A Filter must specify exactly one Prefix , Tag , And , or Not child
 // element.
 type ReplicationRuleFilter struct {
 
@@ -4235,6 +4243,10 @@ type ReplicationRuleFilter struct {
 	//   And tag.
 	And *ReplicationRuleAndOperator
 
+	// A container for specifying filters that exclude matching objects from the
+	// replication rule.
+	Not *ReplicationRuleNotOperator
+
 	// An object key name prefix that identifies the subset of objects to which the
 	// rule applies.
 	//
@@ -4248,6 +4260,36 @@ type ReplicationRuleFilter struct {
 	//
 	// The rule applies only to objects that have the tag in their tag set.
 	Tag *Tag
+
+	noSmithyDocumentSerde
+}
+
+// A container for specifying a filter that excludes matching objects from the
+// replication rule. Specify exactly one Prefix , Tag , or Or child element.
+type ReplicationRuleNotOperator struct {
+
+	// A container for specifying prefixes and tags. An object is excluded from the
+	// replication rule if it matches any of the specified filters.
+	Or *ReplicationRuleOrOperator
+
+	// An object key name prefix that identifies objects to exclude from the
+	// replication rule.
+	Prefix *string
+
+	// A tag key and value that identify objects to exclude from the replication rule.
+	Tag *Tag
+
+	noSmithyDocumentSerde
+}
+
+// A container for specifying one or more prefix or tag filters.
+type ReplicationRuleOrOperator struct {
+
+	// An array of object key name prefixes.
+	Prefixes []string
+
+	// An array of tags containing key and value pairs.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -5121,6 +5163,19 @@ type Transition struct {
 
 	// The storage class to which you want the object to transition.
 	StorageClass TransitionStorageClass
+
+	noSmithyDocumentSerde
+}
+
+// A container for configuring the use of the related multi-Region KMS key in the
+// destination Amazon Web Services Region for replication.
+type UseSourceMultiRegionKey struct {
+
+	// Specifies whether Amazon S3 uses the related multi-Region KMS key in the
+	// destination Amazon Web Services Region to encrypt the replica.
+	//
+	// This member is required.
+	Status UseSourceMultiRegionKeyStatus
 
 	noSmithyDocumentSerde
 }

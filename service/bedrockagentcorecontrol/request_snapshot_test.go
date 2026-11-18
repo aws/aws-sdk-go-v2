@@ -594,6 +594,11 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -6674,6 +6679,11 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{
@@ -9487,6 +9497,11 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -15567,6 +15582,11 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{

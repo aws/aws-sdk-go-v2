@@ -1,0 +1,8 @@
+{
+    "id": "12407ba5-15f4-49bb-bb52-5a81d5d6db26",
+    "type": "feature",
+    "description": "Adds support for populating intermediate tables with results from PySpark analysis templates.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

@@ -3532,8 +3532,10 @@ var _IntermediateTableColumnTypeString = smithy.NewSchema(smithy.ShapeID{
 var IntermediateTableComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "IntermediateTableComputeConfiguration",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var IntermediateTableComputeConfiguration_queryComputeConfiguration *smithy.Schema
+
+var IntermediateTableComputeConfiguration_jobComputeConfiguration *smithy.Schema
 
 var IntermediateTableDependency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -4183,14 +4185,24 @@ var PaymentConfiguration_jobCompute *smithy.Schema
 var PopulateIntermediateTableAnalysisType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "PopulateIntermediateTableAnalysisType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var PopulateIntermediateTableAnalysisType_QUERY *smithy.Schema
+
+var PopulateIntermediateTableAnalysisType_JOB *smithy.Schema
 
 var PopulationAnalysisConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "PopulationAnalysisConfiguration",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var PopulationAnalysisConfiguration_sqlParameters *smithy.Schema
+
+var PopulationAnalysisConfiguration_jobParameters *smithy.Schema
+
+var PopulationAnalysisJobParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cleanrooms",
+	Name:      "PopulationAnalysisJobParameters",
+}, smithy.ShapeTypeStructure, 1)
+var PopulationAnalysisJobParameters_analysisTemplateArn *smithy.Schema
 
 var PopulationAnalysisSqlParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -4458,10 +4470,12 @@ var ProtectedJobOutputConfigurationInput_member *smithy.Schema
 var ProtectedJobOutputConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ProtectedJobOutputConfigurationOutput",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var ProtectedJobOutputConfigurationOutput_s3 *smithy.Schema
 
 var ProtectedJobOutputConfigurationOutput_member *smithy.Schema
+
+var ProtectedJobOutputConfigurationOutput_intermediateTable *smithy.Schema
 
 var ProtectedJobParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -4566,7 +4580,7 @@ var ProtectedJobStatus_SUCCESS *smithy.Schema
 var ProtectedJobSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ProtectedJobSummary",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ProtectedJobSummary_id *smithy.Schema
 
 var ProtectedJobSummary_membershipId *smithy.Schema
@@ -4580,6 +4594,8 @@ var ProtectedJobSummary_status *smithy.Schema
 var ProtectedJobSummary_receiverConfigurations *smithy.Schema
 
 var ProtectedJobSummary_jobComputePayerAccountId *smithy.Schema
+
+var ProtectedJobSummary_intermediateTableConfiguration *smithy.Schema
 
 var _ProtectedJobSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -9133,9 +9149,15 @@ func init() {
 
 	PopulationAnalysisSqlParameters_analysisTemplateArn = PopulationAnalysisSqlParameters.AddMember("analysisTemplateArn", _AnalysisTemplateArn)
 
+	PopulationAnalysisJobParameters_analysisTemplateArn = PopulationAnalysisJobParameters.AddMember("analysisTemplateArn", _AnalysisTemplateArn)
+
 	PopulationAnalysisConfiguration_sqlParameters = PopulationAnalysisConfiguration.AddMember("sqlParameters", PopulationAnalysisSqlParameters)
 
+	PopulationAnalysisConfiguration_jobParameters = PopulationAnalysisConfiguration.AddMember("jobParameters", PopulationAnalysisJobParameters)
+
 	PopulateIntermediateTableAnalysisType_QUERY = PopulateIntermediateTableAnalysisType.AddMember("QUERY", smithyprelude.Unit)
+
+	PopulateIntermediateTableAnalysisType_JOB = PopulateIntermediateTableAnalysisType.AddMember("JOB", smithyprelude.Unit)
 
 	_ParameterMap_key = _ParameterMap.AddMember("key", _ParameterName)
 
@@ -9249,7 +9271,21 @@ func init() {
 
 	_IntermediateTableColumnList_member = _IntermediateTableColumnList.AddMember("member", IntermediateTableColumn)
 
+	ProtectedJobWorkerComputeType_CR1X = ProtectedJobWorkerComputeType.AddMember("CR1X", smithyprelude.Unit)
+
+	ProtectedJobWorkerComputeType_CR4X = ProtectedJobWorkerComputeType.AddMember("CR4X", smithyprelude.Unit)
+
+	ProtectedJobWorkerComputeConfiguration_type = ProtectedJobWorkerComputeConfiguration.AddMember("type", ProtectedJobWorkerComputeType)
+
+	ProtectedJobWorkerComputeConfiguration_number = ProtectedJobWorkerComputeConfiguration.AddMember("number", smithyprelude.Integer)
+
+	ProtectedJobWorkerComputeConfiguration_properties = ProtectedJobWorkerComputeConfiguration.AddMember("properties", WorkerComputeConfigurationProperties)
+
+	ProtectedJobComputeConfiguration_worker = ProtectedJobComputeConfiguration.AddMember("worker", ProtectedJobWorkerComputeConfiguration)
+
 	IntermediateTableComputeConfiguration_queryComputeConfiguration = IntermediateTableComputeConfiguration.AddMember("queryComputeConfiguration", WorkerComputeConfiguration)
+
+	IntermediateTableComputeConfiguration_jobComputeConfiguration = IntermediateTableComputeConfiguration.AddMember("jobComputeConfiguration", ProtectedJobComputeConfiguration)
 
 	IntermediateTableOutputConfiguration_id = IntermediateTableOutputConfiguration.AddMember("id", _UUID)
 
@@ -9587,6 +9623,8 @@ func init() {
 
 	ProtectedJobOutputConfigurationOutput_member = ProtectedJobOutputConfigurationOutput.AddMember("member", ProtectedJobMemberOutputConfigurationOutput)
 
+	ProtectedJobOutputConfigurationOutput_intermediateTable = ProtectedJobOutputConfigurationOutput.AddMember("intermediateTable", IntermediateTableOutputConfiguration)
+
 	ProtectedJobResultConfigurationOutput_outputConfiguration = ProtectedJobResultConfigurationOutput.AddMember("outputConfiguration", ProtectedJobOutputConfigurationOutput)
 
 	ProtectedJobStatistics_totalDurationInMillis = ProtectedJobStatistics.AddMember("totalDurationInMillis", smithyprelude.Long)
@@ -9612,18 +9650,6 @@ func init() {
 	ProtectedJobError_code = ProtectedJobError.AddMember("code", smithyprelude.String)
 
 	ProtectedJobError_retry = ProtectedJobError.AddMember("retry", RetryInfo)
-
-	ProtectedJobWorkerComputeType_CR1X = ProtectedJobWorkerComputeType.AddMember("CR1X", smithyprelude.Unit)
-
-	ProtectedJobWorkerComputeType_CR4X = ProtectedJobWorkerComputeType.AddMember("CR4X", smithyprelude.Unit)
-
-	ProtectedJobWorkerComputeConfiguration_type = ProtectedJobWorkerComputeConfiguration.AddMember("type", ProtectedJobWorkerComputeType)
-
-	ProtectedJobWorkerComputeConfiguration_number = ProtectedJobWorkerComputeConfiguration.AddMember("number", smithyprelude.Integer)
-
-	ProtectedJobWorkerComputeConfiguration_properties = ProtectedJobWorkerComputeConfiguration.AddMember("properties", WorkerComputeConfigurationProperties)
-
-	ProtectedJobComputeConfiguration_worker = ProtectedJobComputeConfiguration.AddMember("worker", ProtectedJobWorkerComputeConfiguration)
 
 	ProtectedJob_id = ProtectedJob.AddMember("id", _ProtectedJobIdentifier)
 
@@ -9682,6 +9708,8 @@ func init() {
 	ProtectedJobSummary_receiverConfigurations = ProtectedJobSummary.AddMember("receiverConfigurations", _ProtectedJobReceiverConfigurations)
 
 	ProtectedJobSummary_jobComputePayerAccountId = ProtectedJobSummary.AddMember("jobComputePayerAccountId", _AccountId)
+
+	ProtectedJobSummary_intermediateTableConfiguration = ProtectedJobSummary.AddMember("intermediateTableConfiguration", IntermediateTableOutputConfiguration)
 
 	_ProtectedJobSummaryList_member = _ProtectedJobSummaryList.AddMember("member", ProtectedJobSummary)
 

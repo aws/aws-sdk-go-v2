@@ -140,6 +140,49 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_BatchRevokeSessions(t *testing.T) {
+	want := &BatchRevokeSessionsOutput{
+		RevokedSessions: []types.RevokedSession{
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+			},
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+			},
+		},
+		Errors: []types.BatchRevokeSessionError{
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.Signin)
+	opSchema := smithy.NewOperationSchema(schemas.BatchRevokeSessions, schemas.BatchRevokeSessionsOutput, schemas.BatchRevokeSessionsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchRevokeSessions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateBearerToken(t *testing.T) {
 	want := &CreateBearerTokenOutput{
 		AccessToken: ptr.String("__AccessToken__"),
@@ -232,6 +275,8 @@ func TestUpdateResponseSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T)
 		IssuedTokenType: ptr.String("__IssuedTokenType__"),
 		TokenType:       ptr.String("__TokenType__"),
 		ExpiresIn:       ptr.Int32(1),
+		Resource:        ptr.String("__Resource__"),
+		Scope:           ptr.String("__Scope__"),
 	}
 	proto := restjson1.New(schemas.Signin)
 	opSchema := smithy.NewOperationSchema(schemas.CreateOAuth2TokenWithTokenExchange, schemas.CreateOAuth2TokenWithTokenExchangeResponse, schemas.CreateOAuth2TokenWithTokenExchangeResponse)
@@ -393,6 +438,42 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetSession(t *testing.T) {
+	want := &GetSessionOutput{
+		SessionArn:       ptr.String("__SessionArn__"),
+		PrincipalArn:     ptr.String("__PrincipalArn__"),
+		Role:             ptr.String("__Role__"),
+		Status:           types.SessionStatus("ACTIVE"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientType:       types.ClientType("CLI"),
+		Resource:         ptr.String("__Resource__"),
+		IssuedAt:         ptr.Int64(1),
+		ExpiresAt:        ptr.Int64(1),
+		LastUsedAt:       ptr.Int64(1),
+		IssuedInRegion:   ptr.String("__IssuedInRegion__"),
+		OriginSessionArn: ptr.String("__OriginSessionArn__"),
+		UserAgent:        ptr.String("__UserAgent__"),
+	}
+	proto := restjson1.New(schemas.Signin)
+	opSchema := smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionOutput, schemas.GetSessionOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 	want := &IntrospectOAuth2TokenWithIAMOutput{
 		Active:        ptr.Bool(true),
@@ -478,6 +559,54 @@ func TestUpdateResponseSnapshot_ListResourcePermissionStatements(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListSessions(t *testing.T) {
+	want := &ListSessionsOutput{
+		Items: []types.Session{
+			{
+				SessionArn:   ptr.String("__SessionArn__"),
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				Role:         ptr.String("__Role__"),
+				Status:       types.SessionStatus("ACTIVE"),
+				IssuedAt:     ptr.Int64(1),
+				ExpiresAt:    ptr.Int64(1),
+				ClientId:     ptr.String("__ClientId__"),
+				ClientType:   types.ClientType("CLI"),
+				Resource:     ptr.String("__Resource__"),
+			},
+			{
+				SessionArn:   ptr.String("__SessionArn__"),
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				Role:         ptr.String("__Role__"),
+				Status:       types.SessionStatus("ACTIVE"),
+				IssuedAt:     ptr.Int64(1),
+				ExpiresAt:    ptr.Int64(1),
+				ClientId:     ptr.String("__ClientId__"),
+				ClientType:   types.ClientType("CLI"),
+				Resource:     ptr.String("__Resource__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.Signin)
+	opSchema := smithy.NewOperationSchema(schemas.ListSessions, schemas.ListSessionsOutput, schemas.ListSessionsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListSessions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutConsoleAuthorizationConfiguration(t *testing.T) {
 	want := &PutConsoleAuthorizationConfigurationOutput{
 		TargetId:                    ptr.String("__TargetId__"),
@@ -556,7 +685,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchRevokeSessions, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -608,7 +737,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchRevokeSessions, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -686,7 +815,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteConsoleAuthorizationConfiguration, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchRevokeSessions, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -764,7 +893,7 @@ func TestUpdateResponseSnapshot_Error_TooManyRequestsError(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.TooManyRequestsError, schemas.TooManyRequestsError)
+	opSchema := smithy.NewOperationSchema(schemas.BatchRevokeSessions, schemas.TooManyRequestsError, schemas.TooManyRequestsError)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -790,7 +919,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Signin)
-	opSchema := smithy.NewOperationSchema(schemas.CreateBearerToken, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.BatchRevokeSessions, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

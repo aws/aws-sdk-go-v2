@@ -985,6 +985,9 @@ func TestUpdateResponseSnapshot_GetAccount(t *testing.T) {
 			CurrentPlan: types.PricingPlan("NONE"),
 			NextPlan:    types.PricingPlan("NONE"),
 		},
+		DeliveryAttributes: &types.DeliveryAttributes{
+			SharedPoolDeliveryMode: types.AccountSharedPoolDeliveryMode("GLOBAL"),
+		},
 	}
 	proto := restjson1.New(schemas.SimpleEmailService_v2)
 	opSchema := smithy.NewOperationSchema(schemas.GetAccount, schemas.GetAccountResponse, schemas.GetAccountResponse)
@@ -1051,9 +1054,10 @@ func TestUpdateResponseSnapshot_GetConfigurationSet(t *testing.T) {
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,
@@ -3241,6 +3245,28 @@ func TestUpdateResponseSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutAccountDedicatedIpWarmupAttributes.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutAccountDeliveryAttributes(t *testing.T) {
+	want := &PutAccountDeliveryAttributesOutput{}
+	proto := restjson1.New(schemas.SimpleEmailService_v2)
+	opSchema := smithy.NewOperationSchema(schemas.PutAccountDeliveryAttributes, schemas.PutAccountDeliveryAttributesResponse, schemas.PutAccountDeliveryAttributesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutAccountDeliveryAttributes.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

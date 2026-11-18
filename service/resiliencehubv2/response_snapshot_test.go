@@ -1534,6 +1534,48 @@ func TestCheckResponseSnapshot_GetTestRun(t *testing.T) {
 					TimeBetweenBackupsInMinutes: ptr.Int32(1),
 				},
 			},
+			EffectivePolicyValues: &types.TestRunEffectivePolicyValues{
+				AvailabilitySlo: &types.SloSource{
+					Value:      ptr.Float64(1.0),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				MultiAzRto: &types.TargetSource{
+					Value:      ptr.Int32(1),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				MultiAzRpo: &types.TargetSource{
+					Value:      ptr.Int32(1),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				MultiAzDrApproach: &types.DisasterRecoverySource{
+					Value:      ptr.String("__Value__"),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				MultiRegionRto: &types.TargetSource{
+					Value:      ptr.Int32(1),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				MultiRegionRpo: &types.TargetSource{
+					Value:      ptr.Int32(1),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				MultiRegionDrApproach: &types.DisasterRecoverySource{
+					Value:      ptr.String("__Value__"),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+				DataRecoveryTimeBetweenBackups: &types.TargetSource{
+					Value:      ptr.Int32(1),
+					PolicyName: ptr.String("__PolicyName__"),
+					Source:     types.PolicyValueSource("SELF"),
+				},
+			},
 			ReportOutput: &types.ReportGenerationResult{
 				ReportType:      types.ReportType("FAILURE_MODE"),
 				Status:          types.ReportGenerationStatus("PENDING"),
@@ -3433,6 +3475,7 @@ func TestCheckResponseSnapshot_ListTestTemplates(t *testing.T) {
 				Description:     ptr.String("__Description__"),
 			},
 		},
+		NextToken: ptr.String("__NextToken__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ListTestTemplates.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3442,7 +3485,10 @@ func TestCheckResponseSnapshot_ListTestTemplates(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	got, err := svc.ListTestTemplates(context.Background(), &ListTestTemplatesInput{})
+	got, err := svc.ListTestTemplates(context.Background(), &ListTestTemplatesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

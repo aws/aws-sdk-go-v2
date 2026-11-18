@@ -3703,6 +3703,11 @@ func TestUpdateResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{

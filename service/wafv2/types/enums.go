@@ -31,6 +31,25 @@ func (ActionValue) Values() []ActionValue {
 	}
 }
 
+type AnalyticsMode string
+
+// Enum values for AnalyticsMode
+const (
+	AnalyticsModeCrossRegion AnalyticsMode = "CROSS_REGION"
+	AnalyticsModeDisabled    AnalyticsMode = "DISABLED"
+)
+
+// Values returns all known values for AnalyticsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsMode) Values() []AnalyticsMode {
+	return []AnalyticsMode{
+		"CROSS_REGION",
+		"DISABLED",
+	}
+}
+
 type AssociatedResourceType string
 
 // Enum values for AssociatedResourceType

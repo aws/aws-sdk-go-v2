@@ -4558,6 +4558,239 @@ func (v *ResourceServerType) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A summary of a point-in-time recovery of a user pool.
+type RestorationDescriptionType struct {
+
+	// The ID of the recovery.
+	RestoreId *string
+
+	// The status of the recovery. For a description of each status, see the
+	// RestoreStatus parameter of RestorationType .
+	RestoreStatus RestoreStatusType
+
+	// The point in time that the recovery restores the user pool to.
+	RestoreTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestorationDescriptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestorationDescriptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestorationDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreId != nil {
+		s.WriteString(schemas.RestorationDescriptionType_RestoreId, *v.RestoreId)
+	}
+	if v.RestoreStatus != "" {
+		s.WriteString(schemas.RestorationDescriptionType_RestoreStatus, string(v.RestoreStatus))
+	}
+	if v.RestoreTimestamp != nil {
+		s.WriteTime(schemas.RestorationDescriptionType_RestoreTimestamp, *v.RestoreTimestamp)
+	}
+}
+func (v *RestorationDescriptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestorationDescriptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestorationDescriptionType_RestoreId:
+			v.RestoreId = new(string)
+			return d.ReadString(schemas.RestorationDescriptionType_RestoreId, v.RestoreId)
+		case schemas.RestorationDescriptionType_RestoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.RestorationDescriptionType_RestoreStatus, &ev); err != nil {
+				return err
+			}
+			v.RestoreStatus = RestoreStatusType(ev)
+			return nil
+		case schemas.RestorationDescriptionType_RestoreTimestamp:
+			v.RestoreTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RestorationDescriptionType_RestoreTimestamp, v.RestoreTimestamp)
+		}
+		return nil
+	})
+}
+
+// The details of a point-in-time recovery of a user pool.
+type RestorationType struct {
+
+	// The ID of the recovery. Use this ID in requests to describe, start, or cancel
+	// the recovery.
+	RestoreId *string
+
+	// The recovery preview. For each type of entity, the preview shows the number of
+	// entities that the recovery creates, updates, and deletes. The preview doesn't
+	// include user data. Amazon Cognito returns the preview when it's available.
+	RestorePreview []RestorePreviewType
+
+	// The status of the recovery. Can be one of the following values.
+	//
+	// PREVIEW_GENERATING Amazon Cognito is waiting for available capacity in the
+	// Amazon Web Services Region or is generating the recovery preview. Write
+	// operations in the user pool are paused.
+	//
+	// PREVIEW_GENERATED The recovery preview is ready for review. Write operations in
+	// the user pool are paused. Within 24 hours after you initiate the recovery, apply
+	// it with a StartPointInTimeRecovery request or discard it with a
+	// CancelPointInTimeRecovery request.
+	//
+	// PREVIEW_CANCELLED You canceled the recovery. Amazon Cognito resumed write
+	// operations and didn't change your user pool data.
+	//
+	// PREVIEW_GENERATION_FAILED Amazon Cognito couldn't generate the recovery
+	// preview. Amazon Cognito resumed write operations and didn't change your user
+	// pool data. You can initiate a new recovery.
+	//
+	// PREVIEW_EXPIRED You didn't start or cancel the recovery within 24 hours after
+	// you initiated it. Amazon Cognito resumed write operations and didn't change your
+	// user pool data.
+	//
+	// RESTORING Amazon Cognito is restoring user data in the user pool to its state
+	// at the recovery point. Write operations in the user pool are paused.
+	//
+	// RESTORE_COMPLETED Amazon Cognito restored your user pool to its state at the
+	// recovery point and resumed write operations.
+	//
+	// TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE The recovery encountered an internal
+	// error. Write operations in the user pool remain paused. Amazon Web Services
+	// Support contacts you through a support case to resolve the issue.
+	//
+	// AWS_ABORTED Amazon Cognito stopped the recovery because of an internal failure.
+	// Write operations in the user pool remain paused, and you can't cancel or retry
+	// the recovery. Amazon Web Services Support contacts you through a support case to
+	// resolve the issue.
+	RestoreStatus RestoreStatusType
+
+	// The point in time that the recovery restores the user pool to.
+	RestoreTimestamp *time.Time
+
+	// The end of the period of changes that the recovery reverts. This time is
+	// shortly after the time that you initiated the recovery. The recovery reverts
+	// changes to user data that occurred between RestoreTimestamp and TriggerTimestamp
+	// .
+	TriggerTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestorationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestorationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestorationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreId != nil {
+		s.WriteString(schemas.RestorationType_RestoreId, *v.RestoreId)
+	}
+	if v.RestorePreview != nil {
+		serializeRestorePreviewListType(s, schemas.RestorationType_RestorePreview, v.RestorePreview)
+	}
+	if v.RestoreStatus != "" {
+		s.WriteString(schemas.RestorationType_RestoreStatus, string(v.RestoreStatus))
+	}
+	if v.RestoreTimestamp != nil {
+		s.WriteTime(schemas.RestorationType_RestoreTimestamp, *v.RestoreTimestamp)
+	}
+	if v.TriggerTimestamp != nil {
+		s.WriteTime(schemas.RestorationType_TriggerTimestamp, *v.TriggerTimestamp)
+	}
+}
+func (v *RestorationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestorationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestorationType_RestoreId:
+			v.RestoreId = new(string)
+			return d.ReadString(schemas.RestorationType_RestoreId, v.RestoreId)
+		case schemas.RestorationType_RestorePreview:
+			return deserializeRestorePreviewListType(d, schemas.RestorationType_RestorePreview, &v.RestorePreview)
+		case schemas.RestorationType_RestoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.RestorationType_RestoreStatus, &ev); err != nil {
+				return err
+			}
+			v.RestoreStatus = RestoreStatusType(ev)
+			return nil
+		case schemas.RestorationType_RestoreTimestamp:
+			v.RestoreTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RestorationType_RestoreTimestamp, v.RestoreTimestamp)
+		case schemas.RestorationType_TriggerTimestamp:
+			v.TriggerTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RestorationType_TriggerTimestamp, v.TriggerTimestamp)
+		}
+		return nil
+	})
+}
+
+// The number of entities of one type that a point-in-time recovery creates,
+// updates, and deletes.
+type RestorePreviewType struct {
+
+	// The number of entities of this type that the recovery creates. These entities
+	// existed at the recovery point and were deleted after it.
+	CreateCount int64
+
+	// The number of entities of this type that the recovery deletes. These entities
+	// were created after the recovery point.
+	DeleteCount int64
+
+	// The type of user pool entity that the recovery changes. Can be one of the
+	// following values.
+	//
+	// Users User profiles, including their attributes.
+	//
+	// Groups User pool groups.
+	//
+	// User MFAs The MFA settings of users.
+	//
+	// Passkeys The passkeys that users registered.
+	Entity *string
+
+	// The number of entities of this type that the recovery reverts to their state at
+	// the recovery point. These entities were modified after the recovery point.
+	UpdateCount int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestorePreviewType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestorePreviewType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestorePreviewType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateCount != 0 {
+		s.WriteInt64(schemas.RestorePreviewType_CreateCount, v.CreateCount)
+	}
+	if v.DeleteCount != 0 {
+		s.WriteInt64(schemas.RestorePreviewType_DeleteCount, v.DeleteCount)
+	}
+	if v.Entity != nil {
+		s.WriteString(schemas.RestorePreviewType_Entity, *v.Entity)
+	}
+	if v.UpdateCount != 0 {
+		s.WriteInt64(schemas.RestorePreviewType_UpdateCount, v.UpdateCount)
+	}
+}
+func (v *RestorePreviewType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestorePreviewType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestorePreviewType_CreateCount:
+			return d.ReadInt64(schemas.RestorePreviewType_CreateCount, &v.CreateCount)
+		case schemas.RestorePreviewType_DeleteCount:
+			return d.ReadInt64(schemas.RestorePreviewType_DeleteCount, &v.DeleteCount)
+		case schemas.RestorePreviewType_Entity:
+			v.Entity = new(string)
+			return d.ReadString(schemas.RestorePreviewType_Entity, v.Entity)
+		case schemas.RestorePreviewType_UpdateCount:
+			return d.ReadInt64(schemas.RestorePreviewType_UpdateCount, &v.UpdateCount)
+		}
+		return nil
+	})
+}
+
 // The settings of risk configuration for threat protection with threat protection
 // in a user pool.
 type RiskConfigurationType struct {

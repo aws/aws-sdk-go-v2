@@ -1210,6 +1210,26 @@ func (m *validateOpListTenantResources) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountDeliveryAttributes struct {
+}
+
+func (*validateOpPutAccountDeliveryAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountDeliveryAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountDeliveryAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountDeliveryAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutAccountDetails struct {
 }
 
@@ -2188,6 +2208,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTenantResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTenantResources{}, middleware.After)
+}
+
+func addOpPutAccountDeliveryAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountDeliveryAttributes{}, middleware.After)
 }
 
 func addOpPutAccountDetailsValidationMiddleware(stack *middleware.Stack) error {
@@ -4339,6 +4363,21 @@ func validateOpListTenantResourcesInput(v *ListTenantResourcesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTenantResourcesInput"}
 	if v.TenantName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TenantName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountDeliveryAttributesInput(v *PutAccountDeliveryAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountDeliveryAttributesInput"}
+	if len(v.SharedPoolDeliveryMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedPoolDeliveryMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

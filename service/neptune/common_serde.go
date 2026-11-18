@@ -395,6 +395,16 @@ func serializeReadReplicaIdentifierList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeServerlessV2PlatformVersionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ServerlessV2PlatformVersionInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSourceIdsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1380,6 +1390,28 @@ func deserializeReadReplicaIdentifierList(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeServerlessV2PlatformVersionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ServerlessV2PlatformVersionInfo) error {
+	*v = make([]types.ServerlessV2PlatformVersionInfo, 0)
+	var vv types.ServerlessV2PlatformVersionInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ServerlessV2PlatformVersionInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ServerlessV2PlatformVersionInfo{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

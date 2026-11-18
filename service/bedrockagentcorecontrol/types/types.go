@@ -1920,6 +1920,10 @@ type CapacityProviderConfiguration struct {
 	// This member is required.
 	CapacityProviderArn *string
 
+	// The operating system configuration of the agents that Amazon Bedrock AgentCore
+	// Runtime runs on the capacity provider.
+	OperatingSystemConfiguration OperatingSystemConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1933,6 +1937,9 @@ func (v *CapacityProviderConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.CapacityProviderArn != nil {
 		s.WriteString(schemas.CapacityProviderConfiguration_capacityProviderArn, *v.CapacityProviderArn)
 	}
+	if v.OperatingSystemConfiguration != nil {
+		serializeOperatingSystemConfiguration(s, schemas.CapacityProviderConfiguration_operatingSystemConfiguration, v.OperatingSystemConfiguration)
+	}
 }
 func (v *CapacityProviderConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapacityProviderConfiguration, func(s *smithy.Schema) error {
@@ -1940,6 +1947,8 @@ func (v *CapacityProviderConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.CapacityProviderConfiguration_capacityProviderArn:
 			v.CapacityProviderArn = new(string)
 			return d.ReadString(schemas.CapacityProviderConfiguration_capacityProviderArn, v.CapacityProviderArn)
+		case schemas.CapacityProviderConfiguration_operatingSystemConfiguration:
+			return deserializeOperatingSystemConfiguration(d, schemas.CapacityProviderConfiguration_operatingSystemConfiguration, &v.OperatingSystemConfiguration)
 		}
 		return nil
 	})
@@ -7709,6 +7718,7 @@ func (v *FallbackTriggers) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //	FilesystemConfigurationMemberCapacityProviderVolume
 //	FilesystemConfigurationMemberEfsAccessPoint
+//	FilesystemConfigurationMemberS3BucketMount
 //	FilesystemConfigurationMemberS3FilesAccessPoint
 //	FilesystemConfigurationMemberSessionStorage
 type FilesystemConfiguration interface {
@@ -7749,6 +7759,23 @@ func (v *FilesystemConfigurationMemberEfsAccessPoint) Serialize(s smithy.ShapeSe
 	s.CloseStruct()
 }
 func (v *FilesystemConfigurationMemberEfsAccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime.
+type FilesystemConfigurationMemberS3BucketMount struct {
+	Value S3BucketMountConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FilesystemConfigurationMemberS3BucketMount) isFilesystemConfiguration() {}
+func (v *FilesystemConfigurationMemberS3BucketMount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilesystemConfiguration_s3BucketMount)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FilesystemConfigurationMemberS3BucketMount) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -13834,6 +13861,49 @@ func (v *LinkedinOauth2ProviderConfigOutput) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
+// Contains the operating system configuration of agents that run on Linux
+// instances, such as the privilege mode.
+type LinuxOperatingSystemConfiguration struct {
+
+	// The privilege mode of the agents. If you omit this field, the agents run in
+	// STANDARD privilege mode. The following values are possible:
+	//
+	//   - STANDARD – The agent runs without elevated privileges. This is the default.
+	//
+	//   - PRIVILEGED – The agent runs with elevated privileges on its instance. Use
+	//   this mode for agents that build container images, run containers, or install
+	//   system packages. A session that runs a PRIVILEGED agent runs only that agent.
+	PrivilegeMode PrivilegeMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *LinuxOperatingSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinuxOperatingSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinuxOperatingSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivilegeMode != "" {
+		s.WriteString(schemas.LinuxOperatingSystemConfiguration_privilegeMode, string(v.PrivilegeMode))
+	}
+}
+func (v *LinuxOperatingSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinuxOperatingSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinuxOperatingSystemConfiguration_privilegeMode:
+			var ev string
+			if err := d.ReadString(schemas.LinuxOperatingSystemConfiguration_privilegeMode, &ev); err != nil {
+				return err
+			}
+			v.PrivilegeMode = PrivilegeMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A filter for ListDatasetExamples .
 type ListDatasetExamplesFilter struct {
 
@@ -17323,6 +17393,34 @@ func (v *OpenResponsesEvaluatorModelConfig) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Contains the operating system configuration of the agents that AgentCore
+// Runtime runs on a capacity provider. Specify the member for the operating system
+// of the capacity provider.
+//
+// The following types satisfy this interface:
+//
+//	OperatingSystemConfigurationMemberLinux
+type OperatingSystemConfiguration interface {
+	isOperatingSystemConfiguration()
+}
+
+// The operating system configuration of agents that run on Linux instances.
+type OperatingSystemConfigurationMemberLinux struct {
+	Value LinuxOperatingSystemConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OperatingSystemConfigurationMemberLinux) isOperatingSystemConfiguration() {}
+func (v *OperatingSystemConfigurationMemberLinux) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperatingSystemConfiguration_linux)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OperatingSystemConfigurationMemberLinux) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 //	The configuration that specifies where evaluation results should be written
 //
 // for monitoring and analysis.
@@ -20554,6 +20652,85 @@ func (v *RuntimeTargetConfiguration) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.RuntimeTargetConfiguration_schema:
 			v.Schema = &HttpApiSchemaConfiguration{}
 			return v.Schema.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint for Amazon
+// S3. Files under the mount path map to objects in the bucket.
+type S3BucketMountConfiguration struct {
+
+	// The name of the S3 bucket to mount. You can specify a general purpose bucket or
+	// a directory bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The mount path for the S3 bucket inside the AgentCore Runtime. The path must be
+	// under /mnt with exactly one subdirectory level (for example, /mnt/data ).
+	//
+	// This member is required.
+	MountPath *string
+
+	// The key prefix to mount. Only objects under this prefix are visible at the
+	// mount path. To give each session its own prefix, include {runtimeSessionId}
+	// (for example, data/{runtimeSessionId}/ ). If you omit the prefix, the whole
+	// bucket is mounted.
+	Prefix *string
+
+	// The AWS account ID that must own the bucket. If you omit it, the bucket must be
+	// owned by the account that owns the AgentCore Runtime.
+	S3BucketOwner *string
+
+	// The AWS Region of the S3 bucket. If you omit it, the bucket must be in the same
+	// Region as the AgentCore Runtime.
+	S3BucketRegion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3BucketMountConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3BucketMountConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3BucketMountConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_bucket, *v.Bucket)
+	}
+	if v.MountPath != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_mountPath, *v.MountPath)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_prefix, *v.Prefix)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3BucketRegion != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_s3BucketRegion, *v.S3BucketRegion)
+	}
+}
+func (v *S3BucketMountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3BucketMountConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3BucketMountConfiguration_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_bucket, v.Bucket)
+		case schemas.S3BucketMountConfiguration_mountPath:
+			v.MountPath = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_mountPath, v.MountPath)
+		case schemas.S3BucketMountConfiguration_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_prefix, v.Prefix)
+		case schemas.S3BucketMountConfiguration_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_s3BucketOwner, v.S3BucketOwner)
+		case schemas.S3BucketMountConfiguration_s3BucketRegion:
+			v.S3BucketRegion = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_s3BucketRegion, v.S3BucketRegion)
 		}
 		return nil
 	})
@@ -25491,6 +25668,7 @@ func (*UnknownUnionMember) isModifyReflectionConfiguration()          {}
 func (*UnknownUnionMember) isOauth2Discovery()                        {}
 func (*UnknownUnionMember) isOauth2ProviderConfigInput()              {}
 func (*UnknownUnionMember) isOauth2ProviderConfigOutput()             {}
+func (*UnknownUnionMember) isOperatingSystemConfiguration()           {}
 func (*UnknownUnionMember) isPaymentProviderConfigurationInput()      {}
 func (*UnknownUnionMember) isPaymentProviderConfigurationOutput()     {}
 func (*UnknownUnionMember) isPolicyDefinition()                       {}

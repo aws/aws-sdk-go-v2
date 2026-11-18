@@ -44,9 +44,27 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	// The name of the dedicated IP pool to associate with the configuration set.
 	SendingPoolName *string
 
+	// The shared pool delivery mode for email that you send with the configuration
+	// set from shared IP addresses. This setting overrides the shared pool delivery
+	// mode of your account. Can be one of the following:
+	//
+	//   - GLOBAL – Amazon SES delivers from your sending Region first and, when it
+	//   improves your deliverability, also uses Amazon SES shared IP addresses with
+	//   established sending history in other Amazon Web Services Regions within the same
+	//   Amazon Web Services partition.
+	//
+	//   - REGIONAL – Amazon SES delivers your email only from shared IP addresses in
+	//   your sending Region.
+	//
+	//   - ACCOUNT – The configuration set uses the shared pool delivery mode of your
+	//   account.
+	//
+	// If you don't specify a value, the current value doesn't change.
+	SharedPoolDeliveryMode types.SharedPoolDeliveryMode
+
 	// Specifies whether messages that use the configuration set are required to use
-	// Transport Layer Security (TLS). If the value is Require , messages are only
-	// delivered if a TLS connection can be established. If the value is Optional ,
+	// Transport Layer Security (TLS). If the value is REQUIRE , messages are only
+	// delivered if a TLS connection can be established. If the value is OPTIONAL ,
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy types.TlsPolicy
@@ -69,6 +87,9 @@ func (v *PutConfigurationSetDeliveryOptionsInput) SerializeMembers(s smithy.Shap
 	}
 	if v.SendingPoolName != nil {
 		s.WriteString(schemas.PutConfigurationSetDeliveryOptionsRequest_SendingPoolName, *v.SendingPoolName)
+	}
+	if v.SharedPoolDeliveryMode != "" {
+		s.WriteString(schemas.PutConfigurationSetDeliveryOptionsRequest_SharedPoolDeliveryMode, string(v.SharedPoolDeliveryMode))
 	}
 	if v.TlsPolicy != "" {
 		s.WriteString(schemas.PutConfigurationSetDeliveryOptionsRequest_TlsPolicy, string(v.TlsPolicy))

@@ -1,0 +1,8 @@
+{
+    "id": "404e2f82-1591-4477-8365-ffc51bcdcbb1",
+    "type": "documentation",
+    "description": "This release adds support for the keyExchange field in CloudTrail tlsDetails, enabling customers to distinguish classical from post-quantum hybrid key exchange for TLS connections on Application Load Balancers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

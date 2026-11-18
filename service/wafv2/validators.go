@@ -1442,6 +1442,21 @@ func validateAllowAction(v *types.AllowAction) error {
 	}
 }
 
+func validateAnalyticsConfig(v *types.AnalyticsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsConfig"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAndStatement(v *types.AndStatement) error {
 	if v == nil {
 		return nil
@@ -4269,6 +4284,11 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AnalyticsConfig != nil {
+		if err := validateAnalyticsConfig(v.AnalyticsConfig); err != nil {
+			invalidParams.AddNested("AnalyticsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5370,6 +5390,11 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	if v.MonetizationConfig != nil {
 		if err := validateMonetizationConfig(v.MonetizationConfig); err != nil {
 			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AnalyticsConfig != nil {
+		if err := validateAnalyticsConfig(v.AnalyticsConfig); err != nil {
+			invalidParams.AddNested("AnalyticsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

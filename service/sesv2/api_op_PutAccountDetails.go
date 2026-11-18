@@ -44,7 +44,8 @@ type PutAccountDetailsInput struct {
 	// SES matters.
 	AdditionalContactEmailAddresses []string
 
-	// The language you would prefer to be contacted with.
+	// The language you would prefer to be contacted with. The contact language can be
+	// one of EN or JA .
 	ContactLanguage types.ContactLanguage
 
 	// Indicates whether or not your account should have production access in the

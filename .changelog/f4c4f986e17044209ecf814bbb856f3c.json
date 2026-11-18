@@ -1,0 +1,8 @@
+{
+    "id": "f4c4f986-e170-4420-9ecf-814bbb856f3c",
+    "type": "feature",
+    "description": "Adds exclusions and Multi-Region key resolution to S3 Replication. Rule filters support a Not element to exclude prefixes and object tags. Destination EncryptionConfiguration supports UseSourceMultiRegionKey to encrypt replicas with the related replica KMS multi-Region key in the destination Region.",
+    "modules": [
+        "service/s3"
+    ]
+}

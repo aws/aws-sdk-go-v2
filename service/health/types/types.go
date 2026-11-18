@@ -205,7 +205,9 @@ func (v *AffectedAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
 // Information about an entity that is affected by a Health event.
 type AffectedEntity struct {
 
-	// A map of account tag key-value pairs attached to the affected entity.
+	// A map of account tag key-value pairs for the account that owns the affected
+	// entity. This field is returned only by DescribeAffectedEntitiesForOrganization
+	// and is not populated by DescribeAffectedEntities.
 	AccountTags map[string]string
 
 	// The 12-digit Amazon Web Services account number that contains the affected
@@ -244,11 +246,6 @@ type AffectedEntity struct {
 	// The most recent status of the entity affected by the event. The possible values
 	// are IMPAIRED , UNIMPAIRED , UNKNOWN , PENDING , and RESOLVED .
 	StatusCode EntityStatusCode
-
-	// A map of resource tag key-value pairs attached to the affected entity.
-	//
-	// Currently, the tags property isn't supported.
-	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -290,9 +287,6 @@ func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusCode != "" {
 		s.WriteString(schemas.AffectedEntity_statusCode, string(v.StatusCode))
 	}
-	if v.Tags != nil {
-		serializetagSet(s, schemas.AffectedEntity_tags, v.Tags)
-	}
 }
 func (v *AffectedEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AffectedEntity, func(s *smithy.Schema) error {
@@ -328,8 +322,47 @@ func (v *AffectedEntity) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.StatusCode = EntityStatusCode(ev)
 			return nil
-		case schemas.AffectedEntity_tags:
-			return deserializetagSet(d, schemas.AffectedEntity_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// A resource tag key to configure for Health event tracking.
+type ConfigureTagsTagKey struct {
+
+	// The tag key name.
+	//
+	// This member is required.
+	Key *string
+
+	// Whether this tag key is enabled for EventBridge notifications.
+	EnabledForEventBridge bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConfigureTagsTagKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigureTagsTagKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigureTagsTagKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnabledForEventBridge != false {
+		s.WriteBool(schemas.ConfigureTagsTagKey_enabledForEventBridge, v.EnabledForEventBridge)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ConfigureTagsTagKey_key, *v.Key)
+	}
+}
+func (v *ConfigureTagsTagKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigureTagsTagKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigureTagsTagKey_enabledForEventBridge:
+			return d.ReadBool(schemas.ConfigureTagsTagKey_enabledForEventBridge, &v.EnabledForEventBridge)
+		case schemas.ConfigureTagsTagKey_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ConfigureTagsTagKey_key, v.Key)
 		}
 		return nil
 	})
@@ -600,9 +633,9 @@ type EntityFilter struct {
 	// A list of entity status codes ( IMPAIRED , UNIMPAIRED , or UNKNOWN ).
 	StatusCodes []EntityStatusCode
 
-	// A map of resource tag key-value pairs to filter affected entities.
-	//
-	// Currently, the tags property isn't supported.
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. The filter matches
+	// when at least one key in the map matches.
 	Tags map[string][]string
 
 	noSmithyDocumentSerde
@@ -1157,9 +1190,9 @@ type EventFilter struct {
 	// A list of dates and times that the event began.
 	StartTimes []DateTimeRange
 
-	// A map of resource tag key-value pairs to filter affected entities.
-	//
-	// Currently, the tags property isn't supported.
+	// A map of tag keys to lists of tag values. A tag matches when its key is in the
+	// map and its value is one of the values listed for that key. The filter matches
+	// when at least one key in the map matches.
 	Tags map[string][]string
 
 	noSmithyDocumentSerde
@@ -2454,11 +2487,13 @@ func (v *ServiceLifecycleFilter) Deserialize(d smithy.ShapeDeserializer) error {
 // A tag key configured for an organization.
 type TagKeyForOrganization struct {
 
+	// The tag key name.
+	//
+	// This member is required.
+	Key *string
+
 	// Whether this tag key is enabled for EventBridge notifications.
 	EnabledForEventBridge bool
-
-	// The tag key name.
-	Key *string
 
 	noSmithyDocumentSerde
 }

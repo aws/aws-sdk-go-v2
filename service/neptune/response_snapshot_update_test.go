@@ -521,6 +521,7 @@ func TestUpdateResponseSnapshot_CreateDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -1183,6 +1184,7 @@ func TestUpdateResponseSnapshot_DeleteDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -2080,6 +2082,7 @@ func TestUpdateResponseSnapshot_DescribeDBClusters(t *testing.T) {
 					MinCapacity: ptr.Float64(1.0),
 					MaxCapacity: ptr.Float64(1.0),
 				},
+				ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 				GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 				IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StorageType:                            ptr.String("__StorageType__"),
@@ -2201,6 +2204,7 @@ func TestUpdateResponseSnapshot_DescribeDBClusters(t *testing.T) {
 					MinCapacity: ptr.Float64(1.0),
 					MaxCapacity: ptr.Float64(1.0),
 				},
+				ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 				GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 				IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StorageType:                            ptr.String("__StorageType__"),
@@ -3465,6 +3469,55 @@ func TestUpdateResponseSnapshot_DescribePendingMaintenanceActions(t *testing.T) 
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeServerlessV2PlatformVersions(t *testing.T) {
+	want := &DescribeServerlessV2PlatformVersionsOutput{
+		Marker: ptr.String("__Marker__"),
+		ServerlessV2PlatformVersions: []types.ServerlessV2PlatformVersionInfo{
+			{
+				ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
+				ServerlessV2PlatformVersionDescription: ptr.String("__ServerlessV2PlatformVersionDescription__"),
+				Engine:                                 ptr.String("__Engine__"),
+				ServerlessV2FeaturesSupport: &types.ServerlessV2FeaturesSupport{
+					MinCapacity: ptr.Float64(1.0),
+					MaxCapacity: ptr.Float64(1.0),
+				},
+				Status:    ptr.String("__Status__"),
+				IsDefault: ptr.Bool(true),
+			},
+			{
+				ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
+				ServerlessV2PlatformVersionDescription: ptr.String("__ServerlessV2PlatformVersionDescription__"),
+				Engine:                                 ptr.String("__Engine__"),
+				ServerlessV2FeaturesSupport: &types.ServerlessV2FeaturesSupport{
+					MinCapacity: ptr.Float64(1.0),
+					MaxCapacity: ptr.Float64(1.0),
+				},
+				Status:    ptr.String("__Status__"),
+				IsDefault: ptr.Bool(true),
+			},
+		},
+	}
+	proto := restxml.New(schemas.AmazonRDSv19)
+	opSchema := serdeRespQueryOpSchema(schemas.DescribeServerlessV2PlatformVersions, schemas.ServerlessV2PlatformVersionsMessage, schemas.ServerlessV2PlatformVersionsMessage)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespQueryResultEnvelope(body, "DescribeServerlessV2PlatformVersions")
+	if err := serdeRespWriteSnapshot("DescribeServerlessV2PlatformVersions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeValidDBInstanceModifications(t *testing.T) {
 	want := &DescribeValidDBInstanceModificationsOutput{
 		ValidDBInstanceModificationsMessage: &types.ValidDBInstanceModificationsMessage{
@@ -3685,6 +3738,7 @@ func TestUpdateResponseSnapshot_FailoverDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -3933,6 +3987,7 @@ func TestUpdateResponseSnapshot_ModifyDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -4578,6 +4633,7 @@ func TestUpdateResponseSnapshot_PromoteReadReplicaDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -5135,6 +5191,7 @@ func TestUpdateResponseSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -5280,6 +5337,7 @@ func TestUpdateResponseSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -5425,6 +5483,7 @@ func TestUpdateResponseSnapshot_StartDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),
@@ -5570,6 +5629,7 @@ func TestUpdateResponseSnapshot_StopDBCluster(t *testing.T) {
 				MinCapacity: ptr.Float64(1.0),
 				MaxCapacity: ptr.Float64(1.0),
 			},
+			ServerlessV2PlatformVersion:            ptr.String("__ServerlessV2PlatformVersion__"),
 			GlobalClusterIdentifier:                ptr.String("__GlobalClusterIdentifier__"),
 			IOOptimizedNextAllowedModificationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StorageType:                            ptr.String("__StorageType__"),

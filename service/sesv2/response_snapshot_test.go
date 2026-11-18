@@ -247,9 +247,10 @@ func TestCheckResponseSnapshot_CreateConfigurationSet(t *testing.T) {
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,
@@ -1381,6 +1382,9 @@ func TestCheckResponseSnapshot_GetAccount(t *testing.T) {
 			CurrentPlan: types.PricingPlan("NONE"),
 			NextPlan:    types.PricingPlan("NONE"),
 		},
+		DeliveryAttributes: &types.DeliveryAttributes{
+			SharedPoolDeliveryMode: types.AccountSharedPoolDeliveryMode("GLOBAL"),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAccount.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1446,9 +1450,10 @@ func TestCheckResponseSnapshot_GetConfigurationSet(t *testing.T) {
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,
@@ -3662,6 +3667,27 @@ func TestCheckResponseSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing.
 	}
 }
 
+func TestCheckResponseSnapshot_PutAccountDeliveryAttributes(t *testing.T) {
+	want := &PutAccountDeliveryAttributesOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutAccountDeliveryAttributes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAccountDeliveryAttributes(context.Background(), &PutAccountDeliveryAttributesInput{
+		SharedPoolDeliveryMode: types.AccountSharedPoolDeliveryMode("GLOBAL"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAccountDeliveryAttributes.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutAccountDetails(t *testing.T) {
 	want := &PutAccountDetailsOutput{}
 	status, header, body, err := serdeRespReadSnapshot("PutAccountDetails.response")
@@ -3827,10 +3853,11 @@ func TestCheckResponseSnapshot_PutConfigurationSetDeliveryOptions(t *testing.T) 
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.PutConfigurationSetDeliveryOptions(context.Background(), &PutConfigurationSetDeliveryOptionsInput{
-		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
-		TlsPolicy:            types.TlsPolicy("REQUIRE"),
-		SendingPoolName:      ptr.String("__SendingPoolName__"),
-		MaxDeliverySeconds:   ptr.Int64(1),
+		ConfigurationSetName:   ptr.String("__ConfigurationSetName__"),
+		TlsPolicy:              types.TlsPolicy("REQUIRE"),
+		SendingPoolName:        ptr.String("__SendingPoolName__"),
+		MaxDeliverySeconds:     ptr.Int64(1),
+		SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5182,9 +5209,10 @@ func TestCheckResponseSnapshot_Error_ConcurrentModificationException(t *testing.
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,
@@ -5384,9 +5412,10 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,

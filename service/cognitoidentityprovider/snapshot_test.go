@@ -458,6 +458,18 @@ func TestCheckSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelPointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ChangePassword(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ChangePassword(context.Background(), nil, func(o *Options) {
@@ -830,6 +842,18 @@ func TestCheckSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribePointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeResourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeResourceServer(context.Background(), nil, func(o *Options) {
@@ -1178,6 +1202,18 @@ func TestCheckSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InitiatePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InitiatePointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDevices(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDevices(context.Background(), nil, func(o *Options) {
@@ -1207,6 +1243,18 @@ func TestCheckSnapshot_ListIdentityProviders(t *testing.T) {
 	_, err := svc.ListIdentityProviders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIdentityProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPointInTimeRecoveries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPointInTimeRecoveries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1507,6 +1555,18 @@ func TestCheckSnapshot_SignUp(t *testing.T) {
 	_, err := svc.SignUp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SignUp")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartPointInTimeRecovery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2149,6 +2209,18 @@ func TestUpdateSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelPointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ChangePassword(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ChangePassword(context.Background(), nil, func(o *Options) {
@@ -2521,6 +2593,18 @@ func TestUpdateSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribePointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeResourceServer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeResourceServer(context.Background(), nil, func(o *Options) {
@@ -2869,6 +2953,18 @@ func TestUpdateSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InitiatePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InitiatePointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDevices(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDevices(context.Background(), nil, func(o *Options) {
@@ -2898,6 +2994,18 @@ func TestUpdateSnapshot_ListIdentityProviders(t *testing.T) {
 	_, err := svc.ListIdentityProviders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIdentityProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPointInTimeRecoveries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPointInTimeRecoveries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3198,6 +3306,18 @@ func TestUpdateSnapshot_SignUp(t *testing.T) {
 	_, err := svc.SignUp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SignUp")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartPointInTimeRecovery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

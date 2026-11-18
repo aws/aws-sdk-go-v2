@@ -650,6 +650,26 @@ func (m *validateOpAdminUserGlobalSignOut) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelPointInTimeRecovery struct {
+}
+
+func (*validateOpCancelPointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelPointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelPointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelPointInTimeRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpChangePassword struct {
 }
 
@@ -1270,6 +1290,26 @@ func (m *validateOpDescribeManagedLoginBranding) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePointInTimeRecovery struct {
+}
+
+func (*validateOpDescribePointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePointInTimeRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeResourceServer struct {
 }
 
@@ -1850,6 +1890,26 @@ func (m *validateOpInitiateAuth) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInitiatePointInTimeRecovery struct {
+}
+
+func (*validateOpInitiatePointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInitiatePointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InitiatePointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInitiatePointInTimeRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDevices struct {
 }
 
@@ -1905,6 +1965,26 @@ func (m *validateOpListIdentityProviders) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListIdentityProvidersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPointInTimeRecoveries struct {
+}
+
+func (*validateOpListPointInTimeRecoveries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPointInTimeRecoveries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPointInTimeRecoveriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPointInTimeRecoveriesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2405,6 +2485,26 @@ func (m *validateOpSignUp) HandleInitialize(ctx context.Context, in middleware.I
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSignUpInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartPointInTimeRecovery struct {
+}
+
+func (*validateOpStartPointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartPointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartPointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartPointInTimeRecoveryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2938,6 +3038,10 @@ func addOpAdminUserGlobalSignOutValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpAdminUserGlobalSignOut{}, middleware.After)
 }
 
+func addOpCancelPointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelPointInTimeRecovery{}, middleware.After)
+}
+
 func addOpChangePasswordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChangePassword{}, middleware.After)
 }
@@ -3062,6 +3166,10 @@ func addOpDescribeManagedLoginBrandingValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDescribeManagedLoginBranding{}, middleware.After)
 }
 
+func addOpDescribePointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePointInTimeRecovery{}, middleware.After)
+}
+
 func addOpDescribeResourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResourceServer{}, middleware.After)
 }
@@ -3178,6 +3286,10 @@ func addOpInitiateAuthValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInitiateAuth{}, middleware.After)
 }
 
+func addOpInitiatePointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInitiatePointInTimeRecovery{}, middleware.After)
+}
+
 func addOpListDevicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDevices{}, middleware.After)
 }
@@ -3188,6 +3300,10 @@ func addOpListGroupsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListIdentityProvidersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIdentityProviders{}, middleware.After)
+}
+
+func addOpListPointInTimeRecoveriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPointInTimeRecoveries{}, middleware.After)
 }
 
 func addOpListResourceServersValidationMiddleware(stack *middleware.Stack) error {
@@ -3288,6 +3404,10 @@ func addOpSetUserSettingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSignUpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSignUp{}, middleware.After)
+}
+
+func addOpStartPointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartPointInTimeRecovery{}, middleware.After)
 }
 
 func addOpStartUserImportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -4705,6 +4825,24 @@ func validateOpAdminUserGlobalSignOutInput(v *AdminUserGlobalSignOutInput) error
 	}
 }
 
+func validateOpCancelPointInTimeRecoveryInput(v *CancelPointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelPointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpChangePasswordInput(v *ChangePasswordInput) error {
 	if v == nil {
 		return nil
@@ -5342,6 +5480,24 @@ func validateOpDescribeManagedLoginBrandingInput(v *DescribeManagedLoginBranding
 	}
 }
 
+func validateOpDescribePointInTimeRecoveryInput(v *DescribePointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeResourceServerInput(v *DescribeResourceServerInput) error {
 	if v == nil {
 		return nil
@@ -5829,6 +5985,24 @@ func validateOpInitiateAuthInput(v *InitiateAuthInput) error {
 	}
 }
 
+func validateOpInitiatePointInTimeRecoveryInput(v *InitiatePointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InitiatePointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDevicesInput(v *ListDevicesInput) error {
 	if v == nil {
 		return nil
@@ -5864,6 +6038,21 @@ func validateOpListIdentityProvidersInput(v *ListIdentityProvidersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityProvidersInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPointInTimeRecoveriesInput(v *ListPointInTimeRecoveriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPointInTimeRecoveriesInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
@@ -6320,6 +6509,24 @@ func validateOpSignUpInput(v *SignUpInput) error {
 		if err := validateAttributeListType(v.ValidationData); err != nil {
 			invalidParams.AddNested("ValidationData", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartPointInTimeRecoveryInput(v *StartPointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartPointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

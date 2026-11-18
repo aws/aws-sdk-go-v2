@@ -106,6 +106,53 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_BatchRevokeSessions(t *testing.T) {
+	want := &BatchRevokeSessionsOutput{
+		RevokedSessions: []types.RevokedSession{
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+			},
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+			},
+		},
+		Errors: []types.BatchRevokeSessionError{
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+			{
+				SessionArn: ptr.String("__SessionArn__"),
+				Code:       ptr.String("__Code__"),
+				Message:    ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchRevokeSessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchRevokeSessions(context.Background(), &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchRevokeSessions.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateBearerToken(t *testing.T) {
 	want := &CreateBearerTokenOutput{
 		AccessToken: ptr.String("__AccessToken__"),
@@ -205,6 +252,8 @@ func TestCheckResponseSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) 
 		IssuedTokenType: ptr.String("__IssuedTokenType__"),
 		TokenType:       ptr.String("__TokenType__"),
 		ExpiresIn:       ptr.Int32(1),
+		Resource:        ptr.String("__Resource__"),
+		Scope:           ptr.String("__Scope__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateOAuth2TokenWithTokenExchange.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -218,6 +267,8 @@ func TestCheckResponseSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) 
 		GrantType:        ptr.String("__GrantType__"),
 		SubjectToken:     ptr.String("__SubjectToken__"),
 		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Assertion:        ptr.String("__Assertion__"),
+		ClientId:         ptr.String("__ClientId__"),
 		Resource:         ptr.String("__Resource__"),
 		Scope:            ptr.String("__Scope__"),
 	})
@@ -364,6 +415,42 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSession(t *testing.T) {
+	want := &GetSessionOutput{
+		SessionArn:       ptr.String("__SessionArn__"),
+		PrincipalArn:     ptr.String("__PrincipalArn__"),
+		Role:             ptr.String("__Role__"),
+		Status:           types.SessionStatus("ACTIVE"),
+		ClientId:         ptr.String("__ClientId__"),
+		ClientType:       types.ClientType("CLI"),
+		Resource:         ptr.String("__Resource__"),
+		IssuedAt:         ptr.Int64(1),
+		ExpiresAt:        ptr.Int64(1),
+		LastUsedAt:       ptr.Int64(1),
+		IssuedInRegion:   ptr.String("__IssuedInRegion__"),
+		OriginSessionArn: ptr.String("__OriginSessionArn__"),
+		UserAgent:        ptr.String("__UserAgent__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSession.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSession(context.Background(), &GetSessionInput{
+		SessionArn:   ptr.String("__SessionArn__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSession.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 	want := &IntrospectOAuth2TokenWithIAMOutput{
 		Active:        ptr.Bool(true),
@@ -446,6 +533,59 @@ func TestCheckResponseSnapshot_ListResourcePermissionStatements(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListResourcePermissionStatements.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListSessions(t *testing.T) {
+	want := &ListSessionsOutput{
+		Items: []types.Session{
+			{
+				SessionArn:   ptr.String("__SessionArn__"),
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				Role:         ptr.String("__Role__"),
+				Status:       types.SessionStatus("ACTIVE"),
+				IssuedAt:     ptr.Int64(1),
+				ExpiresAt:    ptr.Int64(1),
+				ClientId:     ptr.String("__ClientId__"),
+				ClientType:   types.ClientType("CLI"),
+				Resource:     ptr.String("__Resource__"),
+			},
+			{
+				SessionArn:   ptr.String("__SessionArn__"),
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				Role:         ptr.String("__Role__"),
+				Status:       types.SessionStatus("ACTIVE"),
+				IssuedAt:     ptr.Int64(1),
+				ExpiresAt:    ptr.Int64(1),
+				ClientId:     ptr.String("__ClientId__"),
+				ClientType:   types.ClientType("CLI"),
+				Resource:     ptr.String("__Resource__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSessions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSessions(context.Background(), &ListSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Status:       types.SessionStatus("ACTIVE"),
+		ClientId:     ptr.String("__ClientId__"),
+		IssuedAfter:  ptr.Int64(1),
+		IssuedBefore: ptr.Int64(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSessions.response", err)
 	}
 }
 
@@ -538,10 +678,13 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
-		GrantType:       ptr.String("__GrantType__"),
-		Resource:        ptr.String("__Resource__"),
-		DurationSeconds: ptr.Int32(1),
+	_, opErr := svc.BatchRevokeSessions(context.Background(), &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -596,10 +739,13 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
-		GrantType:       ptr.String("__GrantType__"),
-		Resource:        ptr.String("__Resource__"),
-		DurationSeconds: ptr.Int32(1),
+	_, opErr := svc.BatchRevokeSessions(context.Background(), &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -630,6 +776,8 @@ func TestCheckResponseSnapshot_Error_InvalidGrantException(t *testing.T) {
 		GrantType:        ptr.String("__GrantType__"),
 		SubjectToken:     ptr.String("__SubjectToken__"),
 		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Assertion:        ptr.String("__Assertion__"),
+		ClientId:         ptr.String("__ClientId__"),
 		Resource:         ptr.String("__Resource__"),
 		Scope:            ptr.String("__Scope__"),
 	})
@@ -662,6 +810,8 @@ func TestCheckResponseSnapshot_Error_InvalidScopeException(t *testing.T) {
 		GrantType:        ptr.String("__GrantType__"),
 		SubjectToken:     ptr.String("__SubjectToken__"),
 		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Assertion:        ptr.String("__Assertion__"),
+		ClientId:         ptr.String("__ClientId__"),
 		Resource:         ptr.String("__Resource__"),
 		Scope:            ptr.String("__Scope__"),
 	})
@@ -690,8 +840,13 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), &DeleteConsoleAuthorizationConfigurationInput{
-		TargetId: ptr.String("__TargetId__"),
+	_, opErr := svc.BatchRevokeSessions(context.Background(), &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -757,6 +912,8 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		GrantType:        ptr.String("__GrantType__"),
 		SubjectToken:     ptr.String("__SubjectToken__"),
 		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Assertion:        ptr.String("__Assertion__"),
+		ClientId:         ptr.String("__ClientId__"),
 		Resource:         ptr.String("__Resource__"),
 		Scope:            ptr.String("__Scope__"),
 	})
@@ -785,10 +942,13 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsError(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
-		GrantType:       ptr.String("__GrantType__"),
-		Resource:        ptr.String("__Resource__"),
-		DurationSeconds: ptr.Int32(1),
+	_, opErr := svc.BatchRevokeSessions(context.Background(), &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -815,10 +975,13 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateBearerToken(context.Background(), &CreateBearerTokenInput{
-		GrantType:       ptr.String("__GrantType__"),
-		Resource:        ptr.String("__Resource__"),
-		DurationSeconds: ptr.Int32(1),
+	_, opErr := svc.BatchRevokeSessions(context.Background(), &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

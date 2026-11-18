@@ -559,6 +559,12 @@ func serializeFilesystemConfiguration(s smithy.ShapeSerializer, schema *smithy.S
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.FilesystemConfigurationMemberS3BucketMount:
+		s.WriteUnion(schema, schemas.FilesystemConfiguration_s3BucketMount)
+		s.WriteStruct(schemas.FilesystemConfiguration_s3BucketMount)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
 		s.WriteUnion(schema, schemas.FilesystemConfiguration_s3FilesAccessPoint)
 		s.WriteStruct(schemas.FilesystemConfiguration_s3FilesAccessPoint)
@@ -1207,6 +1213,17 @@ func serializeOauth2ProviderConfigOutput(s smithy.ShapeSerializer, schema *smith
 	case *types.Oauth2ProviderConfigOutputMemberSlackOauth2ProviderConfig:
 		s.WriteUnion(schema, schemas.Oauth2ProviderConfigOutput_slackOauth2ProviderConfig)
 		s.WriteStruct(schemas.Oauth2ProviderConfigOutput_slackOauth2ProviderConfig)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeOperatingSystemConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.OperatingSystemConfiguration) {
+	switch vv := v.(type) {
+	case *types.OperatingSystemConfigurationMemberLinux:
+		s.WriteUnion(schema, schemas.OperatingSystemConfiguration_linux)
+		s.WriteStruct(schemas.OperatingSystemConfiguration_linux)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -2096,6 +2113,10 @@ func deserializeFilesystemConfiguration(d smithy.ShapeDeserializer, s *smithy.Sc
 			vv := &types.FilesystemConfigurationMemberEfsAccessPoint{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.FilesystemConfiguration_s3BucketMount:
+			vv := &types.FilesystemConfigurationMemberS3BucketMount{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.FilesystemConfiguration_s3FilesAccessPoint:
 			vv := &types.FilesystemConfigurationMemberS3FilesAccessPoint{}
 			*v = vv
@@ -2690,6 +2711,18 @@ func deserializeOauth2ProviderConfigOutput(d smithy.ShapeDeserializer, s *smithy
 			return vv.Deserialize(d)
 		case schemas.Oauth2ProviderConfigOutput_slackOauth2ProviderConfig:
 			vv := &types.Oauth2ProviderConfigOutputMemberSlackOauth2ProviderConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeOperatingSystemConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.OperatingSystemConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.OperatingSystemConfiguration_linux:
+			vv := &types.OperatingSystemConfigurationMemberLinux{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

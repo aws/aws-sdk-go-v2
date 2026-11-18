@@ -1779,6 +1779,13 @@ type LoginProfile struct {
 	// This member is required.
 	UserName *string
 
+	// The maximum duration (in seconds) of an Amazon Web Services Sign-In session for
+	// the user.
+	//
+	// This member is omitted when the setting is unset. In that case, no default
+	// value is returned and the existing sign-in session behavior applies.
+	MaxSigninSessionDuration *int32
+
 	// Specifies whether the user is required to set a new password on next sign-in.
 	PasswordResetRequired bool
 
@@ -1795,6 +1802,9 @@ func (v *LoginProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateDate != nil {
 		s.WriteTime(schemas.LoginProfile_CreateDate, *v.CreateDate)
 	}
+	if v.MaxSigninSessionDuration != nil {
+		s.WriteInt32(schemas.LoginProfile_MaxSigninSessionDuration, *v.MaxSigninSessionDuration)
+	}
 	if v.PasswordResetRequired != false {
 		s.WriteBool(schemas.LoginProfile_PasswordResetRequired, v.PasswordResetRequired)
 	}
@@ -1808,6 +1818,9 @@ func (v *LoginProfile) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LoginProfile_CreateDate:
 			v.CreateDate = new(time.Time)
 			return d.ReadTime(schemas.LoginProfile_CreateDate, v.CreateDate)
+		case schemas.LoginProfile_MaxSigninSessionDuration:
+			v.MaxSigninSessionDuration = new(int32)
+			return d.ReadInt32(schemas.LoginProfile_MaxSigninSessionDuration, v.MaxSigninSessionDuration)
 		case schemas.LoginProfile_PasswordResetRequired:
 			return d.ReadBool(schemas.LoginProfile_PasswordResetRequired, &v.PasswordResetRequired)
 		case schemas.LoginProfile_UserName:
@@ -3342,6 +3355,14 @@ type Role struct {
 	// optional DurationSeconds API parameter or duration-seconds CLI parameter.
 	MaxSessionDuration *int32
 
+	// The maximum duration (in seconds) of an Amazon Web Services Sign-In session for
+	// users who sign in with this role. This value is independent of
+	// MaxSessionDuration .
+	//
+	// This member is omitted when the setting is unset. In that case, no default
+	// value is returned and the existing sign-in session behavior applies.
+	MaxSigninSessionDuration *int32
+
 	// The ARN of the policy used to set the permissions boundary for the role.
 	//
 	// For more information about permissions boundaries, see [Permissions boundaries for IAM identities] in the IAM User Guide.
@@ -3396,6 +3417,9 @@ func (v *Role) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxSessionDuration != nil {
 		s.WriteInt32(schemas.Role_MaxSessionDuration, *v.MaxSessionDuration)
 	}
+	if v.MaxSigninSessionDuration != nil {
+		s.WriteInt32(schemas.Role_MaxSigninSessionDuration, *v.MaxSigninSessionDuration)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.Role_Path, *v.Path)
 	}
@@ -3442,6 +3466,9 @@ func (v *Role) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Role_MaxSessionDuration:
 			v.MaxSessionDuration = new(int32)
 			return d.ReadInt32(schemas.Role_MaxSessionDuration, v.MaxSessionDuration)
+		case schemas.Role_MaxSigninSessionDuration:
+			v.MaxSigninSessionDuration = new(int32)
+			return d.ReadInt32(schemas.Role_MaxSigninSessionDuration, v.MaxSigninSessionDuration)
 		case schemas.Role_Path:
 			v.Path = new(string)
 			return d.ReadString(schemas.Role_Path, v.Path)

@@ -6633,6 +6633,10 @@ type PentestJob struct {
 	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The version of the pentest job. The version increases each time the job is
+	// resumed. This value is absent for jobs created before versions were recorded.
+	Version *string
+
 	// The VPC configuration for the pentest job.
 	VpcConfig *VpcConfig
 
@@ -6765,6 +6769,9 @@ func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PentestJob_updatedAt, *v.UpdatedAt)
 	}
+	if v.Version != nil {
+		s.WriteString(schemas.PentestJob_version, *v.Version)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.PentestJob_vpcConfig)
 		v.VpcConfig.SerializeMembers(s)
@@ -6880,6 +6887,9 @@ func (v *PentestJob) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PentestJob_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.PentestJob_updatedAt, v.UpdatedAt)
+		case schemas.PentestJob_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PentestJob_version, v.Version)
 		case schemas.PentestJob_vpcConfig:
 			v.VpcConfig = &VpcConfig{}
 			return v.VpcConfig.Deserialize(d)
@@ -6919,6 +6929,10 @@ type PentestJobSummary struct {
 	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The version of the pentest job. The version increases each time the job is
+	// resumed. This value is absent for jobs created before versions were recorded.
+	Version *string
+
 	noSmithyDocumentSerde
 }
 
@@ -6952,6 +6966,9 @@ func (v *PentestJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PentestJobSummary_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.PentestJobSummary_version, *v.Version)
 	}
 }
 func (v *PentestJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
@@ -6989,6 +7006,9 @@ func (v *PentestJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PentestJobSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.PentestJobSummary_updatedAt, v.UpdatedAt)
+		case schemas.PentestJobSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PentestJobSummary_version, v.Version)
 		}
 		return nil
 	})

@@ -1,0 +1,8 @@
+{
+    "id": "45004987-71ed-463e-a3b0-1cd72212df89",
+    "type": "feature",
+    "description": "Adds resource tags functionality to the AWS Health service",
+    "modules": [
+        "service/health"
+    ]
+}

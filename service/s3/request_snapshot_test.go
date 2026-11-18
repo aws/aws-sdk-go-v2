@@ -3633,6 +3633,52 @@ func TestCheckRequestSnapshot_PutBucketReplication(t *testing.T) {
 									Value: ptr.String("__Value__"),
 								},
 							},
+							Not: &types.ReplicationRuleNotOperator{
+								Prefix: ptr.String("__Prefix__"),
+								Tag: &types.Tag{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								Or: &types.ReplicationRuleOrOperator{
+									Prefixes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Tags: []types.Tag{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						Not: &types.ReplicationRuleNotOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tag: &types.Tag{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							Or: &types.ReplicationRuleOrOperator{
+								Prefixes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Tags: []types.Tag{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
 						},
 					},
 					Status: types.ReplicationRuleStatus("Enabled"),
@@ -3656,6 +3702,9 @@ func TestCheckRequestSnapshot_PutBucketReplication(t *testing.T) {
 						},
 						EncryptionConfiguration: &types.EncryptionConfiguration{
 							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+							UseSourceMultiRegionKey: &types.UseSourceMultiRegionKey{
+								Status: types.UseSourceMultiRegionKeyStatus("Enabled"),
+							},
 						},
 						ReplicationTime: &types.ReplicationTime{
 							Status: types.ReplicationTimeStatus("Enabled"),
@@ -3696,6 +3745,52 @@ func TestCheckRequestSnapshot_PutBucketReplication(t *testing.T) {
 									Value: ptr.String("__Value__"),
 								},
 							},
+							Not: &types.ReplicationRuleNotOperator{
+								Prefix: ptr.String("__Prefix__"),
+								Tag: &types.Tag{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								Or: &types.ReplicationRuleOrOperator{
+									Prefixes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Tags: []types.Tag{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						Not: &types.ReplicationRuleNotOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tag: &types.Tag{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							Or: &types.ReplicationRuleOrOperator{
+								Prefixes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Tags: []types.Tag{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
 						},
 					},
 					Status: types.ReplicationRuleStatus("Enabled"),
@@ -3719,6 +3814,9 @@ func TestCheckRequestSnapshot_PutBucketReplication(t *testing.T) {
 						},
 						EncryptionConfiguration: &types.EncryptionConfiguration{
 							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+							UseSourceMultiRegionKey: &types.UseSourceMultiRegionKey{
+								Status: types.UseSourceMultiRegionKeyStatus("Enabled"),
+							},
 						},
 						ReplicationTime: &types.ReplicationTime{
 							Status: types.ReplicationTimeStatus("Enabled"),
@@ -8276,6 +8374,52 @@ func TestUpdateRequestSnapshot_PutBucketReplication(t *testing.T) {
 									Value: ptr.String("__Value__"),
 								},
 							},
+							Not: &types.ReplicationRuleNotOperator{
+								Prefix: ptr.String("__Prefix__"),
+								Tag: &types.Tag{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								Or: &types.ReplicationRuleOrOperator{
+									Prefixes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Tags: []types.Tag{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						Not: &types.ReplicationRuleNotOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tag: &types.Tag{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							Or: &types.ReplicationRuleOrOperator{
+								Prefixes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Tags: []types.Tag{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
 						},
 					},
 					Status: types.ReplicationRuleStatus("Enabled"),
@@ -8299,6 +8443,9 @@ func TestUpdateRequestSnapshot_PutBucketReplication(t *testing.T) {
 						},
 						EncryptionConfiguration: &types.EncryptionConfiguration{
 							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+							UseSourceMultiRegionKey: &types.UseSourceMultiRegionKey{
+								Status: types.UseSourceMultiRegionKeyStatus("Enabled"),
+							},
 						},
 						ReplicationTime: &types.ReplicationTime{
 							Status: types.ReplicationTimeStatus("Enabled"),
@@ -8339,6 +8486,52 @@ func TestUpdateRequestSnapshot_PutBucketReplication(t *testing.T) {
 									Value: ptr.String("__Value__"),
 								},
 							},
+							Not: &types.ReplicationRuleNotOperator{
+								Prefix: ptr.String("__Prefix__"),
+								Tag: &types.Tag{
+									Key:   ptr.String("__Key__"),
+									Value: ptr.String("__Value__"),
+								},
+								Or: &types.ReplicationRuleOrOperator{
+									Prefixes: []string{
+										"__Member__",
+										"__Member__",
+									},
+									Tags: []types.Tag{
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+										{
+											Key:   ptr.String("__Key__"),
+											Value: ptr.String("__Value__"),
+										},
+									},
+								},
+							},
+						},
+						Not: &types.ReplicationRuleNotOperator{
+							Prefix: ptr.String("__Prefix__"),
+							Tag: &types.Tag{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							Or: &types.ReplicationRuleOrOperator{
+								Prefixes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								Tags: []types.Tag{
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+									{
+										Key:   ptr.String("__Key__"),
+										Value: ptr.String("__Value__"),
+									},
+								},
+							},
 						},
 					},
 					Status: types.ReplicationRuleStatus("Enabled"),
@@ -8362,6 +8555,9 @@ func TestUpdateRequestSnapshot_PutBucketReplication(t *testing.T) {
 						},
 						EncryptionConfiguration: &types.EncryptionConfiguration{
 							ReplicaKmsKeyID: ptr.String("__ReplicaKmsKeyID__"),
+							UseSourceMultiRegionKey: &types.UseSourceMultiRegionKey{
+								Status: types.UseSourceMultiRegionKeyStatus("Enabled"),
+							},
 						},
 						ReplicationTime: &types.ReplicationTime{
 							Status: types.ReplicationTimeStatus("Enabled"),

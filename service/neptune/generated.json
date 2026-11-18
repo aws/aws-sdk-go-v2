@@ -56,6 +56,7 @@
         "api_op_DescribeGlobalClusters.go",
         "api_op_DescribeOrderableDBInstanceOptions.go",
         "api_op_DescribePendingMaintenanceActions.go",
+        "api_op_DescribeServerlessV2PlatformVersions.go",
         "api_op_DescribeValidDBInstanceModifications.go",
         "api_op_FailoverDBCluster.go",
         "api_op_FailoverGlobalCluster.go",

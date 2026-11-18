@@ -228,6 +228,11 @@ var DescribePendingMaintenanceActions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribePendingMaintenanceActions",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeServerlessV2PlatformVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptune",
+	Name:      "DescribeServerlessV2PlatformVersions",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeValidDBInstanceModifications = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptune",
 	Name:      "DescribeValidDBInstanceModifications",
@@ -466,7 +471,7 @@ var ClusterPendingModifiedValues_NetworkType *smithy.Schema
 var DBCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptune",
 	Name:      "DBCluster",
-}, smithy.ShapeTypeStructure, 46)
+}, smithy.ShapeTypeStructure, 47)
 var DBCluster_AllocatedStorage *smithy.Schema
 
 var DBCluster_AvailabilityZones *smithy.Schema
@@ -550,6 +555,8 @@ var DBCluster_CrossAccountClone *smithy.Schema
 var DBCluster_AutomaticRestartTime *smithy.Schema
 
 var DBCluster_ServerlessV2ScalingConfiguration *smithy.Schema
+
+var DBCluster_ServerlessV2PlatformVersion *smithy.Schema
 
 var DBCluster_GlobalClusterIdentifier *smithy.Schema
 
@@ -1946,6 +1953,36 @@ var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SensitiveString",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var ServerlessV2FeaturesSupport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptune",
+	Name:      "ServerlessV2FeaturesSupport",
+}, smithy.ShapeTypeStructure, 2)
+var ServerlessV2FeaturesSupport_MinCapacity *smithy.Schema
+
+var ServerlessV2FeaturesSupport_MaxCapacity *smithy.Schema
+
+var ServerlessV2PlatformVersionInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptune",
+	Name:      "ServerlessV2PlatformVersionInfo",
+}, smithy.ShapeTypeStructure, 6)
+var ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersion *smithy.Schema
+
+var ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersionDescription *smithy.Schema
+
+var ServerlessV2PlatformVersionInfo_Engine *smithy.Schema
+
+var ServerlessV2PlatformVersionInfo_ServerlessV2FeaturesSupport *smithy.Schema
+
+var ServerlessV2PlatformVersionInfo_Status *smithy.Schema
+
+var ServerlessV2PlatformVersionInfo_IsDefault *smithy.Schema
+
+var _ServerlessV2PlatformVersionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptune",
+	Name:      "ServerlessV2PlatformVersionList",
+}, smithy.ShapeTypeList, 1)
+var _ServerlessV2PlatformVersionList_member *smithy.Schema
+
 var ServerlessV2ScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptune",
 	Name:      "ServerlessV2ScalingConfiguration",
@@ -3184,6 +3221,32 @@ var PendingMaintenanceActionsMessage_PendingMaintenanceActions *smithy.Schema
 
 var PendingMaintenanceActionsMessage_Marker *smithy.Schema
 
+var DescribeServerlessV2PlatformVersionsMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptune",
+	Name:      "DescribeServerlessV2PlatformVersionsMessage",
+}, smithy.ShapeTypeStructure, 7)
+var DescribeServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersion *smithy.Schema
+
+var DescribeServerlessV2PlatformVersionsMessage_Engine *smithy.Schema
+
+var DescribeServerlessV2PlatformVersionsMessage_Filters *smithy.Schema
+
+var DescribeServerlessV2PlatformVersionsMessage_DefaultOnly *smithy.Schema
+
+var DescribeServerlessV2PlatformVersionsMessage_IncludeAll *smithy.Schema
+
+var DescribeServerlessV2PlatformVersionsMessage_MaxRecords *smithy.Schema
+
+var DescribeServerlessV2PlatformVersionsMessage_Marker *smithy.Schema
+
+var ServerlessV2PlatformVersionsMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptune",
+	Name:      "ServerlessV2PlatformVersionsMessage",
+}, smithy.ShapeTypeStructure, 2)
+var ServerlessV2PlatformVersionsMessage_Marker *smithy.Schema
+
+var ServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersions *smithy.Schema
+
 var DescribeValidDBInstanceModificationsMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptune",
 	Name:      "DescribeValidDBInstanceModificationsMessage",
@@ -3913,6 +3976,8 @@ func init() {
 
 	DBCluster_ServerlessV2ScalingConfiguration = DBCluster.AddMember("ServerlessV2ScalingConfiguration", ServerlessV2ScalingConfigurationInfo)
 
+	DBCluster_ServerlessV2PlatformVersion = DBCluster.AddMember("ServerlessV2PlatformVersion", _String)
+
 	DBCluster_GlobalClusterIdentifier = DBCluster.AddMember("GlobalClusterIdentifier", _GlobalClusterIdentifier)
 
 	DBCluster_IOOptimizedNextAllowedModificationTime = DBCluster.AddMember("IOOptimizedNextAllowedModificationTime", _TStamp)
@@ -4621,6 +4686,24 @@ func init() {
 
 	ResourceNotFoundFault_message = ResourceNotFoundFault.AddMember("message", _ExceptionMessage)
 
+	ServerlessV2FeaturesSupport_MinCapacity = ServerlessV2FeaturesSupport.AddMember("MinCapacity", _DoubleOptional)
+
+	ServerlessV2FeaturesSupport_MaxCapacity = ServerlessV2FeaturesSupport.AddMember("MaxCapacity", _DoubleOptional)
+
+	ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersion = ServerlessV2PlatformVersionInfo.AddMember("ServerlessV2PlatformVersion", _String)
+
+	ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersionDescription = ServerlessV2PlatformVersionInfo.AddMember("ServerlessV2PlatformVersionDescription", _String)
+
+	ServerlessV2PlatformVersionInfo_Engine = ServerlessV2PlatformVersionInfo.AddMember("Engine", _String)
+
+	ServerlessV2PlatformVersionInfo_ServerlessV2FeaturesSupport = ServerlessV2PlatformVersionInfo.AddMember("ServerlessV2FeaturesSupport", ServerlessV2FeaturesSupport)
+
+	ServerlessV2PlatformVersionInfo_Status = ServerlessV2PlatformVersionInfo.AddMember("Status", _String)
+
+	ServerlessV2PlatformVersionInfo_IsDefault = ServerlessV2PlatformVersionInfo.AddMember("IsDefault", _Boolean)
+
+	_ServerlessV2PlatformVersionList_member = _ServerlessV2PlatformVersionList.AddMember("member", ServerlessV2PlatformVersionInfo)
+
 	ServerlessV2ScalingConfiguration_MinCapacity = ServerlessV2ScalingConfiguration.AddMember("MinCapacity", _DoubleOptional)
 
 	ServerlessV2ScalingConfiguration_MaxCapacity = ServerlessV2ScalingConfiguration.AddMember("MaxCapacity", _DoubleOptional)
@@ -5288,6 +5371,24 @@ func init() {
 	PendingMaintenanceActionsMessage_PendingMaintenanceActions = PendingMaintenanceActionsMessage.AddMember("PendingMaintenanceActions", _PendingMaintenanceActions)
 
 	PendingMaintenanceActionsMessage_Marker = PendingMaintenanceActionsMessage.AddMember("Marker", _String)
+
+	DescribeServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersion = DescribeServerlessV2PlatformVersionsMessage.AddMember("ServerlessV2PlatformVersion", _String)
+
+	DescribeServerlessV2PlatformVersionsMessage_Engine = DescribeServerlessV2PlatformVersionsMessage.AddMember("Engine", _String)
+
+	DescribeServerlessV2PlatformVersionsMessage_Filters = DescribeServerlessV2PlatformVersionsMessage.AddMember("Filters", _FilterList)
+
+	DescribeServerlessV2PlatformVersionsMessage_DefaultOnly = DescribeServerlessV2PlatformVersionsMessage.AddMember("DefaultOnly", _BooleanOptional)
+
+	DescribeServerlessV2PlatformVersionsMessage_IncludeAll = DescribeServerlessV2PlatformVersionsMessage.AddMember("IncludeAll", _BooleanOptional)
+
+	DescribeServerlessV2PlatformVersionsMessage_MaxRecords = DescribeServerlessV2PlatformVersionsMessage.AddMember("MaxRecords", _IntegerOptional)
+
+	DescribeServerlessV2PlatformVersionsMessage_Marker = DescribeServerlessV2PlatformVersionsMessage.AddMember("Marker", _String)
+
+	ServerlessV2PlatformVersionsMessage_Marker = ServerlessV2PlatformVersionsMessage.AddMember("Marker", _String)
+
+	ServerlessV2PlatformVersionsMessage_ServerlessV2PlatformVersions = ServerlessV2PlatformVersionsMessage.AddMember("ServerlessV2PlatformVersions", _ServerlessV2PlatformVersionList)
 
 	DescribeValidDBInstanceModificationsMessage_DBInstanceIdentifier = DescribeValidDBInstanceModificationsMessage.AddMember("DBInstanceIdentifier", _String)
 

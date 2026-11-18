@@ -139,6 +139,7 @@ func TestCheckResponseSnapshot_AcquireRole(t *testing.T) {
 			AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 			Description:              ptr.String("__Description__"),
 			MaxSessionDuration:       ptr.Int32(1),
+			MaxSigninSessionDuration: ptr.Int32(1),
 			PermissionsBoundary: &types.AttachedPermissionsBoundary{
 				PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 				PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -516,6 +517,7 @@ func TestCheckResponseSnapshot_CreateInstanceProfile(t *testing.T) {
 					AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 					Description:              ptr.String("__Description__"),
 					MaxSessionDuration:       ptr.Int32(1),
+					MaxSigninSessionDuration: ptr.Int32(1),
 					PermissionsBoundary: &types.AttachedPermissionsBoundary{
 						PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 						PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -548,6 +550,7 @@ func TestCheckResponseSnapshot_CreateInstanceProfile(t *testing.T) {
 					AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 					Description:              ptr.String("__Description__"),
 					MaxSessionDuration:       ptr.Int32(1),
+					MaxSigninSessionDuration: ptr.Int32(1),
 					PermissionsBoundary: &types.AttachedPermissionsBoundary{
 						PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 						PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -617,9 +620,10 @@ func TestCheckResponseSnapshot_CreateInstanceProfile(t *testing.T) {
 func TestCheckResponseSnapshot_CreateLoginProfile(t *testing.T) {
 	want := &CreateLoginProfileOutput{
 		LoginProfile: &types.LoginProfile{
-			UserName:              ptr.String("__UserName__"),
-			CreateDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			PasswordResetRequired: true,
+			UserName:                 ptr.String("__UserName__"),
+			CreateDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PasswordResetRequired:    true,
+			MaxSigninSessionDuration: ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateLoginProfile.response")
@@ -631,9 +635,10 @@ func TestCheckResponseSnapshot_CreateLoginProfile(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateLoginProfile(context.Background(), &CreateLoginProfileInput{
-		UserName:              ptr.String("__UserName__"),
-		Password:              ptr.String("__Password__"),
-		PasswordResetRequired: true,
+		UserName:                 ptr.String("__UserName__"),
+		Password:                 ptr.String("__Password__"),
+		PasswordResetRequired:    true,
+		MaxSigninSessionDuration: ptr.Int32(1),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -793,6 +798,7 @@ func TestCheckResponseSnapshot_CreateRole(t *testing.T) {
 			AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 			Description:              ptr.String("__Description__"),
 			MaxSessionDuration:       ptr.Int32(1),
+			MaxSigninSessionDuration: ptr.Int32(1),
 			PermissionsBoundary: &types.AttachedPermissionsBoundary{
 				PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 				PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -831,6 +837,7 @@ func TestCheckResponseSnapshot_CreateRole(t *testing.T) {
 		AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 		Description:              ptr.String("__Description__"),
 		MaxSessionDuration:       ptr.Int32(1),
+		MaxSigninSessionDuration: ptr.Int32(1),
 		PermissionsBoundary:      ptr.String("__PermissionsBoundary__"),
 		Tags: []types.Tag{
 			{
@@ -908,6 +915,7 @@ func TestCheckResponseSnapshot_CreateServiceLinkedRole(t *testing.T) {
 			AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 			Description:              ptr.String("__Description__"),
 			MaxSessionDuration:       ptr.Int32(1),
+			MaxSigninSessionDuration: ptr.Int32(1),
 			PermissionsBoundary: &types.AttachedPermissionsBoundary{
 				PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 				PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2132,6 +2140,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2164,6 +2173,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2215,6 +2225,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2247,6 +2258,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2346,6 +2358,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2378,6 +2391,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2429,6 +2443,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2461,6 +2476,7 @@ func TestCheckResponseSnapshot_GetAccountAuthorizationDetails(t *testing.T) {
 								AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 								Description:              ptr.String("__Description__"),
 								MaxSessionDuration:       ptr.Int32(1),
+								MaxSigninSessionDuration: ptr.Int32(1),
 								PermissionsBoundary: &types.AttachedPermissionsBoundary{
 									PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 									PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -2999,6 +3015,7 @@ func TestCheckResponseSnapshot_GetInstanceProfile(t *testing.T) {
 					AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 					Description:              ptr.String("__Description__"),
 					MaxSessionDuration:       ptr.Int32(1),
+					MaxSigninSessionDuration: ptr.Int32(1),
 					PermissionsBoundary: &types.AttachedPermissionsBoundary{
 						PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 						PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -3031,6 +3048,7 @@ func TestCheckResponseSnapshot_GetInstanceProfile(t *testing.T) {
 					AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 					Description:              ptr.String("__Description__"),
 					MaxSessionDuration:       ptr.Int32(1),
+					MaxSigninSessionDuration: ptr.Int32(1),
 					PermissionsBoundary: &types.AttachedPermissionsBoundary{
 						PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 						PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -3089,9 +3107,10 @@ func TestCheckResponseSnapshot_GetInstanceProfile(t *testing.T) {
 func TestCheckResponseSnapshot_GetLoginProfile(t *testing.T) {
 	want := &GetLoginProfileOutput{
 		LoginProfile: &types.LoginProfile{
-			UserName:              ptr.String("__UserName__"),
-			CreateDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			PasswordResetRequired: true,
+			UserName:                 ptr.String("__UserName__"),
+			CreateDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			PasswordResetRequired:    true,
+			MaxSigninSessionDuration: ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLoginProfile.response")
@@ -3345,6 +3364,7 @@ func TestCheckResponseSnapshot_GetRole(t *testing.T) {
 			AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 			Description:              ptr.String("__Description__"),
 			MaxSessionDuration:       ptr.Int32(1),
+			MaxSigninSessionDuration: ptr.Int32(1),
 			PermissionsBoundary: &types.AttachedPermissionsBoundary{
 				PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 				PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4399,6 +4419,7 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4431,6 +4452,7 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4482,6 +4504,7 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4514,6 +4537,7 @@ func TestCheckResponseSnapshot_ListInstanceProfiles(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4593,6 +4617,7 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4625,6 +4650,7 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4676,6 +4702,7 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -4708,6 +4735,7 @@ func TestCheckResponseSnapshot_ListInstanceProfilesForRole(t *testing.T) {
 						AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 						Description:              ptr.String("__Description__"),
 						MaxSessionDuration:       ptr.Int32(1),
+						MaxSigninSessionDuration: ptr.Int32(1),
 						PermissionsBoundary: &types.AttachedPermissionsBoundary{
 							PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 							PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -5231,6 +5259,7 @@ func TestCheckResponseSnapshot_ListRoles(t *testing.T) {
 				AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 				Description:              ptr.String("__Description__"),
 				MaxSessionDuration:       ptr.Int32(1),
+				MaxSigninSessionDuration: ptr.Int32(1),
 				PermissionsBoundary: &types.AttachedPermissionsBoundary{
 					PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 					PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -5263,6 +5292,7 @@ func TestCheckResponseSnapshot_ListRoles(t *testing.T) {
 				AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 				Description:              ptr.String("__Description__"),
 				MaxSessionDuration:       ptr.Int32(1),
+				MaxSigninSessionDuration: ptr.Int32(1),
 				PermissionsBoundary: &types.AttachedPermissionsBoundary{
 					PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 					PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),
@@ -7415,9 +7445,11 @@ func TestCheckResponseSnapshot_UpdateLoginProfile(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UpdateLoginProfile(context.Background(), &UpdateLoginProfileInput{
-		UserName:              ptr.String("__UserName__"),
-		Password:              ptr.String("__Password__"),
-		PasswordResetRequired: ptr.Bool(true),
+		UserName:                      ptr.String("__UserName__"),
+		Password:                      ptr.String("__Password__"),
+		PasswordResetRequired:         ptr.Bool(true),
+		MaxSigninSessionDuration:      ptr.Int32(1),
+		ResetMaxSigninSessionDuration: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7463,9 +7495,11 @@ func TestCheckResponseSnapshot_UpdateRole(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.UpdateRole(context.Background(), &UpdateRoleInput{
-		RoleName:           ptr.String("__RoleName__"),
-		Description:        ptr.String("__Description__"),
-		MaxSessionDuration: ptr.Int32(1),
+		RoleName:                      ptr.String("__RoleName__"),
+		Description:                   ptr.String("__Description__"),
+		MaxSessionDuration:            ptr.Int32(1),
+		MaxSigninSessionDuration:      ptr.Int32(1),
+		ResetMaxSigninSessionDuration: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -7486,6 +7520,7 @@ func TestCheckResponseSnapshot_UpdateRoleDescription(t *testing.T) {
 			AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 			Description:              ptr.String("__Description__"),
 			MaxSessionDuration:       ptr.Int32(1),
+			MaxSigninSessionDuration: ptr.Int32(1),
 			PermissionsBoundary: &types.AttachedPermissionsBoundary{
 				PermissionsBoundaryType: types.PermissionsBoundaryAttachmentType("PermissionsBoundaryPolicy"),
 				PermissionsBoundaryArn:  ptr.String("__PermissionsBoundaryArn__"),

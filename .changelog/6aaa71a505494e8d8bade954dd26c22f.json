@@ -1,0 +1,8 @@
+{
+    "id": "6aaa71a5-0549-4e8d-8bad-e954dd26c22f",
+    "type": "feature",
+    "description": "This release adds support for Spillover Routing in Amazon SES.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

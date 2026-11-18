@@ -752,6 +752,9 @@ func ExampleFilesystemConfiguration_outputUsage() {
 	case *types.FilesystemConfigurationMemberEfsAccessPoint:
 		_ = v.Value // Value is types.EfsAccessPointConfiguration
 
+	case *types.FilesystemConfigurationMemberS3BucketMount:
+		_ = v.Value // Value is types.S3BucketMountConfiguration
+
 	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
 		_ = v.Value // Value is types.S3FilesAccessPointConfiguration
 
@@ -767,6 +770,7 @@ func ExampleFilesystemConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.S3BucketMountConfiguration
 var _ *types.S3FilesAccessPointConfiguration
 var _ *types.EfsAccessPointConfiguration
 var _ *types.CapacityProviderVolumeConfiguration
@@ -1543,6 +1547,24 @@ var _ *types.IncludedOauth2ProviderConfigOutput
 var _ *types.SalesforceOauth2ProviderConfigOutput
 var _ *types.GoogleOauth2ProviderConfigOutput
 var _ *types.LinkedinOauth2ProviderConfigOutput
+
+func ExampleOperatingSystemConfiguration_outputUsage() {
+	var union types.OperatingSystemConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OperatingSystemConfigurationMemberLinux:
+		_ = v.Value // Value is types.LinuxOperatingSystemConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LinuxOperatingSystemConfiguration
 
 func ExamplePaymentProviderConfigurationInput_outputUsage() {
 	var union types.PaymentProviderConfigurationInput

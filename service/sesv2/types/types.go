@@ -17,7 +17,7 @@ type AccountDetails struct {
 	AdditionalContactEmailAddresses []string
 
 	// The language you would prefer for the case. The contact language can be one of
-	// ENGLISH or JAPANESE .
+	// EN or JA .
 	ContactLanguage ContactLanguage
 
 	// The type of email your account is sending. The mail type can be one of the
@@ -611,9 +611,8 @@ type BulkEmailEntry struct {
 	ReplacementHeaders []MessageHeader
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send using the SendBulkTemplatedEmail operation. Tags correspond to
-	// characteristics of the email that you define, so that you can publish email
-	// sending events.
+	// send using the SendBulkEmail operation. Tags correspond to characteristics of
+	// the email that you define, so that you can publish email sending events.
 	ReplacementTags []MessageTag
 
 	noSmithyDocumentSerde
@@ -665,60 +664,58 @@ func (v *BulkEmailEntry) Deserialize(d smithy.ShapeDeserializer) error {
 type BulkEmailEntryResult struct {
 
 	// A description of an error that prevented a message being sent using the
-	// SendBulkTemplatedEmail operation.
+	// SendBulkEmail operation.
 	Error *string
 
-	// The unique message identifier returned from the SendBulkTemplatedEmail
-	// operation.
+	// The unique message identifier returned from the SendBulkEmail operation.
 	MessageId *string
 
-	// The status of a message sent using the SendBulkTemplatedEmail operation.
+	// The status of a message sent using the SendBulkEmail operation.
 	//
 	// Possible values for this parameter include:
 	//
-	//   - SUCCESS: Amazon SES accepted the message, and will attempt to deliver it to
+	//   - SUCCESS – Amazon SES accepted the message, and will attempt to deliver it to
 	//   the recipients.
 	//
-	//   - MESSAGE_REJECTED: The message was rejected because it contained a virus.
+	//   - MESSAGE_REJECTED – The message was rejected because it contained a virus.
 	//
-	//   - MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender's email address or domain was not
+	//   - MAIL_FROM_DOMAIN_NOT_VERIFIED – The sender's email address or domain was not
 	//   verified.
 	//
-	//   - CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you specified does
-	//   not exist.
+	//   - CONFIGURATION_SET_NOT_FOUND – The configuration set you specified does not
+	//   exist.
 	//
-	//   - TEMPLATE_DOES_NOT_EXIST: The template you specified does not exist.
+	//   - TEMPLATE_NOT_FOUND – The template you specified does not exist.
 	//
-	//   - ACCOUNT_SUSPENDED: Your account has been shut down because of issues
+	//   - ACCOUNT_SUSPENDED – Your account has been shut down because of issues
 	//   related to your email sending practices.
 	//
-	//   - ACCOUNT_THROTTLED: The number of emails you can send has been reduced
+	//   - ACCOUNT_THROTTLED – The number of emails you can send has been reduced
 	//   because your account has exceeded its allocated sending limit.
 	//
-	//   - ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or exceeded the maximum
+	//   - ACCOUNT_DAILY_QUOTA_EXCEEDED – You have reached or exceeded the maximum
 	//   number of emails you can send from your account in a 24-hour period.
 	//
-	//   - INVALID_SENDING_POOL_NAME: The configuration set you specified refers to an
+	//   - INVALID_SENDING_POOL_NAME – The configuration set you specified refers to an
 	//   IP pool that does not exist.
 	//
-	//   - ACCOUNT_SENDING_PAUSED: Email sending for the Amazon SES account was
-	//   disabled using the [UpdateAccountSendingEnabled]operation.
+	//   - ACCOUNT_SENDING_PAUSED – Email sending for the Amazon SES account was
+	//   disabled using the [PutAccountSendingAttributes]operation.
 	//
-	//   - CONFIGURATION_SET_SENDING_PAUSED: Email sending for this configuration set
-	//   was disabled using the [UpdateConfigurationSetSendingEnabled]operation.
+	//   - CONFIGURATION_SET_SENDING_PAUSED – Email sending for this configuration set
+	//   was disabled using the [PutConfigurationSetSendingOptions]operation.
 	//
-	//   - INVALID_PARAMETER_VALUE: One or more of the parameters you specified when
-	//   calling this operation was invalid. See the error message for additional
-	//   information.
+	//   - INVALID_PARAMETER – One or more of the parameters you specified when calling
+	//   this operation was invalid. See the error message for additional information.
 	//
-	//   - TRANSIENT_FAILURE: Amazon SES was unable to process your request because of
+	//   - TRANSIENT_FAILURE – Amazon SES was unable to process your request because of
 	//   a temporary issue.
 	//
-	//   - FAILED: Amazon SES was unable to process your request. See the error
+	//   - FAILED – Amazon SES was unable to process your request. See the error
 	//   message for additional information.
 	//
-	// [UpdateAccountSendingEnabled]: https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html
-	// [UpdateConfigurationSetSendingEnabled]: https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html
+	// [PutConfigurationSetSendingOptions]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutConfigurationSetSendingOptions.html
+	// [PutAccountSendingAttributes]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutAccountSendingAttributes.html
 	Status BulkEmailStatus
 
 	noSmithyDocumentSerde
@@ -826,9 +823,9 @@ type CloudWatchDimensionConfiguration struct {
 
 	// The location where the Amazon SES API v2 finds the value of a dimension to
 	// publish to Amazon CloudWatch. To use the message tags that you specify using an
-	// X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or SendRawEmail API,
-	// choose messageTag . To use your own email headers, choose emailHeader . To use
-	// link tags, choose linkTags .
+	// X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or SendBulkEmail
+	// operation, choose MESSAGE_TAG . To use your own email headers, choose
+	// EMAIL_HEADER . To use link tags, choose LINK_TAG .
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
@@ -1546,8 +1543,8 @@ type DeliverabilityTestReport struct {
 	// The status of the predictive inbox placement test. If the status is IN_PROGRESS
 	// , then the predictive inbox placement test is currently running. Predictive
 	// inbox placement tests are usually complete within 24 hours of creating the test.
-	// If the status is COMPLETE , then the test is finished, and you can use the
-	// GetDeliverabilityTestReport to view the results of the test.
+	// If the status is COMPLETED , then the test is finished, and you can use the
+	// GetDeliverabilityTestReport operation to view the results of the test.
 	DeliverabilityTestStatus DeliverabilityTestStatus
 
 	// The sender address that you specified for the predictive inbox placement test.
@@ -1622,6 +1619,55 @@ func (v *DeliverabilityTestReport) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The delivery attributes that apply to your Amazon SES account in the current
+// Amazon Web Services Region.
+type DeliveryAttributes struct {
+
+	// The shared pool delivery mode for your Amazon SES account in the current Amazon
+	// Web Services Region. This mode applies to email that you send from shared IP
+	// addresses. Can be one of the following:
+	//
+	//   - GLOBAL – Amazon SES delivers from your sending Region first and, when it
+	//   improves your deliverability, also uses Amazon SES shared IP addresses with
+	//   established sending history in other Amazon Web Services Regions within the same
+	//   Amazon Web Services partition.
+	//
+	//   - REGIONAL – Amazon SES delivers your email only from shared IP addresses in
+	//   your sending Region.
+	//
+	// Accounts that start sending in a Region on or after the launch of Global Shared
+	// Delivery use GLOBAL in that Region.
+	SharedPoolDeliveryMode AccountSharedPoolDeliveryMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeliveryAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeliveryAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeliveryAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedPoolDeliveryMode != "" {
+		s.WriteString(schemas.DeliveryAttributes_SharedPoolDeliveryMode, string(v.SharedPoolDeliveryMode))
+	}
+}
+func (v *DeliveryAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeliveryAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeliveryAttributes_SharedPoolDeliveryMode:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryAttributes_SharedPoolDeliveryMode, &ev); err != nil {
+				return err
+			}
+			v.SharedPoolDeliveryMode = AccountSharedPoolDeliveryMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Used to associate a configuration set with a dedicated IP pool.
 type DeliveryOptions struct {
 
@@ -1633,9 +1679,28 @@ type DeliveryOptions struct {
 	// The name of the dedicated IP pool to associate with the configuration set.
 	SendingPoolName *string
 
+	// The shared pool delivery mode for email that you send with the configuration
+	// set from shared IP addresses. This setting overrides the shared pool delivery
+	// mode of your account. Can be one of the following:
+	//
+	//   - GLOBAL – Amazon SES delivers from your sending Region first and, when it
+	//   improves your deliverability, also uses Amazon SES shared IP addresses with
+	//   established sending history in other Amazon Web Services Regions within the same
+	//   Amazon Web Services partition.
+	//
+	//   - REGIONAL – Amazon SES delivers your email only from shared IP addresses in
+	//   your sending Region.
+	//
+	//   - ACCOUNT – The configuration set uses the shared pool delivery mode of your
+	//   account.
+	//
+	// If you don't specify a value, the configuration set uses the shared pool
+	// delivery mode of your account.
+	SharedPoolDeliveryMode SharedPoolDeliveryMode
+
 	// Specifies whether messages that use the configuration set are required to use
-	// Transport Layer Security (TLS). If the value is Require , messages are only
-	// delivered if a TLS connection can be established. If the value is Optional ,
+	// Transport Layer Security (TLS). If the value is REQUIRE , messages are only
+	// delivered if a TLS connection can be established. If the value is OPTIONAL ,
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy TlsPolicy
@@ -1656,6 +1721,9 @@ func (v *DeliveryOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SendingPoolName != nil {
 		s.WriteString(schemas.DeliveryOptions_SendingPoolName, *v.SendingPoolName)
 	}
+	if v.SharedPoolDeliveryMode != "" {
+		s.WriteString(schemas.DeliveryOptions_SharedPoolDeliveryMode, string(v.SharedPoolDeliveryMode))
+	}
 	if v.TlsPolicy != "" {
 		s.WriteString(schemas.DeliveryOptions_TlsPolicy, string(v.TlsPolicy))
 	}
@@ -1669,6 +1737,13 @@ func (v *DeliveryOptions) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeliveryOptions_SendingPoolName:
 			v.SendingPoolName = new(string)
 			return d.ReadString(schemas.DeliveryOptions_SendingPoolName, v.SendingPoolName)
+		case schemas.DeliveryOptions_SharedPoolDeliveryMode:
+			var ev string
+			if err := d.ReadString(schemas.DeliveryOptions_SharedPoolDeliveryMode, &ev); err != nil {
+				return err
+			}
+			v.SharedPoolDeliveryMode = SharedPoolDeliveryMode(ev)
+			return nil
 		case schemas.DeliveryOptions_TlsPolicy:
 			var ev string
 			if err := d.ReadString(schemas.DeliveryOptions_TlsPolicy, &ev); err != nil {
@@ -3765,9 +3840,11 @@ type ImportJobSummary struct {
 	//
 	//   - PROCESSING – Job is processing.
 	//
-	//   - ERROR – An error occurred during processing.
-	//
 	//   - COMPLETED – Job has completed processing successfully.
+	//
+	//   - FAILED – An error occurred during processing.
+	//
+	//   - CANCELLED – Job has been canceled.
 	JobStatus JobStatus
 
 	// The current number of records processed.
@@ -4184,11 +4261,11 @@ type MailFromAttributes struct {
 	// The action to take if the required MX record can't be found when you send an
 	// email. When you set this value to USE_DEFAULT_VALUE , the mail is sent using
 	// amazonses.com as the MAIL FROM domain. When you set this value to REJECT_MESSAGE
-	// , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't
-	// attempt to deliver the email.
+	// , the Amazon SES API v2 returns a MailFromDomainNotVerifiedException error, and
+	// doesn't attempt to deliver the email.
 	//
 	// These behaviors are taken when the custom MAIL FROM domain configuration is in
-	// the Pending , Failed , and TemporaryFailure states.
+	// the PENDING , FAILED , and TEMPORARY_FAILURE states.
 	//
 	// This member is required.
 	BehaviorOnMxFailure BehaviorOnMxFailure
@@ -5298,8 +5375,8 @@ func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The ReplaceEmailContent object to be used for a specific BulkEmailEntry . The
-// ReplacementTemplate can be specified within this object.
+// The ReplacementEmailContent object to be used for a specific BulkEmailEntry .
+// The ReplacementTemplate can be specified within this object.
 type ReplacementEmailContent struct {
 
 	// The ReplacementTemplate associated with ReplacementEmailContent .

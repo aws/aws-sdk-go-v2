@@ -3396,6 +3396,25 @@ func validateIntermediateTableColumnList(v []types.IntermediateTableColumn) erro
 	}
 }
 
+func validateIntermediateTableComputeConfiguration(v types.IntermediateTableComputeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntermediateTableComputeConfiguration"}
+	switch uv := v.(type) {
+	case *types.IntermediateTableComputeConfigurationMemberJobComputeConfiguration:
+		if err := validateProtectedJobComputeConfiguration(uv.Value); err != nil {
+			invalidParams.AddNested("[jobComputeConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIntermediateTableOutputConfiguration(v *types.IntermediateTableOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -3871,6 +3890,40 @@ func validatePaymentConfiguration(v *types.PaymentConfiguration) error {
 		if err := validateJobComputePaymentConfig(v.JobCompute); err != nil {
 			invalidParams.AddNested("JobCompute", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePopulationAnalysisConfiguration(v types.PopulationAnalysisConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PopulationAnalysisConfiguration"}
+	switch uv := v.(type) {
+	case *types.PopulationAnalysisConfigurationMemberJobParameters:
+		if err := validatePopulationAnalysisJobParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[jobParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePopulationAnalysisJobParameters(v *types.PopulationAnalysisJobParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PopulationAnalysisJobParameters"}
+	if v.AnalysisTemplateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4869,6 +4922,10 @@ func validateOpCreateIntermediateTableInput(v *CreateIntermediateTableInput) err
 	}
 	if v.PopulationAnalysisConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PopulationAnalysisConfiguration"))
+	} else if v.PopulationAnalysisConfiguration != nil {
+		if err := validatePopulationAnalysisConfiguration(v.PopulationAnalysisConfiguration); err != nil {
+			invalidParams.AddNested("PopulationAnalysisConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5968,6 +6025,11 @@ func validateOpPopulateIntermediateTableInput(v *PopulateIntermediateTableInput)
 	}
 	if v.MembershipIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MembershipIdentifier"))
+	}
+	if v.ComputeConfiguration != nil {
+		if err := validateIntermediateTableComputeConfiguration(v.ComputeConfiguration); err != nil {
+			invalidParams.AddNested("ComputeConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

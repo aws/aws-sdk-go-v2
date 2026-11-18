@@ -2163,7 +2163,46 @@ func TestCheckResponseSnapshot_DescribeStackSetOperation(t *testing.T) {
 			},
 			StatusReason: ptr.String("__StatusReason__"),
 			StatusDetails: &types.StackSetOperationStatusDetails{
+				Stages: &types.Stages{
+					RoleProvisioning: &types.RoleProvisioning{
+						Status:                 types.StageStatus("PENDING"),
+						SucceededAccountsCount: ptr.Int32(1),
+						FailedAccountsCount:    ptr.Int32(1),
+						CompletedAccountsCount: ptr.Int32(1),
+						PendingAccountsCount:   ptr.Int32(1),
+						PercentageCompleted:    ptr.Float64(1.0),
+					},
+					StackInstancesDeployment: &types.StackInstancesDeployment{
+						Status:                       types.StageStatus("PENDING"),
+						SucceededStackInstancesCount: ptr.Int32(1),
+						FailedStackInstancesCount:    ptr.Int32(1),
+						CompletedStackInstancesCount: ptr.Int32(1),
+						PendingStackInstancesCount:   ptr.Int32(1),
+						CancelledStackInstancesCount: ptr.Int32(1),
+						SkippedStackInstancesCount:   ptr.Int32(1),
+						PercentageCompleted:          ptr.Float64(1.0),
+					},
+				},
+				TotalAccountsCount:        ptr.Int32(1),
+				TotalStackInstancesCount:  ptr.Int32(1),
 				FailedStackInstancesCount: ptr.Int32(1),
+			},
+			RegionalStatusDetails: map[string]types.RegionalStatusDetail{
+				"key0": {
+					Stages: &types.RegionalStages{
+						RegionalStackInstancesDeployment: &types.RegionalStackInstancesDeployment{
+							Status:                       types.StageStatus("PENDING"),
+							SucceededStackInstancesCount: ptr.Int32(1),
+							FailedStackInstancesCount:    ptr.Int32(1),
+							CompletedStackInstancesCount: ptr.Int32(1),
+							PendingStackInstancesCount:   ptr.Int32(1),
+							CancelledStackInstancesCount: ptr.Int32(1),
+							SkippedStackInstancesCount:   ptr.Int32(1),
+							TotalStackInstancesCount:     ptr.Int32(1),
+							PercentageCompleted:          ptr.Float64(1.0),
+						},
+					},
+				},
 			},
 		},
 	}
@@ -3854,6 +3893,28 @@ func TestCheckResponseSnapshot_ListStackSetOperations(t *testing.T) {
 				EndTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusReason:      ptr.String("__StatusReason__"),
 				StatusDetails: &types.StackSetOperationStatusDetails{
+					Stages: &types.Stages{
+						RoleProvisioning: &types.RoleProvisioning{
+							Status:                 types.StageStatus("PENDING"),
+							SucceededAccountsCount: ptr.Int32(1),
+							FailedAccountsCount:    ptr.Int32(1),
+							CompletedAccountsCount: ptr.Int32(1),
+							PendingAccountsCount:   ptr.Int32(1),
+							PercentageCompleted:    ptr.Float64(1.0),
+						},
+						StackInstancesDeployment: &types.StackInstancesDeployment{
+							Status:                       types.StageStatus("PENDING"),
+							SucceededStackInstancesCount: ptr.Int32(1),
+							FailedStackInstancesCount:    ptr.Int32(1),
+							CompletedStackInstancesCount: ptr.Int32(1),
+							PendingStackInstancesCount:   ptr.Int32(1),
+							CancelledStackInstancesCount: ptr.Int32(1),
+							SkippedStackInstancesCount:   ptr.Int32(1),
+							PercentageCompleted:          ptr.Float64(1.0),
+						},
+					},
+					TotalAccountsCount:        ptr.Int32(1),
+					TotalStackInstancesCount:  ptr.Int32(1),
 					FailedStackInstancesCount: ptr.Int32(1),
 				},
 				OperationPreferences: &types.StackSetOperationPreferences{
@@ -3877,6 +3938,28 @@ func TestCheckResponseSnapshot_ListStackSetOperations(t *testing.T) {
 				EndTimestamp:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusReason:      ptr.String("__StatusReason__"),
 				StatusDetails: &types.StackSetOperationStatusDetails{
+					Stages: &types.Stages{
+						RoleProvisioning: &types.RoleProvisioning{
+							Status:                 types.StageStatus("PENDING"),
+							SucceededAccountsCount: ptr.Int32(1),
+							FailedAccountsCount:    ptr.Int32(1),
+							CompletedAccountsCount: ptr.Int32(1),
+							PendingAccountsCount:   ptr.Int32(1),
+							PercentageCompleted:    ptr.Float64(1.0),
+						},
+						StackInstancesDeployment: &types.StackInstancesDeployment{
+							Status:                       types.StageStatus("PENDING"),
+							SucceededStackInstancesCount: ptr.Int32(1),
+							FailedStackInstancesCount:    ptr.Int32(1),
+							CompletedStackInstancesCount: ptr.Int32(1),
+							PendingStackInstancesCount:   ptr.Int32(1),
+							CancelledStackInstancesCount: ptr.Int32(1),
+							SkippedStackInstancesCount:   ptr.Int32(1),
+							PercentageCompleted:          ptr.Float64(1.0),
+						},
+					},
+					TotalAccountsCount:        ptr.Int32(1),
+					TotalStackInstancesCount:  ptr.Int32(1),
 					FailedStackInstancesCount: ptr.Int32(1),
 				},
 				OperationPreferences: &types.StackSetOperationPreferences{

@@ -1168,6 +1168,49 @@ func TestUpdateResponseSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	want := &CancelPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.CancelPointInTimeRecovery, schemas.CancelPointInTimeRecoveryResponse, schemas.CancelPointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelPointInTimeRecovery.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ChangePassword(t *testing.T) {
 	want := &ChangePasswordOutput{}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -2326,6 +2369,49 @@ func TestUpdateResponseSnapshot_DescribeManagedLoginBrandingByClient(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeManagedLoginBrandingByClient.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	want := &DescribePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.DescribePointInTimeRecovery, schemas.DescribePointInTimeRecoveryResponse, schemas.DescribePointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribePointInTimeRecovery.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3640,6 +3726,49 @@ func TestUpdateResponseSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	want := &InitiatePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.InitiatePointInTimeRecovery, schemas.InitiatePointInTimeRecoveryResponse, schemas.InitiatePointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("InitiatePointInTimeRecovery.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListDevices(t *testing.T) {
 	want := &ListDevicesOutput{
 		Devices: []types.DeviceType{
@@ -3776,6 +3905,42 @@ func TestUpdateResponseSnapshot_ListIdentityProviders(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListIdentityProviders.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	want := &ListPointInTimeRecoveriesOutput{
+		Restorations: []types.RestorationDescriptionType{
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.ListPointInTimeRecoveries, schemas.ListPointInTimeRecoveriesResponse, schemas.ListPointInTimeRecoveriesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPointInTimeRecoveries.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4906,6 +5071,49 @@ func TestUpdateResponseSnapshot_SignUp(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("SignUp.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	want := &StartPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.StartPointInTimeRecovery, schemas.StartPointInTimeRecoveryResponse, schemas.StartPointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartPointInTimeRecovery.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -1840,6 +1840,35 @@ func (StackStatus) Values() []StackStatus {
 	}
 }
 
+type StageStatus string
+
+// Enum values for StageStatus
+const (
+	StageStatusPending        StageStatus = "PENDING"
+	StageStatusNotApplicable  StageStatus = "NOT_APPLICABLE"
+	StageStatusNotStarted     StageStatus = "NOT_STARTED"
+	StageStatusInProgress     StageStatus = "IN_PROGRESS"
+	StageStatusSucceeded      StageStatus = "SUCCEEDED"
+	StageStatusPartialSuccess StageStatus = "PARTIAL_SUCCESS"
+	StageStatusFailed         StageStatus = "FAILED"
+)
+
+// Values returns all known values for StageStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StageStatus) Values() []StageStatus {
+	return []StageStatus{
+		"PENDING",
+		"NOT_APPLICABLE",
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"PARTIAL_SUCCESS",
+		"FAILED",
+	}
+}
+
 type TemplateFormat string
 
 // Enum values for TemplateFormat
