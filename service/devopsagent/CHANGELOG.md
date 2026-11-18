@@ -1,3 +1,7 @@
+# v1.24.0 (2026-11-17)
+
+* **Feature**: AWS DevOps Agent adds Code Change Risk Analysis capability and task types, and GetChat and UpdateChat operations to rename, archive, and unarchive chats and filter ListChats by archive status.
+
 # v1.23.0 (2026-11-13)
 
 * **Feature**: AWS DevOps Agent adds bidirectional communication for Microsoft Teams associations. Set msteams.bidirectional with an IAM role so the agent answers mentions in your Teams channels.

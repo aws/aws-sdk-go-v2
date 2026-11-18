@@ -85,6 +85,7 @@ const (
 	AuthorizerTypeToken            AuthorizerType = "TOKEN"
 	AuthorizerTypeRequest          AuthorizerType = "REQUEST"
 	AuthorizerTypeCognitoUserPools AuthorizerType = "COGNITO_USER_POOLS"
+	AuthorizerTypeJwt              AuthorizerType = "JWT"
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
@@ -96,6 +97,7 @@ func (AuthorizerType) Values() []AuthorizerType {
 		"TOKEN",
 		"REQUEST",
 		"COGNITO_USER_POOLS",
+		"JWT",
 	}
 }
 
@@ -397,6 +399,50 @@ func (IpAddressType) Values() []IpAddressType {
 	return []IpAddressType{
 		"ipv4",
 		"dualstack",
+	}
+}
+
+type JwtClaimFormat string
+
+// Enum values for JwtClaimFormat
+const (
+	JwtClaimFormatSingleString JwtClaimFormat = "SINGLE_STRING"
+)
+
+// Values returns all known values for JwtClaimFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JwtClaimFormat) Values() []JwtClaimFormat {
+	return []JwtClaimFormat{
+		"SINGLE_STRING",
+	}
+}
+
+type JwtSigningAlgorithm string
+
+// Enum values for JwtSigningAlgorithm
+const (
+	JwtSigningAlgorithmRs256 JwtSigningAlgorithm = "RS256"
+	JwtSigningAlgorithmRs384 JwtSigningAlgorithm = "RS384"
+	JwtSigningAlgorithmRs512 JwtSigningAlgorithm = "RS512"
+	JwtSigningAlgorithmEs256 JwtSigningAlgorithm = "ES256"
+	JwtSigningAlgorithmEs384 JwtSigningAlgorithm = "ES384"
+	JwtSigningAlgorithmEs512 JwtSigningAlgorithm = "ES512"
+)
+
+// Values returns all known values for JwtSigningAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JwtSigningAlgorithm) Values() []JwtSigningAlgorithm {
+	return []JwtSigningAlgorithm{
+		"RS256",
+		"RS384",
+		"RS512",
+		"ES256",
+		"ES384",
+		"ES512",
 	}
 }
 

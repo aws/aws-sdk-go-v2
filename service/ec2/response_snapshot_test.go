@@ -321,7 +321,12 @@ func TestCheckResponseSnapshot_AcceptTransitGatewayPeeringAttachment(t *testing.
 				Region:           ptr.String("__Region__"),
 			},
 			Options: &types.TransitGatewayPeeringAttachmentOptions{
-				DynamicRouting: types.DynamicRoutingValue("enable"),
+				DynamicRouting:                    types.DynamicRoutingValue("enable"),
+				RequesterAllowMultipathResilience: ptr.Bool(true),
+				RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				AccepterAllowMultipathResilience:  ptr.Bool(true),
+				AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
 			},
 			Status: &types.PeeringAttachmentStatus{
 				Code:    ptr.String("__Code__"),
@@ -485,6 +490,8 @@ func TestCheckResponseSnapshot_AcceptVpcPeeringConnection(t *testing.T) {
 					AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 					AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 					AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+					AllowMultipathResilience:                   ptr.Bool(true),
+					MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 				},
 				VpcId:  ptr.String("__VpcId__"),
 				Region: ptr.String("__Region__"),
@@ -513,6 +520,8 @@ func TestCheckResponseSnapshot_AcceptVpcPeeringConnection(t *testing.T) {
 					AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 					AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 					AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+					AllowMultipathResilience:                   ptr.Bool(true),
+					MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 				},
 				VpcId:  ptr.String("__VpcId__"),
 				Region: ptr.String("__Region__"),
@@ -531,7 +540,8 @@ func TestCheckResponseSnapshot_AcceptVpcPeeringConnection(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
+			VpcPeeringConnectionId:    ptr.String("__VpcPeeringConnectionId__"),
+			MultipathResilienceStatus: types.MultipathResilienceStatus("pending"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AcceptVpcPeeringConnection.response")
@@ -15229,7 +15239,12 @@ func TestCheckResponseSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.
 				Region:           ptr.String("__Region__"),
 			},
 			Options: &types.TransitGatewayPeeringAttachmentOptions{
-				DynamicRouting: types.DynamicRoutingValue("enable"),
+				DynamicRouting:                    types.DynamicRoutingValue("enable"),
+				RequesterAllowMultipathResilience: ptr.Bool(true),
+				RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				AccepterAllowMultipathResilience:  ptr.Bool(true),
+				AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
 			},
 			Status: &types.PeeringAttachmentStatus{
 				Code:    ptr.String("__Code__"),
@@ -15263,7 +15278,9 @@ func TestCheckResponseSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -17197,6 +17214,8 @@ func TestCheckResponseSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 					AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 					AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 					AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+					AllowMultipathResilience:                   ptr.Bool(true),
+					MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 				},
 				VpcId:  ptr.String("__VpcId__"),
 				Region: ptr.String("__Region__"),
@@ -17225,6 +17244,8 @@ func TestCheckResponseSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 					AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 					AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 					AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+					AllowMultipathResilience:                   ptr.Bool(true),
+					MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 				},
 				VpcId:  ptr.String("__VpcId__"),
 				Region: ptr.String("__Region__"),
@@ -17243,7 +17264,8 @@ func TestCheckResponseSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 					Value: ptr.String("__Value__"),
 				},
 			},
-			VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
+			VpcPeeringConnectionId:    ptr.String("__VpcPeeringConnectionId__"),
+			MultipathResilienceStatus: types.MultipathResilienceStatus("pending"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateVpcPeeringConnection.response")
@@ -17283,6 +17305,10 @@ func TestCheckResponseSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 					},
 				},
 			},
+		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
 		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
@@ -17466,6 +17492,58 @@ func TestCheckResponseSnapshot_CreateVpnConnection(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 					{
 						OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -17547,6 +17625,58 @@ func TestCheckResponseSnapshot_CreateVpnConnection(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 				},
 				TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -17727,6 +17857,58 @@ func TestCheckResponseSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -17807,6 +17989,58 @@ func TestCheckResponseSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -20849,7 +21083,12 @@ func TestCheckResponseSnapshot_DeleteTransitGatewayPeeringAttachment(t *testing.
 				Region:           ptr.String("__Region__"),
 			},
 			Options: &types.TransitGatewayPeeringAttachmentOptions{
-				DynamicRouting: types.DynamicRoutingValue("enable"),
+				DynamicRouting:                    types.DynamicRoutingValue("enable"),
+				RequesterAllowMultipathResilience: ptr.Bool(true),
+				RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				AccepterAllowMultipathResilience:  ptr.Bool(true),
+				AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
 			},
 			Status: &types.PeeringAttachmentStatus{
 				Code:    ptr.String("__Code__"),
@@ -23418,6 +23657,34 @@ func TestCheckResponseSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 				UltraserverCount:             ptr.Int32(1),
 				CapacityBlockDurationMinutes: ptr.Int32(1),
 				ZoneType:                     ptr.String("__ZoneType__"),
+				CapacityBlockOfferingSegments: []types.CapacityBlockOfferingSegment{
+					{
+						InstanceType:                 ptr.String("__InstanceType__"),
+						AvailabilityZone:             ptr.String("__AvailabilityZone__"),
+						AvailabilityZoneId:           ptr.String("__AvailabilityZoneId__"),
+						InstanceCount:                ptr.Int32(1),
+						StartDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						CapacityBlockDurationHours:   ptr.Int32(1),
+						CapacityBlockDurationMinutes: ptr.Int32(1),
+						UpfrontFee:                   ptr.String("__UpfrontFee__"),
+						CurrencyCode:                 ptr.String("__CurrencyCode__"),
+						ZoneType:                     ptr.String("__ZoneType__"),
+					},
+					{
+						InstanceType:                 ptr.String("__InstanceType__"),
+						AvailabilityZone:             ptr.String("__AvailabilityZone__"),
+						AvailabilityZoneId:           ptr.String("__AvailabilityZoneId__"),
+						InstanceCount:                ptr.Int32(1),
+						StartDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						CapacityBlockDurationHours:   ptr.Int32(1),
+						CapacityBlockDurationMinutes: ptr.Int32(1),
+						UpfrontFee:                   ptr.String("__UpfrontFee__"),
+						CurrencyCode:                 ptr.String("__CurrencyCode__"),
+						ZoneType:                     ptr.String("__ZoneType__"),
+					},
+				},
 			},
 			{
 				CapacityBlockOfferingId:      ptr.String("__CapacityBlockOfferingId__"),
@@ -23434,6 +23701,34 @@ func TestCheckResponseSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 				UltraserverCount:             ptr.Int32(1),
 				CapacityBlockDurationMinutes: ptr.Int32(1),
 				ZoneType:                     ptr.String("__ZoneType__"),
+				CapacityBlockOfferingSegments: []types.CapacityBlockOfferingSegment{
+					{
+						InstanceType:                 ptr.String("__InstanceType__"),
+						AvailabilityZone:             ptr.String("__AvailabilityZone__"),
+						AvailabilityZoneId:           ptr.String("__AvailabilityZoneId__"),
+						InstanceCount:                ptr.Int32(1),
+						StartDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						CapacityBlockDurationHours:   ptr.Int32(1),
+						CapacityBlockDurationMinutes: ptr.Int32(1),
+						UpfrontFee:                   ptr.String("__UpfrontFee__"),
+						CurrencyCode:                 ptr.String("__CurrencyCode__"),
+						ZoneType:                     ptr.String("__ZoneType__"),
+					},
+					{
+						InstanceType:                 ptr.String("__InstanceType__"),
+						AvailabilityZone:             ptr.String("__AvailabilityZone__"),
+						AvailabilityZoneId:           ptr.String("__AvailabilityZoneId__"),
+						InstanceCount:                ptr.Int32(1),
+						StartDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						CapacityBlockDurationHours:   ptr.Int32(1),
+						CapacityBlockDurationMinutes: ptr.Int32(1),
+						UpfrontFee:                   ptr.String("__UpfrontFee__"),
+						CurrencyCode:                 ptr.String("__CurrencyCode__"),
+						ZoneType:                     ptr.String("__ZoneType__"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -23458,6 +23753,14 @@ func TestCheckResponseSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -58703,7 +59006,12 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayPeeringAttachments(t *testi
 					Region:           ptr.String("__Region__"),
 				},
 				Options: &types.TransitGatewayPeeringAttachmentOptions{
-					DynamicRouting: types.DynamicRoutingValue("enable"),
+					DynamicRouting:                    types.DynamicRoutingValue("enable"),
+					RequesterAllowMultipathResilience: ptr.Bool(true),
+					RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+					AccepterAllowMultipathResilience:  ptr.Bool(true),
+					AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+					MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
 				},
 				Status: &types.PeeringAttachmentStatus{
 					Code:    ptr.String("__Code__"),
@@ -58738,7 +59046,12 @@ func TestCheckResponseSnapshot_DescribeTransitGatewayPeeringAttachments(t *testi
 					Region:           ptr.String("__Region__"),
 				},
 				Options: &types.TransitGatewayPeeringAttachmentOptions{
-					DynamicRouting: types.DynamicRoutingValue("enable"),
+					DynamicRouting:                    types.DynamicRoutingValue("enable"),
+					RequesterAllowMultipathResilience: ptr.Bool(true),
+					RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+					AccepterAllowMultipathResilience:  ptr.Bool(true),
+					AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+					MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
 				},
 				Status: &types.PeeringAttachmentStatus{
 					Code:    ptr.String("__Code__"),
@@ -62057,6 +62370,8 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 						AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 						AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 						AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+						AllowMultipathResilience:                   ptr.Bool(true),
+						MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 					},
 					VpcId:  ptr.String("__VpcId__"),
 					Region: ptr.String("__Region__"),
@@ -62085,6 +62400,8 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 						AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 						AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 						AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+						AllowMultipathResilience:                   ptr.Bool(true),
+						MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 					},
 					VpcId:  ptr.String("__VpcId__"),
 					Region: ptr.String("__Region__"),
@@ -62103,7 +62420,8 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
+				VpcPeeringConnectionId:    ptr.String("__VpcPeeringConnectionId__"),
+				MultipathResilienceStatus: types.MultipathResilienceStatus("pending"),
 			},
 			{
 				AccepterVpcInfo: &types.VpcPeeringConnectionVpcInfo{
@@ -62129,6 +62447,8 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 						AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 						AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 						AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+						AllowMultipathResilience:                   ptr.Bool(true),
+						MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 					},
 					VpcId:  ptr.String("__VpcId__"),
 					Region: ptr.String("__Region__"),
@@ -62157,6 +62477,8 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 						AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 						AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 						AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+						AllowMultipathResilience:                   ptr.Bool(true),
+						MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 					},
 					VpcId:  ptr.String("__VpcId__"),
 					Region: ptr.String("__Region__"),
@@ -62175,7 +62497,8 @@ func TestCheckResponseSnapshot_DescribeVpcPeeringConnections(t *testing.T) {
 						Value: ptr.String("__Value__"),
 					},
 				},
-				VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
+				VpcPeeringConnectionId:    ptr.String("__VpcPeeringConnectionId__"),
+				MultipathResilienceStatus: types.MultipathResilienceStatus("pending"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -62700,6 +63023,58 @@ func TestCheckResponseSnapshot_DescribeVpnConnections(t *testing.T) {
 								},
 							},
 							EnableTunnelLifecycleControl: ptr.Bool(true),
+							Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
+							Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
 						},
 						{
 							OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -62781,6 +63156,58 @@ func TestCheckResponseSnapshot_DescribeVpnConnections(t *testing.T) {
 								},
 							},
 							EnableTunnelLifecycleControl: ptr.Bool(true),
+							Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
+							Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
 						},
 					},
 					TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -62931,6 +63358,58 @@ func TestCheckResponseSnapshot_DescribeVpnConnections(t *testing.T) {
 								},
 							},
 							EnableTunnelLifecycleControl: ptr.Bool(true),
+							Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
+							Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
 						},
 						{
 							OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -63012,6 +63491,58 @@ func TestCheckResponseSnapshot_DescribeVpnConnections(t *testing.T) {
 								},
 							},
 							EnableTunnelLifecycleControl: ptr.Bool(true),
+							Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
+							Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+								{
+									AdditionalKeyExchangeRound: ptr.Int32(1),
+									KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+										{
+											Value: ptr.Int32(1),
+										},
+										{
+											Value: ptr.Int32(1),
+										},
+									},
+									Requirement: types.AdditionalKeyExchangeRequirement("required"),
+								},
+							},
 						},
 					},
 					TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -66038,6 +66569,26 @@ func TestCheckResponseSnapshot_GetActiveVpnTunnelStatus(t *testing.T) {
 			IkeVersion:                ptr.String("__IkeVersion__"),
 			ProvisioningStatus:        types.VpnTunnelProvisioningStatus("available"),
 			ProvisioningStatusReason:  ptr.String("__ProvisioningStatusReason__"),
+			Phase1AdditionalKeyExchanges: []types.ActiveVpnTunnelAdditionalKeyExchange{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethod:          ptr.Int32(1),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethod:          ptr.Int32(1),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.ActiveVpnTunnelAdditionalKeyExchange{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethod:          ptr.Int32(1),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethod:          ptr.Int32(1),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetActiveVpnTunnelStatus.response")
@@ -81356,6 +81907,73 @@ func TestCheckResponseSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *
 	}
 }
 
+func TestCheckResponseSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	want := &ModifyTransitGatewayPeeringAttachmentOutput{
+		TransitGatewayPeeringAttachment: &types.TransitGatewayPeeringAttachment{
+			TransitGatewayAttachmentId:         ptr.String("__TransitGatewayAttachmentId__"),
+			AccepterTransitGatewayAttachmentId: ptr.String("__AccepterTransitGatewayAttachmentId__"),
+			RequesterTgwInfo: &types.PeeringTgwInfo{
+				TransitGatewayId: ptr.String("__TransitGatewayId__"),
+				CoreNetworkId:    ptr.String("__CoreNetworkId__"),
+				OwnerId:          ptr.String("__OwnerId__"),
+				Region:           ptr.String("__Region__"),
+			},
+			AccepterTgwInfo: &types.PeeringTgwInfo{
+				TransitGatewayId: ptr.String("__TransitGatewayId__"),
+				CoreNetworkId:    ptr.String("__CoreNetworkId__"),
+				OwnerId:          ptr.String("__OwnerId__"),
+				Region:           ptr.String("__Region__"),
+			},
+			Options: &types.TransitGatewayPeeringAttachmentOptions{
+				DynamicRouting:                    types.DynamicRoutingValue("enable"),
+				RequesterAllowMultipathResilience: ptr.Bool(true),
+				RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				AccepterAllowMultipathResilience:  ptr.Bool(true),
+				AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
+			},
+			Status: &types.PeeringAttachmentStatus{
+				Code:    ptr.String("__Code__"),
+				Message: ptr.String("__Message__"),
+			},
+			State:        types.TransitGatewayAttachmentState("initiating"),
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ModifyTransitGatewayPeeringAttachment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ModifyTransitGatewayPeeringAttachment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	want := &ModifyTransitGatewayPolicyTableEntryOutput{
 		TransitGatewayPolicyTableEntry: &types.TransitGatewayPolicyTableEntry{
@@ -82604,11 +83222,15 @@ func TestCheckResponseSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptions{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyVpcPeeringConnectionOptions.response")
@@ -82624,12 +83246,16 @@ func TestCheckResponseSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	})
@@ -82766,6 +83392,58 @@ func TestCheckResponseSnapshot_ModifyVpnConnection(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 					{
 						OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -82847,6 +83525,58 @@ func TestCheckResponseSnapshot_ModifyVpnConnection(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 				},
 				TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -83023,6 +83753,58 @@ func TestCheckResponseSnapshot_ModifyVpnConnectionOptions(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 					{
 						OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -83104,6 +83886,58 @@ func TestCheckResponseSnapshot_ModifyVpnConnectionOptions(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 				},
 				TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -83282,6 +84116,58 @@ func TestCheckResponseSnapshot_ModifyVpnTunnelCertificate(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 					{
 						OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -83363,6 +84249,58 @@ func TestCheckResponseSnapshot_ModifyVpnTunnelCertificate(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 				},
 				TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -83537,6 +84475,58 @@ func TestCheckResponseSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 					{
 						OutsideIpAddress:       ptr.String("__OutsideIpAddress__"),
@@ -83618,6 +84608,58 @@ func TestCheckResponseSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 							},
 						},
 						EnableTunnelLifecycleControl: ptr.Bool(true),
+						Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
+						Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchange{
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+							{
+								AdditionalKeyExchangeRound: ptr.Int32(1),
+								KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsListValue{
+									{
+										Value: ptr.Int32(1),
+									},
+									{
+										Value: ptr.Int32(1),
+									},
+								},
+								Requirement: types.AdditionalKeyExchangeRequirement("required"),
+							},
+						},
 					},
 				},
 				TunnelBandwidth: types.VpnTunnelBandwidth("standard"),
@@ -83761,6 +84803,58 @@ func TestCheckResponseSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),
@@ -84459,6 +85553,200 @@ func TestCheckResponseSnapshot_PurchaseCapacityBlock(t *testing.T) {
 				},
 			},
 		},
+		CapacityReservations: []types.CapacityReservation{
+			{
+				CapacityReservationId:  ptr.String("__CapacityReservationId__"),
+				OwnerId:                ptr.String("__OwnerId__"),
+				CapacityReservationArn: ptr.String("__CapacityReservationArn__"),
+				AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+				InstanceType:           ptr.String("__InstanceType__"),
+				InstancePlatform:       types.CapacityReservationInstancePlatform("Linux/UNIX"),
+				AvailabilityZone:       ptr.String("__AvailabilityZone__"),
+				Tenancy:                types.CapacityReservationTenancy("default"),
+				TotalInstanceCount:     ptr.Int32(1),
+				AvailableInstanceCount: ptr.Int32(1),
+				EbsOptimized:           ptr.Bool(true),
+				EphemeralStorage:       ptr.Bool(true),
+				State:                  types.CapacityReservationState("active"),
+				StartDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDateType:            types.EndDateType("unlimited"),
+				InstanceMatchCriteria:  types.InstanceMatchCriteria("open"),
+				CreateDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				OutpostArn:                 ptr.String("__OutpostArn__"),
+				CapacityReservationFleetId: ptr.String("__CapacityReservationFleetId__"),
+				PlacementGroupArn:          ptr.String("__PlacementGroupArn__"),
+				CapacityAllocations: []types.CapacityAllocation{
+					{
+						AllocationType: types.AllocationType("used"),
+						Count:          ptr.Int32(1),
+						AllocationMetadata: []types.CapacityAllocationMetadataEntry{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocationType: types.AllocationType("used"),
+						Count:          ptr.Int32(1),
+						AllocationMetadata: []types.CapacityAllocationMetadataEntry{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				ReservationType:                 types.CapacityReservationType("default"),
+				UnusedReservationBillingOwnerId: ptr.String("__UnusedReservationBillingOwnerId__"),
+				CommitmentInfo: &types.CapacityReservationCommitmentInfo{
+					CommittedInstanceCount: ptr.Int32(1),
+					CommitmentEndDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CommitmentDuration:     ptr.Int64(1),
+				},
+				DeliveryPreference: types.CapacityReservationDeliveryPreference("fixed"),
+				CapacityBlockId:    ptr.String("__CapacityBlockId__"),
+				Interruptible:      ptr.Bool(true),
+				InterruptibleCapacityAllocation: &types.InterruptibleCapacityAllocation{
+					InstanceCount:                      ptr.Int32(1),
+					TargetInstanceCount:                ptr.Int32(1),
+					Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
+					InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
+					InterruptionType:                   types.InterruptionType("adhoc"),
+					ZeroSizePreference:                 types.ZeroSizePreference("retain"),
+				},
+				InterruptionInfo: &types.InterruptionInfo{
+					SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
+					InterruptionType:            types.InterruptionType("adhoc"),
+				},
+				AdjustmentStatus: types.CapacityReservationAdjustmentStatus("requested"),
+				AdjustmentDetails: &types.CapacityReservationAdjustmentDetails{
+					StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CommitmentEndDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateType:        ptr.String("__EndDateType__"),
+					CommitmentDuration: ptr.Int64(1),
+				},
+				OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ZeroSizePreference: types.ZeroSizePreference("retain"),
+				LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
+			},
+			{
+				CapacityReservationId:  ptr.String("__CapacityReservationId__"),
+				OwnerId:                ptr.String("__OwnerId__"),
+				CapacityReservationArn: ptr.String("__CapacityReservationArn__"),
+				AvailabilityZoneId:     ptr.String("__AvailabilityZoneId__"),
+				InstanceType:           ptr.String("__InstanceType__"),
+				InstancePlatform:       types.CapacityReservationInstancePlatform("Linux/UNIX"),
+				AvailabilityZone:       ptr.String("__AvailabilityZone__"),
+				Tenancy:                types.CapacityReservationTenancy("default"),
+				TotalInstanceCount:     ptr.Int32(1),
+				AvailableInstanceCount: ptr.Int32(1),
+				EbsOptimized:           ptr.Bool(true),
+				EphemeralStorage:       ptr.Bool(true),
+				State:                  types.CapacityReservationState("active"),
+				StartDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndDateType:            types.EndDateType("unlimited"),
+				InstanceMatchCriteria:  types.InstanceMatchCriteria("open"),
+				CreateDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				OutpostArn:                 ptr.String("__OutpostArn__"),
+				CapacityReservationFleetId: ptr.String("__CapacityReservationFleetId__"),
+				PlacementGroupArn:          ptr.String("__PlacementGroupArn__"),
+				CapacityAllocations: []types.CapacityAllocation{
+					{
+						AllocationType: types.AllocationType("used"),
+						Count:          ptr.Int32(1),
+						AllocationMetadata: []types.CapacityAllocationMetadataEntry{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+					{
+						AllocationType: types.AllocationType("used"),
+						Count:          ptr.Int32(1),
+						AllocationMetadata: []types.CapacityAllocationMetadataEntry{
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Key:   ptr.String("__Key__"),
+								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				ReservationType:                 types.CapacityReservationType("default"),
+				UnusedReservationBillingOwnerId: ptr.String("__UnusedReservationBillingOwnerId__"),
+				CommitmentInfo: &types.CapacityReservationCommitmentInfo{
+					CommittedInstanceCount: ptr.Int32(1),
+					CommitmentEndDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CommitmentDuration:     ptr.Int64(1),
+				},
+				DeliveryPreference: types.CapacityReservationDeliveryPreference("fixed"),
+				CapacityBlockId:    ptr.String("__CapacityBlockId__"),
+				Interruptible:      ptr.Bool(true),
+				InterruptibleCapacityAllocation: &types.InterruptibleCapacityAllocation{
+					InstanceCount:                      ptr.Int32(1),
+					TargetInstanceCount:                ptr.Int32(1),
+					Status:                             types.InterruptibleCapacityReservationAllocationStatus("pending"),
+					InterruptibleCapacityReservationId: ptr.String("__InterruptibleCapacityReservationId__"),
+					InterruptionType:                   types.InterruptionType("adhoc"),
+					ZeroSizePreference:                 types.ZeroSizePreference("retain"),
+				},
+				InterruptionInfo: &types.InterruptionInfo{
+					SourceCapacityReservationId: ptr.String("__SourceCapacityReservationId__"),
+					InterruptionType:            types.InterruptionType("adhoc"),
+				},
+				AdjustmentStatus: types.CapacityReservationAdjustmentStatus("requested"),
+				AdjustmentDetails: &types.CapacityReservationAdjustmentDetails{
+					StartDate:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDate:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CommitmentEndDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateType:        ptr.String("__EndDateType__"),
+					CommitmentDuration: ptr.Int64(1),
+				},
+				OriginalStartDate:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ZeroSizePreference: types.ZeroSizePreference("retain"),
+				LaunchStatus:       types.CapacityReservationLaunchStatus("launchable"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PurchaseCapacityBlock.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -85135,7 +86423,12 @@ func TestCheckResponseSnapshot_RejectTransitGatewayPeeringAttachment(t *testing.
 				Region:           ptr.String("__Region__"),
 			},
 			Options: &types.TransitGatewayPeeringAttachmentOptions{
-				DynamicRouting: types.DynamicRoutingValue("enable"),
+				DynamicRouting:                    types.DynamicRoutingValue("enable"),
+				RequesterAllowMultipathResilience: ptr.Bool(true),
+				RequesterMultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				AccepterAllowMultipathResilience:  ptr.Bool(true),
+				AccepterMultipathResilienceMode:   types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+				MultipathResilienceStatus:         types.TransitGatewayPeeringAttachmentMultipathResilienceStatus("pending"),
 			},
 			Status: &types.PeeringAttachmentStatus{
 				Code:    ptr.String("__Code__"),

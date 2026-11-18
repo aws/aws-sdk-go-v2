@@ -3451,6 +3451,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 							},
 						},
 					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				NewValues: &types.CoreNetworkChangeValues{
 					SegmentName:              ptr.String("__SegmentName__"),
@@ -3595,6 +3608,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 								"__Member__",
 							},
 							SharedSegments: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
 								"__Member__",
 								"__Member__",
 							},
@@ -3755,6 +3781,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 							},
 						},
 					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				NewValues: &types.CoreNetworkChangeValues{
 					SegmentName:              ptr.String("__SegmentName__"),
@@ -3899,6 +3938,19 @@ func TestCheckResponseSnapshot_GetCoreNetworkChangeSet(t *testing.T) {
 								"__Member__",
 							},
 							SharedSegments: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					MultipathResilience: &types.MultipathResilienceChangeValues{
+						Mode: types.MultipathResilienceMode("best-effort"),
+						EdgeSets: [][]string{
+							{
+								"__Member__",
+								"__Member__",
+							},
+							{
 								"__Member__",
 								"__Member__",
 							},

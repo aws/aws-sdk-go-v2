@@ -1,0 +1,5 @@
+POST /ListRemoteSourceActionInvocations
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","filters":{"remoteSourceActionArns":["__Member__","__Member__"],"sourceServerArns":["__Member__","__Member__"],"statuses":["PENDING","PENDING"]},"maxResults":1,"nextToken":"__NextToken__","remoteSourceActionJobID":"__RemoteSourceActionJobID__"}

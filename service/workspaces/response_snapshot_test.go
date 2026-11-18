@@ -2264,11 +2264,13 @@ func TestCheckResponseSnapshot_DescribeWorkspaceDirectories(t *testing.T) {
 				},
 				Tenancy: types.Tenancy("DEDICATED"),
 				SelfservicePermissions: &types.SelfservicePermissions{
-					RestartWorkspace:   types.ReconnectEnum("ENABLED"),
-					IncreaseVolumeSize: types.ReconnectEnum("ENABLED"),
-					ChangeComputeType:  types.ReconnectEnum("ENABLED"),
-					SwitchRunningMode:  types.ReconnectEnum("ENABLED"),
-					RebuildWorkspace:   types.ReconnectEnum("ENABLED"),
+					RestartWorkspace:     types.ReconnectEnum("ENABLED"),
+					IncreaseVolumeSize:   types.ReconnectEnum("ENABLED"),
+					ChangeComputeType:    types.ReconnectEnum("ENABLED"),
+					SwitchRunningMode:    types.ReconnectEnum("ENABLED"),
+					RebuildWorkspace:     types.ReconnectEnum("ENABLED"),
+					NestedVirtualization: types.ReconnectEnum("ENABLED"),
+					EnableEndUserAdvisor: types.ReconnectEnum("ENABLED"),
 				},
 				SamlProperties: &types.SamlProperties{
 					Status:                  types.SamlStatusEnum("DISABLED"),
@@ -2391,11 +2393,13 @@ func TestCheckResponseSnapshot_DescribeWorkspaceDirectories(t *testing.T) {
 				},
 				Tenancy: types.Tenancy("DEDICATED"),
 				SelfservicePermissions: &types.SelfservicePermissions{
-					RestartWorkspace:   types.ReconnectEnum("ENABLED"),
-					IncreaseVolumeSize: types.ReconnectEnum("ENABLED"),
-					ChangeComputeType:  types.ReconnectEnum("ENABLED"),
-					SwitchRunningMode:  types.ReconnectEnum("ENABLED"),
-					RebuildWorkspace:   types.ReconnectEnum("ENABLED"),
+					RestartWorkspace:     types.ReconnectEnum("ENABLED"),
+					IncreaseVolumeSize:   types.ReconnectEnum("ENABLED"),
+					ChangeComputeType:    types.ReconnectEnum("ENABLED"),
+					SwitchRunningMode:    types.ReconnectEnum("ENABLED"),
+					RebuildWorkspace:     types.ReconnectEnum("ENABLED"),
+					NestedVirtualization: types.ReconnectEnum("ENABLED"),
+					EnableEndUserAdvisor: types.ReconnectEnum("ENABLED"),
 				},
 				SamlProperties: &types.SamlProperties{
 					Status:                  types.SamlStatusEnum("DISABLED"),
@@ -3630,11 +3634,13 @@ func TestCheckResponseSnapshot_ModifySelfservicePermissions(t *testing.T) {
 	got, err := svc.ModifySelfservicePermissions(context.Background(), &ModifySelfservicePermissionsInput{
 		ResourceId: ptr.String("__ResourceId__"),
 		SelfservicePermissions: &types.SelfservicePermissions{
-			RestartWorkspace:   types.ReconnectEnum("ENABLED"),
-			IncreaseVolumeSize: types.ReconnectEnum("ENABLED"),
-			ChangeComputeType:  types.ReconnectEnum("ENABLED"),
-			SwitchRunningMode:  types.ReconnectEnum("ENABLED"),
-			RebuildWorkspace:   types.ReconnectEnum("ENABLED"),
+			RestartWorkspace:     types.ReconnectEnum("ENABLED"),
+			IncreaseVolumeSize:   types.ReconnectEnum("ENABLED"),
+			ChangeComputeType:    types.ReconnectEnum("ENABLED"),
+			SwitchRunningMode:    types.ReconnectEnum("ENABLED"),
+			RebuildWorkspace:     types.ReconnectEnum("ENABLED"),
+			NestedVirtualization: types.ReconnectEnum("ENABLED"),
+			EnableEndUserAdvisor: types.ReconnectEnum("ENABLED"),
 		},
 	})
 	if err != nil {

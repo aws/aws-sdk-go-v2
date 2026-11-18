@@ -1,0 +1,5 @@
+POST /GetConnector
+
+Content-Type: application/json
+
+{"ConnectorIdentifier":"__ConnectorIdentifier__"}

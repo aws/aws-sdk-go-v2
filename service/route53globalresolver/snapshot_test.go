@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateAccessToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCoreNetworkEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDNSView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDNSView(context.Background(), nil, func(o *Options) {
@@ -199,6 +211,18 @@ func TestCheckSnapshot_DeleteAccessToken(t *testing.T) {
 	_, err := svc.DeleteAccessToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAccessToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCoreNetworkEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +338,18 @@ func TestCheckSnapshot_GetAccessToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCoreNetworkEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDNSView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDNSView(context.Background(), nil, func(o *Options) {
@@ -415,6 +451,18 @@ func TestCheckSnapshot_ListAccessTokens(t *testing.T) {
 	_, err := svc.ListAccessTokens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAccessTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCoreNetworkEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCoreNetworkEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCoreNetworkEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +626,18 @@ func TestCheckSnapshot_UpdateAccessToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCoreNetworkEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDNSView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDNSView(context.Background(), nil, func(o *Options) {
@@ -709,6 +769,18 @@ func TestUpdateSnapshot_CreateAccessToken(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCoreNetworkEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDNSView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDNSView(context.Background(), nil, func(o *Options) {
@@ -774,6 +846,18 @@ func TestUpdateSnapshot_DeleteAccessToken(t *testing.T) {
 	_, err := svc.DeleteAccessToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAccessToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCoreNetworkEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -889,6 +973,18 @@ func TestUpdateSnapshot_GetAccessToken(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCoreNetworkEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDNSView(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDNSView(context.Background(), nil, func(o *Options) {
@@ -990,6 +1086,18 @@ func TestUpdateSnapshot_ListAccessTokens(t *testing.T) {
 	_, err := svc.ListAccessTokens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAccessTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCoreNetworkEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCoreNetworkEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCoreNetworkEndpoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1146,6 +1254,18 @@ func TestUpdateSnapshot_UpdateAccessToken(t *testing.T) {
 	_, err := svc.UpdateAccessToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAccessToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCoreNetworkEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCoreNetworkEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCoreNetworkEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

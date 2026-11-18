@@ -1535,6 +1535,9 @@ type ChatExecution struct {
 	// This member is required.
 	ExecutionId *string
 
+	// Indicates whether the chat execution is archived or active.
+	ArchiveStatus ChatArchiveStatus
+
 	// Summary or title of the chat
 	Summary *string
 
@@ -1551,6 +1554,9 @@ func (v *ChatExecution) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChatExecution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveStatus != "" {
+		s.WriteString(schemas.ChatExecution_archiveStatus, string(v.ArchiveStatus))
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ChatExecution_createdAt, *v.CreatedAt)
 	}
@@ -1567,6 +1573,13 @@ func (v *ChatExecution) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ChatExecution) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChatExecution, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ChatExecution_archiveStatus:
+			var ev string
+			if err := d.ReadString(schemas.ChatExecution_archiveStatus, &ev); err != nil {
+				return err
+			}
+			v.ArchiveStatus = ChatArchiveStatus(ev)
+			return nil
 		case schemas.ChatExecution_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.ChatExecution_createdAt, v.CreatedAt)

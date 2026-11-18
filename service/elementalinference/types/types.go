@@ -54,6 +54,137 @@ func (v *AspectRatio) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An Amazon Bedrock model to invoke. Elemental Inference invokes the model in
+// your account by assuming the feed's access role, so a feed that runs this
+// function must specify an accessRoleArn. The invocation is subject to your Amazon
+// Bedrock quotas and appears on your bill.
+type BedrockFunctionTarget struct {
+
+	// The Amazon Bedrock API to call. The only valid value is INVOKE_MODEL.
+	//
+	// This member is required.
+	Api BedrockApi
+
+	// The model to invoke. Specify one of the following:
+	//
+	//   - A model ID.
+	//
+	//   - An inference profile ID.
+	//
+	//   - The ARN of a custom model.
+	//
+	//   - The ARN of a provisioned model.
+	//
+	// Elemental Inference invokes the model in the Region of the feed. To use a model
+	// in other Regions, specify a cross-Region inference profile ID. A custom or
+	// provisioned model must be in the Region of the feed.
+	//
+	// The request expression must produce a request body that this model accepts, and
+	// the model must accept the kind of media that the request expression references.
+	// For example, a text-only model can't accept a request that references
+	// media.frames.
+	//
+	// This member is required.
+	Model *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BedrockFunctionTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BedrockFunctionTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BedrockFunctionTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Api != "" {
+		s.WriteString(schemas.BedrockFunctionTarget_api, string(v.Api))
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.BedrockFunctionTarget_model, *v.Model)
+	}
+}
+func (v *BedrockFunctionTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BedrockFunctionTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BedrockFunctionTarget_api:
+			var ev string
+			if err := d.ReadString(schemas.BedrockFunctionTarget_api, &ev); err != nil {
+				return err
+			}
+			v.Api = BedrockApi(ev)
+			return nil
+		case schemas.BedrockFunctionTarget_model:
+			v.Model = new(string)
+			return d.ReadString(schemas.BedrockFunctionTarget_model, v.Model)
+		}
+		return nil
+	})
+}
+
+// A question that you ask Elemental Inference, which answers by choosing one of
+// its options. You specify it in the chooseOne array of a question set.
+type ChooseOneQuestion struct {
+
+	// A name for the question. The name must be unique among all the questions in the
+	// version, across all question types. The name can be up to 64 characters. It must
+	// start with a letter or an underscore, and can contain only the letters A-Z and
+	// a-z, the digits 0-9, and underscores.
+	//
+	// This member is required.
+	Name *string
+
+	// The options that Elemental Inference chooses from. You can specify from 2 to 26
+	// options. The question counts as one item toward the limit of 100 scored items in
+	// a version, regardless of how many options it has.
+	//
+	// This member is required.
+	Options []QuestionOption
+
+	// The text of the question. The text can be up to 256 bytes, encoded in UTF-8. It
+	// can contain letters in any language, combining marks, digits, spaces, and the
+	// following characters: . , ? ! ' " ( ) - : ; / & % , plus the curly apostrophe
+	// and quotation marks (U+2019, U+201C, and U+201D).
+	//
+	// This member is required.
+	Question *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ChooseOneQuestion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChooseOneQuestion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChooseOneQuestion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ChooseOneQuestion_name, *v.Name)
+	}
+	if v.Options != nil {
+		serializeChooseOneOptionList(s, schemas.ChooseOneQuestion_options, v.Options)
+	}
+	if v.Question != nil {
+		s.WriteString(schemas.ChooseOneQuestion_question, *v.Question)
+	}
+}
+func (v *ChooseOneQuestion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChooseOneQuestion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChooseOneQuestion_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ChooseOneQuestion_name, v.Name)
+		case schemas.ChooseOneQuestion_options:
+			return deserializeChooseOneOptionList(d, schemas.ChooseOneQuestion_options, &v.Options)
+		case schemas.ChooseOneQuestion_question:
+			v.Question = new(string)
+			return d.ReadString(schemas.ChooseOneQuestion_question, v.Question)
+		}
+		return nil
+	})
+}
+
 // A type of OutputConfig, used when the output in a feed is for the clip feature.
 type ClippingConfig struct {
 
@@ -99,6 +230,73 @@ func (v *ClippingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ClippingConfig_dataSourceConfiguration:
 			v.DataSourceConfiguration = &DataSourceConfiguration{}
 			return v.DataSourceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The event clipping output on this feed that provides events for a perClip
+// trigger and media.clip for a function. Specify this structure for a perClip
+// trigger, and for a function that references media.clip on a fixedInterval
+// trigger.
+//
+// If the function output is ENABLED, the output that you name must also be
+// ENABLED.
+type ClippingSettings struct {
+
+	// The name of an ENABLED event clipping output on this feed.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClippingSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClippingSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClippingSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.ClippingSettings_outputName, *v.OutputName)
+	}
+}
+func (v *ClippingSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClippingSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClippingSettings_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.ClippingSettings_outputName, v.OutputName)
+		}
+		return nil
+	})
+}
+
+// The perClip trigger, which runs the function each time an event clipping output
+// reports events. Events that the output reports together share one run, and
+// media.clip.events contains all of them. To choose this trigger, set perClip to
+// an empty object.
+//
+// Specify clippingSettings to name the event clipping output that reports the
+// events. You can't use this trigger with a function that references
+// media.transcript or media.contextual.
+type ClipTrigger struct {
+	noSmithyDocumentSerde
+}
+
+func (v *ClipTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClipTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClipTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ClipTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClipTrigger, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -151,6 +349,16 @@ func (v *Competitor) Deserialize(d smithy.ShapeDeserializer) error {
 // content.
 type ContextualMetadataConfig struct {
 
+	// The question sets that you ask Elemental Inference about each shot, each scene,
+	// or both, in this output.
+	//
+	// If you specify customQuestions, you must also set extendedAnalysis to DISABLED.
+	// If you omit extendedAnalysis, it defaults to ENABLED, and the request fails.
+	//
+	// While a feed references a version of a question set, you can't delete that
+	// version or the question set.
+	CustomQuestions *CustomQuestionsConfig
+
 	// Specifies whether Elemental Inference generates extended analysis of the media
 	// content for this output. Extended analysis identifies the people, environments,
 	// brands, and on-screen text in the media content. This setting is independent of
@@ -163,6 +371,8 @@ type ContextualMetadataConfig struct {
 	//
 	//   - DISABLED – Elemental Inference doesn't populate the people, environments,
 	//   brands, and on-screen text fields.
+	//
+	// If you specify customQuestions , you must set this property to DISABLED.
 	ExtendedAnalysis ExtendedAnalysisMode
 
 	// Specifies whether Elemental Inference generates a descriptive summary of the
@@ -189,6 +399,11 @@ func (v *ContextualMetadataConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContextualMetadataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomQuestions != nil {
+		s.WriteStruct(schemas.ContextualMetadataConfig_customQuestions)
+		v.CustomQuestions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ExtendedAnalysis != "" {
 		s.WriteString(schemas.ContextualMetadataConfig_extendedAnalysis, string(v.ExtendedAnalysis))
 	}
@@ -199,6 +414,9 @@ func (v *ContextualMetadataConfig) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ContextualMetadataConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContextualMetadataConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ContextualMetadataConfig_customQuestions:
+			v.CustomQuestions = &CustomQuestionsConfig{}
+			return v.CustomQuestions.Deserialize(d)
 		case schemas.ContextualMetadataConfig_extendedAnalysis:
 			var ev string
 			if err := d.ReadString(schemas.ContextualMetadataConfig_extendedAnalysis, &ev); err != nil {
@@ -213,6 +431,45 @@ func (v *ContextualMetadataConfig) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.SummaryGeneration = SummaryGenerationMode(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The contextual metadata output on this feed that provides scenes for a perScene
+// trigger and media.contextual for a function. Specify this structure for a
+// perScene trigger, and for a function that references media.contextual on a
+// perShot trigger.
+//
+// If the function output is ENABLED, the output that you name must also be
+// ENABLED.
+type ContextualMetadataSettings struct {
+
+	// The name of an ENABLED contextual metadata output on this feed.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextualMetadataSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextualMetadataSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextualMetadataSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.ContextualMetadataSettings_outputName, *v.OutputName)
+	}
+}
+func (v *ContextualMetadataSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextualMetadataSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextualMetadataSettings_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.ContextualMetadataSettings_outputName, v.OutputName)
 		}
 		return nil
 	})
@@ -316,6 +573,52 @@ func (v *CroppingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.CroppingConfig_templateGroups:
 			return deserializeTemplateGroupList(d, schemas.CroppingConfig_templateGroups, &v.TemplateGroups)
+		}
+		return nil
+	})
+}
+
+// The question sets that you ask Elemental Inference about the media in a
+// contextual metadata output. You must specify at least one of shot or scene. They
+// can reference the same version of the same question set.
+type CustomQuestionsConfig struct {
+
+	// The version of a question set to ask Elemental Inference about each scene.
+	Scene *QuestionSetReference
+
+	// The version of a question set to ask Elemental Inference about each shot.
+	Shot *QuestionSetReference
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomQuestionsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomQuestionsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomQuestionsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scene != nil {
+		s.WriteStruct(schemas.CustomQuestionsConfig_scene)
+		v.Scene.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Shot != nil {
+		s.WriteStruct(schemas.CustomQuestionsConfig_shot)
+		v.Shot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomQuestionsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomQuestionsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomQuestionsConfig_scene:
+			v.Scene = &QuestionSetReference{}
+			return v.Scene.Deserialize(d)
+		case schemas.CustomQuestionsConfig_shot:
+			v.Shot = &QuestionSetReference{}
+			return v.Shot.Deserialize(d)
 		}
 		return nil
 	})
@@ -563,6 +866,48 @@ func (v *FeedSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The settings of the fixedInterval trigger, which runs the function once for
+// every intervalSeconds of content. A function that references media.transcript
+// must use this trigger. You can't use this trigger with a function that
+// references media.contextual.
+//
+// If the function references media.transcript, specify subtitlingSettings. If the
+// function references media.clip, specify clippingSettings. Each run then receives
+// the events that the event clipping output reported during the interval, in
+// media.clip.events.
+type FixedIntervalTrigger struct {
+
+	// The amount of content, in seconds, between runs of the function. Valid range: 1
+	// to 60. For a function with eventBridgeDelivery set to ENABLED, the minimum is 4.
+	//
+	// This member is required.
+	IntervalSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *FixedIntervalTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedIntervalTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedIntervalTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntervalSeconds != nil {
+		s.WriteInt32(schemas.FixedIntervalTrigger_intervalSeconds, *v.IntervalSeconds)
+	}
+}
+func (v *FixedIntervalTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedIntervalTrigger, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedIntervalTrigger_intervalSeconds:
+			v.IntervalSeconds = new(int32)
+			return d.ReadInt32(schemas.FixedIntervalTrigger_intervalSeconds, v.IntervalSeconds)
+		}
+		return nil
+	})
+}
+
 // Sets the time at which a schedule action runs once. This is a type of
 // ScheduleActionStartConfiguration.
 type FixedModeScheduleActionStartSettings struct {
@@ -695,6 +1040,405 @@ func (v *FixtureSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies how Elemental Inference chooses frames from the media of each run,
+// and how many frames it chooses. The media of a run is the interval, shot, scene,
+// or clips that the run covers.
+type FrameSamplingStrategy struct {
+
+	// Which frames of the window to send: FIRST (the first frames), UNIFORM (frames
+	// spread evenly across the window), or LAST (the last frames).
+	//
+	// This member is required.
+	Mode FrameSamplingMode
+
+	// The number of frames to send on each run. Valid range: 1 to 64. The default is
+	// 1. Each frame adds to the size of the model request and to what the model
+	// charges for it.
+	Count *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *FrameSamplingStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameSamplingStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameSamplingStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.FrameSamplingStrategy_count, *v.Count)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.FrameSamplingStrategy_mode, string(v.Mode))
+	}
+}
+func (v *FrameSamplingStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameSamplingStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameSamplingStrategy_count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.FrameSamplingStrategy_count, v.Count)
+		case schemas.FrameSamplingStrategy_mode:
+			var ev string
+			if err := d.ReadString(schemas.FrameSamplingStrategy_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = FrameSamplingMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The frames that a function receives in media.frames on each run: which frames,
+// how many, and at what size. Elemental Inference applies these settings only to a
+// function that references media.frames.
+//
+// When you add or change the function output, Elemental Inference estimates the
+// size of the frames and rejects settings whose frames won't fit in one model
+// request. To send more frames in each request, specify a smaller frameSize.
+type FrameSettings struct {
+
+	// The method for choosing which frames to send.
+	//
+	// This member is required.
+	FrameSampling *FrameSamplingStrategy
+
+	// The size to resize each frame to. If you omit this structure, frames keep their
+	// source size. Smaller frames reduce the size of the model request.
+	FrameSize *FrameSize
+
+	noSmithyDocumentSerde
+}
+
+func (v *FrameSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameSampling != nil {
+		s.WriteStruct(schemas.FrameSettings_frameSampling)
+		v.FrameSampling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrameSize != nil {
+		s.WriteStruct(schemas.FrameSettings_frameSize)
+		v.FrameSize.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FrameSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameSettings_frameSampling:
+			v.FrameSampling = &FrameSamplingStrategy{}
+			return v.FrameSampling.Deserialize(d)
+		case schemas.FrameSettings_frameSize:
+			v.FrameSize = &FrameSize{}
+			return v.FrameSize.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The dimensions, in pixels, of each frame that a function sends. Elemental
+// Inference resizes each frame to exactly this width and height.
+type FrameSize struct {
+
+	// The height of each frame, in pixels. Valid range: 1 to 720.
+	//
+	// This member is required.
+	HeightPixels *int32
+
+	// The width of each frame, in pixels. Valid range: 1 to 1280.
+	//
+	// This member is required.
+	WidthPixels *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *FrameSize) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameSize)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameSize) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeightPixels != nil {
+		s.WriteInt32(schemas.FrameSize_heightPixels, *v.HeightPixels)
+	}
+	if v.WidthPixels != nil {
+		s.WriteInt32(schemas.FrameSize_widthPixels, *v.WidthPixels)
+	}
+}
+func (v *FrameSize) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameSize, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameSize_heightPixels:
+			v.HeightPixels = new(int32)
+			return d.ReadInt32(schemas.FrameSize_heightPixels, v.HeightPixels)
+		case schemas.FrameSize_widthPixels:
+			v.WidthPixels = new(int32)
+			return d.ReadInt32(schemas.FrameSize_widthPixels, v.WidthPixels)
+		}
+		return nil
+	})
+}
+
+// The output configuration settings for a function. Use this structure to run a
+// function on this feed. The name of the output is the name that you pass to
+// GetMetadata to read the results.
+//
+// Include the settings that the function's media context and trigger require.
+// Elemental Inference ignores settings that neither uses. It also rejects settings
+// whose frames are estimated to exceed the size of a single model request.
+//
+// A feed that has an enabled function output must also have an enabled cropping,
+// clipping, subtitling, or contextual metadata output. A feed that runs a function
+// with a Bedrock target must specify an accessRoleArn.
+type FunctionConfig struct {
+
+	// The ARN of the function to run. The function must exist in the same account and
+	// the same Region as the feed.
+	//
+	// This member is required.
+	FunctionArn *string
+
+	// Determines when the function runs.
+	//
+	// This member is required.
+	Trigger Trigger
+
+	// The event clipping output on this feed to read clips from. Required for a
+	// perClip trigger, and for a function that references media.clip.
+	ClippingSettings *ClippingSettings
+
+	// The contextual metadata output on this feed to read scenes and classifications
+	// from. Required for a perScene trigger, and for a function that references
+	// media.contextual on a perShot trigger.
+	ContextualMetadataSettings *ContextualMetadataSettings
+
+	// The frames to send on each run: how many, which ones, and at what size. Applies
+	// to a function that references media.frames. If you omit this structure,
+	// Elemental Inference sends the first frame of the window, at its source size.
+	FrameSettings *FrameSettings
+
+	// The smart subtitles output on this feed to read the transcript from. Required
+	// for a function that references media.transcript.
+	SubtitlingSettings *SubtitlingSettings
+
+	noSmithyDocumentSerde
+}
+
+func (v *FunctionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FunctionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClippingSettings != nil {
+		s.WriteStruct(schemas.FunctionConfig_clippingSettings)
+		v.ClippingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContextualMetadataSettings != nil {
+		s.WriteStruct(schemas.FunctionConfig_contextualMetadataSettings)
+		v.ContextualMetadataSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FrameSettings != nil {
+		s.WriteStruct(schemas.FunctionConfig_frameSettings)
+		v.FrameSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.FunctionConfig_functionArn, *v.FunctionArn)
+	}
+	if v.SubtitlingSettings != nil {
+		s.WriteStruct(schemas.FunctionConfig_subtitlingSettings)
+		v.SubtitlingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Trigger != nil {
+		serializeTrigger(s, schemas.FunctionConfig_trigger, v.Trigger)
+	}
+}
+func (v *FunctionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionConfig_clippingSettings:
+			v.ClippingSettings = &ClippingSettings{}
+			return v.ClippingSettings.Deserialize(d)
+		case schemas.FunctionConfig_contextualMetadataSettings:
+			v.ContextualMetadataSettings = &ContextualMetadataSettings{}
+			return v.ContextualMetadataSettings.Deserialize(d)
+		case schemas.FunctionConfig_frameSettings:
+			v.FrameSettings = &FrameSettings{}
+			return v.FrameSettings.Deserialize(d)
+		case schemas.FunctionConfig_functionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.FunctionConfig_functionArn, v.FunctionArn)
+		case schemas.FunctionConfig_subtitlingSettings:
+			v.SubtitlingSettings = &SubtitlingSettings{}
+			return v.SubtitlingSettings.Deserialize(d)
+		case schemas.FunctionConfig_trigger:
+			return deserializeTrigger(d, schemas.FunctionConfig_trigger, &v.Trigger)
+		}
+		return nil
+	})
+}
+
+// Contains identifying and configuration details for a function, including its
+// name, target, status, and derived media context.
+type FunctionSummary struct {
+
+	// The ARN of the function.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the function.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the function.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the function.
+	//
+	// This member is required.
+	Status FunctionStatus
+
+	// The kinds of media context that this function uses. Elemental Inference derives
+	// this field from the media paths that the request expression references; you
+	// can't set it. An empty list means that the expression references no media, so
+	// Elemental Inference supplies none at run time.
+	ContextTypes []ContextType
+
+	// The description of the function.
+	Description *string
+
+	// The destination for the request that the function builds.
+	Target FunctionTarget
+
+	noSmithyDocumentSerde
+}
+
+func (v *FunctionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FunctionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FunctionSummary_arn, *v.Arn)
+	}
+	if v.ContextTypes != nil {
+		serializeContextTypeList(s, schemas.FunctionSummary_contextTypes, v.ContextTypes)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FunctionSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FunctionSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FunctionSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FunctionSummary_status, string(v.Status))
+	}
+	if v.Target != nil {
+		serializeFunctionTarget(s, schemas.FunctionSummary_target, v.Target)
+	}
+}
+func (v *FunctionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FunctionSummary_arn, v.Arn)
+		case schemas.FunctionSummary_contextTypes:
+			return deserializeContextTypeList(d, schemas.FunctionSummary_contextTypes, &v.ContextTypes)
+		case schemas.FunctionSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FunctionSummary_description, v.Description)
+		case schemas.FunctionSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FunctionSummary_id, v.Id)
+		case schemas.FunctionSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FunctionSummary_name, v.Name)
+		case schemas.FunctionSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.FunctionSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = FunctionStatus(ev)
+			return nil
+		case schemas.FunctionSummary_target:
+			return deserializeFunctionTarget(d, schemas.FunctionSummary_target, &v.Target)
+		}
+		return nil
+	})
+}
+
+// The destination for the request that a function builds. Specify exactly one
+// member.
+//
+// The following types satisfy this interface:
+//
+//	FunctionTargetMemberBedrock
+//	FunctionTargetMemberPassthrough
+type FunctionTarget interface {
+	isFunctionTarget()
+}
+
+// Send the request to an Amazon Bedrock model.
+type FunctionTargetMemberBedrock struct {
+	Value BedrockFunctionTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*FunctionTargetMemberBedrock) isFunctionTarget() {}
+func (v *FunctionTargetMemberBedrock) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionTarget_bedrock)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FunctionTargetMemberBedrock) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Send the request nowhere. Use this target to reshape the metadata that
+// Elemental Inference already produces, with no model invocation and no model
+// charges.
+type FunctionTargetMemberPassthrough struct {
+	Value PassthroughFunctionTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*FunctionTargetMemberPassthrough) isFunctionTarget() {}
+func (v *FunctionTargetMemberPassthrough) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionTarget_passthrough)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FunctionTargetMemberPassthrough) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Contains configuration information about one output in a feed. It is used in
 // the GetFeed response.
 type GetOutput struct {
@@ -787,6 +1531,7 @@ func (v *GetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 //	OutputConfigMemberClipping
 //	OutputConfigMemberContextualMetadata
 //	OutputConfigMemberCropping
+//	OutputConfigMemberFunction
 //	OutputConfigMemberSubtitling
 type OutputConfig interface {
 	isOutputConfig()
@@ -843,6 +1588,23 @@ func (v *OutputConfigMemberCropping) Deserialize(d smithy.ShapeDeserializer) err
 	return v.Value.Deserialize(d)
 }
 
+// The output config type that applies to a function.
+type OutputConfigMemberFunction struct {
+	Value FunctionConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberFunction) isOutputConfig() {}
+func (v *OutputConfigMemberFunction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_function)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberFunction) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The output config type that applies to the smart subtitling feature.
 type OutputConfigMemberSubtitling struct {
 	Value SubtitlingConfig
@@ -858,6 +1620,268 @@ func (v *OutputConfigMemberSubtitling) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *OutputConfigMemberSubtitling) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// A target that invokes nothing. Elemental Inference evaluates your request
+// expression, then evaluates your response expression against that result. If the
+// function has no response expression, Elemental Inference stores the result of
+// the request expression.
+//
+// A passthrough function can't reference media.frames. It also needs no access
+// role on the feed.
+type PassthroughFunctionTarget struct {
+	noSmithyDocumentSerde
+}
+
+func (v *PassthroughFunctionTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PassthroughFunctionTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PassthroughFunctionTarget) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PassthroughFunctionTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PassthroughFunctionTarget, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// An option in a yesNoPerOption question or a chooseOne question.
+type QuestionOption struct {
+
+	// A name for the option. The name must be unique among the options of the
+	// question. The name can be up to 64 characters. It must start with a letter or an
+	// underscore, and can contain only the letters A-Z and a-z, the digits 0-9, and
+	// underscores.
+	//
+	// This member is required.
+	Name *string
+
+	// The text of the option. The text must be unique among the options of the
+	// question, ignoring case. The text can be up to 16 bytes, encoded in UTF-8. It
+	// can contain the same characters as the text of a question.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuestionOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuestionOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuestionOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.QuestionOption_name, *v.Name)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.QuestionOption_text, *v.Text)
+	}
+}
+func (v *QuestionOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuestionOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuestionOption_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.QuestionOption_name, v.Name)
+		case schemas.QuestionOption_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.QuestionOption_text, v.Text)
+		}
+		return nil
+	})
+}
+
+// Identifies one version of a question set. You specify it in
+// CustomQuestionsConfig.
+type QuestionSetReference struct {
+
+	// The ID of the question set. The question set must be in your account.
+	//
+	// This member is required.
+	QuestionSetId *string
+
+	// The version of the question set: DRAFT or the number of a published version.
+	// The version must exist.
+	//
+	// If you specify DRAFT, the output uses the current DRAFT questions and picks up
+	// changes that you make later by using UpdateQuestionSet. To keep the questions
+	// for the output fixed, specify a published version.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuestionSetReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuestionSetReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuestionSetReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuestionSetId != nil {
+		s.WriteString(schemas.QuestionSetReference_questionSetId, *v.QuestionSetId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.QuestionSetReference_version, *v.Version)
+	}
+}
+func (v *QuestionSetReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuestionSetReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuestionSetReference_questionSetId:
+			v.QuestionSetId = new(string)
+			return d.ReadString(schemas.QuestionSetReference_questionSetId, v.QuestionSetId)
+		case schemas.QuestionSetReference_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.QuestionSetReference_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a question set. Used in the ListQuestionSets
+// response.
+type QuestionSetSummary struct {
+
+	// The ARN of the question set.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the question set.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the question set.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of the highest version that you have published for this question
+	// set, even if you have since deleted that version. Elemental Inference doesn't
+	// return this property if you haven't published a version.
+	LatestVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuestionSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuestionSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuestionSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.QuestionSetSummary_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.QuestionSetSummary_id, *v.Id)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.QuestionSetSummary_latestVersion, *v.LatestVersion)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.QuestionSetSummary_name, *v.Name)
+	}
+}
+func (v *QuestionSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuestionSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuestionSetSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.QuestionSetSummary_arn, v.Arn)
+		case schemas.QuestionSetSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QuestionSetSummary_id, v.Id)
+		case schemas.QuestionSetSummary_latestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.QuestionSetSummary_latestVersion, v.LatestVersion)
+		case schemas.QuestionSetSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.QuestionSetSummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about one version of a question set. Used in the
+// ListQuestionSetVersions response.
+type QuestionSetVersionSummary struct {
+
+	// For DRAFT, the time when you created the question set or last updated DRAFT.
+	// For a published version, the time when you published it.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The SHA-256 hash of this version, as 64 lowercase hexadecimal characters. The
+	// hash covers the name of the question set and its questions at this version.
+	//
+	// This member is required.
+	Sha256 *string
+
+	// The version: DRAFT or the number of a published version.
+	//
+	// This member is required.
+	Version *string
+
+	// The description that you specified when you published this version. Elemental
+	// Inference doesn't return this property for DRAFT, or for a version that you
+	// published without a description.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuestionSetVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuestionSetVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuestionSetVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.QuestionSetVersionSummary_description, *v.Description)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.QuestionSetVersionSummary_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.Sha256 != nil {
+		s.WriteString(schemas.QuestionSetVersionSummary_sha256, *v.Sha256)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.QuestionSetVersionSummary_version, *v.Version)
+	}
+}
+func (v *QuestionSetVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuestionSetVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuestionSetVersionSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.QuestionSetVersionSummary_description, v.Description)
+		case schemas.QuestionSetVersionSummary_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.QuestionSetVersionSummary_lastModifiedAt, v.LastModifiedAt)
+		case schemas.QuestionSetVersionSummary_sha256:
+			v.Sha256 = new(string)
+			return d.ReadString(schemas.QuestionSetVersionSummary_sha256, v.Sha256)
+		case schemas.QuestionSetVersionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.QuestionSetVersionSummary_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Removes the game from an event clipping output at the action's scheduled time.
@@ -890,6 +1914,34 @@ func (v *RemoveClippingDataSourceConfiguration) Deserialize(d smithy.ShapeDeseri
 		case schemas.RemoveClippingDataSourceConfiguration_outputName:
 			v.OutputName = new(string)
 			return d.ReadString(schemas.RemoveClippingDataSourceConfiguration_outputName, v.OutputName)
+		}
+		return nil
+	})
+}
+
+// The perScene trigger, which runs the function once for each scene that a
+// contextual metadata output reports. The function runs after the scene ends, with
+// the media of that scene. To choose this trigger, set perScene to an empty
+// object.
+//
+// Specify contextualMetadataSettings to name the contextual metadata output that
+// reports the scenes. You can't use this trigger with a function that references
+// media.transcript or media.clip.
+type SceneTrigger struct {
+	noSmithyDocumentSerde
+}
+
+func (v *SceneTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SceneTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SceneTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SceneTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SceneTrigger, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -1180,6 +2232,34 @@ func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The perShot trigger, which runs the function once for each shot that Elemental
+// Inference detects in the video. The function runs after the shot ends, with the
+// media of that shot. To choose this trigger, set perShot to an empty object. The
+// feed must have a video input.
+//
+// You can't use this trigger with a function that references media.transcript or
+// media.clip. If the function references media.contextual, specify
+// contextualMetadataSettings.
+type ShotTrigger struct {
+	noSmithyDocumentSerde
+}
+
+func (v *ShotTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShotTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShotTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ShotTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShotTrigger, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // A type of OutputConfig, used when the output in a feed is for the smart
 // subtitling feature. Smart subtitling uses automatic speech recognition (ASR) to
 // generate live TTML subtitles from the audio in your source media.
@@ -1261,6 +2341,44 @@ func (v *SubtitlingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The smart subtitles output on this feed that a function reads media.transcript
+// from. Specify this structure for a function that references media.transcript.
+// That function must use a fixedInterval trigger.
+//
+// If the function output is ENABLED, the output that you name must also be
+// ENABLED.
+type SubtitlingSettings struct {
+
+	// The name of an ENABLED smart subtitles output on this feed.
+	//
+	// This member is required.
+	OutputName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubtitlingSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubtitlingSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubtitlingSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputName != nil {
+		s.WriteString(schemas.SubtitlingSettings_outputName, *v.OutputName)
+	}
+}
+func (v *SubtitlingSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubtitlingSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubtitlingSettings_outputName:
+			v.OutputName = new(string)
+			return d.ReadString(schemas.SubtitlingSettings_outputName, v.OutputName)
+		}
+		return nil
+	})
+}
+
 // A named set of graphics-compositing templates used by the crop feature,
 // specified in the templateGroups array of a CroppingConfig.
 type TemplateGroup struct {
@@ -1306,6 +2424,93 @@ func (v *TemplateGroup) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// Determines when a function runs. Specify exactly one member.
+//
+// The following types satisfy this interface:
+//
+//	TriggerMemberFixedInterval
+//	TriggerMemberPerClip
+//	TriggerMemberPerScene
+//	TriggerMemberPerShot
+type Trigger interface {
+	isTrigger()
+}
+
+// Run the function at a fixed interval of content. This is the only trigger for a
+// function that references media.transcript. Can't be used with a function that
+// references media.contextual.
+type TriggerMemberFixedInterval struct {
+	Value FixedIntervalTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerMemberFixedInterval) isTrigger() {}
+func (v *TriggerMemberFixedInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trigger_fixedInterval)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TriggerMemberFixedInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Run the function once for each clip that an event clipping output detects.
+// Requires clippingSettings. Can't be used with a function that references
+// media.transcript or media.contextual.
+type TriggerMemberPerClip struct {
+	Value ClipTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerMemberPerClip) isTrigger() {}
+func (v *TriggerMemberPerClip) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trigger_perClip)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TriggerMemberPerClip) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Run the function once for each scene boundary that a contextual metadata output
+// reports. Requires contextualMetadataSettings. Can't be used with a function that
+// references media.transcript or media.clip.
+type TriggerMemberPerScene struct {
+	Value SceneTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerMemberPerScene) isTrigger() {}
+func (v *TriggerMemberPerScene) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trigger_perScene)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TriggerMemberPerScene) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Run the function once for each shot that Elemental Inference detects. Can't be
+// used with a function that references media.transcript or media.clip.
+type TriggerMemberPerShot struct {
+	Value ShotTrigger
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerMemberPerShot) isTrigger() {}
+func (v *TriggerMemberPerShot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trigger_perShot)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TriggerMemberPerShot) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Attaches a game to an event clipping output at the action's scheduled time.
@@ -1492,6 +2697,123 @@ func (v *UpdateOutputStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A question that you ask Elemental Inference separately about each of its
+// options. Elemental Inference answers yes or no for each option. Word the
+// question so that it fits any of the options. For example, ask Is this overlay
+// visible? with one option for each overlay. You specify it in the yesNoPerOption
+// array of a question set.
+type YesNoPerOptionQuestion struct {
+
+	// A name for the question. The name must be unique among all the questions in the
+	// version, across all question types. The name can be up to 64 characters. It must
+	// start with a letter or an underscore, and can contain only the letters A-Z and
+	// a-z, the digits 0-9, and underscores.
+	//
+	// This member is required.
+	Name *string
+
+	// The options that you ask the question about. You can specify from 1 to 50
+	// options. Each option counts as one item toward the limit of 100 scored items in
+	// a version.
+	//
+	// This member is required.
+	Options []QuestionOption
+
+	// The text of the question. The text can be up to 256 bytes, encoded in UTF-8. It
+	// can contain letters in any language, combining marks, digits, spaces, and the
+	// following characters: . , ? ! ' " ( ) - : ; / & % , plus the curly apostrophe
+	// and quotation marks (U+2019, U+201C, and U+201D).
+	//
+	// This member is required.
+	Question *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *YesNoPerOptionQuestion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.YesNoPerOptionQuestion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *YesNoPerOptionQuestion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.YesNoPerOptionQuestion_name, *v.Name)
+	}
+	if v.Options != nil {
+		serializeYesNoPerOptionOptionList(s, schemas.YesNoPerOptionQuestion_options, v.Options)
+	}
+	if v.Question != nil {
+		s.WriteString(schemas.YesNoPerOptionQuestion_question, *v.Question)
+	}
+}
+func (v *YesNoPerOptionQuestion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.YesNoPerOptionQuestion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.YesNoPerOptionQuestion_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.YesNoPerOptionQuestion_name, v.Name)
+		case schemas.YesNoPerOptionQuestion_options:
+			return deserializeYesNoPerOptionOptionList(d, schemas.YesNoPerOptionQuestion_options, &v.Options)
+		case schemas.YesNoPerOptionQuestion_question:
+			v.Question = new(string)
+			return d.ReadString(schemas.YesNoPerOptionQuestion_question, v.Question)
+		}
+		return nil
+	})
+}
+
+// A question that you ask Elemental Inference, which answers with yes or no. You
+// specify it in the yesNo array of a question set.
+type YesNoQuestion struct {
+
+	// A name for the question. The name must be unique among all the questions in the
+	// version, across all question types. The name can be up to 64 characters. It must
+	// start with a letter or an underscore, and can contain only the letters A-Z and
+	// a-z, the digits 0-9, and underscores.
+	//
+	// This member is required.
+	Name *string
+
+	// The text of the question. The text can be up to 256 bytes, encoded in UTF-8. It
+	// can contain letters in any language, combining marks, digits, spaces, and the
+	// following characters: . , ? ! ' " ( ) - : ; / & % , plus the curly apostrophe
+	// and quotation marks (U+2019, U+201C, and U+201D).
+	//
+	// This member is required.
+	Question *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *YesNoQuestion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.YesNoQuestion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *YesNoQuestion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.YesNoQuestion_name, *v.Name)
+	}
+	if v.Question != nil {
+		s.WriteString(schemas.YesNoQuestion_question, *v.Question)
+	}
+}
+func (v *YesNoQuestion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.YesNoQuestion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.YesNoQuestion_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.YesNoQuestion_name, v.Name)
+		case schemas.YesNoQuestion_question:
+			v.Question = new(string)
+			return d.ReadString(schemas.YesNoQuestion_question, v.Question)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1503,6 +2825,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isFunctionTarget()                   {}
 func (*UnknownUnionMember) isOutputConfig()                     {}
 func (*UnknownUnionMember) isScheduleActionOperation()          {}
 func (*UnknownUnionMember) isScheduleActionStartConfiguration() {}
+func (*UnknownUnionMember) isTrigger()                          {}

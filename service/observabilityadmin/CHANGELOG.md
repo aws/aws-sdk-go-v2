@@ -1,3 +1,7 @@
+# v1.34.0 (2026-11-17)
+
+* **Feature**: This release adds Microsoft Azure connectors, third-party telemetry enrichment and StartTelemetryPipelineRefresh, to discover Azure resources, enrich their telemetry and refresh external-cloud pipelines.
+
 # v1.33.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -107,6 +107,41 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AcceptAgreementApproval(t *testing.T) {
+	want := &AcceptAgreementApprovalOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AcceptAgreementApproval.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AcceptAgreementApproval.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AcceptAgreementCancellationRequest(t *testing.T) {
 	want := &AcceptAgreementCancellationRequestOutput{
 		AgreementId:                    ptr.String("__AgreementId__"),
@@ -355,9 +390,31 @@ func TestCheckResponseSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelAgreementRequest(t *testing.T) {
+	want := &CancelAgreementRequestOutput{}
+	status, header, body, err := serdeRespReadSnapshot("CancelAgreementRequest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelAgreementRequest(context.Background(), &CancelAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelAgreementRequest.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 	want := &CreateAgreementRequestOutput{
 		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		AgreementType:      ptr.String("__AgreementType__"),
 		ChargeSummary: &types.ChargeSummary{
 			CurrencyCode:              ptr.String("__CurrencyCode__"),
 			NewAgreementValue:         ptr.String("__NewAgreementValue__"),
@@ -384,6 +441,7 @@ func TestCheckResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 						},
 						TotalAmount: ptr.String("__TotalAmount__"),
 					},
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
 				},
 				{
 					Id:             ptr.String("__Id__"),
@@ -406,6 +464,7 @@ func TestCheckResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 						},
 						TotalAmount: ptr.String("__TotalAmount__"),
 					},
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
 				},
 			},
 			EstimatedTaxes: &types.EstimatedTaxes{
@@ -444,6 +503,9 @@ func TestCheckResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 				BranchName: ptr.String("__BranchName__"),
 			},
 		},
+		Status:              types.AgreementRequestStatus("DRAFT"),
+		ApprovalRequirement: types.ApprovalRequirement("REQUIRED"),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateAgreementRequest.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -498,6 +560,13 @@ func TestCheckResponseSnapshot_CreateAgreementRequest(t *testing.T) {
 		AgreementProposalIdentifier: ptr.String("__AgreementProposalIdentifier__"),
 		TaxConfiguration: &types.TaxConfiguration{
 			TaxEstimation: types.TaxEstimation("DISABLED"),
+		},
+		AcceptorContact: &types.AcceptorContact{
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+			EmailAddress: ptr.String("__EmailAddress__"),
+			CompanyName:  ptr.String("__CompanyName__"),
+			CountryCode:  ptr.String("__CountryCode__"),
 		},
 	})
 	if err != nil {
@@ -571,6 +640,294 @@ func TestCheckResponseSnapshot_DescribeAgreement(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAgreementApproval(t *testing.T) {
+	want := &GetAgreementApprovalOutput{
+		BuyerAgreementApproval: &types.BuyerAgreementApproval{
+			ApprovalType:        types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			Name:                ptr.String("__Name__"),
+			AgreementRequestId:  ptr.String("__AgreementRequestId__"),
+			Status:              types.AgreementApprovalStatus("PENDING_APPROVAL"),
+			Requester: &types.AgreementApprovalRequester{
+				AccountId: ptr.String("__AccountId__"),
+			},
+			CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ExpiresAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ApprovalNeededBy: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Levels: []types.BuyerAgreementApprovalLevel{
+				{
+					Name: ptr.String("__Name__"),
+					Groups: []types.BuyerAgreementApprovalGroup{
+						{
+							ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+								RequiredApprovalCount: ptr.Int32(1),
+							},
+							Approvers: []types.ApproverOutcome{
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+								RequiredApprovalCount: ptr.Int32(1),
+							},
+							Approvers: []types.ApproverOutcome{
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Groups: []types.BuyerAgreementApprovalGroup{
+						{
+							ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+								RequiredApprovalCount: ptr.Int32(1),
+							},
+							Approvers: []types.ApproverOutcome{
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+							},
+						},
+						{
+							ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+								RequiredApprovalCount: ptr.Int32(1),
+							},
+							Approvers: []types.ApproverOutcome{
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+								&types.ApproverOutcomeMemberEmailApproverOutcome{
+									Value: types.EmailApproverOutcome{
+										Note:              ptr.String("__Note__"),
+										Status:            types.ApproverOutcomeStatus("QUEUED"),
+										UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+										ApproverOutcomeId: ptr.String("__ApproverOutcomeId__"),
+										EmailAddress:      ptr.String("__EmailAddress__"),
+										Name:              ptr.String("__Name__"),
+										PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+											{
+												ChargeId:               ptr.String("__ChargeId__"),
+												PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+											},
+										},
+										OverriddenBy: &types.CallerIdentity{
+											PrincipalArn: ptr.String("__PrincipalArn__"),
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			PlanInput: &types.BuyerAgreementApprovalPlanInput{
+				PlanReference: ptr.String("__PlanReference__"),
+				RequesterNote: ptr.String("__RequesterNote__"),
+			},
+			Proposer: &types.AgreementApprovalProposer{
+				AccountId: ptr.String("__AccountId__"),
+				LegalName: ptr.String("__LegalName__"),
+			},
+			ProposalSummary: &types.AgreementApprovalProposalSummary{
+				OfferId:    ptr.String("__OfferId__"),
+				OfferSetId: ptr.String("__OfferSetId__"),
+				Resources: []types.AgreementApprovalResource{
+					{
+						Id:            ptr.String("__Id__"),
+						Type:          ptr.String("__Type__"),
+						Name:          ptr.String("__Name__"),
+						DeployedOnAws: ptr.String("__DeployedOnAws__"),
+					},
+					{
+						Id:            ptr.String("__Id__"),
+						Type:          ptr.String("__Type__"),
+						Name:          ptr.String("__Name__"),
+						DeployedOnAws: ptr.String("__DeployedOnAws__"),
+					},
+				},
+				VisibilityScope: types.OfferVisibilityScope("PUBLIC"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgreementApproval.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgreementApproval(context.Background(), &GetAgreementApprovalInput{
+		AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementApproval.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 	want := &GetAgreementCancellationRequestOutput{
 		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
@@ -599,6 +956,35 @@ func TestCheckResponseSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementCancellationRequest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgreementContacts(t *testing.T) {
+	want := &GetAgreementContactsOutput{
+		AcceptorContact: &types.AcceptorContact{
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+			EmailAddress: ptr.String("__EmailAddress__"),
+			CompanyName:  ptr.String("__CompanyName__"),
+			CountryCode:  ptr.String("__CountryCode__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgreementContacts.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgreementContacts(context.Background(), &GetAgreementContactsInput{
+		AgreementId: ptr.String("__AgreementId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementContacts.response", err)
 	}
 }
 
@@ -682,6 +1068,418 @@ func TestCheckResponseSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementPaymentRequest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgreementRequest(t *testing.T) {
+	want := &GetAgreementRequestOutput{
+		AgreementRequestId:  ptr.String("__AgreementRequestId__"),
+		AgreementType:       ptr.String("__AgreementType__"),
+		Status:              types.AgreementRequestStatus("DRAFT"),
+		ApprovalRequirement: types.ApprovalRequirement("REQUIRED"),
+		AgreementId:         ptr.String("__AgreementId__"),
+		Intent:              types.Intent("NEW"),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ChargeSummary: &types.ChargeSummary{
+			CurrencyCode:              ptr.String("__CurrencyCode__"),
+			NewAgreementValue:         ptr.String("__NewAgreementValue__"),
+			NewAgreementValueAfterTax: ptr.String("__NewAgreementValueAfterTax__"),
+			ExpectedCharges: []types.ExpectedCharge{
+				{
+					Id:             ptr.String("__Id__"),
+					Time:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Amount:         ptr.String("__Amount__"),
+					AmountAfterTax: ptr.String("__AmountAfterTax__"),
+					Timing:         types.Timing("ON_ACCEPTANCE"),
+					EstimatedTaxes: &types.EstimatedTaxes{
+						Breakdown: []types.TaxBreakdownItem{
+							{
+								Amount: ptr.String("__Amount__"),
+								Rate:   ptr.String("__Rate__"),
+								Type:   ptr.String("__Type__"),
+							},
+							{
+								Amount: ptr.String("__Amount__"),
+								Rate:   ptr.String("__Rate__"),
+								Type:   ptr.String("__Type__"),
+							},
+						},
+						TotalAmount: ptr.String("__TotalAmount__"),
+					},
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					Id:             ptr.String("__Id__"),
+					Time:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Amount:         ptr.String("__Amount__"),
+					AmountAfterTax: ptr.String("__AmountAfterTax__"),
+					Timing:         types.Timing("ON_ACCEPTANCE"),
+					EstimatedTaxes: &types.EstimatedTaxes{
+						Breakdown: []types.TaxBreakdownItem{
+							{
+								Amount: ptr.String("__Amount__"),
+								Rate:   ptr.String("__Rate__"),
+								Type:   ptr.String("__Type__"),
+							},
+							{
+								Amount: ptr.String("__Amount__"),
+								Rate:   ptr.String("__Rate__"),
+								Type:   ptr.String("__Type__"),
+							},
+						},
+						TotalAmount: ptr.String("__TotalAmount__"),
+					},
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			EstimatedTaxes: &types.EstimatedTaxes{
+				Breakdown: []types.TaxBreakdownItem{
+					{
+						Amount: ptr.String("__Amount__"),
+						Rate:   ptr.String("__Rate__"),
+						Type:   ptr.String("__Type__"),
+					},
+					{
+						Amount: ptr.String("__Amount__"),
+						Rate:   ptr.String("__Rate__"),
+						Type:   ptr.String("__Type__"),
+					},
+				},
+				TotalAmount: ptr.String("__TotalAmount__"),
+			},
+			ItemizedCharges: []types.ItemizedCharge{
+				{
+					DimensionKey:            ptr.String("__DimensionKey__"),
+					NewQuantity:             ptr.Int32(1),
+					OldQuantity:             ptr.Int32(1),
+					ChargeReference:         ptr.String("__ChargeReference__"),
+					IncrementalChargeAmount: ptr.String("__IncrementalChargeAmount__"),
+				},
+				{
+					DimensionKey:            ptr.String("__DimensionKey__"),
+					NewQuantity:             ptr.Int32(1),
+					OldQuantity:             ptr.Int32(1),
+					ChargeReference:         ptr.String("__ChargeReference__"),
+					IncrementalChargeAmount: ptr.String("__IncrementalChargeAmount__"),
+				},
+			},
+			InvoicingEntity: &types.InvoicingEntity{
+				LegalName:  ptr.String("__LegalName__"),
+				BranchName: ptr.String("__BranchName__"),
+			},
+		},
+		Proposer: &types.Proposer{
+			AccountId: ptr.String("__AccountId__"),
+		},
+		ProposalSummary: &types.ProposalSummary{
+			Resources: []types.Resource{
+				{
+					Id:   ptr.String("__Id__"),
+					Type: ptr.String("__Type__"),
+				},
+				{
+					Id:   ptr.String("__Id__"),
+					Type: ptr.String("__Type__"),
+				},
+			},
+			OfferId:    ptr.String("__OfferId__"),
+			OfferSetId: ptr.String("__OfferSetId__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgreementRequest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgreementRequest(context.Background(), &GetAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementRequest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgreementRequestApprovalPlans(t *testing.T) {
+	want := &GetAgreementRequestApprovalPlansOutput{
+		Items: []types.AgreementApprovalPlan{
+			&types.AgreementApprovalPlanMemberBuyerAgreementApprovalPlan{
+				Value: types.BuyerAgreementApprovalPlan{
+					PlanReference: ptr.String("__PlanReference__"),
+					Name:          ptr.String("__Name__"),
+					Levels: []types.BuyerAgreementApprovalPlanLevel{
+						{
+							Name: ptr.String("__Name__"),
+							Groups: []types.BuyerAgreementApprovalPlanGroup{
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Groups: []types.BuyerAgreementApprovalPlanGroup{
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			&types.AgreementApprovalPlanMemberBuyerAgreementApprovalPlan{
+				Value: types.BuyerAgreementApprovalPlan{
+					PlanReference: ptr.String("__PlanReference__"),
+					Name:          ptr.String("__Name__"),
+					Levels: []types.BuyerAgreementApprovalPlanLevel{
+						{
+							Name: ptr.String("__Name__"),
+							Groups: []types.BuyerAgreementApprovalPlanGroup{
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Groups: []types.BuyerAgreementApprovalPlanGroup{
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+								{
+									ApprovalCriteria: &types.BuyerAgreementApprovalCriteria{
+										RequiredApprovalCount: ptr.Int32(1),
+									},
+									Approvers: []types.Approver{
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+										&types.ApproverMemberEmailApprover{
+											Value: types.EmailApprover{
+												EmailAddress: ptr.String("__EmailAddress__"),
+												Name:         ptr.String("__Name__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgreementRequestApprovalPlans.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgreementRequestApprovalPlans(context.Background(), &GetAgreementRequestApprovalPlansInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementRequestApprovalPlans.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAgreementRequestTerms(t *testing.T) {
+	want := &GetAgreementRequestTermsOutput{
+		Terms: []types.AgreementRequestTerm{
+			&types.AgreementRequestTermMemberLegalTerm{
+				Value: types.LegalTerm{
+					Type: ptr.String("__Type__"),
+					Id:   ptr.String("__Id__"),
+					Documents: []types.DocumentItem{
+						{
+							Type:    ptr.String("__Type__"),
+							Url:     ptr.String("__Url__"),
+							Version: ptr.String("__Version__"),
+						},
+						{
+							Type:    ptr.String("__Type__"),
+							Url:     ptr.String("__Url__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+			&types.AgreementRequestTermMemberLegalTerm{
+				Value: types.LegalTerm{
+					Type: ptr.String("__Type__"),
+					Id:   ptr.String("__Id__"),
+					Documents: []types.DocumentItem{
+						{
+							Type:    ptr.String("__Type__"),
+							Url:     ptr.String("__Url__"),
+							Version: ptr.String("__Version__"),
+						},
+						{
+							Type:    ptr.String("__Type__"),
+							Url:     ptr.String("__Url__"),
+							Version: ptr.String("__Version__"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAgreementRequestTerms.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAgreementRequestTerms(context.Background(), &GetAgreementRequestTermsInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAgreementRequestTerms.response", err)
 	}
 }
 
@@ -779,6 +1577,61 @@ func TestCheckResponseSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetBillingAdjustmentRequest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAgreementApprovals(t *testing.T) {
+	want := &ListAgreementApprovalsOutput{
+		Items: []types.AgreementApprovalSummary{
+			{
+				ApprovalType:        types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+				AgreementRequestId:  ptr.String("__AgreementRequestId__"),
+				AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+				Name:                ptr.String("__Name__"),
+				Status:              types.AgreementApprovalStatus("PENDING_APPROVAL"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ApprovalNeededBy:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ApprovalType:        types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+				AgreementRequestId:  ptr.String("__AgreementRequestId__"),
+				AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+				Name:                ptr.String("__Name__"),
+				Status:              types.AgreementApprovalStatus("PENDING_APPROVAL"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ApprovalNeededBy:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAgreementApprovals.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAgreementApprovals(context.Background(), &ListAgreementApprovalsInput{
+		Catalog:            ptr.String("__Catalog__"),
+		PartyType:          types.AgreementApprovalPartyType("REQUESTER"),
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		ApprovalType:       types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+		Status:             types.AgreementApprovalStatus("PENDING_APPROVAL"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAgreementApprovals.response", err)
 	}
 }
 
@@ -1009,6 +1862,75 @@ func TestCheckResponseSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAgreementRequests(t *testing.T) {
+	want := &ListAgreementRequestsOutput{
+		Items: []types.AgreementRequestSummary{
+			{
+				AgreementRequestId: ptr.String("__AgreementRequestId__"),
+				AgreementType:      ptr.String("__AgreementType__"),
+				Status:             types.AgreementRequestStatus("DRAFT"),
+				AgreementId:        ptr.String("__AgreementId__"),
+				ProposalSummary: &types.ProposalSummary{
+					Resources: []types.Resource{
+						{
+							Id:   ptr.String("__Id__"),
+							Type: ptr.String("__Type__"),
+						},
+						{
+							Id:   ptr.String("__Id__"),
+							Type: ptr.String("__Type__"),
+						},
+					},
+					OfferId:    ptr.String("__OfferId__"),
+					OfferSetId: ptr.String("__OfferSetId__"),
+				},
+			},
+			{
+				AgreementRequestId: ptr.String("__AgreementRequestId__"),
+				AgreementType:      ptr.String("__AgreementType__"),
+				Status:             types.AgreementRequestStatus("DRAFT"),
+				AgreementId:        ptr.String("__AgreementId__"),
+				ProposalSummary: &types.ProposalSummary{
+					Resources: []types.Resource{
+						{
+							Id:   ptr.String("__Id__"),
+							Type: ptr.String("__Type__"),
+						},
+						{
+							Id:   ptr.String("__Id__"),
+							Type: ptr.String("__Type__"),
+						},
+					},
+					OfferId:    ptr.String("__OfferId__"),
+					OfferSetId: ptr.String("__OfferSetId__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAgreementRequests.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAgreementRequests(context.Background(), &ListAgreementRequestsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Status:     types.AgreementRequestStatus("DRAFT"),
+		ResourceId: ptr.String("__ResourceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAgreementRequests.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 	want := &ListBillingAdjustmentRequestsOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -1062,6 +1984,31 @@ func TestCheckResponseSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListBillingAdjustmentRequests.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RejectAgreementApproval(t *testing.T) {
+	want := &RejectAgreementApprovalOutput{}
+	status, header, body, err := serdeRespReadSnapshot("RejectAgreementApproval.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RejectAgreementApproval(context.Background(), &RejectAgreementApprovalInput{
+		BuyerAgreementApprovalRejectionInput: &types.BuyerAgreementApprovalRejectionInput{
+			AgreementApprovalId:         ptr.String("__AgreementApprovalId__"),
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RejectAgreementApproval.response", err)
 	}
 }
 
@@ -1174,6 +2121,10 @@ func TestCheckResponseSnapshot_SearchAgreements(t *testing.T) {
 				EndTimeBehaviorType:       types.EndTimeBehaviorType("RENEW"),
 				EndTimeBehaviorReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
 				FreeTrialEndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				IncludesContactOfType: []types.ContactType{
+					types.ContactType("ACCEPTOR"),
+					types.ContactType("ACCEPTOR"),
+				},
 			},
 			{
 				AgreementId:    ptr.String("__AgreementId__"),
@@ -1215,6 +2166,10 @@ func TestCheckResponseSnapshot_SearchAgreements(t *testing.T) {
 				EndTimeBehaviorType:       types.EndTimeBehaviorType("RENEW"),
 				EndTimeBehaviorReasonCode: types.EndTimeBehaviorReasonCode("PROPOSER_RENEW_OPTED_OUT"),
 				FreeTrialEndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				IncludesContactOfType: []types.ContactType{
+					types.ContactType("ACCEPTOR"),
+					types.ContactType("ACCEPTOR"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1327,6 +2282,78 @@ func TestCheckResponseSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartAgreementApprovals(t *testing.T) {
+	want := &StartAgreementApprovalsOutput{
+		ApprovalSummaries: []types.AgreementApprovalSummary{
+			{
+				ApprovalType:        types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+				AgreementRequestId:  ptr.String("__AgreementRequestId__"),
+				AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+				Name:                ptr.String("__Name__"),
+				Status:              types.AgreementApprovalStatus("PENDING_APPROVAL"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ApprovalNeededBy:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ApprovalType:        types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+				AgreementRequestId:  ptr.String("__AgreementRequestId__"),
+				AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+				Name:                ptr.String("__Name__"),
+				Status:              types.AgreementApprovalStatus("PENDING_APPROVAL"),
+				CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpiresAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ApprovalNeededBy:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartAgreementApprovals.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartAgreementApprovals(context.Background(), &StartAgreementApprovalsInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		PlanInputs: []types.AgreementApprovalPlanInput{
+			&types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{
+				Value: types.BuyerAgreementApprovalPlanInput{
+					PlanReference: ptr.String("__PlanReference__"),
+					RequesterNote: ptr.String("__RequesterNote__"),
+				},
+			},
+			&types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{
+				Value: types.BuyerAgreementApprovalPlanInput{
+					PlanReference: ptr.String("__PlanReference__"),
+					RequesterNote: ptr.String("__RequesterNote__"),
+				},
+			},
+		},
+		PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartAgreementApprovals.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdatePurchaseOrders(t *testing.T) {
 	want := &UpdatePurchaseOrdersOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdatePurchaseOrders.response")
@@ -1375,9 +2402,22 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
-		AgreementId:                    ptr.String("__AgreementId__"),
-		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	_, opErr := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1406,9 +2446,22 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
-		AgreementId:                    ptr.String("__AgreementId__"),
-		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	_, opErr := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1435,9 +2488,22 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
-		AgreementId:                    ptr.String("__AgreementId__"),
-		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	_, opErr := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1466,9 +2532,22 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
-		AgreementId:                    ptr.String("__AgreementId__"),
-		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	_, opErr := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1499,51 +2578,21 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAgreementRequest(context.Background(), &CreateAgreementRequestInput{
-		ClientToken: ptr.String("__ClientToken__"),
-		Intent:      types.Intent("NEW"),
-		RequestedTerms: []types.RequestedTerm{
+	_, opErr := svc.AcceptAgreementRequest(context.Background(), &AcceptAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		PurchaseOrders: []types.PurchaseOrder{
 			{
-				Id: ptr.String("__Id__"),
-				Configuration: &types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration{
-					Value: types.ConfigurableUpfrontPricingTermConfiguration{
-						SelectorValue: ptr.String("__SelectorValue__"),
-						Dimensions: []types.Dimension{
-							{
-								DimensionKey:   ptr.String("__DimensionKey__"),
-								DimensionValue: 1,
-							},
-							{
-								DimensionKey:   ptr.String("__DimensionKey__"),
-								DimensionValue: 1,
-							},
-						},
-					},
-				},
+				ChargeId:               ptr.String("__ChargeId__"),
+				ChargeRevision:         ptr.Int64(1),
+				AgreementId:            ptr.String("__AgreementId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
 			},
 			{
-				Id: ptr.String("__Id__"),
-				Configuration: &types.RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration{
-					Value: types.ConfigurableUpfrontPricingTermConfiguration{
-						SelectorValue: ptr.String("__SelectorValue__"),
-						Dimensions: []types.Dimension{
-							{
-								DimensionKey:   ptr.String("__DimensionKey__"),
-								DimensionValue: 1,
-							},
-							{
-								DimensionKey:   ptr.String("__DimensionKey__"),
-								DimensionValue: 1,
-							},
-						},
-					},
-				},
+				ChargeId:               ptr.String("__ChargeId__"),
+				ChargeRevision:         ptr.Int64(1),
+				AgreementId:            ptr.String("__AgreementId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
 			},
-		},
-		SourceAgreementIdentifier:   ptr.String("__SourceAgreementIdentifier__"),
-		AgreementProposalIdentifier: ptr.String("__AgreementProposalIdentifier__"),
-		TaxConfiguration: &types.TaxConfiguration{
-			TaxEstimation: types.TaxEstimation("DISABLED"),
 		},
 	})
 	if opErr == nil {
@@ -1571,9 +2620,22 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
-		AgreementId:                    ptr.String("__AgreementId__"),
-		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	_, opErr := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1591,7 +2653,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 	want := &types.ValidationException{
 		RequestId: ptr.String("__RequestId__"),
 		Message:   ptr.String("__Message__"),
-		Reason:    types.ValidationExceptionReason("MISSING_BILLING_ADJUSTMENTS"),
+		Reason:    types.ValidationExceptionReason("CLOSED_AGREEMENT_APPROVAL"),
 		Fields: []types.ValidationExceptionField{
 			{
 				Name:    ptr.String("__Name__"),
@@ -1611,9 +2673,22 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AcceptAgreementCancellationRequest(context.Background(), &AcceptAgreementCancellationRequestInput{
-		AgreementId:                    ptr.String("__AgreementId__"),
-		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
+	_, opErr := svc.AcceptAgreementApproval(context.Background(), &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

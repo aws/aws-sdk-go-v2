@@ -1,0 +1,8 @@
+{
+    "id": "c3a22ebe-74c9-4dcb-b111-873dd2c1c0e2",
+    "type": "feature",
+    "description": "Treat Kinesis ReceiveQueueRecords and ReceiveDeadLetterQueueRecords as long-polling operations, so they back off when the retry quota is exhausted.",
+    "modules": [
+        "service/kinesis"
+    ]
+}

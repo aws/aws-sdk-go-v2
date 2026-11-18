@@ -62,11 +62,6 @@ type GetAccessSourceOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The IP range for the rule's parameters in CIDR notation.
-	//
-	// This member is required.
-	Cidr *string
-
 	// The time and date the rule was created.
 	//
 	// This member is required.
@@ -81,11 +76,6 @@ type GetAccessSourceOutput struct {
 	//
 	// This member is required.
 	Id *string
-
-	// The IP address type.
-	//
-	// This member is required.
-	IpAddressType types.IpAddressType
 
 	// The protocol determines how data is transmitted to a Global Resolver instance.
 	//
@@ -102,8 +92,20 @@ type GetAccessSourceOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The IP range for the rule's parameters in CIDR notation.
+	Cidr *string
+
+	// The ID of the core network endpoint associated with this access source.
+	CoreNetworkEndpointId *string
+
+	// The IP address type.
+	IpAddressType types.IpAddressType
+
 	// Name for the access source.
 	Name *string
+
+	// The name of the segment associated with this access source.
+	Segment *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -124,6 +126,9 @@ func (v *GetAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cidr != nil {
 		s.WriteString(schemas.GetAccessSourceOutput_cidr, *v.Cidr)
 	}
+	if v.CoreNetworkEndpointId != nil {
+		s.WriteString(schemas.GetAccessSourceOutput_coreNetworkEndpointId, *v.CoreNetworkEndpointId)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetAccessSourceOutput_createdAt, *v.CreatedAt)
 	}
@@ -142,6 +147,9 @@ func (v *GetAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.GetAccessSourceOutput_protocol, string(v.Protocol))
 	}
+	if v.Segment != nil {
+		s.WriteString(schemas.GetAccessSourceOutput_segment, *v.Segment)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetAccessSourceOutput_status, string(v.Status))
 	}
@@ -158,6 +166,9 @@ func (v *GetAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetAccessSourceOutput_cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.GetAccessSourceOutput_cidr, v.Cidr)
+		case schemas.GetAccessSourceOutput_coreNetworkEndpointId:
+			v.CoreNetworkEndpointId = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_coreNetworkEndpointId, v.CoreNetworkEndpointId)
 		case schemas.GetAccessSourceOutput_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetAccessSourceOutput_createdAt, v.CreatedAt)
@@ -184,6 +195,9 @@ func (v *GetAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Protocol = types.DnsProtocol(ev)
 			return nil
+		case schemas.GetAccessSourceOutput_segment:
+			v.Segment = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_segment, v.Segment)
 		case schemas.GetAccessSourceOutput_status:
 			var ev string
 			if err := d.ReadString(schemas.GetAccessSourceOutput_status, &ev); err != nil {

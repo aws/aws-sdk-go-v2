@@ -1,0 +1,5 @@
+POST /GetConnectorTelemetryManifest
+
+Content-Type: application/json
+
+{"ConnectorIdentifier":"__ConnectorIdentifier__"}

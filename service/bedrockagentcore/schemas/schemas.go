@@ -85,6 +85,13 @@ var DeleteCapacityProviderSession = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/capacity-providers/{capacityProviderId}/sessions/{sessionId}",
 	Code: 202})
 
+var DeleteDatasetGeneration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DeleteDatasetGeneration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/datasets/{datasetId}/generations/{generationId}",
+	Code: 202})
+
 var DeleteEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "DeleteEvent",
@@ -141,6 +148,13 @@ var GetAgentCard = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/runtimes/{agentRuntimeArn}/invocations/.well-known/agent-card.json",
 	Code: 200})
 
+var GetAgentInsight = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GetAgentInsight",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/agentinsights/{agentInsightId}",
+	Code: 200})
+
 var GetBatchEvaluation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "GetBatchEvaluation",
@@ -160,6 +174,13 @@ var GetCodeInterpreterSession = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetCodeInterpreterSession",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/code-interpreters/{codeInterpreterIdentifier}/sessions/get",
+	Code: 200})
+
+var GetDatasetGeneration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GetDatasetGeneration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/datasets/{datasetId}/generations/{generationId}",
 	Code: 200})
 
 var GetEvent = smithy.NewSchema(smithy.ShapeID{
@@ -309,6 +330,13 @@ var ListActors = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/memories/{memoryId}/actors",
 	Code: 200})
 
+var ListAgentInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ListAgentInsights",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/agentinsights",
+	Code: 200})
+
 var ListBatchEvaluations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "ListBatchEvaluations",
@@ -328,6 +356,13 @@ var ListCodeInterpreterSessions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListCodeInterpreterSessions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/code-interpreters/{codeInterpreterIdentifier}/sessions/list",
+	Code: 200})
+
+var ListDatasetGenerations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ListDatasetGenerations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/datasets/{datasetId}/generations",
 	Code: 200})
 
 var ListEvents = smithy.NewSchema(smithy.ShapeID{
@@ -428,6 +463,13 @@ var StartCodeInterpreterSession = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/code-interpreters/{codeInterpreterIdentifier}/sessions/start",
 	Code: 200})
 
+var StartDatasetGeneration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "StartDatasetGeneration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/datasets/{datasetId}/generations",
+	Code: 202})
+
 var StartMemoryExtractionJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "StartMemoryExtractionJob",
@@ -476,6 +518,13 @@ var UpdateABTest = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/ab-tests/{abTestId}",
 	Code: 202})
+
+var UpdateAgentInsight = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "UpdateAgentInsight",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/agentinsights/{agentInsightId}",
+	Code: 200})
 
 var UpdateBrowserStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -642,6 +691,11 @@ var _AffectedSessionList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AffectedSessionList_member *smithy.Schema
 
+var _AgentApplicationName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentApplicationName",
+}, smithy.ShapeTypeString, 0)
+
 var _AgentCard = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "AgentCard",
@@ -654,6 +708,103 @@ var AgentCardDefinition = smithy.NewSchema(smithy.ShapeID{
 var AgentCardDefinition_schemaVersion *smithy.Schema
 
 var AgentCardDefinition_inlineContent *smithy.Schema
+
+var AgentCoreRuntimeInvocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentCoreRuntimeInvocation",
+}, smithy.ShapeTypeStructure, 2)
+var AgentCoreRuntimeInvocation_agentRuntimeEndpointArn *smithy.Schema
+
+var AgentCoreRuntimeInvocation_requestTemplate *smithy.Schema
+
+var AgentCoreRuntimeInvocationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentCoreRuntimeInvocationDetails",
+}, smithy.ShapeTypeStructure, 3)
+var AgentCoreRuntimeInvocationDetails_agentRuntimeEndpointArn *smithy.Schema
+
+var AgentCoreRuntimeInvocationDetails_agentRuntimeVersion *smithy.Schema
+
+var AgentCoreRuntimeInvocationDetails_requestTemplate *smithy.Schema
+
+var AgentInsightArchiveStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInsightArchiveStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AgentInsightArchiveStatus_ACTIVE *smithy.Schema
+
+var AgentInsightArchiveStatus_ARCHIVED *smithy.Schema
+
+var AgentInsightCustomerMetadataStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInsightCustomerMetadataStatus",
+}, smithy.ShapeTypeEnum, 3)
+var AgentInsightCustomerMetadataStatus_AVAILABLE *smithy.Schema
+
+var AgentInsightCustomerMetadataStatus_CUSTOMER_KEY_UNAVAILABLE *smithy.Schema
+
+var AgentInsightCustomerMetadataStatus_UNAVAILABLE *smithy.Schema
+
+var _AgentInsightId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInsightId",
+}, smithy.ShapeTypeString, 0)
+
+var AgentInsightSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInsightSummary",
+}, smithy.ShapeTypeStructure, 12)
+var AgentInsightSummary_type *smithy.Schema
+
+var AgentInsightSummary_name *smithy.Schema
+
+var AgentInsightSummary_description *smithy.Schema
+
+var AgentInsightSummary_createdAt *smithy.Schema
+
+var AgentInsightSummary_affectedSessionCount *smithy.Schema
+
+var AgentInsightSummary_agentInsightId *smithy.Schema
+
+var AgentInsightSummary_applicationName *smithy.Schema
+
+var AgentInsightSummary_batchEvaluationId *smithy.Schema
+
+var AgentInsightSummary_customerMetadataStatus *smithy.Schema
+
+var AgentInsightSummary_updatedAt *smithy.Schema
+
+var AgentInsightSummary_archiveStatus *smithy.Schema
+
+var AgentInsightSummary_lastSeenAt *smithy.Schema
+
+var _AgentInsightSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInsightSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _AgentInsightSummaryList_member *smithy.Schema
+
+var AgentInvocationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInvocationConfig",
+}, smithy.ShapeTypeUnion, 1)
+var AgentInvocationConfig_agentCoreRuntime *smithy.Schema
+
+var AgentInvocationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentInvocationDetails",
+}, smithy.ShapeTypeUnion, 1)
+var AgentInvocationDetails_agentCoreRuntime *smithy.Schema
+
+var _AgentRuntimeEndpointArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentRuntimeEndpointArn",
+}, smithy.ShapeTypeString, 0)
+
+var _AgentRuntimeVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AgentRuntimeVersion",
+}, smithy.ShapeTypeString, 0)
 
 var AgentSkillsDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -764,6 +915,12 @@ var _BatchEvaluationName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "BatchEvaluationName",
 }, smithy.ShapeTypeString, 0)
+
+var BatchEvaluationSourceConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "BatchEvaluationSourceConfig",
+}, smithy.ShapeTypeStructure, 1)
+var BatchEvaluationSourceConfig_batchEvaluationArn *smithy.Schema
 
 var BatchEvaluationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -1124,6 +1281,32 @@ var CloudWatchLogsSource_logGroupNamePrefixes *smithy.Schema
 
 var CloudWatchLogsSource_filterConfig *smithy.Schema
 
+var CloudWatchLogsSourceConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "CloudWatchLogsSourceConfig",
+}, smithy.ShapeTypeStructure, 5)
+var CloudWatchLogsSourceConfig_logGroupNames *smithy.Schema
+
+var CloudWatchLogsSourceConfig_logGroupNamePrefixes *smithy.Schema
+
+var CloudWatchLogsSourceConfig_serviceNames *smithy.Schema
+
+var CloudWatchLogsSourceConfig_startTime *smithy.Schema
+
+var CloudWatchLogsSourceConfig_endTime *smithy.Schema
+
+var _CloudWatchLogsSourceConfigLogGroupNamePrefixesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "CloudWatchLogsSourceConfigLogGroupNamePrefixesList",
+}, smithy.ShapeTypeList, 1)
+var _CloudWatchLogsSourceConfigLogGroupNamePrefixesList_member *smithy.Schema
+
+var _CloudWatchLogsSourceConfigLogGroupNamesList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "CloudWatchLogsSourceConfigLogGroupNamesList",
+}, smithy.ShapeTypeList, 1)
+var _CloudWatchLogsSourceConfigLogGroupNamesList_member *smithy.Schema
+
 var CloudWatchLogsTraceConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "CloudWatchLogsTraceConfig",
@@ -1446,6 +1629,20 @@ var Currency = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var Currency_USD *smithy.Schema
 
+var CustomDataIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "CustomDataIdentifier",
+}, smithy.ShapeTypeStructure, 2)
+var CustomDataIdentifier_name *smithy.Schema
+
+var CustomDataIdentifier_regex *smithy.Schema
+
+var _CustomDataIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "CustomDataIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _CustomDataIdentifierList_member *smithy.Schema
+
 var CustomDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "CustomDescriptor",
@@ -1469,6 +1666,103 @@ var _CustomRequestValueType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "CustomRequestValueType",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var DatasetDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetDetails",
+}, smithy.ShapeTypeStructure, 2)
+var DatasetDetails_datasetId *smithy.Schema
+
+var DatasetDetails_datasetVersion *smithy.Schema
+
+var DatasetExecutionConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetExecutionConfig",
+}, smithy.ShapeTypeStructure, 2)
+var DatasetExecutionConfig_dataset *smithy.Schema
+
+var DatasetExecutionConfig_agentInvocation *smithy.Schema
+
+var DatasetExecutionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetExecutionDetails",
+}, smithy.ShapeTypeStructure, 2)
+var DatasetExecutionDetails_dataset *smithy.Schema
+
+var DatasetExecutionDetails_agentInvocation *smithy.Schema
+
+var _DatasetGenerationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetGenerationDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _DatasetGenerationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetGenerationId",
+}, smithy.ShapeTypeString, 0)
+
+var _DatasetGenerationName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetGenerationName",
+}, smithy.ShapeTypeString, 0)
+
+var DatasetGenerationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetGenerationStatus",
+}, smithy.ShapeTypeEnum, 5)
+var DatasetGenerationStatus_IN_PROGRESS *smithy.Schema
+
+var DatasetGenerationStatus_COMPLETED *smithy.Schema
+
+var DatasetGenerationStatus_COMPLETED_WITH_ERRORS *smithy.Schema
+
+var DatasetGenerationStatus_FAILED *smithy.Schema
+
+var DatasetGenerationStatus_DELETING *smithy.Schema
+
+var DatasetGenerationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetGenerationSummary",
+}, smithy.ShapeTypeStructure, 8)
+var DatasetGenerationSummary_generationId *smithy.Schema
+
+var DatasetGenerationSummary_datasetId *smithy.Schema
+
+var DatasetGenerationSummary_name *smithy.Schema
+
+var DatasetGenerationSummary_description *smithy.Schema
+
+var DatasetGenerationSummary_scenarioType *smithy.Schema
+
+var DatasetGenerationSummary_status *smithy.Schema
+
+var DatasetGenerationSummary_createdAt *smithy.Schema
+
+var DatasetGenerationSummary_completedAt *smithy.Schema
+
+var _DatasetGenerationSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetGenerationSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _DatasetGenerationSummaryList_member *smithy.Schema
+
+var _DatasetId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetId",
+}, smithy.ShapeTypeString, 0)
+
+var DatasetSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetSource",
+}, smithy.ShapeTypeStructure, 2)
+var DatasetSource_datasetId *smithy.Schema
+
+var DatasetSource_datasetVersion *smithy.Schema
+
+var _DatasetVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DatasetVersion",
+}, smithy.ShapeTypeString, 0)
 
 var DataSourceConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -1745,6 +2039,26 @@ var _EvaluatorArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "EvaluatorArn",
 }, smithy.ShapeTypeString, 0)
+
+var EvaluatorFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "EvaluatorFilter",
+}, smithy.ShapeTypeStructure, 5)
+var EvaluatorFilter_evaluatorId *smithy.Schema
+
+var EvaluatorFilter_evaluationDimensionName *smithy.Schema
+
+var EvaluatorFilter_operator *smithy.Schema
+
+var EvaluatorFilter_value *smithy.Schema
+
+var EvaluatorFilter_aggregation *smithy.Schema
+
+var _EvaluatorFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "EvaluatorFilterList",
+}, smithy.ShapeTypeList, 1)
+var _EvaluatorFilterList_member *smithy.Schema
 
 var _EvaluatorId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -2062,10 +2376,23 @@ var FilterValue_doubleValue *smithy.Schema
 
 var FilterValue_booleanValue *smithy.Schema
 
+var _FindingCountMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "FindingCountMap",
+}, smithy.ShapeTypeMap, 2)
+var _FindingCountMap_key *smithy.Schema
+
+var _FindingCountMap_value *smithy.Schema
+
 var _FindingDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "FindingDescription",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _FindingIdentifierKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "FindingIdentifierKey",
+}, smithy.ShapeTypeString, 0)
 
 var _FindingTargetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -2092,6 +2419,205 @@ var GatewayFilter = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GatewayFilter",
 }, smithy.ShapeTypeStructure, 1)
 var GatewayFilter_targetPaths *smithy.Schema
+
+var GenerationAttributeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationAttributeFilter",
+}, smithy.ShapeTypeStructure, 3)
+var GenerationAttributeFilter_key *smithy.Schema
+
+var GenerationAttributeFilter_operator *smithy.Schema
+
+var GenerationAttributeFilter_value *smithy.Schema
+
+var _GenerationAttributeFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationAttributeFilterList",
+}, smithy.ShapeTypeList, 1)
+var _GenerationAttributeFilterList_member *smithy.Schema
+
+var _GenerationErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationErrorCode",
+}, smithy.ShapeTypeString, 0)
+
+var GenerationErrorDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationErrorDetail",
+}, smithy.ShapeTypeStructure, 4)
+var GenerationErrorDetail_errorCode *smithy.Schema
+
+var GenerationErrorDetail_errorMessage *smithy.Schema
+
+var GenerationErrorDetail_count *smithy.Schema
+
+var GenerationErrorDetail_sessionIds *smithy.Schema
+
+var _GenerationErrorDetailsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationErrorDetailsList",
+}, smithy.ShapeTypeList, 1)
+var _GenerationErrorDetailsList_member *smithy.Schema
+
+var _GenerationErrorMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationErrorMessage",
+}, smithy.ShapeTypeString, 0)
+
+var _GenerationErrorSessionIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationErrorSessionIdList",
+}, smithy.ShapeTypeList, 1)
+var _GenerationErrorSessionIdList_member *smithy.Schema
+
+var GenerationFilterOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationFilterOperator",
+}, smithy.ShapeTypeEnum, 8)
+var GenerationFilterOperator_EQUALS *smithy.Schema
+
+var GenerationFilterOperator_NOT_EQUALS *smithy.Schema
+
+var GenerationFilterOperator_GREATER_THAN *smithy.Schema
+
+var GenerationFilterOperator_LESS_THAN *smithy.Schema
+
+var GenerationFilterOperator_GREATER_THAN_OR_EQUAL *smithy.Schema
+
+var GenerationFilterOperator_LESS_THAN_OR_EQUAL *smithy.Schema
+
+var GenerationFilterOperator_CONTAINS *smithy.Schema
+
+var GenerationFilterOperator_NOT_CONTAINS *smithy.Schema
+
+var GenerationFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationFilters",
+}, smithy.ShapeTypeStructure, 3)
+var GenerationFilters_attributeFilters *smithy.Schema
+
+var GenerationFilters_turnCount *smithy.Schema
+
+var GenerationFilters_evaluatorFilters *smithy.Schema
+
+var _GenerationFilterStringValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationFilterStringValue",
+}, smithy.ShapeTypeString, 0)
+
+var GenerationFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationFilterValue",
+}, smithy.ShapeTypeUnion, 3)
+var GenerationFilterValue_stringValue *smithy.Schema
+
+var GenerationFilterValue_doubleValue *smithy.Schema
+
+var GenerationFilterValue_booleanValue *smithy.Schema
+
+var GenerationIdentifierCounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationIdentifierCounts",
+}, smithy.ShapeTypeStructure, 2)
+var GenerationIdentifierCounts_sessionIdCount *smithy.Schema
+
+var GenerationIdentifierCounts_traceIdCount *smithy.Schema
+
+var GenerationIdentifiers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationIdentifiers",
+}, smithy.ShapeTypeStructure, 2)
+var GenerationIdentifiers_sessionIds *smithy.Schema
+
+var GenerationIdentifiers_traceIds *smithy.Schema
+
+var GenerationResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationResults",
+}, smithy.ShapeTypeStructure, 8)
+var GenerationResults_sessionsMatched *smithy.Schema
+
+var GenerationResults_sessionsSelected *smithy.Schema
+
+var GenerationResults_sessionsUnscored *smithy.Schema
+
+var GenerationResults_sessionsFailed *smithy.Schema
+
+var GenerationResults_scenariosGenerated *smithy.Schema
+
+var GenerationResults_scenariosDeduplicated *smithy.Schema
+
+var GenerationResults_examplesWritten *smithy.Schema
+
+var GenerationResults_examplesWithGroundTruth *smithy.Schema
+
+var GenerationSamplingConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationSamplingConfig",
+}, smithy.ShapeTypeStructure, 1)
+var GenerationSamplingConfig_maxScenarios *smithy.Schema
+
+var GenerationSelection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationSelection",
+}, smithy.ShapeTypeUnion, 2)
+var GenerationSelection_filters *smithy.Schema
+
+var GenerationSelection_identifiers *smithy.Schema
+
+var GenerationSelectionRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationSelectionRecord",
+}, smithy.ShapeTypeUnion, 2)
+var GenerationSelectionRecord_filters *smithy.Schema
+
+var GenerationSelectionRecord_identifiers *smithy.Schema
+
+var _GenerationSessionIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationSessionIdList",
+}, smithy.ShapeTypeList, 1)
+var _GenerationSessionIdList_member *smithy.Schema
+
+var GenerationSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationSource",
+}, smithy.ShapeTypeUnion, 1)
+var GenerationSource_traceGeneration *smithy.Schema
+
+var GenerationSourceRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationSourceRecord",
+}, smithy.ShapeTypeUnion, 1)
+var GenerationSourceRecord_traceGeneration *smithy.Schema
+
+var _GenerationTraceIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GenerationTraceIdList",
+}, smithy.ShapeTypeList, 1)
+var _GenerationTraceIdList_member *smithy.Schema
+
+var GroundTruthConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GroundTruthConfig",
+}, smithy.ShapeTypeStructure, 2)
+var GroundTruthConfig_fields *smithy.Schema
+
+var GroundTruthConfig_qualityFilters *smithy.Schema
+
+var GroundTruthField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GroundTruthField",
+}, smithy.ShapeTypeEnum, 2)
+var GroundTruthField_EXPECTED_RESPONSE *smithy.Schema
+
+var GroundTruthField_EXPECTED_TRAJECTORY *smithy.Schema
+
+var _GroundTruthFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GroundTruthFieldList",
+}, smithy.ShapeTypeList, 1)
+var _GroundTruthFieldList_member *smithy.Schema
 
 var GroundTruthSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -3887,6 +4413,16 @@ var OnlineEvaluationConfigSource_onlineEvaluationConfigArn *smithy.Schema
 
 var OnlineEvaluationConfigSource_timeRange *smithy.Schema
 
+var OnlineEvaluationSourceConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "OnlineEvaluationSourceConfig",
+}, smithy.ShapeTypeStructure, 3)
+var OnlineEvaluationSourceConfig_onlineEvaluationConfigArn *smithy.Schema
+
+var OnlineEvaluationSourceConfig_startTime *smithy.Schema
+
+var OnlineEvaluationSourceConfig_endTime *smithy.Schema
+
 var OnlineEvaluationTraceConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "OnlineEvaluationTraceConfig",
@@ -4398,6 +4934,232 @@ var RecordExpirySpecification_recordExpiryDurationDays *smithy.Schema
 
 var RecordExpirySpecification_action *smithy.Schema
 
+var RedactionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "RedactionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var RedactionConfiguration_identifiers *smithy.Schema
+
+var RedactionConfiguration_customDataIdentifiers *smithy.Schema
+
+var RedactionIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "RedactionIdentifier",
+}, smithy.ShapeTypeEnum, 100)
+var RedactionIdentifier_ADDRESS *smithy.Schema
+
+var RedactionIdentifier_AWS_SECRET_KEY *smithy.Schema
+
+var RedactionIdentifier_BANK_ACCOUNT_NUMBER_DE *smithy.Schema
+
+var RedactionIdentifier_BANK_ACCOUNT_NUMBER_ES *smithy.Schema
+
+var RedactionIdentifier_BANK_ACCOUNT_NUMBER_FR *smithy.Schema
+
+var RedactionIdentifier_BANK_ACCOUNT_NUMBER_GB *smithy.Schema
+
+var RedactionIdentifier_BANK_ACCOUNT_NUMBER_IT *smithy.Schema
+
+var RedactionIdentifier_BANK_ACCOUNT_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_CEP_CODE_BR *smithy.Schema
+
+var RedactionIdentifier_CNPJ_BR *smithy.Schema
+
+var RedactionIdentifier_CPF_CODE_BR *smithy.Schema
+
+var RedactionIdentifier_CREDIT_CARD_EXPIRATION *smithy.Schema
+
+var RedactionIdentifier_CREDIT_CARD_MAGNETIC_STRIPE *smithy.Schema
+
+var RedactionIdentifier_CREDIT_CARD_NUMBER *smithy.Schema
+
+var RedactionIdentifier_CREDIT_CARD_SECURITY_CODE *smithy.Schema
+
+var RedactionIdentifier_DATE_OF_BIRTH *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_AT *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_AU *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_BE *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_BG *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_CA *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_CY *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_CZ *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_DE *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_DK *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_EE *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_ES *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_FI *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_FR *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_GB *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_GR *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_HR *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_HU *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_IE *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_IT *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_LT *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_LU *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_LV *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_MT *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_NL *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_PL *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_PT *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_RO *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_SE *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_SI *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_SK *smithy.Schema
+
+var RedactionIdentifier_DRIVERS_LICENSE_US *smithy.Schema
+
+var RedactionIdentifier_DRUG_ENFORCEMENT_AGENCY_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_ELECTORAL_ROLL_NUMBER_GB *smithy.Schema
+
+var RedactionIdentifier_EMAIL_ADDRESS *smithy.Schema
+
+var RedactionIdentifier_HEALTH_INSURANCE_CARD_NUMBER_EU *smithy.Schema
+
+var RedactionIdentifier_HEALTH_INSURANCE_CLAIM_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_HEALTH_INSURANCE_NUMBER_FR *smithy.Schema
+
+var RedactionIdentifier_HEALTHCARE_PROCEDURE_CODE_US *smithy.Schema
+
+var RedactionIdentifier_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_INSEE_CODE_FR *smithy.Schema
+
+var RedactionIdentifier_IP_ADDRESS *smithy.Schema
+
+var RedactionIdentifier_LAT_LONG *smithy.Schema
+
+var RedactionIdentifier_MEDICARE_BENEFICIARY_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_NAME *smithy.Schema
+
+var RedactionIdentifier_NATIONAL_DRUG_CODE_US *smithy.Schema
+
+var RedactionIdentifier_NATIONAL_IDENTIFICATION_NUMBER_DE *smithy.Schema
+
+var RedactionIdentifier_NATIONAL_IDENTIFICATION_NUMBER_ES *smithy.Schema
+
+var RedactionIdentifier_NATIONAL_IDENTIFICATION_NUMBER_IT *smithy.Schema
+
+var RedactionIdentifier_NATIONAL_INSURANCE_NUMBER_GB *smithy.Schema
+
+var RedactionIdentifier_NATIONAL_PROVIDER_ID_US *smithy.Schema
+
+var RedactionIdentifier_NHS_NUMBER_GB *smithy.Schema
+
+var RedactionIdentifier_NIE_NUMBER_ES *smithy.Schema
+
+var RedactionIdentifier_NIF_NUMBER_ES *smithy.Schema
+
+var RedactionIdentifier_OPEN_SSH_PRIVATE_KEY *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_CA *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_DE *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_ES *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_FR *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_GB *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_IT *smithy.Schema
+
+var RedactionIdentifier_PASSPORT_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_PERMANENT_RESIDENCE_NUMBER_CA *smithy.Schema
+
+var RedactionIdentifier_PERSONAL_HEALTH_NUMBER_CA *smithy.Schema
+
+var RedactionIdentifier_PGP_PRIVATE_KEY *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_BR *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_DE *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_ES *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_FR *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_GB *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_IT *smithy.Schema
+
+var RedactionIdentifier_PHONE_NUMBER_US *smithy.Schema
+
+var RedactionIdentifier_PKCS_PRIVATE_KEY *smithy.Schema
+
+var RedactionIdentifier_POSTAL_CODE_CA *smithy.Schema
+
+var RedactionIdentifier_PUTTY_PRIVATE_KEY *smithy.Schema
+
+var RedactionIdentifier_RG_NUMBER_BR *smithy.Schema
+
+var RedactionIdentifier_SOCIAL_INSURANCE_NUMBER_CA *smithy.Schema
+
+var RedactionIdentifier_SSN_ES *smithy.Schema
+
+var RedactionIdentifier_SSN_US *smithy.Schema
+
+var RedactionIdentifier_TAX_ID_DE *smithy.Schema
+
+var RedactionIdentifier_TAX_ID_ES *smithy.Schema
+
+var RedactionIdentifier_TAX_ID_FR *smithy.Schema
+
+var RedactionIdentifier_TAX_ID_GB *smithy.Schema
+
+var RedactionIdentifier_VEHICLE_IDENTIFICATION_NUMBER *smithy.Schema
+
+var RedactionIdentifier_ZIP_CODE_US *smithy.Schema
+
+var _RedactionIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "RedactionIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _RedactionIdentifierList_member *smithy.Schema
+
+var RedactionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "RedactionSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RedactionSummary_scenariosScanned *smithy.Schema
+
+var RedactionSummary_findingCounts *smithy.Schema
+
 var _RegistryArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "RegistryArn",
@@ -4485,6 +5247,11 @@ var _RequestIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RequestIdentifier",
 }, smithy.ShapeTypeString, 0)
 
+var _RequestTemplate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "RequestTemplate",
+}, smithy.ShapeTypeString, 0)
+
 var _RequestUri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "RequestUri",
@@ -4556,6 +5323,20 @@ var _ResponseStream = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResponseStream",
 }, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{},
 	&smithytraits.Sensitive{})
+
+var ResultAggregation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ResultAggregation",
+}, smithy.ShapeTypeEnum, 5)
+var ResultAggregation_MIN *smithy.Schema
+
+var ResultAggregation_MAX *smithy.Schema
+
+var ResultAggregation_MEAN *smithy.Schema
+
+var ResultAggregation_ALL_MATCH *smithy.Schema
+
+var ResultAggregation_ANY_MATCH *smithy.Schema
 
 var ResultDestination = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -4673,6 +5454,14 @@ var SampleSession_sessionId *smithy.Schema
 var SampleSession_lastSeenAt *smithy.Schema
 
 var SampleSession_findings *smithy.Schema
+
+var ScenarioType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ScenarioType",
+}, smithy.ShapeTypeEnum, 2)
+var ScenarioType_FIXED *smithy.Schema
+
+var ScenarioType_DYNAMIC *smithy.Schema
 
 var _SchemaVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -5378,6 +6167,34 @@ var _TopP = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TopP",
 }, smithy.ShapeTypeFloat, 0)
 
+var TraceGenerationRecord = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "TraceGenerationRecord",
+}, smithy.ShapeTypeStructure, 5)
+var TraceGenerationRecord_sourceConfig *smithy.Schema
+
+var TraceGenerationRecord_selection *smithy.Schema
+
+var TraceGenerationRecord_sampling *smithy.Schema
+
+var TraceGenerationRecord_groundTruth *smithy.Schema
+
+var TraceGenerationRecord_redactionConfiguration *smithy.Schema
+
+var TraceGenerationSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "TraceGenerationSource",
+}, smithy.ShapeTypeStructure, 5)
+var TraceGenerationSource_sourceConfig *smithy.Schema
+
+var TraceGenerationSource_selection *smithy.Schema
+
+var TraceGenerationSource_sampling *smithy.Schema
+
+var TraceGenerationSource_groundTruth *smithy.Schema
+
+var TraceGenerationSource_redactionConfiguration *smithy.Schema
+
 var _TraceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "TraceId",
@@ -5394,6 +6211,24 @@ var _TraceIds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TraceIds",
 }, smithy.ShapeTypeList, 1)
 var _TraceIds_member *smithy.Schema
+
+var TraceSourceConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "TraceSourceConfig",
+}, smithy.ShapeTypeUnion, 3)
+var TraceSourceConfig_cloudWatchLogs *smithy.Schema
+
+var TraceSourceConfig_onlineEvaluation *smithy.Schema
+
+var TraceSourceConfig_batchEvaluation *smithy.Schema
+
+var TurnCountRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "TurnCountRange",
+}, smithy.ShapeTypeStructure, 2)
+var TurnCountRange_min *smithy.Schema
+
+var TurnCountRange_max *smithy.Schema
 
 var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -5873,6 +6708,22 @@ var DeleteCapacityProviderSessionResponse_sessionId *smithy.Schema
 
 var DeleteCapacityProviderSessionResponse_status *smithy.Schema
 
+var DeleteDatasetGenerationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DeleteDatasetGenerationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteDatasetGenerationRequest_datasetId *smithy.Schema
+
+var DeleteDatasetGenerationRequest_generationId *smithy.Schema
+
+var DeleteDatasetGenerationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DeleteDatasetGenerationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteDatasetGenerationResponse_generationId *smithy.Schema
+
+var DeleteDatasetGenerationResponse_status *smithy.Schema
+
 var DeleteEventInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "DeleteEventInput",
@@ -6041,6 +6892,46 @@ var GetAgentCardResponse_agentCard *smithy.Schema
 
 var GetAgentCardResponse_statusCode *smithy.Schema
 
+var GetAgentInsightRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GetAgentInsightRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgentInsightRequest_applicationName *smithy.Schema
+
+var GetAgentInsightRequest_agentInsightId *smithy.Schema
+
+var GetAgentInsightResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GetAgentInsightResponse",
+}, smithy.ShapeTypeStructure, 14)
+var GetAgentInsightResponse_type *smithy.Schema
+
+var GetAgentInsightResponse_name *smithy.Schema
+
+var GetAgentInsightResponse_description *smithy.Schema
+
+var GetAgentInsightResponse_createdAt *smithy.Schema
+
+var GetAgentInsightResponse_affectedSessionCount *smithy.Schema
+
+var GetAgentInsightResponse_sampleSessions *smithy.Schema
+
+var GetAgentInsightResponse_rootCauses *smithy.Schema
+
+var GetAgentInsightResponse_agentInsightId *smithy.Schema
+
+var GetAgentInsightResponse_applicationName *smithy.Schema
+
+var GetAgentInsightResponse_batchEvaluationId *smithy.Schema
+
+var GetAgentInsightResponse_customerMetadataStatus *smithy.Schema
+
+var GetAgentInsightResponse_updatedAt *smithy.Schema
+
+var GetAgentInsightResponse_archiveStatus *smithy.Schema
+
+var GetAgentInsightResponse_lastSeenAt *smithy.Schema
+
 var GetBatchEvaluationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "GetBatchEvaluationRequest",
@@ -6050,7 +6941,7 @@ var GetBatchEvaluationRequest_batchEvaluationId *smithy.Schema
 var GetBatchEvaluationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "GetBatchEvaluationResponse",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var GetBatchEvaluationResponse_batchEvaluationId *smithy.Schema
 
 var GetBatchEvaluationResponse_batchEvaluationArn *smithy.Schema
@@ -6086,6 +6977,8 @@ var GetBatchEvaluationResponse_description *smithy.Schema
 var GetBatchEvaluationResponse_updatedAt *smithy.Schema
 
 var GetBatchEvaluationResponse_kmsKeyArn *smithy.Schema
+
+var GetBatchEvaluationResponse_datasetExecutionDetails *smithy.Schema
 
 var GetBrowserSessionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -6158,6 +7051,46 @@ var GetCodeInterpreterSessionResponse_status *smithy.Schema
 var GetCodeInterpreterSessionResponse_certificates *smithy.Schema
 
 var GetCodeInterpreterSessionResponse_filesystemConfigurations *smithy.Schema
+
+var GetDatasetGenerationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GetDatasetGenerationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetDatasetGenerationRequest_datasetId *smithy.Schema
+
+var GetDatasetGenerationRequest_generationId *smithy.Schema
+
+var GetDatasetGenerationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "GetDatasetGenerationResponse",
+}, smithy.ShapeTypeStructure, 14)
+var GetDatasetGenerationResponse_generationId *smithy.Schema
+
+var GetDatasetGenerationResponse_name *smithy.Schema
+
+var GetDatasetGenerationResponse_description *smithy.Schema
+
+var GetDatasetGenerationResponse_datasetId *smithy.Schema
+
+var GetDatasetGenerationResponse_scenarioType *smithy.Schema
+
+var GetDatasetGenerationResponse_status *smithy.Schema
+
+var GetDatasetGenerationResponse_failureReason *smithy.Schema
+
+var GetDatasetGenerationResponse_createdAt *smithy.Schema
+
+var GetDatasetGenerationResponse_updatedAt *smithy.Schema
+
+var GetDatasetGenerationResponse_completedAt *smithy.Schema
+
+var GetDatasetGenerationResponse_source *smithy.Schema
+
+var GetDatasetGenerationResponse_generationResults *smithy.Schema
+
+var GetDatasetGenerationResponse_redactionSummary *smithy.Schema
+
+var GetDatasetGenerationResponse_errorDetails *smithy.Schema
 
 var GetEventInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -6671,6 +7604,28 @@ var ListActorsOutput_actorSummaries *smithy.Schema
 
 var ListActorsOutput_nextToken *smithy.Schema
 
+var ListAgentInsightsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ListAgentInsightsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListAgentInsightsRequest_applicationName *smithy.Schema
+
+var ListAgentInsightsRequest_batchEvaluationId *smithy.Schema
+
+var ListAgentInsightsRequest_archiveStatus *smithy.Schema
+
+var ListAgentInsightsRequest_maxResults *smithy.Schema
+
+var ListAgentInsightsRequest_nextToken *smithy.Schema
+
+var ListAgentInsightsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ListAgentInsightsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAgentInsightsResponse_agentInsights *smithy.Schema
+
+var ListAgentInsightsResponse_nextToken *smithy.Schema
+
 var ListBatchEvaluationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "ListBatchEvaluationsRequest",
@@ -6726,6 +7681,24 @@ var ListCodeInterpreterSessionsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListCodeInterpreterSessionsResponse_items *smithy.Schema
 
 var ListCodeInterpreterSessionsResponse_nextToken *smithy.Schema
+
+var ListDatasetGenerationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ListDatasetGenerationsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListDatasetGenerationsRequest_datasetId *smithy.Schema
+
+var ListDatasetGenerationsRequest_maxResults *smithy.Schema
+
+var ListDatasetGenerationsRequest_nextToken *smithy.Schema
+
+var ListDatasetGenerationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "ListDatasetGenerationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDatasetGenerationsResponse_datasetGenerations *smithy.Schema
+
+var ListDatasetGenerationsResponse_nextToken *smithy.Schema
 
 var ListEventsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -7000,7 +7973,7 @@ var SearchRegistryRecordsResponse_registryRecords *smithy.Schema
 var StartBatchEvaluationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "StartBatchEvaluationRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var StartBatchEvaluationRequest_batchEvaluationName *smithy.Schema
 
 var StartBatchEvaluationRequest_evaluators *smithy.Schema
@@ -7020,6 +7993,8 @@ var StartBatchEvaluationRequest_kmsKeyArn *smithy.Schema
 var StartBatchEvaluationRequest_description *smithy.Schema
 
 var StartBatchEvaluationRequest_outputConfig *smithy.Schema
+
+var StartBatchEvaluationRequest_datasetExecutionConfig *smithy.Schema
 
 var StartBatchEvaluationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -7118,6 +8093,36 @@ var StartCodeInterpreterSessionResponse_codeInterpreterIdentifier *smithy.Schema
 var StartCodeInterpreterSessionResponse_sessionId *smithy.Schema
 
 var StartCodeInterpreterSessionResponse_createdAt *smithy.Schema
+
+var StartDatasetGenerationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "StartDatasetGenerationRequest",
+}, smithy.ShapeTypeStructure, 6)
+var StartDatasetGenerationRequest_datasetId *smithy.Schema
+
+var StartDatasetGenerationRequest_name *smithy.Schema
+
+var StartDatasetGenerationRequest_description *smithy.Schema
+
+var StartDatasetGenerationRequest_scenarioType *smithy.Schema
+
+var StartDatasetGenerationRequest_source *smithy.Schema
+
+var StartDatasetGenerationRequest_clientToken *smithy.Schema
+
+var StartDatasetGenerationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "StartDatasetGenerationResponse",
+}, smithy.ShapeTypeStructure, 5)
+var StartDatasetGenerationResponse_generationId *smithy.Schema
+
+var StartDatasetGenerationResponse_name *smithy.Schema
+
+var StartDatasetGenerationResponse_datasetId *smithy.Schema
+
+var StartDatasetGenerationResponse_status *smithy.Schema
+
+var StartDatasetGenerationResponse_createdAt *smithy.Schema
 
 var StartMemoryExtractionJobInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -7296,6 +8301,26 @@ var UpdateABTestResponse_status *smithy.Schema
 var UpdateABTestResponse_executionStatus *smithy.Schema
 
 var UpdateABTestResponse_updatedAt *smithy.Schema
+
+var UpdateAgentInsightRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "UpdateAgentInsightRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateAgentInsightRequest_applicationName *smithy.Schema
+
+var UpdateAgentInsightRequest_agentInsightId *smithy.Schema
+
+var UpdateAgentInsightRequest_archiveStatus *smithy.Schema
+
+var UpdateAgentInsightResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "UpdateAgentInsightResponse",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateAgentInsightResponse_agentInsightId *smithy.Schema
+
+var UpdateAgentInsightResponse_archiveStatus *smithy.Schema
+
+var UpdateAgentInsightResponse_updatedAt *smithy.Schema
 
 var UpdateBrowserStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -7526,6 +8551,58 @@ func init() {
 
 	_AffectedSessionList_member = _AffectedSessionList.AddMember("member", AffectedSession)
 
+	AgentCoreRuntimeInvocation_agentRuntimeEndpointArn = AgentCoreRuntimeInvocation.AddMember("agentRuntimeEndpointArn", _AgentRuntimeEndpointArn)
+
+	AgentCoreRuntimeInvocation_requestTemplate = AgentCoreRuntimeInvocation.AddMember("requestTemplate", _RequestTemplate)
+
+	AgentCoreRuntimeInvocationDetails_agentRuntimeEndpointArn = AgentCoreRuntimeInvocationDetails.AddMember("agentRuntimeEndpointArn", _AgentRuntimeEndpointArn)
+
+	AgentCoreRuntimeInvocationDetails_agentRuntimeVersion = AgentCoreRuntimeInvocationDetails.AddMember("agentRuntimeVersion", _AgentRuntimeVersion)
+
+	AgentCoreRuntimeInvocationDetails_requestTemplate = AgentCoreRuntimeInvocationDetails.AddMember("requestTemplate", _RequestTemplate)
+
+	AgentInsightArchiveStatus_ACTIVE = AgentInsightArchiveStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	AgentInsightArchiveStatus_ARCHIVED = AgentInsightArchiveStatus.AddMember("ARCHIVED", smithyprelude.Unit)
+
+	AgentInsightCustomerMetadataStatus_AVAILABLE = AgentInsightCustomerMetadataStatus.AddMember("AVAILABLE", smithyprelude.Unit)
+
+	AgentInsightCustomerMetadataStatus_CUSTOMER_KEY_UNAVAILABLE = AgentInsightCustomerMetadataStatus.AddMember("CUSTOMER_KEY_UNAVAILABLE", smithyprelude.Unit)
+
+	AgentInsightCustomerMetadataStatus_UNAVAILABLE = AgentInsightCustomerMetadataStatus.AddMember("UNAVAILABLE", smithyprelude.Unit)
+
+	InsightType_FAILURE = InsightType.AddMember("FAILURE", smithyprelude.Unit)
+
+	AgentInsightSummary_type = AgentInsightSummary.AddMember("type", InsightType)
+
+	AgentInsightSummary_name = AgentInsightSummary.AddMember("name", _InsightName)
+
+	AgentInsightSummary_description = AgentInsightSummary.AddMember("description", _InsightDescription)
+
+	AgentInsightSummary_createdAt = AgentInsightSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AgentInsightSummary_affectedSessionCount = AgentInsightSummary.AddMember("affectedSessionCount", smithyprelude.Integer)
+
+	AgentInsightSummary_agentInsightId = AgentInsightSummary.AddMember("agentInsightId", _AgentInsightId)
+
+	AgentInsightSummary_applicationName = AgentInsightSummary.AddMember("applicationName", _AgentApplicationName)
+
+	AgentInsightSummary_batchEvaluationId = AgentInsightSummary.AddMember("batchEvaluationId", _BatchEvaluationId)
+
+	AgentInsightSummary_customerMetadataStatus = AgentInsightSummary.AddMember("customerMetadataStatus", AgentInsightCustomerMetadataStatus)
+
+	AgentInsightSummary_updatedAt = AgentInsightSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	AgentInsightSummary_archiveStatus = AgentInsightSummary.AddMember("archiveStatus", AgentInsightArchiveStatus)
+
+	AgentInsightSummary_lastSeenAt = AgentInsightSummary.AddMember("lastSeenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	_AgentInsightSummaryList_member = _AgentInsightSummaryList.AddMember("member", AgentInsightSummary)
+
+	AgentInvocationConfig_agentCoreRuntime = AgentInvocationConfig.AddMember("agentCoreRuntime", AgentCoreRuntimeInvocation)
+
+	AgentInvocationDetails_agentCoreRuntime = AgentInvocationDetails.AddMember("agentCoreRuntime", AgentCoreRuntimeInvocationDetails)
+
 	SkillMdDefinition_inlineContent = SkillMdDefinition.AddMember("inlineContent", _InlineContent)
 
 	SkillDefinition_schemaVersion = SkillDefinition.AddMember("schemaVersion", _SchemaVersion)
@@ -7623,6 +8700,8 @@ func init() {
 	AvailableLimits_updatedAt = AvailableLimits.AddMember("updatedAt", _DateTimestamp)
 
 	BasicAuth_secretArn = BasicAuth.AddMember("secretArn", _SecretArn)
+
+	BatchEvaluationSourceConfig_batchEvaluationArn = BatchEvaluationSourceConfig.AddMember("batchEvaluationArn", _BatchEvaluationArn)
 
 	BatchEvaluationStatus_PENDING = BatchEvaluationStatus.AddMember("PENDING", smithyprelude.Unit)
 
@@ -7940,6 +9019,20 @@ func init() {
 
 	CloudWatchLogsSource_filterConfig = CloudWatchLogsSource.AddMember("filterConfig", CloudWatchFilterConfig)
 
+	_CloudWatchLogsSourceConfigLogGroupNamesList_member = _CloudWatchLogsSourceConfigLogGroupNamesList.AddMember("member", _LogGroupName)
+
+	_CloudWatchLogsSourceConfigLogGroupNamePrefixesList_member = _CloudWatchLogsSourceConfigLogGroupNamePrefixesList.AddMember("member", _LogGroupNamePrefix)
+
+	CloudWatchLogsSourceConfig_logGroupNames = CloudWatchLogsSourceConfig.AddMember("logGroupNames", _CloudWatchLogsSourceConfigLogGroupNamesList)
+
+	CloudWatchLogsSourceConfig_logGroupNamePrefixes = CloudWatchLogsSourceConfig.AddMember("logGroupNamePrefixes", _CloudWatchLogsSourceConfigLogGroupNamePrefixesList)
+
+	CloudWatchLogsSourceConfig_serviceNames = CloudWatchLogsSourceConfig.AddMember("serviceNames", _ServiceNameList)
+
+	CloudWatchLogsSourceConfig_startTime = CloudWatchLogsSourceConfig.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	CloudWatchLogsSourceConfig_endTime = CloudWatchLogsSourceConfig.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
 	ResultDestination_DEDICATED_LOG_GROUP = ResultDestination.AddMember("DEDICATED_LOG_GROUP", smithyprelude.Unit)
 
 	ResultDestination_SOURCE_LOG_GROUP = ResultDestination.AddMember("SOURCE_LOG_GROUP", smithyprelude.Unit)
@@ -8182,11 +9275,65 @@ func init() {
 
 	CryptoX402PaymentOutput_payload = CryptoX402PaymentOutput.AddMember("payload", _PaymentDocument)
 
+	CustomDataIdentifier_name = CustomDataIdentifier.AddMember("name", smithyprelude.String)
+
+	CustomDataIdentifier_regex = CustomDataIdentifier.AddMember("regex", smithyprelude.String)
+
+	_CustomDataIdentifierList_member = _CustomDataIdentifierList.AddMember("member", CustomDataIdentifier)
+
 	CustomDescriptor_inlineContent = CustomDescriptor.AddMember("inlineContent", _InlineContent)
 
 	_CustomRequestParametersType_key = _CustomRequestParametersType.AddMember("key", _CustomRequestKeyType)
 
 	_CustomRequestParametersType_value = _CustomRequestParametersType.AddMember("value", _CustomRequestValueType)
+
+	DatasetDetails_datasetId = DatasetDetails.AddMember("datasetId", _DatasetId)
+
+	DatasetDetails_datasetVersion = DatasetDetails.AddMember("datasetVersion", _DatasetVersion)
+
+	DatasetSource_datasetId = DatasetSource.AddMember("datasetId", _DatasetId)
+
+	DatasetSource_datasetVersion = DatasetSource.AddMember("datasetVersion", _DatasetVersion)
+
+	DatasetExecutionConfig_dataset = DatasetExecutionConfig.AddMember("dataset", DatasetSource)
+
+	DatasetExecutionConfig_agentInvocation = DatasetExecutionConfig.AddMember("agentInvocation", AgentInvocationConfig)
+
+	DatasetExecutionDetails_dataset = DatasetExecutionDetails.AddMember("dataset", DatasetDetails)
+
+	DatasetExecutionDetails_agentInvocation = DatasetExecutionDetails.AddMember("agentInvocation", AgentInvocationDetails)
+
+	DatasetGenerationStatus_IN_PROGRESS = DatasetGenerationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	DatasetGenerationStatus_COMPLETED = DatasetGenerationStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	DatasetGenerationStatus_COMPLETED_WITH_ERRORS = DatasetGenerationStatus.AddMember("COMPLETED_WITH_ERRORS", smithyprelude.Unit)
+
+	DatasetGenerationStatus_FAILED = DatasetGenerationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DatasetGenerationStatus_DELETING = DatasetGenerationStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	ScenarioType_FIXED = ScenarioType.AddMember("FIXED", smithyprelude.Unit)
+
+	ScenarioType_DYNAMIC = ScenarioType.AddMember("DYNAMIC", smithyprelude.Unit)
+
+	DatasetGenerationSummary_generationId = DatasetGenerationSummary.AddMember("generationId", _DatasetGenerationId)
+
+	DatasetGenerationSummary_datasetId = DatasetGenerationSummary.AddMember("datasetId", _DatasetId)
+
+	DatasetGenerationSummary_name = DatasetGenerationSummary.AddMember("name", _DatasetGenerationName)
+
+	DatasetGenerationSummary_description = DatasetGenerationSummary.AddMember("description", _DatasetGenerationDescription)
+
+	DatasetGenerationSummary_scenarioType = DatasetGenerationSummary.AddMember("scenarioType", ScenarioType)
+
+	DatasetGenerationSummary_status = DatasetGenerationSummary.AddMember("status", DatasetGenerationStatus)
+
+	DatasetGenerationSummary_createdAt = DatasetGenerationSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DatasetGenerationSummary_completedAt = DatasetGenerationSummary.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	_DatasetGenerationSummaryList_member = _DatasetGenerationSummaryList.AddMember("member", DatasetGenerationSummary)
 
 	OnlineEvaluationConfigSource_onlineEvaluationConfigArn = OnlineEvaluationConfigSource.AddMember("onlineEvaluationConfigArn", _OnlineEvaluationConfigArn)
 
@@ -8378,6 +9525,50 @@ func init() {
 
 	EvaluationTarget_traceIds = EvaluationTarget.AddMember("traceIds", _TraceIds)
 
+	GenerationFilterOperator_EQUALS = GenerationFilterOperator.AddMember("EQUALS", smithyprelude.Unit)
+
+	GenerationFilterOperator_NOT_EQUALS = GenerationFilterOperator.AddMember("NOT_EQUALS", smithyprelude.Unit)
+
+	GenerationFilterOperator_GREATER_THAN = GenerationFilterOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
+
+	GenerationFilterOperator_LESS_THAN = GenerationFilterOperator.AddMember("LESS_THAN", smithyprelude.Unit)
+
+	GenerationFilterOperator_GREATER_THAN_OR_EQUAL = GenerationFilterOperator.AddMember("GREATER_THAN_OR_EQUAL", smithyprelude.Unit)
+
+	GenerationFilterOperator_LESS_THAN_OR_EQUAL = GenerationFilterOperator.AddMember("LESS_THAN_OR_EQUAL", smithyprelude.Unit)
+
+	GenerationFilterOperator_CONTAINS = GenerationFilterOperator.AddMember("CONTAINS", smithyprelude.Unit)
+
+	GenerationFilterOperator_NOT_CONTAINS = GenerationFilterOperator.AddMember("NOT_CONTAINS", smithyprelude.Unit)
+
+	GenerationFilterValue_stringValue = GenerationFilterValue.AddMember("stringValue", _GenerationFilterStringValue)
+
+	GenerationFilterValue_doubleValue = GenerationFilterValue.AddMember("doubleValue", smithyprelude.Double)
+
+	GenerationFilterValue_booleanValue = GenerationFilterValue.AddMember("booleanValue", smithyprelude.Boolean)
+
+	ResultAggregation_MIN = ResultAggregation.AddMember("MIN", smithyprelude.Unit)
+
+	ResultAggregation_MAX = ResultAggregation.AddMember("MAX", smithyprelude.Unit)
+
+	ResultAggregation_MEAN = ResultAggregation.AddMember("MEAN", smithyprelude.Unit)
+
+	ResultAggregation_ALL_MATCH = ResultAggregation.AddMember("ALL_MATCH", smithyprelude.Unit)
+
+	ResultAggregation_ANY_MATCH = ResultAggregation.AddMember("ANY_MATCH", smithyprelude.Unit)
+
+	EvaluatorFilter_evaluatorId = EvaluatorFilter.AddMember("evaluatorId", _EvaluatorId)
+
+	EvaluatorFilter_evaluationDimensionName = EvaluatorFilter.AddMember("evaluationDimensionName", _EvaluationDimensionName)
+
+	EvaluatorFilter_operator = EvaluatorFilter.AddMember("operator", GenerationFilterOperator)
+
+	EvaluatorFilter_value = EvaluatorFilter.AddMember("value", GenerationFilterValue)
+
+	EvaluatorFilter_aggregation = EvaluatorFilter.AddMember("aggregation", ResultAggregation)
+
+	_EvaluatorFilterList_member = _EvaluatorFilterList.AddMember("member", EvaluatorFilter)
+
 	PayloadType_conversational = PayloadType.AddMember("conversational", Conversational)
 
 	PayloadType_blob = PayloadType.AddMember("blob", _MemoryDocument)
@@ -8550,6 +9741,10 @@ func init() {
 
 	FilterInput_eventMetadata = FilterInput.AddMember("eventMetadata", _EventMetadataFilterList)
 
+	_FindingCountMap_key = _FindingCountMap.AddMember("key", _FindingIdentifierKey)
+
+	_FindingCountMap_value = _FindingCountMap.AddMember("value", smithyprelude.Integer)
+
 	FindingTargetType_SPAN_ID = FindingTargetType.AddMember("SPAN_ID", smithyprelude.Unit)
 
 	FindingTargetType_TRACE_ID = FindingTargetType.AddMember("TRACE_ID", smithyprelude.Unit)
@@ -8559,6 +9754,326 @@ func init() {
 	_TargetPathList_member = _TargetPathList.AddMember("member", _PathPattern)
 
 	GatewayFilter_targetPaths = GatewayFilter.AddMember("targetPaths", _TargetPathList)
+
+	GenerationAttributeFilter_key = GenerationAttributeFilter.AddMember("key", smithyprelude.String)
+
+	GenerationAttributeFilter_operator = GenerationAttributeFilter.AddMember("operator", GenerationFilterOperator)
+
+	GenerationAttributeFilter_value = GenerationAttributeFilter.AddMember("value", GenerationFilterValue)
+
+	_GenerationAttributeFilterList_member = _GenerationAttributeFilterList.AddMember("member", GenerationAttributeFilter)
+
+	_GenerationErrorSessionIdList_member = _GenerationErrorSessionIdList.AddMember("member", _SessionId)
+
+	GenerationErrorDetail_errorCode = GenerationErrorDetail.AddMember("errorCode", _GenerationErrorCode)
+
+	GenerationErrorDetail_errorMessage = GenerationErrorDetail.AddMember("errorMessage", _GenerationErrorMessage)
+
+	GenerationErrorDetail_count = GenerationErrorDetail.AddMember("count", smithyprelude.Integer)
+
+	GenerationErrorDetail_sessionIds = GenerationErrorDetail.AddMember("sessionIds", _GenerationErrorSessionIdList)
+
+	_GenerationErrorDetailsList_member = _GenerationErrorDetailsList.AddMember("member", GenerationErrorDetail)
+
+	TurnCountRange_min = TurnCountRange.AddMember("min", smithyprelude.Integer)
+
+	TurnCountRange_max = TurnCountRange.AddMember("max", smithyprelude.Integer)
+
+	GenerationFilters_attributeFilters = GenerationFilters.AddMember("attributeFilters", _GenerationAttributeFilterList)
+
+	GenerationFilters_turnCount = GenerationFilters.AddMember("turnCount", TurnCountRange)
+
+	GenerationFilters_evaluatorFilters = GenerationFilters.AddMember("evaluatorFilters", _EvaluatorFilterList)
+
+	GenerationIdentifierCounts_sessionIdCount = GenerationIdentifierCounts.AddMember("sessionIdCount", smithyprelude.Integer)
+
+	GenerationIdentifierCounts_traceIdCount = GenerationIdentifierCounts.AddMember("traceIdCount", smithyprelude.Integer)
+
+	_GenerationSessionIdList_member = _GenerationSessionIdList.AddMember("member", _SessionId)
+
+	_GenerationTraceIdList_member = _GenerationTraceIdList.AddMember("member", _TraceId)
+
+	GenerationIdentifiers_sessionIds = GenerationIdentifiers.AddMember("sessionIds", _GenerationSessionIdList)
+
+	GenerationIdentifiers_traceIds = GenerationIdentifiers.AddMember("traceIds", _GenerationTraceIdList)
+
+	GenerationResults_sessionsMatched = GenerationResults.AddMember("sessionsMatched", smithyprelude.Integer)
+
+	GenerationResults_sessionsSelected = GenerationResults.AddMember("sessionsSelected", smithyprelude.Integer)
+
+	GenerationResults_sessionsUnscored = GenerationResults.AddMember("sessionsUnscored", smithyprelude.Integer)
+
+	GenerationResults_sessionsFailed = GenerationResults.AddMember("sessionsFailed", smithyprelude.Integer)
+
+	GenerationResults_scenariosGenerated = GenerationResults.AddMember("scenariosGenerated", smithyprelude.Integer)
+
+	GenerationResults_scenariosDeduplicated = GenerationResults.AddMember("scenariosDeduplicated", smithyprelude.Integer)
+
+	GenerationResults_examplesWritten = GenerationResults.AddMember("examplesWritten", smithyprelude.Integer)
+
+	GenerationResults_examplesWithGroundTruth = GenerationResults.AddMember("examplesWithGroundTruth", smithyprelude.Integer)
+
+	GenerationSamplingConfig_maxScenarios = GenerationSamplingConfig.AddMember("maxScenarios", smithyprelude.Integer)
+
+	GenerationSelection_filters = GenerationSelection.AddMember("filters", GenerationFilters)
+
+	GenerationSelection_identifiers = GenerationSelection.AddMember("identifiers", GenerationIdentifiers)
+
+	GenerationSelectionRecord_filters = GenerationSelectionRecord.AddMember("filters", GenerationFilters)
+
+	GenerationSelectionRecord_identifiers = GenerationSelectionRecord.AddMember("identifiers", GenerationIdentifierCounts)
+
+	OnlineEvaluationSourceConfig_onlineEvaluationConfigArn = OnlineEvaluationSourceConfig.AddMember("onlineEvaluationConfigArn", _OnlineEvaluationConfigArn)
+
+	OnlineEvaluationSourceConfig_startTime = OnlineEvaluationSourceConfig.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	OnlineEvaluationSourceConfig_endTime = OnlineEvaluationSourceConfig.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	TraceSourceConfig_cloudWatchLogs = TraceSourceConfig.AddMember("cloudWatchLogs", CloudWatchLogsSourceConfig)
+
+	TraceSourceConfig_onlineEvaluation = TraceSourceConfig.AddMember("onlineEvaluation", OnlineEvaluationSourceConfig)
+
+	TraceSourceConfig_batchEvaluation = TraceSourceConfig.AddMember("batchEvaluation", BatchEvaluationSourceConfig)
+
+	GroundTruthField_EXPECTED_RESPONSE = GroundTruthField.AddMember("EXPECTED_RESPONSE", smithyprelude.Unit)
+
+	GroundTruthField_EXPECTED_TRAJECTORY = GroundTruthField.AddMember("EXPECTED_TRAJECTORY", smithyprelude.Unit)
+
+	_GroundTruthFieldList_member = _GroundTruthFieldList.AddMember("member", GroundTruthField)
+
+	GroundTruthConfig_fields = GroundTruthConfig.AddMember("fields", _GroundTruthFieldList)
+
+	GroundTruthConfig_qualityFilters = GroundTruthConfig.AddMember("qualityFilters", _EvaluatorFilterList)
+
+	RedactionIdentifier_ADDRESS = RedactionIdentifier.AddMember("ADDRESS", smithyprelude.Unit)
+
+	RedactionIdentifier_AWS_SECRET_KEY = RedactionIdentifier.AddMember("AWS_SECRET_KEY", smithyprelude.Unit)
+
+	RedactionIdentifier_BANK_ACCOUNT_NUMBER_DE = RedactionIdentifier.AddMember("BANK_ACCOUNT_NUMBER_DE", smithyprelude.Unit)
+
+	RedactionIdentifier_BANK_ACCOUNT_NUMBER_ES = RedactionIdentifier.AddMember("BANK_ACCOUNT_NUMBER_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_BANK_ACCOUNT_NUMBER_FR = RedactionIdentifier.AddMember("BANK_ACCOUNT_NUMBER_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_BANK_ACCOUNT_NUMBER_GB = RedactionIdentifier.AddMember("BANK_ACCOUNT_NUMBER_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_BANK_ACCOUNT_NUMBER_IT = RedactionIdentifier.AddMember("BANK_ACCOUNT_NUMBER_IT", smithyprelude.Unit)
+
+	RedactionIdentifier_BANK_ACCOUNT_NUMBER_US = RedactionIdentifier.AddMember("BANK_ACCOUNT_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_CEP_CODE_BR = RedactionIdentifier.AddMember("CEP_CODE_BR", smithyprelude.Unit)
+
+	RedactionIdentifier_CNPJ_BR = RedactionIdentifier.AddMember("CNPJ_BR", smithyprelude.Unit)
+
+	RedactionIdentifier_CPF_CODE_BR = RedactionIdentifier.AddMember("CPF_CODE_BR", smithyprelude.Unit)
+
+	RedactionIdentifier_CREDIT_CARD_EXPIRATION = RedactionIdentifier.AddMember("CREDIT_CARD_EXPIRATION", smithyprelude.Unit)
+
+	RedactionIdentifier_CREDIT_CARD_MAGNETIC_STRIPE = RedactionIdentifier.AddMember("CREDIT_CARD_MAGNETIC_STRIPE", smithyprelude.Unit)
+
+	RedactionIdentifier_CREDIT_CARD_NUMBER = RedactionIdentifier.AddMember("CREDIT_CARD_NUMBER", smithyprelude.Unit)
+
+	RedactionIdentifier_CREDIT_CARD_SECURITY_CODE = RedactionIdentifier.AddMember("CREDIT_CARD_SECURITY_CODE", smithyprelude.Unit)
+
+	RedactionIdentifier_DATE_OF_BIRTH = RedactionIdentifier.AddMember("DATE_OF_BIRTH", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_AT = RedactionIdentifier.AddMember("DRIVERS_LICENSE_AT", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_AU = RedactionIdentifier.AddMember("DRIVERS_LICENSE_AU", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_BE = RedactionIdentifier.AddMember("DRIVERS_LICENSE_BE", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_BG = RedactionIdentifier.AddMember("DRIVERS_LICENSE_BG", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_CA = RedactionIdentifier.AddMember("DRIVERS_LICENSE_CA", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_CY = RedactionIdentifier.AddMember("DRIVERS_LICENSE_CY", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_CZ = RedactionIdentifier.AddMember("DRIVERS_LICENSE_CZ", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_DE = RedactionIdentifier.AddMember("DRIVERS_LICENSE_DE", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_DK = RedactionIdentifier.AddMember("DRIVERS_LICENSE_DK", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_EE = RedactionIdentifier.AddMember("DRIVERS_LICENSE_EE", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_ES = RedactionIdentifier.AddMember("DRIVERS_LICENSE_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_FI = RedactionIdentifier.AddMember("DRIVERS_LICENSE_FI", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_FR = RedactionIdentifier.AddMember("DRIVERS_LICENSE_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_GB = RedactionIdentifier.AddMember("DRIVERS_LICENSE_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_GR = RedactionIdentifier.AddMember("DRIVERS_LICENSE_GR", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_HR = RedactionIdentifier.AddMember("DRIVERS_LICENSE_HR", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_HU = RedactionIdentifier.AddMember("DRIVERS_LICENSE_HU", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_IE = RedactionIdentifier.AddMember("DRIVERS_LICENSE_IE", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_IT = RedactionIdentifier.AddMember("DRIVERS_LICENSE_IT", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_LT = RedactionIdentifier.AddMember("DRIVERS_LICENSE_LT", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_LU = RedactionIdentifier.AddMember("DRIVERS_LICENSE_LU", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_LV = RedactionIdentifier.AddMember("DRIVERS_LICENSE_LV", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_MT = RedactionIdentifier.AddMember("DRIVERS_LICENSE_MT", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_NL = RedactionIdentifier.AddMember("DRIVERS_LICENSE_NL", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_PL = RedactionIdentifier.AddMember("DRIVERS_LICENSE_PL", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_PT = RedactionIdentifier.AddMember("DRIVERS_LICENSE_PT", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_RO = RedactionIdentifier.AddMember("DRIVERS_LICENSE_RO", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_SE = RedactionIdentifier.AddMember("DRIVERS_LICENSE_SE", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_SI = RedactionIdentifier.AddMember("DRIVERS_LICENSE_SI", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_SK = RedactionIdentifier.AddMember("DRIVERS_LICENSE_SK", smithyprelude.Unit)
+
+	RedactionIdentifier_DRIVERS_LICENSE_US = RedactionIdentifier.AddMember("DRIVERS_LICENSE_US", smithyprelude.Unit)
+
+	RedactionIdentifier_DRUG_ENFORCEMENT_AGENCY_NUMBER_US = RedactionIdentifier.AddMember("DRUG_ENFORCEMENT_AGENCY_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_ELECTORAL_ROLL_NUMBER_GB = RedactionIdentifier.AddMember("ELECTORAL_ROLL_NUMBER_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_EMAIL_ADDRESS = RedactionIdentifier.AddMember("EMAIL_ADDRESS", smithyprelude.Unit)
+
+	RedactionIdentifier_HEALTH_INSURANCE_CARD_NUMBER_EU = RedactionIdentifier.AddMember("HEALTH_INSURANCE_CARD_NUMBER_EU", smithyprelude.Unit)
+
+	RedactionIdentifier_HEALTH_INSURANCE_CLAIM_NUMBER_US = RedactionIdentifier.AddMember("HEALTH_INSURANCE_CLAIM_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_HEALTH_INSURANCE_NUMBER_FR = RedactionIdentifier.AddMember("HEALTH_INSURANCE_NUMBER_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_HEALTHCARE_PROCEDURE_CODE_US = RedactionIdentifier.AddMember("HEALTHCARE_PROCEDURE_CODE_US", smithyprelude.Unit)
+
+	RedactionIdentifier_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US = RedactionIdentifier.AddMember("INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_INSEE_CODE_FR = RedactionIdentifier.AddMember("INSEE_CODE_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_IP_ADDRESS = RedactionIdentifier.AddMember("IP_ADDRESS", smithyprelude.Unit)
+
+	RedactionIdentifier_LAT_LONG = RedactionIdentifier.AddMember("LAT_LONG", smithyprelude.Unit)
+
+	RedactionIdentifier_MEDICARE_BENEFICIARY_NUMBER_US = RedactionIdentifier.AddMember("MEDICARE_BENEFICIARY_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_NAME = RedactionIdentifier.AddMember("NAME", smithyprelude.Unit)
+
+	RedactionIdentifier_NATIONAL_DRUG_CODE_US = RedactionIdentifier.AddMember("NATIONAL_DRUG_CODE_US", smithyprelude.Unit)
+
+	RedactionIdentifier_NATIONAL_IDENTIFICATION_NUMBER_DE = RedactionIdentifier.AddMember("NATIONAL_IDENTIFICATION_NUMBER_DE", smithyprelude.Unit)
+
+	RedactionIdentifier_NATIONAL_IDENTIFICATION_NUMBER_ES = RedactionIdentifier.AddMember("NATIONAL_IDENTIFICATION_NUMBER_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_NATIONAL_IDENTIFICATION_NUMBER_IT = RedactionIdentifier.AddMember("NATIONAL_IDENTIFICATION_NUMBER_IT", smithyprelude.Unit)
+
+	RedactionIdentifier_NATIONAL_INSURANCE_NUMBER_GB = RedactionIdentifier.AddMember("NATIONAL_INSURANCE_NUMBER_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_NATIONAL_PROVIDER_ID_US = RedactionIdentifier.AddMember("NATIONAL_PROVIDER_ID_US", smithyprelude.Unit)
+
+	RedactionIdentifier_NHS_NUMBER_GB = RedactionIdentifier.AddMember("NHS_NUMBER_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_NIE_NUMBER_ES = RedactionIdentifier.AddMember("NIE_NUMBER_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_NIF_NUMBER_ES = RedactionIdentifier.AddMember("NIF_NUMBER_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_OPEN_SSH_PRIVATE_KEY = RedactionIdentifier.AddMember("OPEN_SSH_PRIVATE_KEY", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_CA = RedactionIdentifier.AddMember("PASSPORT_NUMBER_CA", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_DE = RedactionIdentifier.AddMember("PASSPORT_NUMBER_DE", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_ES = RedactionIdentifier.AddMember("PASSPORT_NUMBER_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_FR = RedactionIdentifier.AddMember("PASSPORT_NUMBER_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_GB = RedactionIdentifier.AddMember("PASSPORT_NUMBER_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_IT = RedactionIdentifier.AddMember("PASSPORT_NUMBER_IT", smithyprelude.Unit)
+
+	RedactionIdentifier_PASSPORT_NUMBER_US = RedactionIdentifier.AddMember("PASSPORT_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_PERMANENT_RESIDENCE_NUMBER_CA = RedactionIdentifier.AddMember("PERMANENT_RESIDENCE_NUMBER_CA", smithyprelude.Unit)
+
+	RedactionIdentifier_PERSONAL_HEALTH_NUMBER_CA = RedactionIdentifier.AddMember("PERSONAL_HEALTH_NUMBER_CA", smithyprelude.Unit)
+
+	RedactionIdentifier_PGP_PRIVATE_KEY = RedactionIdentifier.AddMember("PGP_PRIVATE_KEY", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_BR = RedactionIdentifier.AddMember("PHONE_NUMBER_BR", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_DE = RedactionIdentifier.AddMember("PHONE_NUMBER_DE", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_ES = RedactionIdentifier.AddMember("PHONE_NUMBER_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_FR = RedactionIdentifier.AddMember("PHONE_NUMBER_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_GB = RedactionIdentifier.AddMember("PHONE_NUMBER_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_IT = RedactionIdentifier.AddMember("PHONE_NUMBER_IT", smithyprelude.Unit)
+
+	RedactionIdentifier_PHONE_NUMBER_US = RedactionIdentifier.AddMember("PHONE_NUMBER_US", smithyprelude.Unit)
+
+	RedactionIdentifier_PKCS_PRIVATE_KEY = RedactionIdentifier.AddMember("PKCS_PRIVATE_KEY", smithyprelude.Unit)
+
+	RedactionIdentifier_POSTAL_CODE_CA = RedactionIdentifier.AddMember("POSTAL_CODE_CA", smithyprelude.Unit)
+
+	RedactionIdentifier_PUTTY_PRIVATE_KEY = RedactionIdentifier.AddMember("PUTTY_PRIVATE_KEY", smithyprelude.Unit)
+
+	RedactionIdentifier_RG_NUMBER_BR = RedactionIdentifier.AddMember("RG_NUMBER_BR", smithyprelude.Unit)
+
+	RedactionIdentifier_SOCIAL_INSURANCE_NUMBER_CA = RedactionIdentifier.AddMember("SOCIAL_INSURANCE_NUMBER_CA", smithyprelude.Unit)
+
+	RedactionIdentifier_SSN_ES = RedactionIdentifier.AddMember("SSN_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_SSN_US = RedactionIdentifier.AddMember("SSN_US", smithyprelude.Unit)
+
+	RedactionIdentifier_TAX_ID_DE = RedactionIdentifier.AddMember("TAX_ID_DE", smithyprelude.Unit)
+
+	RedactionIdentifier_TAX_ID_ES = RedactionIdentifier.AddMember("TAX_ID_ES", smithyprelude.Unit)
+
+	RedactionIdentifier_TAX_ID_FR = RedactionIdentifier.AddMember("TAX_ID_FR", smithyprelude.Unit)
+
+	RedactionIdentifier_TAX_ID_GB = RedactionIdentifier.AddMember("TAX_ID_GB", smithyprelude.Unit)
+
+	RedactionIdentifier_VEHICLE_IDENTIFICATION_NUMBER = RedactionIdentifier.AddMember("VEHICLE_IDENTIFICATION_NUMBER", smithyprelude.Unit)
+
+	RedactionIdentifier_ZIP_CODE_US = RedactionIdentifier.AddMember("ZIP_CODE_US", smithyprelude.Unit)
+
+	_RedactionIdentifierList_member = _RedactionIdentifierList.AddMember("member", RedactionIdentifier)
+
+	RedactionConfiguration_identifiers = RedactionConfiguration.AddMember("identifiers", _RedactionIdentifierList)
+
+	RedactionConfiguration_customDataIdentifiers = RedactionConfiguration.AddMember("customDataIdentifiers", _CustomDataIdentifierList)
+
+	TraceGenerationSource_sourceConfig = TraceGenerationSource.AddMember("sourceConfig", TraceSourceConfig)
+
+	TraceGenerationSource_selection = TraceGenerationSource.AddMember("selection", GenerationSelection)
+
+	TraceGenerationSource_sampling = TraceGenerationSource.AddMember("sampling", GenerationSamplingConfig)
+
+	TraceGenerationSource_groundTruth = TraceGenerationSource.AddMember("groundTruth", GroundTruthConfig)
+
+	TraceGenerationSource_redactionConfiguration = TraceGenerationSource.AddMember("redactionConfiguration", RedactionConfiguration)
+
+	GenerationSource_traceGeneration = GenerationSource.AddMember("traceGeneration", TraceGenerationSource)
+
+	TraceGenerationRecord_sourceConfig = TraceGenerationRecord.AddMember("sourceConfig", TraceSourceConfig)
+
+	TraceGenerationRecord_selection = TraceGenerationRecord.AddMember("selection", GenerationSelectionRecord)
+
+	TraceGenerationRecord_sampling = TraceGenerationRecord.AddMember("sampling", GenerationSamplingConfig)
+
+	TraceGenerationRecord_groundTruth = TraceGenerationRecord.AddMember("groundTruth", GroundTruthConfig)
+
+	TraceGenerationRecord_redactionConfiguration = TraceGenerationRecord.AddMember("redactionConfiguration", RedactionConfiguration)
+
+	GenerationSourceRecord_traceGeneration = GenerationSourceRecord.AddMember("traceGeneration", TraceGenerationRecord)
 
 	HarnessAgentCoreBrowserConfig_browserArn = HarnessAgentCoreBrowserConfig.AddMember("browserArn", _HarnessBrowserArn)
 
@@ -8945,8 +10460,6 @@ func init() {
 	InputContentBlock_blob = InputContentBlock.AddMember("blob", _Body)
 
 	_InputContentBlockList_member = _InputContentBlockList.AddMember("member", InputContentBlock)
-
-	InsightType_FAILURE = InsightType.AddMember("FAILURE", smithyprelude.Unit)
 
 	SessionFinding_targetId = SessionFinding.AddMember("targetId", _FindingTargetId)
 
@@ -9480,6 +10993,10 @@ func init() {
 
 	RecordExpirySpecification_action = RecordExpirySpecification.AddMember("action", RecordExpiryAction)
 
+	RedactionSummary_scenariosScanned = RedactionSummary.AddMember("scenariosScanned", smithyprelude.Integer)
+
+	RedactionSummary_findingCounts = RedactionSummary.AddMember("findingCounts", _FindingCountMap)
+
 	_RegistryIdList_member = _RegistryIdList.AddMember("member", _RegistryIdentifier)
 
 	RegistryRecordStatus_DRAFT = RegistryRecordStatus.AddMember("DRAFT", smithyprelude.Unit)
@@ -9830,6 +11347,14 @@ func init() {
 
 	DeleteCapacityProviderSessionResponse_status = DeleteCapacityProviderSessionResponse.AddMember("status", CapacityProviderSessionStatus)
 
+	DeleteDatasetGenerationRequest_datasetId = DeleteDatasetGenerationRequest.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
+
+	DeleteDatasetGenerationRequest_generationId = DeleteDatasetGenerationRequest.AddMember("generationId", _DatasetGenerationId, &smithytraits.HTTPLabel{})
+
+	DeleteDatasetGenerationResponse_generationId = DeleteDatasetGenerationResponse.AddMember("generationId", _DatasetGenerationId)
+
+	DeleteDatasetGenerationResponse_status = DeleteDatasetGenerationResponse.AddMember("status", DatasetGenerationStatus)
+
 	DeleteEventInput_memoryId = DeleteEventInput.AddMember("memoryId", _MemoryId, &smithytraits.HTTPLabel{})
 
 	DeleteEventInput_sessionId = DeleteEventInput.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
@@ -9934,6 +11459,38 @@ func init() {
 
 	GetAgentCardResponse_statusCode = GetAgentCardResponse.AddMember("statusCode", _HttpResponseCode, &smithytraits.HTTPResponseCode{})
 
+	GetAgentInsightRequest_applicationName = GetAgentInsightRequest.AddMember("applicationName", _AgentApplicationName, &smithytraits.HTTPQuery{Name: "applicationName"})
+
+	GetAgentInsightRequest_agentInsightId = GetAgentInsightRequest.AddMember("agentInsightId", _AgentInsightId, &smithytraits.HTTPLabel{})
+
+	GetAgentInsightResponse_type = GetAgentInsightResponse.AddMember("type", InsightType)
+
+	GetAgentInsightResponse_name = GetAgentInsightResponse.AddMember("name", _InsightName)
+
+	GetAgentInsightResponse_description = GetAgentInsightResponse.AddMember("description", _InsightDescription)
+
+	GetAgentInsightResponse_createdAt = GetAgentInsightResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetAgentInsightResponse_affectedSessionCount = GetAgentInsightResponse.AddMember("affectedSessionCount", smithyprelude.Integer)
+
+	GetAgentInsightResponse_sampleSessions = GetAgentInsightResponse.AddMember("sampleSessions", _InsightSampleSessionList)
+
+	GetAgentInsightResponse_rootCauses = GetAgentInsightResponse.AddMember("rootCauses", _InsightRootCauseList)
+
+	GetAgentInsightResponse_agentInsightId = GetAgentInsightResponse.AddMember("agentInsightId", _AgentInsightId)
+
+	GetAgentInsightResponse_applicationName = GetAgentInsightResponse.AddMember("applicationName", _AgentApplicationName)
+
+	GetAgentInsightResponse_batchEvaluationId = GetAgentInsightResponse.AddMember("batchEvaluationId", _BatchEvaluationId)
+
+	GetAgentInsightResponse_customerMetadataStatus = GetAgentInsightResponse.AddMember("customerMetadataStatus", AgentInsightCustomerMetadataStatus)
+
+	GetAgentInsightResponse_updatedAt = GetAgentInsightResponse.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetAgentInsightResponse_archiveStatus = GetAgentInsightResponse.AddMember("archiveStatus", AgentInsightArchiveStatus)
+
+	GetAgentInsightResponse_lastSeenAt = GetAgentInsightResponse.AddMember("lastSeenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
 	GetBatchEvaluationRequest_batchEvaluationId = GetBatchEvaluationRequest.AddMember("batchEvaluationId", _BatchEvaluationId, &smithytraits.HTTPLabel{})
 
 	GetBatchEvaluationResponse_batchEvaluationId = GetBatchEvaluationResponse.AddMember("batchEvaluationId", _BatchEvaluationId)
@@ -9971,6 +11528,8 @@ func init() {
 	GetBatchEvaluationResponse_updatedAt = GetBatchEvaluationResponse.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	GetBatchEvaluationResponse_kmsKeyArn = GetBatchEvaluationResponse.AddMember("kmsKeyArn", _KmsKeyArn)
+
+	GetBatchEvaluationResponse_datasetExecutionDetails = GetBatchEvaluationResponse.AddMember("datasetExecutionDetails", DatasetExecutionDetails)
 
 	GetBrowserSessionRequest_browserIdentifier = GetBrowserSessionRequest.AddMember("browserIdentifier", smithyprelude.String, &smithytraits.HTTPLabel{})
 
@@ -10027,6 +11586,38 @@ func init() {
 	GetCodeInterpreterSessionResponse_certificates = GetCodeInterpreterSessionResponse.AddMember("certificates", _Certificates)
 
 	GetCodeInterpreterSessionResponse_filesystemConfigurations = GetCodeInterpreterSessionResponse.AddMember("filesystemConfigurations", _ToolsFileSystemConfigurations)
+
+	GetDatasetGenerationRequest_datasetId = GetDatasetGenerationRequest.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
+
+	GetDatasetGenerationRequest_generationId = GetDatasetGenerationRequest.AddMember("generationId", _DatasetGenerationId, &smithytraits.HTTPLabel{})
+
+	GetDatasetGenerationResponse_generationId = GetDatasetGenerationResponse.AddMember("generationId", _DatasetGenerationId)
+
+	GetDatasetGenerationResponse_name = GetDatasetGenerationResponse.AddMember("name", _DatasetGenerationName)
+
+	GetDatasetGenerationResponse_description = GetDatasetGenerationResponse.AddMember("description", _DatasetGenerationDescription)
+
+	GetDatasetGenerationResponse_datasetId = GetDatasetGenerationResponse.AddMember("datasetId", _DatasetId)
+
+	GetDatasetGenerationResponse_scenarioType = GetDatasetGenerationResponse.AddMember("scenarioType", ScenarioType)
+
+	GetDatasetGenerationResponse_status = GetDatasetGenerationResponse.AddMember("status", DatasetGenerationStatus)
+
+	GetDatasetGenerationResponse_failureReason = GetDatasetGenerationResponse.AddMember("failureReason", smithyprelude.String)
+
+	GetDatasetGenerationResponse_createdAt = GetDatasetGenerationResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetDatasetGenerationResponse_updatedAt = GetDatasetGenerationResponse.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetDatasetGenerationResponse_completedAt = GetDatasetGenerationResponse.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetDatasetGenerationResponse_source = GetDatasetGenerationResponse.AddMember("source", GenerationSourceRecord)
+
+	GetDatasetGenerationResponse_generationResults = GetDatasetGenerationResponse.AddMember("generationResults", GenerationResults)
+
+	GetDatasetGenerationResponse_redactionSummary = GetDatasetGenerationResponse.AddMember("redactionSummary", RedactionSummary)
+
+	GetDatasetGenerationResponse_errorDetails = GetDatasetGenerationResponse.AddMember("errorDetails", _GenerationErrorDetailsList)
 
 	GetEventInput_memoryId = GetEventInput.AddMember("memoryId", _MemoryId, &smithytraits.HTTPLabel{})
 
@@ -10372,6 +11963,20 @@ func init() {
 
 	ListActorsOutput_nextToken = ListActorsOutput.AddMember("nextToken", _PaginationToken)
 
+	ListAgentInsightsRequest_applicationName = ListAgentInsightsRequest.AddMember("applicationName", _AgentApplicationName, &smithytraits.HTTPQuery{Name: "applicationName"})
+
+	ListAgentInsightsRequest_batchEvaluationId = ListAgentInsightsRequest.AddMember("batchEvaluationId", _BatchEvaluationId, &smithytraits.HTTPQuery{Name: "batchEvaluationId"})
+
+	ListAgentInsightsRequest_archiveStatus = ListAgentInsightsRequest.AddMember("archiveStatus", AgentInsightArchiveStatus, &smithytraits.HTTPQuery{Name: "archiveStatus"})
+
+	ListAgentInsightsRequest_maxResults = ListAgentInsightsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAgentInsightsRequest_nextToken = ListAgentInsightsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAgentInsightsResponse_agentInsights = ListAgentInsightsResponse.AddMember("agentInsights", _AgentInsightSummaryList)
+
+	ListAgentInsightsResponse_nextToken = ListAgentInsightsResponse.AddMember("nextToken", _NextToken)
+
 	ListBatchEvaluationsRequest_maxResults = ListBatchEvaluationsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListBatchEvaluationsRequest_nextToken = ListBatchEvaluationsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -10403,6 +12008,16 @@ func init() {
 	ListCodeInterpreterSessionsResponse_items = ListCodeInterpreterSessionsResponse.AddMember("items", _CodeInterpreterSessionSummaries)
 
 	ListCodeInterpreterSessionsResponse_nextToken = ListCodeInterpreterSessionsResponse.AddMember("nextToken", _NextToken)
+
+	ListDatasetGenerationsRequest_datasetId = ListDatasetGenerationsRequest.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
+
+	ListDatasetGenerationsRequest_maxResults = ListDatasetGenerationsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDatasetGenerationsRequest_nextToken = ListDatasetGenerationsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDatasetGenerationsResponse_datasetGenerations = ListDatasetGenerationsResponse.AddMember("datasetGenerations", _DatasetGenerationSummaryList)
+
+	ListDatasetGenerationsResponse_nextToken = ListDatasetGenerationsResponse.AddMember("nextToken", smithyprelude.String)
 
 	ListEventsInput_memoryId = ListEventsInput.AddMember("memoryId", _MemoryId, &smithytraits.HTTPLabel{})
 
@@ -10606,6 +12221,8 @@ func init() {
 
 	StartBatchEvaluationRequest_outputConfig = StartBatchEvaluationRequest.AddMember("outputConfig", OutputConfig)
 
+	StartBatchEvaluationRequest_datasetExecutionConfig = StartBatchEvaluationRequest.AddMember("datasetExecutionConfig", DatasetExecutionConfig)
+
 	StartBatchEvaluationResponse_batchEvaluationId = StartBatchEvaluationResponse.AddMember("batchEvaluationId", _BatchEvaluationId)
 
 	StartBatchEvaluationResponse_batchEvaluationArn = StartBatchEvaluationResponse.AddMember("batchEvaluationArn", _BatchEvaluationArn)
@@ -10683,6 +12300,28 @@ func init() {
 	StartCodeInterpreterSessionResponse_sessionId = StartCodeInterpreterSessionResponse.AddMember("sessionId", _CodeInterpreterSessionId)
 
 	StartCodeInterpreterSessionResponse_createdAt = StartCodeInterpreterSessionResponse.AddMember("createdAt", _DateTimestamp)
+
+	StartDatasetGenerationRequest_datasetId = StartDatasetGenerationRequest.AddMember("datasetId", _DatasetId, &smithytraits.HTTPLabel{})
+
+	StartDatasetGenerationRequest_name = StartDatasetGenerationRequest.AddMember("name", _DatasetGenerationName)
+
+	StartDatasetGenerationRequest_description = StartDatasetGenerationRequest.AddMember("description", _DatasetGenerationDescription)
+
+	StartDatasetGenerationRequest_scenarioType = StartDatasetGenerationRequest.AddMember("scenarioType", ScenarioType)
+
+	StartDatasetGenerationRequest_source = StartDatasetGenerationRequest.AddMember("source", GenerationSource)
+
+	StartDatasetGenerationRequest_clientToken = StartDatasetGenerationRequest.AddMember("clientToken", _ClientToken)
+
+	StartDatasetGenerationResponse_generationId = StartDatasetGenerationResponse.AddMember("generationId", _DatasetGenerationId)
+
+	StartDatasetGenerationResponse_name = StartDatasetGenerationResponse.AddMember("name", _DatasetGenerationName)
+
+	StartDatasetGenerationResponse_datasetId = StartDatasetGenerationResponse.AddMember("datasetId", _DatasetId)
+
+	StartDatasetGenerationResponse_status = StartDatasetGenerationResponse.AddMember("status", DatasetGenerationStatus)
+
+	StartDatasetGenerationResponse_createdAt = StartDatasetGenerationResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	StartMemoryExtractionJobInput_memoryId = StartMemoryExtractionJobInput.AddMember("memoryId", _MemoryId, &smithytraits.HTTPLabel{})
 
@@ -10805,6 +12444,18 @@ func init() {
 	UpdateABTestResponse_executionStatus = UpdateABTestResponse.AddMember("executionStatus", ABTestExecutionStatus)
 
 	UpdateABTestResponse_updatedAt = UpdateABTestResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	UpdateAgentInsightRequest_applicationName = UpdateAgentInsightRequest.AddMember("applicationName", _AgentApplicationName, &smithytraits.HTTPQuery{Name: "applicationName"})
+
+	UpdateAgentInsightRequest_agentInsightId = UpdateAgentInsightRequest.AddMember("agentInsightId", _AgentInsightId, &smithytraits.HTTPLabel{})
+
+	UpdateAgentInsightRequest_archiveStatus = UpdateAgentInsightRequest.AddMember("archiveStatus", AgentInsightArchiveStatus)
+
+	UpdateAgentInsightResponse_agentInsightId = UpdateAgentInsightResponse.AddMember("agentInsightId", _AgentInsightId)
+
+	UpdateAgentInsightResponse_archiveStatus = UpdateAgentInsightResponse.AddMember("archiveStatus", AgentInsightArchiveStatus)
+
+	UpdateAgentInsightResponse_updatedAt = UpdateAgentInsightResponse.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	UpdateBrowserStreamRequest_browserIdentifier = UpdateBrowserStreamRequest.AddMember("browserIdentifier", smithyprelude.String, &smithytraits.HTTPLabel{})
 

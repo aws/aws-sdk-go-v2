@@ -395,6 +395,12 @@
                     "target": "com.amazonaws.mgn#NetworkMigrationDefinitionResource"
                 },
                 {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobResource"
+                },
+                {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionResource"
+                },
+                {
                     "target": "com.amazonaws.mgn#ReplicationConfigurationTemplateResource"
                 },
                 {
@@ -1774,6 +1780,54 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.mgn#AssociationCidrList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#CidrBlock"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.mgn#AssociationUserProvidedID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+            }
+        },
+        "com.amazonaws.mgn#AssociationUserProvidedIDList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#AssociationUserProvidedID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.mgn#AssociationVmUUIDList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#VmUUID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.mgn#BandwidthThrottling": {
             "type": "long",
             "traits": {
@@ -2303,6 +2357,16 @@
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
+        "com.amazonaws.mgn#ConstructLogicalID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
+            }
+        },
         "com.amazonaws.mgn#ConstructProperties": {
             "type": "map",
             "key": {
@@ -2323,7 +2387,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 24
+                    "max": 128
                 }
             }
         },
@@ -2505,6 +2569,12 @@
                     "target": "com.amazonaws.mgn#TagValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Launch configuration template map auto tagging MPE ID.</p>"
+                    }
+                },
+                "mapAutoTaggingKey": {
+                    "target": "com.amazonaws.mgn#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch configuration template map auto tagging key.</p>"
                     }
                 },
                 "tags": {
@@ -2694,6 +2764,12 @@
                         "smithy.api#documentation": "<p>A list of source configurations for the network migration.</p>"
                     }
                 },
+                "definitionType": {
+                    "target": "com.amazonaws.mgn#DefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of the definition. <code>MIGRATION</code> migrates an existing network. <code>NEW_NETWORK</code> designs a new network. If you omit this value, the definition type is <code>MIGRATION</code>.</p>"
+                    }
+                },
                 "targetS3Configuration": {
                     "target": "com.amazonaws.mgn#TargetS3Configuration",
                     "traits": {
@@ -2741,6 +2817,182 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#CreateOperation": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.mgn#SegmentConstructName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the new construct.</p>"
+                    }
+                },
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the new construct is excluded from the migration.</p>"
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.mgn#EnrichedProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the new construct, using their native value types.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.mgn#OperationConfigurationUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial construct-type-specific behavioral configuration for the new construct.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that creates a new construct in the segment.</p>"
+            }
+        },
+        "com.amazonaws.mgn#CreateRemoteSourceAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#CreateRemoteSourceActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#CreateRemoteSourceActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a source action, which references a script in AWS Systems Manager Parameter Store that Application Migration Service runs on source environment.</p>",
+                "smithy.api#http": {
+                    "uri": "/CreateRemoteSourceAction",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.mgn#CreateRemoteSourceActionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the source action.</p>"
+                    }
+                },
+                "ssmParameterName": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Systems Manager Parameter Store parameter name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that the script can run on each source server.</p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionOperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system of the source servers that the script runs on. Set to <code>linux</code> or <code>windows</code> to run the script only on source servers with that operating system, or <code>all</code> to run it on both.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the source action.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#CreateRemoteSourceActionResponse": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source action.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source action.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source action.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the source action.</p>"
+                    }
+                },
+                "ssmParameterName": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Systems Manager Parameter Store parameter name.</p>"
+                    }
+                },
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that the script can run on each source server.</p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.mgn#OperatingSystemString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system of the source servers that the script runs on. Absent when the script runs on both Linux and Windows.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the source action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mgn#RemoteSourceActionResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.mgn#CreateReplicationConfigurationTemplate": {
@@ -2880,6 +3132,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to store snapshot on local zone during Replication Settings template creation.</p>"
+                    }
+                },
+                "outpostSnapshotLocation": {
+                    "target": "com.amazonaws.mgn#OutpostSnapshotLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to set the location of replication snapshots when the staging area subnet is on an AWS Outpost during Replication Settings template creation. Set to <code>OUTPOST</code> to keep replication snapshots on the Outpost, or <code>REGION</code> to store them in the AWS Region. Required when the staging area subnet is on an Outpost, and not allowed otherwise.</p>"
                     }
                 },
                 "storageConfiguration": {
@@ -3097,6 +3355,12 @@
                     "target": "com.amazonaws.mgn#ReplicatorID",
                     "traits": {
                         "smithy.api#documentation": "<p>Replication server instance ID.</p>"
+                    }
+                },
+                "stagingOutpostArn": {
+                    "target": "com.amazonaws.mgn#OutpostARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the AWS Outpost that hosts the staging area, when the staging area subnet is on an Outpost.</p>"
                     }
                 }
             },
@@ -3343,6 +3607,21 @@
                     {
                         "name": "SHIPPING_SNAPSHOT",
                         "value": "SHIPPING_SNAPSHOT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#DefinitionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "MIGRATION",
+                        "value": "MIGRATION"
+                    },
+                    {
+                        "name": "NEW_NETWORK",
+                        "value": "NEW_NETWORK"
                     }
                 ]
             }
@@ -3598,11 +3877,86 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mgn#DeleteOnTermination": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mgn#DeleteOperation": {
             "type": "structure",
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>An operation that deletes a construct from the mapping.</p>"
+            }
+        },
+        "com.amazonaws.mgn#DeleteRemoteSourceAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#DeleteRemoteSourceActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#DeleteRemoteSourceActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a source action. This operation also deletes the invocation results of the source action.</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteRemoteSourceAction",
+                    "method": "POST",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mgn#DeleteRemoteSourceActionRequest": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source action to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#DeleteRemoteSourceActionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mgn#DeleteReplicationConfigurationTemplate": {
@@ -4602,6 +4956,32 @@
                 ]
             }
         },
+        "com.amazonaws.mgn#EnrichedProperties": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mgn#EnrichedPropertyKey"
+            },
+            "value": {
+                "target": "smithy.api#Document"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of construct property keys to values, using native types such as strings, numbers, references, and lists.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.mgn#EnrichedPropertyKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9]*$"
+            }
+        },
         "com.amazonaws.mgn#EnrichmentSourceS3Configuration": {
             "type": "structure",
             "members": {
@@ -5107,6 +5487,89 @@
                     "code": 200
                 },
                 "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#GetLaunchConfigurationDefaults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#GetLaunchConfigurationDefaultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#GetLaunchConfigurationDefaultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the launch configuration defaults of a source server: the Amazon Elastic Block Store (Amazon EBS) volume configuration used for the disk mappings created later in the source server's Amazon Elastic Compute Cloud (Amazon EC2) launch template.</p>",
+                "smithy.api#http": {
+                    "uri": "/GetLaunchConfigurationDefaults",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#GetLaunchConfigurationDefaultsRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to get the launch configuration defaults by Source Server ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to get the launch configuration defaults by Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#GetLaunchConfigurationDefaultsResponse": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Server ID of the launch configuration defaults.</p>"
+                    }
+                },
+                "smallVolumeMaxSize": {
+                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Disks up to this size, in GiB, use the small volume configuration, and larger disks use the large one. <code>0</code> means every disk uses the large one.</p>"
+                    }
+                },
+                "smallVolumeConfiguration": {
+                    "target": "com.amazonaws.mgn#SourceServerVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume configuration for disks up to <code>smallVolumeMaxSize</code>. Omitted when none of its fields is set.</p>"
+                    }
+                },
+                "largeVolumeConfiguration": {
+                    "target": "com.amazonaws.mgn#SourceServerVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume configuration for disks larger than <code>smallVolumeMaxSize</code>. Omitted when none of its fields is set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mgn#GetLaunchConfigurationRequest": {
@@ -5914,6 +6377,169 @@
                 ]
             }
         },
+        "com.amazonaws.mgn#InsightID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.mgn#InsightLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The level that a network migration insight applies to: the run, a segment, or a construct.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "RUN",
+                        "value": "RUN"
+                    },
+                    {
+                        "name": "SEGMENT",
+                        "value": "SEGMENT"
+                    },
+                    {
+                        "name": "CONSTRUCT",
+                        "value": "CONSTRUCT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#InsightMessage": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stable identifier for the kind of insight.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.mgn#InsightMessageText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable insight message.</p>"
+                    }
+                },
+                "topic": {
+                    "target": "com.amazonaws.mgn#BoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topic that the insight relates to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content of a network migration insight.</p>"
+            }
+        },
+        "com.amazonaws.mgn#InsightMessageText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.mgn#InsightProducerID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-]+$"
+            }
+        },
+        "com.amazonaws.mgn#InsightProducerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The job type or API name that produced a network migration insight.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "MAPPING",
+                        "value": "MAPPING"
+                    },
+                    {
+                        "name": "MAPPING_UPDATE",
+                        "value": "MAPPING_UPDATE"
+                    },
+                    {
+                        "name": "CODE_GENERATION",
+                        "value": "CODE_GENERATION"
+                    },
+                    {
+                        "name": "DEPLOY",
+                        "value": "DEPLOY"
+                    },
+                    {
+                        "name": "DEPLOYED_STACKS_DELETION",
+                        "value": "DEPLOYED_STACKS_DELETION"
+                    },
+                    {
+                        "name": "ANALYZE",
+                        "value": "ANALYZE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#InsightProducerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Whether a network migration insight was produced by a job or by an API request.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "JOB",
+                        "value": "JOB"
+                    },
+                    {
+                        "name": "API",
+                        "value": "API"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#InsightType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a network migration insight.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "INTENT_GAP",
+                        "value": "INTENT_GAP"
+                    },
+                    {
+                        "name": "WARNING",
+                        "value": "WARNING"
+                    },
+                    {
+                        "name": "QUESTION",
+                        "value": "QUESTION"
+                    },
+                    {
+                        "name": "INFO",
+                        "value": "INFO"
+                    },
+                    {
+                        "name": "ERROR",
+                        "value": "ERROR"
+                    },
+                    {
+                        "name": "CONTEXT",
+                        "value": "CONTEXT"
+                    },
+                    {
+                        "name": "EXCLUDED",
+                        "value": "EXCLUDED"
+                    },
+                    {
+                        "name": "BEHAVIOR_CHANGE",
+                        "value": "BEHAVIOR_CHANGE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mgn#InternalServerException": {
             "type": "structure",
             "members": {
@@ -5958,7 +6584,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 100,
-                    "max": 64000
+                    "max": 80000
                 }
             }
         },
@@ -6485,6 +7111,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Map auto tagging MPE ID.</p>"
                     }
+                },
+                "mapAutoTaggingKey": {
+                    "target": "com.amazonaws.mgn#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map auto tagging key.</p>"
+                    }
                 }
             }
         },
@@ -6520,6 +7152,12 @@
                     "target": "com.amazonaws.mgn#TagValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Launch configuration template map auto tagging MPE ID.</p>"
+                    }
+                },
+                "mapAutoTaggingKey": {
+                    "target": "com.amazonaws.mgn#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch configuration template map auto tagging key.</p>"
                     }
                 },
                 "tags": {
@@ -8899,6 +9537,185 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mgn#ListNetworkMigrationInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ListNetworkMigrationInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#ListNetworkMigrationInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists network migration insights for a network migration definition.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List the WARNING insights a mapping job recorded for one construct",
+                        "input": {
+                            "networkMigrationDefinitionID": "nmd-54cf850b22f7cf65e",
+                            "networkMigrationExecutionID": "b1235ba8-398e-4ef0-b803-78c8c85b5021",
+                            "producerID": "f7aa9266-b070-421b-a630-e503783b7f12",
+                            "filters": {
+                                "insightTypes": [
+                                    "WARNING"
+                                ]
+                            }
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "networkMigrationDefinitionID": "nmd-54cf850b22f7cf65e",
+                                    "networkMigrationExecutionID": "b1235ba8-398e-4ef0-b803-78c8c85b5021",
+                                    "producerID": "f7aa9266-b070-421b-a630-e503783b7f12",
+                                    "producerType": "JOB",
+                                    "producerName": "MAPPING",
+                                    "segmentID": "47088070-f6d7-4724-846e-bce3ee48a2d0",
+                                    "constructID": "533af212-2d0b-4a98-a89c-c01cd2070b5b",
+                                    "insightID": "0bf04d20-205b-58f6-ac5d-9419e1decf8b",
+                                    "insightLevel": "CONSTRUCT",
+                                    "insightType": "WARNING",
+                                    "insightMessage": {
+                                        "code": "mapper.load_balancers.alb_address_conflict_risk",
+                                        "message": "AWS picks this application load balancer's addresses in its subnets when NM deploys it, before the servers launch, and adds more as it scales. Its subnets hold 2 addresses of servers or network load balancers: a server that keeps its address fails to launch, and a network load balancer fails to deploy, if this load balancer took it first. In each zone the load balancer uses the subnet with the most addresses free.",
+                                        "topic": "load_balancers.placement"
+                                    },
+                                    "createdAt": 1793621845
+                                }
+                            ],
+                            "nextToken": "NextTokenId"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/network-migration/ListNetworkMigrationInsights",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#ListNetworkMigrationInsightsFilters": {
+            "type": "structure",
+            "members": {
+                "insightTypes": {
+                    "target": "com.amazonaws.mgn#ListNetworkMigrationInsightsTypesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insight types to include in the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for listing network migration insights.</p>"
+            }
+        },
+        "com.amazonaws.mgn#ListNetworkMigrationInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "networkMigrationDefinitionID": {
+                    "target": "com.amazonaws.mgn#NetworkMigrationDefinitionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network migration definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "networkMigrationExecutionID": {
+                    "target": "com.amazonaws.mgn#NetworkMigrationExecutionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network migration execution to narrow the results to.</p>"
+                    }
+                },
+                "producerID": {
+                    "target": "com.amazonaws.mgn#InsightProducerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the job or API request to narrow the results to.</p>"
+                    }
+                },
+                "segmentID": {
+                    "target": "com.amazonaws.mgn#SegmentID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the segment to narrow the results to.</p>"
+                    }
+                },
+                "constructID": {
+                    "target": "com.amazonaws.mgn#ConstructID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the construct to narrow the results to.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.mgn#ListNetworkMigrationInsightsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply when listing insights.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#ListNetworkMigrationInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#NetworkMigrationInsightsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of network migration insights.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mgn#ListNetworkMigrationInsightsTypesFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#InsightType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructTypesFilter": {
             "type": "list",
             "member": {
@@ -9072,6 +9889,18 @@
                     "target": "com.amazonaws.mgn#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "includeEnrichedProperties": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to return construct properties using their native value types.</p>"
+                    }
+                },
+                "includeConfiguration": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to return construct-type-specific behavioral configuration.</p>"
                     }
                 }
             },
@@ -9539,6 +10368,410 @@
                     "target": "com.amazonaws.mgn#NetworkMigrationMappingsList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of network migration mapping job details.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocationResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocationResultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocationResultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the latest invocation result of each source action that ran on a source server.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRemoteSourceActionInvocationResults",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocationResultsRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source server to list invocation results for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocationResultsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionInvocationResultsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source action invocation results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the invocations of a source action job, one for each source server and source action, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRemoteSourceActionInvocations",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocationsRequest": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionJobID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job to list invocations for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocationsRequestFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply when listing invocations, such as source server or status.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocationsRequestFilters": {
+            "type": "structure",
+            "members": {
+                "sourceServerArns": {
+                    "target": "com.amazonaws.mgn#SourceServerArnsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source server ARNs to filter by.</p>"
+                    }
+                },
+                "remoteSourceActionArns": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionArnsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source action ARNs to filter by.</p>"
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionInvocationStatusesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of invocation statuses to filter by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for listing source action invocations.</p>"
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionInvocationsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionInvocationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source action invocations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the source action jobs in the account, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRemoteSourceActionJobs",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionJobsRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.mgn#ListRemoteSourceActionJobsRequestFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply when listing source action jobs.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionJobsRequestFilters": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionJobIDs": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobIDsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of job IDs to filter by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for listing source action jobs.</p>"
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionJobsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source action jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the source actions in the account, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListRemoteSourceActions",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionsRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.mgn#ListRemoteSourceActionsRequestFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to apply when listing source actions.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#MaxResultsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionsRequestFilters": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionIDs": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionIDsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source action IDs to filter by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters for listing source actions.</p>"
+            }
+        },
+        "com.amazonaws.mgn#ListRemoteSourceActionsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of source actions.</p>"
                     }
                 },
                 "nextToken": {
@@ -10558,6 +11791,12 @@
                         "smithy.api#documentation": "<p>A list of source configurations for the network migration.</p>"
                     }
                 },
+                "definitionType": {
+                    "target": "com.amazonaws.mgn#DefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of the definition. <code>MIGRATION</code> migrates an existing network. <code>NEW_NETWORK</code> designs a new network.</p>"
+                    }
+                },
                 "targetS3Configuration": {
                     "target": "com.amazonaws.mgn#TargetS3Configuration",
                     "traits": {
@@ -10699,6 +11938,9 @@
                     "target": "com.amazonaws.mgn#ListNetworkMigrationExecutions"
                 },
                 {
+                    "target": "com.amazonaws.mgn#ListNetworkMigrationInsights"
+                },
+                {
                     "target": "com.amazonaws.mgn#ListNetworkMigrationMapperSegmentConstructs"
                 },
                 {
@@ -10778,6 +12020,12 @@
                     "target": "com.amazonaws.mgn#ScopeTagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Scope tags for the network migration definition.</p>"
+                    }
+                },
+                "definitionType": {
+                    "target": "com.amazonaws.mgn#DefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the network migration definition.</p>"
                     }
                 }
             },
@@ -11095,6 +12343,98 @@
                 }
             }
         },
+        "com.amazonaws.mgn#NetworkMigrationInsight": {
+            "type": "structure",
+            "members": {
+                "networkMigrationDefinitionID": {
+                    "target": "com.amazonaws.mgn#NetworkMigrationDefinitionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network migration definition the insight belongs to.</p>"
+                    }
+                },
+                "networkMigrationExecutionID": {
+                    "target": "com.amazonaws.mgn#NetworkMigrationExecutionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the network migration execution the insight belongs to.</p>"
+                    }
+                },
+                "producerID": {
+                    "target": "com.amazonaws.mgn#InsightProducerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the job or API request that produced the insight.</p>"
+                    }
+                },
+                "producerType": {
+                    "target": "com.amazonaws.mgn#InsightProducerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the insight was produced by a job or by an API request.</p>"
+                    }
+                },
+                "producerName": {
+                    "target": "com.amazonaws.mgn#InsightProducerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job type or API name that produced the insight.</p>"
+                    }
+                },
+                "segmentID": {
+                    "target": "com.amazonaws.mgn#SegmentID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the segment the insight relates to; absent for run-level insights.</p>"
+                    }
+                },
+                "constructID": {
+                    "target": "com.amazonaws.mgn#ConstructID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the construct the insight relates to; absent for run-level and segment-level insights.</p>"
+                    }
+                },
+                "insightID": {
+                    "target": "com.amazonaws.mgn#InsightID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the insight.</p>"
+                    }
+                },
+                "insightLevel": {
+                    "target": "com.amazonaws.mgn#InsightLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level that the insight applies to: the run, a segment, or a construct.</p>"
+                    }
+                },
+                "insightType": {
+                    "target": "com.amazonaws.mgn#InsightType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the insight.</p>"
+                    }
+                },
+                "insightMessage": {
+                    "target": "com.amazonaws.mgn#InsightMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the insight.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the insight was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An insight produced during a network migration, such as a warning, decision, question, or other context beyond the migrated output.</p>"
+            }
+        },
+        "com.amazonaws.mgn#NetworkMigrationInsightsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#NetworkMigrationInsight"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.mgn#NetworkMigrationJobID": {
             "type": "string",
             "traits": {
@@ -11279,6 +12619,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The properties and configuration of the construct.</p>"
                     }
+                },
+                "enrichedProperties": {
+                    "target": "com.amazonaws.mgn#EnrichedProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The construct properties using their native value types. Returned by Get, and by List when includeEnrichedProperties is true.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.mgn#OperationConfigurationUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The construct-type-specific behavioral configuration. Returned by Get, and by List when includeConfiguration is true.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11290,9 +12642,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 24
+                    "max": 64
                 },
-                "smithy.api#pattern": "^AWS::([A-Z\\d]){2,10}::[a-zA-Z\\d]{2,30}$"
+                "smithy.api#pattern": "^AWS::([A-Z\\d]){2,10}::[a-zA-Z\\d]{2,47}$"
             }
         },
         "com.amazonaws.mgn#NetworkMigrationMapperSegmentConstructs": {
@@ -11478,6 +12830,26 @@
                 "smithy.api#pattern": "^(linux|windows)$"
             }
         },
+        "com.amazonaws.mgn#OperationConfigurationUnion": {
+            "type": "union",
+            "members": {
+                "securityGroup": {
+                    "target": "com.amazonaws.mgn#SecurityGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Behavioral configuration for a security group construct.</p>"
+                    }
+                },
+                "securityGroupRule": {
+                    "target": "com.amazonaws.mgn#SecurityGroupRuleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Behavioral configuration for a security group rule construct.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Construct-type-specific behavioral configuration. The variant provided must match the construct type.</p>"
+            }
+        },
         "com.amazonaws.mgn#OperationUnion": {
             "type": "union",
             "members": {
@@ -11504,6 +12876,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An update operation to modify construct properties.</p>"
                     }
+                },
+                "updateV2": {
+                    "target": "com.amazonaws.mgn#UpdateOperationV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An update operation that modifies a construct using native property value types and behavioral configuration, with partial updates and property removal.</p>"
+                    }
+                },
+                "create": {
+                    "target": "com.amazonaws.mgn#CreateOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A create operation that adds a new construct to the segment, identified by the constructLogicalID on the parent construct entry.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11517,6 +12901,31 @@
                     "min": 1001,
                     "max": 10000
                 }
+            }
+        },
+        "com.amazonaws.mgn#OutpostARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.mgn#OutpostSnapshotLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OUTPOST",
+                        "name": "OUTPOST"
+                    },
+                    {
+                        "value": "REGION",
+                        "name": "REGION"
+                    }
+                ]
             }
         },
         "com.amazonaws.mgn#PaginationToken": {
@@ -11741,6 +13150,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Status of the Post Launch Actions running on the Test or Cutover instance.</p>"
+            }
+        },
+        "com.amazonaws.mgn#PropertiesToDelete": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#EnrichedPropertyKey"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of construct property keys to remove.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.mgn#PutSourceServerAction": {
@@ -11993,6 +13415,492 @@
                 }
             }
         },
+        "com.amazonaws.mgn#RemoteSourceAction": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source action.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source action.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source action.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the source action.</p>"
+                    }
+                },
+                "ssmParameterName": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Systems Manager Parameter Store parameter name.</p>"
+                    }
+                },
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that the script can run on each source server.</p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.mgn#OperatingSystemString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system of the source servers that the script runs on. Absent when the script runs on both Linux and Windows.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the source action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A source action, which references a script in AWS Systems Manager Parameter Store that Application Migration Service runs on source servers through a connector.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mgn#RemoteSourceActionResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^arn:[\\w-]+:mgn:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:remote-source-action\\/(rsa-[0-9a-zA-Z]{17})$"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionArnsFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 600
+                },
+                "smithy.api#pattern": "^[^\\x00]*$"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 21,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^rsa-[0-9a-zA-Z]{17}$"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionIDsFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionInvocation": {
+            "type": "structure",
+            "members": {
+                "sourceServerArn": {
+                    "target": "com.amazonaws.mgn#SourceServerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source server.</p>"
+                    }
+                },
+                "remoteSourceActionArn": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source action.</p>"
+                    }
+                },
+                "ssmCommandInvocationID": {
+                    "target": "com.amazonaws.mgn#SsmCommandInvocationID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS Systems Manager command that runs the source action on the connector.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionInvocationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the invocation.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the command started running.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the command finished.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The run of a source action on one source server as part of a job.</p>"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionInvocationResult": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source action.</p>"
+                    }
+                },
+                "connectorOwnerAccountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account that owns the connector that ran the source action.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionInvocationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the latest invocation.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the command started running.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the command finished.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The latest invocation result of a source action on a source server.</p>"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionInvocationResultsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionInvocationResult"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionInvocationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a source action invocation. Can be PENDING, IN_PROGRESS, DELAYED, SUCCESS, CANCELLED, TIMED_OUT, FAILED, CANCELLING, or STALLED.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "DELAYED",
+                        "name": "DELAYED"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "CANCELLING",
+                        "name": "CANCELLING"
+                    },
+                    {
+                        "value": "STALLED",
+                        "name": "STALLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionInvocationStatusesFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionInvocationStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionInvocationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionInvocation"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionJob": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionJobID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the job.</p>"
+                    }
+                },
+                "sourceServerArns": {
+                    "target": "com.amazonaws.mgn#SourceServerArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the source servers that the job runs on.</p>"
+                    }
+                },
+                "remoteSourceActionArns": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the source actions that the job runs.</p>"
+                    }
+                },
+                "connectorArn": {
+                    "target": "com.amazonaws.mgn#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the connector that runs the job.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the job started running.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the job completed or failed.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.mgn#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the job failed.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A job that runs a source action on source servers through a connector.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mgn#RemoteSourceActionJobResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionJobID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 24,
+                    "max": 24
+                },
+                "smithy.api#pattern": "^rsajob-[0-9a-zA-Z]{17}$"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionJobIDsFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionJobID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionJobResource": {
+            "type": "resource",
+            "identifiers": {
+                "remoteSourceActionJobID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJobID"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.mgn#StartRemoteSourceActionJob"
+            },
+            "list": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActionJobs"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocations"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "remote-source-action-job/{remoteSourceActionJobID}"
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionJobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a source action job. Can be PENDING, RUNNING, COMPLETED, FAILED, or STALLED.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "STALLED",
+                        "name": "STALLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionJobsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceActionJob"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionOperatingSystem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(linux|windows|all)$"
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionResource": {
+            "type": "resource",
+            "identifiers": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.mgn#CreateRemoteSourceAction"
+            },
+            "update": {
+                "target": "com.amazonaws.mgn#UpdateRemoteSourceAction"
+            },
+            "delete": {
+                "target": "com.amazonaws.mgn#DeleteRemoteSourceAction"
+            },
+            "list": {
+                "target": "com.amazonaws.mgn#ListRemoteSourceActions"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "remote-source-action/{remoteSourceActionID}"
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 5400
+                }
+            }
+        },
+        "com.amazonaws.mgn#RemoteSourceActionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#RemoteSourceAction"
+            }
+        },
         "com.amazonaws.mgn#RemoveSourceServerAction": {
             "type": "operation",
             "input": {
@@ -12211,6 +14119,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration store snapshot on local zone.</p>"
+                    }
+                },
+                "outpostSnapshotLocation": {
+                    "target": "com.amazonaws.mgn#OutpostSnapshotLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the location of replication snapshots when the staging area subnet is on an AWS Outpost. <code>OUTPOST</code> keeps replication snapshots on the Outpost, and <code>REGION</code> stores them in the AWS Region.</p>"
                     }
                 },
                 "storageConfiguration": {
@@ -12476,6 +14390,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration template store snapshot on local zone.</p>"
+                    }
+                },
+                "outpostSnapshotLocation": {
+                    "target": "com.amazonaws.mgn#OutpostSnapshotLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the location of replication snapshots in the Replication Configuration template when the staging area subnet is on an AWS Outpost. <code>OUTPOST</code> keeps replication snapshots on the Outpost, and <code>REGION</code> stores them in the AWS Region.</p>"
                     }
                 },
                 "storageConfiguration": {
@@ -12844,6 +14764,46 @@
                 "smithy.api#pattern": "^arn:[\\w-]+:secretsmanager:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:secret:(.+)$"
             }
         },
+        "com.amazonaws.mgn#SecurityGroupAssociations": {
+            "type": "structure",
+            "members": {
+                "cidrs": {
+                    "target": "com.amazonaws.mgn#AssociationCidrList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR ranges associated with the security group. A provided list replaces the stored list; an empty list clears it, and omitting the field leaves it unchanged.</p>"
+                    }
+                },
+                "vmUUIDs": {
+                    "target": "com.amazonaws.mgn#AssociationVmUUIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UUIDs of the source machines associated with the security group.</p>"
+                    }
+                },
+                "userProvidedIDs": {
+                    "target": "com.amazonaws.mgn#AssociationUserProvidedIDList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-provided identifiers of the source machines associated with the security group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The associations that bind a security group to source machines before they are provisioned.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SecurityGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "associations": {
+                    "target": "com.amazonaws.mgn#SecurityGroupAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR ranges and machine identifiers that associate source machines with the security group. Each list provided replaces the stored list rather than merging into it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Behavioral configuration for a security group construct.</p>"
+            }
+        },
         "com.amazonaws.mgn#SecurityGroupID": {
             "type": "string",
             "traits": {
@@ -12873,6 +14833,20 @@
                 ]
             }
         },
+        "com.amazonaws.mgn#SecurityGroupRuleConfiguration": {
+            "type": "structure",
+            "members": {
+                "enableReferencing": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether automatic conversion of CIDR-based sources and destinations to security group references applies to this rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Behavioral configuration for a security group rule construct.</p>"
+            }
+        },
         "com.amazonaws.mgn#SegmentConstructDescription": {
             "type": "string",
             "traits": {
@@ -12891,6 +14865,46 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+            }
+        },
+        "com.amazonaws.mgn#SegmentCreateOperation": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.mgn#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#SegmentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the new segment.</p>"
+                    }
+                },
+                "targetAccount": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target AWS account for the new segment.</p>"
+                    }
+                },
+                "scopeTags": {
+                    "target": "com.amazonaws.mgn#ScopeTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope tags for the new segment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that creates a segment.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SegmentDeleteOperation": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that deletes a segment from the mapping.</p>"
             }
         },
         "com.amazonaws.mgn#SegmentDescription": {
@@ -12913,6 +14927,15 @@
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
+        "com.amazonaws.mgn#SegmentLogicalID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 64
+                },
+                "smithy.api#pattern": "^nmd[a-zA-Z0-9]+$"
+            }
+        },
         "com.amazonaws.mgn#SegmentName": {
             "type": "string",
             "traits": {
@@ -12921,6 +14944,64 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+            }
+        },
+        "com.amazonaws.mgn#SegmentOperation": {
+            "type": "union",
+            "members": {
+                "create": {
+                    "target": "com.amazonaws.mgn#SegmentCreateOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A create operation to add a new segment.</p>"
+                    }
+                },
+                "update": {
+                    "target": "com.amazonaws.mgn#SegmentUpdateOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An update operation to modify segment properties.</p>"
+                    }
+                },
+                "delete": {
+                    "target": "com.amazonaws.mgn#SegmentDeleteOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A delete operation to remove a segment from the mapping.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the operation to perform on a segment during a mapping update. Specify one of a create, update, or delete operation.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SegmentUpdateOperation": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.mgn#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name for the segment.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#SegmentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description for the segment.</p>"
+                    }
+                },
+                "targetAccount": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated target AWS account for the segment.</p>"
+                    }
+                },
+                "scopeTags": {
+                    "target": "com.amazonaws.mgn#ScopeTagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated scope tags for the segment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that updates the properties of a segment.</p>"
             }
         },
         "com.amazonaws.mgn#ServiceQuotaExceededException": {
@@ -13008,7 +15089,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2
+                    "max": 3
                 }
             }
         },
@@ -13051,6 +15132,10 @@
                     {
                         "name": "MIGRATION_PLANNING_ARTIFACTS",
                         "value": "MIGRATION_PLANNING_ARTIFACTS"
+                    },
+                    {
+                        "name": "F5_BIGIP",
+                        "value": "F5_BIGIP"
                     }
                 ]
             }
@@ -13340,6 +15425,40 @@
                 "smithy.api#documentation": "<p>Source server post migration custom action filters.</p>"
             }
         },
+        "com.amazonaws.mgn#SourceServerArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^arn:[\\w-]+:mgn:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:source-server\\/(s-[0-9a-zA-Z]{17})$"
+            }
+        },
+        "com.amazonaws.mgn#SourceServerArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#SourceServerArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.mgn#SourceServerArnsFilter": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#SourceServerArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.mgn#SourceServerConnectorAction": {
             "type": "structure",
             "members": {
@@ -13400,7 +15519,13 @@
                     "target": "com.amazonaws.mgn#GetLaunchConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.mgn#GetLaunchConfigurationDefaults"
+                },
+                {
                     "target": "com.amazonaws.mgn#GetReplicationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ListRemoteSourceActionInvocationResults"
                 },
                 {
                     "target": "com.amazonaws.mgn#ListSourceServerActions"
@@ -13433,6 +15558,9 @@
                     "target": "com.amazonaws.mgn#UpdateLaunchConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.mgn#UpdateLaunchConfigurationDefaults"
+                },
+                {
                     "target": "com.amazonaws.mgn#UpdateReplicationConfiguration"
                 },
                 {
@@ -13454,6 +15582,44 @@
                 "aws.api#arn": {
                     "template": "source-server/{sourceServerID}"
                 }
+            }
+        },
+        "com.amazonaws.mgn#SourceServerVolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "volumeType": {
+                    "target": "com.amazonaws.mgn#VolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>EBS volume type.</p>"
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.mgn#Iops",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provisioned IOPS, for io1, io2 and gp3 volumes.</p>"
+                    }
+                },
+                "throughput": {
+                    "target": "com.amazonaws.mgn#Throughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Throughput in MiB/s, for gp3 volumes only.</p>"
+                    }
+                },
+                "volumeInitializationRate": {
+                    "target": "com.amazonaws.mgn#VolumeInitializationRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provisioned rate for volume initialization, in MiB/s.</p>"
+                    }
+                },
+                "deleteOnTermination": {
+                    "target": "com.amazonaws.mgn#DeleteOnTermination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the volume is deleted when the launched instance terminates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Amazon Elastic Block Store (Amazon EBS) volume configuration for the disk mappings created later in the source server's Amazon Elastic Compute Cloud (Amazon EC2) launch template. Fields that aren't set get the service's default values.</p>"
             }
         },
         "com.amazonaws.mgn#SourceServersList": {
@@ -13500,6 +15666,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An operation that splits a construct into multiple constructs with different CIDR blocks.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SsmCommandInvocationID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
             }
         },
         "com.amazonaws.mgn#SsmDocument": {
@@ -14473,15 +16649,19 @@
                 "segmentID": {
                     "target": "com.amazonaws.mgn#SegmentID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the segment containing the construct.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the segment containing the construct.</p>"
+                    }
+                },
+                "segmentLogicalID": {
+                    "target": "com.amazonaws.mgn#LogicalID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a segment created in the same request that this construct belongs to. Use it instead of <code>segmentID</code> for a new segment.</p>"
                     }
                 },
                 "constructID": {
                     "target": "com.amazonaws.mgn#ConstructID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the construct to update.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the construct to update.</p>"
                     }
                 },
                 "constructType": {
@@ -14489,6 +16669,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the construct.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "constructLogicalID": {
+                    "target": "com.amazonaws.mgn#ConstructLogicalID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logical identifier for a construct created by a create operation; other operations identify the construct by constructID. Other entries in the same request can reference the new construct as {\"Ref\": \"&lt;constructLogicalID&gt;\"}.</p>"
                     }
                 },
                 "operation": {
@@ -14568,8 +16754,19 @@
                 "segmentID": {
                     "target": "com.amazonaws.mgn#SegmentID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the segment to update.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the segment to update.</p>"
+                    }
+                },
+                "segmentLogicalID": {
+                    "target": "com.amazonaws.mgn#SegmentLogicalID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that you choose for a segment created by this request. You can use it in other constructs in the same request to refer to the new segment.</p>"
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.mgn#SegmentOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to perform on the segment.</p>"
                     }
                 },
                 "targetAccount": {
@@ -14599,6 +16796,102 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.mgn#StartRemoteSourceActionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#StartRemoteSourceActionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#StartRemoteSourceActionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a job that runs a source action on source servers through a connector.</p>",
+                "smithy.api#http": {
+                    "uri": "/StartRemoteSourceActionJob",
+                    "method": "POST",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.mgn#StartRemoteSourceActionJobRequest": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionArns": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the source actions to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorArn": {
+                    "target": "com.amazonaws.mgn#ConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the connector that runs the source actions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceServerArns": {
+                    "target": "com.amazonaws.mgn#SourceServerArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the source servers to run the source actions on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.mgn#ClientIdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the job.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#StartRemoteSourceActionJobResponse": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionJob": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job that was started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mgn#StartReplication": {
@@ -15634,6 +17927,108 @@
                 "smithy.api#idempotent": {}
             }
         },
+        "com.amazonaws.mgn#UpdateLaunchConfigurationDefaults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#UpdateLaunchConfigurationDefaultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#UpdateLaunchConfigurationDefaultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the launch configuration defaults of a source server. They apply only to disk mappings created later in the source server's Amazon Elastic Compute Cloud (Amazon EC2) launch template, and members you omit keep their current values.</p>",
+                "smithy.api#http": {
+                    "uri": "/UpdateLaunchConfigurationDefaults",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mgn#UpdateLaunchConfigurationDefaultsRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to update the launch configuration defaults by Source Server ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to update the launch configuration defaults by Account ID.</p>"
+                    }
+                },
+                "smallVolumeMaxSize": {
+                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Disks up to this size, in GiB, use the small volume configuration, and larger disks use the large one. <code>0</code> means every disk uses the large one. If you omit it, the current value is kept.</p>"
+                    }
+                },
+                "smallVolumeConfiguration": {
+                    "target": "com.amazonaws.mgn#SourceServerVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume configuration for disks up to <code>smallVolumeMaxSize</code>. If you omit it, the current one is kept. If you send it, it replaces the current one: fields you omit are cleared, and an empty configuration, <code>{}</code>, clears all of them.</p>"
+                    }
+                },
+                "largeVolumeConfiguration": {
+                    "target": "com.amazonaws.mgn#SourceServerVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume configuration for disks larger than <code>smallVolumeMaxSize</code>. If you omit it, the current one is kept. If you send it, it replaces the current one: fields you omit are cleared, and an empty configuration, <code>{}</code>, clears all of them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#UpdateLaunchConfigurationDefaultsResponse": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Server ID of the launch configuration defaults.</p>"
+                    }
+                },
+                "smallVolumeMaxSize": {
+                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Disks up to this size, in GiB, use the small volume configuration, and larger disks use the large one. <code>0</code> means every disk uses the large one.</p>"
+                    }
+                },
+                "smallVolumeConfiguration": {
+                    "target": "com.amazonaws.mgn#SourceServerVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume configuration for disks up to <code>smallVolumeMaxSize</code>. Omitted when none of its fields is set.</p>"
+                    }
+                },
+                "largeVolumeConfiguration": {
+                    "target": "com.amazonaws.mgn#SourceServerVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Volume configuration for disks larger than <code>smallVolumeMaxSize</code>. Omitted when none of its fields is set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mgn#UpdateLaunchConfigurationRequest": {
             "type": "structure",
             "members": {
@@ -15701,6 +18096,12 @@
                         "smithy.api#documentation": "<p>Launch configuration map auto tagging MPE ID.</p>"
                     }
                 },
+                "mapAutoTaggingKey": {
+                    "target": "com.amazonaws.mgn#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch configuration map auto tagging key.</p>"
+                    }
+                },
                 "accountID": {
                     "target": "com.amazonaws.mgn#AccountID",
                     "traits": {
@@ -15766,6 +18167,12 @@
                     "target": "com.amazonaws.mgn#TagValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Launch configuration template map auto tagging MPE ID.</p>"
+                    }
+                },
+                "mapAutoTaggingKey": {
+                    "target": "com.amazonaws.mgn#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Launch configuration template map auto tagging key.</p>"
                     }
                 },
                 "launchDisposition": {
@@ -15986,6 +18393,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated scope tags for the network migration definition.</p>"
                     }
+                },
+                "definitionType": {
+                    "target": "com.amazonaws.mgn#DefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated type of the network migration definition.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16111,6 +18524,188 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An operation that updates the properties of a construct.</p>"
+            }
+        },
+        "com.amazonaws.mgn#UpdateOperationV2": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.mgn#SegmentConstructName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name for the construct.</p>"
+                    }
+                },
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to exclude this construct from the migration.</p>"
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.mgn#EnrichedProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties to set or overwrite on the construct, using their native value types; omitted keys are unchanged.</p>"
+                    }
+                },
+                "propertiesToDelete": {
+                    "target": "com.amazonaws.mgn#PropertiesToDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property keys to remove from the construct.</p>"
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.mgn#OperationConfigurationUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Construct-type-specific behavioral configuration to apply, such as security group associations or security group rule referencing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that updates a construct using native property value types and construct-type-specific behavioral configuration.</p>"
+            }
+        },
+        "com.amazonaws.mgn#UpdateRemoteSourceAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#UpdateRemoteSourceActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#UpdateRemoteSourceActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a source action.</p>",
+                "smithy.api#http": {
+                    "uri": "/UpdateRemoteSourceAction",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mgn#UpdateRemoteSourceActionRequest": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source action to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name of the source action.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the source action.</p>"
+                    }
+                },
+                "ssmParameterName": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Systems Manager Parameter Store parameter name.</p>"
+                    }
+                },
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated maximum time, in seconds, that the script can run on each source server.</p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionOperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated operating system of the source servers that the script runs on. Set to <code>linux</code> or <code>windows</code> to run the script only on source servers with that operating system, or <code>all</code> to run it on both.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#UpdateRemoteSourceActionResponse": {
+            "type": "structure",
+            "members": {
+                "remoteSourceActionID": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source action.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.mgn#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source action.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source action.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the source action.</p>"
+                    }
+                },
+                "ssmParameterName": {
+                    "target": "com.amazonaws.mgn#SsmParameterStoreParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Systems Manager Parameter Store parameter name.</p>"
+                    }
+                },
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.mgn#RemoteSourceActionTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that the script can run on each source server.</p>"
+                    }
+                },
+                "operatingSystem": {
+                    "target": "com.amazonaws.mgn#OperatingSystemString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system of the source servers that the script runs on. Absent when the script runs on both Linux and Windows.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.mgn#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the source action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.mgn#RemoteSourceActionResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.mgn#UpdateReplicationConfiguration": {
@@ -16267,6 +18862,12 @@
                         "smithy.api#documentation": "<p>Update replication configuration store snapshot on local zone.</p>"
                     }
                 },
+                "outpostSnapshotLocation": {
+                    "target": "com.amazonaws.mgn#OutpostSnapshotLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the location of replication snapshots when the staging area subnet is on an AWS Outpost. Set to <code>OUTPOST</code> to keep replication snapshots on the Outpost, or <code>REGION</code> to store them in the AWS Region. Required when the staging area subnet is on an Outpost, and not allowed otherwise.</p>"
+                    }
+                },
                 "storageConfiguration": {
                     "target": "com.amazonaws.mgn#StorageConfiguration",
                     "traits": {
@@ -16411,6 +19012,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration template store snapshot on local zone request.</p>"
+                    }
+                },
+                "outpostSnapshotLocation": {
+                    "target": "com.amazonaws.mgn#OutpostSnapshotLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the location of replication snapshots in the Replication Configuration template when the staging area subnet is on an AWS Outpost. Set to <code>OUTPOST</code> to keep replication snapshots on the Outpost, or <code>REGION</code> to store them in the AWS Region. Required when the staging area subnet is on an Outpost, and not allowed otherwise.</p>"
                     }
                 },
                 "storageConfiguration": {
@@ -16786,6 +19393,16 @@
                 "aws.api#arn": {
                     "template": "vcenter-client/{vcenterClientID}"
                 }
+            }
+        },
+        "com.amazonaws.mgn#VmUUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.mgn#VolumeInitializationRate": {

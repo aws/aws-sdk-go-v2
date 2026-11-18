@@ -34,6 +34,11 @@ type DescribeConformancePackStatusInput struct {
 	// Comma-separated list of conformance pack names.
 	ConformancePackNames []string
 
+	// Returns a filtered list of custom or managed conformance pack statuses. By
+	// default, if the filter is not defined, Config returns details for all your
+	// conformance packs.
+	Filters *types.DescribeConformancePacksFilters
+
 	// The maximum number of conformance packs status returned on each page.
 	Limit int32
 
@@ -53,6 +58,11 @@ func (v *DescribeConformancePackStatusInput) Serialize(s smithy.ShapeSerializer)
 func (v *DescribeConformancePackStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConformancePackNames != nil {
 		serializeConformancePackNamesList(s, schemas.DescribeConformancePackStatusRequest_ConformancePackNames, v.ConformancePackNames)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeConformancePackStatusRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Limit != 0 {
 		s.WriteInt32(schemas.DescribeConformancePackStatusRequest_Limit, v.Limit)

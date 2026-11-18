@@ -2256,6 +2256,12 @@ type Event struct {
 	// Details about an execution that failed.
 	ExecutionFailedDetails *ExecutionFailedDetails
 
+	// The details of an ExecutionPaused event.
+	ExecutionPausedDetails *ExecutionPausedDetails
+
+	// The details of an ExecutionResumed event.
+	ExecutionResumedDetails *ExecutionResumedDetails
+
 	// Details about an execution that started.
 	ExecutionStartedDetails *ExecutionStartedDetails
 
@@ -2386,6 +2392,16 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExecutionFailedDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.ExecutionPausedDetails != nil {
+		s.WriteStruct(schemas.Event_ExecutionPausedDetails)
+		v.ExecutionPausedDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionResumedDetails != nil {
+		s.WriteStruct(schemas.Event_ExecutionResumedDetails)
+		v.ExecutionResumedDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ExecutionStartedDetails != nil {
 		s.WriteStruct(schemas.Event_ExecutionStartedDetails)
 		v.ExecutionStartedDetails.SerializeMembers(s)
@@ -2509,6 +2525,12 @@ func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Event_ExecutionFailedDetails:
 			v.ExecutionFailedDetails = &ExecutionFailedDetails{}
 			return v.ExecutionFailedDetails.Deserialize(d)
+		case schemas.Event_ExecutionPausedDetails:
+			v.ExecutionPausedDetails = &ExecutionPausedDetails{}
+			return v.ExecutionPausedDetails.Deserialize(d)
+		case schemas.Event_ExecutionResumedDetails:
+			v.ExecutionResumedDetails = &ExecutionResumedDetails{}
+			return v.ExecutionResumedDetails.Deserialize(d)
 		case schemas.Event_ExecutionStartedDetails:
 			v.ExecutionStartedDetails = &ExecutionStartedDetails{}
 			return v.ExecutionStartedDetails.Deserialize(d)
@@ -2641,6 +2663,49 @@ func (v *EventInput) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The reason for pausing a durable execution, as recorded in the execution
+// history.
+type EventPauseReason struct {
+
+	// The reason that you provided when you paused the execution. This field is only
+	// present if you set IncludeExecutionData to true in the request.
+	Payload *string
+
+	// Specifies whether Lambda omitted the reason from the response because
+	// IncludeExecutionData is false .
+	Truncated *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventPauseReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventPauseReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventPauseReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteString(schemas.EventPauseReason_Payload, *v.Payload)
+	}
+	if v.Truncated != nil {
+		s.WriteBool(schemas.EventPauseReason_Truncated, *v.Truncated)
+	}
+}
+func (v *EventPauseReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventPauseReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventPauseReason_Payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.EventPauseReason_Payload, v.Payload)
+		case schemas.EventPauseReason_Truncated:
+			v.Truncated = new(bool)
+			return d.ReadBool(schemas.EventPauseReason_Truncated, v.Truncated)
+		}
+		return nil
+	})
+}
+
 // Result information for an event.
 type EventResult struct {
 
@@ -2676,6 +2741,49 @@ func (v *EventResult) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EventResult_Truncated:
 			v.Truncated = new(bool)
 			return d.ReadBool(schemas.EventResult_Truncated, v.Truncated)
+		}
+		return nil
+	})
+}
+
+// The reason for resuming a durable execution, as recorded in the execution
+// history.
+type EventResumeReason struct {
+
+	// The reason that you provided when you resumed the execution. This field is only
+	// present if you set IncludeExecutionData to true in the request.
+	Payload *string
+
+	// Specifies whether Lambda omitted the reason from the response because
+	// IncludeExecutionData is false .
+	Truncated *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventResumeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventResumeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventResumeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteString(schemas.EventResumeReason_Payload, *v.Payload)
+	}
+	if v.Truncated != nil {
+		s.WriteBool(schemas.EventResumeReason_Truncated, *v.Truncated)
+	}
+}
+func (v *EventResumeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventResumeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventResumeReason_Payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.EventResumeReason_Payload, v.Payload)
+		case schemas.EventResumeReason_Truncated:
+			v.Truncated = new(bool)
+			return d.ReadBool(schemas.EventResumeReason_Truncated, v.Truncated)
 		}
 		return nil
 	})
@@ -3359,6 +3467,114 @@ func (v *ExecutionFailedDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExecutionFailedDetails_Error:
 			v.Error = &EventError{}
 			return v.Error.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Details about a [durable execution] that paused. The event timestamp is when the execution paused.
+//
+// [durable execution]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+type ExecutionPausedDetails struct {
+
+	// Specifies whether the pause also paused the execution timeout.
+	//
+	// This member is required.
+	ExecutionTimeoutPaused *bool
+
+	// The date and time when you requested the pause, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
+	//
+	// This member is required.
+	PauseRequestTimestamp *time.Time
+
+	// The reason that you provided when you paused the execution.
+	Reason *EventPauseReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExecutionPausedDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionPausedDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionPausedDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionTimeoutPaused != nil {
+		s.WriteBool(schemas.ExecutionPausedDetails_ExecutionTimeoutPaused, *v.ExecutionTimeoutPaused)
+	}
+	if v.PauseRequestTimestamp != nil {
+		s.WriteTime(schemas.ExecutionPausedDetails_PauseRequestTimestamp, *v.PauseRequestTimestamp)
+	}
+	if v.Reason != nil {
+		s.WriteStruct(schemas.ExecutionPausedDetails_Reason)
+		v.Reason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExecutionPausedDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionPausedDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionPausedDetails_ExecutionTimeoutPaused:
+			v.ExecutionTimeoutPaused = new(bool)
+			return d.ReadBool(schemas.ExecutionPausedDetails_ExecutionTimeoutPaused, v.ExecutionTimeoutPaused)
+		case schemas.ExecutionPausedDetails_PauseRequestTimestamp:
+			v.PauseRequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ExecutionPausedDetails_PauseRequestTimestamp, v.PauseRequestTimestamp)
+		case schemas.ExecutionPausedDetails_Reason:
+			v.Reason = &EventPauseReason{}
+			return v.Reason.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Details about a [durable execution] that resumed. The event timestamp is when the execution
+// resumed.
+//
+// [durable execution]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+type ExecutionResumedDetails struct {
+
+	// The date and time when you requested the resume, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
+	//
+	// This member is required.
+	ResumeRequestTimestamp *time.Time
+
+	// The reason that you provided when you resumed the execution.
+	Reason *EventResumeReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExecutionResumedDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionResumedDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionResumedDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteStruct(schemas.ExecutionResumedDetails_Reason)
+		v.Reason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResumeRequestTimestamp != nil {
+		s.WriteTime(schemas.ExecutionResumedDetails_ResumeRequestTimestamp, *v.ResumeRequestTimestamp)
+	}
+}
+func (v *ExecutionResumedDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionResumedDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionResumedDetails_Reason:
+			v.Reason = &EventResumeReason{}
+			return v.Reason.Deserialize(d)
+		case schemas.ExecutionResumedDetails_ResumeRequestTimestamp:
+			v.ResumeRequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ExecutionResumedDetails_ResumeRequestTimestamp, v.ResumeRequestTimestamp)
 		}
 		return nil
 	})
@@ -6300,6 +6516,64 @@ func (v *OperationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details about a [durable execution] that is pausing or paused.
+//
+// [durable execution]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
+type PauseDetails struct {
+
+	// Specifies whether the pause also pauses the execution timeout.
+	//
+	// This member is required.
+	ExecutionTimeoutPaused *bool
+
+	// The date and time when you requested the pause, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
+	//
+	// This member is required.
+	PauseRequestTimestamp *time.Time
+
+	// The reason that you provided when you paused the execution. This field is only
+	// present if you set IncludeExecutionData to true in the request.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PauseDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PauseDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PauseDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionTimeoutPaused != nil {
+		s.WriteBool(schemas.PauseDetails_ExecutionTimeoutPaused, *v.ExecutionTimeoutPaused)
+	}
+	if v.PauseRequestTimestamp != nil {
+		s.WriteTime(schemas.PauseDetails_PauseRequestTimestamp, *v.PauseRequestTimestamp)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.PauseDetails_Reason, *v.Reason)
+	}
+}
+func (v *PauseDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PauseDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PauseDetails_ExecutionTimeoutPaused:
+			v.ExecutionTimeoutPaused = new(bool)
+			return d.ReadBool(schemas.PauseDetails_ExecutionTimeoutPaused, v.ExecutionTimeoutPaused)
+		case schemas.PauseDetails_PauseRequestTimestamp:
+			v.PauseRequestTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PauseDetails_PauseRequestTimestamp, v.PauseRequestTimestamp)
+		case schemas.PauseDetails_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.PauseDetails_Reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Configuration for tag propagation to managed resources launched by the capacity
 // provider.
 type PropagateTags struct {
@@ -7700,7 +7974,7 @@ func (v *WaitDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Specifies how long to pause the durable execution.
+// Specifies how long the durable execution waits.
 type WaitOptions struct {
 
 	// The duration to wait, in seconds.

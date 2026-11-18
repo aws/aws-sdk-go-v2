@@ -78,7 +78,9 @@ type AccountAggregation struct {
 	// The type of finding.
 	FindingType AggregationFindingType
 
-	// The type of resource.
+	// The type of resource. For Google Cloud Platform (GCP) resources, the resource
+	// type is compute.googleapis.com/Instance , cloudfunctions.googleapis.com/Function
+	// , or artifactregistry.googleapis.com/DockerImage .
 	ResourceType AggregationResourceType
 
 	// The value to sort by.
@@ -952,6 +954,8 @@ type AmiAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider Provider
 
 	// The cloud Region associated with this AMI aggregation. The value format depends
@@ -960,6 +964,9 @@ type AmiAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// The source of the scan that generated the findings for the Amazon Machine Image
@@ -5195,6 +5202,12 @@ type Connector struct {
 	// Additional information about the current enablement status of the connector.
 	EnablementStatusReason *string
 
+	// The Google Cloud Platform (GCP) locations configured for the connector.
+	GcpRegions []string
+
+	// The Google Cloud Platform (GCP) scope configuration for the connector.
+	GcpScopeConfiguration *GcpScopeConfiguration
+
 	// The health of the connector, which indicates whether Amazon Inspector can reach
 	// and scan the connected resources.
 	Health *ConnectorHealth
@@ -5241,6 +5254,14 @@ func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EnablementStatusReason != nil {
 		s.WriteString(schemas.Connector_enablementStatusReason, *v.EnablementStatusReason)
+	}
+	if v.GcpRegions != nil {
+		serializeGcpRegionList(s, schemas.Connector_gcpRegions, v.GcpRegions)
+	}
+	if v.GcpScopeConfiguration != nil {
+		s.WriteStruct(schemas.Connector_gcpScopeConfiguration)
+		v.GcpScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Health != nil {
 		s.WriteStruct(schemas.Connector_health)
@@ -5295,6 +5316,11 @@ func (v *Connector) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Connector_enablementStatusReason:
 			v.EnablementStatusReason = new(string)
 			return d.ReadString(schemas.Connector_enablementStatusReason, v.EnablementStatusReason)
+		case schemas.Connector_gcpRegions:
+			return deserializeGcpRegionList(d, schemas.Connector_gcpRegions, &v.GcpRegions)
+		case schemas.Connector_gcpScopeConfiguration:
+			v.GcpScopeConfiguration = &GcpScopeConfiguration{}
+			return v.GcpScopeConfiguration.Deserialize(d)
 		case schemas.Connector_health:
 			v.Health = &ConnectorHealth{}
 			return v.Health.Deserialize(d)
@@ -5721,6 +5747,8 @@ type ContainerImageAggregation struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProviders []StringFilter
 
 	// The cloud regions to aggregate findings for. The value format depends on the
@@ -5729,6 +5757,9 @@ type ContainerImageAggregation struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegions []StringFilter
 
 	// The image digests to aggregate findings for.
@@ -5901,6 +5932,8 @@ type ContainerImageAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider Provider
 
 	// The cloud Region associated with this container image aggregation. The value
@@ -5909,6 +5942,9 @@ type ContainerImageAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// The number of active findings with an exploit available for the container image.
@@ -6325,16 +6361,44 @@ type CoverageFilterCriteria struct {
 	// The cloud container repository name to filter coverage results by.
 	CloudContainerRepositoryName []CoverageStringFilter
 
-	// The cloud provider to filter coverage results by.
+	// The cloud provider to filter coverage results by. Valid values:
+	//
+	//   - AWS – Amazon Web Services resources.
+	//
+	//   - AZURE – Microsoft Azure resources.
+	//
+	//   - GCP – Google Cloud Platform (GCP) resources.
 	CloudProvider []CoverageStringFilter
 
-	// The cloud provider account ID to filter coverage results by.
+	// The cloud provider account ID to filter coverage results by. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services account ID.
+	//
+	//   - An Azure subscription ID.
+	//
+	//   - A Google Cloud Platform (GCP) project ID, such as my-project .
 	CloudProviderAccountId []CoverageStringFilter
 
-	// The cloud provider organization ID to filter coverage results by.
+	// The cloud provider organization ID to filter coverage results by. The value
+	// format depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Organizations organization ID.
+	//
+	//   - An Azure tenant ID.
+	//
+	//   - A numeric Google Cloud Platform (GCP) organization ID.
 	CloudProviderOrgId []CoverageStringFilter
 
-	// The cloud provider region to filter coverage results by.
+	// The cloud provider region to filter coverage results by. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudProviderRegion []CoverageStringFilter
 
 	// The cloud serverless function name to filter coverage results by.
@@ -6404,9 +6468,21 @@ type CoverageFilterCriteria struct {
 	// An array of Amazon Web Services resource IDs to return coverage statistics for.
 	ResourceId []CoverageStringFilter
 
-	// An array of Amazon Web Services resource types to return coverage statistics
-	// for. The values can be AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION ,
-	// AWS_ECR_CONTAINER_IMAGE , AWS_ECR_REPOSITORY or AWS_ACCOUNT .
+	// An array of resource types to return coverage statistics for. Valid values:
+	//
+	//   - Amazon Web Services – AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION ,
+	//   AWS_ECR_CONTAINER_IMAGE , AWS_ECR_REPOSITORY , MACHINE_IMAGE , CODE_REPOSITORY
+	//   , or AWS_ACCOUNT .
+	//
+	//   - Microsoft Azure – Microsoft.Compute/virtualMachines ,
+	//   Microsoft.ContainerRegistry/registries ,
+	//   Microsoft.ContainerRegistry/registry/containerRepository ,
+	//   Microsoft.ContainerRegistry/registry/containerImage , or Microsoft.Web/sites .
+	//
+	//   - Google Cloud Platform (GCP) – compute.googleapis.com/Instance ,
+	//   cloudfunctions.googleapis.com/Function ,
+	//   artifactregistry.googleapis.com/Repository , or
+	//   artifactregistry.googleapis.com/DockerImage .
 	ResourceType []CoverageStringFilter
 
 	// The filter to search for Amazon EC2 instance coverage by scan mode. Valid
@@ -6766,7 +6842,21 @@ type CoveredResource struct {
 	// This member is required.
 	ResourceId *string
 
-	// The type of the covered resource.
+	// The type of the covered resource. Valid values:
+	//
+	//   - Amazon Web Services – AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION ,
+	//   AWS_ECR_CONTAINER_IMAGE , AWS_ECR_REPOSITORY , MACHINE_IMAGE , CODE_REPOSITORY
+	//   , or AWS_ACCOUNT .
+	//
+	//   - Microsoft Azure – Microsoft.Compute/virtualMachines ,
+	//   Microsoft.ContainerRegistry/registries ,
+	//   Microsoft.ContainerRegistry/registry/containerRepository ,
+	//   Microsoft.ContainerRegistry/registry/containerImage , or Microsoft.Web/sites .
+	//
+	//   - Google Cloud Platform (GCP) – compute.googleapis.com/Instance ,
+	//   cloudfunctions.googleapis.com/Function ,
+	//   artifactregistry.googleapis.com/Repository , or
+	//   artifactregistry.googleapis.com/DockerImage .
 	//
 	// This member is required.
 	ResourceType CoverageResourceType
@@ -6779,19 +6869,47 @@ type CoveredResource struct {
 	// The date and time the resource was last checked for vulnerabilities.
 	LastScannedAt *time.Time
 
-	// The cloud provider of the covered resource.
+	// The cloud provider of the covered resource. Valid values:
+	//
+	//   - AWS – Amazon Web Services resources.
+	//
+	//   - AZURE – Microsoft Azure resources.
+	//
+	//   - GCP – Google Cloud Platform (GCP) resources.
 	Provider Provider
 
-	// The cloud provider account ID of the covered resource.
+	// The cloud provider account ID of the covered resource. The value format depends
+	// on the cloud provider:
+	//
+	//   - An Amazon Web Services account ID.
+	//
+	//   - An Azure subscription ID.
+	//
+	//   - A Google Cloud Platform (GCP) project ID, such as my-project .
 	ProviderAccountId *string
 
-	// The cloud provider organization ID of the covered resource.
+	// The cloud provider organization ID of the covered resource. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Organizations organization ID.
+	//
+	//   - An Azure tenant ID.
+	//
+	//   - A numeric Google Cloud Platform (GCP) organization ID.
 	ProviderOrgId *string
 
 	// The cloud provider partition of the covered resource.
 	ProviderPartition *string
 
-	// The cloud provider region of the covered resource.
+	// The cloud provider region of the covered resource. The value format depends on
+	// the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	ProviderRegion *string
 
 	// An object that contains details about the metadata.
@@ -9002,7 +9120,10 @@ type FilterCriteria struct {
 	// Details on the resource tags used to filter findings.
 	ResourceTags []MapFilter
 
-	// Details on the resource types used to filter findings.
+	// Details on the resource types used to filter findings. For Google Cloud
+	// Platform (GCP) resources, the resource type is compute.googleapis.com/Instance ,
+	// cloudfunctions.googleapis.com/Function , or
+	// artifactregistry.googleapis.com/DockerImage .
 	ResourceType []StringFilter
 
 	// Details on the severity used to filter findings.
@@ -9851,7 +9972,10 @@ type FindingTypeAggregation struct {
 	// The finding type to aggregate.
 	FindingType AggregationFindingType
 
-	// The resource type to aggregate.
+	// The resource type to aggregate. For Google Cloud Platform (GCP) resources, the
+	// resource type is compute.googleapis.com/Instance ,
+	// cloudfunctions.googleapis.com/Function , or
+	// artifactregistry.googleapis.com/DockerImage .
 	ResourceType AggregationResourceType
 
 	// The value to sort results by.
@@ -9949,6 +10073,8 @@ type FindingTypeAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider *string
 
 	// The cloud Region associated with this finding type aggregation. The value
@@ -9957,6 +10083,9 @@ type FindingTypeAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// The number of findings that have an exploit available.
@@ -10111,7 +10240,13 @@ type FreeTrialInfo struct {
 	// This member is required.
 	Type FreeTrialType
 
-	// The cloud provider associated with the free trial information.
+	// The cloud provider associated with the free trial information. Valid values:
+	//
+	//   - AWS – Amazon Web Services resources.
+	//
+	//   - AZURE – Microsoft Azure resources.
+	//
+	//   - GCP – Google Cloud Platform (GCP) resources.
 	CloudProvider CloudProvider
 
 	noSmithyDocumentSerde
@@ -10230,6 +10365,365 @@ func (v *FreeTrialInfoError) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FreeTrialInfoError_message:
 			v.Message = new(string)
 			return d.ReadString(schemas.FreeTrialInfoError_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The scope of Google Cloud Platform (GCP) resources that Amazon Inspector scans
+// for a single scanning type, including the scope level, the targeted resources,
+// and the current state.
+type GcpCapabilityScope struct {
+
+	// The type of scope: ORGANIZATION , which scans all projects in the GCP
+	// organization, or PROJECT , which scans only the specified GCP projects.
+	//
+	// This member is required.
+	ScopeType ScopeType
+
+	// The GCP project IDs to scan when scopeType is PROJECT . Not used when scopeType
+	// is ORGANIZATION . Amazon Inspector scans the organization of the Amazon Web
+	// Services Config connector.
+	ScopeValues []string
+
+	// The current state of the scope configuration.
+	State ScopeState
+
+	// The reason for the current state of the scope configuration.
+	StateReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpCapabilityScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpCapabilityScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpCapabilityScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScopeType != "" {
+		s.WriteString(schemas.GcpCapabilityScope_scopeType, string(v.ScopeType))
+	}
+	if v.ScopeValues != nil {
+		serializeGcpScopeValueList(s, schemas.GcpCapabilityScope_scopeValues, v.ScopeValues)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GcpCapabilityScope_state, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.GcpCapabilityScope_stateReason, *v.StateReason)
+	}
+}
+func (v *GcpCapabilityScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpCapabilityScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpCapabilityScope_scopeType:
+			var ev string
+			if err := d.ReadString(schemas.GcpCapabilityScope_scopeType, &ev); err != nil {
+				return err
+			}
+			v.ScopeType = ScopeType(ev)
+			return nil
+		case schemas.GcpCapabilityScope_scopeValues:
+			return deserializeGcpScopeValueList(d, schemas.GcpCapabilityScope_scopeValues, &v.ScopeValues)
+		case schemas.GcpCapabilityScope_state:
+			var ev string
+			if err := d.ReadString(schemas.GcpCapabilityScope_state, &ev); err != nil {
+				return err
+			}
+			v.State = ScopeState(ev)
+			return nil
+		case schemas.GcpCapabilityScope_stateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.GcpCapabilityScope_stateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
+// The scope of Google Cloud Platform (GCP) resources to scan for a single
+// scanning type. Provide this as part of a GcpScopeConfigurationInput when you
+// create or update a connector.
+type GcpCapabilityScopeInput struct {
+
+	// The type of scope: ORGANIZATION , which scans all projects in the GCP
+	// organization, or PROJECT , which scans only the specified GCP projects.
+	//
+	// This member is required.
+	ScopeType ScopeType
+
+	// The GCP project IDs to scan. Required when scopeType is PROJECT . Don't specify
+	// scope values when scopeType is ORGANIZATION . Amazon Inspector scans the
+	// organization of the Amazon Web Services Config connector.
+	ScopeValues []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpCapabilityScopeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpCapabilityScopeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpCapabilityScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScopeType != "" {
+		s.WriteString(schemas.GcpCapabilityScopeInput_scopeType, string(v.ScopeType))
+	}
+	if v.ScopeValues != nil {
+		serializeGcpScopeValueList(s, schemas.GcpCapabilityScopeInput_scopeValues, v.ScopeValues)
+	}
+}
+func (v *GcpCapabilityScopeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpCapabilityScopeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpCapabilityScopeInput_scopeType:
+			var ev string
+			if err := d.ReadString(schemas.GcpCapabilityScopeInput_scopeType, &ev); err != nil {
+				return err
+			}
+			v.ScopeType = ScopeType(ev)
+			return nil
+		case schemas.GcpCapabilityScopeInput_scopeValues:
+			return deserializeGcpScopeValueList(d, schemas.GcpCapabilityScopeInput_scopeValues, &v.ScopeValues)
+		}
+		return nil
+	})
+}
+
+// The configuration details specific to Google Cloud Platform (GCP) for creating
+// a connector, including the Amazon Web Services Config connector association,
+// scan scope, and locations to scan.
+type GcpProviderDetailCreate struct {
+
+	// The ARN of the Amazon Web Services Config connector to associate with this
+	// connector.
+	//
+	// This member is required.
+	AwsConfigConnectorArn *string
+
+	// The GCP locations to scan, such as regions, zones, multi-regions, or
+	// dual-regions. Specify ALL to scan all locations.
+	//
+	// This member is required.
+	GcpRegions []string
+
+	// The scope configuration that defines which GCP resources to scan.
+	//
+	// This member is required.
+	ScopeConfiguration *GcpScopeConfigurationInput
+
+	// Specifies whether to automatically install the VM scanner on connected GCP
+	// resources. Defaults to true .
+	AutoInstallVMScanner *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpProviderDetailCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpProviderDetailCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpProviderDetailCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoInstallVMScanner != nil {
+		s.WriteBool(schemas.GcpProviderDetailCreate_autoInstallVMScanner, *v.AutoInstallVMScanner)
+	}
+	if v.AwsConfigConnectorArn != nil {
+		s.WriteString(schemas.GcpProviderDetailCreate_awsConfigConnectorArn, *v.AwsConfigConnectorArn)
+	}
+	if v.GcpRegions != nil {
+		serializeGcpRegionList(s, schemas.GcpProviderDetailCreate_gcpRegions, v.GcpRegions)
+	}
+	if v.ScopeConfiguration != nil {
+		s.WriteStruct(schemas.GcpProviderDetailCreate_scopeConfiguration)
+		v.ScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpProviderDetailCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpProviderDetailCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpProviderDetailCreate_autoInstallVMScanner:
+			v.AutoInstallVMScanner = new(bool)
+			return d.ReadBool(schemas.GcpProviderDetailCreate_autoInstallVMScanner, v.AutoInstallVMScanner)
+		case schemas.GcpProviderDetailCreate_awsConfigConnectorArn:
+			v.AwsConfigConnectorArn = new(string)
+			return d.ReadString(schemas.GcpProviderDetailCreate_awsConfigConnectorArn, v.AwsConfigConnectorArn)
+		case schemas.GcpProviderDetailCreate_gcpRegions:
+			return deserializeGcpRegionList(d, schemas.GcpProviderDetailCreate_gcpRegions, &v.GcpRegions)
+		case schemas.GcpProviderDetailCreate_scopeConfiguration:
+			v.ScopeConfiguration = &GcpScopeConfigurationInput{}
+			return v.ScopeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration details specific to Google Cloud Platform (GCP) for updating
+// a connector, including the scan scope and locations to scan.
+type GcpProviderDetailUpdate struct {
+
+	// Specifies whether to automatically install the VM scanner on connected GCP
+	// resources.
+	AutoInstallVMScanner *bool
+
+	// The updated GCP locations to scan, such as regions, zones, multi-regions, or
+	// dual-regions. Specify ALL to scan all locations.
+	GcpRegions []string
+
+	// The updated scope configuration that defines which GCP resources to scan.
+	ScopeConfiguration *GcpScopeConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpProviderDetailUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpProviderDetailUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpProviderDetailUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoInstallVMScanner != nil {
+		s.WriteBool(schemas.GcpProviderDetailUpdate_autoInstallVMScanner, *v.AutoInstallVMScanner)
+	}
+	if v.GcpRegions != nil {
+		serializeGcpRegionList(s, schemas.GcpProviderDetailUpdate_gcpRegions, v.GcpRegions)
+	}
+	if v.ScopeConfiguration != nil {
+		s.WriteStruct(schemas.GcpProviderDetailUpdate_scopeConfiguration)
+		v.ScopeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpProviderDetailUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpProviderDetailUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpProviderDetailUpdate_autoInstallVMScanner:
+			v.AutoInstallVMScanner = new(bool)
+			return d.ReadBool(schemas.GcpProviderDetailUpdate_autoInstallVMScanner, v.AutoInstallVMScanner)
+		case schemas.GcpProviderDetailUpdate_gcpRegions:
+			return deserializeGcpRegionList(d, schemas.GcpProviderDetailUpdate_gcpRegions, &v.GcpRegions)
+		case schemas.GcpProviderDetailUpdate_scopeConfiguration:
+			v.ScopeConfiguration = &GcpScopeConfigurationInput{}
+			return v.ScopeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The scope of Google Cloud Platform (GCP) resources that Amazon Inspector scans,
+// defined separately for VM, container image, and serverless scanning. Returned as
+// part of a connector's configuration.
+type GcpScopeConfiguration struct {
+
+	// The scope configuration for container image scanning.
+	ContainerImageScanning *GcpCapabilityScope
+
+	// The scope configuration for serverless scanning.
+	ServerlessScanning *GcpCapabilityScope
+
+	// The scope configuration for VM scanning.
+	VmScanning *GcpCapabilityScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpScopeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpScopeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpScopeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerImageScanning != nil {
+		s.WriteStruct(schemas.GcpScopeConfiguration_containerImageScanning)
+		v.ContainerImageScanning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerlessScanning != nil {
+		s.WriteStruct(schemas.GcpScopeConfiguration_serverlessScanning)
+		v.ServerlessScanning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VmScanning != nil {
+		s.WriteStruct(schemas.GcpScopeConfiguration_vmScanning)
+		v.VmScanning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpScopeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpScopeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpScopeConfiguration_containerImageScanning:
+			v.ContainerImageScanning = &GcpCapabilityScope{}
+			return v.ContainerImageScanning.Deserialize(d)
+		case schemas.GcpScopeConfiguration_serverlessScanning:
+			v.ServerlessScanning = &GcpCapabilityScope{}
+			return v.ServerlessScanning.Deserialize(d)
+		case schemas.GcpScopeConfiguration_vmScanning:
+			v.VmScanning = &GcpCapabilityScope{}
+			return v.VmScanning.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The scope of Google Cloud Platform (GCP) resources to scan, defined separately
+// for VM, container image, and serverless scanning. Provide this when you create
+// or update a GCP connector.
+type GcpScopeConfigurationInput struct {
+
+	// The scope configuration input for container image scanning.
+	ContainerImageScanning *GcpCapabilityScopeInput
+
+	// The scope configuration input for serverless scanning.
+	ServerlessScanning *GcpCapabilityScopeInput
+
+	// The scope configuration input for VM scanning.
+	VmScanning *GcpCapabilityScopeInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *GcpScopeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GcpScopeConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GcpScopeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerImageScanning != nil {
+		s.WriteStruct(schemas.GcpScopeConfigurationInput_containerImageScanning)
+		v.ContainerImageScanning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerlessScanning != nil {
+		s.WriteStruct(schemas.GcpScopeConfigurationInput_serverlessScanning)
+		v.ServerlessScanning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VmScanning != nil {
+		s.WriteStruct(schemas.GcpScopeConfigurationInput_vmScanning)
+		v.VmScanning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GcpScopeConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GcpScopeConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GcpScopeConfigurationInput_containerImageScanning:
+			v.ContainerImageScanning = &GcpCapabilityScopeInput{}
+			return v.ContainerImageScanning.Deserialize(d)
+		case schemas.GcpScopeConfigurationInput_serverlessScanning:
+			v.ServerlessScanning = &GcpCapabilityScopeInput{}
+			return v.ServerlessScanning.Deserialize(d)
+		case schemas.GcpScopeConfigurationInput_vmScanning:
+			v.VmScanning = &GcpCapabilityScopeInput{}
+			return v.VmScanning.Deserialize(d)
 		}
 		return nil
 	})
@@ -10371,6 +10865,8 @@ type ImageLayerAggregation struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProviders []StringFilter
 
 	// The cloud regions to aggregate findings for. The value format depends on the
@@ -10379,6 +10875,9 @@ type ImageLayerAggregation struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegions []StringFilter
 
 	// The hashes associated with the layers.
@@ -10523,6 +11022,8 @@ type ImageLayerAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider *string
 
 	// The cloud Region associated with this image layer aggregation. The value format
@@ -10531,6 +11032,9 @@ type ImageLayerAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// An object that represents the count of matched findings per severity.
@@ -12595,6 +13099,7 @@ func (v *ProjectPeriodicScanConfiguration) Deserialize(d smithy.ShapeDeserialize
 // The following types satisfy this interface:
 //
 //	ProviderDetailCreateMemberAzure
+//	ProviderDetailCreateMemberGcp
 type ProviderDetailCreate interface {
 	isProviderDetailCreate()
 }
@@ -12616,11 +13121,29 @@ func (v *ProviderDetailCreateMemberAzure) Deserialize(d smithy.ShapeDeserializer
 	return v.Value.Deserialize(d)
 }
 
+// The details specific to Google Cloud Platform (GCP) for creating a connector.
+type ProviderDetailCreateMemberGcp struct {
+	Value GcpProviderDetailCreate
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailCreateMemberGcp) isProviderDetailCreate() {}
+func (v *ProviderDetailCreateMemberGcp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderDetailCreate_gcp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProviderDetailCreateMemberGcp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The provider-specific configuration details for updating a connector.
 //
 // The following types satisfy this interface:
 //
 //	ProviderDetailUpdateMemberAzure
+//	ProviderDetailUpdateMemberGcp
 type ProviderDetailUpdate interface {
 	isProviderDetailUpdate()
 }
@@ -12639,6 +13162,23 @@ func (v *ProviderDetailUpdateMemberAzure) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ProviderDetailUpdateMemberAzure) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The details specific to Google Cloud Platform (GCP) for updating a connector.
+type ProviderDetailUpdateMemberGcp struct {
+	Value GcpProviderDetailUpdate
+
+	noSmithyDocumentSerde
+}
+
+func (*ProviderDetailUpdateMemberGcp) isProviderDetailUpdate() {}
+func (v *ProviderDetailUpdateMemberGcp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderDetailUpdate_gcp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProviderDetailUpdateMemberGcp) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -12863,6 +13403,8 @@ type RepositoryAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider Provider
 
 	// The cloud Region associated with this repository aggregation. The value format
@@ -12871,6 +13413,9 @@ type RepositoryAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// An object that represent the count of matched findings per severity.
@@ -12974,13 +13519,33 @@ type Resource struct {
 	// The partition of the resource.
 	Partition *string
 
-	// The cloud provider of the resource.
+	// The cloud provider of the resource. Valid values:
+	//
+	//   - AWS – Amazon Web Services resources.
+	//
+	//   - AZURE – Microsoft Azure resources.
+	//
+	//   - GCP – Google Cloud Platform (GCP) resources.
 	Provider Provider
 
-	// The cloud provider account ID of the resource.
+	// The cloud provider account ID of the resource. The value format depends on the
+	// cloud provider:
+	//
+	//   - An Amazon Web Services account ID.
+	//
+	//   - An Azure subscription ID.
+	//
+	//   - A Google Cloud Platform (GCP) project ID, such as my-project .
 	ProviderAccountId *string
 
-	// The cloud provider organization ID of the resource.
+	// The cloud provider organization ID of the resource. The value format depends on
+	// the cloud provider:
+	//
+	//   - An Amazon Web Services Organizations organization ID.
+	//
+	//   - An Azure tenant ID.
+	//
+	//   - A numeric Google Cloud Platform (GCP) organization ID.
 	ProviderOrgId *string
 
 	// The Amazon Web Services Region the impacted resource is located in.
@@ -13200,16 +13765,44 @@ type ResourceFilterCriteria struct {
 	// The cloud container repository names used as resource filter criteria.
 	CloudContainerRepositoryName []ResourceStringFilter
 
-	// The cloud providers used as resource filter criteria.
+	// The cloud providers used as resource filter criteria. Valid values:
+	//
+	//   - AWS – Amazon Web Services resources.
+	//
+	//   - AZURE – Microsoft Azure resources.
+	//
+	//   - GCP – Google Cloud Platform (GCP) resources.
 	CloudProvider []ResourceStringFilter
 
-	// The cloud provider account IDs used as resource filter criteria.
+	// The cloud provider account IDs used as resource filter criteria. The value
+	// format depends on the cloud provider:
+	//
+	//   - An Amazon Web Services account ID.
+	//
+	//   - An Azure subscription ID.
+	//
+	//   - A Google Cloud Platform (GCP) project ID.
 	CloudProviderAccountId []ResourceStringFilter
 
-	// The cloud provider organization IDs used as resource filter criteria.
+	// The cloud provider organization IDs used as resource filter criteria. The value
+	// format depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Organizations organization ID.
+	//
+	//   - An Azure tenant ID.
+	//
+	//   - A Google Cloud Platform (GCP) organization ID.
 	CloudProviderOrgId []ResourceStringFilter
 
-	// The cloud provider regions used as resource filter criteria.
+	// The cloud provider regions used as resource filter criteria. The value format
+	// depends on the cloud provider:
+	//
+	//   - An Amazon Web Services Region, such as us-east-1 .
+	//
+	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudProviderRegion []ResourceStringFilter
 
 	// The cloud serverless function names used as resource filter criteria.
@@ -13242,7 +13835,17 @@ type ResourceFilterCriteria struct {
 	// The resource IDs used as resource filter criteria.
 	ResourceId []ResourceStringFilter
 
-	// The resource types used as resource filter criteria.
+	// The resource types used as resource filter criteria. Valid values:
+	//
+	//   - Amazon Web Services – AWS_EC2_INSTANCE , AWS_ECR_CONTAINER_IMAGE ,
+	//   AWS_LAMBDA_FUNCTION , or MACHINE_IMAGE .
+	//
+	//   - Microsoft Azure – Microsoft.Compute/virtualMachines ,
+	//   Microsoft.ContainerRegistry/registry/containerImage , or Microsoft.Web/sites .
+	//
+	//   - Google Cloud Platform (GCP) – compute.googleapis.com/Instance ,
+	//   cloudfunctions.googleapis.com/Function , or
+	//   artifactregistry.googleapis.com/DockerImage .
 	ResourceType []ResourceStringFilter
 
 	noSmithyDocumentSerde
@@ -14130,9 +14733,9 @@ func (v *ScopeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 // of an AzureScopeConfigurationInput when you create or update a connector.
 type ScopeConfigurationInput struct {
 
-	// The type of scope. Valid values are TENANT , which scans all resources in the
-	// Azure tenant, and SUBSCRIPTION , which scans only the resources in the specified
-	// Azure subscriptions.
+	// The type of scope: TENANT , which scans all resources in the Azure tenant, or
+	// SUBSCRIPTION , which scans only the resources in the specified Azure
+	// subscriptions.
 	//
 	// This member is required.
 	ScopeType ScopeType
@@ -14399,6 +15002,8 @@ type ServerlessFunctionAggregation struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProviders []StringFilter
 
 	// The cloud regions to aggregate findings for. The value format depends on the
@@ -14407,6 +15012,9 @@ type ServerlessFunctionAggregation struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegions []StringFilter
 
 	// The function names to aggregate findings for.
@@ -14547,6 +15155,8 @@ type ServerlessFunctionAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider Provider
 
 	// The cloud Region associated with this serverless function aggregation. The
@@ -14555,6 +15165,9 @@ type ServerlessFunctionAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// The number of active findings with an exploit available for the serverless
@@ -15484,7 +16097,10 @@ type TitleAggregation struct {
 	// The type of finding to aggregate on.
 	FindingType AggregationFindingType
 
-	// The resource type to aggregate on.
+	// The resource type to aggregate on. For Google Cloud Platform (GCP) resources,
+	// the resource type is compute.googleapis.com/Instance ,
+	// cloudfunctions.googleapis.com/Function , or
+	// artifactregistry.googleapis.com/DockerImage .
 	ResourceType AggregationResourceType
 
 	// The value to sort results by.
@@ -15870,7 +16486,13 @@ func (v *UpdateIntegrationDetailsMemberGitlabSelfManaged) Deserialize(d smithy.S
 // Contains usage information about the cost of Amazon Inspector operation.
 type Usage struct {
 
-	// The cloud provider associated with the usage information.
+	// The cloud provider associated with the usage information. Valid values:
+	//
+	//   - AWS – Amazon Web Services resources.
+	//
+	//   - AZURE – Microsoft Azure resources.
+	//
+	//   - GCP – Google Cloud Platform (GCP) resources.
 	CloudProvider CloudProvider
 
 	// The currency type used when calculating usage data.
@@ -15882,7 +16504,20 @@ type Usage struct {
 	// The total of usage.
 	Total float64
 
-	// The type scan.
+	// The type of scan. Valid values:
+	//
+	//   - Amazon Web Services – EC2_INSTANCE_HOURS , EC2_AGENTLESS_INSTANCE_HOURS ,
+	//   EC2_AMI_HOURS , EC2_AMI_ONE_SHOT_SCAN , ECR_INITIAL_SCAN , ECR_RESCAN ,
+	//   LAMBDA_FUNCTION_HOURS , LAMBDA_FUNCTION_CODE_HOURS , CODE_REPOSITORY_SAST ,
+	//   CODE_REPOSITORY_IAC , or CODE_REPOSITORY_SCA .
+	//
+	//   - Microsoft Azure – AZURE_VM_AGENT_BASED_INSTANCE_HOURS ,
+	//   AZURE_CONTAINER_IMAGE_INITIAL_SCAN , AZURE_CONTAINER_IMAGE_RESCAN , or
+	//   AZURE_SERVERLESS_FUNCTION_HOURS .
+	//
+	//   - Google Cloud Platform (GCP) – GCP_VM_AGENT_BASED_INSTANCE_HOURS ,
+	//   GCP_CONTAINER_IMAGE_INITIAL_SCAN , GCP_CONTAINER_IMAGE_RESCAN , or
+	//   GCP_CLOUD_RUN_HOURS (Cloud Run functions).
 	Type UsageType
 
 	noSmithyDocumentSerde
@@ -16178,6 +16813,8 @@ type VmInstanceAggregation struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProviders []StringFilter
 
 	// The cloud regions to aggregate findings for. The value format depends on the
@@ -16186,6 +16823,9 @@ type VmInstanceAggregation struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegions []StringFilter
 
 	// The instance tags to aggregate findings for.
@@ -16326,6 +16966,8 @@ type VmInstanceAggregationResponse struct {
 	//   - AWS – Findings from Amazon Web Services resources.
 	//
 	//   - AZURE – Findings from Microsoft Azure resources.
+	//
+	//   - GCP – Findings from Google Cloud Platform (GCP) resources.
 	CloudProvider Provider
 
 	// The cloud Region associated with this VM instance aggregation. The value format
@@ -16334,6 +16976,9 @@ type VmInstanceAggregationResponse struct {
 	//   - An Amazon Web Services Region, such as us-east-1 .
 	//
 	//   - An Azure region, such as eastus .
+	//
+	//   - A Google Cloud Platform (GCP) location, such as the region us-central1 or
+	//   the zone us-central1-a .
 	CloudRegion *string
 
 	// The number of active findings with an exploit available for the VM instance.

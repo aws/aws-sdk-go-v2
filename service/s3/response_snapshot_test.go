@@ -110,6 +110,7 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 func TestCheckResponseSnapshot_AbortMultipartUpload(t *testing.T) {
 	want := &AbortMultipartUploadOutput{
 		RequestCharged: types.RequestCharged("requester"),
+		VersionId:      ptr.String("__VersionId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AbortMultipartUpload.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -477,6 +478,7 @@ func TestCheckResponseSnapshot_CreateMultipartUpload(t *testing.T) {
 		RequestCharged:          types.RequestCharged("requester"),
 		ChecksumAlgorithm:       types.ChecksumAlgorithm("CRC32"),
 		ChecksumType:            types.ChecksumType("COMPOSITE"),
+		VersionId:               ptr.String("__VersionId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateMultipartUpload.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3155,6 +3157,7 @@ func TestCheckResponseSnapshot_ListMultipartUploads(t *testing.T) {
 				},
 				ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
 				ChecksumType:      types.ChecksumType("COMPOSITE"),
+				VersionId:         ptr.String("__VersionId__"),
 			},
 			{
 				UploadId:     ptr.String("__UploadId__"),
@@ -3171,6 +3174,7 @@ func TestCheckResponseSnapshot_ListMultipartUploads(t *testing.T) {
 				},
 				ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
 				ChecksumType:      types.ChecksumType("COMPOSITE"),
+				VersionId:         ptr.String("__VersionId__"),
 			},
 		},
 		CommonPrefixes: []types.CommonPrefix{
@@ -3639,6 +3643,7 @@ func TestCheckResponseSnapshot_ListParts(t *testing.T) {
 		RequestCharged:    types.RequestCharged("requester"),
 		ChecksumAlgorithm: types.ChecksumAlgorithm("CRC32"),
 		ChecksumType:      types.ChecksumType("COMPOSITE"),
+		VersionId:         ptr.String("__VersionId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ListParts.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5544,6 +5549,7 @@ func TestCheckResponseSnapshot_UploadPart(t *testing.T) {
 		SSEKMSKeyId:          ptr.String("__SSEKMSKeyId__"),
 		BucketKeyEnabled:     ptr.Bool(true),
 		RequestCharged:       types.RequestCharged("requester"),
+		VersionId:            ptr.String("__VersionId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UploadPart.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5609,6 +5615,7 @@ func TestCheckResponseSnapshot_UploadPartCopy(t *testing.T) {
 		SSEKMSKeyId:          ptr.String("__SSEKMSKeyId__"),
 		BucketKeyEnabled:     ptr.Bool(true),
 		RequestCharged:       types.RequestCharged("requester"),
+		VersionId:            ptr.String("__VersionId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UploadPartCopy.response")
 	if errors.Is(err, fs.ErrNotExist) {

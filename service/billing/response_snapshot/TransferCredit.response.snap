@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.TransferCredit
+
+{"amount":"__Amount__","destinationAccountId":"__DestinationAccountId__","dryRun":true,"newCreditId":"__NewCreditId__","sourceCreditId":"__SourceCreditId__"}

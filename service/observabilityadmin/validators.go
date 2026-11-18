@@ -30,6 +30,26 @@ func (m *validateOpCreateCentralizationRuleForOrganization) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnector struct {
+}
+
+func (*validateOpCreateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDatasetIntegration struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpDeleteCentralizationRuleForOrganization) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCentralizationRuleForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnector struct {
+}
+
+func (*validateOpDeleteConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +310,66 @@ func (m *validateOpGetCentralizationRuleForOrganization) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConnector struct {
+}
+
+func (*validateOpGetConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnectorTelemetryManifest struct {
+}
+
+func (*validateOpGetConnectorTelemetryManifest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnectorTelemetryManifest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectorTelemetryManifestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectorTelemetryManifestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnectorTelemetrySetup struct {
+}
+
+func (*validateOpGetConnectorTelemetrySetup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnectorTelemetrySetup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectorTelemetrySetupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectorTelemetrySetupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDatasetIntegration struct {
 }
 
@@ -370,6 +470,46 @@ func (m *validateOpGetTelemetryRule) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetThirdPartyTelemetryEnrichment struct {
+}
+
+func (*validateOpGetThirdPartyTelemetryEnrichment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetThirdPartyTelemetryEnrichment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetThirdPartyTelemetryEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetThirdPartyTelemetryEnrichmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResourcesByConnector struct {
+}
+
+func (*validateOpListResourcesByConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourcesByConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourcesByConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourcesByConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -385,6 +525,86 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutConnectorTelemetryManifest struct {
+}
+
+func (*validateOpPutConnectorTelemetryManifest) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutConnectorTelemetryManifest) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutConnectorTelemetryManifestInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutConnectorTelemetryManifestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTelemetryPipelineRefresh struct {
+}
+
+func (*validateOpStartTelemetryPipelineRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTelemetryPipelineRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTelemetryPipelineRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTelemetryPipelineRefreshInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartThirdPartyTelemetryEnrichment struct {
+}
+
+func (*validateOpStartThirdPartyTelemetryEnrichment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartThirdPartyTelemetryEnrichment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartThirdPartyTelemetryEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartThirdPartyTelemetryEnrichmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopThirdPartyTelemetryEnrichment struct {
+}
+
+func (*validateOpStopThirdPartyTelemetryEnrichment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopThirdPartyTelemetryEnrichment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopThirdPartyTelemetryEnrichmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopThirdPartyTelemetryEnrichmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -574,6 +794,10 @@ func addOpCreateCentralizationRuleForOrganizationValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpCreateCentralizationRuleForOrganization{}, middleware.After)
 }
 
+func addOpCreateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnector{}, middleware.After)
+}
+
 func addOpCreateDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDatasetIntegration{}, middleware.After)
 }
@@ -596,6 +820,10 @@ func addOpCreateTelemetryRuleValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteCentralizationRuleForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCentralizationRuleForOrganization{}, middleware.After)
+}
+
+func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
 }
 
 func addOpDeleteDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -622,6 +850,18 @@ func addOpGetCentralizationRuleForOrganizationValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpGetCentralizationRuleForOrganization{}, middleware.After)
 }
 
+func addOpGetConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnector{}, middleware.After)
+}
+
+func addOpGetConnectorTelemetryManifestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnectorTelemetryManifest{}, middleware.After)
+}
+
+func addOpGetConnectorTelemetrySetupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnectorTelemetrySetup{}, middleware.After)
+}
+
 func addOpGetDatasetIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDatasetIntegration{}, middleware.After)
 }
@@ -642,8 +882,32 @@ func addOpGetTelemetryRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTelemetryRule{}, middleware.After)
 }
 
+func addOpGetThirdPartyTelemetryEnrichmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetThirdPartyTelemetryEnrichment{}, middleware.After)
+}
+
+func addOpListResourcesByConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourcesByConnector{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutConnectorTelemetryManifestValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutConnectorTelemetryManifest{}, middleware.After)
+}
+
+func addOpStartTelemetryPipelineRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTelemetryPipelineRefresh{}, middleware.After)
+}
+
+func addOpStartThirdPartyTelemetryEnrichmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartThirdPartyTelemetryEnrichment{}, middleware.After)
+}
+
+func addOpStopThirdPartyTelemetryEnrichmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopThirdPartyTelemetryEnrichment{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -733,6 +997,321 @@ func validateAdvancedFieldSelector(v *types.AdvancedFieldSelector) error {
 	}
 }
 
+func validateAzureAwsManagedFlowLogs(v *types.AzureAwsManagedFlowLogs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureAwsManagedFlowLogs"}
+	if v.RetentionDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionDays"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureConnectorConfiguration(v *types.AzureConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureConnectorConfiguration"}
+	if v.TenantIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantIdentifier"))
+	}
+	if v.ClientIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureConnectorQuery(v types.AzureConnectorQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureConnectorQuery"}
+	switch uv := v.(type) {
+	case *types.AzureConnectorQueryMemberResourceIds:
+		if err := validateAzureResourceIdsQuery(&uv.Value); err != nil {
+			invalidParams.AddNested("[ResourceIds]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureCustomerManagedFlowLogs(v *types.AzureCustomerManagedFlowLogs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureCustomerManagedFlowLogs"}
+	if v.StorageAccounts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageAccounts"))
+	} else if v.StorageAccounts != nil {
+		if err := validateAzureFlowLogStorageAccountScopeList(v.StorageAccounts); err != nil {
+			invalidParams.AddNested("StorageAccounts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureEventHubConfiguration(v *types.AzureEventHubConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureEventHubConfiguration"}
+	if len(v.Tier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
+	}
+	if v.PartitionCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureEventHubConfigurationList(v []types.AzureEventHubConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureEventHubConfigurationList"}
+	for i := range v {
+		if err := validateAzureEventHubConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureFlowLogsInfrastructure(v types.AzureFlowLogsInfrastructure) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureFlowLogsInfrastructure"}
+	switch uv := v.(type) {
+	case *types.AzureFlowLogsInfrastructureMemberAwsManaged:
+		if err := validateAzureAwsManagedFlowLogs(&uv.Value); err != nil {
+			invalidParams.AddNested("[AwsManaged]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AzureFlowLogsInfrastructureMemberCustomerManaged:
+		if err := validateAzureCustomerManagedFlowLogs(&uv.Value); err != nil {
+			invalidParams.AddNested("[CustomerManaged]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureFlowLogStorageAccountScope(v *types.AzureFlowLogStorageAccountScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureFlowLogStorageAccountScope"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.StorageAccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageAccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureFlowLogStorageAccountScopeList(v []types.AzureFlowLogStorageAccountScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureFlowLogStorageAccountScopeList"}
+	for i := range v {
+		if err := validateAzureFlowLogStorageAccountScope(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureInfrastructure(v *types.AzureInfrastructure) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureInfrastructure"}
+	if v.EventHubs != nil {
+		if err := validateAzureEventHubConfigurationList(v.EventHubs); err != nil {
+			invalidParams.AddNested("EventHubs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FlowLogs != nil {
+		if err := validateAzureFlowLogsInfrastructure(v.FlowLogs); err != nil {
+			invalidParams.AddNested("FlowLogs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureResourceIdScope(v *types.AzureResourceIdScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureResourceIdScope"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.ResourceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureResourceIdScopeList(v []types.AzureResourceIdScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureResourceIdScopeList"}
+	for i := range v {
+		if err := validateAzureResourceIdScope(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureResourceIdsQuery(v *types.AzureResourceIdsQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureResourceIdsQuery"}
+	if v.TagFilters != nil {
+		if err := validateTagFilterList(v.TagFilters); err != nil {
+			invalidParams.AddNested("TagFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureScope(v *types.AzureScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureScope"}
+	if v.TagFilters != nil {
+		if err := validateTagFilterList(v.TagFilters); err != nil {
+			invalidParams.AddNested("TagFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Resources != nil {
+		if err := validateAzureResourceIdScopeList(v.Resources); err != nil {
+			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureScopeItem(v *types.AzureScopeItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureScopeItem"}
+	if v.TelemetryTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TelemetryTypes"))
+	}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	} else if v.Scope != nil {
+		if err := validateAzureScope(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureSources(v []types.AzureScopeItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureSources"}
+	for i := range v {
+		if err := validateAzureScopeItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureTelemetrySourceConfigurationInput(v *types.AzureTelemetrySourceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureTelemetrySourceConfigurationInput"}
+	if v.AwsConfigConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsConfigConnectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCentralizationRule(v *types.CentralizationRule) error {
 	if v == nil {
 		return nil
@@ -775,6 +1354,11 @@ func validateCentralizationRuleDestination(v *types.CentralizationRuleDestinatio
 	if v.DestinationMetricsConfiguration != nil {
 		if err := validateDestinationMetricsConfiguration(v.DestinationMetricsConfiguration); err != nil {
 			invalidParams.AddNested("DestinationMetricsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationProfilesConfiguration != nil {
+		if err := validateDestinationProfilesConfiguration(v.DestinationProfilesConfiguration); err != nil {
+			invalidParams.AddNested("DestinationProfilesConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -823,6 +1407,44 @@ func validateCloudtrailParameters(v *types.CloudtrailParameters) error {
 	}
 }
 
+func validateConnectorConfiguration(v types.ConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorConfiguration"}
+	switch uv := v.(type) {
+	case *types.ConnectorConfigurationMemberAzure:
+		if err := validateAzureConnectorConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorQuery(v types.ConnectorQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorQuery"}
+	switch uv := v.(type) {
+	case *types.ConnectorQueryMemberAzure:
+		if err := validateAzureConnectorQuery(uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDestinationLogsConfiguration(v *types.DestinationLogsConfiguration) error {
 	if v == nil {
 		return nil
@@ -862,6 +1484,23 @@ func validateDestinationMetricsConfiguration(v *types.DestinationMetricsConfigur
 	invalidParams := smithy.InvalidParamsError{Context: "DestinationMetricsConfiguration"}
 	if v.BackupConfiguration != nil {
 		if err := validateMetricsBackupConfiguration(v.BackupConfiguration); err != nil {
+			invalidParams.AddNested("BackupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationProfilesConfiguration(v *types.DestinationProfilesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationProfilesConfiguration"}
+	if v.BackupConfiguration != nil {
+		if err := validateProfilesBackupConfiguration(v.BackupConfiguration); err != nil {
 			invalidParams.AddNested("BackupConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -964,6 +1603,21 @@ func validateMetricsBackupConfiguration(v *types.MetricsBackupConfiguration) err
 	}
 }
 
+func validateProfilesBackupConfiguration(v *types.ProfilesBackupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfilesBackupConfiguration"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceLogsConfiguration(v *types.SourceLogsConfiguration) error {
 	if v == nil {
 		return nil
@@ -971,6 +1625,41 @@ func validateSourceLogsConfiguration(v *types.SourceLogsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SourceLogsConfiguration"}
 	if len(v.EncryptedLogGroupStrategy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptedLogGroupStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagFilter(v *types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagFilter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagFilterList(v []types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagFilterList"}
+	for i := range v {
+		if err := validateTagFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1003,6 +1692,68 @@ func validateTelemetryDestinationConfiguration(v *types.TelemetryDestinationConf
 		if err := validateCloudtrailParameters(v.CloudtrailParameters); err != nil {
 			invalidParams.AddNested("CloudtrailParameters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelemetryManifest(v *types.TelemetryManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetryManifest"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateTelemetryManifestSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Infrastructure != nil {
+		if err := validateTelemetryManifestInfrastructure(v.Infrastructure); err != nil {
+			invalidParams.AddNested("Infrastructure", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelemetryManifestInfrastructure(v types.TelemetryManifestInfrastructure) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetryManifestInfrastructure"}
+	switch uv := v.(type) {
+	case *types.TelemetryManifestInfrastructureMemberAzure:
+		if err := validateAzureInfrastructure(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelemetryManifestSource(v types.TelemetryManifestSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetryManifestSource"}
+	switch uv := v.(type) {
+	case *types.TelemetryManifestSourceMemberAzure:
+		if err := validateAzureSources(uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1046,6 +1797,25 @@ func validateTelemetryRule(v *types.TelemetryRule) error {
 	}
 }
 
+func validateTelemetrySourceConfigurationInput(v types.TelemetrySourceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelemetrySourceConfigurationInput"}
+	switch uv := v.(type) {
+	case *types.TelemetrySourceConfigurationInputMemberAzure:
+		if err := validateAzureTelemetrySourceConfigurationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCentralizationRuleForOrganizationInput(v *CreateCentralizationRuleForOrganizationInput) error {
 	if v == nil {
 		return nil
@@ -1060,6 +1830,31 @@ func validateOpCreateCentralizationRuleForOrganizationInput(v *CreateCentralizat
 		if err := validateCentralizationRule(v.Rule); err != nil {
 			invalidParams.AddNested("Rule", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
+	if v.ConnectorConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorConfiguration"))
+	} else if v.ConnectorConfiguration != nil {
+		if err := validateConnectorConfiguration(v.ConnectorConfiguration); err != nil {
+			invalidParams.AddNested("ConnectorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1186,6 +1981,21 @@ func validateOpDeleteCentralizationRuleForOrganizationInput(v *DeleteCentralizat
 	}
 }
 
+func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
+	if v.ConnectorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDatasetIntegrationInput(v *DeleteDatasetIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -1276,6 +2086,51 @@ func validateOpGetCentralizationRuleForOrganizationInput(v *GetCentralizationRul
 	}
 }
 
+func validateOpGetConnectorInput(v *GetConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectorInput"}
+	if v.ConnectorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectorTelemetryManifestInput(v *GetConnectorTelemetryManifestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectorTelemetryManifestInput"}
+	if v.ConnectorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectorTelemetrySetupInput(v *GetConnectorTelemetrySetupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectorTelemetrySetupInput"}
+	if v.ConnectorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDatasetIntegrationInput(v *GetDatasetIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -1351,6 +2206,43 @@ func validateOpGetTelemetryRuleInput(v *GetTelemetryRuleInput) error {
 	}
 }
 
+func validateOpGetThirdPartyTelemetryEnrichmentInput(v *GetThirdPartyTelemetryEnrichmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetThirdPartyTelemetryEnrichmentInput"}
+	if v.TelemetryEnrichmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TelemetryEnrichmentIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourcesByConnectorInput(v *ListResourcesByConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourcesByConnectorInput"}
+	if v.ConnectorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorIdentifier"))
+	}
+	if v.Selector == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Selector"))
+	} else if v.Selector != nil {
+		if err := validateConnectorQuery(v.Selector); err != nil {
+			invalidParams.AddNested("Selector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1358,6 +2250,80 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutConnectorTelemetryManifestInput(v *PutConnectorTelemetryManifestInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutConnectorTelemetryManifestInput"}
+	if v.ConnectorIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorIdentifier"))
+	}
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	} else if v.Manifest != nil {
+		if err := validateTelemetryManifest(v.Manifest); err != nil {
+			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTelemetryPipelineRefreshInput(v *StartTelemetryPipelineRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTelemetryPipelineRefreshInput"}
+	if v.PipelineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartThirdPartyTelemetryEnrichmentInput(v *StartThirdPartyTelemetryEnrichmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartThirdPartyTelemetryEnrichmentInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TelemetrySourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TelemetrySourceConfiguration"))
+	} else if v.TelemetrySourceConfiguration != nil {
+		if err := validateTelemetrySourceConfigurationInput(v.TelemetrySourceConfiguration); err != nil {
+			invalidParams.AddNested("TelemetrySourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopThirdPartyTelemetryEnrichmentInput(v *StopThirdPartyTelemetryEnrichmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopThirdPartyTelemetryEnrichmentInput"}
+	if v.TelemetryEnrichmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TelemetryEnrichmentIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,5 @@
+POST /2025-12-01/durable-executions/__DurableExecutionArn__/pause
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ExecutionTimeoutPaused":true,"Reason":"__Reason__"}

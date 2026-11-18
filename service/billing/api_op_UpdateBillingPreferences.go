@@ -15,11 +15,11 @@ import (
 // sets the value for each provided key; keys not present in the request are
 // unchanged.
 //
-// Sharing keys ( RI_SHARING , CREDIT_SHARING , CREDIT_LEVEL_SHARING , and sharing
-// keys under CREDIT_PREFERENCE_OPTIONS ) may only be set by the management account
-// of a consolidated billing family. The credit/{creditId}/status key may be set
-// by member accounts for credits they own, or by the management account for any
-// credit in the family.
+// To set sharing keys ( RI_SHARING , CREDIT_SHARING , CREDIT_LEVEL_SHARING ,
+// BENEFIT_LEVEL_SHARING , and sharing keys under CREDIT_PREFERENCE_OPTIONS ), you
+// must use the management account of a consolidated billing family. To set the
+// credit/{creditId}/status key, you must own the credit or use the management
+// account of its family.
 func (c *Client) UpdateBillingPreferences(ctx context.Context, params *UpdateBillingPreferencesInput, optFns ...func(*Options)) (*UpdateBillingPreferencesOutput, error) {
 	if params == nil {
 		params = &UpdateBillingPreferencesInput{}
@@ -41,13 +41,50 @@ type UpdateBillingPreferencesInput struct {
 	// specified feature and must not be duplicated. For CREDIT_PREFERENCE_OPTIONS ,
 	// all keys must reference the same creditId .
 	//
+	// For BENEFIT_LEVEL_SHARING , all keys must reference the same Reserved Instance
+	// or Savings Plan. To share it with the accounts in one Cost Category rule, send
+	// these three keys with the value ENABLED :
+	//
+	//   - benefit/{ri|sp}/{benefitId}/sharing/costCategoryArn/{costCategoryArn}
+	//
+	//   - benefit/{ri|sp}/{benefitId}/sharing/ruleName/{ruleName}
+	//
+	//   - benefit/{ri|sp}/{benefitId}/sharing/mode/{prioritized|restricted}
+	//
+	// With prioritized , any benefit that the rule's accounts don't use goes to the
+	// rest of your consolidated billing family, following your family sharing
+	// settings. With restricted , only the owner and the rule's accounts receive it.
+	// The Cost Category must belong to your account. To stop sharing, send the same
+	// three keys with the value DISABLED .
+	//
+	// For RI_SHARING and CREDIT_SHARING , you can share benefits by account group.
+	// Each rule in a Cost Category is one group. Send exactly one of these group keys
+	// with the value ENABLED :
+	//
+	//   - open-sharing - Share across the whole consolidated billing family, with no
+	//   groups.
+	//
+	//   - costcategory-prioritized/{costCategoryArn} - Share within each group first,
+	//   then with the rest of the family.
+	//
+	//   - costcategory-restricted/{costCategoryArn} - An account in a group shares
+	//   only with accounts in the same group.
+	//
+	// For RI_SHARING , the costcategory- keys use a Cost Category that supports the
+	// billing:rispgroupsharing resource type. To use a Cost Category that supports the
+	// billing:benefitgroupsharing resource type, use the benefitgroup-prioritized/ or
+	// benefitgroup-restricted/ prefix instead. For CREDIT_SHARING , the Cost Category
+	// must support the billing:benefitgroupsharing resource type. The Cost Category
+	// must belong to your account. GetBillingPreferences returns the group key that
+	// is in effect.
+	//
 	// This member is required.
 	BillingPreferencesPerKey []types.BillingPreferenceForKey
 
 	// The feature to update. Valid values: BILLING_ALERTS , RI_SHARING ,
-	// CREDIT_SHARING , CREDIT_LEVEL_SHARING , CREDIT_PREFERENCE_OPTIONS . The history
-	// features ( RI_SHARING_HISTORY and CREDIT_SHARING_HISTORY ) are read-only and
-	// cannot be updated.
+	// CREDIT_SHARING , CREDIT_LEVEL_SHARING , CREDIT_PREFERENCE_OPTIONS ,
+	// BENEFIT_LEVEL_SHARING . The history features ( RI_SHARING_HISTORY and
+	// CREDIT_SHARING_HISTORY ) are read-only and cannot be updated.
 	//
 	// This member is required.
 	Feature types.BillingFeature

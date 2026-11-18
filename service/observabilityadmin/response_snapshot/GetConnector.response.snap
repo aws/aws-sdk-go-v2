@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Connector":{"Arn":"__Arn__","ConnectorConfiguration":{"Azure":{"ClientIdentifier":"__ClientIdentifier__","TenantIdentifier":"__TenantIdentifier__"}},"CreatedTimeStamp":1,"Name":"__Name__","Provider":"AZURE","RoleArn":"__RoleArn__"}}

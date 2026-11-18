@@ -11075,6 +11075,11 @@ func validateEvaluationFormSection(v *types.EvaluationFormSection) error {
 			invalidParams.AddNested("ScoreThresholds", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Enablement != nil {
+		if err := validateEvaluationFormItemEnablementConfiguration(v.Enablement); err != nil {
+			invalidParams.AddNested("Enablement", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11110,6 +11115,11 @@ func validateEvaluationFormSingleSelectQuestionAutomationOption(v types.Evaluati
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluationFormSingleSelectQuestionAutomationOption"}
 	switch uv := v.(type) {
+	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberAutomationRule:
+		if err := validateSingleSelectQuestionAutomationRule(&uv.Value); err != nil {
+			invalidParams.AddNested("[AutomationRule]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.EvaluationFormSingleSelectQuestionAutomationOptionMemberRuleCategory:
 		if err := validateSingleSelectQuestionRuleCategoryAutomation(&uv.Value); err != nil {
 			invalidParams.AddNested("[RuleCategory]", err.(smithy.InvalidParamsError))
@@ -13222,6 +13232,28 @@ func validateSignInDistributionList(v []types.SignInDistribution) error {
 		if err := validateSignInDistribution(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSingleSelectQuestionAutomationRule(v *types.SingleSelectQuestionAutomationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleSelectQuestionAutomationRule"}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	} else if v.Condition != nil {
+		if err := validateEvaluationFormItemEnablementCondition(v.Condition); err != nil {
+			invalidParams.AddNested("Condition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OptionRefId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OptionRefId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -193,6 +193,47 @@ func serdeBodyEqual(got, expected []byte) bool {
 	}
 	return reflect.DeepEqual(gv, ev)
 }
+func TestCheckRequestSnapshot_AcceptAgreementApproval(t *testing.T) {
+	input := &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AcceptAgreementApproval(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcceptAgreementApproval"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AcceptAgreementCancellationRequest(t *testing.T) {
 	input := &AcceptAgreementCancellationRequestInput{
 		AgreementId:                    ptr.String("__AgreementId__"),
@@ -421,6 +462,33 @@ func TestCheckRequestSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelAgreementRequest(t *testing.T) {
+	input := &CancelAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelAgreementRequest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelAgreementRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateAgreementRequest(t *testing.T) {
 	input := &CreateAgreementRequestInput{
 		ClientToken: ptr.String("__ClientToken__"),
@@ -467,6 +535,13 @@ func TestCheckRequestSnapshot_CreateAgreementRequest(t *testing.T) {
 		AgreementProposalIdentifier: ptr.String("__AgreementProposalIdentifier__"),
 		TaxConfiguration: &types.TaxConfiguration{
 			TaxEstimation: types.TaxEstimation("DISABLED"),
+		},
+		AcceptorContact: &types.AcceptorContact{
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+			EmailAddress: ptr.String("__EmailAddress__"),
+			CompanyName:  ptr.String("__CompanyName__"),
+			CountryCode:  ptr.String("__CountryCode__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -519,6 +594,33 @@ func TestCheckRequestSnapshot_DescribeAgreement(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetAgreementApproval(t *testing.T) {
+	input := &GetAgreementApprovalInput{
+		AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementApproval(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementApproval"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 	input := &GetAgreementCancellationRequestInput{
 		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
@@ -543,6 +645,33 @@ func TestCheckRequestSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementCancellationRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgreementContacts(t *testing.T) {
+	input := &GetAgreementContactsInput{
+		AgreementId: ptr.String("__AgreementId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementContacts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementContacts"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -604,6 +733,91 @@ func TestCheckRequestSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetAgreementRequest(t *testing.T) {
+	input := &GetAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementRequest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgreementRequestApprovalPlans(t *testing.T) {
+	input := &GetAgreementRequestApprovalPlansInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementRequestApprovalPlans(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementRequestApprovalPlans"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAgreementRequestTerms(t *testing.T) {
+	input := &GetAgreementRequestTermsInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementRequestTerms(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementRequestTerms"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetAgreementTerms(t *testing.T) {
 	input := &GetAgreementTermsInput{
 		AgreementId: ptr.String("__AgreementId__"),
@@ -657,6 +871,39 @@ func TestCheckRequestSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBillingAdjustmentRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAgreementApprovals(t *testing.T) {
+	input := &ListAgreementApprovalsInput{
+		Catalog:            ptr.String("__Catalog__"),
+		PartyType:          types.AgreementApprovalPartyType("REQUESTER"),
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		ApprovalType:       types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+		Status:             types.AgreementApprovalStatus("PENDING_APPROVAL"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgreementApprovals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgreementApprovals"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -796,6 +1043,37 @@ func TestCheckRequestSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListAgreementRequests(t *testing.T) {
+	input := &ListAgreementRequestsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Status:     types.AgreementRequestStatus("DRAFT"),
+		ResourceId: ptr.String("__ResourceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgreementRequests(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgreementRequests"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 	input := &ListBillingAdjustmentRequestsInput{
 		AgreementId:   ptr.String("__AgreementId__"),
@@ -826,6 +1104,37 @@ func TestCheckRequestSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBillingAdjustmentRequests"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RejectAgreementApproval(t *testing.T) {
+	input := &RejectAgreementApprovalInput{
+		BuyerAgreementApprovalRejectionInput: &types.BuyerAgreementApprovalRejectionInput{
+			AgreementApprovalId:         ptr.String("__AgreementApprovalId__"),
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RejectAgreementApproval(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RejectAgreementApproval"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -999,6 +1308,57 @@ func TestCheckRequestSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartAgreementApprovals(t *testing.T) {
+	input := &StartAgreementApprovalsInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		PlanInputs: []types.AgreementApprovalPlanInput{
+			&types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{
+				Value: types.BuyerAgreementApprovalPlanInput{
+					PlanReference: ptr.String("__PlanReference__"),
+					RequesterNote: ptr.String("__RequesterNote__"),
+				},
+			},
+			&types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{
+				Value: types.BuyerAgreementApprovalPlanInput{
+					PlanReference: ptr.String("__PlanReference__"),
+					RequesterNote: ptr.String("__RequesterNote__"),
+				},
+			},
+		},
+		PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAgreementApprovals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAgreementApprovals"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdatePurchaseOrders(t *testing.T) {
 	input := &UpdatePurchaseOrdersInput{
 		PurchaseOrders: []types.PurchaseOrder{
@@ -1038,6 +1398,47 @@ func TestCheckRequestSnapshot_UpdatePurchaseOrders(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_AcceptAgreementApproval(t *testing.T) {
+	input := &AcceptAgreementApprovalInput{
+		BuyerAgreementApprovalApproverInput: &types.BuyerAgreementApprovalApproverInput{
+			AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+			PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+				{
+					ChargeId:               ptr.String("__ChargeId__"),
+					PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+				},
+			},
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AcceptAgreementApproval(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcceptAgreementApproval"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AcceptAgreementCancellationRequest(t *testing.T) {
 	input := &AcceptAgreementCancellationRequestInput{
 		AgreementId:                    ptr.String("__AgreementId__"),
@@ -1266,6 +1667,33 @@ func TestUpdateRequestSnapshot_CancelAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelAgreementRequest(t *testing.T) {
+	input := &CancelAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelAgreementRequest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelAgreementRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateAgreementRequest(t *testing.T) {
 	input := &CreateAgreementRequestInput{
 		ClientToken: ptr.String("__ClientToken__"),
@@ -1312,6 +1740,13 @@ func TestUpdateRequestSnapshot_CreateAgreementRequest(t *testing.T) {
 		AgreementProposalIdentifier: ptr.String("__AgreementProposalIdentifier__"),
 		TaxConfiguration: &types.TaxConfiguration{
 			TaxEstimation: types.TaxEstimation("DISABLED"),
+		},
+		AcceptorContact: &types.AcceptorContact{
+			FirstName:    ptr.String("__FirstName__"),
+			LastName:     ptr.String("__LastName__"),
+			EmailAddress: ptr.String("__EmailAddress__"),
+			CompanyName:  ptr.String("__CompanyName__"),
+			CountryCode:  ptr.String("__CountryCode__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1364,6 +1799,33 @@ func TestUpdateRequestSnapshot_DescribeAgreement(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAgreementApproval(t *testing.T) {
+	input := &GetAgreementApprovalInput{
+		AgreementApprovalId: ptr.String("__AgreementApprovalId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementApproval(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementApproval"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 	input := &GetAgreementCancellationRequestInput{
 		AgreementCancellationRequestId: ptr.String("__AgreementCancellationRequestId__"),
@@ -1388,6 +1850,33 @@ func TestUpdateRequestSnapshot_GetAgreementCancellationRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementCancellationRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgreementContacts(t *testing.T) {
+	input := &GetAgreementContactsInput{
+		AgreementId: ptr.String("__AgreementId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementContacts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementContacts"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1449,6 +1938,91 @@ func TestUpdateRequestSnapshot_GetAgreementPaymentRequest(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAgreementRequest(t *testing.T) {
+	input := &GetAgreementRequestInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementRequest(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgreementRequestApprovalPlans(t *testing.T) {
+	input := &GetAgreementRequestApprovalPlansInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementRequestApprovalPlans(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementRequestApprovalPlans"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAgreementRequestTerms(t *testing.T) {
+	input := &GetAgreementRequestTermsInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgreementRequestTerms(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgreementRequestTerms"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetAgreementTerms(t *testing.T) {
 	input := &GetAgreementTermsInput{
 		AgreementId: ptr.String("__AgreementId__"),
@@ -1502,6 +2076,39 @@ func TestUpdateRequestSnapshot_GetBillingAdjustmentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBillingAdjustmentRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAgreementApprovals(t *testing.T) {
+	input := &ListAgreementApprovalsInput{
+		Catalog:            ptr.String("__Catalog__"),
+		PartyType:          types.AgreementApprovalPartyType("REQUESTER"),
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		ApprovalType:       types.AgreementApprovalType("BUYER_AGREEMENT_APPROVAL"),
+		Status:             types.AgreementApprovalStatus("PENDING_APPROVAL"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgreementApprovals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgreementApprovals"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1641,6 +2248,37 @@ func TestUpdateRequestSnapshot_ListAgreementPaymentRequests(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListAgreementRequests(t *testing.T) {
+	input := &ListAgreementRequestsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Status:     types.AgreementRequestStatus("DRAFT"),
+		ResourceId: ptr.String("__ResourceId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgreementRequests(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgreementRequests"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 	input := &ListBillingAdjustmentRequestsInput{
 		AgreementId:   ptr.String("__AgreementId__"),
@@ -1671,6 +2309,37 @@ func TestUpdateRequestSnapshot_ListBillingAdjustmentRequests(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBillingAdjustmentRequests"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RejectAgreementApproval(t *testing.T) {
+	input := &RejectAgreementApprovalInput{
+		BuyerAgreementApprovalRejectionInput: &types.BuyerAgreementApprovalRejectionInput{
+			AgreementApprovalId:         ptr.String("__AgreementApprovalId__"),
+			Note:                        ptr.String("__Note__"),
+			ApproverOutcomeIdToOverride: ptr.String("__ApproverOutcomeIdToOverride__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RejectAgreementApproval(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RejectAgreementApproval"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1840,6 +2509,57 @@ func TestUpdateRequestSnapshot_SendAgreementPaymentRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SendAgreementPaymentRequest"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartAgreementApprovals(t *testing.T) {
+	input := &StartAgreementApprovalsInput{
+		AgreementRequestId: ptr.String("__AgreementRequestId__"),
+		PlanInputs: []types.AgreementApprovalPlanInput{
+			&types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{
+				Value: types.BuyerAgreementApprovalPlanInput{
+					PlanReference: ptr.String("__PlanReference__"),
+					RequesterNote: ptr.String("__RequesterNote__"),
+				},
+			},
+			&types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput{
+				Value: types.BuyerAgreementApprovalPlanInput{
+					PlanReference: ptr.String("__PlanReference__"),
+					RequesterNote: ptr.String("__RequesterNote__"),
+				},
+			},
+		},
+		PurchaseOrders: []types.AgreementApprovalPurchaseOrder{
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+			{
+				ChargeId:               ptr.String("__ChargeId__"),
+				PurchaseOrderReference: ptr.String("__PurchaseOrderReference__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAgreementApprovals(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAgreementApprovals"); err != nil {
 		t.Fatal(err)
 	}
 }

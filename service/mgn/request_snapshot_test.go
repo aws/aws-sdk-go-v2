@@ -483,6 +483,7 @@ func TestCheckRequestSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -559,6 +560,7 @@ func TestCheckRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -611,6 +613,41 @@ func TestCheckRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateRemoteSourceAction(t *testing.T) {
+	input := &CreateRemoteSourceActionInput{
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		SsmParameterName: ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:   ptr.Int32(1),
+		OperatingSystem:  ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccountID: ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRemoteSourceAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRemoteSourceAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	input := &CreateReplicationConfigurationTemplateInput{
 		StagingAreaSubnetId:           ptr.String("__StagingAreaSubnetId__"),
@@ -636,6 +673,7 @@ func TestCheckRequestSnapshot_CreateReplicationConfigurationTemplate(t *testing.
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -832,6 +870,34 @@ func TestCheckRequestSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkMigrationDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteRemoteSourceAction(t *testing.T) {
+	input := &DeleteRemoteSourceActionInput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		AccountID:            ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRemoteSourceAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRemoteSourceAction"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1297,6 +1363,34 @@ func TestCheckRequestSnapshot_GetLaunchConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetLaunchConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetLaunchConfigurationDefaults(t *testing.T) {
+	input := &GetLaunchConfigurationDefaultsInput{
+		SourceServerID: ptr.String("__SourceServerID__"),
+		AccountID:      ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetLaunchConfigurationDefaults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetLaunchConfigurationDefaults"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1956,6 +2050,45 @@ func TestCheckRequestSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListNetworkMigrationInsights(t *testing.T) {
+	input := &ListNetworkMigrationInsightsInput{
+		NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+		NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+		ProducerID:                   ptr.String("__ProducerID__"),
+		SegmentID:                    ptr.String("__SegmentID__"),
+		ConstructID:                  ptr.String("__ConstructID__"),
+		Filters: &types.ListNetworkMigrationInsightsFilters{
+			InsightTypes: []types.InsightType{
+				types.InsightType("INTENT_GAP"),
+				types.InsightType("INTENT_GAP"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListNetworkMigrationInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListNetworkMigrationInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
 	input := &ListNetworkMigrationMapperSegmentConstructsInput{
 		NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
@@ -1971,8 +2104,10 @@ func TestCheckRequestSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *tes
 				"__Member__",
 			},
 		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		IncludeEnrichedProperties: ptr.Bool(true),
+		IncludeConfiguration:      ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2101,6 +2236,150 @@ func TestCheckRequestSnapshot_ListNetworkMigrationMappingUpdates(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListNetworkMigrationMappingUpdates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRemoteSourceActionInvocationResults(t *testing.T) {
+	input := &ListRemoteSourceActionInvocationResultsInput{
+		SourceServerID: ptr.String("__SourceServerID__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		AccountID:      ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActionInvocationResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActionInvocationResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRemoteSourceActionInvocations(t *testing.T) {
+	input := &ListRemoteSourceActionInvocationsInput{
+		RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+		Filters: &types.ListRemoteSourceActionInvocationsRequestFilters{
+			SourceServerArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoteSourceActionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.RemoteSourceActionInvocationStatus{
+				types.RemoteSourceActionInvocationStatus("PENDING"),
+				types.RemoteSourceActionInvocationStatus("PENDING"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActionInvocations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActionInvocations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRemoteSourceActionJobs(t *testing.T) {
+	input := &ListRemoteSourceActionJobsInput{
+		Filters: &types.ListRemoteSourceActionJobsRequestFilters{
+			RemoteSourceActionJobIDs: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActionJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActionJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListRemoteSourceActions(t *testing.T) {
+	input := &ListRemoteSourceActionsInput{
+		Filters: &types.ListRemoteSourceActionsRequestFilters{
+			RemoteSourceActionIDs: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2780,9 +3059,11 @@ func TestCheckRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
 		NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
 		Constructs: []types.StartNetworkMigrationMappingUpdateConstruct{
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
-				ConstructID:   ptr.String("__ConstructID__"),
-				ConstructType: ptr.String("__ConstructType__"),
+				SegmentID:          ptr.String("__SegmentID__"),
+				SegmentLogicalID:   ptr.String("__SegmentLogicalID__"),
+				ConstructID:        ptr.String("__ConstructID__"),
+				ConstructType:      ptr.String("__ConstructType__"),
+				ConstructLogicalID: ptr.String("__ConstructLogicalID__"),
 				Operation: &types.OperationUnionMemberMerge{
 					Value: types.MergeOperation{
 						MergeConstructs: []types.MergeConstruct{
@@ -2799,9 +3080,11 @@ func TestCheckRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
 				},
 			},
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
-				ConstructID:   ptr.String("__ConstructID__"),
-				ConstructType: ptr.String("__ConstructType__"),
+				SegmentID:          ptr.String("__SegmentID__"),
+				SegmentLogicalID:   ptr.String("__SegmentLogicalID__"),
+				ConstructID:        ptr.String("__ConstructID__"),
+				ConstructType:      ptr.String("__ConstructType__"),
+				ConstructLogicalID: ptr.String("__ConstructLogicalID__"),
 				Operation: &types.OperationUnionMemberMerge{
 					Value: types.MergeOperation{
 						MergeConstructs: []types.MergeConstruct{
@@ -2820,14 +3103,36 @@ func TestCheckRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
 		},
 		Segments: []types.StartNetworkMigrationMappingUpdateSegment{
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
+				SegmentID:        ptr.String("__SegmentID__"),
+				SegmentLogicalID: ptr.String("__SegmentLogicalID__"),
+				Operation: &types.SegmentOperationMemberCreate{
+					Value: types.SegmentCreateOperation{
+						Name:          ptr.String("__Name__"),
+						Description:   ptr.String("__Description__"),
+						TargetAccount: ptr.String("__TargetAccount__"),
+						ScopeTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 				TargetAccount: ptr.String("__TargetAccount__"),
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
 			},
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
+				SegmentID:        ptr.String("__SegmentID__"),
+				SegmentLogicalID: ptr.String("__SegmentLogicalID__"),
+				Operation: &types.SegmentOperationMemberCreate{
+					Value: types.SegmentCreateOperation{
+						Name:          ptr.String("__Name__"),
+						Description:   ptr.String("__Description__"),
+						TargetAccount: ptr.String("__TargetAccount__"),
+						ScopeTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 				TargetAccount: ptr.String("__TargetAccount__"),
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
@@ -2854,6 +3159,46 @@ func TestCheckRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartNetworkMigrationMappingUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartRemoteSourceActionJob(t *testing.T) {
+	input := &StartRemoteSourceActionJobInput{
+		RemoteSourceActionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		SourceServerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccountID: ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartRemoteSourceActionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartRemoteSourceActionJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3231,6 +3576,7 @@ func TestCheckRequestSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		AccountID:            ptr.String("__AccountID__"),
 	}
 	body := &bytes.Buffer{}
@@ -3252,6 +3598,49 @@ func TestCheckRequestSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLaunchConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateLaunchConfigurationDefaults(t *testing.T) {
+	input := &UpdateLaunchConfigurationDefaultsInput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		AccountID:          ptr.String("__AccountID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLaunchConfigurationDefaults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLaunchConfigurationDefaults"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3315,6 +3704,7 @@ func TestCheckRequestSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging:                ptr.Bool(true),
 		MapAutoTaggingMpeID:                 ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:                   ptr.String("__MapAutoTaggingKey__"),
 		LaunchDisposition:                   types.LaunchDisposition("STOPPED"),
 		TargetInstanceTypeRightSizingMethod: types.TargetInstanceTypeRightSizingMethod("NONE"),
 		CopyPrivateIp:                       ptr.Bool(true),
@@ -3413,6 +3803,7 @@ func TestCheckRequestSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 		ScopeTags: map[string]string{
 			"key0": "__Value__",
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3469,6 +3860,39 @@ func TestCheckRequestSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T) 
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateRemoteSourceAction(t *testing.T) {
+	input := &UpdateRemoteSourceActionInput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		AccountID:            ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRemoteSourceAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRemoteSourceAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	input := &UpdateReplicationConfigurationInput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -3510,6 +3934,7 @@ func TestCheckRequestSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 		AccountID:                ptr.String("__AccountID__"),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -3565,6 +3990,7 @@ func TestCheckRequestSnapshot_UpdateReplicationConfigurationTemplate(t *testing.
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -3967,6 +4393,7 @@ func TestUpdateRequestSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -4043,6 +4470,7 @@ func TestUpdateRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -4095,6 +4523,41 @@ func TestUpdateRequestSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateRemoteSourceAction(t *testing.T) {
+	input := &CreateRemoteSourceActionInput{
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		SsmParameterName: ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:   ptr.Int32(1),
+		OperatingSystem:  ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccountID: ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateRemoteSourceAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateRemoteSourceAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	input := &CreateReplicationConfigurationTemplateInput{
 		StagingAreaSubnetId:           ptr.String("__StagingAreaSubnetId__"),
@@ -4120,6 +4583,7 @@ func TestUpdateRequestSnapshot_CreateReplicationConfigurationTemplate(t *testing
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -4316,6 +4780,34 @@ func TestUpdateRequestSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteNetworkMigrationDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteRemoteSourceAction(t *testing.T) {
+	input := &DeleteRemoteSourceActionInput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		AccountID:            ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteRemoteSourceAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteRemoteSourceAction"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4781,6 +5273,34 @@ func TestUpdateRequestSnapshot_GetLaunchConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetLaunchConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetLaunchConfigurationDefaults(t *testing.T) {
+	input := &GetLaunchConfigurationDefaultsInput{
+		SourceServerID: ptr.String("__SourceServerID__"),
+		AccountID:      ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetLaunchConfigurationDefaults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetLaunchConfigurationDefaults"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5440,6 +5960,45 @@ func TestUpdateRequestSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListNetworkMigrationInsights(t *testing.T) {
+	input := &ListNetworkMigrationInsightsInput{
+		NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+		NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+		ProducerID:                   ptr.String("__ProducerID__"),
+		SegmentID:                    ptr.String("__SegmentID__"),
+		ConstructID:                  ptr.String("__ConstructID__"),
+		Filters: &types.ListNetworkMigrationInsightsFilters{
+			InsightTypes: []types.InsightType{
+				types.InsightType("INTENT_GAP"),
+				types.InsightType("INTENT_GAP"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListNetworkMigrationInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListNetworkMigrationInsights"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
 	input := &ListNetworkMigrationMapperSegmentConstructsInput{
 		NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
@@ -5455,8 +6014,10 @@ func TestUpdateRequestSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *te
 				"__Member__",
 			},
 		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:                ptr.Int32(1),
+		NextToken:                 ptr.String("__NextToken__"),
+		IncludeEnrichedProperties: ptr.Bool(true),
+		IncludeConfiguration:      ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5585,6 +6146,150 @@ func TestUpdateRequestSnapshot_ListNetworkMigrationMappingUpdates(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListNetworkMigrationMappingUpdates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRemoteSourceActionInvocationResults(t *testing.T) {
+	input := &ListRemoteSourceActionInvocationResultsInput{
+		SourceServerID: ptr.String("__SourceServerID__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+		AccountID:      ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActionInvocationResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActionInvocationResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRemoteSourceActionInvocations(t *testing.T) {
+	input := &ListRemoteSourceActionInvocationsInput{
+		RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+		Filters: &types.ListRemoteSourceActionInvocationsRequestFilters{
+			SourceServerArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoteSourceActionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Statuses: []types.RemoteSourceActionInvocationStatus{
+				types.RemoteSourceActionInvocationStatus("PENDING"),
+				types.RemoteSourceActionInvocationStatus("PENDING"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActionInvocations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActionInvocations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRemoteSourceActionJobs(t *testing.T) {
+	input := &ListRemoteSourceActionJobsInput{
+		Filters: &types.ListRemoteSourceActionJobsRequestFilters{
+			RemoteSourceActionJobIDs: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActionJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActionJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListRemoteSourceActions(t *testing.T) {
+	input := &ListRemoteSourceActionsInput{
+		Filters: &types.ListRemoteSourceActionsRequestFilters{
+			RemoteSourceActionIDs: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		AccountID:  ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListRemoteSourceActions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListRemoteSourceActions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6264,9 +6969,11 @@ func TestUpdateRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 		NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
 		Constructs: []types.StartNetworkMigrationMappingUpdateConstruct{
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
-				ConstructID:   ptr.String("__ConstructID__"),
-				ConstructType: ptr.String("__ConstructType__"),
+				SegmentID:          ptr.String("__SegmentID__"),
+				SegmentLogicalID:   ptr.String("__SegmentLogicalID__"),
+				ConstructID:        ptr.String("__ConstructID__"),
+				ConstructType:      ptr.String("__ConstructType__"),
+				ConstructLogicalID: ptr.String("__ConstructLogicalID__"),
 				Operation: &types.OperationUnionMemberMerge{
 					Value: types.MergeOperation{
 						MergeConstructs: []types.MergeConstruct{
@@ -6283,9 +6990,11 @@ func TestUpdateRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 				},
 			},
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
-				ConstructID:   ptr.String("__ConstructID__"),
-				ConstructType: ptr.String("__ConstructType__"),
+				SegmentID:          ptr.String("__SegmentID__"),
+				SegmentLogicalID:   ptr.String("__SegmentLogicalID__"),
+				ConstructID:        ptr.String("__ConstructID__"),
+				ConstructType:      ptr.String("__ConstructType__"),
+				ConstructLogicalID: ptr.String("__ConstructLogicalID__"),
 				Operation: &types.OperationUnionMemberMerge{
 					Value: types.MergeOperation{
 						MergeConstructs: []types.MergeConstruct{
@@ -6304,14 +7013,36 @@ func TestUpdateRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 		},
 		Segments: []types.StartNetworkMigrationMappingUpdateSegment{
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
+				SegmentID:        ptr.String("__SegmentID__"),
+				SegmentLogicalID: ptr.String("__SegmentLogicalID__"),
+				Operation: &types.SegmentOperationMemberCreate{
+					Value: types.SegmentCreateOperation{
+						Name:          ptr.String("__Name__"),
+						Description:   ptr.String("__Description__"),
+						TargetAccount: ptr.String("__TargetAccount__"),
+						ScopeTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 				TargetAccount: ptr.String("__TargetAccount__"),
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
 			},
 			{
-				SegmentID:     ptr.String("__SegmentID__"),
+				SegmentID:        ptr.String("__SegmentID__"),
+				SegmentLogicalID: ptr.String("__SegmentLogicalID__"),
+				Operation: &types.SegmentOperationMemberCreate{
+					Value: types.SegmentCreateOperation{
+						Name:          ptr.String("__Name__"),
+						Description:   ptr.String("__Description__"),
+						TargetAccount: ptr.String("__TargetAccount__"),
+						ScopeTags: map[string]string{
+							"key0": "__Value__",
+						},
+					},
+				},
 				TargetAccount: ptr.String("__TargetAccount__"),
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
@@ -6338,6 +7069,46 @@ func TestUpdateRequestSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartNetworkMigrationMappingUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartRemoteSourceActionJob(t *testing.T) {
+	input := &StartRemoteSourceActionJobInput{
+		RemoteSourceActionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ConnectorArn: ptr.String("__ConnectorArn__"),
+		SourceServerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		AccountID: ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartRemoteSourceActionJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartRemoteSourceActionJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6715,6 +7486,7 @@ func TestUpdateRequestSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		AccountID:            ptr.String("__AccountID__"),
 	}
 	body := &bytes.Buffer{}
@@ -6736,6 +7508,49 @@ func TestUpdateRequestSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLaunchConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateLaunchConfigurationDefaults(t *testing.T) {
+	input := &UpdateLaunchConfigurationDefaultsInput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		AccountID:          ptr.String("__AccountID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateLaunchConfigurationDefaults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLaunchConfigurationDefaults"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6799,6 +7614,7 @@ func TestUpdateRequestSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) {
 		},
 		EnableMapAutoTagging:                ptr.Bool(true),
 		MapAutoTaggingMpeID:                 ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:                   ptr.String("__MapAutoTaggingKey__"),
 		LaunchDisposition:                   types.LaunchDisposition("STOPPED"),
 		TargetInstanceTypeRightSizingMethod: types.TargetInstanceTypeRightSizingMethod("NONE"),
 		CopyPrivateIp:                       ptr.Bool(true),
@@ -6897,6 +7713,7 @@ func TestUpdateRequestSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 		ScopeTags: map[string]string{
 			"key0": "__Value__",
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6953,6 +7770,39 @@ func TestUpdateRequestSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T)
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateRemoteSourceAction(t *testing.T) {
+	input := &UpdateRemoteSourceActionInput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		AccountID:            ptr.String("__AccountID__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateRemoteSourceAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRemoteSourceAction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	input := &UpdateReplicationConfigurationInput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -6994,6 +7844,7 @@ func TestUpdateRequestSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 		AccountID:                ptr.String("__AccountID__"),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -7049,6 +7900,7 @@ func TestUpdateRequestSnapshot_UpdateReplicationConfigurationTemplate(t *testing
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{

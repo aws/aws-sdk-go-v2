@@ -2,4 +2,4 @@ POST /network-migration/ListNetworkMigrationMapperSegmentConstructs
 
 Content-Type: application/json
 
-{"filters":{"constructIDs":["__Member__","__Member__"],"constructTypes":["__Member__","__Member__"]},"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","nextToken":"__NextToken__","segmentID":"__SegmentID__"}
+{"filters":{"constructIDs":["__Member__","__Member__"],"constructTypes":["__Member__","__Member__"]},"includeConfiguration":true,"includeEnrichedProperties":true,"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","nextToken":"__NextToken__","segmentID":"__SegmentID__"}

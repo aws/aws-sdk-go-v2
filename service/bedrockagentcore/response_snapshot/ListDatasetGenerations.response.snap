@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"datasetGenerations":[{"completedAt":"2000-01-01T00:00:00Z","createdAt":"2000-01-01T00:00:00Z","datasetId":"__DatasetId__","description":"__Description__","generationId":"__GenerationId__","name":"__Name__","scenarioType":"FIXED","status":"IN_PROGRESS"},{"completedAt":"2000-01-01T00:00:00Z","createdAt":"2000-01-01T00:00:00Z","datasetId":"__DatasetId__","description":"__Description__","generationId":"__GenerationId__","name":"__Name__","scenarioType":"FIXED","status":"IN_PROGRESS"}],"nextToken":"__NextToken__"}

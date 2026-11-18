@@ -352,6 +352,16 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#AgentApplicationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The default Store includes all applications; this value attributes the\nInsight to one application and does not configure Store selection.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#AgentCard": {
             "type": "document"
         },
@@ -373,6 +383,268 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The agent card definition for A2A descriptors, including the schema version and inline content that describes the agent's capabilities.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentCoreRuntimeInvocation": {
+            "type": "structure",
+            "members": {
+                "agentRuntimeEndpointArn": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentRuntimeEndpointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent runtime endpoint to invoke. Specify an endpoint in the same account and Region as the batch evaluation. The service requires the endpoint and its agent runtime version to be ready. The agent runtime must use the HTTP protocol and IAM inbound authorization.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestTemplate": {
+                    "target": "com.amazonaws.bedrockagentcore#RequestTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object template for the request payload sent to the agent for each turn. The template must contain the placeholder <code>{{turn.input}}</code> exactly once, as the complete value of a JSON string and not as a field name. The service replaces the placeholder with the input of the turn. If the input isn't a string, the service inserts it as a JSON value. If you don't specify a template, the service uses <code>{\"prompt\": \"{{turn.input}}\"}</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for invoking an agent hosted on AgentCore Runtime. Each scenario runs in its own runtime session, and the turns of a scenario are sent in order within that session. The batch evaluation uses your credentials to read the agent runtime endpoint and the dataset, invoke the agent runtime, and read the resulting traces. You must have permission for these actions.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentCoreRuntimeInvocationDetails": {
+            "type": "structure",
+            "members": {
+                "agentRuntimeEndpointArn": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentRuntimeEndpointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent runtime endpoint that the batch evaluation invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentRuntimeVersion": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentRuntimeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the agent runtime that the endpoint pointed to when the batch evaluation started. If you update the endpoint after the batch evaluation starts, each later turn uses the version that the endpoint points to when the turn runs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestTemplate": {
+                    "target": "com.amazonaws.bedrockagentcore#RequestTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request payload template that the batch evaluation used for each turn. If the request didn't specify a template, this is the default template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the agent hosted on AgentCore Runtime that a batch evaluation invoked.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInsightArchiveStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether an Agent Insight is active or archived. Valid values:</p> <ul> <li> <p> <code>ACTIVE</code> - The insight is currently active.</p> </li> <li> <p> <code>ARCHIVED</code> - The insight has been archived.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInsightCustomerMetadataStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "CUSTOMER_KEY_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_KEY_UNAVAILABLE"
+                    }
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Whether customer-encrypted metadata is available for an Agent Insight."
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInsightId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Application-scoped persisted Insight identifier, distinct from the\ncommon-model analysis type identifier.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInsightSummary": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated display label for the Agent Insight. This is a human-readable summary of the detected pattern, not an identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated description of the Agent Insight that explains the detected pattern and its observed behavior across sessions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Agent Insight was first created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "affectedSessionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions affected by the insight pattern.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "agentInsightId": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Agent Insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationName": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application that the Agent Insight belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "batchEvaluationId": {
+                    "target": "com.amazonaws.bedrockagentcore#BatchEvaluationId",
+                    "traits": {
+                        "smithy.api#documentation": "The Batch Evaluation that produced this Insight, when applicable."
+                    }
+                },
+                "customerMetadataStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightCustomerMetadataStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether customer-encrypted metadata is available for the Agent Insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Agent Insight was last updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Agent Insight is active or archived. Valid values:</p> <ul> <li> <p> <code>ACTIVE</code> - The insight is currently active.</p> </li> <li> <p> <code>ARCHIVED</code> - The insight has been archived.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastSeenAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent date and time when the insight pattern was observed.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about an Amazon Bedrock AgentCore Agent Insight, including its label, description, and creation time. This structure is returned by <code>ListAgentInsights</code>; use <code>GetAgentInsight</code> to retrieve the sample sessions and root causes for a specific insight.</p>",
+                "smithy.api#references": []
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInsightSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#AgentInsightSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInvocationConfig": {
+            "type": "union",
+            "members": {
+                "agentCoreRuntime": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentCoreRuntimeInvocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for invoking an agent hosted on AgentCore Runtime.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The agent that the batch evaluation invokes with each scenario in the dataset.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentInvocationDetails": {
+            "type": "union",
+            "members": {
+                "agentCoreRuntime": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentCoreRuntimeInvocationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the agent hosted on AgentCore Runtime that the batch evaluation invoked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The agent that a batch evaluation invoked with each scenario in the dataset.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentRuntimeEndpointArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::BedrockAgentCore::RuntimeEndpoint"
+                },
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an agent runtime endpoint.</p>",
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}/runtime-endpoint/[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AgentRuntimeVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The version of an agent runtime.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^([1-9][0-9]{0,4})$"
             }
         },
         "com.amazonaws.bedrockagentcore#AgentSkillsDescriptor": {
@@ -1702,6 +1974,21 @@
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
             }
         },
+        "com.amazonaws.bedrockagentcore#BatchEvaluationSourceConfig": {
+            "type": "structure",
+            "members": {
+                "batchEvaluationArn": {
+                    "target": "com.amazonaws.bedrockagentcore#BatchEvaluationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch evaluation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A batch evaluation source for a dataset generation. The generation reads the sessions the batch evaluation evaluated, so there is no time window.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#BatchEvaluationStatus": {
             "type": "enum",
             "members": {
@@ -2756,6 +3043,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for reading agent traces from CloudWatch Logs.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CloudWatchLogsSourceConfig": {
+            "type": "structure",
+            "members": {
+                "logGroupNames": {
+                    "target": "com.amazonaws.bedrockagentcore#CloudWatchLogsSourceConfigLogGroupNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the log groups to read, from 1 to 5. You can't specify this together with <code>logGroupNamePrefixes</code>.</p>"
+                    }
+                },
+                "logGroupNamePrefixes": {
+                    "target": "com.amazonaws.bedrockagentcore#CloudWatchLogsSourceConfigLogGroupNamePrefixesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prefixes of the names of the log groups to read, from 1 to 5. You can't specify this together with <code>logGroupNames</code>.</p>"
+                    }
+                },
+                "serviceNames": {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service name of the agent, which matches the <code>service.name</code> resource attribute in its traces. Specify exactly one.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time window to read sessions from. The default is 7 days before <code>endTime</code>.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time window to read sessions from. The default is the time the generation starts.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudWatch Logs source for a dataset generation. Specify either <code>logGroupNames</code> or <code>logGroupNamePrefixes</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CloudWatchLogsSourceConfigLogGroupNamePrefixesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#LogGroupNamePrefix"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CloudWatchLogsSourceConfigLogGroupNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#LogGroupName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.bedrockagentcore#CloudWatchLogsTraceConfig": {
@@ -4140,6 +4492,43 @@
                 "smithy.api#documentation": "<p>Supported currency codes.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#CustomDataIdentifier": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the custom data identifier. It can't be the same as the name of a managed data identifier.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9_-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regex": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expression that matches the data to mask. Lookahead and lookbehind aren't supported.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A custom data identifier, defined by a regular expression.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#CustomDataIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#CustomDataIdentifier"
+            }
+        },
         "com.amazonaws.bedrockagentcore#CustomDescriptor": {
             "type": "structure",
             "members": {
@@ -4201,6 +4590,244 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for the data source used in evaluation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetDetails": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the dataset that the batch evaluation ran. If the request didn't specify a version, this is the latest published version when the batch evaluation started.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the dataset and the version of it that a batch evaluation ran.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetExecutionConfig": {
+            "type": "structure",
+            "members": {
+                "dataset": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset whose scenarios are sent to the agent. The dataset must use the predefined evaluation schema, and the version that runs must contain between 1 and 1,000 scenarios.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentInvocation": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInvocationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the agent runtime endpoint and the request template that the batch evaluation uses to invoke the agent for each scenario in the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for running the scenarios in a dataset against an agent as part of a batch evaluation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetExecutionDetails": {
+            "type": "structure",
+            "members": {
+                "dataset": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset and the version of it that the batch evaluation ran.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentInvocation": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInvocationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent that the batch evaluation invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the dataset and agent that a batch evaluation ran.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetGenerationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetGenerationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetGenerationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetGenerationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation is running.</p>",
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation finished and added its examples to the dataset's draft.</p>",
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "COMPLETED_WITH_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation finished, but some sessions failed. See <code>errorDetails</code> for the errors.</p>",
+                        "smithy.api#enumValue": "COMPLETED_WITH_ERRORS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation failed. See <code>failureReason</code> for the reason.</p>",
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation record is being deleted.</p>",
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a dataset generation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetGenerationSummary": {
+            "type": "structure",
+            "members": {
+                "generationId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the dataset generation.</p>"
+                    }
+                },
+                "scenarioType": {
+                    "target": "com.amazonaws.bedrockagentcore#ScenarioType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scenario the generation produces.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset generation started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "completedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset generation finished. Present only when the generation has finished.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a dataset generation. To get its counts and the request it was started with, call <code>GetDatasetGeneration</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetGenerationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#DatasetGenerationSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The unique identifier of a dataset.</p>",
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,110}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetSource": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of a published version of the dataset. You can't run the <code>DRAFT</code> version. If you don't specify a version, the batch evaluation uses the latest published version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the dataset and the version of it to run.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DatasetVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The version of a dataset.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^(DRAFT|[0-9]{1,19})$"
             }
         },
         "com.amazonaws.bedrockagentcore#DateTimestamp": {
@@ -4461,6 +5088,93 @@
                     "target": "com.amazonaws.bedrockagentcore#CapacityProviderSessionStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the capacity provider session. When the status is <code>Deleting</code>, the session is being deleted and is not available. When the status is <code>Deleted</code>, the session is no longer available.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DeleteDatasetGeneration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#DeleteDatasetGenerationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#DeleteDatasetGenerationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the record of a dataset generation. The examples the generation added stay in the dataset's draft. To remove them, find them with the <code>generationIds</code> filter of <code>ListDatasetExamples</code>, then call <code>DeleteDatasetExamples</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/datasets/{datasetId}/generations/{generationId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DeleteDatasetGenerationRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "generationId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset generation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DeleteDatasetGenerationResponse": {
+            "type": "structure",
+            "members": {
+                "generationId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset generation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5462,6 +6176,9 @@
                     "target": "com.amazonaws.bedrockagentcore#DeleteBatchEvaluation"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#DeleteDatasetGeneration"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#DeleteRecommendation"
                 },
                 {
@@ -5471,7 +6188,13 @@
                     "target": "com.amazonaws.bedrockagentcore#GetABTest"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#GetAgentInsight"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#GetBatchEvaluation"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#GetDatasetGeneration"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#GetRecommendation"
@@ -5480,13 +6203,22 @@
                     "target": "com.amazonaws.bedrockagentcore#ListABTests"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#ListAgentInsights"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#ListBatchEvaluations"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ListDatasetGenerations"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#ListRecommendations"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#StartBatchEvaluation"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#StartDatasetGeneration"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#StartRecommendation"
@@ -5496,6 +6228,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#UpdateABTest"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#UpdateAgentInsight"
                 }
             ]
         },
@@ -5660,6 +6395,58 @@
                     "type": "AWS::BedrockAgentCore::Evaluator"
                 },
                 "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:evaluator\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$|^arn:aws[a-zA-Z-]*:bedrock-agentcore:::evaluator/(Builtin|ThirdParty)\\.[a-zA-Z0-9._-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#EvaluatorFilter": {
+            "type": "structure",
+            "members": {
+                "evaluatorId": {
+                    "target": "com.amazonaws.bedrockagentcore#EvaluatorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the evaluator whose result to compare.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluationDimensionName": {
+                    "target": "com.amazonaws.bedrockagentcore#EvaluationDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension of the evaluator's result to compare. Required for an evaluator that scores more than one dimension. Don't specify it for any other evaluator.</p>"
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How to compare the evaluation result with <code>value</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to compare the evaluation result with. Use <code>doubleValue</code> for a score and <code>stringValue</code> for a label. <code>booleanValue</code> isn't supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregation": {
+                    "target": "com.amazonaws.bedrockagentcore#ResultAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How to combine the evaluator's per-trace or per-span results into one result for the session. Required for an evaluator that scores traces or spans. Don't specify it for an evaluator that scores sessions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition on a session's evaluation result.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#EvaluatorFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#EvaluatorFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.bedrockagentcore#EvaluatorId": {
@@ -6428,6 +7215,15 @@
                 "smithy.api#documentation": "<p>A value used in filter comparisons, supporting different data types.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#FindingCountMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagentcore#FindingIdentifierKey"
+            },
+            "value": {
+                "target": "smithy.api#Integer"
+            }
+        },
         "com.amazonaws.bedrockagentcore#FindingDescription": {
             "type": "string",
             "traits": {
@@ -6436,6 +7232,16 @@
                     "max": 500
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#FindingIdentifierKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_-]{1,128}$"
             }
         },
         "com.amazonaws.bedrockagentcore#FindingTargetId": {
@@ -6494,6 +7300,447 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A filter to restrict which gateway target paths are included in the A/B test.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationAttributeFilter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute key.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9._-]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How to compare the attribute with <code>value</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to compare the attribute with.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition on a session attribute.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationAttributeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#GenerationAttributeFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z][A-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationErrorDetail": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code, for example <code>ACCESS_DENIED</code> or <code>EXPIRED_CREDENTIALS</code>. New codes can be added.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>"
+                    }
+                },
+                "count": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions and traces that failed with this error code. Absent for a generation that finished before failures were counted by code. In that case, <code>sessionIds</code> is a sample.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "sessionIds": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationErrorSessionIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Up to 10 of the sessions that failed with this error code. Each entry is a session ID, or the ID of a trace named in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The failures in a dataset generation that share an error code.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationErrorDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#GenerationErrorDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationErrorSessionIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#SessionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationFilterOperator": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Equals"
+                    }
+                },
+                "NOT_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEquals"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThan"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThan"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanOrEqual"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanOrEqual"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Contains"
+                    }
+                },
+                "NOT_CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotContains"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How a filter compares a value.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationFilterStringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationFilterValue": {
+            "type": "union",
+            "members": {
+                "stringValue": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilterStringValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string value.</p>"
+                    }
+                },
+                "doubleValue": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A numeric value.</p>"
+                    }
+                },
+                "booleanValue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value a filter compares with. Specify exactly one. Attribute filters support all three types. Evaluator filters support <code>stringValue</code> and <code>doubleValue</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationFilters": {
+            "type": "structure",
+            "members": {
+                "attributeFilters": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationAttributeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Attribute conditions, up to 5. A session must meet all of them. An attribute on a span matches when any span in the session meets the condition.</p>"
+                    }
+                },
+                "turnCount": {
+                    "target": "com.amazonaws.bedrockagentcore#TurnCountRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The range of turns a session can have. For example, set <code>max</code> to 1 for single-turn sessions only, or <code>min</code> to 2 for multi-turn sessions only. Sessions with more than 100 turns are never selected.</p>"
+                    }
+                },
+                "evaluatorFilters": {
+                    "target": "com.amazonaws.bedrockagentcore#EvaluatorFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Conditions on evaluation results, up to 10. A session must meet all of them. You can use these only with an <code>onlineEvaluation</code> or <code>batchEvaluation</code> source. A <code>cloudWatchLogs</code> source has no evaluation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Conditions that a session must meet to be selected. A session must meet every condition you specify. Attribute and turn count filters work with any source. Evaluator filters need a source that has evaluation results.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationIdentifierCounts": {
+            "type": "structure",
+            "members": {
+                "sessionIdCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of session IDs in the request.</p>"
+                    }
+                },
+                "traceIdCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of trace IDs in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of session and trace IDs a dataset generation was started with.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationIdentifiers": {
+            "type": "structure",
+            "members": {
+                "sessionIds": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSessionIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the sessions to use, up to 25.</p>"
+                    }
+                },
+                "traceIds": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationTraceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the traces to use, up to 25.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sessions and traces to generate examples from. Specify at least one session ID or trace ID. A session with more than 100 turns is reported as an error and produces no example.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationResults": {
+            "type": "structure",
+            "members": {
+                "sessionsMatched": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions that matched the filters or were named in the request, before sampling. This includes sessions that later failed.</p>"
+                    }
+                },
+                "sessionsSelected": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions left after sampling.</p>"
+                    }
+                },
+                "sessionsUnscored": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions left out because an evaluator filter had no result to compare, either because the session wasn't evaluated yet or because the evaluation failed.</p>"
+                    }
+                },
+                "sessionsFailed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions dropped because of an error. See <code>errorDetails</code> for the errors.</p>"
+                    }
+                },
+                "scenariosGenerated": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of scenarios generated.</p>"
+                    }
+                },
+                "scenariosDeduplicated": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of scenarios left out as duplicates, of each other or of examples already in the draft.</p>"
+                    }
+                },
+                "examplesWritten": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of examples added to the dataset's draft.</p>"
+                    }
+                },
+                "examplesWithGroundTruth": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of added examples that have reference fields.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Counts of the sessions, scenarios and examples a dataset generation has processed.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationSamplingConfig": {
+            "type": "structure",
+            "members": {
+                "maxScenarios": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of scenarios to generate, from 1 to 1,000. The default is 100. The generation produces at most one scenario for each selected session. The dataset's draft examples plus this value can't be more than 1,000.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How many scenarios a dataset generation produces.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationSelection": {
+            "type": "union",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Conditions that a session must meet to be selected.</p>"
+                    }
+                },
+                "identifiers": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sessions and traces to use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How a dataset generation chooses sessions. Specify exactly one: filters, to have AgentCore find matching sessions, or identifiers, to name the sessions and traces yourself. Sessions and traces you name aren't filtered further.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationSelectionRecord": {
+            "type": "union",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters the generation was started with.</p>"
+                    }
+                },
+                "identifiers": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationIdentifierCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of session and trace IDs the generation was started with.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How a dataset generation was asked to choose sessions. Filters are returned as submitted. Session and trace IDs are returned as counts, and the IDs themselves are never returned.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationSessionIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#SessionId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationSource": {
+            "type": "union",
+            "members": {
+                "traceGeneration": {
+                    "target": "com.amazonaws.bedrockagentcore#TraceGenerationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Generates examples from your agent's traces.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of a dataset generation.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationSourceRecord": {
+            "type": "union",
+            "members": {
+                "traceGeneration": {
+                    "target": "com.amazonaws.bedrockagentcore#TraceGenerationRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The trace source the generation was started with.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source a dataset generation was started with.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GenerationTraceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#TraceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.bedrockagentcore#GetABTest": {
@@ -6785,6 +8032,171 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcore#GetAgentInsight": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#GetAgentInsightRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#GetAgentInsightResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon Bedrock AgentCore Agent Insights identifies patterns detected across your agent sessions. Use Agent Insights to identify recurring issues and prioritize fixes.</p> <p>Retrieves detailed information about an Amazon Bedrock AgentCore Agent Insight, including its archive status, affected sessions, and, when applicable, the batch evaluation that produced it.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/agentinsights/{agentInsightId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GetAgentInsightRequest": {
+            "type": "structure",
+            "members": {
+                "applicationName": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application that the Agent Insight belongs to.</p>",
+                        "smithy.api#httpQuery": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentInsightId": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Agent Insight to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GetAgentInsightResponse": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated display label for the Agent Insight. This is a human-readable summary of the detected pattern, not an identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated description of the Agent Insight that explains the detected pattern and its observed behavior across sessions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Agent Insight was first created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "affectedSessionCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of sessions affected by the insight pattern.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "sampleSessions": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightSampleSessionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of sample sessions that illustrate the Agent Insight, including per-session findings that point to the relevant spans or traces.</p>"
+                    }
+                },
+                "rootCauses": {
+                    "target": "com.amazonaws.bedrockagentcore#InsightRootCauseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The root causes identified for the Agent Insight, each with an explanation, an affected session count, an optional suggested fix, and sample sessions that illustrate the root cause.</p>"
+                    }
+                },
+                "agentInsightId": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Agent Insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationName": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application that the Agent Insight belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "batchEvaluationId": {
+                    "target": "com.amazonaws.bedrockagentcore#BatchEvaluationId",
+                    "traits": {
+                        "smithy.api#documentation": "The Batch Evaluation that produced this Insight, when applicable."
+                    }
+                },
+                "customerMetadataStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightCustomerMetadataStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether customer-encrypted metadata is available for the Agent Insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Agent Insight was last updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Agent Insight is active or archived. Valid values:</p> <ul> <li> <p> <code>ACTIVE</code> - The insight is currently active.</p> </li> <li> <p> <code>ARCHIVED</code> - The insight has been archived.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastSeenAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent date and time when the insight pattern was observed.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#references": []
+            }
+        },
         "com.amazonaws.bedrockagentcore#GetBatchEvaluation": {
             "type": "operation",
             "input": {
@@ -6954,6 +8366,12 @@
                     "target": "com.amazonaws.bedrockagentcore#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt evaluation data.</p>"
+                    }
+                },
+                "datasetExecutionDetails": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetExecutionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the dataset and agent that the batch evaluation ran, including the dataset version and agent runtime version that the service resolved when the batch evaluation started. This field is present only if the batch evaluation was started with a <code>datasetExecutionConfig</code>.</p>"
                     }
                 }
             },
@@ -7235,6 +8653,168 @@
                     "target": "com.amazonaws.bedrockagentcore#ToolsFileSystemConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>The file system configurations for the code interpreter session. Each entry describes an access point and its mount path.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GetDatasetGeneration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#GetDatasetGenerationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#GetDatasetGenerationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a dataset generation, including its status, the request it was started with, its progress counts, its redaction summary and its errors. Call this operation to track a generation that you started with <code>StartDatasetGeneration</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/generations/{generationId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GetDatasetGenerationRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "generationId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset generation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GetDatasetGenerationResponse": {
+            "type": "structure",
+            "members": {
+                "generationId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the dataset generation.</p>"
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scenarioType": {
+                    "target": "com.amazonaws.bedrockagentcore#ScenarioType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scenario the generation produces. This is the value from the request, or <code>DYNAMIC</code> if the request didn't specify one.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the dataset generation failed. Present only when the status is <code>FAILED</code>.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset generation started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset generation last changed status.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "completedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset generation finished. Present only when the generation has finished.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSourceRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source the generation was started with, including the resolved time window. If you selected sessions and traces by ID, the response gives the number of IDs instead of the IDs.</p>"
+                    }
+                },
+                "generationResults": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Counts of the sessions, scenarios and examples the generation has processed.</p>"
+                    }
+                },
+                "redactionSummary": {
+                    "target": "com.amazonaws.bedrockagentcore#RedactionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of what redaction found. Present only when the generation was started with redaction.</p>"
+                    }
+                },
+                "errorDetails": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationErrorDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors the generation hit, grouped by error code. The list holds the 10 most frequent error codes, most frequent first.</p>"
                     }
                 }
             },
@@ -8373,6 +9953,62 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GroundTruthConfig": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.bedrockagentcore#GroundTruthFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference fields to copy. Values are copied from the session as observed, not generated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "qualityFilters": {
+                    "target": "com.amazonaws.bedrockagentcore#EvaluatorFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Evaluator conditions that a selected session must also meet to have reference fields copied. If you don't specify these, the generation uses the evaluator filters from <code>selection</code>. If the selection names sessions and traces by ID, every selected session gets reference fields. Specify an empty list to give every selected session reference fields. You can't specify quality filters with a <code>cloudWatchLogs</code> source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reference fields to copy from the sessions into the generated examples.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GroundTruthField": {
+            "type": "enum",
+            "members": {
+                "EXPECTED_RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's final response.</p>",
+                        "smithy.api#enumValue": "expected_response"
+                    }
+                },
+                "EXPECTED_TRAJECTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sequence of tool calls the agent made.</p>",
+                        "smithy.api#enumValue": "expected_trajectory"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference field in a dataset example.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#GroundTruthFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#GroundTruthField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.bedrockagentcore#GroundTruthSource": {
@@ -12589,6 +14225,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcore#ListAgentInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#ListAgentInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#ListAgentInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists Amazon Bedrock AgentCore Agent Insight summaries in your account and Region. Use this operation to review patterns across sessions before you investigate or archive an insight. The response paginates the results. Use the <code>nextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/agentinsights"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "agentInsights"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListAgentInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationName": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to Agent Insights for an application.</p>",
+                        "smithy.api#httpQuery": "applicationName"
+                    }
+                },
+                "batchEvaluationId": {
+                    "target": "com.amazonaws.bedrockagentcore#BatchEvaluationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to Agent Insights produced by a batch evaluation.</p>",
+                        "smithy.api#httpQuery": "batchEvaluationId"
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results by archive status.</p>",
+                        "smithy.api#httpQuery": "archiveStatus"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Agent Insight summaries to return in one response. If you don't specify a value, the operation returns up to 50 summaries.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcore#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating the results. This token is returned in a previous response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": []
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListAgentInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "agentInsights": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Agent Insight summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrockagentcore#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use to retrieve the next page of results. This value is present only when additional results are available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcore#ListBatchEvaluations": {
             "type": "operation",
             "input": {
@@ -12849,6 +14591,104 @@
                     "target": "com.amazonaws.bedrockagentcore#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListCodeInterpreterSessions</code> request to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListDatasetGenerations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#ListDatasetGenerationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#ListDatasetGenerationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the generations for a dataset. AgentCore keeps a generation until you delete it with <code>DeleteDatasetGeneration</code> or delete the dataset. To get a generation's counts and the request it was started with, call <code>GetDatasetGeneration</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/generations"
+                },
+                "smithy.api#paginated": {
+                    "items": "datasetGenerations",
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListDatasetGenerationsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. The default is 20. If the total number of results is greater than this value, use the token returned in the response in the <code>nextToken</code> field when making another request to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, enter the token returned in the <code>nextToken</code> field in the response in this field to return the next batch of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ListDatasetGenerationsResponse": {
+            "type": "structure",
+            "members": {
+                "datasetGenerations": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset generations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
                     }
                 }
             },
@@ -15134,6 +16974,35 @@
                 "smithy.api#documentation": "<p>A reference to an existing online evaluation configuration to use as the data source for batch evaluation.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#OnlineEvaluationSourceConfig": {
+            "type": "structure",
+            "members": {
+                "onlineEvaluationConfigArn": {
+                    "target": "com.amazonaws.bedrockagentcore#OnlineEvaluationConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the online evaluation configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time window to read sessions from. The default is 7 days before <code>endTime</code>.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time window to read sessions from. The default is the time the generation starts.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An online evaluation source for a dataset generation.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#OnlineEvaluationTraceConfig": {
             "type": "structure",
             "members": {
@@ -16599,6 +18468,669 @@
                 "smithy.api#documentation": "<p>Specifies the record expiry (long-term memory time-to-live) applied to the records in a batch request. Provide exactly one of <code>recordExpiryDurationDays</code> or <code>action</code>. Set <code>recordExpiryDurationDays</code> to configure or update the expiry, or set <code>action</code> to <code>REMOVE</code> to remove a previously configured expiry.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#RedactionConfiguration": {
+            "type": "structure",
+            "members": {
+                "identifiers": {
+                    "target": "com.amazonaws.bedrockagentcore#RedactionIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed data identifiers to apply. These match the CloudWatch Logs managed data identifiers.</p>"
+                    }
+                },
+                "customDataIdentifiers": {
+                    "target": "com.amazonaws.bedrockagentcore#CustomDataIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom data identifiers to apply, up to 10. You can use custom identifiers without any managed identifiers.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sensitive data to mask in generated examples. Nothing is redacted unless you specify at least one identifier. Each character of a match is replaced with <code>*</code>, so a masked value keeps its length. If detection fails, the generation fails and no examples are written.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RedactionIdentifier": {
+            "type": "enum",
+            "members": {
+                "ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDRESS"
+                    }
+                },
+                "AWS_SECRET_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SECRET_KEY"
+                    }
+                },
+                "BANK_ACCOUNT_NUMBER_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER_DE"
+                    }
+                },
+                "BANK_ACCOUNT_NUMBER_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER_ES"
+                    }
+                },
+                "BANK_ACCOUNT_NUMBER_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER_FR"
+                    }
+                },
+                "BANK_ACCOUNT_NUMBER_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER_GB"
+                    }
+                },
+                "BANK_ACCOUNT_NUMBER_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER_IT"
+                    }
+                },
+                "BANK_ACCOUNT_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER_US"
+                    }
+                },
+                "CEP_CODE_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CEP_CODE_BR"
+                    }
+                },
+                "CNPJ_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CNPJ_BR"
+                    }
+                },
+                "CPF_CODE_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPF_CODE_BR"
+                    }
+                },
+                "CREDIT_CARD_EXPIRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_CARD_EXPIRATION"
+                    }
+                },
+                "CREDIT_CARD_MAGNETIC_STRIPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_CARD_MAGNETIC_STRIPE"
+                    }
+                },
+                "CREDIT_CARD_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_CARD_NUMBER"
+                    }
+                },
+                "CREDIT_CARD_SECURITY_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_CARD_SECURITY_CODE"
+                    }
+                },
+                "DATE_OF_BIRTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE_OF_BIRTH"
+                    }
+                },
+                "DRIVERS_LICENSE_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_AT"
+                    }
+                },
+                "DRIVERS_LICENSE_AU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_AU"
+                    }
+                },
+                "DRIVERS_LICENSE_BE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_BE"
+                    }
+                },
+                "DRIVERS_LICENSE_BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_BG"
+                    }
+                },
+                "DRIVERS_LICENSE_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_CA"
+                    }
+                },
+                "DRIVERS_LICENSE_CY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_CY"
+                    }
+                },
+                "DRIVERS_LICENSE_CZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_CZ"
+                    }
+                },
+                "DRIVERS_LICENSE_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_DE"
+                    }
+                },
+                "DRIVERS_LICENSE_DK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_DK"
+                    }
+                },
+                "DRIVERS_LICENSE_EE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_EE"
+                    }
+                },
+                "DRIVERS_LICENSE_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_ES"
+                    }
+                },
+                "DRIVERS_LICENSE_FI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_FI"
+                    }
+                },
+                "DRIVERS_LICENSE_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_FR"
+                    }
+                },
+                "DRIVERS_LICENSE_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_GB"
+                    }
+                },
+                "DRIVERS_LICENSE_GR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_GR"
+                    }
+                },
+                "DRIVERS_LICENSE_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_HR"
+                    }
+                },
+                "DRIVERS_LICENSE_HU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_HU"
+                    }
+                },
+                "DRIVERS_LICENSE_IE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_IE"
+                    }
+                },
+                "DRIVERS_LICENSE_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_IT"
+                    }
+                },
+                "DRIVERS_LICENSE_LT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_LT"
+                    }
+                },
+                "DRIVERS_LICENSE_LU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_LU"
+                    }
+                },
+                "DRIVERS_LICENSE_LV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_LV"
+                    }
+                },
+                "DRIVERS_LICENSE_MT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_MT"
+                    }
+                },
+                "DRIVERS_LICENSE_NL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_NL"
+                    }
+                },
+                "DRIVERS_LICENSE_PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_PL"
+                    }
+                },
+                "DRIVERS_LICENSE_PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_PT"
+                    }
+                },
+                "DRIVERS_LICENSE_RO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_RO"
+                    }
+                },
+                "DRIVERS_LICENSE_SE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_SE"
+                    }
+                },
+                "DRIVERS_LICENSE_SI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_SI"
+                    }
+                },
+                "DRIVERS_LICENSE_SK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_SK"
+                    }
+                },
+                "DRIVERS_LICENSE_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVERS_LICENSE_US"
+                    }
+                },
+                "DRUG_ENFORCEMENT_AGENCY_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRUG_ENFORCEMENT_AGENCY_NUMBER_US"
+                    }
+                },
+                "ELECTORAL_ROLL_NUMBER_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELECTORAL_ROLL_NUMBER_GB"
+                    }
+                },
+                "EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_ADDRESS"
+                    }
+                },
+                "HEALTH_INSURANCE_CARD_NUMBER_EU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTH_INSURANCE_CARD_NUMBER_EU"
+                    }
+                },
+                "HEALTH_INSURANCE_CLAIM_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTH_INSURANCE_CLAIM_NUMBER_US"
+                    }
+                },
+                "HEALTH_INSURANCE_NUMBER_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTH_INSURANCE_NUMBER_FR"
+                    }
+                },
+                "HEALTHCARE_PROCEDURE_CODE_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHCARE_PROCEDURE_CODE_US"
+                    }
+                },
+                "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDIVIDUAL_TAX_IDENTIFICATION_NUMBER_US"
+                    }
+                },
+                "INSEE_CODE_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSEE_CODE_FR"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "LAT_LONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAT_LONG"
+                    }
+                },
+                "MEDICARE_BENEFICIARY_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICARE_BENEFICIARY_NUMBER_US"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "NATIONAL_DRUG_CODE_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIONAL_DRUG_CODE_US"
+                    }
+                },
+                "NATIONAL_IDENTIFICATION_NUMBER_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIONAL_IDENTIFICATION_NUMBER_DE"
+                    }
+                },
+                "NATIONAL_IDENTIFICATION_NUMBER_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIONAL_IDENTIFICATION_NUMBER_ES"
+                    }
+                },
+                "NATIONAL_IDENTIFICATION_NUMBER_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIONAL_IDENTIFICATION_NUMBER_IT"
+                    }
+                },
+                "NATIONAL_INSURANCE_NUMBER_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIONAL_INSURANCE_NUMBER_GB"
+                    }
+                },
+                "NATIONAL_PROVIDER_ID_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIONAL_PROVIDER_ID_US"
+                    }
+                },
+                "NHS_NUMBER_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NHS_NUMBER_GB"
+                    }
+                },
+                "NIE_NUMBER_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NIE_NUMBER_ES"
+                    }
+                },
+                "NIF_NUMBER_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NIF_NUMBER_ES"
+                    }
+                },
+                "OPEN_SSH_PRIVATE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN_SSH_PRIVATE_KEY"
+                    }
+                },
+                "PASSPORT_NUMBER_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_CA"
+                    }
+                },
+                "PASSPORT_NUMBER_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_DE"
+                    }
+                },
+                "PASSPORT_NUMBER_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_ES"
+                    }
+                },
+                "PASSPORT_NUMBER_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_FR"
+                    }
+                },
+                "PASSPORT_NUMBER_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_GB"
+                    }
+                },
+                "PASSPORT_NUMBER_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_IT"
+                    }
+                },
+                "PASSPORT_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER_US"
+                    }
+                },
+                "PERMANENT_RESIDENCE_NUMBER_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENT_RESIDENCE_NUMBER_CA"
+                    }
+                },
+                "PERSONAL_HEALTH_NUMBER_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERSONAL_HEALTH_NUMBER_CA"
+                    }
+                },
+                "PGP_PRIVATE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGP_PRIVATE_KEY"
+                    }
+                },
+                "PHONE_NUMBER_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_BR"
+                    }
+                },
+                "PHONE_NUMBER_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_DE"
+                    }
+                },
+                "PHONE_NUMBER_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_ES"
+                    }
+                },
+                "PHONE_NUMBER_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_FR"
+                    }
+                },
+                "PHONE_NUMBER_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_GB"
+                    }
+                },
+                "PHONE_NUMBER_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_IT"
+                    }
+                },
+                "PHONE_NUMBER_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER_US"
+                    }
+                },
+                "PKCS_PRIVATE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PKCS_PRIVATE_KEY"
+                    }
+                },
+                "POSTAL_CODE_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTAL_CODE_CA"
+                    }
+                },
+                "PUTTY_PRIVATE_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUTTY_PRIVATE_KEY"
+                    }
+                },
+                "RG_NUMBER_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RG_NUMBER_BR"
+                    }
+                },
+                "SOCIAL_INSURANCE_NUMBER_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOCIAL_INSURANCE_NUMBER_CA"
+                    }
+                },
+                "SSN_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSN_ES"
+                    }
+                },
+                "SSN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSN_US"
+                    }
+                },
+                "TAX_ID_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAX_ID_DE"
+                    }
+                },
+                "TAX_ID_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAX_ID_ES"
+                    }
+                },
+                "TAX_ID_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAX_ID_FR"
+                    }
+                },
+                "TAX_ID_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAX_ID_GB"
+                    }
+                },
+                "VEHICLE_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "ZIP_CODE_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZIP_CODE_US"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A managed data identifier. The values match the CloudWatch Logs managed data identifiers.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RedactionIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#RedactionIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#RedactionSummary": {
+            "type": "structure",
+            "members": {
+                "scenariosScanned": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of scenarios scanned for sensitive data.</p>"
+                    }
+                },
+                "findingCounts": {
+                    "target": "com.amazonaws.bedrockagentcore#FindingCountMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of matches for each data identifier.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of what redaction found in a dataset generation. It contains counts only, never the masked data.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#RegistryArn": {
             "type": "string",
             "traits": {
@@ -16811,6 +19343,15 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
         },
+        "com.amazonaws.bedrockagentcore#RequestTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON object template for the request payload sent to an agent.</p>",
+                "smithy.api#length": {
+                    "max": 10240
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcore#RequestUri": {
             "type": "string",
             "traits": {
@@ -16960,6 +19501,49 @@
             "traits": {
                 "smithy.api#sensitive": {},
                 "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ResultAggregation": {
+            "type": "enum",
+            "members": {
+                "MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uses the lowest score.</p>",
+                        "smithy.api#enumValue": "Min"
+                    }
+                },
+                "MAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uses the highest score.</p>",
+                        "smithy.api#enumValue": "Max"
+                    }
+                },
+                "MEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Uses the average score.</p>",
+                        "smithy.api#enumValue": "Mean"
+                    }
+                },
+                "ALL_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Matches when every result has the label.</p>",
+                        "smithy.api#enumValue": "AllMatch"
+                    }
+                },
+                "ANY_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Matches when at least one result has the label.</p>",
+                        "smithy.api#enumValue": "AnyMatch"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How to combine per-trace or per-span evaluation results into one result for the session.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#ResultDestination": {
@@ -17508,6 +20092,28 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#ScenarioType": {
+            "type": "enum",
+            "members": {
+                "FIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A fixed list of turns, with an optional expected response and expected trajectory.</p>",
+                        "smithy.api#enumValue": "FIXED"
+                    }
+                },
+                "DYNAMIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A conversation driven by a simulated user, described by an actor profile, an initial input and a maximum number of turns.</p>",
+                        "smithy.api#enumValue": "DYNAMIC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of scenario a dataset generation produces. Each generation produces one type.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#SchemaVersion": {
@@ -18333,6 +20939,12 @@
                 },
                 "outputConfig": {
                     "target": "com.amazonaws.bedrockagentcore#OutputConfig"
+                },
+                "datasetExecutionConfig": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetExecutionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for running the scenarios in a dataset against an agent before evaluating the resulting sessions. When you specify this field, the batch evaluation runs each scenario in the dataset against the agent. It then evaluates the sessions that the agent produces. You must also specify <code>evaluators</code> and a <code>dataSourceConfig</code> that uses <code>cloudWatchLogs</code>. Configure <code>cloudWatchLogs</code> with the service name and log groups that the agent uses for its traces. You can't specify <code>insights</code> or an <code>onlineEvaluationConfigSource</code> data source with this field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18728,6 +21340,143 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the code interpreter session was created.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#StartDatasetGeneration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#StartDatasetGenerationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#StartDatasetGenerationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a dataset generation, which creates examples for an existing dataset from your agent's traces. The dataset must be <code>ACTIVE</code>. Each generation produces one scenario type, set by <code>scenarioType</code>. When the generation finishes, AgentCore adds the examples to the dataset's draft. Examples that duplicate each other, or that duplicate examples already in the draft, are left out.</p> <p>A dataset can have only one generation in progress at a time. While it runs, requests that change the dataset's draft or publish a version are rejected with a <code>ConflictException</code>.</p> <p>AgentCore reads the traces with your credentials, so you need read access to the trace log groups, and to the dataset's KMS key if the dataset uses a customer managed key. The draft can hold at most 1,000 examples, including the examples this generation can add (<code>maxScenarios</code>).</p> <p>The operation returns immediately. To track progress, call <code>GetDatasetGeneration</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/generations",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#StartDatasetGenerationRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset to add the generated examples to. The dataset must be <code>ACTIVE</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset generation. The generation ID starts with this name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the dataset generation.</p>"
+                    }
+                },
+                "scenarioType": {
+                    "target": "com.amazonaws.bedrockagentcore#ScenarioType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scenario to generate. If you don't specify a value, the generation produces <code>DYNAMIC</code> scenarios.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where the generation reads sessions from, and how it selects, samples, labels and redacts them.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcore#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#StartDatasetGenerationResponse": {
+            "type": "structure",
+            "members": {
+                "generationId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcore#DatasetGenerationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset generation started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -20466,6 +23215,83 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#TraceGenerationRecord": {
+            "type": "structure",
+            "members": {
+                "sourceConfig": {
+                    "target": "com.amazonaws.bedrockagentcore#TraceSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where the generation reads sessions from, including the resolved time window.</p>"
+                    }
+                },
+                "selection": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSelectionRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the generation chooses sessions. Filters are returned as submitted, with the resolved maximum turn count. Session and trace IDs are returned as counts. If this is absent, the request had no selection.</p>"
+                    }
+                },
+                "sampling": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSamplingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How many scenarios the generation produces.</p>"
+                    }
+                },
+                "groundTruth": {
+                    "target": "com.amazonaws.bedrockagentcore#GroundTruthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference fields the generation copies into the examples. If the request didn't specify quality filters, the filters the generation applies are returned here.</p>"
+                    }
+                },
+                "redactionConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcore#RedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sensitive data the generation masks in the examples.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trace source a dataset generation was started with.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#TraceGenerationSource": {
+            "type": "structure",
+            "members": {
+                "sourceConfig": {
+                    "target": "com.amazonaws.bedrockagentcore#TraceSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where to read the sessions from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "selection": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSelection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How to choose sessions from the source. If you don't specify a selection, the generation uses every session in the source and time window that has at most 100 turns.</p>"
+                    }
+                },
+                "sampling": {
+                    "target": "com.amazonaws.bedrockagentcore#GenerationSamplingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How many scenarios to generate from the selected sessions.</p>"
+                    }
+                },
+                "groundTruth": {
+                    "target": "com.amazonaws.bedrockagentcore#GroundTruthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reference fields to copy from the sessions into the examples. If you don't specify this, the examples have no reference fields.</p>"
+                    }
+                },
+                "redactionConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcore#RedactionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sensitive data to mask in the examples. If you don't specify this, nothing is redacted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for generating examples from your agent's traces.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#TraceId": {
             "type": "string",
             "traits": {
@@ -20497,6 +23323,60 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#TraceSourceConfig": {
+            "type": "union",
+            "members": {
+                "cloudWatchLogs": {
+                    "target": "com.amazonaws.bedrockagentcore#CloudWatchLogsSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reads sessions from CloudWatch Logs log groups.</p>"
+                    }
+                },
+                "onlineEvaluation": {
+                    "target": "com.amazonaws.bedrockagentcore#OnlineEvaluationSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reads sessions, with their evaluation results, from an online evaluation configuration.</p>"
+                    }
+                },
+                "batchEvaluation": {
+                    "target": "com.amazonaws.bedrockagentcore#BatchEvaluationSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reads sessions, with their evaluation results, from a batch evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Where a dataset generation reads sessions from. Specify exactly one source.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#TurnCountRange": {
+            "type": "structure",
+            "members": {
+                "min": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of turns.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "max": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of turns. The default is 100.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A range of turn counts. Each bound is from 1 to 100, and <code>min</code> can't be greater than <code>max</code>.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#UnauthorizedException": {
@@ -20657,6 +23537,105 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the A/B test was updated.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#UpdateAgentInsight": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#UpdateAgentInsightRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#UpdateAgentInsightResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the archive status of an Amazon Bedrock AgentCore Agent Insight.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/agentinsights/{agentInsightId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#UpdateAgentInsightRequest": {
+            "type": "structure",
+            "members": {
+                "applicationName": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application that the Agent Insight belongs to.</p>",
+                        "smithy.api#httpQuery": "applicationName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "agentInsightId": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Agent Insight to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The archive status to apply to the Agent Insight. Valid values:</p> <ul> <li> <p> <code>ACTIVE</code> - Marks the insight as active.</p> </li> <li> <p> <code>ARCHIVED</code> - Marks the insight as archived.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#UpdateAgentInsightResponse": {
+            "type": "structure",
+            "members": {
+                "agentInsightId": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Agent Insight.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archiveStatus": {
+                    "target": "com.amazonaws.bedrockagentcore#AgentInsightArchiveStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The archive status of the updated Agent Insight. Valid values:</p> <ul> <li> <p> <code>ACTIVE</code> - The insight is active.</p> </li> <li> <p> <code>ARCHIVED</code> - The insight is archived.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the Agent Insight was updated.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },

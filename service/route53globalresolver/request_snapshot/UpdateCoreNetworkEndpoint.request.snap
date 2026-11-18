@@ -1,0 +1,5 @@
+PATCH /core-network-endpoints/__CoreNetworkEndpointId__
+
+Content-Type: application/json
+
+{"name":"__Name__","updateIpAddresses":[{"dnsLabel":"__DnsLabel__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","operation":"ADD","regionScope":"ALL","regions":["__Member__","__Member__"]},{"dnsLabel":"__DnsLabel__","ipv4Address":"__Ipv4Address__","ipv6Address":"__Ipv6Address__","operation":"ADD","regionScope":"ALL","regions":["__Member__","__Member__"]}]}

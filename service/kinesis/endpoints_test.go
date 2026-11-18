@@ -3715,7 +3715,7 @@ func TestEndpointCase111(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream, channel, or queue.", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -4541,7 +4541,7 @@ func TestEndpointCase136(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream, channel, or queue.", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -5221,7 +5221,7 @@ func TestEndpointCase154(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream or channel", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid ARN: Unsupported resource type `accesspoint`. Expected: stream, channel, or queue.", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -7966,8 +7966,164 @@ func TestEndpointCase229(t *testing.T) {
 	}
 }
 
-// Account Id with account id endpoint mode disabled
+// ResourceARN with queue type: basic control endpoint
 func TestEndpointCase230(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type: FIPS
+func TestEndpointCase231(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type: DualStack
+func TestEndpointCase232(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-west-2"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-west-2:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues.us-west-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with channel type: basic control endpoint
+func TestEndpointCase233(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:298091445058:channel/apu0zt8ge6utbndxe"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://apu0zt8ge6utbndxe.control-kinesis.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Account Id with account id endpoint mode disabled
+func TestEndpointCase234(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8007,7 +8163,7 @@ func TestEndpointCase230(t *testing.T) {
 }
 
 // Account Id and StreamArn with account id endpoint mode disabled
-func TestEndpointCase231(t *testing.T) {
+func TestEndpointCase235(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8048,7 +8204,7 @@ func TestEndpointCase231(t *testing.T) {
 }
 
 // Account Id missing with account id endpoint mode required
-func TestEndpointCase232(t *testing.T) {
+func TestEndpointCase236(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8071,7 +8227,7 @@ func TestEndpointCase232(t *testing.T) {
 
 // Account Id missing with account id endpoint mode required, fips and dual stack
 // enabled
-func TestEndpointCase233(t *testing.T) {
+func TestEndpointCase237(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(true),
@@ -8093,7 +8249,7 @@ func TestEndpointCase233(t *testing.T) {
 }
 
 // Account Id missing with account id endpoint mode required in ADC region
-func TestEndpointCase234(t *testing.T) {
+func TestEndpointCase238(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-iso-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -8115,7 +8271,7 @@ func TestEndpointCase234(t *testing.T) {
 }
 
 // Account Id present with account id endpoint mode required in ADC region
-func TestEndpointCase235(t *testing.T) {
+func TestEndpointCase239(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-iso-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -8138,7 +8294,7 @@ func TestEndpointCase235(t *testing.T) {
 }
 
 // Account Id present with account id endpoint mode preferred in ADC region
-func TestEndpointCase236(t *testing.T) {
+func TestEndpointCase240(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-iso-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -8178,7 +8334,7 @@ func TestEndpointCase236(t *testing.T) {
 }
 
 // Account Id missing with account id endpoint mode required and endpoint override
-func TestEndpointCase237(t *testing.T) {
+func TestEndpointCase241(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8218,7 +8374,7 @@ func TestEndpointCase237(t *testing.T) {
 }
 
 // Account Id missing with StreamArn and account id endpoint mode required
-func TestEndpointCase238(t *testing.T) {
+func TestEndpointCase242(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8258,7 +8414,7 @@ func TestEndpointCase238(t *testing.T) {
 }
 
 // Account Id missing with StreamId and account id endpoint mode required
-func TestEndpointCase239(t *testing.T) {
+func TestEndpointCase243(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8298,7 +8454,7 @@ func TestEndpointCase239(t *testing.T) {
 }
 
 // Account Id missing with account id endpoint mode preferred
-func TestEndpointCase240(t *testing.T) {
+func TestEndpointCase244(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8337,7 +8493,7 @@ func TestEndpointCase240(t *testing.T) {
 }
 
 // Account Id missing with account id endpoint mode disabled
-func TestEndpointCase241(t *testing.T) {
+func TestEndpointCase245(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8376,190 +8532,6 @@ func TestEndpointCase241(t *testing.T) {
 }
 
 // CreateStream: control operation type with AccountId
-func TestEndpointCase242(t *testing.T) {
-	var params = EndpointParameters{
-		Region:                ptr.String("us-east-1"),
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(false),
-		OperationType:         ptr.String("control"),
-		AccountId:             ptr.String("123456789012"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://123456789012.control-kinesis.us-east-1.amazonaws.com")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			out.Set("metricValues", []interface{}{
-				"O",
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// CreateStream: control operation type with FIPS and AccountId
-func TestEndpointCase243(t *testing.T) {
-	var params = EndpointParameters{
-		Region:                ptr.String("us-east-1"),
-		UseFIPS:               ptr.Bool(true),
-		UseDualStack:          ptr.Bool(false),
-		OperationType:         ptr.String("control"),
-		AccountId:             ptr.String("123456789012"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			out.Set("metricValues", []interface{}{
-				"O",
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// ListStreams: control operation type with AccountId
-func TestEndpointCase244(t *testing.T) {
-	var params = EndpointParameters{
-		Region:                ptr.String("us-west-2"),
-		UseFIPS:               ptr.Bool(false),
-		UseDualStack:          ptr.Bool(false),
-		OperationType:         ptr.String("control"),
-		AccountId:             ptr.String("123456789012"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://123456789012.control-kinesis.us-west-2.amazonaws.com")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			out.Set("metricValues", []interface{}{
-				"O",
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// ListStreams: control operation type with FIPS and DualStack
-func TestEndpointCase245(t *testing.T) {
-	var params = EndpointParameters{
-		Region:                ptr.String("us-west-2"),
-		UseFIPS:               ptr.Bool(true),
-		UseDualStack:          ptr.Bool(true),
-		OperationType:         ptr.String("control"),
-		AccountId:             ptr.String("123456789012"),
-		AccountIdEndpointMode: ptr.String("preferred"),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-
-	uri, _ := url.Parse("https://123456789012.control-kinesis-fips.us-west-2.api.aws")
-
-	expectEndpoint := smithyendpoints.Endpoint{
-		URI:     *uri,
-		Headers: http.Header{},
-		Properties: func() smithy.Properties {
-			var out smithy.Properties
-			out.Set("metricValues", []interface{}{
-				"O",
-			})
-			return out
-		}(),
-	}
-
-	if e, a := expectEndpoint.URI, result.URI; e != a {
-		t.Errorf("expect %v URI, got %v", e, a)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
-		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
-	}
-
-	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
-		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
-	}
-}
-
-// DescribeLimits: control operation type with AccountId
 func TestEndpointCase246(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
@@ -8605,7 +8577,7 @@ func TestEndpointCase246(t *testing.T) {
 	}
 }
 
-// DescribeLimits: control operation type with FIPS
+// CreateStream: control operation type with FIPS and AccountId
 func TestEndpointCase247(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
@@ -8651,7 +8623,7 @@ func TestEndpointCase247(t *testing.T) {
 	}
 }
 
-// DescribeAccountSettings: control operation type with AccountId
+// ListStreams: control operation type with AccountId
 func TestEndpointCase248(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
@@ -8697,7 +8669,7 @@ func TestEndpointCase248(t *testing.T) {
 	}
 }
 
-// DescribeAccountSettings: control operation type with FIPS and DualStack
+// ListStreams: control operation type with FIPS and DualStack
 func TestEndpointCase249(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
@@ -8743,7 +8715,7 @@ func TestEndpointCase249(t *testing.T) {
 	}
 }
 
-// UpdateAccountSettings: control operation type with AccountId
+// DescribeLimits: control operation type with AccountId
 func TestEndpointCase250(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
@@ -8789,7 +8761,7 @@ func TestEndpointCase250(t *testing.T) {
 	}
 }
 
-// UpdateAccountSettings: control operation type with FIPS
+// DescribeLimits: control operation type with FIPS
 func TestEndpointCase251(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
@@ -8835,8 +8807,192 @@ func TestEndpointCase251(t *testing.T) {
 	}
 }
 
-// CreateStream: account id endpoint mode disabled falls back to regional endpoint
+// DescribeAccountSettings: control operation type with AccountId
 func TestEndpointCase252(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-west-2"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis.us-west-2.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// DescribeAccountSettings: control operation type with FIPS and DualStack
+func TestEndpointCase253(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-west-2"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis-fips.us-west-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// UpdateAccountSettings: control operation type with AccountId
+func TestEndpointCase254(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// UpdateAccountSettings: control operation type with FIPS
+func TestEndpointCase255(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// CreateStream: account id endpoint mode disabled falls back to regional endpoint
+func TestEndpointCase256(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -8876,7 +9032,7 @@ func TestEndpointCase252(t *testing.T) {
 }
 
 // ListStreams: account id endpoint mode disabled falls back to regional endpoint
-func TestEndpointCase253(t *testing.T) {
+func TestEndpointCase257(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8917,7 +9073,7 @@ func TestEndpointCase253(t *testing.T) {
 
 // DescribeLimits: account id endpoint mode disabled falls back to regional
 // endpoint
-func TestEndpointCase254(t *testing.T) {
+func TestEndpointCase258(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -8958,7 +9114,7 @@ func TestEndpointCase254(t *testing.T) {
 
 // DescribeAccountSettings: account id endpoint mode disabled falls back to
 // regional endpoint
-func TestEndpointCase255(t *testing.T) {
+func TestEndpointCase259(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -8999,7 +9155,7 @@ func TestEndpointCase255(t *testing.T) {
 
 // UpdateAccountSettings: account id endpoint mode disabled falls back to regional
 // endpoint
-func TestEndpointCase256(t *testing.T) {
+func TestEndpointCase260(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -9040,7 +9196,7 @@ func TestEndpointCase256(t *testing.T) {
 
 // CreateStream: account id endpoint mode disabled with FIPS falls back to regional
 // FIPS endpoint
-func TestEndpointCase257(t *testing.T) {
+func TestEndpointCase261(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(true),
@@ -9081,7 +9237,7 @@ func TestEndpointCase257(t *testing.T) {
 
 // CreateStream: account id endpoint mode disabled with DualStack falls back to
 // regional DualStack endpoint
-func TestEndpointCase258(t *testing.T) {
+func TestEndpointCase262(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -9122,7 +9278,7 @@ func TestEndpointCase258(t *testing.T) {
 
 // CreateStream: account id endpoint mode disabled with FIPS and DualStack falls
 // back to regional FIPS DualStack endpoint
-func TestEndpointCase259(t *testing.T) {
+func TestEndpointCase263(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(true),
@@ -9162,7 +9318,7 @@ func TestEndpointCase259(t *testing.T) {
 }
 
 // CreateChannel: control operation type with AccountId
-func TestEndpointCase260(t *testing.T) {
+func TestEndpointCase264(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -9208,7 +9364,7 @@ func TestEndpointCase260(t *testing.T) {
 }
 
 // CreateChannel: control operation type with FIPS and AccountId
-func TestEndpointCase261(t *testing.T) {
+func TestEndpointCase265(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(true),
@@ -9254,7 +9410,7 @@ func TestEndpointCase261(t *testing.T) {
 }
 
 // CreateChannel: control operation type with DualStack and AccountId
-func TestEndpointCase262(t *testing.T) {
+func TestEndpointCase266(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -9300,7 +9456,7 @@ func TestEndpointCase262(t *testing.T) {
 }
 
 // CreateChannel: control operation type with FIPS and DualStack and AccountId
-func TestEndpointCase263(t *testing.T) {
+func TestEndpointCase267(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(true),
@@ -9346,7 +9502,7 @@ func TestEndpointCase263(t *testing.T) {
 }
 
 // CreateChannel: account id endpoint mode disabled falls back to regional endpoint
-func TestEndpointCase264(t *testing.T) {
+func TestEndpointCase268(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -9387,7 +9543,7 @@ func TestEndpointCase264(t *testing.T) {
 
 // CreateChannel: account id endpoint mode disabled with FIPS falls back to
 // regional FIPS endpoint
-func TestEndpointCase265(t *testing.T) {
+func TestEndpointCase269(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(true),
@@ -9428,7 +9584,7 @@ func TestEndpointCase265(t *testing.T) {
 
 // CreateChannel: account id endpoint mode disabled with DualStack falls back to
 // regional DualStack endpoint
-func TestEndpointCase266(t *testing.T) {
+func TestEndpointCase270(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(false),
@@ -9469,7 +9625,7 @@ func TestEndpointCase266(t *testing.T) {
 
 // CreateChannel: account id endpoint mode disabled with FIPS and DualStack falls
 // back to regional FIPS DualStack endpoint
-func TestEndpointCase267(t *testing.T) {
+func TestEndpointCase271(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-east-1"),
 		UseFIPS:               ptr.Bool(true),
@@ -9509,7 +9665,7 @@ func TestEndpointCase267(t *testing.T) {
 }
 
 // ListChannels: control operation type with AccountId
-func TestEndpointCase268(t *testing.T) {
+func TestEndpointCase272(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -9555,7 +9711,7 @@ func TestEndpointCase268(t *testing.T) {
 }
 
 // ListChannels: control operation type with FIPS and DualStack
-func TestEndpointCase269(t *testing.T) {
+func TestEndpointCase273(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(true),
@@ -9601,7 +9757,7 @@ func TestEndpointCase269(t *testing.T) {
 }
 
 // ListChannels: account id endpoint mode disabled falls back to regional endpoint
-func TestEndpointCase270(t *testing.T) {
+func TestEndpointCase274(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                ptr.String("us-west-2"),
 		UseFIPS:               ptr.Bool(false),
@@ -9620,6 +9776,2114 @@ func TestEndpointCase270(t *testing.T) {
 	}
 
 	uri, _ := url.Parse("https://kinesis.us-west-2.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: basic endpoint resolution with control operation type
+func TestEndpointCase275(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: endpoint with FIPS
+func TestEndpointCase276(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: endpoint with DualStack
+func TestEndpointCase277(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: endpoint with FIPS and DualStack
+func TestEndpointCase278(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: data operation type
+func TestEndpointCase279(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-west-2"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("data"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-west-2:123456789012:queue/abc123def456"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123def456.data-kinesis-queues.us-west-2.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: data operation type with FIPS
+func TestEndpointCase280(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("data"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/abc123def456"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123def456.data-kinesis-queues-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: data operation type with DualStack
+func TestEndpointCase281(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-west-2"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("data"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-west-2:123456789012:queue/abc123def456"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://abc123def456.data-kinesis-queues.us-west-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: VPCE endpoint override is respected as-is
+func TestEndpointCase282(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+		Endpoint:      ptr.String("https://my-vpce-xyz.vpce.amazonaws.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://my-vpce-xyz.vpce.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Invalid QueueARN: wrong arn type
+func TestEndpointCase283(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:stream/test-stream"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: QueueARN only supports `queue` ARN types, found: `stream`.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Invalid QueueARN: missing queue id
+func TestEndpointCase284(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Missing queue id.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Invalid QueueARN: non-kinesis service
+func TestEndpointCase285(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:sqs:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: The ARN was not for the Kinesis service, found: sqs.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Queue AccountId: basic endpoint with AccountId
+func TestEndpointCase286(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis-queues.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: endpoint with FIPS
+func TestEndpointCase287(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis-queues-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: endpoint with DualStack
+func TestEndpointCase288(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-west-2"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis-queues.us-west-2.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: endpoint with FIPS and DualStack
+func TestEndpointCase289(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis-queues-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: regular endpoint override is respected as-is
+func TestEndpointCase290(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+		Endpoint:      ptr.String("https://kinesis-queues.us-east-1.amazonaws.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: disabled mode falls back to regional queue endpoint
+func TestEndpointCase291(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: disabled mode with FIPS falls back to regional queue FIPS
+// endpoint
+func TestEndpointCase292(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: disabled mode with DualStack falls back to regional queue
+// DualStack endpoint
+func TestEndpointCase293(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(true),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: disabled mode with FIPS and DualStack falls back to regional
+// queue FIPS DualStack endpoint
+func TestEndpointCase294(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(true),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type: missing queue id errors
+func TestEndpointCase295(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Missing queue id.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN with channel type: missing channel id errors
+func TestEndpointCase296(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:channel"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Missing channel id.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN with unsupported type: consumer type is rejected
+func TestEndpointCase297(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:consumer/test-consumer"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Unsupported resource type `consumer`. Expected: stream, channel, or queue.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// QueueARN and StreamARN both set: StreamARN wins by rule ordering today
+// (ResourceType is not yet authoritative on the stream path; revisit if a both-ARN
+// API is introduced)
+func TestEndpointCase298(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		StreamARN:     ptr.String("arn:aws:kinesis:us-east-1:123:stream/test-stream"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123.control-kinesis.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN set but ResourceType absent: errors instead of misrouting to the
+// default kinesis endpoint
+func TestEndpointCase299(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: ResourceType must be \"queue\" when QueueARN is set.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// QueueARN set but ResourceType is not queue:  errors instead of misrouting to the
+// default kinesis endpoint
+func TestEndpointCase300(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("stream"),
+		QueueARN:      ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: ResourceType must be \"queue\" when QueueARN is set.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// AccountId without ResourceType: non-queue account endpoint is unchanged (no
+// -queues suffix)
+func TestEndpointCase301(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.control-kinesis.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			out.Set("metricValues", []interface{}{
+				"O",
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId: required mode with no AccountId errors
+func TestEndpointCase302(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountIdEndpointMode: ptr.String("required"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "AccountIdEndpointMode is required but no AccountID was provided or able to be loaded", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// QueueARN: OperationType not set errors
+func TestEndpointCase303(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-east-1"),
+		UseFIPS:      ptr.Bool(false),
+		UseDualStack: ptr.Bool(false),
+		ResourceType: ptr.String("queue"),
+		QueueARN:     ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Operation Type is not set. Please contact service team for resolution.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// QueueARN: aws-iso region falls back to regional queue endpoint
+func TestEndpointCase304(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: aws-iso-b region falls back to regional queue endpoint
+func TestEndpointCase305(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-isob-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws-iso-b:kinesis:us-isob-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-isob-east-1.sc2s.sgov.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId in aws-iso: disabled mode falls back to regional queue endpoint
+func TestEndpointCase306(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-iso-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type in aws-iso: falls back to regional queue endpoint
+func TestEndpointCase307(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type in aws-iso-b: falls back to regional queue endpoint
+func TestEndpointCase308(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-isob-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso-b:kinesis:us-isob-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-isob-east-1.sc2s.sgov.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId in aws-iso: preferred mode falls back to regional queue endpoint
+func TestEndpointCase309(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-iso-east-1"),
+		UseFIPS:               ptr.Bool(false),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: aws-iso region with FIPS falls back to regional queue FIPS endpoint
+func TestEndpointCase310(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type in aws-iso with FIPS: falls back to regional queue
+// FIPS endpoint
+func TestEndpointCase311(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: aws-iso region with DualStack falls back to regional queue DualStack
+// endpoint
+func TestEndpointCase312(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: aws-iso region with FIPS and DualStack falls back to regional queue
+// FIPS DualStack endpoint
+func TestEndpointCase313(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type in aws-iso with DualStack: falls back to regional
+// queue DualStack endpoint
+func TestEndpointCase314(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type in aws-iso with FIPS and DualStack: falls back to
+// regional queue FIPS DualStack endpoint
+func TestEndpointCase315(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId in aws-iso: preferred mode with FIPS falls back to regional
+// queue FIPS endpoint
+func TestEndpointCase316(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-iso-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("preferred"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Queue AccountId in aws-iso: disabled mode with FIPS falls back to regional queue
+// FIPS endpoint
+func TestEndpointCase317(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                ptr.String("us-iso-east-1"),
+		UseFIPS:               ptr.Bool(true),
+		UseDualStack:          ptr.Bool(false),
+		OperationType:         ptr.String("control"),
+		AccountId:             ptr.String("123456789012"),
+		AccountIdEndpointMode: ptr.String("disabled"),
+		ResourceType:          ptr.String("queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-queues-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with channel type in aws-iso: falls back to default kinesis endpoint
+func TestEndpointCase318(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with channel type in aws-iso with FIPS: falls back to default
+// kinesis FIPS endpoint
+func TestEndpointCase319(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ChannelARN in aws-iso: falls back to default kinesis endpoint
+func TestEndpointCase320(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ChannelARN:    ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ChannelARN in aws-iso with FIPS: falls back to default kinesis FIPS endpoint
+func TestEndpointCase321(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ChannelARN:    ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:channel/myChannelId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-fips.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN queue in aws-iso: non-kinesis service should error
+func TestEndpointCase322(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:sqs:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: The ARN was not for the Kinesis service, found: sqs.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN queue in aws-iso: partition mismatch should error
+func TestEndpointCase323(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Partition: aws from ARN doesn't match with partition name: aws-iso.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN queue in aws-iso: missing queue id should error
+func TestEndpointCase324(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Missing queue id.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN queue in aws-iso: invalid account id should error
+func TestEndpointCase325(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:invalid..account:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Invalid account id.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN queue in aws-iso: OperationType not set should error
+func TestEndpointCase326(t *testing.T) {
+	var params = EndpointParameters{
+		Region:       ptr.String("us-iso-east-1"),
+		UseFIPS:      ptr.Bool(false),
+		UseDualStack: ptr.Bool(false),
+		ResourceARN:  ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Operation Type is not set. Please contact service team for resolution.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN queue in aws-iso: invalid queue id should error
+func TestEndpointCase327(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:queue/invalid.queue.id"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid ARN: Invalid queue id.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// StreamARN in aws-iso with DualStack: falls back to default kinesis DualStack
+// endpoint
+func TestEndpointCase328(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		StreamARN:     ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// StreamARN in aws-iso with FIPS and DualStack: falls back to default kinesis FIPS
+// DualStack endpoint
+func TestEndpointCase329(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		StreamARN:     ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis-fips.us-iso-east-1.api.aws.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// StreamARN in aws-iso: missing ARN type falls back to default kinesis endpoint
+func TestEndpointCase330(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-iso-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		StreamARN:     ptr.String("arn:aws-iso:kinesis:us-iso-east-1:123456789012:"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://kinesis.us-iso-east-1.c2s.ic.gov")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// QueueARN: partition mismatch errors
+func TestEndpointCase331(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("control"),
+		ResourceType:  ptr.String("queue"),
+		QueueARN:      ptr.String("arn:aws-cn:kinesis:cn-north-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Partition: aws-cn from ARN doesn't match with partition name: aws.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// ResourceARN with queue type: FIPS and DualStack
+func TestEndpointCase332(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-east-1"),
+		UseFIPS:       ptr.Bool(true),
+		UseDualStack:  ptr.Bool(true),
+		OperationType: ptr.String("control"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-east-1:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.control-kinesis-queues-fips.us-east-1.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:        *uri,
+		Headers:    http.Header{},
+		Properties: smithy.Properties{},
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// ResourceARN with queue type: data operation type
+func TestEndpointCase333(t *testing.T) {
+	var params = EndpointParameters{
+		Region:        ptr.String("us-west-2"),
+		UseFIPS:       ptr.Bool(false),
+		UseDualStack:  ptr.Bool(false),
+		OperationType: ptr.String("data"),
+		ResourceARN:   ptr.String("arn:aws:kinesis:us-west-2:123456789012:queue/myQueueId"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://myQueueId.data-kinesis-queues.us-west-2.amazonaws.com")
 
 	expectEndpoint := smithyendpoints.Endpoint{
 		URI:        *uri,

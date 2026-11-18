@@ -82,6 +82,9 @@ func ExampleCspmProviderConfiguration_outputUsage() {
 	case *types.CspmProviderConfigurationMemberAzure:
 		_ = v.Value // Value is types.AzureProviderConfiguration
 
+	case *types.CspmProviderConfigurationMemberGCP:
+		_ = v.Value // Value is types.GcpProviderConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -92,6 +95,7 @@ func ExampleCspmProviderConfiguration_outputUsage() {
 }
 
 var _ *types.AzureProviderConfiguration
+var _ *types.GcpProviderConfiguration
 
 func ExampleCspmProviderDetail_outputUsage() {
 	var union types.CspmProviderDetail
@@ -99,6 +103,9 @@ func ExampleCspmProviderDetail_outputUsage() {
 	switch v := union.(type) {
 	case *types.CspmProviderDetailMemberAzure:
 		_ = v.Value // Value is types.AzureDetail
+
+	case *types.CspmProviderDetailMemberGCP:
+		_ = v.Value // Value is types.GcpDetail
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -109,6 +116,7 @@ func ExampleCspmProviderDetail_outputUsage() {
 	}
 }
 
+var _ *types.GcpDetail
 var _ *types.AzureDetail
 
 func ExampleCspmProviderUpdateConfiguration_outputUsage() {
@@ -117,6 +125,9 @@ func ExampleCspmProviderUpdateConfiguration_outputUsage() {
 	switch v := union.(type) {
 	case *types.CspmProviderUpdateConfigurationMemberAzure:
 		_ = v.Value // Value is types.AzureUpdateConfiguration
+
+	case *types.CspmProviderUpdateConfigurationMemberGCP:
+		_ = v.Value // Value is types.GcpUpdateConfiguration
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -128,6 +139,7 @@ func ExampleCspmProviderUpdateConfiguration_outputUsage() {
 }
 
 var _ *types.AzureUpdateConfiguration
+var _ *types.GcpUpdateConfiguration
 
 func ExampleExportDestination_outputUsage() {
 	var union types.ExportDestination
@@ -252,6 +264,9 @@ func ExampleProviderConfiguration_outputUsage() {
 	case *types.ProviderConfigurationMemberAzure:
 		_ = v.Value // Value is types.AzureProviderConfiguration
 
+	case *types.ProviderConfigurationMemberGCP:
+		_ = v.Value // Value is types.GcpProviderConfiguration
+
 	case *types.ProviderConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudProviderConfiguration
 
@@ -269,6 +284,7 @@ func ExampleProviderConfiguration_outputUsage() {
 
 var _ *types.AzureProviderConfiguration
 var _ *types.JiraCloudProviderConfiguration
+var _ *types.GcpProviderConfiguration
 var _ *types.ServiceNowProviderConfiguration
 
 func ExampleProviderDetail_outputUsage() {
@@ -277,6 +293,9 @@ func ExampleProviderDetail_outputUsage() {
 	switch v := union.(type) {
 	case *types.ProviderDetailMemberAzure:
 		_ = v.Value // Value is types.AzureDetail
+
+	case *types.ProviderDetailMemberGCP:
+		_ = v.Value // Value is types.GcpDetail
 
 	case *types.ProviderDetailMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudDetail
@@ -293,6 +312,7 @@ func ExampleProviderDetail_outputUsage() {
 	}
 }
 
+var _ *types.GcpDetail
 var _ *types.AzureDetail
 var _ *types.JiraCloudDetail
 var _ *types.ServiceNowDetail
@@ -303,6 +323,9 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 	switch v := union.(type) {
 	case *types.ProviderUpdateConfigurationMemberAzure:
 		_ = v.Value // Value is types.AzureUpdateConfiguration
+
+	case *types.ProviderUpdateConfigurationMemberGCP:
+		_ = v.Value // Value is types.GcpUpdateConfiguration
 
 	case *types.ProviderUpdateConfigurationMemberJiraCloud:
 		_ = v.Value // Value is types.JiraCloudUpdateConfiguration
@@ -321,6 +344,7 @@ func ExampleProviderUpdateConfiguration_outputUsage() {
 
 var _ *types.AzureUpdateConfiguration
 var _ *types.ServiceNowUpdateConfiguration
+var _ *types.GcpUpdateConfiguration
 var _ *types.JiraCloudUpdateConfiguration
 
 func ExampleRecommendationStep_outputUsage() {

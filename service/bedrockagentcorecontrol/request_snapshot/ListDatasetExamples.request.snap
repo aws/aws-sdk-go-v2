@@ -1,3 +1,5 @@
-GET /datasets/__DatasetId__/examples?datasetVersion=__DatasetVersion__&maxResults=1&nextToken=__NextToken__
+POST /datasets/__DatasetId__/examples/list
 
+Content-Type: application/json
 
+{"datasetVersion":"__DatasetVersion__","filter":{"exampleFields":[{"anyOf":["TURNS","TURNS"]},{"anyOf":["TURNS","TURNS"]}],"generationIds":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

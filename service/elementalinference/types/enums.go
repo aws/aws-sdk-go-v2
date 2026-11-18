@@ -2,6 +2,46 @@
 
 package types
 
+type BedrockApi string
+
+// Enum values for BedrockApi
+const (
+	BedrockApiInvokeModel BedrockApi = "INVOKE_MODEL"
+)
+
+// Values returns all known values for BedrockApi. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BedrockApi) Values() []BedrockApi {
+	return []BedrockApi{
+		"INVOKE_MODEL",
+	}
+}
+
+type ContextType string
+
+// Enum values for ContextType
+const (
+	ContextTypeFrames             ContextType = "FRAMES"
+	ContextTypeSubtitles          ContextType = "SUBTITLES"
+	ContextTypeContextualMetadata ContextType = "CONTEXTUAL_METADATA"
+	ContextTypeClipMetadata       ContextType = "CLIP_METADATA"
+)
+
+// Values returns all known values for ContextType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextType) Values() []ContextType {
+	return []ContextType{
+		"FRAMES",
+		"SUBTITLES",
+		"CONTEXTUAL_METADATA",
+		"CLIP_METADATA",
+	}
+}
+
 type DataSourceSport string
 
 // Enum values for DataSourceSport
@@ -73,6 +113,25 @@ func (DictionaryStatus) Values() []DictionaryStatus {
 	}
 }
 
+type EventBridgeDeliveryMode string
+
+// Enum values for EventBridgeDeliveryMode
+const (
+	EventBridgeDeliveryModeEnabled  EventBridgeDeliveryMode = "ENABLED"
+	EventBridgeDeliveryModeDisabled EventBridgeDeliveryMode = "DISABLED"
+)
+
+// Values returns all known values for EventBridgeDeliveryMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventBridgeDeliveryMode) Values() []EventBridgeDeliveryMode {
+	return []EventBridgeDeliveryMode{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ExtendedAnalysisMode string
 
 // Enum values for ExtendedAnalysisMode
@@ -135,6 +194,52 @@ const (
 func (FilterName) Values() []FilterName {
 	return []FilterName{
 		"COMPETITOR",
+	}
+}
+
+type FrameSamplingMode string
+
+// Enum values for FrameSamplingMode
+const (
+	FrameSamplingModeFirst   FrameSamplingMode = "FIRST"
+	FrameSamplingModeUniform FrameSamplingMode = "UNIFORM"
+	FrameSamplingModeLast    FrameSamplingMode = "LAST"
+)
+
+// Values returns all known values for FrameSamplingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FrameSamplingMode) Values() []FrameSamplingMode {
+	return []FrameSamplingMode{
+		"FIRST",
+		"UNIFORM",
+		"LAST",
+	}
+}
+
+type FunctionStatus string
+
+// Enum values for FunctionStatus
+const (
+	FunctionStatusCreating   FunctionStatus = "CREATING"
+	FunctionStatusAvailable  FunctionStatus = "AVAILABLE"
+	FunctionStatusReferenced FunctionStatus = "REFERENCED"
+	FunctionStatusDeleting   FunctionStatus = "DELETING"
+	FunctionStatusDeleted    FunctionStatus = "DELETED"
+)
+
+// Values returns all known values for FunctionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionStatus) Values() []FunctionStatus {
+	return []FunctionStatus{
+		"CREATING",
+		"AVAILABLE",
+		"REFERENCED",
+		"DELETING",
+		"DELETED",
 	}
 }
 

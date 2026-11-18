@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"remoteSourceActionJob":{"arn":"__Arn__","connectorArn":"__ConnectorArn__","endedAt":946684800,"remoteSourceActionArns":["__Member__","__Member__"],"remoteSourceActionJobID":"__RemoteSourceActionJobID__","sourceServerArns":["__Member__","__Member__"],"startedAt":946684800,"status":"PENDING","statusReason":"__StatusReason__","tags":{"key0":"__Value__"}}}

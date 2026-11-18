@@ -206,6 +206,18 @@ func TestCheckSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEventSourceMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEventSourceMapping(context.Background(), nil, func(o *Options) {
@@ -806,6 +818,18 @@ func TestCheckSnapshot_ListVersionsByFunction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PauseDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PauseDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PauseDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PublishLayerVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PublishLayerVersion(context.Background(), nil, func(o *Options) {
@@ -943,6 +967,18 @@ func TestCheckSnapshot_RemovePermission(t *testing.T) {
 	_, err := svc.RemovePermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RemovePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ResumeDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResumeDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResumeDurableExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1254,6 +1290,18 @@ func TestUpdateSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 	_, err := svc.DeleteCodeSigningConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCodeSigningConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDurableExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1861,6 +1909,18 @@ func TestUpdateSnapshot_ListVersionsByFunction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PauseDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PauseDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PauseDurableExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PublishLayerVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PublishLayerVersion(context.Background(), nil, func(o *Options) {
@@ -1998,6 +2058,18 @@ func TestUpdateSnapshot_RemovePermission(t *testing.T) {
 	_, err := svc.RemovePermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RemovePermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResumeDurableExecution(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResumeDurableExecution(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResumeDurableExecution")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

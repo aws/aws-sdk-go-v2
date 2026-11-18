@@ -1,0 +1,5 @@
+POST /GetThirdPartyTelemetryEnrichment
+
+Content-Type: application/json
+
+{"TelemetryEnrichmentIdentifier":"__TelemetryEnrichmentIdentifier__"}

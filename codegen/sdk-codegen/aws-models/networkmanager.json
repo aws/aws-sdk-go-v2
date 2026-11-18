@@ -2651,6 +2651,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the routing policies and other association details in the core network change values.</p>"
                     }
+                },
+                "MultipathResilience": {
+                    "target": "com.amazonaws.networkmanager#MultipathResilienceChangeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The change in multipath resilience configuration in the core network change values.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11093,6 +11099,43 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#MultipathResilienceChangeValues": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.networkmanager#MultipathResilienceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode (best-effort/disabled) of multipath resilience.</p>"
+                    }
+                },
+                "EdgeSets": {
+                    "target": "com.amazonaws.networkmanager#EdgeSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of two edge locations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a change in multipath resilience.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#MultipathResilienceMode": {
+            "type": "enum",
+            "members": {
+                "BEST_EFFORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "best-effort"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
                 }
             }
         },

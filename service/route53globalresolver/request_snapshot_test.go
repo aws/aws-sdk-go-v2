@@ -385,12 +385,14 @@ func TestCheckRequestSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 
 func TestCheckRequestSnapshot_CreateAccessSource(t *testing.T) {
 	input := &CreateAccessSourceInput{
-		Cidr:          ptr.String("__Cidr__"),
-		ClientToken:   ptr.String("__ClientToken__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
+		Cidr:                  ptr.String("__Cidr__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Segment:               ptr.String("__Segment__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -447,6 +449,61 @@ func TestCheckRequestSnapshot_CreateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateCoreNetworkEndpoint(t *testing.T) {
+	input := &CreateCoreNetworkEndpointInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpInputItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -565,6 +622,7 @@ func TestCheckRequestSnapshot_CreateGlobalResolver(t *testing.T) {
 		ClientToken:         ptr.String("__ClientToken__"),
 		Description:         ptr.String("__Description__"),
 		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus:      types.PublicIpStatus("ENABLED_RESERVED"),
 		Name:                ptr.String("__Name__"),
 		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
 		Regions: []string{
@@ -648,6 +706,33 @@ func TestCheckRequestSnapshot_DeleteAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteCoreNetworkEndpoint(t *testing.T) {
+	input := &DeleteCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -892,6 +977,33 @@ func TestCheckRequestSnapshot_GetAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetCoreNetworkEndpoint(t *testing.T) {
+	input := &GetCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1152,6 +1264,40 @@ func TestCheckRequestSnapshot_ListAccessTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAccessTokens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListCoreNetworkEndpoints(t *testing.T) {
+	input := &ListCoreNetworkEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCoreNetworkEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCoreNetworkEndpoints"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1484,6 +1630,7 @@ func TestCheckRequestSnapshot_UpdateAccessSource(t *testing.T) {
 	input := &UpdateAccessSourceInput{
 		AccessSourceId: ptr.String("__AccessSourceId__"),
 		Cidr:           ptr.String("__Cidr__"),
+		DnsViewId:      ptr.String("__DnsViewId__"),
 		IpAddressType:  types.IpAddressType("IPV4"),
 		Name:           ptr.String("__Name__"),
 		Protocol:       types.DnsProtocol("DO53"),
@@ -1535,6 +1682,58 @@ func TestCheckRequestSnapshot_UpdateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateCoreNetworkEndpoint(t *testing.T) {
+	input := &UpdateCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Name:                  ptr.String("__Name__"),
+		UpdateIpAddresses: []types.UpdateIpAddressEntry{
+			{
+				Operation:   types.UpdateIpAddressOperation("ADD"),
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Operation:   types.UpdateIpAddressOperation("ADD"),
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1648,6 +1847,7 @@ func TestCheckRequestSnapshot_UpdateGlobalResolver(t *testing.T) {
 		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
 		Description:         ptr.String("__Description__"),
 		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus:      types.PublicIpStatus("ENABLED_RESERVED"),
 		Regions: []string{
 			"__Member__",
 			"__Member__",
@@ -1882,12 +2082,14 @@ func TestUpdateRequestSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CreateAccessSource(t *testing.T) {
 	input := &CreateAccessSourceInput{
-		Cidr:          ptr.String("__Cidr__"),
-		ClientToken:   ptr.String("__ClientToken__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
+		Cidr:                  ptr.String("__Cidr__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Segment:               ptr.String("__Segment__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1944,6 +2146,61 @@ func TestUpdateRequestSnapshot_CreateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateCoreNetworkEndpoint(t *testing.T) {
+	input := &CreateCoreNetworkEndpointInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpInputItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2062,6 +2319,7 @@ func TestUpdateRequestSnapshot_CreateGlobalResolver(t *testing.T) {
 		ClientToken:         ptr.String("__ClientToken__"),
 		Description:         ptr.String("__Description__"),
 		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus:      types.PublicIpStatus("ENABLED_RESERVED"),
 		Name:                ptr.String("__Name__"),
 		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
 		Regions: []string{
@@ -2145,6 +2403,33 @@ func TestUpdateRequestSnapshot_DeleteAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteCoreNetworkEndpoint(t *testing.T) {
+	input := &DeleteCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2389,6 +2674,33 @@ func TestUpdateRequestSnapshot_GetAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetCoreNetworkEndpoint(t *testing.T) {
+	input := &GetCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2649,6 +2961,40 @@ func TestUpdateRequestSnapshot_ListAccessTokens(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAccessTokens"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListCoreNetworkEndpoints(t *testing.T) {
+	input := &ListCoreNetworkEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCoreNetworkEndpoints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCoreNetworkEndpoints"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2981,6 +3327,7 @@ func TestUpdateRequestSnapshot_UpdateAccessSource(t *testing.T) {
 	input := &UpdateAccessSourceInput{
 		AccessSourceId: ptr.String("__AccessSourceId__"),
 		Cidr:           ptr.String("__Cidr__"),
+		DnsViewId:      ptr.String("__DnsViewId__"),
 		IpAddressType:  types.IpAddressType("IPV4"),
 		Name:           ptr.String("__Name__"),
 		Protocol:       types.DnsProtocol("DO53"),
@@ -3032,6 +3379,58 @@ func TestUpdateRequestSnapshot_UpdateAccessToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccessToken"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateCoreNetworkEndpoint(t *testing.T) {
+	input := &UpdateCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Name:                  ptr.String("__Name__"),
+		UpdateIpAddresses: []types.UpdateIpAddressEntry{
+			{
+				Operation:   types.UpdateIpAddressOperation("ADD"),
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Operation:   types.UpdateIpAddressOperation("ADD"),
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCoreNetworkEndpoint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCoreNetworkEndpoint"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3145,6 +3544,7 @@ func TestUpdateRequestSnapshot_UpdateGlobalResolver(t *testing.T) {
 		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
 		Description:         ptr.String("__Description__"),
 		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus:      types.PublicIpStatus("ENABLED_RESERVED"),
 		Regions: []string{
 			"__Member__",
 			"__Member__",

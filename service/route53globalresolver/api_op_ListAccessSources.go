@@ -68,8 +68,8 @@ func (v *ListAccessSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type ListAccessSourcesOutput struct {
 
-	// An array containing information about the access sources, such as the ID, CIDR
-	// etc.
+	// An array containing information about the access sources, such as the ID and
+	// CIDR.
 	//
 	// This member is required.
 	AccessSources []types.AccessSourcesItem

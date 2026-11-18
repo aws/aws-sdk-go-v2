@@ -3967,6 +3967,33 @@ func TestCheckRequestSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetAgentInsightStore(t *testing.T) {
+	input := &GetAgentInsightStoreInput{
+		AgentInsightStoreId: ptr.String("__AgentInsightStoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentInsightStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentInsightStore"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetAgentRuntime(t *testing.T) {
 	input := &GetAgentRuntimeInput{
 		AgentRuntimeId:      ptr.String("__AgentRuntimeId__"),
@@ -4930,6 +4957,34 @@ func TestCheckRequestSnapshot_GetWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListAgentInsightStores(t *testing.T) {
+	input := &ListAgentInsightStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentInsightStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentInsightStores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListAgentRuntimeEndpoints(t *testing.T) {
 	input := &ListAgentRuntimeEndpointsInput{
 		AgentRuntimeId: ptr.String("__AgentRuntimeId__"),
@@ -5282,8 +5337,28 @@ func TestCheckRequestSnapshot_ListDatasetExamples(t *testing.T) {
 	input := &ListDatasetExamplesInput{
 		DatasetId:      ptr.String("__DatasetId__"),
 		DatasetVersion: ptr.String("__DatasetVersion__"),
-		MaxResults:     ptr.Int32(1),
-		NextToken:      ptr.String("__NextToken__"),
+		Filter: &types.ListDatasetExamplesFilter{
+			GenerationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExampleFields: []types.ExampleFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5310,6 +5385,26 @@ func TestCheckRequestSnapshot_ListDatasetExamples(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListDatasets(t *testing.T) {
 	input := &ListDatasetsInput{
+		Filter: &types.ListDatasetsFilter{
+			ExampleCountByField: []types.ExampleCountByFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+			},
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 	}
@@ -5338,7 +5433,27 @@ func TestCheckRequestSnapshot_ListDatasets(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListDatasetVersions(t *testing.T) {
 	input := &ListDatasetVersionsInput{
-		DatasetId:  ptr.String("__DatasetId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Filter: &types.ListDatasetVersionsFilter{
+			ExampleCountByField: []types.ExampleCountByFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+			},
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 	}
@@ -6358,6 +6473,39 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAgentInsightStore(t *testing.T) {
+	input := &UpdateAgentInsightStoreInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AgentInsightStoreId: ptr.String("__AgentInsightStoreId__"),
+		EnablementStatus:    types.AgentInsightStoreEnablementStatus("ENABLED"),
+		EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+			Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentInsightStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentInsightStore"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12712,6 +12860,33 @@ func TestUpdateRequestSnapshot_DeleteWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAgentInsightStore(t *testing.T) {
+	input := &GetAgentInsightStoreInput{
+		AgentInsightStoreId: ptr.String("__AgentInsightStoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAgentInsightStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAgentInsightStore"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetAgentRuntime(t *testing.T) {
 	input := &GetAgentRuntimeInput{
 		AgentRuntimeId:      ptr.String("__AgentRuntimeId__"),
@@ -13675,6 +13850,34 @@ func TestUpdateRequestSnapshot_GetWorkloadIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListAgentInsightStores(t *testing.T) {
+	input := &ListAgentInsightStoresInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAgentInsightStores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAgentInsightStores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListAgentRuntimeEndpoints(t *testing.T) {
 	input := &ListAgentRuntimeEndpointsInput{
 		AgentRuntimeId: ptr.String("__AgentRuntimeId__"),
@@ -14027,8 +14230,28 @@ func TestUpdateRequestSnapshot_ListDatasetExamples(t *testing.T) {
 	input := &ListDatasetExamplesInput{
 		DatasetId:      ptr.String("__DatasetId__"),
 		DatasetVersion: ptr.String("__DatasetVersion__"),
-		MaxResults:     ptr.Int32(1),
-		NextToken:      ptr.String("__NextToken__"),
+		Filter: &types.ListDatasetExamplesFilter{
+			GenerationIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExampleFields: []types.ExampleFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14055,6 +14278,26 @@ func TestUpdateRequestSnapshot_ListDatasetExamples(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListDatasets(t *testing.T) {
 	input := &ListDatasetsInput{
+		Filter: &types.ListDatasetsFilter{
+			ExampleCountByField: []types.ExampleCountByFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+			},
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 	}
@@ -14083,7 +14326,27 @@ func TestUpdateRequestSnapshot_ListDatasets(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListDatasetVersions(t *testing.T) {
 	input := &ListDatasetVersionsInput{
-		DatasetId:  ptr.String("__DatasetId__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Filter: &types.ListDatasetVersionsFilter{
+			ExampleCountByField: []types.ExampleCountByFieldCondition{
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+				{
+					AnyOf: []types.ExampleField{
+						types.ExampleField("TURNS"),
+						types.ExampleField("TURNS"),
+					},
+					Min: ptr.Int64(1),
+					Max: ptr.Int64(1),
+				},
+			},
+		},
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
 	}
@@ -15103,6 +15366,39 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAgentInsightStore(t *testing.T) {
+	input := &UpdateAgentInsightStoreInput{
+		ClientToken:         ptr.String("__ClientToken__"),
+		AgentInsightStoreId: ptr.String("__AgentInsightStoreId__"),
+		EnablementStatus:    types.AgentInsightStoreEnablementStatus("ENABLED"),
+		EncryptionConfiguration: &types.AgentInsightStoreEncryptionConfiguration{
+			Mode:      types.AgentInsightStoreEncryptionMode("AWS_OWNED_KMS_KEY"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAgentInsightStore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentInsightStore"); err != nil {
 		t.Fatal(err)
 	}
 }

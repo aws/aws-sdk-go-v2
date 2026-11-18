@@ -2713,6 +2713,103 @@ func validateDocumentationPartLocation(v *types.DocumentationPartLocation) error
 	}
 }
 
+func validateJwtAdditionalClaim(v *types.JwtAdditionalClaim) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JwtAdditionalClaim"}
+	if v.ClaimName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClaimName"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJwtConfigurationInput(v *types.JwtConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JwtConfigurationInput"}
+	if v.Issuers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuers"))
+	} else if v.Issuers != nil {
+		if err := validateListOfJwtIssuerInput(v.Issuers); err != nil {
+			invalidParams.AddNested("Issuers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultAlgorithms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultAlgorithms"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJwtIssuerInput(v *types.JwtIssuerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JwtIssuerInput"}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	}
+	if v.Audiences == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Audiences"))
+	}
+	if v.AdditionalClaims != nil {
+		if err := validateListOfJwtAdditionalClaim(v.AdditionalClaims); err != nil {
+			invalidParams.AddNested("AdditionalClaims", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListOfJwtAdditionalClaim(v []types.JwtAdditionalClaim) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfJwtAdditionalClaim"}
+	for i := range v {
+		if err := validateJwtAdditionalClaim(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListOfJwtIssuerInput(v []types.JwtIssuerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfJwtIssuerInput"}
+	for i := range v {
+		if err := validateJwtIssuerInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAuthorizerInput(v *CreateAuthorizerInput) error {
 	if v == nil {
 		return nil
@@ -2726,6 +2823,11 @@ func validateOpCreateAuthorizerInput(v *CreateAuthorizerInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.JwtConfiguration != nil {
+		if err := validateJwtConfigurationInput(v.JwtConfiguration); err != nil {
+			invalidParams.AddNested("JwtConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

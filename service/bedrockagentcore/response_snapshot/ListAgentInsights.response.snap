@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentInsights":[{"affectedSessionCount":1,"agentInsightId":"__AgentInsightId__","applicationName":"__ApplicationName__","archiveStatus":"ACTIVE","batchEvaluationId":"__BatchEvaluationId__","createdAt":"2000-01-01T00:00:00Z","customerMetadataStatus":"AVAILABLE","description":"__Description__","lastSeenAt":"2000-01-01T00:00:00Z","name":"__Name__","type":"FAILURE","updatedAt":"2000-01-01T00:00:00Z"},{"affectedSessionCount":1,"agentInsightId":"__AgentInsightId__","applicationName":"__ApplicationName__","archiveStatus":"ACTIVE","batchEvaluationId":"__BatchEvaluationId__","createdAt":"2000-01-01T00:00:00Z","customerMetadataStatus":"AVAILABLE","description":"__Description__","lastSeenAt":"2000-01-01T00:00:00Z","name":"__Name__","type":"FAILURE","updatedAt":"2000-01-01T00:00:00Z"}],"nextToken":"__NextToken__"}

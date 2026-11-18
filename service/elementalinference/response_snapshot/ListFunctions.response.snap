@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"functions":[{"arn":"__Arn__","contextTypes":["FRAMES","FRAMES"],"description":"__Description__","id":"__Id__","name":"__Name__","status":"CREATING","target":{"bedrock":{"api":"INVOKE_MODEL","model":"__Model__"}}},{"arn":"__Arn__","contextTypes":["FRAMES","FRAMES"],"description":"__Description__","id":"__Id__","name":"__Name__","status":"CREATING","target":{"bedrock":{"api":"INVOKE_MODEL","model":"__Model__"}}}],"nextToken":"__NextToken__"}

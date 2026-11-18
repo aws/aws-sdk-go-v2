@@ -1,3 +1,7 @@
+# v1.58.0 (2026-11-17)
+
+* **Feature**: AWS Transform adds Express Migration for MAP, remote source actions, per-server default launch settings, F5 BIG-IP to Elastic Load Balancing migration, AWS Outposts support, greenfield network design, and replication of volumes up to 64 TB.
+
 # v1.57.3 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

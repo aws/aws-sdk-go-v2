@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.SplitCredit
+
+{"childCredits":[{"amount":"__Amount__","creditId":"__CreditId__"},{"amount":"__Amount__","creditId":"__CreditId__"}],"dryRun":true,"parentCreditId":"__ParentCreditId__"}

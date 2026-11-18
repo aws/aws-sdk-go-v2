@@ -2136,7 +2136,7 @@ var _ScanOnPushFlag = smithy.NewSchema(smithy.ShapeID{
 var ScanStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
 	Name:      "ScanStatus",
-}, smithy.ShapeTypeEnum, 10)
+}, smithy.ShapeTypeEnum, 11)
 var ScanStatus_IN_PROGRESS *smithy.Schema
 
 var ScanStatus_COMPLETE *smithy.Schema
@@ -2156,6 +2156,8 @@ var ScanStatus_FINDINGS_UNAVAILABLE *smithy.Schema
 var ScanStatus_LIMIT_EXCEEDED *smithy.Schema
 
 var ScanStatus_IMAGE_ARCHIVED *smithy.Schema
+
+var ScanStatus_IMAGE_SIZE_EXCEEDED *smithy.Schema
 
 var _ScanStatusDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecr",
@@ -4083,6 +4085,8 @@ func init() {
 	ScanStatus_LIMIT_EXCEEDED = ScanStatus.AddMember("LIMIT_EXCEEDED", smithyprelude.Unit)
 
 	ScanStatus_IMAGE_ARCHIVED = ScanStatus.AddMember("IMAGE_ARCHIVED", smithyprelude.Unit)
+
+	ScanStatus_IMAGE_SIZE_EXCEEDED = ScanStatus.AddMember("IMAGE_SIZE_EXCEEDED", smithyprelude.Unit)
 
 	ImageScanStatus_status = ImageScanStatus.AddMember("status", ScanStatus)
 

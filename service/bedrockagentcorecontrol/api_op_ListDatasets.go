@@ -29,6 +29,9 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 
 type ListDatasetsInput struct {
 
+	//  A filter to apply to the datasets.
+	Filter *types.ListDatasetsFilter
+
 	//  The maximum number of datasets to return per page.
 	MaxResults *int32
 
@@ -45,6 +48,11 @@ func (v *ListDatasetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDatasetsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDatasetsRequest_maxResults, *v.MaxResults)
 	}

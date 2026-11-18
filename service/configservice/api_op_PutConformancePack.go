@@ -29,8 +29,12 @@ import (
 // account. The service-linked role is created only when the role does not exist in
 // your account.
 //
-// You must specify only one of the follow parameters: TemplateS3Uri , TemplateBody
-// or TemplateSSMDocumentDetails .
+// For custom conformance packs, you must specify only one of TemplateS3Uri ,
+// TemplateBody , TemplateSSMDocumentDetails .
+//
+// For managed conformance packs, you must specify Source . Do not specify
+// TemplateS3Uri , TemplateBody , TemplateSSMDocumentDetails , DeliveryS3Bucket ,
+// or DeliveryS3KeyPrefix .
 //
 // # Tags are added at creation and cannot be updated with this operation
 //
@@ -67,7 +71,9 @@ type PutConformancePackInput struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// A list of ConformancePackInputParameter objects.
+	// A list of ConformancePackInputParameter objects. Custom conformance packs can
+	// have at most 60 input parameters. Managed conformance packs can have at most 330
+	// input parameters.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
 	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
@@ -79,6 +85,29 @@ type PutConformancePackInput struct {
 	//
 	// This field is optional.
 	DeliveryS3KeyPrefix *string
+
+	// An object of type ConformancePackScope that defines which resources can trigger
+	// an evaluation for Config rules in the conformance pack. The scope can include a
+	// tag key and optional tag value. Specify a scope to constrain the resources that
+	// can trigger an evaluation for rules in the conformance pack. If you do not
+	// specify a scope, all rules in the conformance pack are unscoped.
+	//
+	// This field is optional and is supported only for managed conformance packs. If
+	// you specify a scope, you must also specify Source .
+	Scope *types.ConformancePackScope
+
+	// An object of type ConformancePackSource , which contains the identifier of the
+	// managed conformance pack that you want to deploy. If you specify a source,
+	// Config creates a managed conformance pack. Managed conformance packs are
+	// predefined collections of Config rules that are created and maintained by Amazon
+	// Web Services.
+	//
+	// If you specify a source, you cannot specify TemplateS3Uri , TemplateBody ,
+	// TemplateSSMDocumentDetails , DeliveryS3Bucket , or DeliveryS3KeyPrefix . You
+	// cannot convert an existing conformance pack between a managed conformance pack
+	// and a custom conformance pack. You also cannot change the source of an existing
+	// managed conformance pack.
+	Source *types.ConformancePackSource
 
 	// The tags for the conformance pack. Each tag consists of a key and an optional
 	// value, both of which you define.
@@ -131,6 +160,16 @@ func (v *PutConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DeliveryS3KeyPrefix != nil {
 		s.WriteString(schemas.PutConformancePackRequest_DeliveryS3KeyPrefix, *v.DeliveryS3KeyPrefix)
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.PutConformancePackRequest_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.PutConformancePackRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Tags != nil {
 		serializeTagsList(s, schemas.PutConformancePackRequest_Tags, v.Tags)

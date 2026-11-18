@@ -206,6 +206,76 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_AcknowledgeDeadLetterQueueRecords(t *testing.T) {
+	input := &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcknowledgeDeadLetterQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_AcknowledgeQueueRecords(t *testing.T) {
+	input := &AcknowledgeQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AcknowledgeQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcknowledgeQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AddTagsToStream(t *testing.T) {
 	input := &AddTagsToStreamInput{
 		StreamName: ptr.String("__StreamName__"),
@@ -357,6 +427,59 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateQueue(t *testing.T) {
+	input := &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		StreamConfigurationList: []types.QueueStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				StartingPosition: &types.QueueStartingPosition{
+					Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+					Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				StartingPosition: &types.QueueStartingPosition{
+					Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+					Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		QueueAttributes: &types.QueueAttributes{
+			VisibilityTimeoutSeconds: ptr.Int32(1),
+			DeadLetterConfiguration: &types.DeadLetterConfiguration{
+				TargetType:      types.TargetType("BUILT_IN"),
+				MaxReceiveCount: ptr.Int32(1),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateQueue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateStream(t *testing.T) {
 	input := &CreateStreamInput{
 		StreamName: ptr.String("__StreamName__"),
@@ -447,6 +570,33 @@ func TestCheckRequestSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteQueue(t *testing.T) {
+	input := &DeleteQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQueue"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -612,6 +762,33 @@ func TestCheckRequestSnapshot_DescribeLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeLimits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeQueue(t *testing.T) {
+	input := &DescribeQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeQueue"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -933,6 +1110,44 @@ func TestCheckRequestSnapshot_ListChannels(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListQueues(t *testing.T) {
+	input := &ListQueuesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		StreamFilter: []types.QueueStreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQueues(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueues"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListShards(t *testing.T) {
 	input := &ListShardsInput{
 		StreamName:              ptr.String("__StreamName__"),
@@ -1226,6 +1441,66 @@ func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ReceiveDeadLetterQueueRecords(t *testing.T) {
+	input := &ReceiveDeadLetterQueueRecordsInput{
+		QueueARN:                 ptr.String("__QueueARN__"),
+		Limit:                    ptr.Int32(1),
+		WaitTimeSeconds:          ptr.Int32(1),
+		VisibilityTimeoutSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ReceiveDeadLetterQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ReceiveDeadLetterQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ReceiveQueueRecords(t *testing.T) {
+	input := &ReceiveQueueRecordsInput{
+		QueueARN:                 ptr.String("__QueueARN__"),
+		Limit:                    ptr.Int32(1),
+		WaitTimeSeconds:          ptr.Int32(1),
+		VisibilityTimeoutSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ReceiveQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ReceiveQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RegisterStreamConsumer(t *testing.T) {
 	input := &RegisterStreamConsumerInput{
 		StreamARN:    ptr.String("__StreamARN__"),
@@ -1287,6 +1562,41 @@ func TestCheckRequestSnapshot_RemoveTagsFromStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveTagsFromStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RestoreDeadLetterQueueRecords(t *testing.T) {
+	input := &RestoreDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.RestoreDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreDeadLetterQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreDeadLetterQueueRecords"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1516,6 +1826,43 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateDeadLetterQueueRecordsVisibility(t *testing.T) {
+	input := &UpdateDeadLetterQueueRecordsVisibilityInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.UpdateDeadLetterQueueRecordsVisibilityRequestEntry{
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDeadLetterQueueRecordsVisibility(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDeadLetterQueueRecordsVisibility"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	input := &UpdateMaxRecordSizeInput{
 		StreamARN:          ptr.String("__StreamARN__"),
@@ -1541,6 +1888,77 @@ func TestCheckRequestSnapshot_UpdateMaxRecordSize(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMaxRecordSize"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateQueue(t *testing.T) {
+	input := &UpdateQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		QueueAttributes: &types.QueueAttributes{
+			VisibilityTimeoutSeconds: ptr.Int32(1),
+			DeadLetterConfiguration: &types.DeadLetterConfiguration{
+				TargetType:      types.TargetType("BUILT_IN"),
+				MaxReceiveCount: ptr.Int32(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateQueue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateQueueRecordsVisibility(t *testing.T) {
+	input := &UpdateQueueRecordsVisibilityInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.UpdateQueueRecordsVisibilityRequestEntry{
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateQueueRecordsVisibility(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateQueueRecordsVisibility"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1666,6 +2084,76 @@ func TestCheckRequestSnapshot_UpdateStreamWarmThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_AcknowledgeDeadLetterQueueRecords(t *testing.T) {
+	input := &AcknowledgeDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AcknowledgeDeadLetterQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcknowledgeDeadLetterQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AcknowledgeQueueRecords(t *testing.T) {
+	input := &AcknowledgeQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.AcknowledgeQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AcknowledgeQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AcknowledgeQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AddTagsToStream(t *testing.T) {
 	input := &AddTagsToStreamInput{
 		StreamName: ptr.String("__StreamName__"),
@@ -1817,6 +2305,59 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateQueue(t *testing.T) {
+	input := &CreateQueueInput{
+		QueueName: ptr.String("__QueueName__"),
+		StreamConfigurationList: []types.QueueStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				StartingPosition: &types.QueueStartingPosition{
+					Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+					Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				StartingPosition: &types.QueueStartingPosition{
+					Type:      types.QueueStartingPositionType("TRIM_HORIZON"),
+					Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		QueueAttributes: &types.QueueAttributes{
+			VisibilityTimeoutSeconds: ptr.Int32(1),
+			DeadLetterConfiguration: &types.DeadLetterConfiguration{
+				TargetType:      types.TargetType("BUILT_IN"),
+				MaxReceiveCount: ptr.Int32(1),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateQueue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateStream(t *testing.T) {
 	input := &CreateStreamInput{
 		StreamName: ptr.String("__StreamName__"),
@@ -1907,6 +2448,33 @@ func TestUpdateRequestSnapshot_DeleteChannel(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteQueue(t *testing.T) {
+	input := &DeleteQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQueue"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2072,6 +2640,33 @@ func TestUpdateRequestSnapshot_DescribeLimits(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeLimits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeQueue(t *testing.T) {
+	input := &DescribeQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeQueue"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2393,6 +2988,44 @@ func TestUpdateRequestSnapshot_ListChannels(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListQueues(t *testing.T) {
+	input := &ListQueuesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		StreamFilter: []types.QueueStreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQueues(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueues"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListShards(t *testing.T) {
 	input := &ListShardsInput{
 		StreamName:              ptr.String("__StreamName__"),
@@ -2686,6 +3319,66 @@ func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ReceiveDeadLetterQueueRecords(t *testing.T) {
+	input := &ReceiveDeadLetterQueueRecordsInput{
+		QueueARN:                 ptr.String("__QueueARN__"),
+		Limit:                    ptr.Int32(1),
+		WaitTimeSeconds:          ptr.Int32(1),
+		VisibilityTimeoutSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ReceiveDeadLetterQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ReceiveDeadLetterQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ReceiveQueueRecords(t *testing.T) {
+	input := &ReceiveQueueRecordsInput{
+		QueueARN:                 ptr.String("__QueueARN__"),
+		Limit:                    ptr.Int32(1),
+		WaitTimeSeconds:          ptr.Int32(1),
+		VisibilityTimeoutSeconds: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ReceiveQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ReceiveQueueRecords"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RegisterStreamConsumer(t *testing.T) {
 	input := &RegisterStreamConsumerInput{
 		StreamARN:    ptr.String("__StreamARN__"),
@@ -2747,6 +3440,41 @@ func TestUpdateRequestSnapshot_RemoveTagsFromStream(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveTagsFromStream"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RestoreDeadLetterQueueRecords(t *testing.T) {
+	input := &RestoreDeadLetterQueueRecordsInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.RestoreDeadLetterQueueRecordsRequestEntry{
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+			{
+				ReceiptHandle: ptr.String("__ReceiptHandle__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreDeadLetterQueueRecords(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreDeadLetterQueueRecords"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2976,6 +3704,43 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateDeadLetterQueueRecordsVisibility(t *testing.T) {
+	input := &UpdateDeadLetterQueueRecordsVisibilityInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.UpdateDeadLetterQueueRecordsVisibilityRequestEntry{
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateDeadLetterQueueRecordsVisibility(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateDeadLetterQueueRecordsVisibility"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	input := &UpdateMaxRecordSizeInput{
 		StreamARN:          ptr.String("__StreamARN__"),
@@ -3001,6 +3766,77 @@ func TestUpdateRequestSnapshot_UpdateMaxRecordSize(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMaxRecordSize"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateQueue(t *testing.T) {
+	input := &UpdateQueueInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		QueueAttributes: &types.QueueAttributes{
+			VisibilityTimeoutSeconds: ptr.Int32(1),
+			DeadLetterConfiguration: &types.DeadLetterConfiguration{
+				TargetType:      types.TargetType("BUILT_IN"),
+				MaxReceiveCount: ptr.Int32(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateQueue(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateQueue"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateQueueRecordsVisibility(t *testing.T) {
+	input := &UpdateQueueRecordsVisibilityInput{
+		QueueARN: ptr.String("__QueueARN__"),
+		Entries: []types.UpdateQueueRecordsVisibilityRequestEntry{
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+			{
+				ReceiptHandle:            ptr.String("__ReceiptHandle__"),
+				VisibilityTimeoutSeconds: ptr.Int32(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateQueueRecordsVisibility(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateQueueRecordsVisibility"); err != nil {
 		t.Fatal(err)
 	}
 }

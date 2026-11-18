@@ -63,6 +63,10 @@ type GetNetworkMigrationDefinitionOutput struct {
 	// The timestamp when the network migration definition was created.
 	CreatedAt *time.Time
 
+	// Specifies the type of the definition. MIGRATION migrates an existing network.
+	// NEW_NETWORK designs a new network.
+	DefinitionType types.DefinitionType
+
 	// A description of the network migration definition.
 	Description *string
 
@@ -120,6 +124,9 @@ func (v *GetNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.ShapeSer
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.NetworkMigrationDefinition_createdAt, *v.CreatedAt)
 	}
+	if v.DefinitionType != "" {
+		s.WriteString(schemas.NetworkMigrationDefinition_definitionType, string(v.DefinitionType))
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.NetworkMigrationDefinition_description, *v.Description)
 	}
@@ -169,6 +176,13 @@ func (v *GetNetworkMigrationDefinitionOutput) Deserialize(d smithy.ShapeDeserial
 		case schemas.NetworkMigrationDefinition_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.NetworkMigrationDefinition_createdAt, v.CreatedAt)
+		case schemas.NetworkMigrationDefinition_definitionType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationDefinition_definitionType, &ev); err != nil {
+				return err
+			}
+			v.DefinitionType = types.DefinitionType(ev)
+			return nil
 		case schemas.NetworkMigrationDefinition_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.NetworkMigrationDefinition_description, v.Description)

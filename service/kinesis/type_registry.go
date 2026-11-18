@@ -79,6 +79,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.SubscribeToShardEvent,
 			New:    func() any { return &types.SubscribeToShardEvent{} },
 		},
+		"com.amazonaws.kinesis#ThrottlingException": {
+			Schema: schemas.ThrottlingException,
+			New:    func() any { return &types.ThrottlingException{} },
+		},
 		"com.amazonaws.kinesis#ValidationException": {
 			Schema: schemas.ValidationException,
 			New:    func() any { return &types.ValidationException{} },

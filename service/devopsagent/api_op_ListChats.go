@@ -36,6 +36,10 @@ type ListChatsInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
+	// The archive status to filter by. Use this parameter to list only archived chat
+	// executions or only active ones.
+	ArchiveStatus types.ChatArchiveStatus
+
 	// Maximum number of results to return
 	MaxResults *int32
 
@@ -61,6 +65,9 @@ func (v *ListChatsInput) Serialize(s smithy.ShapeSerializer) {
 func (v *ListChatsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.ListChatsRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ArchiveStatus != "" {
+		s.WriteString(schemas.ListChatsRequest_archiveStatus, string(v.ArchiveStatus))
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListChatsRequest_maxResults, *v.MaxResults)

@@ -8,6 +8,11 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var AcceptAgreementApproval = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AcceptAgreementApproval",
+}, smithy.ShapeTypeOperation, 0)
+
 var AcceptAgreementCancellationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AcceptAgreementCancellationRequest",
@@ -43,6 +48,11 @@ var CancelAgreementPaymentRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CancelAgreementPaymentRequest",
 }, smithy.ShapeTypeOperation, 0)
 
+var CancelAgreementRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "CancelAgreementRequest",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateAgreementRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "CreateAgreementRequest",
@@ -53,9 +63,19 @@ var DescribeAgreement = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeAgreement",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetAgreementApproval = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementApproval",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetAgreementCancellationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "GetAgreementCancellationRequest",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetAgreementContacts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementContacts",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetAgreementEntitlements = smithy.NewSchema(smithy.ShapeID{
@@ -68,6 +88,21 @@ var GetAgreementPaymentRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetAgreementPaymentRequest",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetAgreementRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequest",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetAgreementRequestApprovalPlans = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestApprovalPlans",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetAgreementRequestTerms = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestTerms",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetAgreementTerms = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "GetAgreementTerms",
@@ -76,6 +111,11 @@ var GetAgreementTerms = smithy.NewSchema(smithy.ShapeID{
 var GetBillingAdjustmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "GetBillingAdjustmentRequest",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListAgreementApprovals = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ListAgreementApprovals",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListAgreementCancellationRequests = smithy.NewSchema(smithy.ShapeID{
@@ -98,9 +138,19 @@ var ListAgreementPaymentRequests = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAgreementPaymentRequests",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListAgreementRequests = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ListAgreementRequests",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListBillingAdjustmentRequests = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ListBillingAdjustmentRequests",
+}, smithy.ShapeTypeOperation, 0)
+
+var RejectAgreementApproval = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "RejectAgreementApproval",
 }, smithy.ShapeTypeOperation, 0)
 
 var RejectAgreementCancellationRequest = smithy.NewSchema(smithy.ShapeID{
@@ -126,6 +176,11 @@ var SendAgreementCancellationRequest = smithy.NewSchema(smithy.ShapeID{
 var SendAgreementPaymentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "SendAgreementPaymentRequest",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartAgreementApprovals = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "StartAgreementApprovals",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdatePurchaseOrders = smithy.NewSchema(smithy.ShapeID{
@@ -182,6 +237,20 @@ var Acceptor = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var Acceptor_accountId *smithy.Schema
 
+var AcceptorContact = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AcceptorContact",
+}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
+var AcceptorContact_firstName *smithy.Schema
+
+var AcceptorContact_lastName *smithy.Schema
+
+var AcceptorContact_emailAddress *smithy.Schema
+
+var AcceptorContact_companyName *smithy.Schema
+
+var AcceptorContact_countryCode *smithy.Schema
+
 var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AccessDeniedException",
@@ -206,6 +275,206 @@ var AccessDeniedExceptionReason_FAILED_KYC_COMPLIANCE *smithy.Schema
 var AccessDeniedExceptionReason_MISSING_MFA *smithy.Schema
 
 var AccessDeniedExceptionReason_INVALID_ACCESS *smithy.Schema
+
+var _AgreementApprovalDeployedOnAws = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalDeployedOnAws",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalId",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalLevelName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalLevelName",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalName",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalNote = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalNote",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _AgreementApprovalOfferId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalOfferId",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalOfferSetId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalOfferSetId",
+}, smithy.ShapeTypeString, 0)
+
+var AgreementApprovalPartyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPartyType",
+}, smithy.ShapeTypeEnum, 2)
+var AgreementApprovalPartyType_REQUESTER *smithy.Schema
+
+var AgreementApprovalPartyType_AWS_ORGANIZATION_ADMIN *smithy.Schema
+
+var AgreementApprovalPlan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPlan",
+}, smithy.ShapeTypeUnion, 1)
+var AgreementApprovalPlan_buyerAgreementApprovalPlan *smithy.Schema
+
+var AgreementApprovalPlanInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPlanInput",
+}, smithy.ShapeTypeUnion, 1)
+var AgreementApprovalPlanInput_buyerAgreementApprovalPlanInput *smithy.Schema
+
+var _AgreementApprovalPlanInputs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPlanInputs",
+}, smithy.ShapeTypeList, 1)
+var _AgreementApprovalPlanInputs_member *smithy.Schema
+
+var _AgreementApprovalPlanName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPlanName",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalPlanReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPlanReference",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalPlans = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPlans",
+}, smithy.ShapeTypeList, 1)
+var _AgreementApprovalPlans_member *smithy.Schema
+
+var AgreementApprovalProposalSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalProposalSummary",
+}, smithy.ShapeTypeStructure, 4)
+var AgreementApprovalProposalSummary_offerId *smithy.Schema
+
+var AgreementApprovalProposalSummary_offerSetId *smithy.Schema
+
+var AgreementApprovalProposalSummary_resources *smithy.Schema
+
+var AgreementApprovalProposalSummary_visibilityScope *smithy.Schema
+
+var AgreementApprovalProposer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalProposer",
+}, smithy.ShapeTypeStructure, 2)
+var AgreementApprovalProposer_accountId *smithy.Schema
+
+var AgreementApprovalProposer_legalName *smithy.Schema
+
+var AgreementApprovalPurchaseOrder = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPurchaseOrder",
+}, smithy.ShapeTypeStructure, 2)
+var AgreementApprovalPurchaseOrder_chargeId *smithy.Schema
+
+var AgreementApprovalPurchaseOrder_purchaseOrderReference *smithy.Schema
+
+var _AgreementApprovalPurchaseOrders = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalPurchaseOrders",
+}, smithy.ShapeTypeList, 1)
+var _AgreementApprovalPurchaseOrders_member *smithy.Schema
+
+var AgreementApprovalRequester = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalRequester",
+}, smithy.ShapeTypeStructure, 1)
+var AgreementApprovalRequester_accountId *smithy.Schema
+
+var AgreementApprovalResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalResource",
+}, smithy.ShapeTypeStructure, 4)
+var AgreementApprovalResource_id *smithy.Schema
+
+var AgreementApprovalResource_type *smithy.Schema
+
+var AgreementApprovalResource_name *smithy.Schema
+
+var AgreementApprovalResource_deployedOnAws *smithy.Schema
+
+var _AgreementApprovalResourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalResourceId",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalResourceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalResourceName",
+}, smithy.ShapeTypeString, 0)
+
+var _AgreementApprovalResources = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalResources",
+}, smithy.ShapeTypeList, 1)
+var _AgreementApprovalResources_member *smithy.Schema
+
+var _AgreementApprovalResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalResourceType",
+}, smithy.ShapeTypeString, 0)
+
+var AgreementApprovalStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalStatus",
+}, smithy.ShapeTypeEnum, 5)
+var AgreementApprovalStatus_PENDING_APPROVAL *smithy.Schema
+
+var AgreementApprovalStatus_APPROVED *smithy.Schema
+
+var AgreementApprovalStatus_REJECTED *smithy.Schema
+
+var AgreementApprovalStatus_EXPIRED *smithy.Schema
+
+var AgreementApprovalStatus_CANCELLED *smithy.Schema
+
+var _AgreementApprovalSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalSummaries",
+}, smithy.ShapeTypeList, 1)
+var _AgreementApprovalSummaries_member *smithy.Schema
+
+var AgreementApprovalSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalSummary",
+}, smithy.ShapeTypeStructure, 10)
+var AgreementApprovalSummary_approvalType *smithy.Schema
+
+var AgreementApprovalSummary_agreementRequestId *smithy.Schema
+
+var AgreementApprovalSummary_agreementApprovalId *smithy.Schema
+
+var AgreementApprovalSummary_name *smithy.Schema
+
+var AgreementApprovalSummary_status *smithy.Schema
+
+var AgreementApprovalSummary_createdAt *smithy.Schema
+
+var AgreementApprovalSummary_updatedAt *smithy.Schema
+
+var AgreementApprovalSummary_startedAt *smithy.Schema
+
+var AgreementApprovalSummary_expiresAt *smithy.Schema
+
+var AgreementApprovalSummary_approvalNeededBy *smithy.Schema
+
+var AgreementApprovalType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementApprovalType",
+}, smithy.ShapeTypeEnum, 1)
+var AgreementApprovalType_BUYER_AGREEMENT_APPROVAL *smithy.Schema
 
 var _AgreementCancellationRequestCancellationReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -389,6 +658,83 @@ var _AgreementRequestId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AgreementRequestId",
 }, smithy.ShapeTypeString, 0)
 
+var AgreementRequestStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementRequestStatus",
+}, smithy.ShapeTypeEnum, 6)
+var AgreementRequestStatus_DRAFT *smithy.Schema
+
+var AgreementRequestStatus_PENDING_APPROVAL *smithy.Schema
+
+var AgreementRequestStatus_APPROVED *smithy.Schema
+
+var AgreementRequestStatus_ACCEPTED *smithy.Schema
+
+var AgreementRequestStatus_REJECTED *smithy.Schema
+
+var AgreementRequestStatus_CANCELLED *smithy.Schema
+
+var AgreementRequestSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementRequestSummary",
+}, smithy.ShapeTypeStructure, 5)
+var AgreementRequestSummary_agreementRequestId *smithy.Schema
+
+var AgreementRequestSummary_agreementType *smithy.Schema
+
+var AgreementRequestSummary_status *smithy.Schema
+
+var AgreementRequestSummary_agreementId *smithy.Schema
+
+var AgreementRequestSummary_proposalSummary *smithy.Schema
+
+var _AgreementRequestSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementRequestSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _AgreementRequestSummaryList_member *smithy.Schema
+
+var AgreementRequestTerm = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementRequestTerm",
+}, smithy.ShapeTypeUnion, 13)
+var AgreementRequestTerm_legalTerm *smithy.Schema
+
+var AgreementRequestTerm_supportTerm *smithy.Schema
+
+var AgreementRequestTerm_renewalTerm *smithy.Schema
+
+var AgreementRequestTerm_usageBasedPricingTerm *smithy.Schema
+
+var AgreementRequestTerm_configurableUpfrontPricingTerm *smithy.Schema
+
+var AgreementRequestTerm_byolPricingTerm *smithy.Schema
+
+var AgreementRequestTerm_recurringPaymentTerm *smithy.Schema
+
+var AgreementRequestTerm_validityTerm *smithy.Schema
+
+var AgreementRequestTerm_paymentScheduleTerm *smithy.Schema
+
+var AgreementRequestTerm_freeTrialPricingTerm *smithy.Schema
+
+var AgreementRequestTerm_fixedUpfrontPricingTerm *smithy.Schema
+
+var AgreementRequestTerm_variablePaymentTerm *smithy.Schema
+
+var AgreementRequestTerm_netPaymentTerm *smithy.Schema
+
+var _AgreementRequestTermList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementRequestTermList",
+}, smithy.ShapeTypeList, 1)
+var _AgreementRequestTermList_member *smithy.Schema
+
+var _AgreementRequestTermsMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AgreementRequestTermsMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _AgreementResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AgreementResourceType",
@@ -424,7 +770,7 @@ var _AgreementType = smithy.NewSchema(smithy.ShapeID{
 var AgreementViewSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AgreementViewSummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var AgreementViewSummary_agreementId *smithy.Schema
 
 var AgreementViewSummary_acceptanceTime *smithy.Schema
@@ -455,11 +801,67 @@ var AgreementViewSummary_endTimeBehaviorReasonCode *smithy.Schema
 
 var AgreementViewSummary_freeTrialEndTime *smithy.Schema
 
+var AgreementViewSummary_includesContactOfType *smithy.Schema
+
 var _AgreementViewSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AgreementViewSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _AgreementViewSummaryList_member *smithy.Schema
+
+var ApprovalRequirement = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ApprovalRequirement",
+}, smithy.ShapeTypeEnum, 2)
+var ApprovalRequirement_REQUIRED *smithy.Schema
+
+var ApprovalRequirement_NOT_REQUIRED *smithy.Schema
+
+var Approver = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "Approver",
+}, smithy.ShapeTypeUnion, 3)
+var Approver_emailApprover *smithy.Schema
+
+var Approver_procurementToolApprover *smithy.Schema
+
+var Approver_awsOrganizationAdminApprover *smithy.Schema
+
+var _ApproverName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ApproverName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var ApproverOutcome = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ApproverOutcome",
+}, smithy.ShapeTypeUnion, 3)
+var ApproverOutcome_emailApproverOutcome *smithy.Schema
+
+var ApproverOutcome_procurementToolApproverOutcome *smithy.Schema
+
+var ApproverOutcome_awsOrganizationApproverOutcome *smithy.Schema
+
+var _ApproverOutcomeId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ApproverOutcomeId",
+}, smithy.ShapeTypeString, 0)
+
+var ApproverOutcomeStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ApproverOutcomeStatus",
+}, smithy.ShapeTypeEnum, 6)
+var ApproverOutcomeStatus_QUEUED *smithy.Schema
+
+var ApproverOutcomeStatus_PENDING_APPROVAL *smithy.Schema
+
+var ApproverOutcomeStatus_APPROVED *smithy.Schema
+
+var ApproverOutcomeStatus_REJECTED *smithy.Schema
+
+var ApproverOutcomeStatus_EXPIRED *smithy.Schema
+
+var ApproverOutcomeStatus_SKIPPED *smithy.Schema
 
 var _AWSAccountId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -470,6 +872,26 @@ var _AwsArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "AwsArn",
 }, smithy.ShapeTypeString, 0)
+
+var AwsOrganizationAdminApprover = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AwsOrganizationAdminApprover",
+}, smithy.ShapeTypeStructure, 1)
+var AwsOrganizationAdminApprover_organizationId *smithy.Schema
+
+var AwsOrganizationApproverOutcome = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AwsOrganizationApproverOutcome",
+}, smithy.ShapeTypeStructure, 5)
+var AwsOrganizationApproverOutcome_note *smithy.Schema
+
+var AwsOrganizationApproverOutcome_status *smithy.Schema
+
+var AwsOrganizationApproverOutcome_updatedAt *smithy.Schema
+
+var AwsOrganizationApproverOutcome_approverOutcomeId *smithy.Schema
+
+var AwsOrganizationApproverOutcome_purchaseOrders *smithy.Schema
 
 var BatchCreateBillingAdjustmentError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -620,6 +1042,154 @@ var _BoundedString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BoundedString",
 }, smithy.ShapeTypeString, 0)
 
+var BuyerAgreementApproval = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApproval",
+}, smithy.ShapeTypeStructure, 15)
+var BuyerAgreementApproval_approvalType *smithy.Schema
+
+var BuyerAgreementApproval_agreementApprovalId *smithy.Schema
+
+var BuyerAgreementApproval_name *smithy.Schema
+
+var BuyerAgreementApproval_agreementRequestId *smithy.Schema
+
+var BuyerAgreementApproval_status *smithy.Schema
+
+var BuyerAgreementApproval_requester *smithy.Schema
+
+var BuyerAgreementApproval_createdAt *smithy.Schema
+
+var BuyerAgreementApproval_updatedAt *smithy.Schema
+
+var BuyerAgreementApproval_startedAt *smithy.Schema
+
+var BuyerAgreementApproval_expiresAt *smithy.Schema
+
+var BuyerAgreementApproval_approvalNeededBy *smithy.Schema
+
+var BuyerAgreementApproval_levels *smithy.Schema
+
+var BuyerAgreementApproval_planInput *smithy.Schema
+
+var BuyerAgreementApproval_proposer *smithy.Schema
+
+var BuyerAgreementApproval_proposalSummary *smithy.Schema
+
+var BuyerAgreementApprovalApproverInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalApproverInput",
+}, smithy.ShapeTypeStructure, 4)
+var BuyerAgreementApprovalApproverInput_agreementApprovalId *smithy.Schema
+
+var BuyerAgreementApprovalApproverInput_purchaseOrders *smithy.Schema
+
+var BuyerAgreementApprovalApproverInput_note *smithy.Schema
+
+var BuyerAgreementApprovalApproverInput_approverOutcomeIdToOverride *smithy.Schema
+
+var BuyerAgreementApprovalCriteria = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalCriteria",
+}, smithy.ShapeTypeStructure, 1)
+var BuyerAgreementApprovalCriteria_requiredApprovalCount *smithy.Schema
+
+var BuyerAgreementApprovalGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalGroup",
+}, smithy.ShapeTypeStructure, 2)
+var BuyerAgreementApprovalGroup_approvalCriteria *smithy.Schema
+
+var BuyerAgreementApprovalGroup_approvers *smithy.Schema
+
+var _BuyerAgreementApprovalGroups = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalGroups",
+}, smithy.ShapeTypeList, 1)
+var _BuyerAgreementApprovalGroups_member *smithy.Schema
+
+var BuyerAgreementApprovalLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalLevel",
+}, smithy.ShapeTypeStructure, 2)
+var BuyerAgreementApprovalLevel_name *smithy.Schema
+
+var BuyerAgreementApprovalLevel_groups *smithy.Schema
+
+var _BuyerAgreementApprovalLevels = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalLevels",
+}, smithy.ShapeTypeList, 1)
+var _BuyerAgreementApprovalLevels_member *smithy.Schema
+
+var BuyerAgreementApprovalPlan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalPlan",
+}, smithy.ShapeTypeStructure, 3)
+var BuyerAgreementApprovalPlan_planReference *smithy.Schema
+
+var BuyerAgreementApprovalPlan_name *smithy.Schema
+
+var BuyerAgreementApprovalPlan_levels *smithy.Schema
+
+var BuyerAgreementApprovalPlanGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalPlanGroup",
+}, smithy.ShapeTypeStructure, 2)
+var BuyerAgreementApprovalPlanGroup_approvalCriteria *smithy.Schema
+
+var BuyerAgreementApprovalPlanGroup_approvers *smithy.Schema
+
+var _BuyerAgreementApprovalPlanGroups = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalPlanGroups",
+}, smithy.ShapeTypeList, 1)
+var _BuyerAgreementApprovalPlanGroups_member *smithy.Schema
+
+var BuyerAgreementApprovalPlanInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalPlanInput",
+}, smithy.ShapeTypeStructure, 2)
+var BuyerAgreementApprovalPlanInput_planReference *smithy.Schema
+
+var BuyerAgreementApprovalPlanInput_requesterNote *smithy.Schema
+
+var BuyerAgreementApprovalPlanLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalPlanLevel",
+}, smithy.ShapeTypeStructure, 2)
+var BuyerAgreementApprovalPlanLevel_name *smithy.Schema
+
+var BuyerAgreementApprovalPlanLevel_groups *smithy.Schema
+
+var _BuyerAgreementApprovalPlanLevels = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalPlanLevels",
+}, smithy.ShapeTypeList, 1)
+var _BuyerAgreementApprovalPlanLevels_member *smithy.Schema
+
+var BuyerAgreementApprovalRejectionInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerAgreementApprovalRejectionInput",
+}, smithy.ShapeTypeStructure, 3)
+var BuyerAgreementApprovalRejectionInput_agreementApprovalId *smithy.Schema
+
+var BuyerAgreementApprovalRejectionInput_note *smithy.Schema
+
+var BuyerAgreementApprovalRejectionInput_approverOutcomeIdToOverride *smithy.Schema
+
+var _BuyerApproverOutcomes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerApproverOutcomes",
+}, smithy.ShapeTypeList, 1)
+var _BuyerApproverOutcomes_member *smithy.Schema
+
+var _BuyerApprovers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "BuyerApprovers",
+}, smithy.ShapeTypeList, 1)
+var _BuyerApprovers_member *smithy.Schema
+
 var ByolPricingTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ByolPricingTerm",
@@ -627,6 +1197,12 @@ var ByolPricingTerm = smithy.NewSchema(smithy.ShapeID{
 var ByolPricingTerm_type *smithy.Schema
 
 var ByolPricingTerm_id *smithy.Schema
+
+var CallerIdentity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "CallerIdentity",
+}, smithy.ShapeTypeStructure, 1)
+var CallerIdentity_principalArn *smithy.Schema
 
 var _Catalog = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -756,6 +1332,28 @@ var Constraints_multipleDimensionSelection *smithy.Schema
 
 var Constraints_quantityConfiguration *smithy.Schema
 
+var _ContactCompanyName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ContactCompanyName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var ContactType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ContactType",
+}, smithy.ShapeTypeEnum, 1)
+var ContactType_ACCEPTOR *smithy.Schema
+
+var _ContactTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ContactTypeList",
+}, smithy.ShapeTypeList, 1)
+var _ContactTypeList_member *smithy.Schema
+
+var _CountryCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "CountryCode",
+}, smithy.ShapeTypeString, 0)
+
 var _CurrencyCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "CurrencyCode",
@@ -795,6 +1393,39 @@ var _DocumentList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DocumentList",
 }, smithy.ShapeTypeList, 1)
 var _DocumentList_member *smithy.Schema
+
+var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "EmailAddress",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var EmailApprover = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "EmailApprover",
+}, smithy.ShapeTypeStructure, 2)
+var EmailApprover_emailAddress *smithy.Schema
+
+var EmailApprover_name *smithy.Schema
+
+var EmailApproverOutcome = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "EmailApproverOutcome",
+}, smithy.ShapeTypeStructure, 8)
+var EmailApproverOutcome_note *smithy.Schema
+
+var EmailApproverOutcome_status *smithy.Schema
+
+var EmailApproverOutcome_updatedAt *smithy.Schema
+
+var EmailApproverOutcome_approverOutcomeId *smithy.Schema
+
+var EmailApproverOutcome_emailAddress *smithy.Schema
+
+var EmailApproverOutcome_name *smithy.Schema
+
+var EmailApproverOutcome_purchaseOrders *smithy.Schema
+
+var EmailApproverOutcome_overriddenBy *smithy.Schema
 
 var EndTimeBehavior = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -869,7 +1500,7 @@ var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
 var ExpectedCharge = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ExpectedCharge",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ExpectedCharge_id *smithy.Schema
 
 var ExpectedCharge_time *smithy.Schema
@@ -881,6 +1512,8 @@ var ExpectedCharge_amountAfterTax *smithy.Schema
 var ExpectedCharge_timing *smithy.Schema
 
 var ExpectedCharge_estimatedTaxes *smithy.Schema
+
+var ExpectedCharge_purchaseOrderReference *smithy.Schema
 
 var _ExpectedChargeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1091,9 +1724,22 @@ var _OfferSetId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OfferSetId",
 }, smithy.ShapeTypeString, 0)
 
+var OfferVisibilityScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "OfferVisibilityScope",
+}, smithy.ShapeTypeEnum, 2)
+var OfferVisibilityScope_PUBLIC *smithy.Schema
+
+var OfferVisibilityScope_PRIVATE *smithy.Schema
+
 var _OffsetDuration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "OffsetDuration",
+}, smithy.ShapeTypeString, 0)
+
+var _OrganizationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "OrganizationId",
 }, smithy.ShapeTypeString, 0)
 
 var _PartyType = smithy.NewSchema(smithy.ShapeID{
@@ -1222,6 +1868,11 @@ var PercentageRange_maxValue *smithy.Schema
 
 var PercentageRange_defaultValue *smithy.Schema
 
+var _PersonName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PersonName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _PositiveAmountUpto8Decimals = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "PositiveAmountUpto8Decimals",
@@ -1255,6 +1906,35 @@ var PricingCurrencyAmount_maxAdjustmentAmount *smithy.Schema
 
 var PricingCurrencyAmount_currencyCode *smithy.Schema
 
+var _PrincipalArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "PrincipalArn",
+}, smithy.ShapeTypeString, 0)
+
+var ProcurementToolApprover = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ProcurementToolApprover",
+}, smithy.ShapeTypeStructure, 1)
+var ProcurementToolApprover_name *smithy.Schema
+
+var ProcurementToolApproverOutcome = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ProcurementToolApproverOutcome",
+}, smithy.ShapeTypeStructure, 7)
+var ProcurementToolApproverOutcome_note *smithy.Schema
+
+var ProcurementToolApproverOutcome_status *smithy.Schema
+
+var ProcurementToolApproverOutcome_updatedAt *smithy.Schema
+
+var ProcurementToolApproverOutcome_approverOutcomeId *smithy.Schema
+
+var ProcurementToolApproverOutcome_name *smithy.Schema
+
+var ProcurementToolApproverOutcome_purchaseOrders *smithy.Schema
+
+var ProcurementToolApproverOutcome_overriddenBy *smithy.Schema
+
 var ProposalSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ProposalSummary",
@@ -1270,6 +1950,11 @@ var Proposer = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Proposer",
 }, smithy.ShapeTypeStructure, 1)
 var Proposer_accountId *smithy.Schema
+
+var _ProposerLegalName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ProposerLegalName",
+}, smithy.ShapeTypeString, 0)
 
 var PurchaseOrder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1325,7 +2010,7 @@ var RecurringPaymentTerm_price *smithy.Schema
 var _RegistrationToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "RegistrationToken",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var RenewalSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1423,7 +2108,7 @@ var _Resources_member *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 10)
 var ResourceType_AGREEMENT *smithy.Schema
 
 var ResourceType_AGREEMENT_REQUEST *smithy.Schema
@@ -1439,6 +2124,10 @@ var ResourceType_INVOICE *smithy.Schema
 var ResourceType_AGREEMENT_CANCELLATION_REQUEST *smithy.Schema
 
 var ResourceType_BILLING_ADJUSTMENT_REQUEST *smithy.Schema
+
+var ResourceType_AGREEMENT_APPROVAL *smithy.Schema
+
+var ResourceType_AGREEMENT_REQUEST_APPROVAL_PLAN *smithy.Schema
 
 var ScheduleItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1574,12 +2263,14 @@ var _Timestamp = smithy.NewSchema(smithy.ShapeID{
 var Timing = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "Timing",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var Timing_ON_ACCEPTANCE *smithy.Schema
 
 var Timing_SCHEDULED *smithy.Schema
 
 var Timing_BILLING_PERIOD *smithy.Schema
+
+var Timing_NOT_APPLICABLE *smithy.Schema
 
 var _UnversionedTermType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1640,7 +2331,21 @@ var _ValidationExceptionFieldList_member *smithy.Schema
 var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 82)
+}, smithy.ShapeTypeEnum, 101)
+var ValidationExceptionReason_CLOSED_AGREEMENT_APPROVAL *smithy.Schema
+
+var ValidationExceptionReason_QUEUED_AGREEMENT_APPROVAL *smithy.Schema
+
+var ValidationExceptionReason_INVALID_AGREEMENT_APPROVAL_ID *smithy.Schema
+
+var ValidationExceptionReason_MISSING_AGREEMENT_APPROVAL_ID *smithy.Schema
+
+var ValidationExceptionReason_DUPLICATE_PLAN_REFERENCE *smithy.Schema
+
+var ValidationExceptionReason_INVALID_PLAN_INPUTS *smithy.Schema
+
+var ValidationExceptionReason_PENDING_APPROVAL_AGREEMENT_REQUEST *smithy.Schema
+
 var ValidationExceptionReason_MISSING_BILLING_ADJUSTMENTS *smithy.Schema
 
 var ValidationExceptionReason_BILLING_ADJUSTMENTS_LIMIT_EXCEEDED *smithy.Schema
@@ -1779,6 +2484,8 @@ var ValidationExceptionReason_SUPERSEDED_AGREEMENT_PROPOSAL *smithy.Schema
 
 var ValidationExceptionReason_EXPIRED_AGREEMENT_PROPOSAL *smithy.Schema
 
+var ValidationExceptionReason_INVALID_ACCEPTOR_CONTACT *smithy.Schema
+
 var ValidationExceptionReason_MISSING_MANDATORY_TERMS *smithy.Schema
 
 var ValidationExceptionReason_INCOMPATIBLE_TERMS *smithy.Schema
@@ -1803,7 +2510,29 @@ var ValidationExceptionReason_UNSUPPORTED_ACCOUNT_PLAN *smithy.Schema
 
 var ValidationExceptionReason_DUPLICATE_AGREEMENT_IN_ORGANIZATION *smithy.Schema
 
+var ValidationExceptionReason_MISSING_AWS_LICENSE_MANAGER_USER_SUBSCRIPTIONS_SLR *smithy.Schema
+
 var ValidationExceptionReason_MISSING_PURCHASE_ORDER_REFERENCE *smithy.Schema
+
+var ValidationExceptionReason_INVALID_RESOURCE_ID *smithy.Schema
+
+var ValidationExceptionReason_CLOSED_AGREEMENT_REQUEST *smithy.Schema
+
+var ValidationExceptionReason_INCOMPATIBLE_AGREEMENT_REQUEST *smithy.Schema
+
+var ValidationExceptionReason_REJECTED_BY_AGREEMENT_APPROVAL_POLICY *smithy.Schema
+
+var ValidationExceptionReason_MISSING_PLAN_INPUTS *smithy.Schema
+
+var ValidationExceptionReason_INVALID_APPROVER_OUTCOME_ID_TO_OVERRIDE *smithy.Schema
+
+var ValidationExceptionReason_INVALID_NOTE *smithy.Schema
+
+var ValidationExceptionReason_MISSING_NOTE *smithy.Schema
+
+var ValidationExceptionReason_INVALID_APPROVAL_TYPE *smithy.Schema
+
+var ValidationExceptionReason_MISSING_SORT_BY *smithy.Schema
 
 var ValidityTerm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -1845,6 +2574,17 @@ var _ZeroValueInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ZeroValueInteger",
 }, smithy.ShapeTypeInteger, 0)
+
+var AcceptAgreementApprovalInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AcceptAgreementApprovalInput",
+}, smithy.ShapeTypeStructure, 1)
+var AcceptAgreementApprovalInput_buyerAgreementApprovalApproverInput *smithy.Schema
+
+var AcceptAgreementApprovalOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AcceptAgreementApprovalOutput",
+}, smithy.ShapeTypeStructure, 0)
 
 var AcceptAgreementCancellationRequestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2003,10 +2743,21 @@ var CancelAgreementPaymentRequestOutput_createdAt *smithy.Schema
 
 var CancelAgreementPaymentRequestOutput_updatedAt *smithy.Schema
 
+var CancelAgreementRequestInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "CancelAgreementRequestInput",
+}, smithy.ShapeTypeStructure, 1)
+var CancelAgreementRequestInput_agreementRequestId *smithy.Schema
+
+var CancelAgreementRequestOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "CancelAgreementRequestOutput",
+}, smithy.ShapeTypeStructure, 0)
+
 var CreateAgreementRequestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "CreateAgreementRequestInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateAgreementRequestInput_clientToken *smithy.Schema
 
 var CreateAgreementRequestInput_intent *smithy.Schema
@@ -2019,13 +2770,23 @@ var CreateAgreementRequestInput_agreementProposalIdentifier *smithy.Schema
 
 var CreateAgreementRequestInput_taxConfiguration *smithy.Schema
 
+var CreateAgreementRequestInput_acceptorContact *smithy.Schema
+
 var CreateAgreementRequestOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "CreateAgreementRequestOutput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 6)
 var CreateAgreementRequestOutput_agreementRequestId *smithy.Schema
 
+var CreateAgreementRequestOutput_agreementType *smithy.Schema
+
 var CreateAgreementRequestOutput_chargeSummary *smithy.Schema
+
+var CreateAgreementRequestOutput_status *smithy.Schema
+
+var CreateAgreementRequestOutput_approvalRequirement *smithy.Schema
+
+var CreateAgreementRequestOutput_createdAt *smithy.Schema
 
 var DescribeAgreementInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2063,6 +2824,18 @@ var DescribeAgreementOutput_endTimeBehavior *smithy.Schema
 
 var DescribeAgreementOutput_freeTrialSummary *smithy.Schema
 
+var GetAgreementApprovalInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementApprovalInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgreementApprovalInput_agreementApprovalId *smithy.Schema
+
+var GetAgreementApprovalOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementApprovalOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgreementApprovalOutput_buyerAgreementApproval *smithy.Schema
+
 var GetAgreementCancellationRequestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "GetAgreementCancellationRequestInput",
@@ -2090,6 +2863,18 @@ var GetAgreementCancellationRequestOutput_statusMessage *smithy.Schema
 var GetAgreementCancellationRequestOutput_createdAt *smithy.Schema
 
 var GetAgreementCancellationRequestOutput_updatedAt *smithy.Schema
+
+var GetAgreementContactsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementContactsInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgreementContactsInput_agreementId *smithy.Schema
+
+var GetAgreementContactsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementContactsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgreementContactsOutput_acceptorContact *smithy.Schema
 
 var GetAgreementEntitlementsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2143,6 +2928,72 @@ var GetAgreementPaymentRequestOutput_createdAt *smithy.Schema
 
 var GetAgreementPaymentRequestOutput_updatedAt *smithy.Schema
 
+var GetAgreementRequestApprovalPlansInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestApprovalPlansInput",
+}, smithy.ShapeTypeStructure, 3)
+var GetAgreementRequestApprovalPlansInput_agreementRequestId *smithy.Schema
+
+var GetAgreementRequestApprovalPlansInput_maxResults *smithy.Schema
+
+var GetAgreementRequestApprovalPlansInput_nextToken *smithy.Schema
+
+var GetAgreementRequestApprovalPlansOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestApprovalPlansOutput",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgreementRequestApprovalPlansOutput_items *smithy.Schema
+
+var GetAgreementRequestApprovalPlansOutput_nextToken *smithy.Schema
+
+var GetAgreementRequestInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetAgreementRequestInput_agreementRequestId *smithy.Schema
+
+var GetAgreementRequestOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestOutput",
+}, smithy.ShapeTypeStructure, 10)
+var GetAgreementRequestOutput_agreementRequestId *smithy.Schema
+
+var GetAgreementRequestOutput_agreementType *smithy.Schema
+
+var GetAgreementRequestOutput_status *smithy.Schema
+
+var GetAgreementRequestOutput_approvalRequirement *smithy.Schema
+
+var GetAgreementRequestOutput_agreementId *smithy.Schema
+
+var GetAgreementRequestOutput_intent *smithy.Schema
+
+var GetAgreementRequestOutput_createdAt *smithy.Schema
+
+var GetAgreementRequestOutput_chargeSummary *smithy.Schema
+
+var GetAgreementRequestOutput_proposer *smithy.Schema
+
+var GetAgreementRequestOutput_proposalSummary *smithy.Schema
+
+var GetAgreementRequestTermsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestTermsInput",
+}, smithy.ShapeTypeStructure, 3)
+var GetAgreementRequestTermsInput_agreementRequestId *smithy.Schema
+
+var GetAgreementRequestTermsInput_maxResults *smithy.Schema
+
+var GetAgreementRequestTermsInput_nextToken *smithy.Schema
+
+var GetAgreementRequestTermsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "GetAgreementRequestTermsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var GetAgreementRequestTermsOutput_terms *smithy.Schema
+
+var GetAgreementRequestTermsOutput_nextToken *smithy.Schema
+
 var GetAgreementTermsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "GetAgreementTermsInput",
@@ -2194,6 +3045,32 @@ var GetBillingAdjustmentRequestOutput_statusMessage *smithy.Schema
 var GetBillingAdjustmentRequestOutput_createdAt *smithy.Schema
 
 var GetBillingAdjustmentRequestOutput_updatedAt *smithy.Schema
+
+var ListAgreementApprovalsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ListAgreementApprovalsInput",
+}, smithy.ShapeTypeStructure, 7)
+var ListAgreementApprovalsInput_catalog *smithy.Schema
+
+var ListAgreementApprovalsInput_partyType *smithy.Schema
+
+var ListAgreementApprovalsInput_agreementRequestId *smithy.Schema
+
+var ListAgreementApprovalsInput_approvalType *smithy.Schema
+
+var ListAgreementApprovalsInput_status *smithy.Schema
+
+var ListAgreementApprovalsInput_maxResults *smithy.Schema
+
+var ListAgreementApprovalsInput_nextToken *smithy.Schema
+
+var ListAgreementApprovalsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ListAgreementApprovalsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAgreementApprovalsOutput_items *smithy.Schema
+
+var ListAgreementApprovalsOutput_nextToken *smithy.Schema
 
 var ListAgreementCancellationRequestsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2299,6 +3176,28 @@ var ListAgreementPaymentRequestsOutput_nextToken *smithy.Schema
 
 var ListAgreementPaymentRequestsOutput_items *smithy.Schema
 
+var ListAgreementRequestsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ListAgreementRequestsInput",
+}, smithy.ShapeTypeStructure, 5)
+var ListAgreementRequestsInput_catalog *smithy.Schema
+
+var ListAgreementRequestsInput_status *smithy.Schema
+
+var ListAgreementRequestsInput_resourceId *smithy.Schema
+
+var ListAgreementRequestsInput_maxResults *smithy.Schema
+
+var ListAgreementRequestsInput_nextToken *smithy.Schema
+
+var ListAgreementRequestsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "ListAgreementRequestsOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAgreementRequestsOutput_items *smithy.Schema
+
+var ListAgreementRequestsOutput_nextToken *smithy.Schema
+
 var ListBillingAdjustmentRequestsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "ListBillingAdjustmentRequestsInput",
@@ -2326,6 +3225,17 @@ var ListBillingAdjustmentRequestsOutput = smithy.NewSchema(smithy.ShapeID{
 var ListBillingAdjustmentRequestsOutput_nextToken *smithy.Schema
 
 var ListBillingAdjustmentRequestsOutput_items *smithy.Schema
+
+var RejectAgreementApprovalInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "RejectAgreementApprovalInput",
+}, smithy.ShapeTypeStructure, 1)
+var RejectAgreementApprovalInput_buyerAgreementApprovalRejectionInput *smithy.Schema
+
+var RejectAgreementApprovalOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "RejectAgreementApprovalOutput",
+}, smithy.ShapeTypeStructure, 0)
 
 var RejectAgreementCancellationRequestInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2478,6 +3388,22 @@ var SendAgreementPaymentRequestOutput_chargeAmount *smithy.Schema
 var SendAgreementPaymentRequestOutput_currencyCode *smithy.Schema
 
 var SendAgreementPaymentRequestOutput_createdAt *smithy.Schema
+
+var StartAgreementApprovalsInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "StartAgreementApprovalsInput",
+}, smithy.ShapeTypeStructure, 3)
+var StartAgreementApprovalsInput_agreementRequestId *smithy.Schema
+
+var StartAgreementApprovalsInput_planInputs *smithy.Schema
+
+var StartAgreementApprovalsInput_purchaseOrders *smithy.Schema
+
+var StartAgreementApprovalsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "StartAgreementApprovalsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var StartAgreementApprovalsOutput_approvalSummaries *smithy.Schema
 
 var UpdatePurchaseOrdersInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2729,6 +3655,16 @@ func init() {
 
 	Acceptor_accountId = Acceptor.AddMember("accountId", _AWSAccountId)
 
+	AcceptorContact_firstName = AcceptorContact.AddMember("firstName", _PersonName)
+
+	AcceptorContact_lastName = AcceptorContact.AddMember("lastName", _PersonName)
+
+	AcceptorContact_emailAddress = AcceptorContact.AddMember("emailAddress", _EmailAddress)
+
+	AcceptorContact_companyName = AcceptorContact.AddMember("companyName", _ContactCompanyName)
+
+	AcceptorContact_countryCode = AcceptorContact.AddMember("countryCode", _CountryCode)
+
 	AccessDeniedExceptionReason_INVALID_ACCOUNT_STATE = AccessDeniedExceptionReason.AddMember("INVALID_ACCOUNT_STATE", smithyprelude.Unit)
 
 	AccessDeniedExceptionReason_DENIED_BY_PRIVATE_MARKETPLACE_POLICY = AccessDeniedExceptionReason.AddMember("DENIED_BY_PRIVATE_MARKETPLACE_POLICY", smithyprelude.Unit)
@@ -2744,6 +3680,126 @@ func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
 
 	AccessDeniedException_reason = AccessDeniedException.AddMember("reason", AccessDeniedExceptionReason)
+
+	AgreementApprovalPartyType_REQUESTER = AgreementApprovalPartyType.AddMember("REQUESTER", smithyprelude.Unit)
+
+	AgreementApprovalPartyType_AWS_ORGANIZATION_ADMIN = AgreementApprovalPartyType.AddMember("AWS_ORGANIZATION_ADMIN", smithyprelude.Unit)
+
+	BuyerAgreementApprovalCriteria_requiredApprovalCount = BuyerAgreementApprovalCriteria.AddMember("requiredApprovalCount", smithyprelude.Integer)
+
+	EmailApprover_emailAddress = EmailApprover.AddMember("emailAddress", _EmailAddress)
+
+	EmailApprover_name = EmailApprover.AddMember("name", _ApproverName)
+
+	ProcurementToolApprover_name = ProcurementToolApprover.AddMember("name", _ApproverName)
+
+	AwsOrganizationAdminApprover_organizationId = AwsOrganizationAdminApprover.AddMember("organizationId", _OrganizationId)
+
+	Approver_emailApprover = Approver.AddMember("emailApprover", EmailApprover)
+
+	Approver_procurementToolApprover = Approver.AddMember("procurementToolApprover", ProcurementToolApprover)
+
+	Approver_awsOrganizationAdminApprover = Approver.AddMember("awsOrganizationAdminApprover", AwsOrganizationAdminApprover)
+
+	_BuyerApprovers_member = _BuyerApprovers.AddMember("member", Approver)
+
+	BuyerAgreementApprovalPlanGroup_approvalCriteria = BuyerAgreementApprovalPlanGroup.AddMember("approvalCriteria", BuyerAgreementApprovalCriteria)
+
+	BuyerAgreementApprovalPlanGroup_approvers = BuyerAgreementApprovalPlanGroup.AddMember("approvers", _BuyerApprovers)
+
+	_BuyerAgreementApprovalPlanGroups_member = _BuyerAgreementApprovalPlanGroups.AddMember("member", BuyerAgreementApprovalPlanGroup)
+
+	BuyerAgreementApprovalPlanLevel_name = BuyerAgreementApprovalPlanLevel.AddMember("name", _AgreementApprovalLevelName)
+
+	BuyerAgreementApprovalPlanLevel_groups = BuyerAgreementApprovalPlanLevel.AddMember("groups", _BuyerAgreementApprovalPlanGroups)
+
+	_BuyerAgreementApprovalPlanLevels_member = _BuyerAgreementApprovalPlanLevels.AddMember("member", BuyerAgreementApprovalPlanLevel)
+
+	BuyerAgreementApprovalPlan_planReference = BuyerAgreementApprovalPlan.AddMember("planReference", _AgreementApprovalPlanReference)
+
+	BuyerAgreementApprovalPlan_name = BuyerAgreementApprovalPlan.AddMember("name", _AgreementApprovalPlanName)
+
+	BuyerAgreementApprovalPlan_levels = BuyerAgreementApprovalPlan.AddMember("levels", _BuyerAgreementApprovalPlanLevels)
+
+	AgreementApprovalPlan_buyerAgreementApprovalPlan = AgreementApprovalPlan.AddMember("buyerAgreementApprovalPlan", BuyerAgreementApprovalPlan)
+
+	BuyerAgreementApprovalPlanInput_planReference = BuyerAgreementApprovalPlanInput.AddMember("planReference", _AgreementApprovalPlanReference)
+
+	BuyerAgreementApprovalPlanInput_requesterNote = BuyerAgreementApprovalPlanInput.AddMember("requesterNote", _AgreementApprovalNote)
+
+	AgreementApprovalPlanInput_buyerAgreementApprovalPlanInput = AgreementApprovalPlanInput.AddMember("buyerAgreementApprovalPlanInput", BuyerAgreementApprovalPlanInput)
+
+	_AgreementApprovalPlanInputs_member = _AgreementApprovalPlanInputs.AddMember("member", AgreementApprovalPlanInput)
+
+	_AgreementApprovalPlans_member = _AgreementApprovalPlans.AddMember("member", AgreementApprovalPlan)
+
+	AgreementApprovalResource_id = AgreementApprovalResource.AddMember("id", _AgreementApprovalResourceId)
+
+	AgreementApprovalResource_type = AgreementApprovalResource.AddMember("type", _AgreementApprovalResourceType)
+
+	AgreementApprovalResource_name = AgreementApprovalResource.AddMember("name", _AgreementApprovalResourceName)
+
+	AgreementApprovalResource_deployedOnAws = AgreementApprovalResource.AddMember("deployedOnAws", _AgreementApprovalDeployedOnAws)
+
+	_AgreementApprovalResources_member = _AgreementApprovalResources.AddMember("member", AgreementApprovalResource)
+
+	OfferVisibilityScope_PUBLIC = OfferVisibilityScope.AddMember("PUBLIC", smithyprelude.Unit)
+
+	OfferVisibilityScope_PRIVATE = OfferVisibilityScope.AddMember("PRIVATE", smithyprelude.Unit)
+
+	AgreementApprovalProposalSummary_offerId = AgreementApprovalProposalSummary.AddMember("offerId", _AgreementApprovalOfferId)
+
+	AgreementApprovalProposalSummary_offerSetId = AgreementApprovalProposalSummary.AddMember("offerSetId", _AgreementApprovalOfferSetId)
+
+	AgreementApprovalProposalSummary_resources = AgreementApprovalProposalSummary.AddMember("resources", _AgreementApprovalResources)
+
+	AgreementApprovalProposalSummary_visibilityScope = AgreementApprovalProposalSummary.AddMember("visibilityScope", OfferVisibilityScope)
+
+	AgreementApprovalProposer_accountId = AgreementApprovalProposer.AddMember("accountId", _AWSAccountId)
+
+	AgreementApprovalProposer_legalName = AgreementApprovalProposer.AddMember("legalName", _ProposerLegalName)
+
+	AgreementApprovalPurchaseOrder_chargeId = AgreementApprovalPurchaseOrder.AddMember("chargeId", _ChargeId)
+
+	AgreementApprovalPurchaseOrder_purchaseOrderReference = AgreementApprovalPurchaseOrder.AddMember("purchaseOrderReference", _PurchaseOrderReference)
+
+	_AgreementApprovalPurchaseOrders_member = _AgreementApprovalPurchaseOrders.AddMember("member", AgreementApprovalPurchaseOrder)
+
+	AgreementApprovalRequester_accountId = AgreementApprovalRequester.AddMember("accountId", _AWSAccountId)
+
+	AgreementApprovalStatus_PENDING_APPROVAL = AgreementApprovalStatus.AddMember("PENDING_APPROVAL", smithyprelude.Unit)
+
+	AgreementApprovalStatus_APPROVED = AgreementApprovalStatus.AddMember("APPROVED", smithyprelude.Unit)
+
+	AgreementApprovalStatus_REJECTED = AgreementApprovalStatus.AddMember("REJECTED", smithyprelude.Unit)
+
+	AgreementApprovalStatus_EXPIRED = AgreementApprovalStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	AgreementApprovalStatus_CANCELLED = AgreementApprovalStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	AgreementApprovalType_BUYER_AGREEMENT_APPROVAL = AgreementApprovalType.AddMember("BUYER_AGREEMENT_APPROVAL", smithyprelude.Unit)
+
+	AgreementApprovalSummary_approvalType = AgreementApprovalSummary.AddMember("approvalType", AgreementApprovalType)
+
+	AgreementApprovalSummary_agreementRequestId = AgreementApprovalSummary.AddMember("agreementRequestId", _AgreementRequestId)
+
+	AgreementApprovalSummary_agreementApprovalId = AgreementApprovalSummary.AddMember("agreementApprovalId", _AgreementApprovalId)
+
+	AgreementApprovalSummary_name = AgreementApprovalSummary.AddMember("name", _AgreementApprovalName)
+
+	AgreementApprovalSummary_status = AgreementApprovalSummary.AddMember("status", AgreementApprovalStatus)
+
+	AgreementApprovalSummary_createdAt = AgreementApprovalSummary.AddMember("createdAt", _Timestamp)
+
+	AgreementApprovalSummary_updatedAt = AgreementApprovalSummary.AddMember("updatedAt", _Timestamp)
+
+	AgreementApprovalSummary_startedAt = AgreementApprovalSummary.AddMember("startedAt", _Timestamp)
+
+	AgreementApprovalSummary_expiresAt = AgreementApprovalSummary.AddMember("expiresAt", _Timestamp)
+
+	AgreementApprovalSummary_approvalNeededBy = AgreementApprovalSummary.AddMember("approvalNeededBy", _Timestamp)
+
+	_AgreementApprovalSummaries_member = _AgreementApprovalSummaries.AddMember("member", AgreementApprovalSummary)
 
 	AgreementCancellationRequestReasonCode_INCORRECT_TERMS_ACCEPTED = AgreementCancellationRequestReasonCode.AddMember("INCORRECT_TERMS_ACCEPTED", smithyprelude.Unit)
 
@@ -2869,6 +3925,66 @@ func init() {
 
 	_AgreementInvoiceLineItemGroupSummaries_member = _AgreementInvoiceLineItemGroupSummaries.AddMember("member", AgreementInvoiceLineItemGroupSummary)
 
+	AgreementRequestStatus_DRAFT = AgreementRequestStatus.AddMember("DRAFT", smithyprelude.Unit)
+
+	AgreementRequestStatus_PENDING_APPROVAL = AgreementRequestStatus.AddMember("PENDING_APPROVAL", smithyprelude.Unit)
+
+	AgreementRequestStatus_APPROVED = AgreementRequestStatus.AddMember("APPROVED", smithyprelude.Unit)
+
+	AgreementRequestStatus_ACCEPTED = AgreementRequestStatus.AddMember("ACCEPTED", smithyprelude.Unit)
+
+	AgreementRequestStatus_REJECTED = AgreementRequestStatus.AddMember("REJECTED", smithyprelude.Unit)
+
+	AgreementRequestStatus_CANCELLED = AgreementRequestStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	_Resources_member = _Resources.AddMember("member", Resource)
+
+	ProposalSummary_resources = ProposalSummary.AddMember("resources", _Resources)
+
+	ProposalSummary_offerId = ProposalSummary.AddMember("offerId", _OfferId)
+
+	ProposalSummary_offerSetId = ProposalSummary.AddMember("offerSetId", _OfferSetId)
+
+	AgreementRequestSummary_agreementRequestId = AgreementRequestSummary.AddMember("agreementRequestId", _AgreementRequestId)
+
+	AgreementRequestSummary_agreementType = AgreementRequestSummary.AddMember("agreementType", _AgreementType)
+
+	AgreementRequestSummary_status = AgreementRequestSummary.AddMember("status", AgreementRequestStatus)
+
+	AgreementRequestSummary_agreementId = AgreementRequestSummary.AddMember("agreementId", _ResourceId)
+
+	AgreementRequestSummary_proposalSummary = AgreementRequestSummary.AddMember("proposalSummary", ProposalSummary)
+
+	_AgreementRequestSummaryList_member = _AgreementRequestSummaryList.AddMember("member", AgreementRequestSummary)
+
+	AgreementRequestTerm_legalTerm = AgreementRequestTerm.AddMember("legalTerm", LegalTerm)
+
+	AgreementRequestTerm_supportTerm = AgreementRequestTerm.AddMember("supportTerm", SupportTerm)
+
+	AgreementRequestTerm_renewalTerm = AgreementRequestTerm.AddMember("renewalTerm", RenewalTerm)
+
+	AgreementRequestTerm_usageBasedPricingTerm = AgreementRequestTerm.AddMember("usageBasedPricingTerm", UsageBasedPricingTerm)
+
+	AgreementRequestTerm_configurableUpfrontPricingTerm = AgreementRequestTerm.AddMember("configurableUpfrontPricingTerm", ConfigurableUpfrontPricingTerm)
+
+	AgreementRequestTerm_byolPricingTerm = AgreementRequestTerm.AddMember("byolPricingTerm", ByolPricingTerm)
+
+	AgreementRequestTerm_recurringPaymentTerm = AgreementRequestTerm.AddMember("recurringPaymentTerm", RecurringPaymentTerm)
+
+	AgreementRequestTerm_validityTerm = AgreementRequestTerm.AddMember("validityTerm", ValidityTerm)
+
+	AgreementRequestTerm_paymentScheduleTerm = AgreementRequestTerm.AddMember("paymentScheduleTerm", PaymentScheduleTerm)
+
+	AgreementRequestTerm_freeTrialPricingTerm = AgreementRequestTerm.AddMember("freeTrialPricingTerm", FreeTrialPricingTerm)
+
+	AgreementRequestTerm_fixedUpfrontPricingTerm = AgreementRequestTerm.AddMember("fixedUpfrontPricingTerm", FixedUpfrontPricingTerm)
+
+	AgreementRequestTerm_variablePaymentTerm = AgreementRequestTerm.AddMember("variablePaymentTerm", VariablePaymentTerm)
+
+	AgreementRequestTerm_netPaymentTerm = AgreementRequestTerm.AddMember("netPaymentTerm", NetPaymentTerm)
+
+	_AgreementRequestTermList_member = _AgreementRequestTermList.AddMember("member", AgreementRequestTerm)
+
 	AgreementStatus_ACTIVE = AgreementStatus.AddMember("ACTIVE", smithyprelude.Unit)
 
 	AgreementStatus_ARCHIVED = AgreementStatus.AddMember("ARCHIVED", smithyprelude.Unit)
@@ -2889,14 +4005,6 @@ func init() {
 
 	Proposer_accountId = Proposer.AddMember("accountId", _AWSAccountId)
 
-	_Resources_member = _Resources.AddMember("member", Resource)
-
-	ProposalSummary_resources = ProposalSummary.AddMember("resources", _Resources)
-
-	ProposalSummary_offerId = ProposalSummary.AddMember("offerId", _OfferId)
-
-	ProposalSummary_offerSetId = ProposalSummary.AddMember("offerSetId", _OfferSetId)
-
 	Entitlement_licenseArn = Entitlement.AddMember("licenseArn", smithyprelude.String)
 
 	_EntitlementList_member = _EntitlementList.AddMember("member", Entitlement)
@@ -2914,6 +4022,10 @@ func init() {
 	EndTimeBehaviorReasonCode_NO_RENEWAL_TERM = EndTimeBehaviorReasonCode.AddMember("NO_RENEWAL_TERM", smithyprelude.Unit)
 
 	EndTimeBehaviorReasonCode_RENEWAL_LIMIT_EXHAUSTED = EndTimeBehaviorReasonCode.AddMember("RENEWAL_LIMIT_EXHAUSTED", smithyprelude.Unit)
+
+	ContactType_ACCEPTOR = ContactType.AddMember("ACCEPTOR", smithyprelude.Unit)
+
+	_ContactTypeList_member = _ContactTypeList.AddMember("member", ContactType)
 
 	AgreementViewSummary_agreementId = AgreementViewSummary.AddMember("agreementId", _ResourceId)
 
@@ -2945,7 +4057,73 @@ func init() {
 
 	AgreementViewSummary_freeTrialEndTime = AgreementViewSummary.AddMember("freeTrialEndTime", _Timestamp)
 
+	AgreementViewSummary_includesContactOfType = AgreementViewSummary.AddMember("includesContactOfType", _ContactTypeList)
+
 	_AgreementViewSummaryList_member = _AgreementViewSummaryList.AddMember("member", AgreementViewSummary)
+
+	ApprovalRequirement_REQUIRED = ApprovalRequirement.AddMember("REQUIRED", smithyprelude.Unit)
+
+	ApprovalRequirement_NOT_REQUIRED = ApprovalRequirement.AddMember("NOT_REQUIRED", smithyprelude.Unit)
+
+	ApproverOutcomeStatus_QUEUED = ApproverOutcomeStatus.AddMember("QUEUED", smithyprelude.Unit)
+
+	ApproverOutcomeStatus_PENDING_APPROVAL = ApproverOutcomeStatus.AddMember("PENDING_APPROVAL", smithyprelude.Unit)
+
+	ApproverOutcomeStatus_APPROVED = ApproverOutcomeStatus.AddMember("APPROVED", smithyprelude.Unit)
+
+	ApproverOutcomeStatus_REJECTED = ApproverOutcomeStatus.AddMember("REJECTED", smithyprelude.Unit)
+
+	ApproverOutcomeStatus_EXPIRED = ApproverOutcomeStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	ApproverOutcomeStatus_SKIPPED = ApproverOutcomeStatus.AddMember("SKIPPED", smithyprelude.Unit)
+
+	CallerIdentity_principalArn = CallerIdentity.AddMember("principalArn", _PrincipalArn)
+
+	EmailApproverOutcome_note = EmailApproverOutcome.AddMember("note", _AgreementApprovalNote)
+
+	EmailApproverOutcome_status = EmailApproverOutcome.AddMember("status", ApproverOutcomeStatus)
+
+	EmailApproverOutcome_updatedAt = EmailApproverOutcome.AddMember("updatedAt", _Timestamp)
+
+	EmailApproverOutcome_approverOutcomeId = EmailApproverOutcome.AddMember("approverOutcomeId", _ApproverOutcomeId)
+
+	EmailApproverOutcome_emailAddress = EmailApproverOutcome.AddMember("emailAddress", _EmailAddress)
+
+	EmailApproverOutcome_name = EmailApproverOutcome.AddMember("name", _ApproverName)
+
+	EmailApproverOutcome_purchaseOrders = EmailApproverOutcome.AddMember("purchaseOrders", _AgreementApprovalPurchaseOrders)
+
+	EmailApproverOutcome_overriddenBy = EmailApproverOutcome.AddMember("overriddenBy", CallerIdentity)
+
+	ProcurementToolApproverOutcome_note = ProcurementToolApproverOutcome.AddMember("note", _AgreementApprovalNote)
+
+	ProcurementToolApproverOutcome_status = ProcurementToolApproverOutcome.AddMember("status", ApproverOutcomeStatus)
+
+	ProcurementToolApproverOutcome_updatedAt = ProcurementToolApproverOutcome.AddMember("updatedAt", _Timestamp)
+
+	ProcurementToolApproverOutcome_approverOutcomeId = ProcurementToolApproverOutcome.AddMember("approverOutcomeId", _ApproverOutcomeId)
+
+	ProcurementToolApproverOutcome_name = ProcurementToolApproverOutcome.AddMember("name", _ApproverName)
+
+	ProcurementToolApproverOutcome_purchaseOrders = ProcurementToolApproverOutcome.AddMember("purchaseOrders", _AgreementApprovalPurchaseOrders)
+
+	ProcurementToolApproverOutcome_overriddenBy = ProcurementToolApproverOutcome.AddMember("overriddenBy", CallerIdentity)
+
+	AwsOrganizationApproverOutcome_note = AwsOrganizationApproverOutcome.AddMember("note", _AgreementApprovalNote)
+
+	AwsOrganizationApproverOutcome_status = AwsOrganizationApproverOutcome.AddMember("status", ApproverOutcomeStatus)
+
+	AwsOrganizationApproverOutcome_updatedAt = AwsOrganizationApproverOutcome.AddMember("updatedAt", _Timestamp)
+
+	AwsOrganizationApproverOutcome_approverOutcomeId = AwsOrganizationApproverOutcome.AddMember("approverOutcomeId", _ApproverOutcomeId)
+
+	AwsOrganizationApproverOutcome_purchaseOrders = AwsOrganizationApproverOutcome.AddMember("purchaseOrders", _AgreementApprovalPurchaseOrders)
+
+	ApproverOutcome_emailApproverOutcome = ApproverOutcome.AddMember("emailApproverOutcome", EmailApproverOutcome)
+
+	ApproverOutcome_procurementToolApproverOutcome = ApproverOutcome.AddMember("procurementToolApproverOutcome", ProcurementToolApproverOutcome)
+
+	ApproverOutcome_awsOrganizationApproverOutcome = ApproverOutcome.AddMember("awsOrganizationApproverOutcome", AwsOrganizationApproverOutcome)
 
 	BillingAdjustmentErrorCode_CONFLICT_EXCEPTION = BillingAdjustmentErrorCode.AddMember("CONFLICT_EXCEPTION", smithyprelude.Unit)
 
@@ -3027,6 +4205,64 @@ func init() {
 
 	_BillingAdjustmentSummaryList_member = _BillingAdjustmentSummaryList.AddMember("member", BillingAdjustmentSummary)
 
+	_BuyerApproverOutcomes_member = _BuyerApproverOutcomes.AddMember("member", ApproverOutcome)
+
+	BuyerAgreementApprovalGroup_approvalCriteria = BuyerAgreementApprovalGroup.AddMember("approvalCriteria", BuyerAgreementApprovalCriteria)
+
+	BuyerAgreementApprovalGroup_approvers = BuyerAgreementApprovalGroup.AddMember("approvers", _BuyerApproverOutcomes)
+
+	_BuyerAgreementApprovalGroups_member = _BuyerAgreementApprovalGroups.AddMember("member", BuyerAgreementApprovalGroup)
+
+	BuyerAgreementApprovalLevel_name = BuyerAgreementApprovalLevel.AddMember("name", _AgreementApprovalLevelName)
+
+	BuyerAgreementApprovalLevel_groups = BuyerAgreementApprovalLevel.AddMember("groups", _BuyerAgreementApprovalGroups)
+
+	_BuyerAgreementApprovalLevels_member = _BuyerAgreementApprovalLevels.AddMember("member", BuyerAgreementApprovalLevel)
+
+	BuyerAgreementApproval_approvalType = BuyerAgreementApproval.AddMember("approvalType", AgreementApprovalType)
+
+	BuyerAgreementApproval_agreementApprovalId = BuyerAgreementApproval.AddMember("agreementApprovalId", _AgreementApprovalId)
+
+	BuyerAgreementApproval_name = BuyerAgreementApproval.AddMember("name", _AgreementApprovalName)
+
+	BuyerAgreementApproval_agreementRequestId = BuyerAgreementApproval.AddMember("agreementRequestId", _AgreementRequestId)
+
+	BuyerAgreementApproval_status = BuyerAgreementApproval.AddMember("status", AgreementApprovalStatus)
+
+	BuyerAgreementApproval_requester = BuyerAgreementApproval.AddMember("requester", AgreementApprovalRequester)
+
+	BuyerAgreementApproval_createdAt = BuyerAgreementApproval.AddMember("createdAt", _Timestamp)
+
+	BuyerAgreementApproval_updatedAt = BuyerAgreementApproval.AddMember("updatedAt", _Timestamp)
+
+	BuyerAgreementApproval_startedAt = BuyerAgreementApproval.AddMember("startedAt", _Timestamp)
+
+	BuyerAgreementApproval_expiresAt = BuyerAgreementApproval.AddMember("expiresAt", _Timestamp)
+
+	BuyerAgreementApproval_approvalNeededBy = BuyerAgreementApproval.AddMember("approvalNeededBy", _Timestamp)
+
+	BuyerAgreementApproval_levels = BuyerAgreementApproval.AddMember("levels", _BuyerAgreementApprovalLevels)
+
+	BuyerAgreementApproval_planInput = BuyerAgreementApproval.AddMember("planInput", BuyerAgreementApprovalPlanInput)
+
+	BuyerAgreementApproval_proposer = BuyerAgreementApproval.AddMember("proposer", AgreementApprovalProposer)
+
+	BuyerAgreementApproval_proposalSummary = BuyerAgreementApproval.AddMember("proposalSummary", AgreementApprovalProposalSummary)
+
+	BuyerAgreementApprovalApproverInput_agreementApprovalId = BuyerAgreementApprovalApproverInput.AddMember("agreementApprovalId", _AgreementApprovalId)
+
+	BuyerAgreementApprovalApproverInput_purchaseOrders = BuyerAgreementApprovalApproverInput.AddMember("purchaseOrders", _AgreementApprovalPurchaseOrders)
+
+	BuyerAgreementApprovalApproverInput_note = BuyerAgreementApprovalApproverInput.AddMember("note", _AgreementApprovalNote)
+
+	BuyerAgreementApprovalApproverInput_approverOutcomeIdToOverride = BuyerAgreementApprovalApproverInput.AddMember("approverOutcomeIdToOverride", _ApproverOutcomeId)
+
+	BuyerAgreementApprovalRejectionInput_agreementApprovalId = BuyerAgreementApprovalRejectionInput.AddMember("agreementApprovalId", _AgreementApprovalId)
+
+	BuyerAgreementApprovalRejectionInput_note = BuyerAgreementApprovalRejectionInput.AddMember("note", _AgreementApprovalNote)
+
+	BuyerAgreementApprovalRejectionInput_approverOutcomeIdToOverride = BuyerAgreementApprovalRejectionInput.AddMember("approverOutcomeIdToOverride", _ApproverOutcomeId)
+
 	Charge_id = Charge.AddMember("id", _ResourceId)
 
 	Charge_revision = Charge.AddMember("revision", _ChargeRevision)
@@ -3051,6 +4287,8 @@ func init() {
 
 	Timing_BILLING_PERIOD = Timing.AddMember("BILLING_PERIOD", smithyprelude.Unit)
 
+	Timing_NOT_APPLICABLE = Timing.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
 	TaxBreakdownItem_amount = TaxBreakdownItem.AddMember("amount", _BoundedString)
 
 	TaxBreakdownItem_rate = TaxBreakdownItem.AddMember("rate", _BoundedString)
@@ -3074,6 +4312,8 @@ func init() {
 	ExpectedCharge_timing = ExpectedCharge.AddMember("timing", Timing)
 
 	ExpectedCharge_estimatedTaxes = ExpectedCharge.AddMember("estimatedTaxes", EstimatedTaxes)
+
+	ExpectedCharge_purchaseOrderReference = ExpectedCharge.AddMember("purchaseOrderReference", _PurchaseOrderReference)
 
 	_ExpectedChargeList_member = _ExpectedChargeList.AddMember("member", ExpectedCharge)
 
@@ -3118,6 +4358,10 @@ func init() {
 	ResourceType_AGREEMENT_CANCELLATION_REQUEST = ResourceType.AddMember("AGREEMENT_CANCELLATION_REQUEST", smithyprelude.Unit)
 
 	ResourceType_BILLING_ADJUSTMENT_REQUEST = ResourceType.AddMember("BILLING_ADJUSTMENT_REQUEST", smithyprelude.Unit)
+
+	ResourceType_AGREEMENT_APPROVAL = ResourceType.AddMember("AGREEMENT_APPROVAL", smithyprelude.Unit)
+
+	ResourceType_AGREEMENT_REQUEST_APPROVAL_PLAN = ResourceType.AddMember("AGREEMENT_REQUEST_APPROVAL_PLAN", smithyprelude.Unit)
 
 	ConflictException_requestId = ConflictException.AddMember("requestId", _RequestId)
 
@@ -3252,6 +4496,20 @@ func init() {
 	ThrottlingException_requestId = ThrottlingException.AddMember("requestId", _RequestId)
 
 	ThrottlingException_message = ThrottlingException.AddMember("message", _ExceptionMessage)
+
+	ValidationExceptionReason_CLOSED_AGREEMENT_APPROVAL = ValidationExceptionReason.AddMember("CLOSED_AGREEMENT_APPROVAL", smithyprelude.Unit)
+
+	ValidationExceptionReason_QUEUED_AGREEMENT_APPROVAL = ValidationExceptionReason.AddMember("QUEUED_AGREEMENT_APPROVAL", smithyprelude.Unit)
+
+	ValidationExceptionReason_INVALID_AGREEMENT_APPROVAL_ID = ValidationExceptionReason.AddMember("INVALID_AGREEMENT_APPROVAL_ID", smithyprelude.Unit)
+
+	ValidationExceptionReason_MISSING_AGREEMENT_APPROVAL_ID = ValidationExceptionReason.AddMember("MISSING_AGREEMENT_APPROVAL_ID", smithyprelude.Unit)
+
+	ValidationExceptionReason_DUPLICATE_PLAN_REFERENCE = ValidationExceptionReason.AddMember("DUPLICATE_PLAN_REFERENCE", smithyprelude.Unit)
+
+	ValidationExceptionReason_INVALID_PLAN_INPUTS = ValidationExceptionReason.AddMember("INVALID_PLAN_INPUTS", smithyprelude.Unit)
+
+	ValidationExceptionReason_PENDING_APPROVAL_AGREEMENT_REQUEST = ValidationExceptionReason.AddMember("PENDING_APPROVAL_AGREEMENT_REQUEST", smithyprelude.Unit)
 
 	ValidationExceptionReason_MISSING_BILLING_ADJUSTMENTS = ValidationExceptionReason.AddMember("MISSING_BILLING_ADJUSTMENTS", smithyprelude.Unit)
 
@@ -3391,6 +4649,8 @@ func init() {
 
 	ValidationExceptionReason_EXPIRED_AGREEMENT_PROPOSAL = ValidationExceptionReason.AddMember("EXPIRED_AGREEMENT_PROPOSAL", smithyprelude.Unit)
 
+	ValidationExceptionReason_INVALID_ACCEPTOR_CONTACT = ValidationExceptionReason.AddMember("INVALID_ACCEPTOR_CONTACT", smithyprelude.Unit)
+
 	ValidationExceptionReason_MISSING_MANDATORY_TERMS = ValidationExceptionReason.AddMember("MISSING_MANDATORY_TERMS", smithyprelude.Unit)
 
 	ValidationExceptionReason_INCOMPATIBLE_TERMS = ValidationExceptionReason.AddMember("INCOMPATIBLE_TERMS", smithyprelude.Unit)
@@ -3415,7 +4675,29 @@ func init() {
 
 	ValidationExceptionReason_DUPLICATE_AGREEMENT_IN_ORGANIZATION = ValidationExceptionReason.AddMember("DUPLICATE_AGREEMENT_IN_ORGANIZATION", smithyprelude.Unit)
 
+	ValidationExceptionReason_MISSING_AWS_LICENSE_MANAGER_USER_SUBSCRIPTIONS_SLR = ValidationExceptionReason.AddMember("MISSING_AWS_LICENSE_MANAGER_USER_SUBSCRIPTIONS_SLR", smithyprelude.Unit)
+
 	ValidationExceptionReason_MISSING_PURCHASE_ORDER_REFERENCE = ValidationExceptionReason.AddMember("MISSING_PURCHASE_ORDER_REFERENCE", smithyprelude.Unit)
+
+	ValidationExceptionReason_INVALID_RESOURCE_ID = ValidationExceptionReason.AddMember("INVALID_RESOURCE_ID", smithyprelude.Unit)
+
+	ValidationExceptionReason_CLOSED_AGREEMENT_REQUEST = ValidationExceptionReason.AddMember("CLOSED_AGREEMENT_REQUEST", smithyprelude.Unit)
+
+	ValidationExceptionReason_INCOMPATIBLE_AGREEMENT_REQUEST = ValidationExceptionReason.AddMember("INCOMPATIBLE_AGREEMENT_REQUEST", smithyprelude.Unit)
+
+	ValidationExceptionReason_REJECTED_BY_AGREEMENT_APPROVAL_POLICY = ValidationExceptionReason.AddMember("REJECTED_BY_AGREEMENT_APPROVAL_POLICY", smithyprelude.Unit)
+
+	ValidationExceptionReason_MISSING_PLAN_INPUTS = ValidationExceptionReason.AddMember("MISSING_PLAN_INPUTS", smithyprelude.Unit)
+
+	ValidationExceptionReason_INVALID_APPROVER_OUTCOME_ID_TO_OVERRIDE = ValidationExceptionReason.AddMember("INVALID_APPROVER_OUTCOME_ID_TO_OVERRIDE", smithyprelude.Unit)
+
+	ValidationExceptionReason_INVALID_NOTE = ValidationExceptionReason.AddMember("INVALID_NOTE", smithyprelude.Unit)
+
+	ValidationExceptionReason_MISSING_NOTE = ValidationExceptionReason.AddMember("MISSING_NOTE", smithyprelude.Unit)
+
+	ValidationExceptionReason_INVALID_APPROVAL_TYPE = ValidationExceptionReason.AddMember("INVALID_APPROVAL_TYPE", smithyprelude.Unit)
+
+	ValidationExceptionReason_MISSING_SORT_BY = ValidationExceptionReason.AddMember("MISSING_SORT_BY", smithyprelude.Unit)
 
 	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _BoundedString)
 
@@ -3430,6 +4712,8 @@ func init() {
 	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
 
 	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFieldList)
+
+	AcceptAgreementApprovalInput_buyerAgreementApprovalApproverInput = AcceptAgreementApprovalInput.AddMember("buyerAgreementApprovalApproverInput", BuyerAgreementApprovalApproverInput)
 
 	AcceptAgreementCancellationRequestInput_agreementId = AcceptAgreementCancellationRequestInput.AddMember("agreementId", _AgreementId)
 
@@ -3531,6 +4815,8 @@ func init() {
 
 	CancelAgreementPaymentRequestOutput_updatedAt = CancelAgreementPaymentRequestOutput.AddMember("updatedAt", _Timestamp)
 
+	CancelAgreementRequestInput_agreementRequestId = CancelAgreementRequestInput.AddMember("agreementRequestId", _AgreementRequestId)
+
 	CreateAgreementRequestInput_clientToken = CreateAgreementRequestInput.AddMember("clientToken", _ClientToken)
 
 	CreateAgreementRequestInput_intent = CreateAgreementRequestInput.AddMember("intent", Intent)
@@ -3543,9 +4829,19 @@ func init() {
 
 	CreateAgreementRequestInput_taxConfiguration = CreateAgreementRequestInput.AddMember("taxConfiguration", TaxConfiguration)
 
+	CreateAgreementRequestInput_acceptorContact = CreateAgreementRequestInput.AddMember("acceptorContact", AcceptorContact)
+
 	CreateAgreementRequestOutput_agreementRequestId = CreateAgreementRequestOutput.AddMember("agreementRequestId", _AgreementRequestId)
 
+	CreateAgreementRequestOutput_agreementType = CreateAgreementRequestOutput.AddMember("agreementType", _AgreementType)
+
 	CreateAgreementRequestOutput_chargeSummary = CreateAgreementRequestOutput.AddMember("chargeSummary", ChargeSummary)
+
+	CreateAgreementRequestOutput_status = CreateAgreementRequestOutput.AddMember("status", AgreementRequestStatus)
+
+	CreateAgreementRequestOutput_approvalRequirement = CreateAgreementRequestOutput.AddMember("approvalRequirement", ApprovalRequirement)
+
+	CreateAgreementRequestOutput_createdAt = CreateAgreementRequestOutput.AddMember("createdAt", _Timestamp)
 
 	DescribeAgreementInput_agreementId = DescribeAgreementInput.AddMember("agreementId", _ResourceId)
 
@@ -3575,6 +4871,10 @@ func init() {
 
 	DescribeAgreementOutput_freeTrialSummary = DescribeAgreementOutput.AddMember("freeTrialSummary", FreeTrialSummary)
 
+	GetAgreementApprovalInput_agreementApprovalId = GetAgreementApprovalInput.AddMember("agreementApprovalId", _AgreementApprovalId)
+
+	GetAgreementApprovalOutput_buyerAgreementApproval = GetAgreementApprovalOutput.AddMember("buyerAgreementApproval", BuyerAgreementApproval)
+
 	GetAgreementCancellationRequestInput_agreementCancellationRequestId = GetAgreementCancellationRequestInput.AddMember("agreementCancellationRequestId", _AgreementCancellationRequestId)
 
 	GetAgreementCancellationRequestInput_agreementId = GetAgreementCancellationRequestInput.AddMember("agreementId", _AgreementId)
@@ -3594,6 +4894,10 @@ func init() {
 	GetAgreementCancellationRequestOutput_createdAt = GetAgreementCancellationRequestOutput.AddMember("createdAt", _Timestamp)
 
 	GetAgreementCancellationRequestOutput_updatedAt = GetAgreementCancellationRequestOutput.AddMember("updatedAt", _Timestamp)
+
+	GetAgreementContactsInput_agreementId = GetAgreementContactsInput.AddMember("agreementId", _ResourceId)
+
+	GetAgreementContactsOutput_acceptorContact = GetAgreementContactsOutput.AddMember("acceptorContact", AcceptorContact)
 
 	GetAgreementEntitlementsInput_agreementId = GetAgreementEntitlementsInput.AddMember("agreementId", _ResourceId)
 
@@ -3631,6 +4935,48 @@ func init() {
 
 	GetAgreementPaymentRequestOutput_updatedAt = GetAgreementPaymentRequestOutput.AddMember("updatedAt", smithyprelude.Timestamp)
 
+	GetAgreementRequestApprovalPlansInput_agreementRequestId = GetAgreementRequestApprovalPlansInput.AddMember("agreementRequestId", _AgreementRequestId)
+
+	GetAgreementRequestApprovalPlansInput_maxResults = GetAgreementRequestApprovalPlansInput.AddMember("maxResults", _MaxResults)
+
+	GetAgreementRequestApprovalPlansInput_nextToken = GetAgreementRequestApprovalPlansInput.AddMember("nextToken", _NextToken)
+
+	GetAgreementRequestApprovalPlansOutput_items = GetAgreementRequestApprovalPlansOutput.AddMember("items", _AgreementApprovalPlans)
+
+	GetAgreementRequestApprovalPlansOutput_nextToken = GetAgreementRequestApprovalPlansOutput.AddMember("nextToken", _NextToken)
+
+	GetAgreementRequestInput_agreementRequestId = GetAgreementRequestInput.AddMember("agreementRequestId", _AgreementRequestId)
+
+	GetAgreementRequestOutput_agreementRequestId = GetAgreementRequestOutput.AddMember("agreementRequestId", _AgreementRequestId)
+
+	GetAgreementRequestOutput_agreementType = GetAgreementRequestOutput.AddMember("agreementType", _AgreementType)
+
+	GetAgreementRequestOutput_status = GetAgreementRequestOutput.AddMember("status", AgreementRequestStatus)
+
+	GetAgreementRequestOutput_approvalRequirement = GetAgreementRequestOutput.AddMember("approvalRequirement", ApprovalRequirement)
+
+	GetAgreementRequestOutput_agreementId = GetAgreementRequestOutput.AddMember("agreementId", _ResourceId)
+
+	GetAgreementRequestOutput_intent = GetAgreementRequestOutput.AddMember("intent", Intent)
+
+	GetAgreementRequestOutput_createdAt = GetAgreementRequestOutput.AddMember("createdAt", _Timestamp)
+
+	GetAgreementRequestOutput_chargeSummary = GetAgreementRequestOutput.AddMember("chargeSummary", ChargeSummary)
+
+	GetAgreementRequestOutput_proposer = GetAgreementRequestOutput.AddMember("proposer", Proposer)
+
+	GetAgreementRequestOutput_proposalSummary = GetAgreementRequestOutput.AddMember("proposalSummary", ProposalSummary)
+
+	GetAgreementRequestTermsInput_agreementRequestId = GetAgreementRequestTermsInput.AddMember("agreementRequestId", _AgreementRequestId)
+
+	GetAgreementRequestTermsInput_maxResults = GetAgreementRequestTermsInput.AddMember("maxResults", _AgreementRequestTermsMaxResults)
+
+	GetAgreementRequestTermsInput_nextToken = GetAgreementRequestTermsInput.AddMember("nextToken", _NextToken)
+
+	GetAgreementRequestTermsOutput_terms = GetAgreementRequestTermsOutput.AddMember("terms", _AgreementRequestTermList)
+
+	GetAgreementRequestTermsOutput_nextToken = GetAgreementRequestTermsOutput.AddMember("nextToken", _NextToken)
+
 	GetAgreementTermsInput_agreementId = GetAgreementTermsInput.AddMember("agreementId", _ResourceId)
 
 	GetAgreementTermsInput_maxResults = GetAgreementTermsInput.AddMember("maxResults", _MaxResults)
@@ -3666,6 +5012,24 @@ func init() {
 	GetBillingAdjustmentRequestOutput_createdAt = GetBillingAdjustmentRequestOutput.AddMember("createdAt", _Timestamp)
 
 	GetBillingAdjustmentRequestOutput_updatedAt = GetBillingAdjustmentRequestOutput.AddMember("updatedAt", _Timestamp)
+
+	ListAgreementApprovalsInput_catalog = ListAgreementApprovalsInput.AddMember("catalog", _Catalog)
+
+	ListAgreementApprovalsInput_partyType = ListAgreementApprovalsInput.AddMember("partyType", AgreementApprovalPartyType)
+
+	ListAgreementApprovalsInput_agreementRequestId = ListAgreementApprovalsInput.AddMember("agreementRequestId", _AgreementRequestId)
+
+	ListAgreementApprovalsInput_approvalType = ListAgreementApprovalsInput.AddMember("approvalType", AgreementApprovalType)
+
+	ListAgreementApprovalsInput_status = ListAgreementApprovalsInput.AddMember("status", AgreementApprovalStatus)
+
+	ListAgreementApprovalsInput_maxResults = ListAgreementApprovalsInput.AddMember("maxResults", _MaxResults)
+
+	ListAgreementApprovalsInput_nextToken = ListAgreementApprovalsInput.AddMember("nextToken", _NextToken)
+
+	ListAgreementApprovalsOutput_items = ListAgreementApprovalsOutput.AddMember("items", _AgreementApprovalSummaries)
+
+	ListAgreementApprovalsOutput_nextToken = ListAgreementApprovalsOutput.AddMember("nextToken", _NextToken)
 
 	ListAgreementCancellationRequestsInput_partyType = ListAgreementCancellationRequestsInput.AddMember("partyType", _PartyType)
 
@@ -3739,6 +5103,20 @@ func init() {
 
 	ListAgreementPaymentRequestsOutput_items = ListAgreementPaymentRequestsOutput.AddMember("items", _PaymentRequestSummaryList)
 
+	ListAgreementRequestsInput_catalog = ListAgreementRequestsInput.AddMember("catalog", _Catalog)
+
+	ListAgreementRequestsInput_status = ListAgreementRequestsInput.AddMember("status", AgreementRequestStatus)
+
+	ListAgreementRequestsInput_resourceId = ListAgreementRequestsInput.AddMember("resourceId", _ResourceId)
+
+	ListAgreementRequestsInput_maxResults = ListAgreementRequestsInput.AddMember("maxResults", _MaxResults)
+
+	ListAgreementRequestsInput_nextToken = ListAgreementRequestsInput.AddMember("nextToken", _NextToken)
+
+	ListAgreementRequestsOutput_items = ListAgreementRequestsOutput.AddMember("items", _AgreementRequestSummaryList)
+
+	ListAgreementRequestsOutput_nextToken = ListAgreementRequestsOutput.AddMember("nextToken", _NextToken)
+
 	ListBillingAdjustmentRequestsInput_agreementId = ListBillingAdjustmentRequestsInput.AddMember("agreementId", _AgreementId)
 
 	ListBillingAdjustmentRequestsInput_status = ListBillingAdjustmentRequestsInput.AddMember("status", BillingAdjustmentStatus)
@@ -3758,6 +5136,8 @@ func init() {
 	ListBillingAdjustmentRequestsOutput_nextToken = ListBillingAdjustmentRequestsOutput.AddMember("nextToken", _NextToken)
 
 	ListBillingAdjustmentRequestsOutput_items = ListBillingAdjustmentRequestsOutput.AddMember("items", _BillingAdjustmentSummaryList)
+
+	RejectAgreementApprovalInput_buyerAgreementApprovalRejectionInput = RejectAgreementApprovalInput.AddMember("buyerAgreementApprovalRejectionInput", BuyerAgreementApprovalRejectionInput)
 
 	RejectAgreementCancellationRequestInput_agreementId = RejectAgreementCancellationRequestInput.AddMember("agreementId", _AgreementId)
 
@@ -3870,6 +5250,14 @@ func init() {
 	SendAgreementPaymentRequestOutput_currencyCode = SendAgreementPaymentRequestOutput.AddMember("currencyCode", _CurrencyCode)
 
 	SendAgreementPaymentRequestOutput_createdAt = SendAgreementPaymentRequestOutput.AddMember("createdAt", _Timestamp)
+
+	StartAgreementApprovalsInput_agreementRequestId = StartAgreementApprovalsInput.AddMember("agreementRequestId", _AgreementRequestId)
+
+	StartAgreementApprovalsInput_planInputs = StartAgreementApprovalsInput.AddMember("planInputs", _AgreementApprovalPlanInputs)
+
+	StartAgreementApprovalsInput_purchaseOrders = StartAgreementApprovalsInput.AddMember("purchaseOrders", _AgreementApprovalPurchaseOrders)
+
+	StartAgreementApprovalsOutput_approvalSummaries = StartAgreementApprovalsOutput.AddMember("approvalSummaries", _AgreementApprovalSummaries)
 
 	UpdatePurchaseOrdersInput_purchaseOrders = UpdatePurchaseOrdersInput.AddMember("purchaseOrders", _PurchaseOrders)
 

@@ -398,11 +398,35 @@ func TestCheckSnapshot_RedeemCredits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SplitCredit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SplitCredit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SplitCredit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TransferCredit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TransferCredit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TransferCredit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,11 +805,35 @@ func TestUpdateSnapshot_RedeemCredits(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SplitCredit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SplitCredit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SplitCredit")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TransferCredit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TransferCredit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TransferCredit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

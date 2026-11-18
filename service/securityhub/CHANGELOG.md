@@ -1,3 +1,7 @@
+# v1.88.0 (2026-11-17)
+
+* **Feature**: Security Hub now supports Google Cloud. Use connector APIs to connect GCP organizations or projects and monitor their security posture. It also infers resource criticality from tags, CloudWatch metrics, and SBOM data to help you prioritize findings
+
 # v1.87.0 (2026-11-13)
 
 * **Feature**: New DISABLED status for Security Hub CSPM Central Configuration.

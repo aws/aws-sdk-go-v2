@@ -277,6 +277,8 @@ const (
 	EventTypeCallbackFailed         EventType = "CallbackFailed"
 	EventTypeCallbackTimedOut       EventType = "CallbackTimedOut"
 	EventTypeInvocationCompleted    EventType = "InvocationCompleted"
+	EventTypeExecutionPaused        EventType = "ExecutionPaused"
+	EventTypeExecutionResumed       EventType = "ExecutionResumed"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
@@ -309,6 +311,8 @@ func (EventType) Values() []EventType {
 		"CallbackFailed",
 		"CallbackTimedOut",
 		"InvocationCompleted",
+		"ExecutionPaused",
+		"ExecutionResumed",
 	}
 }
 
@@ -321,6 +325,9 @@ const (
 	ExecutionStatusFailed    ExecutionStatus = "FAILED"
 	ExecutionStatusTimedOut  ExecutionStatus = "TIMED_OUT"
 	ExecutionStatusStopped   ExecutionStatus = "STOPPED"
+	ExecutionStatusDeleting  ExecutionStatus = "DELETING"
+	ExecutionStatusPausing   ExecutionStatus = "PAUSING"
+	ExecutionStatusPaused    ExecutionStatus = "PAUSED"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -334,6 +341,9 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"FAILED",
 		"TIMED_OUT",
 		"STOPPED",
+		"DELETING",
+		"PAUSING",
+		"PAUSED",
 	}
 }
 

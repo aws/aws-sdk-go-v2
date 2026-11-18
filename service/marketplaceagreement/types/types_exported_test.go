@@ -73,6 +73,160 @@ var _ *types.NetPaymentTerm
 var _ *types.VariablePaymentTerm
 var _ *types.ConfigurableUpfrontPricingTerm
 
+func ExampleAgreementApprovalPlan_outputUsage() {
+	var union types.AgreementApprovalPlan
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgreementApprovalPlanMemberBuyerAgreementApprovalPlan:
+		_ = v.Value // Value is types.BuyerAgreementApprovalPlan
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BuyerAgreementApprovalPlan
+
+func ExampleAgreementApprovalPlanInput_outputUsage() {
+	var union types.AgreementApprovalPlanInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput:
+		_ = v.Value // Value is types.BuyerAgreementApprovalPlanInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.BuyerAgreementApprovalPlanInput
+
+func ExampleAgreementRequestTerm_outputUsage() {
+	var union types.AgreementRequestTerm
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgreementRequestTermMemberByolPricingTerm:
+		_ = v.Value // Value is types.ByolPricingTerm
+
+	case *types.AgreementRequestTermMemberConfigurableUpfrontPricingTerm:
+		_ = v.Value // Value is types.ConfigurableUpfrontPricingTerm
+
+	case *types.AgreementRequestTermMemberFixedUpfrontPricingTerm:
+		_ = v.Value // Value is types.FixedUpfrontPricingTerm
+
+	case *types.AgreementRequestTermMemberFreeTrialPricingTerm:
+		_ = v.Value // Value is types.FreeTrialPricingTerm
+
+	case *types.AgreementRequestTermMemberLegalTerm:
+		_ = v.Value // Value is types.LegalTerm
+
+	case *types.AgreementRequestTermMemberNetPaymentTerm:
+		_ = v.Value // Value is types.NetPaymentTerm
+
+	case *types.AgreementRequestTermMemberPaymentScheduleTerm:
+		_ = v.Value // Value is types.PaymentScheduleTerm
+
+	case *types.AgreementRequestTermMemberRecurringPaymentTerm:
+		_ = v.Value // Value is types.RecurringPaymentTerm
+
+	case *types.AgreementRequestTermMemberRenewalTerm:
+		_ = v.Value // Value is types.RenewalTerm
+
+	case *types.AgreementRequestTermMemberSupportTerm:
+		_ = v.Value // Value is types.SupportTerm
+
+	case *types.AgreementRequestTermMemberUsageBasedPricingTerm:
+		_ = v.Value // Value is types.UsageBasedPricingTerm
+
+	case *types.AgreementRequestTermMemberValidityTerm:
+		_ = v.Value // Value is types.ValidityTerm
+
+	case *types.AgreementRequestTermMemberVariablePaymentTerm:
+		_ = v.Value // Value is types.VariablePaymentTerm
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.FixedUpfrontPricingTerm
+var _ *types.UsageBasedPricingTerm
+var _ *types.RenewalTerm
+var _ *types.FreeTrialPricingTerm
+var _ *types.LegalTerm
+var _ *types.ByolPricingTerm
+var _ *types.SupportTerm
+var _ *types.PaymentScheduleTerm
+var _ *types.ValidityTerm
+var _ *types.RecurringPaymentTerm
+var _ *types.NetPaymentTerm
+var _ *types.VariablePaymentTerm
+var _ *types.ConfigurableUpfrontPricingTerm
+
+func ExampleApprover_outputUsage() {
+	var union types.Approver
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ApproverMemberAwsOrganizationAdminApprover:
+		_ = v.Value // Value is types.AwsOrganizationAdminApprover
+
+	case *types.ApproverMemberEmailApprover:
+		_ = v.Value // Value is types.EmailApprover
+
+	case *types.ApproverMemberProcurementToolApprover:
+		_ = v.Value // Value is types.ProcurementToolApprover
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ProcurementToolApprover
+var _ *types.AwsOrganizationAdminApprover
+var _ *types.EmailApprover
+
+func ExampleApproverOutcome_outputUsage() {
+	var union types.ApproverOutcome
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ApproverOutcomeMemberAwsOrganizationApproverOutcome:
+		_ = v.Value // Value is types.AwsOrganizationApproverOutcome
+
+	case *types.ApproverOutcomeMemberEmailApproverOutcome:
+		_ = v.Value // Value is types.EmailApproverOutcome
+
+	case *types.ApproverOutcomeMemberProcurementToolApproverOutcome:
+		_ = v.Value // Value is types.ProcurementToolApproverOutcome
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EmailApproverOutcome
+var _ *types.ProcurementToolApproverOutcome
+var _ *types.AwsOrganizationApproverOutcome
+
 func ExamplePriceIncrease_outputUsage() {
 	var union types.PriceIncrease
 	// type switches can be used to check the union value

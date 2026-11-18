@@ -2404,6 +2404,94 @@ func (v *GlobalReplicationGroupMember) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// An integration configured on the serverless cache, and its current status.
+// ElastiCache supports DynamoDB integration.
+type Integration struct {
+
+	// The integration type. ElastiCache supports dynamodb .
+	IntegrationType IntegrationType
+
+	// The current status of the integration. Valid values are:
+	//
+	//   - enabled – The integration is enabled.
+	//
+	//   - disabled – The integration is disabled.
+	Status IntegrationStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *Integration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Integration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Integration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.Integration_IntegrationType, string(v.IntegrationType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Integration_Status, string(v.Status))
+	}
+}
+func (v *Integration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Integration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Integration_IntegrationType:
+			var ev string
+			if err := d.ReadString(schemas.Integration_IntegrationType, &ev); err != nil {
+				return err
+			}
+			v.IntegrationType = IntegrationType(ev)
+			return nil
+		case schemas.Integration_Status:
+			var ev string
+			if err := d.ReadString(schemas.Integration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = IntegrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Specifies an integration to enable on the serverless cache when you create it.
+type IntegrationRequest struct {
+
+	// The integration type to enable. Must be dynamodb .
+	IntegrationType IntegrationType
+
+	noSmithyDocumentSerde
+}
+
+func (v *IntegrationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntegrationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.IntegrationRequest_IntegrationType, string(v.IntegrationType))
+	}
+}
+func (v *IntegrationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntegrationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntegrationRequest_IntegrationType:
+			var ev string
+			if err := d.ReadString(schemas.IntegrationRequest_IntegrationType, &ev); err != nil {
+				return err
+			}
+			v.IntegrationType = IntegrationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration details of the Kinesis Data Firehose destination.
 type KinesisFirehoseDestinationDetails struct {
 
@@ -4854,7 +4942,7 @@ func (v *ScaleConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // migration.
 type SecretManagerAuthConfig struct {
 
-	// The ARN of the secret in AWS Secrets Manager that contains the credentials for
+	// The ARN of the secret in Secrets Manager that contains the credentials for
 	// authenticating with the source.
 	SecretArn *string
 
@@ -4960,6 +5048,9 @@ type ServerlessCache struct {
 	// with.
 	FullEngineVersion *string
 
+	// Configured integrations and their status.
+	Integrations []Integration
+
 	// The ID of the Amazon Web Services Key Management Service (KMS) key that is used
 	// to encrypt data at rest in the serverless cache.
 	KmsKeyId *string
@@ -5052,6 +5143,9 @@ func (v *ServerlessCache) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FullEngineVersion != nil {
 		s.WriteString(schemas.ServerlessCache_FullEngineVersion, *v.FullEngineVersion)
 	}
+	if v.Integrations != nil {
+		serializeIntegrationList(s, schemas.ServerlessCache_Integrations, v.Integrations)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.ServerlessCache_KmsKeyId, *v.KmsKeyId)
 	}
@@ -5127,6 +5221,8 @@ func (v *ServerlessCache) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ServerlessCache_FullEngineVersion:
 			v.FullEngineVersion = new(string)
 			return d.ReadString(schemas.ServerlessCache_FullEngineVersion, v.FullEngineVersion)
+		case schemas.ServerlessCache_Integrations:
+			return deserializeIntegrationList(d, schemas.ServerlessCache_Integrations, &v.Integrations)
 		case schemas.ServerlessCache_KmsKeyId:
 			v.KmsKeyId = new(string)
 			return d.ReadString(schemas.ServerlessCache_KmsKeyId, v.KmsKeyId)

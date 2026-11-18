@@ -1141,6 +1141,45 @@ func TestCheckRequestSnapshot_RedeemCredits(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SplitCredit(t *testing.T) {
+	input := &SplitCreditInput{
+		CreditId: ptr.String("__CreditId__"),
+		Portions: []types.SplitPortion{
+			{
+				Amount:      ptr.String("__Amount__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Amount:      ptr.String("__Amount__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SplitCredit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SplitCredit"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1174,6 +1213,36 @@ func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_TransferCredit(t *testing.T) {
+	input := &TransferCreditInput{
+		CreditId:             ptr.String("__CreditId__"),
+		DestinationAccountId: ptr.String("__DestinationAccountId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		DryRun:               ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TransferCredit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TransferCredit"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2236,6 +2305,45 @@ func TestUpdateRequestSnapshot_RedeemCredits(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_SplitCredit(t *testing.T) {
+	input := &SplitCreditInput{
+		CreditId: ptr.String("__CreditId__"),
+		Portions: []types.SplitPortion{
+			{
+				Amount:      ptr.String("__Amount__"),
+				Description: ptr.String("__Description__"),
+			},
+			{
+				Amount:      ptr.String("__Amount__"),
+				Description: ptr.String("__Description__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		DryRun:      ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SplitCredit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SplitCredit"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -2269,6 +2377,36 @@ func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_TransferCredit(t *testing.T) {
+	input := &TransferCreditInput{
+		CreditId:             ptr.String("__CreditId__"),
+		DestinationAccountId: ptr.String("__DestinationAccountId__"),
+		ClientToken:          ptr.String("__ClientToken__"),
+		DryRun:               ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TransferCredit(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TransferCredit"); err != nil {
 		t.Fatal(err)
 	}
 }

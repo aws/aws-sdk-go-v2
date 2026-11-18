@@ -265,6 +265,68 @@ func TestCheckRequestSnapshot_CreateAuthorizer(t *testing.T) {
 		IdentitySource:               ptr.String("__IdentitySource__"),
 		IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
 		AuthorizerResultTtlInSeconds: ptr.Int32(1),
+		JwtConfiguration: &types.JwtConfigurationInput{
+			Issuers: []types.JwtIssuerInput{
+				{
+					Issuer: ptr.String("__Issuer__"),
+					Audiences: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalClaims: []types.JwtAdditionalClaim{
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Issuer: ptr.String("__Issuer__"),
+					Audiences: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalClaims: []types.JwtAdditionalClaim{
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			DefaultAlgorithms: []types.JwtSigningAlgorithm{
+				types.JwtSigningAlgorithm("RS256"),
+				types.JwtSigningAlgorithm("RS256"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4393,6 +4455,68 @@ func TestUpdateRequestSnapshot_CreateAuthorizer(t *testing.T) {
 		IdentitySource:               ptr.String("__IdentitySource__"),
 		IdentityValidationExpression: ptr.String("__IdentityValidationExpression__"),
 		AuthorizerResultTtlInSeconds: ptr.Int32(1),
+		JwtConfiguration: &types.JwtConfigurationInput{
+			Issuers: []types.JwtIssuerInput{
+				{
+					Issuer: ptr.String("__Issuer__"),
+					Audiences: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalClaims: []types.JwtAdditionalClaim{
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					Issuer: ptr.String("__Issuer__"),
+					Audiences: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AdditionalClaims: []types.JwtAdditionalClaim{
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							ClaimName: ptr.String("__ClaimName__"),
+							Format:    types.JwtClaimFormat("SINGLE_STRING"),
+							Required:  true,
+							ExpectedValues: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			DefaultAlgorithms: []types.JwtSigningAlgorithm{
+				types.JwtSigningAlgorithm("RS256"),
+				types.JwtSigningAlgorithm("RS256"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

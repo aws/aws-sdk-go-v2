@@ -591,6 +591,25 @@ func (LinkState) Values() []LinkState {
 	}
 }
 
+type MultipathResilienceMode string
+
+// Enum values for MultipathResilienceMode
+const (
+	MultipathResilienceModeBestEffort MultipathResilienceMode = "best-effort"
+	MultipathResilienceModeDisabled   MultipathResilienceMode = "disabled"
+)
+
+// Values returns all known values for MultipathResilienceMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultipathResilienceMode) Values() []MultipathResilienceMode {
+	return []MultipathResilienceMode{
+		"best-effort",
+		"disabled",
+	}
+}
+
 type NatGatewaySupportState string
 
 // Enum values for NatGatewaySupportState

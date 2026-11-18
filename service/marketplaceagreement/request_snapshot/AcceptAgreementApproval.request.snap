@@ -1,0 +1,7 @@
+POST /service/AWSMPCommerceService_v20200301/operation/AcceptAgreementApproval
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿x#buyerAgreementApprovalApproverInput¿sagreementApprovalIdw__AgreementApprovalId__xapproverOutcomeIdToOverridex__ApproverOutcomeIdToOverride__dnoteh__Note__npurchaseOrdersŸ¿hchargeIdl__ChargeId__vpurchaseOrderReferencex__PurchaseOrderReference__ÿ¿hchargeIdl__ChargeId__vpurchaseOrderReferencex__PurchaseOrderReference__ÿÿÿÿ

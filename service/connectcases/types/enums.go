@@ -29,6 +29,30 @@ func (AuditEventType) Values() []AuditEventType {
 	}
 }
 
+type AutoIncludeFields string
+
+// Enum values for AutoIncludeFields
+const (
+	// All fields on the case
+	AutoIncludeFieldsAll AutoIncludeFields = "All"
+	// System fields only
+	AutoIncludeFieldsSystem AutoIncludeFields = "System"
+	// Custom fields only
+	AutoIncludeFieldsCustom AutoIncludeFields = "Custom"
+)
+
+// Values returns all known values for AutoIncludeFields. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoIncludeFields) Values() []AutoIncludeFields {
+	return []AutoIncludeFields{
+		"All",
+		"System",
+		"Custom",
+	}
+}
+
 type CommentBodyTextType string
 
 // Enum values for CommentBodyTextType

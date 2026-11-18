@@ -1927,6 +1927,36 @@ func validateConformancePackInputParameters(v []types.ConformancePackInputParame
 	}
 }
 
+func validateConformancePackScope(v *types.ConformancePackScope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConformancePackScope"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConformancePackSource(v *types.ConformancePackSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConformancePackSource"}
+	if v.SourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectorConfiguration(v *types.ConnectorConfiguration) error {
 	if v == nil {
 		return nil
@@ -3282,6 +3312,16 @@ func validateOpPutConformancePackInput(v *PutConformancePackInput) error {
 	if v.TemplateSSMDocumentDetails != nil {
 		if err := validateTemplateSSMDocumentDetails(v.TemplateSSMDocumentDetails); err != nil {
 			invalidParams.AddNested("TemplateSSMDocumentDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Source != nil {
+		if err := validateConformancePackSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scope != nil {
+		if err := validateConformancePackScope(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1707,6 +1707,7 @@ func TestCheckResponseSnapshot_DescribeConformancePackStatus(t *testing.T) {
 				ConformancePackStatusReason: ptr.String("__ConformancePackStatusReason__"),
 				LastUpdateRequestedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdateCompletedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Type:                        types.ConformancePackType("CUSTOM"),
 			},
 			{
 				ConformancePackName:         ptr.String("__ConformancePackName__"),
@@ -1717,6 +1718,7 @@ func TestCheckResponseSnapshot_DescribeConformancePackStatus(t *testing.T) {
 				ConformancePackStatusReason: ptr.String("__ConformancePackStatusReason__"),
 				LastUpdateRequestedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastUpdateCompletedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Type:                        types.ConformancePackType("CUSTOM"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1733,6 +1735,12 @@ func TestCheckResponseSnapshot_DescribeConformancePackStatus(t *testing.T) {
 		ConformancePackNames: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filters: &types.DescribeConformancePacksFilters{
+			Types: []types.ConformancePackType{
+				types.ConformancePackType("CUSTOM"),
+				types.ConformancePackType("CUSTOM"),
+			},
 		},
 		Limit:     1,
 		NextToken: ptr.String("__NextToken__"),
@@ -1770,6 +1778,14 @@ func TestCheckResponseSnapshot_DescribeConformancePacks(t *testing.T) {
 					DocumentName:    ptr.String("__DocumentName__"),
 					DocumentVersion: ptr.String("__DocumentVersion__"),
 				},
+				Type: types.ConformancePackType("CUSTOM"),
+				Source: &types.ConformancePackSource{
+					SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				},
+				Scope: &types.ConformancePackScope{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
 			},
 			{
 				ConformancePackName: ptr.String("__ConformancePackName__"),
@@ -1793,6 +1809,14 @@ func TestCheckResponseSnapshot_DescribeConformancePacks(t *testing.T) {
 					DocumentName:    ptr.String("__DocumentName__"),
 					DocumentVersion: ptr.String("__DocumentVersion__"),
 				},
+				Type: types.ConformancePackType("CUSTOM"),
+				Source: &types.ConformancePackSource{
+					SourceIdentifier: ptr.String("__SourceIdentifier__"),
+				},
+				Scope: &types.ConformancePackScope{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1809,6 +1833,12 @@ func TestCheckResponseSnapshot_DescribeConformancePacks(t *testing.T) {
 		ConformancePackNames: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filters: &types.DescribeConformancePacksFilters{
+			Types: []types.ConformancePackType{
+				types.ConformancePackType("CUSTOM"),
+				types.ConformancePackType("CUSTOM"),
+			},
 		},
 		Limit:     1,
 		NextToken: ptr.String("__NextToken__"),
@@ -4410,6 +4440,13 @@ func TestCheckResponseSnapshot_PutConformancePack(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Source: &types.ConformancePackSource{
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		Scope: &types.ConformancePackScope{
+			TagKey:   ptr.String("__TagKey__"),
+			TagValue: ptr.String("__TagValue__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5536,6 +5573,13 @@ func TestCheckResponseSnapshot_Error_ConformancePackTemplateValidationException(
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Source: &types.ConformancePackSource{
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		Scope: &types.ConformancePackScope{
+			TagKey:   ptr.String("__TagKey__"),
+			TagValue: ptr.String("__TagValue__"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6644,6 +6688,13 @@ func TestCheckResponseSnapshot_Error_MaxNumberOfConformancePacksExceededExceptio
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		Source: &types.ConformancePackSource{
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		Scope: &types.ConformancePackScope{
+			TagKey:   ptr.String("__TagKey__"),
+			TagValue: ptr.String("__TagValue__"),
 		},
 	})
 	if opErr == nil {

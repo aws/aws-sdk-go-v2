@@ -10,7 +10,12 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates an existing Authorizer resource.
+// Updates an existing Authorizer resource. For a JWT authorizer, the only JWT
+// patch operation is replace on the path /jwtConfiguration . Its value is the
+// complete configuration as a JSON string in the JwtConfigurationInput shape.
+// This replaces the entire configuration; nothing from the previous configuration
+// is retained. A replace operation on the path /type is supported in both
+// directions.
 func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerInput, optFns ...func(*Options)) (*UpdateAuthorizerOutput, error) {
 	if params == nil {
 		params = &UpdateAuthorizerInput{}
@@ -76,13 +81,13 @@ type UpdateAuthorizerOutput struct {
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
 	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
-	// function, specify null.
+	// function, specify null. This property is not supported for JWT authorizers.
 	AuthorizerCredentials *string
 
 	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
 	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
 	// responses. If this field is not set, the default value is 300. The maximum value
-	// is 3600, or 1 hour.
+	// is 3600, or 1 hour. This property is not supported for JWT authorizers.
 	AuthorizerResultTtlInSeconds *int32
 
 	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
@@ -94,7 +99,8 @@ type UpdateAuthorizerOutput struct {
 	// same as the region hosting the Lambda function, path indicates that the
 	// remaining substring in the URI should be treated as the path to the resource,
 	// including the initial / . For Lambda functions, this is usually of the form
-	// /2015-03-31/functions/[FunctionARN]/invocations .
+	// /2015-03-31/functions/[FunctionARN]/invocations . This property is not supported
+	// for JWT authorizers.
 	AuthorizerUri *string
 
 	// The identifier for the authorizer resource.
@@ -117,7 +123,10 @@ type UpdateAuthorizerOutput struct {
 	// a 401 Unauthorized response without calling the Lambda function. The valid value
 	// is a string of comma-separated mapping expressions of the specified request
 	// parameters. When the authorization caching is not enabled, this property is
-	// optional.
+	// optional. For a JWT authorizer, this is required and must be a single
+	// request-header mapping expression, method.request.header. , for example,
+	// method.request.header.Authorization . Query string parameters are not supported,
+	// and there is no default.
 	IdentitySource *string
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
@@ -126,8 +135,12 @@ type UpdateAuthorizerOutput struct {
 	// the specified regular expression. It will invoke the authorizer's Lambda
 	// function when there is a match. Otherwise, it will return a 401 Unauthorized
 	// response without calling the Lambda function. The validation expression does not
-	// apply to the REQUEST authorizer.
+	// apply to the REQUEST or JWT authorizer.
 	IdentityValidationExpression *string
+
+	// The configuration returned for a JWT authorizer. This field is present only
+	// when type is JWT .
+	JwtConfiguration *types.JwtConfiguration
 
 	// The name of the authorizer.
 	Name *string
@@ -135,13 +148,15 @@ type UpdateAuthorizerOutput struct {
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
 	// authorizer. Each element is of this format:
 	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id} . For a TOKEN
-	// or REQUEST authorizer, this is not defined.
+	// or REQUEST authorizer, this is not defined. This property is not supported for
+	// JWT authorizers.
 	ProviderARNs []string
 
 	// The authorizer type. Valid values are TOKEN for a Lambda function using a
 	// single authorization token submitted in a custom header, REQUEST for a Lambda
-	// function using incoming request parameters, and COGNITO_USER_POOLS for using an
-	// Amazon Cognito user pool.
+	// function using incoming request parameters, COGNITO_USER_POOLS for using an
+	// Amazon Cognito user pool, and JWT for using a native JWT authorizer with the
+	// trusted issuers, audiences, and signing algorithms that you declare.
 	Type types.AuthorizerType
 
 	// Metadata pertaining to the operation's result.
@@ -178,6 +193,11 @@ func (v *UpdateAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityValidationExpression != nil {
 		s.WriteString(schemas.Authorizer_identityValidationExpression, *v.IdentityValidationExpression)
 	}
+	if v.JwtConfiguration != nil {
+		s.WriteStruct(schemas.Authorizer_jwtConfiguration)
+		v.JwtConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Authorizer_name, *v.Name)
 	}
@@ -212,6 +232,9 @@ func (v *UpdateAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Authorizer_identityValidationExpression:
 			v.IdentityValidationExpression = new(string)
 			return d.ReadString(schemas.Authorizer_identityValidationExpression, v.IdentityValidationExpression)
+		case schemas.Authorizer_jwtConfiguration:
+			v.JwtConfiguration = &types.JwtConfiguration{}
+			return v.JwtConfiguration.Deserialize(d)
 		case schemas.Authorizer_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Authorizer_name, v.Name)

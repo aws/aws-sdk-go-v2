@@ -183,6 +183,23 @@
         "com.amazonaws.observabilityadmin#AllRegions": {
             "type": "boolean"
         },
+        "com.amazonaws.observabilityadmin#AllSubscriptions": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Selects every Azure subscription that Azure role-based access control (Azure RBAC) allows the connector to read. Subscriptions that the connector can read later are included automatically.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AwsConfigConnectorArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:config:[a-z0-9\\-]+:[0-9]{12}:connector/[^\\r\\n]+$"
+            }
+        },
         "com.amazonaws.observabilityadmin#AwsResourceExplorerManagedViewArn": {
             "type": "string",
             "traits": {
@@ -191,6 +208,969 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws([a-z0-9\\-]+)?:resource-explorer-2:([a-z0-9\\-]+)?:([0-9]{12})?:managed-view/(.+)$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureAwsManagedFlowLogs": {
+            "type": "structure",
+            "members": {
+                "RetentionDays": {
+                    "target": "com.amazonaws.observabilityadmin#AzureFlowLogRetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days that the created Storage Accounts keep Flow Logs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Flow Log Storage Accounts that the setup creates, one in each Region that ingests Flow Logs.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureClientIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "TenantIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#AzureTenantIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Microsoft Entra ID tenant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#AzureClientIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application (client) ID of the Azure app registration. The app registration must have a federated identity credential that trusts the Amazon Web Services OpenID Connect (OIDC) issuer for your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a connector to Microsoft Azure.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureConnectorQuery": {
+            "type": "union",
+            "members": {
+                "ManagementGroups": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupsQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists Azure management groups.</p>"
+                    }
+                },
+                "Subscriptions": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionsQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists Azure subscriptions.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceTypesQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the Azure resource types that have resources in scope.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegionsQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the Azure Regions that have resources in scope.</p>"
+                    }
+                },
+                "ResourceIds": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceIdsQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists Azure resources.</p>"
+                    }
+                },
+                "EventHubs": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubsQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists Azure Event Hubs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of Azure resource to list. Specify one type.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureConnectorQueryResults": {
+            "type": "union",
+            "members": {
+                "ManagementGroups": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure management groups.</p>"
+                    }
+                },
+                "Subscriptions": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure subscriptions.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure resource types.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Regions.</p>"
+                    }
+                },
+                "ResourceIds": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceIdentifierSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure resources.</p>"
+                    }
+                },
+                "EventHubs": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Event Hubs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of an Azure discovery query. The populated member matches the member of the query.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureCustomerManagedFlowLogs": {
+            "type": "structure",
+            "members": {
+                "StorageAccounts": {
+                    "target": "com.amazonaws.observabilityadmin#AzureFlowLogStorageAccountScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Storage Accounts that store your Flow Logs, listed by Azure Region. Each Region can appear only once, and each Storage Account can appear only once across all Regions.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for existing Azure Storage Accounts that already receive your Flow Logs.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubConfiguration": {
+            "type": "structure",
+            "members": {
+                "Tier": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Event Hubs namespace tier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionCount": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubPartitionCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of partitions in each Event Hub. The Standard tier allows 1–32 partitions and the Premium tier allows 1–100. On the Standard tier, you can't change this value after the setup creates the Event Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of the Azure Event Hubs that the setup creates to deliver resource logs.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureEventHubConfiguration"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubNamespaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9-]{4,48}[A-Za-z0-9]$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubPartitionCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureEventHubSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubSummary": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Resource Manager ID of the Event Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventHubName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Event Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NamespaceName": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Event Hubs namespace that contains the Event Hub.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FullyQualifiedNamespace": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified host name of the Event Hubs namespace, for example <code>&lt;namespace&gt;.servicebus.windows.net</code>. The suffix differs in sovereign clouds.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Region of the Event Hub, for example <code>eastus</code>.</p>"
+                    }
+                },
+                "SubscriptionId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure subscription that contains the Event Hub.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Azure Event Hub.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubTier": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "PREMIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Premium"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureEventHubsQuery": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.observabilityadmin#AzureQueryScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the query to a management group or to specific subscriptions.</p>"
+                    }
+                },
+                "NamespaceName": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubNamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to Event Hubs in this namespace.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to one Azure Region, for example <code>eastus</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query that lists Azure Event Hubs.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureFlowLogRetentionDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 365
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureFlowLogStorageAccountScope": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Region of the Storage Accounts, for example <code>eastus</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StorageAccountIds": {
+                    "target": "com.amazonaws.observabilityadmin#AzureStorageAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Resource Manager IDs of the Storage Accounts.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Azure Storage Accounts in one Azure Region that store Flow Logs.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureFlowLogStorageAccountScopeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureFlowLogStorageAccountScope"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureFlowLogsInfrastructure": {
+            "type": "union",
+            "members": {
+                "CustomerManaged": {
+                    "target": "com.amazonaws.observabilityadmin#AzureCustomerManagedFlowLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use your existing Storage Accounts that already store Flow Logs.</p>"
+                    }
+                },
+                "AwsManaged": {
+                    "target": "com.amazonaws.observabilityadmin#AzureAwsManagedFlowLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create one Storage Account in each Azure Region that ingests Flow Logs, in the subscription specified by <code>SubscriptionId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location of your Flow Logs: your existing Storage Accounts, or Storage Accounts that the setup creates. Specify one.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureInfrastructure": {
+            "type": "structure",
+            "members": {
+                "SubscriptionId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure subscription in which the setup creates the Event Hubs namespaces and, for <code>AwsManaged</code> Flow Logs, the Storage Accounts. You must specify this value if an <code>AzureScopeItem</code> collects <code>ResourceLogs</code>, or if you specify <code>EventHubs</code> or <code>AwsManaged</code> Flow Logs.</p>"
+                    }
+                },
+                "EventHubs": {
+                    "target": "com.amazonaws.observabilityadmin#AzureEventHubConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Event Hubs configuration. Specify exactly one entry, which applies to the Event Hubs in every Azure Region. This value applies only if an <code>AzureScopeItem</code> collects <code>ResourceLogs</code>. If you omit it, the setup uses default settings.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        }
+                    }
+                },
+                "FlowLogs": {
+                    "target": "com.amazonaws.observabilityadmin#AzureFlowLogsInfrastructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of your Flow Logs. You must specify this value if an <code>AzureScopeItem</code> collects <code>FlowLogs</code>, and you can specify it only in that case.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The choices for the Azure infrastructure that the setup creates.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureManagementGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 90
+                },
+                "smithy.api#pattern": "^[-\\w._()]+$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureManagementGroupSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureManagementGroupSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureManagementGroupSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the management group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the management group.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the management group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Azure management group.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureManagementGroupsQuery": {
+            "type": "structure",
+            "members": {
+                "ParentManagementGroupId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the management groups under this management group. If you omit this value, the query starts at the tenant root group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query that lists Azure management groups.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureQueryScope": {
+            "type": "structure",
+            "members": {
+                "ManagementGroupId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the query to resources under this management group.</p>"
+                    }
+                },
+                "SubscriptionIds": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the query to these subscriptions. You can specify 1–1000 subscriptions.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Limits a query to a management group or to specific subscriptions.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureRegion"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureRegionsQuery": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.observabilityadmin#AzureQueryScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the query to a management group or to specific subscriptions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query that lists the Azure Regions that have resources in scope.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#ManifestAzureResourceId"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceIdScope": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Region of the resources, for example <code>eastus</code>. Required because an Azure resource ID doesn't include the Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceIds": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Resource Manager IDs of the resources.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Azure resources in one Azure Region.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceIdScopeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureResourceIdScope"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceIdentifierSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureResourceIdentifierSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceIdentifierSummary": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Resource Manager ID of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure resource type, for example <code>Microsoft.Compute/virtualMachines</code>.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Region of the resource, for example <code>eastus</code>.</p>"
+                    }
+                },
+                "SubscriptionId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure subscription that contains the resource.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags on the resource. Absent if the resource has no tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Azure resource.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceIdsQuery": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.observabilityadmin#AzureQueryScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the query to a management group or to specific subscriptions.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to one Azure resource type, for example <code>Microsoft.Compute/virtualMachines</code>.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to one Azure Region, for example <code>eastus</code>.</p>"
+                    }
+                },
+                "TagFilters": {
+                    "target": "com.amazonaws.observabilityadmin#TagFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to resources that have these tags. A resource must match the filters for all tag keys, and any of the values for each key. The service matches tag keys and values case-insensitively, as Azure does.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query that lists Azure resources.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.observabilityadmin#AzureResourceTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.observabilityadmin#AzureResourceTagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+\\.[A-Za-z0-9]+/[A-Za-z0-9/]+$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureResourceType"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureResourceTypesQuery": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.observabilityadmin#AzureQueryScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the query to a management group or to specific subscriptions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query that lists the Azure resource types that have resources in scope.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureScope": {
+            "type": "structure",
+            "members": {
+                "Subscriptions": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscriptions to find resources in: all subscriptions that the connector can read, or a list of subscriptions. Required when you use <code>Regions</code> and <code>ResourceTypes</code>.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.observabilityadmin#AzureRegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure Regions to find resources in. Required when you use <code>Subscriptions</code> and <code>ResourceTypes</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure resource types to find. Required when you use <code>Subscriptions</code> and <code>Regions</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "TagFilters": {
+                    "target": "com.amazonaws.observabilityadmin#TagFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the resources found by <code>Subscriptions</code>, <code>Regions</code>, and <code>ResourceTypes</code> to those that have these tags. You can specify up to 50 filters.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.observabilityadmin#AzureResourceIdScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific Azure resources, listed by Azure Region.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Azure resources to collect telemetry from. These are the resources found by <code>Subscriptions</code>, <code>Regions</code>, and <code>ResourceTypes</code>, optionally narrowed by <code>TagFilters</code>, plus any resources listed in <code>Resources</code>. You can specify:</p> <ul> <li> <p> <code>Subscriptions</code>, <code>Regions</code>, and <code>ResourceTypes</code> together</p> </li> <li> <p> <code>Resources</code> </p> </li> <li> <p>Both</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureScopeItem": {
+            "type": "structure",
+            "members": {
+                "TelemetryTypes": {
+                    "target": "com.amazonaws.observabilityadmin#AzureTelemetryTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry types to collect.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 3
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.observabilityadmin#AzureScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure resources to collect telemetry from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The telemetry types to collect from a set of Azure resources.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureScopeItem"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureStorageAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/${}'\"`\\\\<>%&?#\\s\\u0000-\\u001F\\u007F]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[sS][tT][oO][rR][aA][gG][eE]/[sS][tT][oO][rR][aA][gG][eE][aA][cC][cC][oO][uU][nN][tT][sS]/[a-z0-9]{3,24}$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureStorageAccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureStorageAccountId"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSubscriptionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSubscriptionIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureSubscriptionId"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSubscriptionScope": {
+            "type": "union",
+            "members": {
+                "All": {
+                    "target": "com.amazonaws.observabilityadmin#AllSubscriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All subscriptions that Azure role-based access control (Azure RBAC) allows the connector to read. Subscriptions that the connector can read later are included automatically.</p>"
+                    }
+                },
+                "Ids": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of 1–1000 subscription IDs.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The subscriptions to find resources in: all subscriptions that the connector can read, or a list of subscriptions. Specify one.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSubscriptionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureSubscriptionSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSubscriptionSummary": {
+            "type": "structure",
+            "members": {
+                "SubscriptionId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subscription.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the subscription.</p>"
+                    }
+                },
+                "State": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the subscription in Azure, for example <code>Enabled</code>.</p>"
+                    }
+                },
+                "ManagementGroupId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the management group that contains the subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Azure subscription.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureSubscriptionsQuery": {
+            "type": "structure",
+            "members": {
+                "ManagementGroupId": {
+                    "target": "com.amazonaws.observabilityadmin#AzureManagementGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to subscriptions under this management group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A query that lists Azure subscriptions.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureTelemetrySourceConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "AwsConfigConnectorArn": {
+                    "target": "com.amazonaws.observabilityadmin#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Config connector for the Microsoft Azure tenant to collect resource metadata from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Microsoft Azure source configuration for a third-party telemetry enrichment.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureTelemetrySourceConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "AwsConfigConnectorArn": {
+                    "target": "com.amazonaws.observabilityadmin#AwsConfigConnectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Config connector that the enrichment uses.</p>"
+                    }
+                },
+                "ServiceLinkedRecorderArn": {
+                    "target": "com.amazonaws.observabilityadmin#ServiceLinkedRecorderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked configuration recorder that CloudWatch created in your account for the enrichment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Microsoft Azure source configuration of a third-party telemetry enrichment.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureTelemetryType": {
+            "type": "enum",
+            "members": {
+                "RESOURCE_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceLogs"
+                    }
+                },
+                "METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Metrics"
+                    }
+                },
+                "FLOW_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FlowLogs"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureTelemetryTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#AzureTelemetryType"
+            },
+            "traits": {
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#AzureTenantIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.observabilityadmin#CentralizationFailureReason": {
@@ -265,6 +1245,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metric specific configuration for centralization destination metrics.</p>"
                     }
+                },
+                "DestinationProfilesConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#DestinationProfilesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile-specific configuration for centralization destination profiles.</p>"
+                    }
                 }
             },
             "traits": {
@@ -297,6 +1283,12 @@
                     "target": "com.amazonaws.observabilityadmin#SourceMetricsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Metric specific configuration for centralization source metrics.</p>"
+                    }
+                },
+                "SourceProfilesConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#SourceProfilesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile-specific configuration for centralization source profiles.</p>"
                     }
                 },
                 "SourceContextGraphConfiguration": {
@@ -400,6 +1392,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A summary of a centralization rule's key properties and status.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[!-~]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.observabilityadmin#CloudtrailParameters": {
@@ -512,6 +1515,178 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.observabilityadmin#Connector": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider that the connector connects to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectorConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for connecting to the third-party cloud provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that CloudWatch assumes to obtain credentials for the third-party cloud provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector.</p>"
+                    }
+                },
+                "CreatedTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the connector was created, in milliseconds since the Unix epoch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A connector to a third-party cloud provider.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorConfiguration": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of a connector to Microsoft Azure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for connecting to a third-party cloud provider. Specify one provider.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^([a-z0-9]+|arn:aws[a-z0-9\\-]*:observabilityadmin:[a-z0-9-]+:[0-9]{12}:connector/(azure/)?[a-z0-9]+)$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-_.]*$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+/=_-]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorProvider": {
+            "type": "enum",
+            "members": {
+                "AZURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorQuery": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureConnectorQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Azure resource to list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>What to list in a cloud provider. Specify one provider.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorQueryResults": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureConnectorQueryResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of an Azure discovery query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of a query. The populated member matches the member of the query.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#ConnectorSummary"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ConnectorSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider that the connector connects to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector.</p>"
+                    }
+                },
+                "CreatedTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the connector was created, in milliseconds since the Unix epoch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a connector.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#ContextGraphStatus": {
             "type": "enum",
             "members": {
@@ -609,6 +1784,99 @@
                     "target": "com.amazonaws.observabilityadmin#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#CreateConnectorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#CreateConnectorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a connector to a third-party cloud provider. With a connector, you can discover resources in the provider and collect their telemetry. Currently, Microsoft Azure is the only supported provider.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateConnector",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateConnectorInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for connecting to the third-party cloud provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.observabilityadmin#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that CloudWatch assumes to get credentials for the third-party cloud provider. The role must trust the Amazon CloudWatch Observability Admin service principal, <code>observabilityadmin.amazonaws.com</code>. The role must also allow <code>sts:GetWebIdentityToken</code> for the provider's token exchange audience.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector. The name must be unique in the account and Region (case-sensitive). If another connector already uses the name, the request fails with a <code>ConflictException</code>.</p> <p>The name can contain letters, digits, hyphens (-), underscores (_) and periods (.), and must start with a letter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you want to apply to the connector.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.observabilityadmin#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the operation completes no more than one time. If you use an Amazon Web Services SDK, the SDK generates this value and reuses it on retries. If this token matches a previous request with the same parameters, the service returns the connector from the first request without an error. If you use the same token with different parameters, including different tags, the service returns a <code>ValidationException</code>. This operation is idempotent when you use the same token and parameters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#CreateConnectorOutput": {
+            "type": "structure",
+            "members": {
+                "Connector": {
+                    "target": "com.amazonaws.observabilityadmin#Connector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector that this request created.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -821,7 +2089,9 @@
                         "cloudwatch:PutPipelineRule",
                         "observabilityadmin:TagResource",
                         "observabilityadmin:ListTagsForResource",
-                        "observabilityadmin:GetTelemetryPipeline"
+                        "observabilityadmin:GetTelemetryPipeline",
+                        "observabilityadmin:GetConnector",
+                        "observabilityadmin:GetConnectorTelemetryManifest"
                     ]
                 },
                 "smithy.api#documentation": "<p>Creates a telemetry pipeline for processing and transforming telemetry data. The pipeline defines how data flows from sources through processors to destinations, enabling data transformation and delivering capabilities. </p>",
@@ -1149,6 +2419,64 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#DeleteConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#DeleteConnectorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#DeleteConnectorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a connector and its telemetry manifest.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteConnector"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#DeleteConnectorInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector to delete. Specify one of the following:</p> <ul> <li> <p>The Amazon Resource Name (ARN) of the connector</p> </li> <li> <p>The ID of the connector</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#DeleteConnectorOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.observabilityadmin#DeleteDatasetIntegration": {
@@ -1479,6 +2807,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for centralization destination metrics, including backup settings.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#DestinationProfilesConfiguration": {
+            "type": "structure",
+            "members": {
+                "BackupConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#ProfilesBackupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration that defines the backup Region for the profiles backup destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for centralization destination profiles, including backup settings.</p>"
             }
         },
         "com.amazonaws.observabilityadmin#DestinationType": {
@@ -1856,6 +3198,242 @@
                     "target": "com.amazonaws.observabilityadmin#CentralizationRule",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration details for the organization centralization rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#GetConnectorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetConnectorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a connector.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetConnector"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector. Specify one of the following:</p> <ul> <li> <p>The Amazon Resource Name (ARN) of the connector</p> </li> <li> <p>The ID of the connector</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorOutput": {
+            "type": "structure",
+            "members": {
+                "Connector": {
+                    "target": "com.amazonaws.observabilityadmin#Connector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorTelemetryManifest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#GetConnectorTelemetryManifestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetConnectorTelemetryManifestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the telemetry manifest of a connector and its current version. If the connector has no telemetry manifest, this operation returns a <code>ResourceNotFoundException</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetConnectorTelemetryManifest"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorTelemetryManifestInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector. Specify one of the following:</p> <ul> <li> <p>The Amazon Resource Name (ARN) of the connector</p> </li> <li> <p>The ID of the connector</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorTelemetryManifestOutput": {
+            "type": "structure",
+            "members": {
+                "Manifest": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryManifest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the telemetry manifest. Pass this value as <code>ExpectedVersion</code> when you next call <code>PutConnectorTelemetryManifest</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the telemetry manifest was last updated, in milliseconds since the Unix epoch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorTelemetrySetup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#GetConnectorTelemetrySetupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetConnectorTelemetrySetupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates the artifacts that you use to create the infrastructure in your cloud provider that delivers the telemetry declared in the connector's telemetry manifest. This operation doesn't change any resources in your cloud provider or in Amazon Web Services.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetConnectorTelemetrySetup"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorTelemetrySetupInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector whose telemetry manifest you want to generate the setup from. Specify one of the following:</p> <ul> <li> <p>The Amazon Resource Name (ARN) of the connector</p> </li> <li> <p>The ID of the connector</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.observabilityadmin#SetupFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the setup artifacts. If you omit this value, the service uses the default format for the connector's provider (<code>BICEP</code> for an Azure connector). If the provider doesn't support the format, the service returns a <code>ValidationException</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetConnectorTelemetrySetupOutput": {
+            "type": "structure",
+            "members": {
+                "Artifacts": {
+                    "target": "com.amazonaws.observabilityadmin#SetupArtifactList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The setup artifacts to apply in your cloud provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequiredPermissionsToApply": {
+                    "target": "com.amazonaws.observabilityadmin#PermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions or roles in your cloud provider that you need to apply the artifacts, for example Azure Contributor and User Access Administrator.</p>"
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.observabilityadmin#SetupFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the setup artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider that the setup artifacts are for.</p>"
+                    }
+                },
+                "ManifestVersion": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the telemetry manifest that the service generated the setup artifacts from.</p>"
                     }
                 }
             },
@@ -2517,6 +4095,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#GetThirdPartyTelemetryEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#GetThirdPartyTelemetryEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#GetThirdPartyTelemetryEnrichmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of a third-party telemetry enrichment, including its status and source configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetThirdPartyTelemetryEnrichment",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetThirdPartyTelemetryEnrichmentInput": {
+            "type": "structure",
+            "members": {
+                "TelemetryEnrichmentIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the enrichment to return. You can specify one of the following:</p> <ul> <li> <p>The name of the enrichment.</p> </li> <li> <p>The Amazon Resource Name (ARN) of the enrichment.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#GetThirdPartyTelemetryEnrichmentOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the enrichment.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the enrichment. Valid values:</p> <ul> <li> <p> <code>Initializing</code> - CloudWatch is setting up the enrichment. Some telemetry can be enriched before setup completes.</p> </li> <li> <p> <code>Running</code> - The enrichment is active.</p> </li> <li> <p> <code>Stopped</code> - The enrichment is stopped.</p> </li> <li> <p> <code>Impaired</code> - The enrichment has a problem. <code>StatusReason</code> describes the problem.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.observabilityadmin#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status. This field is present when the status is <code>Impaired</code>.</p>"
+                    }
+                },
+                "TelemetrySourceConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetrySourceConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the enrichment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#IamRoleArn": {
             "type": "string",
             "traits": {
@@ -2738,6 +4413,94 @@
                     "target": "com.amazonaws.observabilityadmin#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token to resume pagination of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListConnectors": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListConnectorsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListConnectorsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the connectors in the account and Region. This operation returns results in pages. To get the next page, pass the returned <code>NextToken</code> in the next call. We recommend that you use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListConnectors"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ConnectorSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListConnectorsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListConnectorsMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of connectors to return in one call. The default is 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results, returned by a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListConnectorsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListConnectorsOutput": {
+            "type": "structure",
+            "members": {
+                "ConnectorSummaries": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connectors in the account and Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use in the next call to get the next page of results. Absent when there are no more results.</p>"
                     }
                 }
             },
@@ -3061,6 +4824,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#ListResourcesByConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListResourcesByConnectorInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListResourcesByConnectorOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists resources in your cloud provider that the connector can access, such as management groups, subscriptions, resource types, Regions, resources, and Event Hubs. Use the results to build a telemetry manifest. This operation returns results in pages. To get the next page, pass the returned <code>NextToken</code> in the next call. We recommend that you use pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListResourcesByConnector"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourcesByConnectorInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector to use for the query. Specify one of the following:</p> <ul> <li> <p>The Amazon Resource Name (ARN) of the connector</p> </li> <li> <p>The ID of the connector</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Selector": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What to list: one cloud provider, and one type of resource in that provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListResourcesByConnectorMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one call. For an <code>EventHubs</code> query, a page can contain more results than this value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results, returned by a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourcesByConnectorMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListResourcesByConnectorOutput": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorQueryResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results, in the same shape as the <code>Selector</code> that you specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use in the next call to get the next page of results. Absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#ListS3TableIntegrations": {
             "type": "operation",
             "input": {
@@ -3174,7 +5036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists all tags attached to the specified resource. Supports telemetry rule resources and telemetry pipeline resources. </p>",
+                "smithy.api#documentation": "<p> Lists all tags attached to the specified resource. Supports telemetry rule resources, telemetry pipeline resources, and third-party telemetry enrichment resources. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListTagsForResource"
@@ -3502,6 +5364,106 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichmentsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichmentsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a summary of each third-party telemetry enrichment in your account and Region. To get the full configuration of an enrichment, use <code>GetThirdPartyTelemetryEnrichment</code>. The results are paginated. To get the next page of results, use <code>NextToken</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListThirdPartyTelemetryEnrichments",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "TelemetryEnrichments"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichmentsInput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only the enrichments that have this status. Valid values:</p> <ul> <li> <p> <code>Initializing</code> - CloudWatch is setting up the enrichment. Some telemetry can be enriched before setup completes.</p> </li> <li> <p> <code>Running</code> - The enrichment is active.</p> </li> <li> <p> <code>Stopped</code> - The enrichment is stopped.</p> </li> <li> <p> <code>Impaired</code> - The enrichment has a problem. <code>StatusReason</code> describes the problem.</p> </li> </ul>"
+                    }
+                },
+                "TelemetrySource": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetrySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only the enrichments for this third-party telemetry source.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichmentsMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. If you omit this parameter, the operation returns up to 100 results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. A previous call generates this token. If you omit this parameter, the operation returns the first page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichmentsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichmentsOutput": {
+            "type": "structure",
+            "members": {
+                "TelemetryEnrichments": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichments in your account and Region.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.observabilityadmin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to resume pagination of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#LogDeliveryParameters": {
             "type": "structure",
             "members": {
@@ -3693,6 +5655,16 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#ManifestAzureResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/${}'\"`\\\\<>%&?#\\s\\u0000-\\u001F\\u007F]+)?/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[A-Za-z0-9.]+/[^/${}'\"`\\\\<>%&?#\\s\\u0000-\\u001F\\u007F]+(/[^/${}'\"`\\\\<>%&?#\\s\\u0000-\\u001F\\u007F]+)*$"
+            }
+        },
         "com.amazonaws.observabilityadmin#MetricsBackupConfiguration": {
             "type": "structure",
             "members": {
@@ -3774,6 +5746,9 @@
                     "target": "com.amazonaws.observabilityadmin#CreateCentralizationRuleForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#CreateConnector"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#CreateDatasetIntegration"
                 },
                 {
@@ -3789,6 +5764,9 @@
                     "target": "com.amazonaws.observabilityadmin#DeleteCentralizationRuleForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#DeleteConnector"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#DeleteDatasetIntegration"
                 },
                 {
@@ -3802,6 +5780,15 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#GetCentralizationRuleForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetConnector"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetConnectorTelemetryManifest"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#GetConnectorTelemetrySetup"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#GetDatasetIntegration"
@@ -3825,10 +5812,19 @@
                     "target": "com.amazonaws.observabilityadmin#GetTelemetryRuleForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#GetThirdPartyTelemetryEnrichment"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#ListCentralizationRulesForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#ListConnectors"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#ListDatasetIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ListResourcesByConnector"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#ListResourceTelemetry"
@@ -3849,6 +5845,12 @@
                     "target": "com.amazonaws.observabilityadmin#ListTelemetryRulesForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#ListThirdPartyTelemetryEnrichments"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#PutConnectorTelemetryManifest"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#StartTelemetryEnrichment"
                 },
                 {
@@ -3858,6 +5860,9 @@
                     "target": "com.amazonaws.observabilityadmin#StartTelemetryEvaluationForOrganization"
                 },
                 {
+                    "target": "com.amazonaws.observabilityadmin#StartThirdPartyTelemetryEnrichment"
+                },
+                {
                     "target": "com.amazonaws.observabilityadmin#StopTelemetryEnrichment"
                 },
                 {
@@ -3865,6 +5870,9 @@
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#StopTelemetryEvaluationForOrganization"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#StopThirdPartyTelemetryEnrichment"
                 },
                 {
                     "target": "com.amazonaws.observabilityadmin#TagResource"
@@ -4757,6 +6765,27 @@
                 "smithy.api#documentation": "<p> Enumeration of supported output formats for ELB access logs: PLAIN for space-delimited format, JSON for structured JSON format. </p>"
             }
         },
+        "com.amazonaws.observabilityadmin#Permission": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#PermissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#Permission"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.observabilityadmin#PipelineOutput": {
             "type": "structure",
             "members": {
@@ -4801,6 +6830,115 @@
             "type": "list",
             "member": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ProfilesBackupConfiguration": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.observabilityadmin#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The backup Region for profiles, within the primary destination account, to which the service centralizes profiles data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for backing up centralized profiles data to a secondary Region.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ProfilesFilterString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#PutConnectorTelemetryManifest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#PutConnectorTelemetryManifestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#PutConnectorTelemetryManifestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or replaces the telemetry manifest of a connector. The telemetry manifest declares which resources in your cloud provider to collect telemetry from and which telemetry types to collect. To avoid overwriting changes made by another caller, specify <code>ExpectedVersion</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/PutConnectorTelemetryManifest"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#PutConnectorTelemetryManifestInput": {
+            "type": "structure",
+            "members": {
+                "ConnectorIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ConnectorIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connector. Specify one of the following:</p> <ul> <li> <p>The Amazon Resource Name (ARN) of the connector</p> </li> <li> <p>The ID of the connector</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Manifest": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryManifest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The telemetry manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExpectedVersion": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the telemetry manifest that you expect to replace, as returned by <code>GetConnectorTelemetryManifest</code>. Omit this value when you create the first telemetry manifest. If the value doesn't match the current version, the request fails with a <code>ConflictException</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.observabilityadmin#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the operation completes no more than one time. If you use an Amazon Web Services SDK, the SDK generates this value and reuses it on retries. If this token matches a previous request with the same telemetry manifest, the service returns the stored version without an error. If you use the same token with a different telemetry manifest, the service returns a <code>ValidationException</code>. This operation is idempotent when you use the same token and parameters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#PutConnectorTelemetryManifestOutput": {
+            "type": "structure",
+            "members": {
+                "Version": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the telemetry manifest after this update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.observabilityadmin#Record": {
@@ -5128,6 +7266,16 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"
+            }
+        },
         "com.amazonaws.observabilityadmin#RuleHealth": {
             "type": "enum",
             "members": {
@@ -5187,6 +7335,16 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#ServiceLinkedRecorderArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:config:[a-z0-9\\-]+:[0-9]{12}:configuration-recorder/[^\\r\\n]+$"
+            }
+        },
         "com.amazonaws.observabilityadmin#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -5229,6 +7387,91 @@
                 "smithy.api#documentation": "<p> The requested operation would exceed the allowed quota for the specified resource type. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.observabilityadmin#SetupArtifact": {
+            "type": "structure",
+            "members": {
+                "FileName": {
+                    "target": "com.amazonaws.observabilityadmin#SetupArtifactFileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suggested file name, for example <code>main.bicep</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.observabilityadmin#SetupArtifactContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the artifact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.observabilityadmin#SetupFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the artifact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.observabilityadmin#SetupArtifactContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the artifact, for example <code>text/plain</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A setup artifact, which is one file in the requested format.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#SetupArtifactContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 262144
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#SetupArtifactContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#SetupArtifactFileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#SetupArtifactList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#SetupArtifact"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#SetupFormat": {
+            "type": "enum",
+            "members": {
+                "BICEP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BICEP"
+                    }
+                }
             }
         },
         "com.amazonaws.observabilityadmin#SignalType": {
@@ -5345,6 +7588,46 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for selecting source metrics for centralization.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#SourceProfilesConfiguration": {
+            "type": "structure",
+            "members": {
+                "ProfilesSelectionCriteria": {
+                    "target": "com.amazonaws.observabilityadmin#ProfilesFilterString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter expression that selects which source profiles to centralize.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for selecting source profiles for centralization.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#SourceProgress": {
+            "type": "structure",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of discovered sources that are active and sending telemetry to the pipeline.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "Total": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of sources discovered for the pipeline.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of source activation for an external-cloud telemetry pipeline, with the number of active sources and the total number of discovered sources.</p>"
             }
         },
         "com.amazonaws.observabilityadmin#Sources": {
@@ -5504,6 +7787,182 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.observabilityadmin#StartTelemetryPipelineRefresh": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#StartTelemetryPipelineRefreshInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#StartTelemetryPipelineRefreshOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "requiredActions": [
+                        "observabilityadmin:GetConnectorTelemetryManifest"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Starts a refresh of an external-cloud telemetry pipeline. The refresh re-reads the connector's telemetry manifest and re-discovers the sources in scope.</p> <p>The pipeline must be in the <code>ACTIVE</code> or <code>UPDATE_FAILED</code> state, with no refresh already running. You can use <code>GetTelemetryPipeline</code> to track the refresh.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartTelemetryPipelineRefresh"
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartTelemetryPipelineRefreshInput": {
+            "type": "structure",
+            "members": {
+                "PipelineIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryPipelineIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the telemetry pipeline to refresh.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartTelemetryPipelineRefreshOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartThirdPartyTelemetryEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#StartThirdPartyTelemetryEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#StartThirdPartyTelemetryEnrichmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a third-party telemetry enrichment. An enrichment adds resource metadata, such as tags, from a third-party telemetry source to the telemetry that CloudWatch receives from the resources of that source.</p> <p>You specify an Amazon Web Services Config connector for your third-party environment, such as a Microsoft Azure tenant. You can use each connector for only one enrichment.</p> <p>To use this operation, you must have the <code>config:PutThirdPartyServiceLinkedConfigurationRecorder</code> permission. If the Amazon Web Services Config service-linked role does not exist in your account, you must also have the <code>iam:CreateServiceLinkedRole</code> permission.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartThirdPartyTelemetryEnrichment",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartThirdPartyTelemetryEnrichmentInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the enrichment. The name must be unique in your account and Region. You can use the name instead of the ARN to identify the enrichment in other operations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TelemetrySourceConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetrySourceConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party telemetry source to collect resource metadata from. Specify exactly one telemetry source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the enrichment resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#StartThirdPartyTelemetryEnrichmentOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the enrichment after the start operation. Valid values:</p> <ul> <li> <p> <code>Initializing</code> - CloudWatch is setting up the enrichment. Some telemetry can be enriched before setup completes.</p> </li> <li> <p> <code>Running</code> - The enrichment is active.</p> </li> <li> <p> <code>Stopped</code> - The enrichment is stopped.</p> </li> <li> <p> <code>Impaired</code> - The enrichment has a problem. <code>StatusReason</code> describes the problem.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.observabilityadmin#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status. This field is present when the status is <code>Impaired</code>.</p>"
+                    }
+                },
+                "TelemetrySourceConfiguration": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetrySourceConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.observabilityadmin#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the enrichment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#Status": {
             "type": "enum",
             "members": {
@@ -5550,6 +8009,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.observabilityadmin#StatusReason": {
+            "type": "string"
         },
         "com.amazonaws.observabilityadmin#StopTelemetryEnrichment": {
             "type": "operation",
@@ -5656,6 +8118,93 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#StopThirdPartyTelemetryEnrichment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.observabilityadmin#StopThirdPartyTelemetryEnrichmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.observabilityadmin#StopThirdPartyTelemetryEnrichmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.observabilityadmin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a third-party telemetry enrichment. CloudWatch stops adding resource metadata from the third-party telemetry source to your telemetry.</p> <p>To use this operation, you must have the <code>config:DeleteServiceLinkedConfigurationRecorder</code> permission.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StopThirdPartyTelemetryEnrichment",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#StopThirdPartyTelemetryEnrichmentInput": {
+            "type": "structure",
+            "members": {
+                "TelemetryEnrichmentIdentifier": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the enrichment to stop. You can specify one of the following:</p> <ul> <li> <p>The name of the enrichment.</p> </li> <li> <p>The Amazon Resource Name (ARN) of the enrichment.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.observabilityadmin#StopThirdPartyTelemetryEnrichmentOutput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TelemetrySource": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetrySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party telemetry source of the enrichment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the enrichment after the stop operation. Valid values:</p> <ul> <li> <p> <code>Initializing</code> - CloudWatch is setting up the enrichment. Some telemetry can be enriched before setup completes.</p> </li> <li> <p> <code>Running</code> - The enrichment is active.</p> </li> <li> <p> <code>Stopped</code> - The enrichment is stopped.</p> </li> <li> <p> <code>Impaired</code> - The enrichment has a problem. <code>StatusReason</code> describes the problem.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.observabilityadmin#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status. This field is present when the status is <code>Impaired</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.observabilityadmin#StringList": {
             "type": "list",
             "member": {
@@ -5686,6 +8235,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The strategy for resolving tag conflicts between source and destination log groups.</p> <ul> <li> <p> <code>ADD_ONLY</code> – Only adds new tags from the source without modifying existing destination tags.</p> </li> <li> <p> <code>UPDATE_SYNC</code> – Adds new tags and updates existing tags from the source. Does not remove destination tags that are absent from the source.</p> </li> <li> <p> <code>IN_SYNC</code> – Keeps destination tags fully synchronized with source tags, including removing destination tags that do not exist on the source.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.observabilityadmin#TagFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key. Up to 512 characters. The characters &lt; &gt; % &amp; \\ ? / $ { } ' \" ` and control characters aren't allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.observabilityadmin#TagFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag values to match. A resource matches if it has any of these values for the tag key.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag filter. A resource matches only if it has the tag. Filters for different tag keys must all match; for one tag key, any of the values can match.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagFilterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[^<>%&\\\\?/${}'\"`\\u0000-\\u001F\\u007F]+$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#TagFilter"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^${}'\"`\\\\<>\\u0000-\\u001F\\u007F]*$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TagFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#TagFilterValue"
             }
         },
         "com.amazonaws.observabilityadmin#TagKey": {
@@ -5825,7 +8432,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Adds or updates tags for a resource. Supports telemetry rule resources and telemetry pipeline resources. </p>",
+                "smithy.api#documentation": "<p> Adds or updates tags for a resource. Supports telemetry rule resources, telemetry pipeline resources, and third-party telemetry enrichment resources. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TagResource"
@@ -5877,7 +8484,7 @@
                 "TelemetryConfigurationState": {
                     "target": "com.amazonaws.observabilityadmin#TelemetryConfigurationState",
                     "traits": {
-                        "smithy.api#documentation": "<p> The configuration state for the resource, for example <code>{ Logs: NotApplicable; Metrics: Enabled; Traces: NotApplicable; }</code>. </p>"
+                        "smithy.api#documentation": "<p> The configuration state for the resource, for example <code>{ Logs: NotApplicable; Metrics: Enabled; Traces: NotApplicable; Insights: NotApplicable; }</code>. </p>"
                     }
                 },
                 "ResourceType": {
@@ -6018,6 +8625,59 @@
                 }
             }
         },
+        "com.amazonaws.observabilityadmin#TelemetryManifest": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryManifestSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources to collect telemetry from and the telemetry types to collect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Infrastructure": {
+                    "target": "com.amazonaws.observabilityadmin#TelemetryManifestInfrastructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The choices for the infrastructure that the setup creates in your cloud provider, such as the subscription that contains the Event Hubs and their size. If you omit this value, the setup uses default settings. If an <code>AzureScopeItem</code> collects <code>ResourceLogs</code>, you must specify at least the Azure <code>SubscriptionId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Declares which resources in a cloud provider to collect telemetry from and which telemetry types to collect.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryManifestInfrastructure": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureInfrastructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The choices for the Azure infrastructure that the setup creates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The choices for the infrastructure that the setup creates. Specify one provider, which must match the provider in <code>Source</code>.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetryManifestSource": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Azure scope items. Each <code>AzureScopeItem</code> specifies a set of Azure resources and the telemetry types to collect from them. You can specify up to 100 scope items.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resources to collect telemetry from, for one cloud provider. Specify one provider.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#TelemetryPipeline": {
             "type": "structure",
             "members": {
@@ -6076,6 +8736,27 @@
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The key-value pairs associated with the telemetry pipeline resource.</p>"
+                    }
+                },
+                "LastRefreshTimeStamp": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The timestamp when the most recent refresh of the telemetry pipeline started. This field is only present for external-cloud pipelines that you have refreshed.</p>"
+                    }
+                },
+                "SourceProgress": {
+                    "target": "com.amazonaws.observabilityadmin#SourceProgress",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The progress of source activation for the telemetry pipeline. This field is only present for external-cloud pipelines.</p>"
+                    }
+                },
+                "ConfigurationSummary": {
+                    "target": "com.amazonaws.observabilityadmin#ConfigurationSummary",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A summary of the pipeline configuration components.</p>"
                     }
                 }
             },
@@ -6148,6 +8829,11 @@
             "list": {
                 "target": "com.amazonaws.observabilityadmin#ListTelemetryPipelines"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.observabilityadmin#StartTelemetryPipelineRefresh"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "telemetry-pipeline/{PipelineIdentifier}"
@@ -6286,7 +8972,7 @@
                 "TelemetryType": {
                     "target": "com.amazonaws.observabilityadmin#TelemetryType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of telemetry to collect (Logs, Metrics, or Traces). </p>",
+                        "smithy.api#documentation": "<p> The type of telemetry to collect (Logs, Metrics, Traces, or Insights). </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6379,7 +9065,7 @@
                 "TelemetryType": {
                     "target": "com.amazonaws.observabilityadmin#TelemetryType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of telemetry (Logs, Metrics, or Traces) the rule configures. </p>"
+                        "smithy.api#documentation": "<p> The type of telemetry (Logs, Metrics, Traces, or Insights) the rule configures. </p>"
                     }
                 },
                 "TelemetrySourceTypes": {
@@ -6391,6 +9077,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> A summary of a telemetry rule's key properties. </p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetrySourceConfigurationInput": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureTelemetrySourceConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a Microsoft Azure source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the third-party telemetry source that a new enrichment collects resource metadata from. Specify exactly one member.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#TelemetrySourceConfigurationOutput": {
+            "type": "union",
+            "members": {
+                "Azure": {
+                    "target": "com.amazonaws.observabilityadmin#AzureTelemetrySourceConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the Microsoft Azure source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The third-party source configuration of an enrichment.</p>"
             }
         },
         "com.amazonaws.observabilityadmin#TelemetrySourceType": {
@@ -6577,6 +9291,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::ObservabilityAdmin::ThirdPartyTelemetryEnrichment"
+                },
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:observabilityadmin:[a-z0-9\\-]+:[0-9]{12}:telemetry-enrichments/[a-z][a-z0-9]{9,63}$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-]*$"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudWatch is setting up the enrichment. Some telemetry can be enriched before setup completes.</p>",
+                        "smithy.api#enumValue": "Initializing"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichment is active. CloudWatch adds resource metadata from the telemetry source to your telemetry.</p>",
+                        "smithy.api#enumValue": "Running"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichment is stopped. CloudWatch no longer adds resource metadata from the telemetry source to your telemetry.</p>",
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichment has a problem that prevents it from working as expected. <code>StatusReason</code> describes the problem.</p>",
+                        "smithy.api#enumValue": "Impaired"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a third-party telemetry enrichment.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the enrichment.</p>"
+                    }
+                },
+                "TelemetrySource": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetrySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third-party telemetry source of the enrichment.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.observabilityadmin#ThirdPartyTelemetryEnrichmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the enrichment. Valid values:</p> <ul> <li> <p> <code>Initializing</code> - CloudWatch is setting up the enrichment. Some telemetry can be enriched before setup completes.</p> </li> <li> <p> <code>Running</code> - The enrichment is active.</p> </li> <li> <p> <code>Stopped</code> - The enrichment is stopped.</p> </li> <li> <p> <code>Impaired</code> - The enrichment has a problem. <code>StatusReason</code> describes the problem.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a third-party telemetry enrichment, as returned by <code>ListThirdPartyTelemetryEnrichments</code>.</p>"
+            }
+        },
+        "com.amazonaws.observabilityadmin#ThirdPartyTelemetrySource": {
+            "type": "enum",
+            "members": {
+                "AZURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> <code>AZURE</code> - Microsoft Azure.</p>",
+                        "smithy.api#enumValue": "Azure"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A third-party telemetry source that can provide resource metadata.</p>"
+            }
+        },
         "com.amazonaws.observabilityadmin#TooManyRequestsException": {
             "type": "structure",
             "members": {
@@ -6616,7 +9450,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Removes tags from a resource. Supports telemetry rule resources and telemetry pipeline resources. </p>",
+                "smithy.api#documentation": "<p> Removes tags from a resource. Supports telemetry rule resources, telemetry pipeline resources, and third-party telemetry enrichment resources. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/UntagResource"

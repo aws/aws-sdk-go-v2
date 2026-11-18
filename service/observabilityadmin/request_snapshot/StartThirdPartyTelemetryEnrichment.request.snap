@@ -1,0 +1,5 @@
+POST /StartThirdPartyTelemetryEnrichment
+
+Content-Type: application/json
+
+{"Name":"__Name__","Tags":{"key0":"__Value__"},"TelemetrySourceConfiguration":{"Azure":{"AwsConfigConnectorArn":"__AwsConfigConnectorArn__"}}}

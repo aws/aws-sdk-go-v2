@@ -589,6 +589,31 @@ func TestUpdateResponseSnapshot_DeleteCapacityProviderSession(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteDatasetGeneration(t *testing.T) {
+	want := &DeleteDatasetGenerationOutput{
+		GenerationId: ptr.String("__GenerationId__"),
+		Status:       types.DatasetGenerationStatus("IN_PROGRESS"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteDatasetGeneration, schemas.DeleteDatasetGenerationResponse, schemas.DeleteDatasetGenerationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteDatasetGeneration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteEvent(t *testing.T) {
 	want := &DeleteEventOutput{
 		EventId: ptr.String("__EventId__"),
@@ -966,6 +991,181 @@ func TestUpdateResponseSnapshot_GetAgentCard(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetAgentCard.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAgentInsight(t *testing.T) {
+	want := &GetAgentInsightOutput{
+		Type:                 types.InsightType("FAILURE"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AffectedSessionCount: ptr.Int32(1),
+		SampleSessions: []types.SampleSession{
+			{
+				SessionId:  ptr.String("__SessionId__"),
+				LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Findings: []types.SessionFinding{
+					{
+						TargetId:    ptr.String("__TargetId__"),
+						TargetType:  types.FindingTargetType("SPAN_ID"),
+						Description: ptr.String("__Description__"),
+						Category:    ptr.String("__Category__"),
+						Confidence:  ptr.Float64(1.0),
+					},
+					{
+						TargetId:    ptr.String("__TargetId__"),
+						TargetType:  types.FindingTargetType("SPAN_ID"),
+						Description: ptr.String("__Description__"),
+						Category:    ptr.String("__Category__"),
+						Confidence:  ptr.Float64(1.0),
+					},
+				},
+			},
+			{
+				SessionId:  ptr.String("__SessionId__"),
+				LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Findings: []types.SessionFinding{
+					{
+						TargetId:    ptr.String("__TargetId__"),
+						TargetType:  types.FindingTargetType("SPAN_ID"),
+						Description: ptr.String("__Description__"),
+						Category:    ptr.String("__Category__"),
+						Confidence:  ptr.Float64(1.0),
+					},
+					{
+						TargetId:    ptr.String("__TargetId__"),
+						TargetType:  types.FindingTargetType("SPAN_ID"),
+						Description: ptr.String("__Description__"),
+						Category:    ptr.String("__Category__"),
+						Confidence:  ptr.Float64(1.0),
+					},
+				},
+			},
+		},
+		RootCauses: []types.InsightRootCause{
+			{
+				Name:                 ptr.String("__Name__"),
+				Explanation:          ptr.String("__Explanation__"),
+				AffectedSessionCount: ptr.Int32(1),
+				SuggestedFix:         ptr.String("__SuggestedFix__"),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name:                 ptr.String("__Name__"),
+				Explanation:          ptr.String("__Explanation__"),
+				AffectedSessionCount: ptr.Int32(1),
+				SuggestedFix:         ptr.String("__SuggestedFix__"),
+				SampleSessions: []types.SampleSession{
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+					{
+						SessionId:  ptr.String("__SessionId__"),
+						LastSeenAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Findings: []types.SessionFinding{
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+							{
+								TargetId:    ptr.String("__TargetId__"),
+								TargetType:  types.FindingTargetType("SPAN_ID"),
+								Description: ptr.String("__Description__"),
+								Category:    ptr.String("__Category__"),
+								Confidence:  ptr.Float64(1.0),
+							},
+						},
+					},
+				},
+			},
+		},
+		AgentInsightId:         ptr.String("__AgentInsightId__"),
+		ApplicationName:        ptr.String("__ApplicationName__"),
+		BatchEvaluationId:      ptr.String("__BatchEvaluationId__"),
+		CustomerMetadataStatus: types.AgentInsightCustomerMetadataStatus("AVAILABLE"),
+		UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchiveStatus:          types.AgentInsightArchiveStatus("ACTIVE"),
+		LastSeenAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.GetAgentInsight, schemas.GetAgentInsightResponse, schemas.GetAgentInsightResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAgentInsight.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2225,6 +2425,19 @@ func TestUpdateResponseSnapshot_GetBatchEvaluation(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		KmsKeyArn:   ptr.String("__KmsKeyArn__"),
+		DatasetExecutionDetails: &types.DatasetExecutionDetails{
+			Dataset: &types.DatasetDetails{
+				DatasetId:      ptr.String("__DatasetId__"),
+				DatasetVersion: ptr.String("__DatasetVersion__"),
+			},
+			AgentInvocation: &types.AgentInvocationDetailsMemberAgentCoreRuntime{
+				Value: types.AgentCoreRuntimeInvocationDetails{
+					AgentRuntimeEndpointArn: ptr.String("__AgentRuntimeEndpointArn__"),
+					AgentRuntimeVersion:     ptr.String("__AgentRuntimeVersion__"),
+					RequestTemplate:         ptr.String("__RequestTemplate__"),
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
 	opSchema := smithy.NewOperationSchema(schemas.GetBatchEvaluation, schemas.GetBatchEvaluationResponse, schemas.GetBatchEvaluationResponse)
@@ -2464,6 +2677,186 @@ func TestUpdateResponseSnapshot_GetCodeInterpreterSession(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetCodeInterpreterSession.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDatasetGeneration(t *testing.T) {
+	want := &GetDatasetGenerationOutput{
+		GenerationId:  ptr.String("__GenerationId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		DatasetId:     ptr.String("__DatasetId__"),
+		ScenarioType:  types.ScenarioType("FIXED"),
+		Status:        types.DatasetGenerationStatus("IN_PROGRESS"),
+		FailureReason: ptr.String("__FailureReason__"),
+		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Source: &types.GenerationSourceRecordMemberTraceGeneration{
+			Value: types.TraceGenerationRecord{
+				SourceConfig: &types.TraceSourceConfigMemberCloudWatchLogs{
+					Value: types.CloudWatchLogsSourceConfig{
+						LogGroupNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						LogGroupNamePrefixes: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ServiceNames: []string{
+							"__Member__",
+							"__Member__",
+						},
+						StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				Selection: &types.GenerationSelectionRecordMemberFilters{
+					Value: types.GenerationFilters{
+						AttributeFilters: []types.GenerationAttributeFilter{
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+							},
+							{
+								Key:      ptr.String("__Key__"),
+								Operator: types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+							},
+						},
+						TurnCount: &types.TurnCountRange{
+							Min: ptr.Int32(1),
+							Max: ptr.Int32(1),
+						},
+						EvaluatorFilters: []types.EvaluatorFilter{
+							{
+								EvaluatorId:             ptr.String("__EvaluatorId__"),
+								EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+								Operator:                types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+								Aggregation: types.ResultAggregation("Min"),
+							},
+							{
+								EvaluatorId:             ptr.String("__EvaluatorId__"),
+								EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+								Operator:                types.GenerationFilterOperator("Equals"),
+								Value: &types.GenerationFilterValueMemberStringValue{
+									Value: "__GenerationFilterValueMemberStringValue__",
+								},
+								Aggregation: types.ResultAggregation("Min"),
+							},
+						},
+					},
+				},
+				Sampling: &types.GenerationSamplingConfig{
+					MaxScenarios: ptr.Int32(1),
+				},
+				GroundTruth: &types.GroundTruthConfig{
+					Fields: []types.GroundTruthField{
+						types.GroundTruthField("expected_response"),
+						types.GroundTruthField("expected_response"),
+					},
+					QualityFilters: []types.EvaluatorFilter{
+						{
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+							Operator:                types.GenerationFilterOperator("Equals"),
+							Value: &types.GenerationFilterValueMemberStringValue{
+								Value: "__GenerationFilterValueMemberStringValue__",
+							},
+							Aggregation: types.ResultAggregation("Min"),
+						},
+						{
+							EvaluatorId:             ptr.String("__EvaluatorId__"),
+							EvaluationDimensionName: ptr.String("__EvaluationDimensionName__"),
+							Operator:                types.GenerationFilterOperator("Equals"),
+							Value: &types.GenerationFilterValueMemberStringValue{
+								Value: "__GenerationFilterValueMemberStringValue__",
+							},
+							Aggregation: types.ResultAggregation("Min"),
+						},
+					},
+				},
+				RedactionConfiguration: &types.RedactionConfiguration{
+					Identifiers: []types.RedactionIdentifier{
+						types.RedactionIdentifier("ADDRESS"),
+						types.RedactionIdentifier("ADDRESS"),
+					},
+					CustomDataIdentifiers: []types.CustomDataIdentifier{
+						{
+							Name:  ptr.String("__Name__"),
+							Regex: ptr.String("__Regex__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Regex: ptr.String("__Regex__"),
+						},
+					},
+				},
+			},
+		},
+		GenerationResults: &types.GenerationResults{
+			SessionsMatched:         ptr.Int32(1),
+			SessionsSelected:        ptr.Int32(1),
+			SessionsUnscored:        ptr.Int32(1),
+			SessionsFailed:          ptr.Int32(1),
+			ScenariosGenerated:      ptr.Int32(1),
+			ScenariosDeduplicated:   ptr.Int32(1),
+			ExamplesWritten:         ptr.Int32(1),
+			ExamplesWithGroundTruth: ptr.Int32(1),
+		},
+		RedactionSummary: &types.RedactionSummary{
+			ScenariosScanned: ptr.Int32(1),
+			FindingCounts: map[string]int32{
+				"key0": 1,
+			},
+		},
+		ErrorDetails: []types.GenerationErrorDetail{
+			{
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+				Count:        ptr.Int32(1),
+				SessionIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+				Count:        ptr.Int32(1),
+				SessionIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.GetDatasetGeneration, schemas.GetDatasetGenerationResponse, schemas.GetDatasetGenerationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDatasetGeneration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3118,6 +3511,60 @@ func TestUpdateResponseSnapshot_ListActors(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListAgentInsights(t *testing.T) {
+	want := &ListAgentInsightsOutput{
+		AgentInsights: []types.AgentInsightSummary{
+			{
+				Type:                   types.InsightType("FAILURE"),
+				Name:                   ptr.String("__Name__"),
+				Description:            ptr.String("__Description__"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount:   ptr.Int32(1),
+				AgentInsightId:         ptr.String("__AgentInsightId__"),
+				ApplicationName:        ptr.String("__ApplicationName__"),
+				BatchEvaluationId:      ptr.String("__BatchEvaluationId__"),
+				CustomerMetadataStatus: types.AgentInsightCustomerMetadataStatus("AVAILABLE"),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ArchiveStatus:          types.AgentInsightArchiveStatus("ACTIVE"),
+				LastSeenAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Type:                   types.InsightType("FAILURE"),
+				Name:                   ptr.String("__Name__"),
+				Description:            ptr.String("__Description__"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AffectedSessionCount:   ptr.Int32(1),
+				AgentInsightId:         ptr.String("__AgentInsightId__"),
+				ApplicationName:        ptr.String("__ApplicationName__"),
+				BatchEvaluationId:      ptr.String("__BatchEvaluationId__"),
+				CustomerMetadataStatus: types.AgentInsightCustomerMetadataStatus("AVAILABLE"),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ArchiveStatus:          types.AgentInsightArchiveStatus("ACTIVE"),
+				LastSeenAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.ListAgentInsights, schemas.ListAgentInsightsResponse, schemas.ListAgentInsightsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAgentInsights.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListBatchEvaluations(t *testing.T) {
 	want := &ListBatchEvaluationsOutput{
 		BatchEvaluations: []types.BatchEvaluationSummary{
@@ -3338,6 +3785,52 @@ func TestUpdateResponseSnapshot_ListCodeInterpreterSessions(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListCodeInterpreterSessions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListDatasetGenerations(t *testing.T) {
+	want := &ListDatasetGenerationsOutput{
+		DatasetGenerations: []types.DatasetGenerationSummary{
+			{
+				GenerationId: ptr.String("__GenerationId__"),
+				DatasetId:    ptr.String("__DatasetId__"),
+				Name:         ptr.String("__Name__"),
+				Description:  ptr.String("__Description__"),
+				ScenarioType: types.ScenarioType("FIXED"),
+				Status:       types.DatasetGenerationStatus("IN_PROGRESS"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				GenerationId: ptr.String("__GenerationId__"),
+				DatasetId:    ptr.String("__DatasetId__"),
+				Name:         ptr.String("__Name__"),
+				Description:  ptr.String("__Description__"),
+				ScenarioType: types.ScenarioType("FIXED"),
+				Status:       types.DatasetGenerationStatus("IN_PROGRESS"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.ListDatasetGenerations, schemas.ListDatasetGenerationsResponse, schemas.ListDatasetGenerationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListDatasetGenerations.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4091,6 +4584,34 @@ func TestUpdateResponseSnapshot_StartCodeInterpreterSession(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartDatasetGeneration(t *testing.T) {
+	want := &StartDatasetGenerationOutput{
+		GenerationId: ptr.String("__GenerationId__"),
+		Name:         ptr.String("__Name__"),
+		DatasetId:    ptr.String("__DatasetId__"),
+		Status:       types.DatasetGenerationStatus("IN_PROGRESS"),
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.StartDatasetGeneration, schemas.StartDatasetGenerationResponse, schemas.StartDatasetGenerationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartDatasetGeneration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartMemoryExtractionJob(t *testing.T) {
 	want := &StartMemoryExtractionJobOutput{
 		JobId: ptr.String("__JobId__"),
@@ -4297,6 +4818,32 @@ func TestUpdateResponseSnapshot_UpdateABTest(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateABTest.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateAgentInsight(t *testing.T) {
+	want := &UpdateAgentInsightOutput{
+		AgentInsightId: ptr.String("__AgentInsightId__"),
+		ArchiveStatus:  types.AgentInsightArchiveStatus("ACTIVE"),
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCore)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateAgentInsight, schemas.UpdateAgentInsightResponse, schemas.UpdateAgentInsightResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateAgentInsight.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -71,6 +71,13 @@ var CreateNetworkMigrationDefinition = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/network-migration/CreateNetworkMigrationDefinition",
 	Code: 201})
 
+var CreateRemoteSourceAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "CreateRemoteSourceAction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/CreateRemoteSourceAction",
+	Code: 201})
+
 var CreateReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "CreateReplicationConfigurationTemplate",
@@ -118,6 +125,13 @@ var DeleteNetworkMigrationDefinition = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteNetworkMigrationDefinition",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/network-migration/DeleteNetworkMigrationDefinition",
+	Code: 204})
+
+var DeleteRemoteSourceAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "DeleteRemoteSourceAction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/DeleteRemoteSourceAction",
 	Code: 204})
 
 var DeleteReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
@@ -223,6 +237,13 @@ var GetLaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetLaunchConfiguration",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetLaunchConfiguration",
+	Code: 200})
+
+var GetLaunchConfigurationDefaults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "GetLaunchConfigurationDefaults",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetLaunchConfigurationDefaults",
 	Code: 200})
 
 var GetNetworkMigrationDefinition = smithy.NewSchema(smithy.ShapeID{
@@ -365,6 +386,13 @@ var ListNetworkMigrationExecutions = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/network-migration/ListNetworkMigrationExecutions",
 	Code: 200})
 
+var ListNetworkMigrationInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListNetworkMigrationInsights",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/network-migration/ListNetworkMigrationInsights",
+	Code: 200})
+
 var ListNetworkMigrationMapperSegmentConstructs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ListNetworkMigrationMapperSegmentConstructs",
@@ -391,6 +419,34 @@ var ListNetworkMigrationMappingUpdates = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListNetworkMigrationMappingUpdates",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/network-migration/ListNetworkMigrationMappingUpdates",
+	Code: 200})
+
+var ListRemoteSourceActionInvocationResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocationResults",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListRemoteSourceActionInvocationResults",
+	Code: 200})
+
+var ListRemoteSourceActionInvocations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListRemoteSourceActionInvocations",
+	Code: 200})
+
+var ListRemoteSourceActionJobs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionJobs",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListRemoteSourceActionJobs",
+	Code: 200})
+
+var ListRemoteSourceActions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListRemoteSourceActions",
 	Code: 200})
 
 var ListSourceServerActions = smithy.NewSchema(smithy.ShapeID{
@@ -540,6 +596,13 @@ var StartNetworkMigrationMappingUpdate = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/network-migration/StartNetworkMigrationMappingUpdate",
 	Code: 202})
 
+var StartRemoteSourceActionJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "StartRemoteSourceActionJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/StartRemoteSourceActionJob",
+	Code: 202})
+
 var StartReplication = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "StartReplication",
@@ -617,6 +680,13 @@ var UpdateLaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/UpdateLaunchConfiguration",
 	Code: 200})
 
+var UpdateLaunchConfigurationDefaults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateLaunchConfigurationDefaults",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/UpdateLaunchConfigurationDefaults",
+	Code: 200})
+
 var UpdateLaunchConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateLaunchConfigurationTemplate",
@@ -636,6 +706,13 @@ var UpdateNetworkMigrationMapperSegment = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateNetworkMigrationMapperSegment",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/network-migration/UpdateNetworkMigrationMapperSegment",
+	Code: 200})
+
+var UpdateRemoteSourceAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateRemoteSourceAction",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/UpdateRemoteSourceAction",
 	Code: 200})
 
 var UpdateReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -814,6 +891,29 @@ var _AssociateSourceServersRequestSourceServerIDs = smithy.NewSchema(smithy.Shap
 	Name:      "AssociateSourceServersRequestSourceServerIDs",
 }, smithy.ShapeTypeList, 1)
 var _AssociateSourceServersRequestSourceServerIDs_member *smithy.Schema
+
+var _AssociationCidrList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "AssociationCidrList",
+}, smithy.ShapeTypeList, 1)
+var _AssociationCidrList_member *smithy.Schema
+
+var _AssociationUserProvidedID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "AssociationUserProvidedID",
+}, smithy.ShapeTypeString, 0)
+
+var _AssociationUserProvidedIDList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "AssociationUserProvidedIDList",
+}, smithy.ShapeTypeList, 1)
+var _AssociationUserProvidedIDList_member *smithy.Schema
+
+var _AssociationVmUUIDList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "AssociationVmUUIDList",
+}, smithy.ShapeTypeList, 1)
+var _AssociationVmUUIDList_member *smithy.Schema
 
 var _BandwidthThrottling = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -996,6 +1096,11 @@ var _ConstructID = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ConstructID",
 }, smithy.ShapeTypeString, 0)
 
+var _ConstructLogicalID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ConstructLogicalID",
+}, smithy.ShapeTypeString, 0)
+
 var _ConstructProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ConstructProperties",
@@ -1023,6 +1128,18 @@ var _Cpus = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Cpus_member *smithy.Schema
 
+var CreateOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "CreateOperation",
+}, smithy.ShapeTypeStructure, 4)
+var CreateOperation_name *smithy.Schema
+
+var CreateOperation_excluded *smithy.Schema
+
+var CreateOperation_properties *smithy.Schema
+
+var CreateOperation_configuration *smithy.Schema
+
 var DataReplicationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "DataReplicationError",
@@ -1039,7 +1156,7 @@ var _DataReplicationErrorString = smithy.NewSchema(smithy.ShapeID{
 var DataReplicationInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "DataReplicationInfo",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var DataReplicationInfo_lagDuration *smithy.Schema
 
 var DataReplicationInfo_etaDateTime *smithy.Schema
@@ -1055,6 +1172,8 @@ var DataReplicationInfo_dataReplicationError *smithy.Schema
 var DataReplicationInfo_lastSnapshotDateTime *smithy.Schema
 
 var DataReplicationInfo_replicatorId *smithy.Schema
+
+var DataReplicationInfo_stagingOutpostArn *smithy.Schema
 
 var DataReplicationInfoReplicatedDisk = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -1113,6 +1232,16 @@ var _DataReplicationInitiationStepStatus = smithy.NewSchema(smithy.ShapeID{
 var _DataReplicationState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "DataReplicationState",
+}, smithy.ShapeTypeString, 0)
+
+var _DefinitionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "DefinitionType",
+}, smithy.ShapeTypeString, 0)
+
+var _DeleteOnTermination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "DeleteOnTermination",
 }, smithy.ShapeTypeString, 0)
 
 var DeleteOperation = smithy.NewSchema(smithy.ShapeID{
@@ -1205,6 +1334,19 @@ var _EC2LaunchConfigurationTemplateID = smithy.NewSchema(smithy.ShapeID{
 var _EncryptionAlgorithm = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "EncryptionAlgorithm",
+}, smithy.ShapeTypeString, 0)
+
+var _EnrichedProperties = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "EnrichedProperties",
+}, smithy.ShapeTypeMap, 2)
+var _EnrichedProperties_key *smithy.Schema
+
+var _EnrichedProperties_value *smithy.Schema
+
+var _EnrichedPropertyKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "EnrichedPropertyKey",
 }, smithy.ShapeTypeString, 0)
 
 var EnrichmentSourceS3Configuration = smithy.NewSchema(smithy.ShapeID{
@@ -1525,6 +1667,51 @@ var _InitiatedBy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InitiatedBy",
 }, smithy.ShapeTypeString, 0)
 
+var _InsightID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightID",
+}, smithy.ShapeTypeString, 0)
+
+var _InsightLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightLevel",
+}, smithy.ShapeTypeString, 0)
+
+var InsightMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightMessage",
+}, smithy.ShapeTypeStructure, 3)
+var InsightMessage_code *smithy.Schema
+
+var InsightMessage_message *smithy.Schema
+
+var InsightMessage_topic *smithy.Schema
+
+var _InsightMessageText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightMessageText",
+}, smithy.ShapeTypeString, 0)
+
+var _InsightProducerID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightProducerID",
+}, smithy.ShapeTypeString, 0)
+
+var _InsightProducerName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightProducerName",
+}, smithy.ShapeTypeString, 0)
+
+var _InsightProducerType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightProducerType",
+}, smithy.ShapeTypeString, 0)
+
+var _InsightType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "InsightType",
+}, smithy.ShapeTypeString, 0)
+
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "InternalServerException",
@@ -1707,7 +1894,7 @@ var _LastKnownCheckType = smithy.NewSchema(smithy.ShapeID{
 var LaunchConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "LaunchConfigurationTemplate",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var LaunchConfigurationTemplate_launchConfigurationTemplateID *smithy.Schema
 
 var LaunchConfigurationTemplate_arn *smithy.Schema
@@ -1717,6 +1904,8 @@ var LaunchConfigurationTemplate_postLaunchActions *smithy.Schema
 var LaunchConfigurationTemplate_enableMapAutoTagging *smithy.Schema
 
 var LaunchConfigurationTemplate_mapAutoTaggingMpeID *smithy.Schema
+
+var LaunchConfigurationTemplate_mapAutoTaggingKey *smithy.Schema
 
 var LaunchConfigurationTemplate_tags *smithy.Schema
 
@@ -2004,6 +2193,18 @@ var ListNetworkMigrationExecutionRequestFilters_networkMigrationExecutionIDs *sm
 
 var ListNetworkMigrationExecutionRequestFilters_networkMigrationExecutionStatuses *smithy.Schema
 
+var ListNetworkMigrationInsightsFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListNetworkMigrationInsightsFilters",
+}, smithy.ShapeTypeStructure, 1)
+var ListNetworkMigrationInsightsFilters_insightTypes *smithy.Schema
+
+var _ListNetworkMigrationInsightsTypesFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListNetworkMigrationInsightsTypesFilter",
+}, smithy.ShapeTypeList, 1)
+var _ListNetworkMigrationInsightsTypesFilter_member *smithy.Schema
+
 var ListNetworkMigrationMapperSegmentConstructsFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ListNetworkMigrationMapperSegmentConstructsFilters",
@@ -2059,6 +2260,28 @@ var _ListNetworkMigrationMappingUpdatesIDsFilter = smithy.NewSchema(smithy.Shape
 	Name:      "ListNetworkMigrationMappingUpdatesIDsFilter",
 }, smithy.ShapeTypeList, 1)
 var _ListNetworkMigrationMappingUpdatesIDsFilter_member *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequestFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocationsRequestFilters",
+}, smithy.ShapeTypeStructure, 3)
+var ListRemoteSourceActionInvocationsRequestFilters_sourceServerArns *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequestFilters_remoteSourceActionArns *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequestFilters_statuses *smithy.Schema
+
+var ListRemoteSourceActionJobsRequestFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionJobsRequestFilters",
+}, smithy.ShapeTypeStructure, 1)
+var ListRemoteSourceActionJobsRequestFilters_remoteSourceActionJobIDs *smithy.Schema
+
+var ListRemoteSourceActionsRequestFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionsRequestFilters",
+}, smithy.ShapeTypeStructure, 1)
+var ListRemoteSourceActionsRequestFilters_remoteSourceActionIDs *smithy.Schema
 
 var ListWavesRequestFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2326,7 +2549,7 @@ var _NetworkMigrationDefinitionSummariesList_member *smithy.Schema
 var NetworkMigrationDefinitionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "NetworkMigrationDefinitionSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var NetworkMigrationDefinitionSummary_networkMigrationDefinitionID *smithy.Schema
 
 var NetworkMigrationDefinitionSummary_name *smithy.Schema
@@ -2338,6 +2561,8 @@ var NetworkMigrationDefinitionSummary_arn *smithy.Schema
 var NetworkMigrationDefinitionSummary_tags *smithy.Schema
 
 var NetworkMigrationDefinitionSummary_scopeTags *smithy.Schema
+
+var NetworkMigrationDefinitionSummary_definitionType *smithy.Schema
 
 var _NetworkMigrationDefintionsIDsFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2460,6 +2685,40 @@ var _NetworkMigrationFailedResourceStatus = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NetworkMigrationFailedResourceStatus",
 }, smithy.ShapeTypeString, 0)
 
+var NetworkMigrationInsight = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "NetworkMigrationInsight",
+}, smithy.ShapeTypeStructure, 12)
+var NetworkMigrationInsight_networkMigrationDefinitionID *smithy.Schema
+
+var NetworkMigrationInsight_networkMigrationExecutionID *smithy.Schema
+
+var NetworkMigrationInsight_producerID *smithy.Schema
+
+var NetworkMigrationInsight_producerType *smithy.Schema
+
+var NetworkMigrationInsight_producerName *smithy.Schema
+
+var NetworkMigrationInsight_segmentID *smithy.Schema
+
+var NetworkMigrationInsight_constructID *smithy.Schema
+
+var NetworkMigrationInsight_insightID *smithy.Schema
+
+var NetworkMigrationInsight_insightLevel *smithy.Schema
+
+var NetworkMigrationInsight_insightType *smithy.Schema
+
+var NetworkMigrationInsight_insightMessage *smithy.Schema
+
+var NetworkMigrationInsight_createdAt *smithy.Schema
+
+var _NetworkMigrationInsightsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "NetworkMigrationInsightsList",
+}, smithy.ShapeTypeList, 1)
+var _NetworkMigrationInsightsList_member *smithy.Schema
+
 var _NetworkMigrationJobID = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "NetworkMigrationJobID",
@@ -2507,7 +2766,7 @@ var NetworkMigrationMapperSegment_referencedSegments *smithy.Schema
 var NetworkMigrationMapperSegmentConstruct = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "NetworkMigrationMapperSegmentConstruct",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var NetworkMigrationMapperSegmentConstruct_constructID *smithy.Schema
 
 var NetworkMigrationMapperSegmentConstruct_constructType *smithy.Schema
@@ -2525,6 +2784,10 @@ var NetworkMigrationMapperSegmentConstruct_createdAt *smithy.Schema
 var NetworkMigrationMapperSegmentConstruct_updatedAt *smithy.Schema
 
 var NetworkMigrationMapperSegmentConstruct_properties *smithy.Schema
+
+var NetworkMigrationMapperSegmentConstruct_enrichedProperties *smithy.Schema
+
+var NetworkMigrationMapperSegmentConstruct_configuration *smithy.Schema
 
 var _NetworkMigrationMapperSegmentConstructs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2601,10 +2864,18 @@ var _OperatingSystemString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OperatingSystemString",
 }, smithy.ShapeTypeString, 0)
 
+var OperationConfigurationUnion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "OperationConfigurationUnion",
+}, smithy.ShapeTypeUnion, 2)
+var OperationConfigurationUnion_securityGroup *smithy.Schema
+
+var OperationConfigurationUnion_securityGroupRule *smithy.Schema
+
 var OperationUnion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "OperationUnion",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 6)
 var OperationUnion_merge *smithy.Schema
 
 var OperationUnion_split *smithy.Schema
@@ -2612,6 +2883,10 @@ var OperationUnion_split *smithy.Schema
 var OperationUnion_delete *smithy.Schema
 
 var OperationUnion_update *smithy.Schema
+
+var OperationUnion_updateV2 *smithy.Schema
+
+var OperationUnion_create *smithy.Schema
 
 var _OrderType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2623,6 +2898,16 @@ var OS = smithy.NewSchema(smithy.ShapeID{
 	Name:      "OS",
 }, smithy.ShapeTypeStructure, 1)
 var OS_fullString *smithy.Schema
+
+var _OutpostARN = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "OutpostARN",
+}, smithy.ShapeTypeString, 0)
+
+var _OutpostSnapshotLocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "OutpostSnapshotLocation",
+}, smithy.ShapeTypeString, 0)
 
 var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2695,11 +2980,190 @@ var PostLaunchActionsStatus_ssmAgentDiscoveryDatetime *smithy.Schema
 
 var PostLaunchActionsStatus_postLaunchActionsLaunchStatusList *smithy.Schema
 
+var _PropertiesToDelete = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "PropertiesToDelete",
+}, smithy.ShapeTypeList, 1)
+var _PropertiesToDelete_member *smithy.Schema
+
 var _referencedSegmentsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "referencedSegmentsList",
 }, smithy.ShapeTypeList, 1)
 var _referencedSegmentsList_member *smithy.Schema
+
+var RemoteSourceAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceAction",
+}, smithy.ShapeTypeStructure, 8)
+var RemoteSourceAction_remoteSourceActionID *smithy.Schema
+
+var RemoteSourceAction_arn *smithy.Schema
+
+var RemoteSourceAction_name *smithy.Schema
+
+var RemoteSourceAction_description *smithy.Schema
+
+var RemoteSourceAction_ssmParameterName *smithy.Schema
+
+var RemoteSourceAction_timeoutSeconds *smithy.Schema
+
+var RemoteSourceAction_operatingSystem *smithy.Schema
+
+var RemoteSourceAction_tags *smithy.Schema
+
+var _RemoteSourceActionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionArn",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionArns = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionArns",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionArns_member *smithy.Schema
+
+var _RemoteSourceActionArnsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionArnsFilter",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionArnsFilter_member *smithy.Schema
+
+var _RemoteSourceActionDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionID",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionIDsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionIDsFilter",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionIDsFilter_member *smithy.Schema
+
+var RemoteSourceActionInvocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionInvocation",
+}, smithy.ShapeTypeStructure, 6)
+var RemoteSourceActionInvocation_sourceServerArn *smithy.Schema
+
+var RemoteSourceActionInvocation_remoteSourceActionArn *smithy.Schema
+
+var RemoteSourceActionInvocation_ssmCommandInvocationID *smithy.Schema
+
+var RemoteSourceActionInvocation_status *smithy.Schema
+
+var RemoteSourceActionInvocation_startedAt *smithy.Schema
+
+var RemoteSourceActionInvocation_endedAt *smithy.Schema
+
+var RemoteSourceActionInvocationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionInvocationResult",
+}, smithy.ShapeTypeStructure, 5)
+var RemoteSourceActionInvocationResult_remoteSourceActionID *smithy.Schema
+
+var RemoteSourceActionInvocationResult_connectorOwnerAccountID *smithy.Schema
+
+var RemoteSourceActionInvocationResult_status *smithy.Schema
+
+var RemoteSourceActionInvocationResult_startedAt *smithy.Schema
+
+var RemoteSourceActionInvocationResult_endedAt *smithy.Schema
+
+var _RemoteSourceActionInvocationResultsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionInvocationResultsList",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionInvocationResultsList_member *smithy.Schema
+
+var _RemoteSourceActionInvocationsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionInvocationsList",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionInvocationsList_member *smithy.Schema
+
+var _RemoteSourceActionInvocationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionInvocationStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionInvocationStatusesFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionInvocationStatusesFilter",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionInvocationStatusesFilter_member *smithy.Schema
+
+var RemoteSourceActionJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionJob",
+}, smithy.ShapeTypeStructure, 10)
+var RemoteSourceActionJob_remoteSourceActionJobID *smithy.Schema
+
+var RemoteSourceActionJob_arn *smithy.Schema
+
+var RemoteSourceActionJob_status *smithy.Schema
+
+var RemoteSourceActionJob_sourceServerArns *smithy.Schema
+
+var RemoteSourceActionJob_remoteSourceActionArns *smithy.Schema
+
+var RemoteSourceActionJob_connectorArn *smithy.Schema
+
+var RemoteSourceActionJob_startedAt *smithy.Schema
+
+var RemoteSourceActionJob_endedAt *smithy.Schema
+
+var RemoteSourceActionJob_statusReason *smithy.Schema
+
+var RemoteSourceActionJob_tags *smithy.Schema
+
+var _RemoteSourceActionJobID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionJobID",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionJobIDsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionJobIDsFilter",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionJobIDsFilter_member *smithy.Schema
+
+var _RemoteSourceActionJobsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionJobsList",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionJobsList_member *smithy.Schema
+
+var _RemoteSourceActionJobStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionJobStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionName",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionOperatingSystem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionOperatingSystem",
+}, smithy.ShapeTypeString, 0)
+
+var _RemoteSourceActionsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionsList",
+}, smithy.ShapeTypeList, 1)
+var _RemoteSourceActionsList_member *smithy.Schema
+
+var _RemoteSourceActionTimeoutSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "RemoteSourceActionTimeoutSeconds",
+}, smithy.ShapeTypeInteger, 0)
 
 var _ReplicationConfigurationDataPlaneRouting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2744,7 +3208,7 @@ var _ReplicationConfigurationReplicatedDiskStagingDiskType = smithy.NewSchema(sm
 var ReplicationConfigurationTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ReplicationConfigurationTemplate",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var ReplicationConfigurationTemplate_replicationConfigurationTemplateID *smithy.Schema
 
 var ReplicationConfigurationTemplate_arn *smithy.Schema
@@ -2780,6 +3244,8 @@ var ReplicationConfigurationTemplate_tags *smithy.Schema
 var ReplicationConfigurationTemplate_internetProtocol *smithy.Schema
 
 var ReplicationConfigurationTemplate_storeSnapshotOnLocalZone *smithy.Schema
+
+var ReplicationConfigurationTemplate_outpostSnapshotLocation *smithy.Schema
 
 var ReplicationConfigurationTemplate_storageConfiguration *smithy.Schema
 
@@ -2898,6 +3364,22 @@ var _SecretArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SecretArn",
 }, smithy.ShapeTypeString, 0)
 
+var SecurityGroupAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SecurityGroupAssociations",
+}, smithy.ShapeTypeStructure, 3)
+var SecurityGroupAssociations_cidrs *smithy.Schema
+
+var SecurityGroupAssociations_vmUUIDs *smithy.Schema
+
+var SecurityGroupAssociations_userProvidedIDs *smithy.Schema
+
+var SecurityGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SecurityGroupConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var SecurityGroupConfiguration_associations *smithy.Schema
+
 var _SecurityGroupID = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "SecurityGroupID",
@@ -2907,6 +3389,12 @@ var _SecurityGroupMappingStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "SecurityGroupMappingStrategy",
 }, smithy.ShapeTypeString, 0)
+
+var SecurityGroupRuleConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SecurityGroupRuleConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var SecurityGroupRuleConfiguration_enableReferencing *smithy.Schema
 
 var _SegmentConstructDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -2918,6 +3406,23 @@ var _SegmentConstructName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SegmentConstructName",
 }, smithy.ShapeTypeString, 0)
 
+var SegmentCreateOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SegmentCreateOperation",
+}, smithy.ShapeTypeStructure, 4)
+var SegmentCreateOperation_name *smithy.Schema
+
+var SegmentCreateOperation_description *smithy.Schema
+
+var SegmentCreateOperation_targetAccount *smithy.Schema
+
+var SegmentCreateOperation_scopeTags *smithy.Schema
+
+var SegmentDeleteOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SegmentDeleteOperation",
+}, smithy.ShapeTypeStructure, 0)
+
 var _SegmentDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "SegmentDescription",
@@ -2928,10 +3433,37 @@ var _SegmentID = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SegmentID",
 }, smithy.ShapeTypeString, 0)
 
+var _SegmentLogicalID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SegmentLogicalID",
+}, smithy.ShapeTypeString, 0)
+
 var _SegmentName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "SegmentName",
 }, smithy.ShapeTypeString, 0)
+
+var SegmentOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SegmentOperation",
+}, smithy.ShapeTypeUnion, 3)
+var SegmentOperation_create *smithy.Schema
+
+var SegmentOperation_update *smithy.Schema
+
+var SegmentOperation_delete *smithy.Schema
+
+var SegmentUpdateOperation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SegmentUpdateOperation",
+}, smithy.ShapeTypeStructure, 4)
+var SegmentUpdateOperation_name *smithy.Schema
+
+var SegmentUpdateOperation_description *smithy.Schema
+
+var SegmentUpdateOperation_targetAccount *smithy.Schema
+
+var SegmentUpdateOperation_scopeTags *smithy.Schema
 
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -3078,6 +3610,23 @@ var SourceServerActionsRequestFilters = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var SourceServerActionsRequestFilters_actionIDs *smithy.Schema
 
+var _SourceServerArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SourceServerArn",
+}, smithy.ShapeTypeString, 0)
+
+var _SourceServerArns = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SourceServerArns",
+}, smithy.ShapeTypeList, 1)
+var _SourceServerArns_member *smithy.Schema
+
+var _SourceServerArnsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SourceServerArnsFilter",
+}, smithy.ShapeTypeList, 1)
+var _SourceServerArnsFilter_member *smithy.Schema
+
 var SourceServerConnectorAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "SourceServerConnectorAction",
@@ -3097,6 +3646,20 @@ var _SourceServersList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SourceServersList_member *smithy.Schema
 
+var SourceServerVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SourceServerVolumeConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var SourceServerVolumeConfiguration_volumeType *smithy.Schema
+
+var SourceServerVolumeConfiguration_iops *smithy.Schema
+
+var SourceServerVolumeConfiguration_throughput *smithy.Schema
+
+var SourceServerVolumeConfiguration_volumeInitializationRate *smithy.Schema
+
+var SourceServerVolumeConfiguration_deleteOnTermination *smithy.Schema
+
 var SplitConstruct = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "SplitConstruct",
@@ -3114,6 +3677,11 @@ var SplitOperation = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SplitOperation",
 }, smithy.ShapeTypeStructure, 1)
 var SplitOperation_splitConstructs *smithy.Schema
+
+var _SsmCommandInvocationID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "SsmCommandInvocationID",
+}, smithy.ShapeTypeString, 0)
 
 var SsmDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -3212,12 +3780,16 @@ var _StartCutoverRequestSourceServerIDs_member *smithy.Schema
 var StartNetworkMigrationMappingUpdateConstruct = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "StartNetworkMigrationMappingUpdateConstruct",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var StartNetworkMigrationMappingUpdateConstruct_segmentID *smithy.Schema
+
+var StartNetworkMigrationMappingUpdateConstruct_segmentLogicalID *smithy.Schema
 
 var StartNetworkMigrationMappingUpdateConstruct_constructID *smithy.Schema
 
 var StartNetworkMigrationMappingUpdateConstruct_constructType *smithy.Schema
+
+var StartNetworkMigrationMappingUpdateConstruct_constructLogicalID *smithy.Schema
 
 var StartNetworkMigrationMappingUpdateConstruct_operation *smithy.Schema
 
@@ -3230,8 +3802,12 @@ var _StartNetworkMigrationMappingUpdateConstructs_member *smithy.Schema
 var StartNetworkMigrationMappingUpdateSegment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "StartNetworkMigrationMappingUpdateSegment",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var StartNetworkMigrationMappingUpdateSegment_segmentID *smithy.Schema
+
+var StartNetworkMigrationMappingUpdateSegment_segmentLogicalID *smithy.Schema
+
+var StartNetworkMigrationMappingUpdateSegment_operation *smithy.Schema
 
 var StartNetworkMigrationMappingUpdateSegment_targetAccount *smithy.Schema
 
@@ -3441,6 +4017,20 @@ var UpdateOperation_excluded *smithy.Schema
 
 var UpdateOperation_properties *smithy.Schema
 
+var UpdateOperationV2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateOperationV2",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateOperationV2_name *smithy.Schema
+
+var UpdateOperationV2_excluded *smithy.Schema
+
+var UpdateOperationV2_properties *smithy.Schema
+
+var UpdateOperationV2_propertiesToDelete *smithy.Schema
+
+var UpdateOperationV2_configuration *smithy.Schema
+
 var _UserProvidedId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UserProvidedId",
@@ -3508,6 +4098,11 @@ var _VcenterClientList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VcenterClientList",
 }, smithy.ShapeTypeList, 1)
 var _VcenterClientList_member *smithy.Schema
+
+var _VmUUID = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "VmUUID",
+}, smithy.ShapeTypeString, 0)
 
 var _VolumeInitializationRate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -3691,12 +4286,14 @@ var CreateConnectorRequest_ssmCommandConfig *smithy.Schema
 var CreateLaunchConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "CreateLaunchConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var CreateLaunchConfigurationTemplateRequest_postLaunchActions *smithy.Schema
 
 var CreateLaunchConfigurationTemplateRequest_enableMapAutoTagging *smithy.Schema
 
 var CreateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID *smithy.Schema
+
+var CreateLaunchConfigurationTemplateRequest_mapAutoTaggingKey *smithy.Schema
 
 var CreateLaunchConfigurationTemplateRequest_tags *smithy.Schema
 
@@ -3727,7 +4324,7 @@ var CreateLaunchConfigurationTemplateRequest_parametersEncryptionKey *smithy.Sch
 var CreateNetworkMigrationDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "CreateNetworkMigrationDefinitionRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateNetworkMigrationDefinitionRequest_clientToken *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_name *smithy.Schema
@@ -3735,6 +4332,8 @@ var CreateNetworkMigrationDefinitionRequest_name *smithy.Schema
 var CreateNetworkMigrationDefinitionRequest_description *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_sourceConfigurations *smithy.Schema
+
+var CreateNetworkMigrationDefinitionRequest_definitionType *smithy.Schema
 
 var CreateNetworkMigrationDefinitionRequest_targetS3Configuration *smithy.Schema
 
@@ -3753,7 +4352,7 @@ var CreateNetworkMigrationDefinitionRequest_scopeTags *smithy.Schema
 var NetworkMigrationDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "NetworkMigrationDefinition",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var NetworkMigrationDefinition_arn *smithy.Schema
 
 var NetworkMigrationDefinition_networkMigrationDefinitionID *smithy.Schema
@@ -3763,6 +4362,8 @@ var NetworkMigrationDefinition_name *smithy.Schema
 var NetworkMigrationDefinition_description *smithy.Schema
 
 var NetworkMigrationDefinition_sourceConfigurations *smithy.Schema
+
+var NetworkMigrationDefinition_definitionType *smithy.Schema
 
 var NetworkMigrationDefinition_targetS3Configuration *smithy.Schema
 
@@ -3782,10 +4383,48 @@ var NetworkMigrationDefinition_tags *smithy.Schema
 
 var NetworkMigrationDefinition_scopeTags *smithy.Schema
 
+var CreateRemoteSourceActionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "CreateRemoteSourceActionRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateRemoteSourceActionRequest_name *smithy.Schema
+
+var CreateRemoteSourceActionRequest_description *smithy.Schema
+
+var CreateRemoteSourceActionRequest_ssmParameterName *smithy.Schema
+
+var CreateRemoteSourceActionRequest_timeoutSeconds *smithy.Schema
+
+var CreateRemoteSourceActionRequest_operatingSystem *smithy.Schema
+
+var CreateRemoteSourceActionRequest_tags *smithy.Schema
+
+var CreateRemoteSourceActionRequest_accountID *smithy.Schema
+
+var CreateRemoteSourceActionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "CreateRemoteSourceActionResponse",
+}, smithy.ShapeTypeStructure, 8)
+var CreateRemoteSourceActionResponse_remoteSourceActionID *smithy.Schema
+
+var CreateRemoteSourceActionResponse_arn *smithy.Schema
+
+var CreateRemoteSourceActionResponse_name *smithy.Schema
+
+var CreateRemoteSourceActionResponse_description *smithy.Schema
+
+var CreateRemoteSourceActionResponse_ssmParameterName *smithy.Schema
+
+var CreateRemoteSourceActionResponse_timeoutSeconds *smithy.Schema
+
+var CreateRemoteSourceActionResponse_operatingSystem *smithy.Schema
+
+var CreateRemoteSourceActionResponse_tags *smithy.Schema
+
 var CreateReplicationConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "CreateReplicationConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var CreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId *smithy.Schema
 
 var CreateReplicationConfigurationTemplateRequest_associateDefaultSecurityGroup *smithy.Schema
@@ -3817,6 +4456,8 @@ var CreateReplicationConfigurationTemplateRequest_tags *smithy.Schema
 var CreateReplicationConfigurationTemplateRequest_internetProtocol *smithy.Schema
 
 var CreateReplicationConfigurationTemplateRequest_storeSnapshotOnLocalZone *smithy.Schema
+
+var CreateReplicationConfigurationTemplateRequest_outpostSnapshotLocation *smithy.Schema
 
 var CreateReplicationConfigurationTemplateRequest_storageConfiguration *smithy.Schema
 
@@ -3884,6 +4525,19 @@ var DeleteNetworkMigrationDefinitionRequest_networkMigrationDefinitionID *smithy
 var DeleteNetworkMigrationDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "DeleteNetworkMigrationDefinitionResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteRemoteSourceActionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "DeleteRemoteSourceActionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteRemoteSourceActionRequest_remoteSourceActionID *smithy.Schema
+
+var DeleteRemoteSourceActionRequest_accountID *smithy.Schema
+
+var DeleteRemoteSourceActionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "DeleteRemoteSourceActionResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var DeleteReplicationConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
@@ -4087,6 +4741,26 @@ var FinalizeCutoverRequest_sourceServerID *smithy.Schema
 
 var FinalizeCutoverRequest_accountID *smithy.Schema
 
+var GetLaunchConfigurationDefaultsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "GetLaunchConfigurationDefaultsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetLaunchConfigurationDefaultsRequest_sourceServerID *smithy.Schema
+
+var GetLaunchConfigurationDefaultsRequest_accountID *smithy.Schema
+
+var GetLaunchConfigurationDefaultsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "GetLaunchConfigurationDefaultsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var GetLaunchConfigurationDefaultsResponse_sourceServerID *smithy.Schema
+
+var GetLaunchConfigurationDefaultsResponse_smallVolumeMaxSize *smithy.Schema
+
+var GetLaunchConfigurationDefaultsResponse_smallVolumeConfiguration *smithy.Schema
+
+var GetLaunchConfigurationDefaultsResponse_largeVolumeConfiguration *smithy.Schema
+
 var GetLaunchConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "GetLaunchConfigurationRequest",
@@ -4098,7 +4772,7 @@ var GetLaunchConfigurationRequest_accountID *smithy.Schema
 var LaunchConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "LaunchConfiguration",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var LaunchConfiguration_sourceServerID *smithy.Schema
 
 var LaunchConfiguration_name *smithy.Schema
@@ -4122,6 +4796,8 @@ var LaunchConfiguration_postLaunchActions *smithy.Schema
 var LaunchConfiguration_enableMapAutoTagging *smithy.Schema
 
 var LaunchConfiguration_mapAutoTaggingMpeID *smithy.Schema
+
+var LaunchConfiguration_mapAutoTaggingKey *smithy.Schema
 
 var GetNetworkMigrationDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -4158,7 +4834,7 @@ var GetReplicationConfigurationRequest_accountID *smithy.Schema
 var ReplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ReplicationConfiguration",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var ReplicationConfiguration_sourceServerID *smithy.Schema
 
 var ReplicationConfiguration_name *smithy.Schema
@@ -4194,6 +4870,8 @@ var ReplicationConfiguration_useFipsEndpoint *smithy.Schema
 var ReplicationConfiguration_internetProtocol *smithy.Schema
 
 var ReplicationConfiguration_storeSnapshotOnLocalZone *smithy.Schema
+
+var ReplicationConfiguration_outpostSnapshotLocation *smithy.Schema
 
 var ReplicationConfiguration_storageConfiguration *smithy.Schema
 
@@ -4519,10 +5197,38 @@ var ListNetworkMigrationExecutionsResponse_items *smithy.Schema
 
 var ListNetworkMigrationExecutionsResponse_nextToken *smithy.Schema
 
+var ListNetworkMigrationInsightsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListNetworkMigrationInsightsRequest",
+}, smithy.ShapeTypeStructure, 8)
+var ListNetworkMigrationInsightsRequest_networkMigrationDefinitionID *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_networkMigrationExecutionID *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_producerID *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_segmentID *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_constructID *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_filters *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_maxResults *smithy.Schema
+
+var ListNetworkMigrationInsightsRequest_nextToken *smithy.Schema
+
+var ListNetworkMigrationInsightsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListNetworkMigrationInsightsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListNetworkMigrationInsightsResponse_items *smithy.Schema
+
+var ListNetworkMigrationInsightsResponse_nextToken *smithy.Schema
+
 var ListNetworkMigrationMapperSegmentConstructsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "ListNetworkMigrationMapperSegmentConstructsRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var ListNetworkMigrationMapperSegmentConstructsRequest_networkMigrationExecutionID *smithy.Schema
 
 var ListNetworkMigrationMapperSegmentConstructsRequest_networkMigrationDefinitionID *smithy.Schema
@@ -4534,6 +5240,10 @@ var ListNetworkMigrationMapperSegmentConstructsRequest_filters *smithy.Schema
 var ListNetworkMigrationMapperSegmentConstructsRequest_maxResults *smithy.Schema
 
 var ListNetworkMigrationMapperSegmentConstructsRequest_nextToken *smithy.Schema
+
+var ListNetworkMigrationMapperSegmentConstructsRequest_includeEnrichedProperties *smithy.Schema
+
+var ListNetworkMigrationMapperSegmentConstructsRequest_includeConfiguration *smithy.Schema
 
 var ListNetworkMigrationMapperSegmentConstructsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -4608,6 +5318,88 @@ var ListNetworkMigrationMappingUpdatesResponse = smithy.NewSchema(smithy.ShapeID
 var ListNetworkMigrationMappingUpdatesResponse_items *smithy.Schema
 
 var ListNetworkMigrationMappingUpdatesResponse_nextToken *smithy.Schema
+
+var ListRemoteSourceActionInvocationResultsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocationResultsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListRemoteSourceActionInvocationResultsRequest_sourceServerID *smithy.Schema
+
+var ListRemoteSourceActionInvocationResultsRequest_maxResults *smithy.Schema
+
+var ListRemoteSourceActionInvocationResultsRequest_nextToken *smithy.Schema
+
+var ListRemoteSourceActionInvocationResultsRequest_accountID *smithy.Schema
+
+var ListRemoteSourceActionInvocationResultsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocationResultsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRemoteSourceActionInvocationResultsResponse_items *smithy.Schema
+
+var ListRemoteSourceActionInvocationResultsResponse_nextToken *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocationsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListRemoteSourceActionInvocationsRequest_remoteSourceActionJobID *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequest_filters *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequest_maxResults *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequest_nextToken *smithy.Schema
+
+var ListRemoteSourceActionInvocationsRequest_accountID *smithy.Schema
+
+var ListRemoteSourceActionInvocationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionInvocationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRemoteSourceActionInvocationsResponse_items *smithy.Schema
+
+var ListRemoteSourceActionInvocationsResponse_nextToken *smithy.Schema
+
+var ListRemoteSourceActionJobsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionJobsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListRemoteSourceActionJobsRequest_filters *smithy.Schema
+
+var ListRemoteSourceActionJobsRequest_maxResults *smithy.Schema
+
+var ListRemoteSourceActionJobsRequest_nextToken *smithy.Schema
+
+var ListRemoteSourceActionJobsRequest_accountID *smithy.Schema
+
+var ListRemoteSourceActionJobsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionJobsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRemoteSourceActionJobsResponse_items *smithy.Schema
+
+var ListRemoteSourceActionJobsResponse_nextToken *smithy.Schema
+
+var ListRemoteSourceActionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListRemoteSourceActionsRequest_filters *smithy.Schema
+
+var ListRemoteSourceActionsRequest_maxResults *smithy.Schema
+
+var ListRemoteSourceActionsRequest_nextToken *smithy.Schema
+
+var ListRemoteSourceActionsRequest_accountID *smithy.Schema
+
+var ListRemoteSourceActionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "ListRemoteSourceActionsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListRemoteSourceActionsResponse_items *smithy.Schema
+
+var ListRemoteSourceActionsResponse_nextToken *smithy.Schema
 
 var ListSourceServerActionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
@@ -4953,6 +5745,28 @@ var StartNetworkMigrationMappingUpdateResponse = smithy.NewSchema(smithy.ShapeID
 }, smithy.ShapeTypeStructure, 1)
 var StartNetworkMigrationMappingUpdateResponse_jobID *smithy.Schema
 
+var StartRemoteSourceActionJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "StartRemoteSourceActionJobRequest",
+}, smithy.ShapeTypeStructure, 6)
+var StartRemoteSourceActionJobRequest_remoteSourceActionArns *smithy.Schema
+
+var StartRemoteSourceActionJobRequest_connectorArn *smithy.Schema
+
+var StartRemoteSourceActionJobRequest_sourceServerArns *smithy.Schema
+
+var StartRemoteSourceActionJobRequest_clientToken *smithy.Schema
+
+var StartRemoteSourceActionJobRequest_tags *smithy.Schema
+
+var StartRemoteSourceActionJobRequest_accountID *smithy.Schema
+
+var StartRemoteSourceActionJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "StartRemoteSourceActionJobResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartRemoteSourceActionJobResponse_remoteSourceActionJob *smithy.Schema
+
 var StartReplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "StartReplicationRequest",
@@ -5055,10 +5869,36 @@ var UpdateConnectorRequest_name *smithy.Schema
 
 var UpdateConnectorRequest_ssmCommandConfig *smithy.Schema
 
+var UpdateLaunchConfigurationDefaultsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateLaunchConfigurationDefaultsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateLaunchConfigurationDefaultsRequest_sourceServerID *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsRequest_accountID *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsRequest_smallVolumeMaxSize *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsRequest_smallVolumeConfiguration *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsRequest_largeVolumeConfiguration *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateLaunchConfigurationDefaultsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateLaunchConfigurationDefaultsResponse_sourceServerID *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsResponse_smallVolumeMaxSize *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsResponse_smallVolumeConfiguration *smithy.Schema
+
+var UpdateLaunchConfigurationDefaultsResponse_largeVolumeConfiguration *smithy.Schema
+
 var UpdateLaunchConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateLaunchConfigurationRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var UpdateLaunchConfigurationRequest_sourceServerID *smithy.Schema
 
 var UpdateLaunchConfigurationRequest_name *smithy.Schema
@@ -5081,12 +5921,14 @@ var UpdateLaunchConfigurationRequest_enableMapAutoTagging *smithy.Schema
 
 var UpdateLaunchConfigurationRequest_mapAutoTaggingMpeID *smithy.Schema
 
+var UpdateLaunchConfigurationRequest_mapAutoTaggingKey *smithy.Schema
+
 var UpdateLaunchConfigurationRequest_accountID *smithy.Schema
 
 var UpdateLaunchConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateLaunchConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID *smithy.Schema
 
 var UpdateLaunchConfigurationTemplateRequest_postLaunchActions *smithy.Schema
@@ -5094,6 +5936,8 @@ var UpdateLaunchConfigurationTemplateRequest_postLaunchActions *smithy.Schema
 var UpdateLaunchConfigurationTemplateRequest_enableMapAutoTagging *smithy.Schema
 
 var UpdateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID *smithy.Schema
+
+var UpdateLaunchConfigurationTemplateRequest_mapAutoTaggingKey *smithy.Schema
 
 var UpdateLaunchConfigurationTemplateRequest_launchDisposition *smithy.Schema
 
@@ -5122,7 +5966,7 @@ var UpdateLaunchConfigurationTemplateRequest_parametersEncryptionKey *smithy.Sch
 var UpdateNetworkMigrationDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateNetworkMigrationDefinitionRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateNetworkMigrationDefinitionRequest_networkMigrationDefinitionID *smithy.Schema
 
 var UpdateNetworkMigrationDefinitionRequest_name *smithy.Schema
@@ -5143,6 +5987,8 @@ var UpdateNetworkMigrationDefinitionRequest_cidrMappings *smithy.Schema
 
 var UpdateNetworkMigrationDefinitionRequest_scopeTags *smithy.Schema
 
+var UpdateNetworkMigrationDefinitionRequest_definitionType *smithy.Schema
+
 var UpdateNetworkMigrationMapperSegmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateNetworkMigrationMapperSegmentRequest",
@@ -5155,10 +6001,48 @@ var UpdateNetworkMigrationMapperSegmentRequest_segmentID *smithy.Schema
 
 var UpdateNetworkMigrationMapperSegmentRequest_scopeTags *smithy.Schema
 
+var UpdateRemoteSourceActionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateRemoteSourceActionRequest",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateRemoteSourceActionRequest_remoteSourceActionID *smithy.Schema
+
+var UpdateRemoteSourceActionRequest_name *smithy.Schema
+
+var UpdateRemoteSourceActionRequest_description *smithy.Schema
+
+var UpdateRemoteSourceActionRequest_ssmParameterName *smithy.Schema
+
+var UpdateRemoteSourceActionRequest_timeoutSeconds *smithy.Schema
+
+var UpdateRemoteSourceActionRequest_operatingSystem *smithy.Schema
+
+var UpdateRemoteSourceActionRequest_accountID *smithy.Schema
+
+var UpdateRemoteSourceActionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mgn",
+	Name:      "UpdateRemoteSourceActionResponse",
+}, smithy.ShapeTypeStructure, 8)
+var UpdateRemoteSourceActionResponse_remoteSourceActionID *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_arn *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_name *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_description *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_ssmParameterName *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_timeoutSeconds *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_operatingSystem *smithy.Schema
+
+var UpdateRemoteSourceActionResponse_tags *smithy.Schema
+
 var UpdateReplicationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateReplicationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var UpdateReplicationConfigurationRequest_sourceServerID *smithy.Schema
 
 var UpdateReplicationConfigurationRequest_name *smithy.Schema
@@ -5197,12 +6081,14 @@ var UpdateReplicationConfigurationRequest_internetProtocol *smithy.Schema
 
 var UpdateReplicationConfigurationRequest_storeSnapshotOnLocalZone *smithy.Schema
 
+var UpdateReplicationConfigurationRequest_outpostSnapshotLocation *smithy.Schema
+
 var UpdateReplicationConfigurationRequest_storageConfiguration *smithy.Schema
 
 var UpdateReplicationConfigurationTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mgn",
 	Name:      "UpdateReplicationConfigurationTemplateRequest",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var UpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID *smithy.Schema
 
 var UpdateReplicationConfigurationTemplateRequest_arn *smithy.Schema
@@ -5236,6 +6122,8 @@ var UpdateReplicationConfigurationTemplateRequest_useFipsEndpoint *smithy.Schema
 var UpdateReplicationConfigurationTemplateRequest_internetProtocol *smithy.Schema
 
 var UpdateReplicationConfigurationTemplateRequest_storeSnapshotOnLocalZone *smithy.Schema
+
+var UpdateReplicationConfigurationTemplateRequest_outpostSnapshotLocation *smithy.Schema
 
 var UpdateReplicationConfigurationTemplateRequest_storageConfiguration *smithy.Schema
 
@@ -5326,6 +6214,12 @@ func init() {
 
 	_AssociateSourceServersRequestSourceServerIDs_member = _AssociateSourceServersRequestSourceServerIDs.AddMember("member", _SourceServerID)
 
+	_AssociationCidrList_member = _AssociationCidrList.AddMember("member", _CidrBlock)
+
+	_AssociationUserProvidedIDList_member = _AssociationUserProvidedIDList.AddMember("member", _AssociationUserProvidedID)
+
+	_AssociationVmUUIDList_member = _AssociationVmUUIDList.AddMember("member", _VmUUID)
+
 	ChangeServerLifeCycleStateSourceServerLifecycle_state = ChangeServerLifeCycleStateSourceServerLifecycle.AddMember("state", _ChangeServerLifeCycleStateSourceServerLifecycleState)
 
 	Checksum_encryptionAlgorithm = Checksum.AddMember("encryptionAlgorithm", _EncryptionAlgorithm)
@@ -5402,6 +6296,32 @@ func init() {
 
 	_Cpus_member = _Cpus.AddMember("member", CPU)
 
+	_EnrichedProperties_key = _EnrichedProperties.AddMember("key", _EnrichedPropertyKey)
+
+	_EnrichedProperties_value = _EnrichedProperties.AddMember("value", smithyprelude.Document)
+
+	SecurityGroupAssociations_cidrs = SecurityGroupAssociations.AddMember("cidrs", _AssociationCidrList)
+
+	SecurityGroupAssociations_vmUUIDs = SecurityGroupAssociations.AddMember("vmUUIDs", _AssociationVmUUIDList)
+
+	SecurityGroupAssociations_userProvidedIDs = SecurityGroupAssociations.AddMember("userProvidedIDs", _AssociationUserProvidedIDList)
+
+	SecurityGroupConfiguration_associations = SecurityGroupConfiguration.AddMember("associations", SecurityGroupAssociations)
+
+	SecurityGroupRuleConfiguration_enableReferencing = SecurityGroupRuleConfiguration.AddMember("enableReferencing", smithyprelude.Boolean)
+
+	OperationConfigurationUnion_securityGroup = OperationConfigurationUnion.AddMember("securityGroup", SecurityGroupConfiguration)
+
+	OperationConfigurationUnion_securityGroupRule = OperationConfigurationUnion.AddMember("securityGroupRule", SecurityGroupRuleConfiguration)
+
+	CreateOperation_name = CreateOperation.AddMember("name", _SegmentConstructName)
+
+	CreateOperation_excluded = CreateOperation.AddMember("excluded", smithyprelude.Boolean)
+
+	CreateOperation_properties = CreateOperation.AddMember("properties", _EnrichedProperties)
+
+	CreateOperation_configuration = CreateOperation.AddMember("configuration", OperationConfigurationUnion)
+
 	DataReplicationError_error = DataReplicationError.AddMember("error", _DataReplicationErrorString)
 
 	DataReplicationError_rawError = DataReplicationError.AddMember("rawError", _LargeBoundedString)
@@ -5445,6 +6365,8 @@ func init() {
 	DataReplicationInfo_lastSnapshotDateTime = DataReplicationInfo.AddMember("lastSnapshotDateTime", _ISO8601DatetimeString)
 
 	DataReplicationInfo_replicatorId = DataReplicationInfo.AddMember("replicatorId", _ReplicatorID)
+
+	DataReplicationInfo_stagingOutpostArn = DataReplicationInfo.AddMember("stagingOutpostArn", _OutpostARN)
 
 	_DescribeJobsRequestFiltersJobIDs_member = _DescribeJobsRequestFiltersJobIDs.AddMember("member", _JobID)
 
@@ -5630,6 +6552,12 @@ func init() {
 
 	_ImportList_member = _ImportList.AddMember("member", ImportTask)
 
+	InsightMessage_code = InsightMessage.AddMember("code", _BoundedString)
+
+	InsightMessage_message = InsightMessage.AddMember("message", _InsightMessageText)
+
+	InsightMessage_topic = InsightMessage.AddMember("topic", _BoundedString)
+
 	InternalServerException_message = InternalServerException.AddMember("message", _LargeBoundedString)
 
 	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _PositiveInteger, &smithytraits.HTTPHeader{Name: "Retry-After"})
@@ -5776,6 +6704,8 @@ func init() {
 
 	LaunchConfigurationTemplate_mapAutoTaggingMpeID = LaunchConfigurationTemplate.AddMember("mapAutoTaggingMpeID", _TagValue)
 
+	LaunchConfigurationTemplate_mapAutoTaggingKey = LaunchConfigurationTemplate.AddMember("mapAutoTaggingKey", _TagKey)
+
 	LaunchConfigurationTemplate_tags = LaunchConfigurationTemplate.AddMember("tags", _TagsMap)
 
 	LaunchConfigurationTemplate_ec2LaunchTemplateID = LaunchConfigurationTemplate.AddMember("ec2LaunchTemplateID", _EC2LaunchConfigurationTemplateID)
@@ -5910,6 +6840,10 @@ func init() {
 
 	ListNetworkMigrationExecutionRequestFilters_networkMigrationExecutionStatuses = ListNetworkMigrationExecutionRequestFilters.AddMember("networkMigrationExecutionStatuses", _NetworkMigrationExecutionStatusesFilter)
 
+	_ListNetworkMigrationInsightsTypesFilter_member = _ListNetworkMigrationInsightsTypesFilter.AddMember("member", _InsightType)
+
+	ListNetworkMigrationInsightsFilters_insightTypes = ListNetworkMigrationInsightsFilters.AddMember("insightTypes", _ListNetworkMigrationInsightsTypesFilter)
+
 	_ListNetworkMigrationMapperSegmentConstructsIDsFilter_member = _ListNetworkMigrationMapperSegmentConstructsIDsFilter.AddMember("member", _ConstructID)
 
 	_ListNetworkMigrationMapperSegmentConstructTypesFilter_member = _ListNetworkMigrationMapperSegmentConstructTypesFilter.AddMember("member", _NetworkMigrationMapperSegmentConstructType)
@@ -5929,6 +6863,26 @@ func init() {
 	_ListNetworkMigrationMappingUpdatesIDsFilter_member = _ListNetworkMigrationMappingUpdatesIDsFilter.AddMember("member", _NetworkMigrationJobID)
 
 	ListNetworkMigrationMappingUpdatesFilters_jobIDs = ListNetworkMigrationMappingUpdatesFilters.AddMember("jobIDs", _ListNetworkMigrationMappingUpdatesIDsFilter)
+
+	_SourceServerArnsFilter_member = _SourceServerArnsFilter.AddMember("member", _SourceServerArn)
+
+	_RemoteSourceActionArnsFilter_member = _RemoteSourceActionArnsFilter.AddMember("member", _RemoteSourceActionArn)
+
+	_RemoteSourceActionInvocationStatusesFilter_member = _RemoteSourceActionInvocationStatusesFilter.AddMember("member", _RemoteSourceActionInvocationStatus)
+
+	ListRemoteSourceActionInvocationsRequestFilters_sourceServerArns = ListRemoteSourceActionInvocationsRequestFilters.AddMember("sourceServerArns", _SourceServerArnsFilter)
+
+	ListRemoteSourceActionInvocationsRequestFilters_remoteSourceActionArns = ListRemoteSourceActionInvocationsRequestFilters.AddMember("remoteSourceActionArns", _RemoteSourceActionArnsFilter)
+
+	ListRemoteSourceActionInvocationsRequestFilters_statuses = ListRemoteSourceActionInvocationsRequestFilters.AddMember("statuses", _RemoteSourceActionInvocationStatusesFilter)
+
+	_RemoteSourceActionJobIDsFilter_member = _RemoteSourceActionJobIDsFilter.AddMember("member", _RemoteSourceActionJobID)
+
+	ListRemoteSourceActionJobsRequestFilters_remoteSourceActionJobIDs = ListRemoteSourceActionJobsRequestFilters.AddMember("remoteSourceActionJobIDs", _RemoteSourceActionJobIDsFilter)
+
+	_RemoteSourceActionIDsFilter_member = _RemoteSourceActionIDsFilter.AddMember("member", _RemoteSourceActionID)
+
+	ListRemoteSourceActionsRequestFilters_remoteSourceActionIDs = ListRemoteSourceActionsRequestFilters.AddMember("remoteSourceActionIDs", _RemoteSourceActionIDsFilter)
 
 	ListWavesRequestFilters_waveIDs = ListWavesRequestFilters.AddMember("waveIDs", _WaveIDsFilter)
 
@@ -6076,6 +7030,8 @@ func init() {
 
 	NetworkMigrationDefinitionSummary_scopeTags = NetworkMigrationDefinitionSummary.AddMember("scopeTags", _ScopeTagsMap)
 
+	NetworkMigrationDefinitionSummary_definitionType = NetworkMigrationDefinitionSummary.AddMember("definitionType", _DefinitionType)
+
 	_NetworkMigrationDefinitionSummariesList_member = _NetworkMigrationDefinitionSummariesList.AddMember("member", NetworkMigrationDefinitionSummary)
 
 	NetworkMigrationFailedResourceDetails_logicalID = NetworkMigrationFailedResourceDetails.AddMember("logicalID", _LogicalID)
@@ -6134,6 +7090,32 @@ func init() {
 
 	_NetworkMigrationExecutionsList_member = _NetworkMigrationExecutionsList.AddMember("member", NetworkMigrationExecution)
 
+	NetworkMigrationInsight_networkMigrationDefinitionID = NetworkMigrationInsight.AddMember("networkMigrationDefinitionID", _NetworkMigrationDefinitionID)
+
+	NetworkMigrationInsight_networkMigrationExecutionID = NetworkMigrationInsight.AddMember("networkMigrationExecutionID", _NetworkMigrationExecutionID)
+
+	NetworkMigrationInsight_producerID = NetworkMigrationInsight.AddMember("producerID", _InsightProducerID)
+
+	NetworkMigrationInsight_producerType = NetworkMigrationInsight.AddMember("producerType", _InsightProducerType)
+
+	NetworkMigrationInsight_producerName = NetworkMigrationInsight.AddMember("producerName", _InsightProducerName)
+
+	NetworkMigrationInsight_segmentID = NetworkMigrationInsight.AddMember("segmentID", _SegmentID)
+
+	NetworkMigrationInsight_constructID = NetworkMigrationInsight.AddMember("constructID", _ConstructID)
+
+	NetworkMigrationInsight_insightID = NetworkMigrationInsight.AddMember("insightID", _InsightID)
+
+	NetworkMigrationInsight_insightLevel = NetworkMigrationInsight.AddMember("insightLevel", _InsightLevel)
+
+	NetworkMigrationInsight_insightType = NetworkMigrationInsight.AddMember("insightType", _InsightType)
+
+	NetworkMigrationInsight_insightMessage = NetworkMigrationInsight.AddMember("insightMessage", InsightMessage)
+
+	NetworkMigrationInsight_createdAt = NetworkMigrationInsight.AddMember("createdAt", smithyprelude.Timestamp)
+
+	_NetworkMigrationInsightsList_member = _NetworkMigrationInsightsList.AddMember("member", NetworkMigrationInsight)
+
 	NetworkMigrationMapperSegment_jobID = NetworkMigrationMapperSegment.AddMember("jobID", _NetworkMigrationJobID)
 
 	NetworkMigrationMapperSegment_networkMigrationExecutionID = NetworkMigrationMapperSegment.AddMember("networkMigrationExecutionID", _NetworkMigrationExecutionID)
@@ -6181,6 +7163,10 @@ func init() {
 	NetworkMigrationMapperSegmentConstruct_updatedAt = NetworkMigrationMapperSegmentConstruct.AddMember("updatedAt", smithyprelude.Timestamp)
 
 	NetworkMigrationMapperSegmentConstruct_properties = NetworkMigrationMapperSegmentConstruct.AddMember("properties", _ConstructProperties)
+
+	NetworkMigrationMapperSegmentConstruct_enrichedProperties = NetworkMigrationMapperSegmentConstruct.AddMember("enrichedProperties", _EnrichedProperties)
+
+	NetworkMigrationMapperSegmentConstruct_configuration = NetworkMigrationMapperSegmentConstruct.AddMember("configuration", OperationConfigurationUnion)
 
 	_NetworkMigrationMapperSegmentConstructs_member = _NetworkMigrationMapperSegmentConstructs.AddMember("member", NetworkMigrationMapperSegmentConstruct)
 
@@ -6230,6 +7216,18 @@ func init() {
 
 	UpdateOperation_properties = UpdateOperation.AddMember("properties", _ConstructProperties)
 
+	_PropertiesToDelete_member = _PropertiesToDelete.AddMember("member", _EnrichedPropertyKey)
+
+	UpdateOperationV2_name = UpdateOperationV2.AddMember("name", _SegmentConstructName)
+
+	UpdateOperationV2_excluded = UpdateOperationV2.AddMember("excluded", smithyprelude.Boolean)
+
+	UpdateOperationV2_properties = UpdateOperationV2.AddMember("properties", _EnrichedProperties)
+
+	UpdateOperationV2_propertiesToDelete = UpdateOperationV2.AddMember("propertiesToDelete", _PropertiesToDelete)
+
+	UpdateOperationV2_configuration = UpdateOperationV2.AddMember("configuration", OperationConfigurationUnion)
+
 	OperationUnion_merge = OperationUnion.AddMember("merge", MergeOperation)
 
 	OperationUnion_split = OperationUnion.AddMember("split", SplitOperation)
@@ -6238,7 +7236,81 @@ func init() {
 
 	OperationUnion_update = OperationUnion.AddMember("update", UpdateOperation)
 
+	OperationUnion_updateV2 = OperationUnion.AddMember("updateV2", UpdateOperationV2)
+
+	OperationUnion_create = OperationUnion.AddMember("create", CreateOperation)
+
 	OS_fullString = OS.AddMember("fullString", _BoundedString)
+
+	RemoteSourceAction_remoteSourceActionID = RemoteSourceAction.AddMember("remoteSourceActionID", _RemoteSourceActionID)
+
+	RemoteSourceAction_arn = RemoteSourceAction.AddMember("arn", _ARN)
+
+	RemoteSourceAction_name = RemoteSourceAction.AddMember("name", _RemoteSourceActionName)
+
+	RemoteSourceAction_description = RemoteSourceAction.AddMember("description", _RemoteSourceActionDescription)
+
+	RemoteSourceAction_ssmParameterName = RemoteSourceAction.AddMember("ssmParameterName", _SsmParameterStoreParameterName)
+
+	RemoteSourceAction_timeoutSeconds = RemoteSourceAction.AddMember("timeoutSeconds", _RemoteSourceActionTimeoutSeconds)
+
+	RemoteSourceAction_operatingSystem = RemoteSourceAction.AddMember("operatingSystem", _OperatingSystemString)
+
+	RemoteSourceAction_tags = RemoteSourceAction.AddMember("tags", _TagsMap)
+
+	_RemoteSourceActionArns_member = _RemoteSourceActionArns.AddMember("member", _RemoteSourceActionArn)
+
+	RemoteSourceActionInvocation_sourceServerArn = RemoteSourceActionInvocation.AddMember("sourceServerArn", _SourceServerArn)
+
+	RemoteSourceActionInvocation_remoteSourceActionArn = RemoteSourceActionInvocation.AddMember("remoteSourceActionArn", _RemoteSourceActionArn)
+
+	RemoteSourceActionInvocation_ssmCommandInvocationID = RemoteSourceActionInvocation.AddMember("ssmCommandInvocationID", _SsmCommandInvocationID)
+
+	RemoteSourceActionInvocation_status = RemoteSourceActionInvocation.AddMember("status", _RemoteSourceActionInvocationStatus)
+
+	RemoteSourceActionInvocation_startedAt = RemoteSourceActionInvocation.AddMember("startedAt", smithyprelude.Timestamp)
+
+	RemoteSourceActionInvocation_endedAt = RemoteSourceActionInvocation.AddMember("endedAt", smithyprelude.Timestamp)
+
+	RemoteSourceActionInvocationResult_remoteSourceActionID = RemoteSourceActionInvocationResult.AddMember("remoteSourceActionID", _RemoteSourceActionID)
+
+	RemoteSourceActionInvocationResult_connectorOwnerAccountID = RemoteSourceActionInvocationResult.AddMember("connectorOwnerAccountID", _AccountID)
+
+	RemoteSourceActionInvocationResult_status = RemoteSourceActionInvocationResult.AddMember("status", _RemoteSourceActionInvocationStatus)
+
+	RemoteSourceActionInvocationResult_startedAt = RemoteSourceActionInvocationResult.AddMember("startedAt", smithyprelude.Timestamp)
+
+	RemoteSourceActionInvocationResult_endedAt = RemoteSourceActionInvocationResult.AddMember("endedAt", smithyprelude.Timestamp)
+
+	_RemoteSourceActionInvocationResultsList_member = _RemoteSourceActionInvocationResultsList.AddMember("member", RemoteSourceActionInvocationResult)
+
+	_RemoteSourceActionInvocationsList_member = _RemoteSourceActionInvocationsList.AddMember("member", RemoteSourceActionInvocation)
+
+	_SourceServerArns_member = _SourceServerArns.AddMember("member", _SourceServerArn)
+
+	RemoteSourceActionJob_remoteSourceActionJobID = RemoteSourceActionJob.AddMember("remoteSourceActionJobID", _RemoteSourceActionJobID)
+
+	RemoteSourceActionJob_arn = RemoteSourceActionJob.AddMember("arn", _ARN)
+
+	RemoteSourceActionJob_status = RemoteSourceActionJob.AddMember("status", _RemoteSourceActionJobStatus)
+
+	RemoteSourceActionJob_sourceServerArns = RemoteSourceActionJob.AddMember("sourceServerArns", _SourceServerArns)
+
+	RemoteSourceActionJob_remoteSourceActionArns = RemoteSourceActionJob.AddMember("remoteSourceActionArns", _RemoteSourceActionArns)
+
+	RemoteSourceActionJob_connectorArn = RemoteSourceActionJob.AddMember("connectorArn", _ConnectorArn)
+
+	RemoteSourceActionJob_startedAt = RemoteSourceActionJob.AddMember("startedAt", smithyprelude.Timestamp)
+
+	RemoteSourceActionJob_endedAt = RemoteSourceActionJob.AddMember("endedAt", smithyprelude.Timestamp)
+
+	RemoteSourceActionJob_statusReason = RemoteSourceActionJob.AddMember("statusReason", _LargeBoundedString)
+
+	RemoteSourceActionJob_tags = RemoteSourceActionJob.AddMember("tags", _TagsMap)
+
+	_RemoteSourceActionJobsList_member = _RemoteSourceActionJobsList.AddMember("member", RemoteSourceActionJob)
+
+	_RemoteSourceActionsList_member = _RemoteSourceActionsList.AddMember("member", RemoteSourceAction)
 
 	ReplicationConfigurationReplicatedDisk_deviceName = ReplicationConfigurationReplicatedDisk.AddMember("deviceName", _BoundedString)
 
@@ -6294,6 +7366,8 @@ func init() {
 
 	ReplicationConfigurationTemplate_storeSnapshotOnLocalZone = ReplicationConfigurationTemplate.AddMember("storeSnapshotOnLocalZone", smithyprelude.Boolean)
 
+	ReplicationConfigurationTemplate_outpostSnapshotLocation = ReplicationConfigurationTemplate.AddMember("outpostSnapshotLocation", _OutpostSnapshotLocation)
+
 	ReplicationConfigurationTemplate_storageConfiguration = ReplicationConfigurationTemplate.AddMember("storageConfiguration", StorageConfiguration)
 
 	_ReplicationConfigurationTemplateIDs_member = _ReplicationConfigurationTemplateIDs.AddMember("member", _ReplicationConfigurationTemplateID)
@@ -6307,6 +7381,28 @@ func init() {
 	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _LargeBoundedString)
 
 	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _LargeBoundedString)
+
+	SegmentCreateOperation_name = SegmentCreateOperation.AddMember("name", _SegmentName)
+
+	SegmentCreateOperation_description = SegmentCreateOperation.AddMember("description", _SegmentDescription)
+
+	SegmentCreateOperation_targetAccount = SegmentCreateOperation.AddMember("targetAccount", _AccountID)
+
+	SegmentCreateOperation_scopeTags = SegmentCreateOperation.AddMember("scopeTags", _ScopeTagsMap)
+
+	SegmentUpdateOperation_name = SegmentUpdateOperation.AddMember("name", _SegmentName)
+
+	SegmentUpdateOperation_description = SegmentUpdateOperation.AddMember("description", _SegmentDescription)
+
+	SegmentUpdateOperation_targetAccount = SegmentUpdateOperation.AddMember("targetAccount", _AccountID)
+
+	SegmentUpdateOperation_scopeTags = SegmentUpdateOperation.AddMember("scopeTags", _ScopeTagsMap)
+
+	SegmentOperation_create = SegmentOperation.AddMember("create", SegmentCreateOperation)
+
+	SegmentOperation_update = SegmentOperation.AddMember("update", SegmentUpdateOperation)
+
+	SegmentOperation_delete = SegmentOperation.AddMember("delete", SegmentDeleteOperation)
 
 	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _LargeBoundedString)
 
@@ -6412,19 +7508,37 @@ func init() {
 
 	_SourceServersList_member = _SourceServersList.AddMember("member", SourceServer)
 
+	SourceServerVolumeConfiguration_volumeType = SourceServerVolumeConfiguration.AddMember("volumeType", _VolumeType)
+
+	SourceServerVolumeConfiguration_iops = SourceServerVolumeConfiguration.AddMember("iops", _Iops)
+
+	SourceServerVolumeConfiguration_throughput = SourceServerVolumeConfiguration.AddMember("throughput", _Throughput)
+
+	SourceServerVolumeConfiguration_volumeInitializationRate = SourceServerVolumeConfiguration.AddMember("volumeInitializationRate", _VolumeInitializationRate)
+
+	SourceServerVolumeConfiguration_deleteOnTermination = SourceServerVolumeConfiguration.AddMember("deleteOnTermination", _DeleteOnTermination)
+
 	_StartCutoverRequestSourceServerIDs_member = _StartCutoverRequestSourceServerIDs.AddMember("member", _SourceServerID)
 
 	StartNetworkMigrationMappingUpdateConstruct_segmentID = StartNetworkMigrationMappingUpdateConstruct.AddMember("segmentID", _SegmentID)
 
+	StartNetworkMigrationMappingUpdateConstruct_segmentLogicalID = StartNetworkMigrationMappingUpdateConstruct.AddMember("segmentLogicalID", _LogicalID)
+
 	StartNetworkMigrationMappingUpdateConstruct_constructID = StartNetworkMigrationMappingUpdateConstruct.AddMember("constructID", _ConstructID)
 
 	StartNetworkMigrationMappingUpdateConstruct_constructType = StartNetworkMigrationMappingUpdateConstruct.AddMember("constructType", _NetworkMigrationMapperSegmentConstructType)
+
+	StartNetworkMigrationMappingUpdateConstruct_constructLogicalID = StartNetworkMigrationMappingUpdateConstruct.AddMember("constructLogicalID", _ConstructLogicalID)
 
 	StartNetworkMigrationMappingUpdateConstruct_operation = StartNetworkMigrationMappingUpdateConstruct.AddMember("operation", OperationUnion)
 
 	_StartNetworkMigrationMappingUpdateConstructs_member = _StartNetworkMigrationMappingUpdateConstructs.AddMember("member", StartNetworkMigrationMappingUpdateConstruct)
 
 	StartNetworkMigrationMappingUpdateSegment_segmentID = StartNetworkMigrationMappingUpdateSegment.AddMember("segmentID", _SegmentID)
+
+	StartNetworkMigrationMappingUpdateSegment_segmentLogicalID = StartNetworkMigrationMappingUpdateSegment.AddMember("segmentLogicalID", _SegmentLogicalID)
+
+	StartNetworkMigrationMappingUpdateSegment_operation = StartNetworkMigrationMappingUpdateSegment.AddMember("operation", SegmentOperation)
 
 	StartNetworkMigrationMappingUpdateSegment_targetAccount = StartNetworkMigrationMappingUpdateSegment.AddMember("targetAccount", _AccountID)
 
@@ -6614,6 +7728,8 @@ func init() {
 
 	CreateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID = CreateLaunchConfigurationTemplateRequest.AddMember("mapAutoTaggingMpeID", _TagValue)
 
+	CreateLaunchConfigurationTemplateRequest_mapAutoTaggingKey = CreateLaunchConfigurationTemplateRequest.AddMember("mapAutoTaggingKey", _TagKey)
+
 	CreateLaunchConfigurationTemplateRequest_tags = CreateLaunchConfigurationTemplateRequest.AddMember("tags", _TagsMap)
 
 	CreateLaunchConfigurationTemplateRequest_launchDisposition = CreateLaunchConfigurationTemplateRequest.AddMember("launchDisposition", _LaunchDisposition)
@@ -6648,6 +7764,8 @@ func init() {
 
 	CreateNetworkMigrationDefinitionRequest_sourceConfigurations = CreateNetworkMigrationDefinitionRequest.AddMember("sourceConfigurations", _SourceConfigurationList)
 
+	CreateNetworkMigrationDefinitionRequest_definitionType = CreateNetworkMigrationDefinitionRequest.AddMember("definitionType", _DefinitionType)
+
 	CreateNetworkMigrationDefinitionRequest_targetS3Configuration = CreateNetworkMigrationDefinitionRequest.AddMember("targetS3Configuration", TargetS3Configuration)
 
 	CreateNetworkMigrationDefinitionRequest_targetNetwork = CreateNetworkMigrationDefinitionRequest.AddMember("targetNetwork", TargetNetwork)
@@ -6672,6 +7790,8 @@ func init() {
 
 	NetworkMigrationDefinition_sourceConfigurations = NetworkMigrationDefinition.AddMember("sourceConfigurations", _SourceConfigurationList)
 
+	NetworkMigrationDefinition_definitionType = NetworkMigrationDefinition.AddMember("definitionType", _DefinitionType)
+
 	NetworkMigrationDefinition_targetS3Configuration = NetworkMigrationDefinition.AddMember("targetS3Configuration", TargetS3Configuration)
 
 	NetworkMigrationDefinition_targetNetwork = NetworkMigrationDefinition.AddMember("targetNetwork", TargetNetwork)
@@ -6689,6 +7809,36 @@ func init() {
 	NetworkMigrationDefinition_tags = NetworkMigrationDefinition.AddMember("tags", _TagsMap)
 
 	NetworkMigrationDefinition_scopeTags = NetworkMigrationDefinition.AddMember("scopeTags", _ScopeTagsMap)
+
+	CreateRemoteSourceActionRequest_name = CreateRemoteSourceActionRequest.AddMember("name", _RemoteSourceActionName)
+
+	CreateRemoteSourceActionRequest_description = CreateRemoteSourceActionRequest.AddMember("description", _RemoteSourceActionDescription)
+
+	CreateRemoteSourceActionRequest_ssmParameterName = CreateRemoteSourceActionRequest.AddMember("ssmParameterName", _SsmParameterStoreParameterName)
+
+	CreateRemoteSourceActionRequest_timeoutSeconds = CreateRemoteSourceActionRequest.AddMember("timeoutSeconds", _RemoteSourceActionTimeoutSeconds)
+
+	CreateRemoteSourceActionRequest_operatingSystem = CreateRemoteSourceActionRequest.AddMember("operatingSystem", _RemoteSourceActionOperatingSystem)
+
+	CreateRemoteSourceActionRequest_tags = CreateRemoteSourceActionRequest.AddMember("tags", _TagsMap)
+
+	CreateRemoteSourceActionRequest_accountID = CreateRemoteSourceActionRequest.AddMember("accountID", _AccountID)
+
+	CreateRemoteSourceActionResponse_remoteSourceActionID = CreateRemoteSourceActionResponse.AddMember("remoteSourceActionID", _RemoteSourceActionID)
+
+	CreateRemoteSourceActionResponse_arn = CreateRemoteSourceActionResponse.AddMember("arn", _ARN)
+
+	CreateRemoteSourceActionResponse_name = CreateRemoteSourceActionResponse.AddMember("name", _RemoteSourceActionName)
+
+	CreateRemoteSourceActionResponse_description = CreateRemoteSourceActionResponse.AddMember("description", _RemoteSourceActionDescription)
+
+	CreateRemoteSourceActionResponse_ssmParameterName = CreateRemoteSourceActionResponse.AddMember("ssmParameterName", _SsmParameterStoreParameterName)
+
+	CreateRemoteSourceActionResponse_timeoutSeconds = CreateRemoteSourceActionResponse.AddMember("timeoutSeconds", _RemoteSourceActionTimeoutSeconds)
+
+	CreateRemoteSourceActionResponse_operatingSystem = CreateRemoteSourceActionResponse.AddMember("operatingSystem", _OperatingSystemString)
+
+	CreateRemoteSourceActionResponse_tags = CreateRemoteSourceActionResponse.AddMember("tags", _TagsMap)
 
 	CreateReplicationConfigurationTemplateRequest_stagingAreaSubnetId = CreateReplicationConfigurationTemplateRequest.AddMember("stagingAreaSubnetId", _SubnetID)
 
@@ -6722,6 +7872,8 @@ func init() {
 
 	CreateReplicationConfigurationTemplateRequest_storeSnapshotOnLocalZone = CreateReplicationConfigurationTemplateRequest.AddMember("storeSnapshotOnLocalZone", smithyprelude.Boolean)
 
+	CreateReplicationConfigurationTemplateRequest_outpostSnapshotLocation = CreateReplicationConfigurationTemplateRequest.AddMember("outpostSnapshotLocation", _OutpostSnapshotLocation)
+
 	CreateReplicationConfigurationTemplateRequest_storageConfiguration = CreateReplicationConfigurationTemplateRequest.AddMember("storageConfiguration", StorageConfiguration)
 
 	CreateWaveRequest_name = CreateWaveRequest.AddMember("name", _WaveName)
@@ -6745,6 +7897,10 @@ func init() {
 	DeleteLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = DeleteLaunchConfigurationTemplateRequest.AddMember("launchConfigurationTemplateID", _LaunchConfigurationTemplateID)
 
 	DeleteNetworkMigrationDefinitionRequest_networkMigrationDefinitionID = DeleteNetworkMigrationDefinitionRequest.AddMember("networkMigrationDefinitionID", _NetworkMigrationDefinitionID)
+
+	DeleteRemoteSourceActionRequest_remoteSourceActionID = DeleteRemoteSourceActionRequest.AddMember("remoteSourceActionID", _RemoteSourceActionID)
+
+	DeleteRemoteSourceActionRequest_accountID = DeleteRemoteSourceActionRequest.AddMember("accountID", _AccountID)
 
 	DeleteReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = DeleteReplicationConfigurationTemplateRequest.AddMember("replicationConfigurationTemplateID", _ReplicationConfigurationTemplateID)
 
@@ -6842,6 +7998,18 @@ func init() {
 
 	FinalizeCutoverRequest_accountID = FinalizeCutoverRequest.AddMember("accountID", _AccountID)
 
+	GetLaunchConfigurationDefaultsRequest_sourceServerID = GetLaunchConfigurationDefaultsRequest.AddMember("sourceServerID", _SourceServerID)
+
+	GetLaunchConfigurationDefaultsRequest_accountID = GetLaunchConfigurationDefaultsRequest.AddMember("accountID", _AccountID)
+
+	GetLaunchConfigurationDefaultsResponse_sourceServerID = GetLaunchConfigurationDefaultsResponse.AddMember("sourceServerID", _SourceServerID)
+
+	GetLaunchConfigurationDefaultsResponse_smallVolumeMaxSize = GetLaunchConfigurationDefaultsResponse.AddMember("smallVolumeMaxSize", _PositiveInteger)
+
+	GetLaunchConfigurationDefaultsResponse_smallVolumeConfiguration = GetLaunchConfigurationDefaultsResponse.AddMember("smallVolumeConfiguration", SourceServerVolumeConfiguration)
+
+	GetLaunchConfigurationDefaultsResponse_largeVolumeConfiguration = GetLaunchConfigurationDefaultsResponse.AddMember("largeVolumeConfiguration", SourceServerVolumeConfiguration)
+
 	GetLaunchConfigurationRequest_sourceServerID = GetLaunchConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
 
 	GetLaunchConfigurationRequest_accountID = GetLaunchConfigurationRequest.AddMember("accountID", _AccountID)
@@ -6869,6 +8037,8 @@ func init() {
 	LaunchConfiguration_enableMapAutoTagging = LaunchConfiguration.AddMember("enableMapAutoTagging", smithyprelude.Boolean)
 
 	LaunchConfiguration_mapAutoTaggingMpeID = LaunchConfiguration.AddMember("mapAutoTaggingMpeID", _TagValue)
+
+	LaunchConfiguration_mapAutoTaggingKey = LaunchConfiguration.AddMember("mapAutoTaggingKey", _TagKey)
 
 	GetNetworkMigrationDefinitionRequest_networkMigrationDefinitionID = GetNetworkMigrationDefinitionRequest.AddMember("networkMigrationDefinitionID", _NetworkMigrationDefinitionID)
 
@@ -6921,6 +8091,8 @@ func init() {
 	ReplicationConfiguration_internetProtocol = ReplicationConfiguration.AddMember("internetProtocol", _InternetProtocol)
 
 	ReplicationConfiguration_storeSnapshotOnLocalZone = ReplicationConfiguration.AddMember("storeSnapshotOnLocalZone", smithyprelude.Boolean)
+
+	ReplicationConfiguration_outpostSnapshotLocation = ReplicationConfiguration.AddMember("outpostSnapshotLocation", _OutpostSnapshotLocation)
 
 	ReplicationConfiguration_storageConfiguration = ReplicationConfiguration.AddMember("storageConfiguration", StorageConfiguration)
 
@@ -7108,6 +8280,26 @@ func init() {
 
 	ListNetworkMigrationExecutionsResponse_nextToken = ListNetworkMigrationExecutionsResponse.AddMember("nextToken", _PaginationToken)
 
+	ListNetworkMigrationInsightsRequest_networkMigrationDefinitionID = ListNetworkMigrationInsightsRequest.AddMember("networkMigrationDefinitionID", _NetworkMigrationDefinitionID)
+
+	ListNetworkMigrationInsightsRequest_networkMigrationExecutionID = ListNetworkMigrationInsightsRequest.AddMember("networkMigrationExecutionID", _NetworkMigrationExecutionID)
+
+	ListNetworkMigrationInsightsRequest_producerID = ListNetworkMigrationInsightsRequest.AddMember("producerID", _InsightProducerID)
+
+	ListNetworkMigrationInsightsRequest_segmentID = ListNetworkMigrationInsightsRequest.AddMember("segmentID", _SegmentID)
+
+	ListNetworkMigrationInsightsRequest_constructID = ListNetworkMigrationInsightsRequest.AddMember("constructID", _ConstructID)
+
+	ListNetworkMigrationInsightsRequest_filters = ListNetworkMigrationInsightsRequest.AddMember("filters", ListNetworkMigrationInsightsFilters)
+
+	ListNetworkMigrationInsightsRequest_maxResults = ListNetworkMigrationInsightsRequest.AddMember("maxResults", _MaxResultsType)
+
+	ListNetworkMigrationInsightsRequest_nextToken = ListNetworkMigrationInsightsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListNetworkMigrationInsightsResponse_items = ListNetworkMigrationInsightsResponse.AddMember("items", _NetworkMigrationInsightsList)
+
+	ListNetworkMigrationInsightsResponse_nextToken = ListNetworkMigrationInsightsResponse.AddMember("nextToken", _PaginationToken)
+
 	ListNetworkMigrationMapperSegmentConstructsRequest_networkMigrationExecutionID = ListNetworkMigrationMapperSegmentConstructsRequest.AddMember("networkMigrationExecutionID", _NetworkMigrationExecutionID)
 
 	ListNetworkMigrationMapperSegmentConstructsRequest_networkMigrationDefinitionID = ListNetworkMigrationMapperSegmentConstructsRequest.AddMember("networkMigrationDefinitionID", _NetworkMigrationDefinitionID)
@@ -7119,6 +8311,10 @@ func init() {
 	ListNetworkMigrationMapperSegmentConstructsRequest_maxResults = ListNetworkMigrationMapperSegmentConstructsRequest.AddMember("maxResults", _MaxResultsType)
 
 	ListNetworkMigrationMapperSegmentConstructsRequest_nextToken = ListNetworkMigrationMapperSegmentConstructsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListNetworkMigrationMapperSegmentConstructsRequest_includeEnrichedProperties = ListNetworkMigrationMapperSegmentConstructsRequest.AddMember("includeEnrichedProperties", smithyprelude.Boolean)
+
+	ListNetworkMigrationMapperSegmentConstructsRequest_includeConfiguration = ListNetworkMigrationMapperSegmentConstructsRequest.AddMember("includeConfiguration", smithyprelude.Boolean)
 
 	ListNetworkMigrationMapperSegmentConstructsResponse_items = ListNetworkMigrationMapperSegmentConstructsResponse.AddMember("items", _NetworkMigrationMapperSegmentConstructs)
 
@@ -7165,6 +8361,56 @@ func init() {
 	ListNetworkMigrationMappingUpdatesResponse_items = ListNetworkMigrationMappingUpdatesResponse.AddMember("items", _NetworkMigrationMappingUpdatesList)
 
 	ListNetworkMigrationMappingUpdatesResponse_nextToken = ListNetworkMigrationMappingUpdatesResponse.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionInvocationResultsRequest_sourceServerID = ListRemoteSourceActionInvocationResultsRequest.AddMember("sourceServerID", _SourceServerID)
+
+	ListRemoteSourceActionInvocationResultsRequest_maxResults = ListRemoteSourceActionInvocationResultsRequest.AddMember("maxResults", _MaxResultsType)
+
+	ListRemoteSourceActionInvocationResultsRequest_nextToken = ListRemoteSourceActionInvocationResultsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionInvocationResultsRequest_accountID = ListRemoteSourceActionInvocationResultsRequest.AddMember("accountID", _AccountID)
+
+	ListRemoteSourceActionInvocationResultsResponse_items = ListRemoteSourceActionInvocationResultsResponse.AddMember("items", _RemoteSourceActionInvocationResultsList)
+
+	ListRemoteSourceActionInvocationResultsResponse_nextToken = ListRemoteSourceActionInvocationResultsResponse.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionInvocationsRequest_remoteSourceActionJobID = ListRemoteSourceActionInvocationsRequest.AddMember("remoteSourceActionJobID", _RemoteSourceActionJobID)
+
+	ListRemoteSourceActionInvocationsRequest_filters = ListRemoteSourceActionInvocationsRequest.AddMember("filters", ListRemoteSourceActionInvocationsRequestFilters)
+
+	ListRemoteSourceActionInvocationsRequest_maxResults = ListRemoteSourceActionInvocationsRequest.AddMember("maxResults", _MaxResultsType)
+
+	ListRemoteSourceActionInvocationsRequest_nextToken = ListRemoteSourceActionInvocationsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionInvocationsRequest_accountID = ListRemoteSourceActionInvocationsRequest.AddMember("accountID", _AccountID)
+
+	ListRemoteSourceActionInvocationsResponse_items = ListRemoteSourceActionInvocationsResponse.AddMember("items", _RemoteSourceActionInvocationsList)
+
+	ListRemoteSourceActionInvocationsResponse_nextToken = ListRemoteSourceActionInvocationsResponse.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionJobsRequest_filters = ListRemoteSourceActionJobsRequest.AddMember("filters", ListRemoteSourceActionJobsRequestFilters)
+
+	ListRemoteSourceActionJobsRequest_maxResults = ListRemoteSourceActionJobsRequest.AddMember("maxResults", _MaxResultsType)
+
+	ListRemoteSourceActionJobsRequest_nextToken = ListRemoteSourceActionJobsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionJobsRequest_accountID = ListRemoteSourceActionJobsRequest.AddMember("accountID", _AccountID)
+
+	ListRemoteSourceActionJobsResponse_items = ListRemoteSourceActionJobsResponse.AddMember("items", _RemoteSourceActionJobsList)
+
+	ListRemoteSourceActionJobsResponse_nextToken = ListRemoteSourceActionJobsResponse.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionsRequest_filters = ListRemoteSourceActionsRequest.AddMember("filters", ListRemoteSourceActionsRequestFilters)
+
+	ListRemoteSourceActionsRequest_maxResults = ListRemoteSourceActionsRequest.AddMember("maxResults", _MaxResultsType)
+
+	ListRemoteSourceActionsRequest_nextToken = ListRemoteSourceActionsRequest.AddMember("nextToken", _PaginationToken)
+
+	ListRemoteSourceActionsRequest_accountID = ListRemoteSourceActionsRequest.AddMember("accountID", _AccountID)
+
+	ListRemoteSourceActionsResponse_items = ListRemoteSourceActionsResponse.AddMember("items", _RemoteSourceActionsList)
+
+	ListRemoteSourceActionsResponse_nextToken = ListRemoteSourceActionsResponse.AddMember("nextToken", _PaginationToken)
 
 	ListSourceServerActionsRequest_sourceServerID = ListSourceServerActionsRequest.AddMember("sourceServerID", _SourceServerID)
 
@@ -7364,6 +8610,20 @@ func init() {
 
 	StartNetworkMigrationMappingUpdateResponse_jobID = StartNetworkMigrationMappingUpdateResponse.AddMember("jobID", _NetworkMigrationJobID)
 
+	StartRemoteSourceActionJobRequest_remoteSourceActionArns = StartRemoteSourceActionJobRequest.AddMember("remoteSourceActionArns", _RemoteSourceActionArns)
+
+	StartRemoteSourceActionJobRequest_connectorArn = StartRemoteSourceActionJobRequest.AddMember("connectorArn", _ConnectorArn)
+
+	StartRemoteSourceActionJobRequest_sourceServerArns = StartRemoteSourceActionJobRequest.AddMember("sourceServerArns", _SourceServerArns)
+
+	StartRemoteSourceActionJobRequest_clientToken = StartRemoteSourceActionJobRequest.AddMember("clientToken", _ClientIdempotencyToken)
+
+	StartRemoteSourceActionJobRequest_tags = StartRemoteSourceActionJobRequest.AddMember("tags", _TagsMap)
+
+	StartRemoteSourceActionJobRequest_accountID = StartRemoteSourceActionJobRequest.AddMember("accountID", _AccountID)
+
+	StartRemoteSourceActionJobResponse_remoteSourceActionJob = StartRemoteSourceActionJobResponse.AddMember("remoteSourceActionJob", RemoteSourceActionJob)
+
 	StartReplicationRequest_sourceServerID = StartReplicationRequest.AddMember("sourceServerID", _SourceServerID)
 
 	StartReplicationRequest_accountID = StartReplicationRequest.AddMember("accountID", _AccountID)
@@ -7418,6 +8678,24 @@ func init() {
 
 	UpdateConnectorRequest_ssmCommandConfig = UpdateConnectorRequest.AddMember("ssmCommandConfig", ConnectorSsmCommandConfig)
 
+	UpdateLaunchConfigurationDefaultsRequest_sourceServerID = UpdateLaunchConfigurationDefaultsRequest.AddMember("sourceServerID", _SourceServerID)
+
+	UpdateLaunchConfigurationDefaultsRequest_accountID = UpdateLaunchConfigurationDefaultsRequest.AddMember("accountID", _AccountID)
+
+	UpdateLaunchConfigurationDefaultsRequest_smallVolumeMaxSize = UpdateLaunchConfigurationDefaultsRequest.AddMember("smallVolumeMaxSize", _PositiveInteger)
+
+	UpdateLaunchConfigurationDefaultsRequest_smallVolumeConfiguration = UpdateLaunchConfigurationDefaultsRequest.AddMember("smallVolumeConfiguration", SourceServerVolumeConfiguration)
+
+	UpdateLaunchConfigurationDefaultsRequest_largeVolumeConfiguration = UpdateLaunchConfigurationDefaultsRequest.AddMember("largeVolumeConfiguration", SourceServerVolumeConfiguration)
+
+	UpdateLaunchConfigurationDefaultsResponse_sourceServerID = UpdateLaunchConfigurationDefaultsResponse.AddMember("sourceServerID", _SourceServerID)
+
+	UpdateLaunchConfigurationDefaultsResponse_smallVolumeMaxSize = UpdateLaunchConfigurationDefaultsResponse.AddMember("smallVolumeMaxSize", _PositiveInteger)
+
+	UpdateLaunchConfigurationDefaultsResponse_smallVolumeConfiguration = UpdateLaunchConfigurationDefaultsResponse.AddMember("smallVolumeConfiguration", SourceServerVolumeConfiguration)
+
+	UpdateLaunchConfigurationDefaultsResponse_largeVolumeConfiguration = UpdateLaunchConfigurationDefaultsResponse.AddMember("largeVolumeConfiguration", SourceServerVolumeConfiguration)
+
 	UpdateLaunchConfigurationRequest_sourceServerID = UpdateLaunchConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
 
 	UpdateLaunchConfigurationRequest_name = UpdateLaunchConfigurationRequest.AddMember("name", _SmallBoundedString)
@@ -7440,6 +8718,8 @@ func init() {
 
 	UpdateLaunchConfigurationRequest_mapAutoTaggingMpeID = UpdateLaunchConfigurationRequest.AddMember("mapAutoTaggingMpeID", _TagValue)
 
+	UpdateLaunchConfigurationRequest_mapAutoTaggingKey = UpdateLaunchConfigurationRequest.AddMember("mapAutoTaggingKey", _TagKey)
+
 	UpdateLaunchConfigurationRequest_accountID = UpdateLaunchConfigurationRequest.AddMember("accountID", _AccountID)
 
 	UpdateLaunchConfigurationTemplateRequest_launchConfigurationTemplateID = UpdateLaunchConfigurationTemplateRequest.AddMember("launchConfigurationTemplateID", _LaunchConfigurationTemplateID)
@@ -7449,6 +8729,8 @@ func init() {
 	UpdateLaunchConfigurationTemplateRequest_enableMapAutoTagging = UpdateLaunchConfigurationTemplateRequest.AddMember("enableMapAutoTagging", smithyprelude.Boolean)
 
 	UpdateLaunchConfigurationTemplateRequest_mapAutoTaggingMpeID = UpdateLaunchConfigurationTemplateRequest.AddMember("mapAutoTaggingMpeID", _TagValue)
+
+	UpdateLaunchConfigurationTemplateRequest_mapAutoTaggingKey = UpdateLaunchConfigurationTemplateRequest.AddMember("mapAutoTaggingKey", _TagKey)
 
 	UpdateLaunchConfigurationTemplateRequest_launchDisposition = UpdateLaunchConfigurationTemplateRequest.AddMember("launchDisposition", _LaunchDisposition)
 
@@ -7494,6 +8776,8 @@ func init() {
 
 	UpdateNetworkMigrationDefinitionRequest_scopeTags = UpdateNetworkMigrationDefinitionRequest.AddMember("scopeTags", _ScopeTagsMap)
 
+	UpdateNetworkMigrationDefinitionRequest_definitionType = UpdateNetworkMigrationDefinitionRequest.AddMember("definitionType", _DefinitionType)
+
 	UpdateNetworkMigrationMapperSegmentRequest_networkMigrationDefinitionID = UpdateNetworkMigrationMapperSegmentRequest.AddMember("networkMigrationDefinitionID", _NetworkMigrationDefinitionID)
 
 	UpdateNetworkMigrationMapperSegmentRequest_networkMigrationExecutionID = UpdateNetworkMigrationMapperSegmentRequest.AddMember("networkMigrationExecutionID", _NetworkMigrationExecutionID)
@@ -7501,6 +8785,36 @@ func init() {
 	UpdateNetworkMigrationMapperSegmentRequest_segmentID = UpdateNetworkMigrationMapperSegmentRequest.AddMember("segmentID", _SegmentID)
 
 	UpdateNetworkMigrationMapperSegmentRequest_scopeTags = UpdateNetworkMigrationMapperSegmentRequest.AddMember("scopeTags", _ScopeTagsMap)
+
+	UpdateRemoteSourceActionRequest_remoteSourceActionID = UpdateRemoteSourceActionRequest.AddMember("remoteSourceActionID", _RemoteSourceActionID)
+
+	UpdateRemoteSourceActionRequest_name = UpdateRemoteSourceActionRequest.AddMember("name", _RemoteSourceActionName)
+
+	UpdateRemoteSourceActionRequest_description = UpdateRemoteSourceActionRequest.AddMember("description", _RemoteSourceActionDescription)
+
+	UpdateRemoteSourceActionRequest_ssmParameterName = UpdateRemoteSourceActionRequest.AddMember("ssmParameterName", _SsmParameterStoreParameterName)
+
+	UpdateRemoteSourceActionRequest_timeoutSeconds = UpdateRemoteSourceActionRequest.AddMember("timeoutSeconds", _RemoteSourceActionTimeoutSeconds)
+
+	UpdateRemoteSourceActionRequest_operatingSystem = UpdateRemoteSourceActionRequest.AddMember("operatingSystem", _RemoteSourceActionOperatingSystem)
+
+	UpdateRemoteSourceActionRequest_accountID = UpdateRemoteSourceActionRequest.AddMember("accountID", _AccountID)
+
+	UpdateRemoteSourceActionResponse_remoteSourceActionID = UpdateRemoteSourceActionResponse.AddMember("remoteSourceActionID", _RemoteSourceActionID)
+
+	UpdateRemoteSourceActionResponse_arn = UpdateRemoteSourceActionResponse.AddMember("arn", _ARN)
+
+	UpdateRemoteSourceActionResponse_name = UpdateRemoteSourceActionResponse.AddMember("name", _RemoteSourceActionName)
+
+	UpdateRemoteSourceActionResponse_description = UpdateRemoteSourceActionResponse.AddMember("description", _RemoteSourceActionDescription)
+
+	UpdateRemoteSourceActionResponse_ssmParameterName = UpdateRemoteSourceActionResponse.AddMember("ssmParameterName", _SsmParameterStoreParameterName)
+
+	UpdateRemoteSourceActionResponse_timeoutSeconds = UpdateRemoteSourceActionResponse.AddMember("timeoutSeconds", _RemoteSourceActionTimeoutSeconds)
+
+	UpdateRemoteSourceActionResponse_operatingSystem = UpdateRemoteSourceActionResponse.AddMember("operatingSystem", _OperatingSystemString)
+
+	UpdateRemoteSourceActionResponse_tags = UpdateRemoteSourceActionResponse.AddMember("tags", _TagsMap)
 
 	UpdateReplicationConfigurationRequest_sourceServerID = UpdateReplicationConfigurationRequest.AddMember("sourceServerID", _SourceServerID)
 
@@ -7540,6 +8854,8 @@ func init() {
 
 	UpdateReplicationConfigurationRequest_storeSnapshotOnLocalZone = UpdateReplicationConfigurationRequest.AddMember("storeSnapshotOnLocalZone", smithyprelude.Boolean)
 
+	UpdateReplicationConfigurationRequest_outpostSnapshotLocation = UpdateReplicationConfigurationRequest.AddMember("outpostSnapshotLocation", _OutpostSnapshotLocation)
+
 	UpdateReplicationConfigurationRequest_storageConfiguration = UpdateReplicationConfigurationRequest.AddMember("storageConfiguration", StorageConfiguration)
 
 	UpdateReplicationConfigurationTemplateRequest_replicationConfigurationTemplateID = UpdateReplicationConfigurationTemplateRequest.AddMember("replicationConfigurationTemplateID", _ReplicationConfigurationTemplateID)
@@ -7575,6 +8891,8 @@ func init() {
 	UpdateReplicationConfigurationTemplateRequest_internetProtocol = UpdateReplicationConfigurationTemplateRequest.AddMember("internetProtocol", _InternetProtocol)
 
 	UpdateReplicationConfigurationTemplateRequest_storeSnapshotOnLocalZone = UpdateReplicationConfigurationTemplateRequest.AddMember("storeSnapshotOnLocalZone", smithyprelude.Boolean)
+
+	UpdateReplicationConfigurationTemplateRequest_outpostSnapshotLocation = UpdateReplicationConfigurationTemplateRequest.AddMember("outpostSnapshotLocation", _OutpostSnapshotLocation)
 
 	UpdateReplicationConfigurationTemplateRequest_storageConfiguration = UpdateReplicationConfigurationTemplateRequest.AddMember("storageConfiguration", StorageConfiguration)
 

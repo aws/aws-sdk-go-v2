@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.ReceiveDeadLetterQueueRecords
+
+{"QueueRecords":[{"ApproximateArrivalTimestamp":946684800,"Data":"YmxvYg==","FirstReceiveTimestamp":946684800,"PartitionKey":"__PartitionKey__","ReceiptHandle":"__ReceiptHandle__","ReceiveCount":1,"RecordId":"__RecordId__"},{"ApproximateArrivalTimestamp":946684800,"Data":"YmxvYg==","FirstReceiveTimestamp":946684800,"PartitionKey":"__PartitionKey__","ReceiptHandle":"__ReceiptHandle__","ReceiveCount":1,"RecordId":"__RecordId__"}]}

@@ -572,6 +572,16 @@ func TestCheckResponseSnapshot_CompleteMigration(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CompleteMigration.response")
@@ -1674,6 +1684,16 @@ func TestCheckResponseSnapshot_CreateServerlessCache(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateServerlessCache.response")
@@ -1728,6 +1748,14 @@ func TestCheckResponseSnapshot_CreateServerlessCache(t *testing.T) {
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
 		ConnectionType:         types.ConnectionType("vpc"),
+		Integrations: []types.IntegrationRequest{
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2957,6 +2985,16 @@ func TestCheckResponseSnapshot_DeleteServerlessCache(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}
@@ -4858,6 +4896,16 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 					},
 					CutoverMode: ptr.String("__CutoverMode__"),
 				},
+				Integrations: []types.Integration{
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
+				},
 			},
 			{
 				ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
@@ -4909,6 +4957,16 @@ func TestCheckResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 						Port:    ptr.Int32(1),
 					},
 					CutoverMode: ptr.String("__CutoverMode__"),
+				},
+				Integrations: []types.Integration{
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
 				},
 			},
 		},
@@ -7203,6 +7261,16 @@ func TestCheckResponseSnapshot_ModifyServerlessCache(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyServerlessCache.response")
@@ -7408,6 +7476,16 @@ func TestCheckResponseSnapshot_PrepareMigration(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}
@@ -8135,6 +8213,16 @@ func TestCheckResponseSnapshot_StartMigration(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartMigration.response")
@@ -8221,6 +8309,16 @@ func TestCheckResponseSnapshot_StopMigration(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}
@@ -9969,6 +10067,14 @@ func TestCheckResponseSnapshot_Error_InvalidCredentialsException(t *testing.T) {
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
 		ConnectionType:         types.ConnectionType("vpc"),
+		Integrations: []types.IntegrationRequest{
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -11676,6 +11782,14 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheAlreadyExistsFault(t *testin
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
 		ConnectionType:         types.ConnectionType("vpc"),
+		Integrations: []types.IntegrationRequest{
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -11857,6 +11971,14 @@ func TestCheckResponseSnapshot_Error_ServerlessCacheQuotaForCustomerExceededFaul
 		DailySnapshotTime:      ptr.String("__DailySnapshotTime__"),
 		NetworkType:            types.NetworkType("ipv4"),
 		ConnectionType:         types.ConnectionType("vpc"),
+		Integrations: []types.IntegrationRequest{
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+			{
+				IntegrationType: types.IntegrationType("dynamodb"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

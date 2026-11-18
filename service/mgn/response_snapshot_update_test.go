@@ -9,6 +9,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/document"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
 	smithy "github.com/aws/smithy-go"
@@ -335,6 +336,7 @@ func TestUpdateResponseSnapshot_ChangeServerLifeCycleState(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -586,6 +588,7 @@ func TestUpdateResponseSnapshot_CreateLaunchConfigurationTemplate(t *testing.T) 
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -661,6 +664,7 @@ func TestUpdateResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -712,6 +716,39 @@ func TestUpdateResponseSnapshot_CreateNetworkMigrationDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateRemoteSourceAction(t *testing.T) {
+	want := &CreateRemoteSourceActionOutput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Arn:                  ptr.String("__Arn__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateRemoteSourceAction, schemas.CreateRemoteSourceActionResponse, schemas.CreateRemoteSourceActionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateRemoteSourceAction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateReplicationConfigurationTemplate(t *testing.T) {
 	want := &CreateReplicationConfigurationTemplateOutput{
 		ReplicationConfigurationTemplateID: ptr.String("__ReplicationConfigurationTemplateID__"),
@@ -739,6 +776,7 @@ func TestUpdateResponseSnapshot_CreateReplicationConfigurationTemplate(t *testin
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -913,6 +951,28 @@ func TestUpdateResponseSnapshot_DeleteNetworkMigrationDefinition(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteNetworkMigrationDefinition.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteRemoteSourceAction(t *testing.T) {
+	want := &DeleteRemoteSourceActionOutput{}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteRemoteSourceAction, schemas.DeleteRemoteSourceActionResponse, schemas.DeleteRemoteSourceActionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteRemoteSourceAction.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1443,6 +1503,7 @@ func TestUpdateResponseSnapshot_DescribeLaunchConfigurationTemplates(t *testing.
 				},
 				EnableMapAutoTagging: ptr.Bool(true),
 				MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+				MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1533,6 +1594,7 @@ func TestUpdateResponseSnapshot_DescribeLaunchConfigurationTemplates(t *testing.
 				},
 				EnableMapAutoTagging: ptr.Bool(true),
 				MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+				MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1616,6 +1678,7 @@ func TestUpdateResponseSnapshot_DescribeReplicationConfigurationTemplates(t *tes
 				},
 				InternetProtocol:         types.InternetProtocol("IPV4"),
 				StoreSnapshotOnLocalZone: ptr.Bool(true),
+				OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 				StorageConfiguration: &types.StorageConfiguration{
 					StorageType: types.StorageType("EBS"),
 					FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -1650,6 +1713,7 @@ func TestUpdateResponseSnapshot_DescribeReplicationConfigurationTemplates(t *tes
 				},
 				InternetProtocol:         types.InternetProtocol("IPV4"),
 				StoreSnapshotOnLocalZone: ptr.Bool(true),
+				OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 				StorageConfiguration: &types.StorageConfiguration{
 					StorageType: types.StorageType("EBS"),
 					FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -1753,6 +1817,7 @@ func TestUpdateResponseSnapshot_DescribeSourceServers(t *testing.T) {
 					},
 					LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 					ReplicatorId:         ptr.String("__ReplicatorId__"),
+					StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 				},
 				LifeCycle: &types.LifeCycle{
 					AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -1917,6 +1982,7 @@ func TestUpdateResponseSnapshot_DescribeSourceServers(t *testing.T) {
 					},
 					LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 					ReplicatorId:         ptr.String("__ReplicatorId__"),
+					StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 				},
 				LifeCycle: &types.LifeCycle{
 					AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2203,6 +2269,7 @@ func TestUpdateResponseSnapshot_DisconnectFromService(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2388,6 +2455,7 @@ func TestUpdateResponseSnapshot_FinalizeCutover(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -2572,6 +2640,7 @@ func TestUpdateResponseSnapshot_GetLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 	}
 	proto := restjson1.New(schemas.ApplicationMigrationService)
 	opSchema := smithy.NewOperationSchema(schemas.GetLaunchConfiguration, schemas.LaunchConfiguration, schemas.LaunchConfiguration)
@@ -2589,6 +2658,45 @@ func TestUpdateResponseSnapshot_GetLaunchConfiguration(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetLaunchConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetLaunchConfigurationDefaults(t *testing.T) {
+	want := &GetLaunchConfigurationDefaultsOutput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.GetLaunchConfigurationDefaults, schemas.GetLaunchConfigurationDefaultsResponse, schemas.GetLaunchConfigurationDefaultsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetLaunchConfigurationDefaults.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2617,6 +2725,7 @@ func TestUpdateResponseSnapshot_GetNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -2682,6 +2791,27 @@ func TestUpdateResponseSnapshot_GetNetworkMigrationMapperSegmentConstruct(t *tes
 			Properties: map[string]string{
 				"key0": "__Value__",
 			},
+			EnrichedProperties: map[string]document.Interface{
+				"key0": document.NewLazyDocument("__Document__"),
+			},
+			Configuration: &types.OperationConfigurationUnionMemberSecurityGroup{
+				Value: types.SecurityGroupConfiguration{
+					Associations: &types.SecurityGroupAssociations{
+						Cidrs: []string{
+							"__Member__",
+							"__Member__",
+						},
+						VmUUIDs: []string{
+							"__Member__",
+							"__Member__",
+						},
+						UserProvidedIDs: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 	}
 	proto := restjson1.New(schemas.ApplicationMigrationService)
@@ -2744,6 +2874,7 @@ func TestUpdateResponseSnapshot_GetReplicationConfiguration(t *testing.T) {
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -3538,6 +3669,7 @@ func TestUpdateResponseSnapshot_ListNetworkMigrationDefinitions(t *testing.T) {
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
+				DefinitionType: types.DefinitionType("MIGRATION"),
 			},
 			{
 				NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
@@ -3550,6 +3682,7 @@ func TestUpdateResponseSnapshot_ListNetworkMigrationDefinitions(t *testing.T) {
 				ScopeTags: map[string]string{
 					"key0": "__Value__",
 				},
+				DefinitionType: types.DefinitionType("MIGRATION"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3732,6 +3865,68 @@ func TestUpdateResponseSnapshot_ListNetworkMigrationExecutions(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListNetworkMigrationInsights(t *testing.T) {
+	want := &ListNetworkMigrationInsightsOutput{
+		Items: []types.NetworkMigrationInsight{
+			{
+				NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+				NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+				ProducerID:                   ptr.String("__ProducerID__"),
+				ProducerType:                 types.InsightProducerType("JOB"),
+				ProducerName:                 types.InsightProducerName("MAPPING"),
+				SegmentID:                    ptr.String("__SegmentID__"),
+				ConstructID:                  ptr.String("__ConstructID__"),
+				InsightID:                    ptr.String("__InsightID__"),
+				InsightLevel:                 types.InsightLevel("RUN"),
+				InsightType:                  types.InsightType("INTENT_GAP"),
+				InsightMessage: &types.InsightMessage{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+					Topic:   ptr.String("__Topic__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				NetworkMigrationDefinitionID: ptr.String("__NetworkMigrationDefinitionID__"),
+				NetworkMigrationExecutionID:  ptr.String("__NetworkMigrationExecutionID__"),
+				ProducerID:                   ptr.String("__ProducerID__"),
+				ProducerType:                 types.InsightProducerType("JOB"),
+				ProducerName:                 types.InsightProducerName("MAPPING"),
+				SegmentID:                    ptr.String("__SegmentID__"),
+				ConstructID:                  ptr.String("__ConstructID__"),
+				InsightID:                    ptr.String("__InsightID__"),
+				InsightLevel:                 types.InsightLevel("RUN"),
+				InsightType:                  types.InsightType("INTENT_GAP"),
+				InsightMessage: &types.InsightMessage{
+					Code:    ptr.String("__Code__"),
+					Message: ptr.String("__Message__"),
+					Topic:   ptr.String("__Topic__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListNetworkMigrationInsights, schemas.ListNetworkMigrationInsightsResponse, schemas.ListNetworkMigrationInsightsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListNetworkMigrationInsights.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *testing.T) {
 	want := &ListNetworkMigrationMapperSegmentConstructsOutput{
 		Items: []types.NetworkMigrationMapperSegmentConstruct{
@@ -3747,6 +3942,27 @@ func TestUpdateResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *t
 				Properties: map[string]string{
 					"key0": "__Value__",
 				},
+				EnrichedProperties: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+				Configuration: &types.OperationConfigurationUnionMemberSecurityGroup{
+					Value: types.SecurityGroupConfiguration{
+						Associations: &types.SecurityGroupAssociations{
+							Cidrs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VmUUIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserProvidedIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 			{
 				ConstructID:   ptr.String("__ConstructID__"),
@@ -3759,6 +3975,27 @@ func TestUpdateResponseSnapshot_ListNetworkMigrationMapperSegmentConstructs(t *t
 				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Properties: map[string]string{
 					"key0": "__Value__",
+				},
+				EnrichedProperties: map[string]document.Interface{
+					"key0": document.NewLazyDocument("__Document__"),
+				},
+				Configuration: &types.OperationConfigurationUnionMemberSecurityGroup{
+					Value: types.SecurityGroupConfiguration{
+						Associations: &types.SecurityGroupAssociations{
+							Cidrs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							VmUUIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+							UserProvidedIDs: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 			},
 		},
@@ -3952,6 +4189,204 @@ func TestUpdateResponseSnapshot_ListNetworkMigrationMappings(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListNetworkMigrationMappings.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRemoteSourceActionInvocationResults(t *testing.T) {
+	want := &ListRemoteSourceActionInvocationResultsOutput{
+		Items: []types.RemoteSourceActionInvocationResult{
+			{
+				RemoteSourceActionID:    ptr.String("__RemoteSourceActionID__"),
+				ConnectorOwnerAccountID: ptr.String("__ConnectorOwnerAccountID__"),
+				Status:                  types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RemoteSourceActionID:    ptr.String("__RemoteSourceActionID__"),
+				ConnectorOwnerAccountID: ptr.String("__ConnectorOwnerAccountID__"),
+				Status:                  types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRemoteSourceActionInvocationResults, schemas.ListRemoteSourceActionInvocationResultsResponse, schemas.ListRemoteSourceActionInvocationResultsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRemoteSourceActionInvocationResults.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRemoteSourceActionInvocations(t *testing.T) {
+	want := &ListRemoteSourceActionInvocationsOutput{
+		Items: []types.RemoteSourceActionInvocation{
+			{
+				SourceServerArn:        ptr.String("__SourceServerArn__"),
+				RemoteSourceActionArn:  ptr.String("__RemoteSourceActionArn__"),
+				SsmCommandInvocationID: ptr.String("__SsmCommandInvocationID__"),
+				Status:                 types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				SourceServerArn:        ptr.String("__SourceServerArn__"),
+				RemoteSourceActionArn:  ptr.String("__RemoteSourceActionArn__"),
+				SsmCommandInvocationID: ptr.String("__SsmCommandInvocationID__"),
+				Status:                 types.RemoteSourceActionInvocationStatus("PENDING"),
+				StartedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRemoteSourceActionInvocations, schemas.ListRemoteSourceActionInvocationsResponse, schemas.ListRemoteSourceActionInvocationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRemoteSourceActionInvocations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRemoteSourceActionJobs(t *testing.T) {
+	want := &ListRemoteSourceActionJobsOutput{
+		Items: []types.RemoteSourceActionJob{
+			{
+				RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+				Arn:                     ptr.String("__Arn__"),
+				Status:                  types.RemoteSourceActionJobStatus("PENDING"),
+				SourceServerArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RemoteSourceActionArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorArn: ptr.String("__ConnectorArn__"),
+				StartedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason: ptr.String("__StatusReason__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+				Arn:                     ptr.String("__Arn__"),
+				Status:                  types.RemoteSourceActionJobStatus("PENDING"),
+				SourceServerArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				RemoteSourceActionArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ConnectorArn: ptr.String("__ConnectorArn__"),
+				StartedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StatusReason: ptr.String("__StatusReason__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRemoteSourceActionJobs, schemas.ListRemoteSourceActionJobsResponse, schemas.ListRemoteSourceActionJobsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRemoteSourceActionJobs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListRemoteSourceActions(t *testing.T) {
+	want := &ListRemoteSourceActionsOutput{
+		Items: []types.RemoteSourceAction{
+			{
+				RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+				Arn:                  ptr.String("__Arn__"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				SsmParameterName:     ptr.String("__SsmParameterName__"),
+				TimeoutSeconds:       ptr.Int32(1),
+				OperatingSystem:      ptr.String("__OperatingSystem__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+				Arn:                  ptr.String("__Arn__"),
+				Name:                 ptr.String("__Name__"),
+				Description:          ptr.String("__Description__"),
+				SsmParameterName:     ptr.String("__SsmParameterName__"),
+				TimeoutSeconds:       ptr.Int32(1),
+				OperatingSystem:      ptr.String("__OperatingSystem__"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListRemoteSourceActions, schemas.ListRemoteSourceActionsResponse, schemas.ListRemoteSourceActionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListRemoteSourceActions.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4286,6 +4721,7 @@ func TestUpdateResponseSnapshot_MarkAsArchived(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -4471,6 +4907,7 @@ func TestUpdateResponseSnapshot_PauseReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -4801,6 +5238,7 @@ func TestUpdateResponseSnapshot_ResumeReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -4986,6 +5424,7 @@ func TestUpdateResponseSnapshot_RetryDataReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -5513,6 +5952,49 @@ func TestUpdateResponseSnapshot_StartNetworkMigrationMappingUpdate(t *testing.T)
 	}
 }
 
+func TestUpdateResponseSnapshot_StartRemoteSourceActionJob(t *testing.T) {
+	want := &StartRemoteSourceActionJobOutput{
+		RemoteSourceActionJob: &types.RemoteSourceActionJob{
+			RemoteSourceActionJobID: ptr.String("__RemoteSourceActionJobID__"),
+			Arn:                     ptr.String("__Arn__"),
+			Status:                  types.RemoteSourceActionJobStatus("PENDING"),
+			SourceServerArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			RemoteSourceActionArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ConnectorArn: ptr.String("__ConnectorArn__"),
+			StartedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StatusReason: ptr.String("__StatusReason__"),
+			Tags: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.StartRemoteSourceActionJob, schemas.StartRemoteSourceActionJobResponse, schemas.StartRemoteSourceActionJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartRemoteSourceActionJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartReplication(t *testing.T) {
 	want := &StartReplicationOutput{
 		SourceServerID: ptr.String("__SourceServerID__"),
@@ -5583,6 +6065,7 @@ func TestUpdateResponseSnapshot_StartReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -5941,6 +6424,7 @@ func TestUpdateResponseSnapshot_StopReplication(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -6498,6 +6982,7 @@ func TestUpdateResponseSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 	}
 	proto := restjson1.New(schemas.ApplicationMigrationService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLaunchConfiguration, schemas.LaunchConfiguration, schemas.LaunchConfiguration)
@@ -6515,6 +7000,45 @@ func TestUpdateResponseSnapshot_UpdateLaunchConfiguration(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateLaunchConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateLaunchConfigurationDefaults(t *testing.T) {
+	want := &UpdateLaunchConfigurationDefaultsOutput{
+		SourceServerID:     ptr.String("__SourceServerID__"),
+		SmallVolumeMaxSize: 1,
+		SmallVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+		LargeVolumeConfiguration: &types.SourceServerVolumeConfiguration{
+			VolumeType:               types.VolumeType("io1"),
+			Iops:                     ptr.Int64(1),
+			Throughput:               ptr.Int64(1),
+			VolumeInitializationRate: ptr.Int64(1),
+			DeleteOnTermination:      types.DeleteOnTermination("ENABLED"),
+		},
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateLaunchConfigurationDefaults, schemas.UpdateLaunchConfigurationDefaultsResponse, schemas.UpdateLaunchConfigurationDefaultsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateLaunchConfigurationDefaults.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6579,6 +7103,7 @@ func TestUpdateResponseSnapshot_UpdateLaunchConfigurationTemplate(t *testing.T) 
 		},
 		EnableMapAutoTagging: ptr.Bool(true),
 		MapAutoTaggingMpeID:  ptr.String("__MapAutoTaggingMpeID__"),
+		MapAutoTaggingKey:    ptr.String("__MapAutoTaggingKey__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -6654,6 +7179,7 @@ func TestUpdateResponseSnapshot_UpdateNetworkMigrationDefinition(t *testing.T) {
 				},
 			},
 		},
+		DefinitionType: types.DefinitionType("MIGRATION"),
 		TargetS3Configuration: &types.TargetS3Configuration{
 			S3Bucket:      ptr.String("__S3Bucket__"),
 			S3BucketOwner: ptr.String("__S3BucketOwner__"),
@@ -6755,6 +7281,39 @@ func TestUpdateResponseSnapshot_UpdateNetworkMigrationMapperSegment(t *testing.T
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateRemoteSourceAction(t *testing.T) {
+	want := &UpdateRemoteSourceActionOutput{
+		RemoteSourceActionID: ptr.String("__RemoteSourceActionID__"),
+		Arn:                  ptr.String("__Arn__"),
+		Name:                 ptr.String("__Name__"),
+		Description:          ptr.String("__Description__"),
+		SsmParameterName:     ptr.String("__SsmParameterName__"),
+		TimeoutSeconds:       ptr.Int32(1),
+		OperatingSystem:      ptr.String("__OperatingSystem__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ApplicationMigrationService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateRemoteSourceAction, schemas.UpdateRemoteSourceActionResponse, schemas.UpdateRemoteSourceActionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateRemoteSourceAction.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 	want := &UpdateReplicationConfigurationOutput{
 		SourceServerID:                ptr.String("__SourceServerID__"),
@@ -6795,6 +7354,7 @@ func TestUpdateResponseSnapshot_UpdateReplicationConfiguration(t *testing.T) {
 		UseFipsEndpoint:          ptr.Bool(true),
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -6850,6 +7410,7 @@ func TestUpdateResponseSnapshot_UpdateReplicationConfigurationTemplate(t *testin
 		},
 		InternetProtocol:         types.InternetProtocol("IPV4"),
 		StoreSnapshotOnLocalZone: ptr.Bool(true),
+		OutpostSnapshotLocation:  types.OutpostSnapshotLocation("OUTPOST"),
 		StorageConfiguration: &types.StorageConfiguration{
 			StorageType: types.StorageType("EBS"),
 			FsxOntapConfiguration: &types.FsxOntapConfiguration{
@@ -6948,6 +7509,7 @@ func TestUpdateResponseSnapshot_UpdateSourceServer(t *testing.T) {
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),
@@ -7133,6 +7695,7 @@ func TestUpdateResponseSnapshot_UpdateSourceServerReplicationType(t *testing.T) 
 			},
 			LastSnapshotDateTime: ptr.String("__LastSnapshotDateTime__"),
 			ReplicatorId:         ptr.String("__ReplicatorId__"),
+			StagingOutpostArn:    ptr.String("__StagingOutpostArn__"),
 		},
 		LifeCycle: &types.LifeCycle{
 			AddedToServiceDateTime:     ptr.String("__AddedToServiceDateTime__"),

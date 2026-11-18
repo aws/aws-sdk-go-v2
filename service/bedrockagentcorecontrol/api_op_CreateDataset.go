@@ -38,18 +38,6 @@ type CreateDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	//  Versioned schema type governing the structure of examples. Immutable after
-	// creation.
-	//
-	// This member is required.
-	SchemaType types.DatasetSchemaType
-
-	//  Source of initial examples. Provide either inline examples or an S3 URI
-	// pointing to a JSONL file.
-	//
-	// This member is required.
-	Source types.DataSourceType
-
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If you don't specify this field, a value is randomly
 	// generated for you. If this token matches a previous request, the service ignores
@@ -63,6 +51,14 @@ type CreateDatasetInput struct {
 
 	//  Optional KMS key ARN for server-side encryption on service Amazon S3 writes.
 	KmsKeyArn *string
+
+	//  Versioned schema type governing the structure of examples. Immutable after
+	// creation.
+	SchemaType types.DatasetSchemaType
+
+	//  Source of initial examples. Provide either inline examples or an S3 URI
+	// pointing to a JSONL file.
+	Source types.DataSourceType
 
 	//  A map of tag keys and values to assign to the dataset.
 	Tags map[string]string

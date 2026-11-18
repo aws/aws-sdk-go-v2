@@ -13,7 +13,8 @@ import (
 // Retrieves billing preferences for the specified feature. Each feature controls
 // a distinct billing capability: which accounts can share Reserved Instances or
 // credits, whether billing alerts are enabled, the historical record of sharing
-// changes, and per-credit options.
+// changes, per-credit options, and which accounts an individual Reserved Instance
+// or Savings Plan is shared with.
 func (c *Client) GetBillingPreferences(ctx context.Context, params *GetBillingPreferencesInput, optFns ...func(*Options)) (*GetBillingPreferencesOutput, error) {
 	if params == nil {
 		params = &GetBillingPreferencesInput{}
@@ -33,7 +34,7 @@ type GetBillingPreferencesInput struct {
 
 	// The feature to retrieve. Specify exactly one value. Valid values: BILLING_ALERTS
 	// , RI_SHARING , RI_SHARING_HISTORY , CREDIT_SHARING , CREDIT_SHARING_HISTORY ,
-	// CREDIT_LEVEL_SHARING , CREDIT_PREFERENCE_OPTIONS .
+	// CREDIT_LEVEL_SHARING , CREDIT_PREFERENCE_OPTIONS , BENEFIT_LEVEL_SHARING .
 	//
 	// This member is required.
 	Features []types.BillingFeature
@@ -41,6 +42,10 @@ type GetBillingPreferencesInput struct {
 	// Filters to narrow results. Specify exactly one filter when supplied. The
 	// supported filter name is PREFERENCE_KEY , which accepts 1 to 10 values to match
 	// preference keys.
+	//
+	// For BENEFIT_LEVEL_SHARING , this filter is required. Specify exactly one value
+	// that identifies the Reserved Instance (RI) or Savings Plan (SP), in the form
+	// benefit/{ri|sp}/{benefitId} .
 	Filters []types.BillingFeatureFilter
 
 	// The maximum number of records to return per page. Range: 1 to 50. Default: 50.

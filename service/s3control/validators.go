@@ -3515,9 +3515,43 @@ func validateStorageLensConfiguration(v *types.StorageLensConfiguration) error {
 			invalidParams.AddNested("ExpandedPrefixesDataExport", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CostAndUsageReportsPublish != nil {
+		if err := validateStorageLensCostAndUsageReportsPublish(v.CostAndUsageReportsPublish); err != nil {
+			invalidParams.AddNested("CostAndUsageReportsPublish", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AwsOrg != nil {
 		if err := validateStorageLensAwsOrg(v.AwsOrg); err != nil {
 			invalidParams.AddNested("AwsOrg", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensCostAndUsageReportsPrefixLevel(v *types.StorageLensCostAndUsageReportsPrefixLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensCostAndUsageReportsPrefixLevel"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStorageLensCostAndUsageReportsPublish(v *types.StorageLensCostAndUsageReportsPublish) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StorageLensCostAndUsageReportsPublish"}
+	if v.PrefixLevel != nil {
+		if err := validateStorageLensCostAndUsageReportsPrefixLevel(v.PrefixLevel); err != nil {
+			invalidParams.AddNested("PrefixLevel", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

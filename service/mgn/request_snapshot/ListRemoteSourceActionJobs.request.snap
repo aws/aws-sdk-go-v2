@@ -1,0 +1,5 @@
+POST /ListRemoteSourceActionJobs
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","filters":{"remoteSourceActionJobIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

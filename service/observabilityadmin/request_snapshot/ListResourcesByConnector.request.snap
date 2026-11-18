@@ -1,0 +1,5 @@
+POST /ListResourcesByConnector
+
+Content-Type: application/json
+
+{"ConnectorIdentifier":"__ConnectorIdentifier__","MaxResults":1,"NextToken":"__NextToken__","Selector":{"Azure":{"ManagementGroups":{"ParentManagementGroupId":"__ParentManagementGroupId__"}}}}

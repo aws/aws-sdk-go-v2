@@ -1,3 +1,7 @@
+# v1.39.0 (2026-11-17)
+
+* **Feature**: AWS Control Tower now reports source drift when an enabled baseline no longer matches the landing zone's configuration.
+
 # v1.38.7 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1006,7 +1006,7 @@ var PutResourcePolicyResponse_PolicyRevisionId *smithy.Schema
 var PutRumEventsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rum",
 	Name:      "PutRumEventsRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var PutRumEventsRequest_Id *smithy.Schema
 
 var PutRumEventsRequest_BatchId *smithy.Schema
@@ -1018,6 +1018,8 @@ var PutRumEventsRequest_UserDetails *smithy.Schema
 var PutRumEventsRequest_RumEvents *smithy.Schema
 
 var PutRumEventsRequest_Alias *smithy.Schema
+
+var PutRumEventsRequest_SessionMetadata *smithy.Schema
 
 var PutRumEventsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rum",
@@ -1473,6 +1475,8 @@ func init() {
 	PutRumEventsRequest_RumEvents = PutRumEventsRequest.AddMember("RumEvents", _RumEventList)
 
 	PutRumEventsRequest_Alias = PutRumEventsRequest.AddMember("Alias", _Alias)
+
+	PutRumEventsRequest_SessionMetadata = PutRumEventsRequest.AddMember("SessionMetadata", _JsonValue)
 
 	PutRumMetricsDestinationRequest_AppMonitorName = PutRumMetricsDestinationRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
 

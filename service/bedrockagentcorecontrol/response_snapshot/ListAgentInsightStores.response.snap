@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentInsightStores":[{"agentInsightStoreArn":"__AgentInsightStoreArn__","agentInsightStoreId":"__AgentInsightStoreId__","createdAt":946684800,"enablementStatus":"ENABLED","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","mode":"AWS_OWNED_KMS_KEY"},"status":"ACTIVE","updatedAt":946684800},{"agentInsightStoreArn":"__AgentInsightStoreArn__","agentInsightStoreId":"__AgentInsightStoreId__","createdAt":946684800,"enablementStatus":"ENABLED","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","mode":"AWS_OWNED_KMS_KEY"},"status":"ACTIVE","updatedAt":946684800}],"nextToken":"__NextToken__"}

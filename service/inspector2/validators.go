@@ -3410,6 +3410,90 @@ func validateFilterCriteria(v *types.FilterCriteria) error {
 	}
 }
 
+func validateGcpCapabilityScopeInput(v *types.GcpCapabilityScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpCapabilityScopeInput"}
+	if len(v.ScopeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpProviderDetailCreate(v *types.GcpProviderDetailCreate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpProviderDetailCreate"}
+	if v.AwsConfigConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsConfigConnectorArn"))
+	}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateGcpScopeConfigurationInput(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GcpRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GcpRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpProviderDetailUpdate(v *types.GcpProviderDetailUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpProviderDetailUpdate"}
+	if v.ScopeConfiguration != nil {
+		if err := validateGcpScopeConfigurationInput(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpScopeConfigurationInput(v *types.GcpScopeConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpScopeConfigurationInput"}
+	if v.VmScanning != nil {
+		if err := validateGcpCapabilityScopeInput(v.VmScanning); err != nil {
+			invalidParams.AddNested("VmScanning", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainerImageScanning != nil {
+		if err := validateGcpCapabilityScopeInput(v.ContainerImageScanning); err != nil {
+			invalidParams.AddNested("ContainerImageScanning", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerlessScanning != nil {
+		if err := validateGcpCapabilityScopeInput(v.ServerlessScanning); err != nil {
+			invalidParams.AddNested("ServerlessScanning", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageLayerAggregation(v *types.ImageLayerAggregation) error {
 	if v == nil {
 		return nil
@@ -3818,6 +3902,11 @@ func validateProviderDetailCreate(v types.ProviderDetailCreate) error {
 			invalidParams.AddNested("[azure]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ProviderDetailCreateMemberGcp:
+		if err := validateGcpProviderDetailCreate(&uv.Value); err != nil {
+			invalidParams.AddNested("[gcp]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3835,6 +3924,11 @@ func validateProviderDetailUpdate(v types.ProviderDetailUpdate) error {
 	case *types.ProviderDetailUpdateMemberAzure:
 		if err := validateAzureProviderDetailUpdate(&uv.Value); err != nil {
 			invalidParams.AddNested("[azure]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderDetailUpdateMemberGcp:
+		if err := validateGcpProviderDetailUpdate(&uv.Value); err != nil {
+			invalidParams.AddNested("[gcp]", err.(smithy.InvalidParamsError))
 		}
 
 	}

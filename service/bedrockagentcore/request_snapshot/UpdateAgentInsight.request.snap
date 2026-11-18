@@ -1,0 +1,5 @@
+PUT /agentinsights/__AgentInsightId__?applicationName=__ApplicationName__
+
+Content-Type: application/json
+
+{"archiveStatus":"ACTIVE"}

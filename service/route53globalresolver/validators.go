@@ -130,6 +130,26 @@ func (m *validateOpCreateAccessToken) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCoreNetworkEndpoint struct {
+}
+
+func (*validateOpCreateCoreNetworkEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCoreNetworkEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCoreNetworkEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCoreNetworkEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDNSView struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpDeleteAccessToken) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccessTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCoreNetworkEndpoint struct {
+}
+
+func (*validateOpDeleteCoreNetworkEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCoreNetworkEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCoreNetworkEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCoreNetworkEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -425,6 +465,26 @@ func (m *validateOpGetAccessToken) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAccessTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCoreNetworkEndpoint struct {
+}
+
+func (*validateOpGetCoreNetworkEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCoreNetworkEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCoreNetworkEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCoreNetworkEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +830,26 @@ func (m *validateOpUpdateAccessToken) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCoreNetworkEndpoint struct {
+}
+
+func (*validateOpUpdateCoreNetworkEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCoreNetworkEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCoreNetworkEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCoreNetworkEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDNSView struct {
 }
 
@@ -894,6 +974,10 @@ func addOpCreateAccessTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessToken{}, middleware.After)
 }
 
+func addOpCreateCoreNetworkEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCoreNetworkEndpoint{}, middleware.After)
+}
+
 func addOpCreateDNSViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDNSView{}, middleware.After)
 }
@@ -916,6 +1000,10 @@ func addOpDeleteAccessSourceValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteAccessTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccessToken{}, middleware.After)
+}
+
+func addOpDeleteCoreNetworkEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCoreNetworkEndpoint{}, middleware.After)
 }
 
 func addOpDeleteDNSViewValidationMiddleware(stack *middleware.Stack) error {
@@ -952,6 +1040,10 @@ func addOpGetAccessSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAccessTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAccessToken{}, middleware.After)
+}
+
+func addOpGetCoreNetworkEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCoreNetworkEndpoint{}, middleware.After)
 }
 
 func addOpGetDNSViewValidationMiddleware(stack *middleware.Stack) error {
@@ -1020,6 +1112,10 @@ func addOpUpdateAccessSourceValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateAccessTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAccessToken{}, middleware.After)
+}
+
+func addOpUpdateCoreNetworkEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCoreNetworkEndpoint{}, middleware.After)
 }
 
 func addOpUpdateDNSViewValidationMiddleware(stack *middleware.Stack) error {
@@ -1147,6 +1243,73 @@ func validateBatchUpdateFirewallRuleInputItems(v []types.BatchUpdateFirewallRule
 	}
 }
 
+func validateCoreNetworkEndpointDnsIpInputItem(v *types.CoreNetworkEndpointDnsIpInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoreNetworkEndpointDnsIpInputItem"}
+	if v.DnsLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DnsLabel"))
+	}
+	if len(v.RegionScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionScope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCoreNetworkEndpointDnsIpInputItems(v []types.CoreNetworkEndpointDnsIpInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoreNetworkEndpointDnsIpInputItems"}
+	for i := range v {
+		if err := validateCoreNetworkEndpointDnsIpInputItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateIpAddressEntry(v *types.UpdateIpAddressEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIpAddressEntry"}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateIpAddressList(v []types.UpdateIpAddressEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIpAddressList"}
+	for i := range v {
+		if err := validateUpdateIpAddressEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateHostedZoneInput(v *AssociateHostedZoneInput) error {
 	if v == nil {
 		return nil
@@ -1230,9 +1393,6 @@ func validateOpCreateAccessSourceInput(v *CreateAccessSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessSourceInput"}
-	if v.Cidr == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Cidr"))
-	}
 	if v.DnsViewId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsViewId"))
 	}
@@ -1253,6 +1413,31 @@ func validateOpCreateAccessTokenInput(v *CreateAccessTokenInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessTokenInput"}
 	if v.DnsViewId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsViewId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCoreNetworkEndpointInput(v *CreateCoreNetworkEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCoreNetworkEndpointInput"}
+	if v.CoreNetworkArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkArn"))
+	}
+	if v.GlobalResolverId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalResolverId"))
+	}
+	if v.IpAddresses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddresses"))
+	} else if v.IpAddresses != nil {
+		if err := validateCoreNetworkEndpointDnsIpInputItems(v.IpAddresses); err != nil {
+			invalidParams.AddNested("IpAddresses", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1358,6 +1543,21 @@ func validateOpDeleteAccessTokenInput(v *DeleteAccessTokenInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessTokenInput"}
 	if v.AccessTokenId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessTokenId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCoreNetworkEndpointInput(v *DeleteCoreNetworkEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCoreNetworkEndpointInput"}
+	if v.CoreNetworkEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1496,6 +1696,21 @@ func validateOpGetAccessTokenInput(v *GetAccessTokenInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAccessTokenInput"}
 	if v.AccessTokenId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessTokenId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCoreNetworkEndpointInput(v *GetCoreNetworkEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCoreNetworkEndpointInput"}
+	if v.CoreNetworkEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1766,6 +1981,26 @@ func validateOpUpdateAccessTokenInput(v *UpdateAccessTokenInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCoreNetworkEndpointInput(v *UpdateCoreNetworkEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCoreNetworkEndpointInput"}
+	if v.CoreNetworkEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreNetworkEndpointId"))
+	}
+	if v.UpdateIpAddresses != nil {
+		if err := validateUpdateIpAddressList(v.UpdateIpAddresses); err != nil {
+			invalidParams.AddNested("UpdateIpAddresses", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

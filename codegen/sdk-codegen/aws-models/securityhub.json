@@ -23103,6 +23103,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS"
                     }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
+                    }
                 }
             }
         },
@@ -23611,6 +23617,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AZURE"
+                    }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
                     }
                 }
             }
@@ -25264,7 +25276,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 3
+                    "max": 5
                 }
             }
         },
@@ -25288,6 +25300,18 @@
                     "traits": {
                         "smithy.api#enumValue": "TagInference"
                     }
+                },
+                "CLOUDWATCH_TELEMETRY_INFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloudWatchTelemetryInference"
+                    }
+                },
+                "INSTALLED_SOFTWARE_AND_PACKAGE_INFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstalledSoftwareAndPackageInference"
+                    }
                 }
             }
         },
@@ -25307,6 +25331,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AZURE"
+                    }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
                     }
                 }
             },
@@ -25484,10 +25514,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Azure provider configuration.</p>"
                     }
+                },
+                "GCP": {
+                    "target": "com.amazonaws.securityhub#GcpProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GCP provider configuration.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The cloud provider configuration for creating a connector. This is a union type that currently supports Azure.</p>"
+                "smithy.api#documentation": "<p>The cloud provider configuration for creating a connector. This is a union type that currently supports Azure and GCP.</p>"
             }
         },
         "com.amazonaws.securityhub#CspmProviderDetail": {
@@ -25498,10 +25534,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Azure provider detail.</p>"
                     }
+                },
+                "GCP": {
+                    "target": "com.amazonaws.securityhub#GcpDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GCP provider detail.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The detailed cloud provider configuration for a connector. This is a union type that currently supports Azure.</p>"
+                "smithy.api#documentation": "<p>The detailed cloud provider configuration for a connector. This is a union type that currently supports Azure and GCP.</p>"
             }
         },
         "com.amazonaws.securityhub#CspmProviderSummary": {
@@ -25538,10 +25580,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Azure update configuration.</p>"
                     }
+                },
+                "GCP": {
+                    "target": "com.amazonaws.securityhub#GcpUpdateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GCP update configuration.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The cloud provider configuration for updating a connector. This is a union type that currently supports Azure.</p>"
+                "smithy.api#documentation": "<p>The cloud provider configuration for updating a connector. This is a union type that currently supports Azure and GCP.</p>"
             }
         },
         "com.amazonaws.securityhub#CustomDataIdentifiersDetections": {
@@ -27155,6 +27203,30 @@
                         }
                     },
                     {
+                        "title": "To get available GCP security standards",
+                        "documentation": "The following example returns a list of available security standards from a specified provider.",
+                        "input": {
+                            "Providers": [
+                                "GCP"
+                            ]
+                        },
+                        "output": {
+                            "Standards": [
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/cis-gcp-foundation-benchmark/v/4.0.0",
+                                    "Name": "CIS Google Cloud Platform Foundation Benchmark v4.0.0",
+                                    "Description": "The Center for Internet Security (CIS) Google Cloud Platform Foundation Benchmark v4.0.0 is a set of security configuration best practices for Google Cloud Platform. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.",
+                                    "EnabledByDefault": false,
+                                    "StandardsManagedBy": {
+                                        "Company": "AWS",
+                                        "Product": "Security Hub"
+                                    },
+                                    "Provider": "GCP"
+                                }
+                            ]
+                        }
+                    },
+                    {
                         "title": "To get available Security Hub standards",
                         "documentation": "The following example returns a list of available security standards in Security Hub.",
                         "output": {
@@ -27213,6 +27285,17 @@
                                         "Product": "Security Hub"
                                     },
                                     "Provider": "Azure"
+                                },
+                                {
+                                    "StandardsArn": "arn:aws:securityhub:us-west-1::standards/cis-gcp-foundation-benchmark/v/4.0.0",
+                                    "Name": "CIS Google Cloud Platform Foundation Benchmark v4.0.0",
+                                    "Description": "The Center for Internet Security (CIS) Google Cloud Platform Foundation Benchmark v4.0.0 is a set of security configuration best practices for Google Cloud Platform. This Security Hub standard automatically checks your compliance readiness against a subset of CIS requirements.",
+                                    "EnabledByDefault": false,
+                                    "StandardsManagedBy": {
+                                        "Company": "AWS",
+                                        "Product": "Security Hub"
+                                    },
+                                    "Provider": "GCP"
                                 }
                             ]
                         }
@@ -27338,7 +27421,7 @@
                 "Providers": {
                     "target": "com.amazonaws.securityhub#StandardsProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cloud providers to filter the standards by. For example, specify <code>Azure</code> to return only standards that evaluate Azure resources.</p>",
+                        "smithy.api#documentation": "<p>A list of cloud providers to filter the standards by. For example, specify <code>Azure</code> to return only standards that evaluate Azure resources, or <code>GCP</code> to return only standards that evaluate GCP resources.</p>",
                         "smithy.api#httpQuery": "Providers"
                     }
                 }
@@ -30230,6 +30313,158 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#GcpDetail": {
+            "type": "structure",
+            "members": {
+                "AWSConfigConnectorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the multi-cloud configuration connector used to establish the connection to GCP.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScopeConfiguration": {
+                    "target": "com.amazonaws.securityhub#GcpScopeConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The scope configuration that defines which GCP resources are monitored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GCPRegions": {
+                    "target": "com.amazonaws.securityhub#GcpRegionList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of GCP regions being monitored.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed GCP configuration for a connector.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#GcpProviderConfiguration": {
+            "type": "structure",
+            "members": {
+                "AWSConfigConnectorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the multi-cloud configuration connector used to establish the connection to GCP.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScopeConfiguration": {
+                    "target": "com.amazonaws.securityhub#GcpScopeConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The scope configuration that defines which GCP resources are monitored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GCPRegions": {
+                    "target": "com.amazonaws.securityhub#GcpRegionList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The list of GCP regions to monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for connecting to a GCP environment.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#GcpRegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString",
+                "traits": {
+                    "smithy.api#documentation": "<p>A GCP region.</p>"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of GCP regions.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GcpResourceDetails": {
+            "type": "document",
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a GCP resource that is related to a finding. This field is a JSON object that contains provider-specific resource details.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#GcpScopeConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScopeType": {
+                    "target": "com.amazonaws.securityhub#GcpScopeType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of scope. Valid values are <code>ORGANIZATION</code> and <code>PROJECT</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScopeValues": {
+                    "target": "com.amazonaws.securityhub#ScopeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scope values. Use an organization ID when the scope type is <code>ORGANIZATION</code>, or project IDs when the scope type is <code>PROJECT</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scope configuration for a GCP connector, defining the organization or project scope.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#GcpScopeType": {
+            "type": "enum",
+            "members": {
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT"
+                    }
+                },
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of scope for a GCP connector. Valid values are <code>ORGANIZATION</code> (monitor all projects in the organization) and <code>PROJECT</code> (monitor specific projects).</p>"
+            }
+        },
+        "com.amazonaws.securityhub#GcpUpdateConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScopeConfiguration": {
+                    "target": "com.amazonaws.securityhub#GcpScopeConfiguration",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The updated scope configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GCPRegions": {
+                    "target": "com.amazonaws.securityhub#GcpRegionList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The updated list of GCP regions to monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for updating a GCP connector's scope and regions.</p>"
+            }
+        },
         "com.amazonaws.securityhub#GenerateRecommendedPolicyV2": {
             "type": "operation",
             "input": {
@@ -31256,7 +31491,7 @@
                 "Providers": {
                     "target": "com.amazonaws.securityhub#StandardsProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cloud providers to filter the enabled standards by. For example, specify <code>Azure</code> to return only enabled standards that evaluate Azure resources.</p>"
+                        "smithy.api#documentation": "<p>A list of cloud providers to filter the enabled standards by. For example, specify <code>Azure</code> to return only enabled standards that evaluate Azure resources, or <code>GCP</code> to return only enabled standards that evaluate GCP resources.</p>"
                     }
                 }
             },
@@ -36401,7 +36636,7 @@
                                     "SecurityControlId": "Azure.App.1",
                                     "Title": "Azure Container Apps with managed identity enabled should follow least privilege",
                                     "Description": "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.",
-                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation",
+                                    "RemediationUrl": "https://learn.microsoft.com/en-us/azure/container-apps/managed-identity",
                                     "SeverityRating": "MEDIUM",
                                     "CurrentRegionAvailability": "AVAILABLE",
                                     "CustomizableProperties": [],
@@ -36411,7 +36646,7 @@
                                     "SecurityControlId": "Azure.App.2",
                                     "Title": "Azure Container Apps should not pass Azure SDK credentials as environment variables",
                                     "Description": "This control checks whether an Azure Container App passes Azure SDK credentials as plain-text container environment variables. The control fails if any container (including initContainers) defines AZURE_CLIENT_SECRET, AZURE_CLIENT_CERTIFICATE_PASSWORD, or AZURE_PASSWORD as a plain-text environment variable instead of referencing a secret via secretRef.",
-                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/Azure.App.2/remediation",
+                                    "RemediationUrl": "https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets",
                                     "SeverityRating": "CRITICAL",
                                     "CurrentRegionAvailability": "AVAILABLE",
                                     "CustomizableProperties": [],
@@ -36421,11 +36656,56 @@
                                     "SecurityControlId": "Azure.App.3",
                                     "Title": "Azure Container Apps should not have external ingress enabled",
                                     "Description": "This control checks whether Azure Container Apps have external ingress configured. The control fails if the Container App ingress is set to accept traffic from anywhere (external).",
-                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/Azure.App.3/remediation",
+                                    "RemediationUrl": "https://learn.microsoft.com/en-us/azure/container-apps/ingress-how-to",
                                     "SeverityRating": "HIGH",
                                     "CurrentRegionAvailability": "AVAILABLE",
                                     "CustomizableProperties": [],
                                     "Provider": "Azure"
+                                }
+                            ],
+                            "NextToken": "U2FsdGVkX1..."
+                        }
+                    },
+                    {
+                        "title": "To list GCP security control definitions",
+                        "documentation": "The following example lists security control definitions for a specified provider.",
+                        "input": {
+                            "Providers": [
+                                "GCP"
+                            ],
+                            "MaxResults": 3
+                        },
+                        "output": {
+                            "SecurityControlDefinitions": [
+                                {
+                                    "SecurityControlId": "GCP.ApiKeys.1",
+                                    "Title": "GCP API keys should not exist",
+                                    "Description": "This control checks whether any GCP API keys exist. The control fails if an API key exists.",
+                                    "RemediationUrl": "https://cloud.google.com/sdk/gcloud/reference/services/api-keys/delete",
+                                    "SeverityRating": "MEDIUM",
+                                    "CurrentRegionAvailability": "AVAILABLE",
+                                    "CustomizableProperties": [],
+                                    "Provider": "GCP"
+                                },
+                                {
+                                    "SecurityControlId": "GCP.ApiKeys.2",
+                                    "Title": "GCP API keys should be restricted to specified hosts and apps",
+                                    "Description": "This control checks whether a GCP API key restricts which hosts or apps may use it. The control fails if the key has no HTTP referrer, IP address, Android app, or iOS app restriction, or if any allowed HTTP referrer or IP address is effectively open. A referrer is effectively open when its host is * or a wildcard over a top-level domain, such as https://* or *.com. An IP address is effectively open when it allows any host, such as 0.0.0.0, 0.0.0.0/0, ::, or ::/0. A single open entry fails the key even when specific entries are also listed, because the key accepts a request that matches any entry.",
+                                    "RemediationUrl": "https://cloud.google.com/docs/authentication/api-keys#adding-application-restrictions",
+                                    "SeverityRating": "MEDIUM",
+                                    "CurrentRegionAvailability": "AVAILABLE",
+                                    "CustomizableProperties": [],
+                                    "Provider": "GCP"
+                                },
+                                {
+                                    "SecurityControlId": "GCP.ApiKeys.3",
+                                    "Title": "GCP API keys should be restricted to only the APIs an application needs",
+                                    "Description": "This control checks whether a GCP API key is restricted to only the specific APIs an application needs. The control fails if the key declares no restrictions.apiTargets entries, or if any entry targets the broad cloudapis.googleapis.com service, which allows the key to call every enabled service.",
+                                    "RemediationUrl": "https://cloud.google.com/docs/authentication/api-keys#adding-api-restrictions",
+                                    "SeverityRating": "HIGH",
+                                    "CurrentRegionAvailability": "AVAILABLE",
+                                    "CustomizableProperties": [],
+                                    "Provider": "GCP"
                                 }
                             ],
                             "NextToken": "U2FsdGVkX1..."
@@ -36478,11 +36758,21 @@
                                     "SecurityControlId": "Azure.App.1",
                                     "Title": "Azure Container Apps with managed identity enabled should follow least privilege",
                                     "Description": "This control checks whether Azure Container Apps have managed identity enabled. The control fails if the Container App has a system-assigned or user-assigned managed identity enabled.",
-                                    "RemediationUrl": "https://docs.aws.amazon.com/console/securityhub/Azure.App.1/remediation",
+                                    "RemediationUrl": "https://learn.microsoft.com/en-us/azure/container-apps/managed-identity",
                                     "SeverityRating": "MEDIUM",
                                     "CurrentRegionAvailability": "AVAILABLE",
                                     "CustomizableProperties": [],
                                     "Provider": "Azure"
+                                },
+                                {
+                                    "SecurityControlId": "GCP.ApiKeys.1",
+                                    "Title": "GCP API keys should not exist",
+                                    "Description": "This control checks whether any GCP API keys exist. The control fails if an API key exists.",
+                                    "RemediationUrl": "https://cloud.google.com/sdk/gcloud/reference/services/api-keys/delete",
+                                    "SeverityRating": "MEDIUM",
+                                    "CurrentRegionAvailability": "AVAILABLE",
+                                    "CustomizableProperties": [],
+                                    "Provider": "GCP"
                                 }
                             ],
                             "NextToken": "U2FsdGVkX1..."
@@ -36529,7 +36819,7 @@
                 "Providers": {
                     "target": "com.amazonaws.securityhub#SecurityControlsProviders",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cloud providers to filter the security control definitions by. For example, specify <code>Azure</code> to return only controls that evaluate Azure resources.</p>",
+                        "smithy.api#documentation": "<p>A list of cloud providers to filter the security control definitions by. For example, specify <code>Azure</code> to return only controls that evaluate Azure resources, or <code>GCP</code> to return only controls that evaluate GCP resources.</p>",
                         "smithy.api#httpQuery": "Providers"
                     }
                 }
@@ -39179,6 +39469,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration settings required to establish a CSPM integration with Microsoft Azure.</p>"
                     }
+                },
+                "GCP": {
+                    "target": "com.amazonaws.securityhub#GcpProviderConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings required to establish a CSPM integration with Google Cloud Platform (GCP).</p>"
+                    }
                 }
             },
             "traits": {
@@ -39204,6 +39500,12 @@
                     "target": "com.amazonaws.securityhub#AzureDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about a Microsoft Azure CSPM integration.</p>"
+                    }
+                },
+                "GCP": {
+                    "target": "com.amazonaws.securityhub#GcpDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a Google Cloud Platform (GCP) CSPM integration.</p>"
                     }
                 }
             },
@@ -39253,6 +39555,12 @@
                     "target": "com.amazonaws.securityhub#AzureUpdateConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters required to update the configuration for a Microsoft Azure CSPM integration.</p>"
+                    }
+                },
+                "GCP": {
+                    "target": "com.amazonaws.securityhub#GcpUpdateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters required to update the configuration for a Google Cloud Platform (GCP) CSPM integration.</p>"
                     }
                 }
             },
@@ -41242,6 +41550,12 @@
                     "target": "com.amazonaws.securityhub#AzureResourceDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about an Azure resource that is related to a finding.</p>"
+                    }
+                },
+                "GcpResource": {
+                    "target": "com.amazonaws.securityhub#GcpResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a GCP resource that is related to a finding.</p>"
                     }
                 }
             },
@@ -43315,7 +43629,7 @@
                 "Provider": {
                     "target": "com.amazonaws.securityhub#SecurityControlsProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cloud provider whose resources the security control evaluates. For example, <code>AWS</code> or <code>Azure</code>.</p>"
+                        "smithy.api#documentation": "<p>The cloud provider whose resources the security control evaluates. For example, <code>AWS</code>, <code>Azure</code>, or <code>GCP</code>.</p>"
                     }
                 }
             },
@@ -43415,7 +43729,7 @@
                 "Provider": {
                     "target": "com.amazonaws.securityhub#SecurityControlsProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cloud provider whose resources the security control evaluates. For example, <code>AWS</code> or <code>Azure</code>.</p>"
+                        "smithy.api#documentation": "<p>The cloud provider whose resources the security control evaluates. For example, <code>AWS</code>, <code>Azure</code>, or <code>GCP</code>.</p>"
                     }
                 }
             },
@@ -43511,6 +43825,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Azure"
+                    }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
                     }
                 }
             }
@@ -46153,7 +46473,7 @@
                 "Provider": {
                     "target": "com.amazonaws.securityhub#StandardsProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cloud provider whose resources the standard evaluates. For example, <code>AWS</code> or <code>Azure</code>.</p>"
+                        "smithy.api#documentation": "<p>The cloud provider whose resources the standard evaluates. For example, <code>AWS</code>, <code>Azure</code>, or <code>GCP</code>.</p>"
                     }
                 },
                 "StandardsManagedBy": {
@@ -46545,6 +46865,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Azure"
                     }
+                },
+                "GCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GCP"
+                    }
                 }
             }
         },
@@ -46655,7 +46981,7 @@
                 "Provider": {
                     "target": "com.amazonaws.securityhub#StandardsProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cloud provider whose resources the standard evaluates. For example, <code>AWS</code> or <code>Azure</code>.</p>"
+                        "smithy.api#documentation": "<p>The cloud provider whose resources the standard evaluates. For example, <code>AWS</code>, <code>Azure</code>, or <code>GCP</code>.</p>"
                     }
                 }
             },

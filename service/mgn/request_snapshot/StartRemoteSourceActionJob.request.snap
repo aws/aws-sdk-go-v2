@@ -1,0 +1,5 @@
+POST /StartRemoteSourceActionJob
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","clientToken":"__ClientToken__","connectorArn":"__ConnectorArn__","remoteSourceActionArns":["__Member__","__Member__"],"sourceServerArns":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

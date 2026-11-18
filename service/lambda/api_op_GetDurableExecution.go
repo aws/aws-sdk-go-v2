@@ -88,8 +88,26 @@ type GetDurableExecutionOutput struct {
 	// This member is required.
 	StartTimestamp *time.Time
 
-	// The current status of the durable execution. Valid values are RUNNING ,
-	// SUCCEEDED , FAILED , TIMED_OUT , and STOPPED .
+	// The durable execution has one of the following statuses:
+	//
+	//   - RUNNING – The execution is running or waiting for pending operations to
+	//   complete.
+	//
+	//   - PAUSING – The execution is waiting for an in-progress invocation to reach
+	//   its next checkpoint before it pauses.
+	//
+	//   - PAUSED – The execution is paused, and Lambda doesn't invoke your function.
+	//
+	//   - SUCCEEDED – The execution completed successfully.
+	//
+	//   - FAILED – The execution completed with an error.
+	//
+	//   - TIMED_OUT – The execution exceeded its execution timeout.
+	//
+	//   - STOPPED – A StopDurableExecution request stopped the execution.
+	//
+	//   - DELETING – A DeleteDurableExecution request is deleting the execution and
+	//   its data.
 	//
 	// This member is required.
 	Status types.ExecutionStatus
@@ -114,10 +132,22 @@ type GetDurableExecutionOutput struct {
 	// when IncludeExecutionData is set to false in the request.
 	ExecutionDataIncluded *bool
 
+	// The date and time when the durable execution will time out, in Unix timestamp
+	// format. This value includes any extension from time the execution spent paused.
+	// While the execution is paused with its execution timeout paused, this value is
+	// 366 days after the start time. This field isn't present for completed
+	// executions.
+	ExpectedExecutionTimeoutTimestamp *time.Time
+
 	// The JSON input payload that you provided when you started the durable
 	// execution. Asynchronous invocations support up to 1 MB, and synchronous
 	// invocations support up to 6 MB.
 	InputPayload *string
+
+	// The details of the pause, including when you requested it and whether it pauses
+	// the execution timeout. This field is only present when the execution status is
+	// PAUSING or PAUSED .
+	PauseDetails *types.PauseDetails
 
 	// The JSON result returned by the durable execution if it completed successfully.
 	// This field is only present when the execution status is SUCCEEDED . Asynchronous
@@ -167,11 +197,19 @@ func (v *GetDurableExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionDataIncluded != nil {
 		s.WriteBool(schemas.GetDurableExecutionResponse_ExecutionDataIncluded, *v.ExecutionDataIncluded)
 	}
+	if v.ExpectedExecutionTimeoutTimestamp != nil {
+		s.WriteTime(schemas.GetDurableExecutionResponse_ExpectedExecutionTimeoutTimestamp, *v.ExpectedExecutionTimeoutTimestamp)
+	}
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.GetDurableExecutionResponse_FunctionArn, *v.FunctionArn)
 	}
 	if v.InputPayload != nil {
 		s.WriteString(schemas.GetDurableExecutionResponse_InputPayload, *v.InputPayload)
+	}
+	if v.PauseDetails != nil {
+		s.WriteStruct(schemas.GetDurableExecutionResponse_PauseDetails)
+		v.PauseDetails.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Result != nil {
 		s.WriteString(schemas.GetDurableExecutionResponse_Result, *v.Result)
@@ -212,12 +250,18 @@ func (v *GetDurableExecutionOutput) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.GetDurableExecutionResponse_ExecutionDataIncluded:
 			v.ExecutionDataIncluded = new(bool)
 			return d.ReadBool(schemas.GetDurableExecutionResponse_ExecutionDataIncluded, v.ExecutionDataIncluded)
+		case schemas.GetDurableExecutionResponse_ExpectedExecutionTimeoutTimestamp:
+			v.ExpectedExecutionTimeoutTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetDurableExecutionResponse_ExpectedExecutionTimeoutTimestamp, v.ExpectedExecutionTimeoutTimestamp)
 		case schemas.GetDurableExecutionResponse_FunctionArn:
 			v.FunctionArn = new(string)
 			return d.ReadString(schemas.GetDurableExecutionResponse_FunctionArn, v.FunctionArn)
 		case schemas.GetDurableExecutionResponse_InputPayload:
 			v.InputPayload = new(string)
 			return d.ReadString(schemas.GetDurableExecutionResponse_InputPayload, v.InputPayload)
+		case schemas.GetDurableExecutionResponse_PauseDetails:
+			v.PauseDetails = &types.PauseDetails{}
+			return v.PauseDetails.Deserialize(d)
 		case schemas.GetDurableExecutionResponse_Result:
 			v.Result = new(string)
 			return d.ReadString(schemas.GetDurableExecutionResponse_Result, v.Result)

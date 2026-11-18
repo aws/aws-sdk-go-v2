@@ -236,6 +236,9 @@ const (
 	ConformancePackStateCreateInProgress ConformancePackState = "CREATE_IN_PROGRESS"
 	ConformancePackStateCreateComplete   ConformancePackState = "CREATE_COMPLETE"
 	ConformancePackStateCreateFailed     ConformancePackState = "CREATE_FAILED"
+	ConformancePackStateUpdateInProgress ConformancePackState = "UPDATE_IN_PROGRESS"
+	ConformancePackStateUpdateComplete   ConformancePackState = "UPDATE_COMPLETE"
+	ConformancePackStateUpdateFailed     ConformancePackState = "UPDATE_FAILED"
 	ConformancePackStateDeleteInProgress ConformancePackState = "DELETE_IN_PROGRESS"
 	ConformancePackStateDeleteFailed     ConformancePackState = "DELETE_FAILED"
 )
@@ -249,8 +252,30 @@ func (ConformancePackState) Values() []ConformancePackState {
 		"CREATE_IN_PROGRESS",
 		"CREATE_COMPLETE",
 		"CREATE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
 		"DELETE_IN_PROGRESS",
 		"DELETE_FAILED",
+	}
+}
+
+type ConformancePackType string
+
+// Enum values for ConformancePackType
+const (
+	ConformancePackTypeCustom  ConformancePackType = "CUSTOM"
+	ConformancePackTypeManaged ConformancePackType = "MANAGED"
+)
+
+// Values returns all known values for ConformancePackType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConformancePackType) Values() []ConformancePackType {
+	return []ConformancePackType{
+		"CUSTOM",
+		"MANAGED",
 	}
 }
 
