@@ -29,7 +29,7 @@ func TestUploadMultipartAbortError(t *testing.T) {
 			t.Run(operation+"/"+tc.name, func(t *testing.T) {
 				cause, abortFails := tc.cause, tc.abortFails
 				primary := &smithy.OperationError{ServiceID: "S3", OperationName: operation, Err: cause}
-				abortError := errors.New("abort request failed")
+				abortError := &smithy.GenericAPIError{Code: "AbortFailed", Message: "abort request failed"}
 				c, _, _ := s3testing.NewUploadLoggingClient(nil)
 				if operation == "UploadPart" {
 					c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
@@ -68,6 +68,13 @@ func TestUploadMultipartAbortError(t *testing.T) {
 				var operationError *smithy.OperationError
 				if !errors.As(err, &operationError) || operationError != primary {
 					t.Errorf("original operation error is not preserved: %v", err)
+				}
+				if got := errors.Is(err, abortError); got != abortFails {
+					t.Errorf("abort cause reachable=%v, want %v: %v", got, abortFails, err)
+				}
+				var abortAPIError *smithy.GenericAPIError
+				if got := errors.As(err, &abortAPIError); got != abortFails || (got && abortAPIError != abortError) {
+					t.Errorf("abort API error reachable=%v, want %v: %v", got, abortFails, err)
 				}
 				if got := strings.Contains(err.Error(), abortError.Error()); got != abortFails {
 					t.Errorf("abort failure reported=%v, want %v: %v", got, abortFails, err)

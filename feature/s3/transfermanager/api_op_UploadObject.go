@@ -1201,11 +1201,8 @@ func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Opti
 	defer cancel()
 	_, err := u.options.S3.AbortMultipartUpload(freshCtx, params, clientOptions...)
 	if err != nil {
-		// Upload workers have finished. Add the cleanup failure without letting
-		// seterr discard it in favor of the original upload error.
-		u.m.Lock()
-		u.err = fmt.Errorf("failed to abort multipart upload (%v), triggered after multipart upload failed: %w", err, u.err)
-		u.m.Unlock()
+		// Upload workers have finished; retain both failure causes.
+		u.err = errors.Join(err, u.err)
 	}
 }
 
