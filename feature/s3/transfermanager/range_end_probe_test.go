@@ -16,7 +16,7 @@ import (
 )
 
 // Exercise bounded ranges through both public APIs with S3-style EOF truncation.
-func TestIssue3643RangeEndProbe(t *testing.T) {
+func TestGetAndDownloadObjectBoundedRanges(t *testing.T) {
 	data := bytes.Repeat([]byte("0123456789"), 100)
 	for _, start := range []int64{0, 1, 500, 999} {
 		seen := make(map[int64]bool)
