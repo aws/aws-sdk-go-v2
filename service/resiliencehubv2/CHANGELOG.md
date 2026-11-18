@@ -1,3 +1,7 @@
+# v1.14.0 (2026-11-18)
+
+* **Feature**: This release includes support for adding new field for the effective policy used in test runs and documentation updates.
+
 # v1.13.8 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

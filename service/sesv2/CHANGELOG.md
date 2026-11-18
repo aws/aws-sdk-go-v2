@@ -1,3 +1,7 @@
+# v1.80.0 (2026-11-18)
+
+* **Feature**: This release adds support for Spillover Routing in Amazon SES.
+
 # v1.79.9 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

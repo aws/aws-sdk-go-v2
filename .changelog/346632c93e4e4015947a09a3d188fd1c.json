@@ -1,8 +1,0 @@
-{
-    "id": "346632c9-3e4e-4015-947a-09a3d188fd1c",
-    "type": "feature",
-    "description": "These APIs enable customers and administrators to list, view, and revoke AWS Sign-In Sessions programmatically using the AWS CLI and SDKs, providing greater visibility and control over authenticated access.",
-    "modules": [
-        "service/signin"
-    ]
-}

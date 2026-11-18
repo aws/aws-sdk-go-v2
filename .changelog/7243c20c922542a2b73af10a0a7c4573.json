@@ -1,8 +1,0 @@
-{
-    "id": "7243c20c-9225-42a2-b73a-f10a0a7c4573",
-    "type": "feature",
-    "description": "Updated endpoint resolution for AWS Support, including FIPS and dual-stack endpoints.",
-    "modules": [
-        "service/support"
-    ]
-}

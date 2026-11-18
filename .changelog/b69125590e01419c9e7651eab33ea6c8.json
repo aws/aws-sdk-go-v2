@@ -1,8 +1,0 @@
-{
-    "id": "b6912559-0e01-419c-9e76-51eab33ea6c8",
-    "type": "feature",
-    "description": "Supporting a new PAUSED device status and a DeviceStatusReason.",
-    "modules": [
-        "service/braket"
-    ]
-}

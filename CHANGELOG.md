@@ -1,3 +1,47 @@
+# Release (2026-11-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/abusesignal`: [v1.0.0](service/abusesignal/CHANGELOG.md#v100-2026-11-18)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces the AWS Abuse Signal API, enabling customers to programmatically submit and track AWS abuse reports.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.82.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1820-2026-11-18)
+  * **Feature**: Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.51.0](service/braket/CHANGELOG.md#v1510-2026-11-18)
+  * **Feature**: Supporting a new PAUSED device status and a DeviceStatusReason.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.61.0](service/cleanrooms/CHANGELOG.md#v1610-2026-11-18)
+  * **Feature**: Adds support for populating intermediate tables with results from PySpark analysis templates.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.85.0](service/cloudformation/CHANGELOG.md#v1850-2026-11-18)
+  * **Feature**: AWS CloudFormation StackSets now provides stage-by-stage progress for deployments that span thousands of accounts and AWS Regions, which enables you to see where each deployment stands while it runs
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.79.0](service/cognitoidentityprovider/CHANGELOG.md#v1790-2026-11-18)
+  * **Feature**: Add support for restoring user pool's user data to point in time.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.64.1](service/elasticloadbalancingv2/CHANGELOG.md#v1641-2026-11-18)
+  * **Documentation**: This release adds support for the keyExchange field in CloudTrail tlsDetails, enabling customers to distinguish classical from post-quantum hybrid key exchange for TLS connections on Application Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.52.0](service/health/CHANGELOG.md#v1520-2026-11-18)
+  * **Feature**: Adds resource tags functionality to the AWS Health service
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.67.0](service/iam/CHANGELOG.md#v1670-2026-11-18)
+  * **Feature**: Adds MaxSignInSessionDuration to IAM Roles and Login Profiles, allowing customers to configure the maximum Console sign-in session duration per principal. Affects CreateRole, UpdateRole, GetRole and LoginProfile APIs.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.58.0](service/kinesis/CHANGELOG.md#v1580-2026-11-18)
+  * **Feature**: Treat Kinesis ReceiveQueueRecords and ReceiveDeadLetterQueueRecords as long-polling operations, so they back off when the retry quota is exhausted.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.55.0](service/neptune/CHANGELOG.md#v1550-2026-11-18)
+  * **Feature**: Neptune Database Serverless support for graviton3 based r8g instances.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.14.0](service/resiliencehubv2/CHANGELOG.md#v1140-2026-11-18)
+  * **Feature**: This release includes support for adding new field for the effective policy used in test runs and documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.116.0](service/s3/CHANGELOG.md#v11160-2026-11-18)
+  * **Feature**: Adds exclusions and Multi-Region key resolution to S3 Replication. Rule filters support a Not element to exclude prefixes and object tags. Destination EncryptionConfiguration supports UseSourceMultiRegionKey to encrypt replicas with the related replica KMS multi-Region key in the destination Region.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.30.0](service/securityagent/CHANGELOG.md#v1300-2026-11-18)
+  * **Feature**: This release adds support for resuming a paused penetration test job from its last saved checkpoint.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.80.0](service/sesv2/CHANGELOG.md#v1800-2026-11-18)
+  * **Feature**: This release adds support for Spillover Routing in Amazon SES.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.14.0](service/signin/CHANGELOG.md#v1140-2026-11-18)
+  * **Feature**: These APIs enable customers and administrators to list, view, and revoke AWS Sign-In Sessions programmatically using the AWS CLI and SDKs, providing greater visibility and control over authenticated access.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.43.0](service/support/CHANGELOG.md#v1430-2026-11-18)
+  * **Feature**: Updated endpoint resolution for AWS Support, including FIPS and dual-stack endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.86.0](service/wafv2/CHANGELOG.md#v1860-2026-11-18)
+  * **Feature**: Adds the AnalyticsConfig parameter to CreateWebACL and UpdateWebACL to enable or disable cross-Region security analytics for a WebACL. When you enable security analytics, you authorize AWS to transfer and store full request logs outside the AWS Region where the WebACL is hosted.
+
 # Release (2026-11-17)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "757c1106-77b3-46b8-a836-2d81247175ba",
-    "type": "feature",
-    "description": "This release adds support for resuming a paused penetration test job from its last saved checkpoint.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

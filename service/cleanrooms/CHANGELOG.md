@@ -1,3 +1,7 @@
+# v1.61.0 (2026-11-18)
+
+* **Feature**: Adds support for populating intermediate tables with results from PySpark analysis templates.
+
 # v1.60.0 (2026-11-12)
 
 * **Feature**: Adds a retry signal to protected query and protected job errors that indicates whether running the same request again might succeed, and defines error codes that identify the category of the failure.

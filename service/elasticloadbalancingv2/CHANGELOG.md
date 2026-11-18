@@ -1,3 +1,7 @@
+# v1.64.1 (2026-11-18)
+
+* **Documentation**: This release adds support for the keyExchange field in CloudTrail tlsDetails, enabling customers to distinguish classical from post-quantum hybrid key exchange for TLS connections on Application Load Balancers.
+
 # v1.64.0 (2026-11-10)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

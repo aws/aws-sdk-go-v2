@@ -1,8 +1,0 @@
-{
-    "id": "25c07a6e-4967-4bd1-ac3a-1d6d9e56b144",
-    "type": "feature",
-    "description": "Neptune Database Serverless support for graviton3 based r8g instances.",
-    "modules": [
-        "service/neptune"
-    ]
-}

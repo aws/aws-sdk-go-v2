@@ -1,3 +1,7 @@
+# v1.30.0 (2026-11-18)
+
+* **Feature**: This release adds support for resuming a paused penetration test job from its last saved checkpoint.
+
 # v1.29.0 (2026-11-12)
 
 * **Feature**: Adds support for cleanup strategy in CreatePentestInput and UpdatePentestInput.

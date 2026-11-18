@@ -1,3 +1,7 @@
+# v1.82.0 (2026-11-18)
+
+* **Feature**: Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration
+
 # v1.81.0 (2026-11-17)
 
 * **Feature**: Adds support for agent insight stores that help frame insight evaluators, and dataset source support for batch evaluation

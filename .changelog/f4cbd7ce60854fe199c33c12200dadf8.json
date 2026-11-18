@@ -1,8 +1,0 @@
-{
-    "id": "f4cbd7ce-6085-4fe1-99c3-3c12200dadf8",
-    "type": "feature",
-    "description": "Add support for restoring user pool's user data to point in time.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.85.0 (2026-11-18)
+
+* **Feature**: AWS CloudFormation StackSets now provides stage-by-stage progress for deployments that span thousands of accounts and AWS Regions, which enables you to see where each deployment stands while it runs
+
 # v1.84.0 (2026-11-13)
 
 * **Feature**: AWS CloudFormation introduces stack aliases, which let you refer to an existing stack by a new name without deleting and recreating it. Manage aliases with SetAlias and RemoveAlias, and use an alias in place of the stack name in operations such as UpdateStack.

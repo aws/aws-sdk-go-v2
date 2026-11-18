@@ -1,8 +1,0 @@
-{
-    "id": "c4b2387b-0646-426f-a041-3f84540b25a1",
-    "type": "feature",
-    "description": "This release introduces the AWS Abuse Signal API, enabling customers to programmatically submit and track AWS abuse reports.",
-    "modules": [
-        "service/abusesignal"
-    ]
-}

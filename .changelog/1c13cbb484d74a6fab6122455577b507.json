@@ -1,8 +1,0 @@
-{
-    "id": "1c13cbb4-84d7-4a6f-ab61-22455577b507",
-    "type": "feature",
-    "description": "This release includes support for adding new field for the effective policy used in test runs and documentation updates.",
-    "modules": [
-        "service/resiliencehubv2"
-    ]
-}
