@@ -173,6 +173,11 @@ var AssociateSoftwareToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssociateSoftwareToken",
 }, smithy.ShapeTypeOperation, 0)
 
+var CancelPointInTimeRecovery = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CancelPointInTimeRecovery",
+}, smithy.ShapeTypeOperation, 0)
+
 var ChangePassword = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ChangePassword",
@@ -328,6 +333,11 @@ var DescribeManagedLoginBrandingByClient = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeManagedLoginBrandingByClient",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribePointInTimeRecovery = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DescribePointInTimeRecovery",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeResourceServer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "DescribeResourceServer",
@@ -473,6 +483,11 @@ var InitiateAuth = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InitiateAuth",
 }, smithy.ShapeTypeOperation, 0)
 
+var InitiatePointInTimeRecovery = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "InitiatePointInTimeRecovery",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListDevices = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ListDevices",
@@ -486,6 +501,11 @@ var ListGroups = smithy.NewSchema(smithy.ShapeID{
 var ListIdentityProviders = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ListIdentityProviders",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListPointInTimeRecoveries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListPointInTimeRecoveries",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListResourceServers = smithy.NewSchema(smithy.ShapeID{
@@ -611,6 +631,11 @@ var SetUserSettings = smithy.NewSchema(smithy.ShapeID{
 var SignUp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "SignUp",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartPointInTimeRecovery = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "StartPointInTimeRecovery",
 }, smithy.ShapeTypeOperation, 0)
 
 var StartUserImportJob = smithy.NewSchema(smithy.ShapeID{
@@ -2891,6 +2916,81 @@ var ResourceServerType_Scopes *smithy.Schema
 
 var ResourceServerType_ManagedBy *smithy.Schema
 
+var RestorationDescriptionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestorationDescriptionType",
+}, smithy.ShapeTypeStructure, 3)
+var RestorationDescriptionType_RestoreId *smithy.Schema
+
+var RestorationDescriptionType_RestoreStatus *smithy.Schema
+
+var RestorationDescriptionType_RestoreTimestamp *smithy.Schema
+
+var _RestorationListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestorationListType",
+}, smithy.ShapeTypeList, 1)
+var _RestorationListType_member *smithy.Schema
+
+var RestorationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestorationType",
+}, smithy.ShapeTypeStructure, 5)
+var RestorationType_RestoreId *smithy.Schema
+
+var RestorationType_RestoreStatus *smithy.Schema
+
+var RestorationType_RestoreTimestamp *smithy.Schema
+
+var RestorationType_TriggerTimestamp *smithy.Schema
+
+var RestorationType_RestorePreview *smithy.Schema
+
+var _RestoreIdType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestoreIdType",
+}, smithy.ShapeTypeString, 0)
+
+var _RestorePreviewListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestorePreviewListType",
+}, smithy.ShapeTypeList, 1)
+var _RestorePreviewListType_member *smithy.Schema
+
+var RestorePreviewType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestorePreviewType",
+}, smithy.ShapeTypeStructure, 4)
+var RestorePreviewType_Entity *smithy.Schema
+
+var RestorePreviewType_CreateCount *smithy.Schema
+
+var RestorePreviewType_UpdateCount *smithy.Schema
+
+var RestorePreviewType_DeleteCount *smithy.Schema
+
+var RestoreStatusType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "RestoreStatusType",
+}, smithy.ShapeTypeEnum, 9)
+var RestoreStatusType_PREVIEW_GENERATING *smithy.Schema
+
+var RestoreStatusType_PREVIEW_GENERATED *smithy.Schema
+
+var RestoreStatusType_PREVIEW_CANCELLED *smithy.Schema
+
+var RestoreStatusType_PREVIEW_GENERATION_FAILED *smithy.Schema
+
+var RestoreStatusType_PREVIEW_EXPIRED *smithy.Schema
+
+var RestoreStatusType_RESTORING *smithy.Schema
+
+var RestoreStatusType_RESTORE_COMPLETED *smithy.Schema
+
+var RestoreStatusType_TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE *smithy.Schema
+
+var RestoreStatusType_AWS_ABORTED *smithy.Schema
+
 var _RetryGracePeriodSecondsType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "RetryGracePeriodSecondsType",
@@ -4681,6 +4781,20 @@ var AssociateSoftwareTokenResponse_SecretCode *smithy.Schema
 
 var AssociateSoftwareTokenResponse_Session *smithy.Schema
 
+var CancelPointInTimeRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CancelPointInTimeRecoveryRequest",
+}, smithy.ShapeTypeStructure, 2)
+var CancelPointInTimeRecoveryRequest_UserPoolId *smithy.Schema
+
+var CancelPointInTimeRecoveryRequest_RestoreId *smithy.Schema
+
+var CancelPointInTimeRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CancelPointInTimeRecoveryResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CancelPointInTimeRecoveryResponse_Restoration *smithy.Schema
+
 var ChangePasswordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ChangePasswordRequest",
@@ -5240,6 +5354,20 @@ var DescribeManagedLoginBrandingResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DescribeManagedLoginBrandingResponse_ManagedLoginBranding *smithy.Schema
 
+var DescribePointInTimeRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DescribePointInTimeRecoveryRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribePointInTimeRecoveryRequest_UserPoolId *smithy.Schema
+
+var DescribePointInTimeRecoveryRequest_RestoreId *smithy.Schema
+
+var DescribePointInTimeRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DescribePointInTimeRecoveryResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribePointInTimeRecoveryResponse_Restoration *smithy.Schema
+
 var DescribeResourceServerRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "DescribeResourceServerRequest",
@@ -5717,6 +5845,20 @@ var InitiateAuthResponse_AuthenticationResult *smithy.Schema
 
 var InitiateAuthResponse_AvailableChallenges *smithy.Schema
 
+var InitiatePointInTimeRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "InitiatePointInTimeRecoveryRequest",
+}, smithy.ShapeTypeStructure, 2)
+var InitiatePointInTimeRecoveryRequest_UserPoolId *smithy.Schema
+
+var InitiatePointInTimeRecoveryRequest_RestoreTimestamp *smithy.Schema
+
+var InitiatePointInTimeRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "InitiatePointInTimeRecoveryResponse",
+}, smithy.ShapeTypeStructure, 1)
+var InitiatePointInTimeRecoveryResponse_Restoration *smithy.Schema
+
 var ListDevicesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ListDevicesRequest",
@@ -5770,6 +5912,24 @@ var ListIdentityProvidersResponse = smithy.NewSchema(smithy.ShapeID{
 var ListIdentityProvidersResponse_Providers *smithy.Schema
 
 var ListIdentityProvidersResponse_NextToken *smithy.Schema
+
+var ListPointInTimeRecoveriesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListPointInTimeRecoveriesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListPointInTimeRecoveriesRequest_UserPoolId *smithy.Schema
+
+var ListPointInTimeRecoveriesRequest_NextToken *smithy.Schema
+
+var ListPointInTimeRecoveriesRequest_MaxResults *smithy.Schema
+
+var ListPointInTimeRecoveriesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListPointInTimeRecoveriesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListPointInTimeRecoveriesResponse_Restorations *smithy.Schema
+
+var ListPointInTimeRecoveriesResponse_NextToken *smithy.Schema
 
 var ListResourceServersRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -6256,6 +6416,20 @@ var SignUpResponse_CodeDeliveryDetails *smithy.Schema
 var SignUpResponse_UserSub *smithy.Schema
 
 var SignUpResponse_Session *smithy.Schema
+
+var StartPointInTimeRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "StartPointInTimeRecoveryRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StartPointInTimeRecoveryRequest_UserPoolId *smithy.Schema
+
+var StartPointInTimeRecoveryRequest_RestoreId *smithy.Schema
+
+var StartPointInTimeRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "StartPointInTimeRecoveryResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartPointInTimeRecoveryResponse_Restoration *smithy.Schema
 
 var StartUserImportJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -7680,6 +7854,52 @@ func init() {
 
 	_ResourceServersListType_member = _ResourceServersListType.AddMember("member", ResourceServerType)
 
+	RestoreStatusType_PREVIEW_GENERATING = RestoreStatusType.AddMember("PREVIEW_GENERATING", smithyprelude.Unit)
+
+	RestoreStatusType_PREVIEW_GENERATED = RestoreStatusType.AddMember("PREVIEW_GENERATED", smithyprelude.Unit)
+
+	RestoreStatusType_PREVIEW_CANCELLED = RestoreStatusType.AddMember("PREVIEW_CANCELLED", smithyprelude.Unit)
+
+	RestoreStatusType_PREVIEW_GENERATION_FAILED = RestoreStatusType.AddMember("PREVIEW_GENERATION_FAILED", smithyprelude.Unit)
+
+	RestoreStatusType_PREVIEW_EXPIRED = RestoreStatusType.AddMember("PREVIEW_EXPIRED", smithyprelude.Unit)
+
+	RestoreStatusType_RESTORING = RestoreStatusType.AddMember("RESTORING", smithyprelude.Unit)
+
+	RestoreStatusType_RESTORE_COMPLETED = RestoreStatusType.AddMember("RESTORE_COMPLETED", smithyprelude.Unit)
+
+	RestoreStatusType_TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE = RestoreStatusType.AddMember("TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE", smithyprelude.Unit)
+
+	RestoreStatusType_AWS_ABORTED = RestoreStatusType.AddMember("AWS_ABORTED", smithyprelude.Unit)
+
+	RestorationDescriptionType_RestoreId = RestorationDescriptionType.AddMember("RestoreId", _RestoreIdType)
+
+	RestorationDescriptionType_RestoreStatus = RestorationDescriptionType.AddMember("RestoreStatus", RestoreStatusType)
+
+	RestorationDescriptionType_RestoreTimestamp = RestorationDescriptionType.AddMember("RestoreTimestamp", _DateType)
+
+	_RestorationListType_member = _RestorationListType.AddMember("member", RestorationDescriptionType)
+
+	RestorePreviewType_Entity = RestorePreviewType.AddMember("Entity", _StringType)
+
+	RestorePreviewType_CreateCount = RestorePreviewType.AddMember("CreateCount", _LongType)
+
+	RestorePreviewType_UpdateCount = RestorePreviewType.AddMember("UpdateCount", _LongType)
+
+	RestorePreviewType_DeleteCount = RestorePreviewType.AddMember("DeleteCount", _LongType)
+
+	_RestorePreviewListType_member = _RestorePreviewListType.AddMember("member", RestorePreviewType)
+
+	RestorationType_RestoreId = RestorationType.AddMember("RestoreId", _RestoreIdType)
+
+	RestorationType_RestoreStatus = RestorationType.AddMember("RestoreStatus", RestoreStatusType)
+
+	RestorationType_RestoreTimestamp = RestorationType.AddMember("RestoreTimestamp", _DateType)
+
+	RestorationType_TriggerTimestamp = RestorationType.AddMember("TriggerTimestamp", _DateType)
+
+	RestorationType_RestorePreview = RestorationType.AddMember("RestorePreview", _RestorePreviewListType)
+
 	RevokeAssociatedSessionsType_NONE = RevokeAssociatedSessionsType.AddMember("NONE", smithyprelude.Unit)
 
 	RevokeAssociatedSessionsType_LINKED = RevokeAssociatedSessionsType.AddMember("LINKED", smithyprelude.Unit)
@@ -8532,6 +8752,12 @@ func init() {
 
 	AssociateSoftwareTokenResponse_Session = AssociateSoftwareTokenResponse.AddMember("Session", _SessionType)
 
+	CancelPointInTimeRecoveryRequest_UserPoolId = CancelPointInTimeRecoveryRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	CancelPointInTimeRecoveryRequest_RestoreId = CancelPointInTimeRecoveryRequest.AddMember("RestoreId", _RestoreIdType)
+
+	CancelPointInTimeRecoveryResponse_Restoration = CancelPointInTimeRecoveryResponse.AddMember("Restoration", RestorationType)
+
 	ChangePasswordRequest_PreviousPassword = ChangePasswordRequest.AddMember("PreviousPassword", _PasswordType)
 
 	ChangePasswordRequest_ProposedPassword = ChangePasswordRequest.AddMember("ProposedPassword", _PasswordType)
@@ -8868,6 +9094,12 @@ func init() {
 
 	DescribeManagedLoginBrandingResponse_ManagedLoginBranding = DescribeManagedLoginBrandingResponse.AddMember("ManagedLoginBranding", ManagedLoginBrandingType)
 
+	DescribePointInTimeRecoveryRequest_UserPoolId = DescribePointInTimeRecoveryRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	DescribePointInTimeRecoveryRequest_RestoreId = DescribePointInTimeRecoveryRequest.AddMember("RestoreId", _RestoreIdType)
+
+	DescribePointInTimeRecoveryResponse_Restoration = DescribePointInTimeRecoveryResponse.AddMember("Restoration", RestorationType)
+
 	DescribeResourceServerRequest_UserPoolId = DescribeResourceServerRequest.AddMember("UserPoolId", _UserPoolIdType)
 
 	DescribeResourceServerRequest_Identifier = DescribeResourceServerRequest.AddMember("Identifier", _ResourceServerIdentifierType)
@@ -9116,6 +9348,12 @@ func init() {
 
 	InitiateAuthResponse_AvailableChallenges = InitiateAuthResponse.AddMember("AvailableChallenges", _AvailableChallengeListType)
 
+	InitiatePointInTimeRecoveryRequest_UserPoolId = InitiatePointInTimeRecoveryRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	InitiatePointInTimeRecoveryRequest_RestoreTimestamp = InitiatePointInTimeRecoveryRequest.AddMember("RestoreTimestamp", _DateType)
+
+	InitiatePointInTimeRecoveryResponse_Restoration = InitiatePointInTimeRecoveryResponse.AddMember("Restoration", RestorationType)
+
 	ListDevicesRequest_AccessToken = ListDevicesRequest.AddMember("AccessToken", _TokenModelType)
 
 	ListDevicesRequest_Limit = ListDevicesRequest.AddMember("Limit", _QueryLimitType)
@@ -9145,6 +9383,16 @@ func init() {
 	ListIdentityProvidersResponse_Providers = ListIdentityProvidersResponse.AddMember("Providers", _ProvidersListType)
 
 	ListIdentityProvidersResponse_NextToken = ListIdentityProvidersResponse.AddMember("NextToken", _PaginationKeyType)
+
+	ListPointInTimeRecoveriesRequest_UserPoolId = ListPointInTimeRecoveriesRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	ListPointInTimeRecoveriesRequest_NextToken = ListPointInTimeRecoveriesRequest.AddMember("NextToken", _PaginationKeyType)
+
+	ListPointInTimeRecoveriesRequest_MaxResults = ListPointInTimeRecoveriesRequest.AddMember("MaxResults", _PoolQueryLimitType)
+
+	ListPointInTimeRecoveriesResponse_Restorations = ListPointInTimeRecoveriesResponse.AddMember("Restorations", _RestorationListType)
+
+	ListPointInTimeRecoveriesResponse_NextToken = ListPointInTimeRecoveriesResponse.AddMember("NextToken", _PaginationKeyType)
 
 	ListResourceServersRequest_UserPoolId = ListResourceServersRequest.AddMember("UserPoolId", _UserPoolIdType)
 
@@ -9427,6 +9675,12 @@ func init() {
 	SignUpResponse_UserSub = SignUpResponse.AddMember("UserSub", _StringType)
 
 	SignUpResponse_Session = SignUpResponse.AddMember("Session", _SessionType)
+
+	StartPointInTimeRecoveryRequest_UserPoolId = StartPointInTimeRecoveryRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	StartPointInTimeRecoveryRequest_RestoreId = StartPointInTimeRecoveryRequest.AddMember("RestoreId", _RestoreIdType)
+
+	StartPointInTimeRecoveryResponse_Restoration = StartPointInTimeRecoveryResponse.AddMember("Restoration", RestorationType)
 
 	StartUserImportJobRequest_UserPoolId = StartUserImportJobRequest.AddMember("UserPoolId", _UserPoolIdType)
 

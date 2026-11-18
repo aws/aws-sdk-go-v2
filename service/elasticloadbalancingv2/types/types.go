@@ -1872,6 +1872,12 @@ type LoadBalancerAttribute struct {
 	//   cipher suite negotiated with the client. Both headers are in OpenSSL format. The
 	//   possible values for the attribute are true and false . The default is false .
 	//
+	//   - routing.http.x_amzn_tls_kx.enabled - Indicates whether the x-amzn-tls-kx
+	//   header, which contains information about the negotiated key exchange group, is
+	//   added to the client request before sending it to the target. The x-amzn-tls-kx
+	//   header uses IANA TLS Supported Groups registry naming. The possible values for
+	//   the attribute are true and false . The default is false .
+	//
 	//   - routing.http.xff_client_port.enabled - Indicates whether the X-Forwarded-For
 	//   header should preserve the source port that the client used to connect to the
 	//   load balancer. The possible values are true and false . The default is false .
@@ -3554,6 +3560,22 @@ type TargetGroupAttribute struct {
 	//   time period expires, the load balancer-generated cookie is considered stale. The
 	//   range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400
 	//   seconds).
+	//
+	//   - waf.http2.traffic_inspection_behavior – Specifies when Amazon Web Services
+	//   WAF inspects HTTP/2 requests. This attribute applies only to target groups that
+	//   use the HTTP2 protocol version. The possible values are:
+	//
+	//   - inspect_immediately – Inspects each request as soon as data is available.
+	//   This is the default.
+	//
+	//   - inspect_after_sufficient_data – Accumulates HTTP/2 data frames before
+	//   inspection.
+	//
+	//   - routing.http2.rst_stream_error_forwarding.enabled – Specifies whether the
+	//   load balancer forwards an HTTP/2 or gRPC target's RST_STREAM error code to the
+	//   client, instead of returning an HTTP 502 (Bad Gateway) response. This attribute
+	//   applies only to target groups that use the HTTP2 or GRPC protocol version. The
+	//   value is true or false . The default is false .
 	//
 	// The following attribute is supported only if the load balancer is an
 	// Application Load Balancer and the target is a Lambda function:

@@ -1,3 +1,7 @@
+# v1.52.0 (2026-11-18)
+
+* **Feature**: Adds resource tags functionality to the AWS Health service
+
 # v1.51.0 (2026-11-16)
 
 * **Feature**: Adds resource tags functionality to the AWS Health service

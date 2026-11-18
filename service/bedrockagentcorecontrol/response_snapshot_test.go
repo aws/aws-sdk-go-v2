@@ -683,6 +683,11 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -5721,6 +5726,11 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{
@@ -11653,6 +11663,11 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{

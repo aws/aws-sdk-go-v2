@@ -367,6 +367,20 @@ var AllQueryArguments = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AllQueryArguments",
 }, smithy.ShapeTypeStructure, 0)
 
+var AnalyticsConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AnalyticsConfig",
+}, smithy.ShapeTypeStructure, 1)
+var AnalyticsConfig_Mode *smithy.Schema
+
+var AnalyticsMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AnalyticsMode",
+}, smithy.ShapeTypeEnum, 2)
+var AnalyticsMode_CROSS_REGION *smithy.Schema
+
+var AnalyticsMode_DISABLED *smithy.Schema
+
 var AndStatement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AndStatement",
@@ -4165,7 +4179,7 @@ var _WalletAddress = smithy.NewSchema(smithy.ShapeID{
 var WebACL = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WebACL",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var WebACL_Name *smithy.Schema
 
 var WebACL_Id *smithy.Schema
@@ -4209,6 +4223,8 @@ var WebACL_OnSourceDDoSProtectionConfig *smithy.Schema
 var WebACL_ApplicationConfig *smithy.Schema
 
 var WebACL_MonetizationConfig *smithy.Schema
+
+var WebACL_AnalyticsConfig *smithy.Schema
 
 var _WebACLSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -4354,7 +4370,7 @@ var CreateRuleGroupResponse_Summary *smithy.Schema
 var CreateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "CreateWebACLRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var CreateWebACLRequest_Name *smithy.Schema
 
 var CreateWebACLRequest_Scope *smithy.Schema
@@ -4386,6 +4402,8 @@ var CreateWebACLRequest_OnSourceDDoSProtectionConfig *smithy.Schema
 var CreateWebACLRequest_ApplicationConfig *smithy.Schema
 
 var CreateWebACLRequest_MonetizationConfig *smithy.Schema
+
+var CreateWebACLRequest_AnalyticsConfig *smithy.Schema
 
 var CreateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -5349,7 +5367,7 @@ var UpdateRuleGroupResponse_NextLockToken *smithy.Schema
 var UpdateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "UpdateWebACLRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var UpdateWebACLRequest_Name *smithy.Schema
 
 var UpdateWebACLRequest_Scope *smithy.Schema
@@ -5383,6 +5401,8 @@ var UpdateWebACLRequest_OnSourceDDoSProtectionConfig *smithy.Schema
 var UpdateWebACLRequest_ApplicationConfig *smithy.Schema
 
 var UpdateWebACLRequest_MonetizationConfig *smithy.Schema
+
+var UpdateWebACLRequest_AnalyticsConfig *smithy.Schema
 
 var UpdateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -5422,6 +5442,12 @@ func init() {
 	CustomRequestHandling_InsertHeaders = CustomRequestHandling.AddMember("InsertHeaders", _CustomHTTPHeaders)
 
 	AllowAction_CustomRequestHandling = AllowAction.AddMember("CustomRequestHandling", CustomRequestHandling)
+
+	AnalyticsMode_CROSS_REGION = AnalyticsMode.AddMember("CROSS_REGION", smithyprelude.Unit)
+
+	AnalyticsMode_DISABLED = AnalyticsMode.AddMember("DISABLED", smithyprelude.Unit)
+
+	AnalyticsConfig_Mode = AnalyticsConfig.AddMember("Mode", AnalyticsMode)
 
 	SingleHeader_Name = SingleHeader.AddMember("Name", _FieldToMatchData)
 
@@ -7581,6 +7607,8 @@ func init() {
 
 	WebACL_MonetizationConfig = WebACL.AddMember("MonetizationConfig", MonetizationConfig)
 
+	WebACL_AnalyticsConfig = WebACL.AddMember("AnalyticsConfig", AnalyticsConfig)
+
 	WebACLSummary_Name = WebACLSummary.AddMember("Name", _EntityName)
 
 	WebACLSummary_Id = WebACLSummary.AddMember("Id", _EntityId)
@@ -7686,6 +7714,8 @@ func init() {
 	CreateWebACLRequest_ApplicationConfig = CreateWebACLRequest.AddMember("ApplicationConfig", ApplicationConfig)
 
 	CreateWebACLRequest_MonetizationConfig = CreateWebACLRequest.AddMember("MonetizationConfig", MonetizationConfig)
+
+	CreateWebACLRequest_AnalyticsConfig = CreateWebACLRequest.AddMember("AnalyticsConfig", AnalyticsConfig)
 
 	CreateWebACLResponse_Summary = CreateWebACLResponse.AddMember("Summary", WebACLSummary)
 
@@ -8256,6 +8286,8 @@ func init() {
 	UpdateWebACLRequest_ApplicationConfig = UpdateWebACLRequest.AddMember("ApplicationConfig", ApplicationConfig)
 
 	UpdateWebACLRequest_MonetizationConfig = UpdateWebACLRequest.AddMember("MonetizationConfig", MonetizationConfig)
+
+	UpdateWebACLRequest_AnalyticsConfig = UpdateWebACLRequest.AddMember("AnalyticsConfig", AnalyticsConfig)
 
 	UpdateWebACLResponse_NextLockToken = UpdateWebACLResponse.AddMember("NextLockToken", _LockToken)
 

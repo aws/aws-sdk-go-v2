@@ -1,3 +1,7 @@
+# v1.51.0 (2026-11-18)
+
+* **Feature**: Supporting a new PAUSED device status and a DeviceStatusReason.
+
 # v1.50.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,3 +1,7 @@
+# v1.43.0 (2026-11-18)
+
+* **Feature**: Updated endpoint resolution for AWS Support, including FIPS and dual-stack endpoints.
+
 # v1.42.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

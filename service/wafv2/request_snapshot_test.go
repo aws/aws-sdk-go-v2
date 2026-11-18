@@ -10201,6 +10201,9 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
 		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -18662,6 +18665,9 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 				},
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -28681,6 +28687,9 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
 		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -37142,6 +37151,9 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 				},
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
 		},
 	}
 	body := &bytes.Buffer{}

@@ -1330,6 +1330,49 @@ func TestCheckResponseSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	want := &CancelPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelPointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelPointInTimeRecovery(context.Background(), &CancelPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelPointInTimeRecovery.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ChangePassword(t *testing.T) {
 	want := &ChangePasswordOutput{}
 	status, header, body, err := serdeRespReadSnapshot("ChangePassword.response")
@@ -2852,6 +2895,49 @@ func TestCheckResponseSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T
 	}
 }
 
+func TestCheckResponseSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	want := &DescribePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribePointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribePointInTimeRecovery(context.Background(), &DescribePointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribePointInTimeRecovery.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeResourceServer(t *testing.T) {
 	want := &DescribeResourceServerOutput{
 		ResourceServer: &types.ResourceServerType{
@@ -4216,6 +4302,49 @@ func TestCheckResponseSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	want := &InitiatePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("InitiatePointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.InitiatePointInTimeRecovery(context.Background(), &InitiatePointInTimeRecoveryInput{
+		UserPoolId:       ptr.String("__UserPoolId__"),
+		RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "InitiatePointInTimeRecovery.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 	want := &ListDevicesOutput{
 		Devices: []types.DeviceType{
@@ -4356,6 +4485,43 @@ func TestCheckResponseSnapshot_ListIdentityProviders(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListIdentityProviders.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	want := &ListPointInTimeRecoveriesOutput{
+		Restorations: []types.RestorationDescriptionType{
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPointInTimeRecoveries.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPointInTimeRecoveries(context.Background(), &ListPointInTimeRecoveriesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPointInTimeRecoveries.response", err)
 	}
 }
 
@@ -5702,6 +5868,49 @@ func TestCheckResponseSnapshot_SignUp(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "SignUp.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	want := &StartPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartPointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartPointInTimeRecovery(context.Background(), &StartPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartPointInTimeRecovery.response", err)
 	}
 }
 

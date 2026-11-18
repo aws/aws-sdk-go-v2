@@ -68,6 +68,16 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.signin#Assertion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 20000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.signin#AuthorizationCode": {
             "type": "string",
             "traits": {
@@ -76,6 +86,197 @@
                     "min": 1,
                     "max": 512
                 }
+            }
+        },
+        "com.amazonaws.signin#BatchRevokeSessionError": {
+            "type": "structure",
+            "members": {
+                "sessionArn": {
+                    "target": "com.amazonaws.signin#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "The session ARN",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The error code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The error message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A session that could not be revoked"
+            }
+        },
+        "com.amazonaws.signin#BatchRevokeSessionErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signin#BatchRevokeSessionError"
+            }
+        },
+        "com.amazonaws.signin#BatchRevokeSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#BatchRevokeSessionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#BatchRevokeSessionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Revoke one or more sign-in sessions"
+                },
+                "smithy.api#documentation": "Revokes up to five sign-in sessions. A revoked session can no longer be refreshed. Revoking a session that is\nalready revoked succeeds. Each session must belong to the identity specified by principalArn, or to the caller if\nprincipalArn is omitted. Failures for individual sessions are returned in the errors list and do not fail the\nwhole request.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Revoke one of your own sessions",
+                        "documentation": "Revokes a session owned by the caller and records the reason.",
+                        "input": {
+                            "sessionArns": [
+                                "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7"
+                            ],
+                            "reason": "Signed out of a lost device"
+                        },
+                        "output": {
+                            "revokedSessions": [
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7"
+                                }
+                            ],
+                            "errors": []
+                        }
+                    },
+                    {
+                        "title": "Revoke another identity's session as an account administrator",
+                        "documentation": "Uses the account wildcard principal ARN to revoke another IAM identity's session.",
+                        "input": {
+                            "principalArn": "arn:aws:iam::123456789012:*",
+                            "sessionArns": [
+                                "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77"
+                            ],
+                            "reason": "Revoked by account administrator"
+                        },
+                        "output": {
+                            "revokedSessions": [
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77"
+                                }
+                            ],
+                            "errors": []
+                        }
+                    },
+                    {
+                        "title": "Revoke a batch of sessions with a partial failure",
+                        "documentation": "Revokes the caller's session and reports a session that was not found in the errors list.",
+                        "input": {
+                            "sessionArns": [
+                                "arn:aws:signin:us-east-1:123456789012:session/ac148df8-7f37-48eb-b0cf-8987fc4a55a4",
+                                "arn:aws:signin:us-east-1:123456789012:session/36b6ae9d-4fa9-40d9-8eff-eeeb4d15f79d"
+                            ]
+                        },
+                        "output": {
+                            "revokedSessions": [
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/ac148df8-7f37-48eb-b0cf-8987fc4a55a4"
+                                }
+                            ],
+                            "errors": [
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/36b6ae9d-4fa9-40d9-8eff-eeeb4d15f79d",
+                                    "code": "ResourceNotFoundException",
+                                    "message": "No session found for the given sessionArn"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/batch-revoke-sessions"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#BatchRevokeSessionsInput": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.signin#PrincipalArnFilter",
+                    "traits": {
+                        "smithy.api#documentation": "The identity that owns the sessions. Omit to use the caller. Specify arn:aws:iam::{account-id}:* to revoke\nany session in the account."
+                    }
+                },
+                "sessionArns": {
+                    "target": "com.amazonaws.signin#SessionArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the sessions to revoke",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.signin#RevocationReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for revoking the sessions"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for BatchRevokeSessions operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#BatchRevokeSessionsOutput": {
+            "type": "structure",
+            "members": {
+                "revokedSessions": {
+                    "target": "com.amazonaws.signin#RevokedSessionList",
+                    "traits": {
+                        "smithy.api#documentation": "Sessions that were revoked",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.signin#BatchRevokeSessionErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "Sessions that could not be revoked",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for BatchRevokeSessions operation",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signin#BearerTokenExpiresIn": {
@@ -117,6 +318,28 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[!-~]+$"
+            }
+        },
+        "com.amazonaws.signin#ClientType": {
+            "type": "enum",
+            "members": {
+                "CLI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The AWS CLI",
+                        "smithy.api#enumValue": "CLI"
+                    }
+                },
+                "MCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An MCP server",
+                        "smithy.api#enumValue": "MCP"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Type of OAuth client that created a session"
             }
         },
         "com.amazonaws.signin#CodeVerifier": {
@@ -568,7 +791,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.signin#OAuthAccessToken",
                     "traits": {
-                        "smithy.api#documentation": "Access token containing principal identity, resource scope, and session metadata.",
+                        "smithy.api#documentation": "The access token containing principal identity, resource scope, and session metadata.",
                         "smithy.api#jsonName": "access_token",
                         "smithy.api#required": {}
                     }
@@ -584,7 +807,7 @@
                 "expiresIn": {
                     "target": "com.amazonaws.signin#TokenExpiresIn",
                     "traits": {
-                        "smithy.api#documentation": "Token lifetime in seconds. Value is the minimum of the caller's session validity and 1 hour (3600 seconds).",
+                        "smithy.api#documentation": "The token lifetime in seconds. Value is the minimum of the caller's session validity and 1 hour (3600 seconds).",
                         "smithy.api#jsonName": "expires_in",
                         "smithy.api#required": {}
                     }
@@ -626,7 +849,7 @@
             "traits": {
                 "aws.iam#iamAction": {
                     "name": "CreateOAuth2Token",
-                    "documentation": "Exchange a subject token for an OAuth 2.0 access token scoped to a resource"
+                    "documentation": "Exchange a supported token for an OAuth 2.0 access token scoped to a resource"
                 },
                 "smithy.api#auth": [],
                 "smithy.api#documentation": "Exchanges a supported token for an OAuth 2.0 access token scoped to a resource, which you can use to access AWS services from applications.",
@@ -647,7 +870,7 @@
                 "grantType": {
                     "target": "com.amazonaws.signin#TokenExchangeGrantType",
                     "traits": {
-                        "smithy.api#documentation": "The OAuth 2.0 grant type. Currently only supports \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "smithy.api#documentation": "The OAuth 2.0 grant type. Currently supports \"urn:ietf:params:oauth:grant-type:token-exchange\"\nand \"urn:ietf:params:oauth:grant-type:jwt-bearer\".",
                         "smithy.api#jsonName": "grant_type",
                         "smithy.api#required": {}
                     }
@@ -666,16 +889,29 @@
                         "smithy.api#jsonName": "subject_token_type"
                     }
                 },
+                "assertion": {
+                    "target": "com.amazonaws.signin#Assertion",
+                    "traits": {
+                        "smithy.api#documentation": "The JWT authorization grant, as defined in RFC 7523.\nRequired when \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\"."
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.signin#JwtBearerClientId",
+                    "traits": {
+                        "smithy.api#documentation": "The OAuth 2.0 client identifier.\nIf provided with \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\", must match the assertion's \"client_id\" claim.",
+                        "smithy.api#jsonName": "client_id"
+                    }
+                },
                 "resource": {
                     "target": "com.amazonaws.signin#Resource",
                     "traits": {
-                        "smithy.api#documentation": "The OAuth resource for which the access token is requested.\nRequired when \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".\nExample: \"glue.amazonaws.com\"."
+                        "smithy.api#documentation": "The OAuth resource for which the access token is requested:\n\n- \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\": Required. Must be a service principal. Example: \"glue.amazonaws.com\".\n- \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\": Required when the assertion has no \"resource\" claim, otherwise must match it. Must be a URI. Example: \"https://aws-mcp.us-east-1.api.aws/mcp\"."
                     }
                 },
                 "scope": {
                     "target": "com.amazonaws.signin#Scope",
                     "traits": {
-                        "smithy.api#documentation": "IAM managed policy Amazon Resource Names (ARNs) to apply as session policies that further\nscope down the permissions of the issued access token, provided as a space-delimited list.\nExample: \"arn:aws:iam::444455556666:policy/MyPolicy\"."
+                        "smithy.api#documentation": "The IAM managed policy Amazon Resource Names (ARNs) to apply as session policies that further\nscope down the permissions of the issued access token, provided as a space-delimited list.\nExample: \"arn:aws:iam::444455556666:policy/MyPolicy\".\n\nIf provided with \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\", must match the assertion's \"scope\" claim."
                     }
                 }
             },
@@ -690,7 +926,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.signin#OAuthAccessToken",
                     "traits": {
-                        "smithy.api#documentation": "Access token containing principal identity, resource scope, and session metadata.",
+                        "smithy.api#documentation": "The access token containing principal identity, resource scope, and session metadata.",
                         "smithy.api#jsonName": "access_token",
                         "smithy.api#required": {}
                     }
@@ -698,7 +934,7 @@
                 "issuedTokenType": {
                     "target": "com.amazonaws.signin#IssuedOAuthAccessTokenType",
                     "traits": {
-                        "smithy.api#documentation": "The token type of the issued token. Always \"urn:ietf:params:oauth:token-type:access_token\" as defined in RFC 8693 §2.2.1.",
+                        "smithy.api#documentation": "The token type of the issued token. Returned when \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".\nValue is \"urn:ietf:params:oauth:token-type:access_token\" as defined in RFC 8693 §2.2.1.",
                         "smithy.api#jsonName": "issued_token_type"
                     }
                 },
@@ -713,14 +949,26 @@
                 "expiresIn": {
                     "target": "com.amazonaws.signin#TokenExpiresIn",
                     "traits": {
-                        "smithy.api#documentation": "Token lifetime in seconds. Value is the minimum of the subject token's validity and 1 hour (3600 seconds).",
+                        "smithy.api#documentation": "The token lifetime in seconds. Value is the minimum of the provided token's validity and 1 hour (3600 seconds).",
                         "smithy.api#jsonName": "expires_in",
                         "smithy.api#required": {}
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.signin#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "The resource the access token is scoped to.\nReturned when \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\"."
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.signin#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "The IAM managed policy ARNs applied as session policies, as a space-delimited list.\nReturned when \"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer\" and the assertion has a scope."
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Output structure for CreateOAuth2TokenWithTokenExchange operation.\n\nContains the access token, issued token type, token type, and expiration as defined in RFC 6749 §5.1 and RFC 8693 §2.2.1.",
+                "smithy.api#documentation": "Output structure for CreateOAuth2TokenWithTokenExchange operation.\n\nContains the access token, token type, and expiration as defined in RFC 6749 §5.1, plus fields specific to the grant type.",
                 "smithy.api#output": {}
             }
         },
@@ -891,7 +1139,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws:((iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]{1,64})|(iam::[0-9]{12}:user/[a-zA-Z0-9_+=,.@-]{1,64})|(sts::[0-9]{12}:federated-user/[a-zA-Z0-9_+=,.@-]{2,193})|(iam::[0-9]{12}:root))$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:((iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]{1,64})|(iam::[0-9]{12}:user/[a-zA-Z0-9_+=,.@-]{1,64})|(sts::[0-9]{12}:federated-user/[a-zA-Z0-9_+=,.@-]{2,193})|(iam::[0-9]{12}:root))$"
             }
         },
         "com.amazonaws.signin#ExpiresIn": {
@@ -1051,6 +1299,200 @@
             },
             "traits": {
                 "smithy.api#documentation": "Output for GetResourcePolicy operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#GetSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#GetSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#GetSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Retrieve the details of a single sign-in session"
+                },
+                "smithy.api#documentation": "Returns the details of a single sign-in session. The session must belong to the identity specified by\nprincipalArn, or to the caller if principalArn is omitted. A session that belongs to a different identity or\naccount is reported as not found.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get one of your own sessions",
+                        "documentation": "Returns a session owned by the caller when principalArn is omitted.",
+                        "input": {
+                            "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7"
+                        },
+                        "output": {
+                            "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7",
+                            "principalArn": "arn:aws:iam::123456789012:role/Developer",
+                            "role": "arn:aws:iam::123456789012:role/Developer",
+                            "status": "ACTIVE",
+                            "clientId": "arn:aws:signin:::devtools/same-device",
+                            "clientType": "CLI",
+                            "issuedAt": 1793825807,
+                            "expiresAt": 1794431207,
+                            "issuedInRegion": "us-east-1"
+                        }
+                    },
+                    {
+                        "title": "Get another identity's session as an account administrator",
+                        "documentation": "Uses the account wildcard principal ARN to get a session owned by another IAM identity.",
+                        "input": {
+                            "principalArn": "arn:aws:iam::123456789012:*",
+                            "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77"
+                        },
+                        "output": {
+                            "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/5dbdd43b-4135-4c59-ad06-5ddbcc2c1d77",
+                            "principalArn": "arn:aws:iam::123456789012:role/ReadOnly",
+                            "role": "arn:aws:iam::123456789012:role/ReadOnly",
+                            "status": "ACTIVE",
+                            "clientId": "arn:aws:signin:::devtools/same-device",
+                            "clientType": "CLI",
+                            "issuedAt": 1793826107,
+                            "expiresAt": 1794431214,
+                            "issuedInRegion": "us-east-1"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-session"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#GetSessionInput": {
+            "type": "structure",
+            "members": {
+                "sessionArn": {
+                    "target": "com.amazonaws.signin#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the session to retrieve",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principalArn": {
+                    "target": "com.amazonaws.signin#PrincipalArnFilter",
+                    "traits": {
+                        "smithy.api#documentation": "The identity that owns the session. Omit to use the caller. Specify arn:aws:iam::{account-id}:* to retrieve\nany session in the account."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for GetSession operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#GetSessionOutput": {
+            "type": "structure",
+            "members": {
+                "sessionArn": {
+                    "target": "com.amazonaws.signin#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "The session ARN",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principalArn": {
+                    "target": "com.amazonaws.signin#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "The IAM identity that owns the session",
+                        "smithy.api#required": {}
+                    }
+                },
+                "role": {
+                    "target": "com.amazonaws.signin#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "The IAM role for the session, when the owner is a role"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signin#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The session status"
+                    }
+                },
+                "clientId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The OAuth client that created the session"
+                    }
+                },
+                "clientType": {
+                    "target": "com.amazonaws.signin#ClientType",
+                    "traits": {
+                        "smithy.api#documentation": "The type of OAuth client that created the session"
+                    }
+                },
+                "resource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The resource that the session's tokens are bound to"
+                    }
+                },
+                "issuedAt": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The time the session was created, in Unix epoch seconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresAt": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The time the session expires, in Unix epoch seconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUsedAt": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The time the session was last refreshed, in Unix epoch seconds"
+                    }
+                },
+                "issuedInRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The AWS Region where the session was created"
+                    }
+                },
+                "originSessionArn": {
+                    "target": "com.amazonaws.signin#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the session this session originated from"
+                    }
+                },
+                "userAgent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The user agent captured when the session was created or last refreshed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for GetSession operation",
                 "smithy.api#output": {}
             }
         },
@@ -1282,7 +1724,7 @@
                 "smithy.api#documentation": "Token string submitted for introspection. May be an AWS Sign-In access token or refresh token.",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4096
+                    "max": 12288
                 },
                 "smithy.api#pattern": "^ASO[AR][A-Za-z0-9+/=_\\-]+$",
                 "smithy.api#sensitive": {}
@@ -1338,6 +1780,15 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^urn:ietf:params:oauth:token-type:access_token$"
+            }
+        },
+        "com.amazonaws.signin#JwtBearerClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 212
+                }
             }
         },
         "com.amazonaws.signin#ListResourcePermissionStatements": {
@@ -1428,6 +1879,178 @@
             },
             "traits": {
                 "smithy.api#documentation": "Output for ListResourcePermissionStatements operation",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#ListSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#ListSessionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#ListSessionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "List sign-in sessions for a target user or role"
+                },
+                "smithy.api#documentation": "Lists sign-in sessions for an IAM identity in your account. If you omit principalArn, the operation lists the\ncaller's own sessions. Specify a user or role ARN to list that identity's sessions, or specify\narn:aws:iam::{account-id}:* to list all sessions in the account. Filters are combined with a logical AND.",
+                "smithy.api#examples": [
+                    {
+                        "title": "List your own sessions",
+                        "documentation": "Lists the caller's sessions when principalArn is omitted.",
+                        "input": {},
+                        "output": {
+                            "items": [
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7",
+                                    "principalArn": "arn:aws:iam::123456789012:role/Developer",
+                                    "role": "arn:aws:iam::123456789012:role/Developer",
+                                    "status": "ACTIVE",
+                                    "issuedAt": 1793825807,
+                                    "expiresAt": 1794431207,
+                                    "clientId": "arn:aws:signin:::devtools/same-device",
+                                    "clientType": "CLI"
+                                },
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/4c63f231-2128-42cf-aa83-83589f9a0df2",
+                                    "principalArn": "arn:aws:iam::123456789012:role/Developer",
+                                    "role": "arn:aws:iam::123456789012:role/Developer",
+                                    "status": "ACTIVE",
+                                    "issuedAt": 1793824607,
+                                    "expiresAt": 1794431212,
+                                    "clientId": "arn:aws:signin:::devtools/same-device",
+                                    "clientType": "CLI"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List active sessions one page at a time",
+                        "documentation": "Returns one active session and a token to request the next page.",
+                        "input": {
+                            "maxResults": 1,
+                            "status": "ACTIVE"
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "sessionArn": "arn:aws:signin:us-east-1:123456789012:session/3b0a6152-ba23-447d-83cf-b3b3cc7b95f7",
+                                    "principalArn": "arn:aws:iam::123456789012:role/Developer",
+                                    "role": "arn:aws:iam::123456789012:role/Developer",
+                                    "status": "ACTIVE",
+                                    "issuedAt": 1793825807,
+                                    "expiresAt": 1794431207,
+                                    "clientId": "arn:aws:signin:::devtools/same-device",
+                                    "clientType": "CLI"
+                                }
+                            ],
+                            "nextToken": "AAMA-EXAMPLE-NEXT-TOKEN"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-sessions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.rules#staticContextParams": {
+                    "IsControlPlane": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#ListSessionsInput": {
+            "type": "structure",
+            "members": {
+                "principalArn": {
+                    "target": "com.amazonaws.signin#PrincipalArnFilter",
+                    "traits": {
+                        "smithy.api#documentation": "The identity whose sessions to list. Omit to list the caller's own sessions. Specify\narn:aws:iam::{account-id}:* to list all sessions in the account."
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.signin#SessionsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of results to return"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "Token for pagination"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signin#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Returns only sessions with this status"
+                    }
+                },
+                "clientId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Returns only sessions created by this OAuth client"
+                    }
+                },
+                "issuedAfter": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "Returns only sessions created at or after this time, in Unix epoch seconds"
+                    }
+                },
+                "issuedBefore": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "Returns only sessions created before this time, in Unix epoch seconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input for ListSessions operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#ListSessionsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.signin#SessionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "List of session summaries",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.signin#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "Token for next page of results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output for ListSessions operation",
                 "smithy.api#output": {}
             }
         },
@@ -1536,6 +2159,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "invalid_target"
+                    }
+                },
+                "OAUTH_INVALID_CLIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid_client"
                     }
                 },
                 "OAUTH_RATE_EXCEEDED": {
@@ -1661,6 +2290,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "IAM principal identifier"
+            }
+        },
+        "com.amazonaws.signin#PrincipalArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "IAM identity that owns a session",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:((iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]{1,64})|(iam::[0-9]{12}:user/[a-zA-Z0-9_+=,.@-]{1,64})|(sts::[0-9]{12}:federated-user/[a-zA-Z0-9_+=,.@-]{2,193})|(iam::[0-9]{12}:root))$"
+            }
+        },
+        "com.amazonaws.signin#PrincipalArnFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "IAM identity ARN, or arn:aws:iam::{account-id}:* for all identities in the account",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:((iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]{1,64})|(iam::[0-9]{12}:user/[a-zA-Z0-9_+=,.@-]{1,64})|(sts::[0-9]{12}:federated-user/[a-zA-Z0-9_+=,.@-]{2,193})|(iam::[0-9]{12}:root)|(iam::[0-9]{12}:[*]))$"
             }
         },
         "com.amazonaws.signin#PutConsoleAuthorizationConfiguration": {
@@ -1888,7 +2539,7 @@
                 "smithy.api#documentation": "The refresh token returned from authorization code redemption. Used in subsequent token refresh requests.",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2048
+                    "max": 12288
                 },
                 "smithy.api#sensitive": {}
             }
@@ -1933,13 +2584,23 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.signin#RevocationReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Reason for revoking a session",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.signin#RevocationToken": {
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "Refresh token string submitted for revocation.",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 4096
+                    "max": 12288
                 },
                 "smithy.api#pattern": "^ASOR[A-Za-z0-9+/=_\\-]+$",
                 "smithy.api#sensitive": {}
@@ -2013,6 +2674,27 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.signin#RevokedSession": {
+            "type": "structure",
+            "members": {
+                "sessionArn": {
+                    "target": "com.amazonaws.signin#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "The revoked session ARN",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A session that was revoked"
+            }
+        },
+        "com.amazonaws.signin#RevokedSessionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signin#RevokedSession"
+            }
+        },
         "com.amazonaws.signin#Scope": {
             "type": "string",
             "traits": {
@@ -2070,10 +2752,139 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.signin#Session": {
+            "type": "structure",
+            "members": {
+                "sessionArn": {
+                    "target": "com.amazonaws.signin#SessionArn",
+                    "traits": {
+                        "smithy.api#documentation": "The session ARN",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principalArn": {
+                    "target": "com.amazonaws.signin#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "The IAM identity that owns the session",
+                        "smithy.api#required": {}
+                    }
+                },
+                "role": {
+                    "target": "com.amazonaws.signin#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "The IAM role for the session, when the owner is a role"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.signin#SessionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The session status"
+                    }
+                },
+                "issuedAt": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The time the session was created, in Unix epoch seconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresAt": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "The time the session expires, in Unix epoch seconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The OAuth client that created the session"
+                    }
+                },
+                "clientType": {
+                    "target": "com.amazonaws.signin#ClientType",
+                    "traits": {
+                        "smithy.api#documentation": "The type of OAuth client that created the session"
+                    }
+                },
+                "resource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The resource that the session's tokens are bound to"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary of a sign-in session"
+            }
+        },
+        "com.amazonaws.signin#SessionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Sign-in session ARN",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.signin#SessionArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signin#SessionArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.signin#SessionStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The session is active",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The session has been revoked",
+                        "smithy.api#enumValue": "REVOKED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Status of a sign-in session"
+            }
+        },
+        "com.amazonaws.signin#SessionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signin#Session"
+            }
+        },
+        "com.amazonaws.signin#SessionsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum number of sessions to return",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.signin#Signin": {
             "type": "service",
             "version": "2023-01-01",
             "operations": [
+                {
+                    "target": "com.amazonaws.signin#BatchRevokeSessions"
+                },
                 {
                     "target": "com.amazonaws.signin#CreateBearerToken"
                 },
@@ -2099,10 +2910,16 @@
                     "target": "com.amazonaws.signin#GetResourcePolicy"
                 },
                 {
+                    "target": "com.amazonaws.signin#GetSession"
+                },
+                {
                     "target": "com.amazonaws.signin#IntrospectOAuth2TokenWithIAM"
                 },
                 {
                     "target": "com.amazonaws.signin#ListResourcePermissionStatements"
+                },
+                {
+                    "target": "com.amazonaws.signin#ListSessions"
                 },
                 {
                     "target": "com.amazonaws.signin#PutConsoleAuthorizationConfiguration"
@@ -4600,7 +5417,7 @@
         "com.amazonaws.signin#TokenExchangeGrantType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^urn:ietf:params:oauth:grant-type:token-exchange$"
+                "smithy.api#pattern": "^urn:ietf:params:oauth:grant-type:(token-exchange|jwt-bearer)$"
             }
         },
         "com.amazonaws.signin#TokenExpiresIn": {

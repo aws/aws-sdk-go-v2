@@ -10111,6 +10111,9 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
 		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -18243,6 +18246,7 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 			OnSourceDDoSProtectionConfig: nil,
 			ApplicationConfig:            nil,
 			MonetizationConfig:           nil,
+			AnalyticsConfig:              nil,
 		},
 		LockToken:                 ptr.String("__LockToken__"),
 		ApplicationIntegrationURL: ptr.String("__ApplicationIntegrationURL__"),
@@ -21607,6 +21611,7 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 			OnSourceDDoSProtectionConfig: nil,
 			ApplicationConfig:            nil,
 			MonetizationConfig:           nil,
+			AnalyticsConfig:              nil,
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetWebACLForResource.response")
@@ -29860,6 +29865,9 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
 		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -33285,6 +33293,9 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 				},
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
 		},
 	})
 	if opErr == nil {

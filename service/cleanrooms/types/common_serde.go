@@ -242,6 +242,10 @@ func serializeIntermediateTableAnalysisRulePolicyV1(s smithy.ShapeSerializer, sc
 
 func serializeIntermediateTableComputeConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v IntermediateTableComputeConfiguration) {
 	switch vv := v.(type) {
+	case *IntermediateTableComputeConfigurationMemberJobComputeConfiguration:
+		s.WriteUnion(schema, schemas.IntermediateTableComputeConfiguration_jobComputeConfiguration)
+		serializeProtectedJobComputeConfiguration(s, schemas.IntermediateTableComputeConfiguration_jobComputeConfiguration, vv.Value)
+		s.CloseUnion()
 	case *IntermediateTableComputeConfigurationMemberQueryComputeConfiguration:
 		s.WriteUnion(schema, schemas.IntermediateTableComputeConfiguration_queryComputeConfiguration)
 		s.WriteStruct(schemas.IntermediateTableComputeConfiguration_queryComputeConfiguration)
@@ -275,6 +279,12 @@ func serializeMembershipProtectedQueryOutputConfiguration(s smithy.ShapeSerializ
 
 func serializePopulationAnalysisConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v PopulationAnalysisConfiguration) {
 	switch vv := v.(type) {
+	case *PopulationAnalysisConfigurationMemberJobParameters:
+		s.WriteUnion(schema, schemas.PopulationAnalysisConfiguration_jobParameters)
+		s.WriteStruct(schemas.PopulationAnalysisConfiguration_jobParameters)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *PopulationAnalysisConfigurationMemberSqlParameters:
 		s.WriteUnion(schema, schemas.PopulationAnalysisConfiguration_sqlParameters)
 		s.WriteStruct(schemas.PopulationAnalysisConfiguration_sqlParameters)
@@ -424,6 +434,12 @@ func serializeProtectedJobOutputConfigurationInput(s smithy.ShapeSerializer, sch
 
 func serializeProtectedJobOutputConfigurationOutput(s smithy.ShapeSerializer, schema *smithy.Schema, v ProtectedJobOutputConfigurationOutput) {
 	switch vv := v.(type) {
+	case *ProtectedJobOutputConfigurationOutputMemberIntermediateTable:
+		s.WriteUnion(schema, schemas.ProtectedJobOutputConfigurationOutput_intermediateTable)
+		s.WriteStruct(schemas.ProtectedJobOutputConfigurationOutput_intermediateTable)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ProtectedJobOutputConfigurationOutputMemberMember:
 		s.WriteUnion(schema, schemas.ProtectedJobOutputConfigurationOutput_member)
 		s.WriteStruct(schemas.ProtectedJobOutputConfigurationOutput_member)
@@ -837,6 +853,10 @@ func deserializeIntermediateTableAnalysisRulePolicyV1(d smithy.ShapeDeserializer
 func deserializeIntermediateTableComputeConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *IntermediateTableComputeConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.IntermediateTableComputeConfiguration_jobComputeConfiguration:
+			vv := &IntermediateTableComputeConfigurationMemberJobComputeConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.IntermediateTableComputeConfiguration_queryComputeConfiguration:
 			vv := &IntermediateTableComputeConfigurationMemberQueryComputeConfiguration{}
 			*v = vv
@@ -873,6 +893,10 @@ func deserializeMembershipProtectedQueryOutputConfiguration(d smithy.ShapeDeseri
 func deserializePopulationAnalysisConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *PopulationAnalysisConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.PopulationAnalysisConfiguration_jobParameters:
+			vv := &PopulationAnalysisConfigurationMemberJobParameters{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.PopulationAnalysisConfiguration_sqlParameters:
 			vv := &PopulationAnalysisConfigurationMemberSqlParameters{}
 			*v = vv
@@ -1025,6 +1049,10 @@ func deserializeProtectedJobOutputConfigurationInput(d smithy.ShapeDeserializer,
 func deserializeProtectedJobOutputConfigurationOutput(d smithy.ShapeDeserializer, s *smithy.Schema, v *ProtectedJobOutputConfigurationOutput) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.ProtectedJobOutputConfigurationOutput_intermediateTable:
+			vv := &ProtectedJobOutputConfigurationOutputMemberIntermediateTable{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ProtectedJobOutputConfigurationOutput_member:
 			vv := &ProtectedJobOutputConfigurationOutputMemberMember{}
 			*v = vv

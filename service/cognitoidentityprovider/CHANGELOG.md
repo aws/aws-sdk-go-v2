@@ -1,3 +1,7 @@
+# v1.79.0 (2026-11-18)
+
+* **Feature**: Add support for restoring user pool's user data to point in time.
+
 # v1.78.0 (2026-11-16)
 
 * **Feature**: Implement OAuth 2.0 Token Exchange (RFC 8693) for Cognito User Pools, enabling services to exchange a user's existing token for a new token that is appropriately scoped and audience-bound for a specific downstream service.

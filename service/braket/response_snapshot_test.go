@@ -347,11 +347,17 @@ func TestCheckResponseSnapshot_DeleteSpendingLimit(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetDevice(t *testing.T) {
 	want := &GetDeviceOutput{
-		DeviceArn:          ptr.String("__DeviceArn__"),
-		DeviceName:         ptr.String("__DeviceName__"),
-		ProviderName:       ptr.String("__ProviderName__"),
-		DeviceType:         types.DeviceType("QPU"),
-		DeviceStatus:       types.DeviceStatus("ONLINE"),
+		DeviceArn:    ptr.String("__DeviceArn__"),
+		DeviceName:   ptr.String("__DeviceName__"),
+		ProviderName: ptr.String("__ProviderName__"),
+		DeviceType:   types.DeviceType("QPU"),
+		DeviceStatus: types.DeviceStatus("ONLINE"),
+		DeviceStatusReason: &types.DeviceStatusReason{
+			Reason:         types.DeviceStatusReasonCode("OUTSIDE_AVAILABILITY_WINDOW"),
+			StartedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EstimatedEndAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 		DeviceCapabilities: ptr.String("__DeviceCapabilities__"),
 		DeviceQueueInfo: []types.DeviceQueueInfo{
 			{

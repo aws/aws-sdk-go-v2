@@ -53,8 +53,8 @@ type SendBulkEmailInput struct {
 	ConfigurationSetName *string
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send using the SendEmail operation. Tags correspond to characteristics of the
-	// email that you define, so that you can publish email sending events.
+	// send using the SendBulkEmail operation. Tags correspond to characteristics of
+	// the email that you define, so that you can publish email sending events.
 	DefaultEmailTags []types.MessageTag
 
 	// The ID of the multi-region endpoint (global-endpoint).

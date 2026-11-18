@@ -318,6 +318,26 @@ func serializeResourceServersListType(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeRestorationListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []RestorationDescriptionType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRestorePreviewListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []RestorePreviewType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSchemaAttributesListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []SchemaAttributeType) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1222,6 +1242,50 @@ func deserializeResourceServersListType(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		vv = ResourceServerType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRestorationListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RestorationDescriptionType) error {
+	*v = make([]RestorationDescriptionType, 0)
+	var vv RestorationDescriptionType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RestorationDescriptionType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RestorationDescriptionType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRestorePreviewListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RestorePreviewType) error {
+	*v = make([]RestorePreviewType, 0)
+	var vv RestorePreviewType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RestorePreviewType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RestorePreviewType{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

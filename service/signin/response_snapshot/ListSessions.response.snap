@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"clientId":"__ClientId__","clientType":"CLI","expiresAt":1,"issuedAt":1,"principalArn":"__PrincipalArn__","resource":"__Resource__","role":"__Role__","sessionArn":"__SessionArn__","status":"ACTIVE"},{"clientId":"__ClientId__","clientType":"CLI","expiresAt":1,"issuedAt":1,"principalArn":"__PrincipalArn__","resource":"__Resource__","role":"__Role__","sessionArn":"__SessionArn__","status":"ACTIVE"}],"nextToken":"__NextToken__"}

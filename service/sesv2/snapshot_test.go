@@ -998,6 +998,18 @@ func TestCheckSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAccountDeliveryAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountDeliveryAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountDeliveryAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutAccountDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountDetails(context.Background(), nil, func(o *Options) {
@@ -2382,6 +2394,18 @@ func TestUpdateSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing.T) {
 	_, err := svc.PutAccountDedicatedIpWarmupAttributes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountDedicatedIpWarmupAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountDeliveryAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountDeliveryAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountDeliveryAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

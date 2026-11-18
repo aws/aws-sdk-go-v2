@@ -2060,8 +2060,10 @@ var _CapacityProviderArn = smithy.NewSchema(smithy.ShapeID{
 var CapacityProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CapacityProviderConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CapacityProviderConfiguration_capacityProviderArn *smithy.Schema
+
+var CapacityProviderConfiguration_operatingSystemConfiguration *smithy.Schema
 
 var _CapacityProviderId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -4150,7 +4152,7 @@ var FallbackTriggers_errors *smithy.Schema
 var FilesystemConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "FilesystemConfiguration",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 5)
 var FilesystemConfiguration_sessionStorage *smithy.Schema
 
 var FilesystemConfiguration_s3FilesAccessPoint *smithy.Schema
@@ -4158,6 +4160,8 @@ var FilesystemConfiguration_s3FilesAccessPoint *smithy.Schema
 var FilesystemConfiguration_efsAccessPoint *smithy.Schema
 
 var FilesystemConfiguration_capacityProviderVolume *smithy.Schema
+
+var FilesystemConfiguration_s3BucketMount *smithy.Schema
 
 var _FilesystemConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5990,6 +5994,12 @@ var LinkedinOauth2ProviderConfigOutput_oauthDiscovery *smithy.Schema
 
 var LinkedinOauth2ProviderConfigOutput_clientId *smithy.Schema
 
+var LinuxOperatingSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "LinuxOperatingSystemConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var LinuxOperatingSystemConfiguration_privilegeMode *smithy.Schema
+
 var ListDatasetExamplesFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ListDatasetExamplesFilter",
@@ -7059,6 +7069,12 @@ var OperatingSystem_LINUX_X86_64 *smithy.Schema
 
 var OperatingSystem_LINUX_ARM64 *smithy.Schema
 
+var OperatingSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "OperatingSystemConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var OperatingSystemConfiguration_linux *smithy.Schema
+
 var _OptionalLogGroupName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "OptionalLogGroupName",
@@ -7732,6 +7748,14 @@ var PrivateKeySource = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var PrivateKeySource_kmsKeySource *smithy.Schema
 
+var PrivilegeMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "PrivilegeMode",
+}, smithy.ShapeTypeEnum, 2)
+var PrivilegeMode_STANDARD *smithy.Schema
+
+var PrivilegeMode_PRIVILEGED *smithy.Schema
+
 var _Prompt = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "Prompt",
@@ -8282,6 +8306,20 @@ var RuntimeTargetConfiguration_arn *smithy.Schema
 var RuntimeTargetConfiguration_qualifier *smithy.Schema
 
 var RuntimeTargetConfiguration_schema *smithy.Schema
+
+var S3BucketMountConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "S3BucketMountConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var S3BucketMountConfiguration_bucket *smithy.Schema
+
+var S3BucketMountConfiguration_mountPath *smithy.Schema
+
+var S3BucketMountConfiguration_prefix *smithy.Schema
+
+var S3BucketMountConfiguration_s3BucketOwner *smithy.Schema
+
+var S3BucketMountConfiguration_s3BucketRegion *smithy.Schema
 
 var _S3BucketUri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -15202,7 +15240,17 @@ func init() {
 
 	BuildLifecycleHooks_warmup = BuildLifecycleHooks.AddMember("warmup", LifecycleHook)
 
+	PrivilegeMode_STANDARD = PrivilegeMode.AddMember("STANDARD", smithyprelude.Unit)
+
+	PrivilegeMode_PRIVILEGED = PrivilegeMode.AddMember("PRIVILEGED", smithyprelude.Unit)
+
+	LinuxOperatingSystemConfiguration_privilegeMode = LinuxOperatingSystemConfiguration.AddMember("privilegeMode", PrivilegeMode)
+
+	OperatingSystemConfiguration_linux = OperatingSystemConfiguration.AddMember("linux", LinuxOperatingSystemConfiguration)
+
 	CapacityProviderConfiguration_capacityProviderArn = CapacityProviderConfiguration.AddMember("capacityProviderArn", _CapacityProviderArn)
+
+	CapacityProviderConfiguration_operatingSystemConfiguration = CapacityProviderConfiguration.AddMember("operatingSystemConfiguration", OperatingSystemConfiguration)
 
 	CapacityProviderStatus_CREATING = CapacityProviderStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -16468,6 +16516,16 @@ func init() {
 
 	S3FilesAccessPointConfiguration_mountPath = S3FilesAccessPointConfiguration.AddMember("mountPath", _MountPath)
 
+	S3BucketMountConfiguration_bucket = S3BucketMountConfiguration.AddMember("bucket", smithyprelude.String)
+
+	S3BucketMountConfiguration_mountPath = S3BucketMountConfiguration.AddMember("mountPath", _MountPath)
+
+	S3BucketMountConfiguration_prefix = S3BucketMountConfiguration.AddMember("prefix", smithyprelude.String)
+
+	S3BucketMountConfiguration_s3BucketOwner = S3BucketMountConfiguration.AddMember("s3BucketOwner", smithyprelude.String)
+
+	S3BucketMountConfiguration_s3BucketRegion = S3BucketMountConfiguration.AddMember("s3BucketRegion", smithyprelude.String)
+
 	FilesystemConfiguration_sessionStorage = FilesystemConfiguration.AddMember("sessionStorage", SessionStorageConfiguration)
 
 	FilesystemConfiguration_s3FilesAccessPoint = FilesystemConfiguration.AddMember("s3FilesAccessPoint", S3FilesAccessPointConfiguration)
@@ -16475,6 +16533,8 @@ func init() {
 	FilesystemConfiguration_efsAccessPoint = FilesystemConfiguration.AddMember("efsAccessPoint", EfsAccessPointConfiguration)
 
 	FilesystemConfiguration_capacityProviderVolume = FilesystemConfiguration.AddMember("capacityProviderVolume", CapacityProviderVolumeConfiguration)
+
+	FilesystemConfiguration_s3BucketMount = FilesystemConfiguration.AddMember("s3BucketMount", S3BucketMountConfiguration)
 
 	_FilesystemConfigurations_member = _FilesystemConfigurations.AddMember("member", FilesystemConfiguration)
 

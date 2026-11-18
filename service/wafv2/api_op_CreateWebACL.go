@@ -71,6 +71,10 @@ type CreateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
+	// Specifies the security analytics configuration for the web ACL. For more
+	// information, see AnalyticsConfig.
+	AnalyticsConfig *types.AnalyticsConfig
+
 	// Configures the ability for the WAF console to store and retrieve application
 	// attributes during the web ACL creation process. Application attributes help WAF
 	// give recommendations for protection packs.
@@ -178,6 +182,11 @@ func (v *CreateWebACLInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_AnalyticsConfig)
+		v.AnalyticsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ApplicationConfig != nil {
 		s.WriteStruct(schemas.CreateWebACLRequest_ApplicationConfig)
 		v.ApplicationConfig.SerializeMembers(s)

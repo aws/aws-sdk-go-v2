@@ -2011,7 +2011,10 @@ func TestCheckRequestSnapshot_ListTestSources(t *testing.T) {
 }
 
 func TestCheckRequestSnapshot_ListTestTemplates(t *testing.T) {
-	input := &ListTestTemplatesInput{}
+	input := &ListTestTemplatesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
 	body := &bytes.Buffer{}
 	method := ""
 	rawPath := ""
@@ -4440,7 +4443,10 @@ func TestUpdateRequestSnapshot_ListTestSources(t *testing.T) {
 }
 
 func TestUpdateRequestSnapshot_ListTestTemplates(t *testing.T) {
-	input := &ListTestTemplatesInput{}
+	input := &ListTestTemplatesInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
 	body := &bytes.Buffer{}
 	method := ""
 	rawPath := ""

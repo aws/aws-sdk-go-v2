@@ -47,7 +47,7 @@
                 "ContactLanguage": {
                     "target": "com.amazonaws.sesv2#ContactLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language you would prefer for the case. The contact language can be one of\n                <code>ENGLISH</code> or <code>JAPANESE</code>.</p>"
+                        "smithy.api#documentation": "<p>The language you would prefer for the case. The contact language can be one of\n                <code>EN</code> or <code>JA</code>.</p>"
                     }
                 },
                 "UseCaseDescription": {
@@ -71,6 +71,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information about your account details.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#AccountSharedPoolDeliveryMode": {
+            "type": "enum",
+            "members": {
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL"
+                    }
+                },
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The shared pool delivery mode for an Amazon SES account. See\n            <code>PutAccountDeliveryAttributesRequest$SharedPoolDeliveryMode</code> for the list of\n            supported values and their meanings.</p>"
             }
         },
         "com.amazonaws.sesv2#AccountSuspendedException": {
@@ -522,7 +542,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The action to take if the required MX record can't be found when you send an email.\n            When you set this value to <code>UseDefaultValue</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>"
+                "smithy.api#documentation": "<p>The action to take if the required MX record can't be found when you send an email.\n            When you set this value to <code>USE_DEFAULT_VALUE</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>REJECT_MESSAGE</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerifiedException</code> error, and doesn't attempt to deliver the\n            email.</p>\n         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>PENDING</code>, <code>FAILED</code>, and <code>TEMPORARY_FAILURE</code>\n            states.</p>"
             }
         },
         "com.amazonaws.sesv2#BlacklistEntries": {
@@ -683,7 +703,7 @@
                 "ReplacementTags": {
                     "target": "com.amazonaws.sesv2#MessageTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags, in the form of name/value pairs, to apply to an email that you send\n            using the <code>SendBulkTemplatedEmail</code> operation. Tags correspond to\n            characteristics of the email that you define, so that you can publish email sending\n            events.</p>"
+                        "smithy.api#documentation": "<p>A list of tags, in the form of name/value pairs, to apply to an email that you send\n            using the <code>SendBulkEmail</code> operation. Tags correspond to\n            characteristics of the email that you define, so that you can publish email sending\n            events.</p>"
                     }
                 },
                 "ReplacementEmailContent": {
@@ -715,19 +735,19 @@
                 "Status": {
                     "target": "com.amazonaws.sesv2#BulkEmailStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code>\n            operation.</p>\n         <p>Possible values for this parameter include:</p>\n         <ul>\n            <li>\n               <p>SUCCESS: Amazon SES accepted the message, and will attempt to deliver it to\n                    the recipients.</p>\n            </li>\n            <li>\n               <p>MESSAGE_REJECTED: The message was rejected because it contained a\n                    virus.</p>\n            </li>\n            <li>\n               <p>MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender's email address or domain was not\n                    verified.</p>\n            </li>\n            <li>\n               <p>CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you specified does not\n                    exist.</p>\n            </li>\n            <li>\n               <p>TEMPLATE_DOES_NOT_EXIST: The template you specified does not exist.</p>\n            </li>\n            <li>\n               <p>ACCOUNT_SUSPENDED: Your account has been shut down because of issues related\n                    to your email sending practices.</p>\n            </li>\n            <li>\n               <p>ACCOUNT_THROTTLED: The number of emails you can send has been reduced because\n                    your account has exceeded its allocated sending limit.</p>\n            </li>\n            <li>\n               <p>ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or exceeded the maximum number\n                    of emails you can send from your account in a 24-hour period.</p>\n            </li>\n            <li>\n               <p>INVALID_SENDING_POOL_NAME: The configuration set you specified refers to an IP\n                    pool that does not exist.</p>\n            </li>\n            <li>\n               <p>ACCOUNT_SENDING_PAUSED: Email sending for the Amazon SES account was disabled\n                    using the <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html\">UpdateAccountSendingEnabled</a> operation.</p>\n            </li>\n            <li>\n               <p>CONFIGURATION_SET_SENDING_PAUSED: Email sending for this configuration set was\n                    disabled using the <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html\">UpdateConfigurationSetSendingEnabled</a> operation.</p>\n            </li>\n            <li>\n               <p>INVALID_PARAMETER_VALUE: One or more of the parameters you specified when\n                    calling this operation was invalid. See the error message for additional\n                    information.</p>\n            </li>\n            <li>\n               <p>TRANSIENT_FAILURE: Amazon SES was unable to process your request because of a\n                    temporary issue.</p>\n            </li>\n            <li>\n               <p>FAILED: Amazon SES was unable to process your request. See the error message\n                    for additional information.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of a message sent using the <code>SendBulkEmail</code>\n            operation.</p>\n         <p>Possible values for this parameter include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESS</code> – Amazon SES accepted the message, and will attempt to deliver it to\n                    the recipients.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MESSAGE_REJECTED</code> – The message was rejected because it contained a\n                    virus.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAIL_FROM_DOMAIN_NOT_VERIFIED</code> – The sender's email address or domain was not\n                    verified.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET_NOT_FOUND</code> – The configuration set you specified does not\n                    exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEMPLATE_NOT_FOUND</code> – The template you specified does not exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT_SUSPENDED</code> – Your account has been shut down because of issues related\n                    to your email sending practices.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT_THROTTLED</code> – The number of emails you can send has been reduced because\n                    your account has exceeded its allocated sending limit.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT_DAILY_QUOTA_EXCEEDED</code> – You have reached or exceeded the maximum number\n                    of emails you can send from your account in a 24-hour period.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_SENDING_POOL_NAME</code> – The configuration set you specified refers to an IP\n                    pool that does not exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT_SENDING_PAUSED</code> – Email sending for the Amazon SES account was disabled\n                    using the <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutAccountSendingAttributes.html\">PutAccountSendingAttributes</a> operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET_SENDING_PAUSED</code> – Email sending for this configuration set was\n                    disabled using the <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutConfigurationSetSendingOptions.html\">PutConfigurationSetSendingOptions</a> operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_PARAMETER</code> – One or more of the parameters you specified when\n                    calling this operation was invalid. See the error message for additional\n                    information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSIENT_FAILURE</code> – Amazon SES was unable to process your request because of a\n                    temporary issue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – Amazon SES was unable to process your request. See the error message\n                    for additional information.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Error": {
                     "target": "com.amazonaws.sesv2#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of an error that prevented a message being sent using the\n                <code>SendBulkTemplatedEmail</code> operation.</p>"
+                        "smithy.api#documentation": "<p>A description of an error that prevented a message being sent using the\n                <code>SendBulkEmail</code> operation.</p>"
                     }
                 },
                 "MessageId": {
                     "target": "com.amazonaws.sesv2#OutboundMessageId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique message identifier returned from the <code>SendBulkTemplatedEmail</code>\n            operation.</p>"
+                        "smithy.api#documentation": "<p>The unique message identifier returned from the <code>SendBulkEmail</code>\n            operation.</p>"
                     }
                 }
             },
@@ -741,7 +761,7 @@
                 "target": "com.amazonaws.sesv2#BulkEmailEntryResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of <code>BulkMailEntry</code> objects.</p>"
+                "smithy.api#documentation": "<p>A list of <code>BulkEmailEntryResult</code> objects.</p>"
             }
         },
         "com.amazonaws.sesv2#BulkEmailStatus": {
@@ -942,7 +962,7 @@
                 "DimensionValueSource": {
                     "target": "com.amazonaws.sesv2#DimensionValueSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose\n                <code>messageTag</code>. To use your own email headers, choose\n                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>",
+                        "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendBulkEmail</code> operation, choose\n                <code>MESSAGE_TAG</code>. To use your own email headers, choose\n                <code>EMAIL_HEADER</code>. To use link tags, choose <code>LINK_TAG</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1823,7 +1843,7 @@
                 "DeliverabilityTestStatus": {
                     "target": "com.amazonaws.sesv2#DeliverabilityTestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test\n            is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the\n            test. If the status is <code>COMPLETE</code>, then the test is finished, and you can use\n            the <code>GetDeliverabilityTestReport</code> to view the results of the test.</p>",
+                        "smithy.api#documentation": "<p>The status of the predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test\n            is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the\n            test. If the status is <code>COMPLETED</code>, then the test is finished, and you can use\n            the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3476,7 +3496,7 @@
                 "DeliverabilityTestStatus": {
                     "target": "com.amazonaws.sesv2#DeliverabilityTestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test\n            is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the\n            test. If the status is <code>COMPLETE</code>, then the test is finished, and you can use\n            the <code>GetDeliverabilityTestReport</code> to view the results of the test.</p>"
+                        "smithy.api#documentation": "<p>The status of the predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test\n            is currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the\n            test. If the status is <code>COMPLETED</code>, then the test is finished, and you can use\n            the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>"
                     }
                 }
             },
@@ -3507,13 +3527,27 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is\n            currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test.\n            If the status is <code>COMPLETE</code>, then the test is finished, and you can use the\n                <code>GetDeliverabilityTestReport</code> operation to view the results of the\n            test.</p>"
+                "smithy.api#documentation": "<p>The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is\n            currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test.\n            If the status is <code>COMPLETED</code>, then the test is finished, and you can use the\n                <code>GetDeliverabilityTestReport</code> operation to view the results of the\n            test.</p>"
             }
         },
         "com.amazonaws.sesv2#DeliverabilityTestSubject": {
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The subject line for an email that you submitted in a predictive inbox placement test.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#DeliveryAttributes": {
+            "type": "structure",
+            "members": {
+                "SharedPoolDeliveryMode": {
+                    "target": "com.amazonaws.sesv2#AccountSharedPoolDeliveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared pool delivery mode for your Amazon SES account in the current Amazon Web Services Region.\n            This mode applies to email that you send from shared IP addresses. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – Amazon SES delivers from your sending Region first and,\n                    when it improves your deliverability, also uses Amazon SES shared IP addresses with\n                    established sending history in other Amazon Web Services Regions within the same Amazon Web Services\n                    partition.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – Amazon SES delivers your email only from shared IP\n                    addresses in your sending Region.</p>\n            </li>\n         </ul>\n         <p>Accounts that start sending in a Region on or after the launch of Global Shared\n            Delivery use <code>GLOBAL</code> in that Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The delivery attributes that apply to your Amazon SES account in the current Amazon Web Services\n            Region.</p>"
             }
         },
         "com.amazonaws.sesv2#DeliveryEventType": {
@@ -3566,7 +3600,7 @@
                 "TlsPolicy": {
                     "target": "com.amazonaws.sesv2#TlsPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>Optional</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>REQUIRE</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>OPTIONAL</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
                     }
                 },
                 "SendingPoolName": {
@@ -3579,6 +3613,12 @@
                     "target": "com.amazonaws.sesv2#MaxDeliverySeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Amazon SES API v2 will attempt delivery of email.\n            If specified, the value must greater than or equal to 300 seconds (5 minutes)\n            and less than or equal to 50400 seconds (840 minutes).\n        </p>"
+                    }
+                },
+                "SharedPoolDeliveryMode": {
+                    "target": "com.amazonaws.sesv2#SharedPoolDeliveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared pool delivery mode for email that you send with the configuration set\n            from shared IP addresses. This setting overrides the shared pool delivery mode of your\n            account. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – Amazon SES delivers from your sending Region first and,\n                    when it improves your deliverability, also uses Amazon SES shared IP addresses with\n                    established sending history in other Amazon Web Services Regions within the same Amazon Web Services\n                    partition.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – Amazon SES delivers your email only from shared IP\n                    addresses in your sending Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – The configuration set uses the shared pool\n                    delivery mode of your account.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value, the configuration set uses the shared pool delivery\n            mode of your account.</p>"
                     }
                 }
             },
@@ -3662,7 +3702,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose\n                <code>messageTag</code>. To use your own email headers, choose\n                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>"
+                "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendBulkEmail</code> operation, choose\n                <code>MESSAGE_TAG</code>. To use your own email headers, choose\n                <code>EMAIL_HEADER</code>. To use link tags, choose <code>LINK_TAG</code>.</p>"
             }
         },
         "com.amazonaws.sesv2#Dimensions": {
@@ -5158,6 +5198,12 @@
                     "target": "com.amazonaws.sesv2#PricingAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change.</p>"
+                    }
+                },
+                "DeliveryAttributes": {
+                    "target": "com.amazonaws.sesv2#DeliveryAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delivery attributes that apply to your Amazon SES account in the current Amazon Web Services\n            Region.</p>"
                     }
                 }
             },
@@ -7690,7 +7736,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of a job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> – Job has just been created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PROCESSING</code> – Job is processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> – An error occurred during processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – Job has completed processing successfully.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The status of a job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATED</code> – Job has just been created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PROCESSING</code> – Job is processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> – Job has completed processing successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – An error occurred during processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> – Job has been canceled.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#KinesisFirehoseDestination": {
@@ -9588,7 +9634,7 @@
                 "BehaviorOnMxFailure": {
                     "target": "com.amazonaws.sesv2#BehaviorOnMxFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take if the required MX record can't be found when you send an email.\n            When you set this value to <code>USE_DEFAULT_VALUE</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>REJECT_MESSAGE</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>",
+                        "smithy.api#documentation": "<p>The action to take if the required MX record can't be found when you send an email.\n            When you set this value to <code>USE_DEFAULT_VALUE</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>REJECT_MESSAGE</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerifiedException</code> error, and doesn't attempt to deliver the\n            email.</p>\n         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>PENDING</code>, <code>FAILED</code>, and <code>TEMPORARY_FAILURE</code>\n            states.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10558,6 +10604,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#PutAccountDeliveryAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutAccountDeliveryAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutAccountDeliveryAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Set the shared pool delivery mode for your Amazon SES account in the current Amazon Web Services Region.\n            The mode controls whether Amazon SES can deliver your email from shared IP addresses in other\n            Amazon Web Services Regions within the same Amazon Web Services partition.</p>\n         <p>A change may take a few minutes to take effect. Messages that are already queued for\n            delivery keep the mode that they were sent with.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/account/delivery",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountDeliveryAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "SharedPoolDeliveryMode": {
+                    "target": "com.amazonaws.sesv2#AccountSharedPoolDeliveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared pool delivery mode for your Amazon SES account in the current Amazon Web Services Region.\n            This mode applies to email that you send from shared IP addresses. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – Amazon SES delivers from your sending Region first and,\n                    when it improves your deliverability, also uses Amazon SES shared IP addresses with\n                    established sending history in other Amazon Web Services Regions within the same Amazon Web Services\n                    partition.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – Amazon SES delivers your email only from shared IP\n                    addresses in your sending Region.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to set the shared pool delivery mode for your Amazon SES account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountDeliveryAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error response if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#PutAccountDetails": {
             "type": "operation",
             "input": {
@@ -10606,7 +10701,7 @@
                 "ContactLanguage": {
                     "target": "com.amazonaws.sesv2#ContactLanguage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language you would prefer to be contacted with.</p>"
+                        "smithy.api#documentation": "<p>The language you would prefer to be contacted with. The contact language can be one\n            of <code>EN</code> or <code>JA</code>.</p>"
                     }
                 },
                 "UseCaseDescription": {
@@ -10957,7 +11052,7 @@
                 "TlsPolicy": {
                     "target": "com.amazonaws.sesv2#TlsPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>Optional</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>REQUIRE</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>OPTIONAL</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
                     }
                 },
                 "SendingPoolName": {
@@ -10970,6 +11065,12 @@
                     "target": "com.amazonaws.sesv2#MaxDeliverySeconds",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that Amazon SES API v2 will attempt delivery of email.\n            If specified, the value must greater than or equal to 300 seconds (5 minutes)\n            and less than or equal to 50400 seconds (840 minutes).\n        </p>"
+                    }
+                },
+                "SharedPoolDeliveryMode": {
+                    "target": "com.amazonaws.sesv2#SharedPoolDeliveryMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shared pool delivery mode for email that you send with the configuration set\n            from shared IP addresses. This setting overrides the shared pool delivery mode of your\n            account. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLOBAL</code> – Amazon SES delivers from your sending Region first and,\n                    when it improves your deliverability, also uses Amazon SES shared IP addresses with\n                    established sending history in other Amazon Web Services Regions within the same Amazon Web Services\n                    partition.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REGIONAL</code> – Amazon SES delivers your email only from shared IP\n                    addresses in your sending Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – The configuration set uses the shared pool\n                    delivery mode of your account.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value, the current value doesn't change.</p>"
                     }
                 }
             },
@@ -11870,7 +11971,7 @@
                 "BehaviorOnMxFailure": {
                     "target": "com.amazonaws.sesv2#BehaviorOnMxFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take if the required MX record isn't found when you send an email. When\n            you set this value to <code>UseDefaultValue</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>"
+                        "smithy.api#documentation": "<p>The action to take if the required MX record isn't found when you send an email. When\n            you set this value to <code>USE_DEFAULT_VALUE</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>REJECT_MESSAGE</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerifiedException</code> error, and doesn't attempt to deliver the\n            email.</p>\n         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>PENDING</code>, <code>FAILED</code>, and <code>TEMPORARY_FAILURE</code>\n            states.</p>"
                     }
                 }
             },
@@ -12250,7 +12351,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ReplaceEmailContent</code> object to be used for a specific\n                <code>BulkEmailEntry</code>. The <code>ReplacementTemplate</code> can be specified\n            within this object.</p>"
+                "smithy.api#documentation": "<p>The <code>ReplacementEmailContent</code> object to be used for a specific\n                <code>BulkEmailEntry</code>. The <code>ReplacementTemplate</code> can be specified\n            within this object.</p>"
             }
         },
         "com.amazonaws.sesv2#ReplacementTemplate": {
@@ -12740,7 +12841,7 @@
                 "DefaultEmailTags": {
                     "target": "com.amazonaws.sesv2#MessageTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags, in the form of name/value pairs, to apply to an email that you send\n            using the <code>SendEmail</code> operation. Tags correspond to characteristics of the\n            email that you define, so that you can publish email sending events.</p>"
+                        "smithy.api#documentation": "<p>A list of tags, in the form of name/value pairs, to apply to an email that you send\n            using the <code>SendBulkEmail</code> operation. Tags correspond to characteristics of the\n            email that you define, so that you can publish email sending events.</p>"
                     }
                 },
                 "DefaultContent": {
@@ -13140,6 +13241,32 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.sesv2#SharedPoolDeliveryMode": {
+            "type": "enum",
+            "members": {
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL"
+                    }
+                },
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                },
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The shared pool delivery mode for a configuration set. See\n            <code>DeliveryOptions$SharedPoolDeliveryMode</code> for the list of supported values and\n            their meanings.</p>"
+            }
+        },
         "com.amazonaws.sesv2#SignatureFormat": {
             "type": "enum",
             "members": {
@@ -13411,6 +13538,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutAccountDedicatedIpWarmupAttributes"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#PutAccountDeliveryAttributes"
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutAccountDetails"
@@ -16293,7 +16423,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>Optional</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
+                "smithy.api#documentation": "<p>Specifies whether messages that use the configuration set are required to use\n            Transport Layer Security (TLS). If the value is <code>REQUIRE</code>, messages are only\n            delivered if a TLS connection can be established. If the value is <code>OPTIONAL</code>,\n            messages can be delivered in plain text if a TLS connection can't be established.</p>"
             }
         },
         "com.amazonaws.sesv2#TooManyRequestsException": {

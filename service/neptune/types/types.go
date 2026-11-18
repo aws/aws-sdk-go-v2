@@ -423,6 +423,13 @@ type DBCluster struct {
 	// Not supported by Neptune.
 	ReplicationSourceIdentifier *string
 
+	// The serverless platform version used by the Neptune Serverless DB cluster.
+	//
+	// For more information, see [Using Amazon Neptune Serverless] in the Amazon Neptune User Guide.
+	//
+	// [Using Amazon Neptune Serverless]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+	ServerlessV2PlatformVersion *string
+
 	// Shows the scaling configuration for a Neptune Serverless DB cluster.
 	//
 	// For more information, see [Using Amazon Neptune Serverless] in the Amazon Neptune User Guide.
@@ -591,6 +598,9 @@ func (v *DBCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicationSourceIdentifier != nil {
 		s.WriteString(schemas.DBCluster_ReplicationSourceIdentifier, *v.ReplicationSourceIdentifier)
 	}
+	if v.ServerlessV2PlatformVersion != nil {
+		s.WriteString(schemas.DBCluster_ServerlessV2PlatformVersion, *v.ServerlessV2PlatformVersion)
+	}
 	if v.ServerlessV2ScalingConfiguration != nil {
 		s.WriteStruct(schemas.DBCluster_ServerlessV2ScalingConfiguration)
 		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
@@ -729,6 +739,9 @@ func (v *DBCluster) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DBCluster_ReplicationSourceIdentifier:
 			v.ReplicationSourceIdentifier = new(string)
 			return d.ReadString(schemas.DBCluster_ReplicationSourceIdentifier, v.ReplicationSourceIdentifier)
+		case schemas.DBCluster_ServerlessV2PlatformVersion:
+			v.ServerlessV2PlatformVersion = new(string)
+			return d.ReadString(schemas.DBCluster_ServerlessV2PlatformVersion, v.ServerlessV2PlatformVersion)
 		case schemas.DBCluster_ServerlessV2ScalingConfiguration:
 			v.ServerlessV2ScalingConfiguration = &ServerlessV2ScalingConfigurationInfo{}
 			return v.ServerlessV2ScalingConfiguration.Deserialize(d)
@@ -3936,6 +3949,141 @@ func (v *ResourcePendingMaintenanceActions) Deserialize(d smithy.ShapeDeserializ
 		case schemas.ResourcePendingMaintenanceActions_ResourceIdentifier:
 			v.ResourceIdentifier = new(string)
 			return d.ReadString(schemas.ResourcePendingMaintenanceActions_ResourceIdentifier, v.ResourceIdentifier)
+		}
+		return nil
+	})
+}
+
+// Specifies any Neptune Serverless properties or limits that differ between
+// serverless platform versions.
+type ServerlessV2FeaturesSupport struct {
+
+	// Specifies the upper Neptune capacity unit (NCU) limit that a serverless
+	// platform version supports.
+	MaxCapacity *float64
+
+	// Specifies the lower Neptune capacity unit (NCU) limit that a serverless
+	// platform version supports.
+	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServerlessV2FeaturesSupport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerlessV2FeaturesSupport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerlessV2FeaturesSupport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCapacity != nil {
+		s.WriteFloat64(schemas.ServerlessV2FeaturesSupport_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.MinCapacity != nil {
+		s.WriteFloat64(schemas.ServerlessV2FeaturesSupport_MinCapacity, *v.MinCapacity)
+	}
+}
+func (v *ServerlessV2FeaturesSupport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerlessV2FeaturesSupport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerlessV2FeaturesSupport_MaxCapacity:
+			v.MaxCapacity = new(float64)
+			return d.ReadFloat64(schemas.ServerlessV2FeaturesSupport_MaxCapacity, v.MaxCapacity)
+		case schemas.ServerlessV2FeaturesSupport_MinCapacity:
+			v.MinCapacity = new(float64)
+			return d.ReadFloat64(schemas.ServerlessV2FeaturesSupport_MinCapacity, v.MinCapacity)
+		}
+		return nil
+	})
+}
+
+// This data type is used as a response element in the
+// DescribeServerlessV2PlatformVersions action. It describes the properties of a
+// specific Neptune Serverless platform version.
+//
+// For more information, see [Using Amazon Neptune Serverless] in the Amazon Neptune User Guide.
+//
+// [Using Amazon Neptune Serverless]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
+type ServerlessV2PlatformVersionInfo struct {
+
+	// The name of the database engine.
+	Engine *string
+
+	// Indicates whether this platform version is the default version for the engine.
+	// The default platform version is the version used for new DB clusters.
+	IsDefault *bool
+
+	// Specifies any Neptune Serverless properties or limits that differ between
+	// serverless platform versions. You can retrieve the platform version of an
+	// existing DB cluster and check whether that version supports certain serverless
+	// features before you attempt to use those features.
+	ServerlessV2FeaturesSupport *ServerlessV2FeaturesSupport
+
+	// The version number of the serverless platform.
+	ServerlessV2PlatformVersion *string
+
+	// The description of the serverless platform.
+	ServerlessV2PlatformVersionDescription *string
+
+	// The status of the serverless platform version. Valid statuses are the following:
+	//
+	//   - enabled - The platform version is in use.
+	//
+	//   - disabled - The platform version is not in use.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServerlessV2PlatformVersionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerlessV2PlatformVersionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerlessV2PlatformVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != nil {
+		s.WriteString(schemas.ServerlessV2PlatformVersionInfo_Engine, *v.Engine)
+	}
+	if v.IsDefault != nil {
+		s.WriteBool(schemas.ServerlessV2PlatformVersionInfo_IsDefault, *v.IsDefault)
+	}
+	if v.ServerlessV2FeaturesSupport != nil {
+		s.WriteStruct(schemas.ServerlessV2PlatformVersionInfo_ServerlessV2FeaturesSupport)
+		v.ServerlessV2FeaturesSupport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerlessV2PlatformVersion != nil {
+		s.WriteString(schemas.ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersion, *v.ServerlessV2PlatformVersion)
+	}
+	if v.ServerlessV2PlatformVersionDescription != nil {
+		s.WriteString(schemas.ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersionDescription, *v.ServerlessV2PlatformVersionDescription)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ServerlessV2PlatformVersionInfo_Status, *v.Status)
+	}
+}
+func (v *ServerlessV2PlatformVersionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerlessV2PlatformVersionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerlessV2PlatformVersionInfo_Engine:
+			v.Engine = new(string)
+			return d.ReadString(schemas.ServerlessV2PlatformVersionInfo_Engine, v.Engine)
+		case schemas.ServerlessV2PlatformVersionInfo_IsDefault:
+			v.IsDefault = new(bool)
+			return d.ReadBool(schemas.ServerlessV2PlatformVersionInfo_IsDefault, v.IsDefault)
+		case schemas.ServerlessV2PlatformVersionInfo_ServerlessV2FeaturesSupport:
+			v.ServerlessV2FeaturesSupport = &ServerlessV2FeaturesSupport{}
+			return v.ServerlessV2FeaturesSupport.Deserialize(d)
+		case schemas.ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersion:
+			v.ServerlessV2PlatformVersion = new(string)
+			return d.ReadString(schemas.ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersion, v.ServerlessV2PlatformVersion)
+		case schemas.ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersionDescription:
+			v.ServerlessV2PlatformVersionDescription = new(string)
+			return d.ReadString(schemas.ServerlessV2PlatformVersionInfo_ServerlessV2PlatformVersionDescription, v.ServerlessV2PlatformVersionDescription)
+		case schemas.ServerlessV2PlatformVersionInfo_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ServerlessV2PlatformVersionInfo_Status, v.Status)
 		}
 		return nil
 	})

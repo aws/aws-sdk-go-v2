@@ -1940,12 +1940,14 @@ var _localeType = smithy.NewSchema(smithy.ShapeID{
 var LoginProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "LoginProfile",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var LoginProfile_UserName *smithy.Schema
 
 var LoginProfile_CreateDate *smithy.Schema
 
 var LoginProfile_PasswordResetRequired *smithy.Schema
+
+var LoginProfile_MaxSigninSessionDuration *smithy.Schema
 
 var MalformedCertificateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -2047,6 +2049,11 @@ var _maxItemsType = smithy.NewSchema(smithy.ShapeID{
 var _maxPasswordAgeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "maxPasswordAgeType",
+}, smithy.ShapeTypeInteger, 0)
+
+var _maxSigninSessionDurationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "maxSigninSessionDurationType",
 }, smithy.ShapeTypeInteger, 0)
 
 var MFADevice = smithy.NewSchema(smithy.ShapeID{
@@ -2846,7 +2853,7 @@ var _responseMarkerType = smithy.NewSchema(smithy.ShapeID{
 var Role = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "Role",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var Role_Path *smithy.Schema
 
 var Role_RoleName *smithy.Schema
@@ -2862,6 +2869,8 @@ var Role_AssumeRolePolicyDocument *smithy.Schema
 var Role_Description *smithy.Schema
 
 var Role_MaxSessionDuration *smithy.Schema
+
+var Role_MaxSigninSessionDuration *smithy.Schema
 
 var Role_PermissionsBoundary *smithy.Schema
 
@@ -3886,12 +3895,14 @@ var CreateInstanceProfileResponse_InstanceProfile *smithy.Schema
 var CreateLoginProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "CreateLoginProfileRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var CreateLoginProfileRequest_UserName *smithy.Schema
 
 var CreateLoginProfileRequest_Password *smithy.Schema
 
 var CreateLoginProfileRequest_PasswordResetRequired *smithy.Schema
+
+var CreateLoginProfileRequest_MaxSigninSessionDuration *smithy.Schema
 
 var CreateLoginProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -3958,7 +3969,7 @@ var CreatePolicyVersionResponse_PolicyVersion *smithy.Schema
 var CreateRoleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "CreateRoleRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateRoleRequest_Path *smithy.Schema
 
 var CreateRoleRequest_RoleName *smithy.Schema
@@ -3968,6 +3979,8 @@ var CreateRoleRequest_AssumeRolePolicyDocument *smithy.Schema
 var CreateRoleRequest_Description *smithy.Schema
 
 var CreateRoleRequest_MaxSessionDuration *smithy.Schema
+
+var CreateRoleRequest_MaxSigninSessionDuration *smithy.Schema
 
 var CreateRoleRequest_PermissionsBoundary *smithy.Schema
 
@@ -5971,12 +5984,16 @@ var UpdateGroupRequest_NewGroupName *smithy.Schema
 var UpdateLoginProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "UpdateLoginProfileRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateLoginProfileRequest_UserName *smithy.Schema
 
 var UpdateLoginProfileRequest_Password *smithy.Schema
 
 var UpdateLoginProfileRequest_PasswordResetRequired *smithy.Schema
+
+var UpdateLoginProfileRequest_MaxSigninSessionDuration *smithy.Schema
+
+var UpdateLoginProfileRequest_ResetMaxSigninSessionDuration *smithy.Schema
 
 var UpdateOpenIDConnectProviderThumbprintRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -6003,12 +6020,16 @@ var UpdateRoleDescriptionResponse_Role *smithy.Schema
 var UpdateRoleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "UpdateRoleRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateRoleRequest_RoleName *smithy.Schema
 
 var UpdateRoleRequest_Description *smithy.Schema
 
 var UpdateRoleRequest_MaxSessionDuration *smithy.Schema
+
+var UpdateRoleRequest_MaxSigninSessionDuration *smithy.Schema
+
+var UpdateRoleRequest_ResetMaxSigninSessionDuration *smithy.Schema
 
 var UpdateRoleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -6608,6 +6629,8 @@ func init() {
 
 	Role_MaxSessionDuration = Role.AddMember("MaxSessionDuration", _roleMaxSessionDurationType)
 
+	Role_MaxSigninSessionDuration = Role.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
 	Role_PermissionsBoundary = Role.AddMember("PermissionsBoundary", AttachedPermissionsBoundary)
 
 	Role_Tags = Role.AddMember("Tags", _tagListType)
@@ -6681,6 +6704,8 @@ func init() {
 	LoginProfile_CreateDate = LoginProfile.AddMember("CreateDate", _dateType)
 
 	LoginProfile_PasswordResetRequired = LoginProfile.AddMember("PasswordResetRequired", _booleanType)
+
+	LoginProfile_MaxSigninSessionDuration = LoginProfile.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
 
 	MalformedCertificateException_message = MalformedCertificateException.AddMember("message", _malformedCertificateMessage)
 
@@ -7366,6 +7391,8 @@ func init() {
 
 	CreateLoginProfileRequest_PasswordResetRequired = CreateLoginProfileRequest.AddMember("PasswordResetRequired", _booleanType)
 
+	CreateLoginProfileRequest_MaxSigninSessionDuration = CreateLoginProfileRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
 	CreateLoginProfileResponse_LoginProfile = CreateLoginProfileResponse.AddMember("LoginProfile", LoginProfile)
 
 	CreateOpenIDConnectProviderRequest_Url = CreateOpenIDConnectProviderRequest.AddMember("Url", _OpenIDConnectProviderUrlType)
@@ -7409,6 +7436,8 @@ func init() {
 	CreateRoleRequest_Description = CreateRoleRequest.AddMember("Description", _roleDescriptionType)
 
 	CreateRoleRequest_MaxSessionDuration = CreateRoleRequest.AddMember("MaxSessionDuration", _roleMaxSessionDurationType)
+
+	CreateRoleRequest_MaxSigninSessionDuration = CreateRoleRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
 
 	CreateRoleRequest_PermissionsBoundary = CreateRoleRequest.AddMember("PermissionsBoundary", _arnType)
 
@@ -8514,6 +8543,10 @@ func init() {
 
 	UpdateLoginProfileRequest_PasswordResetRequired = UpdateLoginProfileRequest.AddMember("PasswordResetRequired", _booleanObjectType)
 
+	UpdateLoginProfileRequest_MaxSigninSessionDuration = UpdateLoginProfileRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
+	UpdateLoginProfileRequest_ResetMaxSigninSessionDuration = UpdateLoginProfileRequest.AddMember("ResetMaxSigninSessionDuration", _booleanObjectType)
+
 	UpdateOpenIDConnectProviderThumbprintRequest_OpenIDConnectProviderArn = UpdateOpenIDConnectProviderThumbprintRequest.AddMember("OpenIDConnectProviderArn", _arnType)
 
 	UpdateOpenIDConnectProviderThumbprintRequest_ThumbprintList = UpdateOpenIDConnectProviderThumbprintRequest.AddMember("ThumbprintList", _thumbprintListType)
@@ -8529,6 +8562,10 @@ func init() {
 	UpdateRoleRequest_Description = UpdateRoleRequest.AddMember("Description", _roleDescriptionType)
 
 	UpdateRoleRequest_MaxSessionDuration = UpdateRoleRequest.AddMember("MaxSessionDuration", _roleMaxSessionDurationType)
+
+	UpdateRoleRequest_MaxSigninSessionDuration = UpdateRoleRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
+	UpdateRoleRequest_ResetMaxSigninSessionDuration = UpdateRoleRequest.AddMember("ResetMaxSigninSessionDuration", _booleanObjectType)
 
 	UpdateSAMLProviderRequest_SAMLMetadataDocument = UpdateSAMLProviderRequest.AddMember("SAMLMetadataDocument", _SAMLMetadataDocumentType)
 

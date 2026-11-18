@@ -270,7 +270,7 @@ var _AffectedEntitiesForOrganizationTagValueList_member *smithy.Schema
 var AffectedEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "AffectedEntity",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 10)
 var AffectedEntity_entityArn *smithy.Schema
 
 var AffectedEntity_eventArn *smithy.Schema
@@ -288,8 +288,6 @@ var AffectedEntity_statusCode *smithy.Schema
 var AffectedEntity_resourceTags *smithy.Schema
 
 var AffectedEntity_accountTags *smithy.Schema
-
-var AffectedEntity_tags *smithy.Schema
 
 var AffectedEntity_entityMetadata *smithy.Schema
 
@@ -326,17 +324,37 @@ var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
 
+var _ConfigureTagsForOrganizationResponseTagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsForOrganizationResponseTagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _ConfigureTagsForOrganizationResponseTagKeyList_member *smithy.Schema
+
 var _ConfigureTagsForOrganizationTagKeyList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "ConfigureTagsForOrganizationTagKeyList",
 }, smithy.ShapeTypeList, 1)
 var _ConfigureTagsForOrganizationTagKeyList_member *smithy.Schema
 
+var _ConfigureTagsRequestTagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsRequestTagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _ConfigureTagsRequestTagKeyList_member *smithy.Schema
+
 var _ConfigureTagsResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "ConfigureTagsResourceTagKeyList",
 }, smithy.ShapeTypeList, 1)
 var _ConfigureTagsResourceTagKeyList_member *smithy.Schema
+
+var ConfigureTagsTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsTagKey",
+}, smithy.ShapeTypeStructure, 2)
+var ConfigureTagsTagKey_key *smithy.Schema
+
+var ConfigureTagsTagKey_enabledForEventBridge *smithy.Schema
 
 var _count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -1313,14 +1331,6 @@ var TagKeyStatus_PENDING *smithy.Schema
 
 var TagKeyStatus_ACTIVE *smithy.Schema
 
-var _tagSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "tagSet",
-}, smithy.ShapeTypeMap, 2)
-var _tagSet_key *smithy.Schema
-
-var _tagSet_value *smithy.Schema
-
 var TagsOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "TagsOnboardingStatus",
@@ -1736,10 +1746,6 @@ func init() {
 
 	_ResourceTagSet_value = _ResourceTagSet.AddMember("value", _ResourceTagValue)
 
-	_tagSet_key = _tagSet.AddMember("key", _tagKey)
-
-	_tagSet_value = _tagSet.AddMember("value", _tagValue)
-
 	_entityMetadata_key = _entityMetadata.AddMember("key", _entityMetadataKey)
 
 	_entityMetadata_value = _entityMetadata.AddMember("value", _entityMetadataValue)
@@ -1762,8 +1768,6 @@ func init() {
 
 	AffectedEntity_accountTags = AffectedEntity.AddMember("accountTags", _AccountTagSet)
 
-	AffectedEntity_tags = AffectedEntity.AddMember("tags", _tagSet)
-
 	AffectedEntity_entityMetadata = AffectedEntity.AddMember("entityMetadata", _entityMetadata)
 
 	_availabilityZones_member = _availabilityZones.AddMember("member", _availabilityZone)
@@ -1772,15 +1776,29 @@ func init() {
 
 	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _string)
 
+	TagKeyStatus_PENDING = TagKeyStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	TagKeyStatus_ACTIVE = TagKeyStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	OrganizationTagKey_key = OrganizationTagKey.AddMember("key", _OrganizationTagKey2)
+
+	OrganizationTagKey_enabledForEventBridge = OrganizationTagKey.AddMember("enabledForEventBridge", _Boolean)
+
+	OrganizationTagKey_status = OrganizationTagKey.AddMember("status", TagKeyStatus)
+
+	_ConfigureTagsForOrganizationResponseTagKeyList_member = _ConfigureTagsForOrganizationResponseTagKeyList.AddMember("member", OrganizationTagKey)
+
 	TagKeyForOrganization_key = TagKeyForOrganization.AddMember("key", _OrganizationTagKey2)
 
 	TagKeyForOrganization_enabledForEventBridge = TagKeyForOrganization.AddMember("enabledForEventBridge", _Boolean)
 
 	_ConfigureTagsForOrganizationTagKeyList_member = _ConfigureTagsForOrganizationTagKeyList.AddMember("member", TagKeyForOrganization)
 
-	TagKeyStatus_PENDING = TagKeyStatus.AddMember("PENDING", smithyprelude.Unit)
+	ConfigureTagsTagKey_key = ConfigureTagsTagKey.AddMember("key", _ResourceTagKey2)
 
-	TagKeyStatus_ACTIVE = TagKeyStatus.AddMember("ACTIVE", smithyprelude.Unit)
+	ConfigureTagsTagKey_enabledForEventBridge = ConfigureTagsTagKey.AddMember("enabledForEventBridge", _Boolean)
+
+	_ConfigureTagsRequestTagKeyList_member = _ConfigureTagsRequestTagKeyList.AddMember("member", ConfigureTagsTagKey)
 
 	ResourceTagKey_key = ResourceTagKey.AddMember("key", _ResourceTagKey2)
 
@@ -2184,12 +2202,6 @@ func init() {
 
 	OrganizationTag_type = OrganizationTag.AddMember("type", OrganizationTagType)
 
-	OrganizationTagKey_key = OrganizationTagKey.AddMember("key", _OrganizationTagKey2)
-
-	OrganizationTagKey_enabledForEventBridge = OrganizationTagKey.AddMember("enabledForEventBridge", _Boolean)
-
-	OrganizationTagKey_status = OrganizationTagKey.AddMember("status", TagKeyStatus)
-
 	_OrganizationTagKeyList_member = _OrganizationTagKeyList.AddMember("member", OrganizationTagKey)
 
 	_OrganizationTagList_member = _OrganizationTagList.AddMember("member", OrganizationTag)
@@ -2222,9 +2234,9 @@ func init() {
 
 	ConfigureTagsForOrganizationRequest_tagKeys = ConfigureTagsForOrganizationRequest.AddMember("tagKeys", _ConfigureTagsForOrganizationTagKeyList)
 
-	ConfigureTagsForOrganizationResponse_configuredTagKeys = ConfigureTagsForOrganizationResponse.AddMember("configuredTagKeys", _ConfigureTagsForOrganizationTagKeyList)
+	ConfigureTagsForOrganizationResponse_configuredTagKeys = ConfigureTagsForOrganizationResponse.AddMember("configuredTagKeys", _ConfigureTagsForOrganizationResponseTagKeyList)
 
-	ConfigureTagsRequest_tagKeys = ConfigureTagsRequest.AddMember("tagKeys", _ConfigureTagsResourceTagKeyList)
+	ConfigureTagsRequest_tagKeys = ConfigureTagsRequest.AddMember("tagKeys", _ConfigureTagsRequestTagKeyList)
 
 	ConfigureTagsResponse_configuredTagKeys = ConfigureTagsResponse.AddMember("configuredTagKeys", _ConfigureTagsResourceTagKeyList)
 

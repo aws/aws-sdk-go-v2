@@ -1,0 +1,1702 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.abusesignal#AbuseReportApi": {
+            "type": "service",
+            "version": "2026-01-12",
+            "operations": [
+                {
+                    "target": "com.amazonaws.abusesignal#CreateAbuseReport"
+                },
+                {
+                    "target": "com.amazonaws.abusesignal#GetAbuseReportStatus"
+                },
+                {
+                    "target": "com.amazonaws.abusesignal#ListAbuseReportStatuses"
+                }
+            ],
+            "errors": [
+                {
+                    "target": "com.amazonaws.abusesignal#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.abusesignal#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.abusesignal#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.abusesignal#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Abuse Signal",
+                    "arnNamespace": "abuse",
+                    "cloudTrailEventSource": "abuse.amazonaws.com",
+                    "endpointPrefix": "abuse"
+                },
+                "aws.auth#sigv4": {
+                    "name": "abuse"
+                },
+                "aws.auth#sigv4a": {
+                    "name": "abuse"
+                },
+                "aws.endpoints#standardRegionalEndpoints": {},
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4",
+                    "aws.auth#sigv4a"
+                ],
+                "smithy.api#documentation": "<fullname>Amazon Web Services Abuse Signal</fullname> <p>Amazon Web Services Abuse Signal API provides programmatic means to report suspected abuse of Amazon Web Services resources. You can use the API to submit abuse reports about Amazon Web Services resources and to track the status of your reports. Amazon Web Services Trust &amp; Safety uses the information that you provide to investigate and try to resolve the incident that you reported.</p> <p>You submit reports in the eXtended Abuse Reporting Format (XARF), an open standard for structured abuse reporting. For more information, see <a href=\"https://xarf.org/docs/introduction/\">XARF on the XARF website</a>. Reports can cover a wide range of abuse categories, including spam, phishing, distributed denial of service (DDoS), malware distribution, and copyright infringement.</p> <p>With the Amazon Web Services Abuse Signal API, you can:</p> <ul> <li> <p> <b>Submit abuse reports</b> – Create structured abuse reports by using the XARF format, with full support for all XARF v4 report types.</p> </li> <li> <p> <b>Track report status</b> – Monitor the processing status of submitted reports, from submission through resolution.</p> </li> <li> <p> <b>List and filter reports</b> – Retrieve the status of all reports, with optional filtering by correlation ID.</p> </li> <li> <p> <b>Retry submissions safely</b> – Safely retry report submissions without creating duplicates by using client tokens.</p> </li> </ul> <important> <p> <b>Cross-Region data residency:</b> By submitting a report, you instruct Amazon Web Services to store it in all supported Regions (<code>us-east-1</code>, <code>us-west-2</code>, and <code>eu-west-2</code>), including across the United States and Europe. If data must remain in a single Region, do not include it in the report.</p> </important>",
+                "smithy.api#title": "AWS Abuse Signal API",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://abuse-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://abuse-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://abuse.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://abuse.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://abuse-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://abuse-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://abuse.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://abuse.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://abuse.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.abusesignal#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the access-denied error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The caller does not have sufficient access to perform this operation. Verify that the caller has the specific IAM permission for the operation it is calling (for example, <code>abuse:CreateAbuseReport</code>, <code>abuse:GetAbuseReportStatus</code>, or <code>abuse:ListAbuseReportStatuses</code>). Grant only the actions each caller requires.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.abusesignal#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\x21-\\x7E]{1,128}$"
+            }
+        },
+        "com.amazonaws.abusesignal#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the conflict.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource. For example, an idempotency token was reused with a different payload.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.abusesignal#CorrelationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]{1,256}$"
+            }
+        },
+        "com.amazonaws.abusesignal#CreateAbuseReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.abusesignal#CreateAbuseReportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.abusesignal#CreateAbuseReportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.abusesignal#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.abusesignal#SubmissionRequirementException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to submit a new abuse report"
+                },
+                "smithy.api#documentation": "<p>Submits a structured report. Amazon Web Services validates it and returns a report ID. A successful response confirms that Amazon Web Services received your report. It doesn't mean that Amazon Web Services has reached an outcome. Use <a>GetAbuseReportStatus</a> with the report ID to check the report's status and outcome.</p> <p>This operation is idempotent within a time window. If you provide a <code>clientToken</code>, duplicate requests within 24 hours return the existing report ID. If you omit it, the service generates a token scoped to 5 minutes.</p> <important> <p> <b>Cross-Region data residency:</b> By submitting a report, you instruct Amazon Web Services to store it in all supported Regions (<code>us-east-1</code>, <code>us-west-2</code>, and <code>eu-west-2</code>), including across the United States and Europe. If data must remain in a single Region, do not include it in the report.</p> </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Submit an abuse report in X-ARF format",
+                        "input": {
+                            "report": {
+                                "xarf": {}
+                            }
+                        },
+                        "output": {
+                            "reportId": "rpt5a8b3c2d1e4f6g7h8i9j0",
+                            "correlationId": "my-tracking-id-123"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/abuse",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.abusesignal#CreateAbuseReportRequest": {
+            "type": "structure",
+            "members": {
+                "report": {
+                    "target": "com.amazonaws.abusesignal#ReportData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The abuse report data in XARF format. Provide the report under the <code>xarf</code> key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "correlationId": {
+                    "target": "com.amazonaws.abusesignal#CorrelationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional correlation ID for tracking the report in the reporter's system. The service echoes this value back in responses, and you can use it to filter reports with <a>ListAbuseReportStatuses</a>.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.abusesignal#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional, client-provided idempotency token that ensures the operation completes no more than once. If the token matches a previous request within 24 hours, the service returns the existing report ID instead of creating a new report. When you omit this token, the service automatically generates one that is scoped to a 5-minute window.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for a <a>CreateAbuseReport</a> request. Provide the report in XARF format, and optionally your own correlation ID and idempotency token.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.abusesignal#CreateAbuseReportResponse": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.abusesignal#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the submitted abuse report. Use this ID with <a>GetAbuseReportStatus</a> to track processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "correlationId": {
+                    "target": "com.amazonaws.abusesignal#CorrelationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The correlation ID that you provided in the request, if any. The service echoes this value back in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response from a <a>CreateAbuseReport</a> request. Contains the identifier that Amazon Web Services assigned to your report, which you use to track it.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.abusesignal#GetAbuseReportStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.abusesignal#GetAbuseReportStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.abusesignal#GetAbuseReportStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.abusesignal#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve the status of an abuse report"
+                },
+                "smithy.api#documentation": "<p>Retrieves the current processing status of a previously submitted abuse report, including the status, submission timestamp, and last-update time.</p> <p>You can poll this operation to track the report's status. <code>PROCESSING</code> confirms that Amazon Web Services received your report and is processing it. <code>COMPLETED</code> means Amazon Web Services finished resolving the report, and the response includes a <code>reasonCode</code>. The time to reach <code>COMPLETED</code> may vary and can take up to several days depending on the scope and complexity of the suspected abuse.</p> <note> <p> <code>COMPLETED</code> is the only terminal status. To wait for a report, use the <code>ReportProcessing</code> waiter, which succeeds when the report reaches <code>PROCESSING</code> or <code>COMPLETED</code>. If you poll this operation yourself, wait 1–5 seconds between calls.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the status of a submitted report",
+                        "input": {
+                            "reportId": "rpt5a8b3c2d1e4f6g7h8i9j0"
+                        },
+                        "output": {
+                            "reportId": "rpt5a8b3c2d1e4f6g7h8i9j0",
+                            "status": "PROCESSING",
+                            "description": "Report has been successfully submitted to Trust & Safety",
+                            "submittedAt": "2024-01-01T00:00:00Z"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/abuse/{reportId}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetAbuseReportStatusFailure",
+                        "params": {
+                            "reportId": "nonexistent00000000000"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.abusesignal#ResourceNotFoundException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ],
+                "smithy.waiters#waitable": {
+                    "ReportProcessing": {
+                        "documentation": "Wait until an abuse report has at least reached PROCESSING.\n\nA report advances QUEUED -> PROCESSING -> COMPLETED. A report can\ngo from QUEUED all the way to COMPLETED in well under a second,\nso a poller that only accepts PROCESSING can miss the transient\nPROCESSING window entirely and then poll forever. COMPLETED\ntherefore also satisfies this waiter: it implies the report already\npassed through PROCESSING.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "comparator": "stringEquals",
+                                        "expected": "PROCESSING"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "status",
+                                        "comparator": "stringEquals",
+                                        "expected": "COMPLETED"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            }
+                        ],
+                        "minDelay": 1,
+                        "maxDelay": 5
+                    }
+                }
+            }
+        },
+        "com.amazonaws.abusesignal#GetAbuseReportStatusRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.abusesignal#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the abuse report to retrieve status for. This is the <code>reportId</code> that is returned by <a>CreateAbuseReport</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for a <a>GetAbuseReportStatus</a> request. Identifies the abuse report whose status you want to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.abusesignal#GetAbuseReportStatusResponse": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.abusesignal#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the abuse report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "correlationId": {
+                    "target": "com.amazonaws.abusesignal#CorrelationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reporter-provided correlation ID for cross-referencing.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.abusesignal#ReportSubmissionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current processing status of the abuse report. Valid values are <code>QUEUED</code> (the report has been received and queued for processing), <code>PROCESSING</code> (the report has been received and is being processed), and <code>COMPLETED</code> (downstream resolution is finished).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the current status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reasonCode": {
+                    "target": "com.amazonaws.abusesignal#ReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that explains the resolution outcome. This value is returned only after the report reaches the terminal <code>COMPLETED</code> status; it is absent while the report is <code>QUEUED</code> or <code>PROCESSING</code>. Treat an unrecognized value as opaque, because the set of reason codes is append-only.</p>"
+                    }
+                },
+                "submittedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the abuse report was submitted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the status was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response from a <a>GetAbuseReportStatus</a> request. Contains the report's current status, when you submitted it, and when its status last changed.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.abusesignal#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before you retry the request. The service also returns this value in the <code>Retry-After</code> HTTP header.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected error occurred during the processing of the request. This error is retryable; check the <code>Retry-After</code> header before you retry.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.abusesignal#ListAbuseReportStatuses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.abusesignal#ListAbuseReportStatusesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.abusesignal#ListAbuseReportStatusesResponse"
+            },
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list abuse report statuses"
+                },
+                "smithy.api#documentation": "<p>Lists abuse report statuses for the calling account, ordered by submission time, with optional filtering and pagination.</p> <p>Use the <code>correlationId</code> parameter to filter results by the reporter-provided correlation ID that was specified during report submission.</p> <p>Results are paginated. Use <code>nextToken</code> to retrieve additional results.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List abuse report statuses",
+                        "input": {},
+                        "output": {
+                            "reports": [
+                                {
+                                    "reportId": "rpt5a8b3c2d1e4f6g7h8i9j0",
+                                    "status": "PROCESSING",
+                                    "description": "Submitted"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/abusestatuses"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "reports"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListAbuseReportStatusesSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.abusesignal#ListAbuseReportStatusesRequest": {
+            "type": "structure",
+            "members": {
+                "correlationId": {
+                    "target": "com.amazonaws.abusesignal#CorrelationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results by the reporter-provided correlation ID.</p>",
+                        "smithy.api#httpQuery": "correlationId"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.abusesignal#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for retrieving the next page of results. Omit this parameter to return the first page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page. Valid range: 1–50. The default is 50.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for a <a>ListAbuseReportStatuses</a> request. Use it to filter results by correlation ID and to page through them.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.abusesignal#ListAbuseReportStatusesResponse": {
+            "type": "structure",
+            "members": {
+                "reports": {
+                    "target": "com.amazonaws.abusesignal#ReportStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of abuse report status items. This list is empty when no reports are found for the calling account, or when no reports match the specified <code>correlationId</code> filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.abusesignal#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next page of results. This value is <code>null</code> when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response from a <a>ListAbuseReportStatuses</a> request. Contains one page of abuse report statuses and, when more results remain, a token for retrieving the next page.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.abusesignal#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\x00-\\x7F]+$"
+            }
+        },
+        "com.amazonaws.abusesignal#ReasonCode": {
+            "type": "enum",
+            "members": {
+                "ACTIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIONED"
+                    }
+                },
+                "NOT_RESOLVABLE_TO_AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_RESOLVABLE_TO_AWS"
+                    }
+                },
+                "REVIEWED_NO_AWS_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVIEWED_NO_AWS_ACTION"
+                    }
+                },
+                "CONTENT_DOWN_OR_INACCESSIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT_DOWN_OR_INACCESSIBLE"
+                    }
+                },
+                "NEED_MORE_INFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEED_MORE_INFORMATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A code that explains the resolution outcome of an abuse report, surfaced to the reporter. This value is present only after a report reaches the terminal <code>COMPLETED</code> status; it is absent while the report is <code>QUEUED</code> or <code>PROCESSING</code>. The vocabulary is owned by the service and is append-only, so treat an unrecognized value as opaque rather than as an error.</p> <p>The following values are defined:</p> <ul> <li> <p> <code>ACTIONED</code> – Enforcement action was taken on the reported resource.</p> </li> <li> <p> <code>NOT_RESOLVABLE_TO_AWS</code> – The reported resource could not be attributed to Amazon Web Services.</p> </li> <li> <p> <code>REVIEWED_NO_AWS_ACTION</code> – The report was reviewed and no Amazon Web Services action was warranted.</p> </li> <li> <p> <code>CONTENT_DOWN_OR_INACCESSIBLE</code> – The reported content is already down or inaccessible, so no action was needed.</p> </li> <li> <p> <code>NEED_MORE_INFORMATION</code> – The report did not contain enough information to act on.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.abusesignal#ReportData": {
+            "type": "union",
+            "members": {
+                "xarf": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that conforms to the XARF v4 specification. At a minimum, the document must include the XARF core fields, including the required <code>category</code> and <code>type</code> fields that classify the report (for example, <code>category</code> <code>content</code> with <code>type</code> <code>phishing</code>). For the XARF core fields and detailed schema definitions of each report type, see the <a href=\"https://xarf.org/docs/specification/\">XARF v4 Technical Specification on the XARF website</a>.</p> <note> <p>Never include images, video, or copies of child sexual abuse or child sexual exploitation material in a report, in any field and for any report type. Send URLs, hash values, and reference identifiers only.</p> </note> <p>If you suspect that activity is illegal, use the XARF <code>description</code> field to explain why and name the laws concerned.</p> <p> <b>Testing your integration</b> </p> <p>To test your integration, add the tag <code>lifecycle:test</code> to the report. Amazon Web Services validates test reports and returns a report ID and status in the same way as other reports, but doesn't process them as abuse reports. Amazon Web Services deletes test reports shortly after submission.</p> <p>Use test values only, such as example.com and the IP address ranges reserved for documentation (192.0.2.0/24, 198.51.100.0/24 and 203.0.113.0/24). Don't add this tag to a real abuse report.</p> <p>Tag keys that begin with <code>aws:</code> are reserved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The abuse report data in XARF format. This is a union type, so exactly one member must be specified.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.abusesignal#ReportId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{20,64}$"
+            }
+        },
+        "com.amazonaws.abusesignal#ReportStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.abusesignal#ReportStatusListItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.abusesignal#ReportStatusListItem": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.abusesignal#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the abuse report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "correlationId": {
+                    "target": "com.amazonaws.abusesignal#CorrelationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reporter-provided correlation ID for cross-referencing.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.abusesignal#ReportSubmissionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current processing status of the abuse report. Valid values are <code>QUEUED</code> (the report has been received and queued for processing), <code>PROCESSING</code> (the report has been received and is being processed), and <code>COMPLETED</code> (downstream resolution is finished).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reasonCode": {
+                    "target": "com.amazonaws.abusesignal#ReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that explains the resolution outcome. This value is present only after the report reaches the terminal <code>COMPLETED</code> status; it is absent while the report is <code>QUEUED</code> or <code>PROCESSING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Status information for an individual abuse report. The ListAbuseReportStatuses operation returns this structure in its reports list.</p>"
+            }
+        },
+        "com.amazonaws.abusesignal#ReportSubmissionStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enumerates the processing states of a submitted abuse report. The reporter-facing lifecycle consists of <code>QUEUED</code>, <code>PROCESSING</code>, and <code>COMPLETED</code>:</p> <ul> <li> <p> <code>QUEUED</code> – The report has been received and queued for processing.</p> </li> <li> <p> <code>PROCESSING</code> – The report has been received and is being processed. Poll for this status to confirm that the report was received.</p> </li> <li> <p> <code>COMPLETED</code> – Downstream resolution is finished. A report in this state carries a <code>reasonCode</code> that describes the outcome. The time to reach <code>COMPLETED</code> may vary and can take up to several days depending on the scope and complexity of the suspected abuse.</p> </li> </ul>",
+                "smithy.api#unstable": {}
+            }
+        },
+        "com.amazonaws.abusesignal#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource that was not found.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource was not found. Verify that the <code>reportId</code> is correct.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.abusesignal#SubmissionRequirement": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stable, dot-namespaced identifier for the submission requirement that the report did not meet (for example, <code>rule.timestamp.too_old</code>). The set of codes is append-only, so treat an unrecognized value as opaque. This value is absent when the requirement that the report did not meet does not publish an identifier.</p> <p>The service checks the following submission requirements:</p> <ul> <li> <p> <code>rule.source_identifier.too_long</code> (<code>source_identifier</code>) – The value exceeds the maximum accepted length of 253 characters (the DNS hostname limit).</p> </li> <li> <p> <code>rule.source_identifier.forbidden_characters</code> (<code>source_identifier</code>) – The value contains characters that are never valid in an address (<code>{</code>, <code>}</code>, <code>*</code>, or <code>`</code>). These are common template-injection and command-injection markers.</p> </li> <li> <p> <code>rule.source_identifier.malformed</code> (<code>source_identifier</code>) – The value is not a valid IPv4 address, IPv6 address, URL, or domain name.</p> </li> <li> <p> <code>rule.timestamp.unparseable</code> (<code>timestamp</code>) – The value could not be parsed as an RFC 3339 date-time.</p> </li> <li> <p> <code>rule.timestamp.in_future</code> (<code>timestamp</code>) – The value is dated further into the future than the accepted clock-skew tolerance (a default of 1 hour).</p> </li> <li> <p> <code>rule.timestamp.too_old</code> (<code>timestamp</code>) – The value predates the submission lookback window (a default of 90 days). For content that is still accessible, set <code>timestamp</code> to the time you most recently observed it.</p> </li> <li> <p> <code>rule.evidence.content_type_mismatch</code> (<code>evidence</code>) – The decoded payload of an evidence item does not match its declared <code>content_type</code>. The <code>path</code> identifies the item, for example <code>/evidence/0</code>.</p> </li> </ul> <p>Submission requirement thresholds are configuration-driven and can change over time. The set of codes is append-only, so treat an unrecognized code as opaque.</p>"
+                    }
+                },
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON Pointer expression to the report member that did not meet the requirement. An empty string refers to the report as a whole.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed, human-readable description of the unmet submission requirement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one specific submission requirement that a well-formed report did not meet. The service returns this structure in the <code>unmetRequirements</code> list of a <code>SubmissionRequirementException</code> (HTTP 422).</p>"
+            }
+        },
+        "com.amazonaws.abusesignal#SubmissionRequirementException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the unmet submission requirements.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "unmetRequirements": {
+                    "target": "com.amazonaws.abusesignal#SubmissionRequirementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the specific submission requirements that the report did not meet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The report is well-formed and satisfies the XARF schema, but it does not meet one or more submission requirements (for example, the submission lookback window or <code>source_identifier</code> restrictions). This error is distinct from <code>ValidationException</code> (HTTP 400), which indicates that the report is not well-formed. Retrying the same report will not succeed; the report content must change.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 422
+            }
+        },
+        "com.amazonaws.abusesignal#SubmissionRequirementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.abusesignal#SubmissionRequirement"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.abusesignal#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the throttling error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the Amazon Web Services service that is associated with the quota that was exceeded.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the service quota that was exceeded.</p>"
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before you retry the request. The service also returns this value in the <code>Retry-After</code> HTTP header.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. This error is retryable; retry with exponential backoff.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.abusesignal#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the validation failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.abusesignal#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the specific input fields that failed validation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the service, which indicates that the request is not well-formed. Check <code>fieldList</code> for the specific members that failed validation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.abusesignal#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON Pointer expression to the structure member whose value failed to satisfy the modeled constraints.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the validation failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one specific validation failure for an input member.</p>"
+            }
+        },
+        "com.amazonaws.abusesignal#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.abusesignal#ValidationExceptionField"
+            }
+        }
+    }
+}

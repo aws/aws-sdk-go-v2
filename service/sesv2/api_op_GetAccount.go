@@ -50,6 +50,10 @@ type GetAccountOutput struct {
 	// IP addresses that are associated with your account.
 	DedicatedIpAutoWarmupEnabled bool
 
+	// The delivery attributes that apply to your Amazon SES account in the current
+	// Amazon Web Services Region.
+	DeliveryAttributes *types.DeliveryAttributes
+
 	// An object that defines your account details.
 	Details *types.AccountDetails
 
@@ -116,6 +120,11 @@ func (v *GetAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DedicatedIpAutoWarmupEnabled != false {
 		s.WriteBool(schemas.GetAccountResponse_DedicatedIpAutoWarmupEnabled, v.DedicatedIpAutoWarmupEnabled)
 	}
+	if v.DeliveryAttributes != nil {
+		s.WriteStruct(schemas.GetAccountResponse_DeliveryAttributes)
+		v.DeliveryAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Details != nil {
 		s.WriteStruct(schemas.GetAccountResponse_Details)
 		v.Details.SerializeMembers(s)
@@ -156,6 +165,9 @@ func (v *GetAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.GetAccountResponse_DedicatedIpAutoWarmupEnabled:
 			return d.ReadBool(schemas.GetAccountResponse_DedicatedIpAutoWarmupEnabled, &v.DedicatedIpAutoWarmupEnabled)
+		case schemas.GetAccountResponse_DeliveryAttributes:
+			v.DeliveryAttributes = &types.DeliveryAttributes{}
+			return v.DeliveryAttributes.Deserialize(d)
 		case schemas.GetAccountResponse_Details:
 			v.Details = &types.AccountDetails{}
 			return v.Details.Deserialize(d)

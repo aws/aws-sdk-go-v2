@@ -5708,6 +5708,11 @@ func validateFilesystemConfiguration(v types.FilesystemConfiguration) error {
 			invalidParams.AddNested("[efsAccessPoint]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.FilesystemConfigurationMemberS3BucketMount:
+		if err := validateS3BucketMountConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3BucketMount]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
 		if err := validateS3FilesAccessPointConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[s3FilesAccessPoint]", err.(smithy.InvalidParamsError))
@@ -8749,6 +8754,24 @@ func validateRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration) err
 		if err := validateHttpApiSchemaConfiguration(v.Schema); err != nil {
 			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketMountConfiguration(v *types.S3BucketMountConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketMountConfiguration"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.MountPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

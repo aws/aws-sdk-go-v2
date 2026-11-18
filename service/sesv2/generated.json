@@ -87,6 +87,7 @@
         "api_op_ListTenantResources.go",
         "api_op_ListTenants.go",
         "api_op_PutAccountDedicatedIpWarmupAttributes.go",
+        "api_op_PutAccountDeliveryAttributes.go",
         "api_op_PutAccountDetails.go",
         "api_op_PutAccountPricingAttributes.go",
         "api_op_PutAccountSendingAttributes.go",

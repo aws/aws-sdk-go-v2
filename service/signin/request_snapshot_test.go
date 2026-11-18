@@ -205,6 +205,38 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_BatchRevokeSessions(t *testing.T) {
+	input := &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchRevokeSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchRevokeSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateBearerToken(t *testing.T) {
 	input := &CreateBearerTokenInput{
 		GrantType:       ptr.String("__GrantType__"),
@@ -301,6 +333,8 @@ func TestCheckRequestSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) {
 		GrantType:        ptr.String("__GrantType__"),
 		SubjectToken:     ptr.String("__SubjectToken__"),
 		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Assertion:        ptr.String("__Assertion__"),
+		ClientId:         ptr.String("__ClientId__"),
 		Resource:         ptr.String("__Resource__"),
 		Scope:            ptr.String("__Scope__"),
 	}
@@ -434,6 +468,34 @@ func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSession(t *testing.T) {
+	input := &GetSessionInput{
+		SessionArn:   ptr.String("__SessionArn__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 	input := &IntrospectOAuth2TokenWithIAMInput{
 		Token:         ptr.String("__Token__"),
@@ -486,6 +548,39 @@ func TestCheckRequestSnapshot_ListResourcePermissionStatements(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcePermissionStatements"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListSessions(t *testing.T) {
+	input := &ListSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Status:       types.SessionStatus("ACTIVE"),
+		ClientId:     ptr.String("__ClientId__"),
+		IssuedAfter:  ptr.Int64(1),
+		IssuedBefore: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSessions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -577,6 +672,38 @@ func TestCheckRequestSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_BatchRevokeSessions(t *testing.T) {
+	input := &BatchRevokeSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		SessionArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Reason: ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchRevokeSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchRevokeSessions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateBearerToken(t *testing.T) {
 	input := &CreateBearerTokenInput{
 		GrantType:       ptr.String("__GrantType__"),
@@ -673,6 +800,8 @@ func TestUpdateRequestSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) 
 		GrantType:        ptr.String("__GrantType__"),
 		SubjectToken:     ptr.String("__SubjectToken__"),
 		SubjectTokenType: ptr.String("__SubjectTokenType__"),
+		Assertion:        ptr.String("__Assertion__"),
+		ClientId:         ptr.String("__ClientId__"),
 		Resource:         ptr.String("__Resource__"),
 		Scope:            ptr.String("__Scope__"),
 	}
@@ -806,6 +935,34 @@ func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetSession(t *testing.T) {
+	input := &GetSessionInput{
+		SessionArn:   ptr.String("__SessionArn__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSession(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSession"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 	input := &IntrospectOAuth2TokenWithIAMInput{
 		Token:         ptr.String("__Token__"),
@@ -858,6 +1015,39 @@ func TestUpdateRequestSnapshot_ListResourcePermissionStatements(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourcePermissionStatements"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListSessions(t *testing.T) {
+	input := &ListSessionsInput{
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Status:       types.SessionStatus("ACTIVE"),
+		ClientId:     ptr.String("__ClientId__"),
+		IssuedAfter:  ptr.Int64(1),
+		IssuedBefore: ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSessions"); err != nil {
 		t.Fatal(err)
 	}
 }

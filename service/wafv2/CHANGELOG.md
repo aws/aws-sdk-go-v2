@@ -1,3 +1,7 @@
+# v1.86.0 (2026-11-18)
+
+* **Feature**: Adds the AnalyticsConfig parameter to CreateWebACL and UpdateWebACL to enable or disable cross-Region security analytics for a WebACL. When you enable security analytics, you authorize AWS to transfer and store full request logs outside the AWS Region where the WebACL is hosted.
+
 # v1.85.2 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

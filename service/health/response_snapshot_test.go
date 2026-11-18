@@ -131,16 +131,14 @@ func TestCheckResponseSnapshot_ConfigureTags(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ConfigureTags(context.Background(), &ConfigureTagsInput{
-		TagKeys: []types.ResourceTagKey{
+		TagKeys: []types.ConfigureTagsTagKey{
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
-				Status:                types.TagKeyStatus("PENDING"),
 			},
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
-				Status:                types.TagKeyStatus("PENDING"),
 			},
 		},
 	})
@@ -154,14 +152,16 @@ func TestCheckResponseSnapshot_ConfigureTags(t *testing.T) {
 
 func TestCheckResponseSnapshot_ConfigureTagsForOrganization(t *testing.T) {
 	want := &ConfigureTagsForOrganizationOutput{
-		ConfiguredTagKeys: []types.TagKeyForOrganization{
+		ConfiguredTagKeys: []types.OrganizationTagKey{
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
 			},
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
 			},
 		},
 	}
@@ -263,9 +263,6 @@ func TestCheckResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 				AccountTags: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
 				EntityMetadata: map[string]string{
 					"key0": "__Value__",
 				},
@@ -282,9 +279,6 @@ func TestCheckResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 					"key0": "__Value__",
 				},
 				AccountTags: map[string]string{
-					"key0": "__Value__",
-				},
-				Tags: map[string]string{
 					"key0": "__Value__",
 				},
 				EntityMetadata: map[string]string{
@@ -366,9 +360,6 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 				AccountTags: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
 				EntityMetadata: map[string]string{
 					"key0": "__Value__",
 				},
@@ -385,9 +376,6 @@ func TestCheckResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testin
 					"key0": "__Value__",
 				},
 				AccountTags: map[string]string{
-					"key0": "__Value__",
-				},
-				Tags: map[string]string{
 					"key0": "__Value__",
 				},
 				EntityMetadata: map[string]string{

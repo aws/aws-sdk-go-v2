@@ -2594,6 +2594,17 @@ func serializeJazzResourceIdentifierProperties(s smithy.ShapeSerializer, schema 
 	s.CloseMap()
 }
 
+func serializeRegionalStatusDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.RegionalStatusDetail) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeResourceIdentifierProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -2616,6 +2627,28 @@ func deserializeJazzResourceIdentifierProperties(d smithy.ShapeDeserializer, s *
 		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeRegionalStatusDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.RegionalStatusDetail) error {
+	*v = make(map[string]types.RegionalStatusDetail)
+	var vv types.RegionalStatusDetail
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RegionalStatusDetail
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.RegionalStatusDetail{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

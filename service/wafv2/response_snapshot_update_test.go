@@ -8350,6 +8350,7 @@ func TestUpdateResponseSnapshot_GetWebACL(t *testing.T) {
 			OnSourceDDoSProtectionConfig: nil,
 			ApplicationConfig:            nil,
 			MonetizationConfig:           nil,
+			AnalyticsConfig:              nil,
 		},
 		LockToken:                 ptr.String("__LockToken__"),
 		ApplicationIntegrationURL: ptr.String("__ApplicationIntegrationURL__"),
@@ -11712,6 +11713,7 @@ func TestUpdateResponseSnapshot_GetWebACLForResource(t *testing.T) {
 			OnSourceDDoSProtectionConfig: nil,
 			ApplicationConfig:            nil,
 			MonetizationConfig:           nil,
+			AnalyticsConfig:              nil,
 		},
 	}
 	proto := awsjson.New11(schemas.AWSWAF_20190729)

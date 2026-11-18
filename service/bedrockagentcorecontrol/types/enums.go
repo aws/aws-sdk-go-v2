@@ -2186,6 +2186,25 @@ func (PrincipalMatchOperator) Values() []PrincipalMatchOperator {
 	}
 }
 
+type PrivilegeMode string
+
+// Enum values for PrivilegeMode
+const (
+	PrivilegeModeStandard   PrivilegeMode = "STANDARD"
+	PrivilegeModePrivileged PrivilegeMode = "PRIVILEGED"
+)
+
+// Values returns all known values for PrivilegeMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrivilegeMode) Values() []PrivilegeMode {
+	return []PrivilegeMode{
+		"STANDARD",
+		"PRIVILEGED",
+	}
+}
+
 type Provider string
 
 // Enum values for Provider

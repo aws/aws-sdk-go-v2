@@ -9953,9 +9953,27 @@ func (v *IntermediateTableColumn) Deserialize(d smithy.ShapeDeserializer) error 
 //
 // The following types satisfy this interface:
 //
+//	IntermediateTableComputeConfigurationMemberJobComputeConfiguration
 //	IntermediateTableComputeConfigurationMemberQueryComputeConfiguration
 type IntermediateTableComputeConfiguration interface {
 	isIntermediateTableComputeConfiguration()
+}
+
+// Specifies the compute configuration for the PySpark job that populates the
+// intermediate table.
+type IntermediateTableComputeConfigurationMemberJobComputeConfiguration struct {
+	Value ProtectedJobComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*IntermediateTableComputeConfigurationMemberJobComputeConfiguration) isIntermediateTableComputeConfiguration() {
+}
+func (v *IntermediateTableComputeConfigurationMemberJobComputeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	serializeProtectedJobComputeConfiguration(s, schemas.IntermediateTableComputeConfiguration_jobComputeConfiguration, v.Value)
+}
+func (v *IntermediateTableComputeConfigurationMemberJobComputeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeProtectedJobComputeConfiguration(d, schemas.IntermediateTableComputeConfiguration_jobComputeConfiguration, &v.Value)
 }
 
 //	The configuration of the compute resources for workers running an analysis
@@ -12125,9 +12143,29 @@ func (v *PaymentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	PopulationAnalysisConfigurationMemberJobParameters
 //	PopulationAnalysisConfigurationMemberSqlParameters
 type PopulationAnalysisConfiguration interface {
 	isPopulationAnalysisConfiguration()
+}
+
+// Specifies the PySpark job parameters for the population analysis. Use
+// jobParameters instead of sqlParameters when you populate the intermediate table
+// with results from a PySpark job.
+type PopulationAnalysisConfigurationMemberJobParameters struct {
+	Value PopulationAnalysisJobParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*PopulationAnalysisConfigurationMemberJobParameters) isPopulationAnalysisConfiguration() {}
+func (v *PopulationAnalysisConfigurationMemberJobParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulationAnalysisConfiguration_jobParameters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PopulationAnalysisConfigurationMemberJobParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The SQL parameters for the population analysis, including the query string or
@@ -12146,6 +12184,44 @@ func (v *PopulationAnalysisConfigurationMemberSqlParameters) Serialize(s smithy.
 }
 func (v *PopulationAnalysisConfigurationMemberSqlParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// Contains the PySpark job parameters used to populate an intermediate table,
+// including the ARN of the analysis template that defines the job. Use these
+// parameters instead of SQL parameters when the analysis you use to populate the
+// intermediate table is a PySpark analysis template.
+type PopulationAnalysisJobParameters struct {
+
+	// Specifies the ARN of the PySpark analysis template that populates the
+	// intermediate table. Provide this ARN in jobParameters when you populate the
+	// intermediate table with results from a PySpark job.
+	//
+	// This member is required.
+	AnalysisTemplateArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PopulationAnalysisJobParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulationAnalysisJobParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulationAnalysisJobParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplateArn != nil {
+		s.WriteString(schemas.PopulationAnalysisJobParameters_analysisTemplateArn, *v.AnalysisTemplateArn)
+	}
+}
+func (v *PopulationAnalysisJobParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PopulationAnalysisJobParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PopulationAnalysisJobParameters_analysisTemplateArn:
+			v.AnalysisTemplateArn = new(string)
+			return d.ReadString(schemas.PopulationAnalysisJobParameters_analysisTemplateArn, v.AnalysisTemplateArn)
+		}
+		return nil
+	})
 }
 
 // Contains the SQL parameters used to populate an intermediate table.
@@ -13327,10 +13403,31 @@ func (v *ProtectedJobOutputConfigurationInputMemberMember) Deserialize(d smithy.
 //
 // The following types satisfy this interface:
 //
+//	ProtectedJobOutputConfigurationOutputMemberIntermediateTable
 //	ProtectedJobOutputConfigurationOutputMemberMember
 //	ProtectedJobOutputConfigurationOutputMemberS3
 type ProtectedJobOutputConfigurationOutput interface {
 	isProtectedJobOutputConfigurationOutput()
+}
+
+// Specifies the intermediate table that the protected job populated, identified
+// by its ID, Amazon Resource Name (ARN), and name. This field is present when the
+// protected job was triggered by a PopulateIntermediateTable operation.
+type ProtectedJobOutputConfigurationOutputMemberIntermediateTable struct {
+	Value IntermediateTableOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ProtectedJobOutputConfigurationOutputMemberIntermediateTable) isProtectedJobOutputConfigurationOutput() {
+}
+func (v *ProtectedJobOutputConfigurationOutputMemberIntermediateTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtectedJobOutputConfigurationOutput_intermediateTable)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ProtectedJobOutputConfigurationOutputMemberIntermediateTable) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The member output configuration for a protected job.
@@ -13791,6 +13888,10 @@ type ProtectedJobSummary struct {
 	// This member is required.
 	Status ProtectedJobStatus
 
+	// The intermediate table that the protected job populated. This field is present
+	// when the protected job was triggered by a PopulateIntermediateTable operation.
+	IntermediateTableConfiguration *IntermediateTableOutputConfiguration
+
 	// The account ID of the member that pays for the job compute costs.
 	JobComputePayerAccountId *string
 
@@ -13809,6 +13910,11 @@ func (v *ProtectedJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.ProtectedJobSummary_id, *v.Id)
+	}
+	if v.IntermediateTableConfiguration != nil {
+		s.WriteStruct(schemas.ProtectedJobSummary_intermediateTableConfiguration)
+		v.IntermediateTableConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.JobComputePayerAccountId != nil {
 		s.WriteString(schemas.ProtectedJobSummary_jobComputePayerAccountId, *v.JobComputePayerAccountId)
@@ -13835,6 +13941,9 @@ func (v *ProtectedJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProtectedJobSummary_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.ProtectedJobSummary_id, v.Id)
+		case schemas.ProtectedJobSummary_intermediateTableConfiguration:
+			v.IntermediateTableConfiguration = &IntermediateTableOutputConfiguration{}
+			return v.IntermediateTableConfiguration.Deserialize(d)
 		case schemas.ProtectedJobSummary_jobComputePayerAccountId:
 			v.JobComputePayerAccountId = new(string)
 			return d.ReadString(schemas.ProtectedJobSummary_jobComputePayerAccountId, v.JobComputePayerAccountId)

@@ -201,6 +201,61 @@ func (v *AllQueryArguments) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies the security analytics configuration for the web ACL. Security
+// analytics shows the web ACL's request log data from multiple Amazon Web Services
+// Regions in a single dashboard in the WAF console.
+//
+// When you enable security analytics, you authorize Amazon Web Services to
+// transfer and store full request logs outside the Amazon Web Services Region
+// where the web ACL is hosted. For regional web ACLs, security analytics is
+// disabled by default when you omit this configuration. For web ACLs that protect
+// CloudFront distributions (global web ACLs), security analytics is enabled by
+// default. For more information, see [Enabling security analytics for a protection pack (web ACL)]in the WAF Developer Guide.
+//
+// [Enabling security analytics for a protection pack (web ACL)]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-security-analytics-enabling.html
+type AnalyticsConfig struct {
+
+	// The security analytics mode for the web ACL. Valid values:
+	//
+	//   - CROSS_REGION - Enables security analytics. WAF transfers and stores the web
+	//   ACL's request logs outside the Amazon Web Services Region where the web ACL is
+	//   hosted, for aggregation and processing.
+	//
+	//   - DISABLED - Disables security analytics. WAF stops transferring the web ACL's
+	//   request logs.
+	//
+	// This member is required.
+	Mode AnalyticsMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *AnalyticsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyticsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyticsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.AnalyticsConfig_Mode, string(v.Mode))
+	}
+}
+func (v *AnalyticsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyticsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyticsConfig_Mode:
+			var ev string
+			if err := d.ReadString(schemas.AnalyticsConfig_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AnalyticsMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A logical rule statement used to combine other rule statements with AND logic.
 // You provide more than one Statementwithin the AndStatement .
 type AndStatement struct {
@@ -1113,8 +1168,10 @@ type ByteMatchStatement struct {
 	//   Application Load Balancers. Match against the request's JA3 fingerprint. The JA3
 	//   fingerprint is a 32-character hash derived from the TLS Client Hello of an
 	//   incoming request. This fingerprint serves as a unique identifier for the
-	//   client's TLS configuration. You can use this choice only with a string match
-	//   ByteMatchStatement with the PositionalConstraint set to EXACTLY .
+	//   client's TLS configuration. You can use this choice with a ByteMatchStatement
+	//   , RegexMatchStatement , RegexPatternSetReferenceStatement , or
+	//   SizeConstraintStatement . You can't use it with SqliMatchStatement or
+	//   XssMatchStatement .
 	//
 	// You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 	//   If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -1584,8 +1641,8 @@ type ClientSideAction struct {
 	//   - If usage is enabled:
 	//
 	//   - The managed rule group adds the label
-	//   awswaf:managed:aws:anti-ddos:challengeable-request to any web request whose
-	//   URL does NOT match the regular expressions provided in the ClientSideAction
+	//   awswaf:managed:aws:anti-ddos:challengeable-request to any web request that
+	//   does not match the regular expressions provided in the ClientSideAction
 	//   setting ExemptUriRegularExpressions .
 	//
 	//   - The two rules are evaluated against web requests for protected resources
@@ -1614,18 +1671,26 @@ type ClientSideAction struct {
 	// This member is required.
 	UsageOfAction UsageOfAction
 
-	// The regular expression to match against the web request URI, used to identify
-	// requests that can't handle a silent browser challenge. When the ClientSideAction
-	// setting UsageOfAction is enabled, the managed rule group uses this setting to
-	// determine which requests to label with
-	// awswaf:managed:aws:anti-ddos:challengeable-request . If UsageOfAction is
+	// The regular expression to match against the request's host followed by its
+	// normalized URI path, used to identify requests that can't handle a silent
+	// browser challenge. When the ClientSideAction setting UsageOfAction is enabled,
+	// the managed rule group uses this setting to determine which requests to label
+	// with awswaf:managed:aws:anti-ddos:challengeable-request . If UsageOfAction is
 	// disabled, this setting has no effect and the managed rule group doesn't add the
 	// label to any requests.
 	//
+	// WAF matches against the host immediately followed by the normalized URI path
+	// and doesn't include the scheme, the query string, or the fragment. For example,
+	// www.example.com/api/orders . Because the match begins with the host, a pattern
+	// anchored to the start of the path, such as ^/api/ , never matches. WAF
+	// normalizes the path first, removing empty segments (including a trailing slash)
+	// and single-dot ( . ) segments and resolving double-dot ( .. ) segments, so /api/
+	// is evaluated as /api . Only GET requests are challengeable.
+	//
 	// The anti-DDoS managed rule group doesn't evaluate the rules
-	// ChallengeDDoSRequests or ChallengeAllDuringEvent for web requests whose URIs
-	// match this regex. This is true regardless of whether you override the rule
-	// action for either of the rules in your web ACL configuration.
+	// ChallengeDDoSRequests or ChallengeAllDuringEvent for web requests that match
+	// this regex. This is true regardless of whether you override the rule action for
+	// either of the rules in your web ACL configuration.
 	//
 	// Amazon Web Services recommends using a regular expression.
 	//
@@ -1635,7 +1700,7 @@ type ClientSideAction struct {
 	// Amazon Web Services recommends starting with the following setting. Review and
 	// update it for your application's needs:
 	//
-	//     \/api\/|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$
+	//     \/api(\/|$)|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$
 	ExemptUriRegularExpressions []Regex
 
 	// The sensitivity that the rule group rule ChallengeDDoSRequests uses when
@@ -2916,8 +2981,9 @@ type FieldToMatch struct {
 	// Client Hello information for the calculation. Almost all web requests include
 	// this information.
 	//
-	// You can use this choice only with a string match ByteMatchStatement with the
-	// PositionalConstraint set to EXACTLY .
+	// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+	// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+	// it with SqliMatchStatement or XssMatchStatement .
 	//
 	// You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 	// If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -2925,7 +2991,8 @@ type FieldToMatch struct {
 	//
 	// Provide the JA3 fingerprint string from the logs in your string match statement
 	// specification, to match with any future requests that have the same TLS
-	// configuration.
+	// configuration. To match a group of TLS configurations with a single pattern, use
+	// a regex statement.
 	//
 	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	JA3Fingerprint *JA3Fingerprint
@@ -2938,8 +3005,9 @@ type FieldToMatch struct {
 	// Client Hello information for the calculation. Almost all web requests include
 	// this information.
 	//
-	// You can use this choice only with a string match ByteMatchStatement with the
-	// PositionalConstraint set to EXACTLY .
+	// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+	// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+	// it with SqliMatchStatement or XssMatchStatement .
 	//
 	// You can obtain the JA4 fingerprint for client requests from the web ACL logs.
 	// If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -2947,7 +3015,8 @@ type FieldToMatch struct {
 	//
 	// Provide the JA4 fingerprint string from the logs in your string match statement
 	// specification, to match with any future requests that have the same TLS
-	// configuration.
+	// configuration. To match a group of TLS configurations with a single pattern, use
+	// a regex statement.
 	//
 	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	JA4Fingerprint *JA4Fingerprint
@@ -4384,8 +4453,9 @@ func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // Client Hello information for the calculation. Almost all web requests include
 // this information.
 //
-// You can use this choice only with a string match ByteMatchStatement with the
-// PositionalConstraint set to EXACTLY .
+// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+// it with SqliMatchStatement or XssMatchStatement .
 //
 // You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 // If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -4393,7 +4463,8 @@ func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // Provide the JA3 fingerprint string from the logs in your string match statement
 // specification, to match with any future requests that have the same TLS
-// configuration.
+// configuration. To match a group of TLS configurations with a single pattern, use
+// a regex statement.
 //
 // [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 type JA3Fingerprint struct {
@@ -4448,8 +4519,9 @@ func (v *JA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
 // Client Hello information for the calculation. Almost all web requests include
 // this information.
 //
-// You can use this choice only with a string match ByteMatchStatement with the
-// PositionalConstraint set to EXACTLY .
+// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+// it with SqliMatchStatement or XssMatchStatement .
 //
 // You can obtain the JA4 fingerprint for client requests from the web ACL logs.
 // If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -4457,7 +4529,8 @@ func (v *JA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // Provide the JA4 fingerprint string from the logs in your string match statement
 // specification, to match with any future requests that have the same TLS
-// configuration.
+// configuration. To match a group of TLS configurations with a single pattern, use
+// a regex statement.
 //
 // [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 type JA4Fingerprint struct {
@@ -11572,6 +11645,10 @@ type WebACL struct {
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
 
+	// The security analytics configuration for the web ACL. For more information, see AnalyticsConfig
+	// .
+	AnalyticsConfig *AnalyticsConfig
+
 	// Returns a list of ApplicationAttribute s.
 	ApplicationConfig *ApplicationConfig
 
@@ -11735,6 +11812,11 @@ func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.WebACL_ARN, *v.ARN)
 	}
+	if v.AnalyticsConfig != nil {
+		s.WriteStruct(schemas.WebACL_AnalyticsConfig)
+		v.AnalyticsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ApplicationConfig != nil {
 		s.WriteStruct(schemas.WebACL_ApplicationConfig)
 		v.ApplicationConfig.SerializeMembers(s)
@@ -11823,6 +11905,9 @@ func (v *WebACL) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WebACL_ARN:
 			v.ARN = new(string)
 			return d.ReadString(schemas.WebACL_ARN, v.ARN)
+		case schemas.WebACL_AnalyticsConfig:
+			v.AnalyticsConfig = &AnalyticsConfig{}
+			return v.AnalyticsConfig.Deserialize(d)
 		case schemas.WebACL_ApplicationConfig:
 			v.ApplicationConfig = &ApplicationConfig{}
 			return v.ApplicationConfig.Deserialize(d)

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchRevokeSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRevokeSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchRevokeSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBearerToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBearerToken(context.Background(), nil, func(o *Options) {
@@ -158,6 +170,18 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
@@ -175,6 +199,18 @@ func TestCheckSnapshot_ListResourcePermissionStatements(t *testing.T) {
 	_, err := svc.ListResourcePermissionStatements(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListResourcePermissionStatements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -217,6 +253,18 @@ func TestCheckSnapshot_RevokeOAuth2TokenWithIAM(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchRevokeSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRevokeSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchRevokeSessions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBearerToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBearerToken(context.Background(), nil, func(o *Options) {
@@ -313,6 +361,18 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_IntrospectOAuth2TokenWithIAM(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.IntrospectOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
@@ -330,6 +390,18 @@ func TestUpdateSnapshot_ListResourcePermissionStatements(t *testing.T) {
 	_, err := svc.ListResourcePermissionStatements(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListResourcePermissionStatements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

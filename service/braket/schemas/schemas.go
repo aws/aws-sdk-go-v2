@@ -258,6 +258,23 @@ var _DeviceStatus = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeviceStatus",
 }, smithy.ShapeTypeString, 0)
 
+var DeviceStatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.braket",
+	Name:      "DeviceStatusReason",
+}, smithy.ShapeTypeStructure, 4)
+var DeviceStatusReason_reason *smithy.Schema
+
+var DeviceStatusReason_startedAt *smithy.Schema
+
+var DeviceStatusReason_estimatedEndAt *smithy.Schema
+
+var DeviceStatusReason_updatedAt *smithy.Schema
+
+var _DeviceStatusReasonCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.braket",
+	Name:      "DeviceStatusReasonCode",
+}, smithy.ShapeTypeString, 0)
+
 var DeviceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.braket",
 	Name:      "DeviceSummary",
@@ -912,7 +929,7 @@ var GetDeviceRequest_deviceArn *smithy.Schema
 var GetDeviceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.braket",
 	Name:      "GetDeviceResponse",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var GetDeviceResponse_deviceArn *smithy.Schema
 
 var GetDeviceResponse_deviceName *smithy.Schema
@@ -922,6 +939,8 @@ var GetDeviceResponse_providerName *smithy.Schema
 var GetDeviceResponse_deviceType *smithy.Schema
 
 var GetDeviceResponse_deviceStatus *smithy.Schema
+
+var GetDeviceResponse_deviceStatusReason *smithy.Schema
 
 var GetDeviceResponse_deviceCapabilities *smithy.Schema
 
@@ -1202,6 +1221,14 @@ func init() {
 	_DeviceQueueInfoList_member = _DeviceQueueInfoList.AddMember("member", DeviceQueueInfo)
 
 	DeviceRetiredException_message = DeviceRetiredException.AddMember("message", smithyprelude.String)
+
+	DeviceStatusReason_reason = DeviceStatusReason.AddMember("reason", _DeviceStatusReasonCode)
+
+	DeviceStatusReason_startedAt = DeviceStatusReason.AddMember("startedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DeviceStatusReason_estimatedEndAt = DeviceStatusReason.AddMember("estimatedEndAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	DeviceStatusReason_updatedAt = DeviceStatusReason.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	DeviceSummary_deviceArn = DeviceSummary.AddMember("deviceArn", _DeviceArn)
 
@@ -1486,6 +1513,8 @@ func init() {
 	GetDeviceResponse_deviceType = GetDeviceResponse.AddMember("deviceType", _DeviceType)
 
 	GetDeviceResponse_deviceStatus = GetDeviceResponse.AddMember("deviceStatus", _DeviceStatus)
+
+	GetDeviceResponse_deviceStatusReason = GetDeviceResponse.AddMember("deviceStatusReason", DeviceStatusReason)
 
 	GetDeviceResponse_deviceCapabilities = GetDeviceResponse.AddMember("deviceCapabilities", _JsonValue)
 

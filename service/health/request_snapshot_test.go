@@ -195,16 +195,14 @@ func serdeBodyEqual(got, expected []byte) bool {
 }
 func TestCheckRequestSnapshot_ConfigureTags(t *testing.T) {
 	input := &ConfigureTagsInput{
-		TagKeys: []types.ResourceTagKey{
+		TagKeys: []types.ConfigureTagsTagKey{
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
-				Status:                types.TagKeyStatus("PENDING"),
 			},
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
-				Status:                types.TagKeyStatus("PENDING"),
 			},
 		},
 	}
@@ -1316,16 +1314,14 @@ func TestCheckRequestSnapshot_EnableTagsForOrganization(t *testing.T) {
 }
 func TestUpdateRequestSnapshot_ConfigureTags(t *testing.T) {
 	input := &ConfigureTagsInput{
-		TagKeys: []types.ResourceTagKey{
+		TagKeys: []types.ConfigureTagsTagKey{
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
-				Status:                types.TagKeyStatus("PENDING"),
 			},
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
-				Status:                types.TagKeyStatus("PENDING"),
 			},
 		},
 	}
