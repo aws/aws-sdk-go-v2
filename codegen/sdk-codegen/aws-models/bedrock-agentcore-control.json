@@ -3174,6 +3174,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the capacity provider to use for the AgentCore Runtime.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "operatingSystemConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OperatingSystemConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system configuration of the agents that Amazon Bedrock AgentCore Runtime runs on the capacity provider.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15372,6 +15378,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for a capacity provider volume to mount into the AgentCore Runtime. This mounts a persistent volume that is defined on the capacity provider, referenced by its logical name.</p>"
                     }
+                },
+                "s3BucketMount": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3BucketMountConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime.</p>"
+                    }
                 }
             },
             "traits": {
@@ -25007,6 +25019,20 @@
                 "smithy.api#documentation": "<p>The configuration details returned for a LinkedIn OAuth2 provider, including the client ID and OAuth2 discovery information.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#LinuxOperatingSystemConfiguration": {
+            "type": "structure",
+            "members": {
+                "privilegeMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PrivilegeMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The privilege mode of the agents. If you omit this field, the agents run in <code>STANDARD</code> privilege mode. The following values are possible:</p> <ul> <li> <p> <code>STANDARD</code> – The agent runs without elevated privileges. This is the default.</p> </li> <li> <p> <code>PRIVILEGED</code> – The agent runs with elevated privileges on its instance. Use this mode for agents that build container images, run containers, or install system packages. A session that runs a <code>PRIVILEGED</code> agent runs only that agent.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the operating system configuration of agents that run on Linux instances, such as the privilege mode.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ListAgentInsightStores": {
             "type": "operation",
             "input": {
@@ -31421,6 +31447,20 @@
                 "smithy.api#documentation": "<p>The operating system and CPU architecture for capacity provider instances.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#OperatingSystemConfiguration": {
+            "type": "union",
+            "members": {
+                "linux": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#LinuxOperatingSystemConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system configuration of agents that run on Linux instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the operating system configuration of the agents that AgentCore Runtime runs on a capacity provider. Specify the member for the operating system of the capacity provider.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#OptionalLogGroupName": {
             "type": "string",
             "traits": {
@@ -33346,6 +33386,26 @@
                 "smithy.api#documentation": "<p>Contains the private key source configuration for a JWT client assertion.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#PrivilegeMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "PRIVILEGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVILEGED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The privilege mode of the agents, either <code>STANDARD</code> (the default) or <code>PRIVILEGED</code>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#Prompt": {
             "type": "string",
             "traits": {
@@ -34944,6 +35004,61 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for an AgentCore Runtime target. Specifies the agent runtime to route requests to via HTTP.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#S3BucketMountConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket to mount. You can specify a general purpose bucket or a directory bucket.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "mountPath": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MountPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount path for the S3 bucket inside the AgentCore Runtime. The path must be under <code>/mnt</code> with exactly one subdirectory level (for example, <code>/mnt/data</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key prefix to mount. Only objects under this prefix are visible at the mount path. To give each session its own prefix, include <code>{runtimeSessionId}</code> (for example, <code>data/{runtimeSessionId}/</code>). If you omit the prefix, the whole bucket is mounted.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9{][a-zA-Z0-9!_.*'()/{}-]*$"
+                    }
+                },
+                "s3BucketOwner": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID that must own the bucket. If you omit it, the bucket must be owned by the account that owns the AgentCore Runtime.</p>",
+                        "smithy.api#pattern": "^[0-9]{12}$"
+                    }
+                },
+                "s3BucketRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region of the S3 bucket. If you omit it, the bucket must be in the same Region as the AgentCore Runtime.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 32
+                        },
+                        "smithy.api#pattern": "^([a-z]+-){2,3}\\d+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint for Amazon S3. Files under the mount path map to objects in the bucket.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#S3BucketUri": {

@@ -679,9 +679,9 @@
                 "smithy.api#documentation": "<p>Idempotency token.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 63
+                    "max": 64
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9_.-]{0,63}$"
+                "smithy.api#pattern": "^[A-Za-z0-9_.-]{1,64}$"
             }
         },
         "com.amazonaws.resiliencehubv2#CloudWatchAlarmArn": {
@@ -855,6 +855,9 @@
                                     "aws:ResourceTag/${TagKey}"
                                 ]
                             }
+                        },
+                        "optional": {
+                            "repository-connection": {}
                         }
                     }
                 },
@@ -2852,7 +2855,7 @@
                 "category": {
                     "target": "com.amazonaws.resiliencehubv2#InsightsCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of the insight. Valid values:</p> <ul> <li> <p>CROSS_REGION - The insight relates to dependencies used across multiple Regions.</p> </li> <li> <p>NEW_DEPENDENCY - The insight relates to a recently detected dependency.</p> </li> <li> <p>THIRD_PARTY - The insight relates to a third-party dependency.</p> </li> <li> <p>UNEVEN_USAGE - The insight relates to a dependency with uneven usage across the service.</p> </li> <li> <p>AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services service.</p> </li> </ul>",
+                        "smithy.api#documentation": "<p>The category of the insight. Valid values:</p> <ul> <li> <p>CROSS_REGION - The insight relates to dependencies used across multiple Regions.</p> </li> <li> <p>NEW_DEPENDENCY - The insight relates to a recently detected dependency.</p> </li> <li> <p>THIRD_PARTY - The insight relates to a third-party dependency.</p> </li> <li> <p>UNEVEN_USAGE - The insight relates to a dependency with uneven usage across the service.</p> </li> <li> <p>AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services service. Resilience Hub doesn't currently return this value.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3055,7 +3058,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS DevOps Agent (DevOps Agent) integration configuration that you supply when creating or updating a service. Connecting a service to a DevOps Agent Agent Space lets DevOps Agent investigate the service's resilience test runs and attach its analysis to the results. Include this block with an Agent Space Amazon Resource Name (ARN) to connect or reconnect the service to an Agent Space. Include it without an Agent Space ARN to disconnect the service. Omit it to leave the existing linkage unchanged.</p>"
+                "smithy.api#documentation": "<p>The Amazon Web Services DevOps Agent (DevOps Agent) integration configuration that you supply when creating or updating a service. Connecting a service to an Agent Space lets DevOps Agent investigate the service's resilience test runs and attach its analysis to the results. Include this block with an Agent Space Amazon Resource Name (ARN) to connect or reconnect the service to an Agent Space. Include it without an Agent Space ARN to disconnect the service. Omit it to leave the existing linkage unchanged.</p>"
             }
         },
         "com.amazonaws.resiliencehubv2#DevOpsAgentConfigurationView": {
@@ -4646,12 +4649,24 @@
                     "target": "com.amazonaws.resiliencehubv2#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#ValidationException"
                 }
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to retrieve a test template"
+                    "documentation": "Grants permission to retrieve a test template",
+                    "resources": {
+                        "required": {
+                            "test-template": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Retrieves a resilience test template by ARN, including the parameters it accepts and the fault actions it runs.</p>",
                 "smithy.api#http": {
@@ -5467,7 +5482,16 @@
             ],
             "traits": {
                 "aws.iam#iamAction": {
-                    "documentation": "Grants permission to list dependencies discovered for services"
+                    "documentation": "Grants permission to list dependencies discovered for services",
+                    "resources": {
+                        "optional": {
+                            "service": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            }
+                        }
+                    }
                 },
                 "smithy.api#documentation": "<p>Lists dependencies discovered for services.</p>",
                 "smithy.api#http": {
@@ -7253,6 +7277,11 @@
                                 "conditionKeys": [
                                     "aws:ResourceTag/${TagKey}"
                                 ]
+                            },
+                            "test-template": {
+                                "conditionKeys": [
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
                             }
                         }
                     }
@@ -7967,6 +7996,9 @@
                     "target": "com.amazonaws.resiliencehubv2#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.resiliencehubv2#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.resiliencehubv2#ValidationException"
                 }
             ],
@@ -7979,12 +8011,32 @@
                     "method": "GET",
                     "uri": "/v2/list-test-templates"
                 },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "testTemplates"
+                },
                 "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.resiliencehubv2#ListTestTemplatesRequest": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.resiliencehubv2#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#input": {}
             }
@@ -7998,6 +8050,9 @@
                         "smithy.api#documentation": "<p>The list of test template summaries.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.resiliencehubv2#NextToken"
                 }
             },
             "traits": {
@@ -13394,6 +13449,13 @@
                                     "aws:TagKeys",
                                     "aws:ResourceTag/${TagKey}"
                                 ]
+                            },
+                            "test-template": {
+                                "conditionKeys": [
+                                    "aws:RequestTag/${TagKey}",
+                                    "aws:TagKeys",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
                             }
                         }
                     }
@@ -13722,6 +13784,12 @@
                         "smithy.api#documentation": "<p>The resilience policy snapshotted from the service when the run was started.</p>"
                     }
                 },
+                "effectivePolicyValues": {
+                    "target": "com.amazonaws.resiliencehubv2#TestRunEffectivePolicyValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective resilience policy values snapshotted from the service when the run was started. The test run is evaluated against these values.</p>"
+                    }
+                },
                 "reportOutput": {
                     "target": "com.amazonaws.resiliencehubv2#ReportGenerationResult",
                     "traits": {
@@ -13874,6 +13942,62 @@
                 "smithy.api#length": {
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.resiliencehubv2#TestRunEffectivePolicyValues": {
+            "type": "structure",
+            "members": {
+                "availabilitySlo": {
+                    "target": "com.amazonaws.resiliencehubv2#SloSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective availability SLO value for the test run.</p>"
+                    }
+                },
+                "multiAzRto": {
+                    "target": "com.amazonaws.resiliencehubv2#TargetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective multi-AZ RTO value for the test run, in minutes.</p>"
+                    }
+                },
+                "multiAzRpo": {
+                    "target": "com.amazonaws.resiliencehubv2#TargetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective multi-AZ RPO value for the test run, in minutes.</p>"
+                    }
+                },
+                "multiAzDrApproach": {
+                    "target": "com.amazonaws.resiliencehubv2#DisasterRecoverySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective multi-Availability Zone (AZ) disaster recovery approach for the test run.</p>"
+                    }
+                },
+                "multiRegionRto": {
+                    "target": "com.amazonaws.resiliencehubv2#TargetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective multi-Region RTO value for the test run, in minutes.</p>"
+                    }
+                },
+                "multiRegionRpo": {
+                    "target": "com.amazonaws.resiliencehubv2#TargetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective multi-Region RPO value for the test run, in minutes.</p>"
+                    }
+                },
+                "multiRegionDrApproach": {
+                    "target": "com.amazonaws.resiliencehubv2#DisasterRecoverySource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective multi-Region disaster recovery approach for the test run.</p>"
+                    }
+                },
+                "dataRecoveryTimeBetweenBackups": {
+                    "target": "com.amazonaws.resiliencehubv2#TargetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective data recovery time between backups value for the test run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the effective resilience policy values captured onto a test run from the service when the run was started.</p>"
             }
         },
         "com.amazonaws.resiliencehubv2#TestRunEvent": {
@@ -14842,6 +14966,12 @@
                                 ]
                             },
                             "policy": {
+                                "conditionKeys": [
+                                    "aws:TagKeys",
+                                    "aws:ResourceTag/${TagKey}"
+                                ]
+                            },
+                            "test-template": {
                                 "conditionKeys": [
                                     "aws:TagKeys",
                                     "aws:ResourceTag/${TagKey}"

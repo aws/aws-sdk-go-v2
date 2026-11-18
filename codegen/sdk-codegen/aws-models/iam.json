@@ -5439,6 +5439,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the user is required to set a new password on next sign-in.</p>"
                     }
+                },
+                "MaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#maxSigninSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration (in seconds) of an Amazon Web Services Sign-In session for this IAM user.\n            This setting can have a value from 1 hour (3600 seconds) to 90 days (7776000 seconds),\n            inclusive. If you do not specify a value, the setting remains unset and the existing\n            sign-in session behavior applies.</p>\n         <note>\n            <p>This setting is not supported for the root user.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -5811,6 +5817,12 @@
                     "target": "com.amazonaws.iam#roleMaxSessionDurationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum session duration (in seconds) that you want to set for the specified role.\n            If you do not specify a value for this setting, the default value of one hour is\n            applied. This setting can have a value from 1 hour to 12 hours.</p>\n         <p>Anyone who assumes the role from the CLI or API can use the\n                <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code>\n            CLI parameter to request a longer session. The <code>MaxSessionDuration</code> setting\n            determines the maximum duration that can be requested using the\n                <code>DurationSeconds</code> parameter. If users don't specify a value for the\n                <code>DurationSeconds</code> parameter, their security credentials are valid for one\n            hour by default. This applies when you use the <code>AssumeRole*</code> API operations\n            or the <code>assume-role*</code> CLI operations but does not apply when you use those\n            operations to create a console URL. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM\n                roles</a> in the <i>IAM User Guide</i>.</p>"
+                    }
+                },
+                "MaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#maxSigninSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration (in seconds) of an Amazon Web Services Sign-In session for users who sign in\n            with this role. This setting can have a value from 1 hour (3600 seconds) to 90 days\n            (7776000 seconds), inclusive. If you do not specify a value, the setting remains unset\n            and the existing sign-in session behavior applies.</p>\n         <p>This setting is independent of <code>MaxSessionDuration</code>.</p>"
                     }
                 },
                 "PermissionsBoundary": {
@@ -14522,6 +14534,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the user is required to set a new password on next sign-in.</p>"
                     }
+                },
+                "MaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#maxSigninSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration (in seconds) of an Amazon Web Services Sign-In session for the user.</p>\n         <p>This member is omitted when the setting is unset. In that case, no default value is\n         returned and the existing sign-in session behavior applies.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16411,6 +16429,12 @@
                     "target": "com.amazonaws.iam#roleMaxSessionDurationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum session duration (in seconds) for the specified role. Anyone who uses the\n         CLI, or API to assume the role can specify the duration using the optional\n            <code>DurationSeconds</code> API parameter or <code>duration-seconds</code> CLI\n         parameter.</p>"
+                    }
+                },
+                "MaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#maxSigninSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration (in seconds) of an Amazon Web Services Sign-In session for users who sign in\n         with this role. This value is independent of <code>MaxSessionDuration</code>.</p>\n         <p>This member is omitted when the setting is unset. In that case, no default value is\n         returned and the existing sign-in session behavior applies.</p>"
                     }
                 },
                 "PermissionsBoundary": {
@@ -19045,6 +19069,9 @@
                     "target": "com.amazonaws.iam#EntityTemporarilyUnmodifiableException"
                 },
                 {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
                     "target": "com.amazonaws.iam#LimitExceededException"
                 },
                 {
@@ -19058,7 +19085,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the password for the specified IAM user. You can use the CLI, the Amazon Web Services\n            API, or the <b>Users</b> page in the IAM console to change\n            the password for any IAM user. Use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html\">ChangePassword</a> to\n            change your own password in the <b>My Security Credentials</b>\n            page in the Amazon Web Services Management Console.</p>\n         <p>For more information about modifying passwords, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html\">Managing passwords</a> in the\n                <i>IAM User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Changes the password or the maximum sign-in session duration for the specified\n            IAM user. You can use the CLI, the Amazon Web Services\n            API, or the <b>Users</b> page in the IAM console to change\n            the password for any IAM user. Use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html\">ChangePassword</a> to\n            change your own password in the <b>My Security Credentials</b>\n            page in the Amazon Web Services Management Console.</p>\n         <p>For more information about modifying passwords, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html\">Managing passwords</a> in the\n                <i>IAM User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To change the password for an IAM user",
@@ -19091,6 +19118,18 @@
                     "target": "com.amazonaws.iam#booleanObjectType",
                     "traits": {
                         "smithy.api#documentation": "<p>Allows this new password to be used only once by requiring the specified IAM user to\n            set a new password on next sign-in.</p>"
+                    }
+                },
+                "MaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#maxSigninSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration (in seconds) of an Amazon Web Services Sign-In session for the specified\n            IAM user. This setting can have a value from 1 hour (3600 seconds) to 90 days (7776000\n            seconds), inclusive, and replaces any value currently configured for the user.</p>\n         <p>If you omit both this parameter and <code>ResetMaxSigninSessionDuration</code>, the\n            current setting is unchanged. You cannot specify this parameter and set\n                <code>ResetMaxSigninSessionDuration</code> to <code>true</code> in the same request.\n            If you update only the sign-in session duration, the user's password and\n                <code>PasswordResetRequired</code> setting do not change.</p>\n         <p>Changes to this setting apply to new sign-in sessions. Sessions that are already\n            established are not affected.</p>\n         <note>\n            <p>This setting is not supported for the root user.</p>\n         </note>"
+                    }
+                },
+                "ResetMaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#booleanObjectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to clear the maximum sign-in session duration for the specified\n            IAM user. Set this value to <code>true</code> to return the setting to its unset\n            state, so that the existing sign-in session behavior applies. When the setting is unset,\n            the user's <code>MaxSigninSessionDuration</code> is omitted from responses.</p>\n         <p>If you set this value to <code>false</code> or omit it, the current setting is not\n            cleared. You cannot set this value to <code>true</code> and specify\n                <code>MaxSigninSessionDuration</code> in the same request. Clearing a setting that\n            is already unset has no effect.</p>"
                     }
                 }
             },
@@ -19156,6 +19195,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.iam#InvalidInputException"
+                },
+                {
                     "target": "com.amazonaws.iam#NoSuchEntityException"
                 },
                 {
@@ -19166,7 +19208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the description or maximum session duration setting of a role.</p>"
+                "smithy.api#documentation": "<p>Updates the description, maximum session duration, or maximum sign-in session duration\n            of a role. You cannot change the maximum sign-in session duration of a service-linked\n            role.</p>"
             }
         },
         "com.amazonaws.iam#UpdateRoleDescription": {
@@ -19248,6 +19290,18 @@
                     "target": "com.amazonaws.iam#roleMaxSessionDurationType",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum session duration (in seconds) that you want to set for the specified role.\n            If you do not specify a value for this setting, the default value of one hour is\n            applied. This setting can have a value from 1 hour to 12 hours.</p>\n         <p>Anyone who assumes the role from the CLI or API can use the\n                <code>DurationSeconds</code> API parameter or the <code>duration-seconds</code>\n            CLI parameter to request a longer session. The <code>MaxSessionDuration</code> setting\n            determines the maximum duration that can be requested using the\n                <code>DurationSeconds</code> parameter. If users don't specify a value for the\n                <code>DurationSeconds</code> parameter, their security credentials are valid for one\n            hour by default. This applies when you use the <code>AssumeRole*</code> API operations\n            or the <code>assume-role*</code> CLI operations but does not apply when you use those\n            operations to create a console URL. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html\">Using IAM\n                roles</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>IAM role credentials provided by Amazon EC2 instances assigned to the role are not\n                subject to the specified maximum session duration.</p>\n         </note>"
+                    }
+                },
+                "MaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#maxSigninSessionDurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration (in seconds) of an Amazon Web Services Sign-In session for users who sign in\n            with the specified role. This setting can have a value from 1 hour (3600 seconds) to 90\n            days (7776000 seconds), inclusive, and replaces any value currently configured for the\n            role. This setting is independent of <code>MaxSessionDuration</code>.</p>\n         <p>If you omit both this parameter and <code>ResetMaxSigninSessionDuration</code>, the\n            current setting is unchanged. You cannot specify this parameter and set\n                <code>ResetMaxSigninSessionDuration</code> to <code>true</code> in the same\n            request.</p>\n         <p>Changes to this setting apply to new sign-in sessions. Sessions that are already\n            established are not affected.</p>\n         <note>\n            <p>You cannot set this value on a service-linked role.</p>\n         </note>"
+                    }
+                },
+                "ResetMaxSigninSessionDuration": {
+                    "target": "com.amazonaws.iam#booleanObjectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to clear the role's maximum sign-in session duration. Set this value\n            to <code>true</code> to return the setting to its unset state, so that the existing\n            sign-in session behavior applies. When the setting is unset, the role's\n                <code>MaxSigninSessionDuration</code> is omitted from responses.</p>\n         <p>If you set this value to <code>false</code> or omit it, the current setting is not\n            cleared. You cannot set this value to <code>true</code> and specify\n                <code>MaxSigninSessionDuration</code> in the same request. Clearing a setting that\n            is already unset has no effect.</p>\n         <note>\n            <p>You cannot reset this value on a service-linked role.</p>\n         </note>"
                     }
                 }
             },
@@ -20649,6 +20703,16 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1095
+                }
+            }
+        },
+        "com.amazonaws.iam#maxSigninSessionDurationType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "A maximum sign-in session duration in seconds. Valid values range from 3600 through 7776000, inclusive. This type is distinct from roleMaxSessionDurationType.",
+                "smithy.api#range": {
+                    "min": 3600,
+                    "max": 7776000
                 }
             }
         },

@@ -1432,7 +1432,7 @@
                 "outputS3KeyPrefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key prefix for the location in the S3 bucket to store quantum task results in.</p>",
+                        "smithy.api#documentation": "<p>The key prefix for the location in the S3 bucket to store quantum task results in. For example, <code>results/</code>. Must not contain path traversal sequences such as <code>../</code> or <code>./</code>. The following characters are not valid in the key prefix:</p> <ul> <li> <p>Braces (<code>{</code> or <code>}</code>)</p> </li> <li> <p>Brackets (<code>[</code> or <code>]</code>)</p> </li> <li> <p>Less than or greater than sign (<code>&lt;</code> or <code>&gt;</code>)</p> </li> <li> <p>Backslash (<code>\\</code>)</p> </li> <li> <p>Vertical bar or pipe (<code>|</code>)</p> </li> <li> <p>Caret or circumflex (<code>^</code>)</p> </li> <li> <p>Tilde (<code>~</code>)</p> </li> <li> <p>Grave accent or backtick (<code>`</code>)</p> </li> <li> <p>Percent character (<code>%</code>)</p> </li> <li> <p>Pound sign (<code>#</code>)</p> </li> <li> <p>Quotation mark (<code>\"</code>)</p> </li> <li> <p>Non-printable ASCII characters (128–255 decimal characters)</p> </li> </ul>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1024
@@ -1780,6 +1780,66 @@
                     {
                         "value": "RETIRED",
                         "name": "RETIRED"
+                    },
+                    {
+                        "value": "PAUSED",
+                        "name": "PAUSED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#DeviceStatusReason": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.braket#DeviceStatusReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason code for the current status of the device.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the device status reason started.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "estimatedEndAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time at which the current status reason will end.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of the most recent update to the device status reason.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the reason for the current status of a device.</p>"
+            }
+        },
+        "com.amazonaws.braket#DeviceStatusReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OUTSIDE_AVAILABILITY_WINDOW",
+                        "name": "OUTSIDE_AVAILABILITY_WINDOW"
+                    },
+                    {
+                        "value": "MAINTENANCE",
+                        "name": "MAINTENANCE"
+                    },
+                    {
+                        "value": "RESERVATION",
+                        "name": "RESERVATION"
                     }
                 ]
             }
@@ -1960,6 +2020,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the device.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "deviceStatusReason": {
+                    "target": "com.amazonaws.braket#DeviceStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the current status of the device, including status reason codes and timestamps.</p>"
                     }
                 },
                 "deviceCapabilities": {
@@ -2600,34 +2666,6 @@
                     {
                         "value": "ml.c5n.18xlarge",
                         "name": "ML_C5N_18XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.xlarge",
-                        "name": "ML_P2_XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.8xlarge",
-                        "name": "ML_P2_8XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.16xlarge",
-                        "name": "ML_P2_16XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.2xlarge",
-                        "name": "ML_P3_2XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.8xlarge",
-                        "name": "ML_P3_8XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.16xlarge",
-                        "name": "ML_P3_16XLARGE"
-                    },
-                    {
-                        "value": "ml.p3dn.24xlarge",
-                        "name": "ML_P3DN_24XLARGE"
                     },
                     {
                         "value": "ml.p4d.24xlarge",
@@ -3604,14 +3642,14 @@
                 "name": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the hybrid job parameter to filter based on. Filter name can be either <code>jobArn</code> or <code>createdAt</code>. </p>",
+                        "smithy.api#documentation": "<p>The name of the hybrid job parameter to filter based on. Supported filter names:</p> <p> <code>jobArn</code> — Filter by the job ARN. Supports the <code>EQUAL</code> operator only. Cannot be combined with other filters.</p> <p> <code>jobName</code> — Filter by the job name. Supports the <code>EQUAL</code> operator for exact match, or the <code>CONTAINS</code> operator for substring match. For example, use <code>CONTAINS</code> with a value of <code>my-experiment</code> to find all jobs whose name includes \"my-experiment\".</p> <p> <code>deviceArn</code> — Filter by the target device. Supports the <code>EQUAL</code> operator only. The value can be a device ARN (for example, <code>arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1</code>) or a local simulator identifier (for example, <code>local:braket/default</code>).</p> <p> <code>createdAt</code> — Filter by the job creation time. Supports the <code>EQUAL</code>, <code>GT</code>, <code>GTE</code>, <code>LT</code>, <code>LTE</code>, and <code>BETWEEN</code> operators. Values must be in RFC 3339 date-time format.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.braket#String256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values used to filter hybrid jobs based on the filter name and operator.</p>",
+                        "smithy.api#documentation": "<p>The values used to filter hybrid jobs based on the filter name and operator. Each filter accepts an array of values. Most filters accept a single value, except <code>createdAt</code> with the <code>BETWEEN</code> operator, which requires exactly two values.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -3622,13 +3660,13 @@
                 "operator": {
                     "target": "com.amazonaws.braket#SearchJobsFilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>An operator to use for the filter.</p>",
+                        "smithy.api#documentation": "<p>An operator to use for the filter. The supported operators depend on the filter name. See the <code>name</code> parameter for details.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter used to search for Amazon Braket hybrid jobs.</p>"
+                "smithy.api#documentation": "<p>A filter used to search for Amazon Braket hybrid jobs. You can combine multiple filters in a single request, except that <code>jobArn</code> cannot be combined with any other filter.</p>"
             }
         },
         "com.amazonaws.braket#SearchJobsFilterList": {
@@ -3922,7 +3960,7 @@
                 "name": {
                     "target": "com.amazonaws.braket#String64",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the field to filter on. Currently only supports <code>deviceArn</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the field to filter on. Currently supports <code>deviceArn</code> and <code>spendingLimitArn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -2155,13 +2155,7 @@
                 "accountTags": {
                     "target": "com.amazonaws.health#AccountTagSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of account tag key-value pairs attached to the affected entity.</p>"
-                    }
-                },
-                "tags": {
-                    "target": "com.amazonaws.health#tagSet",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A map of resource tag key-value pairs attached to the affected entity.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of account tag key-value pairs for the account that owns the affected entity. This field is returned only by DescribeAffectedEntitiesForOrganization and is not populated by DescribeAffectedEntities.</p>"
                     }
                 },
                 "entityMetadata": {
@@ -2238,14 +2232,26 @@
             "type": "structure",
             "members": {
                 "configuredTagKeys": {
-                    "target": "com.amazonaws.health#ConfigureTagsForOrganizationTagKeyList",
+                    "target": "com.amazonaws.health#ConfigureTagsForOrganizationResponseTagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tag keys that were successfully configured for the organization.</p>"
+                        "smithy.api#documentation": "<p>The list of tag keys that were successfully configured for the organization, with the current status of each tag key.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.health#ConfigureTagsForOrganizationResponseTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#OrganizationTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.health#ConfigureTagsForOrganizationTagKeyList": {
@@ -2264,7 +2270,7 @@
             "type": "structure",
             "members": {
                 "tagKeys": {
-                    "target": "com.amazonaws.health#ConfigureTagsResourceTagKeyList",
+                    "target": "com.amazonaws.health#ConfigureTagsRequestTagKeyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of resource tag keys to configure for Health event tracking.</p>",
                         "smithy.api#required": {}
@@ -2273,6 +2279,18 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.health#ConfigureTagsRequestTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.health#ConfigureTagsTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.health#ConfigureTagsResourceTagKeyList": {
@@ -2299,6 +2317,28 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.health#ConfigureTagsTagKey": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.health#ResourceTagKey2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabledForEventBridge": {
+                    "target": "com.amazonaws.health#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether this tag key is enabled for EventBridge notifications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource tag key to configure for Health event tracking.</p>"
             }
         },
         "com.amazonaws.health#DateTimeRange": {
@@ -3839,7 +3879,7 @@
                 "tags": {
                     "target": "com.amazonaws.health#DescribeAffectedEntitiesTagFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of resource tag key-value pairs to filter affected entities.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of tag keys to lists of tag values. A tag matches when its key is in the map and its value is one of the values listed for that key. The filter matches when at least one key in the map matches.</p>"
                     }
                 },
                 "statusCodes": {
@@ -4187,7 +4227,7 @@
                 "tags": {
                     "target": "com.amazonaws.health#DescribeEventsTagFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of resource tag key-value pairs to filter affected entities.</p>\n         <note>\n            <p>Currently, the <code>tags</code> property isn't supported.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A map of tag keys to lists of tag values. A tag matches when its key is in the map and its value is one of the values listed for that key. The filter matches when at least one key in the map matches.</p>"
                     }
                 },
                 "eventStatusCodes": {
@@ -5187,7 +5227,8 @@
                 "key": {
                     "target": "com.amazonaws.health#OrganizationTagKey2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag key name.</p>"
+                        "smithy.api#documentation": "<p>The tag key name.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "enabledForEventBridge": {
@@ -5743,21 +5784,6 @@
                     "max": 127
                 },
                 "smithy.api#pattern": "^.{0,127}$"
-            }
-        },
-        "com.amazonaws.health#tagSet": {
-            "type": "map",
-            "key": {
-                "target": "com.amazonaws.health#tagKey"
-            },
-            "value": {
-                "target": "com.amazonaws.health#tagValue"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 50
-                }
             }
         },
         "com.amazonaws.health#tagValue": {
