@@ -31,6 +31,42 @@ func ExampleABTestEvaluationConfig_outputUsage() {
 var _ []types.PerVariantOnlineEvaluationConfig
 var _ *string
 
+func ExampleAgentInvocationConfig_outputUsage() {
+	var union types.AgentInvocationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentInvocationConfigMemberAgentCoreRuntime:
+		_ = v.Value // Value is types.AgentCoreRuntimeInvocation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AgentCoreRuntimeInvocation
+
+func ExampleAgentInvocationDetails_outputUsage() {
+	var union types.AgentInvocationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentInvocationDetailsMemberAgentCoreRuntime:
+		_ = v.Value // Value is types.AgentCoreRuntimeInvocationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AgentCoreRuntimeInvocationDetails
+
 func ExampleAgentTracesConfig_outputUsage() {
 	var union types.AgentTracesConfig
 	// type switches can be used to check the union value
@@ -384,6 +420,112 @@ func ExampleFilterValue_outputUsage() {
 var _ *string
 var _ *bool
 var _ *float64
+
+func ExampleGenerationFilterValue_outputUsage() {
+	var union types.GenerationFilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GenerationFilterValueMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.GenerationFilterValueMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.GenerationFilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *bool
+var _ *float64
+
+func ExampleGenerationSelection_outputUsage() {
+	var union types.GenerationSelection
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GenerationSelectionMemberFilters:
+		_ = v.Value // Value is types.GenerationFilters
+
+	case *types.GenerationSelectionMemberIdentifiers:
+		_ = v.Value // Value is types.GenerationIdentifiers
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GenerationFilters
+var _ *types.GenerationIdentifiers
+
+func ExampleGenerationSelectionRecord_outputUsage() {
+	var union types.GenerationSelectionRecord
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GenerationSelectionRecordMemberFilters:
+		_ = v.Value // Value is types.GenerationFilters
+
+	case *types.GenerationSelectionRecordMemberIdentifiers:
+		_ = v.Value // Value is types.GenerationIdentifierCounts
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GenerationIdentifierCounts
+var _ *types.GenerationFilters
+
+func ExampleGenerationSource_outputUsage() {
+	var union types.GenerationSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GenerationSourceMemberTraceGeneration:
+		_ = v.Value // Value is types.TraceGenerationSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TraceGenerationSource
+
+func ExampleGenerationSourceRecord_outputUsage() {
+	var union types.GenerationSourceRecord
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GenerationSourceRecordMemberTraceGeneration:
+		_ = v.Value // Value is types.TraceGenerationRecord
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TraceGenerationRecord
 
 func ExampleGroundTruthSource_outputUsage() {
 	var union types.GroundTruthSource
@@ -1408,6 +1550,32 @@ func ExampleToolsFileSystemConfiguration_outputUsage() {
 
 var _ *types.S3FilesConfiguration
 var _ *types.EfsConfiguration
+
+func ExampleTraceSourceConfig_outputUsage() {
+	var union types.TraceSourceConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TraceSourceConfigMemberBatchEvaluation:
+		_ = v.Value // Value is types.BatchEvaluationSourceConfig
+
+	case *types.TraceSourceConfigMemberCloudWatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogsSourceConfig
+
+	case *types.TraceSourceConfigMemberOnlineEvaluation:
+		_ = v.Value // Value is types.OnlineEvaluationSourceConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OnlineEvaluationSourceConfig
+var _ *types.BatchEvaluationSourceConfig
+var _ *types.CloudWatchLogsSourceConfig
 
 func ExampleUserIdentifier_outputUsage() {
 	var union types.UserIdentifier

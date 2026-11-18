@@ -219,6 +219,18 @@ func TestCheckRequestSnapshot_CreateIndex(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
 			SseType:   types.SseType("AES256"),
@@ -770,7 +782,18 @@ func TestCheckRequestSnapshot_QueryVectors(t *testing.T) {
 		QueryMode:      types.IndexMode("CLASSIC"),
 		ReturnMetadata: true,
 		ReturnDistance: true,
-		NextToken:      ptr.String("__NextToken__"),
+		QueryTexts: []types.QueryText{
+			{
+				Text:        ptr.String("__Text__"),
+				MetadataKey: ptr.String("__MetadataKey__"),
+			},
+			{
+				Text:        ptr.String("__Text__"),
+				MetadataKey: ptr.String("__MetadataKey__"),
+			},
+		},
+		ReturnScores: true,
+		NextToken:    ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -885,6 +908,59 @@ func TestCheckRequestSnapshot_UpdateIndexMode(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateMetadataConfiguration(t *testing.T) {
+	input := &UpdateMetadataConfigurationInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Add: &types.MetadataConfigurationAdd{
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
+		},
+		Delete: &types.MetadataConfigurationDelete{
+			TextSearchConfigurations: []types.TextSearchConfigurationKey{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMetadataConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMetadataConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_CreateIndex(t *testing.T) {
 	input := &CreateIndexInput{
 		VectorBucketName: ptr.String("__VectorBucketName__"),
@@ -897,6 +973,18 @@ func TestUpdateRequestSnapshot_CreateIndex(t *testing.T) {
 			NonFilterableMetadataKeys: []string{
 				"__Member__",
 				"__Member__",
+			},
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
 			},
 		},
 		EncryptionConfiguration: &types.EncryptionConfiguration{
@@ -1449,7 +1537,18 @@ func TestUpdateRequestSnapshot_QueryVectors(t *testing.T) {
 		QueryMode:      types.IndexMode("CLASSIC"),
 		ReturnMetadata: true,
 		ReturnDistance: true,
-		NextToken:      ptr.String("__NextToken__"),
+		QueryTexts: []types.QueryText{
+			{
+				Text:        ptr.String("__Text__"),
+				MetadataKey: ptr.String("__MetadataKey__"),
+			},
+			{
+				Text:        ptr.String("__Text__"),
+				MetadataKey: ptr.String("__MetadataKey__"),
+			},
+		},
+		ReturnScores: true,
+		NextToken:    ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1561,6 +1660,59 @@ func TestUpdateRequestSnapshot_UpdateIndexMode(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateIndexMode"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateMetadataConfiguration(t *testing.T) {
+	input := &UpdateMetadataConfigurationInput{
+		VectorBucketName: ptr.String("__VectorBucketName__"),
+		IndexName:        ptr.String("__IndexName__"),
+		IndexArn:         ptr.String("__IndexArn__"),
+		Add: &types.MetadataConfigurationAdd{
+			TextSearchConfigurations: []types.TextSearchConfiguration{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+					Language:    types.LanguageCode("en"),
+					Status:      types.AnalyzerStatus("ACTIVE"),
+				},
+			},
+		},
+		Delete: &types.MetadataConfigurationDelete{
+			TextSearchConfigurations: []types.TextSearchConfigurationKey{
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+				},
+				{
+					MetadataKey: ptr.String("__MetadataKey__"),
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMetadataConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMetadataConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -1,3 +1,7 @@
+# v1.21.0 (2026-11-16)
+
+* **Feature**: This release adds Performance Monitors to Amazon CloudWatch Network Monitoring. Without installing an agent, they track traffic in the VPCs you select and report an impact score (None, Low, Medium, or High) showing whether the AWS network is degrading your workloads.
+
 # v1.20.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

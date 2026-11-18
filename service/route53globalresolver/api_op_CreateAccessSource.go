@@ -38,12 +38,6 @@ func (c *Client) CreateAccessSource(ctx context.Context, params *CreateAccessSou
 
 type CreateAccessSourceInput struct {
 
-	// The IP address or CIDR range that is allowed to send DNS queries to the Route
-	// 53 Global Resolver.
-	//
-	// This member is required.
-	Cidr *string
-
 	// The ID of the DNS view to associate with this access source.
 	//
 	// This member is required.
@@ -55,15 +49,26 @@ type CreateAccessSourceInput struct {
 	// This member is required.
 	Protocol types.DnsProtocol
 
+	// The IP address or CIDR range that is allowed to send DNS queries to the Route
+	// 53 Global Resolver.
+	Cidr *string
+
 	// A unique string that identifies the request and ensures idempotency.
 	ClientToken *string
 
-	// The IP address type for this access source. Valid values are IPv4 and IPv6 (if
-	// the Route 53 Global Resolver supports dual-stack).
+	// The ID of the core network endpoint to associate with this access source.
+	CoreNetworkEndpointId *string
+
+	// The IP address type for this access source. Valid values are IPV4, IPV6, and
+	// NONE. If you provide a CIDR range, this defaults to IPV4; otherwise it defaults
+	// to NONE.
 	IpAddressType types.IpAddressType
 
 	// A descriptive name for the access source.
 	Name *string
+
+	// The name of the segment to associate with this access source.
+	Segment *string
 
 	// Tags to associate with the access source.
 	Tags map[string]string
@@ -84,6 +89,9 @@ func (v *CreateAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAccessSourceInput_clientToken, *v.ClientToken)
 	}
+	if v.CoreNetworkEndpointId != nil {
+		s.WriteString(schemas.CreateAccessSourceInput_coreNetworkEndpointId, *v.CoreNetworkEndpointId)
+	}
 	if v.DnsViewId != nil {
 		s.WriteString(schemas.CreateAccessSourceInput_dnsViewId, *v.DnsViewId)
 	}
@@ -96,6 +104,9 @@ func (v *CreateAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateAccessSourceInput_protocol, string(v.Protocol))
 	}
+	if v.Segment != nil {
+		s.WriteString(schemas.CreateAccessSourceInput_segment, *v.Segment)
+	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.CreateAccessSourceInput_tags, v.Tags)
 	}
@@ -107,12 +118,6 @@ type CreateAccessSourceOutput struct {
 	//
 	// This member is required.
 	Arn *string
-
-	// The IP address or CIDR range that is allowed to send DNS queries to the Route
-	// 53 Global Resolver.
-	//
-	// This member is required.
-	Cidr *string
 
 	// The date and time when the access source was created.
 	//
@@ -129,11 +134,6 @@ type CreateAccessSourceOutput struct {
 	// This member is required.
 	Id *string
 
-	// The IP address type for this access source (IPv4 or IPv6).
-	//
-	// This member is required.
-	IpAddressType types.IpAddressType
-
 	// The DNS protocol that is permitted for this access source (Do53, DoT, or DoH).
 	//
 	// This member is required.
@@ -149,8 +149,22 @@ type CreateAccessSourceOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The IP address or CIDR range that is allowed to send DNS queries to the Route
+	// 53 Global Resolver.
+	Cidr *string
+
+	// The ID of the core network endpoint associated with this access source.
+	CoreNetworkEndpointId *string
+
+	// The IP address type for this access source. Valid values are IPV4, IPV6, and
+	// NONE.
+	IpAddressType types.IpAddressType
+
 	// The descriptive name of the access source.
 	Name *string
+
+	// The name of the segment associated with this access source.
+	Segment *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -171,6 +185,9 @@ func (v *CreateAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cidr != nil {
 		s.WriteString(schemas.CreateAccessSourceOutput_cidr, *v.Cidr)
 	}
+	if v.CoreNetworkEndpointId != nil {
+		s.WriteString(schemas.CreateAccessSourceOutput_coreNetworkEndpointId, *v.CoreNetworkEndpointId)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateAccessSourceOutput_createdAt, *v.CreatedAt)
 	}
@@ -189,6 +206,9 @@ func (v *CreateAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateAccessSourceOutput_protocol, string(v.Protocol))
 	}
+	if v.Segment != nil {
+		s.WriteString(schemas.CreateAccessSourceOutput_segment, *v.Segment)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateAccessSourceOutput_status, string(v.Status))
 	}
@@ -205,6 +225,9 @@ func (v *CreateAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.CreateAccessSourceOutput_cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.CreateAccessSourceOutput_cidr, v.Cidr)
+		case schemas.CreateAccessSourceOutput_coreNetworkEndpointId:
+			v.CoreNetworkEndpointId = new(string)
+			return d.ReadString(schemas.CreateAccessSourceOutput_coreNetworkEndpointId, v.CoreNetworkEndpointId)
 		case schemas.CreateAccessSourceOutput_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.CreateAccessSourceOutput_createdAt, v.CreatedAt)
@@ -231,6 +254,9 @@ func (v *CreateAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.Protocol = types.DnsProtocol(ev)
 			return nil
+		case schemas.CreateAccessSourceOutput_segment:
+			v.Segment = new(string)
+			return d.ReadString(schemas.CreateAccessSourceOutput_segment, v.Segment)
 		case schemas.CreateAccessSourceOutput_status:
 			var ev string
 			if err := d.ReadString(schemas.CreateAccessSourceOutput_status, &ev); err != nil {

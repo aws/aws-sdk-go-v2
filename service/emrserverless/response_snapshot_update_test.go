@@ -529,6 +529,9 @@ func TestUpdateResponseSnapshot_GetJobRun(t *testing.T) {
 					},
 				},
 			},
+			FlexExecution: &types.FlexExecution{
+				Enabled: ptr.Bool(true),
+			},
 		},
 	}
 	proto := restjson1.New(schemas.AwsToledoWebService)
@@ -760,6 +763,9 @@ func TestUpdateResponseSnapshot_ListJobRunAttempts(t *testing.T) {
 				ReleaseLabel:  ptr.String("__ReleaseLabel__"),
 				Type:          ptr.String("__Type__"),
 				Attempt:       ptr.Int32(1),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 			{
 				ApplicationId: ptr.String("__ApplicationId__"),
@@ -777,6 +783,9 @@ func TestUpdateResponseSnapshot_ListJobRunAttempts(t *testing.T) {
 				ReleaseLabel:  ptr.String("__ReleaseLabel__"),
 				Type:          ptr.String("__Type__"),
 				Attempt:       ptr.Int32(1),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -821,6 +830,9 @@ func TestUpdateResponseSnapshot_ListJobRuns(t *testing.T) {
 				Attempt:          ptr.Int32(1),
 				AttemptCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AttemptUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 			{
 				ApplicationId:    ptr.String("__ApplicationId__"),
@@ -839,6 +851,9 @@ func TestUpdateResponseSnapshot_ListJobRuns(t *testing.T) {
 				Attempt:          ptr.Int32(1),
 				AttemptCreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				AttemptUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FlexExecution: &types.FlexExecution{
+					Enabled: ptr.Bool(true),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

@@ -6,6 +6,66 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeAcknowledgeDeadLetterQueueRecordsErrorEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcknowledgeDeadLetterQueueRecordsErrorEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAcknowledgeDeadLetterQueueRecordsRequestEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcknowledgeDeadLetterQueueRecordsRequestEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAcknowledgeDeadLetterQueueRecordsResultEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcknowledgeDeadLetterQueueRecordsResultEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAcknowledgeQueueRecordsErrorEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcknowledgeQueueRecordsErrorEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAcknowledgeQueueRecordsRequestEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcknowledgeQueueRecordsRequestEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAcknowledgeQueueRecordsResultEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcknowledgeQueueRecordsResultEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeChannelStreamConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ChannelStreamConfiguration) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -114,7 +174,87 @@ func serializePutRecordsResultEntryList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeQueueRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueueRecord) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQueueStreamConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueueStreamConfiguration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQueueStreamFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueueStreamFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQueueStreamIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueueStreamIdentifier) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeQueueSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueueSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Record) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRestoreDeadLetterQueueRecordsErrorEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RestoreDeadLetterQueueRecordsErrorEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRestoreDeadLetterQueueRecordsRequestEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RestoreDeadLetterQueueRecordsRequestEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRestoreDeadLetterQueueRecordsResultEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RestoreDeadLetterQueueRecordsResultEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -196,6 +336,198 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func serializeUpdateDeadLetterQueueRecordsVisibilityErrorEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UpdateDeadLetterQueueRecordsVisibilityErrorEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUpdateDeadLetterQueueRecordsVisibilityRequestEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UpdateDeadLetterQueueRecordsVisibilityRequestEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUpdateDeadLetterQueueRecordsVisibilityResultEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UpdateDeadLetterQueueRecordsVisibilityResultEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUpdateQueueRecordsVisibilityErrorEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UpdateQueueRecordsVisibilityErrorEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUpdateQueueRecordsVisibilityRequestEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UpdateQueueRecordsVisibilityRequestEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUpdateQueueRecordsVisibilityResultEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UpdateQueueRecordsVisibilityResultEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func deserializeAcknowledgeDeadLetterQueueRecordsErrorEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcknowledgeDeadLetterQueueRecordsErrorEntry) error {
+	*v = make([]AcknowledgeDeadLetterQueueRecordsErrorEntry, 0)
+	var vv AcknowledgeDeadLetterQueueRecordsErrorEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcknowledgeDeadLetterQueueRecordsErrorEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcknowledgeDeadLetterQueueRecordsErrorEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcknowledgeDeadLetterQueueRecordsRequestEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcknowledgeDeadLetterQueueRecordsRequestEntry) error {
+	*v = make([]AcknowledgeDeadLetterQueueRecordsRequestEntry, 0)
+	var vv AcknowledgeDeadLetterQueueRecordsRequestEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcknowledgeDeadLetterQueueRecordsRequestEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcknowledgeDeadLetterQueueRecordsRequestEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcknowledgeDeadLetterQueueRecordsResultEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcknowledgeDeadLetterQueueRecordsResultEntry) error {
+	*v = make([]AcknowledgeDeadLetterQueueRecordsResultEntry, 0)
+	var vv AcknowledgeDeadLetterQueueRecordsResultEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcknowledgeDeadLetterQueueRecordsResultEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcknowledgeDeadLetterQueueRecordsResultEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcknowledgeQueueRecordsErrorEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcknowledgeQueueRecordsErrorEntry) error {
+	*v = make([]AcknowledgeQueueRecordsErrorEntry, 0)
+	var vv AcknowledgeQueueRecordsErrorEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcknowledgeQueueRecordsErrorEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcknowledgeQueueRecordsErrorEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcknowledgeQueueRecordsRequestEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcknowledgeQueueRecordsRequestEntry) error {
+	*v = make([]AcknowledgeQueueRecordsRequestEntry, 0)
+	var vv AcknowledgeQueueRecordsRequestEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcknowledgeQueueRecordsRequestEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcknowledgeQueueRecordsRequestEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcknowledgeQueueRecordsResultEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcknowledgeQueueRecordsResultEntry) error {
+	*v = make([]AcknowledgeQueueRecordsResultEntry, 0)
+	var vv AcknowledgeQueueRecordsResultEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcknowledgeQueueRecordsResultEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcknowledgeQueueRecordsResultEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeChannelStreamConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChannelStreamConfiguration) error {
@@ -439,6 +771,116 @@ func deserializePutRecordsResultEntryList(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
+func deserializeQueueRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueueRecord) error {
+	*v = make([]QueueRecord, 0)
+	var vv QueueRecord
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueueRecord
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = QueueRecord{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueueStreamConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueueStreamConfiguration) error {
+	*v = make([]QueueStreamConfiguration, 0)
+	var vv QueueStreamConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueueStreamConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = QueueStreamConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueueStreamFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueueStreamFilter) error {
+	*v = make([]QueueStreamFilter, 0)
+	var vv QueueStreamFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueueStreamFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = QueueStreamFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueueStreamIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueueStreamIdentifier) error {
+	*v = make([]QueueStreamIdentifier, 0)
+	var vv QueueStreamIdentifier
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueueStreamIdentifier
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = QueueStreamIdentifier{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeQueueSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]QueueSummary) error {
+	*v = make([]QueueSummary, 0)
+	var vv QueueSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero QueueSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = QueueSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Record) error {
 	*v = make([]Record, 0)
 	var vv Record
@@ -452,6 +894,72 @@ func deserializeRecordList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Re
 		}
 
 		vv = Record{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRestoreDeadLetterQueueRecordsErrorEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RestoreDeadLetterQueueRecordsErrorEntry) error {
+	*v = make([]RestoreDeadLetterQueueRecordsErrorEntry, 0)
+	var vv RestoreDeadLetterQueueRecordsErrorEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RestoreDeadLetterQueueRecordsErrorEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RestoreDeadLetterQueueRecordsErrorEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRestoreDeadLetterQueueRecordsRequestEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RestoreDeadLetterQueueRecordsRequestEntry) error {
+	*v = make([]RestoreDeadLetterQueueRecordsRequestEntry, 0)
+	var vv RestoreDeadLetterQueueRecordsRequestEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RestoreDeadLetterQueueRecordsRequestEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RestoreDeadLetterQueueRecordsRequestEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRestoreDeadLetterQueueRecordsResultEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RestoreDeadLetterQueueRecordsResultEntry) error {
+	*v = make([]RestoreDeadLetterQueueRecordsResultEntry, 0)
+	var vv RestoreDeadLetterQueueRecordsResultEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RestoreDeadLetterQueueRecordsResultEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RestoreDeadLetterQueueRecordsResultEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -625,6 +1133,138 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 		}
 
 		vv = Tag{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateDeadLetterQueueRecordsVisibilityErrorEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdateDeadLetterQueueRecordsVisibilityErrorEntry) error {
+	*v = make([]UpdateDeadLetterQueueRecordsVisibilityErrorEntry, 0)
+	var vv UpdateDeadLetterQueueRecordsVisibilityErrorEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UpdateDeadLetterQueueRecordsVisibilityErrorEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UpdateDeadLetterQueueRecordsVisibilityErrorEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateDeadLetterQueueRecordsVisibilityRequestEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdateDeadLetterQueueRecordsVisibilityRequestEntry) error {
+	*v = make([]UpdateDeadLetterQueueRecordsVisibilityRequestEntry, 0)
+	var vv UpdateDeadLetterQueueRecordsVisibilityRequestEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UpdateDeadLetterQueueRecordsVisibilityRequestEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UpdateDeadLetterQueueRecordsVisibilityRequestEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateDeadLetterQueueRecordsVisibilityResultEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdateDeadLetterQueueRecordsVisibilityResultEntry) error {
+	*v = make([]UpdateDeadLetterQueueRecordsVisibilityResultEntry, 0)
+	var vv UpdateDeadLetterQueueRecordsVisibilityResultEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UpdateDeadLetterQueueRecordsVisibilityResultEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UpdateDeadLetterQueueRecordsVisibilityResultEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateQueueRecordsVisibilityErrorEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdateQueueRecordsVisibilityErrorEntry) error {
+	*v = make([]UpdateQueueRecordsVisibilityErrorEntry, 0)
+	var vv UpdateQueueRecordsVisibilityErrorEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UpdateQueueRecordsVisibilityErrorEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UpdateQueueRecordsVisibilityErrorEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateQueueRecordsVisibilityRequestEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdateQueueRecordsVisibilityRequestEntry) error {
+	*v = make([]UpdateQueueRecordsVisibilityRequestEntry, 0)
+	var vv UpdateQueueRecordsVisibilityRequestEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UpdateQueueRecordsVisibilityRequestEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UpdateQueueRecordsVisibilityRequestEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUpdateQueueRecordsVisibilityResultEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdateQueueRecordsVisibilityResultEntry) error {
+	*v = make([]UpdateQueueRecordsVisibilityResultEntry, 0)
+	var vv UpdateQueueRecordsVisibilityResultEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UpdateQueueRecordsVisibilityResultEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UpdateQueueRecordsVisibilityResultEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

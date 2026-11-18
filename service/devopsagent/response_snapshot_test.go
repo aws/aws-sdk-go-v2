@@ -1114,6 +1114,34 @@ func TestCheckResponseSnapshot_GetBacklogTask(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetChat(t *testing.T) {
+	want := &GetChatOutput{
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetChat.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetChat(context.Background(), &GetChatInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ExecutionId:  ptr.String("__ExecutionId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetChat.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetOperatorApp(t *testing.T) {
 	want := &GetOperatorAppOutput{
 		OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
@@ -1726,16 +1754,18 @@ func TestCheckResponseSnapshot_ListChats(t *testing.T) {
 	want := &ListChatsOutput{
 		Executions: []types.ChatExecution{
 			{
-				ExecutionId: ptr.String("__ExecutionId__"),
-				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Summary:     ptr.String("__Summary__"),
+				ExecutionId:   ptr.String("__ExecutionId__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Summary:       ptr.String("__Summary__"),
+				ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 			},
 			{
-				ExecutionId: ptr.String("__ExecutionId__"),
-				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Summary:     ptr.String("__Summary__"),
+				ExecutionId:   ptr.String("__ExecutionId__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Summary:       ptr.String("__Summary__"),
+				ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1749,10 +1779,11 @@ func TestCheckResponseSnapshot_ListChats(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListChats(context.Background(), &ListChatsInput{
-		AgentSpaceId: ptr.String("__AgentSpaceId__"),
-		UserId:       ptr.String("__UserId__"),
-		MaxResults:   ptr.Int32(1),
-		NextToken:    ptr.String("__NextToken__"),
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		UserId:        ptr.String("__UserId__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2736,6 +2767,36 @@ func TestCheckResponseSnapshot_UpdateBacklogTask(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateChat(t *testing.T) {
+	want := &UpdateChatOutput{
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateChat.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateChat(context.Background(), &UpdateChatInput{
+		AgentSpaceId:  ptr.String("__AgentSpaceId__"),
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+		ClientToken:   ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateChat.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateGoal(t *testing.T) {
 	want := &UpdateGoalOutput{
 		Goal: &types.Goal{
@@ -3032,6 +3093,7 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
+		Reason:  types.ConflictExceptionReason("CHAT_ARCHIVED"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
 	if errors.Is(err, fs.ErrNotExist) {

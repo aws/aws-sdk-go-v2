@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.BatchGetEvent
+
+{"actorId":"__ActorId__","eventIds":["__Member__","__Member__"],"sessionId":"__SessionId__","spaceId":"__SpaceId__"}

@@ -1,0 +1,4 @@
+200
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

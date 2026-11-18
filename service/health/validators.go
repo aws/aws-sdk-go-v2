@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpConfigureTagsForOrganization struct {
+}
+
+func (*validateOpConfigureTagsForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpConfigureTagsForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ConfigureTagsForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpConfigureTagsForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpConfigureTags struct {
+}
+
+func (*validateOpConfigureTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpConfigureTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ConfigureTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpConfigureTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAffectedAccountsForOrganization struct {
 }
 
@@ -150,6 +190,14 @@ func (m *validateOpDescribeEventDetails) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpConfigureTagsForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpConfigureTagsForOrganization{}, middleware.After)
+}
+
+func addOpConfigureTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpConfigureTags{}, middleware.After)
+}
+
 func addOpDescribeAffectedAccountsForOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAffectedAccountsForOrganization{}, middleware.After)
 }
@@ -266,6 +314,36 @@ func validateOrganizationEventDetailFiltersList(v []types.EventAccountFilter) er
 		if err := validateEventAccountFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpConfigureTagsForOrganizationInput(v *ConfigureTagsForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsForOrganizationInput"}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpConfigureTagsInput(v *ConfigureTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsInput"}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

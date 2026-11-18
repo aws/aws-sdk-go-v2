@@ -148,6 +148,82 @@ func TestCheckResponseSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 						},
 					},
 				},
+				Checks: []types.Check{
+					{
+						CheckType:       types.CheckType("SERVICE_CONTROL_POLICY"),
+						EvaluatedEffect: types.CheckEffect("ALLOW"),
+						TargetArn:       ptr.String("__TargetArn__"),
+						RelevantPolicyTypes: []types.PolicyType{
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+						},
+						MatchedPolicies: []types.MatchedPolicy{
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+						},
+					},
+					{
+						CheckType:       types.CheckType("SERVICE_CONTROL_POLICY"),
+						EvaluatedEffect: types.CheckEffect("ALLOW"),
+						TargetArn:       ptr.String("__TargetArn__"),
+						RelevantPolicyTypes: []types.PolicyType{
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+						},
+						MatchedPolicies: []types.MatchedPolicy{
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 			{
 				Action:   ptr.String("__Action__"),
@@ -184,6 +260,82 @@ func TestCheckResponseSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 						},
 					},
 				},
+				Checks: []types.Check{
+					{
+						CheckType:       types.CheckType("SERVICE_CONTROL_POLICY"),
+						EvaluatedEffect: types.CheckEffect("ALLOW"),
+						TargetArn:       ptr.String("__TargetArn__"),
+						RelevantPolicyTypes: []types.PolicyType{
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+						},
+						MatchedPolicies: []types.MatchedPolicy{
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+						},
+					},
+					{
+						CheckType:       types.CheckType("SERVICE_CONTROL_POLICY"),
+						EvaluatedEffect: types.CheckEffect("ALLOW"),
+						TargetArn:       ptr.String("__TargetArn__"),
+						RelevantPolicyTypes: []types.PolicyType{
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+							types.PolicyType("IDENTITY_BASED_POLICY"),
+						},
+						MatchedPolicies: []types.MatchedPolicy{
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+							{
+								Uri: ptr.String("__Uri__"),
+								MatchedStatements: []types.MatchedStatement{
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+									{
+										Sid:             ptr.String("__Sid__"),
+										EvaluatedEffect: types.StatementEffect("ALLOW"),
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		Policies: []types.PolicyInfo{
@@ -199,6 +351,9 @@ func TestCheckResponseSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 						Arn: ptr.String("__Arn__"),
 					},
 				},
+				PolicySource: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			{
 				Type:   types.PolicyType("IDENTITY_BASED_POLICY"),
@@ -211,6 +366,9 @@ func TestCheckResponseSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 					{
 						Arn: ptr.String("__Arn__"),
 					},
+				},
+				PolicySource: map[string]string{
+					"key0": "__Value__",
 				},
 			},
 		},
@@ -233,6 +391,30 @@ func TestCheckResponseSnapshot_GetRequestAuthorizationDetails(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetRequestAuthorizationDetails.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetRequestAuthorizationPolicy(t *testing.T) {
+	want := &GetRequestAuthorizationPolicyOutput{
+		PolicyDocument: document.NewLazyDocument("__Document__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetRequestAuthorizationPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetRequestAuthorizationPolicy(context.Background(), &GetRequestAuthorizationPolicyInput{
+		AuthorizationId: ptr.String("__AuthorizationId__"),
+		PolicyUri:       ptr.String("__PolicyUri__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetRequestAuthorizationPolicy.response", err)
 	}
 }
 

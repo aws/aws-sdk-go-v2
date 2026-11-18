@@ -341,6 +341,44 @@ func (DataReplicationState) Values() []DataReplicationState {
 	}
 }
 
+type DefinitionType string
+
+// Enum values for DefinitionType
+const (
+	DefinitionTypeMigration  DefinitionType = "MIGRATION"
+	DefinitionTypeNewNetwork DefinitionType = "NEW_NETWORK"
+)
+
+// Values returns all known values for DefinitionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefinitionType) Values() []DefinitionType {
+	return []DefinitionType{
+		"MIGRATION",
+		"NEW_NETWORK",
+	}
+}
+
+type DeleteOnTermination string
+
+// Enum values for DeleteOnTermination
+const (
+	DeleteOnTerminationEnabled  DeleteOnTermination = "ENABLED"
+	DeleteOnTerminationDisabled DeleteOnTermination = "DISABLED"
+)
+
+// Values returns all known values for DeleteOnTermination. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteOnTermination) Values() []DeleteOnTermination {
+	return []DeleteOnTermination{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type EncryptionAlgorithm string
 
 // Enum values for EncryptionAlgorithm
@@ -566,6 +604,104 @@ func (InitiatedBy) Values() []InitiatedBy {
 		"START_CUTOVER",
 		"DIAGNOSTIC",
 		"TERMINATE",
+	}
+}
+
+type InsightLevel string
+
+// Enum values for InsightLevel
+const (
+	InsightLevelRun       InsightLevel = "RUN"
+	InsightLevelSegment   InsightLevel = "SEGMENT"
+	InsightLevelConstruct InsightLevel = "CONSTRUCT"
+)
+
+// Values returns all known values for InsightLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightLevel) Values() []InsightLevel {
+	return []InsightLevel{
+		"RUN",
+		"SEGMENT",
+		"CONSTRUCT",
+	}
+}
+
+type InsightProducerName string
+
+// Enum values for InsightProducerName
+const (
+	InsightProducerNameMapping                InsightProducerName = "MAPPING"
+	InsightProducerNameMappingUpdate          InsightProducerName = "MAPPING_UPDATE"
+	InsightProducerNameCodeGeneration         InsightProducerName = "CODE_GENERATION"
+	InsightProducerNameDeploy                 InsightProducerName = "DEPLOY"
+	InsightProducerNameDeployedStacksDeletion InsightProducerName = "DEPLOYED_STACKS_DELETION"
+	InsightProducerNameAnalyze                InsightProducerName = "ANALYZE"
+)
+
+// Values returns all known values for InsightProducerName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightProducerName) Values() []InsightProducerName {
+	return []InsightProducerName{
+		"MAPPING",
+		"MAPPING_UPDATE",
+		"CODE_GENERATION",
+		"DEPLOY",
+		"DEPLOYED_STACKS_DELETION",
+		"ANALYZE",
+	}
+}
+
+type InsightProducerType string
+
+// Enum values for InsightProducerType
+const (
+	InsightProducerTypeJob InsightProducerType = "JOB"
+	InsightProducerTypeApi InsightProducerType = "API"
+)
+
+// Values returns all known values for InsightProducerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightProducerType) Values() []InsightProducerType {
+	return []InsightProducerType{
+		"JOB",
+		"API",
+	}
+}
+
+type InsightType string
+
+// Enum values for InsightType
+const (
+	InsightTypeIntentGap      InsightType = "INTENT_GAP"
+	InsightTypeWarning        InsightType = "WARNING"
+	InsightTypeQuestion       InsightType = "QUESTION"
+	InsightTypeInfo           InsightType = "INFO"
+	InsightTypeError          InsightType = "ERROR"
+	InsightTypeContext        InsightType = "CONTEXT"
+	InsightTypeExcluded       InsightType = "EXCLUDED"
+	InsightTypeBehaviorChange InsightType = "BEHAVIOR_CHANGE"
+)
+
+// Values returns all known values for InsightType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightType) Values() []InsightType {
+	return []InsightType{
+		"INTENT_GAP",
+		"WARNING",
+		"QUESTION",
+		"INFO",
+		"ERROR",
+		"CONTEXT",
+		"EXCLUDED",
+		"BEHAVIOR_CHANGE",
 	}
 }
 
@@ -998,6 +1134,25 @@ func (NetworkMigrationMapperSegmentType) Values() []NetworkMigrationMapperSegmen
 	}
 }
 
+type OutpostSnapshotLocation string
+
+// Enum values for OutpostSnapshotLocation
+const (
+	OutpostSnapshotLocationOutpost OutpostSnapshotLocation = "OUTPOST"
+	OutpostSnapshotLocationRegion  OutpostSnapshotLocation = "REGION"
+)
+
+// Values returns all known values for OutpostSnapshotLocation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutpostSnapshotLocation) Values() []OutpostSnapshotLocation {
+	return []OutpostSnapshotLocation{
+		"OUTPOST",
+		"REGION",
+	}
+}
+
 type PostLaunchActionExecutionStatus string
 
 // Enum values for PostLaunchActionExecutionStatus
@@ -1039,6 +1194,65 @@ func (PostLaunchActionsDeploymentType) Values() []PostLaunchActionsDeploymentTyp
 		"TEST_AND_CUTOVER",
 		"CUTOVER_ONLY",
 		"TEST_ONLY",
+	}
+}
+
+type RemoteSourceActionInvocationStatus string
+
+// Enum values for RemoteSourceActionInvocationStatus
+const (
+	RemoteSourceActionInvocationStatusPending    RemoteSourceActionInvocationStatus = "PENDING"
+	RemoteSourceActionInvocationStatusInProgress RemoteSourceActionInvocationStatus = "IN_PROGRESS"
+	RemoteSourceActionInvocationStatusDelayed    RemoteSourceActionInvocationStatus = "DELAYED"
+	RemoteSourceActionInvocationStatusSuccess    RemoteSourceActionInvocationStatus = "SUCCESS"
+	RemoteSourceActionInvocationStatusCancelled  RemoteSourceActionInvocationStatus = "CANCELLED"
+	RemoteSourceActionInvocationStatusTimedOut   RemoteSourceActionInvocationStatus = "TIMED_OUT"
+	RemoteSourceActionInvocationStatusFailed     RemoteSourceActionInvocationStatus = "FAILED"
+	RemoteSourceActionInvocationStatusCancelling RemoteSourceActionInvocationStatus = "CANCELLING"
+	RemoteSourceActionInvocationStatusStalled    RemoteSourceActionInvocationStatus = "STALLED"
+)
+
+// Values returns all known values for RemoteSourceActionInvocationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemoteSourceActionInvocationStatus) Values() []RemoteSourceActionInvocationStatus {
+	return []RemoteSourceActionInvocationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"DELAYED",
+		"SUCCESS",
+		"CANCELLED",
+		"TIMED_OUT",
+		"FAILED",
+		"CANCELLING",
+		"STALLED",
+	}
+}
+
+type RemoteSourceActionJobStatus string
+
+// Enum values for RemoteSourceActionJobStatus
+const (
+	RemoteSourceActionJobStatusPending   RemoteSourceActionJobStatus = "PENDING"
+	RemoteSourceActionJobStatusRunning   RemoteSourceActionJobStatus = "RUNNING"
+	RemoteSourceActionJobStatusCompleted RemoteSourceActionJobStatus = "COMPLETED"
+	RemoteSourceActionJobStatusFailed    RemoteSourceActionJobStatus = "FAILED"
+	RemoteSourceActionJobStatusStalled   RemoteSourceActionJobStatus = "STALLED"
+)
+
+// Values returns all known values for RemoteSourceActionJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemoteSourceActionJobStatus) Values() []RemoteSourceActionJobStatus {
+	return []RemoteSourceActionJobStatus{
+		"PENDING",
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"STALLED",
 	}
 }
 
@@ -1192,6 +1406,7 @@ const (
 	SourceEnvironmentModelizeIt                 SourceEnvironment = "MODELIZE_IT"
 	SourceEnvironmentAwsDiscoveryCollector      SourceEnvironment = "AWS_DISCOVERY_COLLECTOR"
 	SourceEnvironmentMigrationPlanningArtifacts SourceEnvironment = "MIGRATION_PLANNING_ARTIFACTS"
+	SourceEnvironmentF5Bigip                    SourceEnvironment = "F5_BIGIP"
 )
 
 // Values returns all known values for SourceEnvironment. Note that this can be
@@ -1209,6 +1424,7 @@ func (SourceEnvironment) Values() []SourceEnvironment {
 		"MODELIZE_IT",
 		"AWS_DISCOVERY_COLLECTOR",
 		"MIGRATION_PLANNING_ARTIFACTS",
+		"F5_BIGIP",
 	}
 }
 

@@ -17,11 +17,6 @@ type AccessSourcesItem struct {
 	// This member is required.
 	Arn *string
 
-	// The CIDR block that defines the IP address range for the access source.
-	//
-	// This member is required.
-	Cidr *string
-
 	// The date and time when the access source was created.
 	//
 	// This member is required.
@@ -36,11 +31,6 @@ type AccessSourcesItem struct {
 	//
 	// This member is required.
 	Id *string
-
-	// The IP address type of the access source.
-	//
-	// This member is required.
-	IpAddressType IpAddressType
 
 	// The protocol used by the access source.
 	//
@@ -57,8 +47,20 @@ type AccessSourcesItem struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The CIDR block that defines the IP address range for the access source.
+	Cidr *string
+
+	// The ID of the core network endpoint associated with this access source.
+	CoreNetworkEndpointId *string
+
+	// The IP address type of the access source.
+	IpAddressType IpAddressType
+
 	// The name of the access source.
 	Name *string
+
+	// The name of the segment associated with this access source.
+	Segment *string
 
 	noSmithyDocumentSerde
 }
@@ -75,6 +77,9 @@ func (v *AccessSourcesItem) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Cidr != nil {
 		s.WriteString(schemas.AccessSourcesItem_cidr, *v.Cidr)
+	}
+	if v.CoreNetworkEndpointId != nil {
+		s.WriteString(schemas.AccessSourcesItem_coreNetworkEndpointId, *v.CoreNetworkEndpointId)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AccessSourcesItem_createdAt, *v.CreatedAt)
@@ -94,6 +99,9 @@ func (v *AccessSourcesItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.AccessSourcesItem_protocol, string(v.Protocol))
 	}
+	if v.Segment != nil {
+		s.WriteString(schemas.AccessSourcesItem_segment, *v.Segment)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AccessSourcesItem_status, string(v.Status))
 	}
@@ -110,6 +118,9 @@ func (v *AccessSourcesItem) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AccessSourcesItem_cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.AccessSourcesItem_cidr, v.Cidr)
+		case schemas.AccessSourcesItem_coreNetworkEndpointId:
+			v.CoreNetworkEndpointId = new(string)
+			return d.ReadString(schemas.AccessSourcesItem_coreNetworkEndpointId, v.CoreNetworkEndpointId)
 		case schemas.AccessSourcesItem_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.AccessSourcesItem_createdAt, v.CreatedAt)
@@ -136,6 +147,9 @@ func (v *AccessSourcesItem) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Protocol = DnsProtocol(ev)
 			return nil
+		case schemas.AccessSourcesItem_segment:
+			v.Segment = new(string)
+			return d.ReadString(schemas.AccessSourcesItem_segment, v.Segment)
 		case schemas.AccessSourcesItem_status:
 			var ev string
 			if err := d.ReadString(schemas.AccessSourcesItem_status, &ev); err != nil {
@@ -1296,6 +1310,313 @@ func (v *BatchUpdateFirewallRuleResult) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// A DNS IP address configuration that you provide when you create a core network
+// endpoint. Each item specifies an IP address for the endpoint to receive DNS
+// queries, along with its DNS label, and the scope and Amazon Web Services Regions
+// in which the address applies.
+type CoreNetworkEndpointDnsIpInputItem struct {
+
+	// The DNS label to associate with the IP address.
+	//
+	// This member is required.
+	DnsLabel *string
+
+	// Indicates whether the IP address applies to all Amazon Web Services Regions or
+	// only to the specific Regions that you identify. When the value is REGIONAL , the
+	// Regions are listed in the regions field.
+	//
+	// This member is required.
+	RegionScope RegionScopeType
+
+	// The IPv4 address for the core network endpoint to receive DNS queries.
+	Ipv4Address *string
+
+	// The IPv6 address for the core network endpoint to receive DNS queries.
+	Ipv6Address *string
+
+	// The Amazon Web Services Regions in which the IP address applies when the region
+	// scope is REGIONAL .
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkEndpointDnsIpInputItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkEndpointDnsIpInputItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkEndpointDnsIpInputItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsLabel != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpInputItem_dnsLabel, *v.DnsLabel)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpInputItem_ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpInputItem_ipv6Address, *v.Ipv6Address)
+	}
+	if v.RegionScope != "" {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpInputItem_regionScope, string(v.RegionScope))
+	}
+	if v.Regions != nil {
+		serializeRegions(s, schemas.CoreNetworkEndpointDnsIpInputItem_regions, v.Regions)
+	}
+}
+func (v *CoreNetworkEndpointDnsIpInputItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkEndpointDnsIpInputItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkEndpointDnsIpInputItem_dnsLabel:
+			v.DnsLabel = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpInputItem_dnsLabel, v.DnsLabel)
+		case schemas.CoreNetworkEndpointDnsIpInputItem_ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpInputItem_ipv4Address, v.Ipv4Address)
+		case schemas.CoreNetworkEndpointDnsIpInputItem_ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpInputItem_ipv6Address, v.Ipv6Address)
+		case schemas.CoreNetworkEndpointDnsIpInputItem_regionScope:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkEndpointDnsIpInputItem_regionScope, &ev); err != nil {
+				return err
+			}
+			v.RegionScope = RegionScopeType(ev)
+			return nil
+		case schemas.CoreNetworkEndpointDnsIpInputItem_regions:
+			return deserializeRegions(d, schemas.CoreNetworkEndpointDnsIpInputItem_regions, &v.Regions)
+		}
+		return nil
+	})
+}
+
+// A DNS IP address configuration returned for a core network endpoint. Each item
+// describes an IP address that the endpoint uses to receive DNS queries, along
+// with its DNS label and name, and the scope and Amazon Web Services Regions in
+// which the address applies.
+type CoreNetworkEndpointDnsIpItem struct {
+
+	// The DNS label associated with the IP address.
+	//
+	// This member is required.
+	DnsLabel *string
+
+	// Indicates whether the IP address applies to all Amazon Web Services Regions or
+	// only to the specific Regions that you identify. When the value is REGIONAL , the
+	// Regions are listed in the regions field.
+	//
+	// This member is required.
+	RegionScope RegionScopeType
+
+	// The fully qualified DNS name associated with the IP address.
+	DnsName *string
+
+	// The IPv4 address that the core network endpoint uses to receive DNS queries.
+	Ipv4Address *string
+
+	// The IPv6 address that the core network endpoint uses to receive DNS queries.
+	Ipv6Address *string
+
+	// The Amazon Web Services Regions in which the IP address applies when the region
+	// scope is REGIONAL .
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkEndpointDnsIpItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkEndpointDnsIpItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkEndpointDnsIpItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsLabel != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpItem_dnsLabel, *v.DnsLabel)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpItem_dnsName, *v.DnsName)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpItem_ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpItem_ipv6Address, *v.Ipv6Address)
+	}
+	if v.RegionScope != "" {
+		s.WriteString(schemas.CoreNetworkEndpointDnsIpItem_regionScope, string(v.RegionScope))
+	}
+	if v.Regions != nil {
+		serializeRegions(s, schemas.CoreNetworkEndpointDnsIpItem_regions, v.Regions)
+	}
+}
+func (v *CoreNetworkEndpointDnsIpItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkEndpointDnsIpItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkEndpointDnsIpItem_dnsLabel:
+			v.DnsLabel = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpItem_dnsLabel, v.DnsLabel)
+		case schemas.CoreNetworkEndpointDnsIpItem_dnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpItem_dnsName, v.DnsName)
+		case schemas.CoreNetworkEndpointDnsIpItem_ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpItem_ipv4Address, v.Ipv4Address)
+		case schemas.CoreNetworkEndpointDnsIpItem_ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointDnsIpItem_ipv6Address, v.Ipv6Address)
+		case schemas.CoreNetworkEndpointDnsIpItem_regionScope:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkEndpointDnsIpItem_regionScope, &ev); err != nil {
+				return err
+			}
+			v.RegionScope = RegionScopeType(ev)
+			return nil
+		case schemas.CoreNetworkEndpointDnsIpItem_regions:
+			return deserializeRegions(d, schemas.CoreNetworkEndpointDnsIpItem_regions, &v.Regions)
+		}
+		return nil
+	})
+}
+
+// Summary information about a core network endpoint. Route 53 Global Resolver
+// returns one of these items for each endpoint in the response to a
+// ListCoreNetworkEndpoints request. Each item describes the endpoint's
+// identifiers, the Global Resolver and Cloud WAN core network that it connects,
+// its DNS IP addresses, and its current status.
+type CoreNetworkEndpointsItem struct {
+
+	// The Amazon Resource Name (ARN) of the core network endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Amazon Web Services Regions in which the core network endpoint is available.
+	//
+	// This member is required.
+	AvailableRegions []string
+
+	// The Amazon Resource Name (ARN) of the Cloud WAN core network that the endpoint
+	// connects to.
+	//
+	// This member is required.
+	CoreNetworkArn *string
+
+	// The date and time when the core network endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identifier of the Route 53 Global Resolver that the core network endpoint
+	// is associated with.
+	//
+	// This member is required.
+	GlobalResolverId *string
+
+	// The unique identifier of the core network endpoint.
+	//
+	// This member is required.
+	Id *string
+
+	// The DNS IP addresses that the core network endpoint uses to receive DNS queries.
+	//
+	// This member is required.
+	IpAddresses []CoreNetworkEndpointDnsIpItem
+
+	// The current status of the core network endpoint.
+	//
+	// This member is required.
+	Status CRResourceStatus
+
+	// The date and time when the core network endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The name of the core network endpoint.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkEndpointsItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkEndpointsItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkEndpointsItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CoreNetworkEndpointsItem_arn, *v.Arn)
+	}
+	if v.AvailableRegions != nil {
+		serializeRegions(s, schemas.CoreNetworkEndpointsItem_availableRegions, v.AvailableRegions)
+	}
+	if v.CoreNetworkArn != nil {
+		s.WriteString(schemas.CoreNetworkEndpointsItem_coreNetworkArn, *v.CoreNetworkArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CoreNetworkEndpointsItem_createdAt, *v.CreatedAt)
+	}
+	if v.GlobalResolverId != nil {
+		s.WriteString(schemas.CoreNetworkEndpointsItem_globalResolverId, *v.GlobalResolverId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CoreNetworkEndpointsItem_id, *v.Id)
+	}
+	if v.IpAddresses != nil {
+		serializeCoreNetworkEndpointDnsIpItems(s, schemas.CoreNetworkEndpointsItem_ipAddresses, v.IpAddresses)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CoreNetworkEndpointsItem_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CoreNetworkEndpointsItem_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CoreNetworkEndpointsItem_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CoreNetworkEndpointsItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkEndpointsItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkEndpointsItem_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointsItem_arn, v.Arn)
+		case schemas.CoreNetworkEndpointsItem_availableRegions:
+			return deserializeRegions(d, schemas.CoreNetworkEndpointsItem_availableRegions, &v.AvailableRegions)
+		case schemas.CoreNetworkEndpointsItem_coreNetworkArn:
+			v.CoreNetworkArn = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointsItem_coreNetworkArn, v.CoreNetworkArn)
+		case schemas.CoreNetworkEndpointsItem_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CoreNetworkEndpointsItem_createdAt, v.CreatedAt)
+		case schemas.CoreNetworkEndpointsItem_globalResolverId:
+			v.GlobalResolverId = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointsItem_globalResolverId, v.GlobalResolverId)
+		case schemas.CoreNetworkEndpointsItem_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointsItem_id, v.Id)
+		case schemas.CoreNetworkEndpointsItem_ipAddresses:
+			return deserializeCoreNetworkEndpointDnsIpItems(d, schemas.CoreNetworkEndpointsItem_ipAddresses, &v.IpAddresses)
+		case schemas.CoreNetworkEndpointsItem_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CoreNetworkEndpointsItem_name, v.Name)
+		case schemas.CoreNetworkEndpointsItem_status:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkEndpointsItem_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CRResourceStatus(ev)
+			return nil
+		case schemas.CoreNetworkEndpointsItem_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CoreNetworkEndpointsItem_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Summary information about a DNS view.
 type DNSViewSummary struct {
 
@@ -1859,6 +2180,20 @@ type GlobalResolversItem struct {
 	// global resolver.
 	ObservabilityRegion *string
 
+	// The public IP connectivity configured for the Route 53 Global Resolver. Public
+	// IP addresses let DNS clients send queries to the resolver over the internet.
+	// Valid values are the following:
+	//
+	//   - ENABLED_RESERVED - Public IP connectivity is enabled, and the global anycast
+	//   public IP addresses are reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RESERVED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses remain reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RELEASED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses are released.
+	PublicIpStatus PublicIpStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -1901,6 +2236,9 @@ func (v *GlobalResolversItem) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.GlobalResolversItem_observabilityRegion, *v.ObservabilityRegion)
+	}
+	if v.PublicIpStatus != "" {
+		s.WriteString(schemas.GlobalResolversItem_publicIpStatus, string(v.PublicIpStatus))
 	}
 	if v.Regions != nil {
 		serializeRegions(s, schemas.GlobalResolversItem_regions, v.Regions)
@@ -1950,6 +2288,13 @@ func (v *GlobalResolversItem) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GlobalResolversItem_observabilityRegion:
 			v.ObservabilityRegion = new(string)
 			return d.ReadString(schemas.GlobalResolversItem_observabilityRegion, v.ObservabilityRegion)
+		case schemas.GlobalResolversItem_publicIpStatus:
+			var ev string
+			if err := d.ReadString(schemas.GlobalResolversItem_publicIpStatus, &ev); err != nil {
+				return err
+			}
+			v.PublicIpStatus = PublicIpStatus(ev)
+			return nil
 		case schemas.GlobalResolversItem_regions:
 			return deserializeRegions(d, schemas.GlobalResolversItem_regions, &v.Regions)
 		case schemas.GlobalResolversItem_status:
@@ -2321,6 +2666,97 @@ func (v *SharedDNSViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SharedDNSViewSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.SharedDNSViewSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// A single change to apply to the DNS IP addresses of a core network endpoint
+// when you update it. Each entry specifies the operation to perform and the IP
+// address details that the operation acts on.
+type UpdateIpAddressEntry struct {
+
+	// The operation to perform on the IP address. Valid values are ADD , REMOVE , and
+	// UPDATE .
+	//
+	// This member is required.
+	Operation UpdateIpAddressOperation
+
+	// The DNS label associated with the IP address.
+	DnsLabel *string
+
+	// The IPv4 address that the operation acts on.
+	Ipv4Address *string
+
+	// The IPv6 address that the operation acts on.
+	Ipv6Address *string
+
+	// Indicates whether the IP address applies to all Amazon Web Services Regions or
+	// only to the specific Regions that you identify. When the value is REGIONAL , the
+	// Regions are listed in the regions field.
+	RegionScope RegionScopeType
+
+	// The Amazon Web Services Regions in which the IP address applies when the region
+	// scope is REGIONAL .
+	Regions []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateIpAddressEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIpAddressEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIpAddressEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsLabel != nil {
+		s.WriteString(schemas.UpdateIpAddressEntry_dnsLabel, *v.DnsLabel)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.UpdateIpAddressEntry_ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.UpdateIpAddressEntry_ipv6Address, *v.Ipv6Address)
+	}
+	if v.Operation != "" {
+		s.WriteString(schemas.UpdateIpAddressEntry_operation, string(v.Operation))
+	}
+	if v.RegionScope != "" {
+		s.WriteString(schemas.UpdateIpAddressEntry_regionScope, string(v.RegionScope))
+	}
+	if v.Regions != nil {
+		serializeRegions(s, schemas.UpdateIpAddressEntry_regions, v.Regions)
+	}
+}
+func (v *UpdateIpAddressEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIpAddressEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIpAddressEntry_dnsLabel:
+			v.DnsLabel = new(string)
+			return d.ReadString(schemas.UpdateIpAddressEntry_dnsLabel, v.DnsLabel)
+		case schemas.UpdateIpAddressEntry_ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.UpdateIpAddressEntry_ipv4Address, v.Ipv4Address)
+		case schemas.UpdateIpAddressEntry_ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.UpdateIpAddressEntry_ipv6Address, v.Ipv6Address)
+		case schemas.UpdateIpAddressEntry_operation:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIpAddressEntry_operation, &ev); err != nil {
+				return err
+			}
+			v.Operation = UpdateIpAddressOperation(ev)
+			return nil
+		case schemas.UpdateIpAddressEntry_regionScope:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIpAddressEntry_regionScope, &ev); err != nil {
+				return err
+			}
+			v.RegionScope = RegionScopeType(ev)
+			return nil
+		case schemas.UpdateIpAddressEntry_regions:
+			return deserializeRegions(d, schemas.UpdateIpAddressEntry_regions, &v.Regions)
 		}
 		return nil
 	})

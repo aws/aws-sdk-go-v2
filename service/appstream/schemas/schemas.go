@@ -498,7 +498,7 @@ var _AccountPassword = smithy.NewSchema(smithy.ShapeID{
 var Action = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "Action",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 9)
 var Action_CLIPBOARD_COPY_FROM_LOCAL_DEVICE *smithy.Schema
 
 var Action_CLIPBOARD_COPY_TO_LOCAL_DEVICE *smithy.Schema
@@ -514,6 +514,8 @@ var Action_DOMAIN_PASSWORD_SIGNIN *smithy.Schema
 var Action_DOMAIN_SMART_CARD_SIGNIN *smithy.Schema
 
 var Action_AUTO_TIME_ZONE_REDIRECTION *smithy.Schema
+
+var Action_SMART_CARD_REDIRECTION *smithy.Schema
 
 var _AdminAppLicenseUsageList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -2333,6 +2335,11 @@ var StreamingExperienceSettings = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StreamingExperienceSettings",
 }, smithy.ShapeTypeStructure, 1)
 var StreamingExperienceSettings_PreferredProtocol *smithy.Schema
+
+var _StreamingUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "StreamingUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _StreamingUrlUserId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
@@ -4370,6 +4377,8 @@ func init() {
 
 	Action_AUTO_TIME_ZONE_REDIRECTION = Action.AddMember("AUTO_TIME_ZONE_REDIRECTION", smithyprelude.Unit)
 
+	Action_SMART_CARD_REDIRECTION = Action.AddMember("SMART_CARD_REDIRECTION", smithyprelude.Unit)
+
 	AdminAppLicenseUsageRecord_UserArn = AdminAppLicenseUsageRecord.AddMember("UserArn", _String)
 
 	AdminAppLicenseUsageRecord_BillingPeriod = AdminAppLicenseUsageRecord.AddMember("BillingPeriod", _String)
@@ -5622,7 +5631,7 @@ func init() {
 
 	CreateAppBlockBuilderStreamingURLRequest_Validity = CreateAppBlockBuilderStreamingURLRequest.AddMember("Validity", _Long)
 
-	CreateAppBlockBuilderStreamingURLResult_StreamingURL = CreateAppBlockBuilderStreamingURLResult.AddMember("StreamingURL", _String)
+	CreateAppBlockBuilderStreamingURLResult_StreamingURL = CreateAppBlockBuilderStreamingURLResult.AddMember("StreamingURL", _StreamingUrl)
 
 	CreateAppBlockBuilderStreamingURLResult_Expires = CreateAppBlockBuilderStreamingURLResult.AddMember("Expires", _Timestamp)
 
@@ -5794,7 +5803,7 @@ func init() {
 
 	CreateImageBuilderStreamingURLRequest_Validity = CreateImageBuilderStreamingURLRequest.AddMember("Validity", _Long)
 
-	CreateImageBuilderStreamingURLResult_StreamingURL = CreateImageBuilderStreamingURLResult.AddMember("StreamingURL", _String)
+	CreateImageBuilderStreamingURLResult_StreamingURL = CreateImageBuilderStreamingURLResult.AddMember("StreamingURL", _StreamingUrl)
 
 	CreateImageBuilderStreamingURLResult_Expires = CreateImageBuilderStreamingURLResult.AddMember("Expires", _Timestamp)
 
@@ -5866,7 +5875,7 @@ func init() {
 
 	CreateStreamingURLRequest_SessionContext = CreateStreamingURLRequest.AddMember("SessionContext", _String)
 
-	CreateStreamingURLResult_StreamingURL = CreateStreamingURLResult.AddMember("StreamingURL", _String)
+	CreateStreamingURLResult_StreamingURL = CreateStreamingURLResult.AddMember("StreamingURL", _StreamingUrl)
 
 	CreateStreamingURLResult_Expires = CreateStreamingURLResult.AddMember("Expires", _Timestamp)
 

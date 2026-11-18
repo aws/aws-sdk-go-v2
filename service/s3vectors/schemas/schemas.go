@@ -155,6 +155,13 @@ var UpdateIndexMode = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/UpdateIndexMode",
 	Code: 200})
 
+var UpdateMetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "UpdateMetadataConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/UpdateMetadataConfiguration",
+	Code: 200})
+
 var _S3Vectors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
 	Name:      "S3Vectors",
@@ -168,6 +175,28 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
+
+var AnalyzerStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "AnalyzerStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AnalyzerStatus_ACTIVE *smithy.Schema
+
+var AnalyzerStatus_BUILDING *smithy.Schema
+
+var Bm25Score = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "Bm25Score",
+}, smithy.ShapeTypeStructure, 2)
+var Bm25Score_metadataKey *smithy.Schema
+
+var Bm25Score_score *smithy.Schema
+
+var _Bm25ScoreList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "Bm25ScoreList",
+}, smithy.ShapeTypeList, 1)
+var _Bm25ScoreList_member *smithy.Schema
 
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
@@ -336,6 +365,30 @@ var KmsNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 400})
 var KmsNotFoundException_message *smithy.Schema
 
+var LanguageCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "LanguageCode",
+}, smithy.ShapeTypeEnum, 10)
+var LanguageCode_EN *smithy.Schema
+
+var LanguageCode_FR *smithy.Schema
+
+var LanguageCode_ES *smithy.Schema
+
+var LanguageCode_PT *smithy.Schema
+
+var LanguageCode_IT *smithy.Schema
+
+var LanguageCode_DE *smithy.Schema
+
+var LanguageCode_NL *smithy.Schema
+
+var LanguageCode_ZH *smithy.Schema
+
+var LanguageCode_JA *smithy.Schema
+
+var LanguageCode_KO *smithy.Schema
+
 var _ListIndexesMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
 	Name:      "ListIndexesMaxResults",
@@ -417,8 +470,22 @@ var _ListVectorsSegmentIndex = smithy.NewSchema(smithy.ShapeID{
 var MetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
 	Name:      "MetadataConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var MetadataConfiguration_nonFilterableMetadataKeys *smithy.Schema
+
+var MetadataConfiguration_textSearchConfigurations *smithy.Schema
+
+var MetadataConfigurationAdd = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "MetadataConfigurationAdd",
+}, smithy.ShapeTypeStructure, 1)
+var MetadataConfigurationAdd_textSearchConfigurations *smithy.Schema
+
+var MetadataConfigurationDelete = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "MetadataConfigurationDelete",
+}, smithy.ShapeTypeStructure, 1)
+var MetadataConfigurationDelete_textSearchConfigurations *smithy.Schema
 
 var _MetadataKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
@@ -457,12 +524,43 @@ var _PutVectorsInputList_member *smithy.Schema
 var QueryOutputVector = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
 	Name:      "QueryOutputVector",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var QueryOutputVector_distance *smithy.Schema
+
+var QueryOutputVector_scores *smithy.Schema
 
 var QueryOutputVector_key *smithy.Schema
 
 var QueryOutputVector_metadata *smithy.Schema
+
+var QueryScores = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "QueryScores",
+}, smithy.ShapeTypeStructure, 3)
+var QueryScores_fused *smithy.Schema
+
+var QueryScores_bm25Scores *smithy.Schema
+
+var QueryScores_vectorDistance *smithy.Schema
+
+var QueryText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "QueryText",
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
+var QueryText_text *smithy.Schema
+
+var QueryText_metadataKey *smithy.Schema
+
+var _QueryTextList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "QueryTextList",
+}, smithy.ShapeTypeList, 1)
+var _QueryTextList_member *smithy.Schema
+
+var _QueryTextString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "QueryTextString",
+}, smithy.ShapeTypeString, 0)
 
 var _QueryVectorsNextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
@@ -532,6 +630,34 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
+
+var TextSearchConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "TextSearchConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var TextSearchConfiguration_metadataKey *smithy.Schema
+
+var TextSearchConfiguration_language *smithy.Schema
+
+var TextSearchConfiguration_status *smithy.Schema
+
+var TextSearchConfigurationKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "TextSearchConfigurationKey",
+}, smithy.ShapeTypeStructure, 1)
+var TextSearchConfigurationKey_metadataKey *smithy.Schema
+
+var _TextSearchConfigurationKeys = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "TextSearchConfigurationKeys",
+}, smithy.ShapeTypeList, 1)
+var _TextSearchConfigurationKeys_member *smithy.Schema
+
+var _TextSearchConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "TextSearchConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _TextSearchConfigurations_member *smithy.Schema
 
 var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
@@ -922,7 +1048,7 @@ var PutVectorsOutput = smithy.NewSchema(smithy.ShapeID{
 var QueryVectorsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3vectors",
 	Name:      "QueryVectorsInput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var QueryVectorsInput_vectorBucketName *smithy.Schema
 
 var QueryVectorsInput_indexName *smithy.Schema
@@ -940,6 +1066,10 @@ var QueryVectorsInput_queryMode *smithy.Schema
 var QueryVectorsInput_returnMetadata *smithy.Schema
 
 var QueryVectorsInput_returnDistance *smithy.Schema
+
+var QueryVectorsInput_queryTexts *smithy.Schema
+
+var QueryVectorsInput_returnScores *smithy.Schema
 
 var QueryVectorsInput_nextToken *smithy.Schema
 
@@ -996,10 +1126,40 @@ var UpdateIndexModeOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateIndexModeOutput",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateMetadataConfigurationInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "UpdateMetadataConfigurationInput",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateMetadataConfigurationInput_vectorBucketName *smithy.Schema
+
+var UpdateMetadataConfigurationInput_indexName *smithy.Schema
+
+var UpdateMetadataConfigurationInput_indexArn *smithy.Schema
+
+var UpdateMetadataConfigurationInput_add *smithy.Schema
+
+var UpdateMetadataConfigurationInput_delete *smithy.Schema
+
+var UpdateMetadataConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3vectors",
+	Name:      "UpdateMetadataConfigurationOutput",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateMetadataConfigurationOutput_indexArn *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
+
+	AnalyzerStatus_ACTIVE = AnalyzerStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	AnalyzerStatus_BUILDING = AnalyzerStatus.AddMember("BUILDING", smithyprelude.Unit)
+
+	Bm25Score_metadataKey = Bm25Score.AddMember("metadataKey", _MetadataKey)
+
+	Bm25Score_score = Bm25Score.AddMember("score", smithyprelude.Float)
+
+	_Bm25ScoreList_member = _Bm25ScoreList.AddMember("member", Bm25Score)
 
 	ConflictException_message = ConflictException.AddMember("message", _ExceptionMessage)
 
@@ -1035,7 +1195,37 @@ func init() {
 
 	_NonFilterableMetadataKeys_member = _NonFilterableMetadataKeys.AddMember("member", _MetadataKey)
 
+	LanguageCode_EN = LanguageCode.AddMember("EN", smithyprelude.Unit)
+
+	LanguageCode_FR = LanguageCode.AddMember("FR", smithyprelude.Unit)
+
+	LanguageCode_ES = LanguageCode.AddMember("ES", smithyprelude.Unit)
+
+	LanguageCode_PT = LanguageCode.AddMember("PT", smithyprelude.Unit)
+
+	LanguageCode_IT = LanguageCode.AddMember("IT", smithyprelude.Unit)
+
+	LanguageCode_DE = LanguageCode.AddMember("DE", smithyprelude.Unit)
+
+	LanguageCode_NL = LanguageCode.AddMember("NL", smithyprelude.Unit)
+
+	LanguageCode_ZH = LanguageCode.AddMember("ZH", smithyprelude.Unit)
+
+	LanguageCode_JA = LanguageCode.AddMember("JA", smithyprelude.Unit)
+
+	LanguageCode_KO = LanguageCode.AddMember("KO", smithyprelude.Unit)
+
+	TextSearchConfiguration_metadataKey = TextSearchConfiguration.AddMember("metadataKey", _MetadataKey)
+
+	TextSearchConfiguration_language = TextSearchConfiguration.AddMember("language", LanguageCode)
+
+	TextSearchConfiguration_status = TextSearchConfiguration.AddMember("status", AnalyzerStatus)
+
+	_TextSearchConfigurations_member = _TextSearchConfigurations.AddMember("member", TextSearchConfiguration)
+
 	MetadataConfiguration_nonFilterableMetadataKeys = MetadataConfiguration.AddMember("nonFilterableMetadataKeys", _NonFilterableMetadataKeys)
+
+	MetadataConfiguration_textSearchConfigurations = MetadataConfiguration.AddMember("textSearchConfigurations", _TextSearchConfigurations)
 
 	IndexMode_CLASSIC = IndexMode.AddMember("CLASSIC", smithyprelude.Unit)
 
@@ -1097,6 +1287,14 @@ func init() {
 
 	_ListVectorsOutputList_member = _ListVectorsOutputList.AddMember("member", ListOutputVector)
 
+	MetadataConfigurationAdd_textSearchConfigurations = MetadataConfigurationAdd.AddMember("textSearchConfigurations", _TextSearchConfigurations)
+
+	TextSearchConfigurationKey_metadataKey = TextSearchConfigurationKey.AddMember("metadataKey", _MetadataKey)
+
+	_TextSearchConfigurationKeys_member = _TextSearchConfigurationKeys.AddMember("member", TextSearchConfigurationKey)
+
+	MetadataConfigurationDelete_textSearchConfigurations = MetadataConfigurationDelete.AddMember("textSearchConfigurations", _TextSearchConfigurationKeys)
+
 	NotFoundException_message = NotFoundException.AddMember("message", _ExceptionMessage)
 
 	PutInputVector_key = PutInputVector.AddMember("key", _VectorKey)
@@ -1107,11 +1305,25 @@ func init() {
 
 	_PutVectorsInputList_member = _PutVectorsInputList.AddMember("member", PutInputVector)
 
+	QueryScores_fused = QueryScores.AddMember("fused", smithyprelude.Float)
+
+	QueryScores_bm25Scores = QueryScores.AddMember("bm25Scores", _Bm25ScoreList)
+
+	QueryScores_vectorDistance = QueryScores.AddMember("vectorDistance", smithyprelude.Float)
+
 	QueryOutputVector_distance = QueryOutputVector.AddMember("distance", smithyprelude.Float)
+
+	QueryOutputVector_scores = QueryOutputVector.AddMember("scores", QueryScores)
 
 	QueryOutputVector_key = QueryOutputVector.AddMember("key", _VectorKey)
 
 	QueryOutputVector_metadata = QueryOutputVector.AddMember("metadata", _VectorMetadata)
+
+	QueryText_text = QueryText.AddMember("text", _QueryTextString)
+
+	QueryText_metadataKey = QueryText.AddMember("metadataKey", _MetadataKey)
+
+	_QueryTextList_member = _QueryTextList.AddMember("member", QueryText)
 
 	_QueryVectorsOutputList_member = _QueryVectorsOutputList.AddMember("member", QueryOutputVector)
 
@@ -1321,6 +1533,10 @@ func init() {
 
 	QueryVectorsInput_returnDistance = QueryVectorsInput.AddMember("returnDistance", smithyprelude.Boolean)
 
+	QueryVectorsInput_queryTexts = QueryVectorsInput.AddMember("queryTexts", _QueryTextList)
+
+	QueryVectorsInput_returnScores = QueryVectorsInput.AddMember("returnScores", smithyprelude.Boolean)
+
 	QueryVectorsInput_nextToken = QueryVectorsInput.AddMember("nextToken", _QueryVectorsNextToken)
 
 	QueryVectorsOutput_vectors = QueryVectorsOutput.AddMember("vectors", _QueryVectorsOutputList)
@@ -1344,5 +1560,17 @@ func init() {
 	UpdateIndexModeInput_indexArn = UpdateIndexModeInput.AddMember("indexArn", _IndexArn)
 
 	UpdateIndexModeInput_indexMode = UpdateIndexModeInput.AddMember("indexMode", IndexMode)
+
+	UpdateMetadataConfigurationInput_vectorBucketName = UpdateMetadataConfigurationInput.AddMember("vectorBucketName", _VectorBucketName)
+
+	UpdateMetadataConfigurationInput_indexName = UpdateMetadataConfigurationInput.AddMember("indexName", _IndexName)
+
+	UpdateMetadataConfigurationInput_indexArn = UpdateMetadataConfigurationInput.AddMember("indexArn", _IndexArn)
+
+	UpdateMetadataConfigurationInput_add = UpdateMetadataConfigurationInput.AddMember("add", MetadataConfigurationAdd)
+
+	UpdateMetadataConfigurationInput_delete = UpdateMetadataConfigurationInput.AddMember("delete", MetadataConfigurationDelete)
+
+	UpdateMetadataConfigurationOutput_indexArn = UpdateMetadataConfigurationOutput.AddMember("indexArn", _IndexArn)
 
 }

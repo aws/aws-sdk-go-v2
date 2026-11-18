@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"nextToken":"__NextToken__","versions":[{"createdAt":946684800,"datasetVersion":"__DatasetVersion__","exampleCount":1},{"createdAt":946684800,"datasetVersion":"__DatasetVersion__","exampleCount":1}]}
+{"nextToken":"__NextToken__","versions":[{"createdAt":946684800,"datasetVersion":"__DatasetVersion__","exampleCount":1,"exampleCountByField":{"actorProfile":1,"input":1,"turns":1}},{"createdAt":946684800,"datasetVersion":"__DatasetVersion__","exampleCount":1,"exampleCountByField":{"actorProfile":1,"input":1,"turns":1}}]}

@@ -40,7 +40,8 @@ type GetEnabledStandardsInput struct {
 	NextToken *string
 
 	// A list of cloud providers to filter the enabled standards by. For example,
-	// specify Azure to return only enabled standards that evaluate Azure resources.
+	// specify Azure to return only enabled standards that evaluate Azure resources,
+	// or GCP to return only enabled standards that evaluate GCP resources.
 	Providers []types.StandardsProvider
 
 	// The list of the standards subscription ARNs for the standards to retrieve.

@@ -80,6 +80,10 @@ type RegisterWorkspaceDirectoryInput struct {
 	// The name of the directory to register.
 	WorkspaceDirectoryName *string
 
+	// Indicates how users are set up on the WorkSpace operating system. To use local
+	// users with an AWS IAM Identity Center directory, specify LOCAL_USER .
+	WorkspaceOsUserMode types.WorkspaceOSUserMode
+
 	// Indicates whether the directory's WorkSpace type is personal or pools.
 	WorkspaceType types.WorkspaceType
 
@@ -129,6 +133,9 @@ func (v *RegisterWorkspaceDirectoryInput) SerializeMembers(s smithy.ShapeSeriali
 	}
 	if v.WorkspaceDirectoryName != nil {
 		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_WorkspaceDirectoryName, *v.WorkspaceDirectoryName)
+	}
+	if v.WorkspaceOsUserMode != "" {
+		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_WorkspaceOsUserMode, string(v.WorkspaceOsUserMode))
 	}
 	if v.WorkspaceType != "" {
 		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_WorkspaceType, string(v.WorkspaceType))

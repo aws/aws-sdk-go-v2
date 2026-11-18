@@ -1410,6 +1410,10 @@ func TestCheckRequestSnapshot_ListKeys(t *testing.T) {
 	input := &ListKeysInput{
 		Limit:  ptr.Int32(1),
 		Marker: ptr.String("__Marker__"),
+		ResourceOwners: []types.ResourceOwnerType{
+			types.ResourceOwnerType("SELF"),
+			types.ResourceOwnerType("SELF"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3224,6 +3228,10 @@ func TestUpdateRequestSnapshot_ListKeys(t *testing.T) {
 	input := &ListKeysInput{
 		Limit:  ptr.Int32(1),
 		Marker: ptr.String("__Marker__"),
+		ResourceOwners: []types.ResourceOwnerType{
+			types.ResourceOwnerType("SELF"),
+			types.ResourceOwnerType("SELF"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -174,6 +174,34 @@ func TestUpdateResponseSnapshot_ActivateSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateDataset(t *testing.T) {
+	want := &CreateDatasetOutput{
+		Arn:       ptr.String("__Arn__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Type:      types.DatasetType("MEDICAL_CODING"),
+		Status:    types.DatasetStatus("CREATING"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.CreateDataset, schemas.CreateDatasetOutput, schemas.CreateDatasetOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateDataset.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateDomain(t *testing.T) {
 	want := &CreateDomainOutput{
 		DomainId:  ptr.String("__DomainId__"),
@@ -277,6 +305,32 @@ func TestUpdateResponseSnapshot_DeactivateSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteDataset(t *testing.T) {
+	want := &DeleteDatasetOutput{
+		Arn:       ptr.String("__Arn__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Status:    types.DatasetStatus("CREATING"),
+	}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteDataset, schemas.DeleteDatasetOutput, schemas.DeleteDatasetOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteDataset.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 	want := &DeleteDomainOutput{
 		DomainId: ptr.String("__DomainId__"),
@@ -299,6 +353,48 @@ func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteDomain.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDataset(t *testing.T) {
+	want := &GetDatasetOutput{
+		Arn:       ptr.String("__Arn__"),
+		DatasetId: ptr.String("__DatasetId__"),
+		Name:      ptr.String("__Name__"),
+		Type:      types.DatasetType("MEDICAL_CODING"),
+		Config: &types.DatasetConfigMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetConfig{
+				S3InputPath:  ptr.String("__S3InputPath__"),
+				S3OutputPath: ptr.String("__S3OutputPath__"),
+			},
+		},
+		Status:        types.DatasetStatus("CREATING"),
+		StatusDetails: ptr.String("__StatusDetails__"),
+		Artifacts: &types.DatasetArtifactsMemberMedicalCoding{
+			Value: types.MedicalCodingDatasetArtifacts{
+				EvaluationS3Uri: ptr.String("__EvaluationS3Uri__"),
+			},
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetOutput, schemas.GetDatasetOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDataset.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -345,6 +441,56 @@ func TestUpdateResponseSnapshot_GetDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetMedicalCodingJob(t *testing.T) {
+	want := &GetMedicalCodingJobOutput{
+		JobId:        ptr.String("__JobId__"),
+		JobArn:       ptr.String("__JobArn__"),
+		JobStatus:    types.JobStatus("SUBMITTED"),
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Text:         ptr.String("__Text__"),
+		PatientContext: &types.MedicalCodesPatientContext{
+			Sex:         types.Sex("MALE"),
+			Status:      types.PatientStatus("NEW"),
+			DateOfBirth: ptr.String("__DateOfBirth__"),
+			Insurance:   ptr.String("__Insurance__"),
+		},
+		EncounterContext: &types.MedicalCodesEncounterContext{
+			EncounterType:            types.EncounterType("TELEHEALTH"),
+			EncounterReason:          ptr.String("__EncounterReason__"),
+			AfterHours:               ptr.Bool(true),
+			EncounterDate:            ptr.String("__EncounterDate__"),
+			EncounterDurationMinutes: ptr.Int32(1),
+		},
+		OutputDataConfig: &types.MedicalCodingOutputDataConfig{
+			S3OutputPath: ptr.String("__S3OutputPath__"),
+		},
+		DatasetId: ptr.String("__DatasetId__"),
+		MedicalCodingOutput: &types.MedicalCodingOutput{
+			Uri: ptr.String("__Uri__"),
+		},
+		StatusDetails: ptr.String("__StatusDetails__"),
+	}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.GetMedicalCodingJob, schemas.GetMedicalCodingJobResponse, schemas.GetMedicalCodingJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetMedicalCodingJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 	want := &GetMedicalScribeListeningSessionOutput{
 		MedicalScribeListeningSessionDetails: &types.MedicalScribeListeningSessionDetails{
@@ -373,6 +519,9 @@ func TestUpdateResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 						},
 					},
 				},
+				MedicalCodeGenerationSettings: &types.MedicalCodeGenerationSettingsResponse{
+					Enabled: ptr.Bool(true),
+				},
 			},
 			PostStreamActionResult: &types.MedicalScribePostStreamActionsResult{
 				ClinicalNoteGenerationResult: &types.ClinicalNoteGenerationResult{
@@ -392,11 +541,20 @@ func TestUpdateResponseSnapshot_GetMedicalScribeListeningSession(t *testing.T) {
 						FailureReason:  ptr.String("__FailureReason__"),
 					},
 				},
+				MedicalCodeGenerationResult: &types.MedicalCodeGenerationResult{
+					MedicalCodesResult: &types.ArtifactDetails{
+						OutputLocation: ptr.String("__OutputLocation__"),
+						Status:         types.PostStreamArtifactGenerationStatus("IN_PROGRESS"),
+						FailureReason:  ptr.String("__FailureReason__"),
+					},
+					JobId: ptr.String("__JobId__"),
+				},
 			},
-			EncounterContextProvided: ptr.Bool(true),
-			StreamStatus:             types.MedicalScribeStreamStatus("IN_PROGRESS"),
-			StreamCreationTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			StreamEndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EncounterContextProvided:     ptr.Bool(true),
+			MedicalCodingContextProvided: ptr.Bool(true),
+			StreamStatus:                 types.MedicalScribeStreamStatus("IN_PROGRESS"),
+			StreamCreationTime:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			StreamEndTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	proto := restjson1.New(schemas.ConnectHealth)
@@ -517,6 +675,52 @@ func TestUpdateResponseSnapshot_GetSubscription(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListDatasets(t *testing.T) {
+	want := &ListDatasetsOutput{
+		Items: []types.DatasetSummary{
+			{
+				Arn:           ptr.String("__Arn__"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				Name:          ptr.String("__Name__"),
+				Type:          types.DatasetType("MEDICAL_CODING"),
+				Status:        types.DatasetStatus("CREATING"),
+				StatusDetails: ptr.String("__StatusDetails__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				DatasetId:     ptr.String("__DatasetId__"),
+				Name:          ptr.String("__Name__"),
+				Type:          types.DatasetType("MEDICAL_CODING"),
+				Status:        types.DatasetStatus("CREATING"),
+				StatusDetails: ptr.String("__StatusDetails__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.ListDatasets, schemas.ListDatasetsOutput, schemas.ListDatasetsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListDatasets.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListDomains(t *testing.T) {
 	want := &ListDomainsOutput{
 		Domains: []types.DomainSummary{
@@ -629,6 +833,32 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartMedicalCodingJob(t *testing.T) {
+	want := &StartMedicalCodingJobOutput{
+		JobArn:       ptr.String("__JobArn__"),
+		JobId:        ptr.String("__JobId__"),
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.StartMedicalCodingJob, schemas.StartMedicalCodingJobResponse, schemas.StartMedicalCodingJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartMedicalCodingJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartPatientInsightsJob(t *testing.T) {
 	want := &StartPatientInsightsJobOutput{
 		JobArn:       ptr.String("__JobArn__"),
@@ -651,6 +881,28 @@ func TestUpdateResponseSnapshot_StartPatientInsightsJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartPatientInsightsJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SubmitFeedback(t *testing.T) {
+	want := &SubmitFeedbackOutput{}
+	proto := restjson1.New(schemas.ConnectHealth)
+	opSchema := smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackResponse, schemas.SubmitFeedbackResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SubmitFeedback.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -729,7 +981,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.ConnectHealth)
-	opSchema := smithy.NewOperationSchema(schemas.StartPatientInsightsJob, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateDataset, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -804,7 +1056,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.ConnectHealth)
-	opSchema := smithy.NewOperationSchema(schemas.CreateDomain, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateDataset, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -829,7 +1081,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.ConnectHealth)
-	opSchema := smithy.NewOperationSchema(schemas.GetMedicalScribeListeningSession, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateDataset, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

@@ -1,3 +1,7 @@
+# v1.23.0 (2026-11-16)
+
+* **Feature**: Added support for Amazon Aurora DSQL advanced monitoring metric groups, which publish detailed database metrics and logs to Amazon CloudWatch Database Insights. Adds the metricGroups parameter to CreateCluster, UpdateCluster, and GetCluster.
+
 # v1.22.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

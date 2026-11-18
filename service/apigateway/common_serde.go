@@ -133,6 +133,44 @@ func serializeListOfGatewayResponse(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeListOfJwtAdditionalClaim(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.JwtAdditionalClaim) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeListOfJwtIssuer(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.JwtIssuer) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeListOfJwtIssuerInput(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.JwtIssuerInput) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeListOfJwtSigningAlgorithm(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.JwtSigningAlgorithm) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeListOfLong(s smithy.ShapeSerializer, schema *smithy.Schema, v []int64) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -557,6 +595,93 @@ func deserializeListOfGatewayResponse(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeListOfJwtAdditionalClaim(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JwtAdditionalClaim) error {
+	*v = make([]types.JwtAdditionalClaim, 0)
+	var vv types.JwtAdditionalClaim
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.JwtAdditionalClaim
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.JwtAdditionalClaim{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeListOfJwtIssuer(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JwtIssuer) error {
+	*v = make([]types.JwtIssuer, 0)
+	var vv types.JwtIssuer
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.JwtIssuer
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.JwtIssuer{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeListOfJwtIssuerInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JwtIssuerInput) error {
+	*v = make([]types.JwtIssuerInput, 0)
+	var vv types.JwtIssuerInput
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.JwtIssuerInput
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.JwtIssuerInput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeListOfJwtSigningAlgorithm(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JwtSigningAlgorithm) error {
+	*v = make([]types.JwtSigningAlgorithm, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.JwtSigningAlgorithm
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.JwtSigningAlgorithm(vv))
 		return nil
 	})
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","questionSets":[{"arn":"__Arn__","id":"__Id__","latestVersion":"__LatestVersion__","name":"__Name__"},{"arn":"__Arn__","id":"__Id__","latestVersion":"__LatestVersion__","name":"__Name__"}]}

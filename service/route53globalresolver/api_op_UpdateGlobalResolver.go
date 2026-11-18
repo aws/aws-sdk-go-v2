@@ -55,6 +55,20 @@ type UpdateGlobalResolverInput struct {
 	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
+	// Specifies the public IP connectivity to configure for the Route 53 Global
+	// Resolver. Public IP addresses let DNS clients send queries to the resolver over
+	// the internet. Valid values are the following:
+	//
+	//   - ENABLED_RESERVED - Public IP connectivity is enabled, and the global anycast
+	//   public IP addresses are reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RESERVED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses remain reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RELEASED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses are released.
+	PublicIpStatus types.PublicIpStatus
+
 	// The list of Amazon Web Services Regions where the Global Resolver will operate.
 	// The resolver will be distributed across these Regions to provide global
 	// availability and low-latency DNS resolution.
@@ -84,6 +98,9 @@ func (v *UpdateGlobalResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.UpdateGlobalResolverInput_observabilityRegion, *v.ObservabilityRegion)
+	}
+	if v.PublicIpStatus != "" {
+		s.WriteString(schemas.UpdateGlobalResolverInput_publicIpStatus, string(v.PublicIpStatus))
 	}
 	if v.Regions != nil {
 		serializeRegions(s, schemas.UpdateGlobalResolverInput_regions, v.Regions)
@@ -159,6 +176,20 @@ type UpdateGlobalResolverOutput struct {
 	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
+	// The public IP connectivity configured for the Route 53 Global Resolver. Public
+	// IP addresses let DNS clients send queries to the resolver over the internet.
+	// Valid values are the following:
+	//
+	//   - ENABLED_RESERVED - Public IP connectivity is enabled, and the global anycast
+	//   public IP addresses are reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RESERVED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses remain reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RELEASED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses are released.
+	PublicIpStatus types.PublicIpStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -204,6 +235,9 @@ func (v *UpdateGlobalResolverOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.UpdateGlobalResolverOutput_observabilityRegion, *v.ObservabilityRegion)
+	}
+	if v.PublicIpStatus != "" {
+		s.WriteString(schemas.UpdateGlobalResolverOutput_publicIpStatus, string(v.PublicIpStatus))
 	}
 	if v.Regions != nil {
 		serializeRegions(s, schemas.UpdateGlobalResolverOutput_regions, v.Regions)
@@ -253,6 +287,13 @@ func (v *UpdateGlobalResolverOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.UpdateGlobalResolverOutput_observabilityRegion:
 			v.ObservabilityRegion = new(string)
 			return d.ReadString(schemas.UpdateGlobalResolverOutput_observabilityRegion, v.ObservabilityRegion)
+		case schemas.UpdateGlobalResolverOutput_publicIpStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGlobalResolverOutput_publicIpStatus, &ev); err != nil {
+				return err
+			}
+			v.PublicIpStatus = types.PublicIpStatus(ev)
+			return nil
 		case schemas.UpdateGlobalResolverOutput_regions:
 			return deserializeRegions(d, schemas.UpdateGlobalResolverOutput_regions, &v.Regions)
 		case schemas.UpdateGlobalResolverOutput_status:

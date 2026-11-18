@@ -166,6 +166,7 @@ func TestUpdateResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T
 							},
 						},
 					},
+					LanguageCode: ptr.String("__LanguageCode__"),
 				},
 				Categories: &types.Categories{
 					MatchedCategories: []string{
@@ -251,6 +252,7 @@ func TestUpdateResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T
 							},
 						},
 					},
+					LanguageCode: ptr.String("__LanguageCode__"),
 				},
 				Categories: &types.Categories{
 					MatchedCategories: []string{

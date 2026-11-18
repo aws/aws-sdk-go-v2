@@ -1347,6 +1347,52 @@ var _IntegerOptional = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IntegerOptional",
 }, smithy.ShapeTypeInteger, 0)
 
+var Integration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticache",
+	Name:      "Integration",
+}, smithy.ShapeTypeStructure, 2)
+var Integration_IntegrationType *smithy.Schema
+
+var Integration_Status *smithy.Schema
+
+var _IntegrationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticache",
+	Name:      "IntegrationList",
+}, smithy.ShapeTypeList, 1)
+var _IntegrationList_member *smithy.Schema
+
+var IntegrationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticache",
+	Name:      "IntegrationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var IntegrationRequest_IntegrationType *smithy.Schema
+
+var _IntegrationRequestList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticache",
+	Name:      "IntegrationRequestList",
+}, smithy.ShapeTypeList, 1)
+var _IntegrationRequestList_member *smithy.Schema
+
+var IntegrationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticache",
+	Name:      "IntegrationStatus",
+}, smithy.ShapeTypeEnum, 5)
+var IntegrationStatus_ENABLED *smithy.Schema
+
+var IntegrationStatus_DISABLED *smithy.Schema
+
+var IntegrationStatus_ENABLING *smithy.Schema
+
+var IntegrationStatus_DISABLING *smithy.Schema
+
+var IntegrationStatus_FAILED *smithy.Schema
+
+var IntegrationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticache",
+	Name:      "IntegrationType",
+}, smithy.ShapeTypeEnum, 1)
+var IntegrationType_DYNAMODB *smithy.Schema
+
 var InvalidARNFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticache",
 	Name:      "InvalidARNFault",
@@ -2351,7 +2397,7 @@ var _SecurityGroupMembershipList_member *smithy.Schema
 var ServerlessCache = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticache",
 	Name:      "ServerlessCache",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var ServerlessCache_ServerlessCacheName *smithy.Schema
 
 var ServerlessCache_Description *smithy.Schema
@@ -2393,6 +2439,8 @@ var ServerlessCache_NetworkType *smithy.Schema
 var ServerlessCache_ConnectionType *smithy.Schema
 
 var ServerlessCache_Migration *smithy.Schema
+
+var ServerlessCache_Integrations *smithy.Schema
 
 var ServerlessCacheAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticache",
@@ -3513,7 +3561,7 @@ var CreateReplicationGroupResult_ReplicationGroup *smithy.Schema
 var CreateServerlessCacheRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticache",
 	Name:      "CreateServerlessCacheRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateServerlessCacheRequest_ServerlessCacheName *smithy.Schema
 
 var CreateServerlessCacheRequest_Description *smithy.Schema
@@ -3543,6 +3591,8 @@ var CreateServerlessCacheRequest_DailySnapshotTime *smithy.Schema
 var CreateServerlessCacheRequest_NetworkType *smithy.Schema
 
 var CreateServerlessCacheRequest_ConnectionType *smithy.Schema
+
+var CreateServerlessCacheRequest_Integrations *smithy.Schema
 
 var CreateServerlessCacheResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticache",
@@ -5337,6 +5387,28 @@ func init() {
 
 	InsufficientCacheClusterCapacityFault_message = InsufficientCacheClusterCapacityFault.AddMember("message", _ExceptionMessage)
 
+	IntegrationType_DYNAMODB = IntegrationType.AddMember("DYNAMODB", smithyprelude.Unit)
+
+	IntegrationStatus_ENABLED = IntegrationStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	IntegrationStatus_DISABLED = IntegrationStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	IntegrationStatus_ENABLING = IntegrationStatus.AddMember("ENABLING", smithyprelude.Unit)
+
+	IntegrationStatus_DISABLING = IntegrationStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	IntegrationStatus_FAILED = IntegrationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	Integration_IntegrationType = Integration.AddMember("IntegrationType", IntegrationType)
+
+	Integration_Status = Integration.AddMember("Status", IntegrationStatus)
+
+	_IntegrationList_member = _IntegrationList.AddMember("member", Integration, &smithytraits.XMLName{Name: "Integration"})
+
+	IntegrationRequest_IntegrationType = IntegrationRequest.AddMember("IntegrationType", IntegrationType)
+
+	_IntegrationRequestList_member = _IntegrationRequestList.AddMember("member", IntegrationRequest, &smithytraits.XMLName{Name: "IntegrationRequest"})
+
 	InvalidARNFault_message = InvalidARNFault.AddMember("message", _ExceptionMessage)
 
 	InvalidCacheClusterStateFault_message = InvalidCacheClusterStateFault.AddMember("message", _ExceptionMessage)
@@ -5786,6 +5858,8 @@ func init() {
 	ServerlessCache_ConnectionType = ServerlessCache.AddMember("ConnectionType", ConnectionType)
 
 	ServerlessCache_Migration = ServerlessCache.AddMember("Migration", MigrationSummary)
+
+	ServerlessCache_Integrations = ServerlessCache.AddMember("Integrations", _IntegrationList)
 
 	ServerlessCacheAlreadyExistsFault_message = ServerlessCacheAlreadyExistsFault.AddMember("message", _ExceptionMessage)
 
@@ -6376,6 +6450,8 @@ func init() {
 	CreateServerlessCacheRequest_NetworkType = CreateServerlessCacheRequest.AddMember("NetworkType", NetworkType)
 
 	CreateServerlessCacheRequest_ConnectionType = CreateServerlessCacheRequest.AddMember("ConnectionType", ConnectionType)
+
+	CreateServerlessCacheRequest_Integrations = CreateServerlessCacheRequest.AddMember("Integrations", _IntegrationRequestList)
 
 	CreateServerlessCacheResponse_ServerlessCache = CreateServerlessCacheResponse.AddMember("ServerlessCache", ServerlessCache)
 

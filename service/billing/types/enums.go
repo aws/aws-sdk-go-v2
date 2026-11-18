@@ -70,6 +70,7 @@ const (
 	BillingFeatureCreditLevelSharing      BillingFeature = "CREDIT_LEVEL_SHARING"
 	BillingFeatureBillingAlerts           BillingFeature = "BILLING_ALERTS"
 	BillingFeatureCreditPreferenceOptions BillingFeature = "CREDIT_PREFERENCE_OPTIONS"
+	BillingFeatureBenefitLevelSharing     BillingFeature = "BENEFIT_LEVEL_SHARING"
 )
 
 // Values returns all known values for BillingFeature. Note that this can be
@@ -85,6 +86,7 @@ func (BillingFeature) Values() []BillingFeature {
 		"CREDIT_LEVEL_SHARING",
 		"BILLING_ALERTS",
 		"CREDIT_PREFERENCE_OPTIONS",
+		"BENEFIT_LEVEL_SHARING",
 	}
 }
 

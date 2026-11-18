@@ -15,6 +15,11 @@ import (
 	"time"
 )
 
+// Application-level recommendations are a new recommendation format currently in
+// beta. We are actively seeking customer feedback to improve their quality and
+// relevance. As with any AI-generated content, please thoroughly review each
+// recommendation before taking any action based on it.
+//
 // Retrieves information about a recommendation generation process, including its
 // status, progress, and results. Recommendation generation is asynchronous: poll
 // this operation until status reaches a terminal value of COMPLETED (results are
@@ -96,8 +101,9 @@ type GetAgentRecommendationGenerationOutput struct {
 	// This member is required.
 	Status types.GenerationStatus
 
-	// Additional context information provided to guide the recommendation generation
-	// process.
+	// The additional context that was provided when the generation was started. For
+	// ARCHITECTURE generations, this includes the location of the reviewed IaC
+	// template and the lenses used.
 	AdditionalContext document.Interface
 
 	// The timestamp when the recommendation generation process completed.
@@ -108,6 +114,12 @@ type GetAgentRecommendationGenerationOutput struct {
 
 	// The estimated time for the generation to complete.
 	EstimatedCompletionTime *time.Time
+
+	// The recommendation types the generation covers.
+	GenerationRecommendationTypes []types.RecommendationType
+
+	// How the generation was started.
+	GenerationType types.GenerationType
 
 	// The timestamp when the generation was last modified.
 	LastModifiedAt *time.Time
@@ -161,6 +173,12 @@ func (v *GetAgentRecommendationGenerationOutput) SerializeMembers(s smithy.Shape
 	}
 	if v.EstimatedCompletionTime != nil {
 		s.WriteTime(schemas.GetAgentRecommendationGenerationResponse_estimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+	if v.GenerationRecommendationTypes != nil {
+		serializeGenerationRecommendationTypes(s, schemas.GetAgentRecommendationGenerationResponse_generationRecommendationTypes, v.GenerationRecommendationTypes)
+	}
+	if v.GenerationType != "" {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_generationType, string(v.GenerationType))
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_id, *v.Id)
@@ -221,6 +239,15 @@ func (v *GetAgentRecommendationGenerationOutput) Deserialize(d smithy.ShapeDeser
 		case schemas.GetAgentRecommendationGenerationResponse_estimatedCompletionTime:
 			v.EstimatedCompletionTime = new(time.Time)
 			return d.ReadTime(schemas.GetAgentRecommendationGenerationResponse_estimatedCompletionTime, v.EstimatedCompletionTime)
+		case schemas.GetAgentRecommendationGenerationResponse_generationRecommendationTypes:
+			return deserializeGenerationRecommendationTypes(d, schemas.GetAgentRecommendationGenerationResponse_generationRecommendationTypes, &v.GenerationRecommendationTypes)
+		case schemas.GetAgentRecommendationGenerationResponse_generationType:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationGenerationResponse_generationType, &ev); err != nil {
+				return err
+			}
+			v.GenerationType = types.GenerationType(ev)
+			return nil
 		case schemas.GetAgentRecommendationGenerationResponse_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.GetAgentRecommendationGenerationResponse_id, v.Id)

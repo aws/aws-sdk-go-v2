@@ -79,6 +79,9 @@ type DescribeEndpointConfigOutput struct {
 	// [CreateEndpointConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
+	// The cross-Region traffic cap, if the endpoint configuration sets one.
+	CrossRegionTrafficConfig *types.CrossRegionTrafficConfig
+
 	// Configuration to control how SageMaker AI captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
@@ -134,6 +137,11 @@ func (v *DescribeEndpointConfigOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeEndpointConfigOutput_CreationTime, *v.CreationTime)
 	}
+	if v.CrossRegionTrafficConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointConfigOutput_CrossRegionTrafficConfig)
+		v.CrossRegionTrafficConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DataCaptureConfig != nil {
 		s.WriteStruct(schemas.DescribeEndpointConfigOutput_DataCaptureConfig)
 		v.DataCaptureConfig.SerializeMembers(s)
@@ -185,6 +193,9 @@ func (v *DescribeEndpointConfigOutput) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.DescribeEndpointConfigOutput_CreationTime:
 			v.CreationTime = new(time.Time)
 			return d.ReadTime(schemas.DescribeEndpointConfigOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeEndpointConfigOutput_CrossRegionTrafficConfig:
+			v.CrossRegionTrafficConfig = &types.CrossRegionTrafficConfig{}
+			return v.CrossRegionTrafficConfig.Deserialize(d)
 		case schemas.DescribeEndpointConfigOutput_DataCaptureConfig:
 			v.DataCaptureConfig = &types.DataCaptureConfig{}
 			return v.DataCaptureConfig.Deserialize(d)

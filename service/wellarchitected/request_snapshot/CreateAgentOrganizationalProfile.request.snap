@@ -1,0 +1,5 @@
+POST /api/v1/agent-organizational-profiles
+
+Content-Type: application/json
+
+{"businessOverview":"__BusinessOverview__","clientToken":"__ClientToken__","deletionProtection":true,"description":"__Description__","displayName":"__DisplayName__","name":"__Name__","organizationalAggregationConfiguration":{"accounts":[{"accountId":"__AccountId__","regions":["__Member__","__Member__"]},{"accountId":"__AccountId__","regions":["__Member__","__Member__"]}],"organizationalUnits":[{"organizationalUnitId":"__OrganizationalUnitId__","regions":["__Member__","__Member__"]},{"organizationalUnitId":"__OrganizationalUnitId__","regions":["__Member__","__Member__"]}]},"pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

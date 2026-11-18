@@ -8,6 +8,16 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var ConfigureTags = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTags",
+}, smithy.ShapeTypeOperation, 0)
+
+var ConfigureTagsForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsForOrganization",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeAffectedAccountsForOrganization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DescribeAffectedAccountsForOrganization",
@@ -73,14 +83,64 @@ var DescribeServiceLifecycle = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeServiceLifecycle",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeTagKeys = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagKeys",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTagKeysForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagKeysForOrganization",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTags = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTags",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTagsForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsForOrganization",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTagsOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsOnboardingStatus",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeTagsOnboardingStatusForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsOnboardingStatusForOrganization",
+}, smithy.ShapeTypeOperation, 0)
+
 var DisableHealthServiceAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DisableHealthServiceAccessForOrganization",
 }, smithy.ShapeTypeOperation, 0)
 
+var DisableTags = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DisableTags",
+}, smithy.ShapeTypeOperation, 0)
+
+var DisableTagsForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DisableTagsForOrganization",
+}, smithy.ShapeTypeOperation, 0)
+
 var EnableHealthServiceAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "EnableHealthServiceAccessForOrganization",
+}, smithy.ShapeTypeOperation, 0)
+
+var EnableTags = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "EnableTags",
+}, smithy.ShapeTypeOperation, 0)
+
+var EnableTagsForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "EnableTagsForOrganization",
 }, smithy.ShapeTypeOperation, 0)
 
 var _AWSHealth_20160804 = smithy.NewSchema(smithy.ShapeID{
@@ -89,6 +149,14 @@ var _AWSHealth_20160804 = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeService, 0)
 
 var AWSHealth_20160804 = smithy.NewServiceSchema(_AWSHealth_20160804, "2016-08-04")
+
+var AccountEntity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountEntity",
+}, smithy.ShapeTypeStructure, 2)
+var AccountEntity_accountId *smithy.Schema
+
+var AccountEntity_accountTags *smithy.Schema
 
 var AccountEntityAggregate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -111,16 +179,98 @@ var _accountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "accountId",
 }, smithy.ShapeTypeString, 0)
 
+var AccountTag = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountTag",
+}, smithy.ShapeTypeStructure, 3)
+var AccountTag_key *smithy.Schema
+
+var AccountTag_value *smithy.Schema
+
+var AccountTag_type *smithy.Schema
+
+var _AccountTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountTagKey",
+}, smithy.ShapeTypeString, 0)
+
+var _AccountTagList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountTagList",
+}, smithy.ShapeTypeList, 1)
+var _AccountTagList_member *smithy.Schema
+
+var _AccountTagSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountTagSet",
+}, smithy.ShapeTypeMap, 2)
+var _AccountTagSet_key *smithy.Schema
+
+var _AccountTagSet_value *smithy.Schema
+
+var AccountTagType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountTagType",
+}, smithy.ShapeTypeEnum, 1)
+var AccountTagType_ACCOUNT_RESOURCE_TAG *smithy.Schema
+
+var _AccountTagValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AccountTagValue",
+}, smithy.ShapeTypeString, 0)
+
+var _AffectedAccountEntityList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AffectedAccountEntityList",
+}, smithy.ShapeTypeList, 1)
+var _AffectedAccountEntityList_member *smithy.Schema
+
+var AffectedAccountFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AffectedAccountFilter",
+}, smithy.ShapeTypeStructure, 2)
+var AffectedAccountFilter_eventArn *smithy.Schema
+
+var AffectedAccountFilter_tags *smithy.Schema
+
+var _AffectedAccountsForOrganizationTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AffectedAccountsForOrganizationTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _AffectedAccountsForOrganizationTagFilter_key *smithy.Schema
+
+var _AffectedAccountsForOrganizationTagFilter_value *smithy.Schema
+
+var _AffectedAccountsForOrganizationTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AffectedAccountsForOrganizationTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _AffectedAccountsForOrganizationTagValueList_member *smithy.Schema
+
 var _affectedAccountsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "affectedAccountsList",
 }, smithy.ShapeTypeList, 1)
 var _affectedAccountsList_member *smithy.Schema
 
+var _AffectedEntitiesForOrganizationTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AffectedEntitiesForOrganizationTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _AffectedEntitiesForOrganizationTagFilter_key *smithy.Schema
+
+var _AffectedEntitiesForOrganizationTagFilter_value *smithy.Schema
+
+var _AffectedEntitiesForOrganizationTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "AffectedEntitiesForOrganizationTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _AffectedEntitiesForOrganizationTagValueList_member *smithy.Schema
+
 var AffectedEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "AffectedEntity",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var AffectedEntity_entityArn *smithy.Schema
 
 var AffectedEntity_eventArn *smithy.Schema
@@ -134,6 +284,10 @@ var AffectedEntity_awsAccountId *smithy.Schema
 var AffectedEntity_lastUpdatedTime *smithy.Schema
 
 var AffectedEntity_statusCode *smithy.Schema
+
+var AffectedEntity_resourceTags *smithy.Schema
+
+var AffectedEntity_accountTags *smithy.Schema
 
 var AffectedEntity_tags *smithy.Schema
 
@@ -161,11 +315,28 @@ var _awsAccountIdsList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _awsAccountIdsList_member *smithy.Schema
 
+var _Boolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "Boolean",
+}, smithy.ShapeTypeBoolean, 0)
+
 var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "ConcurrentModificationException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var ConcurrentModificationException_message *smithy.Schema
+
+var _ConfigureTagsForOrganizationTagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsForOrganizationTagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _ConfigureTagsForOrganizationTagKeyList_member *smithy.Schema
+
+var _ConfigureTagsResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsResourceTagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _ConfigureTagsResourceTagKeyList_member *smithy.Schema
 
 var _count = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -192,6 +363,34 @@ var _DescribeAffectedEntitiesForOrganizationFailedSet = smithy.NewSchema(smithy.
 }, smithy.ShapeTypeList, 1)
 var _DescribeAffectedEntitiesForOrganizationFailedSet_member *smithy.Schema
 
+var _DescribeAffectedEntitiesTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeAffectedEntitiesTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _DescribeAffectedEntitiesTagFilter_key *smithy.Schema
+
+var _DescribeAffectedEntitiesTagFilter_value *smithy.Schema
+
+var _DescribeAffectedEntitiesTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeAffectedEntitiesTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _DescribeAffectedEntitiesTagValueList_member *smithy.Schema
+
+var _DescribeEntityAggregatesTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeEntityAggregatesTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _DescribeEntityAggregatesTagFilter_key *smithy.Schema
+
+var _DescribeEntityAggregatesTagFilter_value *smithy.Schema
+
+var _DescribeEntityAggregatesTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeEntityAggregatesTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _DescribeEntityAggregatesTagValueList_member *smithy.Schema
+
 var _DescribeEventDetailsFailedSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DescribeEventDetailsFailedSet",
@@ -216,15 +415,37 @@ var _DescribeEventDetailsSuccessfulSet = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DescribeEventDetailsSuccessfulSet_member *smithy.Schema
 
+var _DescribeEventsTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeEventsTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _DescribeEventsTagFilter_key *smithy.Schema
+
+var _DescribeEventsTagFilter_value *smithy.Schema
+
+var _DescribeEventsTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeEventsTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _DescribeEventsTagValueList_member *smithy.Schema
+
+var DescribeTagsForOrganizationFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsForOrganizationFilter",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTagsForOrganizationFilter_tagTypes *smithy.Schema
+
 var EntityAccountFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "EntityAccountFilter",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var EntityAccountFilter_eventArn *smithy.Schema
 
 var EntityAccountFilter_awsAccountId *smithy.Schema
 
 var EntityAccountFilter_statusCodes *smithy.Schema
+
+var EntityAccountFilter_tags *smithy.Schema
 
 var EntityAggregate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -235,6 +456,12 @@ var EntityAggregate_eventArn *smithy.Schema
 var EntityAggregate_count *smithy.Schema
 
 var EntityAggregate_statuses *smithy.Schema
+
+var EntityAggregateFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "EntityAggregateFilter",
+}, smithy.ShapeTypeStructure, 1)
+var EntityAggregateFilter_tags *smithy.Schema
 
 var _EntityAggregateList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -769,11 +996,31 @@ var OrganizationEntityAggregate_statuses *smithy.Schema
 
 var OrganizationEntityAggregate_accounts *smithy.Schema
 
+var OrganizationEntityAggregateFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationEntityAggregateFilter",
+}, smithy.ShapeTypeStructure, 1)
+var OrganizationEntityAggregateFilter_tags *smithy.Schema
+
 var _OrganizationEntityAggregatesList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "OrganizationEntityAggregatesList",
 }, smithy.ShapeTypeList, 1)
 var _OrganizationEntityAggregatesList_member *smithy.Schema
+
+var _OrganizationEntityAggregateTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationEntityAggregateTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _OrganizationEntityAggregateTagFilter_key *smithy.Schema
+
+var _OrganizationEntityAggregateTagFilter_value *smithy.Schema
+
+var _OrganizationEntityAggregateTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationEntityAggregateTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationEntityAggregateTagValueList_member *smithy.Schema
 
 var _OrganizationEntityFiltersList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -848,7 +1095,7 @@ var OrganizationEventDetailsErrorItem_errorMessage *smithy.Schema
 var OrganizationEventFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "OrganizationEventFilter",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var OrganizationEventFilter_actionabilities *smithy.Schema
 
 var OrganizationEventFilter_eventTypeCodes *smithy.Schema
@@ -875,11 +1122,78 @@ var OrganizationEventFilter_eventStatusCodes *smithy.Schema
 
 var OrganizationEventFilter_personas *smithy.Schema
 
+var OrganizationEventFilter_tags *smithy.Schema
+
 var _OrganizationEventList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "OrganizationEventList",
 }, smithy.ShapeTypeList, 1)
 var _OrganizationEventList_member *smithy.Schema
+
+var _OrganizationEventTagFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationEventTagFilter",
+}, smithy.ShapeTypeMap, 2)
+var _OrganizationEventTagFilter_key *smithy.Schema
+
+var _OrganizationEventTagFilter_value *smithy.Schema
+
+var _OrganizationEventTagValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationEventTagValueList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationEventTagValueList_member *smithy.Schema
+
+var OrganizationTag = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTag",
+}, smithy.ShapeTypeStructure, 3)
+var OrganizationTag_key *smithy.Schema
+
+var OrganizationTag_value *smithy.Schema
+
+var OrganizationTag_type *smithy.Schema
+
+var OrganizationTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTagKey",
+}, smithy.ShapeTypeStructure, 3)
+var OrganizationTagKey_key *smithy.Schema
+
+var OrganizationTagKey_enabledForEventBridge *smithy.Schema
+
+var OrganizationTagKey_status *smithy.Schema
+
+var _OrganizationTagKey2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTagKey2",
+}, smithy.ShapeTypeString, 0)
+
+var _OrganizationTagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationTagKeyList_member *smithy.Schema
+
+var _OrganizationTagList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTagList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationTagList_member *smithy.Schema
+
+var OrganizationTagType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTagType",
+}, smithy.ShapeTypeEnum, 2)
+var OrganizationTagType_ORGANIZATION_RESOURCE_TAG *smithy.Schema
+
+var OrganizationTagType_ORGANIZATION_ACCOUNT_TAG *smithy.Schema
+
+var _OrganizationTagTypeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "OrganizationTagTypeFilter",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationTagTypeFilter_member *smithy.Schema
 
 var _region = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -891,6 +1205,40 @@ var _regionList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "regionList",
 }, smithy.ShapeTypeList, 1)
 var _regionList_member *smithy.Schema
+
+var ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ResourceTagKey",
+}, smithy.ShapeTypeStructure, 3)
+var ResourceTagKey_key *smithy.Schema
+
+var ResourceTagKey_enabledForEventBridge *smithy.Schema
+
+var ResourceTagKey_status *smithy.Schema
+
+var _ResourceTagKey2 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ResourceTagKey2",
+}, smithy.ShapeTypeString, 0)
+
+var _ResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ResourceTagKeyList",
+}, smithy.ShapeTypeList, 1)
+var _ResourceTagKeyList_member *smithy.Schema
+
+var _ResourceTagSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ResourceTagSet",
+}, smithy.ShapeTypeMap, 2)
+var _ResourceTagSet_key *smithy.Schema
+
+var _ResourceTagSet_value *smithy.Schema
+
+var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ResourceTagValue",
+}, smithy.ShapeTypeString, 0)
 
 var _service = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -934,16 +1282,36 @@ var _string = smithy.NewSchema(smithy.ShapeID{
 	Name:      "string",
 }, smithy.ShapeTypeString, 0)
 
-var _tagFilter = smithy.NewSchema(smithy.ShapeID{
+var _TagFilterKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
-	Name:      "tagFilter",
-}, smithy.ShapeTypeList, 1)
-var _tagFilter_member *smithy.Schema
+	Name:      "TagFilterKey",
+}, smithy.ShapeTypeString, 0)
+
+var _TagFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "TagFilterValue",
+}, smithy.ShapeTypeString, 0)
 
 var _tagKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "tagKey",
 }, smithy.ShapeTypeString, 0)
+
+var TagKeyForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "TagKeyForOrganization",
+}, smithy.ShapeTypeStructure, 2)
+var TagKeyForOrganization_key *smithy.Schema
+
+var TagKeyForOrganization_enabledForEventBridge *smithy.Schema
+
+var TagKeyStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "TagKeyStatus",
+}, smithy.ShapeTypeEnum, 2)
+var TagKeyStatus_PENDING *smithy.Schema
+
+var TagKeyStatus_ACTIVE *smithy.Schema
 
 var _tagSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -952,6 +1320,22 @@ var _tagSet = smithy.NewSchema(smithy.ShapeID{
 var _tagSet_key *smithy.Schema
 
 var _tagSet_value *smithy.Schema
+
+var TagsOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "TagsOnboardingStatus",
+}, smithy.ShapeTypeEnum, 2)
+var TagsOnboardingStatus_ENABLED *smithy.Schema
+
+var TagsOnboardingStatus_DISABLED *smithy.Schema
+
+var TagsOnboardingStatusForOrganization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "TagsOnboardingStatusForOrganization",
+}, smithy.ShapeTypeEnum, 2)
+var TagsOnboardingStatusForOrganization_ENABLED *smithy.Schema
+
+var TagsOnboardingStatusForOrganization_DISABLED *smithy.Schema
 
 var _tagValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -969,21 +1353,49 @@ var UnsupportedLocale = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedLocale_message *smithy.Schema
 
+var ConfigureTagsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsForOrganizationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ConfigureTagsForOrganizationRequest_tagKeys *smithy.Schema
+
+var ConfigureTagsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsForOrganizationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var ConfigureTagsForOrganizationResponse_configuredTagKeys *smithy.Schema
+
+var ConfigureTagsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ConfigureTagsRequest_tagKeys *smithy.Schema
+
+var ConfigureTagsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "ConfigureTagsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var ConfigureTagsResponse_configuredTagKeys *smithy.Schema
+
 var DescribeAffectedAccountsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DescribeAffectedAccountsForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DescribeAffectedAccountsForOrganizationRequest_eventArn *smithy.Schema
 
 var DescribeAffectedAccountsForOrganizationRequest_nextToken *smithy.Schema
 
 var DescribeAffectedAccountsForOrganizationRequest_maxResults *smithy.Schema
 
+var DescribeAffectedAccountsForOrganizationRequest_filter *smithy.Schema
+
 var DescribeAffectedAccountsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DescribeAffectedAccountsForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DescribeAffectedAccountsForOrganizationResponse_affectedAccounts *smithy.Schema
+
+var DescribeAffectedAccountsForOrganizationResponse_affectedAccountEntities *smithy.Schema
 
 var DescribeAffectedAccountsForOrganizationResponse_eventScopeCode *smithy.Schema
 
@@ -1036,10 +1448,12 @@ var DescribeAffectedEntitiesResponse_nextToken *smithy.Schema
 var DescribeEntityAggregatesForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DescribeEntityAggregatesForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DescribeEntityAggregatesForOrganizationRequest_eventArns *smithy.Schema
 
 var DescribeEntityAggregatesForOrganizationRequest_awsAccountIds *smithy.Schema
+
+var DescribeEntityAggregatesForOrganizationRequest_filter *smithy.Schema
 
 var DescribeEntityAggregatesForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -1050,8 +1464,10 @@ var DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates
 var DescribeEntityAggregatesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
 	Name:      "DescribeEntityAggregatesRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var DescribeEntityAggregatesRequest_eventArns *smithy.Schema
+
+var DescribeEntityAggregatesRequest_filter *smithy.Schema
 
 var DescribeEntityAggregatesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.health",
@@ -1195,9 +1611,75 @@ var DescribeServiceLifecycleResponse_serviceLifecycles *smithy.Schema
 
 var DescribeServiceLifecycleResponse_nextToken *smithy.Schema
 
+var DescribeTagKeysForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagKeysForOrganizationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTagKeysForOrganizationResponse_keys *smithy.Schema
+
+var DescribeTagKeysResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagKeysResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTagKeysResponse_keys *smithy.Schema
+
+var DescribeTagsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsForOrganizationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeTagsForOrganizationRequest_filter *smithy.Schema
+
+var DescribeTagsForOrganizationRequest_nextToken *smithy.Schema
+
+var DescribeTagsForOrganizationRequest_maxResults *smithy.Schema
+
+var DescribeTagsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsForOrganizationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeTagsForOrganizationResponse_tags *smithy.Schema
+
+var DescribeTagsForOrganizationResponse_nextToken *smithy.Schema
+
+var DescribeTagsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeTagsRequest_nextToken *smithy.Schema
+
+var DescribeTagsRequest_maxResults *smithy.Schema
+
+var DescribeTagsOnboardingStatusForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsOnboardingStatusForOrganizationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTagsOnboardingStatusForOrganizationResponse_status *smithy.Schema
+
+var DescribeTagsOnboardingStatusResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsOnboardingStatusResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeTagsOnboardingStatusResponse_status *smithy.Schema
+
+var DescribeTagsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.health",
+	Name:      "DescribeTagsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeTagsResponse_tags *smithy.Schema
+
+var DescribeTagsResponse_nextToken *smithy.Schema
+
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	_AccountTagSet_key = _AccountTagSet.AddMember("key", _AccountTagKey)
+
+	_AccountTagSet_value = _AccountTagSet.AddMember("value", _AccountTagValue)
+
+	AccountEntity_accountId = AccountEntity.AddMember("accountId", _accountId)
+
+	AccountEntity_accountTags = AccountEntity.AddMember("accountTags", _AccountTagSet)
+
 	entityStatusCode_IMPAIRED = entityStatusCode.AddMember("IMPAIRED", smithyprelude.Unit)
 
 	entityStatusCode_UNIMPAIRED = entityStatusCode.AddMember("UNIMPAIRED", smithyprelude.Unit)
@@ -1220,7 +1702,39 @@ func init() {
 
 	_AccountEntityAggregatesList_member = _AccountEntityAggregatesList.AddMember("member", AccountEntityAggregate)
 
+	AccountTagType_ACCOUNT_RESOURCE_TAG = AccountTagType.AddMember("ACCOUNT_RESOURCE_TAG", smithyprelude.Unit)
+
+	AccountTag_key = AccountTag.AddMember("key", _tagKey)
+
+	AccountTag_value = AccountTag.AddMember("value", _tagValue)
+
+	AccountTag_type = AccountTag.AddMember("type", AccountTagType)
+
+	_AccountTagList_member = _AccountTagList.AddMember("member", AccountTag)
+
+	_AffectedAccountEntityList_member = _AffectedAccountEntityList.AddMember("member", AccountEntity)
+
+	_AffectedAccountsForOrganizationTagValueList_member = _AffectedAccountsForOrganizationTagValueList.AddMember("member", _TagFilterValue)
+
+	_AffectedAccountsForOrganizationTagFilter_key = _AffectedAccountsForOrganizationTagFilter.AddMember("key", _TagFilterKey)
+
+	_AffectedAccountsForOrganizationTagFilter_value = _AffectedAccountsForOrganizationTagFilter.AddMember("value", _AffectedAccountsForOrganizationTagValueList)
+
+	AffectedAccountFilter_eventArn = AffectedAccountFilter.AddMember("eventArn", _eventArn)
+
+	AffectedAccountFilter_tags = AffectedAccountFilter.AddMember("tags", _AffectedAccountsForOrganizationTagFilter)
+
 	_affectedAccountsList_member = _affectedAccountsList.AddMember("member", _accountId)
+
+	_AffectedEntitiesForOrganizationTagValueList_member = _AffectedEntitiesForOrganizationTagValueList.AddMember("member", _TagFilterValue)
+
+	_AffectedEntitiesForOrganizationTagFilter_key = _AffectedEntitiesForOrganizationTagFilter.AddMember("key", _TagFilterKey)
+
+	_AffectedEntitiesForOrganizationTagFilter_value = _AffectedEntitiesForOrganizationTagFilter.AddMember("value", _AffectedEntitiesForOrganizationTagValueList)
+
+	_ResourceTagSet_key = _ResourceTagSet.AddMember("key", _ResourceTagKey2)
+
+	_ResourceTagSet_value = _ResourceTagSet.AddMember("value", _ResourceTagValue)
 
 	_tagSet_key = _tagSet.AddMember("key", _tagKey)
 
@@ -1244,6 +1758,10 @@ func init() {
 
 	AffectedEntity_statusCode = AffectedEntity.AddMember("statusCode", entityStatusCode)
 
+	AffectedEntity_resourceTags = AffectedEntity.AddMember("resourceTags", _ResourceTagSet)
+
+	AffectedEntity_accountTags = AffectedEntity.AddMember("accountTags", _AccountTagSet)
+
 	AffectedEntity_tags = AffectedEntity.AddMember("tags", _tagSet)
 
 	AffectedEntity_entityMetadata = AffectedEntity.AddMember("entityMetadata", _entityMetadata)
@@ -1253,6 +1771,24 @@ func init() {
 	_awsAccountIdsList_member = _awsAccountIdsList.AddMember("member", _accountId)
 
 	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _string)
+
+	TagKeyForOrganization_key = TagKeyForOrganization.AddMember("key", _OrganizationTagKey2)
+
+	TagKeyForOrganization_enabledForEventBridge = TagKeyForOrganization.AddMember("enabledForEventBridge", _Boolean)
+
+	_ConfigureTagsForOrganizationTagKeyList_member = _ConfigureTagsForOrganizationTagKeyList.AddMember("member", TagKeyForOrganization)
+
+	TagKeyStatus_PENDING = TagKeyStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	TagKeyStatus_ACTIVE = TagKeyStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ResourceTagKey_key = ResourceTagKey.AddMember("key", _ResourceTagKey2)
+
+	ResourceTagKey_enabledForEventBridge = ResourceTagKey.AddMember("enabledForEventBridge", _Boolean)
+
+	ResourceTagKey_status = ResourceTagKey.AddMember("status", TagKeyStatus)
+
+	_ConfigureTagsResourceTagKeyList_member = _ConfigureTagsResourceTagKeyList.AddMember("member", ResourceTagKey)
 
 	DateTimeRange_from = DateTimeRange.AddMember("from", _timestamp)
 
@@ -1269,6 +1805,18 @@ func init() {
 	OrganizationAffectedEntitiesErrorItem_errorMessage = OrganizationAffectedEntitiesErrorItem.AddMember("errorMessage", _string)
 
 	_DescribeAffectedEntitiesForOrganizationFailedSet_member = _DescribeAffectedEntitiesForOrganizationFailedSet.AddMember("member", OrganizationAffectedEntitiesErrorItem)
+
+	_DescribeAffectedEntitiesTagValueList_member = _DescribeAffectedEntitiesTagValueList.AddMember("member", _TagFilterValue)
+
+	_DescribeAffectedEntitiesTagFilter_key = _DescribeAffectedEntitiesTagFilter.AddMember("key", _TagFilterKey)
+
+	_DescribeAffectedEntitiesTagFilter_value = _DescribeAffectedEntitiesTagFilter.AddMember("value", _DescribeAffectedEntitiesTagValueList)
+
+	_DescribeEntityAggregatesTagValueList_member = _DescribeEntityAggregatesTagValueList.AddMember("member", _TagFilterValue)
+
+	_DescribeEntityAggregatesTagFilter_key = _DescribeEntityAggregatesTagFilter.AddMember("key", _TagFilterKey)
+
+	_DescribeEntityAggregatesTagFilter_value = _DescribeEntityAggregatesTagFilter.AddMember("value", _DescribeEntityAggregatesTagValueList)
 
 	EventDetailsErrorItem_eventArn = EventDetailsErrorItem.AddMember("eventArn", _eventArn)
 
@@ -1372,6 +1920,20 @@ func init() {
 
 	_DescribeEventDetailsSuccessfulSet_member = _DescribeEventDetailsSuccessfulSet.AddMember("member", EventDetails)
 
+	_DescribeEventsTagValueList_member = _DescribeEventsTagValueList.AddMember("member", _TagFilterValue)
+
+	_DescribeEventsTagFilter_key = _DescribeEventsTagFilter.AddMember("key", _TagFilterKey)
+
+	_DescribeEventsTagFilter_value = _DescribeEventsTagFilter.AddMember("value", _DescribeEventsTagValueList)
+
+	OrganizationTagType_ORGANIZATION_RESOURCE_TAG = OrganizationTagType.AddMember("ORGANIZATION_RESOURCE_TAG", smithyprelude.Unit)
+
+	OrganizationTagType_ORGANIZATION_ACCOUNT_TAG = OrganizationTagType.AddMember("ORGANIZATION_ACCOUNT_TAG", smithyprelude.Unit)
+
+	_OrganizationTagTypeFilter_member = _OrganizationTagTypeFilter.AddMember("member", OrganizationTagType)
+
+	DescribeTagsForOrganizationFilter_tagTypes = DescribeTagsForOrganizationFilter.AddMember("tagTypes", _OrganizationTagTypeFilter)
+
 	_entityStatusCodeList_member = _entityStatusCodeList.AddMember("member", entityStatusCode)
 
 	EntityAccountFilter_eventArn = EntityAccountFilter.AddMember("eventArn", _eventArn)
@@ -1380,11 +1942,15 @@ func init() {
 
 	EntityAccountFilter_statusCodes = EntityAccountFilter.AddMember("statusCodes", _entityStatusCodeList)
 
+	EntityAccountFilter_tags = EntityAccountFilter.AddMember("tags", _AffectedEntitiesForOrganizationTagFilter)
+
 	EntityAggregate_eventArn = EntityAggregate.AddMember("eventArn", _eventArn)
 
 	EntityAggregate_count = EntityAggregate.AddMember("count", _count)
 
 	EntityAggregate_statuses = EntityAggregate.AddMember("statuses", _entityStatuses)
+
+	EntityAggregateFilter_tags = EntityAggregateFilter.AddMember("tags", _DescribeEntityAggregatesTagFilter)
 
 	_EntityAggregateList_member = _EntityAggregateList.AddMember("member", EntityAggregate)
 
@@ -1394,8 +1960,6 @@ func init() {
 
 	_entityValueList_member = _entityValueList.AddMember("member", _entityValue)
 
-	_tagFilter_member = _tagFilter.AddMember("member", _tagSet)
-
 	EntityFilter_eventArns = EntityFilter.AddMember("eventArns", _eventArnList)
 
 	EntityFilter_entityArns = EntityFilter.AddMember("entityArns", _entityArnList)
@@ -1404,7 +1968,7 @@ func init() {
 
 	EntityFilter_lastUpdatedTimes = EntityFilter.AddMember("lastUpdatedTimes", _dateTimeRangeList)
 
-	EntityFilter_tags = EntityFilter.AddMember("tags", _tagFilter)
+	EntityFilter_tags = EntityFilter.AddMember("tags", _DescribeAffectedEntitiesTagFilter)
 
 	EntityFilter_statusCodes = EntityFilter.AddMember("statusCodes", _entityStatusCodeList)
 
@@ -1460,7 +2024,7 @@ func init() {
 
 	EventFilter_eventTypeCategories = EventFilter.AddMember("eventTypeCategories", _eventTypeCategoryList2)
 
-	EventFilter_tags = EventFilter.AddMember("tags", _tagFilter)
+	EventFilter_tags = EventFilter.AddMember("tags", _DescribeEventsTagFilter)
 
 	EventFilter_eventStatusCodes = EventFilter.AddMember("eventStatusCodes", _eventStatusCodeList)
 
@@ -1538,6 +2102,14 @@ func init() {
 
 	OrganizationEntityAggregate_accounts = OrganizationEntityAggregate.AddMember("accounts", _AccountEntityAggregatesList)
 
+	_OrganizationEntityAggregateTagValueList_member = _OrganizationEntityAggregateTagValueList.AddMember("member", _TagFilterValue)
+
+	_OrganizationEntityAggregateTagFilter_key = _OrganizationEntityAggregateTagFilter.AddMember("key", _TagFilterKey)
+
+	_OrganizationEntityAggregateTagFilter_value = _OrganizationEntityAggregateTagFilter.AddMember("value", _OrganizationEntityAggregateTagValueList)
+
+	OrganizationEntityAggregateFilter_tags = OrganizationEntityAggregateFilter.AddMember("tags", _OrganizationEntityAggregateTagFilter)
+
 	_OrganizationEntityAggregatesList_member = _OrganizationEntityAggregatesList.AddMember("member", OrganizationEntityAggregate)
 
 	_OrganizationEntityFiltersList_member = _OrganizationEntityFiltersList.AddMember("member", EventAccountFilter)
@@ -1570,6 +2142,12 @@ func init() {
 
 	_OrganizationEventDetailFiltersList_member = _OrganizationEventDetailFiltersList.AddMember("member", EventAccountFilter)
 
+	_OrganizationEventTagValueList_member = _OrganizationEventTagValueList.AddMember("member", _TagFilterValue)
+
+	_OrganizationEventTagFilter_key = _OrganizationEventTagFilter.AddMember("key", _TagFilterKey)
+
+	_OrganizationEventTagFilter_value = _OrganizationEventTagFilter.AddMember("value", _OrganizationEventTagValueList)
+
 	OrganizationEventFilter_actionabilities = OrganizationEventFilter.AddMember("actionabilities", _EventActionabilityList)
 
 	OrganizationEventFilter_eventTypeCodes = OrganizationEventFilter.AddMember("eventTypeCodes", _eventTypeList2)
@@ -1596,7 +2174,27 @@ func init() {
 
 	OrganizationEventFilter_personas = OrganizationEventFilter.AddMember("personas", _EventPersonaList)
 
+	OrganizationEventFilter_tags = OrganizationEventFilter.AddMember("tags", _OrganizationEventTagFilter)
+
 	_OrganizationEventList_member = _OrganizationEventList.AddMember("member", OrganizationEvent)
+
+	OrganizationTag_key = OrganizationTag.AddMember("key", _tagKey)
+
+	OrganizationTag_value = OrganizationTag.AddMember("value", _tagValue)
+
+	OrganizationTag_type = OrganizationTag.AddMember("type", OrganizationTagType)
+
+	OrganizationTagKey_key = OrganizationTagKey.AddMember("key", _OrganizationTagKey2)
+
+	OrganizationTagKey_enabledForEventBridge = OrganizationTagKey.AddMember("enabledForEventBridge", _Boolean)
+
+	OrganizationTagKey_status = OrganizationTagKey.AddMember("status", TagKeyStatus)
+
+	_OrganizationTagKeyList_member = _OrganizationTagKeyList.AddMember("member", OrganizationTagKey)
+
+	_OrganizationTagList_member = _OrganizationTagList.AddMember("member", OrganizationTag)
+
+	_ResourceTagKeyList_member = _ResourceTagKeyList.AddMember("member", ResourceTagKey)
 
 	ServiceLifecycle_service = ServiceLifecycle.AddMember("service", _service)
 
@@ -1612,7 +2210,23 @@ func init() {
 
 	_ServiceLifecycleList_member = _ServiceLifecycleList.AddMember("member", ServiceLifecycle)
 
+	TagsOnboardingStatus_ENABLED = TagsOnboardingStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	TagsOnboardingStatus_DISABLED = TagsOnboardingStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	TagsOnboardingStatusForOrganization_ENABLED = TagsOnboardingStatusForOrganization.AddMember("ENABLED", smithyprelude.Unit)
+
+	TagsOnboardingStatusForOrganization_DISABLED = TagsOnboardingStatusForOrganization.AddMember("DISABLED", smithyprelude.Unit)
+
 	UnsupportedLocale_message = UnsupportedLocale.AddMember("message", _string)
+
+	ConfigureTagsForOrganizationRequest_tagKeys = ConfigureTagsForOrganizationRequest.AddMember("tagKeys", _ConfigureTagsForOrganizationTagKeyList)
+
+	ConfigureTagsForOrganizationResponse_configuredTagKeys = ConfigureTagsForOrganizationResponse.AddMember("configuredTagKeys", _ConfigureTagsForOrganizationTagKeyList)
+
+	ConfigureTagsRequest_tagKeys = ConfigureTagsRequest.AddMember("tagKeys", _ConfigureTagsResourceTagKeyList)
+
+	ConfigureTagsResponse_configuredTagKeys = ConfigureTagsResponse.AddMember("configuredTagKeys", _ConfigureTagsResourceTagKeyList)
 
 	DescribeAffectedAccountsForOrganizationRequest_eventArn = DescribeAffectedAccountsForOrganizationRequest.AddMember("eventArn", _eventArn)
 
@@ -1620,7 +2234,11 @@ func init() {
 
 	DescribeAffectedAccountsForOrganizationRequest_maxResults = DescribeAffectedAccountsForOrganizationRequest.AddMember("maxResults", _maxResults)
 
+	DescribeAffectedAccountsForOrganizationRequest_filter = DescribeAffectedAccountsForOrganizationRequest.AddMember("filter", AffectedAccountFilter)
+
 	DescribeAffectedAccountsForOrganizationResponse_affectedAccounts = DescribeAffectedAccountsForOrganizationResponse.AddMember("affectedAccounts", _affectedAccountsList)
+
+	DescribeAffectedAccountsForOrganizationResponse_affectedAccountEntities = DescribeAffectedAccountsForOrganizationResponse.AddMember("affectedAccountEntities", _AffectedAccountEntityList)
 
 	DescribeAffectedAccountsForOrganizationResponse_eventScopeCode = DescribeAffectedAccountsForOrganizationResponse.AddMember("eventScopeCode", eventScopeCode)
 
@@ -1658,9 +2276,13 @@ func init() {
 
 	DescribeEntityAggregatesForOrganizationRequest_awsAccountIds = DescribeEntityAggregatesForOrganizationRequest.AddMember("awsAccountIds", _OrganizationAccountIdsList)
 
+	DescribeEntityAggregatesForOrganizationRequest_filter = DescribeEntityAggregatesForOrganizationRequest.AddMember("filter", OrganizationEntityAggregateFilter)
+
 	DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates = DescribeEntityAggregatesForOrganizationResponse.AddMember("organizationEntityAggregates", _OrganizationEntityAggregatesList)
 
 	DescribeEntityAggregatesRequest_eventArns = DescribeEntityAggregatesRequest.AddMember("eventArns", _EventArnsList)
+
+	DescribeEntityAggregatesRequest_filter = DescribeEntityAggregatesRequest.AddMember("filter", EntityAggregateFilter)
 
 	DescribeEntityAggregatesResponse_entityAggregates = DescribeEntityAggregatesResponse.AddMember("entityAggregates", _EntityAggregateList)
 
@@ -1739,5 +2361,31 @@ func init() {
 	DescribeServiceLifecycleResponse_serviceLifecycles = DescribeServiceLifecycleResponse.AddMember("serviceLifecycles", _ServiceLifecycleList)
 
 	DescribeServiceLifecycleResponse_nextToken = DescribeServiceLifecycleResponse.AddMember("nextToken", _nextToken)
+
+	DescribeTagKeysForOrganizationResponse_keys = DescribeTagKeysForOrganizationResponse.AddMember("keys", _OrganizationTagKeyList)
+
+	DescribeTagKeysResponse_keys = DescribeTagKeysResponse.AddMember("keys", _ResourceTagKeyList)
+
+	DescribeTagsForOrganizationRequest_filter = DescribeTagsForOrganizationRequest.AddMember("filter", DescribeTagsForOrganizationFilter)
+
+	DescribeTagsForOrganizationRequest_nextToken = DescribeTagsForOrganizationRequest.AddMember("nextToken", _nextToken)
+
+	DescribeTagsForOrganizationRequest_maxResults = DescribeTagsForOrganizationRequest.AddMember("maxResults", _maxResultsLowerRange)
+
+	DescribeTagsForOrganizationResponse_tags = DescribeTagsForOrganizationResponse.AddMember("tags", _OrganizationTagList)
+
+	DescribeTagsForOrganizationResponse_nextToken = DescribeTagsForOrganizationResponse.AddMember("nextToken", _nextToken)
+
+	DescribeTagsRequest_nextToken = DescribeTagsRequest.AddMember("nextToken", _nextToken)
+
+	DescribeTagsRequest_maxResults = DescribeTagsRequest.AddMember("maxResults", _maxResultsLowerRange)
+
+	DescribeTagsOnboardingStatusForOrganizationResponse_status = DescribeTagsOnboardingStatusForOrganizationResponse.AddMember("status", TagsOnboardingStatusForOrganization)
+
+	DescribeTagsOnboardingStatusResponse_status = DescribeTagsOnboardingStatusResponse.AddMember("status", TagsOnboardingStatus)
+
+	DescribeTagsResponse_tags = DescribeTagsResponse.AddMember("tags", _AccountTagList)
+
+	DescribeTagsResponse_nextToken = DescribeTagsResponse.AddMember("nextToken", _nextToken)
 
 }

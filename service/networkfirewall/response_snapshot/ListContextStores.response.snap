@@ -1,0 +1,6 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿mContextStoresŸ¿nContextStoreIdr__ContextStoreId__xContextStoreOwnerAccountIdx__ContextStoreOwnerAccountId__ÿ¿nContextStoreIdr__ContextStoreId__xContextStoreOwnerAccountIdx__ContextStoreOwnerAccountId__ÿÿiNextTokenm__NextToken__ÿ

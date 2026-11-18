@@ -605,6 +605,16 @@ func TestUpdateResponseSnapshot_CompleteMigration(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	proto := restxml.New(schemas.AmazonElastiCacheV9)
@@ -1442,6 +1452,16 @@ func TestUpdateResponseSnapshot_CreateServerlessCache(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}
@@ -2599,6 +2619,16 @@ func TestUpdateResponseSnapshot_DeleteServerlessCache(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}
@@ -4487,6 +4517,16 @@ func TestUpdateResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 					},
 					CutoverMode: ptr.String("__CutoverMode__"),
 				},
+				Integrations: []types.Integration{
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
+				},
 			},
 			{
 				ServerlessCacheName: ptr.String("__ServerlessCacheName__"),
@@ -4538,6 +4578,16 @@ func TestUpdateResponseSnapshot_DescribeServerlessCaches(t *testing.T) {
 						Port:    ptr.Int32(1),
 					},
 					CutoverMode: ptr.String("__CutoverMode__"),
+				},
+				Integrations: []types.Integration{
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
+					{
+						IntegrationType: types.IntegrationType("dynamodb"),
+						Status:          types.IntegrationStatus("enabled"),
+					},
 				},
 			},
 		},
@@ -6548,6 +6598,16 @@ func TestUpdateResponseSnapshot_ModifyServerlessCache(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	proto := restxml.New(schemas.AmazonElastiCacheV9)
@@ -6713,6 +6773,16 @@ func TestUpdateResponseSnapshot_PrepareMigration(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}
@@ -7401,6 +7471,16 @@ func TestUpdateResponseSnapshot_StartMigration(t *testing.T) {
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
 			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+			},
 		},
 	}
 	proto := restxml.New(schemas.AmazonElastiCacheV9)
@@ -7476,6 +7556,16 @@ func TestUpdateResponseSnapshot_StopMigration(t *testing.T) {
 					Port:    ptr.Int32(1),
 				},
 				CutoverMode: ptr.String("__CutoverMode__"),
+			},
+			Integrations: []types.Integration{
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
+				{
+					IntegrationType: types.IntegrationType("dynamodb"),
+					Status:          types.IntegrationStatus("enabled"),
+				},
 			},
 		},
 	}

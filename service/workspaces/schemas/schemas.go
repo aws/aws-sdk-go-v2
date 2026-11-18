@@ -2389,7 +2389,7 @@ var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
 var SelfservicePermissions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "SelfservicePermissions",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var SelfservicePermissions_RestartWorkspace *smithy.Schema
 
 var SelfservicePermissions_IncreaseVolumeSize *smithy.Schema
@@ -2399,6 +2399,10 @@ var SelfservicePermissions_ChangeComputeType *smithy.Schema
 var SelfservicePermissions_SwitchRunningMode *smithy.Schema
 
 var SelfservicePermissions_RebuildWorkspace *smithy.Schema
+
+var SelfservicePermissions_NestedVirtualization *smithy.Schema
+
+var SelfservicePermissions_EnableEndUserAdvisor *smithy.Schema
 
 var SessionConnectionState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -2973,7 +2977,7 @@ var WorkspaceCreationProperties_InstanceIamRoleArn *smithy.Schema
 var WorkspaceDirectory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "WorkspaceDirectory",
-}, smithy.ShapeTypeStructure, 29)
+}, smithy.ShapeTypeStructure, 30)
 var WorkspaceDirectory_DirectoryId *smithy.Schema
 
 var WorkspaceDirectory_Alias *smithy.Schema
@@ -3029,6 +3033,8 @@ var WorkspaceDirectory_IDCConfig *smithy.Schema
 var WorkspaceDirectory_ActiveDirectoryConfig *smithy.Schema
 
 var WorkspaceDirectory_StreamingProperties *smithy.Schema
+
+var WorkspaceDirectory_WorkspaceOsUserMode *smithy.Schema
 
 var WorkspaceDirectory_ErrorMessage *smithy.Schema
 
@@ -3298,6 +3304,18 @@ var _WorkspaceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "WorkspaceName",
 }, smithy.ShapeTypeString, 0)
+
+var WorkspaceOSUserMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.workspaces",
+	Name:      "WorkspaceOSUserMode",
+}, smithy.ShapeTypeEnum, 4)
+var WorkspaceOSUserMode_LOCAL_USER *smithy.Schema
+
+var WorkspaceOSUserMode_DOMAIN_JOIN *smithy.Schema
+
+var WorkspaceOSUserMode_ENTRA_JOIN *smithy.Schema
+
+var WorkspaceOSUserMode_SELF_MANAGED *smithy.Schema
 
 var WorkspaceProperties = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
@@ -4879,7 +4897,7 @@ var RebuildWorkspacesResult_FailedRequests *smithy.Schema
 var RegisterWorkspaceDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.workspaces",
 	Name:      "RegisterWorkspaceDirectoryRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RegisterWorkspaceDirectoryRequest_DirectoryId *smithy.Schema
 
 var RegisterWorkspaceDirectoryRequest_SubnetIds *smithy.Schema
@@ -4895,6 +4913,8 @@ var RegisterWorkspaceDirectoryRequest_WorkspaceDirectoryName *smithy.Schema
 var RegisterWorkspaceDirectoryRequest_WorkspaceDirectoryDescription *smithy.Schema
 
 var RegisterWorkspaceDirectoryRequest_UserIdentityType *smithy.Schema
+
+var RegisterWorkspaceDirectoryRequest_WorkspaceOsUserMode *smithy.Schema
 
 var RegisterWorkspaceDirectoryRequest_IdcInstanceArn *smithy.Schema
 
@@ -5732,6 +5752,10 @@ func init() {
 
 	SelfservicePermissions_RebuildWorkspace = SelfservicePermissions.AddMember("RebuildWorkspace", ReconnectEnum)
 
+	SelfservicePermissions_NestedVirtualization = SelfservicePermissions.AddMember("NestedVirtualization", ReconnectEnum)
+
+	SelfservicePermissions_EnableEndUserAdvisor = SelfservicePermissions.AddMember("EnableEndUserAdvisor", ReconnectEnum)
+
 	SamlStatusEnum_DISABLED = SamlStatusEnum.AddMember("DISABLED", smithyprelude.Unit)
 
 	SamlStatusEnum_ENABLED = SamlStatusEnum.AddMember("ENABLED", smithyprelude.Unit)
@@ -5814,6 +5838,14 @@ func init() {
 
 	StreamingProperties_GlobalAccelerator = StreamingProperties.AddMember("GlobalAccelerator", GlobalAcceleratorForDirectory)
 
+	WorkspaceOSUserMode_LOCAL_USER = WorkspaceOSUserMode.AddMember("LOCAL_USER", smithyprelude.Unit)
+
+	WorkspaceOSUserMode_DOMAIN_JOIN = WorkspaceOSUserMode.AddMember("DOMAIN_JOIN", smithyprelude.Unit)
+
+	WorkspaceOSUserMode_ENTRA_JOIN = WorkspaceOSUserMode.AddMember("ENTRA_JOIN", smithyprelude.Unit)
+
+	WorkspaceOSUserMode_SELF_MANAGED = WorkspaceOSUserMode.AddMember("SELF_MANAGED", smithyprelude.Unit)
+
 	WorkspaceDirectory_DirectoryId = WorkspaceDirectory.AddMember("DirectoryId", _DirectoryId)
 
 	WorkspaceDirectory_Alias = WorkspaceDirectory.AddMember("Alias", _Alias)
@@ -5869,6 +5901,8 @@ func init() {
 	WorkspaceDirectory_ActiveDirectoryConfig = WorkspaceDirectory.AddMember("ActiveDirectoryConfig", ActiveDirectoryConfig)
 
 	WorkspaceDirectory_StreamingProperties = WorkspaceDirectory.AddMember("StreamingProperties", StreamingProperties)
+
+	WorkspaceDirectory_WorkspaceOsUserMode = WorkspaceDirectory.AddMember("WorkspaceOsUserMode", WorkspaceOSUserMode)
 
 	WorkspaceDirectory_ErrorMessage = WorkspaceDirectory.AddMember("ErrorMessage", _Description)
 
@@ -7371,6 +7405,8 @@ func init() {
 	RegisterWorkspaceDirectoryRequest_WorkspaceDirectoryDescription = RegisterWorkspaceDirectoryRequest.AddMember("WorkspaceDirectoryDescription", _WorkspaceDirectoryDescription)
 
 	RegisterWorkspaceDirectoryRequest_UserIdentityType = RegisterWorkspaceDirectoryRequest.AddMember("UserIdentityType", UserIdentityType)
+
+	RegisterWorkspaceDirectoryRequest_WorkspaceOsUserMode = RegisterWorkspaceDirectoryRequest.AddMember("WorkspaceOsUserMode", WorkspaceOSUserMode)
 
 	RegisterWorkspaceDirectoryRequest_IdcInstanceArn = RegisterWorkspaceDirectoryRequest.AddMember("IdcInstanceArn", _ARN)
 

@@ -115,6 +115,54 @@ func (ContainerMonitoringType) Values() []ContainerMonitoringType {
 	}
 }
 
+type ContextStoreSyncStatus string
+
+// Enum values for ContextStoreSyncStatus
+const (
+	ContextStoreSyncStatusSyncing           ContextStoreSyncStatus = "SYNCING"
+	ContextStoreSyncStatusPartiallyResolved ContextStoreSyncStatus = "PARTIALLY_RESOLVED"
+	ContextStoreSyncStatusFullyResolved     ContextStoreSyncStatus = "FULLY_RESOLVED"
+	ContextStoreSyncStatusSyncFailed        ContextStoreSyncStatus = "SYNC_FAILED"
+	ContextStoreSyncStatusUnresolved        ContextStoreSyncStatus = "UNRESOLVED"
+)
+
+// Values returns all known values for ContextStoreSyncStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextStoreSyncStatus) Values() []ContextStoreSyncStatus {
+	return []ContextStoreSyncStatus{
+		"SYNCING",
+		"PARTIALLY_RESOLVED",
+		"FULLY_RESOLVED",
+		"SYNC_FAILED",
+		"UNRESOLVED",
+	}
+}
+
+type ContextType string
+
+// Enum values for ContextType
+const (
+	ContextTypeResourceId ContextType = "ResourceId"
+	ContextTypeSegmentId  ContextType = "SegmentId"
+	ContextTypeSubnet     ContextType = "Subnet"
+	ContextTypeAttachment ContextType = "Attachment"
+)
+
+// Values returns all known values for ContextType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextType) Values() []ContextType {
+	return []ContextType{
+		"ResourceId",
+		"SegmentId",
+		"Subnet",
+		"Attachment",
+	}
+}
+
 type DecryptionAction string
 
 // Enum values for DecryptionAction
@@ -1147,6 +1195,29 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"DELETING",
 		"ERROR",
 		"UPDATING",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeSecurityGroup ResourceType = "SecurityGroup"
+	ResourceTypeVpc           ResourceType = "VPC"
+	ResourceTypeSubnet        ResourceType = "Subnet"
+	ResourceTypeTgwAttachment ResourceType = "TGWAttachment"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"SecurityGroup",
+		"VPC",
+		"Subnet",
+		"TGWAttachment",
 	}
 }
 

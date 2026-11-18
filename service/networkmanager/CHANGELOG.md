@@ -1,3 +1,11 @@
+# v1.53.0 (2026-11-17)
+
+* **Feature**: Adds support for Multipath Resilience change values to be delivered when reviewing a core network change set.
+
+# v1.52.0 (2026-11-16)
+
+* **Feature**: Context Sharing with Firewalls
+
 # v1.51.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

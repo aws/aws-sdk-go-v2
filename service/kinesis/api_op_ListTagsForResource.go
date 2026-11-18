@@ -15,6 +15,9 @@ import (
 // consisting of a user-defined key and value. Tags can help you manage, identify,
 // organize, search for, and filter resources.
 //
+// The Kinesis resource can be a data stream, a queue, or an enhanced fan-out
+// consumer.
+//
 // For more information about tagging Kinesis resources, see [Tag your Amazon Kinesis Data Streams resources].
 //
 // [Tag your Amazon Kinesis Data Streams resources]: https://docs.aws.amazon.com/streams/latest/dev/tagging.html

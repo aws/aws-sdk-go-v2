@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"agentInsightStoreArn":"__AgentInsightStoreArn__","agentInsightStoreId":"__AgentInsightStoreId__","createdAt":946684800,"enablementStatus":"ENABLED","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__","mode":"AWS_OWNED_KMS_KEY"},"failureReason":"__FailureReason__","status":"ACTIVE","updatedAt":946684800}

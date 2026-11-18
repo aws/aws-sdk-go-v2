@@ -2197,6 +2197,18 @@ type Fleet struct {
 	//
 	//   - stream.graphics.gr6f.4xlarge
 	//
+	//   - stream.graphics.g7.2xlarge
+	//
+	//   - stream.graphics.g7.4xlarge
+	//
+	//   - stream.graphics.g7.8xlarge
+	//
+	//   - stream.graphics.g7.12xlarge
+	//
+	//   - stream.graphics.g7.24xlarge
+	//
+	//   - stream.graphics.g7.48xlarge
+	//
 	// This member is required.
 	InstanceType *string
 
@@ -3036,6 +3048,18 @@ type ImageBuilder struct {
 	//   - stream.graphics.g6f.4xlarge
 	//
 	//   - stream.graphics.gr6f.4xlarge
+	//
+	//   - stream.graphics.g7.2xlarge
+	//
+	//   - stream.graphics.g7.4xlarge
+	//
+	//   - stream.graphics.g7.8xlarge
+	//
+	//   - stream.graphics.g7.12xlarge
+	//
+	//   - stream.graphics.g7.24xlarge
+	//
+	//   - stream.graphics.g7.48xlarge
 	InstanceType *string
 
 	// Indicates whether the image builder is using the latest WorkSpaces Applications
@@ -5010,12 +5034,48 @@ func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
 // during their streaming sessions.
 type UserSetting struct {
 
-	// The action that is enabled or disabled.
+	// The action you want to enable or disable. Choose from the following:
+	//
+	// AUTO_TIME_ZONE_REDIRECTION Controls whether the streaming session's time zone
+	// matches the time zone of your local device.
+	//
+	// CLIPBOARD_COPY_FROM_LOCAL_DEVICE Controls whether you can copy data from your
+	// local device and paste it into the streaming session.
+	//
+	// CLIPBOARD_COPY_TO_LOCAL_DEVICE Controls whether you can copy data from the
+	// streaming session and paste it to your local device.
+	//
+	// DOMAIN_PASSWORD_SIGNIN Controls whether you can sign in to a domain-joined
+	// streaming session by using your password.
+	//
+	// DOMAIN_SMART_CARD_SIGNIN Controls whether you can sign in to a domain-joined
+	// streaming session by using a smart card.
+	//
+	// FILE_DOWNLOAD Controls whether you can download files from the streaming
+	// session to your local device.
+	//
+	// FILE_UPLOAD Controls whether you can upload files from your local device to the
+	// streaming session.
+	//
+	// PRINTING_TO_LOCAL_DEVICE Controls whether you can print from the streaming
+	// session to a printer on your local device.
+	//
+	// SMART_CARD_REDIRECTION Controls whether smart cards connected to your local
+	// device are redirected into the streaming session. Applications in the session
+	// can access the local smart card for use cases such as authentication, digital
+	// signing, and email encryption.
+	//
+	// Smart card redirection was on by default for existing streaming sessions that
+	// use a Windows single-session fleet. To preserve that behavior,
+	// SMART_CARD_REDIRECTION is ENABLED by default on existing stacks associated with
+	// Windows single-session fleets. To turn it off, call UpdateStack with
+	// SMART_CARD_REDIRECTION set to DISABLED , and use an image that includes the
+	// latest WorkSpaces Applications agent version.
 	//
 	// This member is required.
 	Action Action
 
-	// Indicates whether the action is enabled or disabled.
+	// Specifies whether to turn the action on or off.
 	//
 	// This member is required.
 	Permission Permission

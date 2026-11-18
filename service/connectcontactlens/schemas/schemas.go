@@ -183,6 +183,11 @@ var _IssuesDetected = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _IssuesDetected_member *smithy.Schema
 
+var _LanguageCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcontactlens",
+	Name:      "LanguageCode",
+}, smithy.ShapeTypeString, 0)
+
 var _MatchedCategories = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "MatchedCategories",
@@ -368,7 +373,7 @@ var ThrottlingException_Message *smithy.Schema
 var Transcript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
 	Name:      "Transcript",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var Transcript_Id *smithy.Schema
 
 var Transcript_ParticipantId *smithy.Schema
@@ -384,6 +389,8 @@ var Transcript_EndOffsetMillis *smithy.Schema
 var Transcript_Sentiment *smithy.Schema
 
 var Transcript_IssuesDetected *smithy.Schema
+
+var Transcript_LanguageCode *smithy.Schema
 
 var _TranscriptContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcontactlens",
@@ -543,6 +550,8 @@ func init() {
 	Transcript_Sentiment = Transcript.AddMember("Sentiment", SentimentValue)
 
 	Transcript_IssuesDetected = Transcript.AddMember("IssuesDetected", _IssuesDetected)
+
+	Transcript_LanguageCode = Transcript.AddMember("LanguageCode", _LanguageCode)
 
 	RealtimeContactAnalysisSegment_Transcript = RealtimeContactAnalysisSegment.AddMember("Transcript", Transcript)
 

@@ -737,9 +737,16 @@
                     "target": "com.amazonaws.ec2#VpcEndpointIdList",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IDs of the interface VPC endpoints.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the interface VPC endpoints.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "VpcEndpointId"
+                    }
+                },
+                "TransitGatewayAttachmentIds": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the transit gateway attachments to accept. This parameter is supported only for\n\t\t    Gateway Load Balancer endpoint services.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
+                        "smithy.api#xmlName": "TransitGatewayAttachmentId"
                     }
                 }
             },
@@ -772,7 +779,7 @@
                 "target": "com.amazonaws.ec2#AcceptVpcPeeringConnectionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Accept a VPC peering connection request. To accept a request, the VPC peering connection must\n      be in the <code>pending-acceptance</code> state, and you must be the owner of the peer VPC.\n      Use <a>DescribeVpcPeeringConnections</a> to view your outstanding VPC\n      peering connection requests.</p>\n         <p>For an inter-Region VPC peering connection request, you must accept the VPC peering\n      connection in the Region of the accepter VPC.</p>"
+                "smithy.api#documentation": "<p>Accept a VPC peering connection request. To accept a request, the VPC peering connection must\n      be in the <code>pending-acceptance</code> state, and you must be the owner of the peer VPC.\n      Use <a>DescribeVpcPeeringConnections</a> to view your outstanding VPC\n      peering connection requests.</p>\n         <p>For an inter-Region VPC peering connection request, you must accept the VPC peering\n      connection in the Region of the accepter VPC.</p>\n         <p>If the requester allows multipath resilience, accepting the request also allows multipath resilience\n      for the accepter VPC, and the <code>multipathResilienceStatus</code> of the VPC peering connection becomes\n      <code>enabled</code>. Additional charges apply. For more information, see <a href=\"http://aws.amazon.com/vpc/pricing/\">Amazon VPC pricing</a>. To stop allowing\n      multipath resilience for the accepter VPC, use <a>ModifyVpcPeeringConnectionOptions</a> and set\n      <code>AllowMultipathResilience</code> to <code>false</code>.</p>"
             }
         },
         "com.amazonaws.ec2#AcceptVpcPeeringConnectionRequest": {
@@ -1156,7 +1163,7 @@
                     "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionState",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GlobalAccelerator",
-                        "smithy.api#documentation": "<p>The exclusion configuration for AWS Global Accelerator.</p>",
+                        "smithy.api#documentation": "<p>The exclusion configuration for Amazon Web Services Global Accelerator.</p>",
                         "smithy.api#xmlName": "globalAccelerator"
                     }
                 },
@@ -1231,6 +1238,15 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ActiveAdditionalKeyExchangesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ActiveVpnTunnelAdditionalKeyExchange",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#ActiveInstance": {
             "type": "structure",
             "members": {
@@ -1278,6 +1294,30 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#ActiveVpnTunnelAdditionalKeyExchange": {
+            "type": "structure",
+            "members": {
+                "AdditionalKeyExchangeRound": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdditionalKeyExchangeRound",
+                        "smithy.api#documentation": "<p>The additional key exchange round number.</p>",
+                        "smithy.api#xmlName": "additionalKeyExchangeRound"
+                    }
+                },
+                "KeyExchangeMethod": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "KeyExchangeMethod",
+                        "smithy.api#documentation": "<p>The key exchange method number negotiated for this round.</p>",
+                        "smithy.api#xmlName": "keyExchangeMethod"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an additional key exchange round negotiated for an active VPN tunnel.</p>"
             }
         },
         "com.amazonaws.ec2#ActiveVpnTunnelStatus": {
@@ -1353,6 +1393,22 @@
                         "aws.protocols#ec2QueryName": "ProvisioningStatusReason",
                         "smithy.api#documentation": "<p>The reason for the current provisioning status.</p>",
                         "smithy.api#xmlName": "provisioningStatusReason"
+                    }
+                },
+                "Phase1AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#ActiveAdditionalKeyExchangesList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Phase1AdditionalKeyExchangeSet",
+                        "smithy.api#documentation": "<p>The additional key exchanges negotiated in Phase 1 IKE negotiations.</p>",
+                        "smithy.api#xmlName": "phase1AdditionalKeyExchangeSet"
+                    }
+                },
+                "Phase2AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#ActiveAdditionalKeyExchangesList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Phase2AdditionalKeyExchangeSet",
+                        "smithy.api#documentation": "<p>The additional key exchanges negotiated in Phase 2 IKE negotiations.</p>",
+                        "smithy.api#xmlName": "phase2AdditionalKeyExchangeSet"
                     }
                 }
             },
@@ -1509,6 +1565,14 @@
                         "smithy.api#documentation": "<p>The ID of the service.</p>",
                         "smithy.api#xmlName": "serviceId"
                     }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.ec2#PermissionType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PermissionType",
+                        "smithy.api#documentation": "<p>The type of permission granted to the principal.</p>",
+                        "smithy.api#xmlName": "permissionType"
+                    }
                 }
             },
             "traits": {
@@ -1607,6 +1671,98 @@
         },
         "com.amazonaws.ec2#AdditionalFlexibleNetworkInterfaces": {
             "type": "integer"
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangeMethodsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AdditionalKeyExchangeMethodsListValue",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangeMethodsListValue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Value",
+                        "smithy.api#documentation": "<p>The key exchange method number.</p>",
+                        "smithy.api#xmlName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key exchange method number that is permitted for an additional key exchange\n            round.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangeMethodsRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AdditionalKeyExchangeMethodsRequestListValue",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangeMethodsRequestListValue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key exchange method number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a key exchange method number that is permitted for an additional key\n            exchange round.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangeRequirement": {
+            "type": "enum",
+            "members": {
+                "required": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "required"
+                    }
+                },
+                "optional": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "optional"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangeRound": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 7
+                }
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#VpnAdditionalKeyExchange",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AdditionalKeyExchangesRequestSpecification": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#VpnAdditionalKeyExchangeRequest",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
         },
         "com.amazonaws.ec2#Address": {
             "type": "structure",
@@ -2629,6 +2785,14 @@
                         "smithy.api#documentation": "<p>The ID of the service.</p>",
                         "smithy.api#xmlName": "serviceId"
                     }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.ec2#PermissionType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PermissionType",
+                        "smithy.api#documentation": "<p>The type of permission granted to the principal.</p>",
+                        "smithy.api#xmlName": "permissionType"
+                    }
                 }
             },
             "traits": {
@@ -2778,6 +2942,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#AssociateIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#AssociateKmsKeyId"
                 },
                 {
                     "target": "com.amazonaws.ec2#AssociateNatGatewayAddress"
@@ -3161,6 +3328,9 @@
                     "target": "com.amazonaws.ec2#CreateTransitGatewayMulticastDomain"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachment"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateTransitGatewayPeeringAttachment"
                 },
                 {
@@ -3459,6 +3629,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteTransitGatewayMulticastDomain"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachment"
                 },
                 {
                     "target": "com.amazonaws.ec2#DeleteTransitGatewayPeeringAttachment"
@@ -4043,6 +4216,9 @@
                     "target": "com.amazonaws.ec2#DescribeTransitGatewayMulticastDomains"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachments"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeTransitGatewayPeeringAttachments"
                 },
                 {
@@ -4257,6 +4433,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DisassociateIpamResourceDiscovery"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DisassociateKmsKeyId"
                 },
                 {
                     "target": "com.amazonaws.ec2#DisassociateNatGatewayAddress"
@@ -4836,6 +5015,12 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayMeteringPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachment"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachment"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntry"
@@ -8907,6 +9092,62 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#AssociateKmsKeyId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#AssociateKmsKeyIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#AssociateKmsKeyIdResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an additional KMS key with an encrypted Amazon EBS snapshot. With the\n      associated key, you have a second, independent way to access the snapshot's data, in\n      addition to the key the snapshot is already encrypted under. Associating a key doesn't\n      re-encrypt the snapshot or grant access to its original key.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/associated-kms-keys.html\">Associated\n      KMS keys</a> in the <i>Amazon EBS User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AssociateKmsKeyIdRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EBS snapshot.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#KmsKeyId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID, alias, or ARN of the KMS key to associate with the snapshot. You can\n      specify a key ID, key alias, key ARN, or alias ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#AssociateKmsKeyIdResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#AssociateNatGatewayAddress": {
             "type": "operation",
             "input": {
@@ -9738,6 +9979,31 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#AssociatedKmsKey": {
+            "type": "structure",
+            "members": {
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "KmsKeyId",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the associated KMS key.</p>",
+                        "smithy.api#xmlName": "kmsKeyId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an KMS key that is associated with an Amazon EBS snapshot, in addition to the\n      key the snapshot is encrypted under. An associated key provides a second way to access the\n      snapshot's data for cross-account sharing and copying.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AssociatedKmsKeySet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AssociatedKmsKey",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ec2#AssociatedNetworkType": {
@@ -14015,6 +14281,35 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CapacityBlockInstanceTypePreference": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type to consider in the Capacity Block search.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Instance type preference for a Capacity Block search. Specifies one or more instance\n\t\t\ttypes to evaluate when searching for available Capacity Blocks.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityBlockInstanceTypePreferenceSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityBlockInstanceTypePreference",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.ec2#CapacityBlockInterconnectStatus": {
             "type": "enum",
             "members": {
@@ -14152,10 +14447,129 @@
                         "smithy.api#documentation": "<p>The type of zone where the Capacity Block offering is available.</p>",
                         "smithy.api#xmlName": "zoneType"
                     }
+                },
+                "CapacityBlockOfferingSegments": {
+                    "target": "com.amazonaws.ec2#CapacityBlockOfferingSegmentSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityBlockOfferingSegmentSet",
+                        "smithy.api#documentation": "<p>The individual segments that compose the Capacity Block offering. Each segment\n\t\t\tdescribes a distinct block of capacity with its own Availability Zone, instance type,\n\t\t\tschedule, and pricing.</p>",
+                        "smithy.api#xmlName": "capacityBlockOfferingSegmentSet"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The recommended Capacity Block that fits your search requirements.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityBlockOfferingSegment": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceType",
+                        "smithy.api#documentation": "<p>The instance type of the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "instanceType"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZone",
+                        "smithy.api#documentation": "<p>The Availability Zone of the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "availabilityZone"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone for the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceCount",
+                        "smithy.api#documentation": "<p>The number of instances in the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "instanceCount"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartDate",
+                        "smithy.api#documentation": "<p>The start date of the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "startDate"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDate",
+                        "smithy.api#documentation": "<p>The end date of the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "endDate"
+                    }
+                },
+                "CapacityBlockDurationHours": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityBlockDurationHours",
+                        "smithy.api#documentation": "<p>The number of hours for the duration of the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "capacityBlockDurationHours"
+                    }
+                },
+                "CapacityBlockDurationMinutes": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityBlockDurationMinutes",
+                        "smithy.api#documentation": "<p>The number of minutes for the duration of the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "capacityBlockDurationMinutes"
+                    }
+                },
+                "UpfrontFee": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UpfrontFee",
+                        "smithy.api#documentation": "<p>The total price to be paid up front for the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "upfrontFee"
+                    }
+                },
+                "CurrencyCode": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CurrencyCode",
+                        "smithy.api#documentation": "<p>The currency of the payment for the Capacity Block offering segment.</p>",
+                        "smithy.api#xmlName": "currencyCode"
+                    }
+                },
+                "ZoneType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ZoneType",
+                        "smithy.api#documentation": "<p>The type of zone where the Capacity Block offering segment is available.</p>",
+                        "smithy.api#xmlName": "zoneType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an individual segment within a Capacity Block offering. Each segment\n\t\t\trepresents a distinct block of capacity with its own Availability Zone, instance type,\n\t\t\tduration, pricing, and schedule.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityBlockOfferingSegmentSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityBlockOfferingSegment",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.ec2#CapacityBlockOfferingSet": {
@@ -25285,6 +25699,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#CreatePeeringConnectionOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "AllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you allow multipath resilience for the requester VPC. Multipath resilience is supported only\n            for inter-Region VPC peering connections between supported Regions. It takes effect only when both the requester and the\n            accepter allow it. Accepting the VPC peering connection request also allows multipath resilience\n            for the accepter VPC. If you don't specify this parameter, the default is <code>false</code>.</p>"
+                    }
+                },
+                "MultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#MultipathResilienceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multipath resilience mode. You can specify this parameter only if\n            <code>AllowMultipathResilience</code> is <code>true</code>.</p>\n         <p>The following value is valid:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>always-on</code> – Replicates traffic across multiple network paths while multipath resilience is in effect.</p>\n            </li>\n         </ul>\n         <p>If <code>AllowMultipathResilience</code> is <code>true</code> and you don't specify a mode, the default is <code>always-on</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC peering connection options to apply to the requester VPC when you create a VPC peering connection.</p>"
+            }
+        },
         "com.amazonaws.ec2#CreatePlacementGroup": {
             "type": "operation",
             "input": {
@@ -28016,6 +28450,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a network function attachment that connects the specified transit gateway to a Gateway Load Balancer endpoint service.\n            Traffic that you route to the attachment is sent to the network function appliances behind the endpoint service.\n            To use this operation, you must be the owner of the transit gateway.</p>\n         <p>You can create one network function attachment for each combination of transit gateway and endpoint service.\n            The attachment remains in the <code>pendingAcceptance</code> state until the endpoint service owner\n            accepts the endpoint connection.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway. The transit gateway must be in the <code>available</code> state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the Gateway Load Balancer endpoint service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Availability Zones for the attachment. You must specify at least one Availability Zone,\n            using this parameter, <code>AvailabilityZoneIds</code>, or both.\n            Each Availability Zone must be supported by both the transit gateway and the endpoint service.</p>",
+                        "smithy.api#xmlName": "AvailabilityZone"
+                    }
+                },
+                "AvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones for the attachment. You must specify at least one Availability Zone,\n            using this parameter, <code>AvailabilityZones</code>, or both.\n            Each Availability Zone must be supported by both the transit gateway and the endpoint service.</p>",
+                        "smithy.api#xmlName": "AvailabilityZoneId"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the network function attachment.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#CreateTransitGatewayNetworkFunctionAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachment",
+                        "smithy.api#documentation": "<p>Information about the network function attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#CreateTransitGatewayPeeringAttachment": {
             "type": "operation",
             "input": {
@@ -28094,6 +28607,18 @@
                     "target": "com.amazonaws.ec2#DynamicRoutingValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether dynamic routing is enabled or disabled.</p>"
+                    }
+                },
+                "AllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you allow multipath resilience for the requester side of the transit gateway peering attachment.\n            Multipath resilience is supported only for inter-Region transit gateway peering attachments between supported Regions. It takes effect\n            only when both the requester and the accepter allow it. If you don't specify this parameter, the default is <code>false</code>.</p>"
+                    }
+                },
+                "MultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multipath resilience mode. You can specify this parameter only if\n            <code>AllowMultipathResilience</code> is <code>true</code>.</p>\n         <p>The following value is valid:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>always-on</code> – Replicates traffic across multiple network paths while multipath resilience is in effect.</p>\n            </li>\n         </ul>\n         <p>If <code>AllowMultipathResilience</code> is <code>true</code> and you don't specify a mode, the default is <code>always-on</code>.</p>"
                     }
                 }
             },
@@ -30128,7 +30653,7 @@
                 "target": "com.amazonaws.ec2#CreateVpcPeeringConnectionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and\n\t\t  an accepter VPC with which to create the connection. The accepter VPC can belong to\n\t\t  another Amazon Web Services account and can be in a different Region to the requester VPC. \n          The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p>\n         <note>\n            <p>Limitations and rules apply to a VPC peering connection. For more information, see \n          the <a href=\"https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations\">VPC peering limitations</a> in the <i>VPC Peering Guide</i>.</p>\n         </note>\n         <p>The owner of the accepter VPC must accept the peering request to activate the peering\n            connection. The VPC peering connection request expires after 7 days, after which it\n            cannot be accepted or rejected.</p>\n         <p>If you create a VPC peering connection request between VPCs with overlapping CIDR\n            blocks, the VPC peering connection has a status of <code>failed</code>.</p>"
+                "smithy.api#documentation": "<p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and\n\t\t  an accepter VPC with which to create the connection. The accepter VPC can belong to\n\t\t  another Amazon Web Services account and can be in a different Region to the requester VPC. \n          The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p>\n         <note>\n            <p>Limitations and rules apply to a VPC peering connection. For more information, see \n          the <a href=\"https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations\">VPC peering limitations</a> in the <i>VPC Peering Guide</i>.</p>\n         </note>\n         <p>The owner of the accepter VPC must accept the peering request to activate the peering\n            connection. The VPC peering connection request expires after 7 days, after which it\n            cannot be accepted or rejected.</p>\n         <p>Multipath resilience replicates the traffic of an inter-Region VPC peering connection across\n            multiple network paths.</p>\n         <p>If you create a VPC peering connection request between VPCs with overlapping CIDR\n            blocks, the VPC peering connection has a status of <code>failed</code>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateVpcPeeringConnectionRequest": {
@@ -30145,6 +30670,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the peering connection.</p>",
                         "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "RequesterPeeringConnectionOptions": {
+                    "target": "com.amazonaws.ec2#CreatePeeringConnectionOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC peering connection options to apply to the requester VPC.</p>"
                     }
                 },
                 "DryRun": {
@@ -35736,6 +36267,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified network function attachment. The attachment must be in the <code>available</code> or <code>pendingAcceptance</code> state.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the network function attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DeleteTransitGatewayNetworkFunctionAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachment",
+                        "smithy.api#documentation": "<p>Information about the deleted network function attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DeleteTransitGatewayPeeringAttachment": {
             "type": "operation",
             "input": {
@@ -39042,6 +39623,13 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tInclude all Availability Zones and Local Zones, regardless of your opt-in status.\n\t\t\tIf you do not use this parameter, the results include available offerings from all\n\t\t\tAvailability Zones in the Amazon Web Services Region and Local Zones you are opted into.\n\t\t</p>"
+                    }
+                },
+                "InstanceTypePreferences": {
+                    "target": "com.amazonaws.ec2#CapacityBlockInstanceTypePreferenceSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of instance type preferences for the Capacity Block offering search. Accepts one\n\t\t\tor more instance type names. Either this or the legacy <code>InstanceType</code> parameter is\n\t\t\trequired.</p>",
+                        "smithy.api#xmlName": "InstanceTypePreference"
                     }
                 }
             },
@@ -54259,6 +54847,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more network function attachments. You can describe attachments that you own or that are attached to a transit gateway that you own.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentIds": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the network function attachments.</p>",
+                        "smithy.api#xmlName": "TransitGatewayAttachmentId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>service-name</code> - The name of the Gateway Load Balancer endpoint service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#TransitGatewayMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeTransitGatewayNetworkFunctionAttachmentsResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachments": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachmentSet",
+                        "smithy.api#documentation": "<p>Information about the network function attachments.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachmentSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#DescribeTransitGatewayPeeringAttachments": {
             "type": "operation",
             "input": {
@@ -56542,7 +57206,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-id</code> - The ID of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID \n\t\t            that owns the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-region</code> - The Region of the endpoint or <code>cross-region</code>\n\t\t            to find endpoints for other Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n\t\t\t        (<code>pendingAcceptance</code> | <code>pending</code> |\n\t\t\t        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n\t\t\t        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ip-address-type</code> - The IP address type (<code>ipv4</code> | <code>ipv6</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-id</code> - The ID of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the transit gateway\n\t\t            attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID \n\t\t            that owns the endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-region</code> - The Region of the endpoint or <code>cross-region</code>\n\t\t            to find endpoints for other Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n\t\t\t        (<code>pendingAcceptance</code> | <code>pending</code> |\n\t\t\t        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n\t\t\t        <code>rejected</code> | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -56707,7 +57371,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>principal</code> - The ARN of the principal.</p>\n            </li>\n            <li>\n               <p>\n                  <code>principal-type</code> - The principal type (<code>All</code> |\n\t\t\t\t\t\t<code>Service</code> | <code>OrganizationUnit</code> | <code>Account</code>\n\t\t\t\t\t| <code>User</code> | <code>Role</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>permission-type</code> - The permission type (<code>vpc-endpoint</code> |\n\t\t\t\t\t<code>transit-gateway-attachment</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>principal</code> - The ARN of the principal.</p>\n            </li>\n            <li>\n               <p>\n                  <code>principal-type</code> - The principal type (<code>All</code> |\n\t\t\t\t\t\t<code>Service</code> | <code>OrganizationUnit</code> | <code>Account</code>\n\t\t\t\t\t| <code>User</code> | <code>Role</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -60258,6 +60922,62 @@
                         "aws.protocols#ec2QueryName": "IpamResourceDiscoveryAssociation",
                         "smithy.api#documentation": "<p>A resource discovery association.</p>",
                         "smithy.api#xmlName": "ipamResourceDiscoveryAssociation"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#DisassociateKmsKeyId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisassociateKmsKeyIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisassociateKmsKeyIdResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an associated KMS key from an Amazon EBS snapshot. After you disassociate the\n      key, it can no longer be used to access the snapshot's data. The snapshot's original\n      encryption key is unaffected.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DisassociateKmsKeyIdRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EBS snapshot.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.ec2#KmsKeyId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID, alias, or ARN of the associated KMS key to remove from the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#DisassociateKmsKeyIdResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
                     }
                 }
             },
@@ -105838,7 +106558,7 @@
                 "GlobalAccelerator": {
                     "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to exclude AWS Global Accelerator from account-level encryption enforcement.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Amazon Web Services Global Accelerator from account-level encryption enforcement.</p>"
                     }
                 },
                 "ApiGatewayV2": {
@@ -110697,6 +111417,84 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Adds Availability Zones to or removes Availability Zones from the specified network function attachment.\n            The attachment must be in the <code>available</code> state. You must specify at least one Availability Zone to add or remove,\n            and the attachment must keep at least one Availability Zone.</p>\n         <p>Adding an Availability Zone provisions a new Gateway Load Balancer endpoint in that Availability Zone. If the endpoint service\n            doesn't automatically accept connection requests, the endpoint service owner must accept the endpoint connection for\n            each Availability Zone that you add.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the network function attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AddAvailabilityZones": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Availability Zones to add to the attachment. You can't add and remove the same Availability Zone in a single request.</p>",
+                        "smithy.api#xmlName": "AddAvailabilityZone"
+                    }
+                },
+                "AddAvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones to add to the attachment. You can't add and remove the same Availability Zone in a single request.</p>",
+                        "smithy.api#xmlName": "AddAvailabilityZoneId"
+                    }
+                },
+                "RemoveAvailabilityZones": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Availability Zones to remove from the attachment. Each Availability Zone must be currently in the attachment.</p>",
+                        "smithy.api#xmlName": "RemoveAvailabilityZone"
+                    }
+                },
+                "RemoveAvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones to remove from the attachment. Each Availability Zone must be currently in the attachment.</p>",
+                        "smithy.api#xmlName": "RemoveAvailabilityZoneId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request,\n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.\n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayNetworkFunctionAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayNetworkFunctionAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayNetworkFunctionAttachment",
+                        "smithy.api#documentation": "<p>Information about the network function attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayNetworkFunctionAttachment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#ModifyTransitGatewayOptions": {
             "type": "structure",
             "members": {
@@ -110775,6 +111573,82 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The transit gateway options.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachmentResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the options for a transit gateway peering attachment. The peering attachment must be in the <code>available</code> state.</p>\n         <p>You can allow multipath resilience for your side of an inter-Region transit gateway peering attachment between\n            supported Regions.\n            Multipath resilience isn't supported for transit gateway peering attachments in the same Region. It takes\n            effect only when both the requester and the accepter allow it. To modify the requester side, send the\n            request in the Region of the requester transit gateway. To modify the accepter side, send the request in the\n            Region of the accepter transit gateway. To check whether multipath resilience is in effect, use\n            <a>DescribeTransitGatewayPeeringAttachments</a> and check\n            <code>multipathResilienceStatus</code>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the transit gateway peering attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Options": {
+                    "target": "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachmentRequestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options to modify for the transit gateway peering attachment.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachmentRequestOptions": {
+            "type": "structure",
+            "members": {
+                "AllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you allow multipath resilience for your side of the transit gateway peering attachment. Multipath\n            resilience is supported only for inter-Region transit gateway peering attachments between supported Regions. It takes effect only when\n            both the requester and the accepter allow it. If you don't specify this parameter, the current setting doesn't change.</p>"
+                    }
+                },
+                "MultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multipath resilience mode. You can specify this parameter only if\n            <code>AllowMultipathResilience</code> is <code>true</code>.</p>\n         <p>The following value is valid:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>always-on</code> – Replicates traffic across multiple network paths while multipath resilience is in effect.</p>\n            </li>\n         </ul>\n         <p>If <code>AllowMultipathResilience</code> is <code>true</code> and you don't specify a mode, the default is <code>always-on</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the options to modify for a transit gateway peering attachment, including multipath resilience settings.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyTransitGatewayPeeringAttachmentResult": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayPeeringAttachment": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPeeringAttachment",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayPeeringAttachment",
+                        "smithy.api#documentation": "<p>Information about the transit gateway peering attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayPeeringAttachment"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ec2#ModifyTransitGatewayPolicyTableEntry": {
@@ -112293,7 +113167,7 @@
                 "GlobalAcceleratorExclusion": {
                     "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to exclude AWS Global Accelerator traffic from encryption enforcement.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Amazon Web Services Global Accelerator traffic from encryption enforcement.</p>"
                     }
                 },
                 "ApiGatewayV2Exclusion": {
@@ -112785,7 +113659,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the permissions for your VPC endpoint service. You can add or remove permissions\n            for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to\n            your endpoint service. Principal ARNs with path components aren't supported.</p>\n         <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>"
+                "smithy.api#documentation": "<p>Modifies the permissions for your VPC endpoint service. You can add or remove permissions\n            for service consumers (Amazon Web Services accounts, users, and IAM roles) to connect to\n            your endpoint service. Principal ARNs with path components aren't supported.</p>\n         <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>\n         <p>By default, principals that you grant permissions to can create VPC endpoints that connect to\n\t        your endpoint service. For Gateway Load Balancer endpoint services, you can instead grant permissions so that\n\t        principals can create transit gateway attachments that connect to your endpoint service. To do so,\n\t        specify <code>transit-gateway-attachment</code> for <code>PermissionType</code>. The two permission\n\t        types are independent. A principal can have either or both.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsRequest": {
@@ -112815,6 +113689,12 @@
                     "target": "com.amazonaws.ec2#ValueStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the principals.\n\t        Permissions are revoked for principals in this list.</p>"
+                    }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.ec2#PermissionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of permission to add or remove. The permission type applies to all principals\n\t        in <code>AddAllowedPrincipals</code> and <code>RemoveAllowedPrincipals</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>vpc-endpoint</code> - Principals can create VPC endpoints that connect to\n\t                the endpoint service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment</code> - Principals can create transit gateway\n\t                attachments that connect to the endpoint service. This permission type is supported only\n\t                for Gateway Load Balancer endpoint services. You can grant it only to Amazon Web Services accounts\n\t                (<code>arn:aws:iam::account-id:root</code>). You can't grant it\n\t                to users, IAM roles, organizations, organizational units, or all principals (*).</p>\n            </li>\n         </ul>\n         <p>Default: <code>vpc-endpoint</code>\n         </p>"
                     }
                 }
             },
@@ -112855,7 +113735,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpcPeeringConnectionOptionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the VPC peering connection options on one side of a VPC peering connection.</p>\n         <p>If the peered VPCs are in the same Amazon Web Services account, you can enable DNS\n            resolution for queries from the local VPC. This ensures that queries from the local VPC\n            resolve to private IP addresses in the peer VPC. This option is not available if the\n            peered VPCs are in different Amazon Web Services accounts or different Regions. For\n            peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account\n            owner must initiate a separate request to modify the peering connection options. For\n            inter-region peering connections, you must use the Region for the requester VPC to\n            modify the requester VPC peering options and the Region for the accepter VPC to modify\n            the accepter VPC peering options. To verify which VPCs are the accepter and the\n            requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>"
+                "smithy.api#documentation": "<p>Modifies the VPC peering connection options on one side of a VPC peering connection.</p>\n         <p>If the peered VPCs are in the same Amazon Web Services account, you can enable DNS\n            resolution for queries from the local VPC. This ensures that queries from the local VPC\n            resolve to private IP addresses in the peer VPC. This option is not available if the\n            peered VPCs are in different Amazon Web Services accounts or different Regions. For\n            peered VPCs in different Amazon Web Services accounts, each Amazon Web Services account\n            owner must initiate a separate request to modify the peering connection options. For\n            inter-region peering connections, you must use the Region for the requester VPC to\n            modify the requester VPC peering options and the Region for the accepter VPC to modify\n            the accepter VPC peering options. To verify which VPCs are the accepter and the\n            requester for a VPC peering connection, use the <a>DescribeVpcPeeringConnections</a> command.</p>\n         <p>Multipath resilience replicates the traffic of an inter-Region VPC peering connection across\n            multiple network paths. You can allow multipath resilience for your side of the connection if both of its\n            Regions are supported. It takes effect only when both the requester and the\n            accepter allow it. Additional charges apply when multipath resilience is in effect. For more\n            information, see <a href=\"http://aws.amazon.com/vpc/pricing/\">Amazon VPC pricing</a>. To check whether multipath resilience is in effect, use\n            <a>DescribeVpcPeeringConnections</a> and check <code>multipathResilienceStatus</code>.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpcPeeringConnectionOptionsRequest": {
@@ -113352,14 +114232,14 @@
                 "Phase1DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase1DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> |\n                <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> |\n                <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> |\n                <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> |\n                <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code> |\n                <code>35</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1DHGroupNumber"
                     }
                 },
                 "Phase2DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase2DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code> | <code>35</code> | <code>36</code> | <code>37</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2DHGroupNumber"
                     }
                 },
@@ -113386,6 +114266,20 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Turn on or off tunnel endpoint lifecycle control feature.</p>"
+                    }
+                },
+                "Phase1AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangesRequestSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more additional key exchange rounds that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations. Additional key exchanges occur after the initial\n            Diffie-Hellman exchange. Each round must have a unique round number.</p>\n         <p>Additional key exchanges are supported only with IKEv2. You can't specify a\n            <code>required</code> round if <code>IKEVersions</code> contains only\n            <code>ikev1</code>.</p>",
+                        "smithy.api#xmlName": "Phase1AdditionalKeyExchange"
+                    }
+                },
+                "Phase2AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangesRequestSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more additional key exchange rounds that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations. Additional key exchanges occur after the initial\n            Diffie-Hellman exchange. Each round must have a unique round number.</p>\n         <p>Additional key exchanges are supported only with IKEv2. You can't specify a\n            <code>required</code> round if <code>IKEVersions</code> contains only\n            <code>ikev1</code>.</p>",
+                        "smithy.api#xmlName": "Phase2AdditionalKeyExchange"
                     }
                 }
             },
@@ -113799,6 +114693,40 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "disable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#MultipathResilienceMode": {
+            "type": "enum",
+            "members": {
+                "ALWAYS_ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "always-on"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#MultipathResilienceStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
                     }
                 }
             }
@@ -114790,6 +115718,24 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#NetworkCardInterfaceType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkFunctionAttachmentAZIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkFunctionAttachmentAZNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -117861,6 +118807,22 @@
                         "smithy.api#documentation": "<p>Deprecated.</p>",
                         "smithy.api#xmlName": "allowEgressFromLocalVpcToRemoteClassicLink"
                     }
+                },
+                "AllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AllowMultipathResilience",
+                        "smithy.api#documentation": "<p>Indicates whether this side of the VPC peering connection allows multipath resilience.</p>",
+                        "smithy.api#xmlName": "allowMultipathResilience"
+                    }
+                },
+                "MultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#MultipathResilienceMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MultipathResilienceMode",
+                        "smithy.api#documentation": "<p>The multipath resilience mode for this side of the VPC peering connection. This value is present\n        only when this side allows multipath resilience.</p>",
+                        "smithy.api#xmlName": "multipathResilienceMode"
+                    }
                 }
             },
             "traits": {
@@ -117886,6 +118848,18 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Deprecated.</p>"
+                    }
+                },
+                "AllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you allow multipath resilience for this side of the VPC peering connection. Multipath\n        resilience is supported only for inter-Region VPC peering connections between supported Regions. It takes effect only when\n        both the requester and the accepter allow it. If you don't specify this parameter, the current setting doesn't change.</p>"
+                    }
+                },
+                "MultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#MultipathResilienceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The multipath resilience mode. You can specify this parameter only if\n        <code>AllowMultipathResilience</code> is <code>true</code>.</p>\n         <p>The following value is valid:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>always-on</code> – Replicates traffic across multiple network paths while multipath resilience is in effect.</p>\n            </li>\n         </ul>\n         <p>If <code>AllowMultipathResilience</code> is <code>true</code> and you don't specify a mode, the default is <code>always-on</code>.</p>"
                     }
                 }
             },
@@ -118069,6 +119043,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "all"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#PermissionType": {
+            "type": "enum",
+            "members": {
+                "VpcEndpoint": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vpc-endpoint"
+                    }
+                },
+                "TransitGatewayAttachment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "transit-gateway-attachment"
                     }
                 }
             }
@@ -120493,6 +121484,14 @@
                         "smithy.api#documentation": "<p>The Capacity Block.</p>",
                         "smithy.api#xmlName": "capacityBlockSet"
                     }
+                },
+                "CapacityReservations": {
+                    "target": "com.amazonaws.ec2#CapacityReservationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationSet",
+                        "smithy.api#documentation": "<p>The Capacity Reservations created as a result of the Capacity Block purchase. When a\n\t\t\tCapacity Block offering contains multiple segments, a separate Capacity Reservation is\n\t\t\tcreated for each segment.</p>",
+                        "smithy.api#xmlName": "capacityReservationSet"
+                    }
                 }
             },
             "traits": {
@@ -121880,9 +122879,16 @@
                     "target": "com.amazonaws.ec2#VpcEndpointIdList",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The IDs of the VPC endpoints.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the VPC endpoints.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "VpcEndpointId"
+                    }
+                },
+                "TransitGatewayAttachmentIds": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the transit gateway attachments to reject. This parameter is supported only for\n\t\t    Gateway Load Balancer endpoint services.</p>\n         <p>You must specify either <code>VpcEndpointIds</code> or <code>TransitGatewayAttachmentIds</code>,\n\t\t    but not both.</p>",
+                        "smithy.api#xmlName": "TransitGatewayAttachmentId"
                     }
                 }
             },
@@ -133432,6 +134438,14 @@
                         "smithy.api#xmlName": "fullSnapshotSizeInBytes"
                     }
                 },
+                "AssociatedKmsKeys": {
+                    "target": "com.amazonaws.ec2#AssociatedKmsKeySet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AssociatedKmsKeySet",
+                        "smithy.api#documentation": "<p>The additional KMS keys that are associated with the snapshot.</p>",
+                        "smithy.api#xmlName": "associatedKmsKeySet"
+                    }
+                },
                 "SnapshotId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -139415,6 +140429,21 @@
         "com.amazonaws.ec2#TransitGatewayAttachmentId": {
             "type": "string"
         },
+        "com.amazonaws.ec2#TransitGatewayAttachmentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.ec2#TransitGatewayAttachmentIdStringList": {
             "type": "list",
             "member": {
@@ -141098,6 +142127,112 @@
                 }
             }
         },
+        "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway.</p>",
+                        "smithy.api#xmlName": "transitGatewayId"
+                    }
+                },
+                "TransitGatewayOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
+                        "smithy.api#xmlName": "transitGatewayOwnerId"
+                    }
+                },
+                "ResourceOwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceOwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the attachment.</p>",
+                        "smithy.api#xmlName": "resourceOwnerId"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ResourceId",
+                        "smithy.api#documentation": "<p>The name of the Gateway Load Balancer endpoint service.</p>",
+                        "smithy.api#xmlName": "resourceId"
+                    }
+                },
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.ec2#ValueStringList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneSet",
+                        "smithy.api#documentation": "<p>The names of the Availability Zones for the attachment.</p>",
+                        "smithy.api#xmlName": "availabilityZoneSet"
+                    }
+                },
+                "AvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#ValueStringList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneIdSet",
+                        "smithy.api#documentation": "<p>The IDs of the Availability Zones for the attachment.</p>",
+                        "smithy.api#xmlName": "availabilityZoneIdSet"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the attachment.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreationTime",
+                        "smithy.api#documentation": "<p>The date and time the attachment was created.</p>",
+                        "smithy.api#xmlName": "creationTime"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags for the attachment.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a transit gateway network function attachment, including the attachment ID, the transit gateway, the endpoint service,\n            the Availability Zones, and the state of the attachment.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#TransitGatewayNetworkFunctionAttachment",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#TransitGatewayNetworkInterfaceIdList": {
             "type": "list",
             "member": {
@@ -141300,6 +142435,40 @@
                 }
             }
         },
+        "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceMode": {
+            "type": "enum",
+            "members": {
+                "always_on": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "always-on"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceStatus": {
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#TransitGatewayPeeringAttachmentOptions": {
             "type": "structure",
             "members": {
@@ -141309,6 +142478,46 @@
                         "aws.protocols#ec2QueryName": "DynamicRouting",
                         "smithy.api#documentation": "<p>Describes whether dynamic routing is enabled or disabled for the transit gateway peering attachment.</p>",
                         "smithy.api#xmlName": "dynamicRouting"
+                    }
+                },
+                "RequesterAllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RequesterAllowMultipathResilience",
+                        "smithy.api#documentation": "<p>Indicates whether the requester allows multipath resilience for the transit gateway peering attachment.</p>",
+                        "smithy.api#xmlName": "requesterAllowMultipathResilience"
+                    }
+                },
+                "RequesterMultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RequesterMultipathResilienceMode",
+                        "smithy.api#documentation": "<p>The multipath resilience mode for the requester. This value is present only when the requester\n            allows multipath resilience.</p>",
+                        "smithy.api#xmlName": "requesterMultipathResilienceMode"
+                    }
+                },
+                "AccepterAllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AccepterAllowMultipathResilience",
+                        "smithy.api#documentation": "<p>Indicates whether the accepter allows multipath resilience for the transit gateway peering attachment.</p>",
+                        "smithy.api#xmlName": "accepterAllowMultipathResilience"
+                    }
+                },
+                "AccepterMultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AccepterMultipathResilienceMode",
+                        "smithy.api#documentation": "<p>The multipath resilience mode for the accepter. This value is present only when the accepter\n            allows multipath resilience.</p>",
+                        "smithy.api#xmlName": "accepterMultipathResilienceMode"
+                    }
+                },
+                "MultipathResilienceStatus": {
+                    "target": "com.amazonaws.ec2#TransitGatewayPeeringAttachmentMultipathResilienceStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MultipathResilienceStatus",
+                        "smithy.api#documentation": "<p>The multipath resilience status of the transit gateway peering attachment. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> – Both the requester and the accepter allow multipath resilience.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> – Either the requester or the accepter allows multipath resilience, but not both.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> – Neither the requester nor the accepter allows multipath resilience.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "multipathResilienceStatus"
                     }
                 }
             },
@@ -143055,6 +144264,22 @@
                         "aws.protocols#ec2QueryName": "EnableTunnelLifecycleControl",
                         "smithy.api#documentation": "<p>Status of tunnel endpoint lifecycle control feature.</p>",
                         "smithy.api#xmlName": "enableTunnelLifecycleControl"
+                    }
+                },
+                "Phase1AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangesList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Phase1AdditionalKeyExchangeSet",
+                        "smithy.api#documentation": "<p>The permitted additional key exchange rounds for the VPN tunnel for phase 1 IKE\n            negotiations.</p>",
+                        "smithy.api#xmlName": "phase1AdditionalKeyExchangeSet"
+                    }
+                },
+                "Phase2AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangesList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Phase2AdditionalKeyExchangeSet",
+                        "smithy.api#documentation": "<p>The permitted additional key exchange rounds for the VPN tunnel for phase 2 IKE\n            negotiations.</p>",
+                        "smithy.api#xmlName": "phase2AdditionalKeyExchangeSet"
                     }
                 }
             },
@@ -148081,7 +149306,7 @@
                 "GlobalAcceleratorExclusion": {
                     "target": "com.amazonaws.ec2#VpcEncryptionControlExclusionStateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to exclude AWS Global Accelerator traffic from encryption enforcement.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to exclude Amazon Web Services Global Accelerator traffic from encryption enforcement.</p>"
                     }
                 },
                 "ApiGatewayV2Exclusion": {
@@ -148236,7 +149461,7 @@
                     "target": "com.amazonaws.ec2#VpcEncryptionControlExclusion",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GlobalAccelerator",
-                        "smithy.api#documentation": "<p>The exclusion configuration for AWS Global Accelerator traffic.</p>",
+                        "smithy.api#documentation": "<p>The exclusion configuration for Amazon Web Services Global Accelerator traffic.</p>",
                         "smithy.api#xmlName": "globalAccelerator"
                     }
                 },
@@ -148834,6 +150059,22 @@
                         "smithy.api#documentation": "<p>The payer responsibility settings for the endpoint.</p>",
                         "smithy.api#xmlName": "payerResponsibilitySet"
                     }
+                },
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentId",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment, if the connection is for a transit gateway\n            attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentId"
+                    }
+                },
+                "TransitGatewayAttachmentOwner": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TransitGatewayAttachmentOwner",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway attachment, if the\n            connection is for a transit gateway attachment.</p>",
+                        "smithy.api#xmlName": "transitGatewayAttachmentOwner"
+                    }
                 }
             },
             "traits": {
@@ -149097,6 +150338,14 @@
                         "smithy.api#documentation": "<p>The ID of the VPC peering connection.</p>",
                         "smithy.api#xmlName": "vpcPeeringConnectionId"
                     }
+                },
+                "MultipathResilienceStatus": {
+                    "target": "com.amazonaws.ec2#MultipathResilienceStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MultipathResilienceStatus",
+                        "smithy.api#documentation": "<p>The multipath resilience status of the VPC peering connection. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> – Both the requester and the accepter allow multipath resilience.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code> – Either the requester or the accepter allows multipath resilience, but not both.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> – Neither the requester nor the accepter allows multipath resilience.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "multipathResilienceStatus"
+                    }
                 }
             },
             "traits": {
@@ -149152,6 +150401,22 @@
                         "aws.protocols#ec2QueryName": "AllowEgressFromLocalVpcToRemoteClassicLink",
                         "smithy.api#documentation": "<p>Deprecated.</p>",
                         "smithy.api#xmlName": "allowEgressFromLocalVpcToRemoteClassicLink"
+                    }
+                },
+                "AllowMultipathResilience": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AllowMultipathResilience",
+                        "smithy.api#documentation": "<p>Indicates whether this side of the VPC peering connection allows multipath resilience.</p>",
+                        "smithy.api#xmlName": "allowMultipathResilience"
+                    }
+                },
+                "MultipathResilienceMode": {
+                    "target": "com.amazonaws.ec2#MultipathResilienceMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MultipathResilienceMode",
+                        "smithy.api#documentation": "<p>The multipath resilience mode for this side of the VPC peering connection. This value is present\n        only when this side allows multipath resilience.</p>",
+                        "smithy.api#xmlName": "multipathResilienceMode"
                     }
                 }
             },
@@ -149338,6 +150603,67 @@
                         "smithy.api#enumValue": "default"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#VpnAdditionalKeyExchange": {
+            "type": "structure",
+            "members": {
+                "AdditionalKeyExchangeRound": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AdditionalKeyExchangeRound",
+                        "smithy.api#documentation": "<p>The additional key exchange round number.</p>",
+                        "smithy.api#xmlName": "additionalKeyExchangeRound"
+                    }
+                },
+                "KeyExchangeMethods": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangeMethodsList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "KeyExchangeMethodSet",
+                        "smithy.api#documentation": "<p>The key exchange method numbers permitted for this round.</p>",
+                        "smithy.api#xmlName": "keyExchangeMethodSet"
+                    }
+                },
+                "Requirement": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangeRequirement",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Requirement",
+                        "smithy.api#documentation": "<p>Indicates whether this round is mandatory.</p>",
+                        "smithy.api#xmlName": "requirement"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an additional key exchange round that is permitted for the VPN\n            tunnel.</p>"
+            }
+        },
+        "com.amazonaws.ec2#VpnAdditionalKeyExchangeRequest": {
+            "type": "structure",
+            "members": {
+                "AdditionalKeyExchangeRound": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangeRound",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The additional key exchange round number.</p>\n         <p>Valid range: Minimum value of 1. Maximum value of 7.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyExchangeMethods": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangeMethodsRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key exchange method numbers that are permitted for this round. The method\n            numbers are the IANA IKEv2 key exchange method transform IDs.</p>\n         <p>A <code>required</code> round must specify at least one method. An\n            <code>optional</code> round can omit this parameter or specify an empty list.\n            If omitted or empty for an optional round, the round is disabled.</p>\n         <p>IKEv2 requires that the initial Diffie-Hellman exchange and each required round use a\n            different key exchange method. The permitted methods must allow a distinct method to be\n            selected for each of them.</p>\n         <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code> | <code>35</code> | <code>36</code> | <code>37</code>\n         </p>",
+                        "smithy.api#xmlName": "KeyExchangeMethod"
+                    }
+                },
+                "Requirement": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangeRequirement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this round is mandatory. If\n            <code>required</code>, the tunnel isn't established unless the customer gateway\n            device negotiates this round. If <code>optional</code>, the round is negotiated only\n            if the customer gateway device supports it.</p>\n         <p>Valid values: <code>required</code> | <code>optional</code>\n         </p>\n         <p>Default: <code>required</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an additional key exchange round for the VPN tunnel, as defined in RFC\n            9370.</p>"
             }
         },
         "com.amazonaws.ec2#VpnConcentrator": {
@@ -150158,14 +151484,14 @@
                 "Phase1DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase1DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> |\n                <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> |\n                <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> |\n                <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> |\n                <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code> |\n                <code>35</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1DHGroupNumber"
                     }
                 },
                 "Phase2DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase2DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations.</p>\n         <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code> | <code>35</code> | <code>36</code> | <code>37</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2DHGroupNumber"
                     }
                 },
@@ -150192,6 +151518,20 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Turn on or off tunnel endpoint lifecycle control feature.</p>"
+                    }
+                },
+                "Phase1AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangesRequestSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more additional key exchange rounds that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations. Additional key exchanges occur after the initial\n            Diffie-Hellman exchange. Each round must have a unique round number.</p>\n         <p>Additional key exchanges are supported only with IKEv2. You can't specify a\n            <code>required</code> round if <code>IKEVersions</code> contains only\n            <code>ikev1</code>.</p>",
+                        "smithy.api#xmlName": "Phase1AdditionalKeyExchange"
+                    }
+                },
+                "Phase2AdditionalKeyExchanges": {
+                    "target": "com.amazonaws.ec2#AdditionalKeyExchangesRequestSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more additional key exchange rounds that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations. Additional key exchanges occur after the initial\n            Diffie-Hellman exchange. Each round must have a unique round number.</p>\n         <p>Additional key exchanges are supported only with IKEv2. You can't specify a\n            <code>required</code> round if <code>IKEVersions</code> contains only\n            <code>ikev1</code>.</p>",
+                        "smithy.api#xmlName": "Phase2AdditionalKeyExchange"
                     }
                 }
             },

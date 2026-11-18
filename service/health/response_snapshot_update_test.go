@@ -141,11 +141,93 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_ConfigureTags(t *testing.T) {
+	want := &ConfigureTagsOutput{
+		ConfiguredTagKeys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.ConfigureTags, schemas.ConfigureTagsResponse, schemas.ConfigureTagsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ConfigureTags.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ConfigureTagsForOrganization(t *testing.T) {
+	want := &ConfigureTagsForOrganizationOutput{
+		ConfiguredTagKeys: []types.TagKeyForOrganization{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.ConfigureTagsForOrganization, schemas.ConfigureTagsForOrganizationResponse, schemas.ConfigureTagsForOrganizationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ConfigureTagsForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeAffectedAccountsForOrganization(t *testing.T) {
 	want := &DescribeAffectedAccountsForOrganizationOutput{
 		AffectedAccounts: []string{
 			"__Member__",
 			"__Member__",
+		},
+		AffectedAccountEntities: []types.AccountEntity{
+			{
+				AccountId: ptr.String("__AccountId__"),
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				AccountId: ptr.String("__AccountId__"),
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
 		},
 		EventScopeCode: types.EventScopeCode("PUBLIC"),
 		NextToken:      ptr.String("__NextToken__"),
@@ -181,6 +263,12 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -196,6 +284,12 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -237,6 +331,12 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testi
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -252,6 +352,12 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testi
 				AwsAccountId:    ptr.String("__AwsAccountId__"),
 				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StatusCode:      types.EntityStatusCode("IMPAIRED"),
+				ResourceTags: map[string]string{
+					"key0": "__Value__",
+				},
+				AccountTags: map[string]string{
+					"key0": "__Value__",
+				},
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -908,6 +1014,196 @@ func TestUpdateResponseSnapshot_DescribeServiceLifecycle(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeTagKeys(t *testing.T) {
+	want := &DescribeTagKeysOutput{
+		Keys: []types.ResourceTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTagKeys, schemas.DescribeTagKeysResponse, schemas.DescribeTagKeysResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTagKeys.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeTagKeysForOrganization(t *testing.T) {
+	want := &DescribeTagKeysForOrganizationOutput{
+		Keys: []types.OrganizationTagKey{
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+			{
+				Key:                   ptr.String("__Key__"),
+				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTagKeysForOrganization, schemas.DescribeTagKeysForOrganizationResponse, schemas.DescribeTagKeysForOrganizationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTagKeysForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeTags(t *testing.T) {
+	want := &DescribeTagsOutput{
+		Tags: []types.AccountTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.AccountTagType("ACCOUNT_RESOURCE_TAG"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.AccountTagType("ACCOUNT_RESOURCE_TAG"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsResponse, schemas.DescribeTagsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTags.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeTagsForOrganization(t *testing.T) {
+	want := &DescribeTagsForOrganizationOutput{
+		Tags: []types.OrganizationTag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+				Type:  types.OrganizationTagType("ORGANIZATION_RESOURCE_TAG"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTagsForOrganization, schemas.DescribeTagsForOrganizationResponse, schemas.DescribeTagsForOrganizationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTagsForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeTagsOnboardingStatus(t *testing.T) {
+	want := &DescribeTagsOnboardingStatusOutput{
+		Status: types.TagsOnboardingStatus("ENABLED"),
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTagsOnboardingStatus, schemas.DescribeTagsOnboardingStatusResponse, schemas.DescribeTagsOnboardingStatusResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTagsOnboardingStatus.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeTagsOnboardingStatusForOrganization(t *testing.T) {
+	want := &DescribeTagsOnboardingStatusForOrganizationOutput{
+		Status: types.TagsOnboardingStatusForOrganization("ENABLED"),
+	}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTagsOnboardingStatusForOrganization, schemas.DescribeTagsOnboardingStatusForOrganizationResponse, schemas.DescribeTagsOnboardingStatusForOrganizationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTagsOnboardingStatusForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DisableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &DisableHealthServiceAccessForOrganizationOutput{}
 	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
@@ -930,6 +1226,50 @@ func TestUpdateResponseSnapshot_DisableHealthServiceAccessForOrganization(t *tes
 	}
 }
 
+func TestUpdateResponseSnapshot_DisableTags(t *testing.T) {
+	want := &DisableTagsOutput{}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DisableTags, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisableTags.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DisableTagsForOrganization(t *testing.T) {
+	want := &DisableTagsForOrganizationOutput{}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.DisableTagsForOrganization, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisableTagsForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_EnableHealthServiceAccessForOrganization(t *testing.T) {
 	want := &EnableHealthServiceAccessForOrganizationOutput{}
 	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
@@ -948,6 +1288,50 @@ func TestUpdateResponseSnapshot_EnableHealthServiceAccessForOrganization(t *test
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("EnableHealthServiceAccessForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_EnableTags(t *testing.T) {
+	want := &EnableTagsOutput{}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.EnableTags, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("EnableTags.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_EnableTagsForOrganization(t *testing.T) {
+	want := &EnableTagsForOrganizationOutput{}
+	proto := rpcv2.NewCBOR(schemas.AWSHealth_20160804)
+	opSchema := smithy.NewOperationSchema(schemas.EnableTagsForOrganization, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("EnableTagsForOrganization.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

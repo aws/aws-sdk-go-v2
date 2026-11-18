@@ -2485,6 +2485,11 @@ func validateCspmProviderConfiguration(v types.CspmProviderConfiguration) error 
 			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.CspmProviderConfigurationMemberGCP:
+		if err := validateGcpProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[GCP]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2502,6 +2507,11 @@ func validateCspmProviderUpdateConfiguration(v types.CspmProviderUpdateConfigura
 	case *types.CspmProviderUpdateConfigurationMemberAzure:
 		if err := validateAzureUpdateConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.CspmProviderUpdateConfigurationMemberGCP:
+		if err := validateGcpUpdateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[GCP]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -2574,6 +2584,68 @@ func validateFindingsOutput(v *types.FindingsOutput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FindingsOutput"}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpProviderConfiguration(v *types.GcpProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpProviderConfiguration"}
+	if v.AWSConfigConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AWSConfigConnectorArn"))
+	}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateGcpScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GCPRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GCPRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpScopeConfiguration(v *types.GcpScopeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpScopeConfiguration"}
+	if len(v.ScopeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGcpUpdateConfiguration(v *types.GcpUpdateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GcpUpdateConfiguration"}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateGcpScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GCPRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GCPRegions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2801,6 +2873,11 @@ func validateProviderConfiguration(v types.ProviderConfiguration) error {
 			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ProviderConfigurationMemberGCP:
+		if err := validateGcpProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[GCP]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProviderConfigurationMemberServiceNow:
 		if err := validateServiceNowProviderConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[ServiceNow]", err.(smithy.InvalidParamsError))
@@ -2823,6 +2900,11 @@ func validateProviderUpdateConfiguration(v types.ProviderUpdateConfiguration) er
 	case *types.ProviderUpdateConfigurationMemberAzure:
 		if err := validateAzureUpdateConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProviderUpdateConfigurationMemberGCP:
+		if err := validateGcpUpdateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[GCP]", err.(smithy.InvalidParamsError))
 		}
 
 	}

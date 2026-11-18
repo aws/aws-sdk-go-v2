@@ -2,6 +2,27 @@
 
 package types
 
+type AnalyzerStatus string
+
+// Enum values for AnalyzerStatus
+const (
+	// The analyzer is built and serving queries.
+	AnalyzerStatusActive AnalyzerStatus = "ACTIVE"
+	// The analyzer is being backfilled and isn't yet serving queries.
+	AnalyzerStatusBuilding AnalyzerStatus = "BUILDING"
+)
+
+// Values returns all known values for AnalyzerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyzerStatus) Values() []AnalyzerStatus {
+	return []AnalyzerStatus{
+		"ACTIVE",
+		"BUILDING",
+	}
+}
+
 type DataType string
 
 // Enum values for DataType
@@ -54,6 +75,41 @@ func (IndexMode) Values() []IndexMode {
 	return []IndexMode{
 		"CLASSIC",
 		"ENHANCED",
+	}
+}
+
+type LanguageCode string
+
+// Enum values for LanguageCode
+const (
+	LanguageCodeEn LanguageCode = "en"
+	LanguageCodeFr LanguageCode = "fr"
+	LanguageCodeEs LanguageCode = "es"
+	LanguageCodePt LanguageCode = "pt"
+	LanguageCodeIt LanguageCode = "it"
+	LanguageCodeDe LanguageCode = "de"
+	LanguageCodeNl LanguageCode = "nl"
+	LanguageCodeZh LanguageCode = "zh"
+	LanguageCodeJa LanguageCode = "ja"
+	LanguageCodeKo LanguageCode = "ko"
+)
+
+// Values returns all known values for LanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en",
+		"fr",
+		"es",
+		"pt",
+		"it",
+		"de",
+		"nl",
+		"zh",
+		"ja",
+		"ko",
 	}
 }
 

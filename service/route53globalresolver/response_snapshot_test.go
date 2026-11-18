@@ -522,16 +522,18 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 
 func TestCheckResponseSnapshot_CreateAccessSource(t *testing.T) {
 	want := &CreateAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Segment:               ptr.String("__Segment__"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateAccessSource.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -542,12 +544,14 @@ func TestCheckResponseSnapshot_CreateAccessSource(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.CreateAccessSource(context.Background(), &CreateAccessSourceInput{
-		Cidr:          ptr.String("__Cidr__"),
-		ClientToken:   ptr.String("__ClientToken__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
+		Cidr:                  ptr.String("__Cidr__"),
+		ClientToken:           ptr.String("__ClientToken__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Segment:               ptr.String("__Segment__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -594,6 +598,92 @@ func TestCheckResponseSnapshot_CreateAccessToken(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateAccessToken.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateCoreNetworkEndpoint(t *testing.T) {
+	want := &CreateCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateCoreNetworkEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCoreNetworkEndpoint(context.Background(), &CreateCoreNetworkEndpointInput{
+		ClientToken:      ptr.String("__ClientToken__"),
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpInputItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCoreNetworkEndpoint.response", err)
 	}
 }
 
@@ -731,13 +821,14 @@ func TestCheckResponseSnapshot_CreateFirewallRule(t *testing.T) {
 
 func TestCheckResponseSnapshot_CreateGlobalResolver(t *testing.T) {
 	want := &CreateGlobalResolverOutput{
-		Id:            ptr.String("__Id__"),
-		Arn:           ptr.String("__Arn__"),
-		ClientToken:   ptr.String("__ClientToken__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Description:   ptr.String("__Description__"),
-		DnsName:       ptr.String("__DnsName__"),
-		IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+		Id:             ptr.String("__Id__"),
+		Arn:            ptr.String("__Arn__"),
+		ClientToken:    ptr.String("__ClientToken__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Description:    ptr.String("__Description__"),
+		DnsName:        ptr.String("__DnsName__"),
+		IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 		Ipv4Addresses: []string{
 			"__Member__",
 			"__Member__",
@@ -767,6 +858,7 @@ func TestCheckResponseSnapshot_CreateGlobalResolver(t *testing.T) {
 		ClientToken:         ptr.String("__ClientToken__"),
 		Description:         ptr.String("__Description__"),
 		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus:      types.PublicIpStatus("ENABLED_RESERVED"),
 		Name:                ptr.String("__Name__"),
 		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
 		Regions: []string{
@@ -787,16 +879,18 @@ func TestCheckResponseSnapshot_CreateGlobalResolver(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteAccessSource(t *testing.T) {
 	want := &DeleteAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Segment:               ptr.String("__Segment__"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAccessSource.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -839,6 +933,64 @@ func TestCheckResponseSnapshot_DeleteAccessToken(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAccessToken.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteCoreNetworkEndpoint(t *testing.T) {
+	want := &DeleteCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCoreNetworkEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCoreNetworkEndpoint(context.Background(), &DeleteCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCoreNetworkEndpoint.response", err)
 	}
 }
 
@@ -1087,16 +1239,18 @@ func TestCheckResponseSnapshot_EnableDNSView(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetAccessSource(t *testing.T) {
 	want := &GetAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Segment:               ptr.String("__Segment__"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAccessSource.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1147,6 +1301,64 @@ func TestCheckResponseSnapshot_GetAccessToken(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAccessToken.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCoreNetworkEndpoint(t *testing.T) {
+	want := &GetCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCoreNetworkEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCoreNetworkEndpoint(context.Background(), &GetCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCoreNetworkEndpoint.response", err)
 	}
 }
 
@@ -1280,7 +1492,8 @@ func TestCheckResponseSnapshot_GetGlobalResolver(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+		IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGlobalResolver.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1389,28 +1602,32 @@ func TestCheckResponseSnapshot_ListAccessSources(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		AccessSources: []types.AccessSourcesItem{
 			{
-				Arn:           ptr.String("__Arn__"),
-				Cidr:          ptr.String("__Cidr__"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Id:            ptr.String("__Id__"),
-				IpAddressType: types.IpAddressType("IPV4"),
-				Name:          ptr.String("__Name__"),
-				DnsViewId:     ptr.String("__DnsViewId__"),
-				Protocol:      types.DnsProtocol("DO53"),
-				Status:        types.CRResourceStatus("CREATING"),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                   ptr.String("__Arn__"),
+				Cidr:                  ptr.String("__Cidr__"),
+				CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+				CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Id:                    ptr.String("__Id__"),
+				IpAddressType:         types.IpAddressType("IPV4"),
+				Name:                  ptr.String("__Name__"),
+				DnsViewId:             ptr.String("__DnsViewId__"),
+				Protocol:              types.DnsProtocol("DO53"),
+				Segment:               ptr.String("__Segment__"),
+				Status:                types.CRResourceStatus("CREATING"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				Arn:           ptr.String("__Arn__"),
-				Cidr:          ptr.String("__Cidr__"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Id:            ptr.String("__Id__"),
-				IpAddressType: types.IpAddressType("IPV4"),
-				Name:          ptr.String("__Name__"),
-				DnsViewId:     ptr.String("__DnsViewId__"),
-				Protocol:      types.DnsProtocol("DO53"),
-				Status:        types.CRResourceStatus("CREATING"),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                   ptr.String("__Arn__"),
+				Cidr:                  ptr.String("__Cidr__"),
+				CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+				CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Id:                    ptr.String("__Id__"),
+				IpAddressType:         types.IpAddressType("IPV4"),
+				Name:                  ptr.String("__Name__"),
+				DnsViewId:             ptr.String("__DnsViewId__"),
+				Protocol:              types.DnsProtocol("DO53"),
+				Segment:               ptr.String("__Segment__"),
+				Status:                types.CRResourceStatus("CREATING"),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -1492,6 +1709,114 @@ func TestCheckResponseSnapshot_ListAccessTokens(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListAccessTokens.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCoreNetworkEndpoints(t *testing.T) {
+	want := &ListCoreNetworkEndpointsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		CoreNetworkEndpoints: []types.CoreNetworkEndpointsItem{
+			{
+				Arn: ptr.String("__Arn__"),
+				AvailableRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GlobalResolverId: ptr.String("__GlobalResolverId__"),
+				Id:               ptr.String("__Id__"),
+				IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Name:      ptr.String("__Name__"),
+				Status:    types.CRResourceStatus("CREATING"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+				AvailableRegions: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				GlobalResolverId: ptr.String("__GlobalResolverId__"),
+				Id:               ptr.String("__Id__"),
+				IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Ipv4Address: ptr.String("__Ipv4Address__"),
+						Ipv6Address: ptr.String("__Ipv6Address__"),
+						DnsLabel:    ptr.String("__DnsLabel__"),
+						DnsName:     ptr.String("__DnsName__"),
+						RegionScope: types.RegionScopeType("ALL"),
+						Regions: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				Name:      ptr.String("__Name__"),
+				Status:    types.CRResourceStatus("CREATING"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCoreNetworkEndpoints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCoreNetworkEndpoints(context.Background(), &ListCoreNetworkEndpointsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: map[string][]string{
+			"key0": {
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCoreNetworkEndpoints.response", err)
 	}
 }
 
@@ -1724,7 +2049,8 @@ func TestCheckResponseSnapshot_ListGlobalResolvers(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+				IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+				PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 			},
 			{
 				Id:                  ptr.String("__Id__"),
@@ -1749,7 +2075,8 @@ func TestCheckResponseSnapshot_ListGlobalResolvers(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+				IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+				PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 			},
 		},
 	}
@@ -1991,16 +2318,18 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateAccessSource(t *testing.T) {
 	want := &UpdateAccessSourceOutput{
-		Arn:           ptr.String("__Arn__"),
-		Cidr:          ptr.String("__Cidr__"),
-		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Id:            ptr.String("__Id__"),
-		IpAddressType: types.IpAddressType("IPV4"),
-		Name:          ptr.String("__Name__"),
-		DnsViewId:     ptr.String("__DnsViewId__"),
-		Protocol:      types.DnsProtocol("DO53"),
-		Status:        types.CRResourceStatus("CREATING"),
-		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Arn:                   ptr.String("__Arn__"),
+		Cidr:                  ptr.String("__Cidr__"),
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Id:                    ptr.String("__Id__"),
+		IpAddressType:         types.IpAddressType("IPV4"),
+		Name:                  ptr.String("__Name__"),
+		DnsViewId:             ptr.String("__DnsViewId__"),
+		Protocol:              types.DnsProtocol("DO53"),
+		Segment:               ptr.String("__Segment__"),
+		Status:                types.CRResourceStatus("CREATING"),
+		UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateAccessSource.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2013,6 +2342,7 @@ func TestCheckResponseSnapshot_UpdateAccessSource(t *testing.T) {
 	got, err := svc.UpdateAccessSource(context.Background(), &UpdateAccessSourceInput{
 		AccessSourceId: ptr.String("__AccessSourceId__"),
 		Cidr:           ptr.String("__Cidr__"),
+		DnsViewId:      ptr.String("__DnsViewId__"),
 		IpAddressType:  types.IpAddressType("IPV4"),
 		Name:           ptr.String("__Name__"),
 		Protocol:       types.DnsProtocol("DO53"),
@@ -2047,6 +2377,89 @@ func TestCheckResponseSnapshot_UpdateAccessToken(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAccessToken.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCoreNetworkEndpoint(t *testing.T) {
+	want := &UpdateCoreNetworkEndpointOutput{
+		Arn: ptr.String("__Arn__"),
+		AvailableRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+		CoreNetworkArn:   ptr.String("__CoreNetworkArn__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		GlobalResolverId: ptr.String("__GlobalResolverId__"),
+		Id:               ptr.String("__Id__"),
+		IpAddresses: []types.CoreNetworkEndpointDnsIpItem{
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				DnsName:     ptr.String("__DnsName__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Name:      ptr.String("__Name__"),
+		Status:    types.CRResourceStatus("CREATING"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCoreNetworkEndpoint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCoreNetworkEndpoint(context.Background(), &UpdateCoreNetworkEndpointInput{
+		CoreNetworkEndpointId: ptr.String("__CoreNetworkEndpointId__"),
+		Name:                  ptr.String("__Name__"),
+		UpdateIpAddresses: []types.UpdateIpAddressEntry{
+			{
+				Operation:   types.UpdateIpAddressOperation("ADD"),
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Operation:   types.UpdateIpAddressOperation("ADD"),
+				Ipv4Address: ptr.String("__Ipv4Address__"),
+				Ipv6Address: ptr.String("__Ipv6Address__"),
+				DnsLabel:    ptr.String("__DnsLabel__"),
+				RegionScope: types.RegionScopeType("ALL"),
+				Regions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCoreNetworkEndpoint.response", err)
 	}
 }
 
@@ -2193,7 +2606,8 @@ func TestCheckResponseSnapshot_UpdateGlobalResolver(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		IpAddressType: types.GlobalResolverIpAddressType("IPV4"),
+		IpAddressType:  types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus: types.PublicIpStatus("ENABLED_RESERVED"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateGlobalResolver.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2209,6 +2623,7 @@ func TestCheckResponseSnapshot_UpdateGlobalResolver(t *testing.T) {
 		ObservabilityRegion: ptr.String("__ObservabilityRegion__"),
 		Description:         ptr.String("__Description__"),
 		IpAddressType:       types.GlobalResolverIpAddressType("IPV4"),
+		PublicIpStatus:      types.PublicIpStatus("ENABLED_RESERVED"),
 		Regions: []string{
 			"__Member__",
 			"__Member__",

@@ -1,3 +1,7 @@
+# v1.53.0 (2026-11-16)
+
+* **Feature**: Amazon EMR Serverless now supports Flex, a new execution option for running data processing jobs on spare compute capacity at a discount.
+
 # v1.52.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

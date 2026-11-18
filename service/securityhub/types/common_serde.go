@@ -88,6 +88,12 @@ func serializeCspmProviderConfiguration(s smithy.ShapeSerializer, schema *smithy
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *CspmProviderConfigurationMemberGCP:
+		s.WriteUnion(schema, schemas.CspmProviderConfiguration_GCP)
+		s.WriteStruct(schemas.CspmProviderConfiguration_GCP)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -99,6 +105,12 @@ func serializeCspmProviderDetail(s smithy.ShapeSerializer, schema *smithy.Schema
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *CspmProviderDetailMemberGCP:
+		s.WriteUnion(schema, schemas.CspmProviderDetail_GCP)
+		s.WriteStruct(schemas.CspmProviderDetail_GCP)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -107,6 +119,12 @@ func serializeCspmProviderUpdateConfiguration(s smithy.ShapeSerializer, schema *
 	case *CspmProviderUpdateConfigurationMemberAzure:
 		s.WriteUnion(schema, schemas.CspmProviderUpdateConfiguration_Azure)
 		s.WriteStruct(schemas.CspmProviderUpdateConfiguration_Azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *CspmProviderUpdateConfigurationMemberGCP:
+		s.WriteUnion(schema, schemas.CspmProviderUpdateConfiguration_GCP)
+		s.WriteStruct(schemas.CspmProviderUpdateConfiguration_GCP)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -202,6 +220,12 @@ func serializeProviderConfiguration(s smithy.ShapeSerializer, schema *smithy.Sch
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ProviderConfigurationMemberGCP:
+		s.WriteUnion(schema, schemas.ProviderConfiguration_GCP)
+		s.WriteStruct(schemas.ProviderConfiguration_GCP)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ProviderConfigurationMemberJiraCloud:
 		s.WriteUnion(schema, schemas.ProviderConfiguration_JiraCloud)
 		s.WriteStruct(schemas.ProviderConfiguration_JiraCloud)
@@ -225,6 +249,12 @@ func serializeProviderDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ProviderDetailMemberGCP:
+		s.WriteUnion(schema, schemas.ProviderDetail_GCP)
+		s.WriteStruct(schemas.ProviderDetail_GCP)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ProviderDetailMemberJiraCloud:
 		s.WriteUnion(schema, schemas.ProviderDetail_JiraCloud)
 		s.WriteStruct(schemas.ProviderDetail_JiraCloud)
@@ -245,6 +275,12 @@ func serializeProviderUpdateConfiguration(s smithy.ShapeSerializer, schema *smit
 	case *ProviderUpdateConfigurationMemberAzure:
 		s.WriteUnion(schema, schemas.ProviderUpdateConfiguration_Azure)
 		s.WriteStruct(schemas.ProviderUpdateConfiguration_Azure)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ProviderUpdateConfigurationMemberGCP:
+		s.WriteUnion(schema, schemas.ProviderUpdateConfiguration_GCP)
+		s.WriteStruct(schemas.ProviderUpdateConfiguration_GCP)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -354,6 +390,10 @@ func deserializeCspmProviderConfiguration(d smithy.ShapeDeserializer, s *smithy.
 			vv := &CspmProviderConfigurationMemberAzure{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.CspmProviderConfiguration_GCP:
+			vv := &CspmProviderConfigurationMemberGCP{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
@@ -366,6 +406,10 @@ func deserializeCspmProviderDetail(d smithy.ShapeDeserializer, s *smithy.Schema,
 			vv := &CspmProviderDetailMemberAzure{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.CspmProviderDetail_GCP:
+			vv := &CspmProviderDetailMemberGCP{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
@@ -376,6 +420,10 @@ func deserializeCspmProviderUpdateConfiguration(d smithy.ShapeDeserializer, s *s
 		switch ms {
 		case schemas.CspmProviderUpdateConfiguration_Azure:
 			vv := &CspmProviderUpdateConfigurationMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.CspmProviderUpdateConfiguration_GCP:
+			vv := &CspmProviderUpdateConfigurationMemberGCP{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -478,6 +526,10 @@ func deserializeProviderConfiguration(d smithy.ShapeDeserializer, s *smithy.Sche
 			vv := &ProviderConfigurationMemberAzure{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ProviderConfiguration_GCP:
+			vv := &ProviderConfigurationMemberGCP{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ProviderConfiguration_JiraCloud:
 			vv := &ProviderConfigurationMemberJiraCloud{}
 			*v = vv
@@ -498,6 +550,10 @@ func deserializeProviderDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 			vv := &ProviderDetailMemberAzure{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ProviderDetail_GCP:
+			vv := &ProviderDetailMemberGCP{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ProviderDetail_JiraCloud:
 			vv := &ProviderDetailMemberJiraCloud{}
 			*v = vv
@@ -516,6 +572,10 @@ func deserializeProviderUpdateConfiguration(d smithy.ShapeDeserializer, s *smith
 		switch ms {
 		case schemas.ProviderUpdateConfiguration_Azure:
 			vv := &ProviderUpdateConfigurationMemberAzure{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ProviderUpdateConfiguration_GCP:
+			vv := &ProviderUpdateConfigurationMemberGCP{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ProviderUpdateConfiguration_JiraCloud:
@@ -2606,6 +2666,14 @@ func serializeFreeTrialStatusList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeFreeTrialStatusValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FreeTrialStatusValue) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeGcpRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -8378,6 +8446,27 @@ func deserializeFreeTrialStatusValueList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		*v = append(*v, FreeTrialStatusValue(vv))
+		return nil
+	})
+}
+
+func deserializeGcpRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

@@ -61,6 +61,43 @@ func (v *Compatibility) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// How the connector's network interfaces get an Elastic IP address.
+type ElasticIpConfiguration struct {
+
+	// The Elastic IP type for the connector's network interfaces.
+	//
+	// This member is required.
+	Type ElasticIpType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ElasticIpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElasticIpConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElasticIpConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.ElasticIpConfiguration_Type, string(v.Type))
+	}
+}
+func (v *ElasticIpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElasticIpConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElasticIpConfiguration_Type:
+			var ev string
+			if err := d.ReadString(schemas.ElasticIpConfiguration_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ElasticIpType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The network configuration for a network connector. Different connector types
 // use different configuration shapes; specify the configuration that matches your
 // connector type.
@@ -343,6 +380,11 @@ type NetworkConnectorVpcEgressConfiguration struct {
 	// are MicroVm and WebFunction . Specify exactly one value.
 	AssociatedComputeResourceTypes []ComputeResourceType
 
+	// The Elastic IP configuration for the connector's ENIs. Specify ServiceManaged
+	// to have Lambda assign a service-managed Elastic IP address to each ENI. The
+	// operator role must allow ec2:AllocateAddress and ec2:AssociateAddress .
+	ElasticIpConfiguration *ElasticIpConfiguration
+
 	// The network protocol for the connector. Specify IPv4 for IPv4-only networking,
 	// or DualStack for both IPv4 and IPv6.
 	NetworkProtocol NetworkProtocol
@@ -368,6 +410,11 @@ func (v *NetworkConnectorVpcEgressConfiguration) SerializeMembers(s smithy.Shape
 	if v.AssociatedComputeResourceTypes != nil {
 		serializeAssociatedComputeResourceTypesList(s, schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes, v.AssociatedComputeResourceTypes)
 	}
+	if v.ElasticIpConfiguration != nil {
+		s.WriteStruct(schemas.NetworkConnectorVpcEgressConfiguration_ElasticIpConfiguration)
+		v.ElasticIpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.NetworkProtocol != "" {
 		s.WriteString(schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol, string(v.NetworkProtocol))
 	}
@@ -383,6 +430,9 @@ func (v *NetworkConnectorVpcEgressConfiguration) Deserialize(d smithy.ShapeDeser
 		switch s {
 		case schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes:
 			return deserializeAssociatedComputeResourceTypesList(d, schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes, &v.AssociatedComputeResourceTypes)
+		case schemas.NetworkConnectorVpcEgressConfiguration_ElasticIpConfiguration:
+			v.ElasticIpConfiguration = &ElasticIpConfiguration{}
+			return v.ElasticIpConfiguration.Deserialize(d)
 		case schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol:
 			var ev string
 			if err := d.ReadString(schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol, &ev); err != nil {

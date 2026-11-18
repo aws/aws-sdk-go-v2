@@ -55,7 +55,7 @@ type PutRestApiInput struct {
 
 	// Custom header parameters as part of the request. For example, to exclude
 	// DocumentationParts from an imported API, set ignore=documentation as a
-	// parameters value, as in the AWS CLI command of aws apigateway import-rest-api
+	// parameters value, as in the CLI command of aws apigateway import-rest-api
 	// --parameters ignore=documentation --body
 	// 'file:///path/to/imported-api-body.json' .
 	Parameters map[string]string

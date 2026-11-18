@@ -970,6 +970,26 @@ func (m *validateOpCreateInferenceRecommendationsJob) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInferenceRouter struct {
+}
+
+func (*validateOpCreateInferenceRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInferenceRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInferenceRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInferenceRouterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateJob struct {
 }
 
@@ -2150,6 +2170,26 @@ func (m *validateOpDeleteEndpoint) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEndpointPolicy struct {
+}
+
+func (*validateOpDeleteEndpointPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEndpointPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEndpointPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEndpointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteExperiment struct {
 }
 
@@ -2385,6 +2425,26 @@ func (m *validateOpDeleteInferenceExperiment) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteInferenceExperimentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteInferenceRouter struct {
+}
+
+func (*validateOpDeleteInferenceRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInferenceRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInferenceRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInferenceRouterInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3810,6 +3870,26 @@ func (m *validateOpDescribeInferenceRecommendationsJob) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeInferenceRouter struct {
+}
+
+func (*validateOpDescribeInferenceRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInferenceRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInferenceRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInferenceRouterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeJob struct {
 }
 
@@ -4650,6 +4730,26 @@ func (m *validateOpGetDeviceFleetReport) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEndpointPolicy struct {
+}
+
+func (*validateOpGetEndpointPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEndpointPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEndpointPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEndpointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLineageGroupPolicy struct {
 }
 
@@ -5265,6 +5365,26 @@ func (m *validateOpListUltraServersByReservedCapacity) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListUltraServersByReservedCapacityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutEndpointPolicy struct {
+}
+
+func (*validateOpPutEndpointPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutEndpointPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutEndpointPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutEndpointPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6490,6 +6610,26 @@ func (m *validateOpUpdateInferenceExperiment) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInferenceRouter struct {
+}
+
+func (*validateOpUpdateInferenceRouter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInferenceRouter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInferenceRouterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInferenceRouterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMlflowApp struct {
 }
 
@@ -7082,6 +7222,10 @@ func addOpCreateInferenceRecommendationsJobValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpCreateInferenceRecommendationsJob{}, middleware.After)
 }
 
+func addOpCreateInferenceRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInferenceRouter{}, middleware.After)
+}
+
 func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
@@ -7318,6 +7462,10 @@ func addOpDeleteEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEndpoint{}, middleware.After)
 }
 
+func addOpDeleteEndpointPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEndpointPolicy{}, middleware.After)
+}
+
 func addOpDeleteExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteExperiment{}, middleware.After)
 }
@@ -7364,6 +7512,10 @@ func addOpDeleteInferenceComponentValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteInferenceExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInferenceExperiment{}, middleware.After)
+}
+
+func addOpDeleteInferenceRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInferenceRouter{}, middleware.After)
 }
 
 func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
@@ -7650,6 +7802,10 @@ func addOpDescribeInferenceRecommendationsJobValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDescribeInferenceRecommendationsJob{}, middleware.After)
 }
 
+func addOpDescribeInferenceRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInferenceRouter{}, middleware.After)
+}
+
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
 }
@@ -7818,6 +7974,10 @@ func addOpGetDeviceFleetReportValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetDeviceFleetReport{}, middleware.After)
 }
 
+func addOpGetEndpointPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEndpointPolicy{}, middleware.After)
+}
+
 func addOpGetLineageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLineageGroupPolicy{}, middleware.After)
 }
@@ -7940,6 +8100,10 @@ func addOpListTrainingPlansValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListUltraServersByReservedCapacityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUltraServersByReservedCapacity{}, middleware.After)
+}
+
+func addOpPutEndpointPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutEndpointPolicy{}, middleware.After)
 }
 
 func addOpPutModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -8184,6 +8348,10 @@ func addOpUpdateInferenceComponentRuntimeConfigValidationMiddleware(stack *middl
 
 func addOpUpdateInferenceExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInferenceExperiment{}, middleware.After)
+}
+
+func addOpUpdateInferenceRouterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInferenceRouter{}, middleware.After)
 }
 
 func addOpUpdateMlflowAppValidationMiddleware(stack *middleware.Stack) error {
@@ -10718,6 +10886,24 @@ func validateCreateTemplateProviderList(v []types.CreateTemplateProvider) error 
 	}
 }
 
+func validateCrossRegionTrafficConfig(v *types.CrossRegionTrafficConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CrossRegionTrafficConfig"}
+	if v.MaxInvocationsPerSecondPerInstance == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxInvocationsPerSecondPerInstance"))
+	}
+	if v.MaxCrossRegionPercentPerEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxCrossRegionPercentPerEndpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomFileSystem(v types.CustomFileSystem) error {
 	if v == nil {
 		return nil
@@ -11264,6 +11450,38 @@ func validateDesiredWeightAndCapacityList(v []types.DesiredWeightAndCapacity) er
 	invalidParams := smithy.InvalidParamsError{Context: "DesiredWeightAndCapacityList"}
 	for i := range v {
 		if err := validateDesiredWeightAndCapacity(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestination(v *types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Destination"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationList(v []types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationList"}
+	for i := range v {
+		if err := validateDestination(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -15419,6 +15637,87 @@ func validateRollingUpdatePolicy(v *types.RollingUpdatePolicy) error {
 	}
 }
 
+func validateRoutingTarget(v *types.RoutingTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingTarget"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Destinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destinations"))
+	} else if v.Destinations != nil {
+		if err := validateDestinationList(v.Destinations); err != nil {
+			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AsyncInferenceConfig != nil {
+		if err := validateRoutingTargetAsyncInferenceConfig(v.AsyncInferenceConfig); err != nil {
+			invalidParams.AddNested("AsyncInferenceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingTargetAsyncInferenceConfig(v *types.RoutingTargetAsyncInferenceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingTargetAsyncInferenceConfig"}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateRoutingTargetAsyncInferenceOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingTargetAsyncInferenceOutputConfig(v *types.RoutingTargetAsyncInferenceOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingTargetAsyncInferenceOutputConfig"}
+	if v.S3OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if v.S3FailurePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3FailurePath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingTargetList(v []types.RoutingTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingTargetList"}
+	for i := range v {
+		if err := validateRoutingTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRSessionAppSettings(v *types.RSessionAppSettings) error {
 	if v == nil {
 		return nil
@@ -17854,6 +18153,11 @@ func validateOpCreateEndpointConfigInput(v *CreateEndpointConfigInput) error {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CrossRegionTrafficConfig != nil {
+		if err := validateCrossRegionTrafficConfig(v.CrossRegionTrafficConfig); err != nil {
+			invalidParams.AddNested("CrossRegionTrafficConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -18287,6 +18591,33 @@ func validateOpCreateInferenceRecommendationsJobInput(v *CreateInferenceRecommen
 	} else if v.InputConfig != nil {
 		if err := validateRecommendationJobInputConfig(v.InputConfig); err != nil {
 			invalidParams.AddNested("InputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInferenceRouterInput(v *CreateInferenceRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInferenceRouterInput"}
+	if v.InferenceRouterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceRouterName"))
+	}
+	if v.RoutingTargets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingTargets"))
+	} else if v.RoutingTargets != nil {
+		if err := validateRoutingTargetList(v.RoutingTargets); err != nil {
+			invalidParams.AddNested("RoutingTargets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {
@@ -19952,6 +20283,21 @@ func validateOpDeleteEndpointInput(v *DeleteEndpointInput) error {
 	}
 }
 
+func validateOpDeleteEndpointPolicyInput(v *DeleteEndpointPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEndpointPolicyInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteExperimentInput(v *DeleteExperimentInput) error {
 	if v == nil {
 		return nil
@@ -20139,6 +20485,21 @@ func validateOpDeleteInferenceExperimentInput(v *DeleteInferenceExperimentInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInferenceExperimentInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInferenceRouterInput(v *DeleteInferenceRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInferenceRouterInput"}
+	if v.InferenceRouterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceRouterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -21257,6 +21618,21 @@ func validateOpDescribeInferenceRecommendationsJobInput(v *DescribeInferenceReco
 	}
 }
 
+func validateOpDescribeInferenceRouterInput(v *DescribeInferenceRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInferenceRouterInput"}
+	if v.InferenceRouterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceRouterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeJobInput(v *DescribeJobInput) error {
 	if v == nil {
 		return nil
@@ -21905,6 +22281,21 @@ func validateOpGetDeviceFleetReportInput(v *GetDeviceFleetReportInput) error {
 	}
 }
 
+func validateOpGetEndpointPolicyInput(v *GetEndpointPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEndpointPolicyInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLineageGroupPolicyInput(v *GetLineageGroupPolicyInput) error {
 	if v == nil {
 		return nil
@@ -22400,6 +22791,24 @@ func validateOpListUltraServersByReservedCapacityInput(v *ListUltraServersByRese
 	invalidParams := smithy.InvalidParamsError{Context: "ListUltraServersByReservedCapacityInput"}
 	if v.ReservedCapacityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservedCapacityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutEndpointPolicyInput(v *PutEndpointPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutEndpointPolicyInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if v.ResourcePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -23587,6 +23996,28 @@ func validateOpUpdateInferenceExperimentInput(v *UpdateInferenceExperimentInput)
 	if v.ShadowModeConfig != nil {
 		if err := validateShadowModeConfig(v.ShadowModeConfig); err != nil {
 			invalidParams.AddNested("ShadowModeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInferenceRouterInput(v *UpdateInferenceRouterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInferenceRouterInput"}
+	if v.InferenceRouterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceRouterName"))
+	}
+	if v.RoutingTargets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingTargets"))
+	} else if v.RoutingTargets != nil {
+		if err := validateRoutingTargetList(v.RoutingTargets); err != nil {
+			invalidParams.AddNested("RoutingTargets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -402,6 +402,175 @@ func TestCheckRequestSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateFunction(t *testing.T) {
+	input := &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateQuestionSet(t *testing.T) {
+	input := &CreateQuestionSetInput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateQuestionSetVersion(t *testing.T) {
+	input := &CreateQuestionSetVersionInput{
+		Id:          ptr.String("__Id__"),
+		Sha256:      ptr.String("__Sha256__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateQuestionSetVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateQuestionSetVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateScheduleAction(t *testing.T) {
 	input := &CreateScheduleActionInput{
 		Id:         ptr.String("__Id__"),
@@ -526,6 +695,88 @@ func TestCheckRequestSnapshot_DeleteFeedPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteFunction(t *testing.T) {
+	input := &DeleteFunctionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteQuestionSet(t *testing.T) {
+	input := &DeleteQuestionSetInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteQuestionSetVersion(t *testing.T) {
+	input := &DeleteQuestionSetVersionInput{
+		Id:                 ptr.String("__Id__"),
+		QuestionSetVersion: ptr.String("__QuestionSetVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteQuestionSetVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQuestionSetVersion"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -722,6 +973,61 @@ func TestCheckRequestSnapshot_GetFixture(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetFunction(t *testing.T) {
+	input := &GetFunctionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetQuestionSet(t *testing.T) {
+	input := &GetQuestionSetInput{
+		Id:                 ptr.String("__Id__"),
+		QuestionSetVersion: ptr.String("__QuestionSetVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDictionaries(t *testing.T) {
 	input := &ListDictionariesInput{
 		MaxResults: ptr.Int32(1),
@@ -774,6 +1080,91 @@ func TestCheckRequestSnapshot_ListFeeds(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFeeds"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListFunctions(t *testing.T) {
+	input := &ListFunctionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListFunctions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFunctions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListQuestionSets(t *testing.T) {
+	input := &ListQuestionSetsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQuestionSets(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQuestionSets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListQuestionSetVersions(t *testing.T) {
+	input := &ListQuestionSetVersionsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQuestionSetVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQuestionSetVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1082,6 +1473,142 @@ func TestCheckRequestSnapshot_UpdateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_UpdateFunction(t *testing.T) {
+	input := &UpdateFunctionInput{
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateQuestionSet(t *testing.T) {
+	input := &UpdateQuestionSetInput{
+		Id: ptr.String("__Id__"),
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateRequestSnapshot_AssociateFeed(t *testing.T) {
 	input := &AssociateFeedInput{
 		Id:                     ptr.String("__Id__"),
@@ -1278,6 +1805,175 @@ func TestUpdateRequestSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateFunction(t *testing.T) {
+	input := &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateQuestionSet(t *testing.T) {
+	input := &CreateQuestionSetInput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateQuestionSetVersion(t *testing.T) {
+	input := &CreateQuestionSetVersionInput{
+		Id:          ptr.String("__Id__"),
+		Sha256:      ptr.String("__Sha256__"),
+		Description: ptr.String("__Description__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateQuestionSetVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateQuestionSetVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateScheduleAction(t *testing.T) {
 	input := &CreateScheduleActionInput{
 		Id:         ptr.String("__Id__"),
@@ -1402,6 +2098,88 @@ func TestUpdateRequestSnapshot_DeleteFeedPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFeedPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteFunction(t *testing.T) {
+	input := &DeleteFunctionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteQuestionSet(t *testing.T) {
+	input := &DeleteQuestionSetInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteQuestionSetVersion(t *testing.T) {
+	input := &DeleteQuestionSetVersionInput{
+		Id:                 ptr.String("__Id__"),
+		QuestionSetVersion: ptr.String("__QuestionSetVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteQuestionSetVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteQuestionSetVersion"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1598,6 +2376,61 @@ func TestUpdateRequestSnapshot_GetFixture(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetFunction(t *testing.T) {
+	input := &GetFunctionInput{
+		Id: ptr.String("__Id__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetQuestionSet(t *testing.T) {
+	input := &GetQuestionSetInput{
+		Id:                 ptr.String("__Id__"),
+		QuestionSetVersion: ptr.String("__QuestionSetVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetQuestionSet"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDictionaries(t *testing.T) {
 	input := &ListDictionariesInput{
 		MaxResults: ptr.Int32(1),
@@ -1650,6 +2483,91 @@ func TestUpdateRequestSnapshot_ListFeeds(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFeeds"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListFunctions(t *testing.T) {
+	input := &ListFunctionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListFunctions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListFunctions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListQuestionSets(t *testing.T) {
+	input := &ListQuestionSetsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQuestionSets(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQuestionSets"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListQuestionSetVersions(t *testing.T) {
+	input := &ListQuestionSetVersionsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListQuestionSetVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQuestionSetVersions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1955,6 +2873,142 @@ func TestUpdateRequestSnapshot_UpdateFeed(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFeed"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateFunction(t *testing.T) {
+	input := &UpdateFunctionInput{
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateFunction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFunction"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateQuestionSet(t *testing.T) {
+	input := &UpdateQuestionSetInput{
+		Id: ptr.String("__Id__"),
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateQuestionSet(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateQuestionSet"); err != nil {
 		t.Fatal(err)
 	}
 }

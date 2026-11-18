@@ -4865,6 +4865,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The connection type for the serverless cache.\n           Must be either <code>vpc</code> | <code>public</code>.\n           Use <code>vpc</code> to access the cache through a VPC endpoint, or <code>public</code> to access the cache over the internet.\n           If not specified, defaults to <code>vpc</code>.\n           This value cannot be changed after the serverless cache is created.\n           Setting this to <code>public</code> requires Valkey 9 or above.</p>"
                     }
+                },
+                "Integrations": {
+                    "target": "com.amazonaws.elasticache#IntegrationRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which serverless cache integrations to enable. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>dynamodb</code> – DynamoDB integration.</p>\n            </li>\n         </ul>\n         <p>DynamoDB integration requires the Valkey engine with a major engine version of 9 or above.\n           If not specified, no integrations are enabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10815,6 +10821,104 @@
         "com.amazonaws.elasticache#IntegerOptional": {
             "type": "integer"
         },
+        "com.amazonaws.elasticache#Integration": {
+            "type": "structure",
+            "members": {
+                "IntegrationType": {
+                    "target": "com.amazonaws.elasticache#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integration type. ElastiCache supports <code>dynamodb</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticache#IntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the integration. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enabled</code> – The integration is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code> – The integration is disabled.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An integration configured on the serverless cache, and its current status.\n           ElastiCache supports DynamoDB integration.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#IntegrationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticache#Integration",
+                "traits": {
+                    "smithy.api#xmlName": "Integration"
+                }
+            }
+        },
+        "com.amazonaws.elasticache#IntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "IntegrationType": {
+                    "target": "com.amazonaws.elasticache#IntegrationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integration type to enable.\n           Must be <code>dynamodb</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an integration to enable on the serverless cache when you create it.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#IntegrationRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticache#IntegrationRequest",
+                "traits": {
+                    "smithy.api#xmlName": "IntegrationRequest"
+                }
+            }
+        },
+        "com.amazonaws.elasticache#IntegrationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabling"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabling"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticache#IntegrationType": {
+            "type": "enum",
+            "members": {
+                "DYNAMODB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dynamodb"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticache#InvalidARNFault": {
             "type": "structure",
             "members": {
@@ -15091,7 +15195,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret in AWS Secrets Manager that contains the credentials for authenticating\n            with the source.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the secret in Secrets Manager that contains the credentials for authenticating\n            with the source.</p>"
                     }
                 }
             },
@@ -15255,6 +15359,12 @@
                     "target": "com.amazonaws.elasticache#MigrationSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides a summary of the migration status for the serverless cache.</p>"
+                    }
+                },
+                "Integrations": {
+                    "target": "com.amazonaws.elasticache#IntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configured integrations and their status.</p>"
                     }
                 }
             },

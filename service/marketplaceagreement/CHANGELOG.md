@@ -1,3 +1,7 @@
+# v1.32.0 (2026-11-17)
+
+* **Feature**: Adds buyer agreement request and approval APIs. Buyers can get, list and cancel agreement requests and start approvals, which organization administrators approve or reject. Buyers can share a contact when they create an agreement request, and sellers can retrieve it with GetAgreementContacts.
+
 # v1.31.0 (2026-11-10)
 
 * **Feature**: This release adds the freeTrialSummary.trialEndTime field to DescribeAgreement and the freeTrialEndTime field to SearchAgreements results, so you can see when an agreement's free trial ends.

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"monitors":[{"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","monitorStatus":"PENDING","monitorType":"VPC","targets":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}]},{"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","monitorStatus":"PENDING","monitorType":"VPC","targets":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}]}],"nextToken":"__NextToken__"}

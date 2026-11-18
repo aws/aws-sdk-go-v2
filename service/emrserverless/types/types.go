@@ -744,6 +744,38 @@ func (v *DiskEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// The Amazon EMR Serverless Flex settings for the job run.
+type FlexExecution struct {
+
+	// Enables Amazon EMR Serverless Flex capacity for the job run and defaults to
+	// false. If set to true, the job run uses Flex capacity.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *FlexExecution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlexExecution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlexExecution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.FlexExecution_enabled, *v.Enabled)
+	}
+}
+func (v *FlexExecution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlexExecution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlexExecution_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.FlexExecution_enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
 // The configurations for the Hive job driver.
 type Hive struct {
 
@@ -1261,6 +1293,9 @@ type JobRun struct {
 	// with Amazon EMR release 7.11.
 	ExecutionTimeoutMinutes *int64
 
+	// The Amazon EMR Serverless Flex settings for the job run.
+	FlexExecution *FlexExecution
+
 	// The applied image configuration.
 	ImageConfiguration *ImageConfiguration
 
@@ -1353,6 +1388,11 @@ func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExecutionTimeoutMinutes != nil {
 		s.WriteInt64(schemas.JobRun_executionTimeoutMinutes, *v.ExecutionTimeoutMinutes)
+	}
+	if v.FlexExecution != nil {
+		s.WriteStruct(schemas.JobRun_flexExecution)
+		v.FlexExecution.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.ImageConfiguration != nil {
 		s.WriteStruct(schemas.JobRun_imageConfiguration)
@@ -1456,6 +1496,9 @@ func (v *JobRun) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobRun_executionTimeoutMinutes:
 			v.ExecutionTimeoutMinutes = new(int64)
 			return d.ReadInt64(schemas.JobRun_executionTimeoutMinutes, v.ExecutionTimeoutMinutes)
+		case schemas.JobRun_flexExecution:
+			v.FlexExecution = &FlexExecution{}
+			return v.FlexExecution.Deserialize(d)
 		case schemas.JobRun_imageConfiguration:
 			v.ImageConfiguration = &ImageConfiguration{}
 			return v.ImageConfiguration.Deserialize(d)
@@ -1578,6 +1621,9 @@ type JobRunAttemptSummary struct {
 	// The attempt number of the job run execution.
 	Attempt *int32
 
+	// The Amazon EMR Serverless Flex settings for the job run attempt.
+	FlexExecution *FlexExecution
+
 	// The mode of the job run attempt.
 	Mode JobRunMode
 
@@ -1614,6 +1660,11 @@ func (v *JobRunAttemptSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExecutionRole != nil {
 		s.WriteString(schemas.JobRunAttemptSummary_executionRole, *v.ExecutionRole)
+	}
+	if v.FlexExecution != nil {
+		s.WriteStruct(schemas.JobRunAttemptSummary_flexExecution)
+		v.FlexExecution.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.JobRunAttemptSummary_id, *v.Id)
@@ -1664,6 +1715,9 @@ func (v *JobRunAttemptSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobRunAttemptSummary_executionRole:
 			v.ExecutionRole = new(string)
 			return d.ReadString(schemas.JobRunAttemptSummary_executionRole, v.ExecutionRole)
+		case schemas.JobRunAttemptSummary_flexExecution:
+			v.FlexExecution = &FlexExecution{}
+			return v.FlexExecution.Deserialize(d)
 		case schemas.JobRunAttemptSummary_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.JobRunAttemptSummary_id, v.Id)
@@ -1807,6 +1861,9 @@ type JobRunSummary struct {
 	// The date and time of when the job run attempt was last updated.
 	AttemptUpdatedAt *time.Time
 
+	// The Amazon EMR Serverless Flex settings for the job run.
+	FlexExecution *FlexExecution
+
 	// The mode of the job run.
 	Mode JobRunMode
 
@@ -1849,6 +1906,11 @@ func (v *JobRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ExecutionRole != nil {
 		s.WriteString(schemas.JobRunSummary_executionRole, *v.ExecutionRole)
+	}
+	if v.FlexExecution != nil {
+		s.WriteStruct(schemas.JobRunSummary_flexExecution)
+		v.FlexExecution.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.JobRunSummary_id, *v.Id)
@@ -1902,6 +1964,9 @@ func (v *JobRunSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.JobRunSummary_executionRole:
 			v.ExecutionRole = new(string)
 			return d.ReadString(schemas.JobRunSummary_executionRole, v.ExecutionRole)
+		case schemas.JobRunSummary_flexExecution:
+			v.FlexExecution = &FlexExecution{}
+			return v.FlexExecution.Deserialize(d)
 		case schemas.JobRunSummary_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.JobRunSummary_id, v.Id)

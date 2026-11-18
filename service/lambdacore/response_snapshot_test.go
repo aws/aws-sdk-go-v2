@@ -129,6 +129,9 @@ func TestCheckResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
 				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
+				},
 			},
 		},
 		OperatorRole: ptr.String("__OperatorRole__"),
@@ -158,6 +161,9 @@ func TestCheckResponseSnapshot_CreateNetworkConnector(t *testing.T) {
 				AssociatedComputeResourceTypes: []types.ComputeResourceType{
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
+				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
 				},
 			},
 		},
@@ -343,6 +349,9 @@ func TestCheckResponseSnapshot_DeleteNetworkConnector(t *testing.T) {
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
 				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
+				},
 			},
 		},
 		OperatorRole: ptr.String("__OperatorRole__"),
@@ -458,6 +467,9 @@ func TestCheckResponseSnapshot_GetNetworkConnector(t *testing.T) {
 				AssociatedComputeResourceTypes: []types.ComputeResourceType{
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
+				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
 				},
 			},
 		},
@@ -989,6 +1001,9 @@ func TestCheckResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
 				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
+				},
 			},
 		},
 		State:                  types.NetworkConnectorState("PENDING"),
@@ -1020,6 +1035,9 @@ func TestCheckResponseSnapshot_UpdateNetworkConnector(t *testing.T) {
 				AssociatedComputeResourceTypes: []types.ComputeResourceType{
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
+				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
 				},
 			},
 		},
@@ -1217,6 +1235,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterValueException(t *testing.T
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
 				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
+				},
 			},
 		},
 		OperatorRole: ptr.String("__OperatorRole__"),
@@ -1267,6 +1288,9 @@ func TestCheckResponseSnapshot_Error_NetworkConnectorLimitExceededException(t *t
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
 				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
+				},
 			},
 		},
 		OperatorRole: ptr.String("__OperatorRole__"),
@@ -1316,6 +1340,9 @@ func TestCheckResponseSnapshot_Error_ResourceConflictException(t *testing.T) {
 				AssociatedComputeResourceTypes: []types.ComputeResourceType{
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
+				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
 				},
 			},
 		},
@@ -1403,6 +1430,9 @@ func TestCheckResponseSnapshot_Error_ServiceException(t *testing.T) {
 				AssociatedComputeResourceTypes: []types.ComputeResourceType{
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
+				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
 				},
 			},
 		},
@@ -1494,6 +1524,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 				AssociatedComputeResourceTypes: []types.ComputeResourceType{
 					types.ComputeResourceType("MicroVm"),
 					types.ComputeResourceType("MicroVm"),
+				},
+				ElasticIpConfiguration: &types.ElasticIpConfiguration{
+					Type: types.ElasticIpType("None"),
 				},
 			},
 		},

@@ -31,7 +31,8 @@ func (c *Client) CreateAgentGoal(ctx context.Context, params *CreateAgentGoalInp
 
 type CreateAgentGoalInput struct {
 
-	// The Well-Architected Tool Framework pillars to associate with this goal.
+	// The Amazon Web Services Well-Architected Framework pillars to associate with
+	// this goal.
 	//
 	// This member is required.
 	Pillars []types.Pillar

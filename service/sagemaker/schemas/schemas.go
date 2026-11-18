@@ -248,6 +248,11 @@ var CreateInferenceRecommendationsJob = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateInferenceRecommendationsJob",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateInferenceRouter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateInferenceRouter",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateJob",
@@ -543,6 +548,11 @@ var DeleteEndpointConfig = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteEndpointConfig",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteEndpointPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteExperiment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteExperiment",
@@ -601,6 +611,11 @@ var DeleteInferenceComponent = smithy.NewSchema(smithy.ShapeID{
 var DeleteInferenceExperiment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteInferenceExperiment",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteInferenceRouter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteInferenceRouter",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteJob = smithy.NewSchema(smithy.ShapeID{
@@ -958,6 +973,11 @@ var DescribeInferenceRecommendationsJob = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeInferenceRecommendationsJob",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeInferenceRouter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeInferenceRouter",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeJob",
@@ -1176,6 +1196,11 @@ var ExtendTrainingPlan = smithy.NewSchema(smithy.ShapeID{
 var GetDeviceFleetReport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "GetDeviceFleetReport",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GetEndpointPolicy",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetLineageGroupPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -1433,6 +1458,11 @@ var ListInferenceRecommendationsJobSteps = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListInferenceRecommendationsJobSteps",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListInferenceRouters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListInferenceRouters",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListJobs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListJobs",
@@ -1676,6 +1706,11 @@ var ListWorkforces = smithy.NewSchema(smithy.ShapeID{
 var ListWorkteams = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListWorkteams",
+}, smithy.ShapeTypeOperation, 0)
+
+var PutEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "PutEndpointPolicy",
 }, smithy.ShapeTypeOperation, 0)
 
 var PutModelPackageGroupPolicy = smithy.NewSchema(smithy.ShapeID{
@@ -1991,6 +2026,11 @@ var UpdateInferenceComponentRuntimeConfig = smithy.NewSchema(smithy.ShapeID{
 var UpdateInferenceExperiment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "UpdateInferenceExperiment",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateInferenceRouter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateInferenceRouter",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateMlflowApp = smithy.NewSchema(smithy.ShapeID{
@@ -8223,6 +8263,24 @@ var CrossAccountFilterOption_SAME_ACCOUNT *smithy.Schema
 
 var CrossAccountFilterOption_CROSS_ACCOUNT *smithy.Schema
 
+var _CrossRegionMaxInvocationsPerSecondPerInstance = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CrossRegionMaxInvocationsPerSecondPerInstance",
+}, smithy.ShapeTypeInteger, 0)
+
+var _CrossRegionPercentPerEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CrossRegionPercentPerEndpoint",
+}, smithy.ShapeTypeInteger, 0)
+
+var CrossRegionTrafficConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CrossRegionTrafficConfig",
+}, smithy.ShapeTypeStructure, 2)
+var CrossRegionTrafficConfig_MaxInvocationsPerSecondPerInstance *smithy.Schema
+
+var CrossRegionTrafficConfig_MaxCrossRegionPercentPerEndpoint *smithy.Schema
+
 var _CsvContentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CsvContentType",
@@ -8780,6 +8838,25 @@ var _DesiredWeightAndCapacityList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DesiredWeightAndCapacityList",
 }, smithy.ShapeTypeList, 1)
 var _DesiredWeightAndCapacityList_member *smithy.Schema
+
+var Destination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "Destination",
+}, smithy.ShapeTypeStructure, 2)
+var Destination_ResourceArn *smithy.Schema
+
+var Destination_RoutingStatus *smithy.Schema
+
+var _DestinationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DestinationList",
+}, smithy.ShapeTypeList, 1)
+var _DestinationList_member *smithy.Schema
+
+var _DestinationResourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DestinationResourceArn",
+}, smithy.ShapeTypeString, 0)
 
 var _DestinationS3Uri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -9816,6 +9893,11 @@ var _EndpointPerformances = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EndpointPerformances",
 }, smithy.ShapeTypeList, 1)
 var _EndpointPerformances_member *smithy.Schema
+
+var _EndpointPolicyDocument = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "EndpointPolicyDocument",
+}, smithy.ShapeTypeString, 0)
 
 var _Endpoints = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -12726,6 +12808,81 @@ var _InferenceRecommendationsJobSteps = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _InferenceRecommendationsJobSteps_member *smithy.Schema
 
+var _InferenceRouterArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterArn",
+}, smithy.ShapeTypeString, 0)
+
+var _InferenceRouterClientToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterClientToken",
+}, smithy.ShapeTypeString, 0)
+
+var _InferenceRouterMaxTimeInBacklogSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterMaxTimeInBacklogSeconds",
+}, smithy.ShapeTypeInteger, 0)
+
+var _InferenceRouterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterName",
+}, smithy.ShapeTypeString, 0)
+
+var InferenceRouterRoutingPreference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterRoutingPreference",
+}, smithy.ShapeTypeEnum, 2)
+var InferenceRouterRoutingPreference_LOCAL_REGION_FIRST *smithy.Schema
+
+var InferenceRouterRoutingPreference_INSTANCE_POOL_ORDER *smithy.Schema
+
+var _InferenceRouterS3Uri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterS3Uri",
+}, smithy.ShapeTypeString, 0)
+
+var _InferenceRouterSnsTopicArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterSnsTopicArn",
+}, smithy.ShapeTypeString, 0)
+
+var InferenceRouterStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterStatus",
+}, smithy.ShapeTypeEnum, 5)
+var InferenceRouterStatus_IN_SERVICE *smithy.Schema
+
+var InferenceRouterStatus_CREATING *smithy.Schema
+
+var InferenceRouterStatus_UPDATING *smithy.Schema
+
+var InferenceRouterStatus_FAILED *smithy.Schema
+
+var InferenceRouterStatus_DELETING *smithy.Schema
+
+var _InferenceRouterStatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterStatusReason",
+}, smithy.ShapeTypeString, 0)
+
+var InferenceRouterSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterSummary",
+}, smithy.ShapeTypeStructure, 4)
+var InferenceRouterSummary_InferenceRouterName *smithy.Schema
+
+var InferenceRouterSummary_InferenceRouterArn *smithy.Schema
+
+var InferenceRouterSummary_CreationTime *smithy.Schema
+
+var InferenceRouterSummary_LastModifiedTime *smithy.Schema
+
+var _InferenceRouterSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "InferenceRouterSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _InferenceRouterSummaryList_member *smithy.Schema
+
 var InferenceSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "InferenceSpecification",
@@ -13528,10 +13685,16 @@ var _JobArn = smithy.NewSchema(smithy.ShapeID{
 var JobCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "JobCategory",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 5)
 var JobCategory_AGENT_RFT *smithy.Schema
 
+var JobCategory_SYNTHETIC_DATA_GENERATION *smithy.Schema
+
+var JobCategory_DATA_QUALITY_EVALUATION *smithy.Schema
+
 var JobCategory_AGENT_RFT_EVALUATION *smithy.Schema
+
+var JobCategory_DATA_TRANSFORMATION *smithy.Schema
 
 var _JobConfigDocument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -13578,7 +13741,7 @@ var _JobSchemaVersion = smithy.NewSchema(smithy.ShapeID{
 var JobSecondaryStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "JobSecondaryStatus",
-}, smithy.ShapeTypeEnum, 15)
+}, smithy.ShapeTypeEnum, 23)
 var JobSecondaryStatus_STARTING *smithy.Schema
 
 var JobSecondaryStatus_DOWNLOADING *smithy.Schema
@@ -13603,7 +13766,23 @@ var JobSecondaryStatus_RESTARTING *smithy.Schema
 
 var JobSecondaryStatus_PENDING *smithy.Schema
 
+var JobSecondaryStatus_GENERATING *smithy.Schema
+
+var JobSecondaryStatus_PARTIAL_GENERATION *smithy.Schema
+
 var JobSecondaryStatus_EVALUATING *smithy.Schema
+
+var JobSecondaryStatus_VALIDATING *smithy.Schema
+
+var JobSecondaryStatus_PREPARING *smithy.Schema
+
+var JobSecondaryStatus_EXECUTING *smithy.Schema
+
+var JobSecondaryStatus_PUBLISHING *smithy.Schema
+
+var JobSecondaryStatus_FINALIZING *smithy.Schema
+
+var JobSecondaryStatus_TRANSFORMING *smithy.Schema
 
 var JobSecondaryStatus_DELETING *smithy.Schema
 
@@ -20723,6 +20902,12 @@ var ResolvedAttributes_ProblemType *smithy.Schema
 
 var ResolvedAttributes_CompletionCriteria *smithy.Schema
 
+var ResourceAlreadyExists = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ResourceAlreadyExists",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ResourceAlreadyExists_Message *smithy.Schema
+
 var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ResourceArn",
@@ -21018,15 +21203,84 @@ var RootAccess_ENABLED *smithy.Schema
 
 var RootAccess_DISABLED *smithy.Schema
 
+var RoutingStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingStatus",
+}, smithy.ShapeTypeEnum, 3)
+var RoutingStatus_ROUTABLE *smithy.Schema
+
+var RoutingStatus_UNROUTABLE *smithy.Schema
+
+var RoutingStatus_UNKNOWN *smithy.Schema
+
 var RoutingStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "RoutingStrategy",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var RoutingStrategy_LEAST_OUTSTANDING_REQUESTS *smithy.Schema
 
 var RoutingStrategy_RANDOM *smithy.Schema
 
 var RoutingStrategy_PREFIX_AWARE *smithy.Schema
+
+var RoutingStrategy_KV_AWARE *smithy.Schema
+
+var RoutingTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTarget",
+}, smithy.ShapeTypeStructure, 4)
+var RoutingTarget_Name *smithy.Schema
+
+var RoutingTarget_Destinations *smithy.Schema
+
+var RoutingTarget_AsyncInferenceConfig *smithy.Schema
+
+var RoutingTarget_RoutingPreference *smithy.Schema
+
+var RoutingTargetAsyncInferenceClientConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTargetAsyncInferenceClientConfig",
+}, smithy.ShapeTypeStructure, 1)
+var RoutingTargetAsyncInferenceClientConfig_MaxTimeInBacklogSeconds *smithy.Schema
+
+var RoutingTargetAsyncInferenceConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTargetAsyncInferenceConfig",
+}, smithy.ShapeTypeStructure, 2)
+var RoutingTargetAsyncInferenceConfig_OutputConfig *smithy.Schema
+
+var RoutingTargetAsyncInferenceConfig_ClientConfig *smithy.Schema
+
+var RoutingTargetAsyncInferenceNotificationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTargetAsyncInferenceNotificationConfig",
+}, smithy.ShapeTypeStructure, 2)
+var RoutingTargetAsyncInferenceNotificationConfig_SuccessTopic *smithy.Schema
+
+var RoutingTargetAsyncInferenceNotificationConfig_ErrorTopic *smithy.Schema
+
+var RoutingTargetAsyncInferenceOutputConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTargetAsyncInferenceOutputConfig",
+}, smithy.ShapeTypeStructure, 4)
+var RoutingTargetAsyncInferenceOutputConfig_S3OutputPath *smithy.Schema
+
+var RoutingTargetAsyncInferenceOutputConfig_S3FailurePath *smithy.Schema
+
+var RoutingTargetAsyncInferenceOutputConfig_KmsKeyId *smithy.Schema
+
+var RoutingTargetAsyncInferenceOutputConfig_NotificationConfig *smithy.Schema
+
+var _RoutingTargetList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTargetList",
+}, smithy.ShapeTypeList, 1)
+var _RoutingTargetList_member *smithy.Schema
+
+var _RoutingTargetName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RoutingTargetName",
+}, smithy.ShapeTypeString, 0)
 
 var RSessionAppSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -26541,7 +26795,7 @@ var CreateEdgePackagingJobRequest_Tags *smithy.Schema
 var CreateEndpointConfigInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateEndpointConfigInput",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var CreateEndpointConfigInput_EndpointConfigName *smithy.Schema
 
 var CreateEndpointConfigInput_ProductionVariants *smithy.Schema
@@ -26565,6 +26819,8 @@ var CreateEndpointConfigInput_VpcConfig *smithy.Schema
 var CreateEndpointConfigInput_EnableNetworkIsolation *smithy.Schema
 
 var CreateEndpointConfigInput_MetricsConfig *smithy.Schema
+
+var CreateEndpointConfigInput_CrossRegionTrafficConfig *smithy.Schema
 
 var CreateEndpointConfigOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -26905,6 +27161,24 @@ var CreateInferenceRecommendationsJobResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateInferenceRecommendationsJobResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateInferenceRecommendationsJobResponse_JobArn *smithy.Schema
+
+var CreateInferenceRouterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateInferenceRouterInput",
+}, smithy.ShapeTypeStructure, 4)
+var CreateInferenceRouterInput_InferenceRouterName *smithy.Schema
+
+var CreateInferenceRouterInput_RoutingTargets *smithy.Schema
+
+var CreateInferenceRouterInput_ClientToken *smithy.Schema
+
+var CreateInferenceRouterInput_Tags *smithy.Schema
+
+var CreateInferenceRouterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateInferenceRouterOutput",
+}, smithy.ShapeTypeStructure, 1)
+var CreateInferenceRouterOutput_InferenceRouterArn *smithy.Schema
 
 var CreateJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -28086,6 +28360,17 @@ var DeleteEndpointInput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DeleteEndpointInput_EndpointName *smithy.Schema
 
+var DeleteEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteEndpointPolicyRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteEndpointPolicyRequest_EndpointName *smithy.Schema
+
+var DeleteEndpointPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteEndpointPolicyResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteExperimentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteExperimentRequest",
@@ -28203,6 +28488,12 @@ var DeleteInferenceExperimentResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteInferenceExperimentResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DeleteInferenceExperimentResponse_InferenceExperimentArn *smithy.Schema
+
+var DeleteInferenceRouterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteInferenceRouterInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteInferenceRouterInput_InferenceRouterName *smithy.Schema
 
 var DeleteJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -29375,7 +29666,7 @@ var DescribeEndpointConfigInput_EndpointConfigName *smithy.Schema
 var DescribeEndpointConfigOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeEndpointConfigOutput",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var DescribeEndpointConfigOutput_EndpointConfigName *smithy.Schema
 
 var DescribeEndpointConfigOutput_EndpointConfigArn *smithy.Schema
@@ -29402,6 +29693,8 @@ var DescribeEndpointConfigOutput_EnableNetworkIsolation *smithy.Schema
 
 var DescribeEndpointConfigOutput_MetricsConfig *smithy.Schema
 
+var DescribeEndpointConfigOutput_CrossRegionTrafficConfig *smithy.Schema
+
 var DescribeEndpointInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeEndpointInput",
@@ -29411,7 +29704,7 @@ var DescribeEndpointInput_EndpointName *smithy.Schema
 var DescribeEndpointOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeEndpointOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var DescribeEndpointOutput_EndpointName *smithy.Schema
 
 var DescribeEndpointOutput_EndpointArn *smithy.Schema
@@ -29441,6 +29734,8 @@ var DescribeEndpointOutput_ExplainerConfig *smithy.Schema
 var DescribeEndpointOutput_ShadowProductionVariants *smithy.Schema
 
 var DescribeEndpointOutput_MetricsConfig *smithy.Schema
+
+var DescribeEndpointOutput_CrossRegionTrafficConfig *smithy.Schema
 
 var DescribeExperimentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -29925,6 +30220,30 @@ var DescribeInferenceRecommendationsJobResponse_StoppingConditions *smithy.Schem
 var DescribeInferenceRecommendationsJobResponse_InferenceRecommendations *smithy.Schema
 
 var DescribeInferenceRecommendationsJobResponse_EndpointPerformances *smithy.Schema
+
+var DescribeInferenceRouterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeInferenceRouterInput",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeInferenceRouterInput_InferenceRouterName *smithy.Schema
+
+var DescribeInferenceRouterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeInferenceRouterOutput",
+}, smithy.ShapeTypeStructure, 7)
+var DescribeInferenceRouterOutput_InferenceRouterName *smithy.Schema
+
+var DescribeInferenceRouterOutput_InferenceRouterArn *smithy.Schema
+
+var DescribeInferenceRouterOutput_RoutingTargets *smithy.Schema
+
+var DescribeInferenceRouterOutput_Status *smithy.Schema
+
+var DescribeInferenceRouterOutput_StatusReason *smithy.Schema
+
+var DescribeInferenceRouterOutput_CreationTime *smithy.Schema
+
+var DescribeInferenceRouterOutput_LastModifiedTime *smithy.Schema
 
 var DescribeJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -31414,6 +31733,22 @@ var GetDeviceFleetReportResponse_AgentVersions *smithy.Schema
 
 var GetDeviceFleetReportResponse_ModelStats *smithy.Schema
 
+var GetEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GetEndpointPolicyRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetEndpointPolicyRequest_EndpointName *smithy.Schema
+
+var GetEndpointPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GetEndpointPolicyResponse",
+}, smithy.ShapeTypeStructure, 3)
+var GetEndpointPolicyResponse_EndpointName *smithy.Schema
+
+var GetEndpointPolicyResponse_EndpointArn *smithy.Schema
+
+var GetEndpointPolicyResponse_ResourcePolicy *smithy.Schema
+
 var GetLineageGroupPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "GetLineageGroupPolicyRequest",
@@ -32813,6 +33148,22 @@ var ListInferenceRecommendationsJobStepsResponse_Steps *smithy.Schema
 
 var ListInferenceRecommendationsJobStepsResponse_NextToken *smithy.Schema
 
+var ListInferenceRoutersInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListInferenceRoutersInput",
+}, smithy.ShapeTypeStructure, 2)
+var ListInferenceRoutersInput_MaxResults *smithy.Schema
+
+var ListInferenceRoutersInput_NextToken *smithy.Schema
+
+var ListInferenceRoutersOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListInferenceRoutersOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListInferenceRoutersOutput_InferenceRouters *smithy.Schema
+
+var ListInferenceRoutersOutput_NextToken *smithy.Schema
+
 var ListJobSchemaVersionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListJobSchemaVersionsRequest",
@@ -34133,6 +34484,20 @@ var ListWorkteamsResponse_Workteams *smithy.Schema
 
 var ListWorkteamsResponse_NextToken *smithy.Schema
 
+var PutEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "PutEndpointPolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var PutEndpointPolicyRequest_EndpointName *smithy.Schema
+
+var PutEndpointPolicyRequest_ResourcePolicy *smithy.Schema
+
+var PutEndpointPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "PutEndpointPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var PutEndpointPolicyResponse_EndpointArn *smithy.Schema
+
 var PutModelPackageGroupPolicyInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PutModelPackageGroupPolicyInput",
@@ -35108,6 +35473,20 @@ var UpdateInferenceExperimentResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateInferenceExperimentResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateInferenceExperimentResponse_InferenceExperimentArn *smithy.Schema
+
+var UpdateInferenceRouterInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateInferenceRouterInput",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateInferenceRouterInput_InferenceRouterName *smithy.Schema
+
+var UpdateInferenceRouterInput_RoutingTargets *smithy.Schema
+
+var UpdateInferenceRouterOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateInferenceRouterOutput",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateInferenceRouterOutput_InferenceRouterArn *smithy.Schema
 
 var UpdateMlflowAppRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -41360,6 +41739,10 @@ func init() {
 
 	CrossAccountFilterOption_CROSS_ACCOUNT = CrossAccountFilterOption.AddMember("CROSS_ACCOUNT", smithyprelude.Unit)
 
+	CrossRegionTrafficConfig_MaxInvocationsPerSecondPerInstance = CrossRegionTrafficConfig.AddMember("MaxInvocationsPerSecondPerInstance", _CrossRegionMaxInvocationsPerSecondPerInstance)
+
+	CrossRegionTrafficConfig_MaxCrossRegionPercentPerEndpoint = CrossRegionTrafficConfig.AddMember("MaxCrossRegionPercentPerEndpoint", _CrossRegionPercentPerEndpoint)
+
 	_CustomerMetadataKeyList_member = _CustomerMetadataKeyList.AddMember("member", _CustomerMetadataKey)
 
 	_CustomerMetadataMap_key = _CustomerMetadataMap.AddMember("key", _CustomerMetadataKey)
@@ -42234,6 +42617,18 @@ func init() {
 
 	_DesiredWeightAndCapacityList_member = _DesiredWeightAndCapacityList.AddMember("member", DesiredWeightAndCapacity)
 
+	RoutingStatus_ROUTABLE = RoutingStatus.AddMember("ROUTABLE", smithyprelude.Unit)
+
+	RoutingStatus_UNROUTABLE = RoutingStatus.AddMember("UNROUTABLE", smithyprelude.Unit)
+
+	RoutingStatus_UNKNOWN = RoutingStatus.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	Destination_ResourceArn = Destination.AddMember("ResourceArn", _DestinationResourceArn)
+
+	Destination_RoutingStatus = Destination.AddMember("RoutingStatus", RoutingStatus)
+
+	_DestinationList_member = _DestinationList.AddMember("member", Destination)
+
 	DetailedModelPackageStatus_NOT_STARTED = DetailedModelPackageStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
 
 	DetailedModelPackageStatus_IN_PROGRESS = DetailedModelPackageStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
@@ -42703,6 +43098,8 @@ func init() {
 	RoutingStrategy_RANDOM = RoutingStrategy.AddMember("RANDOM", smithyprelude.Unit)
 
 	RoutingStrategy_PREFIX_AWARE = RoutingStrategy.AddMember("PREFIX_AWARE", smithyprelude.Unit)
+
+	RoutingStrategy_KV_AWARE = RoutingStrategy.AddMember("KV_AWARE", smithyprelude.Unit)
 
 	PrefixAwareRoutingConfig_PrefixLength = PrefixAwareRoutingConfig.AddMember("PrefixLength", _PrefixAwareRoutingPrefixLength)
 
@@ -44558,6 +44955,30 @@ func init() {
 
 	_InferenceRecommendationsJobSteps_member = _InferenceRecommendationsJobSteps.AddMember("member", InferenceRecommendationsJobStep)
 
+	InferenceRouterRoutingPreference_LOCAL_REGION_FIRST = InferenceRouterRoutingPreference.AddMember("LOCAL_REGION_FIRST", smithyprelude.Unit)
+
+	InferenceRouterRoutingPreference_INSTANCE_POOL_ORDER = InferenceRouterRoutingPreference.AddMember("INSTANCE_POOL_ORDER", smithyprelude.Unit)
+
+	InferenceRouterStatus_IN_SERVICE = InferenceRouterStatus.AddMember("IN_SERVICE", smithyprelude.Unit)
+
+	InferenceRouterStatus_CREATING = InferenceRouterStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	InferenceRouterStatus_UPDATING = InferenceRouterStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	InferenceRouterStatus_FAILED = InferenceRouterStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	InferenceRouterStatus_DELETING = InferenceRouterStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	InferenceRouterSummary_InferenceRouterName = InferenceRouterSummary.AddMember("InferenceRouterName", _InferenceRouterName)
+
+	InferenceRouterSummary_InferenceRouterArn = InferenceRouterSummary.AddMember("InferenceRouterArn", _InferenceRouterArn)
+
+	InferenceRouterSummary_CreationTime = InferenceRouterSummary.AddMember("CreationTime", _Timestamp)
+
+	InferenceRouterSummary_LastModifiedTime = InferenceRouterSummary.AddMember("LastModifiedTime", _Timestamp)
+
+	_InferenceRouterSummaryList_member = _InferenceRouterSummaryList.AddMember("member", InferenceRouterSummary)
+
 	InfraCheckConfig_EnableInfraCheck = InfraCheckConfig.AddMember("EnableInfraCheck", _EnableInfraCheck)
 
 	InputConfig_S3Uri = InputConfig.AddMember("S3Uri", _S3Uri)
@@ -44968,7 +45389,13 @@ func init() {
 
 	JobCategory_AGENT_RFT = JobCategory.AddMember("AGENT_RFT", smithyprelude.Unit)
 
+	JobCategory_SYNTHETIC_DATA_GENERATION = JobCategory.AddMember("SYNTHETIC_DATA_GENERATION", smithyprelude.Unit)
+
+	JobCategory_DATA_QUALITY_EVALUATION = JobCategory.AddMember("DATA_QUALITY_EVALUATION", smithyprelude.Unit)
+
 	JobCategory_AGENT_RFT_EVALUATION = JobCategory.AddMember("AGENT_RFT_EVALUATION", smithyprelude.Unit)
+
+	JobCategory_DATA_TRANSFORMATION = JobCategory.AddMember("DATA_TRANSFORMATION", smithyprelude.Unit)
 
 	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
 
@@ -45008,7 +45435,23 @@ func init() {
 
 	JobSecondaryStatus_PENDING = JobSecondaryStatus.AddMember("PENDING", smithyprelude.Unit)
 
+	JobSecondaryStatus_GENERATING = JobSecondaryStatus.AddMember("GENERATING", smithyprelude.Unit)
+
+	JobSecondaryStatus_PARTIAL_GENERATION = JobSecondaryStatus.AddMember("PARTIAL_GENERATION", smithyprelude.Unit)
+
 	JobSecondaryStatus_EVALUATING = JobSecondaryStatus.AddMember("EVALUATING", smithyprelude.Unit)
+
+	JobSecondaryStatus_VALIDATING = JobSecondaryStatus.AddMember("VALIDATING", smithyprelude.Unit)
+
+	JobSecondaryStatus_PREPARING = JobSecondaryStatus.AddMember("PREPARING", smithyprelude.Unit)
+
+	JobSecondaryStatus_EXECUTING = JobSecondaryStatus.AddMember("EXECUTING", smithyprelude.Unit)
+
+	JobSecondaryStatus_PUBLISHING = JobSecondaryStatus.AddMember("PUBLISHING", smithyprelude.Unit)
+
+	JobSecondaryStatus_FINALIZING = JobSecondaryStatus.AddMember("FINALIZING", smithyprelude.Unit)
+
+	JobSecondaryStatus_TRANSFORMING = JobSecondaryStatus.AddMember("TRANSFORMING", smithyprelude.Unit)
 
 	JobSecondaryStatus_DELETING = JobSecondaryStatus.AddMember("DELETING", smithyprelude.Unit)
 
@@ -47572,6 +48015,8 @@ func init() {
 
 	ResolvedAttributes_CompletionCriteria = ResolvedAttributes.AddMember("CompletionCriteria", AutoMLJobCompletionCriteria)
 
+	ResourceAlreadyExists_Message = ResourceAlreadyExists.AddMember("Message", _FailureReason)
+
 	ResourceCatalog_ResourceCatalogArn = ResourceCatalog.AddMember("ResourceCatalogArn", _ResourceCatalogArn)
 
 	ResourceCatalog_ResourceCatalogName = ResourceCatalog.AddMember("ResourceCatalogName", _ResourceCatalogName)
@@ -47645,6 +48090,34 @@ func init() {
 	RootAccess_ENABLED = RootAccess.AddMember("ENABLED", smithyprelude.Unit)
 
 	RootAccess_DISABLED = RootAccess.AddMember("DISABLED", smithyprelude.Unit)
+
+	RoutingTargetAsyncInferenceNotificationConfig_SuccessTopic = RoutingTargetAsyncInferenceNotificationConfig.AddMember("SuccessTopic", _InferenceRouterSnsTopicArn)
+
+	RoutingTargetAsyncInferenceNotificationConfig_ErrorTopic = RoutingTargetAsyncInferenceNotificationConfig.AddMember("ErrorTopic", _InferenceRouterSnsTopicArn)
+
+	RoutingTargetAsyncInferenceOutputConfig_S3OutputPath = RoutingTargetAsyncInferenceOutputConfig.AddMember("S3OutputPath", _InferenceRouterS3Uri)
+
+	RoutingTargetAsyncInferenceOutputConfig_S3FailurePath = RoutingTargetAsyncInferenceOutputConfig.AddMember("S3FailurePath", _InferenceRouterS3Uri)
+
+	RoutingTargetAsyncInferenceOutputConfig_KmsKeyId = RoutingTargetAsyncInferenceOutputConfig.AddMember("KmsKeyId", _KmsKeyId)
+
+	RoutingTargetAsyncInferenceOutputConfig_NotificationConfig = RoutingTargetAsyncInferenceOutputConfig.AddMember("NotificationConfig", RoutingTargetAsyncInferenceNotificationConfig)
+
+	RoutingTargetAsyncInferenceClientConfig_MaxTimeInBacklogSeconds = RoutingTargetAsyncInferenceClientConfig.AddMember("MaxTimeInBacklogSeconds", _InferenceRouterMaxTimeInBacklogSeconds)
+
+	RoutingTargetAsyncInferenceConfig_OutputConfig = RoutingTargetAsyncInferenceConfig.AddMember("OutputConfig", RoutingTargetAsyncInferenceOutputConfig)
+
+	RoutingTargetAsyncInferenceConfig_ClientConfig = RoutingTargetAsyncInferenceConfig.AddMember("ClientConfig", RoutingTargetAsyncInferenceClientConfig)
+
+	RoutingTarget_Name = RoutingTarget.AddMember("Name", _RoutingTargetName)
+
+	RoutingTarget_Destinations = RoutingTarget.AddMember("Destinations", _DestinationList)
+
+	RoutingTarget_AsyncInferenceConfig = RoutingTarget.AddMember("AsyncInferenceConfig", RoutingTargetAsyncInferenceConfig)
+
+	RoutingTarget_RoutingPreference = RoutingTarget.AddMember("RoutingPreference", InferenceRouterRoutingPreference)
+
+	_RoutingTargetList_member = _RoutingTargetList.AddMember("member", RoutingTarget)
 
 	RSessionAppSettings_DefaultResourceSpec = RSessionAppSettings.AddMember("DefaultResourceSpec", ResourceSpec)
 
@@ -49492,6 +49965,8 @@ func init() {
 
 	CreateEndpointConfigInput_MetricsConfig = CreateEndpointConfigInput.AddMember("MetricsConfig", MetricsConfig)
 
+	CreateEndpointConfigInput_CrossRegionTrafficConfig = CreateEndpointConfigInput.AddMember("CrossRegionTrafficConfig", CrossRegionTrafficConfig)
+
 	CreateEndpointConfigOutput_EndpointConfigArn = CreateEndpointConfigOutput.AddMember("EndpointConfigArn", _EndpointConfigArn)
 
 	CreateEndpointInput_EndpointName = CreateEndpointInput.AddMember("EndpointName", _EndpointName)
@@ -49715,6 +50190,16 @@ func init() {
 	CreateInferenceRecommendationsJobRequest_Tags = CreateInferenceRecommendationsJobRequest.AddMember("Tags", _TagList)
 
 	CreateInferenceRecommendationsJobResponse_JobArn = CreateInferenceRecommendationsJobResponse.AddMember("JobArn", _RecommendationJobArn)
+
+	CreateInferenceRouterInput_InferenceRouterName = CreateInferenceRouterInput.AddMember("InferenceRouterName", _InferenceRouterName)
+
+	CreateInferenceRouterInput_RoutingTargets = CreateInferenceRouterInput.AddMember("RoutingTargets", _RoutingTargetList)
+
+	CreateInferenceRouterInput_ClientToken = CreateInferenceRouterInput.AddMember("ClientToken", _InferenceRouterClientToken)
+
+	CreateInferenceRouterInput_Tags = CreateInferenceRouterInput.AddMember("Tags", _TagList)
+
+	CreateInferenceRouterOutput_InferenceRouterArn = CreateInferenceRouterOutput.AddMember("InferenceRouterArn", _InferenceRouterArn)
 
 	CreateJobRequest_JobName = CreateJobRequest.AddMember("JobName", _JobName)
 
@@ -50480,6 +50965,8 @@ func init() {
 
 	DeleteEndpointInput_EndpointName = DeleteEndpointInput.AddMember("EndpointName", _EndpointName)
 
+	DeleteEndpointPolicyRequest_EndpointName = DeleteEndpointPolicyRequest.AddMember("EndpointName", _EndpointName)
+
 	DeleteExperimentRequest_ExperimentName = DeleteExperimentRequest.AddMember("ExperimentName", _ExperimentEntityName)
 
 	DeleteExperimentResponse_ExperimentArn = DeleteExperimentResponse.AddMember("ExperimentArn", _ExperimentArn)
@@ -50521,6 +51008,8 @@ func init() {
 	DeleteInferenceExperimentRequest_Name = DeleteInferenceExperimentRequest.AddMember("Name", _InferenceExperimentName)
 
 	DeleteInferenceExperimentResponse_InferenceExperimentArn = DeleteInferenceExperimentResponse.AddMember("InferenceExperimentArn", _InferenceExperimentArn)
+
+	DeleteInferenceRouterInput_InferenceRouterName = DeleteInferenceRouterInput.AddMember("InferenceRouterName", _InferenceRouterName)
 
 	DeleteJobRequest_JobName = DeleteJobRequest.AddMember("JobName", _JobName)
 
@@ -51336,6 +51825,8 @@ func init() {
 
 	DescribeEndpointConfigOutput_MetricsConfig = DescribeEndpointConfigOutput.AddMember("MetricsConfig", MetricsConfig)
 
+	DescribeEndpointConfigOutput_CrossRegionTrafficConfig = DescribeEndpointConfigOutput.AddMember("CrossRegionTrafficConfig", CrossRegionTrafficConfig)
+
 	DescribeEndpointInput_EndpointName = DescribeEndpointInput.AddMember("EndpointName", _EndpointName)
 
 	DescribeEndpointOutput_EndpointName = DescribeEndpointOutput.AddMember("EndpointName", _EndpointName)
@@ -51367,6 +51858,8 @@ func init() {
 	DescribeEndpointOutput_ShadowProductionVariants = DescribeEndpointOutput.AddMember("ShadowProductionVariants", _ProductionVariantSummaryList)
 
 	DescribeEndpointOutput_MetricsConfig = DescribeEndpointOutput.AddMember("MetricsConfig", MetricsConfig)
+
+	DescribeEndpointOutput_CrossRegionTrafficConfig = DescribeEndpointOutput.AddMember("CrossRegionTrafficConfig", CrossRegionTrafficConfig)
 
 	DescribeExperimentRequest_ExperimentName = DescribeExperimentRequest.AddMember("ExperimentName", _ExperimentEntityName)
 
@@ -51747,6 +52240,22 @@ func init() {
 	DescribeInferenceRecommendationsJobResponse_InferenceRecommendations = DescribeInferenceRecommendationsJobResponse.AddMember("InferenceRecommendations", _InferenceRecommendations)
 
 	DescribeInferenceRecommendationsJobResponse_EndpointPerformances = DescribeInferenceRecommendationsJobResponse.AddMember("EndpointPerformances", _EndpointPerformances)
+
+	DescribeInferenceRouterInput_InferenceRouterName = DescribeInferenceRouterInput.AddMember("InferenceRouterName", _InferenceRouterName)
+
+	DescribeInferenceRouterOutput_InferenceRouterName = DescribeInferenceRouterOutput.AddMember("InferenceRouterName", _InferenceRouterName)
+
+	DescribeInferenceRouterOutput_InferenceRouterArn = DescribeInferenceRouterOutput.AddMember("InferenceRouterArn", _InferenceRouterArn)
+
+	DescribeInferenceRouterOutput_RoutingTargets = DescribeInferenceRouterOutput.AddMember("RoutingTargets", _RoutingTargetList)
+
+	DescribeInferenceRouterOutput_Status = DescribeInferenceRouterOutput.AddMember("Status", InferenceRouterStatus)
+
+	DescribeInferenceRouterOutput_StatusReason = DescribeInferenceRouterOutput.AddMember("StatusReason", _InferenceRouterStatusReason)
+
+	DescribeInferenceRouterOutput_CreationTime = DescribeInferenceRouterOutput.AddMember("CreationTime", _Timestamp)
+
+	DescribeInferenceRouterOutput_LastModifiedTime = DescribeInferenceRouterOutput.AddMember("LastModifiedTime", _Timestamp)
 
 	DescribeJobRequest_JobName = DescribeJobRequest.AddMember("JobName", _JobName)
 
@@ -52880,6 +53389,14 @@ func init() {
 
 	GetDeviceFleetReportResponse_ModelStats = GetDeviceFleetReportResponse.AddMember("ModelStats", _EdgeModelStats)
 
+	GetEndpointPolicyRequest_EndpointName = GetEndpointPolicyRequest.AddMember("EndpointName", _EndpointName)
+
+	GetEndpointPolicyResponse_EndpointName = GetEndpointPolicyResponse.AddMember("EndpointName", _EndpointName)
+
+	GetEndpointPolicyResponse_EndpointArn = GetEndpointPolicyResponse.AddMember("EndpointArn", _EndpointArn)
+
+	GetEndpointPolicyResponse_ResourcePolicy = GetEndpointPolicyResponse.AddMember("ResourcePolicy", _EndpointPolicyDocument)
+
 	GetLineageGroupPolicyRequest_LineageGroupName = GetLineageGroupPolicyRequest.AddMember("LineageGroupName", _LineageGroupNameOrArn)
 
 	GetLineageGroupPolicyResponse_LineageGroupArn = GetLineageGroupPolicyResponse.AddMember("LineageGroupArn", _LineageGroupArn)
@@ -53870,6 +54387,14 @@ func init() {
 
 	ListInferenceRecommendationsJobStepsResponse_NextToken = ListInferenceRecommendationsJobStepsResponse.AddMember("NextToken", _NextToken)
 
+	ListInferenceRoutersInput_MaxResults = ListInferenceRoutersInput.AddMember("MaxResults", _MaxResults)
+
+	ListInferenceRoutersInput_NextToken = ListInferenceRoutersInput.AddMember("NextToken", _NextToken)
+
+	ListInferenceRoutersOutput_InferenceRouters = ListInferenceRoutersOutput.AddMember("InferenceRouters", _InferenceRouterSummaryList)
+
+	ListInferenceRoutersOutput_NextToken = ListInferenceRoutersOutput.AddMember("NextToken", _NextToken)
+
 	ListJobSchemaVersionsRequest_JobCategory = ListJobSchemaVersionsRequest.AddMember("JobCategory", JobCategory)
 
 	ListJobSchemaVersionsRequest_NextToken = ListJobSchemaVersionsRequest.AddMember("NextToken", _NextToken)
@@ -54798,6 +55323,12 @@ func init() {
 
 	ListWorkteamsResponse_NextToken = ListWorkteamsResponse.AddMember("NextToken", _NextToken)
 
+	PutEndpointPolicyRequest_EndpointName = PutEndpointPolicyRequest.AddMember("EndpointName", _EndpointName)
+
+	PutEndpointPolicyRequest_ResourcePolicy = PutEndpointPolicyRequest.AddMember("ResourcePolicy", _EndpointPolicyDocument)
+
+	PutEndpointPolicyResponse_EndpointArn = PutEndpointPolicyResponse.AddMember("EndpointArn", _EndpointArn)
+
 	PutModelPackageGroupPolicyInput_ModelPackageGroupName = PutModelPackageGroupPolicyInput.AddMember("ModelPackageGroupName", _EntityName)
 
 	PutModelPackageGroupPolicyInput_ResourcePolicy = PutModelPackageGroupPolicyInput.AddMember("ResourcePolicy", _PolicyString)
@@ -55347,6 +55878,12 @@ func init() {
 	UpdateInferenceExperimentRequest_ShadowModeConfig = UpdateInferenceExperimentRequest.AddMember("ShadowModeConfig", ShadowModeConfig)
 
 	UpdateInferenceExperimentResponse_InferenceExperimentArn = UpdateInferenceExperimentResponse.AddMember("InferenceExperimentArn", _InferenceExperimentArn)
+
+	UpdateInferenceRouterInput_InferenceRouterName = UpdateInferenceRouterInput.AddMember("InferenceRouterName", _InferenceRouterName)
+
+	UpdateInferenceRouterInput_RoutingTargets = UpdateInferenceRouterInput.AddMember("RoutingTargets", _RoutingTargetList)
+
+	UpdateInferenceRouterOutput_InferenceRouterArn = UpdateInferenceRouterOutput.AddMember("InferenceRouterArn", _InferenceRouterArn)
 
 	UpdateMlflowAppRequest_Arn = UpdateMlflowAppRequest.AddMember("Arn", _MlflowAppArn)
 

@@ -9,9 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Removes tags from a resource. Supports telemetry rule resources and telemetry
+//	Removes tags from a resource. Supports telemetry rule resources, telemetry
 //
-// pipeline resources.
+// pipeline resources, and third-party telemetry enrichment resources.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

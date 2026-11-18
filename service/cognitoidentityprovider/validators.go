@@ -1510,6 +1510,26 @@ func (m *validateOpGetCSVHeader) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDerivedToken struct {
+}
+
+func (*validateOpGetDerivedToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDerivedToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDerivedTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDerivedTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDevice struct {
 }
 
@@ -3088,6 +3108,10 @@ func addOpGetClientTokenValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetCSVHeaderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCSVHeader{}, middleware.After)
+}
+
+func addOpGetDerivedTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDerivedToken{}, middleware.After)
 }
 
 func addOpGetDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -5514,6 +5538,27 @@ func validateOpGetCSVHeaderInput(v *GetCSVHeaderInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetCSVHeaderInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDerivedTokenInput(v *GetDerivedTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDerivedTokenInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.SubjectToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubjectToken"))
+	}
+	if len(v.SubjectTokenType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SubjectTokenType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

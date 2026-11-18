@@ -250,6 +250,26 @@ func (m *validateOpUpdateIndexMode) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMetadataConfiguration struct {
+}
+
+func (*validateOpUpdateMetadataConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMetadataConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMetadataConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMetadataConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIndex{}, middleware.After)
 }
@@ -298,13 +318,53 @@ func addOpUpdateIndexModeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIndexMode{}, middleware.After)
 }
 
+func addOpUpdateMetadataConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMetadataConfiguration{}, middleware.After)
+}
+
 func validateMetadataConfiguration(v *types.MetadataConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfiguration"}
-	if v.NonFilterableMetadataKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NonFilterableMetadataKeys"))
+	if v.TextSearchConfigurations != nil {
+		if err := validateTextSearchConfigurations(v.TextSearchConfigurations); err != nil {
+			invalidParams.AddNested("TextSearchConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataConfigurationAdd(v *types.MetadataConfigurationAdd) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfigurationAdd"}
+	if v.TextSearchConfigurations != nil {
+		if err := validateTextSearchConfigurations(v.TextSearchConfigurations); err != nil {
+			invalidParams.AddNested("TextSearchConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataConfigurationDelete(v *types.MetadataConfigurationDelete) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataConfigurationDelete"}
+	if v.TextSearchConfigurations != nil {
+		if err := validateTextSearchConfigurationKeys(v.TextSearchConfigurations); err != nil {
+			invalidParams.AddNested("TextSearchConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -338,6 +398,105 @@ func validatePutVectorsInputList(v []types.PutInputVector) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutVectorsInputList"}
 	for i := range v {
 		if err := validatePutInputVector(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryText(v *types.QueryText) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryText"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.MetadataKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryTextList(v []types.QueryText) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryTextList"}
+	for i := range v {
+		if err := validateQueryText(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextSearchConfiguration(v *types.TextSearchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextSearchConfiguration"}
+	if v.MetadataKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextSearchConfigurationKey(v *types.TextSearchConfigurationKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextSearchConfigurationKey"}
+	if v.MetadataKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextSearchConfigurationKeys(v []types.TextSearchConfigurationKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextSearchConfigurationKeys"}
+	for i := range v {
+		if err := validateTextSearchConfigurationKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextSearchConfigurations(v []types.TextSearchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextSearchConfigurations"}
+	for i := range v {
+		if err := validateTextSearchConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -494,8 +653,10 @@ func validateOpQueryVectorsInput(v *QueryVectorsInput) error {
 	if v.TopK == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopK"))
 	}
-	if v.QueryVector == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryVector"))
+	if v.QueryTexts != nil {
+		if err := validateQueryTextList(v.QueryTexts); err != nil {
+			invalidParams.AddNested("QueryTexts", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -547,6 +708,28 @@ func validateOpUpdateIndexModeInput(v *UpdateIndexModeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIndexModeInput"}
 	if len(v.IndexMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMetadataConfigurationInput(v *UpdateMetadataConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMetadataConfigurationInput"}
+	if v.Add != nil {
+		if err := validateMetadataConfigurationAdd(v.Add); err != nil {
+			invalidParams.AddNested("Add", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Delete != nil {
+		if err := validateMetadataConfigurationDelete(v.Delete); err != nil {
+			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

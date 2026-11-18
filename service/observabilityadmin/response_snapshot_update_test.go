@@ -165,6 +165,42 @@ func TestUpdateResponseSnapshot_CreateCentralizationRuleForOrganization(t *testi
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateConnector(t *testing.T) {
+	want := &CreateConnectorOutput{
+		Connector: &types.Connector{
+			Arn:      ptr.String("__Arn__"),
+			Provider: types.ConnectorProvider("AZURE"),
+			ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+				Value: types.AzureConnectorConfiguration{
+					TenantIdentifier: ptr.String("__TenantIdentifier__"),
+					ClientIdentifier: ptr.String("__ClientIdentifier__"),
+				},
+			},
+			RoleArn:          ptr.String("__RoleArn__"),
+			Name:             ptr.String("__Name__"),
+			CreatedTimeStamp: ptr.Int64(1),
+		},
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.CreateConnector, schemas.CreateConnectorOutput, schemas.CreateConnectorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateDatasetIntegration(t *testing.T) {
 	want := &CreateDatasetIntegrationOutput{
 		Arn:       ptr.String("__Arn__"),
@@ -310,6 +346,28 @@ func TestUpdateResponseSnapshot_DeleteCentralizationRuleForOrganization(t *testi
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteConnector(t *testing.T) {
+	want := &DeleteConnectorOutput{}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteConnector, schemas.DeleteConnectorOutput, schemas.DeleteConnectorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteDatasetIntegration(t *testing.T) {
 	want := &DeleteDatasetIntegrationOutput{}
 	proto := restjson1.New(schemas.ObservabilityAdmin)
@@ -448,6 +506,9 @@ func TestUpdateResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -478,6 +539,11 @@ func TestUpdateResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.
 						Region: ptr.String("__Region__"),
 					},
 				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
 			},
 		},
 	}
@@ -497,6 +563,254 @@ func TestUpdateResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetCentralizationRuleForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetConnector(t *testing.T) {
+	want := &GetConnectorOutput{
+		Connector: &types.Connector{
+			Arn:      ptr.String("__Arn__"),
+			Provider: types.ConnectorProvider("AZURE"),
+			ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+				Value: types.AzureConnectorConfiguration{
+					TenantIdentifier: ptr.String("__TenantIdentifier__"),
+					ClientIdentifier: ptr.String("__ClientIdentifier__"),
+				},
+			},
+			RoleArn:          ptr.String("__RoleArn__"),
+			Name:             ptr.String("__Name__"),
+			CreatedTimeStamp: ptr.Int64(1),
+		},
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.GetConnector, schemas.GetConnectorOutput, schemas.GetConnectorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetConnectorTelemetryManifest(t *testing.T) {
+	want := &GetConnectorTelemetryManifestOutput{
+		Manifest: &types.TelemetryManifest{
+			Source: &types.TelemetryManifestSourceMemberAzure{
+				Value: []types.AzureScopeItem{
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Infrastructure: &types.TelemetryManifestInfrastructureMemberAzure{
+				Value: types.AzureInfrastructure{
+					SubscriptionId: ptr.String("__SubscriptionId__"),
+					EventHubs: []types.AzureEventHubConfiguration{
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+					},
+					FlowLogs: &types.AzureFlowLogsInfrastructureMemberCustomerManaged{
+						Value: types.AzureCustomerManagedFlowLogs{
+							StorageAccounts: []types.AzureFlowLogStorageAccountScope{
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Version:             ptr.Int64(1),
+		LastUpdateTimeStamp: ptr.Int64(1),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.GetConnectorTelemetryManifest, schemas.GetConnectorTelemetryManifestOutput, schemas.GetConnectorTelemetryManifestOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetConnectorTelemetryManifest.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetConnectorTelemetrySetup(t *testing.T) {
+	want := &GetConnectorTelemetrySetupOutput{
+		Artifacts: []types.SetupArtifact{
+			{
+				FileName:    ptr.String("__FileName__"),
+				Content:     ptr.String("__Content__"),
+				Format:      types.SetupFormat("BICEP"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+			{
+				FileName:    ptr.String("__FileName__"),
+				Content:     ptr.String("__Content__"),
+				Format:      types.SetupFormat("BICEP"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+		RequiredPermissionsToApply: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Format:          types.SetupFormat("BICEP"),
+		Provider:        types.ConnectorProvider("AZURE"),
+		ManifestVersion: ptr.Int64(1),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.GetConnectorTelemetrySetup, schemas.GetConnectorTelemetrySetupOutput, schemas.GetConnectorTelemetrySetupOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetConnectorTelemetrySetup.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -681,6 +995,40 @@ func TestUpdateResponseSnapshot_GetTelemetryPipeline(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
+			},
+			LastRefreshTimeStamp: ptr.Int64(1),
+			SourceProgress: &types.SourceProgress{
+				Active: ptr.Int32(1),
+				Total:  ptr.Int32(1),
+			},
+			ConfigurationSummary: &types.ConfigurationSummary{
+				Sources: []types.Source{
+					{
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Type: ptr.String("__Type__"),
+					},
+				},
+				DataSources: []types.DataSource{
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+				},
+				Processors: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ProcessorCount: ptr.Int32(1),
+				Sinks: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 	}
@@ -1254,6 +1602,42 @@ func TestUpdateResponseSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetThirdPartyTelemetryEnrichment(t *testing.T) {
+	want := &GetThirdPartyTelemetryEnrichmentOutput{
+		Arn:          ptr.String("__Arn__"),
+		Name:         ptr.String("__Name__"),
+		Status:       types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		StatusReason: ptr.String("__StatusReason__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationOutputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationOutput{
+				AwsConfigConnectorArn:    ptr.String("__AwsConfigConnectorArn__"),
+				ServiceLinkedRecorderArn: ptr.String("__ServiceLinkedRecorderArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.GetThirdPartyTelemetryEnrichment, schemas.GetThirdPartyTelemetryEnrichmentOutput, schemas.GetThirdPartyTelemetryEnrichmentOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetThirdPartyTelemetryEnrichment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	want := &ListCentralizationRulesForOrganizationOutput{
 		CentralizationRuleSummaries: []types.CentralizationRuleSummary{
@@ -1306,6 +1690,44 @@ func TestUpdateResponseSnapshot_ListCentralizationRulesForOrganization(t *testin
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListCentralizationRulesForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListConnectors(t *testing.T) {
+	want := &ListConnectorsOutput{
+		ConnectorSummaries: []types.ConnectorSummary{
+			{
+				Arn:              ptr.String("__Arn__"),
+				Provider:         types.ConnectorProvider("AZURE"),
+				Name:             ptr.String("__Name__"),
+				CreatedTimeStamp: ptr.Int64(1),
+			},
+			{
+				Arn:              ptr.String("__Arn__"),
+				Provider:         types.ConnectorProvider("AZURE"),
+				Name:             ptr.String("__Name__"),
+				CreatedTimeStamp: ptr.Int64(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.ListConnectors, schemas.ListConnectorsOutput, schemas.ListConnectorsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListConnectors.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1448,6 +1870,46 @@ func TestUpdateResponseSnapshot_ListResourceTelemetryForOrganization(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListResourceTelemetryForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListResourcesByConnector(t *testing.T) {
+	want := &ListResourcesByConnectorOutput{
+		Results: &types.ConnectorQueryResultsMemberAzure{
+			Value: &types.AzureConnectorQueryResultsMemberManagementGroups{
+				Value: []types.AzureManagementGroupSummary{
+					{
+						Id:          ptr.String("__Id__"),
+						Name:        ptr.String("__Name__"),
+						DisplayName: ptr.String("__DisplayName__"),
+					},
+					{
+						Id:          ptr.String("__Id__"),
+						Name:        ptr.String("__Name__"),
+						DisplayName: ptr.String("__DisplayName__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.ListResourcesByConnector, schemas.ListResourcesByConnectorOutput, schemas.ListResourcesByConnectorOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListResourcesByConnector.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1716,6 +2178,66 @@ func TestUpdateResponseSnapshot_ListTelemetryRulesForOrganization(t *testing.T) 
 	}
 }
 
+func TestUpdateResponseSnapshot_ListThirdPartyTelemetryEnrichments(t *testing.T) {
+	want := &ListThirdPartyTelemetryEnrichmentsOutput{
+		TelemetryEnrichments: []types.ThirdPartyTelemetryEnrichmentSummary{
+			{
+				Name:            ptr.String("__Name__"),
+				TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+				Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+				Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.ListThirdPartyTelemetryEnrichments, schemas.ListThirdPartyTelemetryEnrichmentsOutput, schemas.ListThirdPartyTelemetryEnrichmentsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListThirdPartyTelemetryEnrichments.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutConnectorTelemetryManifest(t *testing.T) {
+	want := &PutConnectorTelemetryManifestOutput{
+		Version: ptr.Int64(1),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.PutConnectorTelemetryManifest, schemas.PutConnectorTelemetryManifestOutput, schemas.PutConnectorTelemetryManifestOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutConnectorTelemetryManifest.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartTelemetryEnrichment(t *testing.T) {
 	want := &StartTelemetryEnrichmentOutput{
 		Status:                            types.TelemetryEnrichmentStatus("Running"),
@@ -1785,6 +2307,64 @@ func TestUpdateResponseSnapshot_StartTelemetryEvaluationForOrganization(t *testi
 	}
 }
 
+func TestUpdateResponseSnapshot_StartTelemetryPipelineRefresh(t *testing.T) {
+	want := &StartTelemetryPipelineRefreshOutput{}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.StartTelemetryPipelineRefresh, schemas.StartTelemetryPipelineRefreshOutput, schemas.StartTelemetryPipelineRefreshOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartTelemetryPipelineRefresh.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartThirdPartyTelemetryEnrichment(t *testing.T) {
+	want := &StartThirdPartyTelemetryEnrichmentOutput{
+		Arn:          ptr.String("__Arn__"),
+		Name:         ptr.String("__Name__"),
+		Status:       types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		StatusReason: ptr.String("__StatusReason__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationOutputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationOutput{
+				AwsConfigConnectorArn:    ptr.String("__AwsConfigConnectorArn__"),
+				ServiceLinkedRecorderArn: ptr.String("__ServiceLinkedRecorderArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.StartThirdPartyTelemetryEnrichment, schemas.StartThirdPartyTelemetryEnrichmentOutput, schemas.StartThirdPartyTelemetryEnrichmentOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartThirdPartyTelemetryEnrichment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StopTelemetryEnrichment(t *testing.T) {
 	want := &StopTelemetryEnrichmentOutput{
 		Status: types.TelemetryEnrichmentStatus("Running"),
@@ -1849,6 +2429,33 @@ func TestUpdateResponseSnapshot_StopTelemetryEvaluationForOrganization(t *testin
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StopTelemetryEvaluationForOrganization.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopThirdPartyTelemetryEnrichment(t *testing.T) {
+	want := &StopThirdPartyTelemetryEnrichmentOutput{
+		Name:            ptr.String("__Name__"),
+		TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+		Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		StatusReason:    ptr.String("__StatusReason__"),
+	}
+	proto := restjson1.New(schemas.ObservabilityAdmin)
+	opSchema := smithy.NewOperationSchema(schemas.StopThirdPartyTelemetryEnrichment, schemas.StopThirdPartyTelemetryEnrichmentOutput, schemas.StopThirdPartyTelemetryEnrichmentOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopThirdPartyTelemetryEnrichment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2185,7 +2792,7 @@ func TestUpdateResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.ObservabilityAdmin)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteS3TableIntegration, schemas.InvalidStateException, schemas.InvalidStateException)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteConnector, schemas.InvalidStateException, schemas.InvalidStateException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
 )
 
+func ExampleDatasetArtifacts_outputUsage() {
+	var union types.DatasetArtifacts
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DatasetArtifactsMemberMedicalCoding:
+		_ = v.Value // Value is types.MedicalCodingDatasetArtifacts
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MedicalCodingDatasetArtifacts
+
+func ExampleDatasetConfig_outputUsage() {
+	var union types.DatasetConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DatasetConfigMemberMedicalCoding:
+		_ = v.Value // Value is types.MedicalCodingDatasetConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MedicalCodingDatasetConfig
+
 func ExampleMedicalScribeInputStream_outputUsage() {
 	var union types.MedicalScribeInputStream
 	// type switches can be used to check the union value
@@ -41,6 +77,12 @@ func ExampleMedicalScribeOutputStream_outputUsage() {
 	var union types.MedicalScribeOutputStream
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.MedicalScribeOutputStreamMemberChecklistEvent:
+		_ = v.Value // Value is types.MedicalScribeChecklistEvent
+
+	case *types.MedicalScribeOutputStreamMemberPeriodontalChartEvent:
+		_ = v.Value // Value is types.MedicalScribePeriodontalChartEvent
+
 	case *types.MedicalScribeOutputStreamMemberTranscriptEvent:
 		_ = v.Value // Value is types.MedicalScribeTranscriptEvent
 
@@ -53,7 +95,9 @@ func ExampleMedicalScribeOutputStream_outputUsage() {
 	}
 }
 
+var _ *types.MedicalScribeChecklistEvent
 var _ *types.MedicalScribeTranscriptEvent
+var _ *types.MedicalScribePeriodontalChartEvent
 
 func ExampleNoteTemplateSettings_outputUsage() {
 	var union types.NoteTemplateSettings

@@ -365,6 +365,74 @@ func (ConnectPeerState) Values() []ConnectPeerState {
 	}
 }
 
+type ContextChangeType string
+
+// Enum values for ContextChangeType
+const (
+	ContextChangeTypeAdded   ContextChangeType = "ADDED"
+	ContextChangeTypeRemoved ContextChangeType = "REMOVED"
+)
+
+// Values returns all known values for ContextChangeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextChangeType) Values() []ContextChangeType {
+	return []ContextChangeType{
+		"ADDED",
+		"REMOVED",
+	}
+}
+
+type ContextStoreAssociationState string
+
+// Enum values for ContextStoreAssociationState
+const (
+	ContextStoreAssociationStateAssociating    ContextStoreAssociationState = "ASSOCIATING"
+	ContextStoreAssociationStateAssociated     ContextStoreAssociationState = "ASSOCIATED"
+	ContextStoreAssociationStateDisassociating ContextStoreAssociationState = "DISASSOCIATING"
+	ContextStoreAssociationStateFailed         ContextStoreAssociationState = "FAILED"
+)
+
+// Values returns all known values for ContextStoreAssociationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextStoreAssociationState) Values() []ContextStoreAssociationState {
+	return []ContextStoreAssociationState{
+		"ASSOCIATING",
+		"ASSOCIATED",
+		"DISASSOCIATING",
+		"FAILED",
+	}
+}
+
+type ContextStoreState string
+
+// Enum values for ContextStoreState
+const (
+	ContextStoreStatePending   ContextStoreState = "PENDING"
+	ContextStoreStateAvailable ContextStoreState = "AVAILABLE"
+	ContextStoreStateUpdating  ContextStoreState = "UPDATING"
+	ContextStoreStateDeleting  ContextStoreState = "DELETING"
+	ContextStoreStateDeleted   ContextStoreState = "DELETED"
+)
+
+// Values returns all known values for ContextStoreState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextStoreState) Values() []ContextStoreState {
+	return []ContextStoreState{
+		"PENDING",
+		"AVAILABLE",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type CoreNetworkPolicyAlias string
 
 // Enum values for CoreNetworkPolicyAlias
@@ -520,6 +588,25 @@ func (LinkState) Values() []LinkState {
 		"AVAILABLE",
 		"DELETING",
 		"UPDATING",
+	}
+}
+
+type MultipathResilienceMode string
+
+// Enum values for MultipathResilienceMode
+const (
+	MultipathResilienceModeBestEffort MultipathResilienceMode = "best-effort"
+	MultipathResilienceModeDisabled   MultipathResilienceMode = "disabled"
+)
+
+// Values returns all known values for MultipathResilienceMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultipathResilienceMode) Values() []MultipathResilienceMode {
+	return []MultipathResilienceMode{
+		"best-effort",
+		"disabled",
 	}
 }
 

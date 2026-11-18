@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/datasets
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","config":{"medicalCoding":{"s3InputPath":"__S3InputPath__","s3OutputPath":"__S3OutputPath__"}},"name":"__Name__"}

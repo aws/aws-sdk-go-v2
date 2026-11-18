@@ -1,3 +1,7 @@
+# v1.291.0 (2026-11-16)
+
+* **Feature**: Amazon SageMaker adds Synthetic Data Generation, Auto-labeling, Data Quality Evaluation, and Data Transformation capabilities, Cross-Region Inference Routing, KV Aware routing for realtime inference endpoints.
+
 # v1.290.0 (2026-11-13)
 
 * **Feature**: New feature for Sagemaker Hyperpod Slurm clusters to install Extensions and view cluster operations.

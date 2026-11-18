@@ -1,0 +1,5 @@
+POST /v1/question-set
+
+Content-Type: application/json
+
+{"chooseOne":[{"name":"__Name__","options":[{"name":"__Name__","text":"__Text__"},{"name":"__Name__","text":"__Text__"}],"question":"__Question__"},{"name":"__Name__","options":[{"name":"__Name__","text":"__Text__"},{"name":"__Name__","text":"__Text__"}],"question":"__Question__"}],"name":"__Name__","tags":{"key0":"__Value__"},"yesNo":[{"name":"__Name__","question":"__Question__"},{"name":"__Name__","question":"__Question__"}],"yesNoPerOption":[{"name":"__Name__","options":[{"name":"__Name__","text":"__Text__"},{"name":"__Name__","text":"__Text__"}],"question":"__Question__"},{"name":"__Name__","options":[{"name":"__Name__","text":"__Text__"},{"name":"__Name__","text":"__Text__"}],"question":"__Question__"}]}

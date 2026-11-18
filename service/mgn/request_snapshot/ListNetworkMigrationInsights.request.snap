@@ -1,0 +1,5 @@
+POST /network-migration/ListNetworkMigrationInsights
+
+Content-Type: application/json
+
+{"constructID":"__ConstructID__","filters":{"insightTypes":["INTENT_GAP","INTENT_GAP"]},"maxResults":1,"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","nextToken":"__NextToken__","producerID":"__ProducerID__","segmentID":"__SegmentID__"}

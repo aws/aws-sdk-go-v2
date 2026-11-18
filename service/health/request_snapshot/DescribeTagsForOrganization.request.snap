@@ -1,0 +1,7 @@
+POST /service/AWSHealth_20160804/operation/DescribeTagsForOrganization
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿ffilter¿htagTypesŸxORGANIZATION_RESOURCE_TAGxORGANIZATION_RESOURCE_TAGÿÿjmaxResultsinextTokenm__NextToken__ÿ

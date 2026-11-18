@@ -815,6 +815,9 @@ func TestCheckRequestSnapshot_CreateFunction(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -967,6 +970,33 @@ func TestCheckRequestSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCodeSigningConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteDurableExecution(t *testing.T) {
+	input := &DeleteDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDurableExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDurableExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2367,6 +2397,36 @@ func TestCheckRequestSnapshot_ListVersionsByFunction(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_PauseDurableExecution(t *testing.T) {
+	input := &PauseDurableExecutionInput{
+		DurableExecutionArn:    ptr.String("__DurableExecutionArn__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Reason:                 ptr.String("__Reason__"),
+		ExecutionTimeoutPaused: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PauseDurableExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PauseDurableExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PublishLayerVersion(t *testing.T) {
 	input := &PublishLayerVersionInput{
 		LayerName:   ptr.String("__LayerName__"),
@@ -2740,6 +2800,35 @@ func TestCheckRequestSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemovePermission"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ResumeDurableExecution(t *testing.T) {
+	input := &ResumeDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		Reason:              ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResumeDurableExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResumeDurableExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3333,6 +3422,9 @@ func TestCheckRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4054,6 +4146,9 @@ func TestUpdateRequestSnapshot_CreateFunction(t *testing.T) {
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
 		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4206,6 +4301,33 @@ func TestUpdateRequestSnapshot_DeleteCodeSigningConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCodeSigningConfig"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteDurableExecution(t *testing.T) {
+	input := &DeleteDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteDurableExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteDurableExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5606,6 +5728,36 @@ func TestUpdateRequestSnapshot_ListVersionsByFunction(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_PauseDurableExecution(t *testing.T) {
+	input := &PauseDurableExecutionInput{
+		DurableExecutionArn:    ptr.String("__DurableExecutionArn__"),
+		ClientToken:            ptr.String("__ClientToken__"),
+		Reason:                 ptr.String("__Reason__"),
+		ExecutionTimeoutPaused: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PauseDurableExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PauseDurableExecution"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PublishLayerVersion(t *testing.T) {
 	input := &PublishLayerVersionInput{
 		LayerName:   ptr.String("__LayerName__"),
@@ -5979,6 +6131,35 @@ func TestUpdateRequestSnapshot_RemovePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemovePermission"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ResumeDurableExecution(t *testing.T) {
+	input := &ResumeDurableExecutionInput{
+		DurableExecutionArn: ptr.String("__DurableExecutionArn__"),
+		ClientToken:         ptr.String("__ClientToken__"),
+		Reason:              ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResumeDurableExecution(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResumeDurableExecution"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6572,6 +6753,9 @@ func TestUpdateRequestSnapshot_UpdateFunctionConfiguration(t *testing.T) {
 		RuntimeConfig: &types.FunctionRuntimeConfig{
 			RuntimeArn:   ptr.String("__RuntimeArn__"),
 			RuntimeAlias: ptr.String("__RuntimeAlias__"),
+		},
+		AcceleratorConfig: &types.AcceleratorConfig{
+			AcceleratorMemorySize: types.AcceleratorMemoryGB(3),
 		},
 	}
 	body := &bytes.Buffer{}

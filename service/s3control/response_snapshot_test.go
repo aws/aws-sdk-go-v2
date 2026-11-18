@@ -2876,12 +2876,24 @@ func TestCheckResponseSnapshot_GetStorageLensConfiguration(t *testing.T) {
 					},
 				},
 			},
+			CostAndUsageReportsPublish: &types.StorageLensCostAndUsageReportsPublish{
+				PrefixLevel: &types.StorageLensCostAndUsageReportsPrefixLevel{
+					IsEnabled: true,
+					SelectionCriteria: &types.StorageLensCostAndUsageReportsSelectionCriteria{
+						MinDepth: ptr.Int32(1),
+						MaxDepth: ptr.Int32(1),
+					},
+				},
+			},
 			IsEnabled: true,
 			AwsOrg: &types.StorageLensAwsOrg{
 				Arn: ptr.String("__Arn__"),
 			},
 			StorageLensArn:  ptr.String("__StorageLensArn__"),
 			PrefixDelimiter: ptr.String("__PrefixDelimiter__"),
+			IntAccessTiers: &types.IntAccessTiers{
+				IsEnabled: true,
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetStorageLensConfiguration.response")
@@ -4461,12 +4473,24 @@ func TestCheckResponseSnapshot_PutStorageLensConfiguration(t *testing.T) {
 					},
 				},
 			},
+			CostAndUsageReportsPublish: &types.StorageLensCostAndUsageReportsPublish{
+				PrefixLevel: &types.StorageLensCostAndUsageReportsPrefixLevel{
+					IsEnabled: true,
+					SelectionCriteria: &types.StorageLensCostAndUsageReportsSelectionCriteria{
+						MinDepth: ptr.Int32(1),
+						MaxDepth: ptr.Int32(1),
+					},
+				},
+			},
 			IsEnabled: true,
 			AwsOrg: &types.StorageLensAwsOrg{
 				Arn: ptr.String("__Arn__"),
 			},
 			StorageLensArn:  ptr.String("__StorageLensArn__"),
 			PrefixDelimiter: ptr.String("__PrefixDelimiter__"),
+			IntAccessTiers: &types.IntAccessTiers{
+				IsEnabled: true,
+			},
 		},
 		Tags: []types.StorageLensTag{
 			{

@@ -74,6 +74,18 @@ func TestCheckSnapshot_CreateMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateScope(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_DeleteMonitor(t *testing.T) {
 	_, err := svc.DeleteMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -122,11 +146,47 @@ func TestCheckSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMonitorScopeSuggestions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMonitorScopeSuggestions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMonitorScopeSuggestions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetQueryResultsMonitorTopContributors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetQueryResultsMonitorTopContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQueryResultsPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQueryResultsPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQueryResultsPerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -163,6 +223,18 @@ func TestCheckSnapshot_GetQueryStatusMonitorTopContributors(t *testing.T) {
 	_, err := svc.GetQueryStatusMonitorTopContributors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetQueryStatusMonitorTopContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetQueryStatusPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQueryStatusPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetQueryStatusPerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -218,6 +290,18 @@ func TestCheckSnapshot_ListMonitors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPerformanceMonitors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPerformanceMonitors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPerformanceMonitors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListScopes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListScopes(context.Background(), nil, func(o *Options) {
@@ -254,6 +338,18 @@ func TestCheckSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartQueryPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQueryPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartQueryPerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartQueryWorkloadInsightsTopContributors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartQueryWorkloadInsightsTopContributors(context.Background(), nil, func(o *Options) {
@@ -283,6 +379,18 @@ func TestCheckSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 	_, err := svc.StopQueryMonitorTopContributors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopQueryMonitorTopContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopQueryPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopQueryPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopQueryPerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +458,18 @@ func TestCheckSnapshot_UpdateMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateScope(context.Background(), nil, func(o *Options) {
@@ -366,6 +486,18 @@ func TestUpdateSnapshot_CreateMonitor(t *testing.T) {
 	_, err := svc.CreateMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -397,6 +529,18 @@ func TestUpdateSnapshot_DeleteMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeletePerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteScope(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteScope(context.Background(), nil, func(o *Options) {
@@ -421,11 +565,47 @@ func TestUpdateSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMonitorScopeSuggestions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMonitorScopeSuggestions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMonitorScopeSuggestions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetQueryResultsMonitorTopContributors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetQueryResultsMonitorTopContributors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetQueryResultsMonitorTopContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQueryResultsPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQueryResultsPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQueryResultsPerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -462,6 +642,18 @@ func TestUpdateSnapshot_GetQueryStatusMonitorTopContributors(t *testing.T) {
 	_, err := svc.GetQueryStatusMonitorTopContributors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetQueryStatusMonitorTopContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetQueryStatusPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetQueryStatusPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetQueryStatusPerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -517,6 +709,18 @@ func TestUpdateSnapshot_ListMonitors(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPerformanceMonitors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPerformanceMonitors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPerformanceMonitors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListScopes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListScopes(context.Background(), nil, func(o *Options) {
@@ -553,6 +757,18 @@ func TestUpdateSnapshot_StartQueryMonitorTopContributors(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartQueryPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartQueryPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartQueryPerformanceMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartQueryWorkloadInsightsTopContributors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartQueryWorkloadInsightsTopContributors(context.Background(), nil, func(o *Options) {
@@ -582,6 +798,18 @@ func TestUpdateSnapshot_StopQueryMonitorTopContributors(t *testing.T) {
 	_, err := svc.StopQueryMonitorTopContributors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopQueryMonitorTopContributors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopQueryPerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopQueryPerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopQueryPerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -642,6 +870,18 @@ func TestUpdateSnapshot_UpdateMonitor(t *testing.T) {
 	_, err := svc.UpdateMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePerformanceMonitor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePerformanceMonitor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePerformanceMonitor")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

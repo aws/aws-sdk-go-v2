@@ -2039,17 +2039,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2058,17 +2071,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2159,17 +2185,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2178,17 +2217,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2241,6 +2293,79 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -2302,17 +2427,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2321,17 +2459,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2422,17 +2573,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2441,17 +2605,30 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -2504,6 +2681,79 @@ func TestCheckRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -4533,6 +4783,35 @@ func TestCheckRequestSnapshot_DeactivateEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeactivateEvaluationForm"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteAllEntitySessions(t *testing.T) {
+	input := &DeleteAllEntitySessionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		EntityId:   ptr.String("__EntityId__"),
+		EntityType: types.SessionEntityType("USER"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAllEntitySessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAllEntitySessions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15835,17 +16114,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -15854,17 +16146,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -15955,17 +16260,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -15974,17 +16292,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -16037,6 +16368,79 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -16098,17 +16502,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -16117,17 +16534,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -16218,17 +16648,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -16237,17 +16680,30 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -16300,6 +16756,79 @@ func TestCheckRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -20718,17 +21247,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -20737,17 +21279,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -20838,17 +21393,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -20857,17 +21425,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -20920,6 +21501,79 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -20981,17 +21635,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -21000,17 +21667,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -21101,17 +21781,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -21120,17 +21813,30 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -21183,6 +21889,79 @@ func TestUpdateRequestSnapshot_CreateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -23212,6 +23991,35 @@ func TestUpdateRequestSnapshot_DeactivateEvaluationForm(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeactivateEvaluationForm"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteAllEntitySessions(t *testing.T) {
+	input := &DeleteAllEntitySessionsInput{
+		InstanceId: ptr.String("__InstanceId__"),
+		EntityId:   ptr.String("__EntityId__"),
+		EntityType: types.SessionEntityType("USER"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAllEntitySessions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAllEntitySessions"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34514,17 +35322,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34533,17 +35354,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34634,17 +35468,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34653,17 +35500,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34716,6 +35576,79 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},
@@ -34777,17 +35710,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34796,17 +35742,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34897,17 +35856,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34916,17 +35888,30 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 											&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
 												Value: types.EvaluationFormItemEnablementExpression{
 													Source: &types.EvaluationFormItemEnablementSource{
-														Type:  types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
-														RefId: ptr.String("__RefId__"),
+														Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+														RefId:                   ptr.String("__RefId__"),
+														ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+														ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+														SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+														EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+														AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
 													},
 													Values: []types.EvaluationFormItemEnablementSourceValue{
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 														{
-															Type:  types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
-															RefId: ptr.String("__RefId__"),
+															Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+															RefId:         ptr.String("__RefId__"),
+															StringValue:   ptr.String("__StringValue__"),
+															NumericValue:  ptr.Float64(1.0),
+															BooleanValue:  ptr.Bool(true),
+															DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 														},
 													},
 													Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
@@ -34979,6 +35964,79 @@ func TestUpdateRequestSnapshot_UpdateEvaluationForm(t *testing.T) {
 							MinScorePercentage:  1.0,
 							MaxScorePercentage:  1.0,
 						},
+					},
+					Enablement: &types.EvaluationFormItemEnablementConfiguration{
+						Condition: &types.EvaluationFormItemEnablementCondition{
+							Operands: []types.EvaluationFormItemEnablementConditionOperand{
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+								&types.EvaluationFormItemEnablementConditionOperandMemberExpression{
+									Value: types.EvaluationFormItemEnablementExpression{
+										Source: &types.EvaluationFormItemEnablementSource{
+											Type:                    types.EvaluationFormItemEnablementSourceType("QUESTION_REF_ID"),
+											RefId:                   ptr.String("__RefId__"),
+											ContactField:            types.EvaluationFormContactField("CATEGORIES"),
+											ContactAttributeKey:     ptr.String("__ContactAttributeKey__"),
+											SegmentAttributeKey:     ptr.String("__SegmentAttributeKey__"),
+											EvaluationMetadataField: types.EvaluationFormEvaluationMetadataField("EVALUATION_TYPE"),
+											AiMetricsField:          types.EvaluationFormAiMetricsField("AI_SESSION_IS_HANDED_OFF"),
+										},
+										Values: []types.EvaluationFormItemEnablementSourceValue{
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+											{
+												Type:          types.EvaluationFormItemEnablementSourceValueType("OPTION_REF_ID"),
+												RefId:         ptr.String("__RefId__"),
+												StringValue:   ptr.String("__StringValue__"),
+												NumericValue:  ptr.Float64(1.0),
+												BooleanValue:  ptr.Bool(true),
+												DateTimeValue: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+											},
+										},
+										Comparator: types.EvaluationFormItemSourceValuesComparator("IN"),
+									},
+								},
+							},
+							Operator: types.EvaluationFormItemEnablementOperator("OR"),
+						},
+						Action:        types.EvaluationFormItemEnablementAction("DISABLE"),
+						DefaultAction: types.EvaluationFormItemEnablementAction("DISABLE"),
 					},
 				},
 			},

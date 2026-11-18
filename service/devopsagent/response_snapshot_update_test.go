@@ -1028,6 +1028,34 @@ func TestUpdateResponseSnapshot_GetBacklogTask(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetChat(t *testing.T) {
+	want := &GetChatOutput{
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+	}
+	proto := restjson1.New(schemas.DevOpsAgent)
+	opSchema := smithy.NewOperationSchema(schemas.GetChat, schemas.GetChatResponse, schemas.GetChatResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetChat.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetOperatorApp(t *testing.T) {
 	want := &GetOperatorAppOutput{
 		OperatorAppUrl: ptr.String("__OperatorAppUrl__"),
@@ -1609,16 +1637,18 @@ func TestUpdateResponseSnapshot_ListChats(t *testing.T) {
 	want := &ListChatsOutput{
 		Executions: []types.ChatExecution{
 			{
-				ExecutionId: ptr.String("__ExecutionId__"),
-				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Summary:     ptr.String("__Summary__"),
+				ExecutionId:   ptr.String("__ExecutionId__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Summary:       ptr.String("__Summary__"),
+				ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 			},
 			{
-				ExecutionId: ptr.String("__ExecutionId__"),
-				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				Summary:     ptr.String("__Summary__"),
+				ExecutionId:   ptr.String("__ExecutionId__"),
+				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Summary:       ptr.String("__Summary__"),
+				ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -2498,6 +2528,33 @@ func TestUpdateResponseSnapshot_UpdateBacklogTask(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateChat(t *testing.T) {
+	want := &UpdateChatOutput{
+		ExecutionId:   ptr.String("__ExecutionId__"),
+		Summary:       ptr.String("__Summary__"),
+		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchiveStatus: types.ChatArchiveStatus("ACTIVE"),
+	}
+	proto := restjson1.New(schemas.DevOpsAgent)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateChat, schemas.UpdateChatResponse, schemas.UpdateChatResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateChat.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateGoal(t *testing.T) {
 	want := &UpdateGoalOutput{
 		Goal: &types.Goal{
@@ -2742,6 +2799,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	want := &types.ConflictException{
 		Message: ptr.String("__Message__"),
+		Reason:  types.ConflictExceptionReason("CHAT_ARCHIVED"),
 	}
 	proto := restjson1.New(schemas.DevOpsAgent)
 	opSchema := smithy.NewOperationSchema(schemas.AssociateService, schemas.ConflictException, schemas.ConflictException)

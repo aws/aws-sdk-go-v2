@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ContextStoreAssociation":{"ContextStoreId":"__ContextStoreId__","CreatedAt":946684800,"State":"ASSOCIATING","TransitGatewayArn":"__TransitGatewayArn__"}}

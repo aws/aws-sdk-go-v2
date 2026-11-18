@@ -1,3 +1,11 @@
+# v1.20.23 (2026-11-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.22 (2026-11-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.21 (2026-11-10)
 
 * **Bug Fix**: Fix a panic in `Marshal` and `MarshalMap` when a typed nil pointer with a pointer-receiver `Marshaler` is held in an interface or is the inner pointer of a double pointer. These values are encoded as `AttributeValueMemberNULL` again.

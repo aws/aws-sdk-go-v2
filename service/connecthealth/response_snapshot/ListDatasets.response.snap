@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","createdAt":946684800,"datasetId":"__DatasetId__","name":"__Name__","status":"CREATING","statusDetails":"__StatusDetails__","type":"MEDICAL_CODING","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"datasetId":"__DatasetId__","name":"__Name__","status":"CREATING","statusDetails":"__StatusDetails__","type":"MEDICAL_CODING","updatedAt":946684800}],"nextToken":"__NextToken__"}

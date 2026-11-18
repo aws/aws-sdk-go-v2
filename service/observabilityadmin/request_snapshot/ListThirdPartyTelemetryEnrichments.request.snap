@@ -1,0 +1,5 @@
+POST /ListThirdPartyTelemetryEnrichments
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","Status":"Initializing","TelemetrySource":"Azure"}

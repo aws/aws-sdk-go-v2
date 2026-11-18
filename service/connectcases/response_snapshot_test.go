@@ -1208,6 +1208,7 @@ func TestCheckResponseSnapshot_GetCaseEventConfiguration(t *testing.T) {
 							Id: ptr.String("__Id__"),
 						},
 					},
+					AutoIncludeFields: types.AutoIncludeFields("All"),
 				},
 				RelatedItemData: &types.RelatedItemEventIncludedData{
 					IncludeContent: ptr.Bool(true),
@@ -1821,6 +1822,7 @@ func TestCheckResponseSnapshot_PutCaseEventConfiguration(t *testing.T) {
 							Id: ptr.String("__Id__"),
 						},
 					},
+					AutoIncludeFields: types.AutoIncludeFields("All"),
 				},
 				RelatedItemData: &types.RelatedItemEventIncludedData{
 					IncludeContent: ptr.Bool(true),

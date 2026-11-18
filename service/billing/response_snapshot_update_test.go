@@ -1583,6 +1583,41 @@ func TestUpdateResponseSnapshot_RedeemCredits(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_SplitCredit(t *testing.T) {
+	want := &SplitCreditOutput{
+		ParentCreditId: ptr.String("__ParentCreditId__"),
+		ChildCredits: []types.ChildCredit{
+			{
+				CreditId: ptr.String("__CreditId__"),
+				Amount:   ptr.String("__Amount__"),
+			},
+			{
+				CreditId: ptr.String("__CreditId__"),
+				Amount:   ptr.String("__Amount__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.SplitCredit, schemas.SplitCreditResponse, schemas.SplitCreditResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SplitCredit.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	proto := awsjson.New10(schemas.AWSBilling)
@@ -1601,6 +1636,34 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("TagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_TransferCredit(t *testing.T) {
+	want := &TransferCreditOutput{
+		SourceCreditId:       ptr.String("__SourceCreditId__"),
+		NewCreditId:          ptr.String("__NewCreditId__"),
+		DestinationAccountId: ptr.String("__DestinationAccountId__"),
+		Amount:               ptr.String("__Amount__"),
+		DryRun:               ptr.Bool(true),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.TransferCredit, schemas.TransferCreditResponse, schemas.TransferCreditResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("TransferCredit.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

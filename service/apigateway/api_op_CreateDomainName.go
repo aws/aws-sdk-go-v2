@@ -196,8 +196,8 @@ type CreateDomainNameOutput struct {
 
 	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
 	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
-	// information, see Set up a Regional Custom Domain Name and AWS Regions and
-	// Endpoints for API Gateway.
+	// information, see Set up a Regional Custom Domain Name and Amazon Web Services
+	// Regions and Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
 	// The custom domain name as an API host name, for example, my-api.example.com .
@@ -264,8 +264,8 @@ type CreateDomainNameOutput struct {
 	RegionalDomainName *string
 
 	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
-	// For more information, see Set up a Regional Custom Domain Name and AWS Regions
-	// and Endpoints for API Gateway.
+	// For more information, see Set up a Regional Custom Domain Name and Amazon Web
+	// Services Regions and Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The routing mode for this domain name. The routing mode determines how API

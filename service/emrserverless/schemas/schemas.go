@@ -452,6 +452,12 @@ var _EntryPointPath = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EntryPointPath",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var FlexExecution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.emrserverless",
+	Name:      "FlexExecution",
+}, smithy.ShapeTypeStructure, 1)
+var FlexExecution_enabled *smithy.Schema
+
 var Hive = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "Hive",
@@ -588,7 +594,7 @@ var JobLevelCostAllocationConfiguration_enabled *smithy.Schema
 var JobRun = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "JobRun",
-}, smithy.ShapeTypeStructure, 30)
+}, smithy.ShapeTypeStructure, 31)
 var JobRun_applicationId *smithy.Schema
 
 var JobRun_jobRunId *smithy.Schema
@@ -649,6 +655,8 @@ var JobRun_imageConfiguration *smithy.Schema
 
 var JobRun_workerTypeSpecifications *smithy.Schema
 
+var JobRun_flexExecution *smithy.Schema
+
 var _JobRunAttempts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "JobRunAttempts",
@@ -658,7 +666,7 @@ var _JobRunAttempts_member *smithy.Schema
 var JobRunAttemptSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "JobRunAttemptSummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var JobRunAttemptSummary_applicationId *smithy.Schema
 
 var JobRunAttemptSummary_id *smithy.Schema
@@ -688,6 +696,8 @@ var JobRunAttemptSummary_releaseLabel *smithy.Schema
 var JobRunAttemptSummary_type *smithy.Schema
 
 var JobRunAttemptSummary_attempt *smithy.Schema
+
+var JobRunAttemptSummary_flexExecution *smithy.Schema
 
 var JobRunExecutionIamPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
@@ -727,7 +737,7 @@ var _JobRunStateSet_member *smithy.Schema
 var JobRunSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "JobRunSummary",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var JobRunSummary_applicationId *smithy.Schema
 
 var JobRunSummary_id *smithy.Schema
@@ -759,6 +769,8 @@ var JobRunSummary_attempt *smithy.Schema
 var JobRunSummary_attemptCreatedAt *smithy.Schema
 
 var JobRunSummary_attemptUpdatedAt *smithy.Schema
+
+var JobRunSummary_flexExecution *smithy.Schema
 
 var _JobRunType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
@@ -1510,7 +1522,7 @@ var StartApplicationResponse = smithy.NewSchema(smithy.ShapeID{
 var StartJobRunRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
 	Name:      "StartJobRunRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var StartJobRunRequest_applicationId *smithy.Schema
 
 var StartJobRunRequest_clientToken *smithy.Schema
@@ -1532,6 +1544,8 @@ var StartJobRunRequest_name *smithy.Schema
 var StartJobRunRequest_mode *smithy.Schema
 
 var StartJobRunRequest_retryPolicy *smithy.Schema
+
+var StartJobRunRequest_flexExecution *smithy.Schema
 
 var StartJobRunResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.emrserverless",
@@ -1881,6 +1895,8 @@ func init() {
 
 	_EntryPointArguments_member = _EntryPointArguments.AddMember("member", _EntryPointArgument)
 
+	FlexExecution_enabled = FlexExecution.AddMember("enabled", smithyprelude.Boolean)
+
 	Hive_query = Hive.AddMember("query", _Query)
 
 	Hive_initQueryFile = Hive.AddMember("initQueryFile", _InitScriptPath)
@@ -1989,6 +2005,8 @@ func init() {
 
 	JobRun_workerTypeSpecifications = JobRun.AddMember("workerTypeSpecifications", _WorkerTypeSpecificationMap)
 
+	JobRun_flexExecution = JobRun.AddMember("flexExecution", FlexExecution)
+
 	JobRunAttemptSummary_applicationId = JobRunAttemptSummary.AddMember("applicationId", _ApplicationId)
 
 	JobRunAttemptSummary_id = JobRunAttemptSummary.AddMember("id", _JobRunId)
@@ -2018,6 +2036,8 @@ func init() {
 	JobRunAttemptSummary_type = JobRunAttemptSummary.AddMember("type", _JobRunType)
 
 	JobRunAttemptSummary_attempt = JobRunAttemptSummary.AddMember("attempt", _AttemptNumber)
+
+	JobRunAttemptSummary_flexExecution = JobRunAttemptSummary.AddMember("flexExecution", FlexExecution)
 
 	_JobRunAttempts_member = _JobRunAttempts.AddMember("member", JobRunAttemptSummary)
 
@@ -2052,6 +2072,8 @@ func init() {
 	JobRunSummary_attemptCreatedAt = JobRunSummary.AddMember("attemptCreatedAt", _Date)
 
 	JobRunSummary_attemptUpdatedAt = JobRunSummary.AddMember("attemptUpdatedAt", _Date)
+
+	JobRunSummary_flexExecution = JobRunSummary.AddMember("flexExecution", FlexExecution)
 
 	_JobRuns_member = _JobRuns.AddMember("member", JobRunSummary)
 
@@ -2334,6 +2356,8 @@ func init() {
 	StartJobRunRequest_mode = StartJobRunRequest.AddMember("mode", _JobRunMode)
 
 	StartJobRunRequest_retryPolicy = StartJobRunRequest.AddMember("retryPolicy", RetryPolicy)
+
+	StartJobRunRequest_flexExecution = StartJobRunRequest.AddMember("flexExecution", FlexExecution)
 
 	StartJobRunResponse_applicationId = StartJobRunResponse.AddMember("applicationId", _ApplicationId)
 

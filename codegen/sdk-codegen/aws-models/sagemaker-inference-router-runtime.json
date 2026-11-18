@@ -1,0 +1,1677 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.sagemakerinferencerouterruntime#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have permission to perform this action. Check that the caller is allowed to invoke the inference router and every destination of the routing target.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#CustomAttributesHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Additional information about an inference, passed to or returned by the model container.</p>",
+                "smithy.api#length": {
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^\\p{ASCII}*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InferenceRouterBodyBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "<p>The inference request or response body.</p>",
+                "smithy.api#length": {
+                    "max": 6291456
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InternalDependencyException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because of an error in an internal dependency. Retry the request with exponential backoff.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 530
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InternalFailure": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error occurred. Retry the request with exponential backoff. The Amazon Web Services SDKs and the Amazon Web Services CLI do this by default.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InternalDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ModelError"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ModelNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends a real-time inference request to an inference router. In the request, you name the routing target, and the router sends the request to one of the routing target's destinations. The response includes the destination that served the request and the reason that the router chose it.</p> <p>The following limits apply:</p> <ul> <li> <p>The maximum request payload is 6 MB. A request with a larger body fails with HTTP status code 413.</p> </li> <li> <p>Your model has up to 60 seconds for each attempt, the same limit as <code>InvokeEndpoint</code>. If your account has a higher model execution timeout for <code>InvokeEndpoint</code>, it doesn't apply through an inference router. For models that take longer, use <code>InvokeInferenceRouterAsync</code>.</p> </li> </ul> <p>If a destination returns an error that the router can retry, such as a throttling error, before your model produces a response, the router retries the request once on another destination. A request that times out on a destination isn't retried. Because a request can make two attempts, set your client read timeout to at least 170 seconds.</p> <p>The caller needs permission to invoke the inference router and every destination of the routing target. For information about permissions, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router.html\">Route requests across Regions with inference routers</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke an inference router",
+                        "documentation": "The following example sends a JSON request to the my-target routing target of the my-router inference router. The response shows that a destination in the router's Region served the request.",
+                        "input": {
+                            "InferenceRouterName": "my-router",
+                            "RoutingTargetName": "my-target",
+                            "ContentType": "application/json",
+                            "Body": "{\"instances\": [[1.0, 2.0, 5.0]]}"
+                        },
+                        "output": {
+                            "ContentType": "application/json",
+                            "RoutingReason": "local-preferred"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/inference-routers/{InferenceRouterName}/invocations"
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "InvokeInferenceRouterFailure",
+                        "params": {
+                            "InferenceRouterName": "smoke-test-nonexistent-router",
+                            "RoutingTargetName": "smoke-test-target",
+                            "Body": "{}"
+                        },
+                        "expect": {
+                            "failure": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterAsync": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterAsyncInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterAsyncOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits an asynchronous inference request to an inference router. Before you call this operation, upload the input data to Amazon S3 in the router's Amazon Web Services Region. The router returns as soon as it accepts the request, and sends the request to one of the destinations of the routing target. The destination reads the input from Amazon S3, and the inference response is written to the Amazon S3 output path that the routing target specifies.</p> <p>If a destination doesn't start the request within the routing target's <code>MaxTimeInBacklogSeconds</code>, the router moves the request to another destination. After your model starts processing the request, the request doesn't move. If no destination can take the request before <code>RequestTTLSeconds</code> runs out, or every destination has been tried, the router writes a failure object to the <code>FailureLocation</code> and publishes a notification to the routing target's error topic, if one is configured.</p> <p>For information about the permissions that the caller and each destination need, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/inference-router-async.html\">Send asynchronous requests through an inference router</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/inference-routers/{InferenceRouterName}/async-invocations",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterAsyncInput": {
+            "type": "structure",
+            "members": {
+                "InferenceRouterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference router to invoke.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingTargetName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the routing target in the inference router. The routing target must be configured for asynchronous inference.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Routing-Target-Name",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the input data in Amazon S3. The router passes it to the destination.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Content-Type",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "Accept": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type that you want for the inference response. The router passes it to the destination.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Accept",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "CustomAttributes": {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#CustomAttributesHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional information about the inference request. The value is an opaque string that the router passes, unchanged, to the model container of the destination that serves the request. The value can contain up to 1,024 visible US-ASCII characters.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Custom-Attributes"
+                    }
+                },
+                "InferenceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the inference request. If you don't provide one, SageMaker AI generates one and returns it in the response.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Inference-Id",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^\\S[\\p{Print}]*$"
+                    }
+                },
+                "InputLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the object that contains the input data for the inference. The bucket must be in the inference router's Amazon Web Services Region and owned by the router's account. The destination endpoint's execution role reads the object, and the destination's asynchronous inference limits apply to it.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-InputLocation",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3OutputPathExtension": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path extension that is appended to the routing target's Amazon S3 output path where the inference response is stored.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-S3OutputPathExtension",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 512
+                        },
+                        "smithy.api#pattern": "^(?!s3:|https:)[a-zA-Z0-9!_.*'()/-]+$"
+                    }
+                },
+                "Filename": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file name of the inference response stored in Amazon S3. If you don't provide one, SageMaker AI generates one.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Filename",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^(?!.*\\..*\\.)[a-zA-Z0-9][a-zA-Z0-9-_\\.]*$"
+                    }
+                },
+                "RequestTTLSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time to live of the request, in seconds, measured from when the router accepts it. If no destination starts the request in this time, the request fails. The default is 21,600 seconds (6 hours).</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-RequestTTLSeconds",
+                        "smithy.api#range": {
+                            "min": 60,
+                            "max": 21600
+                        }
+                    }
+                },
+                "InvocationTimeoutSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a destination can spend processing the request before the request is marked as expired. The default is 900 seconds (15 minutes).</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-InvocationTimeoutSeconds",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 3600
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterAsyncOutput": {
+            "type": "structure",
+            "members": {
+                "InferenceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the inference request. This is the <code>InferenceId</code> that you provided, or the one that SageMaker AI generated.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "OutputLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where the inference response is written. The location doesn't change if the router moves the request to another destination.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-OutputLocation",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "FailureLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where the failure details are written if the inference fails.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-FailureLocation",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterInput": {
+            "type": "structure",
+            "members": {
+                "InferenceRouterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference router to invoke.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingTargetName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the routing target in the inference router. The routing target lists the destinations that can serve the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Routing-Target-Name",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the input data in the request body. The router passes it to the destination.</p>",
+                        "smithy.api#httpHeader": "Content-Type",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "Accept": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type that you want for the inference response. The router passes it to the destination.</p>",
+                        "smithy.api#httpHeader": "Accept",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "InferenceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the inference request. The router passes it to the destination.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Inference-Id",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^\\S[\\p{Print}]*$"
+                    }
+                },
+                "PrefixAwareId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional, stable identifier that serves as a routing hint for prefix-aware routing. The router passes it to the destination that serves the request. Within that destination, requests with the same prefix and the same identifier go to the same instance. If requests from different applications might have the same prompt prefix, set a different identifier for each application to differentiate their routing decisions.</p> <p>Applies only to destination endpoints configured with a <code>RoutingStrategy</code> of <code>PREFIX_AWARE</code>.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Prefix-Aware-Id",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^\\S[\\p{Print}]*$"
+                    }
+                },
+                "CustomAttributes": {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#CustomAttributesHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional information about the inference request. The value is an opaque string that the router passes, unchanged, to the model container of the destination that serves the request. The value can contain up to 1,024 visible US-ASCII characters.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Custom-Attributes"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InferenceRouterBodyBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input data for the inference, in the format that your model expects. The body can't be empty.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterOutput": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InferenceRouterBodyBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inference that the model returned.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the inference returned in the response body.</p>",
+                        "smithy.api#httpHeader": "Content-Type",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "InvokedRoutedResourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the endpoint or inference component that served the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Invoked-Routed-Resource-Arn",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "RoutingReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the router chose the destination that served the request. Possible values:</p> <ul> <li> <p> <code>local-preferred</code> – The destination is a healthy destination in the router's Region.</p> </li> <li> <p> <code>capacity-available</code> – No destination in the router's Region could take the request, and two or more destinations in other Regions could.</p> </li> <li> <p> <code>only-healthy</code> – No destination in the router's Region could take the request, and exactly one destination in another Region could.</p> </li> <li> <p> <code>failover</code> – The router moved the request away from destinations in its Region because they were overloaded or returning errors. You also see this value when the router can't assess destination health, and when no destination is healthy and the router tries one anyway.</p> </li> </ul>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Invoked-Routing-Reason",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "InvokedProductionVariant": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The production variant of the destination endpoint that served the request.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Invoked-Production-Variant",
+                        "smithy.api#length": {
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^\\p{ASCII}*$"
+                    }
+                },
+                "CustomAttributes": {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#CustomAttributesHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional information in the response about the inference. This is the value that the model container of the destination returned, unchanged.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Custom-Attributes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#ModelError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                },
+                "OriginalStatusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code that the model container returned.</p>"
+                    }
+                },
+                "OriginalMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that the model container returned.</p>"
+                    }
+                },
+                "LogStreamArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log stream for the destination that served the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The model in the destination that served the request returned an error. Check <code>OriginalStatusCode</code>, <code>OriginalMessage</code>, and the destination's logs in Amazon CloudWatch.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#ModelNotReadyException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination isn't ready to serve the model, for example because an inference component has no copies. Retry the request later.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#RequestTimeoutException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The inference router didn't receive the complete request within 300 seconds of accepting it, for example because of a very slow upload. Retry the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 408,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#SageMakerInferenceRouterRuntime": {
+            "type": "service",
+            "version": "2026-01-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouter"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerinferencerouterruntime#InvokeInferenceRouterAsync"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SageMaker Inference Router Runtime",
+                    "arnNamespace": "sagemaker",
+                    "cloudFormationName": "SageMakerInferenceRouterRuntime",
+                    "endpointPrefix": "inferencerouter-runtime.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.endpoints#standardRegionalEndpoints": {
+                    "partitionSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://inferencerouter-runtime.sagemaker.{region}.{dnsSuffix}",
+                                "fips": false,
+                                "dualStack": false
+                            },
+                            {
+                                "endpoint": "https://inferencerouter-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "fips": false,
+                                "dualStack": true
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon SageMaker Inference Router Runtime is the runtime API for Amazon SageMaker AI inference routers. An inference router sends each request that you make to one of the destinations of a routing target. A destination is a SageMaker AI endpoint or inference component, in your account or in another account, in the router's Amazon Web Services Region or in another Region in the same Amazon Web Services partition. The router chooses a healthy destination with capacity, and prefers destinations in its own Region.</p> <p>Use <code>InvokeInferenceRouter</code> to get an inference in real time. Use <code>InvokeInferenceRouterAsync</code> to submit a request whose input and response are stored in Amazon S3.</p> <p>The inference router runtime endpoint supports HTTP/1.1 only. HTTP/2 isn't supported. If you use the Amazon Web Services SDKs or the Amazon Web Services CLI, you don't need to change anything.</p>",
+                "smithy.api#title": "Amazon SageMaker Inference Router Runtime",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://inferencerouter-runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://inferencerouter-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://inferencerouter-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://inferencerouter-runtime.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 14,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAkAAAAGAAAABQAAAAcF9eEEAAAABgX14QUAAAAIAAAABwX14QUF9eEKAAAABAAAAAsAAAAKAAAABQX14QcF9eEJAAAABQAAAAwF9eEIAAAABgX14QYF9eEHAAAAAwX14QEAAAAOAAAABQX14QIF9eED"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://inferencerouter-runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://inferencerouter-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://inferencerouter-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://inferencerouter-runtime.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://inferencerouter-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://inferencerouter-runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eusc-de-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.eusc-de-east-1.amazonaws.eu"
+                                }
+                            },
+                            "params": {
+                                "Region": "eusc-de-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inferencerouter-runtime.sagemaker.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is temporarily unavailable. For example, no destination of the routing target could serve the request, or a destination didn't respond. Retry the request with exponential backoff. The Amazon Web Services SDKs and the Amazon Web Services CLI do this by default.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because you exceeded the request rate for the inference router, or because a destination throttled the request. Retry the request with exponential backoff.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.sagemakerinferencerouterruntime#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request isn't valid. Check the inference router name, the routing target name, and the request parameters, and then try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

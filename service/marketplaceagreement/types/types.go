@@ -86,7 +86,7 @@ func (v *AcceptedTermMemberFixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDe
 	return v.Value.Deserialize(d)
 }
 
-// Defines a short-term free pricing model where the buyers aren’t charged
+// Defines a short-term free pricing model where the buyers aren't charged
 // anything within a specified limit.
 type AcceptedTermMemberFreeTrialPricingTerm struct {
 	Value FreeTrialPricingTerm
@@ -302,6 +302,529 @@ func (v *Acceptor) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Acceptor_accountId:
 			v.AccountId = new(string)
 			return d.ReadString(schemas.Acceptor_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
+// The contact information of the acceptor.
+type AcceptorContact struct {
+
+	// The name of the company that the acceptor contact represents.
+	//
+	// This member is required.
+	CompanyName *string
+
+	// The ISO-3166 two-letter country code for the acceptor contact.
+	//
+	// This member is required.
+	CountryCode *string
+
+	// The email address of the acceptor contact.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	// The first name of the acceptor contact.
+	//
+	// This member is required.
+	FirstName *string
+
+	// The last name of the acceptor contact.
+	//
+	// This member is required.
+	LastName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcceptorContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptorContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptorContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompanyName != nil {
+		s.WriteString(schemas.AcceptorContact_companyName, *v.CompanyName)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.AcceptorContact_countryCode, *v.CountryCode)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.AcceptorContact_emailAddress, *v.EmailAddress)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.AcceptorContact_firstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.AcceptorContact_lastName, *v.LastName)
+	}
+}
+func (v *AcceptorContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptorContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptorContact_companyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.AcceptorContact_companyName, v.CompanyName)
+		case schemas.AcceptorContact_countryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.AcceptorContact_countryCode, v.CountryCode)
+		case schemas.AcceptorContact_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.AcceptorContact_emailAddress, v.EmailAddress)
+		case schemas.AcceptorContact_firstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.AcceptorContact_firstName, v.FirstName)
+		case schemas.AcceptorContact_lastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.AcceptorContact_lastName, v.LastName)
+		}
+		return nil
+	})
+}
+
+// An approval plan that applies to an agreement request.
+//
+// The following types satisfy this interface:
+//
+//	AgreementApprovalPlanMemberBuyerAgreementApprovalPlan
+type AgreementApprovalPlan interface {
+	isAgreementApprovalPlan()
+}
+
+// An approval plan that the buyer's organization requires.
+type AgreementApprovalPlanMemberBuyerAgreementApprovalPlan struct {
+	Value BuyerAgreementApprovalPlan
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementApprovalPlanMemberBuyerAgreementApprovalPlan) isAgreementApprovalPlan() {}
+func (v *AgreementApprovalPlanMemberBuyerAgreementApprovalPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalPlan_buyerAgreementApprovalPlan)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementApprovalPlanMemberBuyerAgreementApprovalPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The approval plan to start an agreement approval for.
+//
+// The following types satisfy this interface:
+//
+//	AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput
+type AgreementApprovalPlanInput interface {
+	isAgreementApprovalPlanInput()
+}
+
+// An approval plan that the buyer's organization requires.
+type AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput struct {
+	Value BuyerAgreementApprovalPlanInput
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput) isAgreementApprovalPlanInput() {
+}
+func (v *AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalPlanInput_buyerAgreementApprovalPlanInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementApprovalPlanInputMemberBuyerAgreementApprovalPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of the proposal received from the proposer.
+type AgreementApprovalProposalSummary struct {
+
+	// The unique identifier of the offer in AWS Marketplace.
+	//
+	// This member is required.
+	OfferId *string
+
+	// The visibility of the offer. Valid values are PUBLIC and PRIVATE .
+	//
+	// This member is required.
+	VisibilityScope OfferVisibilityScope
+
+	// A unique identifier for the offer set containing this offer.
+	OfferSetId *string
+
+	// The list of resources involved in the agreement.
+	Resources []AgreementApprovalResource
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementApprovalProposalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalProposalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementApprovalProposalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferId != nil {
+		s.WriteString(schemas.AgreementApprovalProposalSummary_offerId, *v.OfferId)
+	}
+	if v.OfferSetId != nil {
+		s.WriteString(schemas.AgreementApprovalProposalSummary_offerSetId, *v.OfferSetId)
+	}
+	if v.Resources != nil {
+		serializeAgreementApprovalResources(s, schemas.AgreementApprovalProposalSummary_resources, v.Resources)
+	}
+	if v.VisibilityScope != "" {
+		s.WriteString(schemas.AgreementApprovalProposalSummary_visibilityScope, string(v.VisibilityScope))
+	}
+}
+func (v *AgreementApprovalProposalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementApprovalProposalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementApprovalProposalSummary_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.AgreementApprovalProposalSummary_offerId, v.OfferId)
+		case schemas.AgreementApprovalProposalSummary_offerSetId:
+			v.OfferSetId = new(string)
+			return d.ReadString(schemas.AgreementApprovalProposalSummary_offerSetId, v.OfferSetId)
+		case schemas.AgreementApprovalProposalSummary_resources:
+			return deserializeAgreementApprovalResources(d, schemas.AgreementApprovalProposalSummary_resources, &v.Resources)
+		case schemas.AgreementApprovalProposalSummary_visibilityScope:
+			var ev string
+			if err := d.ReadString(schemas.AgreementApprovalProposalSummary_visibilityScope, &ev); err != nil {
+				return err
+			}
+			v.VisibilityScope = OfferVisibilityScope(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Details of the party proposing the agreement terms. This is commonly the seller
+// for PurchaseAgreement .
+type AgreementApprovalProposer struct {
+
+	// The AWS account ID of the proposer.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The legal name of the proposer.
+	//
+	// This member is required.
+	LegalName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementApprovalProposer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalProposer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementApprovalProposer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AgreementApprovalProposer_accountId, *v.AccountId)
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.AgreementApprovalProposer_legalName, *v.LegalName)
+	}
+}
+func (v *AgreementApprovalProposer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementApprovalProposer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementApprovalProposer_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AgreementApprovalProposer_accountId, v.AccountId)
+		case schemas.AgreementApprovalProposer_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.AgreementApprovalProposer_legalName, v.LegalName)
+		}
+		return nil
+	})
+}
+
+// A purchase order reference for a charge on the agreement request.
+type AgreementApprovalPurchaseOrder struct {
+
+	// The unique identifier of the charge to associate the purchase order with. Use
+	// GetAgreementRequest to retrieve the charges of the agreement request.
+	//
+	// This member is required.
+	ChargeId *string
+
+	// The purchase order reference to associate with the charge.
+	PurchaseOrderReference *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementApprovalPurchaseOrder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalPurchaseOrder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementApprovalPurchaseOrder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeId != nil {
+		s.WriteString(schemas.AgreementApprovalPurchaseOrder_chargeId, *v.ChargeId)
+	}
+	if v.PurchaseOrderReference != nil {
+		s.WriteString(schemas.AgreementApprovalPurchaseOrder_purchaseOrderReference, *v.PurchaseOrderReference)
+	}
+}
+func (v *AgreementApprovalPurchaseOrder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementApprovalPurchaseOrder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementApprovalPurchaseOrder_chargeId:
+			v.ChargeId = new(string)
+			return d.ReadString(schemas.AgreementApprovalPurchaseOrder_chargeId, v.ChargeId)
+		case schemas.AgreementApprovalPurchaseOrder_purchaseOrderReference:
+			v.PurchaseOrderReference = new(string)
+			return d.ReadString(schemas.AgreementApprovalPurchaseOrder_purchaseOrderReference, v.PurchaseOrderReference)
+		}
+		return nil
+	})
+}
+
+// The account that started an agreement approval.
+type AgreementApprovalRequester struct {
+
+	// The AWS account ID of the requester, which is the buyer of the agreement
+	// request.
+	//
+	// This member is required.
+	AccountId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementApprovalRequester) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalRequester)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementApprovalRequester) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AgreementApprovalRequester_accountId, *v.AccountId)
+	}
+}
+func (v *AgreementApprovalRequester) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementApprovalRequester, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementApprovalRequester_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AgreementApprovalRequester_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
+// A resource involved in the agreement, such as a product.
+type AgreementApprovalResource struct {
+
+	// The unique identifier of the resource.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the product.
+	//
+	// This member is required.
+	Name *string
+
+	// Type of the resource, which is the product (for example, SaaSProduct ,
+	// AmiProduct , ContainerProduct ).
+	//
+	// This member is required.
+	Type *string
+
+	// Whether the product is deployed on AWS (for example, DEPLOYED ).
+	DeployedOnAws *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementApprovalResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementApprovalResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeployedOnAws != nil {
+		s.WriteString(schemas.AgreementApprovalResource_deployedOnAws, *v.DeployedOnAws)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AgreementApprovalResource_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AgreementApprovalResource_name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.AgreementApprovalResource_type, *v.Type)
+	}
+}
+func (v *AgreementApprovalResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementApprovalResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementApprovalResource_deployedOnAws:
+			v.DeployedOnAws = new(string)
+			return d.ReadString(schemas.AgreementApprovalResource_deployedOnAws, v.DeployedOnAws)
+		case schemas.AgreementApprovalResource_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AgreementApprovalResource_id, v.Id)
+		case schemas.AgreementApprovalResource_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AgreementApprovalResource_name, v.Name)
+		case schemas.AgreementApprovalResource_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AgreementApprovalResource_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Summary view of an agreement approval.
+type AgreementApprovalSummary struct {
+
+	// The unique identifier of the agreement approval.
+	//
+	// This member is required.
+	AgreementApprovalId *string
+
+	// The unique identifier of the agreement request that the agreement approval is
+	// for.
+	//
+	// This member is required.
+	AgreementRequestId *string
+
+	// The date and time by which the agreement approval must be completed.
+	//
+	// This member is required.
+	ApprovalNeededBy *time.Time
+
+	// The type of the agreement approval. The only value is BUYER_AGREEMENT_APPROVAL ,
+	// an approval that the buyer's organization requires before the agreement request
+	// can be accepted.
+	//
+	// This member is required.
+	ApprovalType AgreementApprovalType
+
+	// The date and time when the agreement approval was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The descriptive name of the agreement approval.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the agreement approval. Possible values include
+	// PENDING_APPROVAL , APPROVED , REJECTED , EXPIRED , and CANCELLED .
+	//
+	// This member is required.
+	Status AgreementApprovalStatus
+
+	// The date and time when the agreement approval was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The date and time when the agreement approval expires if it isn't approved or
+	// rejected.
+	ExpiresAt *time.Time
+
+	// The date and time when approvers could start acting on the agreement approval.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementApprovalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementApprovalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementApprovalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementApprovalId != nil {
+		s.WriteString(schemas.AgreementApprovalSummary_agreementApprovalId, *v.AgreementApprovalId)
+	}
+	if v.AgreementRequestId != nil {
+		s.WriteString(schemas.AgreementApprovalSummary_agreementRequestId, *v.AgreementRequestId)
+	}
+	if v.ApprovalNeededBy != nil {
+		s.WriteTime(schemas.AgreementApprovalSummary_approvalNeededBy, *v.ApprovalNeededBy)
+	}
+	if v.ApprovalType != "" {
+		s.WriteString(schemas.AgreementApprovalSummary_approvalType, string(v.ApprovalType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AgreementApprovalSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.AgreementApprovalSummary_expiresAt, *v.ExpiresAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AgreementApprovalSummary_name, *v.Name)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.AgreementApprovalSummary_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgreementApprovalSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AgreementApprovalSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AgreementApprovalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementApprovalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementApprovalSummary_agreementApprovalId:
+			v.AgreementApprovalId = new(string)
+			return d.ReadString(schemas.AgreementApprovalSummary_agreementApprovalId, v.AgreementApprovalId)
+		case schemas.AgreementApprovalSummary_agreementRequestId:
+			v.AgreementRequestId = new(string)
+			return d.ReadString(schemas.AgreementApprovalSummary_agreementRequestId, v.AgreementRequestId)
+		case schemas.AgreementApprovalSummary_approvalNeededBy:
+			v.ApprovalNeededBy = new(time.Time)
+			return d.ReadTime(schemas.AgreementApprovalSummary_approvalNeededBy, v.ApprovalNeededBy)
+		case schemas.AgreementApprovalSummary_approvalType:
+			var ev string
+			if err := d.ReadString(schemas.AgreementApprovalSummary_approvalType, &ev); err != nil {
+				return err
+			}
+			v.ApprovalType = AgreementApprovalType(ev)
+			return nil
+		case schemas.AgreementApprovalSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgreementApprovalSummary_createdAt, v.CreatedAt)
+		case schemas.AgreementApprovalSummary_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.AgreementApprovalSummary_expiresAt, v.ExpiresAt)
+		case schemas.AgreementApprovalSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AgreementApprovalSummary_name, v.Name)
+		case schemas.AgreementApprovalSummary_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.AgreementApprovalSummary_startedAt, v.StartedAt)
+		case schemas.AgreementApprovalSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AgreementApprovalSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementApprovalStatus(ev)
+			return nil
+		case schemas.AgreementApprovalSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgreementApprovalSummary_updatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -596,6 +1119,346 @@ func (v *AgreementInvoiceLineItemGroupSummary) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// Summary view of an agreement request.
+type AgreementRequestSummary struct {
+
+	// The unique identifier of the agreement that the agreement request is for.
+	AgreementId *string
+
+	// The unique identifier of the agreement request.
+	AgreementRequestId *string
+
+	// The type of agreement (for example, PurchaseAgreement ).
+	AgreementType *string
+
+	// A summary of the proposal received from the proposer.
+	ProposalSummary *ProposalSummary
+
+	// The current status of the agreement request. Possible values include DRAFT ,
+	// PENDING_APPROVAL , APPROVED , ACCEPTED , REJECTED , and CANCELLED .
+	Status AgreementRequestStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgreementRequestSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementRequestSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.AgreementRequestSummary_agreementId, *v.AgreementId)
+	}
+	if v.AgreementRequestId != nil {
+		s.WriteString(schemas.AgreementRequestSummary_agreementRequestId, *v.AgreementRequestId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.AgreementRequestSummary_agreementType, *v.AgreementType)
+	}
+	if v.ProposalSummary != nil {
+		s.WriteStruct(schemas.AgreementRequestSummary_proposalSummary)
+		v.ProposalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgreementRequestSummary_status, string(v.Status))
+	}
+}
+func (v *AgreementRequestSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementRequestSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementRequestSummary_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.AgreementRequestSummary_agreementId, v.AgreementId)
+		case schemas.AgreementRequestSummary_agreementRequestId:
+			v.AgreementRequestId = new(string)
+			return d.ReadString(schemas.AgreementRequestSummary_agreementRequestId, v.AgreementRequestId)
+		case schemas.AgreementRequestSummary_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.AgreementRequestSummary_agreementType, v.AgreementType)
+		case schemas.AgreementRequestSummary_proposalSummary:
+			v.ProposalSummary = &ProposalSummary{}
+			return v.ProposalSummary.Deserialize(d)
+		case schemas.AgreementRequestSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AgreementRequestSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementRequestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A subset of terms proposed by the proposer, which have been requested by the
+// acceptor as part of the agreement request.
+//
+// The following types satisfy this interface:
+//
+//	AgreementRequestTermMemberByolPricingTerm
+//	AgreementRequestTermMemberConfigurableUpfrontPricingTerm
+//	AgreementRequestTermMemberFixedUpfrontPricingTerm
+//	AgreementRequestTermMemberFreeTrialPricingTerm
+//	AgreementRequestTermMemberLegalTerm
+//	AgreementRequestTermMemberNetPaymentTerm
+//	AgreementRequestTermMemberPaymentScheduleTerm
+//	AgreementRequestTermMemberRecurringPaymentTerm
+//	AgreementRequestTermMemberRenewalTerm
+//	AgreementRequestTermMemberSupportTerm
+//	AgreementRequestTermMemberUsageBasedPricingTerm
+//	AgreementRequestTermMemberValidityTerm
+//	AgreementRequestTermMemberVariablePaymentTerm
+type AgreementRequestTerm interface {
+	isAgreementRequestTerm()
+}
+
+// Enables you and your customers to move your existing agreements to AWS
+// Marketplace. The customer won't be charged for product usage in AWS Marketplace
+// because they already paid for the product outside of AWS Marketplace.
+type AgreementRequestTermMemberByolPricingTerm struct {
+	Value ByolPricingTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberByolPricingTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberByolPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_byolPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberByolPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines a prepaid payment model that allows buyers to configure the
+// entitlements they want to purchase and the duration.
+type AgreementRequestTermMemberConfigurableUpfrontPricingTerm struct {
+	Value ConfigurableUpfrontPricingTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberConfigurableUpfrontPricingTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberConfigurableUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_configurableUpfrontPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberConfigurableUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines a pre-paid pricing model where the customers are charged a fixed
+// upfront amount.
+type AgreementRequestTermMemberFixedUpfrontPricingTerm struct {
+	Value FixedUpfrontPricingTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberFixedUpfrontPricingTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberFixedUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_fixedUpfrontPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberFixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines a short-term free pricing model where the buyers aren't charged
+// anything within a specified limit.
+type AgreementRequestTermMemberFreeTrialPricingTerm struct {
+	Value FreeTrialPricingTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberFreeTrialPricingTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberFreeTrialPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_freeTrialPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberFreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines the list of text agreements proposed to the acceptors. An example is
+// the end user license agreement (EULA).
+type AgreementRequestTermMemberLegalTerm struct {
+	Value LegalTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberLegalTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberLegalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_legalTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberLegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type AgreementRequestTermMemberNetPaymentTerm struct {
+	Value NetPaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberNetPaymentTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberNetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_netPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberNetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines an installment-based pricing model where customers are charged a fixed
+// price on different dates during the agreement validity period. This is used most
+// commonly for flexible payment schedule pricing.
+type AgreementRequestTermMemberPaymentScheduleTerm struct {
+	Value PaymentScheduleTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberPaymentScheduleTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberPaymentScheduleTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_paymentScheduleTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberPaymentScheduleTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines a pricing model where customers are charged a fixed recurring price at
+// the end of each billing period.
+type AgreementRequestTermMemberRecurringPaymentTerm struct {
+	Value RecurringPaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberRecurringPaymentTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberRecurringPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_recurringPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberRecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines that on graceful expiration of the agreement (when the agreement ends
+// on its pre-defined end date), a new agreement will be created using the accepted
+// terms on the existing agreement. In other words, the agreement will be renewed.
+// Presence of RenewalTerm in the offer document means that auto-renewal is
+// allowed. The acceptor will have the option to accept or decline auto-renewal at
+// the offer acceptance/agreement creation. The acceptor can also change this flag
+// from True to False or False to True , within the limits set by LockoutPeriod
+// and MaxRenewals . Setting the flag to True doesn't by itself guarantee that the
+// agreement renews, because the proposer can also opt out.
+type AgreementRequestTermMemberRenewalTerm struct {
+	Value RenewalTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberRenewalTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberRenewalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_renewalTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberRenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines the customer support available for the acceptors when they purchase the
+// software.
+type AgreementRequestTermMemberSupportTerm struct {
+	Value SupportTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberSupportTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberSupportTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_supportTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberSupportTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines a usage-based pricing model (typically, pay-as-you-go pricing), where
+// the customers are charged based on product usage.
+type AgreementRequestTermMemberUsageBasedPricingTerm struct {
+	Value UsageBasedPricingTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberUsageBasedPricingTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberUsageBasedPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_usageBasedPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberUsageBasedPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines the conditions that will keep an agreement created from this offer
+// valid.
+type AgreementRequestTermMemberValidityTerm struct {
+	Value ValidityTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberValidityTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberValidityTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_validityTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberValidityTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines a payment model where sellers can submit variable payment requests up
+// to a maximum charge amount, with configurable approval strategies and expiration
+// timelines.
+type AgreementRequestTermMemberVariablePaymentTerm struct {
+	Value VariablePaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AgreementRequestTermMemberVariablePaymentTerm) isAgreementRequestTerm() {}
+func (v *AgreementRequestTermMemberVariablePaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementRequestTerm_variablePaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgreementRequestTermMemberVariablePaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // A summary of the agreement, including top-level attributes (for example, the
 // agreement ID, proposer, and acceptor).
 type AgreementViewSummary struct {
@@ -614,7 +1477,7 @@ type AgreementViewSummary struct {
 	AgreementType *string
 
 	// The date and time when the agreement ends. The field is null for pay-as-you-go
-	// agreements, which don’t have end dates.
+	// agreements, which don't have end dates.
 	EndTime *time.Time
 
 	// The reason why the agreement doesn't renew at its end date. The field is null
@@ -665,6 +1528,11 @@ type AgreementViewSummary struct {
 	// For an agreement that includes both a free trial and usage-based pricing, the
 	// agreement converts to paid usage at this time.
 	FreeTrialEndTime *time.Time
+
+	// The types of contact information on file for the agreement. For example,
+	// ACCEPTOR indicates that the acceptor's contact information is on file, which you
+	// can retrieve with GetAgreementContacts .
+	IncludesContactOfType []ContactType
 
 	// The unique identifier of the very first agreement in a chain of related
 	// agreements, such as renewals or replacements. It stays the same across all
@@ -734,6 +1602,9 @@ func (v *AgreementViewSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FreeTrialEndTime != nil {
 		s.WriteTime(schemas.AgreementViewSummary_freeTrialEndTime, *v.FreeTrialEndTime)
 	}
+	if v.IncludesContactOfType != nil {
+		serializeContactTypeList(s, schemas.AgreementViewSummary_includesContactOfType, v.IncludesContactOfType)
+	}
 	if v.InitialAgreementId != nil {
 		s.WriteString(schemas.AgreementViewSummary_initialAgreementId, *v.InitialAgreementId)
 	}
@@ -794,6 +1665,8 @@ func (v *AgreementViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgreementViewSummary_freeTrialEndTime:
 			v.FreeTrialEndTime = new(time.Time)
 			return d.ReadTime(schemas.AgreementViewSummary_freeTrialEndTime, v.FreeTrialEndTime)
+		case schemas.AgreementViewSummary_includesContactOfType:
+			return deserializeContactTypeList(d, schemas.AgreementViewSummary_includesContactOfType, &v.IncludesContactOfType)
 		case schemas.AgreementViewSummary_initialAgreementId:
 			v.InitialAgreementId = new(string)
 			return d.ReadString(schemas.AgreementViewSummary_initialAgreementId, v.InitialAgreementId)
@@ -816,6 +1689,242 @@ func (v *AgreementViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = AgreementStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// An approver in an approval plan.
+//
+// The following types satisfy this interface:
+//
+//	ApproverMemberAwsOrganizationAdminApprover
+//	ApproverMemberEmailApprover
+//	ApproverMemberProcurementToolApprover
+type Approver interface {
+	isApprover()
+}
+
+// The administrators of the buyer's AWS organization.
+type ApproverMemberAwsOrganizationAdminApprover struct {
+	Value AwsOrganizationAdminApprover
+
+	noSmithyDocumentSerde
+}
+
+func (*ApproverMemberAwsOrganizationAdminApprover) isApprover() {}
+func (v *ApproverMemberAwsOrganizationAdminApprover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Approver_awsOrganizationAdminApprover)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ApproverMemberAwsOrganizationAdminApprover) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An approver who is identified by an email address.
+type ApproverMemberEmailApprover struct {
+	Value EmailApprover
+
+	noSmithyDocumentSerde
+}
+
+func (*ApproverMemberEmailApprover) isApprover() {}
+func (v *ApproverMemberEmailApprover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Approver_emailApprover)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ApproverMemberEmailApprover) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A procurement system that approves through the buyer's procurement integration.
+type ApproverMemberProcurementToolApprover struct {
+	Value ProcurementToolApprover
+
+	noSmithyDocumentSerde
+}
+
+func (*ApproverMemberProcurementToolApprover) isApprover() {}
+func (v *ApproverMemberProcurementToolApprover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Approver_procurementToolApprover)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ApproverMemberProcurementToolApprover) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An approver in an agreement approval and the approver's decision.
+//
+// The following types satisfy this interface:
+//
+//	ApproverOutcomeMemberAwsOrganizationApproverOutcome
+//	ApproverOutcomeMemberEmailApproverOutcome
+//	ApproverOutcomeMemberProcurementToolApproverOutcome
+type ApproverOutcome interface {
+	isApproverOutcome()
+}
+
+// The decision of the administrators of the buyer's AWS organization.
+type ApproverOutcomeMemberAwsOrganizationApproverOutcome struct {
+	Value AwsOrganizationApproverOutcome
+
+	noSmithyDocumentSerde
+}
+
+func (*ApproverOutcomeMemberAwsOrganizationApproverOutcome) isApproverOutcome() {}
+func (v *ApproverOutcomeMemberAwsOrganizationApproverOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproverOutcome_awsOrganizationApproverOutcome)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ApproverOutcomeMemberAwsOrganizationApproverOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The decision of an approver who is identified by an email address.
+type ApproverOutcomeMemberEmailApproverOutcome struct {
+	Value EmailApproverOutcome
+
+	noSmithyDocumentSerde
+}
+
+func (*ApproverOutcomeMemberEmailApproverOutcome) isApproverOutcome() {}
+func (v *ApproverOutcomeMemberEmailApproverOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproverOutcome_emailApproverOutcome)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ApproverOutcomeMemberEmailApproverOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The decision of a procurement system.
+type ApproverOutcomeMemberProcurementToolApproverOutcome struct {
+	Value ProcurementToolApproverOutcome
+
+	noSmithyDocumentSerde
+}
+
+func (*ApproverOutcomeMemberProcurementToolApproverOutcome) isApproverOutcome() {}
+func (v *ApproverOutcomeMemberProcurementToolApproverOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApproverOutcome_procurementToolApproverOutcome)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ApproverOutcomeMemberProcurementToolApproverOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An approver that represents the administrators of the buyer's AWS organization.
+// The management account or a delegated administrator of the organization can
+// decide for this approver.
+type AwsOrganizationAdminApprover struct {
+
+	// The ID of the AWS organization.
+	//
+	// This member is required.
+	OrganizationId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsOrganizationAdminApprover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOrganizationAdminApprover)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOrganizationAdminApprover) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.AwsOrganizationAdminApprover_organizationId, *v.OrganizationId)
+	}
+}
+func (v *AwsOrganizationAdminApprover) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOrganizationAdminApprover, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOrganizationAdminApprover_organizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.AwsOrganizationAdminApprover_organizationId, v.OrganizationId)
+		}
+		return nil
+	})
+}
+
+// The decision of the administrators of the buyer's AWS organization. The
+// management account or a delegated administrator of the organization makes this
+// decision.
+type AwsOrganizationApproverOutcome struct {
+
+	// The decision status of the approver. Possible values include QUEUED ,
+	// PENDING_APPROVAL , APPROVED , REJECTED , EXPIRED , and SKIPPED .
+	//
+	// This member is required.
+	Status ApproverOutcomeStatus
+
+	// The date and time when the decision was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The unique identifier of this approver in the agreement approval.
+	ApproverOutcomeId *string
+
+	// The note that the approver provided with the decision.
+	Note *string
+
+	// The purchase order references that the approver provided with the decision.
+	PurchaseOrders []AgreementApprovalPurchaseOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsOrganizationApproverOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsOrganizationApproverOutcome)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsOrganizationApproverOutcome) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproverOutcomeId != nil {
+		s.WriteString(schemas.AwsOrganizationApproverOutcome_approverOutcomeId, *v.ApproverOutcomeId)
+	}
+	if v.Note != nil {
+		s.WriteString(schemas.AwsOrganizationApproverOutcome_note, *v.Note)
+	}
+	if v.PurchaseOrders != nil {
+		serializeAgreementApprovalPurchaseOrders(s, schemas.AwsOrganizationApproverOutcome_purchaseOrders, v.PurchaseOrders)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AwsOrganizationApproverOutcome_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AwsOrganizationApproverOutcome_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AwsOrganizationApproverOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsOrganizationApproverOutcome, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsOrganizationApproverOutcome_approverOutcomeId:
+			v.ApproverOutcomeId = new(string)
+			return d.ReadString(schemas.AwsOrganizationApproverOutcome_approverOutcomeId, v.ApproverOutcomeId)
+		case schemas.AwsOrganizationApproverOutcome_note:
+			v.Note = new(string)
+			return d.ReadString(schemas.AwsOrganizationApproverOutcome_note, v.Note)
+		case schemas.AwsOrganizationApproverOutcome_purchaseOrders:
+			return deserializeAgreementApprovalPurchaseOrders(d, schemas.AwsOrganizationApproverOutcome_purchaseOrders, &v.PurchaseOrders)
+		case schemas.AwsOrganizationApproverOutcome_status:
+			var ev string
+			if err := d.ReadString(schemas.AwsOrganizationApproverOutcome_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApproverOutcomeStatus(ev)
+			return nil
+		case schemas.AwsOrganizationApproverOutcome_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AwsOrganizationApproverOutcome_updatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -1166,6 +2275,639 @@ func (v *BillingAdjustmentSummary) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The details of an approval that the buyer's organization requires before the
+// agreement request can be accepted, including the approval levels and the
+// decision of each approver.
+type BuyerAgreementApproval struct {
+
+	// The unique identifier of the agreement approval.
+	//
+	// This member is required.
+	AgreementApprovalId *string
+
+	// The unique identifier of the agreement request that the agreement approval is
+	// for. Use GetAgreementRequest to retrieve the agreement request details.
+	//
+	// This member is required.
+	AgreementRequestId *string
+
+	// The date and time by which the agreement approval must be completed.
+	//
+	// This member is required.
+	ApprovalNeededBy *time.Time
+
+	// The type of the agreement approval, which is BUYER_AGREEMENT_APPROVAL .
+	//
+	// This member is required.
+	ApprovalType AgreementApprovalType
+
+	// The date and time when the agreement approval was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The approval levels, in the order they are evaluated. Approvers at a level can
+	// act only after the previous level is approved. Each level lists its approvers
+	// and the decision of each one.
+	//
+	// This member is required.
+	Levels []BuyerAgreementApprovalLevel
+
+	// The descriptive name of the agreement approval.
+	//
+	// This member is required.
+	Name *string
+
+	// The approval plan and the note that the requester provided in
+	// StartAgreementApprovals .
+	//
+	// This member is required.
+	PlanInput *BuyerAgreementApprovalPlanInput
+
+	// A summary of the proposal received from the proposer.
+	//
+	// This member is required.
+	ProposalSummary *AgreementApprovalProposalSummary
+
+	// The details of the party proposing the agreement terms. This is commonly the
+	// seller for PurchaseAgreement .
+	//
+	// This member is required.
+	Proposer *AgreementApprovalProposer
+
+	// The account that started the agreement approval.
+	//
+	// This member is required.
+	Requester *AgreementApprovalRequester
+
+	// The current status of the agreement approval. Possible values include
+	// PENDING_APPROVAL , APPROVED , REJECTED , EXPIRED , and CANCELLED .
+	//
+	// This member is required.
+	Status AgreementApprovalStatus
+
+	// The date and time when the agreement approval was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The date and time when the agreement approval expires if it isn't approved or
+	// rejected.
+	ExpiresAt *time.Time
+
+	// The date and time when approvers could start acting on the agreement approval.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApproval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApproval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApproval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementApprovalId != nil {
+		s.WriteString(schemas.BuyerAgreementApproval_agreementApprovalId, *v.AgreementApprovalId)
+	}
+	if v.AgreementRequestId != nil {
+		s.WriteString(schemas.BuyerAgreementApproval_agreementRequestId, *v.AgreementRequestId)
+	}
+	if v.ApprovalNeededBy != nil {
+		s.WriteTime(schemas.BuyerAgreementApproval_approvalNeededBy, *v.ApprovalNeededBy)
+	}
+	if v.ApprovalType != "" {
+		s.WriteString(schemas.BuyerAgreementApproval_approvalType, string(v.ApprovalType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.BuyerAgreementApproval_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.BuyerAgreementApproval_expiresAt, *v.ExpiresAt)
+	}
+	if v.Levels != nil {
+		serializeBuyerAgreementApprovalLevels(s, schemas.BuyerAgreementApproval_levels, v.Levels)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BuyerAgreementApproval_name, *v.Name)
+	}
+	if v.PlanInput != nil {
+		s.WriteStruct(schemas.BuyerAgreementApproval_planInput)
+		v.PlanInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProposalSummary != nil {
+		s.WriteStruct(schemas.BuyerAgreementApproval_proposalSummary)
+		v.ProposalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Proposer != nil {
+		s.WriteStruct(schemas.BuyerAgreementApproval_proposer)
+		v.Proposer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Requester != nil {
+		s.WriteStruct(schemas.BuyerAgreementApproval_requester)
+		v.Requester.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.BuyerAgreementApproval_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.BuyerAgreementApproval_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.BuyerAgreementApproval_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *BuyerAgreementApproval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApproval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApproval_agreementApprovalId:
+			v.AgreementApprovalId = new(string)
+			return d.ReadString(schemas.BuyerAgreementApproval_agreementApprovalId, v.AgreementApprovalId)
+		case schemas.BuyerAgreementApproval_agreementRequestId:
+			v.AgreementRequestId = new(string)
+			return d.ReadString(schemas.BuyerAgreementApproval_agreementRequestId, v.AgreementRequestId)
+		case schemas.BuyerAgreementApproval_approvalNeededBy:
+			v.ApprovalNeededBy = new(time.Time)
+			return d.ReadTime(schemas.BuyerAgreementApproval_approvalNeededBy, v.ApprovalNeededBy)
+		case schemas.BuyerAgreementApproval_approvalType:
+			var ev string
+			if err := d.ReadString(schemas.BuyerAgreementApproval_approvalType, &ev); err != nil {
+				return err
+			}
+			v.ApprovalType = AgreementApprovalType(ev)
+			return nil
+		case schemas.BuyerAgreementApproval_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.BuyerAgreementApproval_createdAt, v.CreatedAt)
+		case schemas.BuyerAgreementApproval_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.BuyerAgreementApproval_expiresAt, v.ExpiresAt)
+		case schemas.BuyerAgreementApproval_levels:
+			return deserializeBuyerAgreementApprovalLevels(d, schemas.BuyerAgreementApproval_levels, &v.Levels)
+		case schemas.BuyerAgreementApproval_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BuyerAgreementApproval_name, v.Name)
+		case schemas.BuyerAgreementApproval_planInput:
+			v.PlanInput = &BuyerAgreementApprovalPlanInput{}
+			return v.PlanInput.Deserialize(d)
+		case schemas.BuyerAgreementApproval_proposalSummary:
+			v.ProposalSummary = &AgreementApprovalProposalSummary{}
+			return v.ProposalSummary.Deserialize(d)
+		case schemas.BuyerAgreementApproval_proposer:
+			v.Proposer = &AgreementApprovalProposer{}
+			return v.Proposer.Deserialize(d)
+		case schemas.BuyerAgreementApproval_requester:
+			v.Requester = &AgreementApprovalRequester{}
+			return v.Requester.Deserialize(d)
+		case schemas.BuyerAgreementApproval_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.BuyerAgreementApproval_startedAt, v.StartedAt)
+		case schemas.BuyerAgreementApproval_status:
+			var ev string
+			if err := d.ReadString(schemas.BuyerAgreementApproval_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementApprovalStatus(ev)
+			return nil
+		case schemas.BuyerAgreementApproval_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.BuyerAgreementApproval_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The approval decision for an agreement approval.
+type BuyerAgreementApprovalApproverInput struct {
+
+	// The unique identifier of the agreement approval to approve.
+	//
+	// This member is required.
+	AgreementApprovalId *string
+
+	// The approverOutcomeId of the approver to decide on behalf of. You must be the
+	// management account or a delegated administrator of your AWS organization to set
+	// this field. Use GetAgreementApproval to retrieve the approverOutcomeId of each
+	// approver.
+	ApproverOutcomeIdToOverride *string
+
+	// An optional note that explains the decision (1-1000 characters).
+	Note *string
+
+	// An optional list of purchase order references to associate with charges on the
+	// agreement request.
+	PurchaseOrders []AgreementApprovalPurchaseOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalApproverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalApproverInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalApproverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementApprovalId != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalApproverInput_agreementApprovalId, *v.AgreementApprovalId)
+	}
+	if v.ApproverOutcomeIdToOverride != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalApproverInput_approverOutcomeIdToOverride, *v.ApproverOutcomeIdToOverride)
+	}
+	if v.Note != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalApproverInput_note, *v.Note)
+	}
+	if v.PurchaseOrders != nil {
+		serializeAgreementApprovalPurchaseOrders(s, schemas.BuyerAgreementApprovalApproverInput_purchaseOrders, v.PurchaseOrders)
+	}
+}
+func (v *BuyerAgreementApprovalApproverInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalApproverInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalApproverInput_agreementApprovalId:
+			v.AgreementApprovalId = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalApproverInput_agreementApprovalId, v.AgreementApprovalId)
+		case schemas.BuyerAgreementApprovalApproverInput_approverOutcomeIdToOverride:
+			v.ApproverOutcomeIdToOverride = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalApproverInput_approverOutcomeIdToOverride, v.ApproverOutcomeIdToOverride)
+		case schemas.BuyerAgreementApprovalApproverInput_note:
+			v.Note = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalApproverInput_note, v.Note)
+		case schemas.BuyerAgreementApprovalApproverInput_purchaseOrders:
+			return deserializeAgreementApprovalPurchaseOrders(d, schemas.BuyerAgreementApprovalApproverInput_purchaseOrders, &v.PurchaseOrders)
+		}
+		return nil
+	})
+}
+
+// The approval criteria for a group of approvers.
+type BuyerAgreementApprovalCriteria struct {
+
+	// The number of approvers in the group who must approve before the level is
+	// approved.
+	//
+	// This member is required.
+	RequiredApprovalCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalCriteria) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalCriteria)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalCriteria) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequiredApprovalCount != nil {
+		s.WriteInt32(schemas.BuyerAgreementApprovalCriteria_requiredApprovalCount, *v.RequiredApprovalCount)
+	}
+}
+func (v *BuyerAgreementApprovalCriteria) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalCriteria, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalCriteria_requiredApprovalCount:
+			v.RequiredApprovalCount = new(int32)
+			return d.ReadInt32(schemas.BuyerAgreementApprovalCriteria_requiredApprovalCount, v.RequiredApprovalCount)
+		}
+		return nil
+	})
+}
+
+// A group of approvers, the number of approvals the group requires, and the
+// decision of each approver.
+type BuyerAgreementApprovalGroup struct {
+
+	// The number of approvers in the group who must approve.
+	//
+	// This member is required.
+	ApprovalCriteria *BuyerAgreementApprovalCriteria
+
+	// The approvers in the group and the decision of each one.
+	//
+	// This member is required.
+	Approvers []ApproverOutcome
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalCriteria != nil {
+		s.WriteStruct(schemas.BuyerAgreementApprovalGroup_approvalCriteria)
+		v.ApprovalCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Approvers != nil {
+		serializeBuyerApproverOutcomes(s, schemas.BuyerAgreementApprovalGroup_approvers, v.Approvers)
+	}
+}
+func (v *BuyerAgreementApprovalGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalGroup_approvalCriteria:
+			v.ApprovalCriteria = &BuyerAgreementApprovalCriteria{}
+			return v.ApprovalCriteria.Deserialize(d)
+		case schemas.BuyerAgreementApprovalGroup_approvers:
+			return deserializeBuyerApproverOutcomes(d, schemas.BuyerAgreementApprovalGroup_approvers, &v.Approvers)
+		}
+		return nil
+	})
+}
+
+// A level of an agreement approval, with the decision of each approver.
+type BuyerAgreementApprovalLevel struct {
+
+	// The group of approvers at this level.
+	//
+	// This member is required.
+	Groups []BuyerAgreementApprovalGroup
+
+	// The name of the level.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalLevel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalLevel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalLevel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Groups != nil {
+		serializeBuyerAgreementApprovalGroups(s, schemas.BuyerAgreementApprovalLevel_groups, v.Groups)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalLevel_name, *v.Name)
+	}
+}
+func (v *BuyerAgreementApprovalLevel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalLevel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalLevel_groups:
+			return deserializeBuyerAgreementApprovalGroups(d, schemas.BuyerAgreementApprovalLevel_groups, &v.Groups)
+		case schemas.BuyerAgreementApprovalLevel_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalLevel_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// An approval plan that the buyer's organization requires, with its approval
+// levels and the approvers at each level.
+type BuyerAgreementApprovalPlan struct {
+
+	// The approval levels of the plan, in the order they are evaluated. Approvers at
+	// a level can act only after the previous level is approved.
+	//
+	// This member is required.
+	Levels []BuyerAgreementApprovalPlanLevel
+
+	// The identifier of the approval plan. Pass it in StartAgreementApprovals to
+	// start an agreement approval for this plan.
+	//
+	// This member is required.
+	PlanReference *string
+
+	// The name of the approval plan.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalPlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalPlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalPlan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Levels != nil {
+		serializeBuyerAgreementApprovalPlanLevels(s, schemas.BuyerAgreementApprovalPlan_levels, v.Levels)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalPlan_name, *v.Name)
+	}
+	if v.PlanReference != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalPlan_planReference, *v.PlanReference)
+	}
+}
+func (v *BuyerAgreementApprovalPlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalPlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalPlan_levels:
+			return deserializeBuyerAgreementApprovalPlanLevels(d, schemas.BuyerAgreementApprovalPlan_levels, &v.Levels)
+		case schemas.BuyerAgreementApprovalPlan_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalPlan_name, v.Name)
+		case schemas.BuyerAgreementApprovalPlan_planReference:
+			v.PlanReference = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalPlan_planReference, v.PlanReference)
+		}
+		return nil
+	})
+}
+
+// A group of approvers and the number of approvals the group requires.
+type BuyerAgreementApprovalPlanGroup struct {
+
+	// The number of approvers in the group who must approve.
+	//
+	// This member is required.
+	ApprovalCriteria *BuyerAgreementApprovalCriteria
+
+	// The approvers in the group.
+	//
+	// This member is required.
+	Approvers []Approver
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalPlanGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalPlanGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalPlanGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApprovalCriteria != nil {
+		s.WriteStruct(schemas.BuyerAgreementApprovalPlanGroup_approvalCriteria)
+		v.ApprovalCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Approvers != nil {
+		serializeBuyerApprovers(s, schemas.BuyerAgreementApprovalPlanGroup_approvers, v.Approvers)
+	}
+}
+func (v *BuyerAgreementApprovalPlanGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalPlanGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalPlanGroup_approvalCriteria:
+			v.ApprovalCriteria = &BuyerAgreementApprovalCriteria{}
+			return v.ApprovalCriteria.Deserialize(d)
+		case schemas.BuyerAgreementApprovalPlanGroup_approvers:
+			return deserializeBuyerApprovers(d, schemas.BuyerAgreementApprovalPlanGroup_approvers, &v.Approvers)
+		}
+		return nil
+	})
+}
+
+// The approval plan to start an agreement approval for, and an optional note for
+// the approvers.
+type BuyerAgreementApprovalPlanInput struct {
+
+	// The identifier of the approval plan. Use GetAgreementRequestApprovalPlans to
+	// retrieve the approval plans of the agreement request.
+	//
+	// This member is required.
+	PlanReference *string
+
+	// An optional note for the approvers, such as the business reason for the
+	// purchase (1-1000 characters).
+	RequesterNote *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlanReference != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalPlanInput_planReference, *v.PlanReference)
+	}
+	if v.RequesterNote != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalPlanInput_requesterNote, *v.RequesterNote)
+	}
+}
+func (v *BuyerAgreementApprovalPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalPlanInput_planReference:
+			v.PlanReference = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalPlanInput_planReference, v.PlanReference)
+		case schemas.BuyerAgreementApprovalPlanInput_requesterNote:
+			v.RequesterNote = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalPlanInput_requesterNote, v.RequesterNote)
+		}
+		return nil
+	})
+}
+
+// A level of an approval plan.
+type BuyerAgreementApprovalPlanLevel struct {
+
+	// The group of approvers at this level.
+	//
+	// This member is required.
+	Groups []BuyerAgreementApprovalPlanGroup
+
+	// The name of the level.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalPlanLevel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalPlanLevel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalPlanLevel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Groups != nil {
+		serializeBuyerAgreementApprovalPlanGroups(s, schemas.BuyerAgreementApprovalPlanLevel_groups, v.Groups)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalPlanLevel_name, *v.Name)
+	}
+}
+func (v *BuyerAgreementApprovalPlanLevel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalPlanLevel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalPlanLevel_groups:
+			return deserializeBuyerAgreementApprovalPlanGroups(d, schemas.BuyerAgreementApprovalPlanLevel_groups, &v.Groups)
+		case schemas.BuyerAgreementApprovalPlanLevel_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalPlanLevel_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The rejection decision for an agreement approval.
+type BuyerAgreementApprovalRejectionInput struct {
+
+	// The unique identifier of the agreement approval to reject.
+	//
+	// This member is required.
+	AgreementApprovalId *string
+
+	// The reason for the rejection.
+	//
+	// This member is required.
+	Note *string
+
+	// The approverOutcomeId of the approver to decide on behalf of. You must be the
+	// management account or a delegated administrator of your AWS organization to set
+	// this field. Use GetAgreementApproval to retrieve the approverOutcomeId of each
+	// approver.
+	ApproverOutcomeIdToOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BuyerAgreementApprovalRejectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuyerAgreementApprovalRejectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuyerAgreementApprovalRejectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementApprovalId != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalRejectionInput_agreementApprovalId, *v.AgreementApprovalId)
+	}
+	if v.ApproverOutcomeIdToOverride != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalRejectionInput_approverOutcomeIdToOverride, *v.ApproverOutcomeIdToOverride)
+	}
+	if v.Note != nil {
+		s.WriteString(schemas.BuyerAgreementApprovalRejectionInput_note, *v.Note)
+	}
+}
+func (v *BuyerAgreementApprovalRejectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuyerAgreementApprovalRejectionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuyerAgreementApprovalRejectionInput_agreementApprovalId:
+			v.AgreementApprovalId = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalRejectionInput_agreementApprovalId, v.AgreementApprovalId)
+		case schemas.BuyerAgreementApprovalRejectionInput_approverOutcomeIdToOverride:
+			v.ApproverOutcomeIdToOverride = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalRejectionInput_approverOutcomeIdToOverride, v.ApproverOutcomeIdToOverride)
+		case schemas.BuyerAgreementApprovalRejectionInput_note:
+			v.Note = new(string)
+			return d.ReadString(schemas.BuyerAgreementApprovalRejectionInput_note, v.Note)
+		}
+		return nil
+	})
+}
+
 // Enables you and your customers to move your existing agreements to AWS
 // Marketplace. The customer won't be charged for product usage in AWS Marketplace
 // because they already paid for the product outside of AWS Marketplace.
@@ -1203,6 +2945,39 @@ func (v *ByolPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ByolPricingTerm_type:
 			v.Type = new(string)
 			return d.ReadString(schemas.ByolPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// The identity of a caller.
+type CallerIdentity struct {
+
+	// The ARN of the IAM principal that made the call.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CallerIdentity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallerIdentity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallerIdentity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.CallerIdentity_principalArn, *v.PrincipalArn)
+	}
+}
+func (v *CallerIdentity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallerIdentity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallerIdentity_principalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.CallerIdentity_principalArn, v.PrincipalArn)
 		}
 		return nil
 	})
@@ -1322,7 +3097,7 @@ func (v *Charge) Deserialize(d smithy.ShapeDeserializer) error {
 //     rate and type .
 type ChargeSummary struct {
 
-	// The three-letter currency code for all charges (e.g., USD).
+	// The three-letter currency code for all charges (for example, USD).
 	CurrencyCode *string
 
 	// Provides an aggregated view of estimated tax information for the agreement.
@@ -1422,7 +3197,7 @@ type ConfigurableUpfrontPricingTerm struct {
 	// A rate card defines the per unit rates for product dimensions.
 	RateCards []ConfigurableUpfrontRateCardItem
 
-	// Category of selector.
+	// Category of the term.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1681,12 +3456,12 @@ type DocumentItem struct {
 	//   this document type.
 	//
 	//   - StandardEula – The Standard Contract for AWS Marketplace (SCMP). For more
-	//   information about SCMP, see the AWS Marketplace Seller Guide. You don’t provide
-	//   a URL for this type because it’s managed by AWS Marketplace.
+	//   information about SCMP, see the AWS Marketplace Seller Guide. You don't provide
+	//   a URL for this type because it's managed by AWS Marketplace.
 	//
 	//   - StandardDsa – DSA for AWS Marketplace. For more information about the DSA,
-	//   see the AWS Data Exchange User Guide. You don’t provide a URL for this type
-	//   because it’s managed by AWS Marketplace.
+	//   see the AWS Data Exchange User Guide. You don't provide a URL for this type
+	//   because it's managed by AWS Marketplace.
 	Type *string
 
 	// A URL to the legal document for buyers to read. Required when Type is CustomEula
@@ -1729,6 +3504,157 @@ func (v *DocumentItem) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DocumentItem_version:
 			v.Version = new(string)
 			return d.ReadString(schemas.DocumentItem_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// An approver who is identified by an email address.
+type EmailApprover struct {
+
+	// The email address of the approver.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	// The name of the approver.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EmailApprover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailApprover)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailApprover) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.EmailApprover_emailAddress, *v.EmailAddress)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EmailApprover_name, *v.Name)
+	}
+}
+func (v *EmailApprover) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailApprover, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailApprover_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.EmailApprover_emailAddress, v.EmailAddress)
+		case schemas.EmailApprover_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EmailApprover_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The decision of an approver who is identified by an email address.
+type EmailApproverOutcome struct {
+
+	// The email address of the approver.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	// The decision status of the approver. Possible values include QUEUED ,
+	// PENDING_APPROVAL , APPROVED , REJECTED , EXPIRED , and SKIPPED .
+	//
+	// This member is required.
+	Status ApproverOutcomeStatus
+
+	// The date and time when the decision was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The unique identifier of this approver in the agreement approval. An
+	// administrator of the buyer's AWS organization passes it as
+	// approverOutcomeIdToOverride to decide on the approver's behalf.
+	ApproverOutcomeId *string
+
+	// The name of the approver.
+	Name *string
+
+	// The note that the approver provided with the decision.
+	Note *string
+
+	// The identity that decided on the approver's behalf. This field is empty unless
+	// an administrator of the buyer's AWS organization decided for the approver.
+	OverriddenBy *CallerIdentity
+
+	// The purchase order references that the approver provided with the decision.
+	PurchaseOrders []AgreementApprovalPurchaseOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *EmailApproverOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailApproverOutcome)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailApproverOutcome) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproverOutcomeId != nil {
+		s.WriteString(schemas.EmailApproverOutcome_approverOutcomeId, *v.ApproverOutcomeId)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.EmailApproverOutcome_emailAddress, *v.EmailAddress)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EmailApproverOutcome_name, *v.Name)
+	}
+	if v.Note != nil {
+		s.WriteString(schemas.EmailApproverOutcome_note, *v.Note)
+	}
+	if v.OverriddenBy != nil {
+		s.WriteStruct(schemas.EmailApproverOutcome_overriddenBy)
+		v.OverriddenBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PurchaseOrders != nil {
+		serializeAgreementApprovalPurchaseOrders(s, schemas.EmailApproverOutcome_purchaseOrders, v.PurchaseOrders)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EmailApproverOutcome_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.EmailApproverOutcome_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *EmailApproverOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailApproverOutcome, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailApproverOutcome_approverOutcomeId:
+			v.ApproverOutcomeId = new(string)
+			return d.ReadString(schemas.EmailApproverOutcome_approverOutcomeId, v.ApproverOutcomeId)
+		case schemas.EmailApproverOutcome_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.EmailApproverOutcome_emailAddress, v.EmailAddress)
+		case schemas.EmailApproverOutcome_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EmailApproverOutcome_name, v.Name)
+		case schemas.EmailApproverOutcome_note:
+			v.Note = new(string)
+			return d.ReadString(schemas.EmailApproverOutcome_note, v.Note)
+		case schemas.EmailApproverOutcome_overriddenBy:
+			v.OverriddenBy = &CallerIdentity{}
+			return v.OverriddenBy.Deserialize(d)
+		case schemas.EmailApproverOutcome_purchaseOrders:
+			return deserializeAgreementApprovalPurchaseOrders(d, schemas.EmailApproverOutcome_purchaseOrders, &v.PurchaseOrders)
+		case schemas.EmailApproverOutcome_status:
+			var ev string
+			if err := d.ReadString(schemas.EmailApproverOutcome_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApproverOutcomeStatus(ev)
+			return nil
+		case schemas.EmailApproverOutcome_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.EmailApproverOutcome_updatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -1980,6 +3906,9 @@ type ExpectedCharge struct {
 	// Unique identifier of the charge for a given agreement.
 	Id *string
 
+	// The purchase order reference associated with the charge, if any.
+	PurchaseOrderReference *string
+
 	// The date and time when the charge is due to be invoiced. This is available only
 	// when the charge date is known.
 	Time *time.Time
@@ -2014,6 +3943,9 @@ func (v *ExpectedCharge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ExpectedCharge_id, *v.Id)
 	}
+	if v.PurchaseOrderReference != nil {
+		s.WriteString(schemas.ExpectedCharge_purchaseOrderReference, *v.PurchaseOrderReference)
+	}
 	if v.Time != nil {
 		s.WriteTime(schemas.ExpectedCharge_time, *v.Time)
 	}
@@ -2036,6 +3968,9 @@ func (v *ExpectedCharge) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExpectedCharge_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.ExpectedCharge_id, v.Id)
+		case schemas.ExpectedCharge_purchaseOrderReference:
+			v.PurchaseOrderReference = new(string)
+			return d.ReadString(schemas.ExpectedCharge_purchaseOrderReference, v.PurchaseOrderReference)
 		case schemas.ExpectedCharge_time:
 			v.Time = new(time.Time)
 			return d.ReadTime(schemas.ExpectedCharge_time, v.Time)
@@ -2202,7 +4137,7 @@ func (v *FixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// Defines a short-term free pricing model where the buyers aren’t charged
+// Defines a short-term free pricing model where the buyers aren't charged
 // anything within a specified limit.
 type FreeTrialPricingTerm struct {
 
@@ -2502,7 +4437,7 @@ type LegalTerm struct {
 	// EULA.
 	Documents []DocumentItem
 
-	// The unique identifer for the term.
+	// The unique identifier for the term.
 	Id *string
 
 	// Category of the term being updated.
@@ -2966,7 +4901,7 @@ type PricingCurrencyAmount struct {
 	// The monetary amount before tax.
 	Amount *string
 
-	// The 3-letter ISO 4217 currency code (e.g., USD , EUR , JPY ).
+	// The 3-letter ISO 4217 currency code (for example, USD , EUR , JPY ).
 	CurrencyCode *string
 
 	// The maximum refundable amount as a string representation of a decimal number.
@@ -3004,6 +4939,140 @@ func (v *PricingCurrencyAmount) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PricingCurrencyAmount_maxAdjustmentAmount:
 			v.MaxAdjustmentAmount = new(string)
 			return d.ReadString(schemas.PricingCurrencyAmount_maxAdjustmentAmount, v.MaxAdjustmentAmount)
+		}
+		return nil
+	})
+}
+
+// A procurement system that approves through the buyer's procurement integration.
+type ProcurementToolApprover struct {
+
+	// The name of the procurement system.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProcurementToolApprover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementToolApprover)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementToolApprover) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ProcurementToolApprover_name, *v.Name)
+	}
+}
+func (v *ProcurementToolApprover) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementToolApprover, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementToolApprover_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProcurementToolApprover_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// The decision of a procurement system.
+type ProcurementToolApproverOutcome struct {
+
+	// The name of the procurement system.
+	//
+	// This member is required.
+	Name *string
+
+	// The decision status of the approver. Possible values include QUEUED ,
+	// PENDING_APPROVAL , APPROVED , REJECTED , EXPIRED , and SKIPPED .
+	//
+	// This member is required.
+	Status ApproverOutcomeStatus
+
+	// The date and time when the decision was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The unique identifier of this approver in the agreement approval. An
+	// administrator of the buyer's AWS organization passes it as
+	// approverOutcomeIdToOverride to decide on the approver's behalf.
+	ApproverOutcomeId *string
+
+	// The note that the approver provided with the decision.
+	Note *string
+
+	// The identity that decided on the procurement system's behalf. This field is
+	// empty unless an administrator of the buyer's AWS organization decided for the
+	// procurement system.
+	OverriddenBy *CallerIdentity
+
+	// The purchase order references that the approver provided with the decision.
+	PurchaseOrders []AgreementApprovalPurchaseOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProcurementToolApproverOutcome) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProcurementToolApproverOutcome)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProcurementToolApproverOutcome) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproverOutcomeId != nil {
+		s.WriteString(schemas.ProcurementToolApproverOutcome_approverOutcomeId, *v.ApproverOutcomeId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProcurementToolApproverOutcome_name, *v.Name)
+	}
+	if v.Note != nil {
+		s.WriteString(schemas.ProcurementToolApproverOutcome_note, *v.Note)
+	}
+	if v.OverriddenBy != nil {
+		s.WriteStruct(schemas.ProcurementToolApproverOutcome_overriddenBy)
+		v.OverriddenBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PurchaseOrders != nil {
+		serializeAgreementApprovalPurchaseOrders(s, schemas.ProcurementToolApproverOutcome_purchaseOrders, v.PurchaseOrders)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProcurementToolApproverOutcome_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ProcurementToolApproverOutcome_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ProcurementToolApproverOutcome) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProcurementToolApproverOutcome, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProcurementToolApproverOutcome_approverOutcomeId:
+			v.ApproverOutcomeId = new(string)
+			return d.ReadString(schemas.ProcurementToolApproverOutcome_approverOutcomeId, v.ApproverOutcomeId)
+		case schemas.ProcurementToolApproverOutcome_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProcurementToolApproverOutcome_name, v.Name)
+		case schemas.ProcurementToolApproverOutcome_note:
+			v.Note = new(string)
+			return d.ReadString(schemas.ProcurementToolApproverOutcome_note, v.Note)
+		case schemas.ProcurementToolApproverOutcome_overriddenBy:
+			v.OverriddenBy = &CallerIdentity{}
+			return v.OverriddenBy.Deserialize(d)
+		case schemas.ProcurementToolApproverOutcome_purchaseOrders:
+			return deserializeAgreementApprovalPurchaseOrders(d, schemas.ProcurementToolApproverOutcome_purchaseOrders, &v.PurchaseOrders)
+		case schemas.ProcurementToolApproverOutcome_status:
+			var ev string
+			if err := d.ReadString(schemas.ProcurementToolApproverOutcome_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApproverOutcomeStatus(ev)
+			return nil
+		case schemas.ProcurementToolApproverOutcome_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProcurementToolApproverOutcome_updatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -3159,7 +5228,7 @@ type RateCardItem struct {
 	// in AWS Marketplace.
 	DimensionKey *string
 
-	// Per unit price for the product dimension that’s used for calculating the amount
+	// Per unit price for the product dimension that's used for calculating the amount
 	// to be charged.
 	Price *string
 
@@ -4042,17 +6111,17 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 type ValidityTerm struct {
 
 	// Defines the duration that the agreement remains active. If AgreementStartDate
-	// isn’t provided, the agreement duration is relative to the agreement signature
+	// isn't provided, the agreement duration is relative to the agreement signature
 	// time. The duration is represented in the ISO_8601 format.
 	AgreementDuration *string
 
 	// Defines the date when the agreement ends. The agreement ends at 23:59:59.999
-	// UTC on the date provided. If AgreementEndDate isn’t provided, the agreement end
+	// UTC on the date provided. If AgreementEndDate isn't provided, the agreement end
 	// date is determined by the validity of individual terms.
 	AgreementEndDate *time.Time
 
 	// Defines the date when agreement starts. The agreement starts at 00:00:00.000
-	// UTC on the date provided. If AgreementStartDate isn’t provided, the agreement
+	// UTC on the date provided. If AgreementStartDate isn't provided, the agreement
 	// start date is determined based on agreement signature time.
 	AgreementStartDate *time.Time
 
@@ -4196,7 +6265,7 @@ type VariablePaymentTermConfiguration struct {
 	// Defines the duration after which a payment request is automatically approved if
 	// no further action is taken. This only applies when the payment request approval
 	// strategy is set to AUTO_APPROVE_ON_EXPIRATION . The duration is represented in
-	// the ISO_8601 format (e.g., P10D for 10 days).
+	// the ISO_8601 format (for example, P10D for 10 days).
 	ExpirationDuration *string
 
 	noSmithyDocumentSerde
@@ -4246,6 +6315,11 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAcceptedTerm()               {}
+func (*UnknownUnionMember) isAgreementApprovalPlan()      {}
+func (*UnknownUnionMember) isAgreementApprovalPlanInput() {}
+func (*UnknownUnionMember) isAgreementRequestTerm()       {}
+func (*UnknownUnionMember) isApprover()                   {}
+func (*UnknownUnionMember) isApproverOutcome()            {}
 func (*UnknownUnionMember) isPriceIncrease()              {}
 func (*UnknownUnionMember) isRequestedTermConfiguration() {}
 func (*UnknownUnionMember) isTermTemplate()               {}

@@ -14,11 +14,24 @@ import (
 	"time"
 )
 
-// Initiates a new recommendation generation process for the specified
-// optimization profile. This asynchronous operation analyzes your Amazon Web
-// Services resources and generates optimization recommendations based on the
-// configured pillars and scope. Use GetAgentRecommendationGeneration to check
-// status.
+// Starts a recommendation generation process for the specified agent profile.
+// This asynchronous operation returns immediately. Use
+// GetAgentRecommendationGeneration to check the status of the generation.
+//
+// Currently, only the ARCHITECTURE recommendation type is supported. RESOURCE and
+// APPLICATION recommendations are generated only by the scheduled generation cycle
+// and cannot be started with this operation.
+//
+// For the ARCHITECTURE type, the generation analyzes the infrastructure as code
+// (IaC) template that you specify in additionalContext , and returns updated
+// templates with best practice fixes applied. You must specify scope and
+// additionalContext . You can optionally specify name .
+//
+// Architecture review generations are subject to a daily quota for each profile.
+// For more information, see [Quotas and limits]in the Amazon Web Services Well-Architected User
+// Guide.
+//
+// [Quotas and limits]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/agent-quotas.html
 func (c *Client) StartAgentRecommendationGeneration(ctx context.Context, params *StartAgentRecommendationGenerationInput, optFns ...func(*Options)) (*StartAgentRecommendationGenerationOutput, error) {
 	if params == nil {
 		params = &StartAgentRecommendationGenerationInput{}
@@ -42,23 +55,34 @@ type StartAgentRecommendationGenerationInput struct {
 	// This member is required.
 	ProfileArn *string
 
-	// Scope configuration to focus the generation on specific pillars or goals.
-	//
-	// This member is required.
-	Scope *types.Scope
-
-	// The types of recommendations to generate.
+	// The types of recommendations to generate. You can specify up to two types in a
+	// single request. Currently, only ARCHITECTURE is supported for this operation.
 	//
 	// This member is required.
 	Types []types.RecommendationType
 
-	// Optional additional context to guide the recommendation generation, such as
-	// specific business requirements or constraints.
+	// The location of the infrastructure as code (IaC) template to review, and the
+	// lenses to review it against. Required for the ARCHITECTURE type. Must be absent
+	// for other types. Specify a JSON object with the following members:
+	//
+	//   - s3Uri : The Amazon S3 URI of the IaC template, .zip archive, or folder to
+	//   review.
+	//
+	//   - s3VersionId : The version ID of the Amazon S3 object. If you omit this
+	//   member, the current version is used.
+	//
+	//   - lensArns : The ARNs of the lenses to review against. Only
+	//   arn:aws:wellarchitected::aws:lens/wellarchitected is supported.
 	AdditionalContext document.Interface
 
-	// An optional name for this generation process to help identify it in lists and
-	// logs.
+	// An optional name for this generation that identifies the architecture review in
+	// the console and in ListAgentRecommendationGenerations results. Applies to
+	// ARCHITECTURE type only. Must be absent for other types.
 	Name *string
+
+	// Defines which pillars, goals, and items the review covers. Required for the
+	// ARCHITECTURE type. Must be absent for other types.
+	Scope *types.Scope
 
 	noSmithyDocumentSerde
 }

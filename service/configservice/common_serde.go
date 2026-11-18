@@ -389,6 +389,14 @@ func serializeConformancePackStatusDetailsList(s smithy.ShapeSerializer, schema 
 	s.CloseList()
 }
 
+func serializeConformancePackTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConformancePackType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeConnectorFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConnectorFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1853,6 +1861,27 @@ func deserializeConformancePackStatusDetailsList(d smithy.ShapeDeserializer, s *
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConformancePackTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ConformancePackType) error {
+	*v = make([]types.ConformancePackType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ConformancePackType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ConformancePackType(vv))
 		return nil
 	})
 }

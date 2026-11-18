@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"modifiedAt":946684800,"monitorArn":"__MonitorArn__","monitorName":"__MonitorName__","monitorStatus":"PENDING","monitorType":"VPC","tags":{"key0":"__Value__"},"targets":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}]}

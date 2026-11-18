@@ -41,7 +41,8 @@ type ListSecurityControlDefinitionsInput struct {
 	NextToken *string
 
 	// A list of cloud providers to filter the security control definitions by. For
-	// example, specify Azure to return only controls that evaluate Azure resources.
+	// example, specify Azure to return only controls that evaluate Azure resources,
+	// or GCP to return only controls that evaluate GCP resources.
 	Providers []types.SecurityControlsProvider
 
 	//  The Amazon Resource Name (ARN) of the standard that you want to view controls

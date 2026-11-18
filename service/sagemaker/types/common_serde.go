@@ -1723,6 +1723,16 @@ func serializeDesiredWeightAndCapacityList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeDestinationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Destination) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDeviceDeploymentSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeviceDeploymentSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2400,6 +2410,16 @@ func serializeInferenceRecommendationsJobs(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeInferenceRecommendationsJobSteps(s smithy.ShapeSerializer, schema *smithy.Schema, v []InferenceRecommendationsJobStep) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInferenceRouterSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []InferenceRouterSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -3464,6 +3484,16 @@ func serializeResponseMIMETypes(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeRoleGroupAssignmentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RoleGroupAssignment) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRoutingTargetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RoutingTarget) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -6584,6 +6614,28 @@ func deserializeDesiredWeightAndCapacityList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializeDestinationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Destination) error {
+	*v = make([]Destination, 0)
+	var vv Destination
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Destination
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Destination{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDeviceDeploymentSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DeviceDeploymentSummary) error {
 	*v = make([]DeviceDeploymentSummary, 0)
 	var vv DeviceDeploymentSummary
@@ -8142,6 +8194,28 @@ func deserializeInferenceRecommendationsJobSteps(d smithy.ShapeDeserializer, s *
 		}
 
 		vv = InferenceRecommendationsJobStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInferenceRouterSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InferenceRouterSummary) error {
+	*v = make([]InferenceRouterSummary, 0)
+	var vv InferenceRouterSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero InferenceRouterSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = InferenceRouterSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -10595,6 +10669,28 @@ func deserializeRoleGroupAssignmentsList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		vv = RoleGroupAssignment{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRoutingTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RoutingTarget) error {
+	*v = make([]RoutingTarget, 0)
+	var vv RoutingTarget
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RoutingTarget
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RoutingTarget{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

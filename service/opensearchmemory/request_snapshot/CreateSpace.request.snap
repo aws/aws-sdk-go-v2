@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.CreateSpace
+
+{"clientToken":"__ClientToken__","encryptionConfiguration":{"kmsKeyArn":"__KmsKeyArn__"},"eventExpiryDays":1,"extractionModelId":"__ExtractionModelId__","memoryExpiryDays":1,"memoryStrategies":[{"configuration":{"consolidationEnabled":true,"extractEveryNMessages":1,"extractEveryNTokens":1,"extractionPrompt":"__ExtractionPrompt__","extractionSeedRecentN":1,"extractionSeedTopK":1,"idleTimeoutSeconds":1},"description":"__Description__","name":"__Name__","type":"SEMANTIC"},{"configuration":{"consolidationEnabled":true,"extractEveryNMessages":1,"extractEveryNTokens":1,"extractionPrompt":"__ExtractionPrompt__","extractionSeedRecentN":1,"extractionSeedTopK":1,"idleTimeoutSeconds":1},"description":"__Description__","name":"__Name__","type":"SEMANTIC"}],"name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

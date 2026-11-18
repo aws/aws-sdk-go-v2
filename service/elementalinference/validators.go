@@ -70,6 +70,66 @@ func (m *validateOpCreateFeed) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFunction struct {
+}
+
+func (*validateOpCreateFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateQuestionSet struct {
+}
+
+func (*validateOpCreateQuestionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuestionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuestionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuestionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateQuestionSetVersion struct {
+}
+
+func (*validateOpCreateQuestionSetVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuestionSetVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuestionSetVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuestionSetVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateScheduleAction struct {
 }
 
@@ -145,6 +205,66 @@ func (m *validateOpDeleteFeedPolicy) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFunction struct {
+}
+
+func (*validateOpDeleteFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQuestionSet struct {
+}
+
+func (*validateOpDeleteQuestionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuestionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuestionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuestionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQuestionSetVersion struct {
+}
+
+func (*validateOpDeleteQuestionSetVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuestionSetVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuestionSetVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuestionSetVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +405,66 @@ func (m *validateOpGetFixture) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFixtureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFunction struct {
+}
+
+func (*validateOpGetFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQuestionSet struct {
+}
+
+func (*validateOpGetQuestionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQuestionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQuestionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQuestionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQuestionSetVersions struct {
+}
+
+func (*validateOpListQuestionSetVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQuestionSetVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQuestionSetVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQuestionSetVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +630,46 @@ func (m *validateOpUpdateFeed) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFunction struct {
+}
+
+func (*validateOpUpdateFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQuestionSet struct {
+}
+
+func (*validateOpUpdateQuestionSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuestionSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuestionSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuestionSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFeed{}, middleware.After)
 }
@@ -460,6 +680,18 @@ func addOpCreateDictionaryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFeed{}, middleware.After)
+}
+
+func addOpCreateFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFunction{}, middleware.After)
+}
+
+func addOpCreateQuestionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuestionSet{}, middleware.After)
+}
+
+func addOpCreateQuestionSetVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuestionSetVersion{}, middleware.After)
 }
 
 func addOpCreateScheduleActionValidationMiddleware(stack *middleware.Stack) error {
@@ -476,6 +708,18 @@ func addOpDeleteFeedValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFeedPolicy{}, middleware.After)
+}
+
+func addOpDeleteFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFunction{}, middleware.After)
+}
+
+func addOpDeleteQuestionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuestionSet{}, middleware.After)
+}
+
+func addOpDeleteQuestionSetVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuestionSetVersion{}, middleware.After)
 }
 
 func addOpDeleteScheduleActionValidationMiddleware(stack *middleware.Stack) error {
@@ -504,6 +748,18 @@ func addOpGetFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetFixtureValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFixture{}, middleware.After)
+}
+
+func addOpGetFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFunction{}, middleware.After)
+}
+
+func addOpGetQuestionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQuestionSet{}, middleware.After)
+}
+
+func addOpListQuestionSetVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQuestionSetVersions{}, middleware.After)
 }
 
 func addOpListScheduleActionsValidationMiddleware(stack *middleware.Stack) error {
@@ -538,6 +794,14 @@ func addOpUpdateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFeed{}, middleware.After)
 }
 
+func addOpUpdateFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFunction{}, middleware.After)
+}
+
+func addOpUpdateQuestionSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuestionSet{}, middleware.After)
+}
+
 func validateAspectRatio(v *types.AspectRatio) error {
 	if v == nil {
 		return nil
@@ -556,6 +820,83 @@ func validateAspectRatio(v *types.AspectRatio) error {
 	}
 }
 
+func validateBedrockFunctionTarget(v *types.BedrockFunctionTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockFunctionTarget"}
+	if len(v.Api) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Api"))
+	}
+	if v.Model == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Model"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChooseOneOptionList(v []types.QuestionOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChooseOneOptionList"}
+	for i := range v {
+		if err := validateQuestionOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChooseOneQuestion(v *types.ChooseOneQuestion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChooseOneQuestion"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Question == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Question"))
+	}
+	if v.Options == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Options"))
+	} else if v.Options != nil {
+		if err := validateChooseOneOptionList(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChooseOneQuestionList(v []types.ChooseOneQuestion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChooseOneQuestionList"}
+	for i := range v {
+		if err := validateChooseOneQuestion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClippingConfig(v *types.ClippingConfig) error {
 	if v == nil {
 		return nil
@@ -565,6 +906,53 @@ func validateClippingConfig(v *types.ClippingConfig) error {
 		if err := validateDataSourceConfiguration(v.DataSourceConfiguration); err != nil {
 			invalidParams.AddNested("DataSourceConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClippingSettings(v *types.ClippingSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClippingSettings"}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextualMetadataConfig(v *types.ContextualMetadataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextualMetadataConfig"}
+	if v.CustomQuestions != nil {
+		if err := validateCustomQuestionsConfig(v.CustomQuestions); err != nil {
+			invalidParams.AddNested("CustomQuestions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextualMetadataSettings(v *types.ContextualMetadataSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextualMetadataSettings"}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -632,6 +1020,28 @@ func validateCroppingConfig(v *types.CroppingConfig) error {
 	}
 }
 
+func validateCustomQuestionsConfig(v *types.CustomQuestionsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomQuestionsConfig"}
+	if v.Shot != nil {
+		if err := validateQuestionSetReference(v.Shot); err != nil {
+			invalidParams.AddNested("Shot", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Scene != nil {
+		if err := validateQuestionSetReference(v.Scene); err != nil {
+			invalidParams.AddNested("Scene", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v == nil {
 		return nil
@@ -639,6 +1049,21 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfiguration"}
 	if v.FixtureId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFixedIntervalTrigger(v *types.FixedIntervalTrigger) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FixedIntervalTrigger"}
+	if v.IntervalSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntervalSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -662,6 +1087,124 @@ func validateFixedModeScheduleActionStartSettings(v *types.FixedModeScheduleActi
 	}
 }
 
+func validateFrameSamplingStrategy(v *types.FrameSamplingStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrameSamplingStrategy"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFrameSettings(v *types.FrameSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrameSettings"}
+	if v.FrameSampling == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameSampling"))
+	} else if v.FrameSampling != nil {
+		if err := validateFrameSamplingStrategy(v.FrameSampling); err != nil {
+			invalidParams.AddNested("FrameSampling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FrameSize != nil {
+		if err := validateFrameSize(v.FrameSize); err != nil {
+			invalidParams.AddNested("FrameSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFrameSize(v *types.FrameSize) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrameSize"}
+	if v.WidthPixels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WidthPixels"))
+	}
+	if v.HeightPixels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeightPixels"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionConfig(v *types.FunctionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionConfig"}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
+	}
+	if v.Trigger == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Trigger"))
+	} else if v.Trigger != nil {
+		if err := validateTrigger(v.Trigger); err != nil {
+			invalidParams.AddNested("Trigger", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FrameSettings != nil {
+		if err := validateFrameSettings(v.FrameSettings); err != nil {
+			invalidParams.AddNested("FrameSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubtitlingSettings != nil {
+		if err := validateSubtitlingSettings(v.SubtitlingSettings); err != nil {
+			invalidParams.AddNested("SubtitlingSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContextualMetadataSettings != nil {
+		if err := validateContextualMetadataSettings(v.ContextualMetadataSettings); err != nil {
+			invalidParams.AddNested("ContextualMetadataSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClippingSettings != nil {
+		if err := validateClippingSettings(v.ClippingSettings); err != nil {
+			invalidParams.AddNested("ClippingSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionTarget(v types.FunctionTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionTarget"}
+	switch uv := v.(type) {
+	case *types.FunctionTargetMemberBedrock:
+		if err := validateBedrockFunctionTarget(&uv.Value); err != nil {
+			invalidParams.AddNested("[bedrock]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputConfig(v types.OutputConfig) error {
 	if v == nil {
 		return nil
@@ -673,9 +1216,19 @@ func validateOutputConfig(v types.OutputConfig) error {
 			invalidParams.AddNested("[clipping]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.OutputConfigMemberContextualMetadata:
+		if err := validateContextualMetadataConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[contextualMetadata]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.OutputConfigMemberCropping:
 		if err := validateCroppingConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[cropping]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.OutputConfigMemberFunction:
+		if err := validateFunctionConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[function]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.OutputConfigMemberSubtitling:
@@ -683,6 +1236,42 @@ func validateOutputConfig(v types.OutputConfig) error {
 			invalidParams.AddNested("[subtitling]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuestionOption(v *types.QuestionOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuestionOption"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuestionSetReference(v *types.QuestionSetReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuestionSetReference"}
+	if v.QuestionSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionSetId"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -826,6 +1415,21 @@ func validateSubtitlingConfig(v *types.SubtitlingConfig) error {
 	}
 }
 
+func validateSubtitlingSettings(v *types.SubtitlingSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubtitlingSettings"}
+	if v.OutputName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTemplateGroup(v *types.TemplateGroup) error {
 	if v == nil {
 		return nil
@@ -853,6 +1457,25 @@ func validateTemplateGroupList(v []types.TemplateGroup) error {
 		if err := validateTemplateGroup(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrigger(v types.Trigger) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Trigger"}
+	switch uv := v.(type) {
+	case *types.TriggerMemberFixedInterval:
+		if err := validateFixedIntervalTrigger(&uv.Value); err != nil {
+			invalidParams.AddNested("[fixedInterval]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -943,6 +1566,100 @@ func validateUpdateOutputStatus(v *types.UpdateOutputStatus) error {
 	}
 }
 
+func validateYesNoPerOptionOptionList(v []types.QuestionOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YesNoPerOptionOptionList"}
+	for i := range v {
+		if err := validateQuestionOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYesNoPerOptionQuestion(v *types.YesNoPerOptionQuestion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YesNoPerOptionQuestion"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Question == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Question"))
+	}
+	if v.Options == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Options"))
+	} else if v.Options != nil {
+		if err := validateYesNoPerOptionOptionList(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYesNoPerOptionQuestionList(v []types.YesNoPerOptionQuestion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YesNoPerOptionQuestionList"}
+	for i := range v {
+		if err := validateYesNoPerOptionQuestion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYesNoQuestion(v *types.YesNoQuestion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YesNoQuestion"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Question == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Question"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYesNoQuestionList(v []types.YesNoQuestion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YesNoQuestionList"}
+	for i := range v {
+		if err := validateYesNoQuestion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateFeedInput(v *AssociateFeedInput) error {
 	if v == nil {
 		return nil
@@ -1000,6 +1717,76 @@ func validateOpCreateFeedInput(v *CreateFeedInput) error {
 		if err := validateCreateOutputList(v.Outputs); err != nil {
 			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	} else if v.Target != nil {
+		if err := validateFunctionTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RequestExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateQuestionSetInput(v *CreateQuestionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuestionSetInput"}
+	if v.YesNo != nil {
+		if err := validateYesNoQuestionList(v.YesNo); err != nil {
+			invalidParams.AddNested("YesNo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.YesNoPerOption != nil {
+		if err := validateYesNoPerOptionQuestionList(v.YesNoPerOption); err != nil {
+			invalidParams.AddNested("YesNoPerOption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChooseOne != nil {
+		if err := validateChooseOneQuestionList(v.ChooseOne); err != nil {
+			invalidParams.AddNested("ChooseOne", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateQuestionSetVersionInput(v *CreateQuestionSetVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuestionSetVersionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1077,6 +1864,54 @@ func validateOpDeleteFeedPolicyInput(v *DeleteFeedPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFeedPolicyInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFunctionInput(v *DeleteFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFunctionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQuestionSetInput(v *DeleteQuestionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuestionSetInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQuestionSetVersionInput(v *DeleteQuestionSetVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuestionSetVersionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.QuestionSetVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionSetVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1188,6 +2023,51 @@ func validateOpGetFixtureInput(v *GetFixtureInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetFixtureInput"}
 	if v.FixtureId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFunctionInput(v *GetFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFunctionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQuestionSetInput(v *GetQuestionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQuestionSetInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQuestionSetVersionsInput(v *ListQuestionSetVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQuestionSetVersionsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1334,6 +2214,56 @@ func validateOpUpdateFeedInput(v *UpdateFeedInput) error {
 	} else if v.Outputs != nil {
 		if err := validateUpdateOutputList(v.Outputs); err != nil {
 			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFunctionInput(v *UpdateFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFunctionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Target != nil {
+		if err := validateFunctionTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuestionSetInput(v *UpdateQuestionSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuestionSetInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.YesNo != nil {
+		if err := validateYesNoQuestionList(v.YesNo); err != nil {
+			invalidParams.AddNested("YesNo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.YesNoPerOption != nil {
+		if err := validateYesNoPerOptionQuestionList(v.YesNoPerOption); err != nil {
+			invalidParams.AddNested("YesNoPerOption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChooseOne != nil {
+		if err := validateChooseOneQuestionList(v.ChooseOne); err != nil {
+			invalidParams.AddNested("ChooseOne", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

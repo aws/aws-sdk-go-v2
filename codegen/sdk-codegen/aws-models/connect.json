@@ -1624,6 +1624,9 @@
                     "target": "com.amazonaws.connect#DeactivateEvaluationForm"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteAllEntitySessions"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteAttachedFile"
                 },
                 {
@@ -18012,6 +18015,79 @@
                 }
             }
         },
+        "com.amazonaws.connect#DeleteAllEntitySessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteAllEntitySessionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteAllEntitySessionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes all active sessions for the specified entity in the specified Connect Customer instance. The\n   operation supports only the <code>USER</code> entity type, so you can use it to sign out all of a user's active\n   sessions. Use it when you need to end a user's access right away, for example when they leave your organization or\n   you suspect that their credentials are compromised.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/auth/sessions/delete-all-entity-sessions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteAllEntitySessionsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Connect Customer instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityId": {
+                    "target": "com.amazonaws.connect#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the entity whose sessions you want to delete. For <code>USER</code>, use the user ID or\n   the user ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityType": {
+                    "target": "com.amazonaws.connect#SessionEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of entity whose sessions you want to delete.</p>\n         <note>\n            <p>The only valid value is <code>USER</code>, which signs out a user in your Connect Customer\n    instance.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteAllEntitySessionsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#DeleteAttachedFile": {
             "type": "operation",
             "input": {
@@ -26180,6 +26256,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
+                },
+                "ItemEnablementStatus": {
+                    "target": "com.amazonaws.connect#EvaluationEnablementStatusMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of item (section or question) identifiers to their enablement status, computed by the service from each\n   item's conditional enablement configuration. Disabled items are excluded from scoring. Valid values:\n   <code>ENABLED</code> | <code>DISABLED</code>.</p>"
+                    }
+                },
+                "SourceResolutionStatus": {
+                    "target": "com.amazonaws.connect#EvaluationItemResolutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregate status of resolving the external source data (such as Contact Lens analysis and AI metrics) that is used by\n   conditional enablement in the evaluation. Source data is resolved asynchronously after the evaluation is started.\n   While a source is pending or after it fails to resolve, conditions that depend on it evaluate to the item's\n   <code>DefaultAction</code>. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - One or more sources have not been resolved yet. Call\n     <code>DescribeContactEvaluation</code> again to get updated <code>ItemEnablementStatus</code> values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - All sources have been resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - One or more sources could not be resolved. Dependent conditions use the item's\n     <code>DefaultAction</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SourceValues": {
+                    "target": "com.amazonaws.connect#EvaluationResolvedSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved values of the external sources (such as contact data, evaluation metadata, form metadata, and AI\n   metrics) that are used by the conditions in the evaluation form. You can use these values to evaluate the conditions\n   against the current answers without calling <code>DescribeContactEvaluation</code> again.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26449,6 +26543,38 @@
                 "smithy.api#documentation": "<p>Information about a contact participant in the evaluation.</p>"
             }
         },
+        "com.amazonaws.connect#EvaluationEnablementStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationEnablementStatusMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#ReferenceId"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#EvaluationEnablementStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.connect#EvaluationForm": {
             "type": "structure",
             "members": {
@@ -26690,6 +26816,71 @@
                 "target": "com.amazonaws.connect#EvaluationFormAIVersionSummary"
             }
         },
+        "com.amazonaws.connect#EvaluationFormAiMetricsField": {
+            "type": "enum",
+            "members": {
+                "AI_SESSION_IS_HANDED_OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_IS_HANDED_OFF"
+                    }
+                },
+                "AI_SESSION_SELF_SERVICE_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_SELF_SERVICE_DURATION"
+                    }
+                },
+                "AI_SESSION_GOAL_SUCCESS_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_GOAL_SUCCESS_RATE"
+                    }
+                },
+                "AI_SESSION_COMPLETENESS_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_COMPLETENESS_SCORE"
+                    }
+                },
+                "AI_SESSION_FAITHFULNESS_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_FAITHFULNESS_SCORE"
+                    }
+                },
+                "AI_AGENT_MAX_PROMPT_LATENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_AGENT_MAX_PROMPT_LATENCY"
+                    }
+                },
+                "AI_TOOL_MAX_LATENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_MAX_LATENCY"
+                    }
+                },
+                "AI_TOOL_SELECTION_ACCURACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_SELECTION_ACCURACY"
+                    }
+                },
+                "AI_TOOL_PARAMETER_ACCURACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_PARAMETER_ACCURACY"
+                    }
+                },
+                "AI_TOOL_UTILIZATION_ACCURACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_UTILIZATION_ACCURACY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#EvaluationFormAutoEvaluationConfiguration": {
             "type": "structure",
             "members": {
@@ -26704,6 +26895,146 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The automatic evaluation configuration of an evaluation form.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormContactAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32767
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormContactField": {
+            "type": "enum",
+            "members": {
+                "CATEGORIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CATEGORIES"
+                    }
+                },
+                "AGENT_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_ARN"
+                    }
+                },
+                "QUEUE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUE_ARN"
+                    }
+                },
+                "ROUTING_PROFILE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_PROFILE_ARN"
+                    }
+                },
+                "CHANNEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHANNEL"
+                    }
+                },
+                "INITIATION_METHOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIATION_METHOD"
+                    }
+                },
+                "IS_QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IS_QUEUED"
+                    }
+                },
+                "OVERALL_CUSTOMER_SENTIMENT_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERALL_CUSTOMER_SENTIMENT_SCORE"
+                    }
+                },
+                "OVERALL_AGENT_SENTIMENT_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERALL_AGENT_SENTIMENT_SCORE"
+                    }
+                },
+                "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT"
+                    }
+                },
+                "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT"
+                    }
+                },
+                "NON_TALK_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_TALK_TIME"
+                    }
+                },
+                "NON_TALK_TIME_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_TALK_TIME_PERCENTAGE"
+                    }
+                },
+                "NUMBER_OF_INTERRUPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_OF_INTERRUPTIONS"
+                    }
+                },
+                "CONTACT_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT_DURATION"
+                    }
+                },
+                "AGENT_INTERACTION_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_INTERACTION_DURATION"
+                    }
+                },
+                "CUSTOMER_HOLD_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_HOLD_TIME"
+                    }
+                },
+                "LONGEST_HOLD_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LONGEST_HOLD_DURATION"
+                    }
+                },
+                "NUMBER_OF_HOLDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_OF_HOLDS"
+                    }
+                },
+                "AGENT_INTERACTION_AND_HOLD_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_INTERACTION_AND_HOLD_DURATION"
+                    }
+                },
+                "RECORDING_MEDIA_STREAM_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECORDING_MEDIA_STREAM_TYPES"
+                    }
+                }
             }
         },
         "com.amazonaws.connect#EvaluationFormContent": {
@@ -26795,6 +27126,38 @@
         "com.amazonaws.connect#EvaluationFormDescription": {
             "type": "string"
         },
+        "com.amazonaws.connect#EvaluationFormEnablementBooleanValue": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormEnablementNumericValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormEnablementStringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormEvaluationMetadataField": {
+            "type": "enum",
+            "members": {
+                "EVALUATION_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVALUATION_TYPE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#EvaluationFormId": {
             "type": "string",
             "traits": {
@@ -26854,7 +27217,7 @@
                 "Operator": {
                     "target": "com.amazonaws.connect#EvaluationFormItemEnablementOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator to be used to be applied to operands if more than one provided. </p>"
+                        "smithy.api#documentation": "<p>The operator to apply to the operands when more than one operand is provided.</p>"
                     }
                 }
             },
@@ -26901,14 +27264,14 @@
                 "Action": {
                     "target": "com.amazonaws.connect#EvaluationFormItemEnablementAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enablement action that if condition is satisfied. </p>",
+                        "smithy.api#documentation": "<p>The enablement action to apply if the condition is satisfied.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DefaultAction": {
                     "target": "com.amazonaws.connect#EvaluationFormItemEnablementAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enablement action that if condition is not satisfied. </p>"
+                        "smithy.api#documentation": "<p>The enablement action to apply if the condition is not satisfied. This action is also applied when the condition\n   depends on an external source that is still pending or could not be resolved.</p>"
                     }
                 }
             },
@@ -26936,7 +27299,7 @@
                 "Comparator": {
                     "target": "com.amazonaws.connect#EvaluationFormItemSourceValuesComparator",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comparator to be used against list of values. </p>",
+                        "smithy.api#documentation": "<p>A comparator to be used against a list of values. <code>IN</code>, <code>NOT_IN</code>, <code>ALL_IN</code>, and\n   <code>EXACT</code> compare sets of values. <code>GREATER_THAN</code>, <code>LESS_THAN</code>,\n   <code>GREATER_THAN_OR_EQUAL_TO</code>, and <code>LESS_THAN_OR_EQUAL_TO</code> compare a single numeric or date and\n   time value. <code>EQUAL_TO</code> and <code>NOT_EQUAL_TO</code> compare a single value.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -26968,14 +27331,44 @@
                 "Type": {
                     "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A type of source item. </p>",
+                        "smithy.api#documentation": "<p>A type of source item. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUESTION_REF_ID</code> - The answer to another question in the evaluation form.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONTACT</code> - Data from the evaluated contact.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EVALUATION_METADATA</code> - Metadata of the evaluation, such as the evaluation type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AI_METRICS</code> - Metrics about AI agents, AI sessions, and AI tools on the contact.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "RefId": {
                     "target": "com.amazonaws.connect#ReferenceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A referenceId of the source item.</p>"
+                        "smithy.api#documentation": "<p>A referenceId of the source item. Use when <code>Type</code> is <code>QUESTION_REF_ID</code>.</p>"
+                    }
+                },
+                "ContactField": {
+                    "target": "com.amazonaws.connect#EvaluationFormContactField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contact field to use as the source, such as <code>CHANNEL</code>, <code>QUEUE_ARN</code>,\n   <code>OVERALL_CUSTOMER_SENTIMENT_SCORE</code>, or <code>RECORDING_MEDIA_STREAM_TYPES</code>. Use when\n   <code>Type</code> is <code>CONTACT</code>.</p>"
+                    }
+                },
+                "ContactAttributeKey": {
+                    "target": "com.amazonaws.connect#EvaluationFormContactAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the contact attribute to use as the source. Use when <code>Type</code> is <code>CONTACT</code>.</p>"
+                    }
+                },
+                "SegmentAttributeKey": {
+                    "target": "com.amazonaws.connect#EvaluationFormSegmentAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the contact segment attribute to use as the source. Use when <code>Type</code> is\n   <code>CONTACT</code>.</p>"
+                    }
+                },
+                "EvaluationMetadataField": {
+                    "target": "com.amazonaws.connect#EvaluationFormEvaluationMetadataField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluation metadata field to use as the source. Use when <code>Type</code> is\n   <code>EVALUATION_METADATA</code>.</p>"
+                    }
+                },
+                "AiMetricsField": {
+                    "target": "com.amazonaws.connect#EvaluationFormAiMetricsField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI metrics field to use as the source. Use when <code>Type</code> is <code>AI_METRICS</code>.</p>"
                     }
                 }
             },
@@ -26991,6 +27384,30 @@
                     "traits": {
                         "smithy.api#enumValue": "QUESTION_REF_ID"
                     }
+                },
+                "CONTACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT"
+                    }
+                },
+                "EVALUATION_METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVALUATION_METADATA"
+                    }
+                },
+                "FORM_METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM_METADATA"
+                    }
+                },
+                "AI_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_METRICS"
+                    }
                 }
             }
         },
@@ -27000,19 +27417,45 @@
                 "Type": {
                     "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A type of source item value. </p>",
+                        "smithy.api#documentation": "<p>A type of source item value. Valid values: <code>OPTION_REF_ID</code> | <code>STRING_VALUE</code> |\n   <code>NUMERIC_VALUE</code> | <code>BOOLEAN_VALUE</code> | <code>DATETIME_VALUE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RefId": {
                     "target": "com.amazonaws.connect#ReferenceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A referenceId of the source value.</p>"
+                        "smithy.api#documentation": "<p>A referenceId of the source value. Use when <code>Type</code> is <code>OPTION_REF_ID</code>.</p>"
+                    }
+                },
+                "StringValue": {
+                    "target": "com.amazonaws.connect#EvaluationFormEnablementStringValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string value to compare against the source. Use when <code>Type</code> is\n   <code>STRING_VALUE</code>.</p>"
+                    }
+                },
+                "NumericValue": {
+                    "target": "com.amazonaws.connect#EvaluationFormEnablementNumericValue",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A numeric value to compare against the source. Use when <code>Type</code> is\n   <code>NUMERIC_VALUE</code>.</p>"
+                    }
+                },
+                "BooleanValue": {
+                    "target": "com.amazonaws.connect#EvaluationFormEnablementBooleanValue",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A Boolean value to compare against the source. Use when <code>Type</code> is\n   <code>BOOLEAN_VALUE</code>.</p>"
+                    }
+                },
+                "DateTimeValue": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date and time value to compare against the source. Use when <code>Type</code> is\n   <code>DATETIME_VALUE</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An enablement expression source value.</p>"
+                "smithy.api#documentation": "<p>An enablement expression source value. Provide only the value member that matches the specified\n   <code>Type</code>.</p>"
             }
         },
         "com.amazonaws.connect#EvaluationFormItemEnablementSourceValueList": {
@@ -27028,6 +27471,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OPTION_REF_ID"
+                    }
+                },
+                "STRING_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_VALUE"
+                    }
+                },
+                "NUMERIC_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMERIC_VALUE"
+                    }
+                },
+                "BOOLEAN_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN_VALUE"
+                    }
+                },
+                "DATETIME_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATETIME_VALUE"
                     }
                 }
             }
@@ -27057,6 +27524,42 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EXACT"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
                     }
                 }
             }
@@ -27787,7 +28290,10 @@
                     }
                 },
                 "AnswerSource": {
-                    "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSource"
+                    "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Automation answer source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -28115,7 +28621,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.connect#EvaluationFormQuestionAutomationAnswerSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The automation answer source type.</p>",
+                        "smithy.api#documentation": "<p>The automation answer source type. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTACT_LENS_DATA</code> - The answer is based on Contact Lens data, such as rule categories and\n     metrics.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GEN_AI</code> - The answer is generated by generative AI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONDITION</code> - The answer is determined by evaluating the conditions defined in the automation\n     rules of the question.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -28137,6 +28643,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GEN_AI"
+                    }
+                },
+                "CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONDITION"
                     }
                 }
             }
@@ -28582,6 +29094,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The score thresholds for performance categories.</p>"
                     }
+                },
+                "Enablement": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditional enablement configuration of the section. Sections use the same enablement model as\n   questions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -28590,6 +29108,15 @@
         },
         "com.amazonaws.connect#EvaluationFormSectionTitle": {
             "type": "string"
+        },
+        "com.amazonaws.connect#EvaluationFormSegmentAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
         },
         "com.amazonaws.connect#EvaluationFormSingleSelectQuestionAutomation": {
             "type": "structure",
@@ -28626,6 +29153,12 @@
                     "target": "com.amazonaws.connect#SingleSelectQuestionRuleCategoryAutomation",
                     "traits": {
                         "smithy.api#documentation": "<p>The automation option based on a rule category for the single select question.</p>"
+                    }
+                },
+                "AutomationRule": {
+                    "target": "com.amazonaws.connect#SingleSelectQuestionAutomationRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The automation option based on a condition for the single select question. Use with the\n   <code>CONDITION</code> answer source type.</p>"
                     }
                 }
             },
@@ -29129,6 +29662,29 @@
         "com.amazonaws.connect#EvaluationId": {
             "type": "string"
         },
+        "com.amazonaws.connect#EvaluationItemResolutionStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "RESOLVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#EvaluationMetadata": {
             "type": "structure",
             "members": {
@@ -29271,6 +29827,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GEN_AI"
                     }
+                },
+                "CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONDITION"
+                    }
                 }
             }
         },
@@ -29286,6 +29848,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details of the input data used for automated question processing.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationResolvedSource": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external source, such as contact data, evaluation metadata, form metadata, or AI metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#EvaluationItemResolutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of resolving the source. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The source has not been resolved yet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The source has been resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The source could not be resolved.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.connect#EvaluationResolvedSourceValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resolved values of the source. Present when <code>Status</code> is <code>RESOLVED</code>. Contains one value\n   for a single-valued source, any number of values for a multi-valued source, and no values when the source is not\n   present on the contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resolved value of an external source that is used by the conditions in an evaluation form.</p>"
+            }
+        },
+        "com.amazonaws.connect#EvaluationResolvedSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationResolvedSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationResolvedSourceValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#EvaluationFormItemEnablementSourceValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.connect#EvaluationReviewConfiguration": {
@@ -29887,7 +30501,7 @@
                 "AnalysisType": {
                     "target": "com.amazonaws.connect#EvaluationQuestionAnswerAnalysisType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of analysis used to provide suggested answer.</p>",
+                        "smithy.api#documentation": "<p>Type of analysis used to provide suggested answer. Valid values: <code>CONTACT_LENS_DATA</code> |\n   <code>GEN_AI</code> | <code>CONDITION</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -45697,6 +46311,60 @@
                     "traits": {
                         "smithy.api#enumValue": "AGENT_INTERACTION_AND_HOLD_DURATION"
                     }
+                },
+                "AI_SESSION_SELF_SERVICE_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_SELF_SERVICE_DURATION"
+                    }
+                },
+                "AI_SESSION_GOAL_SUCCESS_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_GOAL_SUCCESS_RATE"
+                    }
+                },
+                "AI_SESSION_COMPLETENESS_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_COMPLETENESS_SCORE"
+                    }
+                },
+                "AI_SESSION_FAITHFULNESS_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_SESSION_FAITHFULNESS_SCORE"
+                    }
+                },
+                "AI_AGENT_MAX_PROMPT_LATENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_AGENT_MAX_PROMPT_LATENCY"
+                    }
+                },
+                "AI_TOOL_MAX_LATENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_MAX_LATENCY"
+                    }
+                },
+                "AI_TOOL_SELECTION_ACCURACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_SELECTION_ACCURACY"
+                    }
+                },
+                "AI_TOOL_PARAMETER_ACCURACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_PARAMETER_ACCURACY"
+                    }
+                },
+                "AI_TOOL_UTILIZATION_ACCURACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI_TOOL_UTILIZATION_ACCURACY"
+                    }
                 }
             }
         },
@@ -45712,7 +46380,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the property value used in automation of a numeric questions. Label values are associated with\n   minimum and maximum values for the numeric question.</p>\n         <ul>\n            <li>\n               <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p>\n            </li>\n            <li>\n               <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>,\n      <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum\n     value of 63072000.</p>\n            </li>\n            <li>\n               <p>Percentages have a minimum value of 0 and maximum value of 100. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 1000.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Information about the property value used in automation of a numeric question. Label values are associated with\n   minimum and maximum values for the numeric question.</p>\n         <ul>\n            <li>\n               <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p>\n            </li>\n            <li>\n               <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>,\n      <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum\n     value of 63072000.</p>\n            </li>\n            <li>\n               <p>Percentages have a minimum value of 0 and maximum value of 100. </p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 1000.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.connect#ObservationSummary": {
@@ -58479,6 +59147,20 @@
                 "smithy.api#documentation": "<p>The reason for the exception.</p>"
             }
         },
+        "com.amazonaws.connect#SessionEntityType": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the type of entity whose sessions you delete when you call\n   <code>DeleteAllEntitySessions</code>. The only valid value is <code>USER</code>, which targets a user in your\n   Connect Customer instance.</p>"
+            }
+        },
         "com.amazonaws.connect#SessionId": {
             "type": "string",
             "traits": {
@@ -58546,6 +59228,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#TaskTemplateSingleSelectOption"
+            }
+        },
+        "com.amazonaws.connect#SingleSelectQuestionAutomationRule": {
+            "type": "structure",
+            "members": {
+                "Condition": {
+                    "target": "com.amazonaws.connect#EvaluationFormItemEnablementCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition that must be satisfied for the answer option to be selected. The condition uses the same\n   sources, comparators, and operators as item enablement conditions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OptionRefId": {
+                    "target": "com.amazonaws.connect#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the answer option to select when the condition is satisfied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a condition-based automation rule for a single select question. When the condition is\n   satisfied, the specified answer option is selected.</p>"
             }
         },
         "com.amazonaws.connect#SingleSelectQuestionRuleCategoryAutomation": {

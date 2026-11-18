@@ -131,6 +131,46 @@ func serializeConstrainedStringList(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeContextChangeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextChange) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeContextList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeContextStoreAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextStoreAssociation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeContextStoreList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextStore) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCoreNetworkChangeEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CoreNetworkChangeEvent) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -884,6 +924,94 @@ func deserializeConstrainedStringList(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextChangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextChange) error {
+	*v = make([]types.ContextChange, 0)
+	var vv types.ContextChange
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextChange
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContextChange{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextEntry) error {
+	*v = make([]types.ContextEntry, 0)
+	var vv types.ContextEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContextEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextStoreAssociationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextStoreAssociation) error {
+	*v = make([]types.ContextStoreAssociation, 0)
+	var vv types.ContextStoreAssociation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextStoreAssociation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContextStoreAssociation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextStoreList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextStore) error {
+	*v = make([]types.ContextStore, 0)
+	var vv types.ContextStore
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextStore
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContextStore{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

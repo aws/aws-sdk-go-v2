@@ -386,6 +386,18 @@ func TestCheckSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateKmsKeyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
@@ -1910,6 +1922,18 @@ func TestCheckSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
@@ -3103,6 +3127,18 @@ func TestCheckSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) {
 	_, err := svc.DeleteTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTransitGatewayMulticastDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayNetworkFunctionAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5438,6 +5474,18 @@ func TestCheckSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTransitGatewayNetworkFunctionAttachments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeTransitGatewayPeeringAttachments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTransitGatewayPeeringAttachments(context.Background(), nil, func(o *Options) {
@@ -6295,6 +6343,18 @@ func TestCheckSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 	_, err := svc.DisassociateIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateIpamResourceDiscovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateKmsKeyId")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8618,6 +8678,30 @@ func TestCheckSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyTransitGatewayPeeringAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyTransitGatewayPolicyTableEntry(context.Background(), nil, func(o *Options) {
@@ -10261,6 +10345,18 @@ func TestUpdateSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateKmsKeyId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateNatGatewayAddress(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateNatGatewayAddress(context.Background(), nil, func(o *Options) {
@@ -11785,6 +11881,18 @@ func TestUpdateSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
@@ -12978,6 +13086,18 @@ func TestUpdateSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) {
 	_, err := svc.DeleteTransitGatewayMulticastDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTransitGatewayMulticastDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayNetworkFunctionAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15313,6 +15433,18 @@ func TestUpdateSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTransitGatewayNetworkFunctionAttachments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeTransitGatewayPeeringAttachments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeTransitGatewayPeeringAttachments(context.Background(), nil, func(o *Options) {
@@ -16170,6 +16302,18 @@ func TestUpdateSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 	_, err := svc.DisassociateIpamResourceDiscovery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateIpamResourceDiscovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateKmsKeyId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateKmsKeyId")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -18486,6 +18630,30 @@ func TestUpdateSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	_, err := svc.ModifyTransitGatewayMeteringPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyTransitGatewayMeteringPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayNetworkFunctionAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyTransitGatewayPeeringAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

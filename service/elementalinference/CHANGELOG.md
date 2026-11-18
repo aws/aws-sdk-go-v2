@@ -1,3 +1,7 @@
+# v1.16.0 (2026-11-17)
+
+* **Feature**: AWS Elemental Inference now supports functions, for running your own analysis on feed media, and question sets, for custom decisions on contextual metadata shots and scenes.
+
 # v1.15.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

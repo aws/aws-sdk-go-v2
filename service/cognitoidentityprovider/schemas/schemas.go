@@ -388,6 +388,11 @@ var GetCSVHeader = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetCSVHeader",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetDerivedToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "GetDerivedToken",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetDevice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "GetDevice",
@@ -1039,6 +1044,17 @@ var _AttributeValueType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "AttributeValueType",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _AudienceListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AudienceListType",
+}, smithy.ShapeTypeList, 1)
+var _AudienceListType_member *smithy.Schema
+
+var _AudienceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "AudienceType",
+}, smithy.ShapeTypeString, 0)
 
 var AuthenticationResultType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -1884,7 +1900,7 @@ var _ExplicitAuthFlowsListType_member *smithy.Schema
 var ExplicitAuthFlowsType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ExplicitAuthFlowsType",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
 var ExplicitAuthFlowsType_ADMIN_NO_SRP_AUTH *smithy.Schema
 
 var ExplicitAuthFlowsType_CUSTOM_AUTH_FLOW_ONLY *smithy.Schema
@@ -1902,6 +1918,10 @@ var ExplicitAuthFlowsType_ALLOW_USER_SRP_AUTH *smithy.Schema
 var ExplicitAuthFlowsType_ALLOW_REFRESH_TOKEN_AUTH *smithy.Schema
 
 var ExplicitAuthFlowsType_ALLOW_USER_AUTH *smithy.Schema
+
+var ExplicitAuthFlowsType_ALLOW_TOKEN_EXCHANGE_DELEGATION *smithy.Schema
+
+var ExplicitAuthFlowsType_ALLOW_TOKEN_EXCHANGE_IMPERSONATION *smithy.Schema
 
 var FailoverType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -1956,6 +1976,11 @@ var _GenerateSecret = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "GenerateSecret",
 }, smithy.ShapeTypeBoolean, 0)
+
+var _GetDerivedTokenTokenModelType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "GetDerivedTokenTokenModelType",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var GroupExistsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -2174,6 +2199,14 @@ var InvalidUserPoolConfigurationException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var InvalidUserPoolConfigurationException_message *smithy.Schema
+
+var IssuedTokenTypeIdentifierType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "IssuedTokenTypeIdentifierType",
+}, smithy.ShapeTypeEnum, 2)
+var IssuedTokenTypeIdentifierType_ACCESS_TOKEN *smithy.Schema
+
+var IssuedTokenTypeIdentifierType_ID_TOKEN *smithy.Schema
 
 var IssuerConfigurationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -2492,6 +2525,14 @@ var OAuthFlowType_implicit *smithy.Schema
 
 var OAuthFlowType_client_credentials *smithy.Schema
 
+var OAuthTokenTypeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "OAuthTokenTypeType",
+}, smithy.ShapeTypeEnum, 2)
+var OAuthTokenTypeType_BEARER *smithy.Schema
+
+var OAuthTokenTypeType_NOT_APPLICABLE *smithy.Schema
+
 var OperationNotEnabledException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "OperationNotEnabledException",
@@ -2776,6 +2817,12 @@ var _ResourceIdType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ResourceIdType",
 }, smithy.ShapeTypeString, 0)
+
+var _ResourceListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ResourceListType",
+}, smithy.ShapeTypeList, 1)
+var _ResourceListType_member *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -3309,6 +3356,16 @@ var _TokenModelType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "TokenModelType",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var TokenTypeIdentifierType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "TokenTypeIdentifierType",
+}, smithy.ShapeTypeEnum, 3)
+var TokenTypeIdentifierType_ACCESS_TOKEN *smithy.Schema
+
+var TokenTypeIdentifierType_ID_TOKEN *smithy.Schema
+
+var TokenTypeIdentifierType_SAML2 *smithy.Schema
 
 var TokenValidityUnitsType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -5355,6 +5412,48 @@ var GetCSVHeaderResponse_UserPoolId *smithy.Schema
 
 var GetCSVHeaderResponse_CSVHeader *smithy.Schema
 
+var GetDerivedTokenRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "GetDerivedTokenRequest",
+}, smithy.ShapeTypeStructure, 12)
+var GetDerivedTokenRequest_ClientId *smithy.Schema
+
+var GetDerivedTokenRequest_ClientSecret *smithy.Schema
+
+var GetDerivedTokenRequest_SubjectToken *smithy.Schema
+
+var GetDerivedTokenRequest_SubjectTokenType *smithy.Schema
+
+var GetDerivedTokenRequest_SubjectTokenProviderName *smithy.Schema
+
+var GetDerivedTokenRequest_ActorToken *smithy.Schema
+
+var GetDerivedTokenRequest_ActorTokenType *smithy.Schema
+
+var GetDerivedTokenRequest_ActorTokenProviderName *smithy.Schema
+
+var GetDerivedTokenRequest_Scopes *smithy.Schema
+
+var GetDerivedTokenRequest_Audiences *smithy.Schema
+
+var GetDerivedTokenRequest_Resources *smithy.Schema
+
+var GetDerivedTokenRequest_RequestedTokenType *smithy.Schema
+
+var GetDerivedTokenResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "GetDerivedTokenResponse",
+}, smithy.ShapeTypeStructure, 5)
+var GetDerivedTokenResponse_IssuedToken *smithy.Schema
+
+var GetDerivedTokenResponse_IssuedTokenType *smithy.Schema
+
+var GetDerivedTokenResponse_TokenType *smithy.Schema
+
+var GetDerivedTokenResponse_ExpiresIn *smithy.Schema
+
+var GetDerivedTokenResponse_Scopes *smithy.Schema
+
 var GetDeviceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "GetDeviceRequest",
@@ -6791,6 +6890,8 @@ func init() {
 
 	_AttributesRequireVerificationBeforeUpdateType_member = _AttributesRequireVerificationBeforeUpdateType.AddMember("member", VerifiedAttributeType)
 
+	_AudienceListType_member = _AudienceListType.AddMember("member", _AudienceType)
+
 	NewDeviceMetadataType_DeviceKey = NewDeviceMetadataType.AddMember("DeviceKey", _DeviceKeyType)
 
 	NewDeviceMetadataType_DeviceGroupKey = NewDeviceMetadataType.AddMember("DeviceGroupKey", _StringType)
@@ -7251,6 +7352,10 @@ func init() {
 
 	ExplicitAuthFlowsType_ALLOW_USER_AUTH = ExplicitAuthFlowsType.AddMember("ALLOW_USER_AUTH", smithyprelude.Unit)
 
+	ExplicitAuthFlowsType_ALLOW_TOKEN_EXCHANGE_DELEGATION = ExplicitAuthFlowsType.AddMember("ALLOW_TOKEN_EXCHANGE_DELEGATION", smithyprelude.Unit)
+
+	ExplicitAuthFlowsType_ALLOW_TOKEN_EXCHANGE_IMPERSONATION = ExplicitAuthFlowsType.AddMember("ALLOW_TOKEN_EXCHANGE_IMPERSONATION", smithyprelude.Unit)
+
 	_ExplicitAuthFlowsListType_member = _ExplicitAuthFlowsListType.AddMember("member", ExplicitAuthFlowsType)
 
 	FeatureType_ENABLED = FeatureType.AddMember("ENABLED", smithyprelude.Unit)
@@ -7344,6 +7449,10 @@ func init() {
 	InvalidSmsRoleTrustRelationshipException_message = InvalidSmsRoleTrustRelationshipException.AddMember("message", _MessageType)
 
 	InvalidUserPoolConfigurationException_message = InvalidUserPoolConfigurationException.AddMember("message", _MessageType)
+
+	IssuedTokenTypeIdentifierType_ACCESS_TOKEN = IssuedTokenTypeIdentifierType.AddMember("ACCESS_TOKEN", smithyprelude.Unit)
+
+	IssuedTokenTypeIdentifierType_ID_TOKEN = IssuedTokenTypeIdentifierType.AddMember("ID_TOKEN", smithyprelude.Unit)
 
 	IssuerType_ORIGINAL = IssuerType.AddMember("ORIGINAL", smithyprelude.Unit)
 
@@ -7473,6 +7582,10 @@ func init() {
 
 	NotAuthorizedException_message = NotAuthorizedException.AddMember("message", _MessageType)
 
+	OAuthTokenTypeType_BEARER = OAuthTokenTypeType.AddMember("BEARER", smithyprelude.Unit)
+
+	OAuthTokenTypeType_NOT_APPLICABLE = OAuthTokenTypeType.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
 	OperationNotEnabledException_message = OperationNotEnabledException.AddMember("message", _MessageType)
 
 	PasswordHashingAlgorithmType_BCRYPT = PasswordHashingAlgorithmType.AddMember("BCRYPT", smithyprelude.Unit)
@@ -7542,6 +7655,8 @@ func init() {
 	ReplicaStatusType_INACTIVE = ReplicaStatusType.AddMember("INACTIVE", smithyprelude.Unit)
 
 	ReplicaStatusType_DELETING = ReplicaStatusType.AddMember("DELETING", smithyprelude.Unit)
+
+	_ResourceListType_member = _ResourceListType.AddMember("member", _ResourceServerIdentifierType)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _MessageType)
 
@@ -7698,6 +7813,12 @@ func init() {
 	TimeUnitsType_HOURS = TimeUnitsType.AddMember("HOURS", smithyprelude.Unit)
 
 	TimeUnitsType_DAYS = TimeUnitsType.AddMember("DAYS", smithyprelude.Unit)
+
+	TokenTypeIdentifierType_ACCESS_TOKEN = TokenTypeIdentifierType.AddMember("ACCESS_TOKEN", smithyprelude.Unit)
+
+	TokenTypeIdentifierType_ID_TOKEN = TokenTypeIdentifierType.AddMember("ID_TOKEN", smithyprelude.Unit)
+
+	TokenTypeIdentifierType_SAML2 = TokenTypeIdentifierType.AddMember("SAML2", smithyprelude.Unit)
 
 	TokenValidityUnitsType_AccessToken = TokenValidityUnitsType.AddMember("AccessToken", TimeUnitsType)
 
@@ -8826,6 +8947,40 @@ func init() {
 	GetCSVHeaderResponse_UserPoolId = GetCSVHeaderResponse.AddMember("UserPoolId", _UserPoolIdType)
 
 	GetCSVHeaderResponse_CSVHeader = GetCSVHeaderResponse.AddMember("CSVHeader", _ListOfStringTypes)
+
+	GetDerivedTokenRequest_ClientId = GetDerivedTokenRequest.AddMember("ClientId", _ClientIdType)
+
+	GetDerivedTokenRequest_ClientSecret = GetDerivedTokenRequest.AddMember("ClientSecret", _ClientSecretType)
+
+	GetDerivedTokenRequest_SubjectToken = GetDerivedTokenRequest.AddMember("SubjectToken", _GetDerivedTokenTokenModelType)
+
+	GetDerivedTokenRequest_SubjectTokenType = GetDerivedTokenRequest.AddMember("SubjectTokenType", TokenTypeIdentifierType)
+
+	GetDerivedTokenRequest_SubjectTokenProviderName = GetDerivedTokenRequest.AddMember("SubjectTokenProviderName", _ProviderNameType)
+
+	GetDerivedTokenRequest_ActorToken = GetDerivedTokenRequest.AddMember("ActorToken", _GetDerivedTokenTokenModelType)
+
+	GetDerivedTokenRequest_ActorTokenType = GetDerivedTokenRequest.AddMember("ActorTokenType", TokenTypeIdentifierType)
+
+	GetDerivedTokenRequest_ActorTokenProviderName = GetDerivedTokenRequest.AddMember("ActorTokenProviderName", _ProviderNameType)
+
+	GetDerivedTokenRequest_Scopes = GetDerivedTokenRequest.AddMember("Scopes", _ScopeListType)
+
+	GetDerivedTokenRequest_Audiences = GetDerivedTokenRequest.AddMember("Audiences", _AudienceListType)
+
+	GetDerivedTokenRequest_Resources = GetDerivedTokenRequest.AddMember("Resources", _ResourceListType)
+
+	GetDerivedTokenRequest_RequestedTokenType = GetDerivedTokenRequest.AddMember("RequestedTokenType", IssuedTokenTypeIdentifierType)
+
+	GetDerivedTokenResponse_IssuedToken = GetDerivedTokenResponse.AddMember("IssuedToken", _TokenModelType)
+
+	GetDerivedTokenResponse_IssuedTokenType = GetDerivedTokenResponse.AddMember("IssuedTokenType", IssuedTokenTypeIdentifierType)
+
+	GetDerivedTokenResponse_TokenType = GetDerivedTokenResponse.AddMember("TokenType", OAuthTokenTypeType)
+
+	GetDerivedTokenResponse_ExpiresIn = GetDerivedTokenResponse.AddMember("ExpiresIn", _IntegerType)
+
+	GetDerivedTokenResponse_Scopes = GetDerivedTokenResponse.AddMember("Scopes", _ScopeListType)
 
 	GetDeviceRequest_DeviceKey = GetDeviceRequest.AddMember("DeviceKey", _DeviceKeyType)
 

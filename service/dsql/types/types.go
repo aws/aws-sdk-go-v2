@@ -162,6 +162,80 @@ func (v *KinesisTargetDefinition) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// A metric group to enable for advanced monitoring.
+type MetricGroupRequest struct {
+
+	// The name of the metric group to enable.
+	//
+	// This member is required.
+	MetricGroup MetricGroup
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetricGroupRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricGroupRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricGroup != "" {
+		s.WriteString(schemas.MetricGroupRequest_metricGroup, string(v.MetricGroup))
+	}
+}
+func (v *MetricGroupRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricGroupRequest_metricGroup:
+			var ev string
+			if err := d.ReadString(schemas.MetricGroupRequest_metricGroup, &ev); err != nil {
+				return err
+			}
+			v.MetricGroup = MetricGroup(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A metric group that you enabled for advanced monitoring on a cluster.
+type MetricGroupResponse struct {
+
+	// The name of the metric group that you enabled.
+	//
+	// This member is required.
+	MetricGroup MetricGroup
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetricGroupResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricGroupResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricGroup != "" {
+		s.WriteString(schemas.MetricGroupResponse_metricGroup, string(v.MetricGroup))
+	}
+}
+func (v *MetricGroupResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricGroupResponse_metricGroup:
+			var ev string
+			if err := d.ReadString(schemas.MetricGroupResponse_metricGroup, &ev); err != nil {
+				return err
+			}
+			v.MetricGroup = MetricGroup(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines the structure for multi-Region cluster configurations, containing the
 // witness region and linked cluster settings.
 type MultiRegionProperties struct {

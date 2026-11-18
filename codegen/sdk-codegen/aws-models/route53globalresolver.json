@@ -49,6 +49,12 @@
                 "protocol": {
                     "target": "com.amazonaws.route53globalresolver#DnsProtocol"
                 },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId"
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName"
+                },
                 "status": {
                     "target": "com.amazonaws.route53globalresolver#CRResourceStatus"
                 },
@@ -106,8 +112,15 @@
                 "cidr": {
                     "target": "com.amazonaws.route53globalresolver#Cidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR block that defines the IP address range for the access source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The CIDR block that defines the IP address range for the access source.</p>"
+                    }
+                },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network endpoint associated with this access source.</p>"
                     }
                 },
                 "createdAt": {
@@ -127,8 +140,9 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type of the access source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NONE",
+                        "smithy.api#documentation": "<p>The IP address type of the access source.</p>"
                     }
                 },
                 "name": {
@@ -149,6 +163,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol used by the access source.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment associated with this access source.</p>"
                     }
                 },
                 "status": {
@@ -1370,7 +1390,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 43
                 }
             }
@@ -1434,6 +1454,254 @@
                 "smithy.api#documentation": "<p>The request conflicts with the current state of the resource. This can occur when trying to modify a resource that is not in a valid state for the requested operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpoint": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId"
+                }
+            },
+            "properties": {
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn"
+                },
+                "availableRegions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions"
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.route53globalresolver#ClientToken"
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn"
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString"
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId"
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName"
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#CRResourceStatus"
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.route53globalresolver#CreateCoreNetworkEndpoint"
+            },
+            "read": {
+                "target": "com.amazonaws.route53globalresolver#GetCoreNetworkEndpoint"
+            },
+            "update": {
+                "target": "com.amazonaws.route53globalresolver#UpdateCoreNetworkEndpoint"
+            },
+            "delete": {
+                "target": "com.amazonaws.route53globalresolver#DeleteCoreNetworkEndpoint"
+            },
+            "list": {
+                "target": "com.amazonaws.route53globalresolver#ListCoreNetworkEndpoints"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "core-network-endpoint/{id}",
+                    "noRegion": true
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "core-network-endpoint",
+                    "relativeDocumentation": "API_route53globalresolver_CoreNetworkEndpoint.html"
+                },
+                "smithy.api#documentation": "Represents a Core Network Endpoint that enables DNS resolution for AWS Cloud WAN core network segments."
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpInputItem": {
+            "type": "structure",
+            "members": {
+                "ipv4Address": {
+                    "target": "com.amazonaws.route53globalresolver#IPv4Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 address for the core network endpoint to receive DNS queries.</p>"
+                    }
+                },
+                "ipv6Address": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address for the core network endpoint to receive DNS queries.</p>"
+                    }
+                },
+                "dnsLabel": {
+                    "target": "com.amazonaws.route53globalresolver#DnsLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS label to associate with the IP address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionScope": {
+                    "target": "com.amazonaws.route53globalresolver#RegionScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the IP address applies to all Amazon Web Services Regions or only to the specific Regions that you identify. When the value is <code>REGIONAL</code>, the Regions are listed in the <code>regions</code> field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the IP address applies when the region scope is <code>REGIONAL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A DNS IP address configuration that you provide when you create a core network endpoint. Each item specifies an IP address for the endpoint to receive DNS queries, along with its DNS label, and the scope and Amazon Web Services Regions in which the address applies.</p>"
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpInputItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpInputItem"
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItem": {
+            "type": "structure",
+            "members": {
+                "ipv4Address": {
+                    "target": "com.amazonaws.route53globalresolver#IPv4Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 address that the core network endpoint uses to receive DNS queries.</p>"
+                    }
+                },
+                "ipv6Address": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address that the core network endpoint uses to receive DNS queries.</p>"
+                    }
+                },
+                "dnsLabel": {
+                    "target": "com.amazonaws.route53globalresolver#DnsLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS label associated with the IP address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dnsName": {
+                    "target": "com.amazonaws.route53globalresolver#DnsName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified DNS name associated with the IP address.</p>"
+                    }
+                },
+                "regionScope": {
+                    "target": "com.amazonaws.route53globalresolver#RegionScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the IP address applies to all Amazon Web Services Regions or only to the specific Regions that you identify. When the value is <code>REGIONAL</code>, the Regions are listed in the <code>regions</code> field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the IP address applies when the region scope is <code>REGIONAL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A DNS IP address configuration returned for a core network endpoint. Each item describes an IP address that the endpoint uses to receive DNS queries, along with its DNS label and name, and the scope and Amazon Web Services Regions in which the address applies.</p>"
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItem"
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointsItem"
+            }
+        },
+        "com.amazonaws.route53globalresolver#CoreNetworkEndpointsItem": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availableRegions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the core network endpoint is available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Cloud WAN core network that the endpoint connects to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Route 53 Global Resolver that the core network endpoint is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS IP addresses that the core network endpoint uses to receive DNS queries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core network endpoint.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#CRResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a core network endpoint. Route 53 Global Resolver returns one of these items for each endpoint in the response to a <code>ListCoreNetworkEndpoints</code> request. Each item describes the endpoint's identifiers, the Global Resolver and Cloud WAN core network that it connects, its DNS IP addresses, and its current status.</p>"
             }
         },
         "com.amazonaws.route53globalresolver#CreateAccessSource": {
@@ -1519,8 +1787,7 @@
                 "cidr": {
                     "target": "com.amazonaws.route53globalresolver#Cidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address or CIDR range that is allowed to send DNS queries to the Route 53 Global Resolver.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IP address or CIDR range that is allowed to send DNS queries to the Route 53 Global Resolver.</p>"
                     }
                 },
                 "clientToken": {
@@ -1534,13 +1801,25 @@
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
                         "smithy.api#default": "IPV4",
-                        "smithy.api#documentation": "<p>The IP address type for this access source. Valid values are IPv4 and IPv6 (if the Route 53 Global Resolver supports dual-stack).</p>"
+                        "smithy.api#documentation": "<p>The IP address type for this access source. Valid values are IPV4, IPV6, and NONE. If you provide a CIDR range, this defaults to IPV4; otherwise it defaults to NONE.</p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.route53globalresolver#ResourceNameShort",
                     "traits": {
                         "smithy.api#documentation": "<p>A descriptive name for the access source.</p>"
+                    }
+                },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network endpoint to associate with this access source.</p>"
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment to associate with this access source.</p>"
                     }
                 },
                 "dnsViewId": {
@@ -1590,8 +1869,9 @@
                 "cidr": {
                     "target": "com.amazonaws.route53globalresolver#Cidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address or CIDR range that is allowed to send DNS queries to the Route 53 Global Resolver.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The IP address or CIDR range that is allowed to send DNS queries to the Route 53 Global Resolver.</p>"
                     }
                 },
                 "createdAt": {
@@ -1611,8 +1891,21 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type for this access source (IPv4 or IPv6).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NONE",
+                        "smithy.api#documentation": "<p>The IP address type for this access source. Valid values are IPV4, IPV6, and NONE.</p>"
+                    }
+                },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network endpoint associated with this access source.</p>"
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment associated with this access source.</p>"
                     }
                 },
                 "name": {
@@ -1814,6 +2107,183 @@
                     "target": "com.amazonaws.route53globalresolver#AccessTokenValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The access token value. This token should be included in DoH and DoT requests for authentication. Keep this value secure as it provides access to your Route 53 Global Resolver.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#CreateCoreNetworkEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53globalresolver#CreateCoreNetworkEndpointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.route53globalresolver#CreateCoreNetworkEndpointOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a core network endpoint"
+                },
+                "smithy.api#documentation": "<p>Creates a core network endpoint, which enables DNS resolution for Amazon Web Services Cloud WAN core network segments. The endpoint connects a Route 53 Global Resolver to an Amazon Web Services Cloud WAN core network so that resources attached to the core network can send DNS queries to the resolver.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions, but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/core-network-endpoints",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#CreateCoreNetworkEndpointInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.route53globalresolver#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that ensures the request is idempotent. Making the same request multiple times with the same <code>clientToken</code> produces the same result every time.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN core network to connect to this endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Global Resolver to associate with this core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpInputItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses that the core network endpoint uses to resolve DNS queries within the Amazon Web Services Cloud WAN core network.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive name for the core network endpoint.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.route53globalresolver#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of user-defined keys and optional values that you can use to categorize and organize the core network endpoint.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#CreateCoreNetworkEndpointOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availableRegions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the core network endpoint is available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN core network connected to the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Global Resolver associated with the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses that the core network endpoint uses to resolve DNS queries within the Amazon Web Services Cloud WAN core network.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core network endpoint.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#CRResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2546,6 +3016,13 @@
                         "smithy.api#documentation": "<p>The IP address type for the Route 53 Global Resolver. Valid values are IPV4 (default) or DUAL_STACK for both IPv4 and IPv6 support.</p>"
                     }
                 },
+                "publicIpStatus": {
+                    "target": "com.amazonaws.route53globalresolver#PublicIpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the public IP connectivity to configure for the Route 53 Global Resolver. Public IP addresses let DNS clients send queries to the resolver over the internet. Valid values are the following:</p> <ul> <li> <p> <code>ENABLED_RESERVED</code> - Public IP connectivity is enabled, and the global anycast public IP addresses are reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RESERVED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses remain reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RELEASED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses are released.</p> </li> </ul>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.route53globalresolver#ResourceName",
                     "traits": {
@@ -2626,6 +3103,13 @@
                     "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type configured for the Route 53 Global Resolver (IPV4 or DUAL_STACK).</p>"
+                    }
+                },
+                "publicIpStatus": {
+                    "target": "com.amazonaws.route53globalresolver#PublicIpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public IP connectivity configured for the Route 53 Global Resolver. Public IP addresses let DNS clients send queries to the resolver over the internet. Valid values are the following:</p> <ul> <li> <p> <code>ENABLED_RESERVED</code> - Public IP connectivity is enabled, and the global anycast public IP addresses are reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RESERVED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses remain reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RELEASED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses are released.</p> </li> </ul>",
+                        "smithy.api#notProperty": {}
                     }
                 },
                 "ipv4Addresses": {
@@ -2930,8 +3414,15 @@
                 "cidr": {
                     "target": "com.amazonaws.route53globalresolver#Cidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address or CIDR range of the deleted access source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The IP address or CIDR range of the deleted access source.</p>"
+                    }
+                },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network endpoint associated with this access source.</p>"
                     }
                 },
                 "createdAt": {
@@ -2951,8 +3442,9 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type of the deleted access source (IPv4 or IPv6).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NONE",
+                        "smithy.api#documentation": "<p>The IP address type of the deleted access source. Valid values are IPV4, IPV6, and NONE.</p>"
                     }
                 },
                 "name": {
@@ -2973,6 +3465,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The DNS protocol that was permitted for the deleted access source.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment associated with this access source.</p>"
                     }
                 },
                 "status": {
@@ -3083,6 +3581,143 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the access token was deleted.</p>",
                         "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#DeleteCoreNetworkEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53globalresolver#DeleteCoreNetworkEndpointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.route53globalresolver#DeleteCoreNetworkEndpointOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a core network endpoint"
+                },
+                "smithy.api#documentation": "<p>Deletes a core network endpoint. This operation cannot be undone.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions, but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/core-network-endpoints/{coreNetworkEndpointId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#DeleteCoreNetworkEndpointInput": {
+            "type": "structure",
+            "members": {
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the core network endpoint to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#DeleteCoreNetworkEndpointOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availableRegions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the deleted core network endpoint was available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN core network that was connected to the deleted endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was originally created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Global Resolver that was associated with the deleted core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses that the deleted core network endpoint used to resolve DNS queries within the Amazon Web Services Cloud WAN core network.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deleted core network endpoint.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#CRResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final status of the deleted core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was last updated before deletion.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3978,6 +4613,24 @@
                 }
             }
         },
+        "com.amazonaws.route53globalresolver#DnsLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.route53globalresolver#DnsName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.route53globalresolver#DnsProtocol": {
             "type": "enum",
             "members": {
@@ -4069,6 +4722,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53globalresolver#AccessToken"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpoint"
                 },
                 {
                     "target": "com.amazonaws.route53globalresolver#DNSView"
@@ -5190,8 +5846,15 @@
                 "cidr": {
                     "target": "com.amazonaws.route53globalresolver#Cidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP range for the rule's parameters in CIDR notation.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The IP range for the rule's parameters in CIDR notation.</p>"
+                    }
+                },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network endpoint associated with this access source.</p>"
                     }
                 },
                 "createdAt": {
@@ -5211,8 +5874,9 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NONE",
+                        "smithy.api#documentation": "<p>The IP address type.</p>"
                     }
                 },
                 "name": {
@@ -5233,6 +5897,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol determines how data is transmitted to a Global Resolver instance.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment associated with this access source.</p>"
                     }
                 },
                 "status": {
@@ -5411,6 +6081,140 @@
                     "target": "com.amazonaws.route53globalresolver#AccessTokenValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#GetCoreNetworkEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53globalresolver#GetCoreNetworkEndpointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.route53globalresolver#GetCoreNetworkEndpointOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get a core network endpoint"
+                },
+                "smithy.api#documentation": "<p>Retrieves information about a core network endpoint.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions, but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/core-network-endpoints/{coreNetworkEndpointId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#GetCoreNetworkEndpointInput": {
+            "type": "structure",
+            "members": {
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the core network endpoint to retrieve information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#GetCoreNetworkEndpointOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availableRegions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the core network endpoint is available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN core network connected to the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Global Resolver associated with the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses that the core network endpoint uses to resolve DNS queries within the Amazon Web Services Cloud WAN core network.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core network endpoint.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#CRResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6116,6 +6920,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type configured for the Global Resolver.</p>"
                     }
+                },
+                "publicIpStatus": {
+                    "target": "com.amazonaws.route53globalresolver#PublicIpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public IP connectivity configured for the Route 53 Global Resolver. Public IP addresses let DNS clients send queries to the resolver over the internet. Valid values are the following:</p> <ul> <li> <p> <code>ENABLED_RESERVED</code> - Public IP connectivity is enabled, and the global anycast public IP addresses are reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RESERVED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses remain reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RELEASED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses are released.</p> </li> </ul>",
+                        "smithy.api#notProperty": {}
+                    }
                 }
             },
             "traits": {
@@ -6567,6 +7378,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type configured for the global resolver.</p>"
                     }
+                },
+                "publicIpStatus": {
+                    "target": "com.amazonaws.route53globalresolver#PublicIpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public IP connectivity configured for the Route 53 Global Resolver. Public IP addresses let DNS clients send queries to the resolver over the internet. Valid values are the following:</p> <ul> <li> <p> <code>ENABLED_RESERVED</code> - Public IP connectivity is enabled, and the global anycast public IP addresses are reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RESERVED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses remain reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RELEASED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses are released.</p> </li> </ul>",
+                        "smithy.api#notProperty": {}
+                    }
                 }
             },
             "traits": {
@@ -6920,6 +7738,12 @@
                     "traits": {
                         "smithy.api#enumValue": "IPV6"
                     }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
                 }
             }
         },
@@ -7006,7 +7830,7 @@
                 "accessSources": {
                     "target": "com.amazonaws.route53globalresolver#AccessSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing information about the access sources, such as the ID, CIDR etc.</p>",
+                        "smithy.api#documentation": "<p>An array containing information about the access sources, such as the ID and CIDR.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7117,6 +7941,98 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53globalresolver#ListCoreNetworkEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53globalresolver#ListCoreNetworkEndpointsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.route53globalresolver#ListCoreNetworkEndpointsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list core network endpoints"
+                },
+                "smithy.api#documentation": "<p>Lists the core network endpoints in your Amazon Web Services account, with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions, but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/core-network-endpoints",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "coreNetworkEndpoints"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#ListCoreNetworkEndpointsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to retrieve in a single call.</p>",
+                        "smithy.api#httpQuery": "max_results"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token used for large sets of results that can't be returned in a single response.</p>",
+                        "smithy.api#httpQuery": "next_token"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.route53globalresolver#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values to filter the results.</p>",
+                        "smithy.api#httpQueryParams": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#ListCoreNetworkEndpointsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token used for large sets of results that can't be returned in a single response. Provide this token in the next call to get the results not returned in this call.</p>"
+                    }
+                },
+                "coreNetworkEndpoints": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of information about the core network endpoints.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53globalresolver#ListDNSViews": {
             "type": "operation",
             "input": {
@@ -7204,7 +8120,7 @@
                 "dnsViews": {
                     "target": "com.amazonaws.route53globalresolver#DNSViews",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of information about the DNS views, such as whether DNSSEC is enabled, creation time, etc.</p>",
+                        "smithy.api#documentation": "<p>An array of information about the DNS views, such as whether DNSSEC is enabled and the creation time.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7887,7 +8803,16 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 }
             ],
             "traits": {
@@ -8084,6 +9009,29 @@
                 }
             }
         },
+        "com.amazonaws.route53globalresolver#PublicIpStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED_RESERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_RESERVED"
+                    }
+                },
+                "DISABLED_RESERVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED_RESERVED"
+                    }
+                },
+                "DISABLED_RELEASED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED_RELEASED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53globalresolver#Region": {
             "type": "string",
             "traits": {
@@ -8091,6 +9039,28 @@
                     "min": 0,
                     "max": 32
                 }
+            }
+        },
+        "com.amazonaws.route53globalresolver#RegionScopeType": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address applies to all Amazon Web Services Regions in which the core network endpoint is available.</p>",
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address applies only to the specific Amazon Web Services Regions that you identify in the <code>regions</code> field.</p>",
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the scope of Amazon Web Services Regions that a DNS IP address of a core network endpoint applies to. Valid values are the following:</p> <ul> <li> <p> <code>ALL</code> - The IP address applies to all Amazon Web Services Regions in which the core network endpoint is available.</p> </li> <li> <p> <code>REGIONAL</code> - The IP address applies only to the specific Amazon Web Services Regions that you identify in the <code>regions</code> field.</p> </li> </ul>"
             }
         },
         "com.amazonaws.route53globalresolver#Regions": {
@@ -8175,6 +9145,15 @@
                 "smithy.api#documentation": "<p>The specified resource was not found. Verify the resource ID and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.route53globalresolver#SegmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.route53globalresolver#ServiceQuotaExceededException": {
@@ -8363,10 +9342,19 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.route53globalresolver#ValidationException"
@@ -8544,7 +9532,16 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.route53globalresolver#ValidationException"
@@ -8690,6 +9687,12 @@
                         "smithy.api#documentation": "<p>The CIDR block for the access source.</p>"
                     }
                 },
+                "dnsViewId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the DNS view to associate with this access source.</p>"
+                    }
+                },
                 "ipAddressType": {
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
@@ -8726,8 +9729,15 @@
                 "cidr": {
                     "target": "com.amazonaws.route53globalresolver#Cidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR block of the updated access source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The CIDR block of the updated access source.</p>"
+                    }
+                },
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the core network endpoint associated with this access source.</p>"
                     }
                 },
                 "createdAt": {
@@ -8747,8 +9757,9 @@
                 "ipAddressType": {
                     "target": "com.amazonaws.route53globalresolver#IpAddressType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address type of the updated access source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NONE",
+                        "smithy.api#documentation": "<p>The IP address type of the updated access source.</p>"
                     }
                 },
                 "name": {
@@ -8769,6 +9780,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol of the updated access source.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "segment": {
+                    "target": "com.amazonaws.route53globalresolver#SegmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the segment associated with this access source.</p>"
                     }
                 },
                 "status": {
@@ -8881,6 +9898,159 @@
                     "target": "com.amazonaws.route53globalresolver#ResourceNameShort",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#UpdateCoreNetworkEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53globalresolver#UpdateCoreNetworkEndpointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.route53globalresolver#UpdateCoreNetworkEndpointOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a core network endpoint"
+                },
+                "smithy.api#documentation": "<p>Updates the configuration of a core network endpoint. You can change the name and modify the IP addresses that the endpoint uses for DNS resolution.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions, but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/core-network-endpoints/{coreNetworkEndpointId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#UpdateCoreNetworkEndpointInput": {
+            "type": "structure",
+            "members": {
+                "coreNetworkEndpointId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the core network endpoint to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "id"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the core network endpoint.</p>"
+                    }
+                },
+                "updateIpAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#UpdateIpAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address changes to apply to the core network endpoint. Use this parameter to add or remove the IP addresses that the endpoint uses to resolve DNS queries within the Amazon Web Services Cloud WAN core network.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#UpdateCoreNetworkEndpointOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availableRegions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the updated core network endpoint is available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "coreNetworkArn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN core network connected to the updated endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was originally created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Route 53 Global Resolver associated with the updated core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddresses": {
+                    "target": "com.amazonaws.route53globalresolver#CoreNetworkEndpointDnsIpItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addresses that the updated core network endpoint uses to resolve DNS queries within the Amazon Web Services Cloud WAN core network.</p>",
+                        "smithy.api#notProperty": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the updated core network endpoint.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#CRResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the updated core network endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the core network endpoint was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9520,6 +10690,13 @@
                         "smithy.api#documentation": "<p>The IP address type for the Global Resolver. Valid values are IPV4 or DUAL_STACK for both IPv4 and IPv6 support.</p>"
                     }
                 },
+                "publicIpStatus": {
+                    "target": "com.amazonaws.route53globalresolver#PublicIpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the public IP connectivity to configure for the Route 53 Global Resolver. Public IP addresses let DNS clients send queries to the resolver over the internet. Valid values are the following:</p> <ul> <li> <p> <code>ENABLED_RESERVED</code> - Public IP connectivity is enabled, and the global anycast public IP addresses are reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RESERVED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses remain reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RELEASED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses are released.</p> </li> </ul>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
                 "regions": {
                     "target": "com.amazonaws.route53globalresolver#Regions",
                     "traits": {
@@ -9626,6 +10803,13 @@
                     "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type configured for the updated Global Resolver.</p>"
+                    }
+                },
+                "publicIpStatus": {
+                    "target": "com.amazonaws.route53globalresolver#PublicIpStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public IP connectivity configured for the Route 53 Global Resolver. Public IP addresses let DNS clients send queries to the resolver over the internet. Valid values are the following:</p> <ul> <li> <p> <code>ENABLED_RESERVED</code> - Public IP connectivity is enabled, and the global anycast public IP addresses are reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RESERVED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses remain reserved for the Route 53 Global Resolver.</p> </li> <li> <p> <code>DISABLED_RELEASED</code> - Public IP connectivity is disabled, and the global anycast public IP addresses are released.</p> </li> </ul>",
+                        "smithy.api#notProperty": {}
                     }
                 }
             },
@@ -9763,6 +10947,86 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#UpdateIpAddressEntry": {
+            "type": "structure",
+            "members": {
+                "operation": {
+                    "target": "com.amazonaws.route53globalresolver#UpdateIpAddressOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to perform on the IP address. Valid values are <code>ADD</code>, <code>REMOVE</code>, and <code>UPDATE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipv4Address": {
+                    "target": "com.amazonaws.route53globalresolver#IPv4Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 address that the operation acts on.</p>"
+                    }
+                },
+                "ipv6Address": {
+                    "target": "com.amazonaws.route53globalresolver#IPv6Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address that the operation acts on.</p>"
+                    }
+                },
+                "dnsLabel": {
+                    "target": "com.amazonaws.route53globalresolver#DnsLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS label associated with the IP address.</p>"
+                    }
+                },
+                "regionScope": {
+                    "target": "com.amazonaws.route53globalresolver#RegionScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the IP address applies to all Amazon Web Services Regions or only to the specific Regions that you identify. When the value is <code>REGIONAL</code>, the Regions are listed in the <code>regions</code> field.</p>"
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions in which the IP address applies when the region scope is <code>REGIONAL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single change to apply to the DNS IP addresses of a core network endpoint when you update it. Each entry specifies the operation to perform and the IP address details that the operation acts on.</p>"
+            }
+        },
+        "com.amazonaws.route53globalresolver#UpdateIpAddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53globalresolver#UpdateIpAddressEntry"
+            }
+        },
+        "com.amazonaws.route53globalresolver#UpdateIpAddressOperation": {
+            "type": "enum",
+            "members": {
+                "ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds a new DNS IP address to the core network endpoint.</p>",
+                        "smithy.api#enumValue": "ADD"
+                    }
+                },
+                "REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Removes an existing DNS IP address from the core network endpoint.</p>",
+                        "smithy.api#enumValue": "REMOVE"
+                    }
+                },
+                "UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the configuration of an existing DNS IP address on the core network endpoint.</p>",
+                        "smithy.api#enumValue": "UPDATE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of change to apply to a DNS IP address of a core network endpoint during an update. Valid values are the following:</p> <ul> <li> <p> <code>ADD</code> - Adds a new DNS IP address to the core network endpoint.</p> </li> <li> <p> <code>REMOVE</code> - Removes an existing DNS IP address from the core network endpoint.</p> </li> <li> <p> <code>UPDATE</code> - Updates the configuration of an existing DNS IP address on the core network endpoint.</p> </li> </ul>"
             }
         },
         "com.amazonaws.route53globalresolver#ValidationException": {

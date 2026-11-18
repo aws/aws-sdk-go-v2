@@ -233,6 +233,26 @@ func serializeGlobalReplicationGroupMemberList(s smithy.ShapeSerializer, schema 
 	s.CloseList()
 }
 
+func serializeIntegrationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Integration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeIntegrationRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IntegrationRequest) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1237,6 +1257,50 @@ func deserializeGlobalReplicationGroupMemberList(d smithy.ShapeDeserializer, s *
 		}
 
 		vv = types.GlobalReplicationGroupMember{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIntegrationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Integration) error {
+	*v = make([]types.Integration, 0)
+	var vv types.Integration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Integration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Integration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeIntegrationRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.IntegrationRequest) error {
+	*v = make([]types.IntegrationRequest, 0)
+	var vv types.IntegrationRequest
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.IntegrationRequest
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.IntegrationRequest{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

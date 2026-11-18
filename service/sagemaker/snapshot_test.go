@@ -638,6 +638,18 @@ func TestCheckSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInferenceRouter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateJob(context.Background(), nil, func(o *Options) {
@@ -1346,6 +1358,18 @@ func TestCheckSnapshot_DeleteEndpointConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteEndpointPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEndpointPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEndpointPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteExperiment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteExperiment(context.Background(), nil, func(o *Options) {
@@ -1483,6 +1507,18 @@ func TestCheckSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	_, err := svc.DeleteInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteInferenceRouter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2342,6 +2378,18 @@ func TestCheckSnapshot_DescribeInferenceRecommendationsJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInferenceRouter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeJob(context.Background(), nil, func(o *Options) {
@@ -2863,6 +2911,18 @@ func TestCheckSnapshot_GetDeviceFleetReport(t *testing.T) {
 	_, err := svc.GetDeviceFleetReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDeviceFleetReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEndpointPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEndpointPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEndpointPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3482,6 +3542,18 @@ func TestCheckSnapshot_ListInferenceRecommendationsJobSteps(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInferenceRouters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInferenceRouters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInferenceRouters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
@@ -4063,6 +4135,18 @@ func TestCheckSnapshot_ListWorkteams(t *testing.T) {
 	_, err := svc.ListWorkteams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListWorkteams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutEndpointPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutEndpointPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutEndpointPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4819,6 +4903,18 @@ func TestCheckSnapshot_UpdateInferenceExperiment(t *testing.T) {
 	_, err := svc.UpdateInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateInferenceRouter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5641,6 +5737,18 @@ func TestUpdateSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInferenceRouter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateJob(context.Background(), nil, func(o *Options) {
@@ -6349,6 +6457,18 @@ func TestUpdateSnapshot_DeleteEndpointConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteEndpointPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEndpointPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEndpointPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteExperiment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteExperiment(context.Background(), nil, func(o *Options) {
@@ -6486,6 +6606,18 @@ func TestUpdateSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	_, err := svc.DeleteInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteInferenceRouter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7345,6 +7477,18 @@ func TestUpdateSnapshot_DescribeInferenceRecommendationsJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInferenceRouter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeJob(context.Background(), nil, func(o *Options) {
@@ -7866,6 +8010,18 @@ func TestUpdateSnapshot_GetDeviceFleetReport(t *testing.T) {
 	_, err := svc.GetDeviceFleetReport(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDeviceFleetReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEndpointPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEndpointPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEndpointPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8485,6 +8641,18 @@ func TestUpdateSnapshot_ListInferenceRecommendationsJobSteps(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListInferenceRouters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInferenceRouters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInferenceRouters")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
@@ -9066,6 +9234,18 @@ func TestUpdateSnapshot_ListWorkteams(t *testing.T) {
 	_, err := svc.ListWorkteams(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListWorkteams")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutEndpointPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutEndpointPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutEndpointPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9822,6 +10002,18 @@ func TestUpdateSnapshot_UpdateInferenceExperiment(t *testing.T) {
 	_, err := svc.UpdateInferenceExperiment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateInferenceExperiment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateInferenceRouter(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInferenceRouter(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateInferenceRouter")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

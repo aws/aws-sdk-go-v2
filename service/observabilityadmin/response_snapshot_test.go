@@ -136,6 +136,9 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -166,6 +169,11 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 						Region: ptr.String("__Region__"),
 					},
 				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -177,6 +185,52 @@ func TestCheckResponseSnapshot_CreateCentralizationRuleForOrganization(t *testin
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateCentralizationRuleForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateConnector(t *testing.T) {
+	want := &CreateConnectorOutput{
+		Connector: &types.Connector{
+			Arn:      ptr.String("__Arn__"),
+			Provider: types.ConnectorProvider("AZURE"),
+			ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+				Value: types.AzureConnectorConfiguration{
+					TenantIdentifier: ptr.String("__TenantIdentifier__"),
+					ClientIdentifier: ptr.String("__ClientIdentifier__"),
+				},
+			},
+			RoleArn:          ptr.String("__RoleArn__"),
+			Name:             ptr.String("__Name__"),
+			CreatedTimeStamp: ptr.Int64(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateConnector(context.Background(), &CreateConnectorInput{
+		ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+			Value: types.AzureConnectorConfiguration{
+				TenantIdentifier: ptr.String("__TenantIdentifier__"),
+				ClientIdentifier: ptr.String("__ClientIdentifier__"),
+			},
+		},
+		RoleArn: ptr.String("__RoleArn__"),
+		Name:    ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateConnector.response", err)
 	}
 }
 
@@ -805,6 +859,27 @@ func TestCheckResponseSnapshot_DeleteCentralizationRuleForOrganization(t *testin
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteConnector(t *testing.T) {
+	want := &DeleteConnectorOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteConnector.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteDatasetIntegration(t *testing.T) {
 	want := &DeleteDatasetIntegrationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteDatasetIntegration.response")
@@ -938,6 +1013,9 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -968,6 +1046,11 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 						Region: ptr.String("__Region__"),
 					},
 				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
 			},
 		},
 	}
@@ -987,6 +1070,252 @@ func TestCheckResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.T
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetCentralizationRuleForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetConnector(t *testing.T) {
+	want := &GetConnectorOutput{
+		Connector: &types.Connector{
+			Arn:      ptr.String("__Arn__"),
+			Provider: types.ConnectorProvider("AZURE"),
+			ConnectorConfiguration: &types.ConnectorConfigurationMemberAzure{
+				Value: types.AzureConnectorConfiguration{
+					TenantIdentifier: ptr.String("__TenantIdentifier__"),
+					ClientIdentifier: ptr.String("__ClientIdentifier__"),
+				},
+			},
+			RoleArn:          ptr.String("__RoleArn__"),
+			Name:             ptr.String("__Name__"),
+			CreatedTimeStamp: ptr.Int64(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetConnector(context.Background(), &GetConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetConnector.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetConnectorTelemetryManifest(t *testing.T) {
+	want := &GetConnectorTelemetryManifestOutput{
+		Manifest: &types.TelemetryManifest{
+			Source: &types.TelemetryManifestSourceMemberAzure{
+				Value: []types.AzureScopeItem{
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Infrastructure: &types.TelemetryManifestInfrastructureMemberAzure{
+				Value: types.AzureInfrastructure{
+					SubscriptionId: ptr.String("__SubscriptionId__"),
+					EventHubs: []types.AzureEventHubConfiguration{
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+					},
+					FlowLogs: &types.AzureFlowLogsInfrastructureMemberCustomerManaged{
+						Value: types.AzureCustomerManagedFlowLogs{
+							StorageAccounts: []types.AzureFlowLogStorageAccountScope{
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Version:             ptr.Int64(1),
+		LastUpdateTimeStamp: ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetConnectorTelemetryManifest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetConnectorTelemetryManifest(context.Background(), &GetConnectorTelemetryManifestInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetConnectorTelemetryManifest.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetConnectorTelemetrySetup(t *testing.T) {
+	want := &GetConnectorTelemetrySetupOutput{
+		Artifacts: []types.SetupArtifact{
+			{
+				FileName:    ptr.String("__FileName__"),
+				Content:     ptr.String("__Content__"),
+				Format:      types.SetupFormat("BICEP"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+			{
+				FileName:    ptr.String("__FileName__"),
+				Content:     ptr.String("__Content__"),
+				Format:      types.SetupFormat("BICEP"),
+				ContentType: ptr.String("__ContentType__"),
+			},
+		},
+		RequiredPermissionsToApply: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Format:          types.SetupFormat("BICEP"),
+		Provider:        types.ConnectorProvider("AZURE"),
+		ManifestVersion: ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetConnectorTelemetrySetup.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetConnectorTelemetrySetup(context.Background(), &GetConnectorTelemetrySetupInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Format:              types.SetupFormat("BICEP"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetConnectorTelemetrySetup.response", err)
 	}
 }
 
@@ -1159,6 +1488,40 @@ func TestCheckResponseSnapshot_GetTelemetryPipeline(t *testing.T) {
 			},
 			Tags: map[string]string{
 				"key0": "__Value__",
+			},
+			LastRefreshTimeStamp: ptr.Int64(1),
+			SourceProgress: &types.SourceProgress{
+				Active: ptr.Int32(1),
+				Total:  ptr.Int32(1),
+			},
+			ConfigurationSummary: &types.ConfigurationSummary{
+				Sources: []types.Source{
+					{
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Type: ptr.String("__Type__"),
+					},
+				},
+				DataSources: []types.DataSource{
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: ptr.String("__Type__"),
+					},
+				},
+				Processors: []string{
+					"__Member__",
+					"__Member__",
+				},
+				ProcessorCount: ptr.Int32(1),
+				Sinks: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 	}
@@ -1729,6 +2092,41 @@ func TestCheckResponseSnapshot_GetTelemetryRuleForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetThirdPartyTelemetryEnrichment(t *testing.T) {
+	want := &GetThirdPartyTelemetryEnrichmentOutput{
+		Arn:          ptr.String("__Arn__"),
+		Name:         ptr.String("__Name__"),
+		Status:       types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		StatusReason: ptr.String("__StatusReason__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationOutputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationOutput{
+				AwsConfigConnectorArn:    ptr.String("__AwsConfigConnectorArn__"),
+				ServiceLinkedRecorderArn: ptr.String("__ServiceLinkedRecorderArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetThirdPartyTelemetryEnrichment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetThirdPartyTelemetryEnrichment(context.Background(), &GetThirdPartyTelemetryEnrichmentInput{
+		TelemetryEnrichmentIdentifier: ptr.String("__TelemetryEnrichmentIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetThirdPartyTelemetryEnrichment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing.T) {
 	want := &ListCentralizationRulesForOrganizationOutput{
 		CentralizationRuleSummaries: []types.CentralizationRuleSummary{
@@ -1784,6 +2182,44 @@ func TestCheckResponseSnapshot_ListCentralizationRulesForOrganization(t *testing
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListCentralizationRulesForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListConnectors(t *testing.T) {
+	want := &ListConnectorsOutput{
+		ConnectorSummaries: []types.ConnectorSummary{
+			{
+				Arn:              ptr.String("__Arn__"),
+				Provider:         types.ConnectorProvider("AZURE"),
+				Name:             ptr.String("__Name__"),
+				CreatedTimeStamp: ptr.Int64(1),
+			},
+			{
+				Arn:              ptr.String("__Arn__"),
+				Provider:         types.ConnectorProvider("AZURE"),
+				Name:             ptr.String("__Name__"),
+				CreatedTimeStamp: ptr.Int64(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListConnectors.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListConnectors(context.Background(), &ListConnectorsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListConnectors.response", err)
 	}
 }
 
@@ -1952,6 +2388,54 @@ func TestCheckResponseSnapshot_ListResourceTelemetryForOrganization(t *testing.T
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListResourceTelemetryForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListResourcesByConnector(t *testing.T) {
+	want := &ListResourcesByConnectorOutput{
+		Results: &types.ConnectorQueryResultsMemberAzure{
+			Value: &types.AzureConnectorQueryResultsMemberManagementGroups{
+				Value: []types.AzureManagementGroupSummary{
+					{
+						Id:          ptr.String("__Id__"),
+						Name:        ptr.String("__Name__"),
+						DisplayName: ptr.String("__DisplayName__"),
+					},
+					{
+						Id:          ptr.String("__Id__"),
+						Name:        ptr.String("__Name__"),
+						DisplayName: ptr.String("__DisplayName__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResourcesByConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResourcesByConnector(context.Background(), &ListResourcesByConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Selector: &types.ConnectorQueryMemberAzure{
+			Value: &types.AzureConnectorQueryMemberManagementGroups{
+				Value: types.AzureManagementGroupsQuery{
+					ParentManagementGroupId: ptr.String("__ParentManagementGroupId__"),
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResourcesByConnector.response", err)
 	}
 }
 
@@ -2228,6 +2712,212 @@ func TestCheckResponseSnapshot_ListTelemetryRulesForOrganization(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListThirdPartyTelemetryEnrichments(t *testing.T) {
+	want := &ListThirdPartyTelemetryEnrichmentsOutput{
+		TelemetryEnrichments: []types.ThirdPartyTelemetryEnrichmentSummary{
+			{
+				Name:            ptr.String("__Name__"),
+				TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+				Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+				Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListThirdPartyTelemetryEnrichments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListThirdPartyTelemetryEnrichments(context.Background(), &ListThirdPartyTelemetryEnrichmentsInput{
+		Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListThirdPartyTelemetryEnrichments.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutConnectorTelemetryManifest(t *testing.T) {
+	want := &PutConnectorTelemetryManifestOutput{
+		Version: ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutConnectorTelemetryManifest.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutConnectorTelemetryManifest(context.Background(), &PutConnectorTelemetryManifestInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
+		Manifest: &types.TelemetryManifest{
+			Source: &types.TelemetryManifestSourceMemberAzure{
+				Value: []types.AzureScopeItem{
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+					{
+						TelemetryTypes: []types.AzureTelemetryType{
+							types.AzureTelemetryType("ResourceLogs"),
+							types.AzureTelemetryType("ResourceLogs"),
+						},
+						Scope: &types.AzureScope{
+							Subscriptions: &types.AzureSubscriptionScopeMemberAll{
+								Value: types.AllSubscriptions{},
+							},
+							Regions: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ResourceTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+							TagFilters: []types.TagFilter{
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Key: ptr.String("__Key__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							Resources: []types.AzureResourceIdScope{
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									ResourceIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Infrastructure: &types.TelemetryManifestInfrastructureMemberAzure{
+				Value: types.AzureInfrastructure{
+					SubscriptionId: ptr.String("__SubscriptionId__"),
+					EventHubs: []types.AzureEventHubConfiguration{
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+						{
+							Tier:           types.AzureEventHubTier("Standard"),
+							PartitionCount: ptr.Int32(1),
+						},
+					},
+					FlowLogs: &types.AzureFlowLogsInfrastructureMemberCustomerManaged{
+						Value: types.AzureCustomerManagedFlowLogs{
+							StorageAccounts: []types.AzureFlowLogStorageAccountScope{
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Region: ptr.String("__Region__"),
+									StorageAccountIds: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		ExpectedVersion: ptr.Int64(1),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutConnectorTelemetryManifest.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartTelemetryEnrichment(t *testing.T) {
 	want := &StartTelemetryEnrichmentOutput{
 		Status:                            types.TelemetryEnrichmentStatus("Running"),
@@ -2300,6 +2990,70 @@ func TestCheckResponseSnapshot_StartTelemetryEvaluationForOrganization(t *testin
 	}
 }
 
+func TestCheckResponseSnapshot_StartTelemetryPipelineRefresh(t *testing.T) {
+	want := &StartTelemetryPipelineRefreshOutput{}
+	status, header, body, err := serdeRespReadSnapshot("StartTelemetryPipelineRefresh.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTelemetryPipelineRefresh(context.Background(), &StartTelemetryPipelineRefreshInput{
+		PipelineIdentifier: ptr.String("__PipelineIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTelemetryPipelineRefresh.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartThirdPartyTelemetryEnrichment(t *testing.T) {
+	want := &StartThirdPartyTelemetryEnrichmentOutput{
+		Arn:          ptr.String("__Arn__"),
+		Name:         ptr.String("__Name__"),
+		Status:       types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		StatusReason: ptr.String("__StatusReason__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationOutputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationOutput{
+				AwsConfigConnectorArn:    ptr.String("__AwsConfigConnectorArn__"),
+				ServiceLinkedRecorderArn: ptr.String("__ServiceLinkedRecorderArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartThirdPartyTelemetryEnrichment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartThirdPartyTelemetryEnrichment(context.Background(), &StartThirdPartyTelemetryEnrichmentInput{
+		Name: ptr.String("__Name__"),
+		TelemetrySourceConfiguration: &types.TelemetrySourceConfigurationInputMemberAzure{
+			Value: types.AzureTelemetrySourceConfigurationInput{
+				AwsConfigConnectorArn: ptr.String("__AwsConfigConnectorArn__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartThirdPartyTelemetryEnrichment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StopTelemetryEnrichment(t *testing.T) {
 	want := &StopTelemetryEnrichmentOutput{
 		Status: types.TelemetryEnrichmentStatus("Running"),
@@ -2356,6 +3110,32 @@ func TestCheckResponseSnapshot_StopTelemetryEvaluationForOrganization(t *testing
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StopTelemetryEvaluationForOrganization.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopThirdPartyTelemetryEnrichment(t *testing.T) {
+	want := &StopThirdPartyTelemetryEnrichmentOutput{
+		Name:            ptr.String("__Name__"),
+		TelemetrySource: types.ThirdPartyTelemetrySource("Azure"),
+		Status:          types.ThirdPartyTelemetryEnrichmentStatus("Initializing"),
+		StatusReason:    ptr.String("__StatusReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StopThirdPartyTelemetryEnrichment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopThirdPartyTelemetryEnrichment(context.Background(), &StopThirdPartyTelemetryEnrichmentInput{
+		TelemetryEnrichmentIdentifier: ptr.String("__TelemetryEnrichmentIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopThirdPartyTelemetryEnrichment.response", err)
 	}
 }
 
@@ -2492,6 +3272,9 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -2519,6 +3302,11 @@ func TestCheckResponseSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -3164,6 +3952,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -3191,6 +3982,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -3243,6 +4039,9 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -3270,6 +4069,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -3322,6 +4126,9 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -3349,6 +4156,11 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -3382,8 +4194,8 @@ func TestCheckResponseSnapshot_Error_InvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteS3TableIntegration(context.Background(), &DeleteS3TableIntegrationInput{
-		Arn: ptr.String("__Arn__"),
+	_, opErr := svc.DeleteConnector(context.Background(), &DeleteConnectorInput{
+		ConnectorIdentifier: ptr.String("__ConnectorIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3460,6 +4272,9 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -3487,6 +4302,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -3537,6 +4357,9 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -3564,6 +4387,11 @@ func TestCheckResponseSnapshot_Error_TooManyRequestsException(t *testing.T) {
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},
@@ -3630,6 +4458,9 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
 				},
+				SourceProfilesConfiguration: &types.SourceProfilesConfiguration{
+					ProfilesSelectionCriteria: ptr.String("__ProfilesSelectionCriteria__"),
+				},
 				SourceContextGraphConfiguration: &types.SourceContextGraphConfiguration{},
 			},
 			Destination: &types.CentralizationRuleDestination{
@@ -3657,6 +4488,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 				},
 				DestinationMetricsConfiguration: &types.DestinationMetricsConfiguration{
 					BackupConfiguration: &types.MetricsBackupConfiguration{
+						Region: ptr.String("__Region__"),
+					},
+				},
+				DestinationProfilesConfiguration: &types.DestinationProfilesConfiguration{
+					BackupConfiguration: &types.ProfilesBackupConfiguration{
 						Region: ptr.String("__Region__"),
 					},
 				},

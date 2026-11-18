@@ -1,0 +1,3 @@
+GET /context-stores/__ContextStoreId__/contexts?maxResults=1&nextToken=__NextToken__
+
+

@@ -13983,10 +13983,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filters that control which gateway ingress paths the connector applies to.</p>"
                     }
+                },
+                "deregistrationDelay": {
+                    "target": "com.amazonaws.ecs#GatewayConnectorDeregistrationDelay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deregistration delay settings for the targets of this connector.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A gateway connector that attaches an Amazon ECS service to a gateway ingress path. The connector specifies the service port that receives gateway-managed ingress traffic, along with the health check and traffic filters that the gateway applies. A service can have at most one gateway connector.</p>"
+            }
+        },
+        "com.amazonaws.ecs#GatewayConnectorDeregistrationDelay": {
+            "type": "structure",
+            "members": {
+                "timeoutSeconds": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait before a deregistering target is removed. A value of <code>0</code> removes the target immediately. The valid range is 0-3600 seconds. The default value is 300 seconds.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 3600
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The amount of time to allow in-flight requests to complete before a deregistering target is removed.</p>"
             }
         },
         "com.amazonaws.ecs#GatewayConnectorFilters": {

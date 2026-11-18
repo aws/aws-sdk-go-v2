@@ -216,6 +216,20 @@ var _CoreTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CoreTimestamp",
 }, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
 
+var ElasticIpConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ElasticIpConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ElasticIpConfiguration_Type *smithy.Schema
+
+var ElasticIpType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdacore",
+	Name:      "ElasticIpType",
+}, smithy.ShapeTypeEnum, 2)
+var ElasticIpType_None *smithy.Schema
+
+var ElasticIpType_ServiceManaged *smithy.Schema
+
 var IntegrationModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "IntegrationModel",
@@ -281,7 +295,7 @@ var _NetworkConnectorLastUpdateStatusReason = smithy.NewSchema(smithy.ShapeID{
 var NetworkConnectorLastUpdateStatusReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorLastUpdateStatusReasonCode",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 9)
 var NetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
 var NetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded *smithy.Schema
@@ -289,6 +303,8 @@ var NetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded *smithy.S
 var NetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions *smithy.Schema
 
 var NetworkConnectorLastUpdateStatusReasonCode_InternalError *smithy.Schema
+
+var NetworkConnectorLastUpdateStatusReasonCode_InternetGatewayNotAttached *smithy.Schema
 
 var NetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup *smithy.Schema
 
@@ -353,7 +369,7 @@ var NetworkConnectorState_DELETE_FAILED *smithy.Schema
 var NetworkConnectorStateReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorStateReasonCode",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 9)
 var NetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
 
 var NetworkConnectorStateReasonCode_Ec2RequestLimitExceeded *smithy.Schema
@@ -361,6 +377,8 @@ var NetworkConnectorStateReasonCode_Ec2RequestLimitExceeded *smithy.Schema
 var NetworkConnectorStateReasonCode_InsufficientRolePermissions *smithy.Schema
 
 var NetworkConnectorStateReasonCode_InternalError *smithy.Schema
+
+var NetworkConnectorStateReasonCode_InternetGatewayNotAttached *smithy.Schema
 
 var NetworkConnectorStateReasonCode_InvalidSecurityGroup *smithy.Schema
 
@@ -461,7 +479,7 @@ var NetworkConnectorVersionSummary_LastModified *smithy.Schema
 var NetworkConnectorVpcEgressConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
 	Name:      "NetworkConnectorVpcEgressConfiguration",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var NetworkConnectorVpcEgressConfiguration_SubnetIds *smithy.Schema
 
 var NetworkConnectorVpcEgressConfiguration_SecurityGroupIds *smithy.Schema
@@ -469,6 +487,8 @@ var NetworkConnectorVpcEgressConfiguration_SecurityGroupIds *smithy.Schema
 var NetworkConnectorVpcEgressConfiguration_NetworkProtocol *smithy.Schema
 
 var NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes *smithy.Schema
+
+var NetworkConnectorVpcEgressConfiguration_ElasticIpConfiguration *smithy.Schema
 
 var NetworkProtocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdacore",
@@ -1411,6 +1431,12 @@ func init() {
 
 	Compatibility_ManagedInstances = Compatibility.AddMember("ManagedInstances", CompatibilityPolicy)
 
+	ElasticIpType_None = ElasticIpType.AddMember("None", smithyprelude.Unit)
+
+	ElasticIpType_ServiceManaged = ElasticIpType.AddMember("ServiceManaged", smithyprelude.Unit)
+
+	ElasticIpConfiguration_Type = ElasticIpConfiguration.AddMember("Type", ElasticIpType)
+
 	InvalidParameterValueException_Type = InvalidParameterValueException.AddMember("Type", _AwsGirApiString)
 
 	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _AwsGirApiString)
@@ -1431,6 +1457,8 @@ func init() {
 
 	NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes = NetworkConnectorVpcEgressConfiguration.AddMember("AssociatedComputeResourceTypes", _AssociatedComputeResourceTypesList)
 
+	NetworkConnectorVpcEgressConfiguration_ElasticIpConfiguration = NetworkConnectorVpcEgressConfiguration.AddMember("ElasticIpConfiguration", ElasticIpConfiguration)
+
 	NetworkConnectorConfiguration_VpcEgressConfiguration = NetworkConnectorConfiguration.AddMember("VpcEgressConfiguration", NetworkConnectorVpcEgressConfiguration)
 
 	NetworkConnectorLastUpdateStatus_Successful = NetworkConnectorLastUpdateStatus.AddMember("Successful", smithyprelude.Unit)
@@ -1446,6 +1474,8 @@ func init() {
 	NetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InsufficientRolePermissions", smithyprelude.Unit)
 
 	NetworkConnectorLastUpdateStatusReasonCode_InternalError = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InternalError", smithyprelude.Unit)
+
+	NetworkConnectorLastUpdateStatusReasonCode_InternetGatewayNotAttached = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InternetGatewayNotAttached", smithyprelude.Unit)
 
 	NetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InvalidSecurityGroup", smithyprelude.Unit)
 
@@ -1498,6 +1528,8 @@ func init() {
 	NetworkConnectorStateReasonCode_InsufficientRolePermissions = NetworkConnectorStateReasonCode.AddMember("InsufficientRolePermissions", smithyprelude.Unit)
 
 	NetworkConnectorStateReasonCode_InternalError = NetworkConnectorStateReasonCode.AddMember("InternalError", smithyprelude.Unit)
+
+	NetworkConnectorStateReasonCode_InternetGatewayNotAttached = NetworkConnectorStateReasonCode.AddMember("InternetGatewayNotAttached", smithyprelude.Unit)
 
 	NetworkConnectorStateReasonCode_InvalidSecurityGroup = NetworkConnectorStateReasonCode.AddMember("InvalidSecurityGroup", smithyprelude.Unit)
 

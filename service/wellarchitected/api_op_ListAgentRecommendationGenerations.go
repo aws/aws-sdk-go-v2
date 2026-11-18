@@ -12,6 +12,11 @@ import (
 	"github.com/aws/smithy-go/ptr"
 )
 
+// Application-level recommendations are a new recommendation format currently in
+// beta. We are actively seeking customer feedback to improve their quality and
+// relevance. As with any AI-generated content, please thoroughly review each
+// recommendation before taking any action based on it.
+//
 // Lists recommendation generation processes for a specified profile.
 func (c *Client) ListAgentRecommendationGenerations(ctx context.Context, params *ListAgentRecommendationGenerationsInput, optFns ...func(*Options)) (*ListAgentRecommendationGenerationsOutput, error) {
 	if params == nil {

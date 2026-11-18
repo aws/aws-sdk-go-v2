@@ -14,6 +14,9 @@ import (
 // consisting of a user-defined key and value. Tags can help you manage, identify,
 // organize, search for, and filter resources. You can assign up to 50 tags to a
 // Kinesis resource.
+//
+// The Kinesis resource can be a data stream, a queue, or an enhanced fan-out
+// consumer.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

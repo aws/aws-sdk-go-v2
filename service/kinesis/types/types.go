@@ -9,6 +9,246 @@ import (
 	"time"
 )
 
+// A dead-letter record that was not acknowledged, and why.
+type AcknowledgeDeadLetterQueueRecordsErrorEntry struct {
+
+	// A code identifying the type of failure. One of ResourceNotFoundException ,
+	// InvalidArgumentException , ThrottlingException , or InternalFailureException .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The receipt handle of the record that was not acknowledged.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// A description of the cause of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcknowledgeDeadLetterQueueRecordsErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeDeadLetterQueueRecordsErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *AcknowledgeDeadLetterQueueRecordsErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorCode, v.ErrorCode)
+		case schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.AcknowledgeDeadLetterQueueRecordsErrorEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record to acknowledge, identified by its receipt handle.
+type AcknowledgeDeadLetterQueueRecordsRequestEntry struct {
+
+	// The receipt handle of the record to acknowledge, as returned by ReceiveDeadLetterQueueRecords.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcknowledgeDeadLetterQueueRecordsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeDeadLetterQueueRecordsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeDeadLetterQueueRecordsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.AcknowledgeDeadLetterQueueRecordsRequestEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *AcknowledgeDeadLetterQueueRecordsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeDeadLetterQueueRecordsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeDeadLetterQueueRecordsRequestEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.AcknowledgeDeadLetterQueueRecordsRequestEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record that was acknowledged.
+type AcknowledgeDeadLetterQueueRecordsResultEntry struct {
+
+	// The receipt handle of the record that was acknowledged.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcknowledgeDeadLetterQueueRecordsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeDeadLetterQueueRecordsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeDeadLetterQueueRecordsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.AcknowledgeDeadLetterQueueRecordsResultEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *AcknowledgeDeadLetterQueueRecordsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeDeadLetterQueueRecordsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeDeadLetterQueueRecordsResultEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.AcknowledgeDeadLetterQueueRecordsResultEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A record that was not acknowledged, and why.
+type AcknowledgeQueueRecordsErrorEntry struct {
+
+	// A code identifying the type of failure. One of ResourceNotFoundException ,
+	// InvalidArgumentException , ThrottlingException , or InternalFailureException .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The receipt handle of the record that was not acknowledged.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// A description of the cause of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcknowledgeQueueRecordsErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeQueueRecordsErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeQueueRecordsErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.AcknowledgeQueueRecordsErrorEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.AcknowledgeQueueRecordsErrorEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.AcknowledgeQueueRecordsErrorEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *AcknowledgeQueueRecordsErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeQueueRecordsErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeQueueRecordsErrorEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.AcknowledgeQueueRecordsErrorEntry_ErrorCode, v.ErrorCode)
+		case schemas.AcknowledgeQueueRecordsErrorEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.AcknowledgeQueueRecordsErrorEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.AcknowledgeQueueRecordsErrorEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.AcknowledgeQueueRecordsErrorEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A record to acknowledge, identified by its receipt handle.
+type AcknowledgeQueueRecordsRequestEntry struct {
+
+	// The receipt handle of the record to acknowledge, as returned by ReceiveQueueRecords.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcknowledgeQueueRecordsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeQueueRecordsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeQueueRecordsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.AcknowledgeQueueRecordsRequestEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *AcknowledgeQueueRecordsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeQueueRecordsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeQueueRecordsRequestEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.AcknowledgeQueueRecordsRequestEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A record that was acknowledged.
+type AcknowledgeQueueRecordsResultEntry struct {
+
+	// The receipt handle of the record that was acknowledged.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcknowledgeQueueRecordsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcknowledgeQueueRecordsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcknowledgeQueueRecordsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.AcknowledgeQueueRecordsResultEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *AcknowledgeQueueRecordsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcknowledgeQueueRecordsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcknowledgeQueueRecordsResultEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.AcknowledgeQueueRecordsResultEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration and current status of a channel.
 type ChannelDescription struct {
 
@@ -904,6 +1144,66 @@ func (v *ConsumerDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The dead-letter handling configuration for a queue. Each queue has built-in
+// dead-letter handling. When a record has been received MaxReceiveCount times
+// without being acknowledged, it becomes a dead-letter record, and ReceiveQueueRecordsno longer
+// returns it. The dead-letter record stays in the same queue, and you work with it
+// through ReceiveDeadLetterQueueRecords, AcknowledgeDeadLetterQueueRecords, UpdateDeadLetterQueueRecordsVisibility, and RestoreDeadLetterQueueRecords, which use the same queue ARN.
+//
+// Dead-letter handling is enabled by default, with a MaxReceiveCount of 6. To use
+// a different value, or to turn dead-letter handling off, specify this
+// configuration in QueueAttributes .
+type DeadLetterConfiguration struct {
+
+	// Whether dead-letter handling is enabled for the queue. BUILT_IN enables it:
+	// when a record has been received MaxReceiveCount times without being
+	// acknowledged, it becomes a dead-letter record and ReceiveQueueRecordsno longer returns it. NONE
+	// disables it, and an unacknowledged record continues to be redelivered until it
+	// is acknowledged or its retention period ends.
+	//
+	// This member is required.
+	TargetType TargetType
+
+	// The number of times a record can be received without being acknowledged before
+	// it becomes a dead-letter record. Required when TargetType is BUILT_IN . A queue
+	// that you create without DeadLetterConfiguration gets a MaxReceiveCount of 6.
+	MaxReceiveCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeadLetterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeadLetterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeadLetterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxReceiveCount != nil {
+		s.WriteInt32(schemas.DeadLetterConfiguration_MaxReceiveCount, *v.MaxReceiveCount)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.DeadLetterConfiguration_TargetType, string(v.TargetType))
+	}
+}
+func (v *DeadLetterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeadLetterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeadLetterConfiguration_MaxReceiveCount:
+			v.MaxReceiveCount = new(int32)
+			return d.ReadInt32(schemas.DeadLetterConfiguration_MaxReceiveCount, v.MaxReceiveCount)
+		case schemas.DeadLetterConfiguration_TargetType:
+			var ev string
+			if err := d.ReadString(schemas.DeadLetterConfiguration_TargetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 dead-letter queue configuration for records that cannot be
 // delivered.
 type DeadLetterQueueS3Configuration struct {
@@ -1388,6 +1688,535 @@ func (v *PutRecordsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The configuration attributes for a queue.
+type QueueAttributes struct {
+
+	// The dead-letter handling configuration for the queue. If you omit this
+	// attribute, dead-letter handling is enabled with a MaxReceiveCount of 6. If you
+	// specify it with a TargetType of BUILT_IN , you must also specify MaxReceiveCount
+	// .
+	DeadLetterConfiguration *DeadLetterConfiguration
+
+	// The duration, in seconds, that a record is in flight and not visible to any
+	// consumer instance after it is received. A record that is not acknowledged before
+	// this duration elapses becomes visible in the queue again and can be received by
+	// any consumer instance. If you omit this attribute when you create a queue, the
+	// queue uses 30 seconds.
+	VisibilityTimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeadLetterConfiguration != nil {
+		s.WriteStruct(schemas.QueueAttributes_DeadLetterConfiguration)
+		v.DeadLetterConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VisibilityTimeoutSeconds != nil {
+		s.WriteInt32(schemas.QueueAttributes_VisibilityTimeoutSeconds, *v.VisibilityTimeoutSeconds)
+	}
+}
+func (v *QueueAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueAttributes_DeadLetterConfiguration:
+			v.DeadLetterConfiguration = &DeadLetterConfiguration{}
+			return v.DeadLetterConfiguration.Deserialize(d)
+		case schemas.QueueAttributes_VisibilityTimeoutSeconds:
+			v.VisibilityTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.QueueAttributes_VisibilityTimeoutSeconds, v.VisibilityTimeoutSeconds)
+		}
+		return nil
+	})
+}
+
+// A description of a queue. Returned by CreateQueue, UpdateQueue, and DescribeQueue.
+type QueueDescription struct {
+
+	// The ARN of the queue. The resource identifier in the ARN is generated when the
+	// queue is created and is not derived from QueueName . Use the returned QueueARN
+	// to identify the queue in subsequent requests.
+	//
+	// This member is required.
+	QueueARN *string
+
+	// The time the queue was created.
+	//
+	// This member is required.
+	QueueCreationTimestamp *time.Time
+
+	// The name of the queue.
+	//
+	// This member is required.
+	QueueName *string
+
+	// The current status of the queue.
+	//
+	// This member is required.
+	QueueStatus QueueStatus
+
+	// The data stream the queue delivers records from, and the position in that
+	// stream where delivery begins. The list contains exactly one entry, because a
+	// queue delivers records from a single data stream.
+	//
+	// This member is required.
+	StreamConfigurationList []QueueStreamConfiguration
+
+	// The configuration attributes of the queue.
+	QueueAttributes *QueueAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueARN != nil {
+		s.WriteString(schemas.QueueDescription_QueueARN, *v.QueueARN)
+	}
+	if v.QueueAttributes != nil {
+		s.WriteStruct(schemas.QueueDescription_QueueAttributes)
+		v.QueueAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueCreationTimestamp != nil {
+		s.WriteTime(schemas.QueueDescription_QueueCreationTimestamp, *v.QueueCreationTimestamp)
+	}
+	if v.QueueName != nil {
+		s.WriteString(schemas.QueueDescription_QueueName, *v.QueueName)
+	}
+	if v.QueueStatus != "" {
+		s.WriteString(schemas.QueueDescription_QueueStatus, string(v.QueueStatus))
+	}
+	if v.StreamConfigurationList != nil {
+		serializeQueueStreamConfigurationList(s, schemas.QueueDescription_StreamConfigurationList, v.StreamConfigurationList)
+	}
+}
+func (v *QueueDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueDescription_QueueARN:
+			v.QueueARN = new(string)
+			return d.ReadString(schemas.QueueDescription_QueueARN, v.QueueARN)
+		case schemas.QueueDescription_QueueAttributes:
+			v.QueueAttributes = &QueueAttributes{}
+			return v.QueueAttributes.Deserialize(d)
+		case schemas.QueueDescription_QueueCreationTimestamp:
+			v.QueueCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueDescription_QueueCreationTimestamp, v.QueueCreationTimestamp)
+		case schemas.QueueDescription_QueueName:
+			v.QueueName = new(string)
+			return d.ReadString(schemas.QueueDescription_QueueName, v.QueueName)
+		case schemas.QueueDescription_QueueStatus:
+			var ev string
+			if err := d.ReadString(schemas.QueueDescription_QueueStatus, &ev); err != nil {
+				return err
+			}
+			v.QueueStatus = QueueStatus(ev)
+			return nil
+		case schemas.QueueDescription_StreamConfigurationList:
+			return deserializeQueueStreamConfigurationList(d, schemas.QueueDescription_StreamConfigurationList, &v.StreamConfigurationList)
+		}
+		return nil
+	})
+}
+
+// A data stream record, as delivered through a queue.
+type QueueRecord struct {
+
+	// The approximate time the record arrived in the data stream. The difference
+	// between this value and the current time is how long the record took to reach
+	// your queue consumer.
+	//
+	// This member is required.
+	ApproximateArrivalTimestamp *time.Time
+
+	// The data blob of the record. Amazon Kinesis Data Streams does not inspect,
+	// interpret, or change the data.
+	//
+	// This member is required.
+	Data []byte
+
+	// The approximate time the record was first received from the queue.
+	//
+	// This member is required.
+	FirstReceiveTimestamp *time.Time
+
+	// The identifier you use to acknowledge this record, change its visibility, or
+	// restore it after it becomes a dead-letter record. A new receipt handle is issued
+	// each time the record is received.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// The number of times this record has been received without being acknowledged.
+	//
+	// This member is required.
+	ReceiveCount *int32
+
+	// The unique identifier of the record. This value stays the same across every
+	// delivery of the record, and it is the same in every queue on the stream that
+	// delivers the record. To identify a single delivery, use ReceiptHandle instead.
+	//
+	// This member is required.
+	RecordId *string
+
+	// The partition key the record was written to the data stream with.
+	PartitionKey *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateArrivalTimestamp != nil {
+		s.WriteTime(schemas.QueueRecord_ApproximateArrivalTimestamp, *v.ApproximateArrivalTimestamp)
+	}
+	if v.Data != nil {
+		s.WriteBlob(schemas.QueueRecord_Data, v.Data)
+	}
+	if v.FirstReceiveTimestamp != nil {
+		s.WriteTime(schemas.QueueRecord_FirstReceiveTimestamp, *v.FirstReceiveTimestamp)
+	}
+	if v.PartitionKey != nil {
+		s.WriteString(schemas.QueueRecord_PartitionKey, *v.PartitionKey)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.QueueRecord_ReceiptHandle, *v.ReceiptHandle)
+	}
+	if v.ReceiveCount != nil {
+		s.WriteInt32(schemas.QueueRecord_ReceiveCount, *v.ReceiveCount)
+	}
+	if v.RecordId != nil {
+		s.WriteString(schemas.QueueRecord_RecordId, *v.RecordId)
+	}
+}
+func (v *QueueRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueRecord_ApproximateArrivalTimestamp:
+			v.ApproximateArrivalTimestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueRecord_ApproximateArrivalTimestamp, v.ApproximateArrivalTimestamp)
+		case schemas.QueueRecord_Data:
+			return d.ReadBlob(schemas.QueueRecord_Data, &v.Data)
+		case schemas.QueueRecord_FirstReceiveTimestamp:
+			v.FirstReceiveTimestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueRecord_FirstReceiveTimestamp, v.FirstReceiveTimestamp)
+		case schemas.QueueRecord_PartitionKey:
+			v.PartitionKey = new(string)
+			return d.ReadString(schemas.QueueRecord_PartitionKey, v.PartitionKey)
+		case schemas.QueueRecord_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.QueueRecord_ReceiptHandle, v.ReceiptHandle)
+		case schemas.QueueRecord_ReceiveCount:
+			v.ReceiveCount = new(int32)
+			return d.ReadInt32(schemas.QueueRecord_ReceiveCount, v.ReceiveCount)
+		case schemas.QueueRecord_RecordId:
+			v.RecordId = new(string)
+			return d.ReadString(schemas.QueueRecord_RecordId, v.RecordId)
+		}
+		return nil
+	})
+}
+
+// The position in a data stream from which a queue begins delivering records.
+type QueueStartingPosition struct {
+
+	// You can set the starting position to one of the following values:
+	//
+	// LATEST : Delivers records that arrive after you create the queue. This is the
+	// default.
+	//
+	// TRIM_HORIZON : Start delivering at the last untrimmed record in the stream,
+	// which is the oldest record the stream still retains.
+	//
+	// AT_TIMESTAMP : Delivers records that arrive at or after a time stamp that you
+	// provide.
+	//
+	// This member is required.
+	Type QueueStartingPositionType
+
+	// The approximate time from which the queue begins delivering records. Records
+	// that arrive at approximately this time or later are delivered.
+	//
+	// In a request, specify this value only when Type is AT_TIMESTAMP . It is required
+	// in that case, and specifying it for any other type returns a ValidationException
+	// .
+	//
+	// In a response, this value is approximate and reflects the queue's effective
+	// starting position. While the queue is CREATING , the response echoes what you
+	// configured: for AT_TIMESTAMP , the timestamp you provided, and for TRIM_HORIZON
+	// and LATEST , this member is absent because the effective position is not yet
+	// determined. Once the queue is ACTIVE , the response always includes this member.
+	// For AT_TIMESTAMP , it is the timestamp you provided or the earliest time the
+	// stream can be read from, whichever is later.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueStartingPosition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueStartingPosition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueStartingPosition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.QueueStartingPosition_Timestamp, *v.Timestamp)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.QueueStartingPosition_Type, string(v.Type))
+	}
+}
+func (v *QueueStartingPosition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueStartingPosition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueStartingPosition_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueStartingPosition_Timestamp, v.Timestamp)
+		case schemas.QueueStartingPosition_Type:
+			var ev string
+			if err := d.ReadString(schemas.QueueStartingPosition_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = QueueStartingPositionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The data stream a queue delivers records from, and the position in that stream
+// where delivery begins.
+type QueueStreamConfiguration struct {
+
+	// The ARN of the data stream.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The position in the stream from which the queue begins delivering records. The
+	// default is LATEST .
+	StartingPosition *QueueStartingPosition
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueStreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueStreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueStreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StartingPosition != nil {
+		s.WriteStruct(schemas.QueueStreamConfiguration_StartingPosition)
+		v.StartingPosition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.QueueStreamConfiguration_StreamARN, *v.StreamARN)
+	}
+}
+func (v *QueueStreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueStreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueStreamConfiguration_StartingPosition:
+			v.StartingPosition = &QueueStartingPosition{}
+			return v.StartingPosition.Deserialize(d)
+		case schemas.QueueStreamConfiguration_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.QueueStreamConfiguration_StreamARN, v.StreamARN)
+		}
+		return nil
+	})
+}
+
+// Filters the queues returned by ListQueues to those created on a particular data stream.
+type QueueStreamFilter struct {
+
+	// The ARN of the data stream to filter on.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The time the data stream was created. Specify this value to distinguish between
+	// a deleted stream and a stream that was recreated with the same name.
+	StreamCreationTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueStreamFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueStreamFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueStreamFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.QueueStreamFilter_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.QueueStreamFilter_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+}
+func (v *QueueStreamFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueStreamFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueStreamFilter_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.QueueStreamFilter_StreamARN, v.StreamARN)
+		case schemas.QueueStreamFilter_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueStreamFilter_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		}
+		return nil
+	})
+}
+
+// Identifies a data stream associated with a queue.
+type QueueStreamIdentifier struct {
+
+	// The ARN of the data stream.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The time the data stream was created.
+	//
+	// This member is required.
+	StreamCreationTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueStreamIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueStreamIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueStreamIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamARN != nil {
+		s.WriteString(schemas.QueueStreamIdentifier_StreamARN, *v.StreamARN)
+	}
+	if v.StreamCreationTimestamp != nil {
+		s.WriteTime(schemas.QueueStreamIdentifier_StreamCreationTimestamp, *v.StreamCreationTimestamp)
+	}
+}
+func (v *QueueStreamIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueStreamIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueStreamIdentifier_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.QueueStreamIdentifier_StreamARN, v.StreamARN)
+		case schemas.QueueStreamIdentifier_StreamCreationTimestamp:
+			v.StreamCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueStreamIdentifier_StreamCreationTimestamp, v.StreamCreationTimestamp)
+		}
+		return nil
+	})
+}
+
+// A summary of a queue. Returned by ListQueues. To retrieve a queue's configuration
+// attributes, use DescribeQueue.
+type QueueSummary struct {
+
+	// The ARN of the queue.
+	//
+	// This member is required.
+	QueueARN *string
+
+	// The time the queue was created.
+	//
+	// This member is required.
+	QueueCreationTimestamp *time.Time
+
+	// The name of the queue.
+	//
+	// This member is required.
+	QueueName *string
+
+	// The current status of the queue.
+	//
+	// This member is required.
+	QueueStatus QueueStatus
+
+	// The data stream the queue delivers records from.
+	//
+	// This member is required.
+	Streams []QueueStreamIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (v *QueueSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueueSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueueSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueARN != nil {
+		s.WriteString(schemas.QueueSummary_QueueARN, *v.QueueARN)
+	}
+	if v.QueueCreationTimestamp != nil {
+		s.WriteTime(schemas.QueueSummary_QueueCreationTimestamp, *v.QueueCreationTimestamp)
+	}
+	if v.QueueName != nil {
+		s.WriteString(schemas.QueueSummary_QueueName, *v.QueueName)
+	}
+	if v.QueueStatus != "" {
+		s.WriteString(schemas.QueueSummary_QueueStatus, string(v.QueueStatus))
+	}
+	if v.Streams != nil {
+		serializeQueueStreamIdentifierList(s, schemas.QueueSummary_Streams, v.Streams)
+	}
+}
+func (v *QueueSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueueSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueueSummary_QueueARN:
+			v.QueueARN = new(string)
+			return d.ReadString(schemas.QueueSummary_QueueARN, v.QueueARN)
+		case schemas.QueueSummary_QueueCreationTimestamp:
+			v.QueueCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.QueueSummary_QueueCreationTimestamp, v.QueueCreationTimestamp)
+		case schemas.QueueSummary_QueueName:
+			v.QueueName = new(string)
+			return d.ReadString(schemas.QueueSummary_QueueName, v.QueueName)
+		case schemas.QueueSummary_QueueStatus:
+			var ev string
+			if err := d.ReadString(schemas.QueueSummary_QueueStatus, &ev); err != nil {
+				return err
+			}
+			v.QueueStatus = QueueStatus(ev)
+			return nil
+		case schemas.QueueSummary_Streams:
+			return deserializeQueueStreamIdentifierList(d, schemas.QueueSummary_Streams, &v.Streams)
+		}
+		return nil
+	})
+}
+
 // The unit of data of the Kinesis data stream, which is composed of a sequence
 // number, a partition key, and a data blob.
 type Record struct {
@@ -1531,6 +2360,126 @@ func (v *RecordConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.RecordFormatType = RecordFormatType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A dead-letter record that was not restored, and why.
+type RestoreDeadLetterQueueRecordsErrorEntry struct {
+
+	// A code identifying the type of failure. One of ResourceNotFoundException ,
+	// InvalidArgumentException , ThrottlingException , or InternalFailureException .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The receipt handle of the record that was not restored.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// A description of the cause of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestoreDeadLetterQueueRecordsErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDeadLetterQueueRecordsErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDeadLetterQueueRecordsErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.RestoreDeadLetterQueueRecordsErrorEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.RestoreDeadLetterQueueRecordsErrorEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.RestoreDeadLetterQueueRecordsErrorEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *RestoreDeadLetterQueueRecordsErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDeadLetterQueueRecordsErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDeadLetterQueueRecordsErrorEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.RestoreDeadLetterQueueRecordsErrorEntry_ErrorCode, v.ErrorCode)
+		case schemas.RestoreDeadLetterQueueRecordsErrorEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.RestoreDeadLetterQueueRecordsErrorEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.RestoreDeadLetterQueueRecordsErrorEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.RestoreDeadLetterQueueRecordsErrorEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record to restore, identified by its receipt handle.
+type RestoreDeadLetterQueueRecordsRequestEntry struct {
+
+	// The receipt handle of the record to restore, as returned by ReceiveDeadLetterQueueRecords.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestoreDeadLetterQueueRecordsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDeadLetterQueueRecordsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDeadLetterQueueRecordsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.RestoreDeadLetterQueueRecordsRequestEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *RestoreDeadLetterQueueRecordsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDeadLetterQueueRecordsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDeadLetterQueueRecordsRequestEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.RestoreDeadLetterQueueRecordsRequestEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record that was restored.
+type RestoreDeadLetterQueueRecordsResultEntry struct {
+
+	// The receipt handle of the record that was restored.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RestoreDeadLetterQueueRecordsResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDeadLetterQueueRecordsResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDeadLetterQueueRecordsResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.RestoreDeadLetterQueueRecordsResultEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *RestoreDeadLetterQueueRecordsResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDeadLetterQueueRecordsResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDeadLetterQueueRecordsResultEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.RestoreDeadLetterQueueRecordsResultEntry_ReceiptHandle, v.ReceiptHandle)
 		}
 		return nil
 	})
@@ -2544,7 +3493,10 @@ type StreamDescriptionSummary struct {
 	// The number of channels associated with the stream.
 	ChannelCount *int32
 
-	// The number of enhanced fan-out consumers registered with the stream.
+	// The number of enhanced fan-out consumers registered with the stream. Queues are
+	// not included in this count, even though they share the stream's registered
+	// consumer limit with enhanced fan-out consumers. QueueCount reports the number
+	// of queues.
 	ConsumerCount *int32
 
 	// The encryption type used. This value is one of the following:
@@ -2576,6 +3528,9 @@ type StreamDescriptionSummary struct {
 	// to, and read from a stream.
 	MaxRecordSizeInKiB *int32
 
+	// The number of queues created on the data stream.
+	QueueCount *int32
+
 	// The record distribution strategy that the stream currently uses. A value of AUTO
 	// indicates that Amazon Kinesis Data Streams distributes records across shards
 	// using service-managed algorithms. A value of USER_PARTITION_KEY indicates that
@@ -2587,8 +3542,8 @@ type StreamDescriptionSummary struct {
 	StreamId *string
 
 	//  Specifies the capacity mode to which you want to set your data stream.
-	// Currently, in Kinesis Data Streams, you can choose between an on-demand
-	// ycapacity mode and a provisioned capacity mode for your data streams.
+	// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
+	// mode and a provisioned capacity mode for your data streams.
 	StreamModeDetails *StreamModeDetails
 
 	// The warm throughput in MB/s for the stream. This represents the throughput
@@ -2625,6 +3580,9 @@ func (v *StreamDescriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OpenShardCount != nil {
 		s.WriteInt32(schemas.StreamDescriptionSummary_OpenShardCount, *v.OpenShardCount)
+	}
+	if v.QueueCount != nil {
+		s.WriteInt32(schemas.StreamDescriptionSummary_QueueCount, *v.QueueCount)
 	}
 	if v.RecordDistributionStrategy != "" {
 		s.WriteString(schemas.StreamDescriptionSummary_RecordDistributionStrategy, string(v.RecordDistributionStrategy))
@@ -2685,6 +3643,9 @@ func (v *StreamDescriptionSummary) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.StreamDescriptionSummary_OpenShardCount:
 			v.OpenShardCount = new(int32)
 			return d.ReadInt32(schemas.StreamDescriptionSummary_OpenShardCount, v.OpenShardCount)
+		case schemas.StreamDescriptionSummary_QueueCount:
+			v.QueueCount = new(int32)
+			return d.ReadInt32(schemas.StreamDescriptionSummary_QueueCount, v.QueueCount)
 		case schemas.StreamDescriptionSummary_RecordDistributionStrategy:
 			var ev string
 			if err := d.ReadString(schemas.StreamDescriptionSummary_RecordDistributionStrategy, &ev); err != nil {
@@ -2971,7 +3932,7 @@ type SubscribeToShardEventStream interface {
 }
 
 // After you call SubscribeToShard, Kinesis Data Streams sends events of this type to your
-// consumer. For an example of how to handle these events, see Enhanced Fan-Out Using the Kinesis Data Streams API.
+// consumer. For an example of how to handle these events, see Develop enhanced fan-out consumers with the Amazon Web Services SDK for Java.
 type SubscribeToShardEventStreamMemberSubscribeToShardEvent struct {
 	Value SubscribeToShardEvent
 
@@ -3028,6 +3989,273 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Tag_Value:
 			v.Value = new(string)
 			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record whose visibility timeout was not changed, and why.
+type UpdateDeadLetterQueueRecordsVisibilityErrorEntry struct {
+
+	// A code identifying the type of failure. One of ResourceNotFoundException ,
+	// InvalidArgumentException , ThrottlingException , or InternalFailureException .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The receipt handle of the record whose visibility timeout was not changed.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// A description of the cause of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateDeadLetterQueueRecordsVisibilityErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeadLetterQueueRecordsVisibilityErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *UpdateDeadLetterQueueRecordsVisibilityErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorCode, v.ErrorCode)
+		case schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.UpdateDeadLetterQueueRecordsVisibilityErrorEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record whose visibility timeout is changed, and the new
+// visibility timeout.
+type UpdateDeadLetterQueueRecordsVisibilityRequestEntry struct {
+
+	// The receipt handle of the record, as returned by ReceiveDeadLetterQueueRecords.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// The new duration, in seconds, that the record is in flight and not visible to
+	// any consumer instance, measured from when this request is processed. Specify 0
+	// to make the record visible immediately.
+	//
+	// This member is required.
+	VisibilityTimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateDeadLetterQueueRecordsVisibilityRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeadLetterQueueRecordsVisibilityRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+	if v.VisibilityTimeoutSeconds != nil {
+		s.WriteInt32(schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds, *v.VisibilityTimeoutSeconds)
+	}
+}
+func (v *UpdateDeadLetterQueueRecordsVisibilityRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry_ReceiptHandle, v.ReceiptHandle)
+		case schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds:
+			v.VisibilityTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateDeadLetterQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds, v.VisibilityTimeoutSeconds)
+		}
+		return nil
+	})
+}
+
+// A dead-letter record whose visibility timeout was changed.
+type UpdateDeadLetterQueueRecordsVisibilityResultEntry struct {
+
+	// The receipt handle of the record whose visibility timeout was changed.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateDeadLetterQueueRecordsVisibilityResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeadLetterQueueRecordsVisibilityResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeadLetterQueueRecordsVisibilityResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.UpdateDeadLetterQueueRecordsVisibilityResultEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *UpdateDeadLetterQueueRecordsVisibilityResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeadLetterQueueRecordsVisibilityResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeadLetterQueueRecordsVisibilityResultEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.UpdateDeadLetterQueueRecordsVisibilityResultEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A record whose visibility timeout was not changed, and why.
+type UpdateQueueRecordsVisibilityErrorEntry struct {
+
+	// A code identifying the type of failure. One of ResourceNotFoundException ,
+	// InvalidArgumentException , ThrottlingException , or InternalFailureException .
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The receipt handle of the record whose visibility timeout was not changed.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// A description of the cause of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateQueueRecordsVisibilityErrorEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueRecordsVisibilityErrorEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueRecordsVisibilityErrorEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.UpdateQueueRecordsVisibilityErrorEntry_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateQueueRecordsVisibilityErrorEntry_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.UpdateQueueRecordsVisibilityErrorEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *UpdateQueueRecordsVisibilityErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueRecordsVisibilityErrorEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQueueRecordsVisibilityErrorEntry_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.UpdateQueueRecordsVisibilityErrorEntry_ErrorCode, v.ErrorCode)
+		case schemas.UpdateQueueRecordsVisibilityErrorEntry_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateQueueRecordsVisibilityErrorEntry_ErrorMessage, v.ErrorMessage)
+		case schemas.UpdateQueueRecordsVisibilityErrorEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.UpdateQueueRecordsVisibilityErrorEntry_ReceiptHandle, v.ReceiptHandle)
+		}
+		return nil
+	})
+}
+
+// A record whose visibility timeout is changed, and the new visibility timeout.
+type UpdateQueueRecordsVisibilityRequestEntry struct {
+
+	// The receipt handle of the record, as returned by ReceiveQueueRecords.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// The new duration, in seconds, that the record is in flight and not visible to
+	// any consumer instance, measured from when this request is processed. Specify 0
+	// to make the record visible in the queue immediately.
+	//
+	// This member is required.
+	VisibilityTimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateQueueRecordsVisibilityRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueRecordsVisibilityRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueRecordsVisibilityRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.UpdateQueueRecordsVisibilityRequestEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+	if v.VisibilityTimeoutSeconds != nil {
+		s.WriteInt32(schemas.UpdateQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds, *v.VisibilityTimeoutSeconds)
+	}
+}
+func (v *UpdateQueueRecordsVisibilityRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueRecordsVisibilityRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQueueRecordsVisibilityRequestEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.UpdateQueueRecordsVisibilityRequestEntry_ReceiptHandle, v.ReceiptHandle)
+		case schemas.UpdateQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds:
+			v.VisibilityTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateQueueRecordsVisibilityRequestEntry_VisibilityTimeoutSeconds, v.VisibilityTimeoutSeconds)
+		}
+		return nil
+	})
+}
+
+// A record whose visibility timeout was changed.
+type UpdateQueueRecordsVisibilityResultEntry struct {
+
+	// The receipt handle of the record whose visibility timeout was changed.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateQueueRecordsVisibilityResultEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueRecordsVisibilityResultEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueRecordsVisibilityResultEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.UpdateQueueRecordsVisibilityResultEntry_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+func (v *UpdateQueueRecordsVisibilityResultEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueRecordsVisibilityResultEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQueueRecordsVisibilityResultEntry_ReceiptHandle:
+			v.ReceiptHandle = new(string)
+			return d.ReadString(schemas.UpdateQueueRecordsVisibilityResultEntry_ReceiptHandle, v.ReceiptHandle)
 		}
 		return nil
 	})

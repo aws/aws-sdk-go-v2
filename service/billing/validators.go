@@ -510,6 +510,26 @@ func (m *validateOpRedeemCredits) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSplitCredit struct {
+}
+
+func (*validateOpSplitCredit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSplitCredit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SplitCreditInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSplitCreditInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -525,6 +545,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTransferCredit struct {
+}
+
+func (*validateOpTransferCredit) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTransferCredit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TransferCreditInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTransferCreditInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,8 +730,16 @@ func addOpRedeemCreditsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRedeemCredits{}, middleware.After)
 }
 
+func addOpSplitCreditValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSplitCredit{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTransferCreditValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTransferCredit{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1037,6 +1085,38 @@ func validateResourceTagList(v []types.ResourceTag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceTagList"}
 	for i := range v {
 		if err := validateResourceTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSplitPortion(v *types.SplitPortion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SplitPortion"}
+	if v.Amount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSplitPortions(v []types.SplitPortion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SplitPortions"}
+	for i := range v {
+		if err := validateSplitPortion(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1550,6 +1630,28 @@ func validateOpRedeemCreditsInput(v *RedeemCreditsInput) error {
 	}
 }
 
+func validateOpSplitCreditInput(v *SplitCreditInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SplitCreditInput"}
+	if v.CreditId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreditId"))
+	}
+	if v.Portions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Portions"))
+	} else if v.Portions != nil {
+		if err := validateSplitPortions(v.Portions); err != nil {
+			invalidParams.AddNested("Portions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -1564,6 +1666,24 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		if err := validateResourceTagList(v.ResourceTags); err != nil {
 			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTransferCreditInput(v *TransferCreditInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransferCreditInput"}
+	if v.CreditId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreditId"))
+	}
+	if v.DestinationAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

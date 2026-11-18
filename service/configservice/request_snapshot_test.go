@@ -1222,6 +1222,12 @@ func TestCheckRequestSnapshot_DescribeConformancePacks(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		Filters: &types.DescribeConformancePacksFilters{
+			Types: []types.ConformancePackType{
+				types.ConformancePackType("CUSTOM"),
+				types.ConformancePackType("CUSTOM"),
+			},
+		},
 		Limit:     1,
 		NextToken: ptr.String("__NextToken__"),
 	}
@@ -1253,6 +1259,12 @@ func TestCheckRequestSnapshot_DescribeConformancePackStatus(t *testing.T) {
 		ConformancePackNames: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filters: &types.DescribeConformancePacksFilters{
+			Types: []types.ConformancePackType{
+				types.ConformancePackType("CUSTOM"),
+				types.ConformancePackType("CUSTOM"),
+			},
 		},
 		Limit:     1,
 		NextToken: ptr.String("__NextToken__"),
@@ -2921,6 +2933,13 @@ func TestCheckRequestSnapshot_PutConformancePack(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		Source: &types.ConformancePackSource{
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		Scope: &types.ConformancePackScope{
+			TagKey:   ptr.String("__TagKey__"),
+			TagValue: ptr.String("__TagValue__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -4877,6 +4896,12 @@ func TestUpdateRequestSnapshot_DescribeConformancePacks(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		Filters: &types.DescribeConformancePacksFilters{
+			Types: []types.ConformancePackType{
+				types.ConformancePackType("CUSTOM"),
+				types.ConformancePackType("CUSTOM"),
+			},
+		},
 		Limit:     1,
 		NextToken: ptr.String("__NextToken__"),
 	}
@@ -4908,6 +4933,12 @@ func TestUpdateRequestSnapshot_DescribeConformancePackStatus(t *testing.T) {
 		ConformancePackNames: []string{
 			"__Member__",
 			"__Member__",
+		},
+		Filters: &types.DescribeConformancePacksFilters{
+			Types: []types.ConformancePackType{
+				types.ConformancePackType("CUSTOM"),
+				types.ConformancePackType("CUSTOM"),
+			},
 		},
 		Limit:     1,
 		NextToken: ptr.String("__NextToken__"),
@@ -6576,6 +6607,13 @@ func TestUpdateRequestSnapshot_PutConformancePack(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		Source: &types.ConformancePackSource{
+			SourceIdentifier: ptr.String("__SourceIdentifier__"),
+		},
+		Scope: &types.ConformancePackScope{
+			TagKey:   ptr.String("__TagKey__"),
+			TagValue: ptr.String("__TagValue__"),
 		},
 	}
 	body := &bytes.Buffer{}

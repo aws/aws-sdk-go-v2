@@ -4329,6 +4329,10 @@ func TestCheckResponseSnapshot_CreateEndpointConfig(t *testing.T) {
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
 		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6147,6 +6151,98 @@ func TestCheckResponseSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateInferenceRecommendationsJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateInferenceRouter(t *testing.T) {
+	want := &CreateInferenceRouterOutput{
+		InferenceRouterArn: ptr.String("__InferenceRouterArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateInferenceRouter.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateInferenceRouter(context.Background(), &CreateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateInferenceRouter.response", err)
 	}
 }
 
@@ -10753,6 +10849,27 @@ func TestCheckResponseSnapshot_DeleteEndpointConfig(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteEndpointPolicy(t *testing.T) {
+	want := &DeleteEndpointPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteEndpointPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteEndpointPolicy(context.Background(), &DeleteEndpointPolicyInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteEndpointPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteExperiment(t *testing.T) {
 	want := &DeleteExperimentOutput{
 		ExperimentArn: ptr.String("__ExperimentArn__"),
@@ -11013,6 +11130,27 @@ func TestCheckResponseSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteInferenceExperiment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteInferenceRouter(t *testing.T) {
+	want := &DeleteInferenceRouterOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteInferenceRouter.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteInferenceRouter(context.Background(), &DeleteInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteInferenceRouter.response", err)
 	}
 }
 
@@ -16543,6 +16681,10 @@ func TestCheckResponseSnapshot_DescribeEndpoint(t *testing.T) {
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
 		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeEndpoint.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -16952,6 +17094,10 @@ func TestCheckResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 			EnableEnhancedMetrics:           ptr.Bool(true),
 			EnableDetailedObservability:     ptr.Bool(true),
 			MetricPublishFrequencyInSeconds: types.MetricPublishFrequencyInSeconds(10),
+		},
+		CrossRegionTrafficConfig: &types.CrossRegionTrafficConfig{
+			MaxInvocationsPerSecondPerInstance: ptr.Int32(1),
+			MaxCrossRegionPercentPerEndpoint:   ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeEndpointConfig.response")
@@ -19040,6 +19186,92 @@ func TestCheckResponseSnapshot_DescribeInferenceRecommendationsJob(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeInferenceRecommendationsJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeInferenceRouter(t *testing.T) {
+	want := &DescribeInferenceRouterOutput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		InferenceRouterArn:  ptr.String("__InferenceRouterArn__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+		Status:           types.InferenceRouterStatus("InService"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeInferenceRouter.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeInferenceRouter(context.Background(), &DescribeInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeInferenceRouter.response", err)
 	}
 }
 
@@ -23864,6 +24096,31 @@ func TestCheckResponseSnapshot_GetDeviceFleetReport(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetEndpointPolicy(t *testing.T) {
+	want := &GetEndpointPolicyOutput{
+		EndpointName:   ptr.String("__EndpointName__"),
+		EndpointArn:    ptr.String("__EndpointArn__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEndpointPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEndpointPolicy(context.Background(), &GetEndpointPolicyInput{
+		EndpointName: ptr.String("__EndpointName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEndpointPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetLineageGroupPolicy(t *testing.T) {
 	want := &GetLineageGroupPolicyOutput{
 		LineageGroupArn: ptr.String("__LineageGroupArn__"),
@@ -26982,6 +27239,44 @@ func TestCheckResponseSnapshot_ListInferenceRecommendationsJobs(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListInferenceRecommendationsJobs.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListInferenceRouters(t *testing.T) {
+	want := &ListInferenceRoutersOutput{
+		InferenceRouters: []types.InferenceRouterSummary{
+			{
+				InferenceRouterName: ptr.String("__InferenceRouterName__"),
+				InferenceRouterArn:  ptr.String("__InferenceRouterArn__"),
+				CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				InferenceRouterName: ptr.String("__InferenceRouterName__"),
+				InferenceRouterArn:  ptr.String("__InferenceRouterArn__"),
+				CreationTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListInferenceRouters.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListInferenceRouters(context.Background(), &ListInferenceRoutersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListInferenceRouters.response", err)
 	}
 }
 
@@ -30208,6 +30503,30 @@ func TestCheckResponseSnapshot_ListWorkteams(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListWorkteams.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutEndpointPolicy(t *testing.T) {
+	want := &PutEndpointPolicyOutput{
+		EndpointArn: ptr.String("__EndpointArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutEndpointPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutEndpointPolicy(context.Background(), &PutEndpointPolicyInput{
+		EndpointName:   ptr.String("__EndpointName__"),
+		ResourcePolicy: ptr.String("__ResourcePolicy__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutEndpointPolicy.response", err)
 	}
 }
 
@@ -44096,6 +44415,87 @@ func TestCheckResponseSnapshot_UpdateInferenceExperiment(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateInferenceRouter(t *testing.T) {
+	want := &UpdateInferenceRouterOutput{
+		InferenceRouterArn: ptr.String("__InferenceRouterArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateInferenceRouter.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateInferenceRouter(context.Background(), &UpdateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateInferenceRouter.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateMlflowApp(t *testing.T) {
 	want := &UpdateMlflowAppOutput{
 		Arn: ptr.String("__Arn__"),
@@ -46159,6 +46559,102 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ResourceAlreadyExists(t *testing.T) {
+	want := &types.ResourceAlreadyExists{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResourceAlreadyExists.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateInferenceRouter(context.Background(), &CreateInferenceRouterInput{
+		InferenceRouterName: ptr.String("__InferenceRouterName__"),
+		RoutingTargets: []types.RoutingTarget{
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Destinations: []types.Destination{
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+					{
+						ResourceArn:   ptr.String("__ResourceArn__"),
+						RoutingStatus: types.RoutingStatus("Routable"),
+					},
+				},
+				AsyncInferenceConfig: &types.RoutingTargetAsyncInferenceConfig{
+					OutputConfig: &types.RoutingTargetAsyncInferenceOutputConfig{
+						S3OutputPath:  ptr.String("__S3OutputPath__"),
+						S3FailurePath: ptr.String("__S3FailurePath__"),
+						KmsKeyId:      ptr.String("__KmsKeyId__"),
+						NotificationConfig: &types.RoutingTargetAsyncInferenceNotificationConfig{
+							SuccessTopic: ptr.String("__SuccessTopic__"),
+							ErrorTopic:   ptr.String("__ErrorTopic__"),
+						},
+					},
+					ClientConfig: &types.RoutingTargetAsyncInferenceClientConfig{
+						MaxTimeInBacklogSeconds: ptr.Int32(1),
+					},
+				},
+				RoutingPreference: types.InferenceRouterRoutingPreference("LocalRegionFirst"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ResourceAlreadyExists
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ResourceAlreadyExists, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceAlreadyExists.error", err)
 	}
 }
 

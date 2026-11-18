@@ -293,6 +293,18 @@ func TestUpdateResponseSnapshot_GetIndex(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+				TextSearchConfigurations: []types.TextSearchConfiguration{
+					{
+						MetadataKey: ptr.String("__MetadataKey__"),
+						Language:    types.LanguageCode("en"),
+						Status:      types.AnalyzerStatus("ACTIVE"),
+					},
+					{
+						MetadataKey: ptr.String("__MetadataKey__"),
+						Language:    types.LanguageCode("en"),
+						Status:      types.AnalyzerStatus("ACTIVE"),
+					},
+				},
 			},
 			EncryptionConfiguration: &types.EncryptionConfiguration{
 				SseType:   types.SseType("AES256"),
@@ -640,11 +652,39 @@ func TestUpdateResponseSnapshot_QueryVectors(t *testing.T) {
 		Vectors: []types.QueryOutputVector{
 			{
 				Distance: ptr.Float32(1.0),
+				Scores: &types.QueryScores{
+					Fused: ptr.Float32(1.0),
+					Bm25Scores: []types.Bm25Score{
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+					},
+					VectorDistance: ptr.Float32(1.0),
+				},
 				Key:      ptr.String("__Key__"),
 				Metadata: document.NewLazyDocument("__Document__"),
 			},
 			{
 				Distance: ptr.Float32(1.0),
+				Scores: &types.QueryScores{
+					Fused: ptr.Float32(1.0),
+					Bm25Scores: []types.Bm25Score{
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+						{
+							MetadataKey: ptr.String("__MetadataKey__"),
+							Score:       ptr.Float32(1.0),
+						},
+					},
+					VectorDistance: ptr.Float32(1.0),
+				},
 				Key:      ptr.String("__Key__"),
 				Metadata: document.NewLazyDocument("__Document__"),
 			},
@@ -734,6 +774,30 @@ func TestUpdateResponseSnapshot_UpdateIndexMode(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateIndexMode.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateMetadataConfiguration(t *testing.T) {
+	want := &UpdateMetadataConfigurationOutput{
+		IndexArn: ptr.String("__IndexArn__"),
+	}
+	proto := restjson1.New(schemas.S3Vectors)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateMetadataConfiguration, schemas.UpdateMetadataConfigurationOutput, schemas.UpdateMetadataConfigurationOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateMetadataConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -31,9 +31,17 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.MedicalScribeBinaryAudioEvent,
 			New:    func() any { return &types.MedicalScribeBinaryAudioEvent{} },
 		},
+		"com.amazonaws.connecthealth#MedicalScribeChecklistEvent": {
+			Schema: schemas.MedicalScribeChecklistEvent,
+			New:    func() any { return &types.MedicalScribeChecklistEvent{} },
+		},
 		"com.amazonaws.connecthealth#MedicalScribeConfigurationEvent": {
 			Schema: schemas.MedicalScribeConfigurationEvent,
 			New:    func() any { return &types.MedicalScribeConfigurationEvent{} },
+		},
+		"com.amazonaws.connecthealth#MedicalScribePeriodontalChartEvent": {
+			Schema: schemas.MedicalScribePeriodontalChartEvent,
+			New:    func() any { return &types.MedicalScribePeriodontalChartEvent{} },
 		},
 		"com.amazonaws.connecthealth#MedicalScribeSessionControlEvent": {
 			Schema: schemas.MedicalScribeSessionControlEvent,

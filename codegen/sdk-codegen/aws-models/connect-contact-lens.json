@@ -1292,6 +1292,16 @@
                 }
             }
         },
+        "com.amazonaws.connectcontactlens#LanguageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegments": {
             "type": "operation",
             "input": {
@@ -1852,6 +1862,12 @@
                     "target": "com.amazonaws.connectcontactlens#IssuesDetected",
                     "traits": {
                         "smithy.api#documentation": "<p>List of positions where issues were detected on the transcript.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.connectcontactlens#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code detected for this piece of transcript, for example, <code>en-US</code>.</p>"
                     }
                 }
             },

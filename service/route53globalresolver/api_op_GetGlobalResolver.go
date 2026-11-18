@@ -123,6 +123,20 @@ type GetGlobalResolverOutput struct {
 	// resolution logs will be propagated.
 	ObservabilityRegion *string
 
+	// The public IP connectivity configured for the Route 53 Global Resolver. Public
+	// IP addresses let DNS clients send queries to the resolver over the internet.
+	// Valid values are the following:
+	//
+	//   - ENABLED_RESERVED - Public IP connectivity is enabled, and the global anycast
+	//   public IP addresses are reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RESERVED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses remain reserved for the Route 53 Global Resolver.
+	//
+	//   - DISABLED_RELEASED - Public IP connectivity is disabled, and the global
+	//   anycast public IP addresses are released.
+	PublicIpStatus types.PublicIpStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -168,6 +182,9 @@ func (v *GetGlobalResolverOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.GetGlobalResolverOutput_observabilityRegion, *v.ObservabilityRegion)
+	}
+	if v.PublicIpStatus != "" {
+		s.WriteString(schemas.GetGlobalResolverOutput_publicIpStatus, string(v.PublicIpStatus))
 	}
 	if v.Regions != nil {
 		serializeRegions(s, schemas.GetGlobalResolverOutput_regions, v.Regions)
@@ -217,6 +234,13 @@ func (v *GetGlobalResolverOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.GetGlobalResolverOutput_observabilityRegion:
 			v.ObservabilityRegion = new(string)
 			return d.ReadString(schemas.GetGlobalResolverOutput_observabilityRegion, v.ObservabilityRegion)
+		case schemas.GetGlobalResolverOutput_publicIpStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetGlobalResolverOutput_publicIpStatus, &ev); err != nil {
+				return err
+			}
+			v.PublicIpStatus = types.PublicIpStatus(ev)
+			return nil
 		case schemas.GetGlobalResolverOutput_regions:
 			return deserializeRegions(d, schemas.GetGlobalResolverOutput_regions, &v.Regions)
 		case schemas.GetGlobalResolverOutput_status:

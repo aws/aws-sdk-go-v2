@@ -43,6 +43,9 @@ type UpdateAccessSourceInput struct {
 	// The CIDR block for the access source.
 	Cidr *string
 
+	// The ID of the DNS view to associate with this access source.
+	DnsViewId *string
+
 	// The IP address type for the access source.
 	IpAddressType types.IpAddressType
 
@@ -68,6 +71,9 @@ func (v *UpdateAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cidr != nil {
 		s.WriteString(schemas.UpdateAccessSourceInput_cidr, *v.Cidr)
 	}
+	if v.DnsViewId != nil {
+		s.WriteString(schemas.UpdateAccessSourceInput_dnsViewId, *v.DnsViewId)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.UpdateAccessSourceInput_ipAddressType, string(v.IpAddressType))
 	}
@@ -86,11 +92,6 @@ type UpdateAccessSourceOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The CIDR block of the updated access source.
-	//
-	// This member is required.
-	Cidr *string
-
 	// The date and time when the access source was originally created.
 	//
 	// This member is required.
@@ -105,11 +106,6 @@ type UpdateAccessSourceOutput struct {
 	//
 	// This member is required.
 	Id *string
-
-	// The IP address type of the updated access source.
-	//
-	// This member is required.
-	IpAddressType types.IpAddressType
 
 	// The protocol of the updated access source.
 	//
@@ -126,8 +122,20 @@ type UpdateAccessSourceOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The CIDR block of the updated access source.
+	Cidr *string
+
+	// The ID of the core network endpoint associated with this access source.
+	CoreNetworkEndpointId *string
+
+	// The IP address type of the updated access source.
+	IpAddressType types.IpAddressType
+
 	// The name of the updated access source.
 	Name *string
+
+	// The name of the segment associated with this access source.
+	Segment *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -148,6 +156,9 @@ func (v *UpdateAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cidr != nil {
 		s.WriteString(schemas.UpdateAccessSourceOutput_cidr, *v.Cidr)
 	}
+	if v.CoreNetworkEndpointId != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_coreNetworkEndpointId, *v.CoreNetworkEndpointId)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateAccessSourceOutput_createdAt, *v.CreatedAt)
 	}
@@ -166,6 +177,9 @@ func (v *UpdateAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.UpdateAccessSourceOutput_protocol, string(v.Protocol))
 	}
+	if v.Segment != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_segment, *v.Segment)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateAccessSourceOutput_status, string(v.Status))
 	}
@@ -182,6 +196,9 @@ func (v *UpdateAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.UpdateAccessSourceOutput_cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.UpdateAccessSourceOutput_cidr, v.Cidr)
+		case schemas.UpdateAccessSourceOutput_coreNetworkEndpointId:
+			v.CoreNetworkEndpointId = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_coreNetworkEndpointId, v.CoreNetworkEndpointId)
 		case schemas.UpdateAccessSourceOutput_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateAccessSourceOutput_createdAt, v.CreatedAt)
@@ -208,6 +225,9 @@ func (v *UpdateAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.Protocol = types.DnsProtocol(ev)
 			return nil
+		case schemas.UpdateAccessSourceOutput_segment:
+			v.Segment = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_segment, v.Segment)
 		case schemas.UpdateAccessSourceOutput_status:
 			var ev string
 			if err := d.ReadString(schemas.UpdateAccessSourceOutput_status, &ev); err != nil {

@@ -226,13 +226,13 @@ type Authorizer struct {
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
 	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
-	// function, specify null.
+	// function, specify null. This property is not supported for JWT authorizers.
 	AuthorizerCredentials *string
 
 	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
 	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
 	// responses. If this field is not set, the default value is 300. The maximum value
-	// is 3600, or 1 hour.
+	// is 3600, or 1 hour. This property is not supported for JWT authorizers.
 	AuthorizerResultTtlInSeconds *int32
 
 	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
@@ -244,7 +244,8 @@ type Authorizer struct {
 	// same as the region hosting the Lambda function, path indicates that the
 	// remaining substring in the URI should be treated as the path to the resource,
 	// including the initial / . For Lambda functions, this is usually of the form
-	// /2015-03-31/functions/[FunctionARN]/invocations .
+	// /2015-03-31/functions/[FunctionARN]/invocations . This property is not supported
+	// for JWT authorizers.
 	AuthorizerUri *string
 
 	// The identifier for the authorizer resource.
@@ -267,7 +268,10 @@ type Authorizer struct {
 	// a 401 Unauthorized response without calling the Lambda function. The valid value
 	// is a string of comma-separated mapping expressions of the specified request
 	// parameters. When the authorization caching is not enabled, this property is
-	// optional.
+	// optional. For a JWT authorizer, this is required and must be a single
+	// request-header mapping expression, method.request.header. , for example,
+	// method.request.header.Authorization . Query string parameters are not supported,
+	// and there is no default.
 	IdentitySource *string
 
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
@@ -276,8 +280,12 @@ type Authorizer struct {
 	// the specified regular expression. It will invoke the authorizer's Lambda
 	// function when there is a match. Otherwise, it will return a 401 Unauthorized
 	// response without calling the Lambda function. The validation expression does not
-	// apply to the REQUEST authorizer.
+	// apply to the REQUEST or JWT authorizer.
 	IdentityValidationExpression *string
+
+	// The configuration returned for a JWT authorizer. This field is present only
+	// when type is JWT .
+	JwtConfiguration *JwtConfiguration
 
 	// The name of the authorizer.
 	Name *string
@@ -285,13 +293,15 @@ type Authorizer struct {
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
 	// authorizer. Each element is of this format:
 	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id} . For a TOKEN
-	// or REQUEST authorizer, this is not defined.
+	// or REQUEST authorizer, this is not defined. This property is not supported for
+	// JWT authorizers.
 	ProviderARNs []string
 
 	// The authorizer type. Valid values are TOKEN for a Lambda function using a
 	// single authorization token submitted in a custom header, REQUEST for a Lambda
-	// function using incoming request parameters, and COGNITO_USER_POOLS for using an
-	// Amazon Cognito user pool.
+	// function using incoming request parameters, COGNITO_USER_POOLS for using an
+	// Amazon Cognito user pool, and JWT for using a native JWT authorizer with the
+	// trusted issuers, audiences, and signing algorithms that you declare.
 	Type AuthorizerType
 
 	noSmithyDocumentSerde
@@ -324,6 +334,11 @@ func (v *Authorizer) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.IdentityValidationExpression != nil {
 		s.WriteString(schemas.Authorizer_identityValidationExpression, *v.IdentityValidationExpression)
+	}
+	if v.JwtConfiguration != nil {
+		s.WriteStruct(schemas.Authorizer_jwtConfiguration)
+		v.JwtConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.Authorizer_name, *v.Name)
@@ -359,6 +374,9 @@ func (v *Authorizer) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Authorizer_identityValidationExpression:
 			v.IdentityValidationExpression = new(string)
 			return d.ReadString(schemas.Authorizer_identityValidationExpression, v.IdentityValidationExpression)
+		case schemas.Authorizer_jwtConfiguration:
+			v.JwtConfiguration = &JwtConfiguration{}
+			return v.JwtConfiguration.Deserialize(d)
 		case schemas.Authorizer_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Authorizer_name, v.Name)
@@ -905,8 +923,8 @@ type DomainName struct {
 
 	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
 	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
-	// information, see Set up a Regional Custom Domain Name and AWS Regions and
-	// Endpoints for API Gateway.
+	// information, see Set up a Regional Custom Domain Name and Amazon Web Services
+	// Regions and Endpoints for API Gateway.
 	DistributionHostedZoneId *string
 
 	// The custom domain name as an API host name, for example, my-api.example.com .
@@ -973,8 +991,8 @@ type DomainName struct {
 	RegionalDomainName *string
 
 	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
-	// For more information, see Set up a Regional Custom Domain Name and AWS Regions
-	// and Endpoints for API Gateway.
+	// For more information, see Set up a Regional Custom Domain Name and Amazon Web
+	// Services Regions and Endpoints for API Gateway.
 	RegionalHostedZoneId *string
 
 	// The routing mode for this domain name. The routing mode determines how API
@@ -1402,12 +1420,12 @@ type Integration struct {
 	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling ContentHandlingStrategy
 
-	// Specifies the credentials required for the integration, if any. For AWS
-	// integrations, three options are available. To specify an IAM Role for API
-	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
-	// the caller's identity be passed through from the request, specify the string
-	// arn:aws:iam::\*:user/\* . To use resource-based permissions on supported Amazon
-	// Web Services services, specify null.
+	// Specifies the credentials required for the integration, if any. For Amazon Web
+	// Services integrations, three options are available. To specify an IAM Role for
+	// API Gateway to assume, use the role's Amazon Resource Name (ARN). To require
+	// that the caller's identity be passed through from the request, specify the
+	// string arn:aws:iam::\*:user/\* . To use resource-based permissions on supported
+	// Amazon Web Services services, specify null.
 	Credentials *string
 
 	// Specifies the integration's HTTP method type. For the Type property, if you
@@ -1419,7 +1437,7 @@ type Integration struct {
 	// Specifies the integration's responses.
 	IntegrationResponses map[string]IntegrationResponse
 
-	//  The ALB or NLB listener to send the request to.
+	//  The ALB or NLB ARN to send the request to.
 	IntegrationTarget *string
 
 	// Specifies how the method request body of an unmapped content type will be
@@ -1727,6 +1745,268 @@ func (v *IntegrationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An additional claim rule for an issuer.
+type JwtAdditionalClaim struct {
+
+	// The name of the claim to check. The value cannot be empty and cannot be iss ,
+	// aud , exp , nbf , iat , scope , or scp .
+	//
+	// This member is required.
+	ClaimName *string
+
+	// The format of the claim value. The only valid value is SINGLE_STRING .
+	//
+	// This member is required.
+	Format JwtClaimFormat
+
+	// The accepted value for the claim. The value cannot be empty. When a value is
+	// specified, the claim must match it exactly, and the match is case-sensitive.
+	// When no value is specified, the claim only has to be present.
+	ExpectedValues []string
+
+	// Specifies whether the claim must be present in the token. Defaults to false .
+	// When true , the token must contain the claim.
+	Required bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *JwtAdditionalClaim) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtAdditionalClaim)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtAdditionalClaim) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClaimName != nil {
+		s.WriteString(schemas.JwtAdditionalClaim_claimName, *v.ClaimName)
+	}
+	if v.ExpectedValues != nil {
+		serializeListOfString(s, schemas.JwtAdditionalClaim_expectedValues, v.ExpectedValues)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.JwtAdditionalClaim_format, string(v.Format))
+	}
+	if v.Required != false {
+		s.WriteBool(schemas.JwtAdditionalClaim_required, v.Required)
+	}
+}
+func (v *JwtAdditionalClaim) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtAdditionalClaim, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtAdditionalClaim_claimName:
+			v.ClaimName = new(string)
+			return d.ReadString(schemas.JwtAdditionalClaim_claimName, v.ClaimName)
+		case schemas.JwtAdditionalClaim_expectedValues:
+			return deserializeListOfString(d, schemas.JwtAdditionalClaim_expectedValues, &v.ExpectedValues)
+		case schemas.JwtAdditionalClaim_format:
+			var ev string
+			if err := d.ReadString(schemas.JwtAdditionalClaim_format, &ev); err != nil {
+				return err
+			}
+			v.Format = JwtClaimFormat(ev)
+			return nil
+		case schemas.JwtAdditionalClaim_required:
+			return d.ReadBool(schemas.JwtAdditionalClaim_required, &v.Required)
+		}
+		return nil
+	})
+}
+
+// The JWT configuration returned for a JWT authorizer.
+type JwtConfiguration struct {
+
+	// The signing algorithms configured for the authorizer.
+	DefaultAlgorithms []JwtSigningAlgorithm
+
+	// The trusted issuers configured for the authorizer.
+	Issuers []JwtIssuer
+
+	noSmithyDocumentSerde
+}
+
+func (v *JwtConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAlgorithms != nil {
+		serializeListOfJwtSigningAlgorithm(s, schemas.JwtConfiguration_defaultAlgorithms, v.DefaultAlgorithms)
+	}
+	if v.Issuers != nil {
+		serializeListOfJwtIssuer(s, schemas.JwtConfiguration_issuers, v.Issuers)
+	}
+}
+func (v *JwtConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtConfiguration_defaultAlgorithms:
+			return deserializeListOfJwtSigningAlgorithm(d, schemas.JwtConfiguration_defaultAlgorithms, &v.DefaultAlgorithms)
+		case schemas.JwtConfiguration_issuers:
+			return deserializeListOfJwtIssuer(d, schemas.JwtConfiguration_issuers, &v.Issuers)
+		}
+		return nil
+	})
+}
+
+// The JWT configuration supplied for a JWT authorizer.
+type JwtConfigurationInput struct {
+
+	// The signing algorithms that the authorizer accepts, applied to every issuer.
+	// Valid values are RS256 , RS384 , RS512 , ES256 , ES384 , and ES512 .
+	//
+	// This member is required.
+	DefaultAlgorithms []JwtSigningAlgorithm
+
+	// The issuers that the authorizer trusts. Issuer URLs must be unique.
+	//
+	// This member is required.
+	Issuers []JwtIssuerInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *JwtConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAlgorithms != nil {
+		serializeListOfJwtSigningAlgorithm(s, schemas.JwtConfigurationInput_defaultAlgorithms, v.DefaultAlgorithms)
+	}
+	if v.Issuers != nil {
+		serializeListOfJwtIssuerInput(s, schemas.JwtConfigurationInput_issuers, v.Issuers)
+	}
+}
+func (v *JwtConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtConfigurationInput_defaultAlgorithms:
+			return deserializeListOfJwtSigningAlgorithm(d, schemas.JwtConfigurationInput_defaultAlgorithms, &v.DefaultAlgorithms)
+		case schemas.JwtConfigurationInput_issuers:
+			return deserializeListOfJwtIssuerInput(d, schemas.JwtConfigurationInput_issuers, &v.Issuers)
+		}
+		return nil
+	})
+}
+
+// A trusted issuer in the returned JWT configuration.
+type JwtIssuer struct {
+
+	// The additional claim rules configured for this issuer.
+	AdditionalClaims []JwtAdditionalClaim
+
+	// The audiences that the issuer can issue tokens for.
+	Audiences []string
+
+	// The OpenID Connect (OIDC) issuer URL.
+	Issuer *string
+
+	// The JSON Web Key Set (JWKS) URI that API Gateway resolved from the issuer's
+	// OpenID Connect discovery document. This value is read-only and cannot be set.
+	JwksUri *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *JwtIssuer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtIssuer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtIssuer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalClaims != nil {
+		serializeListOfJwtAdditionalClaim(s, schemas.JwtIssuer_additionalClaims, v.AdditionalClaims)
+	}
+	if v.Audiences != nil {
+		serializeListOfString(s, schemas.JwtIssuer_audiences, v.Audiences)
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.JwtIssuer_issuer, *v.Issuer)
+	}
+	if v.JwksUri != nil {
+		s.WriteString(schemas.JwtIssuer_jwksUri, *v.JwksUri)
+	}
+}
+func (v *JwtIssuer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtIssuer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtIssuer_additionalClaims:
+			return deserializeListOfJwtAdditionalClaim(d, schemas.JwtIssuer_additionalClaims, &v.AdditionalClaims)
+		case schemas.JwtIssuer_audiences:
+			return deserializeListOfString(d, schemas.JwtIssuer_audiences, &v.Audiences)
+		case schemas.JwtIssuer_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.JwtIssuer_issuer, v.Issuer)
+		case schemas.JwtIssuer_jwksUri:
+			v.JwksUri = new(string)
+			return d.ReadString(schemas.JwtIssuer_jwksUri, v.JwksUri)
+		}
+		return nil
+	})
+}
+
+// A trusted issuer in the JWT configuration.
+type JwtIssuerInput struct {
+
+	// The audiences that the issuer can issue tokens for. None can be empty. The
+	// token's aud claim must contain at least one of these values.
+	//
+	// This member is required.
+	Audiences []string
+
+	// The OpenID Connect (OIDC) issuer URL. The value must be an absolute https URL
+	// that includes a host and has no user information, query, or fragment. It must
+	// exactly match the iss claim of the token, and the issuer's OIDC discovery
+	// document must name this exact issuer.
+	//
+	// This member is required.
+	Issuer *string
+
+	// The additional claim rules for this issuer. Claim names must be unique within
+	// the issuer.
+	AdditionalClaims []JwtAdditionalClaim
+
+	noSmithyDocumentSerde
+}
+
+func (v *JwtIssuerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JwtIssuerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JwtIssuerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalClaims != nil {
+		serializeListOfJwtAdditionalClaim(s, schemas.JwtIssuerInput_additionalClaims, v.AdditionalClaims)
+	}
+	if v.Audiences != nil {
+		serializeListOfString(s, schemas.JwtIssuerInput_audiences, v.Audiences)
+	}
+	if v.Issuer != nil {
+		s.WriteString(schemas.JwtIssuerInput_issuer, *v.Issuer)
+	}
+}
+func (v *JwtIssuerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JwtIssuerInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JwtIssuerInput_additionalClaims:
+			return deserializeListOfJwtAdditionalClaim(d, schemas.JwtIssuerInput_additionalClaims, &v.AdditionalClaims)
+		case schemas.JwtIssuerInput_audiences:
+			return deserializeListOfString(d, schemas.JwtIssuerInput_audiences, &v.Audiences)
+		case schemas.JwtIssuerInput_issuer:
+			v.Issuer = new(string)
+			return d.ReadString(schemas.JwtIssuerInput_issuer, v.Issuer)
+		}
+		return nil
+	})
+}
+
 //	Represents a client-facing interface by which the client calls the API to
 //
 // access back-end resources. A Method resource is integrated with an Integration
@@ -1751,12 +2031,15 @@ type Method struct {
 	// any method scopes matches a claimed scope in the access token. Otherwise, the
 	// invocation is not authorized. When the method scope is configured, the client
 	// must provide an access token instead of an identity token for authorization
-	// purposes.
+	// purposes. The scopes are also used with a JWT authorizer. When scopes are
+	// configured, the scope (or scp ) claim of the token must contain at least one of
+	// the configured scopes.
 	AuthorizationScopes []string
 
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
-	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
-	// COGNITO_USER_POOLS for using a Cognito user pool.
+	// for using Amazon Web Services IAM permissions, CUSTOM for using a custom
+	// authorizer, COGNITO_USER_POOLS for using a Cognito user pool, or JWT for using
+	// a JWT authorizer.
 	AuthorizationType *string
 
 	// The identifier of an Authorizer to use on this method. The authorizationType
@@ -2066,8 +2349,8 @@ type MethodSnapshot struct {
 	ApiKeyRequired bool
 
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
-	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
-	// COGNITO_USER_POOLS for using a Cognito user pool.
+	// for using Amazon Web Services IAM permissions, CUSTOM for using a custom
+	// authorizer, or COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
 
 	noSmithyDocumentSerde
@@ -2309,9 +2592,9 @@ type PatchOperation struct {
 	Path *string
 
 	// The new target value of the update operation. It is applicable for the add or
-	// replace operation. When using AWS CLI to update a property of a JSON value,
-	// enclose the JSON object with a pair of single quotes in a Linux shell, e.g.,
-	// '{"a": ...}'.
+	// replace operation. When using CLI to update a property of a JSON value, enclose
+	// the JSON object with a pair of single quotes in a Linux shell, e.g., '{"a":
+	// ...}'.
 	Value *string
 
 	noSmithyDocumentSerde

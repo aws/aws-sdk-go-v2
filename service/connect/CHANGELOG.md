@@ -1,3 +1,11 @@
+# v1.218.0 (2026-11-17)
+
+* **Feature**: Evaluation forms can now adapt to each contact. Questions and sections can be shown or hidden, and single-select answers can be set automatically, based on answers to other questions, contact data (Contact Lens categories, sentiment, agent, queue, contact attributes and more).
+
+# v1.217.0 (2026-11-16)
+
+* **Feature**: Adds the DeleteAllEntitySessions API, which signs a user out of all of their active sessions in an Amazon Connect instance.
+
 # v1.216.0 (2026-11-12)
 
 * **Feature**: This release adds a LastModifiedTime and LastModifiedRegion field to ListIntegrationAssociations so customers can see at what time and in which Region an IntegrationAssociation was last modified in.

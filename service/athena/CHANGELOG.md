@@ -1,3 +1,7 @@
+# v1.68.0 (2026-11-16)
+
+* **Feature**: Adds an optional AttributesToGet parameter to ListDatabases and ListTableMetadata to return only requested database or table names (and table types) from the AWS Glue Data Catalog, reducing response time for large catalogs.
+
 # v1.67.1 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mgn/document"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
@@ -533,6 +534,63 @@ func (v *CPU) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An operation that creates a new construct in the segment.
+type CreateOperation struct {
+
+	// The initial construct-type-specific behavioral configuration for the new
+	// construct.
+	Configuration OperationConfigurationUnion
+
+	// Whether the new construct is excluded from the migration.
+	Excluded *bool
+
+	// The name for the new construct.
+	Name *string
+
+	// The properties of the new construct, using their native value types.
+	Properties map[string]document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		serializeOperationConfigurationUnion(s, schemas.CreateOperation_configuration, v.Configuration)
+	}
+	if v.Excluded != nil {
+		s.WriteBool(schemas.CreateOperation_excluded, *v.Excluded)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOperation_name, *v.Name)
+	}
+	if v.Properties != nil {
+		serializeEnrichedProperties(s, schemas.CreateOperation_properties, v.Properties)
+	}
+}
+func (v *CreateOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOperation_configuration:
+			return deserializeOperationConfigurationUnion(d, schemas.CreateOperation_configuration, &v.Configuration)
+		case schemas.CreateOperation_excluded:
+			v.Excluded = new(bool)
+			return d.ReadBool(schemas.CreateOperation_excluded, v.Excluded)
+		case schemas.CreateOperation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateOperation_name, v.Name)
+		case schemas.CreateOperation_properties:
+			return deserializeEnrichedProperties(d, schemas.CreateOperation_properties, &v.Properties)
+		}
+		return nil
+	})
+}
+
 // Error in data replication.
 type DataReplicationError struct {
 
@@ -604,6 +662,10 @@ type DataReplicationInfo struct {
 	// Replication server instance ID.
 	ReplicatorId *string
 
+	// The ARN of the AWS Outpost that hosts the staging area, when the staging area
+	// subnet is on an Outpost.
+	StagingOutpostArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -642,6 +704,9 @@ func (v *DataReplicationInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicatorId != nil {
 		s.WriteString(schemas.DataReplicationInfo_replicatorId, *v.ReplicatorId)
 	}
+	if v.StagingOutpostArn != nil {
+		s.WriteString(schemas.DataReplicationInfo_stagingOutpostArn, *v.StagingOutpostArn)
+	}
 }
 func (v *DataReplicationInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataReplicationInfo, func(s *smithy.Schema) error {
@@ -673,6 +738,9 @@ func (v *DataReplicationInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataReplicationInfo_replicatorId:
 			v.ReplicatorId = new(string)
 			return d.ReadString(schemas.DataReplicationInfo_replicatorId, v.ReplicatorId)
+		case schemas.DataReplicationInfo_stagingOutpostArn:
+			v.StagingOutpostArn = new(string)
+			return d.ReadString(schemas.DataReplicationInfo_stagingOutpostArn, v.StagingOutpostArn)
 		}
 		return nil
 	})
@@ -2043,6 +2111,55 @@ func (v *ImportTaskSummaryWaves) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The content of a network migration insight.
+type InsightMessage struct {
+
+	// A stable identifier for the kind of insight.
+	Code *string
+
+	// The human-readable insight message.
+	Message *string
+
+	// The topic that the insight relates to.
+	Topic *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InsightMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsightMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsightMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InsightMessage_code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InsightMessage_message, *v.Message)
+	}
+	if v.Topic != nil {
+		s.WriteString(schemas.InsightMessage_topic, *v.Topic)
+	}
+}
+func (v *InsightMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsightMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsightMessage_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InsightMessage_code, v.Code)
+		case schemas.InsightMessage_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InsightMessage_message, v.Message)
+		case schemas.InsightMessage_topic:
+			v.Topic = new(string)
+			return d.ReadString(schemas.InsightMessage_topic, v.Topic)
+		}
+		return nil
+	})
+}
+
 // Job.
 type Job struct {
 
@@ -2481,6 +2598,9 @@ type LaunchConfigurationTemplate struct {
 	// Configure Licensing.
 	Licensing *Licensing
 
+	// Launch configuration template map auto tagging key.
+	MapAutoTaggingKey *string
+
 	// Launch configuration template map auto tagging MPE ID.
 	MapAutoTaggingMpeID *string
 
@@ -2551,6 +2671,9 @@ func (v *LaunchConfigurationTemplate) SerializeMembers(s smithy.ShapeSerializer)
 		s.WriteStruct(schemas.LaunchConfigurationTemplate_licensing)
 		v.Licensing.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.MapAutoTaggingKey != nil {
+		s.WriteString(schemas.LaunchConfigurationTemplate_mapAutoTaggingKey, *v.MapAutoTaggingKey)
 	}
 	if v.MapAutoTaggingMpeID != nil {
 		s.WriteString(schemas.LaunchConfigurationTemplate_mapAutoTaggingMpeID, *v.MapAutoTaggingMpeID)
@@ -2625,6 +2748,9 @@ func (v *LaunchConfigurationTemplate) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.LaunchConfigurationTemplate_licensing:
 			v.Licensing = &Licensing{}
 			return v.Licensing.Deserialize(d)
+		case schemas.LaunchConfigurationTemplate_mapAutoTaggingKey:
+			v.MapAutoTaggingKey = new(string)
+			return d.ReadString(schemas.LaunchConfigurationTemplate_mapAutoTaggingKey, v.MapAutoTaggingKey)
 		case schemas.LaunchConfigurationTemplate_mapAutoTaggingMpeID:
 			v.MapAutoTaggingMpeID = new(string)
 			return d.ReadString(schemas.LaunchConfigurationTemplate_mapAutoTaggingMpeID, v.MapAutoTaggingMpeID)
@@ -3621,6 +3747,36 @@ func (v *ListNetworkMigrationExecutionRequestFilters) Deserialize(d smithy.Shape
 	})
 }
 
+// Filters for listing network migration insights.
+type ListNetworkMigrationInsightsFilters struct {
+
+	// The insight types to include in the results.
+	InsightTypes []InsightType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListNetworkMigrationInsightsFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationInsightsFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationInsightsFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightTypes != nil {
+		serializeListNetworkMigrationInsightsTypesFilter(s, schemas.ListNetworkMigrationInsightsFilters_insightTypes, v.InsightTypes)
+	}
+}
+func (v *ListNetworkMigrationInsightsFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationInsightsFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationInsightsFilters_insightTypes:
+			return deserializeListNetworkMigrationInsightsTypesFilter(d, schemas.ListNetworkMigrationInsightsFilters_insightTypes, &v.InsightTypes)
+		}
+		return nil
+	})
+}
+
 // Filters for listing mapper segment constructs.
 type ListNetworkMigrationMapperSegmentConstructsFilters struct {
 
@@ -3744,6 +3900,112 @@ func (v *ListNetworkMigrationMappingUpdatesFilters) Deserialize(d smithy.ShapeDe
 		switch s {
 		case schemas.ListNetworkMigrationMappingUpdatesFilters_jobIDs:
 			return deserializeListNetworkMigrationMappingUpdatesIDsFilter(d, schemas.ListNetworkMigrationMappingUpdatesFilters_jobIDs, &v.JobIDs)
+		}
+		return nil
+	})
+}
+
+// Filters for listing source action invocations.
+type ListRemoteSourceActionInvocationsRequestFilters struct {
+
+	// A list of source action ARNs to filter by.
+	RemoteSourceActionArns []string
+
+	// A list of source server ARNs to filter by.
+	SourceServerArns []string
+
+	// A list of invocation statuses to filter by.
+	Statuses []RemoteSourceActionInvocationStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListRemoteSourceActionInvocationsRequestFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRemoteSourceActionInvocationsRequestFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRemoteSourceActionInvocationsRequestFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteSourceActionArns != nil {
+		serializeRemoteSourceActionArnsFilter(s, schemas.ListRemoteSourceActionInvocationsRequestFilters_remoteSourceActionArns, v.RemoteSourceActionArns)
+	}
+	if v.SourceServerArns != nil {
+		serializeSourceServerArnsFilter(s, schemas.ListRemoteSourceActionInvocationsRequestFilters_sourceServerArns, v.SourceServerArns)
+	}
+	if v.Statuses != nil {
+		serializeRemoteSourceActionInvocationStatusesFilter(s, schemas.ListRemoteSourceActionInvocationsRequestFilters_statuses, v.Statuses)
+	}
+}
+func (v *ListRemoteSourceActionInvocationsRequestFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRemoteSourceActionInvocationsRequestFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRemoteSourceActionInvocationsRequestFilters_remoteSourceActionArns:
+			return deserializeRemoteSourceActionArnsFilter(d, schemas.ListRemoteSourceActionInvocationsRequestFilters_remoteSourceActionArns, &v.RemoteSourceActionArns)
+		case schemas.ListRemoteSourceActionInvocationsRequestFilters_sourceServerArns:
+			return deserializeSourceServerArnsFilter(d, schemas.ListRemoteSourceActionInvocationsRequestFilters_sourceServerArns, &v.SourceServerArns)
+		case schemas.ListRemoteSourceActionInvocationsRequestFilters_statuses:
+			return deserializeRemoteSourceActionInvocationStatusesFilter(d, schemas.ListRemoteSourceActionInvocationsRequestFilters_statuses, &v.Statuses)
+		}
+		return nil
+	})
+}
+
+// Filters for listing source action jobs.
+type ListRemoteSourceActionJobsRequestFilters struct {
+
+	// A list of job IDs to filter by.
+	RemoteSourceActionJobIDs []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListRemoteSourceActionJobsRequestFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRemoteSourceActionJobsRequestFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRemoteSourceActionJobsRequestFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteSourceActionJobIDs != nil {
+		serializeRemoteSourceActionJobIDsFilter(s, schemas.ListRemoteSourceActionJobsRequestFilters_remoteSourceActionJobIDs, v.RemoteSourceActionJobIDs)
+	}
+}
+func (v *ListRemoteSourceActionJobsRequestFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRemoteSourceActionJobsRequestFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRemoteSourceActionJobsRequestFilters_remoteSourceActionJobIDs:
+			return deserializeRemoteSourceActionJobIDsFilter(d, schemas.ListRemoteSourceActionJobsRequestFilters_remoteSourceActionJobIDs, &v.RemoteSourceActionJobIDs)
+		}
+		return nil
+	})
+}
+
+// Filters for listing source actions.
+type ListRemoteSourceActionsRequestFilters struct {
+
+	// A list of source action IDs to filter by.
+	RemoteSourceActionIDs []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListRemoteSourceActionsRequestFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRemoteSourceActionsRequestFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRemoteSourceActionsRequestFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteSourceActionIDs != nil {
+		serializeRemoteSourceActionIDsFilter(s, schemas.ListRemoteSourceActionsRequestFilters_remoteSourceActionIDs, v.RemoteSourceActionIDs)
+	}
+}
+func (v *ListRemoteSourceActionsRequestFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRemoteSourceActionsRequestFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRemoteSourceActionsRequestFilters_remoteSourceActionIDs:
+			return deserializeRemoteSourceActionIDsFilter(d, schemas.ListRemoteSourceActionsRequestFilters_remoteSourceActionIDs, &v.RemoteSourceActionIDs)
 		}
 		return nil
 	})
@@ -4529,6 +4791,9 @@ type NetworkMigrationDefinitionSummary struct {
 	// The Amazon Resource Name (ARN) of the network migration definition.
 	Arn *string
 
+	// The type of the network migration definition.
+	DefinitionType DefinitionType
+
 	// The name of the network migration definition.
 	Name *string
 
@@ -4557,6 +4822,9 @@ func (v *NetworkMigrationDefinitionSummary) SerializeMembers(s smithy.ShapeSeria
 	if v.Arn != nil {
 		s.WriteString(schemas.NetworkMigrationDefinitionSummary_arn, *v.Arn)
 	}
+	if v.DefinitionType != "" {
+		s.WriteString(schemas.NetworkMigrationDefinitionSummary_definitionType, string(v.DefinitionType))
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.NetworkMigrationDefinitionSummary_name, *v.Name)
 	}
@@ -4579,6 +4847,13 @@ func (v *NetworkMigrationDefinitionSummary) Deserialize(d smithy.ShapeDeserializ
 		case schemas.NetworkMigrationDefinitionSummary_arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.NetworkMigrationDefinitionSummary_arn, v.Arn)
+		case schemas.NetworkMigrationDefinitionSummary_definitionType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationDefinitionSummary_definitionType, &ev); err != nil {
+				return err
+			}
+			v.DefinitionType = DefinitionType(ev)
+			return nil
 		case schemas.NetworkMigrationDefinitionSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.NetworkMigrationDefinitionSummary_name, v.Name)
@@ -4929,6 +5204,158 @@ func (v *NetworkMigrationFailedResourceDetails) Deserialize(d smithy.ShapeDeseri
 	})
 }
 
+// An insight produced during a network migration, such as a warning, decision,
+// question, or other context beyond the migrated output.
+type NetworkMigrationInsight struct {
+
+	// The unique identifier of the construct the insight relates to; absent for
+	// run-level and segment-level insights.
+	ConstructID *string
+
+	// The timestamp when the insight was created.
+	CreatedAt *time.Time
+
+	// The unique identifier of the insight.
+	InsightID *string
+
+	// The level that the insight applies to: the run, a segment, or a construct.
+	InsightLevel InsightLevel
+
+	// The content of the insight.
+	InsightMessage *InsightMessage
+
+	// The type of the insight.
+	InsightType InsightType
+
+	// The unique identifier of the network migration definition the insight belongs
+	// to.
+	NetworkMigrationDefinitionID *string
+
+	// The unique identifier of the network migration execution the insight belongs to.
+	NetworkMigrationExecutionID *string
+
+	// The identifier of the job or API request that produced the insight.
+	ProducerID *string
+
+	// The job type or API name that produced the insight.
+	ProducerName InsightProducerName
+
+	// Whether the insight was produced by a job or by an API request.
+	ProducerType InsightProducerType
+
+	// The unique identifier of the segment the insight relates to; absent for
+	// run-level insights.
+	SegmentID *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetworkMigrationInsight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkMigrationInsight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkMigrationInsight) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConstructID != nil {
+		s.WriteString(schemas.NetworkMigrationInsight_constructID, *v.ConstructID)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.NetworkMigrationInsight_createdAt, *v.CreatedAt)
+	}
+	if v.InsightID != nil {
+		s.WriteString(schemas.NetworkMigrationInsight_insightID, *v.InsightID)
+	}
+	if v.InsightLevel != "" {
+		s.WriteString(schemas.NetworkMigrationInsight_insightLevel, string(v.InsightLevel))
+	}
+	if v.InsightMessage != nil {
+		s.WriteStruct(schemas.NetworkMigrationInsight_insightMessage)
+		v.InsightMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InsightType != "" {
+		s.WriteString(schemas.NetworkMigrationInsight_insightType, string(v.InsightType))
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.NetworkMigrationInsight_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.NetworkMigrationInsight_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.ProducerID != nil {
+		s.WriteString(schemas.NetworkMigrationInsight_producerID, *v.ProducerID)
+	}
+	if v.ProducerName != "" {
+		s.WriteString(schemas.NetworkMigrationInsight_producerName, string(v.ProducerName))
+	}
+	if v.ProducerType != "" {
+		s.WriteString(schemas.NetworkMigrationInsight_producerType, string(v.ProducerType))
+	}
+	if v.SegmentID != nil {
+		s.WriteString(schemas.NetworkMigrationInsight_segmentID, *v.SegmentID)
+	}
+}
+func (v *NetworkMigrationInsight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkMigrationInsight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkMigrationInsight_constructID:
+			v.ConstructID = new(string)
+			return d.ReadString(schemas.NetworkMigrationInsight_constructID, v.ConstructID)
+		case schemas.NetworkMigrationInsight_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.NetworkMigrationInsight_createdAt, v.CreatedAt)
+		case schemas.NetworkMigrationInsight_insightID:
+			v.InsightID = new(string)
+			return d.ReadString(schemas.NetworkMigrationInsight_insightID, v.InsightID)
+		case schemas.NetworkMigrationInsight_insightLevel:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationInsight_insightLevel, &ev); err != nil {
+				return err
+			}
+			v.InsightLevel = InsightLevel(ev)
+			return nil
+		case schemas.NetworkMigrationInsight_insightMessage:
+			v.InsightMessage = &InsightMessage{}
+			return v.InsightMessage.Deserialize(d)
+		case schemas.NetworkMigrationInsight_insightType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationInsight_insightType, &ev); err != nil {
+				return err
+			}
+			v.InsightType = InsightType(ev)
+			return nil
+		case schemas.NetworkMigrationInsight_networkMigrationDefinitionID:
+			v.NetworkMigrationDefinitionID = new(string)
+			return d.ReadString(schemas.NetworkMigrationInsight_networkMigrationDefinitionID, v.NetworkMigrationDefinitionID)
+		case schemas.NetworkMigrationInsight_networkMigrationExecutionID:
+			v.NetworkMigrationExecutionID = new(string)
+			return d.ReadString(schemas.NetworkMigrationInsight_networkMigrationExecutionID, v.NetworkMigrationExecutionID)
+		case schemas.NetworkMigrationInsight_producerID:
+			v.ProducerID = new(string)
+			return d.ReadString(schemas.NetworkMigrationInsight_producerID, v.ProducerID)
+		case schemas.NetworkMigrationInsight_producerName:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationInsight_producerName, &ev); err != nil {
+				return err
+			}
+			v.ProducerName = InsightProducerName(ev)
+			return nil
+		case schemas.NetworkMigrationInsight_producerType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkMigrationInsight_producerType, &ev); err != nil {
+				return err
+			}
+			v.ProducerType = InsightProducerType(ev)
+			return nil
+		case schemas.NetworkMigrationInsight_segmentID:
+			v.SegmentID = new(string)
+			return d.ReadString(schemas.NetworkMigrationInsight_segmentID, v.SegmentID)
+		}
+		return nil
+	})
+}
+
 type NetworkMigrationMapperSegment struct {
 
 	// The checksum of the segment data for integrity verification.
@@ -5098,6 +5525,10 @@ func (v *NetworkMigrationMapperSegment) Deserialize(d smithy.ShapeDeserializer) 
 // other network resource that is part of the network migration.
 type NetworkMigrationMapperSegmentConstruct struct {
 
+	// The construct-type-specific behavioral configuration. Returned by Get, and by
+	// List when includeConfiguration is true.
+	Configuration OperationConfigurationUnion
+
 	// The unique identifier of the construct.
 	ConstructID *string
 
@@ -5109,6 +5540,10 @@ type NetworkMigrationMapperSegmentConstruct struct {
 
 	// A description of the construct.
 	Description *string
+
+	// The construct properties using their native value types. Returned by Get, and
+	// by List when includeEnrichedProperties is true.
+	EnrichedProperties map[string]document.Interface
 
 	// Whether this construct is excluded from the migration.
 	Excluded *bool
@@ -5135,6 +5570,9 @@ func (v *NetworkMigrationMapperSegmentConstruct) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *NetworkMigrationMapperSegmentConstruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		serializeOperationConfigurationUnion(s, schemas.NetworkMigrationMapperSegmentConstruct_configuration, v.Configuration)
+	}
 	if v.ConstructID != nil {
 		s.WriteString(schemas.NetworkMigrationMapperSegmentConstruct_constructID, *v.ConstructID)
 	}
@@ -5146,6 +5584,9 @@ func (v *NetworkMigrationMapperSegmentConstruct) SerializeMembers(s smithy.Shape
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.NetworkMigrationMapperSegmentConstruct_description, *v.Description)
+	}
+	if v.EnrichedProperties != nil {
+		serializeEnrichedProperties(s, schemas.NetworkMigrationMapperSegmentConstruct_enrichedProperties, v.EnrichedProperties)
 	}
 	if v.Excluded != nil {
 		s.WriteBool(schemas.NetworkMigrationMapperSegmentConstruct_excluded, *v.Excluded)
@@ -5166,6 +5607,8 @@ func (v *NetworkMigrationMapperSegmentConstruct) SerializeMembers(s smithy.Shape
 func (v *NetworkMigrationMapperSegmentConstruct) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkMigrationMapperSegmentConstruct, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.NetworkMigrationMapperSegmentConstruct_configuration:
+			return deserializeOperationConfigurationUnion(d, schemas.NetworkMigrationMapperSegmentConstruct_configuration, &v.Configuration)
 		case schemas.NetworkMigrationMapperSegmentConstruct_constructID:
 			v.ConstructID = new(string)
 			return d.ReadString(schemas.NetworkMigrationMapperSegmentConstruct_constructID, v.ConstructID)
@@ -5178,6 +5621,8 @@ func (v *NetworkMigrationMapperSegmentConstruct) Deserialize(d smithy.ShapeDeser
 		case schemas.NetworkMigrationMapperSegmentConstruct_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.NetworkMigrationMapperSegmentConstruct_description, v.Description)
+		case schemas.NetworkMigrationMapperSegmentConstruct_enrichedProperties:
+			return deserializeEnrichedProperties(d, schemas.NetworkMigrationMapperSegmentConstruct_enrichedProperties, &v.EnrichedProperties)
 		case schemas.NetworkMigrationMapperSegmentConstruct_excluded:
 			v.Excluded = new(bool)
 			return d.ReadBool(schemas.NetworkMigrationMapperSegmentConstruct_excluded, v.Excluded)
@@ -5375,17 +5820,82 @@ func (v *NetworkMigrationMappingUpdateJobDetails) Deserialize(d smithy.ShapeDese
 	})
 }
 
+// Construct-type-specific behavioral configuration. The variant provided must
+// match the construct type.
+//
+// The following types satisfy this interface:
+//
+//	OperationConfigurationUnionMemberSecurityGroup
+//	OperationConfigurationUnionMemberSecurityGroupRule
+type OperationConfigurationUnion interface {
+	isOperationConfigurationUnion()
+}
+
+// Behavioral configuration for a security group construct.
+type OperationConfigurationUnionMemberSecurityGroup struct {
+	Value SecurityGroupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationConfigurationUnionMemberSecurityGroup) isOperationConfigurationUnion() {}
+func (v *OperationConfigurationUnionMemberSecurityGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationConfigurationUnion_securityGroup)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OperationConfigurationUnionMemberSecurityGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Behavioral configuration for a security group rule construct.
+type OperationConfigurationUnionMemberSecurityGroupRule struct {
+	Value SecurityGroupRuleConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationConfigurationUnionMemberSecurityGroupRule) isOperationConfigurationUnion() {}
+func (v *OperationConfigurationUnionMemberSecurityGroupRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationConfigurationUnion_securityGroupRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OperationConfigurationUnionMemberSecurityGroupRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // A union type representing the operation to perform on a construct during a
 // mapping update.
 //
 // The following types satisfy this interface:
 //
+//	OperationUnionMemberCreate
 //	OperationUnionMemberDelete
 //	OperationUnionMemberMerge
 //	OperationUnionMemberSplit
 //	OperationUnionMemberUpdate
+//	OperationUnionMemberUpdateV2
 type OperationUnion interface {
 	isOperationUnion()
+}
+
+// A create operation that adds a new construct to the segment, identified by the
+// constructLogicalID on the parent construct entry.
+type OperationUnionMemberCreate struct {
+	Value CreateOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationUnionMemberCreate) isOperationUnion() {}
+func (v *OperationUnionMemberCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationUnion_create)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OperationUnionMemberCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A delete operation to remove a construct from the mapping.
@@ -5454,6 +5964,24 @@ func (v *OperationUnionMemberUpdate) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *OperationUnionMemberUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An update operation that modifies a construct using native property value types
+// and behavioral configuration, with partial updates and property removal.
+type OperationUnionMemberUpdateV2 struct {
+	Value UpdateOperationV2
+
+	noSmithyDocumentSerde
+}
+
+func (*OperationUnionMemberUpdateV2) isOperationUnion() {}
+func (v *OperationUnionMemberUpdateV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationUnion_updateV2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OperationUnionMemberUpdateV2) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -5664,6 +6192,367 @@ func (v *PostLaunchActionsStatus) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// A source action, which references a script in AWS Systems Manager Parameter
+// Store that Application Migration Service runs on source servers through a
+// connector.
+type RemoteSourceAction struct {
+
+	// The Amazon Resource Name (ARN) of the source action.
+	Arn *string
+
+	// A description of the source action.
+	Description *string
+
+	// The name of the source action.
+	Name *string
+
+	// The operating system of the source servers that the script runs on. Absent when
+	// the script runs on both Linux and Windows.
+	OperatingSystem *string
+
+	// The unique identifier of the source action.
+	RemoteSourceActionID *string
+
+	// AWS Systems Manager Parameter Store parameter name.
+	SsmParameterName *string
+
+	// Tags assigned to the source action.
+	Tags map[string]string
+
+	// The maximum time, in seconds, that the script can run on each source server.
+	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemoteSourceAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoteSourceAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoteSourceAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RemoteSourceAction_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RemoteSourceAction_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RemoteSourceAction_name, *v.Name)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteString(schemas.RemoteSourceAction_operatingSystem, *v.OperatingSystem)
+	}
+	if v.RemoteSourceActionID != nil {
+		s.WriteString(schemas.RemoteSourceAction_remoteSourceActionID, *v.RemoteSourceActionID)
+	}
+	if v.SsmParameterName != nil {
+		s.WriteString(schemas.RemoteSourceAction_ssmParameterName, *v.SsmParameterName)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.RemoteSourceAction_tags, v.Tags)
+	}
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.RemoteSourceAction_timeoutSeconds, *v.TimeoutSeconds)
+	}
+}
+func (v *RemoteSourceAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoteSourceAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoteSourceAction_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RemoteSourceAction_arn, v.Arn)
+		case schemas.RemoteSourceAction_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RemoteSourceAction_description, v.Description)
+		case schemas.RemoteSourceAction_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RemoteSourceAction_name, v.Name)
+		case schemas.RemoteSourceAction_operatingSystem:
+			v.OperatingSystem = new(string)
+			return d.ReadString(schemas.RemoteSourceAction_operatingSystem, v.OperatingSystem)
+		case schemas.RemoteSourceAction_remoteSourceActionID:
+			v.RemoteSourceActionID = new(string)
+			return d.ReadString(schemas.RemoteSourceAction_remoteSourceActionID, v.RemoteSourceActionID)
+		case schemas.RemoteSourceAction_ssmParameterName:
+			v.SsmParameterName = new(string)
+			return d.ReadString(schemas.RemoteSourceAction_ssmParameterName, v.SsmParameterName)
+		case schemas.RemoteSourceAction_tags:
+			return deserializeTagsMap(d, schemas.RemoteSourceAction_tags, &v.Tags)
+		case schemas.RemoteSourceAction_timeoutSeconds:
+			v.TimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.RemoteSourceAction_timeoutSeconds, v.TimeoutSeconds)
+		}
+		return nil
+	})
+}
+
+// The run of a source action on one source server as part of a job.
+type RemoteSourceActionInvocation struct {
+
+	// The timestamp when the command finished.
+	EndedAt *time.Time
+
+	// The ARN of the source action.
+	RemoteSourceActionArn *string
+
+	// The ARN of the source server.
+	SourceServerArn *string
+
+	// The ID of the AWS Systems Manager command that runs the source action on the
+	// connector.
+	SsmCommandInvocationID *string
+
+	// The timestamp when the command started running.
+	StartedAt *time.Time
+
+	// The current status of the invocation.
+	Status RemoteSourceActionInvocationStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemoteSourceActionInvocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoteSourceActionInvocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoteSourceActionInvocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.RemoteSourceActionInvocation_endedAt, *v.EndedAt)
+	}
+	if v.RemoteSourceActionArn != nil {
+		s.WriteString(schemas.RemoteSourceActionInvocation_remoteSourceActionArn, *v.RemoteSourceActionArn)
+	}
+	if v.SourceServerArn != nil {
+		s.WriteString(schemas.RemoteSourceActionInvocation_sourceServerArn, *v.SourceServerArn)
+	}
+	if v.SsmCommandInvocationID != nil {
+		s.WriteString(schemas.RemoteSourceActionInvocation_ssmCommandInvocationID, *v.SsmCommandInvocationID)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.RemoteSourceActionInvocation_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RemoteSourceActionInvocation_status, string(v.Status))
+	}
+}
+func (v *RemoteSourceActionInvocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoteSourceActionInvocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoteSourceActionInvocation_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.RemoteSourceActionInvocation_endedAt, v.EndedAt)
+		case schemas.RemoteSourceActionInvocation_remoteSourceActionArn:
+			v.RemoteSourceActionArn = new(string)
+			return d.ReadString(schemas.RemoteSourceActionInvocation_remoteSourceActionArn, v.RemoteSourceActionArn)
+		case schemas.RemoteSourceActionInvocation_sourceServerArn:
+			v.SourceServerArn = new(string)
+			return d.ReadString(schemas.RemoteSourceActionInvocation_sourceServerArn, v.SourceServerArn)
+		case schemas.RemoteSourceActionInvocation_ssmCommandInvocationID:
+			v.SsmCommandInvocationID = new(string)
+			return d.ReadString(schemas.RemoteSourceActionInvocation_ssmCommandInvocationID, v.SsmCommandInvocationID)
+		case schemas.RemoteSourceActionInvocation_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.RemoteSourceActionInvocation_startedAt, v.StartedAt)
+		case schemas.RemoteSourceActionInvocation_status:
+			var ev string
+			if err := d.ReadString(schemas.RemoteSourceActionInvocation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RemoteSourceActionInvocationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The latest invocation result of a source action on a source server.
+type RemoteSourceActionInvocationResult struct {
+
+	// The ID of the account that owns the connector that ran the source action.
+	ConnectorOwnerAccountID *string
+
+	// The timestamp when the command finished.
+	EndedAt *time.Time
+
+	// The unique identifier of the source action.
+	RemoteSourceActionID *string
+
+	// The timestamp when the command started running.
+	StartedAt *time.Time
+
+	// The status of the latest invocation.
+	Status RemoteSourceActionInvocationStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemoteSourceActionInvocationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoteSourceActionInvocationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoteSourceActionInvocationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorOwnerAccountID != nil {
+		s.WriteString(schemas.RemoteSourceActionInvocationResult_connectorOwnerAccountID, *v.ConnectorOwnerAccountID)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.RemoteSourceActionInvocationResult_endedAt, *v.EndedAt)
+	}
+	if v.RemoteSourceActionID != nil {
+		s.WriteString(schemas.RemoteSourceActionInvocationResult_remoteSourceActionID, *v.RemoteSourceActionID)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.RemoteSourceActionInvocationResult_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RemoteSourceActionInvocationResult_status, string(v.Status))
+	}
+}
+func (v *RemoteSourceActionInvocationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoteSourceActionInvocationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoteSourceActionInvocationResult_connectorOwnerAccountID:
+			v.ConnectorOwnerAccountID = new(string)
+			return d.ReadString(schemas.RemoteSourceActionInvocationResult_connectorOwnerAccountID, v.ConnectorOwnerAccountID)
+		case schemas.RemoteSourceActionInvocationResult_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.RemoteSourceActionInvocationResult_endedAt, v.EndedAt)
+		case schemas.RemoteSourceActionInvocationResult_remoteSourceActionID:
+			v.RemoteSourceActionID = new(string)
+			return d.ReadString(schemas.RemoteSourceActionInvocationResult_remoteSourceActionID, v.RemoteSourceActionID)
+		case schemas.RemoteSourceActionInvocationResult_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.RemoteSourceActionInvocationResult_startedAt, v.StartedAt)
+		case schemas.RemoteSourceActionInvocationResult_status:
+			var ev string
+			if err := d.ReadString(schemas.RemoteSourceActionInvocationResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RemoteSourceActionInvocationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A job that runs a source action on source servers through a connector.
+type RemoteSourceActionJob struct {
+
+	// The Amazon Resource Name (ARN) of the job.
+	Arn *string
+
+	// The ARN of the connector that runs the job.
+	ConnectorArn *string
+
+	// The timestamp when the job completed or failed.
+	EndedAt *time.Time
+
+	// The ARNs of the source actions that the job runs.
+	RemoteSourceActionArns []string
+
+	// The unique identifier of the job.
+	RemoteSourceActionJobID *string
+
+	// The ARNs of the source servers that the job runs on.
+	SourceServerArns []string
+
+	// The timestamp when the job started running.
+	StartedAt *time.Time
+
+	// The current status of the job.
+	Status RemoteSourceActionJobStatus
+
+	// The reason the job failed.
+	StatusReason *string
+
+	// Tags assigned to the job.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RemoteSourceActionJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoteSourceActionJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoteSourceActionJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RemoteSourceActionJob_arn, *v.Arn)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.RemoteSourceActionJob_connectorArn, *v.ConnectorArn)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.RemoteSourceActionJob_endedAt, *v.EndedAt)
+	}
+	if v.RemoteSourceActionArns != nil {
+		serializeRemoteSourceActionArns(s, schemas.RemoteSourceActionJob_remoteSourceActionArns, v.RemoteSourceActionArns)
+	}
+	if v.RemoteSourceActionJobID != nil {
+		s.WriteString(schemas.RemoteSourceActionJob_remoteSourceActionJobID, *v.RemoteSourceActionJobID)
+	}
+	if v.SourceServerArns != nil {
+		serializeSourceServerArns(s, schemas.RemoteSourceActionJob_sourceServerArns, v.SourceServerArns)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.RemoteSourceActionJob_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RemoteSourceActionJob_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.RemoteSourceActionJob_statusReason, *v.StatusReason)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.RemoteSourceActionJob_tags, v.Tags)
+	}
+}
+func (v *RemoteSourceActionJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoteSourceActionJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoteSourceActionJob_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RemoteSourceActionJob_arn, v.Arn)
+		case schemas.RemoteSourceActionJob_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.RemoteSourceActionJob_connectorArn, v.ConnectorArn)
+		case schemas.RemoteSourceActionJob_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.RemoteSourceActionJob_endedAt, v.EndedAt)
+		case schemas.RemoteSourceActionJob_remoteSourceActionArns:
+			return deserializeRemoteSourceActionArns(d, schemas.RemoteSourceActionJob_remoteSourceActionArns, &v.RemoteSourceActionArns)
+		case schemas.RemoteSourceActionJob_remoteSourceActionJobID:
+			v.RemoteSourceActionJobID = new(string)
+			return d.ReadString(schemas.RemoteSourceActionJob_remoteSourceActionJobID, v.RemoteSourceActionJobID)
+		case schemas.RemoteSourceActionJob_sourceServerArns:
+			return deserializeSourceServerArns(d, schemas.RemoteSourceActionJob_sourceServerArns, &v.SourceServerArns)
+		case schemas.RemoteSourceActionJob_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.RemoteSourceActionJob_startedAt, v.StartedAt)
+		case schemas.RemoteSourceActionJob_status:
+			var ev string
+			if err := d.ReadString(schemas.RemoteSourceActionJob_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RemoteSourceActionJobStatus(ev)
+			return nil
+		case schemas.RemoteSourceActionJob_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.RemoteSourceActionJob_statusReason, v.StatusReason)
+		case schemas.RemoteSourceActionJob_tags:
+			return deserializeTagsMap(d, schemas.RemoteSourceActionJob_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Replication Configuration replicated disk.
 type ReplicationConfigurationReplicatedDisk struct {
 
@@ -5768,6 +6657,12 @@ type ReplicationConfigurationTemplate struct {
 	// Replication Configuration template internet protocol.
 	InternetProtocol InternetProtocol
 
+	// Indicates the location of replication snapshots in the Replication
+	// Configuration template when the staging area subnet is on an AWS Outpost.
+	// OUTPOST keeps replication snapshots on the Outpost, and REGION stores them in
+	// the AWS Region.
+	OutpostSnapshotLocation OutpostSnapshotLocation
+
 	// Replication Configuration template server instance type.
 	ReplicationServerInstanceType *string
 
@@ -5831,6 +6726,9 @@ func (v *ReplicationConfigurationTemplate) SerializeMembers(s smithy.ShapeSerial
 	}
 	if v.InternetProtocol != "" {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_internetProtocol, string(v.InternetProtocol))
+	}
+	if v.OutpostSnapshotLocation != "" {
+		s.WriteString(schemas.ReplicationConfigurationTemplate_outpostSnapshotLocation, string(v.OutpostSnapshotLocation))
 	}
 	if v.ReplicationConfigurationTemplateID != nil {
 		s.WriteString(schemas.ReplicationConfigurationTemplate_replicationConfigurationTemplateID, *v.ReplicationConfigurationTemplateID)
@@ -5909,6 +6807,13 @@ func (v *ReplicationConfigurationTemplate) Deserialize(d smithy.ShapeDeserialize
 				return err
 			}
 			v.InternetProtocol = InternetProtocol(ev)
+			return nil
+		case schemas.ReplicationConfigurationTemplate_outpostSnapshotLocation:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationConfigurationTemplate_outpostSnapshotLocation, &ev); err != nil {
+				return err
+			}
+			v.OutpostSnapshotLocation = OutpostSnapshotLocation(ev)
 			return nil
 		case schemas.ReplicationConfigurationTemplate_replicationConfigurationTemplateID:
 			v.ReplicationConfigurationTemplateID = new(string)
@@ -6039,6 +6944,323 @@ func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.S3Configuration_s3Key:
 			v.S3Key = new(string)
 			return d.ReadString(schemas.S3Configuration_s3Key, v.S3Key)
+		}
+		return nil
+	})
+}
+
+// The associations that bind a security group to source machines before they are
+// provisioned.
+type SecurityGroupAssociations struct {
+
+	// The CIDR ranges associated with the security group. A provided list replaces
+	// the stored list; an empty list clears it, and omitting the field leaves it
+	// unchanged.
+	Cidrs []string
+
+	// The user-provided identifiers of the source machines associated with the
+	// security group.
+	UserProvidedIDs []string
+
+	// The UUIDs of the source machines associated with the security group.
+	VmUUIDs []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupAssociations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupAssociations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupAssociations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidrs != nil {
+		serializeAssociationCidrList(s, schemas.SecurityGroupAssociations_cidrs, v.Cidrs)
+	}
+	if v.UserProvidedIDs != nil {
+		serializeAssociationUserProvidedIDList(s, schemas.SecurityGroupAssociations_userProvidedIDs, v.UserProvidedIDs)
+	}
+	if v.VmUUIDs != nil {
+		serializeAssociationVmUUIDList(s, schemas.SecurityGroupAssociations_vmUUIDs, v.VmUUIDs)
+	}
+}
+func (v *SecurityGroupAssociations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupAssociations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupAssociations_cidrs:
+			return deserializeAssociationCidrList(d, schemas.SecurityGroupAssociations_cidrs, &v.Cidrs)
+		case schemas.SecurityGroupAssociations_userProvidedIDs:
+			return deserializeAssociationUserProvidedIDList(d, schemas.SecurityGroupAssociations_userProvidedIDs, &v.UserProvidedIDs)
+		case schemas.SecurityGroupAssociations_vmUUIDs:
+			return deserializeAssociationVmUUIDList(d, schemas.SecurityGroupAssociations_vmUUIDs, &v.VmUUIDs)
+		}
+		return nil
+	})
+}
+
+// Behavioral configuration for a security group construct.
+type SecurityGroupConfiguration struct {
+
+	// The CIDR ranges and machine identifiers that associate source machines with the
+	// security group. Each list provided replaces the stored list rather than merging
+	// into it.
+	Associations *SecurityGroupAssociations
+
+	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Associations != nil {
+		s.WriteStruct(schemas.SecurityGroupConfiguration_associations)
+		v.Associations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SecurityGroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupConfiguration_associations:
+			v.Associations = &SecurityGroupAssociations{}
+			return v.Associations.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Behavioral configuration for a security group rule construct.
+type SecurityGroupRuleConfiguration struct {
+
+	// Whether automatic conversion of CIDR-based sources and destinations to security
+	// group references applies to this rule.
+	EnableReferencing *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupRuleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupRuleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupRuleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableReferencing != nil {
+		s.WriteBool(schemas.SecurityGroupRuleConfiguration_enableReferencing, *v.EnableReferencing)
+	}
+}
+func (v *SecurityGroupRuleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupRuleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupRuleConfiguration_enableReferencing:
+			v.EnableReferencing = new(bool)
+			return d.ReadBool(schemas.SecurityGroupRuleConfiguration_enableReferencing, v.EnableReferencing)
+		}
+		return nil
+	})
+}
+
+// An operation that creates a segment.
+type SegmentCreateOperation struct {
+
+	// The name of the new segment.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the new segment.
+	Description *string
+
+	// Scope tags for the new segment.
+	ScopeTags map[string]string
+
+	// The target AWS account for the new segment.
+	TargetAccount *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SegmentCreateOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentCreateOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentCreateOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SegmentCreateOperation_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SegmentCreateOperation_name, *v.Name)
+	}
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.SegmentCreateOperation_scopeTags, v.ScopeTags)
+	}
+	if v.TargetAccount != nil {
+		s.WriteString(schemas.SegmentCreateOperation_targetAccount, *v.TargetAccount)
+	}
+}
+func (v *SegmentCreateOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentCreateOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentCreateOperation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SegmentCreateOperation_description, v.Description)
+		case schemas.SegmentCreateOperation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SegmentCreateOperation_name, v.Name)
+		case schemas.SegmentCreateOperation_scopeTags:
+			return deserializeScopeTagsMap(d, schemas.SegmentCreateOperation_scopeTags, &v.ScopeTags)
+		case schemas.SegmentCreateOperation_targetAccount:
+			v.TargetAccount = new(string)
+			return d.ReadString(schemas.SegmentCreateOperation_targetAccount, v.TargetAccount)
+		}
+		return nil
+	})
+}
+
+// An operation that deletes a segment from the mapping.
+type SegmentDeleteOperation struct {
+	noSmithyDocumentSerde
+}
+
+func (v *SegmentDeleteOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentDeleteOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentDeleteOperation) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SegmentDeleteOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentDeleteOperation, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// Specifies the operation to perform on a segment during a mapping update.
+// Specify one of a create, update, or delete operation.
+//
+// The following types satisfy this interface:
+//
+//	SegmentOperationMemberCreate
+//	SegmentOperationMemberDelete
+//	SegmentOperationMemberUpdate
+type SegmentOperation interface {
+	isSegmentOperation()
+}
+
+// A create operation to add a new segment.
+type SegmentOperationMemberCreate struct {
+	Value SegmentCreateOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*SegmentOperationMemberCreate) isSegmentOperation() {}
+func (v *SegmentOperationMemberCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentOperation_create)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SegmentOperationMemberCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A delete operation to remove a segment from the mapping.
+type SegmentOperationMemberDelete struct {
+	Value SegmentDeleteOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*SegmentOperationMemberDelete) isSegmentOperation() {}
+func (v *SegmentOperationMemberDelete) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentOperation_delete)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SegmentOperationMemberDelete) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An update operation to modify segment properties.
+type SegmentOperationMemberUpdate struct {
+	Value SegmentUpdateOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*SegmentOperationMemberUpdate) isSegmentOperation() {}
+func (v *SegmentOperationMemberUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentOperation_update)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SegmentOperationMemberUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An operation that updates the properties of a segment.
+type SegmentUpdateOperation struct {
+
+	// The updated description for the segment.
+	Description *string
+
+	// The updated name for the segment.
+	Name *string
+
+	// The updated scope tags for the segment.
+	ScopeTags map[string]string
+
+	// The updated target AWS account for the segment.
+	TargetAccount *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SegmentUpdateOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SegmentUpdateOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SegmentUpdateOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SegmentUpdateOperation_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SegmentUpdateOperation_name, *v.Name)
+	}
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.SegmentUpdateOperation_scopeTags, v.ScopeTags)
+	}
+	if v.TargetAccount != nil {
+		s.WriteString(schemas.SegmentUpdateOperation_targetAccount, *v.TargetAccount)
+	}
+}
+func (v *SegmentUpdateOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SegmentUpdateOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SegmentUpdateOperation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SegmentUpdateOperation_description, v.Description)
+		case schemas.SegmentUpdateOperation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SegmentUpdateOperation_name, v.Name)
+		case schemas.SegmentUpdateOperation_scopeTags:
+			return deserializeScopeTagsMap(d, schemas.SegmentUpdateOperation_scopeTags, &v.ScopeTags)
+		case schemas.SegmentUpdateOperation_targetAccount:
+			v.TargetAccount = new(string)
+			return d.ReadString(schemas.SegmentUpdateOperation_targetAccount, v.TargetAccount)
 		}
 		return nil
 	})
@@ -6604,6 +7826,84 @@ func (v *SourceServerConnectorAction) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// Contains the Amazon Elastic Block Store (Amazon EBS) volume configuration for
+// the disk mappings created later in the source server's Amazon Elastic Compute
+// Cloud (Amazon EC2) launch template. Fields that aren't set get the service's
+// default values.
+type SourceServerVolumeConfiguration struct {
+
+	// Specifies whether the volume is deleted when the launched instance terminates.
+	DeleteOnTermination DeleteOnTermination
+
+	// Provisioned IOPS, for io1, io2 and gp3 volumes.
+	Iops *int64
+
+	// Throughput in MiB/s, for gp3 volumes only.
+	Throughput *int64
+
+	// Provisioned rate for volume initialization, in MiB/s.
+	VolumeInitializationRate *int64
+
+	// EBS volume type.
+	VolumeType VolumeType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceServerVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceServerVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceServerVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteOnTermination != "" {
+		s.WriteString(schemas.SourceServerVolumeConfiguration_deleteOnTermination, string(v.DeleteOnTermination))
+	}
+	if v.Iops != nil {
+		s.WriteInt64(schemas.SourceServerVolumeConfiguration_iops, *v.Iops)
+	}
+	if v.Throughput != nil {
+		s.WriteInt64(schemas.SourceServerVolumeConfiguration_throughput, *v.Throughput)
+	}
+	if v.VolumeInitializationRate != nil {
+		s.WriteInt64(schemas.SourceServerVolumeConfiguration_volumeInitializationRate, *v.VolumeInitializationRate)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.SourceServerVolumeConfiguration_volumeType, string(v.VolumeType))
+	}
+}
+func (v *SourceServerVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceServerVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceServerVolumeConfiguration_deleteOnTermination:
+			var ev string
+			if err := d.ReadString(schemas.SourceServerVolumeConfiguration_deleteOnTermination, &ev); err != nil {
+				return err
+			}
+			v.DeleteOnTermination = DeleteOnTermination(ev)
+			return nil
+		case schemas.SourceServerVolumeConfiguration_iops:
+			v.Iops = new(int64)
+			return d.ReadInt64(schemas.SourceServerVolumeConfiguration_iops, v.Iops)
+		case schemas.SourceServerVolumeConfiguration_throughput:
+			v.Throughput = new(int64)
+			return d.ReadInt64(schemas.SourceServerVolumeConfiguration_throughput, v.Throughput)
+		case schemas.SourceServerVolumeConfiguration_volumeInitializationRate:
+			v.VolumeInitializationRate = new(int64)
+			return d.ReadInt64(schemas.SourceServerVolumeConfiguration_volumeInitializationRate, v.VolumeInitializationRate)
+		case schemas.SourceServerVolumeConfiguration_volumeType:
+			var ev string
+			if err := d.ReadString(schemas.SourceServerVolumeConfiguration_volumeType, &ev); err != nil {
+				return err
+			}
+			v.VolumeType = VolumeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A split target specifying the CIDR block for the new construct.
 type SplitConstruct struct {
 
@@ -6819,23 +8119,28 @@ func (v *SsmParameterStoreParameter) Deserialize(d smithy.ShapeDeserializer) err
 // A construct update to apply during a mapping update operation.
 type StartNetworkMigrationMappingUpdateConstruct struct {
 
-	// The ID of the construct to update.
-	//
-	// This member is required.
-	ConstructID *string
-
 	// The type of the construct.
 	//
 	// This member is required.
 	ConstructType *string
 
-	// The ID of the segment containing the construct.
-	//
-	// This member is required.
-	SegmentID *string
+	// The ID of the construct to update.
+	ConstructID *string
+
+	// The logical identifier for a construct created by a create operation; other
+	// operations identify the construct by constructID. Other entries in the same
+	// request can reference the new construct as {"Ref": "<constructLogicalID>"}.
+	ConstructLogicalID *string
 
 	// The operation to perform on the construct.
 	Operation OperationUnion
+
+	// The ID of the segment containing the construct.
+	SegmentID *string
+
+	// The identifier of a segment created in the same request that this construct
+	// belongs to. Use it instead of segmentID for a new segment.
+	SegmentLogicalID *string
 
 	noSmithyDocumentSerde
 }
@@ -6850,6 +8155,9 @@ func (v *StartNetworkMigrationMappingUpdateConstruct) SerializeMembers(s smithy.
 	if v.ConstructID != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateConstruct_constructID, *v.ConstructID)
 	}
+	if v.ConstructLogicalID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateConstruct_constructLogicalID, *v.ConstructLogicalID)
+	}
 	if v.ConstructType != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateConstruct_constructType, *v.ConstructType)
 	}
@@ -6859,6 +8167,9 @@ func (v *StartNetworkMigrationMappingUpdateConstruct) SerializeMembers(s smithy.
 	if v.SegmentID != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateConstruct_segmentID, *v.SegmentID)
 	}
+	if v.SegmentLogicalID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateConstruct_segmentLogicalID, *v.SegmentLogicalID)
+	}
 }
 func (v *StartNetworkMigrationMappingUpdateConstruct) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartNetworkMigrationMappingUpdateConstruct, func(s *smithy.Schema) error {
@@ -6866,6 +8177,9 @@ func (v *StartNetworkMigrationMappingUpdateConstruct) Deserialize(d smithy.Shape
 		case schemas.StartNetworkMigrationMappingUpdateConstruct_constructID:
 			v.ConstructID = new(string)
 			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateConstruct_constructID, v.ConstructID)
+		case schemas.StartNetworkMigrationMappingUpdateConstruct_constructLogicalID:
+			v.ConstructLogicalID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateConstruct_constructLogicalID, v.ConstructLogicalID)
 		case schemas.StartNetworkMigrationMappingUpdateConstruct_constructType:
 			v.ConstructType = new(string)
 			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateConstruct_constructType, v.ConstructType)
@@ -6874,6 +8188,9 @@ func (v *StartNetworkMigrationMappingUpdateConstruct) Deserialize(d smithy.Shape
 		case schemas.StartNetworkMigrationMappingUpdateConstruct_segmentID:
 			v.SegmentID = new(string)
 			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateConstruct_segmentID, v.SegmentID)
+		case schemas.StartNetworkMigrationMappingUpdateConstruct_segmentLogicalID:
+			v.SegmentLogicalID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateConstruct_segmentLogicalID, v.SegmentLogicalID)
 		}
 		return nil
 	})
@@ -6882,13 +8199,18 @@ func (v *StartNetworkMigrationMappingUpdateConstruct) Deserialize(d smithy.Shape
 // A segment update to apply during a mapping update operation.
 type StartNetworkMigrationMappingUpdateSegment struct {
 
-	// The ID of the segment to update.
-	//
-	// This member is required.
-	SegmentID *string
+	// The operation to perform on the segment.
+	Operation SegmentOperation
 
 	// The updated scope tags for the segment.
 	ScopeTags map[string]string
+
+	// The ID of the segment to update.
+	SegmentID *string
+
+	// An identifier that you choose for a segment created by this request. You can
+	// use it in other constructs in the same request to refer to the new segment.
+	SegmentLogicalID *string
 
 	// The updated target AWS account for the segment.
 	TargetAccount *string
@@ -6903,11 +8225,17 @@ func (v *StartNetworkMigrationMappingUpdateSegment) Serialize(s smithy.ShapeSeri
 }
 
 func (v *StartNetworkMigrationMappingUpdateSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		serializeSegmentOperation(s, schemas.StartNetworkMigrationMappingUpdateSegment_operation, v.Operation)
+	}
 	if v.ScopeTags != nil {
 		serializeScopeTagsMap(s, schemas.StartNetworkMigrationMappingUpdateSegment_scopeTags, v.ScopeTags)
 	}
 	if v.SegmentID != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateSegment_segmentID, *v.SegmentID)
+	}
+	if v.SegmentLogicalID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateSegment_segmentLogicalID, *v.SegmentLogicalID)
 	}
 	if v.TargetAccount != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateSegment_targetAccount, *v.TargetAccount)
@@ -6916,11 +8244,16 @@ func (v *StartNetworkMigrationMappingUpdateSegment) SerializeMembers(s smithy.Sh
 func (v *StartNetworkMigrationMappingUpdateSegment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartNetworkMigrationMappingUpdateSegment, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.StartNetworkMigrationMappingUpdateSegment_operation:
+			return deserializeSegmentOperation(d, schemas.StartNetworkMigrationMappingUpdateSegment_operation, &v.Operation)
 		case schemas.StartNetworkMigrationMappingUpdateSegment_scopeTags:
 			return deserializeScopeTagsMap(d, schemas.StartNetworkMigrationMappingUpdateSegment_scopeTags, &v.ScopeTags)
 		case schemas.StartNetworkMigrationMappingUpdateSegment_segmentID:
 			v.SegmentID = new(string)
 			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateSegment_segmentID, v.SegmentID)
+		case schemas.StartNetworkMigrationMappingUpdateSegment_segmentLogicalID:
+			v.SegmentLogicalID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateSegment_segmentLogicalID, v.SegmentLogicalID)
 		case schemas.StartNetworkMigrationMappingUpdateSegment_targetAccount:
 			v.TargetAccount = new(string)
 			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateSegment_targetAccount, v.TargetAccount)
@@ -7405,6 +8738,73 @@ func (v *UpdateOperation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An operation that updates a construct using native property value types and
+// construct-type-specific behavioral configuration.
+type UpdateOperationV2 struct {
+
+	// Construct-type-specific behavioral configuration to apply, such as security
+	// group associations or security group rule referencing.
+	Configuration OperationConfigurationUnion
+
+	// Whether to exclude this construct from the migration.
+	Excluded *bool
+
+	// The updated name for the construct.
+	Name *string
+
+	// The properties to set or overwrite on the construct, using their native value
+	// types; omitted keys are unchanged.
+	Properties map[string]document.Interface
+
+	// The property keys to remove from the construct.
+	PropertiesToDelete []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateOperationV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOperationV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOperationV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		serializeOperationConfigurationUnion(s, schemas.UpdateOperationV2_configuration, v.Configuration)
+	}
+	if v.Excluded != nil {
+		s.WriteBool(schemas.UpdateOperationV2_excluded, *v.Excluded)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateOperationV2_name, *v.Name)
+	}
+	if v.Properties != nil {
+		serializeEnrichedProperties(s, schemas.UpdateOperationV2_properties, v.Properties)
+	}
+	if v.PropertiesToDelete != nil {
+		serializePropertiesToDelete(s, schemas.UpdateOperationV2_propertiesToDelete, v.PropertiesToDelete)
+	}
+}
+func (v *UpdateOperationV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOperationV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOperationV2_configuration:
+			return deserializeOperationConfigurationUnion(d, schemas.UpdateOperationV2_configuration, &v.Configuration)
+		case schemas.UpdateOperationV2_excluded:
+			v.Excluded = new(bool)
+			return d.ReadBool(schemas.UpdateOperationV2_excluded, v.Excluded)
+		case schemas.UpdateOperationV2_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateOperationV2_name, v.Name)
+		case schemas.UpdateOperationV2_properties:
+			return deserializeEnrichedProperties(d, schemas.UpdateOperationV2_properties, &v.Properties)
+		case schemas.UpdateOperationV2_propertiesToDelete:
+			return deserializePropertiesToDelete(d, schemas.UpdateOperationV2_propertiesToDelete, &v.PropertiesToDelete)
+		}
+		return nil
+	})
+}
+
 // Validate exception field.
 type ValidationExceptionField struct {
 
@@ -7725,5 +9125,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isOperationUnion()       {}
-func (*UnknownUnionMember) isSsmExternalParameter() {}
+func (*UnknownUnionMember) isOperationConfigurationUnion() {}
+func (*UnknownUnionMember) isOperationUnion()              {}
+func (*UnknownUnionMember) isSegmentOperation()            {}
+func (*UnknownUnionMember) isSsmExternalParameter()        {}

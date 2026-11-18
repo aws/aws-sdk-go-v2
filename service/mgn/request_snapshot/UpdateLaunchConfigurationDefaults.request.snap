@@ -1,0 +1,5 @@
+POST /UpdateLaunchConfigurationDefaults
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","largeVolumeConfiguration":{"deleteOnTermination":"ENABLED","iops":1,"throughput":1,"volumeInitializationRate":1,"volumeType":"io1"},"smallVolumeConfiguration":{"deleteOnTermination":"ENABLED","iops":1,"throughput":1,"volumeInitializationRate":1,"volumeType":"io1"},"smallVolumeMaxSize":1,"sourceServerID":"__SourceServerID__"}

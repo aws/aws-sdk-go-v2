@@ -433,6 +433,10 @@ func TestCheckRequestSnapshot_AcceptVpcEndpointConnections(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1214,6 +1218,35 @@ func TestCheckRequestSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_AssociateKmsKeyId(t *testing.T) {
+	input := &AssociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10451,6 +10484,71 @@ func TestCheckRequestSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T) 
 	}
 }
 
+func TestCheckRequestSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &CreateTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		ServiceName:      ptr.String("__ServiceName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &CreateTransitGatewayPeeringAttachmentInput{
 		TransitGatewayId:     ptr.String("__TransitGatewayId__"),
@@ -10458,7 +10556,9 @@ func TestCheckRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -11699,6 +11799,10 @@ func TestCheckRequestSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 				},
 			},
 		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
+		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
 		PeerVpcId:   ptr.String("__PeerVpcId__"),
@@ -11904,6 +12008,58 @@ func TestCheckRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -11984,6 +12140,58 @@ func TestCheckRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -14288,6 +14496,34 @@ func TestCheckRequestSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T) 
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &DeleteTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &DeleteTransitGatewayPeeringAttachmentInput{
 		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
@@ -15837,6 +16073,14 @@ func TestCheckRequestSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -22731,6 +22975,55 @@ func TestCheckRequestSnapshot_DescribeTransitGatewayMulticastDomains(t *testing.
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	input := &DescribeTransitGatewayNetworkFunctionAttachmentsInput{
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayNetworkFunctionAttachments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeTransitGatewayPeeringAttachments(t *testing.T) {
 	input := &DescribeTransitGatewayPeeringAttachmentsInput{
 		TransitGatewayAttachmentIds: []string{
@@ -25446,6 +25739,35 @@ func TestCheckRequestSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	input := &DisassociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34129,6 +34451,82 @@ func TestCheckRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		AddAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPeeringAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -35002,6 +35400,7 @@ func TestCheckRequestSnapshot_ModifyVpcEndpointServicePermissions(t *testing.T) 
 			"__Member__",
 			"__Member__",
 		},
+		PermissionType: types.PermissionType("vpc-endpoint"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -35032,12 +35431,16 @@ func TestCheckRequestSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	}
@@ -35269,6 +35672,58 @@ func TestCheckRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),
@@ -36202,6 +36657,10 @@ func TestCheckRequestSnapshot_RejectVpcEndpointConnections(t *testing.T) {
 		DryRun:    ptr.Bool(true),
 		ServiceId: ptr.String("__ServiceId__"),
 		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransitGatewayAttachmentIds: []string{
 			"__Member__",
 			"__Member__",
 		},
@@ -40902,6 +41361,10 @@ func TestUpdateRequestSnapshot_AcceptVpcEndpointConnections(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -41683,6 +42146,35 @@ func TestUpdateRequestSnapshot_AssociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateKmsKeyId(t *testing.T) {
+	input := &AssociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -50920,6 +51412,71 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayMulticastDomain(t *testing.T)
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &CreateTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayId: ptr.String("__TransitGatewayId__"),
+		ServiceName:      ptr.String("__ServiceName__"),
+		AvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TagSpecifications: []types.TagSpecification{
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceType: types.ResourceType("capacity-reservation"),
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &CreateTransitGatewayPeeringAttachmentInput{
 		TransitGatewayId:     ptr.String("__TransitGatewayId__"),
@@ -50927,7 +51484,9 @@ func TestUpdateRequestSnapshot_CreateTransitGatewayPeeringAttachment(t *testing.
 		PeerAccountId:        ptr.String("__PeerAccountId__"),
 		PeerRegion:           ptr.String("__PeerRegion__"),
 		Options: &types.CreateTransitGatewayPeeringAttachmentRequestOptions{
-			DynamicRouting: types.DynamicRoutingValue("enable"),
+			DynamicRouting:           types.DynamicRoutingValue("enable"),
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
 		},
 		TagSpecifications: []types.TagSpecification{
 			{
@@ -52168,6 +52727,10 @@ func TestUpdateRequestSnapshot_CreateVpcPeeringConnection(t *testing.T) {
 				},
 			},
 		},
+		RequesterPeeringConnectionOptions: &types.CreatePeeringConnectionOptionsRequest{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.MultipathResilienceMode("always-on"),
+		},
 		DryRun:      ptr.Bool(true),
 		VpcId:       ptr.String("__VpcId__"),
 		PeerVpcId:   ptr.String("__PeerVpcId__"),
@@ -52373,6 +52936,58 @@ func TestUpdateRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 				{
 					TunnelInsideCidr:       ptr.String("__TunnelInsideCidr__"),
@@ -52453,6 +53068,58 @@ func TestUpdateRequestSnapshot_CreateVpnConnection(t *testing.T) {
 						},
 					},
 					EnableTunnelLifecycleControl: ptr.Bool(true),
+					Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
+					Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+						{
+							AdditionalKeyExchangeRound: ptr.Int32(1),
+							KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+								{
+									Value: ptr.Int32(1),
+								},
+								{
+									Value: ptr.Int32(1),
+								},
+							},
+							Requirement: types.AdditionalKeyExchangeRequirement("required"),
+						},
+					},
 				},
 			},
 			LocalIpv4NetworkCidr:                ptr.String("__LocalIpv4NetworkCidr__"),
@@ -54757,6 +55424,34 @@ func TestUpdateRequestSnapshot_DeleteTransitGatewayMulticastDomain(t *testing.T)
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &DeleteTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		DryRun:                     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteTransitGatewayPeeringAttachment(t *testing.T) {
 	input := &DeleteTransitGatewayPeeringAttachmentInput{
 		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
@@ -56306,6 +57001,14 @@ func TestUpdateRequestSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 		UltraserverType:       ptr.String("__UltraserverType__"),
 		UltraserverCount:      ptr.Int32(1),
 		AllAvailabilityZones:  ptr.Bool(true),
+		InstanceTypePreferences: []types.CapacityBlockInstanceTypePreference{
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+			{
+				InstanceType: ptr.String("__InstanceType__"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -63200,6 +63903,55 @@ func TestUpdateRequestSnapshot_DescribeTransitGatewayMulticastDomains(t *testing
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTransitGatewayNetworkFunctionAttachments(t *testing.T) {
+	input := &DescribeTransitGatewayNetworkFunctionAttachmentsInput{
+		TransitGatewayAttachmentIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.Filter{
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTransitGatewayNetworkFunctionAttachments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTransitGatewayNetworkFunctionAttachments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeTransitGatewayPeeringAttachments(t *testing.T) {
 	input := &DescribeTransitGatewayPeeringAttachmentsInput{
 		TransitGatewayAttachmentIds: []string{
@@ -65915,6 +66667,35 @@ func TestUpdateRequestSnapshot_DisassociateIpamResourceDiscovery(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateIpamResourceDiscovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateKmsKeyId(t *testing.T) {
+	input := &DisassociateKmsKeyIdInput{
+		SnapshotId: ptr.String("__SnapshotId__"),
+		KmsKeyId:   ptr.String("__KmsKeyId__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateKmsKeyId(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateKmsKeyId"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -74598,6 +75379,82 @@ func TestUpdateRequestSnapshot_ModifyTransitGatewayMeteringPolicy(t *testing.T) 
 	}
 }
 
+func TestUpdateRequestSnapshot_ModifyTransitGatewayNetworkFunctionAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayNetworkFunctionAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		AddAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		AddAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZones: []string{
+			"__Member__",
+			"__Member__",
+		},
+		RemoveAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayNetworkFunctionAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayNetworkFunctionAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ModifyTransitGatewayPeeringAttachment(t *testing.T) {
+	input := &ModifyTransitGatewayPeeringAttachmentInput{
+		TransitGatewayAttachmentId: ptr.String("__TransitGatewayAttachmentId__"),
+		Options: &types.ModifyTransitGatewayPeeringAttachmentRequestOptions{
+			AllowMultipathResilience: ptr.Bool(true),
+			MultipathResilienceMode:  types.TransitGatewayPeeringAttachmentMultipathResilienceMode("always-on"),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ModifyTransitGatewayPeeringAttachment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ModifyTransitGatewayPeeringAttachment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ModifyTransitGatewayPolicyTableEntry(t *testing.T) {
 	input := &ModifyTransitGatewayPolicyTableEntryInput{
 		TransitGatewayPolicyTableId: ptr.String("__TransitGatewayPolicyTableId__"),
@@ -75471,6 +76328,7 @@ func TestUpdateRequestSnapshot_ModifyVpcEndpointServicePermissions(t *testing.T)
 			"__Member__",
 			"__Member__",
 		},
+		PermissionType: types.PermissionType("vpc-endpoint"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -75501,12 +76359,16 @@ func TestUpdateRequestSnapshot_ModifyVpcPeeringConnectionOptions(t *testing.T) {
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		DryRun: ptr.Bool(true),
 		RequesterPeeringConnectionOptions: &types.PeeringConnectionOptionsRequest{
 			AllowDnsResolutionFromRemoteVpc:            ptr.Bool(true),
 			AllowEgressFromLocalClassicLinkToRemoteVpc: ptr.Bool(true),
 			AllowEgressFromLocalVpcToRemoteClassicLink: ptr.Bool(true),
+			AllowMultipathResilience:                   ptr.Bool(true),
+			MultipathResilienceMode:                    types.MultipathResilienceMode("always-on"),
 		},
 		VpcPeeringConnectionId: ptr.String("__VpcPeeringConnectionId__"),
 	}
@@ -75738,6 +76600,58 @@ func TestUpdateRequestSnapshot_ModifyVpnTunnelOptions(t *testing.T) {
 				},
 			},
 			EnableTunnelLifecycleControl: ptr.Bool(true),
+			Phase1AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
+			Phase2AdditionalKeyExchanges: []types.VpnAdditionalKeyExchangeRequest{
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+				{
+					AdditionalKeyExchangeRound: ptr.Int32(1),
+					KeyExchangeMethods: []types.AdditionalKeyExchangeMethodsRequestListValue{
+						{
+							Value: ptr.Int32(1),
+						},
+						{
+							Value: ptr.Int32(1),
+						},
+					},
+					Requirement: types.AdditionalKeyExchangeRequirement("required"),
+				},
+			},
 		},
 		DryRun:                ptr.Bool(true),
 		SkipTunnelReplacement: ptr.Bool(true),
@@ -76671,6 +77585,10 @@ func TestUpdateRequestSnapshot_RejectVpcEndpointConnections(t *testing.T) {
 		DryRun:    ptr.Bool(true),
 		ServiceId: ptr.String("__ServiceId__"),
 		VpcEndpointIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TransitGatewayAttachmentIds: []string{
 			"__Member__",
 			"__Member__",
 		},

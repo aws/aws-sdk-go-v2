@@ -2,4 +2,4 @@ POST /cluster/__Identifier__
 
 Content-Type: application/json
 
-{"clientToken":"__ClientToken__","deletionProtectionEnabled":true,"kmsEncryptionKey":"__KmsEncryptionKey__","multiRegionProperties":{"clusters":["__Member__","__Member__"],"witnessRegion":"__WitnessRegion__"}}
+{"clientToken":"__ClientToken__","deletionProtectionEnabled":true,"kmsEncryptionKey":"__KmsEncryptionKey__","metricGroups":[{"metricGroup":"STATEMENT_STATISTICS"},{"metricGroup":"STATEMENT_STATISTICS"}],"multiRegionProperties":{"clusters":["__Member__","__Member__"],"witnessRegion":"__WitnessRegion__"}}

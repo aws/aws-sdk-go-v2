@@ -87,6 +87,10 @@ type GetClusterOutput struct {
 	// The connection endpoint for the cluster.
 	Endpoint *string
 
+	// The metric groups that you enabled for advanced monitoring on the cluster. If
+	// you haven't enabled any metric groups, the list is empty.
+	MetricGroups []types.MetricGroupResponse
+
 	// Returns the current multi-Region cluster configuration, including witness
 	// region and linked cluster information.
 	MultiRegionProperties *types.MultiRegionProperties
@@ -127,6 +131,9 @@ func (v *GetClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.GetClusterOutput_identifier, *v.Identifier)
 	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupResponseList(s, schemas.GetClusterOutput_metricGroups, v.MetricGroups)
+	}
 	if v.MultiRegionProperties != nil {
 		s.WriteStruct(schemas.GetClusterOutput_multiRegionProperties)
 		v.MultiRegionProperties.SerializeMembers(s)
@@ -160,6 +167,8 @@ func (v *GetClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetClusterOutput_identifier:
 			v.Identifier = new(string)
 			return d.ReadString(schemas.GetClusterOutput_identifier, v.Identifier)
+		case schemas.GetClusterOutput_metricGroups:
+			return deserializeMetricGroupResponseList(d, schemas.GetClusterOutput_metricGroups, &v.MetricGroups)
 		case schemas.GetClusterOutput_multiRegionProperties:
 			v.MultiRegionProperties = &types.MultiRegionProperties{}
 			return v.MultiRegionProperties.Deserialize(d)

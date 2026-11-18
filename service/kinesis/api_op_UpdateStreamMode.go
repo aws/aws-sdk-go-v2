@@ -21,6 +21,10 @@ import (
 // enabling MinimumThroughputBillingCommitment for your account. Once your account
 // has MinimumThroughputBillingCommitment enabled, you can specify the warm
 // throughput in MiB per second that your stream can support in writes.
+//
+// You can't switch a data stream from on-demand to provisioned capacity mode
+// while the stream has one or more queues. Delete the queues with DeleteQueuebefore you
+// change the capacity mode.
 func (c *Client) UpdateStreamMode(ctx context.Context, params *UpdateStreamModeInput, optFns ...func(*Options)) (*UpdateStreamModeOutput, error) {
 	if params == nil {
 		params = &UpdateStreamModeInput{}

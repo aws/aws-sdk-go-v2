@@ -3310,10 +3310,32 @@ type ConformancePackDetail struct {
 	// The last time a conformation pack update was requested.
 	LastUpdateRequestedTime *time.Time
 
+	// An object of type ConformancePackScope , which contains the tag key and optional
+	// tag value that defines which resources trigger an evaluation for the Config
+	// rules in the managed conformance pack.
+	//
+	// Managed conformance packs with a scope populate this field. Custom conformance
+	// packs leave it empty.
+	Scope *ConformancePackScope
+
+	// Contains the identifier of the managed conformance pack that Config deploys in
+	// your account.
+	//
+	// This field applies only to managed conformance packs. Custom conformance packs
+	// leave it empty.
+	Source *ConformancePackSource
+
 	// An object that contains the name or Amazon Resource Name (ARN) of the Amazon
 	// Web Services Systems Manager document (SSM document) and the version of the SSM
 	// document that is used to create a conformance pack.
 	TemplateSSMDocumentDetails *TemplateSSMDocumentDetails
+
+	// The type of the conformance pack. Valid values:
+	//
+	//   - CUSTOM – A custom conformance pack.
+	//
+	//   - MANAGED – A managed conformance pack.
+	Type ConformancePackType
 
 	noSmithyDocumentSerde
 }
@@ -3349,10 +3371,23 @@ func (v *ConformancePackDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateRequestedTime != nil {
 		s.WriteTime(schemas.ConformancePackDetail_LastUpdateRequestedTime, *v.LastUpdateRequestedTime)
 	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.ConformancePackDetail_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.ConformancePackDetail_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.TemplateSSMDocumentDetails != nil {
 		s.WriteStruct(schemas.ConformancePackDetail_TemplateSSMDocumentDetails)
 		v.TemplateSSMDocumentDetails.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConformancePackDetail_Type, string(v.Type))
 	}
 }
 func (v *ConformancePackDetail) Deserialize(d smithy.ShapeDeserializer) error {
@@ -3381,9 +3416,22 @@ func (v *ConformancePackDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ConformancePackDetail_LastUpdateRequestedTime:
 			v.LastUpdateRequestedTime = new(time.Time)
 			return d.ReadTime(schemas.ConformancePackDetail_LastUpdateRequestedTime, v.LastUpdateRequestedTime)
+		case schemas.ConformancePackDetail_Scope:
+			v.Scope = &ConformancePackScope{}
+			return v.Scope.Deserialize(d)
+		case schemas.ConformancePackDetail_Source:
+			v.Source = &ConformancePackSource{}
+			return v.Source.Deserialize(d)
 		case schemas.ConformancePackDetail_TemplateSSMDocumentDetails:
 			v.TemplateSSMDocumentDetails = &TemplateSSMDocumentDetails{}
 			return v.TemplateSSMDocumentDetails.Deserialize(d)
+		case schemas.ConformancePackDetail_Type:
+			var ev string
+			if err := d.ReadString(schemas.ConformancePackDetail_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ConformancePackType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -3541,8 +3589,11 @@ func (v *ConformancePackEvaluationResult) Deserialize(d smithy.ShapeDeserializer
 }
 
 // Input parameters in the form of key-value pairs for the conformance pack, both
-// of which you define. Keys can have a maximum character length of 255 characters,
-// and values can have a maximum length of 4096 characters.
+// of which you define. For managed conformance packs, keys can have a maximum
+// character length of 255 characters, and values can have a maximum length of 1024
+// characters. For custom conformance packs, keys can have a maximum character
+// length of 255 characters, and values can have a maximum length of 4096
+// characters.
 type ConformancePackInputParameter struct {
 
 	// One part of a key-value pair.
@@ -3641,6 +3692,94 @@ func (v *ConformancePackRuleCompliance) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// Defines which resources trigger an evaluation for the Config rules in a
+// conformance pack. The scope is a tag key, or a combination of a tag key and
+// value, that is applied to every rule in the conformance pack. Specify a scope to
+// constrain which resources trigger an evaluation for the rules. Otherwise,
+// evaluations of rules in the conformance pack are triggered when any resource in
+// your recording group changes in configuration.
+type ConformancePackScope struct {
+
+	// The tag key that applies to only those Amazon Web Services resources that you
+	// want to trigger an evaluation for the rules in the conformance pack. Defines the
+	// Scope$TagKeyof all Config rules in the conformance pack.
+	//
+	// This member is required.
+	TagKey *string
+
+	// The tag value that applies to only those Amazon Web Services resources that you
+	// want to trigger an evaluation for the rules in the conformance pack. If you do
+	// not specify a value for TagValue , resources that have the tag key TagKey
+	// trigger an evaluation, regardless of the tag value. Defines the Scope$TagValueof all Config
+	// rules in the conformance pack.
+	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConformancePackScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConformancePackScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConformancePackScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagKey != nil {
+		s.WriteString(schemas.ConformancePackScope_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.ConformancePackScope_TagValue, *v.TagValue)
+	}
+}
+func (v *ConformancePackScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConformancePackScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConformancePackScope_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.ConformancePackScope_TagKey, v.TagKey)
+		case schemas.ConformancePackScope_TagValue:
+			v.TagValue = new(string)
+			return d.ReadString(schemas.ConformancePackScope_TagValue, v.TagValue)
+		}
+		return nil
+	})
+}
+
+// Provides the identifier of the managed conformance pack that Config deploys in
+// your account.
+type ConformancePackSource struct {
+
+	// A predefined identifier for a managed conformance pack. The identifier
+	// specifies which managed conformance pack Config deploys in your account.
+	//
+	// This member is required.
+	SourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConformancePackSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConformancePackSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConformancePackSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceIdentifier != nil {
+		s.WriteString(schemas.ConformancePackSource_SourceIdentifier, *v.SourceIdentifier)
+	}
+}
+func (v *ConformancePackSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConformancePackSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConformancePackSource_SourceIdentifier:
+			v.SourceIdentifier = new(string)
+			return d.ReadString(schemas.ConformancePackSource_SourceIdentifier, v.SourceIdentifier)
+		}
+		return nil
+	})
+}
+
 // Status details of a conformance pack.
 type ConformancePackStatusDetail struct {
 
@@ -3671,6 +3810,14 @@ type ConformancePackStatusDetail struct {
 	//
 	//   - CREATE_FAILED when a conformance pack creation failed in your account.
 	//
+	//   - UPDATE_IN_PROGRESS when a conformance pack update is in progress for an
+	//   account.
+	//
+	//   - UPDATE_COMPLETE when a conformance pack has been successfully updated in
+	//   your account.
+	//
+	//   - UPDATE_FAILED when a conformance pack update failed in your account.
+	//
 	//   - DELETE_IN_PROGRESS when a conformance pack deletion is in progress.
 	//
 	//   - DELETE_FAILED when a conformance pack deletion failed in your account.
@@ -3683,16 +3830,24 @@ type ConformancePackStatusDetail struct {
 	// This member is required.
 	LastUpdateRequestedTime *time.Time
 
-	// Amazon Resource Name (ARN) of CloudFormation stack.
-	//
-	// This member is required.
-	StackArn *string
-
 	// The reason of conformance pack creation failure.
 	ConformancePackStatusReason *string
 
 	// Last time when conformation pack creation and update was successful.
 	LastUpdateCompletedTime *time.Time
+
+	// Amazon Resource Name (ARN) of CloudFormation stack.
+	//
+	// Custom conformance packs populate this field. Managed conformance packs leave
+	// it empty.
+	StackArn *string
+
+	// The type of the conformance pack. Valid values:
+	//
+	//   - CUSTOM – A custom conformance pack.
+	//
+	//   - MANAGED – A managed conformance pack.
+	Type ConformancePackType
 
 	noSmithyDocumentSerde
 }
@@ -3728,6 +3883,9 @@ func (v *ConformancePackStatusDetail) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StackArn != nil {
 		s.WriteString(schemas.ConformancePackStatusDetail_StackArn, *v.StackArn)
 	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConformancePackStatusDetail_Type, string(v.Type))
+	}
 }
 func (v *ConformancePackStatusDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConformancePackStatusDetail, func(s *smithy.Schema) error {
@@ -3760,6 +3918,13 @@ func (v *ConformancePackStatusDetail) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.ConformancePackStatusDetail_StackArn:
 			v.StackArn = new(string)
 			return d.ReadString(schemas.ConformancePackStatusDetail_StackArn, v.StackArn)
+		case schemas.ConformancePackStatusDetail_Type:
+			var ev string
+			if err := d.ReadString(schemas.ConformancePackStatusDetail_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ConformancePackType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -4307,6 +4472,42 @@ func (v *DescribeConfigRulesFilters) Deserialize(d smithy.ShapeDeserializer) err
 			}
 			v.RuleEvaluationVisibility = RuleEvaluationVisibility(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Filters for filtering results from DescribeConformancePacks and DescribeConformancePackStatus by conformance pack type.
+type DescribeConformancePacksFilters struct {
+
+	// Filters results by conformance pack type. Valid values:
+	//
+	//   - CUSTOM – A custom conformance pack.
+	//
+	//   - MANAGED – A managed conformance pack.
+	//
+	// If you specify both values, Config returns conformance packs of either type.
+	Types []ConformancePackType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DescribeConformancePacksFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConformancePacksFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConformancePacksFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Types != nil {
+		serializeConformancePackTypeList(s, schemas.DescribeConformancePacksFilters_Types, v.Types)
+	}
+}
+func (v *DescribeConformancePacksFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConformancePacksFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConformancePacksFilters_Types:
+			return deserializeConformancePackTypeList(d, schemas.DescribeConformancePacksFilters_Types, &v.Types)
 		}
 		return nil
 	})

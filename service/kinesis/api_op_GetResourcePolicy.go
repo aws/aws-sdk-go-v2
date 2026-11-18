@@ -10,13 +10,15 @@ import (
 	"github.com/aws/smithy-go/ptr"
 )
 
-// Returns a policy attached to the specified data stream or consumer. Request
-// patterns can be one of the following:
+// Returns a policy attached to the specified data stream, consumer, or queue.
+// Request patterns can be one of the following:
 //
 //   - Data stream pattern: arn:aws.*:kinesis:.*:\d{12}:.*stream/\S+
 //
 //   - Consumer pattern:
 //     ^(arn):aws.*:kinesis:.*:\d{12}:.*stream\/[a-zA-Z0-9_.-]+\/consumer\/[a-zA-Z0-9_.-]+:[0-9]+
+//
+//   - Queue pattern: arn:aws.*:kinesis:.*:\d{12}:queue/\S+
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}
@@ -34,7 +36,8 @@ func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolic
 
 type GetResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the data stream or consumer.
+	// The Amazon Resource Name (ARN) of a data stream, a queue, or an enhanced
+	// fan-out consumer.
 	//
 	// This member is required.
 	ResourceARN *string

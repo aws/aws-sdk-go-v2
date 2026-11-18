@@ -50,7 +50,8 @@ type CreateAgentProfileInput struct {
 	// This member is required.
 	Name *string
 
-	// The Well-Architected Tool Framework pillars to associate with this profile.
+	// The Amazon Web Services Well-Architected Framework pillars to associate with
+	// this profile.
 	//
 	// This member is required.
 	Pillars []types.Pillar
@@ -152,7 +153,8 @@ type CreateAgentProfileOutput struct {
 	// This member is required.
 	Name *string
 
-	// The Well-Architected Tool Framework pillars associated with the created profile.
+	// The Amazon Web Services Well-Architected Framework pillars associated with the
+	// created profile.
 	//
 	// This member is required.
 	Pillars []types.Pillar

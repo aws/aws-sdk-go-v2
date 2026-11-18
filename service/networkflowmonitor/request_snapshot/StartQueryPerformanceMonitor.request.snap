@@ -1,0 +1,5 @@
+POST /performance-monitors/__MonitorName__/queries
+
+Content-Type: application/json
+
+{"endTime":"2000-01-01T00:00:00Z","filterParameters":[{"field":"__Field__","operator":"EQUALS","values":["__Member__","__Member__"]},{"field":"__Field__","operator":"EQUALS","values":["__Member__","__Member__"]}],"limit":1,"queryType":"TOP_PATHS","startTime":"2000-01-01T00:00:00Z"}

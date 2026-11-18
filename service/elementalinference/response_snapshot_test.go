@@ -371,6 +371,353 @@ func TestCheckResponseSnapshot_CreateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateFunction(t *testing.T) {
+	want := &CreateFunctionOutput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Arn:                 ptr.String("__Arn__"),
+		Id:                  ptr.String("__Id__"),
+		Status:              types.FunctionStatus("CREATING"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.ContextType{
+			types.ContextType("FRAMES"),
+			types.ContextType("FRAMES"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateFunction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateFunction(context.Background(), &CreateFunctionInput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateFunction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateQuestionSet(t *testing.T) {
+	want := &CreateQuestionSetOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateQuestionSet.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateQuestionSet(context.Background(), &CreateQuestionSetInput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateQuestionSet.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateQuestionSetVersion(t *testing.T) {
+	want := &CreateQuestionSetVersionOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateQuestionSetVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateQuestionSetVersion(context.Background(), &CreateQuestionSetVersionInput{
+		Id:          ptr.String("__Id__"),
+		Sha256:      ptr.String("__Sha256__"),
+		Description: ptr.String("__Description__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateQuestionSetVersion.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateScheduleAction(t *testing.T) {
 	want := &CreateScheduleActionOutput{
 		ActionName: ptr.String("__ActionName__"),
@@ -506,6 +853,77 @@ func TestCheckResponseSnapshot_DeleteFeedPolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteFeedPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteFunction(t *testing.T) {
+	want := &DeleteFunctionOutput{
+		Arn:    ptr.String("__Arn__"),
+		Id:     ptr.String("__Id__"),
+		Status: types.FunctionStatus("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteFunction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteFunction(context.Background(), &DeleteFunctionInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteFunction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteQuestionSet(t *testing.T) {
+	want := &DeleteQuestionSetOutput{
+		Arn: ptr.String("__Arn__"),
+		Id:  ptr.String("__Id__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteQuestionSet.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteQuestionSet(context.Background(), &DeleteQuestionSetInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteQuestionSet.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteQuestionSetVersion(t *testing.T) {
+	want := &DeleteQuestionSetVersionOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteQuestionSetVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteQuestionSetVersion(context.Background(), &DeleteQuestionSetVersionInput{
+		Id:                 ptr.String("__Id__"),
+		QuestionSetVersion: ptr.String("__QuestionSetVersion__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteQuestionSetVersion.response", err)
 	}
 }
 
@@ -767,6 +1185,160 @@ func TestCheckResponseSnapshot_GetFixture(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetFunction(t *testing.T) {
+	want := &GetFunctionOutput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Arn:                 ptr.String("__Arn__"),
+		Id:                  ptr.String("__Id__"),
+		Status:              types.FunctionStatus("CREATING"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.ContextType{
+			types.ContextType("FRAMES"),
+			types.ContextType("FRAMES"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetFunction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetFunction(context.Background(), &GetFunctionInput{
+		Id: ptr.String("__Id__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetFunction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetQuestionSet(t *testing.T) {
+	want := &GetQuestionSetOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetQuestionSet.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetQuestionSet(context.Background(), &GetQuestionSetInput{
+		Id:                 ptr.String("__Id__"),
+		QuestionSetVersion: ptr.String("__QuestionSetVersion__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetQuestionSet.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDictionaries(t *testing.T) {
 	want := &ListDictionariesOutput{
 		Dictionaries: []types.DictionarySummary{
@@ -848,6 +1420,143 @@ func TestCheckResponseSnapshot_ListFeeds(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListFeeds.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListFunctions(t *testing.T) {
+	want := &ListFunctionsOutput{
+		Functions: []types.FunctionSummary{
+			{
+				Arn:         ptr.String("__Arn__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Status:      types.FunctionStatus("CREATING"),
+				Target: &types.FunctionTargetMemberBedrock{
+					Value: types.BedrockFunctionTarget{
+						Api:   types.BedrockApi("INVOKE_MODEL"),
+						Model: ptr.String("__Model__"),
+					},
+				},
+				ContextTypes: []types.ContextType{
+					types.ContextType("FRAMES"),
+					types.ContextType("FRAMES"),
+				},
+			},
+			{
+				Arn:         ptr.String("__Arn__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				Status:      types.FunctionStatus("CREATING"),
+				Target: &types.FunctionTargetMemberBedrock{
+					Value: types.BedrockFunctionTarget{
+						Api:   types.BedrockApi("INVOKE_MODEL"),
+						Model: ptr.String("__Model__"),
+					},
+				},
+				ContextTypes: []types.ContextType{
+					types.ContextType("FRAMES"),
+					types.ContextType("FRAMES"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListFunctions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListFunctions(context.Background(), &ListFunctionsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListFunctions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListQuestionSetVersions(t *testing.T) {
+	want := &ListQuestionSetVersionsOutput{
+		Versions: []types.QuestionSetVersionSummary{
+			{
+				Version:        ptr.String("__Version__"),
+				Description:    ptr.String("__Description__"),
+				Sha256:         ptr.String("__Sha256__"),
+				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Version:        ptr.String("__Version__"),
+				Description:    ptr.String("__Description__"),
+				Sha256:         ptr.String("__Sha256__"),
+				LastModifiedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListQuestionSetVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListQuestionSetVersions(context.Background(), &ListQuestionSetVersionsInput{
+		Id:         ptr.String("__Id__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListQuestionSetVersions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListQuestionSets(t *testing.T) {
+	want := &ListQuestionSetsOutput{
+		QuestionSets: []types.QuestionSetSummary{
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Name:          ptr.String("__Name__"),
+				LatestVersion: ptr.String("__LatestVersion__"),
+			},
+			{
+				Arn:           ptr.String("__Arn__"),
+				Id:            ptr.String("__Id__"),
+				Name:          ptr.String("__Name__"),
+				LatestVersion: ptr.String("__LatestVersion__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListQuestionSets.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListQuestionSets(context.Background(), &ListQuestionSetsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListQuestionSets.response", err)
 	}
 }
 
@@ -1288,6 +1997,241 @@ func TestCheckResponseSnapshot_UpdateFeed(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateFeed.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateFunction(t *testing.T) {
+	want := &UpdateFunctionOutput{
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+		Arn:                 ptr.String("__Arn__"),
+		Id:                  ptr.String("__Id__"),
+		Status:              types.FunctionStatus("CREATING"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ContextTypes: []types.ContextType{
+			types.ContextType("FRAMES"),
+			types.ContextType("FRAMES"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateFunction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateFunction(context.Background(), &UpdateFunctionInput{
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Target: &types.FunctionTargetMemberBedrock{
+			Value: types.BedrockFunctionTarget{
+				Api:   types.BedrockApi("INVOKE_MODEL"),
+				Model: ptr.String("__Model__"),
+			},
+		},
+		RequestExpression:   ptr.String("__RequestExpression__"),
+		ResponseExpression:  ptr.String("__ResponseExpression__"),
+		Description:         ptr.String("__Description__"),
+		EventBridgeDelivery: types.EventBridgeDeliveryMode("ENABLED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateFunction.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateQuestionSet(t *testing.T) {
+	want := &UpdateQuestionSetOutput{
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Arn:           ptr.String("__Arn__"),
+		Id:            ptr.String("__Id__"),
+		Name:          ptr.String("__Name__"),
+		Version:       ptr.String("__Version__"),
+		Description:   ptr.String("__Description__"),
+		LatestVersion: ptr.String("__LatestVersion__"),
+		Sha256:        ptr.String("__Sha256__"),
+		References: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateQuestionSet.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateQuestionSet(context.Background(), &UpdateQuestionSetInput{
+		Id: ptr.String("__Id__"),
+		YesNo: []types.YesNoQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+			},
+		},
+		YesNoPerOption: []types.YesNoPerOptionQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		ChooseOne: []types.ChooseOneQuestion{
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+			{
+				Name:     ptr.String("__Name__"),
+				Question: ptr.String("__Question__"),
+				Options: []types.QuestionOption{
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Text: ptr.String("__Text__"),
+					},
+				},
+			},
+		},
+		Name: ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateQuestionSet.response", err)
 	}
 }
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchMemory.GetEvent
+
+{"event":{"actorId":"__ActorId__","eventId":"__EventId__","eventTimestamp":"2000-01-01T00:00:00Z","metadata":{"key0":"__Value__"},"payload":{"conversational":{"unified":{"source":{"object":{"messages":[{"content":{"text":"__Text__"},"role":"USER"},{"content":{"text":"__Text__"},"role":"USER"}]}}}}},"sessionId":"__SessionId__","spaceId":"__SpaceId__"}}

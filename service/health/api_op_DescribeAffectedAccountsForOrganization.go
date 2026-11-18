@@ -52,6 +52,9 @@ type DescribeAffectedAccountsForOrganizationInput struct {
 	// This member is required.
 	EventArn *string
 
+	// Values to narrow the results returned.
+	Filter *types.AffectedAccountFilter
+
 	// The maximum number of items to return in one batch, between 10 and 100,
 	// inclusive.
 	MaxResults *int32
@@ -76,6 +79,11 @@ func (v *DescribeAffectedAccountsForOrganizationInput) SerializeMembers(s smithy
 	if v.EventArn != nil {
 		s.WriteString(schemas.DescribeAffectedAccountsForOrganizationRequest_eventArn, *v.EventArn)
 	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeAffectedAccountsForOrganizationRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeAffectedAccountsForOrganizationRequest_maxResults, *v.MaxResults)
 	}
@@ -85,6 +93,10 @@ func (v *DescribeAffectedAccountsForOrganizationInput) SerializeMembers(s smithy
 }
 
 type DescribeAffectedAccountsForOrganizationOutput struct {
+
+	// The list of affected account entities, including account IDs and their
+	// associated tags.
+	AffectedAccountEntities []types.AccountEntity
 
 	// A JSON set of elements of the affected accounts.
 	AffectedAccounts []string
@@ -125,6 +137,9 @@ func (v *DescribeAffectedAccountsForOrganizationOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeAffectedAccountsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AffectedAccountEntities != nil {
+		serializeAffectedAccountEntityList(s, schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccountEntities, v.AffectedAccountEntities)
+	}
 	if v.AffectedAccounts != nil {
 		serializeaffectedAccountsList(s, schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccounts, v.AffectedAccounts)
 	}
@@ -138,6 +153,8 @@ func (v *DescribeAffectedAccountsForOrganizationOutput) SerializeMembers(s smith
 func (v *DescribeAffectedAccountsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAffectedAccountsForOrganizationResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccountEntities:
+			return deserializeAffectedAccountEntityList(d, schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccountEntities, &v.AffectedAccountEntities)
 		case schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccounts:
 			return deserializeaffectedAccountsList(d, schemas.DescribeAffectedAccountsForOrganizationResponse_affectedAccounts, &v.AffectedAccounts)
 		case schemas.DescribeAffectedAccountsForOrganizationResponse_eventScopeCode:

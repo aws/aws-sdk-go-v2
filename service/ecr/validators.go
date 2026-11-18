@@ -1210,6 +1210,18 @@ func addOpValidatePullThroughCacheRuleValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpValidatePullThroughCacheRule{}, middleware.After)
 }
 
+func validateDeleteReplication(v *types.DeleteReplication) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteReplication"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	if v == nil {
 		return nil
@@ -1383,6 +1395,11 @@ func validateReplicationRule(v *types.ReplicationRule) error {
 	if v.RepositoryFilters != nil {
 		if err := validateRepositoryFilterList(v.RepositoryFilters); err != nil {
 			invalidParams.AddNested("RepositoryFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeleteReplication != nil {
+		if err := validateDeleteReplication(v.DeleteReplication); err != nil {
+			invalidParams.AddNested("DeleteReplication", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

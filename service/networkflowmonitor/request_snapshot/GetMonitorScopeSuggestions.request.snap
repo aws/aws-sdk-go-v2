@@ -1,0 +1,3 @@
+GET /monitor-scope-suggestions?maxResults=1&monitorArn=__MonitorArn__&nextToken=__NextToken__
+
+

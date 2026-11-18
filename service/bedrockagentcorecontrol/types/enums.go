@@ -23,6 +23,77 @@ func (ActorTokenContentType) Values() []ActorTokenContentType {
 	}
 }
 
+type AgentInsightStoreEnablementStatus string
+
+// Enum values for AgentInsightStoreEnablementStatus
+const (
+	AgentInsightStoreEnablementStatusEnabled  AgentInsightStoreEnablementStatus = "ENABLED"
+	AgentInsightStoreEnablementStatusDisabled AgentInsightStoreEnablementStatus = "DISABLED"
+)
+
+// Values returns all known values for AgentInsightStoreEnablementStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInsightStoreEnablementStatus) Values() []AgentInsightStoreEnablementStatus {
+	return []AgentInsightStoreEnablementStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AgentInsightStoreEncryptionMode string
+
+// Enum values for AgentInsightStoreEncryptionMode
+const (
+	AgentInsightStoreEncryptionModeAwsOwnedKmsKey     AgentInsightStoreEncryptionMode = "AWS_OWNED_KMS_KEY"
+	AgentInsightStoreEncryptionModeCustomerManagedKms AgentInsightStoreEncryptionMode = "CUSTOMER_MANAGED_KMS"
+)
+
+// Values returns all known values for AgentInsightStoreEncryptionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInsightStoreEncryptionMode) Values() []AgentInsightStoreEncryptionMode {
+	return []AgentInsightStoreEncryptionMode{
+		"AWS_OWNED_KMS_KEY",
+		"CUSTOMER_MANAGED_KMS",
+	}
+}
+
+type AgentInsightStoreStatus string
+
+// Enum values for AgentInsightStoreStatus
+const (
+	AgentInsightStoreStatusActive AgentInsightStoreStatus = "ACTIVE"
+	// The Store is applying a requested change asynchronously. After an encryption
+	// update, its existing Insights are being re-encrypted under its key, and they
+	// stay readable.
+	AgentInsightStoreStatusUpdating AgentInsightStoreStatus = "UPDATING"
+	// The Store is retained but accepts no eligible output, and Insight cleanup is
+	// complete.
+	AgentInsightStoreStatusInactive AgentInsightStoreStatus = "INACTIVE"
+	// The Store requires customer intervention, and failureReason says what failed.
+	// After a failed encryption update, another encryption update retries it and a
+	// disable is also accepted; after a failed disable, a disable retries it.
+	AgentInsightStoreStatusError AgentInsightStoreStatus = "ERROR"
+)
+
+// Values returns all known values for AgentInsightStoreStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentInsightStoreStatus) Values() []AgentInsightStoreStatus {
+	return []AgentInsightStoreStatus{
+		"ACTIVE",
+		"UPDATING",
+		"INACTIVE",
+		"ERROR",
+	}
+}
+
 type AgentManagedRuntimeType string
 
 // Enum values for AgentManagedRuntimeType
@@ -912,6 +983,30 @@ func (EvaluatorType) Values() []EvaluatorType {
 		"Custom",
 		"CustomCode",
 		"CustomDerived",
+	}
+}
+
+type ExampleField string
+
+// Enum values for ExampleField
+const (
+	//  The example has turns .
+	ExampleFieldTurns ExampleField = "TURNS"
+	//  The example has input .
+	ExampleFieldInput ExampleField = "INPUT"
+	//  The example has actor_profile .
+	ExampleFieldActorProfile ExampleField = "ACTOR_PROFILE"
+)
+
+// Values returns all known values for ExampleField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExampleField) Values() []ExampleField {
+	return []ExampleField{
+		"TURNS",
+		"INPUT",
+		"ACTOR_PROFILE",
 	}
 }
 

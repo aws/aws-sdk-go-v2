@@ -1,3 +1,7 @@
+# v1.63.0 (2026-11-16)
+
+* **Feature**: AWS KMS now supports sharing KMS keys across AWS accounts using AWS Resource Access Manager (AWS RAM). This release adds the optional ResourceOwners parameter to ListKeys, which lists keys owned by the caller's account (SELF), keys shared with the account through AWS RAM, or both.
+
 # v1.62.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

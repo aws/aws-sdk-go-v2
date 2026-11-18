@@ -1,0 +1,3 @@
+GET /scheduling/instances/__InstanceId__/users/__UserId__/timeoffs/__TimeOffId__
+
+

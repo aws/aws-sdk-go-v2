@@ -61,6 +61,14 @@ type CreateServerlessCacheInput struct {
 	// length is 255 characters.
 	Description *string
 
+	// Which serverless cache integrations to enable. Valid values are:
+	//
+	//   - dynamodb – DynamoDB integration.
+	//
+	// DynamoDB integration requires the Valkey engine with a major engine version of
+	// 9 or above. If not specified, no integrations are enabled.
+	Integrations []types.IntegrationRequest
+
 	// ARN of the customer managed key for encrypting the data at rest. If no KMS key
 	// is provided, a default service key is used.
 	KmsKeyId *string
@@ -129,6 +137,9 @@ func (v *CreateServerlessCacheInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.Engine != nil {
 		s.WriteString(schemas.CreateServerlessCacheRequest_Engine, *v.Engine)
+	}
+	if v.Integrations != nil {
+		serializeIntegrationRequestList(s, schemas.CreateServerlessCacheRequest_Integrations, v.Integrations)
 	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateServerlessCacheRequest_KmsKeyId, *v.KmsKeyId)

@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"Pipeline":{"Arn":"__Arn__","Configuration":{"Body":"__Body__"},"CreatedTimeStamp":1,"LastUpdateTimeStamp":1,"Name":"__Name__","Status":"CREATING","StatusReason":{"Description":"__Description__"},"Tags":{"key0":"__Value__"}}}
+{"Pipeline":{"Arn":"__Arn__","Configuration":{"Body":"__Body__"},"ConfigurationSummary":{"DataSources":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"ProcessorCount":1,"Processors":["__Member__","__Member__"],"Sinks":["__Member__","__Member__"],"Sources":[{"Type":"__Type__"},{"Type":"__Type__"}]},"CreatedTimeStamp":1,"LastRefreshTimeStamp":1,"LastUpdateTimeStamp":1,"Name":"__Name__","SourceProgress":{"Active":1,"Total":1},"Status":"CREATING","StatusReason":{"Description":"__Description__"},"Tags":{"key0":"__Value__"}}}

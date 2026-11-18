@@ -2,6 +2,58 @@
 
 package types
 
+type CheckEffect string
+
+// Enum values for CheckEffect
+const (
+	CheckEffectAllow        CheckEffect = "ALLOW"
+	CheckEffectNoImpact     CheckEffect = "NO_IMPACT"
+	CheckEffectImplicitDeny CheckEffect = "IMPLICIT_DENY"
+	CheckEffectExplicitDeny CheckEffect = "EXPLICIT_DENY"
+)
+
+// Values returns all known values for CheckEffect. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CheckEffect) Values() []CheckEffect {
+	return []CheckEffect{
+		"ALLOW",
+		"NO_IMPACT",
+		"IMPLICIT_DENY",
+		"EXPLICIT_DENY",
+	}
+}
+
+type CheckType string
+
+// Enum values for CheckType
+const (
+	CheckTypeServiceControlPolicy  CheckType = "SERVICE_CONTROL_POLICY"
+	CheckTypeResourceControlPolicy CheckType = "RESOURCE_CONTROL_POLICY"
+	CheckTypeVpcEndpoint           CheckType = "VPC_ENDPOINT"
+	CheckTypeResource              CheckType = "RESOURCE"
+	CheckTypePrincipal             CheckType = "PRINCIPAL"
+	CheckTypePermissionsBoundary   CheckType = "PERMISSIONS_BOUNDARY"
+	CheckTypeSession               CheckType = "SESSION"
+)
+
+// Values returns all known values for CheckType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CheckType) Values() []CheckType {
+	return []CheckType{
+		"SERVICE_CONTROL_POLICY",
+		"RESOURCE_CONTROL_POLICY",
+		"VPC_ENDPOINT",
+		"RESOURCE",
+		"PRINCIPAL",
+		"PERMISSIONS_BOUNDARY",
+		"SESSION",
+	}
+}
+
 type EvaluatedEffect string
 
 // Enum values for EvaluatedEffect

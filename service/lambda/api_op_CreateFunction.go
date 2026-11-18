@@ -112,6 +112,9 @@ type CreateFunctionInput struct {
 	// This member is required.
 	Role *string
 
+	// The accelerator resource settings for a Lambda execution environment.
+	AcceleratorConfig *types.AcceleratorConfig
+
 	// The instruction set architecture that the function supports. Enter a string
 	// array with one of the valid values (arm64 or x86_64). The default value is
 	// x86_64 .
@@ -145,7 +148,8 @@ type CreateFunctionInput struct {
 	Environment *types.Environment
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	// can be any whole number between 512 and 10,240 MB. For functions that use
+	// AcceleratorConfig , the maximum is 32,768 MB. For more information, see [Configuring ephemeral storage (console)].
 	//
 	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
@@ -285,6 +289,11 @@ func (v *CreateFunctionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorConfig != nil {
+		s.WriteStruct(schemas.CreateFunctionRequest_AcceleratorConfig)
+		v.AcceleratorConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Architectures != nil {
 		serializeArchitecturesList(s, schemas.CreateFunctionRequest_Architectures, v.Architectures)
 	}
@@ -403,6 +412,9 @@ func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 // Details about a function's configuration.
 type CreateFunctionOutput struct {
 
+	// The accelerator resource settings for a Lambda execution environment.
+	AcceleratorConfig *types.AcceleratorConfig
+
 	// The instruction set architecture that the function supports. Architecture is a
 	// string array with one of the valid values. The default architecture value is
 	// x86_64 .
@@ -437,7 +449,8 @@ type CreateFunctionOutput struct {
 	Environment *types.EnvironmentResponse
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	// can be any whole number between 512 and 10,240 MB. For functions that use
+	// AcceleratorConfig , the maximum is 32,768 MB. For more information, see [Configuring ephemeral storage (console)].
 	//
 	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
@@ -601,6 +614,11 @@ func (v *CreateFunctionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_AcceleratorConfig)
+		v.AcceleratorConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Architectures != nil {
 		serializeArchitecturesList(s, schemas.FunctionConfiguration_Architectures, v.Architectures)
 	}
@@ -754,6 +772,9 @@ func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *CreateFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FunctionConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.FunctionConfiguration_AcceleratorConfig:
+			v.AcceleratorConfig = &types.AcceleratorConfig{}
+			return v.AcceleratorConfig.Deserialize(d)
 		case schemas.FunctionConfiguration_Architectures:
 			return deserializeArchitecturesList(d, schemas.FunctionConfiguration_Architectures, &v.Architectures)
 		case schemas.FunctionConfiguration_CapacityProviderConfig:

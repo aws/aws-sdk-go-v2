@@ -470,6 +470,26 @@ func (m *validateOpListFlowOperations) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListResourcesInContextStore struct {
+}
+
+func (*validateOpListResourcesInContextStore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourcesInContextStore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourcesInContextStoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourcesInContextStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -962,6 +982,10 @@ func addOpListFlowOperationsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListFlowOperations{}, middleware.After)
 }
 
+func addOpListResourcesInContextStoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourcesInContextStore{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1186,6 +1210,39 @@ func validateContainerMonitoringConfigurations(v []types.ContainerMonitoringConf
 	for i := range v {
 		if err := validateContainerMonitoringConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextSet(v *types.ContextSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextSet"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextSets(v map[string]types.ContextSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextSets"}
+	for key := range v {
+		value := v[key]
+		if err := validateContextSet(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2041,6 +2098,11 @@ func validateRuleVariables(v *types.RuleVariables) error {
 	if v.IPSets != nil {
 		if err := validateIPSets(v.IPSets); err != nil {
 			invalidParams.AddNested("IPSets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContextSets != nil {
+		if err := validateContextSets(v.ContextSets); err != nil {
+			invalidParams.AddNested("ContextSets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2962,6 +3024,21 @@ func validateOpListFlowOperationsInput(v *ListFlowOperationsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListFlowOperationsInput"}
 	if v.FirewallArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourcesInContextStoreInput(v *ListResourcesInContextStoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourcesInContextStoreInput"}
+	if v.ContextStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextStoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

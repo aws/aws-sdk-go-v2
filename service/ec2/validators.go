@@ -470,6 +470,26 @@ func (m *validateOpAssociateIpamResourceDiscovery) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateKmsKeyId struct {
+}
+
+func (*validateOpAssociateKmsKeyId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateKmsKeyId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateKmsKeyIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateKmsKeyIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateNatGatewayAddress struct {
 }
 
@@ -2730,6 +2750,26 @@ func (m *validateOpCreateTransitGatewayMulticastDomain) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTransitGatewayNetworkFunctionAttachment struct {
+}
+
+func (*validateOpCreateTransitGatewayNetworkFunctionAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTransitGatewayNetworkFunctionAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTransitGatewayNetworkFunctionAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTransitGatewayNetworkFunctionAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTransitGatewayPeeringAttachment struct {
 }
 
@@ -4590,6 +4630,26 @@ func (m *validateOpDeleteTransitGatewayMulticastDomain) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTransitGatewayNetworkFunctionAttachment struct {
+}
+
+func (*validateOpDeleteTransitGatewayNetworkFunctionAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTransitGatewayNetworkFunctionAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTransitGatewayNetworkFunctionAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTransitGatewayNetworkFunctionAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTransitGatewayPeeringAttachment struct {
 }
 
@@ -6245,6 +6305,26 @@ func (m *validateOpDisassociateIpamResourceDiscovery) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateIpamResourceDiscoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateKmsKeyId struct {
+}
+
+func (*validateOpDisassociateKmsKeyId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateKmsKeyId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateKmsKeyIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateKmsKeyIdInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -9550,6 +9630,46 @@ func (m *validateOpModifyTransitGatewayMeteringPolicy) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyTransitGatewayNetworkFunctionAttachment struct {
+}
+
+func (*validateOpModifyTransitGatewayNetworkFunctionAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyTransitGatewayNetworkFunctionAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyTransitGatewayNetworkFunctionAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyTransitGatewayNetworkFunctionAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyTransitGatewayPeeringAttachment struct {
+}
+
+func (*validateOpModifyTransitGatewayPeeringAttachment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyTransitGatewayPeeringAttachment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyTransitGatewayPeeringAttachmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyTransitGatewayPeeringAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyTransitGatewayPolicyTableEntry struct {
 }
 
@@ -11682,6 +11802,10 @@ func addOpAssociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpAssociateIpamResourceDiscovery{}, middleware.After)
 }
 
+func addOpAssociateKmsKeyIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateKmsKeyId{}, middleware.After)
+}
+
 func addOpAssociateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateNatGatewayAddress{}, middleware.After)
 }
@@ -12134,6 +12258,10 @@ func addOpCreateTransitGatewayMulticastDomainValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpCreateTransitGatewayMulticastDomain{}, middleware.After)
 }
 
+func addOpCreateTransitGatewayNetworkFunctionAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTransitGatewayNetworkFunctionAttachment{}, middleware.After)
+}
+
 func addOpCreateTransitGatewayPeeringAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTransitGatewayPeeringAttachment{}, middleware.After)
 }
@@ -12506,6 +12634,10 @@ func addOpDeleteTransitGatewayMulticastDomainValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDeleteTransitGatewayMulticastDomain{}, middleware.After)
 }
 
+func addOpDeleteTransitGatewayNetworkFunctionAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTransitGatewayNetworkFunctionAttachment{}, middleware.After)
+}
+
 func addOpDeleteTransitGatewayPeeringAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTransitGatewayPeeringAttachment{}, middleware.After)
 }
@@ -12836,6 +12968,10 @@ func addOpDisassociateIpamByoasnValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDisassociateIpamResourceDiscoveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateIpamResourceDiscovery{}, middleware.After)
+}
+
+func addOpDisassociateKmsKeyIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateKmsKeyId{}, middleware.After)
 }
 
 func addOpDisassociateNatGatewayAddressValidationMiddleware(stack *middleware.Stack) error {
@@ -13498,6 +13634,14 @@ func addOpModifyTransitGatewayMeteringPolicyValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpModifyTransitGatewayMeteringPolicy{}, middleware.After)
 }
 
+func addOpModifyTransitGatewayNetworkFunctionAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyTransitGatewayNetworkFunctionAttachment{}, middleware.After)
+}
+
+func addOpModifyTransitGatewayPeeringAttachmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyTransitGatewayPeeringAttachment{}, middleware.After)
+}
+
 func addOpModifyTransitGatewayPolicyTableEntryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyTransitGatewayPolicyTableEntry{}, middleware.After)
 }
@@ -13904,6 +14048,23 @@ func addOpValidateSecurityGroupQuotasForInterfaceValidationMiddleware(stack *mid
 
 func addOpWithdrawByoipCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpWithdrawByoipCidr{}, middleware.After)
+}
+
+func validateAdditionalKeyExchangesRequestSpecification(v []types.VpnAdditionalKeyExchangeRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalKeyExchangesRequestSpecification"}
+	for i := range v {
+		if err := validateVpnAdditionalKeyExchangeRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAddPrefixListEntries(v []types.AddPrefixListEntry) error {
@@ -14665,6 +14826,28 @@ func validateMemoryMiBRequest(v *types.MemoryMiBRequest) error {
 	}
 }
 
+func validateModifyVpnTunnelOptionsSpecification(v *types.ModifyVpnTunnelOptionsSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyVpnTunnelOptionsSpecification"}
+	if v.Phase1AdditionalKeyExchanges != nil {
+		if err := validateAdditionalKeyExchangesRequestSpecification(v.Phase1AdditionalKeyExchanges); err != nil {
+			invalidParams.AddNested("Phase1AdditionalKeyExchanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Phase2AdditionalKeyExchanges != nil {
+		if err := validateAdditionalKeyExchangesRequestSpecification(v.Phase2AdditionalKeyExchanges); err != nil {
+			invalidParams.AddNested("Phase2AdditionalKeyExchanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNatFlexCostAllocationPolicyDocument(v *types.NatFlexCostAllocationPolicyDocument) error {
 	if v == nil {
 		return nil
@@ -15104,6 +15287,77 @@ func validateVpcEncryptionControlConfiguration(v *types.VpcEncryptionControlConf
 	}
 }
 
+func validateVpnAdditionalKeyExchangeRequest(v *types.VpnAdditionalKeyExchangeRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpnAdditionalKeyExchangeRequest"}
+	if v.AdditionalKeyExchangeRound == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdditionalKeyExchangeRound"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpnConnectionOptionsSpecification(v *types.VpnConnectionOptionsSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpnConnectionOptionsSpecification"}
+	if v.TunnelOptions != nil {
+		if err := validateVpnTunnelOptionsSpecificationsList(v.TunnelOptions); err != nil {
+			invalidParams.AddNested("TunnelOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpnTunnelOptionsSpecification(v *types.VpnTunnelOptionsSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpnTunnelOptionsSpecification"}
+	if v.Phase1AdditionalKeyExchanges != nil {
+		if err := validateAdditionalKeyExchangesRequestSpecification(v.Phase1AdditionalKeyExchanges); err != nil {
+			invalidParams.AddNested("Phase1AdditionalKeyExchanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Phase2AdditionalKeyExchanges != nil {
+		if err := validateAdditionalKeyExchangesRequestSpecification(v.Phase2AdditionalKeyExchanges); err != nil {
+			invalidParams.AddNested("Phase2AdditionalKeyExchanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpnTunnelOptionsSpecificationsList(v []types.VpnTunnelOptionsSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpnTunnelOptionsSpecificationsList"}
+	for i := range v {
+		if err := validateVpnTunnelOptionsSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptAddressTransferInput(v *AcceptAddressTransferInput) error {
 	if v == nil {
 		return nil
@@ -15476,6 +15730,21 @@ func validateOpAssociateIpamResourceDiscoveryInput(v *AssociateIpamResourceDisco
 	}
 	if v.IpamResourceDiscoveryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateKmsKeyIdInput(v *AssociateKmsKeyIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateKmsKeyIdInput"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17539,6 +17808,24 @@ func validateOpCreateTransitGatewayMulticastDomainInput(v *CreateTransitGatewayM
 	}
 }
 
+func validateOpCreateTransitGatewayNetworkFunctionAttachmentInput(v *CreateTransitGatewayNetworkFunctionAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTransitGatewayNetworkFunctionAttachmentInput"}
+	if v.TransitGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayId"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTransitGatewayPeeringAttachmentInput(v *CreateTransitGatewayPeeringAttachmentInput) error {
 	if v == nil {
 		return nil
@@ -17863,6 +18150,11 @@ func validateOpCreateVpnConnectionInput(v *CreateVpnConnectionInput) error {
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Options != nil {
+		if err := validateVpnConnectionOptionsSpecification(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18997,6 +19289,21 @@ func validateOpDeleteTransitGatewayMulticastDomainInput(v *DeleteTransitGatewayM
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTransitGatewayMulticastDomainInput"}
 	if v.TransitGatewayMulticastDomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayMulticastDomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTransitGatewayNetworkFunctionAttachmentInput(v *DeleteTransitGatewayNetworkFunctionAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTransitGatewayNetworkFunctionAttachmentInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20330,6 +20637,21 @@ func validateOpDisassociateIpamResourceDiscoveryInput(v *DisassociateIpamResourc
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIpamResourceDiscoveryInput"}
 	if v.IpamResourceDiscoveryAssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpamResourceDiscoveryAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateKmsKeyIdInput(v *DisassociateKmsKeyIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateKmsKeyIdInput"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -23113,6 +23435,36 @@ func validateOpModifyTransitGatewayMeteringPolicyInput(v *ModifyTransitGatewayMe
 	}
 }
 
+func validateOpModifyTransitGatewayNetworkFunctionAttachmentInput(v *ModifyTransitGatewayNetworkFunctionAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyTransitGatewayNetworkFunctionAttachmentInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyTransitGatewayPeeringAttachmentInput(v *ModifyTransitGatewayPeeringAttachmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyTransitGatewayPeeringAttachmentInput"}
+	if v.TransitGatewayAttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayAttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyTransitGatewayPolicyTableEntryInput(v *ModifyTransitGatewayPolicyTableEntryInput) error {
 	if v == nil {
 		return nil
@@ -23562,6 +23914,10 @@ func validateOpModifyVpnTunnelOptionsInput(v *ModifyVpnTunnelOptionsInput) error
 	}
 	if v.TunnelOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TunnelOptions"))
+	} else if v.TunnelOptions != nil {
+		if err := validateModifyVpnTunnelOptionsSpecification(v.TunnelOptions); err != nil {
+			invalidParams.AddNested("TunnelOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
