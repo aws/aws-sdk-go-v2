@@ -89,7 +89,36 @@ func TestIssue3643RangeEndProbe(t *testing.T) {
 	}
 }
 
-func TestDownloadRangeEndRejectsChangedTotal(t *testing.T) {
+func TestDownloadRangeEndRejectsNonEOFMismatch(t *testing.T) {
+	client, _, _, _, _, _ := s3testing.NewDownloadClient()
+	client.Data = bytes.Repeat([]byte("x"), 1000)
+	client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		out, err := s3testing.RangeGetObjectFn(c, in)
+		if err != nil {
+			return nil, err
+		}
+		if aws.ToString(in.Range) == "bytes=513-999" {
+			_ = out.Body.Close()
+			out.Body = io.NopCloser(bytes.NewReader(c.Data[513:900]))
+			out.ContentLength = aws.Int64(387)
+			out.ContentRange = aws.String("bytes 513-899/1000")
+		}
+		return out, nil
+	}
+	manager := New(client, func(o *Options) {
+		o.GetObjectType = types.GetObjectRanges
+		o.PartSizeBytes = 512
+		o.Concurrency = 1
+	})
+	_, err := manager.DownloadObject(context.Background(), &DownloadObjectInput{
+		Bucket: aws.String("test"), Key: aws.String("test"), Range: aws.String("bytes=1-1999"), WriterAt: types.NewWriteAtBuffer(nil),
+	})
+	if err == nil || !strings.Contains(err.Error(), "range mismatch between request 513-999 and response 513-899") {
+		t.Fatalf("expected inconsistent later range to fail, got %v", err)
+	}
+}
+
+func TestDownloadRangeEndAcceptsLaterEOF(t *testing.T) {
 	client, _, _, _, _, _ := s3testing.NewDownloadClient()
 	client.Data = bytes.Repeat([]byte("x"), 1000)
 	client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
@@ -110,10 +139,42 @@ func TestDownloadRangeEndRejectsChangedTotal(t *testing.T) {
 		o.PartSizeBytes = 512
 		o.Concurrency = 1
 	})
-	_, err := manager.DownloadObject(context.Background(), &DownloadObjectInput{
-		Bucket: aws.String("test"), Key: aws.String("test"), Range: aws.String("bytes=1-1999"), WriterAt: types.NewWriteAtBuffer(nil),
+	buffer := types.NewWriteAtBuffer(nil)
+	out, err := manager.DownloadObject(context.Background(), &DownloadObjectInput{
+		Bucket: aws.String("test"), Key: aws.String("test"), Range: aws.String("bytes=1-1999"), WriterAt: buffer,
 	})
-	if err == nil || !strings.Contains(err.Error(), "range mismatch") {
-		t.Fatalf("expected inconsistent later range to fail, got %v", err)
+	if err != nil {
+		t.Fatalf("expected EOF-truncated later range to succeed, got %v", err)
+	}
+	want := client.Data[1:900]
+	if aws.ToInt64(out.ContentLength) != int64(len(want)) || !bytes.Equal(buffer.Bytes(), want) {
+		t.Fatalf("wrong EOF-truncated output: length=%d bytes=%d want=%d", aws.ToInt64(out.ContentLength), len(buffer.Bytes()), len(want))
+	}
+}
+
+func TestDownloadTotalBytesWithoutContentRange(t *testing.T) {
+	for _, tc := range []struct {
+		name   string
+		known  int64
+		length int64
+		want   int64
+	}{
+		{name: "unknown total", known: -1, length: 100, want: 100},
+		{name: "shorter response", known: 200, length: 100, want: 100},
+		{name: "shorter requested range", known: 50, length: 100, want: 50},
+		{name: "equal lengths", known: 100, length: 100, want: 100},
+		{name: "empty response", known: 100, length: 0, want: 0},
+		{name: "unknown empty response", known: -1, length: 0, want: 0},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			d := &downloader{totalBytes: tc.known}
+			d.setTotalBytes(&s3.GetObjectOutput{ContentLength: aws.Int64(tc.length)})
+			if d.err != nil {
+				t.Fatal(d.err)
+			}
+			if d.totalBytes != tc.want {
+				t.Fatalf("totalBytes = %d, want %d", d.totalBytes, tc.want)
+			}
+		})
 	}
 }

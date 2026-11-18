@@ -793,9 +793,9 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 		if err != nil {
 			return nil, err
 		}
-		// S3 truncates a requested range at EOF, including a nonzero first range.
+		// S3 truncates a requested range at EOF.
 		expectedEnd := reqEnd
-		if chunk.start == 0 && respEnd < reqEnd {
+		if respEnd < reqEnd {
 			_, totalStr, _ := strings.Cut(aws.ToString(out.ContentRange), "/")
 			if total, err := strconv.ParseInt(totalStr, 10, 64); err == nil && respEnd == total-1 {
 				expectedEnd = respEnd
@@ -846,8 +846,9 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 	if resp.ContentRange == nil {
 		// ContentRange is nil when the full file contents is provided, and
 		// is not chunked. Use ContentLength instead.
-		if d.totalBytes < 0 {
-			d.totalBytes = aws.ToInt64(resp.ContentLength)
+		length := aws.ToInt64(resp.ContentLength)
+		if d.totalBytes < 0 || length < d.totalBytes {
+			d.totalBytes = length
 		}
 	} else {
 		parts := strings.Split(*resp.ContentRange, "/")
