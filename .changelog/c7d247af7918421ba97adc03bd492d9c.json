@@ -1,8 +1,0 @@
-{
-    "id": "c7d247af-7918-421b-a97a-dc03bd492d9c",
-    "type": "feature",
-    "description": "This release adds API support for configuring trusted identity propagation for IAM SAML and OpenIDConnect providers.",
-    "modules": [
-        "service/iam"
-    ]
-}

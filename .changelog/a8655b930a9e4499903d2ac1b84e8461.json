@@ -1,8 +1,0 @@
-{
-    "id": "a8655b93-0a9e-4499-903d-2ac1b84e8461",
-    "type": "feature",
-    "description": "AWS RTB Fabric now lets you discover modules and attach them to your links. Find modules and their versions with ListAvailableModules, GetAvailableModule, ListAvailableModuleVersions and GetAvailableModuleVersion, attach them with PutLinkFlows and track each change with GetUpdate and ListUpdates.",
-    "modules": [
-        "service/rtbfabric"
-    ]
-}

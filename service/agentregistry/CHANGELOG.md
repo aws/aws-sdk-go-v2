@@ -1,3 +1,7 @@
+# v1.8.0 (2026-11-19)
+
+* **Feature**: BatchGetDiscoverableRegistryRecord returns a short-lived download URL and SHA-256 checksum for approved skill packages. SearchDiscoverableRegistryRecords adds searchType (KEYWORD, SEMANTIC, HYBRID) and pagination. Adds bearer token authentication for registries that use JWT authorization.
+
 # v1.7.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

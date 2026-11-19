@@ -1,8 +1,0 @@
-{
-    "id": "a816dcd4-4263-4e86-a178-67b0df0f8a5d",
-    "type": "feature",
-    "description": "Marketplace revenue shares are now identified by a marketplace revenue share ID. Adds the UpdateMarketplaceRevenueShare API, optional grouping of AWS Marketplace products that run on the same backend AWS infrastructure, and context attributes for revenue attributions.",
-    "modules": [
-        "service/partnercentralrevenuemeasurement"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "652ffe6a-316b-44f1-a9f9-061a101a976f",
-    "type": "feature",
-    "description": "AWS DevOps Agent adds AWS Organizations support so that agent spaces can monitor member accounts across an organizational unit.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

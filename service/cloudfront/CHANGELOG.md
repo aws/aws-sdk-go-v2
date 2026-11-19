@@ -1,3 +1,7 @@
+# v1.76.0 (2026-11-19)
+
+* **Feature**: Amazon CloudFront adds configuration for SNI-less clients on Anycast static IPs, introduces Anycast IP based domain routing for Distribution Tenants, provides automatic domain ownership validation when creating or updating Distribution Tenants, and enables HTTP traffic via DNS validation.
+
 # v1.75.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

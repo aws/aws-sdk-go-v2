@@ -1,3 +1,7 @@
+# v1.60.0 (2026-11-19)
+
+* **Feature**: Adds the AWS Billing x402 payment type to ProcessPayment. Agents can purchase x402-enabled AWS Marketplace products and have the charges billed to the AWS account, without a wallet. Requests use the service-managed payment instrument ID aws.agentcorepayments.awsbilling.v1.
+
 # v1.59.0 (2026-11-17)
 
 * **Feature**: Adds support for continuous insights and automatic dataset generation

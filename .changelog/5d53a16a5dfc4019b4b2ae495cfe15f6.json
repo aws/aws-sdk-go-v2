@@ -1,8 +1,0 @@
-{
-    "id": "5d53a16a-5dfc-4019-b4b2-ae495cfe15f6",
-    "type": "feature",
-    "description": "AWS Certificate Manager now supports the ability to issue certificates from the Amazon N2 certificate authorities (CAs), an Amazon-operated CA hierarchy.",
-    "modules": [
-        "service/acm"
-    ]
-}

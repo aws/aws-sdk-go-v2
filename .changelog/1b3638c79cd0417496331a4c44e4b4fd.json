@@ -1,8 +1,0 @@
-{
-    "id": "1b3638c7-9cd0-4174-9633-1a4c44e4b4fd",
-    "type": "feature",
-    "description": "Adding new API, GetUsageLinesEstimatedCost which can be used to estimate the cost of usage lines.",
-    "modules": [
-        "service/bcmpricingcalculator"
-    ]
-}

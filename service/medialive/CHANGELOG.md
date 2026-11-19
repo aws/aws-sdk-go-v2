@@ -1,3 +1,7 @@
+# v1.116.0 (2026-11-19)
+
+* **Feature**: This feature adds a new codec "JPEGXS" to the Input Specification Codec field. It adds a new "MAX 500 MBPS" maximum bitrate to the maximum bitrate Input Specification field. These input spec changes are used to enable TR-07 inputs and are also tied to metering of JPEGXS inputs.
+
 # v1.115.0 (2026-11-12)
 
 * **Feature**: AWS Elemental MediaLive now adds a caption language setting for MediaPackage V2 output groups that signals a stream carries no closed captions.

@@ -1,8 +1,0 @@
-{
-    "id": "ef2420ac-bfa7-4748-9c0d-b622ef36defe",
-    "type": "feature",
-    "description": "This release adds support for SLAs that track any single-select field, including custom fields, and for updating the target duration of an SLA with the UpdateRelatedItem API.",
-    "modules": [
-        "service/connectcases"
-    ]
-}

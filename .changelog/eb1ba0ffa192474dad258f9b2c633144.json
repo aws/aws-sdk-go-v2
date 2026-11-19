@@ -1,8 +1,0 @@
-{
-    "id": "eb1ba0ff-a192-474d-ad25-8f9b2c633144",
-    "type": "feature",
-    "description": "Add support for deployment configurations for Data as a Service products in AWS Marketplace",
-    "modules": [
-        "service/marketplacedeployment"
-    ]
-}

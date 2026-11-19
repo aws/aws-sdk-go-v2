@@ -1,3 +1,7 @@
+# v1.64.0 (2026-11-19)
+
+* **Feature**: Amazon Inspector Code Security now supports GitHub Enterprise Server integrations. For GitHub Enterprise Server and GitLab Self-Managed, you can connect over a private network by adding a VPC configuration when you create an integration.
+
 # v1.63.0 (2026-11-17)
 
 * **Feature**: This release extends vulnerability management to Google Cloud Platform (GCP) Compute Engine virtual machine (VM) instances, container images in Google Artifact Registry (GAR), and Cloud Run functions.

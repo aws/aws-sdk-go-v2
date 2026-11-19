@@ -1,8 +1,0 @@
-{
-    "id": "5f62141e-fc3a-4512-a5b2-5c27160b430e",
-    "type": "feature",
-    "description": "Adds the tipConfiguration field to profiles to turn on trusted identity propagation, which adds the identity from an X.509 certificate to sessions as origin identity condition keys.",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

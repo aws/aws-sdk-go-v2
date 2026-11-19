@@ -1,3 +1,7 @@
+# v1.80.0 (2026-11-19)
+
+* **Feature**: Adds support for storing user pool app client secrets in AWS Secrets Manager and adds support OAuth Client ID Metadata Document (CIMD) which lets a client use an HTTPS URL as its client ID instead of registering in advance.
+
 # v1.79.0 (2026-11-18)
 
 * **Feature**: Add support for restoring user pool's user data to point in time.

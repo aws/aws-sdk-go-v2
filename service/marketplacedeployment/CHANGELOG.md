@@ -1,3 +1,7 @@
+# v1.21.0 (2026-11-19)
+
+* **Feature**: Add support for deployment configurations for Data as a Service products in AWS Marketplace
+
 # v1.20.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

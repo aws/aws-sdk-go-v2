@@ -1,8 +1,0 @@
-{
-    "id": "66283337-f6e7-4055-af89-4353d31e1dc7",
-    "type": "feature",
-    "description": "Enable stack-level WebAuthn redirection to relay passkey and security-key authentication from a WorkSpaces Applications streaming session to the user's local device.",
-    "modules": [
-        "service/appstream"
-    ]
-}

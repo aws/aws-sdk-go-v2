@@ -1,3 +1,7 @@
+# v1.59.0 (2026-11-19)
+
+* **Feature**: Adds Status and StatusReason to RLSPolicy in GetRLSPolicy and ListRLSPolicies, indicating whether a row-level security policy is valid or references a deleted lookup table or user-defined function
+
 # v1.58.0 (2026-11-10)
 
 * **Feature**: Adds support for governing AWS Glue user-defined functions with Lake Formation permissions. This release adds the UserDefinedFunction and AnyResource resources, the EXECUTE permission, and the GetTemporaryGlueFunctionCredentials and GetGlueFunctionSessionContext APIs.

@@ -1,8 +1,0 @@
-{
-    "id": "35cf89bb-c034-4890-8784-2e39a6c6198d",
-    "type": "feature",
-    "description": "Amazon MSK now supports in-place migration of provisioned clusters from Standard to Express brokers. This release adds APIs to assess a cluster before migration and to reassign topics, and returns broker type upgrade details in cluster operations.",
-    "modules": [
-        "service/kafka"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "96c7f3a2-c118-4aaf-88e0-d79d01f1eb28",
-    "type": "feature",
-    "description": "Route 53 Resolver DNS Firewall adds the AutoAllowlist firewall rule type, which observes the domains your VPCs resolve and allows the ones you approve, and the ListFirewallRuleDomains API.",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

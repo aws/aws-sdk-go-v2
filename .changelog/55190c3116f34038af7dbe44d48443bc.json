@@ -1,8 +1,0 @@
-{
-    "id": "55190c31-16f3-4038-af7d-be44d48443bc",
-    "type": "feature",
-    "description": "This release adds five standardized cost metrics to the Cost Explorer API BilledCost, ListCost, ContractedCost, PublicEquivalentBilledCost and PublicOnDemandCost. Use these metrics with GetCostAndUsage and GetCostAndUsageWithResources. The metrics return values for usage from November 2026 onwards.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

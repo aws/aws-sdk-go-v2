@@ -1,8 +1,0 @@
-{
-    "id": "be918da5-3cc7-4dbb-bdf8-a2beec661d0b",
-    "type": "feature",
-    "description": "This release exposes additional per-job metadata within code remediation tasks.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

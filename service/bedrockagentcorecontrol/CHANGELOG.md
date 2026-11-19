@@ -1,3 +1,7 @@
+# v1.83.0 (2026-11-19)
+
+* **Feature**: Adds AWS Billing payments to ProcessPayment. Agents can pay x402 sellers that accept AWS Marketplace billing, and the charge goes on the buyer's AWS bill. Adds support for nested virtualization in Runtime Instances. When you turn on nested virtualization, Runtime launches instances with KVM enabled.
+
 # v1.82.0 (2026-11-18)
 
 * **Feature**: Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration

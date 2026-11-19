@@ -1,8 +1,0 @@
-{
-    "id": "1c55e2ee-ca8e-44ee-ad45-a930e55c5fca",
-    "type": "feature",
-    "description": "Initial release of AWS Partner Central Marketing, which AWS Partners use to create co-branded marketing campaigns from AWS-authored templates, tailor and activate their emails, landing pages, documents and social posts, and export campaign assets.",
-    "modules": [
-        "service/partnercentralmarketing"
-    ]
-}
