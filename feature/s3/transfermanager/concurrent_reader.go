@@ -60,7 +60,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	}
 
 	if len(p) == 0 {
-		return 0, nil
+		return 0, r.getErr()
 	}
 
 	clientOptions := []func(*s3.Options){
