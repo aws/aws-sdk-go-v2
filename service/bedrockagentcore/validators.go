@@ -1814,6 +1814,46 @@ func validateAmount(v *types.Amount) error {
 	}
 }
 
+func validateAwsBillingPaymentOptions(v *types.AwsBillingPaymentOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsBillingPaymentOptions"}
+	if v.DpopJwk != nil {
+		if err := validateDpopJwk(v.DpopJwk); err != nil {
+			invalidParams.AddNested("DpopJwk", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAwsBillingX402PaymentInput(v *types.AwsBillingX402PaymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsBillingX402PaymentInput"}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if v.Options != nil {
+		if err := validateAwsBillingPaymentOptions(v.Options); err != nil {
+			invalidParams.AddNested("Options", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBasicAuth(v *types.BasicAuth) error {
 	if v == nil {
 		return nil
@@ -2453,6 +2493,30 @@ func validateDataSourceConfig(v types.DataSourceConfig) error {
 			invalidParams.AddNested("[onlineEvaluationConfigSource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDpopJwk(v *types.DpopJwk) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DpopJwk"}
+	if len(v.Kty) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Kty"))
+	}
+	if len(v.Crv) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Crv"))
+	}
+	if v.X == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("X"))
+	}
+	if v.Y == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Y"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4075,6 +4139,11 @@ func validatePaymentInput(v types.PaymentInput) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PaymentInput"}
 	switch uv := v.(type) {
+	case *types.PaymentInputMemberAwsBillingX402:
+		if err := validateAwsBillingX402PaymentInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[awsBillingX402]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.PaymentInputMemberCryptoX402:
 		if err := validateCryptoX402PaymentInput(&uv.Value); err != nil {
 			invalidParams.AddNested("[cryptoX402]", err.(smithy.InvalidParamsError))

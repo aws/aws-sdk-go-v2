@@ -47,6 +47,33 @@ func (ClientRoutingPolicy) Values() []ClientRoutingPolicy {
 	}
 }
 
+type ConfigurableAction string
+
+// Enum values for ConfigurableAction
+const (
+	// Requires FILTER.
+	ConfigurableActionFilter ConfigurableAction = "FILTER"
+	// Requires ENRICH_REQUEST_EXT.
+	ConfigurableActionEnrichRequestExt ConfigurableAction = "ENRICH_REQUEST_EXT"
+	// Requires ENRICH_REQUEST_HEADERS.
+	ConfigurableActionEnrichRequestHeaders ConfigurableAction = "ENRICH_REQUEST_HEADERS"
+	// Requires READ_REQUEST_BODY or READ_REQUEST_HEADERS.
+	ConfigurableActionObserve ConfigurableAction = "OBSERVE"
+)
+
+// Values returns all known values for ConfigurableAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurableAction) Values() []ConfigurableAction {
+	return []ConfigurableAction{
+		"FILTER",
+		"ENRICH_REQUEST_EXT",
+		"ENRICH_REQUEST_HEADERS",
+		"OBSERVE",
+	}
+}
+
 type ConnectivityType string
 
 // Enum values for ConnectivityType
@@ -67,6 +94,60 @@ func (ConnectivityType) Values() []ConnectivityType {
 		"PUBLIC_INGRESS",
 		"PUBLIC_EGRESS",
 		"EXTERNAL_INBOUND",
+	}
+}
+
+type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	// The VPC no longer exists.
+	ErrorCodeVpcNotFound ErrorCode = "VPC_NOT_FOUND"
+	// A subnet no longer exists.
+	ErrorCodeEc2SubnetNotFound ErrorCode = "EC2_SUBNET_NOT_FOUND"
+	// A security group no longer exists.
+	ErrorCodeEc2SecurityGroupNotFound ErrorCode = "EC2_SECURITY_GROUP_NOT_FOUND"
+	// A subnet has no free IP addresses.
+	ErrorCodeEc2SubnetIpExhaustion ErrorCode = "EC2_SUBNET_IP_EXHAUSTION"
+	// RTB Fabric was denied when it assumed an IAM role in your account.
+	ErrorCodeIamAssumeRoleAccessDenied ErrorCode = "IAM_ASSUME_ROLE_ACCESS_DENIED"
+	// An internal error in RTB Fabric.
+	ErrorCodeInternalError ErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for ErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"VPC_NOT_FOUND",
+		"EC2_SUBNET_NOT_FOUND",
+		"EC2_SECURITY_GROUP_NOT_FOUND",
+		"EC2_SUBNET_IP_EXHAUSTION",
+		"IAM_ASSUME_ROLE_ACCESS_DENIED",
+		"INTERNAL_ERROR",
+	}
+}
+
+type FailureMode string
+
+// Enum values for FailureMode
+const (
+	// Continue the flow. The default.
+	FailureModeOpen FailureMode = "OPEN"
+	// Short-circuit with a no-bid.
+	FailureModeClosed FailureMode = "CLOSED"
+)
+
+// Values returns all known values for FailureMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FailureMode) Values() []FailureMode {
+	return []FailureMode{
+		"OPEN",
+		"CLOSED",
 	}
 }
 
@@ -144,6 +225,8 @@ const (
 	LinkStatusPendingIsolation   LinkStatus = "PENDING_ISOLATION"
 	LinkStatusIsolated           LinkStatus = "ISOLATED"
 	LinkStatusPendingRestoration LinkStatus = "PENDING_RESTORATION"
+	LinkStatusCreateFailed       LinkStatus = "CREATE_FAILED"
+	LinkStatusDeleteFailed       LinkStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for LinkStatus. Note that this can be expanded
@@ -165,6 +248,68 @@ func (LinkStatus) Values() []LinkStatus {
 		"PENDING_ISOLATION",
 		"ISOLATED",
 		"PENDING_RESTORATION",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type ModulePermission string
+
+// Enum values for ModulePermission
+const (
+	// Read the bid request body.
+	ModulePermissionReadRequestBody ModulePermission = "READ_REQUEST_BODY"
+	// Read the bid request headers.
+	ModulePermissionReadRequestHeaders ModulePermission = "READ_REQUEST_HEADERS"
+	// Change the bid request body.
+	ModulePermissionMutateRequestBody ModulePermission = "MUTATE_REQUEST_BODY"
+	// Add headers to the bid request.
+	ModulePermissionEnrichRequestHeaders ModulePermission = "ENRICH_REQUEST_HEADERS"
+	// Write data into the bid request's ext object.
+	ModulePermissionEnrichRequestExt ModulePermission = "ENRICH_REQUEST_EXT"
+	// Drop the bid request and return a no-bid.
+	ModulePermissionFilter ModulePermission = "FILTER"
+)
+
+// Values returns all known values for ModulePermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModulePermission) Values() []ModulePermission {
+	return []ModulePermission{
+		"READ_REQUEST_BODY",
+		"READ_REQUEST_HEADERS",
+		"MUTATE_REQUEST_BODY",
+		"ENRICH_REQUEST_HEADERS",
+		"ENRICH_REQUEST_EXT",
+		"FILTER",
+	}
+}
+
+type ModuleVersionStatus string
+
+// Enum values for ModuleVersionStatus
+const (
+	// Being validated.
+	ModuleVersionStatusCreating ModuleVersionStatus = "CREATING"
+	// Terminal. Re-publish as a new version.
+	ModuleVersionStatusCreateFailed ModuleVersionStatus = "CREATE_FAILED"
+	// Attachable.
+	ModuleVersionStatusActive ModuleVersionStatus = "ACTIVE"
+	// Terminal. Can't be attached.
+	ModuleVersionStatusDeprecated ModuleVersionStatus = "DEPRECATED"
+)
+
+// Values returns all known values for ModuleVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModuleVersionStatus) Values() []ModuleVersionStatus {
+	return []ModuleVersionStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"DEPRECATED",
 	}
 }
 
@@ -200,6 +345,8 @@ const (
 	RequesterGatewayStatusIsolated           RequesterGatewayStatus = "ISOLATED"
 	RequesterGatewayStatusPendingIsolation   RequesterGatewayStatus = "PENDING_ISOLATION"
 	RequesterGatewayStatusPendingRestoration RequesterGatewayStatus = "PENDING_RESTORATION"
+	RequesterGatewayStatusCreateFailed       RequesterGatewayStatus = "CREATE_FAILED"
+	RequesterGatewayStatusDeleteFailed       RequesterGatewayStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for RequesterGatewayStatus. Note that this can
@@ -217,6 +364,8 @@ func (RequesterGatewayStatus) Values() []RequesterGatewayStatus {
 		"ISOLATED",
 		"PENDING_ISOLATION",
 		"PENDING_RESTORATION",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
 	}
 }
 
@@ -274,6 +423,8 @@ const (
 	ResponderGatewayStatusIsolated           ResponderGatewayStatus = "ISOLATED"
 	ResponderGatewayStatusPendingIsolation   ResponderGatewayStatus = "PENDING_ISOLATION"
 	ResponderGatewayStatusPendingRestoration ResponderGatewayStatus = "PENDING_RESTORATION"
+	ResponderGatewayStatusCreateFailed       ResponderGatewayStatus = "CREATE_FAILED"
+	ResponderGatewayStatusDeleteFailed       ResponderGatewayStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for ResponderGatewayStatus. Note that this can
@@ -291,6 +442,8 @@ func (ResponderGatewayStatus) Values() []ResponderGatewayStatus {
 		"ISOLATED",
 		"PENDING_ISOLATION",
 		"PENDING_RESTORATION",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
 	}
 }
 
@@ -304,6 +457,8 @@ const (
 	RuleStatusDeletionInProgress RuleStatus = "DELETION_IN_PROGRESS"
 	RuleStatusDeleted            RuleStatus = "DELETED"
 	RuleStatusFailed             RuleStatus = "FAILED"
+	RuleStatusCreateFailed       RuleStatus = "CREATE_FAILED"
+	RuleStatusDeleteFailed       RuleStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for RuleStatus. Note that this can be expanded
@@ -318,5 +473,97 @@ func (RuleStatus) Values() []RuleStatus {
 		"DELETION_IN_PROGRESS",
 		"DELETED",
 		"FAILED",
+		"CREATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
+type SubscriptionStatus string
+
+// Enum values for SubscriptionStatus
+const (
+	// The access is current, and you can attach the module's versions.
+	SubscriptionStatusActive SubscriptionStatus = "ACTIVE"
+	// The subscription or share ended. The module is still listed, but its versions
+	// can't be attached.
+	SubscriptionStatusExpired SubscriptionStatus = "EXPIRED"
+)
+
+// Values returns all known values for SubscriptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionStatus) Values() []SubscriptionStatus {
+	return []SubscriptionStatus{
+		"ACTIVE",
+		"EXPIRED",
+	}
+}
+
+type SubscriptionType string
+
+// Enum values for SubscriptionType
+const (
+	// The access is through an AWS Marketplace subscription.
+	SubscriptionTypeMarketplace SubscriptionType = "MARKETPLACE"
+	// The module is your own, or a vendor shares it with you privately.
+	SubscriptionTypePrivate SubscriptionType = "PRIVATE"
+	// The module is an AWS built-in, available to everyone.
+	SubscriptionTypeAwsBuiltIn SubscriptionType = "AWS_BUILT_IN"
+)
+
+// Values returns all known values for SubscriptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionType) Values() []SubscriptionType {
+	return []SubscriptionType{
+		"MARKETPLACE",
+		"PRIVATE",
+		"AWS_BUILT_IN",
+	}
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusInProgress UpdateStatus = "IN_PROGRESS"
+	UpdateStatusSuccessful UpdateStatus = "SUCCESSFUL"
+	UpdateStatusFailed     UpdateStatus = "FAILED"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+	}
+}
+
+type UpdateType string
+
+// Enum values for UpdateType
+const (
+	UpdateTypeGatewayConfigUpdate UpdateType = "GATEWAY_CONFIG_UPDATE"
+	UpdateTypeLinkConfigUpdate    UpdateType = "LINK_CONFIG_UPDATE"
+	UpdateTypeLinkFlowUpdate      UpdateType = "LINK_FLOW_UPDATE"
+	UpdateTypeRoutingRuleUpdate   UpdateType = "ROUTING_RULE_UPDATE"
+)
+
+// Values returns all known values for UpdateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateType) Values() []UpdateType {
+	return []UpdateType{
+		"GATEWAY_CONFIG_UPDATE",
+		"LINK_CONFIG_UPDATE",
+		"LINK_FLOW_UPDATE",
+		"ROUTING_RULE_UPDATE",
 	}
 }

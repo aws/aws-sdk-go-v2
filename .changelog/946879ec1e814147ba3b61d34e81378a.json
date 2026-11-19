@@ -1,0 +1,8 @@
+{
+    "id": "946879ec-1e81-4147-ba3b-61d34e81378a",
+    "type": "feature",
+    "description": "Adds voice cloning to Amazon Polly. The new CreateVoice, GetVoice and DeleteVoice operations create and manage a custom voice from a speaker's recording, usable with the generative engine in all synthesis operations.",
+    "modules": [
+        "service/polly"
+    ]
+}

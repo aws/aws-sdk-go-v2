@@ -1,0 +1,8 @@
+{
+    "id": "5cd5075d-53b0-4088-8b80-0faa39dad7d0",
+    "type": "feature",
+    "description": "AI Listing Experience that provides listing quality, content and feature recommendations through ListAssessments and DescribeAssessment APIs. Adds a new API StartAssessment to trigger Seller testing for Metering and Entitlement integration for products.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

@@ -1301,6 +1301,8 @@ func TestUpdateResponseSnapshot_CreateDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -1578,6 +1580,10 @@ func TestUpdateResponseSnapshot_CreateDBInstance(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -1910,6 +1916,7 @@ func TestUpdateResponseSnapshot_CreateDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -1947,6 +1954,10 @@ func TestUpdateResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -2279,6 +2290,7 @@ func TestUpdateResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -3437,6 +3449,8 @@ func TestUpdateResponseSnapshot_DeleteDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -3776,6 +3790,10 @@ func TestUpdateResponseSnapshot_DeleteDBInstance(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -4108,6 +4126,7 @@ func TestUpdateResponseSnapshot_DeleteDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -5748,6 +5767,8 @@ func TestUpdateResponseSnapshot_DescribeDBClusters(t *testing.T) {
 						CAIdentifier: ptr.String("__CAIdentifier__"),
 						ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+					VPCNetworkingEnabled:         ptr.Bool(true),
+					InternetAccessGatewayEnabled: ptr.Bool(true),
 				},
 				EngineMode: ptr.String("__EngineMode__"),
 				ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -5992,6 +6013,8 @@ func TestUpdateResponseSnapshot_DescribeDBClusters(t *testing.T) {
 						CAIdentifier: ptr.String("__CAIdentifier__"),
 						ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+					VPCNetworkingEnabled:         ptr.Bool(true),
+					InternetAccessGatewayEnabled: ptr.Bool(true),
 				},
 				EngineMode: ptr.String("__EngineMode__"),
 				ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -6599,6 +6622,10 @@ func TestUpdateResponseSnapshot_DescribeDBInstances(t *testing.T) {
 					Port:         ptr.Int32(1),
 					HostedZoneId: ptr.String("__HostedZoneId__"),
 				},
+				PrimaryEndpoint: &types.PrimaryEndpoint{
+					Address:      ptr.String("__Address__"),
+					HostedZoneId: ptr.String("__HostedZoneId__"),
+				},
 				AllocatedStorage:      ptr.Int32(1),
 				InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -6931,6 +6958,7 @@ func TestUpdateResponseSnapshot_DescribeDBInstances(t *testing.T) {
 				StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 				StorageOperationPercentProgress: ptr.Int32(1),
 				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+				VPCNetworkingEnabled:            ptr.Bool(true),
 			},
 			{
 				DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
@@ -6944,6 +6972,10 @@ func TestUpdateResponseSnapshot_DescribeDBInstances(t *testing.T) {
 					Port:         ptr.Int32(1),
 					HostedZoneId: ptr.String("__HostedZoneId__"),
 				},
+				PrimaryEndpoint: &types.PrimaryEndpoint{
+					Address:      ptr.String("__Address__"),
+					HostedZoneId: ptr.String("__HostedZoneId__"),
+				},
 				AllocatedStorage:      ptr.Int32(1),
 				InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -7276,6 +7308,7 @@ func TestUpdateResponseSnapshot_DescribeDBInstances(t *testing.T) {
 				StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 				StorageOperationPercentProgress: ptr.Int32(1),
 				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+				VPCNetworkingEnabled:            ptr.Bool(true),
 			},
 		},
 	}
@@ -11304,6 +11337,8 @@ func TestUpdateResponseSnapshot_FailoverDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -11990,6 +12025,8 @@ func TestUpdateResponseSnapshot_ModifyDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -12236,6 +12273,10 @@ func TestUpdateResponseSnapshot_ModifyDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -12570,6 +12611,7 @@ func TestUpdateResponseSnapshot_ModifyDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -13760,6 +13802,10 @@ func TestUpdateResponseSnapshot_PromoteReadReplica(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -14092,6 +14138,7 @@ func TestUpdateResponseSnapshot_PromoteReadReplica(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -14257,6 +14304,8 @@ func TestUpdateResponseSnapshot_PromoteReadReplicaDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -14576,6 +14625,8 @@ func TestUpdateResponseSnapshot_RebootDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -14714,6 +14765,10 @@ func TestUpdateResponseSnapshot_RebootDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -15048,6 +15103,7 @@ func TestUpdateResponseSnapshot_RebootDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -15548,6 +15604,8 @@ func TestUpdateResponseSnapshot_RestoreDBClusterFromS3(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -15816,6 +15874,8 @@ func TestUpdateResponseSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -16084,6 +16144,8 @@ func TestUpdateResponseSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -16224,6 +16286,10 @@ func TestUpdateResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -16556,6 +16622,7 @@ func TestUpdateResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -16593,6 +16660,10 @@ func TestUpdateResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -16925,6 +16996,7 @@ func TestUpdateResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -16962,6 +17034,10 @@ func TestUpdateResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -17294,6 +17370,7 @@ func TestUpdateResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -17544,6 +17621,8 @@ func TestUpdateResponseSnapshot_StartDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -17682,6 +17761,10 @@ func TestUpdateResponseSnapshot_StartDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -18016,6 +18099,7 @@ func TestUpdateResponseSnapshot_StartDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -18348,6 +18432,8 @@ func TestUpdateResponseSnapshot_StopDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -18486,6 +18572,10 @@ func TestUpdateResponseSnapshot_StopDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -18820,6 +18910,7 @@ func TestUpdateResponseSnapshot_StopDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)
@@ -19096,6 +19187,10 @@ func TestUpdateResponseSnapshot_SwitchoverReadReplica(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -19428,6 +19523,7 @@ func TestUpdateResponseSnapshot_SwitchoverReadReplica(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	proto := restxml.New(schemas.AmazonRDSv19)

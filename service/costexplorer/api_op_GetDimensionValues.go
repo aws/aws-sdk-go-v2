@@ -332,6 +332,16 @@ type GetDimensionValuesInput struct {
 	//
 	//   - NormalizedUsageAmount
 	//
+	//   - BilledCost
+	//
+	//   - ContractedCost
+	//
+	//   - ListCost
+	//
+	//   - PublicEquivalentBilledCost
+	//
+	//   - PublicOnDemandCost
+	//
 	// The supported values for the SortOrder key are ASCENDING or DESCENDING .
 	//
 	// When you specify a SortBy paramater, the context must be COST_AND_USAGE .

@@ -339,6 +339,11 @@ type AgentSpace struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The Amazon Web Services source mode for the AgentSpace, indicating whether its
+	// Amazon Web Services source configuration targets an individual Amazon Web
+	// Services account or an Amazon Web Services Organization.
+	AwsSourceMode AwsSourceMode
+
 	// The description of the AgentSpace.
 	Description *string
 
@@ -366,6 +371,9 @@ func (v *AgentSpace) Serialize(s smithy.ShapeSerializer) {
 func (v *AgentSpace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.AgentSpace_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AwsSourceMode != "" {
+		s.WriteString(schemas.AgentSpace_awsSourceMode, string(v.AwsSourceMode))
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AgentSpace_createdAt, *v.CreatedAt)
@@ -395,6 +403,13 @@ func (v *AgentSpace) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgentSpace_agentSpaceId:
 			v.AgentSpaceId = new(string)
 			return d.ReadString(schemas.AgentSpace_agentSpaceId, v.AgentSpaceId)
+		case schemas.AgentSpace_awsSourceMode:
+			var ev string
+			if err := d.ReadString(schemas.AgentSpace_awsSourceMode, &ev); err != nil {
+				return err
+			}
+			v.AwsSourceMode = AwsSourceMode(ev)
+			return nil
 		case schemas.AgentSpace_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.AgentSpace_createdAt, v.CreatedAt)
@@ -1336,6 +1351,11 @@ type AWSConfiguration struct {
 	// (validation in progress), VALID (role validated), INVALID (validation failed).
 	AgentElevatedRoleArnStatus ValidationStatus
 
+	// The Amazon Resource Name (ARN) of the Organizations service-managed role that
+	// AIDevOps uses to deploy and manage resources across the accounts in your Amazon
+	// Web Services Organization.
+	ServiceManagementRoleArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1360,6 +1380,9 @@ func (v *AWSConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AssumableRoleArn != nil {
 		s.WriteString(schemas.AWSConfiguration_assumableRoleArn, *v.AssumableRoleArn)
+	}
+	if v.ServiceManagementRoleArn != nil {
+		s.WriteString(schemas.AWSConfiguration_serviceManagementRoleArn, *v.ServiceManagementRoleArn)
 	}
 }
 func (v *AWSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1388,6 +1411,9 @@ func (v *AWSConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AWSConfiguration_assumableRoleArn:
 			v.AssumableRoleArn = new(string)
 			return d.ReadString(schemas.AWSConfiguration_assumableRoleArn, v.AssumableRoleArn)
+		case schemas.AWSConfiguration_serviceManagementRoleArn:
+			v.ServiceManagementRoleArn = new(string)
+			return d.ReadString(schemas.AWSConfiguration_serviceManagementRoleArn, v.ServiceManagementRoleArn)
 		}
 		return nil
 	})
@@ -4539,6 +4565,127 @@ func (v *OAuthAdditionalStepDetails) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.OAuthAdditionalStepDetails_authorizationUrl:
 			v.AuthorizationUrl = new(string)
 			return d.ReadString(schemas.OAuthAdditionalStepDetails_authorizationUrl, v.AuthorizationUrl)
+		}
+		return nil
+	})
+}
+
+// Describes the current rollout state of an Amazon Web Services Organization
+// source configuration, including the number of accounts that have been deployed
+// to and any issues encountered during deployment.
+type OrgSourceDeploymentState struct {
+
+	// The number of accounts in the targeted Amazon Web Services Organization or
+	// organizational unit that have successfully been deployed to.
+	DeployedAccountCount *int32
+
+	// The issues encountered while deploying the source configuration across the
+	// accounts in the Amazon Web Services Organization.
+	Issues []OrgSourceIssue
+
+	// The timestamp of the most recent evaluation of the organization-wide deployment
+	// state.
+	LastEvaluatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrgSourceDeploymentState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrgSourceDeploymentState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrgSourceDeploymentState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeployedAccountCount != nil {
+		s.WriteInt32(schemas.OrgSourceDeploymentState_deployedAccountCount, *v.DeployedAccountCount)
+	}
+	if v.Issues != nil {
+		serializeOrgSourceIssueList(s, schemas.OrgSourceDeploymentState_issues, v.Issues)
+	}
+	if v.LastEvaluatedAt != nil {
+		s.WriteTime(schemas.OrgSourceDeploymentState_lastEvaluatedAt, *v.LastEvaluatedAt)
+	}
+}
+func (v *OrgSourceDeploymentState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrgSourceDeploymentState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrgSourceDeploymentState_deployedAccountCount:
+			v.DeployedAccountCount = new(int32)
+			return d.ReadInt32(schemas.OrgSourceDeploymentState_deployedAccountCount, v.DeployedAccountCount)
+		case schemas.OrgSourceDeploymentState_issues:
+			return deserializeOrgSourceIssueList(d, schemas.OrgSourceDeploymentState_issues, &v.Issues)
+		case schemas.OrgSourceDeploymentState_lastEvaluatedAt:
+			v.LastEvaluatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrgSourceDeploymentState_lastEvaluatedAt, v.LastEvaluatedAt)
+		}
+		return nil
+	})
+}
+
+// Describes an issue encountered while deploying or evaluating an Amazon Web
+// Services Organization source configuration.
+type OrgSourceIssue struct {
+
+	// The number of accounts affected by this issue.
+	//
+	// This member is required.
+	AccountCount *int32
+
+	// The Amazon Web Services account IDs affected by this issue.
+	//
+	// This member is required.
+	AccountIds []string
+
+	// A code that identifies the reason for the issue.
+	//
+	// This member is required.
+	ReasonCode OrgSourceAccountReasonCode
+
+	// A description of the issue.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrgSourceIssue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrgSourceIssue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrgSourceIssue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountCount != nil {
+		s.WriteInt32(schemas.OrgSourceIssue_accountCount, *v.AccountCount)
+	}
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.OrgSourceIssue_accountIds, v.AccountIds)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.OrgSourceIssue_message, *v.Message)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.OrgSourceIssue_reasonCode, string(v.ReasonCode))
+	}
+}
+func (v *OrgSourceIssue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrgSourceIssue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrgSourceIssue_accountCount:
+			v.AccountCount = new(int32)
+			return d.ReadInt32(schemas.OrgSourceIssue_accountCount, v.AccountCount)
+		case schemas.OrgSourceIssue_accountIds:
+			return deserializeAccountIdList(d, schemas.OrgSourceIssue_accountIds, &v.AccountIds)
+		case schemas.OrgSourceIssue_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OrgSourceIssue_message, v.Message)
+		case schemas.OrgSourceIssue_reasonCode:
+			var ev string
+			if err := d.ReadString(schemas.OrgSourceIssue_reasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = OrgSourceAccountReasonCode(ev)
+			return nil
 		}
 		return nil
 	})
@@ -7865,6 +8012,7 @@ func (v *SendMessageUsageInfo) Deserialize(d smithy.ShapeDeserializer) error {
 //	ServiceConfigurationMemberServicenow
 //	ServiceConfigurationMemberSlack
 //	ServiceConfigurationMemberSourceAws
+//	ServiceConfigurationMemberSourceAwsOrg
 type ServiceConfiguration interface {
 	isServiceConfiguration()
 }
@@ -8224,6 +8372,25 @@ func (v *ServiceConfigurationMemberSourceAws) Serialize(s smithy.ShapeSerializer
 	s.CloseStruct()
 }
 func (v *ServiceConfigurationMemberSourceAws) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The Amazon Web Services Organization source configuration used to monitor
+// resources across an entire Amazon Web Services Organization or specified
+// organizational units.
+type ServiceConfigurationMemberSourceAwsOrg struct {
+	Value SourceAwsOrgConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberSourceAwsOrg) isServiceConfiguration() {}
+func (v *ServiceConfigurationMemberSourceAwsOrg) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceConfiguration_sourceAwsOrg)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ServiceConfigurationMemberSourceAwsOrg) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -9075,6 +9242,116 @@ func (v *SourceAwsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SourceAwsConfiguration_externalId:
 			v.ExternalId = new(string)
 			return d.ReadString(schemas.SourceAwsConfiguration_externalId, v.ExternalId)
+		}
+		return nil
+	})
+}
+
+// Configuration for Amazon Web Services Organization-wide source account
+// integration. Use this configuration to monitor Amazon Web Services resources
+// across multiple accounts within an organization or within targeted
+// organizational units.
+type SourceAwsOrgConfiguration struct {
+
+	// The account type for this configuration. For Amazon Web Services
+	// Organization-level configurations, this value is source .
+	//
+	// This member is required.
+	AccountType SourceAccountType
+
+	// The organizational units within the Amazon Web Services Organization that are
+	// targeted for source monitoring.
+	//
+	// This member is required.
+	OrganizationalUnit *SourceAwsOrgUnit
+
+	// The current deployment state of the Amazon Web Services Organization-wide
+	// source configuration.
+	DeploymentState *OrgSourceDeploymentState
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceAwsOrgConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceAwsOrgConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceAwsOrgConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountType != "" {
+		s.WriteString(schemas.SourceAwsOrgConfiguration_accountType, string(v.AccountType))
+	}
+	if v.DeploymentState != nil {
+		s.WriteStruct(schemas.SourceAwsOrgConfiguration_deploymentState)
+		v.DeploymentState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnit != nil {
+		s.WriteStruct(schemas.SourceAwsOrgConfiguration_organizationalUnit)
+		v.OrganizationalUnit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceAwsOrgConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceAwsOrgConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceAwsOrgConfiguration_accountType:
+			var ev string
+			if err := d.ReadString(schemas.SourceAwsOrgConfiguration_accountType, &ev); err != nil {
+				return err
+			}
+			v.AccountType = SourceAccountType(ev)
+			return nil
+		case schemas.SourceAwsOrgConfiguration_deploymentState:
+			v.DeploymentState = &OrgSourceDeploymentState{}
+			return v.DeploymentState.Deserialize(d)
+		case schemas.SourceAwsOrgConfiguration_organizationalUnit:
+			v.OrganizationalUnit = &SourceAwsOrgUnit{}
+			return v.OrganizationalUnit.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Identifies an Organizations organizational unit and its member accounts that
+// are targeted for source monitoring.
+type SourceAwsOrgUnit struct {
+
+	// The identifier of the Organizations organizational unit.
+	//
+	// This member is required.
+	OrganizationalUnitId *string
+
+	// The Amazon Web Services account IDs that belong to this organizational unit and
+	// are targeted for source monitoring.
+	AccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceAwsOrgUnit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceAwsOrgUnit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceAwsOrgUnit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.SourceAwsOrgUnit_accountIds, v.AccountIds)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.SourceAwsOrgUnit_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+}
+func (v *SourceAwsOrgUnit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceAwsOrgUnit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceAwsOrgUnit_accountIds:
+			return deserializeAccountIdList(d, schemas.SourceAwsOrgUnit_accountIds, &v.AccountIds)
+		case schemas.SourceAwsOrgUnit_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.SourceAwsOrgUnit_organizationalUnitId, v.OrganizationalUnitId)
 		}
 		return nil
 	})

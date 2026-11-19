@@ -1188,6 +1188,9 @@ func TestCheckResponseSnapshot_CreateConnectionGroup(t *testing.T) {
 			Status:          ptr.String("__Status__"),
 			Enabled:         ptr.Bool(true),
 			IsDefault:       ptr.Bool(true),
+			ViewerFallback: &types.ViewerFallback{
+				DistributionId: ptr.String("__DistributionId__"),
+			},
 		},
 		ETag: ptr.String("__ETag__"),
 	}
@@ -1216,6 +1219,9 @@ func TestCheckResponseSnapshot_CreateConnectionGroup(t *testing.T) {
 		},
 		AnycastIpListId: ptr.String("__AnycastIpListId__"),
 		Enabled:         ptr.Bool(true),
+		ViewerFallback: &types.ViewerFallback{
+			DistributionId: ptr.String("__DistributionId__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2562,12 +2568,14 @@ func TestCheckResponseSnapshot_CreateDistributionTenant(t *testing.T) {
 			Arn:            ptr.String("__Arn__"),
 			Domains: []types.DomainResult{
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 			},
 			Tags: &types.Tags{
@@ -2629,10 +2637,12 @@ func TestCheckResponseSnapshot_CreateDistributionTenant(t *testing.T) {
 		Name:           ptr.String("__Name__"),
 		Domains: []types.DomainItem{
 			{
-				Domain: ptr.String("__Domain__"),
+				Domain:  ptr.String("__Domain__"),
+				ServeOn: types.ServeOn("any"),
 			},
 			{
-				Domain: ptr.String("__Domain__"),
+				Domain:  ptr.String("__Domain__"),
+				ServeOn: types.ServeOn("any"),
 			},
 		},
 		Tags: &types.Tags{
@@ -2679,7 +2689,8 @@ func TestCheckResponseSnapshot_CreateDistributionTenant(t *testing.T) {
 			PrimaryDomainName:                        ptr.String("__PrimaryDomainName__"),
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("enabled"),
 		},
-		Enabled: ptr.Bool(true),
+		Enabled:          ptr.Bool(true),
+		OnDomainTakeover: types.OnDomainTakeover("allow"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6283,6 +6294,9 @@ func TestCheckResponseSnapshot_GetConnectionGroup(t *testing.T) {
 			Status:          ptr.String("__Status__"),
 			Enabled:         ptr.Bool(true),
 			IsDefault:       ptr.Bool(true),
+			ViewerFallback: &types.ViewerFallback{
+				DistributionId: ptr.String("__DistributionId__"),
+			},
 		},
 		ETag: ptr.String("__ETag__"),
 	}
@@ -6331,6 +6345,9 @@ func TestCheckResponseSnapshot_GetConnectionGroupByRoutingEndpoint(t *testing.T)
 			Status:          ptr.String("__Status__"),
 			Enabled:         ptr.Bool(true),
 			IsDefault:       ptr.Bool(true),
+			ViewerFallback: &types.ViewerFallback{
+				DistributionId: ptr.String("__DistributionId__"),
+			},
 		},
 		ETag: ptr.String("__ETag__"),
 	}
@@ -7736,12 +7753,14 @@ func TestCheckResponseSnapshot_GetDistributionTenant(t *testing.T) {
 			Arn:            ptr.String("__Arn__"),
 			Domains: []types.DomainResult{
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 			},
 			Tags: &types.Tags{
@@ -7818,12 +7837,14 @@ func TestCheckResponseSnapshot_GetDistributionTenantByDomain(t *testing.T) {
 			Arn:            ptr.String("__Arn__"),
 			Domains: []types.DomainResult{
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 			},
 			Tags: &types.Tags{
@@ -9528,6 +9549,9 @@ func TestCheckResponseSnapshot_ListConnectionGroups(t *testing.T) {
 				Enabled:          ptr.Bool(true),
 				Status:           ptr.String("__Status__"),
 				IsDefault:        ptr.Bool(true),
+				ViewerFallback: &types.ViewerFallback{
+					DistributionId: ptr.String("__DistributionId__"),
+				},
 			},
 			{
 				Id:               ptr.String("__Id__"),
@@ -9541,6 +9565,9 @@ func TestCheckResponseSnapshot_ListConnectionGroups(t *testing.T) {
 				Enabled:          ptr.Bool(true),
 				Status:           ptr.String("__Status__"),
 				IsDefault:        ptr.Bool(true),
+				ViewerFallback: &types.ViewerFallback{
+					DistributionId: ptr.String("__DistributionId__"),
+				},
 			},
 		},
 	}
@@ -9668,12 +9695,14 @@ func TestCheckResponseSnapshot_ListDistributionTenants(t *testing.T) {
 				Arn:            ptr.String("__Arn__"),
 				Domains: []types.DomainResult{
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 				},
 				ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
@@ -9706,12 +9735,14 @@ func TestCheckResponseSnapshot_ListDistributionTenants(t *testing.T) {
 				Arn:            ptr.String("__Arn__"),
 				Domains: []types.DomainResult{
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 				},
 				ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
@@ -9774,12 +9805,14 @@ func TestCheckResponseSnapshot_ListDistributionTenantsByCustomization(t *testing
 				Arn:            ptr.String("__Arn__"),
 				Domains: []types.DomainResult{
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 				},
 				ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
@@ -9812,12 +9845,14 @@ func TestCheckResponseSnapshot_ListDistributionTenantsByCustomization(t *testing
 				Arn:            ptr.String("__Arn__"),
 				Domains: []types.DomainResult{
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 					{
-						Domain: ptr.String("__Domain__"),
-						Status: types.DomainStatus("active"),
+						Domain:  ptr.String("__Domain__"),
+						Status:  types.DomainStatus("active"),
+						ServeOn: types.ServeOn("any"),
 					},
 				},
 				ConnectionGroupId: ptr.String("__ConnectionGroupId__"),
@@ -20021,6 +20056,9 @@ func TestCheckResponseSnapshot_UpdateConnectionGroup(t *testing.T) {
 			Status:          ptr.String("__Status__"),
 			Enabled:         ptr.Bool(true),
 			IsDefault:       ptr.Bool(true),
+			ViewerFallback: &types.ViewerFallback{
+				DistributionId: ptr.String("__DistributionId__"),
+			},
 		},
 		ETag: ptr.String("__ETag__"),
 	}
@@ -20038,6 +20076,9 @@ func TestCheckResponseSnapshot_UpdateConnectionGroup(t *testing.T) {
 		IfMatch:         ptr.String("__IfMatch__"),
 		AnycastIpListId: ptr.String("__AnycastIpListId__"),
 		Enabled:         ptr.Bool(true),
+		ViewerFallback: &types.ViewerFallback{
+			DistributionId: ptr.String("__DistributionId__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -21386,12 +21427,14 @@ func TestCheckResponseSnapshot_UpdateDistributionTenant(t *testing.T) {
 			Arn:            ptr.String("__Arn__"),
 			Domains: []types.DomainResult{
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 				{
-					Domain: ptr.String("__Domain__"),
-					Status: types.DomainStatus("active"),
+					Domain:  ptr.String("__Domain__"),
+					Status:  types.DomainStatus("active"),
+					ServeOn: types.ServeOn("any"),
 				},
 			},
 			Tags: &types.Tags{
@@ -21453,10 +21496,12 @@ func TestCheckResponseSnapshot_UpdateDistributionTenant(t *testing.T) {
 		DistributionId: ptr.String("__DistributionId__"),
 		Domains: []types.DomainItem{
 			{
-				Domain: ptr.String("__Domain__"),
+				Domain:  ptr.String("__Domain__"),
+				ServeOn: types.ServeOn("any"),
 			},
 			{
-				Domain: ptr.String("__Domain__"),
+				Domain:  ptr.String("__Domain__"),
+				ServeOn: types.ServeOn("any"),
 			},
 		},
 		Customizations: &types.Customizations{
@@ -21492,7 +21537,8 @@ func TestCheckResponseSnapshot_UpdateDistributionTenant(t *testing.T) {
 			PrimaryDomainName:                        ptr.String("__PrimaryDomainName__"),
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("enabled"),
 		},
-		Enabled: ptr.Bool(true),
+		Enabled:          ptr.Bool(true),
+		OnDomainTakeover: types.OnDomainTakeover("allow"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -25648,10 +25694,12 @@ func TestCheckResponseSnapshot_Error_InvalidAssociation(t *testing.T) {
 		Name:           ptr.String("__Name__"),
 		Domains: []types.DomainItem{
 			{
-				Domain: ptr.String("__Domain__"),
+				Domain:  ptr.String("__Domain__"),
+				ServeOn: types.ServeOn("any"),
 			},
 			{
-				Domain: ptr.String("__Domain__"),
+				Domain:  ptr.String("__Domain__"),
+				ServeOn: types.ServeOn("any"),
 			},
 		},
 		Tags: &types.Tags{
@@ -25698,7 +25746,8 @@ func TestCheckResponseSnapshot_Error_InvalidAssociation(t *testing.T) {
 			PrimaryDomainName:                        ptr.String("__PrimaryDomainName__"),
 			CertificateTransparencyLoggingPreference: types.CertificateTransparencyLoggingPreference("enabled"),
 		},
-		Enabled: ptr.Bool(true),
+		Enabled:          ptr.Bool(true),
+		OnDomainTakeover: types.OnDomainTakeover("allow"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

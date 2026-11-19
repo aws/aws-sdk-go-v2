@@ -241,6 +241,7 @@ func TestCheckResponseSnapshot_CreateAgentSpace(t *testing.T) {
 			Preferences: map[string]bool{
 				"key0": true,
 			},
+			AwsSourceMode: types.AwsSourceMode("standalone"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -266,6 +267,7 @@ func TestCheckResponseSnapshot_CreateAgentSpace(t *testing.T) {
 		Preferences: map[string]bool{
 			"key0": true,
 		},
+		AwsSourceMode: types.AwsSourceMode("standalone"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -874,6 +876,7 @@ func TestCheckResponseSnapshot_GetAgentSpace(t *testing.T) {
 			Preferences: map[string]bool{
 				"key0": true,
 			},
+			AwsSourceMode: types.AwsSourceMode("standalone"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1331,6 +1334,7 @@ func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 				Preferences: map[string]bool{
 					"key0": true,
 				},
+				AwsSourceMode: types.AwsSourceMode("standalone"),
 			},
 			{
 				Name:         ptr.String("__Name__"),
@@ -1343,6 +1347,7 @@ func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 				Preferences: map[string]bool{
 					"key0": true,
 				},
+				AwsSourceMode: types.AwsSourceMode("standalone"),
 			},
 		},
 	}
@@ -2453,6 +2458,7 @@ func TestCheckResponseSnapshot_UpdateAgentSpace(t *testing.T) {
 			Preferences: map[string]bool{
 				"key0": true,
 			},
+			AwsSourceMode: types.AwsSourceMode("standalone"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateAgentSpace.response")
@@ -2471,6 +2477,7 @@ func TestCheckResponseSnapshot_UpdateAgentSpace(t *testing.T) {
 		Preferences: map[string]bool{
 			"key0": true,
 		},
+		AwsSourceMode: types.AwsSourceMode("standalone"),
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -4,6 +4,7 @@ package agentregistry
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/document"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/types"
@@ -15,6 +16,11 @@ import (
 //	Searches the discoverable registry records in a registry using a natural
 //
 // language query. Returns metadata for the matching records ordered by relevance.
+//
+// Returns at most 1000 results across all pages when searchType is KEYWORD , and
+// at most 20 results when it is HYBRID or SEMANTIC . To retrieve more records,
+// refine the query or filters, or use ListDiscoverableRegistryRecords to list
+// every record.
 func (c *Client) SearchDiscoverableRegistryRecords(ctx context.Context, params *SearchDiscoverableRegistryRecordsInput, optFns ...func(*Options)) (*SearchDiscoverableRegistryRecordsOutput, error) {
 	if params == nil {
 		params = &SearchDiscoverableRegistryRecordsInput{}
@@ -39,7 +45,10 @@ type SearchDiscoverableRegistryRecordsInput struct {
 	// This member is required.
 	RegistryIds []string
 
-	//  The natural language query to search for matching registry records.
+	//  The natural language query to search for matching registry records. If you
+	// specify an empty string, the operation returns the records that match the
+	// filters , most recently updated first, up to the result limit for the searchType
+	// .
 	//
 	// This member is required.
 	SearchQuery *string
@@ -55,9 +64,38 @@ type SearchDiscoverableRegistryRecordsInput struct {
 	// {"customMetadata.requiresApproval": {"$eq": true}} .
 	Filters document.Interface
 
-	//  The maximum number of results to return. Valid values are 1 through 20. The
-	// default value is 10.
+	//  The maximum number of results to return in one page. Valid values are 1
+	// through 50 when searchType is KEYWORD , and 1 through 20 when it is HYBRID or
+	// SEMANTIC . The default value is 10.
 	MaxResults *int32
+
+	//  The pagination token from a previous response. Use it to retrieve the next
+	// page of results, and send the same searchQuery , registryIds , filters , and
+	// searchType that you used for the first page. If any of them differ, the request
+	// fails with a ValidationException . A pagination token expires 15 minutes after
+	// the service returns the first page.
+	NextToken *string
+
+	//  Specifies how the service ranks registry records against the search query. If
+	// you omit this parameter, the service uses HYBRID in Amazon Web Services Regions
+	// that support semantic search and KEYWORD in Regions that do not. The response
+	// reports the search type that the service used. Valid values are the following:
+	//
+	//   - KEYWORD – Ranks records by keyword match between the query terms and the
+	//   record name, description, descriptors, and custom metadata text values.
+	//   Available in every Amazon Web Services Region.
+	//
+	//   - SEMANTIC – Ranks records by semantic similarity to the query and returns the
+	//   most similar records, up to maxResults , even when none of them closely
+	//   matches the query.
+	//
+	//   - HYBRID – Combines keyword ranking and semantic ranking.
+	//
+	// HYBRID and SEMANTIC are available in a limited number of Regions. If you
+	// specify either one in a Region that does not support semantic search, the
+	// request fails with a ValidationException that has the reason UnsupportedInRegion
+	// .
+	SearchType types.SearchType
 
 	noSmithyDocumentSerde
 }
@@ -75,20 +113,40 @@ func (v *SearchDiscoverableRegistryRecordsInput) SerializeMembers(s smithy.Shape
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchDiscoverableRegistryRecordsRequest_maxResults, *v.MaxResults)
 	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDiscoverableRegistryRecordsRequest_nextToken, *v.NextToken)
+	}
 	if v.RegistryIds != nil {
 		serializeRegistryIdList(s, schemas.SearchDiscoverableRegistryRecordsRequest_registryIds, v.RegistryIds)
 	}
 	if v.SearchQuery != nil {
 		s.WriteString(schemas.SearchDiscoverableRegistryRecordsRequest_searchQuery, *v.SearchQuery)
 	}
+	if v.SearchType != "" {
+		s.WriteString(schemas.SearchDiscoverableRegistryRecordsRequest_searchType, string(v.SearchType))
+	}
 }
 
 type SearchDiscoverableRegistryRecordsOutput struct {
 
-	//  The registry records that match the search query, ordered by relevance.
+	//  The registry records that match the search query, ordered by relevance. A page
+	// can contain fewer than maxResults records, or none, even when the response
+	// includes a nextToken . To retrieve every result, continue until the response has
+	// no nextToken .
 	//
 	// This member is required.
 	RegistryRecords []types.RegistryRecordSummary
+
+	//  The pagination token to pass to a subsequent request to retrieve the next page
+	// of results. This field is absent when there are no more results, or when the
+	// search has returned the maximum number of results for its search type.
+	NextToken *string
+
+	//  Specifies the search type that the service used to rank the returned records.
+	// If you omitted searchType in the request, this is the default for the Amazon
+	// Web Services Region: HYBRID where semantic search is supported, and KEYWORD
+	// elsewhere.
+	SearchType types.SearchType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -103,15 +161,31 @@ func (v *SearchDiscoverableRegistryRecordsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *SearchDiscoverableRegistryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchDiscoverableRegistryRecordsResponse_nextToken, *v.NextToken)
+	}
 	if v.RegistryRecords != nil {
 		serializeRegistryRecordSummaryList(s, schemas.SearchDiscoverableRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	}
+	if v.SearchType != "" {
+		s.WriteString(schemas.SearchDiscoverableRegistryRecordsResponse_searchType, string(v.SearchType))
 	}
 }
 func (v *SearchDiscoverableRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchDiscoverableRegistryRecordsResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.SearchDiscoverableRegistryRecordsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchDiscoverableRegistryRecordsResponse_nextToken, v.NextToken)
 		case schemas.SearchDiscoverableRegistryRecordsResponse_registryRecords:
 			return deserializeRegistryRecordSummaryList(d, schemas.SearchDiscoverableRegistryRecordsResponse_registryRecords, &v.RegistryRecords)
+		case schemas.SearchDiscoverableRegistryRecordsResponse_searchType:
+			var ev string
+			if err := d.ReadString(schemas.SearchDiscoverableRegistryRecordsResponse_searchType, &ev); err != nil {
+				return err
+			}
+			v.SearchType = types.SearchType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -156,3 +230,101 @@ func (c *Client) addOperationSearchDiscoverableRegistryRecordsMiddlewares(stack 
 	}
 	return nil
 }
+
+// SearchDiscoverableRegistryRecordsPaginatorOptions is the paginator options for
+// SearchDiscoverableRegistryRecords
+type SearchDiscoverableRegistryRecordsPaginatorOptions struct {
+	//  The maximum number of results to return in one page. Valid values are 1
+	// through 50 when searchType is KEYWORD , and 1 through 20 when it is HYBRID or
+	// SEMANTIC . The default value is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchDiscoverableRegistryRecordsPaginator is a paginator for
+// SearchDiscoverableRegistryRecords
+type SearchDiscoverableRegistryRecordsPaginator struct {
+	options   SearchDiscoverableRegistryRecordsPaginatorOptions
+	client    SearchDiscoverableRegistryRecordsAPIClient
+	params    *SearchDiscoverableRegistryRecordsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchDiscoverableRegistryRecordsPaginator returns a new
+// SearchDiscoverableRegistryRecordsPaginator
+func NewSearchDiscoverableRegistryRecordsPaginator(client SearchDiscoverableRegistryRecordsAPIClient, params *SearchDiscoverableRegistryRecordsInput, optFns ...func(*SearchDiscoverableRegistryRecordsPaginatorOptions)) *SearchDiscoverableRegistryRecordsPaginator {
+	if params == nil {
+		params = &SearchDiscoverableRegistryRecordsInput{}
+	}
+
+	options := SearchDiscoverableRegistryRecordsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &SearchDiscoverableRegistryRecordsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchDiscoverableRegistryRecordsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next SearchDiscoverableRegistryRecords page.
+func (p *SearchDiscoverableRegistryRecordsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchDiscoverableRegistryRecordsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.SearchDiscoverableRegistryRecords(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// SearchDiscoverableRegistryRecordsAPIClient is a client that implements the
+// SearchDiscoverableRegistryRecords operation.
+type SearchDiscoverableRegistryRecordsAPIClient interface {
+	SearchDiscoverableRegistryRecords(context.Context, *SearchDiscoverableRegistryRecordsInput, ...func(*Options)) (*SearchDiscoverableRegistryRecordsOutput, error)
+}
+
+var _ SearchDiscoverableRegistryRecordsAPIClient = (*Client)(nil)

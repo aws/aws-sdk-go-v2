@@ -4749,7 +4749,8 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	proto := restjson1.New(schemas.MediaLive)
@@ -9604,7 +9605,8 @@ func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelResponse, schemas.DeleteChannelResponse)
@@ -13899,7 +13901,8 @@ func TestUpdateResponseSnapshot_DescribeChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeChannel, schemas.DescribeChannelResponse, schemas.DescribeChannelResponse)
@@ -15893,7 +15896,8 @@ func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				InferenceSettings: nil,
+				InferenceSettings:        nil,
+				JpegXsInputSpecification: nil,
 			},
 			{},
 		},
@@ -21404,7 +21408,8 @@ func TestUpdateResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.RestartChannelPipelines, schemas.RestartChannelPipelinesResponse, schemas.RestartChannelPipelinesResponse)
@@ -25047,7 +25052,8 @@ func TestUpdateResponseSnapshot_StartChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.StartChannel, schemas.StartChannelResponse, schemas.StartChannelResponse)
@@ -29100,7 +29106,8 @@ func TestUpdateResponseSnapshot_StopChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.StopChannel, schemas.StopChannelResponse, schemas.StopChannelResponse)
@@ -32862,7 +32869,8 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	proto := restjson1.New(schemas.MediaLive)
@@ -36501,7 +36509,8 @@ func TestUpdateResponseSnapshot_UpdateChannelClass(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	proto := restjson1.New(schemas.MediaLive)

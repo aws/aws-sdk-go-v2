@@ -16,6 +16,9 @@ type AccountLimit struct {
 	//   - MAX_HEALTH_CHECKS_BY_OWNER: The maximum number of health checks that you
 	//   can create using the current account.
 	//
+	//   - MAX_HEALTH_CHECK_SOURCES_BY_OWNER The maximum number of health check
+	//   sources that you can create using the current account.
+	//
 	//   - MAX_HOSTED_ZONES_BY_OWNER: The maximum number of hosted zones that you can
 	//   create using the current account.
 	//
@@ -990,6 +993,20 @@ type HealthCheckConfig struct {
 	// FullyQualifiedDomainName from the client_hello message.
 	EnableSNI *bool
 
+	// Specifies whether the health check targets a public endpoint or a private
+	// endpoint in a virtual private cloud (VPC). Valid values:
+	//
+	//   - PUBLIC : The health check targets an endpoint that is reachable over the
+	//   internet. This is the default.
+	//
+	//   - PRIVATE : The health check targets a private endpoint in your virtual
+	//   private cloud. You must also specify HealthCheckSourceId . PRIVATE isn't
+	//   supported for health checks with a Type of CALCULATED , CLOUDWATCH_METRIC , or
+	//   RECOVERY_CONTROL .
+	//
+	// You can't change the value of EndpointType after you create a health check.
+	EndpointType EndpointType
+
 	// The number of consecutive health checks that an endpoint must pass or fail for
 	// Amazon Route 53 to change the current status of the endpoint from unhealthy to
 	// healthy or vice versa. For more information, see [How Amazon Route 53 Determines Whether an Endpoint Is Healthy]in the Amazon Route 53
@@ -1065,6 +1082,16 @@ type HealthCheckConfig struct {
 	// header.
 	FullyQualifiedDomainName *string
 
+	// The ID of the health check source that Route 53 uses to send health checks to a
+	// private endpoint. Required when EndpointType is PRIVATE .
+	//
+	// You can change HealthCheckSourceId on an existing private health check. You
+	// can't add it to a public health check.
+	//
+	// Each health check source supports a limited number of active health checks. If
+	// you reach that limit, specify a different health check source.
+	HealthCheckSourceId *string
+
 	// The number of child health checks that are associated with a CALCULATED health
 	// check that Amazon Route 53 must consider healthy for the CALCULATED health
 	// check to be considered healthy. To specify the child health checks that you want
@@ -1097,23 +1124,29 @@ type HealthCheckConfig struct {
 	//   shorten IPv6 addresses as described in RFC 5952, for example,
 	//   2001:db8:85a3::abcd:1:2345 .
 	//
-	// If the endpoint is an EC2 instance, we recommend that you create an Elastic IP
-	// address, associate it with your EC2 instance, and specify the Elastic IP address
-	// for IPAddress . This ensures that the IP address of your instance will never
-	// change.
+	// For a public health check, if the endpoint is an EC2 instance, we recommend
+	// that you create an Elastic IP address, associate it with your EC2 instance, and
+	// specify the Elastic IP address for IPAddress . This ensures that the IP address
+	// of your instance will never change.
 	//
 	// For more information, see [FullyQualifiedDomainName].
 	//
-	// Constraints: Route 53 can't check the health of endpoints for which the IP
-	// address is in local, private, non-routable, or multicast ranges. For more
-	// information about IP addresses for which you can't create health checks, see the
-	// following documents:
+	// Constraints: For a public health check ( EndpointType of PUBLIC , the default),
+	// Route 53 can't check the health of endpoints for which the IP address is in
+	// local, private, non-routable, or multicast ranges. For more information about IP
+	// addresses for which you can't create public health checks, see the following
+	// documents:
 	//
 	// [RFC 5735, Special Use IPv4 Addresses]
 	//
 	// [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space]
 	//
 	// [RFC 5156, Special-Use IPv6 Addresses]
+	//
+	// For a private endpoint health check ( EndpointType of PRIVATE ), if you specify
+	// IPAddress , it must be a private IPv4 or IPv6 address. Route 53 sends health
+	// checks to it from the health check source that you specify in
+	// HealthCheckSourceId .
 	//
 	// When the value of Type is CALCULATED or CLOUDWATCH_METRIC , omit IPAddress .
 	//
@@ -1225,6 +1258,126 @@ type HealthCheckObservation struct {
 	// A complex type that contains the last failure reason as reported by one Amazon
 	// Route 53 health checker and the time of the failed health check.
 	StatusReport *StatusReport
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains information about a health check source: its ID,
+// its status, and the virtual private cloud (VPC), subnets, and security groups
+// from which Route 53 sends health check requests to private endpoints.
+type HealthCheckSource struct {
+
+	// The virtual private cloud (VPC), subnets, and security groups for the health
+	// check source.
+	//
+	// This member is required.
+	HealthCheckSourceConfig *HealthCheckSourceConfig
+
+	// The ID of the health check source. Route 53 assigns this ID when it creates the
+	// source.
+	//
+	// This member is required.
+	HealthCheckSourceId *string
+
+	// The current status of the health check source. The health check source status
+	// can have one of the following values:
+	//
+	//   - CREATE_PENDING - Route 53 accepted the request to create the source and
+	//   hasn't started creating it. You can't use the source in a health check until its
+	//   status is CREATE_COMPLETED .
+	//
+	//   - CREATE_IN_PROGRESS - Route 53 is creating the source. You can't use the
+	//   source in a health check until its status is CREATE_COMPLETED .
+	//
+	//   - CREATE_COMPLETED - The source is ready to use.
+	//
+	//   - CREATE_FAILED - Route 53 couldn't create the source. StatusReasonCode and
+	//   StatusReason explain why.
+	//
+	//   - DELETE_PENDING - Route 53 accepted the request to delete the source and
+	//   hasn't started deleting it.
+	//
+	//   - DELETE_IN_PROGRESS - Route 53 is deleting the source.
+	//
+	//   - DELETE_COMPLETED - Route 53 has deleted the source. You can't retrieve a
+	//   health check source in this status: GetHealthCheckSource returns
+	//   NoSuchHealthCheckSource .
+	//
+	//   - DELETE_FAILED - Route 53 couldn't delete the source. StatusReasonCode and
+	//   StatusReason explain why.
+	//
+	// If the status is CREATE_FAILED , fix the cause that StatusReasonCode indicates,
+	// and then either retry CreateHealthCheckSource with the same CallerReference and
+	// settings, or delete the source and create a new one. If the status is
+	// DELETE_FAILED , retry the DeleteHealthCheckSource request.
+	//
+	// This member is required.
+	HealthCheckSourceStatus HealthCheckSourceStatus
+
+	// A description of why the health check source has a status of CREATE_FAILED or
+	// DELETE_FAILED , and what you can do about it. The text corresponds to the value
+	// of StatusReasonCode . Route 53 returns this member only when StatusReasonCode
+	// is present.
+	StatusReason *string
+
+	// A code that indicates why the health check source has a status of CREATE_FAILED
+	// or DELETE_FAILED . Route 53 returns this member only when the status is one of
+	// those values. The code can have one of the following values:
+	//
+	//   - INSUFFICIENT_SUBNET_IPS - One of the specified subnets doesn't have enough
+	//   free private IP addresses. Check the available IP addresses in each subnet, and
+	//   delete network interfaces that you don't need.
+	//
+	//   - EC2_LIMIT_EXCEEDED - Your account reached an Amazon virtual private cloud
+	//   (VPC) quota for network interfaces or security groups. Delete network interfaces
+	//   that you don't need, specify fewer security groups, or request a quota increase.
+	//
+	//   - INVALID_SUBNET - One of the specified subnets doesn't exist or isn't valid,
+	//   or an AvailabilityZoneId doesn't match the Availability Zone of its subnet.
+	//   Check that each subnet ID is correct, that the subnet exists, and that each
+	//   AvailabilityZoneId matches its subnet.
+	//
+	//   - INVALID_SECURITY_GROUP - One of the specified security groups doesn't exist
+	//   or isn't valid. Check that each security group ID is correct and that the
+	//   security group exists.
+	//
+	//   - INVALID_CONFIGURATION - The combination of VPC, subnets, and security groups
+	//   isn't valid. Check that VpcId is correct and exists, that each subnet is in
+	//   that VPC, and that the security groups for each subnet are in the same VPC as
+	//   that subnet.
+	//
+	//   - SLR_MISSING_OR_NOT_ASSUMABLE - Route 53 couldn't assume its service-linked
+	//   role in your account. In IAM, check that the service-linked role for Route 53
+	//   private endpoint health checks exists and that no deletion task for it is in
+	//   progress.
+	//
+	//   - INTERNAL_ERROR - Route 53 encountered an internal error. Contact Amazon Web
+	//   Services Support and provide the health check source ID.
+	StatusReasonCode HealthCheckSourceStatusReasonCode
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains the virtual private cloud (VPC), subnets, and
+// security groups for a health check source. You can't change these values after
+// you create the source.
+type HealthCheckSourceConfig struct {
+
+	// A complex type that contains two or three SubnetConfiguration elements, one in
+	// each Availability Zone that Route 53 uses for private endpoint health checks in
+	// the Amazon Web Services Region. The Availability Zones must be distinct. Route
+	// 53 creates network interfaces in each subnet and sends health check requests
+	// from all of them.
+	//
+	// This member is required.
+	SubnetConfigurationList []SubnetConfiguration
+
+	// The ID of the virtual private cloud (VPC) that contains the subnets for the
+	// health check source. All subnets in SubnetConfigurationList must belong to this
+	// VPC.
+	//
+	// This member is required.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -2154,6 +2307,8 @@ type ResourceTagSet struct {
 	//
 	//   - The resource type for health checks is healthcheck .
 	//
+	//   - The resource type for health check sources is healthchecksource .
+	//
 	//   - The resource type for hosted zones is hostedzone .
 	ResourceType TagResourceType
 
@@ -2196,6 +2351,33 @@ type StatusReport struct {
 	// A description of the status of the health check endpoint as reported by one of
 	// the Amazon Route 53 health checkers.
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that identifies one subnet for a health check source and the
+// security groups that Route 53 associates with the network interfaces that it
+// creates in that subnet.
+type SubnetConfiguration struct {
+
+	// The ID of the Availability Zone that contains the subnet, for example use1-az1 .
+	// Specify the Availability Zone ID, not the Availability Zone name.
+	//
+	// This member is required.
+	AvailabilityZoneId *string
+
+	// The IDs of the security groups in the same virtual private cloud (VPC) to
+	// associate with the network interfaces that Route 53 creates in this subnet. The
+	// security groups must allow outbound traffic to the endpoints that the health
+	// checks monitor.
+	//
+	// This member is required.
+	SecurityGroupIdList []string
+
+	// The ID of the subnet that Route 53 uses to send health check requests.
+	//
+	// This member is required.
+	SubnetId *string
 
 	noSmithyDocumentSerde
 }

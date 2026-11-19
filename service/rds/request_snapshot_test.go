@@ -961,7 +961,9 @@ func TestCheckRequestSnapshot_CreateDBCluster(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -5135,6 +5137,9 @@ func TestCheckRequestSnapshot_ModifyDBCluster(t *testing.T) {
 		CACertificateIdentifier:            ptr.String("__CACertificateIdentifier__"),
 		MasterUserAuthenticationType:       types.MasterUserAuthenticationType("password"),
 		EngineLifecycleSupport:             ptr.String("__EngineLifecycleSupport__"),
+		EnableInternetAccessGateway:        ptr.Bool(true),
+		EnableVPCNetworking:                ptr.Bool(true),
+		DBSubnetGroupName:                  ptr.String("__DBSubnetGroupName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8560,7 +8565,9 @@ func TestUpdateRequestSnapshot_CreateDBCluster(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -12734,6 +12741,9 @@ func TestUpdateRequestSnapshot_ModifyDBCluster(t *testing.T) {
 		CACertificateIdentifier:            ptr.String("__CACertificateIdentifier__"),
 		MasterUserAuthenticationType:       types.MasterUserAuthenticationType("password"),
 		EngineLifecycleSupport:             ptr.String("__EngineLifecycleSupport__"),
+		EnableInternetAccessGateway:        ptr.Bool(true),
+		EnableVPCNetworking:                ptr.Bool(true),
+		DBSubnetGroupName:                  ptr.String("__DBSubnetGroupName__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -367,6 +367,12 @@ type ClusterSlurmConfiguration struct {
 	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
 	CgroupCustomSettings []CgroupCustomSetting
 
+	// The job submit plugins to run on the cluster controller. Use job submit plugins
+	// to execute custom scripts during job submission and job modification to validate
+	// or modify the job's configuration. Custom scripts can accept or reject jobs
+	// based on their configuration or modify the configuration before job execution.
+	JobSubmitPlugins []JobSubmitPlugin
+
 	// The JWT authentication configuration for Slurm REST API access.
 	JwtAuth *JwtAuth
 
@@ -408,6 +414,9 @@ func (v *ClusterSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CgroupCustomSettings != nil {
 		serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, v.CgroupCustomSettings)
 	}
+	if v.JobSubmitPlugins != nil {
+		serializeJobSubmitPluginList(s, schemas.ClusterSlurmConfiguration_jobSubmitPlugins, v.JobSubmitPlugins)
+	}
 	if v.JwtAuth != nil {
 		s.WriteStruct(schemas.ClusterSlurmConfiguration_jwtAuth)
 		v.JwtAuth.SerializeMembers(s)
@@ -439,6 +448,8 @@ func (v *ClusterSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 			return v.AuthKey.Deserialize(d)
 		case schemas.ClusterSlurmConfiguration_cgroupCustomSettings:
 			return deserializeCgroupCustomSettings(d, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.ClusterSlurmConfiguration_jobSubmitPlugins:
+			return deserializeJobSubmitPluginList(d, schemas.ClusterSlurmConfiguration_jobSubmitPlugins, &v.JobSubmitPlugins)
 		case schemas.ClusterSlurmConfiguration_jwtAuth:
 			v.JwtAuth = &JwtAuth{}
 			return v.JwtAuth.Deserialize(d)
@@ -466,6 +477,12 @@ type ClusterSlurmConfigurationRequest struct {
 
 	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
 	CgroupCustomSettings []CgroupCustomSetting
+
+	// The job submit plugins to run on the cluster controller. Use job submit plugins
+	// to execute custom scripts during job submission and job modification to validate
+	// or modify the job's configuration. Custom scripts can accept or reject jobs
+	// based on their configuration or modify the configuration before job execution.
+	JobSubmitPlugins []JobSubmitPlugin
 
 	// The time (in seconds) before an idle node is scaled down.
 	//
@@ -500,6 +517,9 @@ func (v *ClusterSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerial
 	if v.CgroupCustomSettings != nil {
 		serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
 	}
+	if v.JobSubmitPlugins != nil {
+		serializeJobSubmitPluginList(s, schemas.ClusterSlurmConfigurationRequest_jobSubmitPlugins, v.JobSubmitPlugins)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
@@ -523,6 +543,8 @@ func (v *ClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserialize
 			return v.Accounting.Deserialize(d)
 		case schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings:
 			return deserializeCgroupCustomSettings(d, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.ClusterSlurmConfigurationRequest_jobSubmitPlugins:
+			return deserializeJobSubmitPluginList(d, schemas.ClusterSlurmConfigurationRequest_jobSubmitPlugins, &v.JobSubmitPlugins)
 		case schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
 			v.ScaleDownIdleTimeInSeconds = new(int32)
 			return d.ReadInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
@@ -1408,6 +1430,127 @@ func (v *InstanceConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InstanceConfig_instanceType:
 			v.InstanceType = new(string)
 			return d.ReadString(schemas.InstanceConfig_instanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
+// A job submit plugin configuration, including its name, runtime language, and
+// script source.
+type JobSubmitPlugin struct {
+
+	// A unique name for the plugin. The name can be up to 64 characters long. Valid
+	// characters are letters, numbers, spaces, underscores ( _ ), and hyphens ( - ).
+	// The first character must be a letter or a number.
+	//
+	// This member is required.
+	Name *string
+
+	// The source location and integrity information for the script.
+	//
+	// This member is required.
+	ScriptSource *JobSubmitScriptSource
+
+	// The runtime language used to execute the custom script. Valid values:
+	//
+	//   - STARLARK – The script uses Starlark syntax.
+	//
+	// This member is required.
+	Type JobSubmitPluginType
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobSubmitPlugin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobSubmitPlugin)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobSubmitPlugin) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.JobSubmitPlugin_name, *v.Name)
+	}
+	if v.ScriptSource != nil {
+		s.WriteStruct(schemas.JobSubmitPlugin_scriptSource)
+		v.ScriptSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.JobSubmitPlugin_type, string(v.Type))
+	}
+}
+func (v *JobSubmitPlugin) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobSubmitPlugin, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobSubmitPlugin_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.JobSubmitPlugin_name, v.Name)
+		case schemas.JobSubmitPlugin_scriptSource:
+			v.ScriptSource = &JobSubmitScriptSource{}
+			return v.ScriptSource.Deserialize(d)
+		case schemas.JobSubmitPlugin_type:
+			var ev string
+			if err := d.ReadString(schemas.JobSubmitPlugin_type, &ev); err != nil {
+				return err
+			}
+			v.Type = JobSubmitPluginType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The source location and integrity information for the script.
+type JobSubmitScriptSource struct {
+
+	// The location of the script. Specify an Amazon S3 URI in the format
+	// s3://bucket-name/key .
+	//
+	// This member is required.
+	ScriptLocation *string
+
+	// The SHA-256 checksum of the script content, as a 64-character hexadecimal
+	// string. This value is optional. When specified, PCS uses this value to verify
+	// the integrity of the downloaded script.
+	Checksum *string
+
+	// The Amazon S3 version ID of the script. Use this value to pin the script to a
+	// specific version in a versioned Amazon S3 bucket.
+	S3VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobSubmitScriptSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobSubmitScriptSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobSubmitScriptSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.JobSubmitScriptSource_checksum, *v.Checksum)
+	}
+	if v.S3VersionId != nil {
+		s.WriteString(schemas.JobSubmitScriptSource_s3VersionId, *v.S3VersionId)
+	}
+	if v.ScriptLocation != nil {
+		s.WriteString(schemas.JobSubmitScriptSource_scriptLocation, *v.ScriptLocation)
+	}
+}
+func (v *JobSubmitScriptSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobSubmitScriptSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobSubmitScriptSource_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.JobSubmitScriptSource_checksum, v.Checksum)
+		case schemas.JobSubmitScriptSource_s3VersionId:
+			v.S3VersionId = new(string)
+			return d.ReadString(schemas.JobSubmitScriptSource_s3VersionId, v.S3VersionId)
+		case schemas.JobSubmitScriptSource_scriptLocation:
+			v.ScriptLocation = new(string)
+			return d.ReadString(schemas.JobSubmitScriptSource_scriptLocation, v.ScriptLocation)
 		}
 		return nil
 	})
@@ -2776,6 +2919,12 @@ type UpdateClusterSlurmConfigurationRequest struct {
 	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
 	CgroupCustomSettings []CgroupCustomSetting
 
+	// The job submit plugins to run on the cluster controller. Use job submit plugins
+	// to execute custom scripts during job submission and job modification to validate
+	// or modify the job's configuration. Custom scripts can accept or reject jobs
+	// based on their configuration or modify the configuration before job execution.
+	JobSubmitPlugins []JobSubmitPlugin
+
 	// The time (in seconds) before an idle node is scaled down.
 	//
 	// Default: 600
@@ -2809,6 +2958,9 @@ func (v *UpdateClusterSlurmConfigurationRequest) SerializeMembers(s smithy.Shape
 	if v.CgroupCustomSettings != nil {
 		serializeCgroupCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
 	}
+	if v.JobSubmitPlugins != nil {
+		serializeJobSubmitPluginList(s, schemas.UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins, v.JobSubmitPlugins)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
@@ -2832,6 +2984,8 @@ func (v *UpdateClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeser
 			return v.Accounting.Deserialize(d)
 		case schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings:
 			return deserializeCgroupCustomSettings(d, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins:
+			return deserializeJobSubmitPluginList(d, schemas.UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins, &v.JobSubmitPlugins)
 		case schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
 			v.ScaleDownIdleTimeInSeconds = new(int32)
 			return d.ReadInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)

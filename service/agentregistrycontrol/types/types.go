@@ -223,11 +223,33 @@ func (v *AgentCoreRuntimeSourceDetails) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
-// Additional data associated with an agent skills definition descriptor.
+// Additional data associated with an agent skills definition descriptor: the
+// skill's SKILL.md and the source that the registry synchronizes the skill from. A
+// record synchronizes from one source at most, either skillMd.source for SKILL.md
+// only or skillPackage.source for the full skill package. When the record has a
+// skill package or a synchronized source, the registry sets skillMd.data from the
+// SKILL.md in that package or source.
 type AgentSkillsAdditionalData struct {
+
+	// The repository provider of the record's skill source. Set it to GITHUB when
+	// skillMd.source or skillPackage.source is a GitHub folder URL. The registry
+	// treats an https:// source as a GitHub source only when this member is set.
+	// Don't set it for an Amazon S3 source.
+	RepositoryProvider AgentSkillsRepositoryProvider
 
 	// The markdown skill content associated with an agent skills definition.
 	SkillMd *AgentSkillsMdDescriptor
+
+	// The source that the registry synchronizes the full skill package from. The
+	// registry validates and stores the package, sets skillMd.data from its SKILL.md,
+	// and returns the package in the artifact member of GetRegistryRecord . You can't
+	// set both this source and skillMd.source .
+	SkillPackage *AgentSkillsPackageDescriptor
+
+	// The provider-specific settings of the record's skill source. For an Amazon S3
+	// source, s3.bucketOwnerAccountId specifies the account that owns the source
+	// bucket.
+	SourceConfiguration AgentSkillsSourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -239,18 +261,41 @@ func (v *AgentSkillsAdditionalData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgentSkillsAdditionalData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryProvider != "" {
+		s.WriteString(schemas.AgentSkillsAdditionalData_repositoryProvider, string(v.RepositoryProvider))
+	}
 	if v.SkillMd != nil {
 		s.WriteStruct(schemas.AgentSkillsAdditionalData_skillMd)
 		v.SkillMd.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SkillPackage != nil {
+		s.WriteStruct(schemas.AgentSkillsAdditionalData_skillPackage)
+		v.SkillPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceConfiguration != nil {
+		serializeAgentSkillsSourceConfiguration(s, schemas.AgentSkillsAdditionalData_sourceConfiguration, v.SourceConfiguration)
+	}
 }
 func (v *AgentSkillsAdditionalData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AgentSkillsAdditionalData, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AgentSkillsAdditionalData_repositoryProvider:
+			var ev string
+			if err := d.ReadString(schemas.AgentSkillsAdditionalData_repositoryProvider, &ev); err != nil {
+				return err
+			}
+			v.RepositoryProvider = AgentSkillsRepositoryProvider(ev)
+			return nil
 		case schemas.AgentSkillsAdditionalData_skillMd:
 			v.SkillMd = &AgentSkillsMdDescriptor{}
 			return v.SkillMd.Deserialize(d)
+		case schemas.AgentSkillsAdditionalData_skillPackage:
+			v.SkillPackage = &AgentSkillsPackageDescriptor{}
+			return v.SkillPackage.Deserialize(d)
+		case schemas.AgentSkillsAdditionalData_sourceConfiguration:
+			return deserializeAgentSkillsSourceConfiguration(d, schemas.AgentSkillsAdditionalData_sourceConfiguration, &v.SourceConfiguration)
 		}
 		return nil
 	})
@@ -317,8 +362,11 @@ type AgentSkillsMdDescriptor struct {
 	// The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
-	// The optional source configuration used to synchronize the agent skills markdown
-	// content.
+	// The optional source of the skill's SKILL.md only. The registry synchronizes the
+	// SKILL.md from this source into data . Specify an s3:// URL of a SKILL.md
+	// object, or a GitHub folder URL together with repositoryProvider set to GITHUB .
+	// The registry rejects a new https:// URL without repositoryProvider , and you
+	// can't set both this source and skillPackage.source .
 	Source *DescriptorSource
 
 	noSmithyDocumentSerde
@@ -358,6 +406,70 @@ func (v *AgentSkillsMdDescriptor) Deserialize(d smithy.ShapeDeserializer) error 
 		}
 		return nil
 	})
+}
+
+// Descriptor that names the source that the registry synchronizes a full skill
+// package from. It holds only the source. The record's artifact member returns
+// the package that the registry reads from this source.
+type AgentSkillsPackageDescriptor struct {
+
+	// The source of the skill package. Specify an s3:// URL of a ZIP object, or a
+	// GitHub folder URL together with repositoryProvider set to GITHUB . For a GitHub
+	// folder, the registry builds the package from every file in the folder.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentSkillsPackageDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentSkillsPackageDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentSkillsPackageDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.AgentSkillsPackageDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgentSkillsPackageDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentSkillsPackageDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentSkillsPackageDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The provider-specific settings of a skill source. Specify the member that
+// matches the source's provider, such as s3 for an Amazon S3 source.
+//
+// The following types satisfy this interface:
+//
+//	AgentSkillsSourceConfigurationMemberS3
+type AgentSkillsSourceConfiguration interface {
+	isAgentSkillsSourceConfiguration()
+}
+
+// The settings of an Amazon S3 source.
+type AgentSkillsSourceConfigurationMemberS3 struct {
+	Value S3SourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentSkillsSourceConfigurationMemberS3) isAgentSkillsSourceConfiguration() {}
+func (v *AgentSkillsSourceConfigurationMemberS3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentSkillsSourceConfiguration_s3)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AgentSkillsSourceConfigurationMemberS3) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // A registry record descriptor for the AG-UI (Agent-User Interaction) protocol.
@@ -426,6 +538,34 @@ func (v *ApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// The authorization that a user must complete before a registry record can
+// synchronize from its source. Only CreateRegistryRecord and UpdateRegistryRecord
+// return it. GetRegistryRecord and ListRegistryRecords never do.
+//
+// The following types satisfy this interface:
+//
+//	AuthorizationDataMemberOauth2
+type AuthorizationData interface {
+	isAuthorizationData()
+}
+
+// The OAuth 2.0 authorization that a GitHub user must approve.
+type AuthorizationDataMemberOauth2 struct {
+	Value OAuth2AuthorizationData
+
+	noSmithyDocumentSerde
+}
+
+func (*AuthorizationDataMemberOauth2) isAuthorizationData() {}
+func (v *AuthorizationDataMemberOauth2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizationData_oauth2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AuthorizationDataMemberOauth2) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The authorizer configuration for a registry. Exactly one member is set.
@@ -1012,7 +1152,11 @@ func (v *DescriptorSource) Deserialize(d smithy.ShapeDeserializer) error {
 // configurations for authenticated URL retrieval.
 type DescriptorSourceFromUrl struct {
 
-	// The URL from which the descriptor content is retrieved.
+	// The URL from which the descriptor content is retrieved. For an agent skill
+	// source, specify an s3:// URL of an object in a bucket in the same Amazon Web
+	// Services Region as the registry. For a GitHub skill source, specify a GitHub
+	// folder URL in the form https://host/owner/repo/tree/branch-or-tag/path . Other
+	// descriptor sources use https:// URLs.
 	//
 	// This member is required.
 	Url *string
@@ -1130,6 +1274,62 @@ func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.EncryptionConfiguration_kmsKeyArn:
 			v.KmsKeyArn = new(string)
 			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
+// A GitHub source that a skill record's content was synchronized from, and the
+// commit that the registry read.
+type GitHubSynchronizedSource struct {
+
+	// The commit that the source's branch or tag pointed to when the registry read it.
+	//
+	// This member is required.
+	CommitId *string
+
+	// The timestamp when the registry read the source.
+	//
+	// This member is required.
+	SynchronizedAt *time.Time
+
+	// The source URL that the registry read.
+	//
+	// This member is required.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GitHubSynchronizedSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GitHubSynchronizedSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GitHubSynchronizedSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.GitHubSynchronizedSource_commitId, *v.CommitId)
+	}
+	if v.SynchronizedAt != nil {
+		s.WriteTime(schemas.GitHubSynchronizedSource_synchronizedAt, *v.SynchronizedAt)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GitHubSynchronizedSource_url, *v.Url)
+	}
+}
+func (v *GitHubSynchronizedSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GitHubSynchronizedSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GitHubSynchronizedSource_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.GitHubSynchronizedSource_commitId, v.CommitId)
+		case schemas.GitHubSynchronizedSource_synchronizedAt:
+			v.SynchronizedAt = new(time.Time)
+			return d.ReadTime(schemas.GitHubSynchronizedSource_synchronizedAt, v.SynchronizedAt)
+		case schemas.GitHubSynchronizedSource_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GitHubSynchronizedSource_url, v.Url)
 		}
 		return nil
 	})
@@ -1390,6 +1590,80 @@ func (v *McpToolsDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.McpToolsDescriptor_dataSchemaVersion:
 			v.DataSchemaVersion = new(string)
 			return d.ReadString(schemas.McpToolsDescriptor_dataSchemaVersion, v.DataSchemaVersion)
+		}
+		return nil
+	})
+}
+
+// An OAuth 2.0 authorization that waits for a user's approval. The user opens
+// authorizationUrl and approves access on GitHub. Amazon Bedrock AgentCore
+// Identity then redirects the browser to the source's returnUrl . There, your
+// application completes the authorization by calling the AgentCore Identity
+// CompleteResourceTokenAuth operation with userId . If the source has no returnUrl
+// , the user returns to the Amazon Web Services Agent Registry console, which
+// completes the authorization. After the authorization completes, the registry
+// synchronizes the record without another request. If the user doesn't approve
+// access before expiresAt , the record moves to CREATE_FAILED or UPDATE_FAILED .
+// To start again, call UpdateRegistryRecord with triggerSynchronization .
+type OAuth2AuthorizationData struct {
+
+	// The URL that the user opens to approve access. The link is valid for up to 10
+	// minutes. Treat it as sensitive and give it only to the user who approves access.
+	//
+	// This member is required.
+	AuthorizationUrl *string
+
+	// The identifier of this authorization attempt.
+	AuthorizationAttemptId *string
+
+	// The timestamp when the authorization link expires, 10 minutes after the
+	// authorization started. A request that joins an authorization in progress gets
+	// less time, and the link might stop working shortly before this time.
+	ExpiresAt *time.Time
+
+	// The AgentCore Identity user ID that the authorization is for. Store it with
+	// your signed-in user and pass it as userIdentifier.userId when your application
+	// calls CompleteResourceTokenAuth .
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OAuth2AuthorizationData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuth2AuthorizationData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuth2AuthorizationData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationAttemptId != nil {
+		s.WriteString(schemas.OAuth2AuthorizationData_authorizationAttemptId, *v.AuthorizationAttemptId)
+	}
+	if v.AuthorizationUrl != nil {
+		s.WriteString(schemas.OAuth2AuthorizationData_authorizationUrl, *v.AuthorizationUrl)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.OAuth2AuthorizationData_expiresAt, *v.ExpiresAt)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.OAuth2AuthorizationData_userId, *v.UserId)
+	}
+}
+func (v *OAuth2AuthorizationData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuth2AuthorizationData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuth2AuthorizationData_authorizationAttemptId:
+			v.AuthorizationAttemptId = new(string)
+			return d.ReadString(schemas.OAuth2AuthorizationData_authorizationAttemptId, v.AuthorizationAttemptId)
+		case schemas.OAuth2AuthorizationData_authorizationUrl:
+			v.AuthorizationUrl = new(string)
+			return d.ReadString(schemas.OAuth2AuthorizationData_authorizationUrl, v.AuthorizationUrl)
+		case schemas.OAuth2AuthorizationData_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.OAuth2AuthorizationData_expiresAt, v.ExpiresAt)
+		case schemas.OAuth2AuthorizationData_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.OAuth2AuthorizationData_userId, v.UserId)
 		}
 		return nil
 	})
@@ -1719,6 +1993,100 @@ func (v *RegistryFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The skill package of a registry record, as a short-lived download URL and the
+// package's SHA-256 checksum. Responses never include the package bytes.
+type RegistryRecordArtifactDownload struct {
+
+	// A presigned Amazon S3 URL that downloads the package. The URL is valid for up
+	// to 5 minutes, and the response doesn't include its expiry time. To get a new
+	// URL, call the operation again. Anyone who has the URL can download the package
+	// until it expires, so don't log, store, or share it.
+	DownloadUrl *string
+
+	// The SHA-256 checksum of the package, as 64 lowercase hexadecimal characters.
+	// The download response carries no signature that you can check, so compare the
+	// checksum of the file that you download with this value before you use the
+	// package.
+	Sha256 *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegistryRecordArtifactDownload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistryRecordArtifactDownload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegistryRecordArtifactDownload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownloadUrl != nil {
+		s.WriteString(schemas.RegistryRecordArtifactDownload_downloadUrl, *v.DownloadUrl)
+	}
+	if v.Sha256 != nil {
+		s.WriteString(schemas.RegistryRecordArtifactDownload_sha256, *v.Sha256)
+	}
+}
+func (v *RegistryRecordArtifactDownload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegistryRecordArtifactDownload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegistryRecordArtifactDownload_downloadUrl:
+			v.DownloadUrl = new(string)
+			return d.ReadString(schemas.RegistryRecordArtifactDownload_downloadUrl, v.DownloadUrl)
+		case schemas.RegistryRecordArtifactDownload_sha256:
+			v.Sha256 = new(string)
+			return d.ReadString(schemas.RegistryRecordArtifactDownload_sha256, v.Sha256)
+		}
+		return nil
+	})
+}
+
+// A skill package to upload with a registry record: a ZIP archive of a skill that
+// follows the Agent Skills specification. The registry validates the package
+// asynchronously, stores it, and sets skillMd.data from the package's SKILL.md.
+type RegistryRecordArtifactUpload struct {
+
+	// The ZIP archive of the skill package, up to 5 MiB (5,242,880 bytes). In a JSON
+	// request, the content is base64-encoded. The Amazon Web Services SDKs encode it
+	// for you.
+	//
+	// This member is required.
+	Content []byte
+
+	// The optional SHA-256 checksum of the ZIP archive, as 64 lowercase hexadecimal
+	// characters, computed over the archive's bytes rather than its base64 text. If it
+	// doesn't match the content, the request fails with a ValidationException .
+	Sha256 *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegistryRecordArtifactUpload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistryRecordArtifactUpload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegistryRecordArtifactUpload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteBlob(schemas.RegistryRecordArtifactUpload_content, v.Content)
+	}
+	if v.Sha256 != nil {
+		s.WriteString(schemas.RegistryRecordArtifactUpload_sha256, *v.Sha256)
+	}
+}
+func (v *RegistryRecordArtifactUpload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegistryRecordArtifactUpload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegistryRecordArtifactUpload_content:
+			return d.ReadBlob(schemas.RegistryRecordArtifactUpload_content, &v.Content)
+		case schemas.RegistryRecordArtifactUpload_sha256:
+			v.Sha256 = new(string)
+			return d.ReadString(schemas.RegistryRecordArtifactUpload_sha256, v.Sha256)
+		}
+		return nil
+	})
+}
+
 // A credential provider configuration that specifies how to authenticate when
 // fetching descriptor content from a registry record's source URL.
 type RegistryRecordCredentialProviderConfiguration struct {
@@ -1864,17 +2232,22 @@ func (v *RegistryRecordFilter) Deserialize(d smithy.ShapeDeserializer) error {
 
 // The configuration for an IAM role credential provider that signs requests to a
 // registry record's source with Amazon Web Services Signature Version 4 (SigV4).
+// For an Amazon S3 skill source (an s3:// URL), Amazon Web Services Agent
+// Registry assumes the role to read the object. The role must be in your Amazon
+// Web Services account.
 type RegistryRecordIamCredentialProvider struct {
 
 	// The Amazon Web Services Region to use for request signing. If not specified,
 	// the Region is derived from the source URL hostname, falling back to the Region
+	// of the registry. For an Amazon S3 skill source, omit it or set it to the Region
 	// of the registry.
 	Region *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to assume for request signing.
 	RoleArn *string
 
-	// The service name to use for request signing, such as execute-api.
+	// The service name to use for request signing, such as execute-api. For an Amazon
+	// S3 skill source, omit it or set it to s3 .
 	Service *string
 
 	noSmithyDocumentSerde
@@ -1927,8 +2300,26 @@ type RegistryRecordOAuthCredentialProvider struct {
 	// Additional parameters to include in the OAuth 2.0 token request.
 	CustomParameters map[string]string
 
-	// The OAuth 2.0 grant type used to obtain access tokens.
+	// The OAuth 2.0 grant type used to obtain access tokens. A GitHub skill source
+	// requires AUTHORIZATION_CODE . Other sources, such as MCP server and A2A agent
+	// card sources, use CLIENT_CREDENTIALS . A GitHub source takes exactly one OAuth
+	// credential provider, in the registry's Amazon Web Services account and Region.
+	// Only an IAM role or IAM user in the account that owns the registry can set,
+	// synchronize, or reauthorize it, and the caller needs
+	// bedrock-agentcore:GetWorkloadAccessTokenForUserId and
+	// bedrock-agentcore:GetResourceOauth2Token on the registry's workload identity,
+	// registry- followed by the registry ID.
 	GrantType RegistryRecordOAuthGrantType
+
+	// The URL that the user's browser returns to after the user approves access on
+	// GitHub, for the AUTHORIZATION_CODE grant. There, your application completes the
+	// authorization by calling the Amazon Bedrock AgentCore Identity
+	// CompleteResourceTokenAuth operation with the userId from authorizationData . If
+	// you omit it, the user returns to the Amazon Web Services Agent Registry console,
+	// which completes the authorization when the user is signed in as the IAM
+	// principal that made the request. A request that joins an authorization already
+	// in progress uses the return URL of the request that started it.
+	ReturnUrl *string
 
 	// The OAuth 2.0 scopes to request when obtaining access tokens.
 	Scopes []string
@@ -1952,6 +2343,9 @@ func (v *RegistryRecordOAuthCredentialProvider) SerializeMembers(s smithy.ShapeS
 	if v.ProviderArn != nil {
 		s.WriteString(schemas.RegistryRecordOAuthCredentialProvider_providerArn, *v.ProviderArn)
 	}
+	if v.ReturnUrl != nil {
+		s.WriteString(schemas.RegistryRecordOAuthCredentialProvider_returnUrl, *v.ReturnUrl)
+	}
 	if v.Scopes != nil {
 		serializeScopeList(s, schemas.RegistryRecordOAuthCredentialProvider_scopes, v.Scopes)
 	}
@@ -1971,6 +2365,9 @@ func (v *RegistryRecordOAuthCredentialProvider) Deserialize(d smithy.ShapeDeseri
 		case schemas.RegistryRecordOAuthCredentialProvider_providerArn:
 			v.ProviderArn = new(string)
 			return d.ReadString(schemas.RegistryRecordOAuthCredentialProvider_providerArn, v.ProviderArn)
+		case schemas.RegistryRecordOAuthCredentialProvider_returnUrl:
+			v.ReturnUrl = new(string)
+			return d.ReadString(schemas.RegistryRecordOAuthCredentialProvider_returnUrl, v.ReturnUrl)
 		case schemas.RegistryRecordOAuthCredentialProvider_scopes:
 			return deserializeScopeList(d, schemas.RegistryRecordOAuthCredentialProvider_scopes, &v.Scopes)
 		}
@@ -2171,6 +2568,51 @@ func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The source that a skill record's content was last synchronized from. Exactly
+// one member is set, for the source's provider.
+//
+// The following types satisfy this interface:
+//
+//	RegistryRecordSynchronizedSourceMemberGitHub
+//	RegistryRecordSynchronizedSourceMemberS3
+type RegistryRecordSynchronizedSource interface {
+	isRegistryRecordSynchronizedSource()
+}
+
+// The GitHub source that the registry read.
+type RegistryRecordSynchronizedSourceMemberGitHub struct {
+	Value GitHubSynchronizedSource
+
+	noSmithyDocumentSerde
+}
+
+func (*RegistryRecordSynchronizedSourceMemberGitHub) isRegistryRecordSynchronizedSource() {}
+func (v *RegistryRecordSynchronizedSourceMemberGitHub) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistryRecordSynchronizedSource_gitHub)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RegistryRecordSynchronizedSourceMemberGitHub) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The Amazon S3 source that the registry read.
+type RegistryRecordSynchronizedSourceMemberS3 struct {
+	Value S3SynchronizedSource
+
+	noSmithyDocumentSerde
+}
+
+func (*RegistryRecordSynchronizedSourceMemberS3) isRegistryRecordSynchronizedSource() {}
+func (v *RegistryRecordSynchronizedSourceMemberS3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistryRecordSynchronizedSource_s3)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RegistryRecordSynchronizedSourceMemberS3) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Registry summary for list operations
 type RegistrySummary struct {
 
@@ -2301,6 +2743,109 @@ func (v *RegistrySummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegistrySummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.RegistrySummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The settings of a source that the registry reads from Amazon S3.
+type S3SourceConfiguration struct {
+
+	// The ID of the Amazon Web Services account that owns the source bucket. The
+	// registry checks that the bucket belongs to this account each time it reads the
+	// source. If you omit it for a source that uses an IAM role, the registry expects
+	// the bucket to be in the role's account. If you omit it for a source that has no
+	// credential provider, which the registry reads as a public object, the request
+	// fails with a ValidationException .
+	BucketOwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3SourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3SourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3SourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketOwnerAccountId != nil {
+		s.WriteString(schemas.S3SourceConfiguration_bucketOwnerAccountId, *v.BucketOwnerAccountId)
+	}
+}
+func (v *S3SourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3SourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3SourceConfiguration_bucketOwnerAccountId:
+			v.BucketOwnerAccountId = new(string)
+			return d.ReadString(schemas.S3SourceConfiguration_bucketOwnerAccountId, v.BucketOwnerAccountId)
+		}
+		return nil
+	})
+}
+
+// An Amazon S3 source that a skill record's content was synchronized from, and
+// the object version that the registry read. At most one of versionId and eTag is
+// set.
+type S3SynchronizedSource struct {
+
+	// The timestamp when the registry read the source.
+	//
+	// This member is required.
+	SynchronizedAt *time.Time
+
+	// The source URL that the registry read.
+	//
+	// This member is required.
+	Url *string
+
+	// The entity tag (ETag) of the object that the registry read, without quotes,
+	// when the object has no version ID. Not recorded for a SKILL.md source on a
+	// registry that is encrypted with a customer managed key.
+	ETag *string
+
+	// The version ID of the object that the registry read. Absent when the bucket
+	// isn't versioned.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3SynchronizedSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3SynchronizedSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3SynchronizedSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.S3SynchronizedSource_eTag, *v.ETag)
+	}
+	if v.SynchronizedAt != nil {
+		s.WriteTime(schemas.S3SynchronizedSource_synchronizedAt, *v.SynchronizedAt)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.S3SynchronizedSource_url, *v.Url)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.S3SynchronizedSource_versionId, *v.VersionId)
+	}
+}
+func (v *S3SynchronizedSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3SynchronizedSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3SynchronizedSource_eTag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.S3SynchronizedSource_eTag, v.ETag)
+		case schemas.S3SynchronizedSource_synchronizedAt:
+			v.SynchronizedAt = new(time.Time)
+			return d.ReadTime(schemas.S3SynchronizedSource_synchronizedAt, v.SynchronizedAt)
+		case schemas.S3SynchronizedSource_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.S3SynchronizedSource_url, v.Url)
+		case schemas.S3SynchronizedSource_versionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.S3SynchronizedSource_versionId, v.VersionId)
 		}
 		return nil
 	})
@@ -2510,8 +3055,17 @@ func (v *UpdatedAgentSkillsAdditionalData) Deserialize(d smithy.ShapeDeserialize
 // The set of agent skills additional-data fields that can be individually updated.
 type UpdatedAgentSkillsAdditionalDataFields struct {
 
+	// The patch for the repository provider field.
+	RepositoryProvider *UpdatedAgentSkillsRepositoryProvider
+
 	// The patch for the agent skills markdown descriptor field.
 	SkillMd *UpdatedAgentSkillsMdDescriptor
+
+	// The patch for the skill package source field.
+	SkillPackage *UpdatedAgentSkillsPackageDescriptor
+
+	// The patch for the source configuration field.
+	SourceConfiguration *UpdatedAgentSkillsSourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2523,18 +3077,42 @@ func (v *UpdatedAgentSkillsAdditionalDataFields) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *UpdatedAgentSkillsAdditionalDataFields) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryProvider != nil {
+		s.WriteStruct(schemas.UpdatedAgentSkillsAdditionalDataFields_repositoryProvider)
+		v.RepositoryProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.SkillMd != nil {
 		s.WriteStruct(schemas.UpdatedAgentSkillsAdditionalDataFields_skillMd)
 		v.SkillMd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SkillPackage != nil {
+		s.WriteStruct(schemas.UpdatedAgentSkillsAdditionalDataFields_skillPackage)
+		v.SkillPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceConfiguration != nil {
+		s.WriteStruct(schemas.UpdatedAgentSkillsAdditionalDataFields_sourceConfiguration)
+		v.SourceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 }
 func (v *UpdatedAgentSkillsAdditionalDataFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatedAgentSkillsAdditionalDataFields, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdatedAgentSkillsAdditionalDataFields_repositoryProvider:
+			v.RepositoryProvider = &UpdatedAgentSkillsRepositoryProvider{}
+			return v.RepositoryProvider.Deserialize(d)
 		case schemas.UpdatedAgentSkillsAdditionalDataFields_skillMd:
 			v.SkillMd = &UpdatedAgentSkillsMdDescriptor{}
 			return v.SkillMd.Deserialize(d)
+		case schemas.UpdatedAgentSkillsAdditionalDataFields_skillPackage:
+			v.SkillPackage = &UpdatedAgentSkillsPackageDescriptor{}
+			return v.SkillPackage.Deserialize(d)
+		case schemas.UpdatedAgentSkillsAdditionalDataFields_sourceConfiguration:
+			v.SourceConfiguration = &UpdatedAgentSkillsSourceConfiguration{}
+			return v.SourceConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -2717,6 +3295,113 @@ func (v *UpdatedAgentSkillsMdDescriptorFields) Deserialize(d smithy.ShapeDeseria
 		case schemas.UpdatedAgentSkillsMdDescriptorFields_source:
 			v.Source = &UpdatedDescriptorSource{}
 			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The skill package source patch wrapper. Omit to leave the source unchanged;
+// supply an empty object to remove it and stop synchronizing the package; supply
+// optionalValue to replace it.
+type UpdatedAgentSkillsPackageDescriptor struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *AgentSkillsPackageDescriptor
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedAgentSkillsPackageDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedAgentSkillsPackageDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedAgentSkillsPackageDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedAgentSkillsPackageDescriptor_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedAgentSkillsPackageDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedAgentSkillsPackageDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedAgentSkillsPackageDescriptor_optionalValue:
+			v.OptionalValue = &AgentSkillsPackageDescriptor{}
+			return v.OptionalValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The repository provider patch wrapper. Omit to leave the repository provider
+// unchanged; supply an empty object to remove it; supply optionalValue to set it.
+// When you remove it, also remove or replace the GitHub source in the same
+// request.
+type UpdatedAgentSkillsRepositoryProvider struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue AgentSkillsRepositoryProvider
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedAgentSkillsRepositoryProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedAgentSkillsRepositoryProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedAgentSkillsRepositoryProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != "" {
+		s.WriteString(schemas.UpdatedAgentSkillsRepositoryProvider_optionalValue, string(v.OptionalValue))
+	}
+}
+func (v *UpdatedAgentSkillsRepositoryProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedAgentSkillsRepositoryProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedAgentSkillsRepositoryProvider_optionalValue:
+			var ev string
+			if err := d.ReadString(schemas.UpdatedAgentSkillsRepositoryProvider_optionalValue, &ev); err != nil {
+				return err
+			}
+			v.OptionalValue = AgentSkillsRepositoryProvider(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The source configuration patch wrapper. Omit to leave the configuration
+// unchanged; supply an empty object to remove it; supply optionalValue to replace
+// it. When you move an Amazon S3 source to another bucket, the record keeps its
+// configuration. In the same request, specify the new bucket's owner, or specify
+// an empty object so that the registry expects the bucket in the role's account.
+type UpdatedAgentSkillsSourceConfiguration struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue AgentSkillsSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedAgentSkillsSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedAgentSkillsSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedAgentSkillsSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		serializeAgentSkillsSourceConfiguration(s, schemas.UpdatedAgentSkillsSourceConfiguration_optionalValue, v.OptionalValue)
+	}
+}
+func (v *UpdatedAgentSkillsSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedAgentSkillsSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedAgentSkillsSourceConfiguration_optionalValue:
+			return deserializeAgentSkillsSourceConfiguration(d, schemas.UpdatedAgentSkillsSourceConfiguration_optionalValue, &v.OptionalValue)
 		}
 		return nil
 	})
@@ -3666,6 +4351,42 @@ func (v *UpdatedMcpToolsDescriptorFields) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
+// The skill package patch wrapper. Omit to leave the package unchanged; supply an
+// empty object to remove an uploaded package; supply optionalValue to upload a new
+// package.
+type UpdatedRegistryRecordArtifact struct {
+
+	// The skill package to upload. It replaces the record's current package or its
+	// synchronized content.
+	OptionalValue *RegistryRecordArtifactUpload
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedRegistryRecordArtifact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedRegistryRecordArtifact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedRegistryRecordArtifact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedRegistryRecordArtifact_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedRegistryRecordArtifact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedRegistryRecordArtifact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedRegistryRecordArtifact_optionalValue:
+			v.OptionalValue = &RegistryRecordArtifactUpload{}
+			return v.OptionalValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a single input field that failed validation.
 type ValidationExceptionField struct {
 
@@ -3757,9 +4478,12 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAgentSkillsSourceConfiguration()        {}
+func (*UnknownUnionMember) isAuthorizationData()                     {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
 func (*UnknownUnionMember) isClaimMatchValueType()                   {}
 func (*UnknownUnionMember) isPrivateEndpoint()                       {}
 func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion() {}
+func (*UnknownUnionMember) isRegistryRecordSynchronizedSource()      {}
 func (*UnknownUnionMember) isSelfManagedLatticeResource()            {}
 func (*UnknownUnionMember) isSourceDetails()                         {}

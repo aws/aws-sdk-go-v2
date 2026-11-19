@@ -1,0 +1,8 @@
+{
+    "id": "8a914cf4-7542-4031-91c7-a1c401c2ff89",
+    "type": "feature",
+    "description": "AWS STS adds GetScopedCredentials and expands Trusted Identity Propagation (TIP) to IAM federation and IAM Roles Anywhere. GetScopedCredentials reduces an existing session's permissions and duration. TIP carries verified user or workload identity for authorization and CloudTrail auditing.",
+    "modules": [
+        "service/sts"
+    ]
+}

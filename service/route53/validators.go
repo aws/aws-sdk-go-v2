@@ -150,6 +150,26 @@ func (m *validateOpCreateHealthCheck) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHealthCheckSource struct {
+}
+
+func (*validateOpCreateHealthCheckSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHealthCheckSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHealthCheckSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHealthCheckSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHostedZone struct {
 }
 
@@ -385,6 +405,26 @@ func (m *validateOpDeleteHealthCheck) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteHealthCheckInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteHealthCheckSource struct {
+}
+
+func (*validateOpDeleteHealthCheckSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHealthCheckSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHealthCheckSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHealthCheckSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +750,26 @@ func (m *validateOpGetHealthCheckLastFailureReason) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetHealthCheckSource struct {
+}
+
+func (*validateOpGetHealthCheckSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHealthCheckSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHealthCheckSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHealthCheckSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetHealthCheckStatus struct {
 }
 
@@ -905,6 +965,26 @@ func (m *validateOpListCidrLocations) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCidrLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHealthChecksBySource struct {
+}
+
+func (*validateOpListHealthChecksBySource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHealthChecksBySource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHealthChecksBySourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHealthChecksBySourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1238,6 +1318,10 @@ func addOpCreateHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHealthCheck{}, middleware.After)
 }
 
+func addOpCreateHealthCheckSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHealthCheckSource{}, middleware.After)
+}
+
 func addOpCreateHostedZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHostedZone{}, middleware.After)
 }
@@ -1284,6 +1368,10 @@ func addOpDeleteCidrCollectionValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHealthCheck{}, middleware.After)
+}
+
+func addOpDeleteHealthCheckSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHealthCheckSource{}, middleware.After)
 }
 
 func addOpDeleteHostedZoneValidationMiddleware(stack *middleware.Stack) error {
@@ -1350,6 +1438,10 @@ func addOpGetHealthCheckLastFailureReasonValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpGetHealthCheckLastFailureReason{}, middleware.After)
 }
 
+func addOpGetHealthCheckSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHealthCheckSource{}, middleware.After)
+}
+
 func addOpGetHealthCheckStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetHealthCheckStatus{}, middleware.After)
 }
@@ -1388,6 +1480,10 @@ func addOpListCidrBlocksValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListCidrLocationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCidrLocations{}, middleware.After)
+}
+
+func addOpListHealthChecksBySourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHealthChecksBySource{}, middleware.After)
 }
 
 func addOpListHostedZonesByVPCValidationMiddleware(stack *middleware.Stack) error {
@@ -1655,6 +1751,28 @@ func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
 	}
 }
 
+func validateHealthCheckSourceConfig(v *types.HealthCheckSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HealthCheckSourceConfig"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetConfigurationList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetConfigurationList"))
+	} else if v.SubnetConfigurationList != nil {
+		if err := validateSubnetConfigurationList(v.SubnetConfigurationList); err != nil {
+			invalidParams.AddNested("SubnetConfigurationList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceRecord(v *types.ResourceRecord) error {
 	if v == nil {
 		return nil
@@ -1795,6 +1913,44 @@ func validateResourceRecordSetProtectionKeyBatch(v []types.ResourceRecordSetProt
 	}
 }
 
+func validateSubnetConfiguration(v *types.SubnetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubnetConfiguration"}
+	if v.SubnetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if v.AvailabilityZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneId"))
+	}
+	if v.SecurityGroupIdList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIdList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubnetConfigurationList(v []types.SubnetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubnetConfigurationList"}
+	for i := range v {
+		if err := validateSubnetConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpActivateKeySigningKeyInput(v *ActivateKeySigningKeyInput) error {
 	if v == nil {
 		return nil
@@ -1924,6 +2080,25 @@ func validateOpCreateHealthCheckInput(v *CreateHealthCheckInput) error {
 	} else if v.HealthCheckConfig != nil {
 		if err := validateHealthCheckConfig(v.HealthCheckConfig); err != nil {
 			invalidParams.AddNested("HealthCheckConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateHealthCheckSourceInput(v *CreateHealthCheckSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHealthCheckSourceInput"}
+	if v.HealthCheckSourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceConfig"))
+	} else if v.HealthCheckSourceConfig != nil {
+		if err := validateHealthCheckSourceConfig(v.HealthCheckSourceConfig); err != nil {
+			invalidParams.AddNested("HealthCheckSourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2154,6 +2329,21 @@ func validateOpDeleteHealthCheckInput(v *DeleteHealthCheckInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteHealthCheckInput"}
 	if v.HealthCheckId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteHealthCheckSourceInput(v *DeleteHealthCheckSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHealthCheckSourceInput"}
+	if v.HealthCheckSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2421,6 +2611,21 @@ func validateOpGetHealthCheckLastFailureReasonInput(v *GetHealthCheckLastFailure
 	}
 }
 
+func validateOpGetHealthCheckSourceInput(v *GetHealthCheckSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHealthCheckSourceInput"}
+	if v.HealthCheckSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetHealthCheckStatusInput(v *GetHealthCheckStatusInput) error {
 	if v == nil {
 		return nil
@@ -2572,6 +2777,21 @@ func validateOpListCidrLocationsInput(v *ListCidrLocationsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListCidrLocationsInput"}
 	if v.CollectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHealthChecksBySourceInput(v *ListHealthChecksBySourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHealthChecksBySourceInput"}
+	if v.HealthCheckSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -442,7 +442,7 @@ var _ProfileAliasArn = smithy.NewSchema(smithy.ShapeID{
 var ProfileDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "ProfileDetail",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var ProfileDetail_profileId *smithy.Schema
 
 var ProfileDetail_profileArn *smithy.Schema
@@ -474,6 +474,8 @@ var ProfileDetail_attributeMappings *smithy.Schema
 var ProfileDetail_aliasName *smithy.Schema
 
 var ProfileDetail_aliasArn *smithy.Schema
+
+var ProfileDetail_tipConfiguration *smithy.Schema
 
 var ProfileDetail_previousAliasName *smithy.Schema
 
@@ -623,6 +625,31 @@ var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var TipConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TipConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var TipConfiguration_status *smithy.Schema
+
+var TipConfiguration_subjectType *smithy.Schema
+
+var TipConfiguration_subjectSource *smithy.Schema
+
+var _TipStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TipStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _TipSubjectSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TipSubjectSource",
+}, smithy.ShapeTypeString, 0)
+
+var _TipSubjectType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rolesanywhere",
+	Name:      "TipSubjectType",
+}, smithy.ShapeTypeString, 0)
+
 var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "TooManyTagsException",
@@ -704,7 +731,7 @@ var ValidationException_message *smithy.Schema
 var CreateProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "CreateProfileRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateProfileRequest_name *smithy.Schema
 
 var CreateProfileRequest_requireInstanceProperties *smithy.Schema
@@ -724,6 +751,8 @@ var CreateProfileRequest_tags *smithy.Schema
 var CreateProfileRequest_acceptRoleSessionName *smithy.Schema
 
 var CreateProfileRequest_aliasName *smithy.Schema
+
+var CreateProfileRequest_tipConfiguration *smithy.Schema
 
 var ProfileDetailResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -960,7 +989,7 @@ var UpdateCrlRequest_aliasName *smithy.Schema
 var UpdateProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
 	Name:      "UpdateProfileRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateProfileRequest_profileId *smithy.Schema
 
 var UpdateProfileRequest_name *smithy.Schema
@@ -976,6 +1005,8 @@ var UpdateProfileRequest_durationSeconds *smithy.Schema
 var UpdateProfileRequest_acceptRoleSessionName *smithy.Schema
 
 var UpdateProfileRequest_aliasName *smithy.Schema
+
+var UpdateProfileRequest_tipConfiguration *smithy.Schema
 
 var UpdateTrustAnchorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rolesanywhere",
@@ -1088,6 +1119,12 @@ func init() {
 
 	_RoleArnList_member = _RoleArnList.AddMember("member", _RoleArn)
 
+	TipConfiguration_status = TipConfiguration.AddMember("status", _TipStatus)
+
+	TipConfiguration_subjectType = TipConfiguration.AddMember("subjectType", _TipSubjectType)
+
+	TipConfiguration_subjectSource = TipConfiguration.AddMember("subjectSource", _TipSubjectSource)
+
 	ProfileDetail_profileId = ProfileDetail.AddMember("profileId", _Uuid)
 
 	ProfileDetail_profileArn = ProfileDetail.AddMember("profileArn", _ProfileResourceArn)
@@ -1119,6 +1156,8 @@ func init() {
 	ProfileDetail_aliasName = ProfileDetail.AddMember("aliasName", _AliasName)
 
 	ProfileDetail_aliasArn = ProfileDetail.AddMember("aliasArn", _ProfileAliasArn)
+
+	ProfileDetail_tipConfiguration = ProfileDetail.AddMember("tipConfiguration", TipConfiguration)
 
 	ProfileDetail_previousAliasName = ProfileDetail.AddMember("previousAliasName", _AliasName)
 
@@ -1231,6 +1270,8 @@ func init() {
 	CreateProfileRequest_acceptRoleSessionName = CreateProfileRequest.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
 
 	CreateProfileRequest_aliasName = CreateProfileRequest.AddMember("aliasName", _AliasName)
+
+	CreateProfileRequest_tipConfiguration = CreateProfileRequest.AddMember("tipConfiguration", TipConfiguration)
 
 	ProfileDetailResponse_profile = ProfileDetailResponse.AddMember("profile", ProfileDetail)
 
@@ -1357,6 +1398,8 @@ func init() {
 	UpdateProfileRequest_acceptRoleSessionName = UpdateProfileRequest.AddMember("acceptRoleSessionName", smithyprelude.Boolean)
 
 	UpdateProfileRequest_aliasName = UpdateProfileRequest.AddMember("aliasName", _AliasName)
+
+	UpdateProfileRequest_tipConfiguration = UpdateProfileRequest.AddMember("tipConfiguration", TipConfiguration)
 
 	UpdateTrustAnchorRequest_trustAnchorId = UpdateTrustAnchorRequest.AddMember("trustAnchorId", _TrustAnchorIdentifier, &smithytraits.HTTPLabel{})
 

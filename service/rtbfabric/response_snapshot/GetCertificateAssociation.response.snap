@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"acmCertificateArn":"__AcmCertificateArn__","associatedAt":946684800,"gatewayId":"__GatewayId__","status":"PENDING_ASSOCIATION","updatedAt":946684800}
+{"acmCertificateArn":"__AcmCertificateArn__","associatedAt":946684800,"errorDetails":[{"code":"VPC_NOT_FOUND","message":"__Message__","resourceIds":["__Member__","__Member__"]},{"code":"VPC_NOT_FOUND","message":"__Message__","resourceIds":["__Member__","__Member__"]}],"gatewayId":"__GatewayId__","status":"PENDING_ASSOCIATION","updatedAt":946684800}

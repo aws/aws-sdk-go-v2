@@ -415,6 +415,10 @@ func serializeRelatedItemUpdateContent(s smithy.ShapeSerializer, schema *smithy.
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *RelatedItemUpdateContentMemberSla:
+		s.WriteUnion(schema, schemas.RelatedItemUpdateContent_sla)
+		serializeSlaUpdateContent(s, schemas.RelatedItemUpdateContent_sla, vv.Value)
+		s.CloseUnion()
 	}
 }
 
@@ -434,6 +438,17 @@ func serializeSlaInputContent(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	case *SlaInputContentMemberSlaInputConfiguration:
 		s.WriteUnion(schema, schemas.SlaInputContent_slaInputConfiguration)
 		s.WriteStruct(schemas.SlaInputContent_slaInputConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeSlaUpdateContent(s smithy.ShapeSerializer, schema *smithy.Schema, v SlaUpdateContent) {
+	switch vv := v.(type) {
+	case *SlaUpdateContentMemberSlaUpdateConfiguration:
+		s.WriteUnion(schema, schemas.SlaUpdateContent_slaUpdateConfiguration)
+		s.WriteStruct(schemas.SlaUpdateContent_slaUpdateConfiguration)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -847,6 +862,10 @@ func deserializeRelatedItemUpdateContent(d smithy.ShapeDeserializer, s *smithy.S
 			vv := &RelatedItemUpdateContentMemberCustom{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.RelatedItemUpdateContent_sla:
+			vv := &RelatedItemUpdateContentMemberSla{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
@@ -869,6 +888,18 @@ func deserializeSlaInputContent(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 		switch ms {
 		case schemas.SlaInputContent_slaInputConfiguration:
 			vv := &SlaInputContentMemberSlaInputConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeSlaUpdateContent(d smithy.ShapeDeserializer, s *smithy.Schema, v *SlaUpdateContent) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.SlaUpdateContent_slaUpdateConfiguration:
+			vv := &SlaUpdateContentMemberSlaUpdateConfiguration{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

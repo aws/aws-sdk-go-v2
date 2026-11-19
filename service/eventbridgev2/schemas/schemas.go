@@ -108,6 +108,11 @@ var RevokeResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RevokeResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var RotateWebhookCredentials = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "RotateWebhookCredentials",
+}, smithy.ShapeTypeOperation, 0)
+
 var TagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "TagResource",
@@ -222,6 +227,16 @@ var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "ConnectionArn",
 }, smithy.ShapeTypeString, 0)
+
+var ConnectivityState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "ConnectivityState",
+}, smithy.ShapeTypeEnum, 3)
+var ConnectivityState_PROVISIONING *smithy.Schema
+
+var ConnectivityState_PROVISION_FAILED *smithy.Schema
+
+var ConnectivityState_ACTIVE *smithy.Schema
 
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
@@ -394,10 +409,18 @@ var _EventSourceArn = smithy.NewSchema(smithy.ShapeID{
 var EventSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "EventSourceConfiguration",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var EventSourceConfiguration_AwsServiceEventsConfiguration *smithy.Schema
 
 var EventSourceConfiguration_PartnerEventsConfiguration *smithy.Schema
+
+var EventSourceConfiguration_WebhookEventsConfiguration *smithy.Schema
+
+var EventSourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "EventSourceDetails",
+}, smithy.ShapeTypeStructure, 1)
+var EventSourceDetails_WebhookDetails *smithy.Schema
 
 var _EventSourceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
@@ -453,10 +476,12 @@ var _EventSourceSummaryList_member *smithy.Schema
 var EventSourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "EventSourceType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var EventSourceType_AWS_SERVICE_EVENTS *smithy.Schema
 
 var EventSourceType_PARTNER_EVENTS *smithy.Schema
+
+var EventSourceType_WEBHOOK_EVENTS *smithy.Schema
 
 var Filter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
@@ -578,7 +603,7 @@ var InvocationType_REQUEST_RESPONSE *smithy.Schema
 var InvokeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "InvokeConfiguration",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var InvokeConfiguration_RoleArn *smithy.Schema
 
 var InvokeConfiguration_LambdaParameters *smithy.Schema
@@ -596,6 +621,8 @@ var InvokeConfiguration_HttpParameters *smithy.Schema
 var InvokeConfiguration_UniversalTargetParameters *smithy.Schema
 
 var InvokeConfiguration_EventBusV2Parameters *smithy.Schema
+
+var InvokeConfiguration_MskParameters *smithy.Schema
 
 var InvokeConfiguration_TargetArn *smithy.Schema
 
@@ -665,6 +692,88 @@ var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 var _MessageAttributeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "MessageAttributeName",
+}, smithy.ShapeTypeString, 0)
+
+var MskAcks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskAcks",
+}, smithy.ShapeTypeEnum, 2)
+var MskAcks_ALL *smithy.Schema
+
+var MskAcks_LEADER *smithy.Schema
+
+var _MskClientId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskClientId",
+}, smithy.ShapeTypeString, 0)
+
+var MskCompression = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskCompression",
+}, smithy.ShapeTypeEnum, 5)
+var MskCompression_NONE *smithy.Schema
+
+var MskCompression_GZIP *smithy.Schema
+
+var MskCompression_SNAPPY *smithy.Schema
+
+var MskCompression_LZ4 *smithy.Schema
+
+var MskCompression_ZSTD *smithy.Schema
+
+var MskConnectivity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskConnectivity",
+}, smithy.ShapeTypeEnum, 2)
+var MskConnectivity_PUBLIC *smithy.Schema
+
+var MskConnectivity_PRIVATE *smithy.Schema
+
+var MskDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskDetails",
+}, smithy.ShapeTypeStructure, 3)
+var MskDetails_ConnectivityState *smithy.Schema
+
+var MskDetails_StateReason *smithy.Schema
+
+var MskDetails_VpcConnectionArn *smithy.Schema
+
+var MskHeader = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskHeader",
+}, smithy.ShapeTypeStructure, 2)
+var MskHeader_Key *smithy.Schema
+
+var MskHeader_Value *smithy.Schema
+
+var _MskHeaderList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskHeaderList",
+}, smithy.ShapeTypeList, 1)
+var _MskHeaderList_member *smithy.Schema
+
+var MskParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskParameters",
+}, smithy.ShapeTypeStructure, 7, &smithytraits.Sensitive{})
+var MskParameters_TopicName *smithy.Schema
+
+var MskParameters_Compression *smithy.Schema
+
+var MskParameters_Acks *smithy.Schema
+
+var MskParameters_PartitionKey *smithy.Schema
+
+var MskParameters_Headers *smithy.Schema
+
+var MskParameters_ClientId *smithy.Schema
+
+var MskParameters_Connectivity *smithy.Schema
+
+var _MskTopicName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "MskTopicName",
 }, smithy.ShapeTypeString, 0)
 
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
@@ -1103,6 +1212,12 @@ var _SubscriberArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SubscriberArn",
 }, smithy.ShapeTypeString, 0)
 
+var SubscriberDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "SubscriberDetails",
+}, smithy.ShapeTypeStructure, 1)
+var SubscriberDetails_MskDetails *smithy.Schema
+
 var _SubscriberName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "SubscriberName",
@@ -1234,7 +1349,7 @@ var UniversalTargetParameters_InvocationTimeoutSeconds *smithy.Schema
 var UpdateInvokeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "UpdateInvokeConfiguration",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateInvokeConfiguration_RoleArn *smithy.Schema
 
 var UpdateInvokeConfiguration_LambdaParameters *smithy.Schema
@@ -1252,6 +1367,208 @@ var UpdateInvokeConfiguration_HttpParameters *smithy.Schema
 var UpdateInvokeConfiguration_UniversalTargetParameters *smithy.Schema
 
 var UpdateInvokeConfiguration_EventBusV2Parameters *smithy.Schema
+
+var UpdateInvokeConfiguration_MskParameters *smithy.Schema
+
+var _VpcConnectionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "VpcConnectionArn",
+}, smithy.ShapeTypeString, 0)
+
+var WebhookAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookAuthConfiguration",
+}, smithy.ShapeTypeUnion, 3)
+var WebhookAuthConfiguration_StaticTokenAuthConfiguration *smithy.Schema
+
+var WebhookAuthConfiguration_BasicHttpAuthConfiguration *smithy.Schema
+
+var WebhookAuthConfiguration_HmacAuthConfiguration *smithy.Schema
+
+var WebhookBasicHttpAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookBasicHttpAuthConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var WebhookBasicHttpAuthConfiguration_Username *smithy.Schema
+
+var WebhookBasicHttpAuthConfiguration_Password *smithy.Schema
+
+var WebhookCredential = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookCredential",
+}, smithy.ShapeTypeUnion, 3)
+var WebhookCredential_StaticTokenSecretValue *smithy.Schema
+
+var WebhookCredential_BasicHttpPassword *smithy.Schema
+
+var WebhookCredential_HmacSecretValue *smithy.Schema
+
+var WebhookDeduplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookDeduplicationConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var WebhookDeduplicationConfiguration_DeduplicationType *smithy.Schema
+
+var WebhookDeduplicationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookDeduplicationType",
+}, smithy.ShapeTypeEnum, 1)
+var WebhookDeduplicationType_CONTENT_BASED *smithy.Schema
+
+var _WebhookDelimiter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookDelimiter",
+}, smithy.ShapeTypeString, 0)
+
+var WebhookDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookDetails",
+}, smithy.ShapeTypeStructure, 2)
+var WebhookDetails_WebhookUrl *smithy.Schema
+
+var WebhookDetails_SecretArn *smithy.Schema
+
+var _WebhookEventSourceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookEventSourceArn",
+}, smithy.ShapeTypeString, 0)
+
+var WebhookEventsSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookEventsSourceConfiguration",
+}, smithy.ShapeTypeStructure, 6)
+var WebhookEventsSourceConfiguration_AuthConfiguration *smithy.Schema
+
+var WebhookEventsSourceConfiguration_KmsKeyIdentifier *smithy.Schema
+
+var WebhookEventsSourceConfiguration_RoleArn *smithy.Schema
+
+var WebhookEventsSourceConfiguration_MetadataHttpHeaders *smithy.Schema
+
+var WebhookEventsSourceConfiguration_DeduplicationConfiguration *smithy.Schema
+
+var WebhookEventsSourceConfiguration_LogConfiguration *smithy.Schema
+
+var _WebhookHeaderName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookHeaderName",
+}, smithy.ShapeTypeString, 0)
+
+var WebhookHmacAlgorithm = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookHmacAlgorithm",
+}, smithy.ShapeTypeEnum, 2)
+var WebhookHmacAlgorithm_SHA256 *smithy.Schema
+
+var WebhookHmacAlgorithm_SHA1 *smithy.Schema
+
+var WebhookHmacAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookHmacAuthConfiguration",
+}, smithy.ShapeTypeStructure, 12)
+var WebhookHmacAuthConfiguration_Algorithm *smithy.Schema
+
+var WebhookHmacAuthConfiguration_Encoding *smithy.Schema
+
+var WebhookHmacAuthConfiguration_SignatureHttpHeader *smithy.Schema
+
+var WebhookHmacAuthConfiguration_SignaturePrefix *smithy.Schema
+
+var WebhookHmacAuthConfiguration_Delimiter *smithy.Schema
+
+var WebhookHmacAuthConfiguration_TimestampHttpHeader *smithy.Schema
+
+var WebhookHmacAuthConfiguration_TimestampPrefix *smithy.Schema
+
+var WebhookHmacAuthConfiguration_TimestampToleranceInSeconds *smithy.Schema
+
+var WebhookHmacAuthConfiguration_MessageIdHttpHeader *smithy.Schema
+
+var WebhookHmacAuthConfiguration_SignedMessageComposition *smithy.Schema
+
+var WebhookHmacAuthConfiguration_SecretValue *smithy.Schema
+
+var WebhookHmacAuthConfiguration_SecretEncoding *smithy.Schema
+
+var WebhookHmacEncoding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookHmacEncoding",
+}, smithy.ShapeTypeEnum, 2)
+var WebhookHmacEncoding_HEX *smithy.Schema
+
+var WebhookHmacEncoding_BASE64 *smithy.Schema
+
+var _WebhookMetadataHttpHeaderList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookMetadataHttpHeaderList",
+}, smithy.ShapeTypeList, 1)
+var _WebhookMetadataHttpHeaderList_member *smithy.Schema
+
+var _WebhookMetadataHttpHeaderName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookMetadataHttpHeaderName",
+}, smithy.ShapeTypeString, 0)
+
+var _WebhookSecretArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookSecretArn",
+}, smithy.ShapeTypeString, 0)
+
+var WebhookSecretEncoding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookSecretEncoding",
+}, smithy.ShapeTypeEnum, 2)
+var WebhookSecretEncoding_RAW *smithy.Schema
+
+var WebhookSecretEncoding_BASE64 *smithy.Schema
+
+var _WebhookSecretValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookSecretValue",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _WebhookSignaturePrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookSignaturePrefix",
+}, smithy.ShapeTypeString, 0)
+
+var WebhookSignedMessageComposition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookSignedMessageComposition",
+}, smithy.ShapeTypeEnum, 3)
+var WebhookSignedMessageComposition_BODY *smithy.Schema
+
+var WebhookSignedMessageComposition_TIMESTAMP_DOT_BODY *smithy.Schema
+
+var WebhookSignedMessageComposition_MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY *smithy.Schema
+
+var WebhookStaticTokenAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookStaticTokenAuthConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var WebhookStaticTokenAuthConfiguration_TokenHttpHeader *smithy.Schema
+
+var WebhookStaticTokenAuthConfiguration_SecretValue *smithy.Schema
+
+var _WebhookTimestampPrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookTimestampPrefix",
+}, smithy.ShapeTypeString, 0)
+
+var _WebhookTimestampToleranceInSeconds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookTimestampToleranceInSeconds",
+}, smithy.ShapeTypeInteger, 0)
+
+var _WebhookUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _WebhookUsername = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "WebhookUsername",
+}, smithy.ShapeTypeString, 0)
 
 var CreateEventBusRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
@@ -1308,7 +1625,7 @@ var CreateEventSourceRequest_ClientToken *smithy.Schema
 var CreateEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "CreateEventSourceResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var CreateEventSourceResponse_EventSourceArn *smithy.Schema
 
 var CreateEventSourceResponse_Name *smithy.Schema
@@ -1316,6 +1633,8 @@ var CreateEventSourceResponse_Name *smithy.Schema
 var CreateEventSourceResponse_EventBusArn *smithy.Schema
 
 var CreateEventSourceResponse_State *smithy.Schema
+
+var CreateEventSourceResponse_EventSourceDetails *smithy.Schema
 
 var CreateEventSourceResponse_CreationTime *smithy.Schema
 
@@ -1358,7 +1677,7 @@ var CreateSubscriberRequest_ClientToken *smithy.Schema
 var CreateSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "CreateSubscriberResponse",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CreateSubscriberResponse_SubscriberArn *smithy.Schema
 
 var CreateSubscriberResponse_Name *smithy.Schema
@@ -1374,6 +1693,8 @@ var CreateSubscriberResponse_PointInTimeConfiguration *smithy.Schema
 var CreateSubscriberResponse_State *smithy.Schema
 
 var CreateSubscriberResponse_CreationTime *smithy.Schema
+
+var CreateSubscriberResponse_SubscriberDetails *smithy.Schema
 
 var DeleteEventBusRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
@@ -1461,7 +1782,7 @@ var DescribeEventSourceRequest_EventSourceArn *smithy.Schema
 var DescribeEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "DescribeEventSourceResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var DescribeEventSourceResponse_EventSourceArn *smithy.Schema
 
 var DescribeEventSourceResponse_Name *smithy.Schema
@@ -1476,6 +1797,8 @@ var DescribeEventSourceResponse_State *smithy.Schema
 
 var DescribeEventSourceResponse_Revoked *smithy.Schema
 
+var DescribeEventSourceResponse_EventSourceDetails *smithy.Schema
+
 var DescribeEventSourceResponse_CreationTime *smithy.Schema
 
 var DescribeEventSourceResponse_LastModifiedTime *smithy.Schema
@@ -1489,7 +1812,7 @@ var DescribeSubscriberRequest_SubscriberArn *smithy.Schema
 var DescribeSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "DescribeSubscriberResponse",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var DescribeSubscriberResponse_SubscriberArn *smithy.Schema
 
 var DescribeSubscriberResponse_Name *smithy.Schema
@@ -1525,6 +1848,8 @@ var DescribeSubscriberResponse_Revoked *smithy.Schema
 var DescribeSubscriberResponse_CreationTime *smithy.Schema
 
 var DescribeSubscriberResponse_LastModifiedTime *smithy.Schema
+
+var DescribeSubscriberResponse_SubscriberDetails *smithy.Schema
 
 var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
@@ -1708,6 +2033,22 @@ var RevokeResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RevokeResourceResponse_Arn *smithy.Schema
 
+var RotateWebhookCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "RotateWebhookCredentialsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var RotateWebhookCredentialsRequest_EventSourceArn *smithy.Schema
+
+var RotateWebhookCredentialsRequest_Credential *smithy.Schema
+
+var RotateWebhookCredentialsRequest_ClientToken *smithy.Schema
+
+var RotateWebhookCredentialsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.eventbridgev2",
+	Name:      "RotateWebhookCredentialsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var RotateWebhookCredentialsResponse_SecretArn *smithy.Schema
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "TagResourceRequest",
@@ -1819,7 +2160,7 @@ var UpdateSubscriberRequest_LogConfiguration *smithy.Schema
 var UpdateSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.eventbridgev2",
 	Name:      "UpdateSubscriberResponse",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateSubscriberResponse_SubscriberArn *smithy.Schema
 
 var UpdateSubscriberResponse_Name *smithy.Schema
@@ -1835,6 +2176,8 @@ var UpdateSubscriberResponse_PointInTimeConfiguration *smithy.Schema
 var UpdateSubscriberResponse_State *smithy.Schema
 
 var UpdateSubscriberResponse_LastModifiedTime *smithy.Schema
+
+var UpdateSubscriberResponse_SubscriberDetails *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1872,6 +2215,12 @@ func init() {
 	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
 
 	ConfluentPublicRegistryConfiguration_ConnectionArn = ConfluentPublicRegistryConfiguration.AddMember("ConnectionArn", _ConnectionArn)
+
+	ConnectivityState_PROVISIONING = ConnectivityState.AddMember("PROVISIONING", smithyprelude.Unit)
+
+	ConnectivityState_PROVISION_FAILED = ConnectivityState.AddMember("PROVISION_FAILED", smithyprelude.Unit)
+
+	ConnectivityState_ACTIVE = ConnectivityState.AddMember("ACTIVE", smithyprelude.Unit)
 
 	DeduplicationType_CONTENT_BASED = DeduplicationType.AddMember("CONTENT_BASED", smithyprelude.Unit)
 
@@ -1923,9 +2272,105 @@ func init() {
 
 	PartnerEventsSourceConfiguration_OnFailureConfiguration = PartnerEventsSourceConfiguration.AddMember("OnFailureConfiguration", OnFailureConfiguration)
 
+	WebhookStaticTokenAuthConfiguration_TokenHttpHeader = WebhookStaticTokenAuthConfiguration.AddMember("TokenHttpHeader", _WebhookHeaderName)
+
+	WebhookStaticTokenAuthConfiguration_SecretValue = WebhookStaticTokenAuthConfiguration.AddMember("SecretValue", _WebhookSecretValue)
+
+	WebhookBasicHttpAuthConfiguration_Username = WebhookBasicHttpAuthConfiguration.AddMember("Username", _WebhookUsername)
+
+	WebhookBasicHttpAuthConfiguration_Password = WebhookBasicHttpAuthConfiguration.AddMember("Password", _WebhookSecretValue)
+
+	WebhookHmacAlgorithm_SHA256 = WebhookHmacAlgorithm.AddMember("SHA256", smithyprelude.Unit)
+
+	WebhookHmacAlgorithm_SHA1 = WebhookHmacAlgorithm.AddMember("SHA1", smithyprelude.Unit)
+
+	WebhookHmacEncoding_HEX = WebhookHmacEncoding.AddMember("HEX", smithyprelude.Unit)
+
+	WebhookHmacEncoding_BASE64 = WebhookHmacEncoding.AddMember("BASE64", smithyprelude.Unit)
+
+	WebhookSignedMessageComposition_BODY = WebhookSignedMessageComposition.AddMember("BODY", smithyprelude.Unit)
+
+	WebhookSignedMessageComposition_TIMESTAMP_DOT_BODY = WebhookSignedMessageComposition.AddMember("TIMESTAMP_DOT_BODY", smithyprelude.Unit)
+
+	WebhookSignedMessageComposition_MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY = WebhookSignedMessageComposition.AddMember("MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY", smithyprelude.Unit)
+
+	WebhookSecretEncoding_RAW = WebhookSecretEncoding.AddMember("RAW", smithyprelude.Unit)
+
+	WebhookSecretEncoding_BASE64 = WebhookSecretEncoding.AddMember("BASE64", smithyprelude.Unit)
+
+	WebhookHmacAuthConfiguration_Algorithm = WebhookHmacAuthConfiguration.AddMember("Algorithm", WebhookHmacAlgorithm)
+
+	WebhookHmacAuthConfiguration_Encoding = WebhookHmacAuthConfiguration.AddMember("Encoding", WebhookHmacEncoding)
+
+	WebhookHmacAuthConfiguration_SignatureHttpHeader = WebhookHmacAuthConfiguration.AddMember("SignatureHttpHeader", _WebhookHeaderName)
+
+	WebhookHmacAuthConfiguration_SignaturePrefix = WebhookHmacAuthConfiguration.AddMember("SignaturePrefix", _WebhookSignaturePrefix)
+
+	WebhookHmacAuthConfiguration_Delimiter = WebhookHmacAuthConfiguration.AddMember("Delimiter", _WebhookDelimiter)
+
+	WebhookHmacAuthConfiguration_TimestampHttpHeader = WebhookHmacAuthConfiguration.AddMember("TimestampHttpHeader", _WebhookHeaderName)
+
+	WebhookHmacAuthConfiguration_TimestampPrefix = WebhookHmacAuthConfiguration.AddMember("TimestampPrefix", _WebhookTimestampPrefix)
+
+	WebhookHmacAuthConfiguration_TimestampToleranceInSeconds = WebhookHmacAuthConfiguration.AddMember("TimestampToleranceInSeconds", _WebhookTimestampToleranceInSeconds)
+
+	WebhookHmacAuthConfiguration_MessageIdHttpHeader = WebhookHmacAuthConfiguration.AddMember("MessageIdHttpHeader", _WebhookHeaderName)
+
+	WebhookHmacAuthConfiguration_SignedMessageComposition = WebhookHmacAuthConfiguration.AddMember("SignedMessageComposition", WebhookSignedMessageComposition)
+
+	WebhookHmacAuthConfiguration_SecretValue = WebhookHmacAuthConfiguration.AddMember("SecretValue", _WebhookSecretValue)
+
+	WebhookHmacAuthConfiguration_SecretEncoding = WebhookHmacAuthConfiguration.AddMember("SecretEncoding", WebhookSecretEncoding)
+
+	WebhookAuthConfiguration_StaticTokenAuthConfiguration = WebhookAuthConfiguration.AddMember("StaticTokenAuthConfiguration", WebhookStaticTokenAuthConfiguration)
+
+	WebhookAuthConfiguration_BasicHttpAuthConfiguration = WebhookAuthConfiguration.AddMember("BasicHttpAuthConfiguration", WebhookBasicHttpAuthConfiguration)
+
+	WebhookAuthConfiguration_HmacAuthConfiguration = WebhookAuthConfiguration.AddMember("HmacAuthConfiguration", WebhookHmacAuthConfiguration)
+
+	_WebhookMetadataHttpHeaderList_member = _WebhookMetadataHttpHeaderList.AddMember("member", _WebhookMetadataHttpHeaderName)
+
+	WebhookDeduplicationType_CONTENT_BASED = WebhookDeduplicationType.AddMember("CONTENT_BASED", smithyprelude.Unit)
+
+	WebhookDeduplicationConfiguration_DeduplicationType = WebhookDeduplicationConfiguration.AddMember("DeduplicationType", WebhookDeduplicationType)
+
+	LogLevel_OFF = LogLevel.AddMember("OFF", smithyprelude.Unit)
+
+	LogLevel_ERROR = LogLevel.AddMember("ERROR", smithyprelude.Unit)
+
+	LogLevel_INFO = LogLevel.AddMember("INFO", smithyprelude.Unit)
+
+	IncludePayload_FULL = IncludePayload.AddMember("FULL", smithyprelude.Unit)
+
+	IncludePayload_ON_ERROR_ONLY = IncludePayload.AddMember("ON_ERROR_ONLY", smithyprelude.Unit)
+
+	LogConfiguration_Level = LogConfiguration.AddMember("Level", LogLevel)
+
+	LogConfiguration_IncludePayload = LogConfiguration.AddMember("IncludePayload", IncludePayload)
+
+	WebhookEventsSourceConfiguration_AuthConfiguration = WebhookEventsSourceConfiguration.AddMember("AuthConfiguration", WebhookAuthConfiguration)
+
+	WebhookEventsSourceConfiguration_KmsKeyIdentifier = WebhookEventsSourceConfiguration.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
+
+	WebhookEventsSourceConfiguration_RoleArn = WebhookEventsSourceConfiguration.AddMember("RoleArn", _RoleArn)
+
+	WebhookEventsSourceConfiguration_MetadataHttpHeaders = WebhookEventsSourceConfiguration.AddMember("MetadataHttpHeaders", _WebhookMetadataHttpHeaderList)
+
+	WebhookEventsSourceConfiguration_DeduplicationConfiguration = WebhookEventsSourceConfiguration.AddMember("DeduplicationConfiguration", WebhookDeduplicationConfiguration)
+
+	WebhookEventsSourceConfiguration_LogConfiguration = WebhookEventsSourceConfiguration.AddMember("LogConfiguration", LogConfiguration)
+
 	EventSourceConfiguration_AwsServiceEventsConfiguration = EventSourceConfiguration.AddMember("AwsServiceEventsConfiguration", AwsServiceEventsSourceConfiguration)
 
 	EventSourceConfiguration_PartnerEventsConfiguration = EventSourceConfiguration.AddMember("PartnerEventsConfiguration", PartnerEventsSourceConfiguration)
+
+	EventSourceConfiguration_WebhookEventsConfiguration = EventSourceConfiguration.AddMember("WebhookEventsConfiguration", WebhookEventsSourceConfiguration)
+
+	WebhookDetails_WebhookUrl = WebhookDetails.AddMember("WebhookUrl", _WebhookUrl)
+
+	WebhookDetails_SecretArn = WebhookDetails.AddMember("SecretArn", _WebhookSecretArn)
+
+	EventSourceDetails_WebhookDetails = EventSourceDetails.AddMember("WebhookDetails", WebhookDetails)
 
 	EventSourceState_CREATING = EventSourceState.AddMember("CREATING", smithyprelude.Unit)
 
@@ -1944,6 +2389,8 @@ func init() {
 	EventSourceType_AWS_SERVICE_EVENTS = EventSourceType.AddMember("AWS_SERVICE_EVENTS", smithyprelude.Unit)
 
 	EventSourceType_PARTNER_EVENTS = EventSourceType.AddMember("PARTNER_EVENTS", smithyprelude.Unit)
+
+	EventSourceType_WEBHOOK_EVENTS = EventSourceType.AddMember("WEBHOOK_EVENTS", smithyprelude.Unit)
 
 	EventSourceSummary_EventSourceArn = EventSourceSummary.AddMember("EventSourceArn", _EventSourceArn)
 
@@ -2002,10 +2449,6 @@ func init() {
 	HttpParameters_InvocationTimeoutSeconds = HttpParameters.AddMember("InvocationTimeoutSeconds", _String)
 
 	IdempotentParameterMismatchException_Message = IdempotentParameterMismatchException.AddMember("Message", smithyprelude.String)
-
-	IncludePayload_FULL = IncludePayload.AddMember("FULL", smithyprelude.Unit)
-
-	IncludePayload_ON_ERROR_ONLY = IncludePayload.AddMember("ON_ERROR_ONLY", smithyprelude.Unit)
 
 	InternalException_Message = InternalException.AddMember("Message", smithyprelude.String)
 
@@ -2083,6 +2526,44 @@ func init() {
 
 	UniversalTargetParameters_InvocationTimeoutSeconds = UniversalTargetParameters.AddMember("InvocationTimeoutSeconds", _String)
 
+	MskCompression_NONE = MskCompression.AddMember("NONE", smithyprelude.Unit)
+
+	MskCompression_GZIP = MskCompression.AddMember("GZIP", smithyprelude.Unit)
+
+	MskCompression_SNAPPY = MskCompression.AddMember("SNAPPY", smithyprelude.Unit)
+
+	MskCompression_LZ4 = MskCompression.AddMember("LZ4", smithyprelude.Unit)
+
+	MskCompression_ZSTD = MskCompression.AddMember("ZSTD", smithyprelude.Unit)
+
+	MskAcks_ALL = MskAcks.AddMember("ALL", smithyprelude.Unit)
+
+	MskAcks_LEADER = MskAcks.AddMember("LEADER", smithyprelude.Unit)
+
+	MskHeader_Key = MskHeader.AddMember("Key", _String)
+
+	MskHeader_Value = MskHeader.AddMember("Value", _String)
+
+	_MskHeaderList_member = _MskHeaderList.AddMember("member", MskHeader)
+
+	MskConnectivity_PUBLIC = MskConnectivity.AddMember("PUBLIC", smithyprelude.Unit)
+
+	MskConnectivity_PRIVATE = MskConnectivity.AddMember("PRIVATE", smithyprelude.Unit)
+
+	MskParameters_TopicName = MskParameters.AddMember("TopicName", _MskTopicName)
+
+	MskParameters_Compression = MskParameters.AddMember("Compression", MskCompression)
+
+	MskParameters_Acks = MskParameters.AddMember("Acks", MskAcks)
+
+	MskParameters_PartitionKey = MskParameters.AddMember("PartitionKey", _String)
+
+	MskParameters_Headers = MskParameters.AddMember("Headers", _MskHeaderList)
+
+	MskParameters_ClientId = MskParameters.AddMember("ClientId", _MskClientId)
+
+	MskParameters_Connectivity = MskParameters.AddMember("Connectivity", MskConnectivity)
+
 	InvokeConfiguration_RoleArn = InvokeConfiguration.AddMember("RoleArn", _RoleArn)
 
 	InvokeConfiguration_LambdaParameters = InvokeConfiguration.AddMember("LambdaParameters", LambdaParameters)
@@ -2101,21 +2582,19 @@ func init() {
 
 	InvokeConfiguration_EventBusV2Parameters = InvokeConfiguration.AddMember("EventBusV2Parameters", EventBusV2Parameters)
 
+	InvokeConfiguration_MskParameters = InvokeConfiguration.AddMember("MskParameters", MskParameters)
+
 	InvokeConfiguration_TargetArn = InvokeConfiguration.AddMember("TargetArn", _TargetResourceArn)
 
 	JsonataConfiguration_Expression = JsonataConfiguration.AddMember("Expression", _String)
 
 	LimitExceededException_Message = LimitExceededException.AddMember("Message", smithyprelude.String)
 
-	LogLevel_OFF = LogLevel.AddMember("OFF", smithyprelude.Unit)
+	MskDetails_ConnectivityState = MskDetails.AddMember("ConnectivityState", ConnectivityState)
 
-	LogLevel_ERROR = LogLevel.AddMember("ERROR", smithyprelude.Unit)
+	MskDetails_StateReason = MskDetails.AddMember("StateReason", _StateReason)
 
-	LogLevel_INFO = LogLevel.AddMember("INFO", smithyprelude.Unit)
-
-	LogConfiguration_Level = LogConfiguration.AddMember("Level", LogLevel)
-
-	LogConfiguration_IncludePayload = LogConfiguration.AddMember("IncludePayload", IncludePayload)
+	MskDetails_VpcConnectionArn = MskDetails.AddMember("VpcConnectionArn", _VpcConnectionArn)
 
 	OrderingType_FIFO = OrderingType.AddMember("FIFO", smithyprelude.Unit)
 
@@ -2237,6 +2716,8 @@ func init() {
 
 	StorageConfigurationOutput_RetentionWindowStartTime = StorageConfigurationOutput.AddMember("RetentionWindowStartTime", _Timestamp)
 
+	SubscriberDetails_MskDetails = SubscriberDetails.AddMember("MskDetails", MskDetails)
+
 	SubscriberState_RUNNING = SubscriberState.AddMember("RUNNING", smithyprelude.Unit)
 
 	SubscriberState_STOPPED = SubscriberState.AddMember("STOPPED", smithyprelude.Unit)
@@ -2299,6 +2780,14 @@ func init() {
 
 	UpdateInvokeConfiguration_EventBusV2Parameters = UpdateInvokeConfiguration.AddMember("EventBusV2Parameters", EventBusV2Parameters)
 
+	UpdateInvokeConfiguration_MskParameters = UpdateInvokeConfiguration.AddMember("MskParameters", MskParameters)
+
+	WebhookCredential_StaticTokenSecretValue = WebhookCredential.AddMember("StaticTokenSecretValue", _WebhookSecretValue)
+
+	WebhookCredential_BasicHttpPassword = WebhookCredential.AddMember("BasicHttpPassword", _WebhookSecretValue)
+
+	WebhookCredential_HmacSecretValue = WebhookCredential.AddMember("HmacSecretValue", _WebhookSecretValue)
+
 	CreateEventBusRequest_Name = CreateEventBusRequest.AddMember("Name", _EventBusName)
 
 	CreateEventBusRequest_Description = CreateEventBusRequest.AddMember("Description", _Description)
@@ -2346,6 +2835,8 @@ func init() {
 	CreateEventSourceResponse_EventBusArn = CreateEventSourceResponse.AddMember("EventBusArn", _EventBusArn)
 
 	CreateEventSourceResponse_State = CreateEventSourceResponse.AddMember("State", EventSourceState)
+
+	CreateEventSourceResponse_EventSourceDetails = CreateEventSourceResponse.AddMember("EventSourceDetails", EventSourceDetails)
 
 	CreateEventSourceResponse_CreationTime = CreateEventSourceResponse.AddMember("CreationTime", _Timestamp)
 
@@ -2397,6 +2888,8 @@ func init() {
 
 	CreateSubscriberResponse_CreationTime = CreateSubscriberResponse.AddMember("CreationTime", _Timestamp)
 
+	CreateSubscriberResponse_SubscriberDetails = CreateSubscriberResponse.AddMember("SubscriberDetails", SubscriberDetails)
+
 	DeleteEventBusRequest_EventBusArn = DeleteEventBusRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
 
 	DeleteEventSourceRequest_EventSourceArn = DeleteEventSourceRequest.AddMember("EventSourceArn", _EventSourceArn)
@@ -2447,6 +2940,8 @@ func init() {
 
 	DescribeEventSourceResponse_Revoked = DescribeEventSourceResponse.AddMember("Revoked", smithyprelude.Boolean)
 
+	DescribeEventSourceResponse_EventSourceDetails = DescribeEventSourceResponse.AddMember("EventSourceDetails", EventSourceDetails)
+
 	DescribeEventSourceResponse_CreationTime = DescribeEventSourceResponse.AddMember("CreationTime", _Timestamp)
 
 	DescribeEventSourceResponse_LastModifiedTime = DescribeEventSourceResponse.AddMember("LastModifiedTime", _Timestamp)
@@ -2488,6 +2983,8 @@ func init() {
 	DescribeSubscriberResponse_CreationTime = DescribeSubscriberResponse.AddMember("CreationTime", _Timestamp)
 
 	DescribeSubscriberResponse_LastModifiedTime = DescribeSubscriberResponse.AddMember("LastModifiedTime", _Timestamp)
+
+	DescribeSubscriberResponse_SubscriberDetails = DescribeSubscriberResponse.AddMember("SubscriberDetails", SubscriberDetails)
 
 	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _EventBusArn, &smithytraits.ContextParam{})
 
@@ -2591,6 +3088,14 @@ func init() {
 
 	RevokeResourceResponse_Arn = RevokeResourceResponse.AddMember("Arn", _RevocableResourceArn)
 
+	RotateWebhookCredentialsRequest_EventSourceArn = RotateWebhookCredentialsRequest.AddMember("EventSourceArn", _WebhookEventSourceArn)
+
+	RotateWebhookCredentialsRequest_Credential = RotateWebhookCredentialsRequest.AddMember("Credential", WebhookCredential)
+
+	RotateWebhookCredentialsRequest_ClientToken = RotateWebhookCredentialsRequest.AddMember("ClientToken", _ClientToken)
+
+	RotateWebhookCredentialsResponse_SecretArn = RotateWebhookCredentialsResponse.AddMember("SecretArn", _WebhookSecretArn)
+
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
 
 	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
@@ -2676,5 +3181,7 @@ func init() {
 	UpdateSubscriberResponse_State = UpdateSubscriberResponse.AddMember("State", SubscriberState)
 
 	UpdateSubscriberResponse_LastModifiedTime = UpdateSubscriberResponse.AddMember("LastModifiedTime", _Timestamp)
+
+	UpdateSubscriberResponse_SubscriberDetails = UpdateSubscriberResponse.AddMember("SubscriberDetails", SubscriberDetails)
 
 }

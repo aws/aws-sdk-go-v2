@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"moduleId":"__ModuleId__","nextToken":"__NextToken__","versions":[{"createdAt":946684800,"moduleVersionArn":"__ModuleVersionArn__","status":"CREATING","version":"__Version__"},{"createdAt":946684800,"moduleVersionArn":"__ModuleVersionArn__","status":"CREATING","version":"__Version__"}]}

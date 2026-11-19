@@ -1,0 +1,8 @@
+{
+    "id": "e24a455f-782d-413e-9fe8-26a7aaf04c24",
+    "type": "feature",
+    "description": "Adds the Leads APIs (SearchEngagements, ListEngagementGroups), customer account APIs with statistics and bulk jobs, SearchOpportunities, opportunity bulk jobs, account planning invitations, co-sell motion reason on AWS opportunity summaries, and channel recommendations on lead insights.",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

@@ -441,6 +441,11 @@ func validateAgentSkillsAdditionalData(v *types.AgentSkillsAdditionalData) error
 			invalidParams.AddNested("SkillMd", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SkillPackage != nil {
+		if err := validateAgentSkillsPackageDescriptor(v.SkillPackage); err != nil {
+			invalidParams.AddNested("SkillPackage", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -470,6 +475,23 @@ func validateAgentSkillsMdDescriptor(v *types.AgentSkillsMdDescriptor) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AgentSkillsMdDescriptor"}
+	if v.Source != nil {
+		if err := validateDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentSkillsPackageDescriptor(v *types.AgentSkillsPackageDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentSkillsPackageDescriptor"}
 	if v.Source != nil {
 		if err := validateDescriptorSource(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
@@ -972,6 +994,21 @@ func validateRegistryFilterList(v []types.RegistryFilter) error {
 	}
 }
 
+func validateRegistryRecordArtifactUpload(v *types.RegistryRecordArtifactUpload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryRecordArtifactUpload"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRegistryRecordCredentialProviderConfiguration(v *types.RegistryRecordCredentialProviderConfiguration) error {
 	if v == nil {
 		return nil
@@ -1165,6 +1202,11 @@ func validateUpdatedAgentSkillsAdditionalDataFields(v *types.UpdatedAgentSkillsA
 			invalidParams.AddNested("SkillMd", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SkillPackage != nil {
+		if err := validateUpdatedAgentSkillsPackageDescriptor(v.SkillPackage); err != nil {
+			invalidParams.AddNested("SkillPackage", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1231,6 +1273,23 @@ func validateUpdatedAgentSkillsMdDescriptorFields(v *types.UpdatedAgentSkillsMdD
 	if v.Source != nil {
 		if err := validateUpdatedDescriptorSource(v.Source); err != nil {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedAgentSkillsPackageDescriptor(v *types.UpdatedAgentSkillsPackageDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedAgentSkillsPackageDescriptor"}
+	if v.OptionalValue != nil {
+		if err := validateAgentSkillsPackageDescriptor(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1481,6 +1540,23 @@ func validateUpdatedMcpServerDescriptorFields(v *types.UpdatedMcpServerDescripto
 	}
 }
 
+func validateUpdatedRegistryRecordArtifact(v *types.UpdatedRegistryRecordArtifact) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedRegistryRecordArtifact"}
+	if v.OptionalValue != nil {
+		if err := validateRegistryRecordArtifactUpload(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkloadIdentityDetails(v *types.WorkloadIdentityDetails) error {
 	if v == nil {
 		return nil
@@ -1550,6 +1626,11 @@ func validateOpCreateRegistryRecordInput(v *CreateRegistryRecordInput) error {
 	} else if v.Descriptors != nil {
 		if err := validateDescriptors(v.Descriptors); err != nil {
 			invalidParams.AddNested("Descriptors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Artifact != nil {
+		if err := validateRegistryRecordArtifactUpload(v.Artifact); err != nil {
+			invalidParams.AddNested("Artifact", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Provenance != nil {
@@ -1780,6 +1861,11 @@ func validateOpUpdateRegistryRecordInput(v *UpdateRegistryRecordInput) error {
 	if v.Descriptors != nil {
 		if err := validateUpdatedDescriptors(v.Descriptors); err != nil {
 			invalidParams.AddNested("Descriptors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Artifact != nil {
+		if err := validateUpdatedRegistryRecordArtifact(v.Artifact); err != nil {
+			invalidParams.AddNested("Artifact", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Provenance != nil {

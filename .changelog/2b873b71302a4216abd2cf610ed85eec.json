@@ -1,0 +1,8 @@
+{
+    "id": "2b873b71-302a-4216-abd2-cf610ed85eec",
+    "type": "feature",
+    "description": "Increase function timeout limit to 30 minutes for Lambda Event Functions.",
+    "modules": [
+        "service/lambda"
+    ]
+}

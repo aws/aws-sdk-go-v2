@@ -106,6 +106,11 @@ type CreateStackInput struct {
 	// sessions. By default, these actions are enabled.
 	UserSettings []types.UserSetting
 
+	// Configuration for WebAuthn redirection between the streaming session and the
+	// user's local device. Use ProcessCompatibilityList to specify which processes can
+	// use WebAuthn redirection on Windows fleets.
+	WebAuthnRedirection *types.WebAuthnRedirection
+
 	noSmithyDocumentSerde
 }
 
@@ -168,6 +173,11 @@ func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UserSettings != nil {
 		serializeUserSettingList(s, schemas.CreateStackRequest_UserSettings, v.UserSettings)
+	}
+	if v.WebAuthnRedirection != nil {
+		s.WriteStruct(schemas.CreateStackRequest_WebAuthnRedirection)
+		v.WebAuthnRedirection.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 

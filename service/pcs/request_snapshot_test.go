@@ -256,6 +256,26 @@ func TestCheckRequestSnapshot_CreateCluster(t *testing.T) {
 					ParameterValue: ptr.String("__ParameterValue__"),
 				},
 			},
+			JobSubmitPlugins: []types.JobSubmitPlugin{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
+				},
+			},
 			Accounting: &types.AccountingRequest{
 				DefaultPurgeTimeInDays: ptr.Int32(1),
 				Mode:                   types.AccountingMode("STANDARD"),
@@ -901,6 +921,26 @@ func TestCheckRequestSnapshot_UpdateCluster(t *testing.T) {
 					ParameterValue: ptr.String("__ParameterValue__"),
 				},
 			},
+			JobSubmitPlugins: []types.JobSubmitPlugin{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
+				},
+			},
 			Accounting: &types.UpdateAccountingRequest{
 				DefaultPurgeTimeInDays: ptr.Int32(1),
 				Mode:                   types.AccountingMode("STANDARD"),
@@ -1172,6 +1212,26 @@ func TestUpdateRequestSnapshot_CreateCluster(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			JobSubmitPlugins: []types.JobSubmitPlugin{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
 				},
 			},
 			Accounting: &types.AccountingRequest{
@@ -1817,6 +1877,26 @@ func TestUpdateRequestSnapshot_UpdateCluster(t *testing.T) {
 				{
 					ParameterName:  ptr.String("__ParameterName__"),
 					ParameterValue: ptr.String("__ParameterValue__"),
+				},
+			},
+			JobSubmitPlugins: []types.JobSubmitPlugin{
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
+				},
+				{
+					Name: ptr.String("__Name__"),
+					Type: types.JobSubmitPluginType("STARLARK"),
+					ScriptSource: &types.JobSubmitScriptSource{
+						ScriptLocation: ptr.String("__ScriptLocation__"),
+						S3VersionId:    ptr.String("__S3VersionId__"),
+						Checksum:       ptr.String("__Checksum__"),
+					},
 				},
 			},
 			Accounting: &types.UpdateAccountingRequest{

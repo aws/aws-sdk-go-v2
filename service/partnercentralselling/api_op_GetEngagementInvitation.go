@@ -30,6 +30,7 @@ func (c *Client) GetEngagementInvitation(ctx context.Context, params *GetEngagem
 	return out, nil
 }
 
+// Contains the request parameters for the GetEngagementInvitation operation.
 type GetEngagementInvitationInput struct {
 
 	// Specifies the catalog associated with the request. The field accepts values
@@ -62,6 +63,7 @@ func (v *GetEngagementInvitationInput) SerializeMembers(s smithy.ShapeSerializer
 	}
 }
 
+// Contains the response that the GetEngagementInvitation action returns.
 type GetEngagementInvitationOutput struct {
 
 	// Indicates the catalog from which the engagement invitation details are

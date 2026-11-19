@@ -2,4 +2,4 @@ POST /ListAssessments
 
 Content-Type: application/json
 
-{"AssessmentTargetFilter":{"ChangeSetId":"__ChangeSetId__","EntityId":"__EntityId__"},"Catalog":"__Catalog__","FrameworkFilters":{"AMISecurityFilters":{"DeliveryOptionId":"__DeliveryOptionId__"}},"FrameworkId":"__FrameworkId__","MaxResults":1,"NextToken":"__NextToken__"}
+{"AssessmentTargetFilter":{"ChangeSetId":"__ChangeSetId__","EntityId":"__EntityId__","EntityIds":["__Member__","__Member__"]},"Catalog":"__Catalog__","FrameworkFilters":{"AMISecurityFilters":{"DeliveryOptionId":"__DeliveryOptionId__"}},"FrameworkId":"__FrameworkId__","MaxResults":1,"NextToken":"__NextToken__"}

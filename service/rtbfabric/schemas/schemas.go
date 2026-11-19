@@ -113,6 +113,20 @@ var DisassociateCertificate = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/responder-gateway/{gatewayId}/certificate",
 	Code: 200})
 
+var GetAvailableModule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetAvailableModule",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/available-modules/{moduleId}",
+	Code: 200})
+
+var GetAvailableModuleVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetAvailableModuleVersion",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/available-modules/{moduleId}/versions/{version}",
+	Code: 200})
+
 var GetCertificateAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetCertificateAssociation",
@@ -162,6 +176,27 @@ var GetResponderGateway = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/responder-gateway/{gatewayId}",
 	Code: 200})
 
+var GetUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetUpdate",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/gateway/{gatewayId}/updates/{updateId}",
+	Code: 200})
+
+var ListAvailableModules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListAvailableModules",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/available-modules",
+	Code: 200})
+
+var ListAvailableModuleVersions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListAvailableModuleVersions",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/available-modules/{moduleId}/versions",
+	Code: 200})
+
 var ListCertificateAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "ListCertificateAssociations",
@@ -202,6 +237,20 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResource",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
+	Code: 200})
+
+var ListUpdates = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListUpdates",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/gateway/{gatewayId}/updates",
+	Code: 200})
+
+var PutLinkFlows = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "PutLinkFlows",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/gateway/{gatewayId}/link/{linkId}/flows",
 	Code: 200})
 
 var RejectLink = smithy.NewSchema(smithy.ShapeID{
@@ -287,6 +336,11 @@ var Action_noBid *smithy.Schema
 
 var Action_headerTag *smithy.Schema
 
+var _ActivationPercentage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ActivationPercentage",
+}, smithy.ShapeTypeFloat, 0)
+
 var _AutoScalingGroupName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "AutoScalingGroupName",
@@ -307,6 +361,57 @@ var AutoScalingGroupsConfiguration_autoScalingGroupNames *smithy.Schema
 var AutoScalingGroupsConfiguration_roleArn *smithy.Schema
 
 var AutoScalingGroupsConfiguration_healthCheckConfig *smithy.Schema
+
+var AvailableModuleSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "AvailableModuleSummary",
+}, smithy.ShapeTypeStructure, 6)
+var AvailableModuleSummary_moduleId *smithy.Schema
+
+var AvailableModuleSummary_moduleArn *smithy.Schema
+
+var AvailableModuleSummary_moduleName *smithy.Schema
+
+var AvailableModuleSummary_subscriptionType *smithy.Schema
+
+var AvailableModuleSummary_subscriptionStatus *smithy.Schema
+
+var AvailableModuleSummary_marketplaceProductId *smithy.Schema
+
+var _AvailableModuleSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "AvailableModuleSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _AvailableModuleSummaryList_member *smithy.Schema
+
+var AvailableModuleVersionSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "AvailableModuleVersionSummary",
+}, smithy.ShapeTypeStructure, 4)
+var AvailableModuleVersionSummary_version *smithy.Schema
+
+var AvailableModuleVersionSummary_moduleVersionArn *smithy.Schema
+
+var AvailableModuleVersionSummary_status *smithy.Schema
+
+var AvailableModuleVersionSummary_createdAt *smithy.Schema
+
+var _AvailableModuleVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "AvailableModuleVersionSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _AvailableModuleVersionSummaryList_member *smithy.Schema
+
+var _AwsResourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "AwsResourceId",
+}, smithy.ShapeTypeString, 0)
+
+var _AwsResourceIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "AwsResourceIdList",
+}, smithy.ShapeTypeList, 1)
+var _AwsResourceIdList_member *smithy.Schema
 
 var _Base64EncodedCertificateChain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -359,6 +464,39 @@ var ClientRoutingPolicy_AVAILABILITY_ZONE_AFFINITY *smithy.Schema
 
 var ClientRoutingPolicy_ANY_AVAILABILITY_ZONE *smithy.Schema
 
+var _ClientToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ClientToken",
+}, smithy.ShapeTypeString, 0)
+
+var ConfigurableAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ConfigurableAction",
+}, smithy.ShapeTypeEnum, 4)
+var ConfigurableAction_FILTER *smithy.Schema
+
+var ConfigurableAction_ENRICH_REQUEST_EXT *smithy.Schema
+
+var ConfigurableAction_ENRICH_REQUEST_HEADERS *smithy.Schema
+
+var ConfigurableAction_OBSERVE *smithy.Schema
+
+var _ConfigurableActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ConfigurableActionList",
+}, smithy.ShapeTypeList, 1)
+var _ConfigurableActionList_member *smithy.Schema
+
+var _ConfigurationSchema = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ConfigurationSchema",
+}, smithy.ShapeTypeString, 0)
+
+var _ConfigurationValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ConfigurationValues",
+}, smithy.ShapeTypeString, 0)
+
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "ConflictException",
@@ -404,6 +542,46 @@ var EksEndpointsConfiguration_clusterName *smithy.Schema
 
 var EksEndpointsConfiguration_roleArn *smithy.Schema
 
+var ErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ErrorCode",
+}, smithy.ShapeTypeEnum, 6)
+var ErrorCode_VPC_NOT_FOUND *smithy.Schema
+
+var ErrorCode_EC2_SUBNET_NOT_FOUND *smithy.Schema
+
+var ErrorCode_EC2_SECURITY_GROUP_NOT_FOUND *smithy.Schema
+
+var ErrorCode_EC2_SUBNET_IP_EXHAUSTION *smithy.Schema
+
+var ErrorCode_IAM_ASSUME_ROLE_ACCESS_DENIED *smithy.Schema
+
+var ErrorCode_INTERNAL_ERROR *smithy.Schema
+
+var ErrorDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ErrorDetail",
+}, smithy.ShapeTypeStructure, 3)
+var ErrorDetail_code *smithy.Schema
+
+var ErrorDetail_message *smithy.Schema
+
+var ErrorDetail_resourceIds *smithy.Schema
+
+var _ErrorDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ErrorDetails",
+}, smithy.ShapeTypeList, 1)
+var _ErrorDetails_member *smithy.Schema
+
+var FailureMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FailureMode",
+}, smithy.ShapeTypeEnum, 2)
+var FailureMode_OPEN *smithy.Schema
+
+var FailureMode_CLOSED *smithy.Schema
+
 var Filter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "Filter",
@@ -438,6 +616,42 @@ var FilterType_INCLUDE *smithy.Schema
 
 var FilterType_EXCLUDE *smithy.Schema
 
+var Flow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "Flow",
+}, smithy.ShapeTypeStructure, 2)
+var Flow_name *smithy.Schema
+
+var Flow_pipeline *smithy.Schema
+
+var _FlowList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowList",
+}, smithy.ShapeTypeList, 1)
+var _FlowList_member *smithy.Schema
+
+var FlowModule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowModule",
+}, smithy.ShapeTypeStructure, 6)
+var FlowModule_name *smithy.Schema
+
+var FlowModule_moduleVersionArn *smithy.Schema
+
+var FlowModule_selectedActions *smithy.Schema
+
+var FlowModule_failureMode *smithy.Schema
+
+var FlowModule_activationPercentage *smithy.Schema
+
+var FlowModule_configurationValues *smithy.Schema
+
+var _FlowModuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowModuleList",
+}, smithy.ShapeTypeList, 1)
+var _FlowModuleList_member *smithy.Schema
+
 var _FlowModuleName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "FlowModuleName",
@@ -448,6 +662,31 @@ var _FlowModuleNameList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FlowModuleNameList",
 }, smithy.ShapeTypeList, 1)
 var _FlowModuleNameList_member *smithy.Schema
+
+var _FlowName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowName",
+}, smithy.ShapeTypeString, 0)
+
+var FlowPhase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowPhase",
+}, smithy.ShapeTypeStructure, 1)
+var FlowPhase_modules *smithy.Schema
+
+var _FlowPhaseList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowPhaseList",
+}, smithy.ShapeTypeList, 1)
+var _FlowPhaseList_member *smithy.Schema
+
+var FlowPipeline = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "FlowPipeline",
+}, smithy.ShapeTypeUnion, 2)
+var FlowPipeline_sequential *smithy.Schema
+
+var FlowPipeline_phased *smithy.Schema
 
 var _GatewayId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -540,6 +779,14 @@ var LinkAttributes_responderErrorMasking *smithy.Schema
 
 var LinkAttributes_customerProvidedId *smithy.Schema
 
+var LinkConfigParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "LinkConfigParameters",
+}, smithy.ShapeTypeStructure, 2)
+var LinkConfigParameters_logSettings *smithy.Schema
+
+var LinkConfigParameters_timeoutInMillis *smithy.Schema
+
 var LinkDirection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "LinkDirection",
@@ -547,6 +794,14 @@ var LinkDirection = smithy.NewSchema(smithy.ShapeID{
 var LinkDirection_RESPONSE *smithy.Schema
 
 var LinkDirection_REQUEST *smithy.Schema
+
+var LinkFlowParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "LinkFlowParameters",
+}, smithy.ShapeTypeUnion, 2)
+var LinkFlowParameters_modules *smithy.Schema
+
+var LinkFlowParameters_flows *smithy.Schema
 
 var _LinkId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -574,7 +829,7 @@ var _LinkRoutingRuleList_member *smithy.Schema
 var LinkRoutingRuleSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "LinkRoutingRuleSummary",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var LinkRoutingRuleSummary_ruleId *smithy.Schema
 
 var LinkRoutingRuleSummary_priority *smithy.Schema
@@ -587,10 +842,12 @@ var LinkRoutingRuleSummary_createdAt *smithy.Schema
 
 var LinkRoutingRuleSummary_updatedAt *smithy.Schema
 
+var LinkRoutingRuleSummary_errorDetails *smithy.Schema
+
 var LinkStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "LinkStatus",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 15)
 var LinkStatus_PENDING_CREATION *smithy.Schema
 
 var LinkStatus_PENDING_REQUEST *smithy.Schema
@@ -617,6 +874,16 @@ var LinkStatus_ISOLATED *smithy.Schema
 
 var LinkStatus_PENDING_RESTORATION *smithy.Schema
 
+var LinkStatus_CREATE_FAILED *smithy.Schema
+
+var LinkStatus_DELETE_FAILED *smithy.Schema
+
+var LinkTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "LinkTarget",
+}, smithy.ShapeTypeStructure, 1)
+var LinkTarget_linkId *smithy.Schema
+
 var _LinkTimeoutInMillis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "LinkTimeoutInMillis",
@@ -631,7 +898,7 @@ var ListenerConfig_protocols *smithy.Schema
 var ListLinksResponseStructure = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "ListLinksResponseStructure",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var ListLinksResponseStructure_gatewayId *smithy.Schema
 
 var ListLinksResponseStructure_peerGatewayId *smithy.Schema
@@ -654,11 +921,18 @@ var ListLinksResponseStructure_logSettings *smithy.Schema
 
 var ListLinksResponseStructure_connectivityType *smithy.Schema
 
+var ListLinksResponseStructure_errorDetails *smithy.Schema
+
 var ListLinksResponseStructure_linkId *smithy.Schema
 
 var ListLinksResponseStructure_tags *smithy.Schema
 
 var ListLinksResponseStructure_publicEndpoint *smithy.Schema
+
+var _LockToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "LockToken",
+}, smithy.ShapeTypeString, 0)
 
 var ManagedEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -667,6 +941,11 @@ var ManagedEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
 var ManagedEndpointConfiguration_autoScalingGroups *smithy.Schema
 
 var ManagedEndpointConfiguration_eksEndpoints *smithy.Schema
+
+var _ModuleArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModuleArn",
+}, smithy.ShapeTypeString, 0)
 
 var ModuleConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -686,6 +965,21 @@ var _ModuleConfigurationList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ModuleConfigurationList_member *smithy.Schema
 
+var _ModuleDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModuleDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _ModuleId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModuleId",
+}, smithy.ShapeTypeString, 0)
+
+var _ModuleName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModuleName",
+}, smithy.ShapeTypeString, 0)
+
 var ModuleParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "ModuleParameters",
@@ -695,6 +989,45 @@ var ModuleParameters_noBid *smithy.Schema
 var ModuleParameters_openRtbAttribute *smithy.Schema
 
 var ModuleParameters_rateLimiter *smithy.Schema
+
+var ModulePermission = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModulePermission",
+}, smithy.ShapeTypeEnum, 6)
+var ModulePermission_READ_REQUEST_BODY *smithy.Schema
+
+var ModulePermission_READ_REQUEST_HEADERS *smithy.Schema
+
+var ModulePermission_MUTATE_REQUEST_BODY *smithy.Schema
+
+var ModulePermission_ENRICH_REQUEST_HEADERS *smithy.Schema
+
+var ModulePermission_ENRICH_REQUEST_EXT *smithy.Schema
+
+var ModulePermission_FILTER *smithy.Schema
+
+var _ModulePermissionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModulePermissionList",
+}, smithy.ShapeTypeList, 1)
+var _ModulePermissionList_member *smithy.Schema
+
+var _ModuleVersionArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModuleVersionArn",
+}, smithy.ShapeTypeString, 0)
+
+var ModuleVersionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ModuleVersionStatus",
+}, smithy.ShapeTypeEnum, 4)
+var ModuleVersionStatus_CREATING *smithy.Schema
+
+var ModuleVersionStatus_CREATE_FAILED *smithy.Schema
+
+var ModuleVersionStatus_ACTIVE *smithy.Schema
+
+var ModuleVersionStatus_DEPRECATED *smithy.Schema
 
 var NoBidAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -724,6 +1057,12 @@ var OpenRtbAttributeModuleParameters_action *smithy.Schema
 
 var OpenRtbAttributeModuleParameters_holdbackPercentage *smithy.Schema
 
+var PhasedPipeline = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "PhasedPipeline",
+}, smithy.ShapeTypeStructure, 1)
+var PhasedPipeline_phases *smithy.Schema
+
 var Protocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "Protocol",
@@ -752,10 +1091,15 @@ var RateLimiterModuleParameters = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RateLimiterModuleParameters_tps *smithy.Schema
 
+var _ReleaseNotes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ReleaseNotes",
+}, smithy.ShapeTypeString, 0)
+
 var RequesterGatewayStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "RequesterGatewayStatus",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
 var RequesterGatewayStatus_PENDING_CREATION *smithy.Schema
 
 var RequesterGatewayStatus_ACTIVE *smithy.Schema
@@ -773,6 +1117,10 @@ var RequesterGatewayStatus_ISOLATED *smithy.Schema
 var RequesterGatewayStatus_PENDING_ISOLATION *smithy.Schema
 
 var RequesterGatewayStatus_PENDING_RESTORATION *smithy.Schema
+
+var RequesterGatewayStatus_CREATE_FAILED *smithy.Schema
+
+var RequesterGatewayStatus_DELETE_FAILED *smithy.Schema
 
 var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -823,10 +1171,30 @@ var _ResponderErrorMaskingLoggingTypes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ResponderErrorMaskingLoggingTypes_member *smithy.Schema
 
+var ResponderGatewayConfigParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ResponderGatewayConfigParameters",
+}, smithy.ShapeTypeStructure, 8)
+var ResponderGatewayConfigParameters_description *smithy.Schema
+
+var ResponderGatewayConfigParameters_clientRoutingPolicy *smithy.Schema
+
+var ResponderGatewayConfigParameters_domainName *smithy.Schema
+
+var ResponderGatewayConfigParameters_port *smithy.Schema
+
+var ResponderGatewayConfigParameters_protocol *smithy.Schema
+
+var ResponderGatewayConfigParameters_listenerConfig *smithy.Schema
+
+var ResponderGatewayConfigParameters_trustStoreConfiguration *smithy.Schema
+
+var ResponderGatewayConfigParameters_managedEndpointConfiguration *smithy.Schema
+
 var ResponderGatewayStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "ResponderGatewayStatus",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
 var ResponderGatewayStatus_PENDING_CREATION *smithy.Schema
 
 var ResponderGatewayStatus_ACTIVE *smithy.Schema
@@ -844,6 +1212,26 @@ var ResponderGatewayStatus_ISOLATED *smithy.Schema
 var ResponderGatewayStatus_PENDING_ISOLATION *smithy.Schema
 
 var ResponderGatewayStatus_PENDING_RESTORATION *smithy.Schema
+
+var ResponderGatewayStatus_CREATE_FAILED *smithy.Schema
+
+var ResponderGatewayStatus_DELETE_FAILED *smithy.Schema
+
+var RoutingRuleParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "RoutingRuleParameters",
+}, smithy.ShapeTypeStructure, 2)
+var RoutingRuleParameters_priority *smithy.Schema
+
+var RoutingRuleParameters_conditions *smithy.Schema
+
+var RoutingRuleTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "RoutingRuleTarget",
+}, smithy.ShapeTypeStructure, 2)
+var RoutingRuleTarget_linkId *smithy.Schema
+
+var RoutingRuleTarget_ruleId *smithy.Schema
 
 var _RtbTaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -879,7 +1267,7 @@ var _RulePriority = smithy.NewSchema(smithy.ShapeID{
 var RuleStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "RuleStatus",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 8)
 var RuleStatus_CREATION_IN_PROGRESS *smithy.Schema
 
 var RuleStatus_ACTIVE *smithy.Schema
@@ -892,6 +1280,10 @@ var RuleStatus_DELETED *smithy.Schema
 
 var RuleStatus_FAILED *smithy.Schema
 
+var RuleStatus_CREATE_FAILED *smithy.Schema
+
+var RuleStatus_DELETE_FAILED *smithy.Schema
+
 var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "SecurityGroupId",
@@ -902,6 +1294,23 @@ var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SecurityGroupIdList",
 }, smithy.ShapeTypeList, 1)
 var _SecurityGroupIdList_member *smithy.Schema
+
+var _SelectedActionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "SelectedActionList",
+}, smithy.ShapeTypeList, 1)
+var _SelectedActionList_member *smithy.Schema
+
+var _SemanticVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "SemanticVersion",
+}, smithy.ShapeTypeString, 0)
+
+var SequentialPipeline = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "SequentialPipeline",
+}, smithy.ShapeTypeStructure, 1)
+var SequentialPipeline_modules *smithy.Schema
 
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -925,6 +1334,24 @@ var _SubnetIdList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SubnetIdList",
 }, smithy.ShapeTypeList, 1)
 var _SubnetIdList_member *smithy.Schema
+
+var SubscriptionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "SubscriptionStatus",
+}, smithy.ShapeTypeEnum, 2)
+var SubscriptionStatus_ACTIVE *smithy.Schema
+
+var SubscriptionStatus_EXPIRED *smithy.Schema
+
+var SubscriptionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "SubscriptionType",
+}, smithy.ShapeTypeEnum, 3)
+var SubscriptionType_MARKETPLACE *smithy.Schema
+
+var SubscriptionType_PRIVATE *smithy.Schema
+
+var SubscriptionType_AWS_BUILT_IN *smithy.Schema
 
 var _TagKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -962,6 +1389,91 @@ var TrustStoreConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TrustStoreConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var TrustStoreConfiguration_certificateAuthorityCertificates *smithy.Schema
+
+var Update = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "Update",
+}, smithy.ShapeTypeStructure, 7)
+var Update_updateId *smithy.Schema
+
+var Update_type *smithy.Schema
+
+var Update_status *smithy.Schema
+
+var Update_target *smithy.Schema
+
+var Update_createdAt *smithy.Schema
+
+var Update_parameters *smithy.Schema
+
+var Update_errorDetails *smithy.Schema
+
+var _UpdateId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateId",
+}, smithy.ShapeTypeString, 0)
+
+var UpdateParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateParameters",
+}, smithy.ShapeTypeUnion, 4)
+var UpdateParameters_responderGatewayConfig *smithy.Schema
+
+var UpdateParameters_linkConfig *smithy.Schema
+
+var UpdateParameters_linkFlow *smithy.Schema
+
+var UpdateParameters_routingRule *smithy.Schema
+
+var UpdateStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateStatus",
+}, smithy.ShapeTypeEnum, 3)
+var UpdateStatus_IN_PROGRESS *smithy.Schema
+
+var UpdateStatus_SUCCESSFUL *smithy.Schema
+
+var UpdateStatus_FAILED *smithy.Schema
+
+var UpdateSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateSummary",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateSummary_updateId *smithy.Schema
+
+var UpdateSummary_type *smithy.Schema
+
+var UpdateSummary_status *smithy.Schema
+
+var UpdateSummary_createdAt *smithy.Schema
+
+var _UpdateSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _UpdateSummaryList_member *smithy.Schema
+
+var UpdateTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateTarget",
+}, smithy.ShapeTypeUnion, 3)
+var UpdateTarget_gateway *smithy.Schema
+
+var UpdateTarget_link *smithy.Schema
+
+var UpdateTarget_routingRule *smithy.Schema
+
+var UpdateType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "UpdateType",
+}, smithy.ShapeTypeEnum, 4)
+var UpdateType_GATEWAY_CONFIG_UPDATE *smithy.Schema
+
+var UpdateType_LINK_CONFIG_UPDATE *smithy.Schema
+
+var UpdateType_LINK_FLOW_UPDATE *smithy.Schema
+
+var UpdateType_ROUTING_RULE_UPDATE *smithy.Schema
 
 var _URI = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -1013,7 +1525,7 @@ var AcceptLinkRequest_timeoutInMillis *smithy.Schema
 var AcceptLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "AcceptLinkResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var AcceptLinkResponse_gatewayId *smithy.Schema
 
 var AcceptLinkResponse_peerGatewayId *smithy.Schema
@@ -1035,6 +1547,8 @@ var AcceptLinkResponse_attributes *smithy.Schema
 var AcceptLinkResponse_logSettings *smithy.Schema
 
 var AcceptLinkResponse_connectivityType *smithy.Schema
+
+var AcceptLinkResponse_errorDetails *smithy.Schema
 
 var AcceptLinkResponse_linkId *smithy.Schema
 
@@ -1105,7 +1619,7 @@ var CreateLinkRequest_timeoutInMillis *smithy.Schema
 var CreateLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "CreateLinkResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var CreateLinkResponse_gatewayId *smithy.Schema
 
 var CreateLinkResponse_peerGatewayId *smithy.Schema
@@ -1127,6 +1641,8 @@ var CreateLinkResponse_attributes *smithy.Schema
 var CreateLinkResponse_logSettings *smithy.Schema
 
 var CreateLinkResponse_connectivityType *smithy.Schema
+
+var CreateLinkResponse_errorDetails *smithy.Schema
 
 var CreateLinkResponse_linkId *smithy.Schema
 
@@ -1368,6 +1884,64 @@ var DisassociateCertificateResponse_acmCertificateArn *smithy.Schema
 
 var DisassociateCertificateResponse_status *smithy.Schema
 
+var GetAvailableModuleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetAvailableModuleRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetAvailableModuleRequest_moduleId *smithy.Schema
+
+var GetAvailableModuleResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetAvailableModuleResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetAvailableModuleResponse_moduleId *smithy.Schema
+
+var GetAvailableModuleResponse_moduleArn *smithy.Schema
+
+var GetAvailableModuleResponse_moduleName *smithy.Schema
+
+var GetAvailableModuleResponse_description *smithy.Schema
+
+var GetAvailableModuleResponse_subscriptionType *smithy.Schema
+
+var GetAvailableModuleResponse_subscriptionStatus *smithy.Schema
+
+var GetAvailableModuleResponse_marketplaceProductId *smithy.Schema
+
+var GetAvailableModuleResponse_createdAt *smithy.Schema
+
+var GetAvailableModuleVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetAvailableModuleVersionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetAvailableModuleVersionRequest_moduleId *smithy.Schema
+
+var GetAvailableModuleVersionRequest_version *smithy.Schema
+
+var GetAvailableModuleVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetAvailableModuleVersionResponse",
+}, smithy.ShapeTypeStructure, 10)
+var GetAvailableModuleVersionResponse_moduleId *smithy.Schema
+
+var GetAvailableModuleVersionResponse_version *smithy.Schema
+
+var GetAvailableModuleVersionResponse_moduleVersionArn *smithy.Schema
+
+var GetAvailableModuleVersionResponse_status *smithy.Schema
+
+var GetAvailableModuleVersionResponse_permissions *smithy.Schema
+
+var GetAvailableModuleVersionResponse_configurableActions *smithy.Schema
+
+var GetAvailableModuleVersionResponse_configurationSchema *smithy.Schema
+
+var GetAvailableModuleVersionResponse_releaseNotes *smithy.Schema
+
+var GetAvailableModuleVersionResponse_createdAt *smithy.Schema
+
+var GetAvailableModuleVersionResponse_updatedAt *smithy.Schema
+
 var GetCertificateAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetCertificateAssociationRequest",
@@ -1379,7 +1953,7 @@ var GetCertificateAssociationRequest_acmCertificateArn *smithy.Schema
 var GetCertificateAssociationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetCertificateAssociationResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetCertificateAssociationResponse_gatewayId *smithy.Schema
 
 var GetCertificateAssociationResponse_acmCertificateArn *smithy.Schema
@@ -1389,6 +1963,8 @@ var GetCertificateAssociationResponse_status *smithy.Schema
 var GetCertificateAssociationResponse_associatedAt *smithy.Schema
 
 var GetCertificateAssociationResponse_updatedAt *smithy.Schema
+
+var GetCertificateAssociationResponse_errorDetails *smithy.Schema
 
 var GetInboundExternalLinkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -1401,7 +1977,7 @@ var GetInboundExternalLinkRequest_linkId *smithy.Schema
 var GetInboundExternalLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetInboundExternalLinkResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 15)
 var GetInboundExternalLinkResponse_gatewayId *smithy.Schema
 
 var GetInboundExternalLinkResponse_linkId *smithy.Schema
@@ -1426,6 +2002,12 @@ var GetInboundExternalLinkResponse_logSettings *smithy.Schema
 
 var GetInboundExternalLinkResponse_connectivityType *smithy.Schema
 
+var GetInboundExternalLinkResponse_errorDetails *smithy.Schema
+
+var GetInboundExternalLinkResponse_lockToken *smithy.Schema
+
+var GetInboundExternalLinkResponse_flows *smithy.Schema
+
 var GetLinkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetLinkRequest",
@@ -1437,7 +2019,7 @@ var GetLinkRequest_linkId *smithy.Schema
 var GetLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetLinkResponse",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 18)
 var GetLinkResponse_gatewayId *smithy.Schema
 
 var GetLinkResponse_peerGatewayId *smithy.Schema
@@ -1460,6 +2042,8 @@ var GetLinkResponse_logSettings *smithy.Schema
 
 var GetLinkResponse_connectivityType *smithy.Schema
 
+var GetLinkResponse_errorDetails *smithy.Schema
+
 var GetLinkResponse_linkId *smithy.Schema
 
 var GetLinkResponse_tags *smithy.Schema
@@ -1467,6 +2051,10 @@ var GetLinkResponse_tags *smithy.Schema
 var GetLinkResponse_httpResponderAllowed *smithy.Schema
 
 var GetLinkResponse_timeoutInMillis *smithy.Schema
+
+var GetLinkResponse_lockToken *smithy.Schema
+
+var GetLinkResponse_flows *smithy.Schema
 
 var GetLinkRoutingRuleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -1481,7 +2069,7 @@ var GetLinkRoutingRuleRequest_ruleId *smithy.Schema
 var GetLinkRoutingRuleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetLinkRoutingRuleResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GetLinkRoutingRuleResponse_gatewayId *smithy.Schema
 
 var GetLinkRoutingRuleResponse_linkId *smithy.Schema
@@ -1500,6 +2088,8 @@ var GetLinkRoutingRuleResponse_updatedAt *smithy.Schema
 
 var GetLinkRoutingRuleResponse_tags *smithy.Schema
 
+var GetLinkRoutingRuleResponse_errorDetails *smithy.Schema
+
 var GetOutboundExternalLinkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetOutboundExternalLinkRequest",
@@ -1511,7 +2101,7 @@ var GetOutboundExternalLinkRequest_linkId *smithy.Schema
 var GetOutboundExternalLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetOutboundExternalLinkResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 15)
 var GetOutboundExternalLinkResponse_gatewayId *smithy.Schema
 
 var GetOutboundExternalLinkResponse_linkId *smithy.Schema
@@ -1536,6 +2126,12 @@ var GetOutboundExternalLinkResponse_logSettings *smithy.Schema
 
 var GetOutboundExternalLinkResponse_connectivityType *smithy.Schema
 
+var GetOutboundExternalLinkResponse_errorDetails *smithy.Schema
+
+var GetOutboundExternalLinkResponse_lockToken *smithy.Schema
+
+var GetOutboundExternalLinkResponse_flows *smithy.Schema
+
 var GetRequesterGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetRequesterGatewayRequest",
@@ -1545,7 +2141,7 @@ var GetRequesterGatewayRequest_gatewayId *smithy.Schema
 var GetRequesterGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetRequesterGatewayResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var GetRequesterGatewayResponse_status *smithy.Schema
 
 var GetRequesterGatewayResponse_domainName *smithy.Schema
@@ -1555,6 +2151,8 @@ var GetRequesterGatewayResponse_description *smithy.Schema
 var GetRequesterGatewayResponse_createdAt *smithy.Schema
 
 var GetRequesterGatewayResponse_updatedAt *smithy.Schema
+
+var GetRequesterGatewayResponse_errorDetails *smithy.Schema
 
 var GetRequesterGatewayResponse_vpcId *smithy.Schema
 
@@ -1579,7 +2177,7 @@ var GetResponderGatewayRequest_gatewayId *smithy.Schema
 var GetResponderGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "GetResponderGatewayResponse",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var GetResponderGatewayResponse_vpcId *smithy.Schema
 
 var GetResponderGatewayResponse_subnetIds *smithy.Schema
@@ -1593,6 +2191,8 @@ var GetResponderGatewayResponse_description *smithy.Schema
 var GetResponderGatewayResponse_createdAt *smithy.Schema
 
 var GetResponderGatewayResponse_updatedAt *smithy.Schema
+
+var GetResponderGatewayResponse_errorDetails *smithy.Schema
 
 var GetResponderGatewayResponse_domainName *smithy.Schema
 
@@ -1621,6 +2221,60 @@ var GetResponderGatewayResponse_gatewayType *smithy.Schema
 var GetResponderGatewayResponse_externalInboundEndpoint *smithy.Schema
 
 var GetResponderGatewayResponse_clientRoutingPolicy *smithy.Schema
+
+var GetUpdateRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetUpdateRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetUpdateRequest_gatewayId *smithy.Schema
+
+var GetUpdateRequest_updateId *smithy.Schema
+
+var GetUpdateResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "GetUpdateResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetUpdateResponse_update *smithy.Schema
+
+var ListAvailableModulesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListAvailableModulesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListAvailableModulesRequest_subscriptionType *smithy.Schema
+
+var ListAvailableModulesRequest_maxResults *smithy.Schema
+
+var ListAvailableModulesRequest_nextToken *smithy.Schema
+
+var ListAvailableModulesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListAvailableModulesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAvailableModulesResponse_modules *smithy.Schema
+
+var ListAvailableModulesResponse_nextToken *smithy.Schema
+
+var ListAvailableModuleVersionsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListAvailableModuleVersionsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListAvailableModuleVersionsRequest_moduleId *smithy.Schema
+
+var ListAvailableModuleVersionsRequest_status *smithy.Schema
+
+var ListAvailableModuleVersionsRequest_maxResults *smithy.Schema
+
+var ListAvailableModuleVersionsRequest_nextToken *smithy.Schema
+
+var ListAvailableModuleVersionsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListAvailableModuleVersionsResponse",
+}, smithy.ShapeTypeStructure, 3)
+var ListAvailableModuleVersionsResponse_moduleId *smithy.Schema
+
+var ListAvailableModuleVersionsResponse_versions *smithy.Schema
+
+var ListAvailableModuleVersionsResponse_nextToken *smithy.Schema
 
 var ListCertificateAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -1722,6 +2376,58 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
 
+var ListUpdatesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListUpdatesRequest",
+}, smithy.ShapeTypeStructure, 7)
+var ListUpdatesRequest_gatewayId *smithy.Schema
+
+var ListUpdatesRequest_linkId *smithy.Schema
+
+var ListUpdatesRequest_ruleId *smithy.Schema
+
+var ListUpdatesRequest_type *smithy.Schema
+
+var ListUpdatesRequest_status *smithy.Schema
+
+var ListUpdatesRequest_nextToken *smithy.Schema
+
+var ListUpdatesRequest_maxResults *smithy.Schema
+
+var ListUpdatesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "ListUpdatesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListUpdatesResponse_updates *smithy.Schema
+
+var ListUpdatesResponse_nextToken *smithy.Schema
+
+var PutLinkFlowsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "PutLinkFlowsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var PutLinkFlowsRequest_gatewayId *smithy.Schema
+
+var PutLinkFlowsRequest_linkId *smithy.Schema
+
+var PutLinkFlowsRequest_clientToken *smithy.Schema
+
+var PutLinkFlowsRequest_lockToken *smithy.Schema
+
+var PutLinkFlowsRequest_flows *smithy.Schema
+
+var PutLinkFlowsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rtbfabric",
+	Name:      "PutLinkFlowsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var PutLinkFlowsResponse_gatewayId *smithy.Schema
+
+var PutLinkFlowsResponse_linkId *smithy.Schema
+
+var PutLinkFlowsResponse_status *smithy.Schema
+
+var PutLinkFlowsResponse_updateId *smithy.Schema
+
 var RejectLinkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "RejectLinkRequest",
@@ -1733,7 +2439,7 @@ var RejectLinkRequest_linkId *smithy.Schema
 var RejectLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "RejectLinkResponse",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var RejectLinkResponse_gatewayId *smithy.Schema
 
 var RejectLinkResponse_peerGatewayId *smithy.Schema
@@ -1755,6 +2461,8 @@ var RejectLinkResponse_attributes *smithy.Schema
 var RejectLinkResponse_logSettings *smithy.Schema
 
 var RejectLinkResponse_connectivityType *smithy.Schema
+
+var RejectLinkResponse_errorDetails *smithy.Schema
 
 var RejectLinkResponse_linkId *smithy.Schema
 
@@ -1787,7 +2495,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateLinkRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "UpdateLinkRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateLinkRequest_gatewayId *smithy.Schema
 
 var UpdateLinkRequest_linkId *smithy.Schema
@@ -1795,6 +2503,8 @@ var UpdateLinkRequest_linkId *smithy.Schema
 var UpdateLinkRequest_logSettings *smithy.Schema
 
 var UpdateLinkRequest_timeoutInMillis *smithy.Schema
+
+var UpdateLinkRequest_clientToken *smithy.Schema
 
 var UpdateLinkModuleFlowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -1811,25 +2521,29 @@ var UpdateLinkModuleFlowRequest_modules *smithy.Schema
 var UpdateLinkModuleFlowResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "UpdateLinkModuleFlowResponse",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateLinkModuleFlowResponse_gatewayId *smithy.Schema
 
 var UpdateLinkModuleFlowResponse_linkId *smithy.Schema
 
 var UpdateLinkModuleFlowResponse_status *smithy.Schema
 
+var UpdateLinkModuleFlowResponse_updateId *smithy.Schema
+
 var UpdateLinkResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "UpdateLinkResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateLinkResponse_linkId *smithy.Schema
 
 var UpdateLinkResponse_status *smithy.Schema
 
+var UpdateLinkResponse_updateId *smithy.Schema
+
 var UpdateLinkRoutingRuleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "UpdateLinkRoutingRuleRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateLinkRoutingRuleRequest_gatewayId *smithy.Schema
 
 var UpdateLinkRoutingRuleRequest_linkId *smithy.Schema
@@ -1840,15 +2554,19 @@ var UpdateLinkRoutingRuleRequest_priority *smithy.Schema
 
 var UpdateLinkRoutingRuleRequest_conditions *smithy.Schema
 
+var UpdateLinkRoutingRuleRequest_clientToken *smithy.Schema
+
 var UpdateLinkRoutingRuleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "UpdateLinkRoutingRuleResponse",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateLinkRoutingRuleResponse_ruleId *smithy.Schema
 
 var UpdateLinkRoutingRuleResponse_status *smithy.Schema
 
 var UpdateLinkRoutingRuleResponse_updatedAt *smithy.Schema
+
+var UpdateLinkRoutingRuleResponse_updateId *smithy.Schema
 
 var UpdateRequesterGatewayRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
@@ -1895,12 +2613,14 @@ var UpdateResponderGatewayRequest_clientRoutingPolicy *smithy.Schema
 var UpdateResponderGatewayResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rtbfabric",
 	Name:      "UpdateResponderGatewayResponse",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateResponderGatewayResponse_gatewayId *smithy.Schema
 
 var UpdateResponderGatewayResponse_status *smithy.Schema
 
 var UpdateResponderGatewayResponse_clientRoutingPolicy *smithy.Schema
+
+var UpdateResponderGatewayResponse_updateId *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1945,6 +2665,50 @@ func init() {
 
 	AutoScalingGroupsConfiguration_healthCheckConfig = AutoScalingGroupsConfiguration.AddMember("healthCheckConfig", HealthCheckConfig)
 
+	SubscriptionType_MARKETPLACE = SubscriptionType.AddMember("MARKETPLACE", smithyprelude.Unit)
+
+	SubscriptionType_PRIVATE = SubscriptionType.AddMember("PRIVATE", smithyprelude.Unit)
+
+	SubscriptionType_AWS_BUILT_IN = SubscriptionType.AddMember("AWS_BUILT_IN", smithyprelude.Unit)
+
+	SubscriptionStatus_ACTIVE = SubscriptionStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	SubscriptionStatus_EXPIRED = SubscriptionStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	AvailableModuleSummary_moduleId = AvailableModuleSummary.AddMember("moduleId", _ModuleId)
+
+	AvailableModuleSummary_moduleArn = AvailableModuleSummary.AddMember("moduleArn", _ModuleArn)
+
+	AvailableModuleSummary_moduleName = AvailableModuleSummary.AddMember("moduleName", _ModuleName)
+
+	AvailableModuleSummary_subscriptionType = AvailableModuleSummary.AddMember("subscriptionType", SubscriptionType)
+
+	AvailableModuleSummary_subscriptionStatus = AvailableModuleSummary.AddMember("subscriptionStatus", SubscriptionStatus)
+
+	AvailableModuleSummary_marketplaceProductId = AvailableModuleSummary.AddMember("marketplaceProductId", smithyprelude.String)
+
+	_AvailableModuleSummaryList_member = _AvailableModuleSummaryList.AddMember("member", AvailableModuleSummary)
+
+	ModuleVersionStatus_CREATING = ModuleVersionStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	ModuleVersionStatus_CREATE_FAILED = ModuleVersionStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	ModuleVersionStatus_ACTIVE = ModuleVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ModuleVersionStatus_DEPRECATED = ModuleVersionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
+
+	AvailableModuleVersionSummary_version = AvailableModuleVersionSummary.AddMember("version", _SemanticVersion)
+
+	AvailableModuleVersionSummary_moduleVersionArn = AvailableModuleVersionSummary.AddMember("moduleVersionArn", _ModuleVersionArn)
+
+	AvailableModuleVersionSummary_status = AvailableModuleVersionSummary.AddMember("status", ModuleVersionStatus)
+
+	AvailableModuleVersionSummary_createdAt = AvailableModuleVersionSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	_AvailableModuleVersionSummaryList_member = _AvailableModuleVersionSummaryList.AddMember("member", AvailableModuleVersionSummary)
+
+	_AwsResourceIdList_member = _AwsResourceIdList.AddMember("member", _AwsResourceId)
+
 	CertificateAssociationStatus_PENDING_ASSOCIATION = CertificateAssociationStatus.AddMember("PENDING_ASSOCIATION", smithyprelude.Unit)
 
 	CertificateAssociationStatus_ASSOCIATED = CertificateAssociationStatus.AddMember("ASSOCIATED", smithyprelude.Unit)
@@ -1971,6 +2735,16 @@ func init() {
 
 	ClientRoutingPolicy_ANY_AVAILABILITY_ZONE = ClientRoutingPolicy.AddMember("ANY_AVAILABILITY_ZONE", smithyprelude.Unit)
 
+	ConfigurableAction_FILTER = ConfigurableAction.AddMember("FILTER", smithyprelude.Unit)
+
+	ConfigurableAction_ENRICH_REQUEST_EXT = ConfigurableAction.AddMember("ENRICH_REQUEST_EXT", smithyprelude.Unit)
+
+	ConfigurableAction_ENRICH_REQUEST_HEADERS = ConfigurableAction.AddMember("ENRICH_REQUEST_HEADERS", smithyprelude.Unit)
+
+	ConfigurableAction_OBSERVE = ConfigurableAction.AddMember("OBSERVE", smithyprelude.Unit)
+
+	_ConfigurableActionList_member = _ConfigurableActionList.AddMember("member", ConfigurableAction)
+
 	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
 
 	ConnectivityType_DEFAULT = ConnectivityType.AddMember("DEFAULT", smithyprelude.Unit)
@@ -1993,6 +2767,30 @@ func init() {
 
 	EksEndpointsConfiguration_roleArn = EksEndpointsConfiguration.AddMember("roleArn", smithyprelude.String)
 
+	ErrorCode_VPC_NOT_FOUND = ErrorCode.AddMember("VPC_NOT_FOUND", smithyprelude.Unit)
+
+	ErrorCode_EC2_SUBNET_NOT_FOUND = ErrorCode.AddMember("EC2_SUBNET_NOT_FOUND", smithyprelude.Unit)
+
+	ErrorCode_EC2_SECURITY_GROUP_NOT_FOUND = ErrorCode.AddMember("EC2_SECURITY_GROUP_NOT_FOUND", smithyprelude.Unit)
+
+	ErrorCode_EC2_SUBNET_IP_EXHAUSTION = ErrorCode.AddMember("EC2_SUBNET_IP_EXHAUSTION", smithyprelude.Unit)
+
+	ErrorCode_IAM_ASSUME_ROLE_ACCESS_DENIED = ErrorCode.AddMember("IAM_ASSUME_ROLE_ACCESS_DENIED", smithyprelude.Unit)
+
+	ErrorCode_INTERNAL_ERROR = ErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	ErrorDetail_code = ErrorDetail.AddMember("code", ErrorCode)
+
+	ErrorDetail_message = ErrorDetail.AddMember("message", smithyprelude.String)
+
+	ErrorDetail_resourceIds = ErrorDetail.AddMember("resourceIds", _AwsResourceIdList)
+
+	_ErrorDetails_member = _ErrorDetails.AddMember("member", ErrorDetail)
+
+	FailureMode_OPEN = FailureMode.AddMember("OPEN", smithyprelude.Unit)
+
+	FailureMode_CLOSED = FailureMode.AddMember("CLOSED", smithyprelude.Unit)
+
 	_ValueList_member = _ValueList.AddMember("member", smithyprelude.String)
 
 	FilterCriterion_path = FilterCriterion.AddMember("path", smithyprelude.String)
@@ -2008,6 +2806,40 @@ func init() {
 	FilterType_INCLUDE = FilterType.AddMember("INCLUDE", smithyprelude.Unit)
 
 	FilterType_EXCLUDE = FilterType.AddMember("EXCLUDE", smithyprelude.Unit)
+
+	_SelectedActionList_member = _SelectedActionList.AddMember("member", ConfigurableAction)
+
+	FlowModule_name = FlowModule.AddMember("name", _ModuleName)
+
+	FlowModule_moduleVersionArn = FlowModule.AddMember("moduleVersionArn", _ModuleVersionArn)
+
+	FlowModule_selectedActions = FlowModule.AddMember("selectedActions", _SelectedActionList)
+
+	FlowModule_failureMode = FlowModule.AddMember("failureMode", FailureMode)
+
+	FlowModule_activationPercentage = FlowModule.AddMember("activationPercentage", _ActivationPercentage)
+
+	FlowModule_configurationValues = FlowModule.AddMember("configurationValues", _ConfigurationValues)
+
+	_FlowModuleList_member = _FlowModuleList.AddMember("member", FlowModule)
+
+	SequentialPipeline_modules = SequentialPipeline.AddMember("modules", _FlowModuleList)
+
+	FlowPhase_modules = FlowPhase.AddMember("modules", _FlowModuleList)
+
+	_FlowPhaseList_member = _FlowPhaseList.AddMember("member", FlowPhase)
+
+	PhasedPipeline_phases = PhasedPipeline.AddMember("phases", _FlowPhaseList)
+
+	FlowPipeline_sequential = FlowPipeline.AddMember("sequential", SequentialPipeline)
+
+	FlowPipeline_phased = FlowPipeline.AddMember("phased", PhasedPipeline)
+
+	Flow_name = Flow.AddMember("name", _FlowName)
+
+	Flow_pipeline = Flow.AddMember("pipeline", FlowPipeline)
+
+	_FlowList_member = _FlowList.AddMember("member", Flow)
 
 	_FlowModuleNameList_member = _FlowModuleNameList.AddMember("member", _FlowModuleName)
 
@@ -2051,35 +2883,15 @@ func init() {
 
 	LinkAttributes_customerProvidedId = LinkAttributes.AddMember("customerProvidedId", _CustomerProvidedId)
 
+	LinkLogSettings_applicationLogs = LinkLogSettings.AddMember("applicationLogs", LinkApplicationLogConfiguration)
+
+	LinkConfigParameters_logSettings = LinkConfigParameters.AddMember("logSettings", LinkLogSettings)
+
+	LinkConfigParameters_timeoutInMillis = LinkConfigParameters.AddMember("timeoutInMillis", _LinkTimeoutInMillis)
+
 	LinkDirection_RESPONSE = LinkDirection.AddMember("RESPONSE", smithyprelude.Unit)
 
 	LinkDirection_REQUEST = LinkDirection.AddMember("REQUEST", smithyprelude.Unit)
-
-	LinkStatus_PENDING_CREATION = LinkStatus.AddMember("PENDING_CREATION", smithyprelude.Unit)
-
-	LinkStatus_PENDING_REQUEST = LinkStatus.AddMember("PENDING_REQUEST", smithyprelude.Unit)
-
-	LinkStatus_REQUESTED = LinkStatus.AddMember("REQUESTED", smithyprelude.Unit)
-
-	LinkStatus_ACCEPTED = LinkStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	LinkStatus_ACTIVE = LinkStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	LinkStatus_REJECTED = LinkStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	LinkStatus_FAILED = LinkStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	LinkStatus_PENDING_DELETION = LinkStatus.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	LinkStatus_DELETED = LinkStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	LinkStatus_PENDING_UPDATE = LinkStatus.AddMember("PENDING_UPDATE", smithyprelude.Unit)
-
-	LinkStatus_PENDING_ISOLATION = LinkStatus.AddMember("PENDING_ISOLATION", smithyprelude.Unit)
-
-	LinkStatus_ISOLATED = LinkStatus.AddMember("ISOLATED", smithyprelude.Unit)
-
-	LinkStatus_PENDING_RESTORATION = LinkStatus.AddMember("PENDING_RESTORATION", smithyprelude.Unit)
 
 	NoBidModuleParameters_reason = NoBidModuleParameters.AddMember("reason", smithyprelude.String)
 
@@ -2113,7 +2925,39 @@ func init() {
 
 	_ModuleConfigurationList_member = _ModuleConfigurationList.AddMember("member", ModuleConfiguration)
 
-	LinkLogSettings_applicationLogs = LinkLogSettings.AddMember("applicationLogs", LinkApplicationLogConfiguration)
+	LinkFlowParameters_modules = LinkFlowParameters.AddMember("modules", _ModuleConfigurationList)
+
+	LinkFlowParameters_flows = LinkFlowParameters.AddMember("flows", _FlowList)
+
+	LinkStatus_PENDING_CREATION = LinkStatus.AddMember("PENDING_CREATION", smithyprelude.Unit)
+
+	LinkStatus_PENDING_REQUEST = LinkStatus.AddMember("PENDING_REQUEST", smithyprelude.Unit)
+
+	LinkStatus_REQUESTED = LinkStatus.AddMember("REQUESTED", smithyprelude.Unit)
+
+	LinkStatus_ACCEPTED = LinkStatus.AddMember("ACCEPTED", smithyprelude.Unit)
+
+	LinkStatus_ACTIVE = LinkStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	LinkStatus_REJECTED = LinkStatus.AddMember("REJECTED", smithyprelude.Unit)
+
+	LinkStatus_FAILED = LinkStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	LinkStatus_PENDING_DELETION = LinkStatus.AddMember("PENDING_DELETION", smithyprelude.Unit)
+
+	LinkStatus_DELETED = LinkStatus.AddMember("DELETED", smithyprelude.Unit)
+
+	LinkStatus_PENDING_UPDATE = LinkStatus.AddMember("PENDING_UPDATE", smithyprelude.Unit)
+
+	LinkStatus_PENDING_ISOLATION = LinkStatus.AddMember("PENDING_ISOLATION", smithyprelude.Unit)
+
+	LinkStatus_ISOLATED = LinkStatus.AddMember("ISOLATED", smithyprelude.Unit)
+
+	LinkStatus_PENDING_RESTORATION = LinkStatus.AddMember("PENDING_RESTORATION", smithyprelude.Unit)
+
+	LinkStatus_CREATE_FAILED = LinkStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	LinkStatus_DELETE_FAILED = LinkStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
 
 	_TagsMap_key = _TagsMap.AddMember("key", _TagKey)
 
@@ -2140,6 +2984,8 @@ func init() {
 	ListLinksResponseStructure_logSettings = ListLinksResponseStructure.AddMember("logSettings", LinkLogSettings)
 
 	ListLinksResponseStructure_connectivityType = ListLinksResponseStructure.AddMember("connectivityType", ConnectivityType)
+
+	ListLinksResponseStructure_errorDetails = ListLinksResponseStructure.AddMember("errorDetails", _ErrorDetails)
 
 	ListLinksResponseStructure_linkId = ListLinksResponseStructure.AddMember("linkId", _LinkId)
 
@@ -2177,6 +3023,10 @@ func init() {
 
 	RuleStatus_FAILED = RuleStatus.AddMember("FAILED", smithyprelude.Unit)
 
+	RuleStatus_CREATE_FAILED = RuleStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	RuleStatus_DELETE_FAILED = RuleStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
 	LinkRoutingRuleSummary_ruleId = LinkRoutingRuleSummary.AddMember("ruleId", _RuleId)
 
 	LinkRoutingRuleSummary_priority = LinkRoutingRuleSummary.AddMember("priority", _RulePriority)
@@ -2189,7 +3039,11 @@ func init() {
 
 	LinkRoutingRuleSummary_updatedAt = LinkRoutingRuleSummary.AddMember("updatedAt", smithyprelude.Timestamp)
 
+	LinkRoutingRuleSummary_errorDetails = LinkRoutingRuleSummary.AddMember("errorDetails", _ErrorDetails)
+
 	_LinkRoutingRuleList_member = _LinkRoutingRuleList.AddMember("member", LinkRoutingRuleSummary)
+
+	LinkTarget_linkId = LinkTarget.AddMember("linkId", _LinkId)
 
 	_ProtocolList_member = _ProtocolList.AddMember("member", Protocol)
 
@@ -2198,6 +3052,20 @@ func init() {
 	ManagedEndpointConfiguration_autoScalingGroups = ManagedEndpointConfiguration.AddMember("autoScalingGroups", AutoScalingGroupsConfiguration)
 
 	ManagedEndpointConfiguration_eksEndpoints = ManagedEndpointConfiguration.AddMember("eksEndpoints", EksEndpointsConfiguration)
+
+	ModulePermission_READ_REQUEST_BODY = ModulePermission.AddMember("READ_REQUEST_BODY", smithyprelude.Unit)
+
+	ModulePermission_READ_REQUEST_HEADERS = ModulePermission.AddMember("READ_REQUEST_HEADERS", smithyprelude.Unit)
+
+	ModulePermission_MUTATE_REQUEST_BODY = ModulePermission.AddMember("MUTATE_REQUEST_BODY", smithyprelude.Unit)
+
+	ModulePermission_ENRICH_REQUEST_HEADERS = ModulePermission.AddMember("ENRICH_REQUEST_HEADERS", smithyprelude.Unit)
+
+	ModulePermission_ENRICH_REQUEST_EXT = ModulePermission.AddMember("ENRICH_REQUEST_EXT", smithyprelude.Unit)
+
+	ModulePermission_FILTER = ModulePermission.AddMember("FILTER", smithyprelude.Unit)
+
+	_ModulePermissionList_member = _ModulePermissionList.AddMember("member", ModulePermission)
 
 	RequesterGatewayStatus_PENDING_CREATION = RequesterGatewayStatus.AddMember("PENDING_CREATION", smithyprelude.Unit)
 
@@ -2217,7 +3085,29 @@ func init() {
 
 	RequesterGatewayStatus_PENDING_RESTORATION = RequesterGatewayStatus.AddMember("PENDING_RESTORATION", smithyprelude.Unit)
 
+	RequesterGatewayStatus_CREATE_FAILED = RequesterGatewayStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	RequesterGatewayStatus_DELETE_FAILED = RequesterGatewayStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
+
+	TrustStoreConfiguration_certificateAuthorityCertificates = TrustStoreConfiguration.AddMember("certificateAuthorityCertificates", _CertificateAuthorityCertificates)
+
+	ResponderGatewayConfigParameters_description = ResponderGatewayConfigParameters.AddMember("description", smithyprelude.String)
+
+	ResponderGatewayConfigParameters_clientRoutingPolicy = ResponderGatewayConfigParameters.AddMember("clientRoutingPolicy", ClientRoutingPolicy)
+
+	ResponderGatewayConfigParameters_domainName = ResponderGatewayConfigParameters.AddMember("domainName", _DomainName)
+
+	ResponderGatewayConfigParameters_port = ResponderGatewayConfigParameters.AddMember("port", smithyprelude.Integer)
+
+	ResponderGatewayConfigParameters_protocol = ResponderGatewayConfigParameters.AddMember("protocol", Protocol)
+
+	ResponderGatewayConfigParameters_listenerConfig = ResponderGatewayConfigParameters.AddMember("listenerConfig", ListenerConfig)
+
+	ResponderGatewayConfigParameters_trustStoreConfiguration = ResponderGatewayConfigParameters.AddMember("trustStoreConfiguration", TrustStoreConfiguration)
+
+	ResponderGatewayConfigParameters_managedEndpointConfiguration = ResponderGatewayConfigParameters.AddMember("managedEndpointConfiguration", ManagedEndpointConfiguration)
 
 	ResponderGatewayStatus_PENDING_CREATION = ResponderGatewayStatus.AddMember("PENDING_CREATION", smithyprelude.Unit)
 
@@ -2237,6 +3127,18 @@ func init() {
 
 	ResponderGatewayStatus_PENDING_RESTORATION = ResponderGatewayStatus.AddMember("PENDING_RESTORATION", smithyprelude.Unit)
 
+	ResponderGatewayStatus_CREATE_FAILED = ResponderGatewayStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
+
+	ResponderGatewayStatus_DELETE_FAILED = ResponderGatewayStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
+	RoutingRuleParameters_priority = RoutingRuleParameters.AddMember("priority", _RulePriority)
+
+	RoutingRuleParameters_conditions = RoutingRuleParameters.AddMember("conditions", RuleCondition)
+
+	RoutingRuleTarget_linkId = RoutingRuleTarget.AddMember("linkId", _LinkId)
+
+	RoutingRuleTarget_ruleId = RoutingRuleTarget.AddMember("ruleId", _RuleId)
+
 	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", _SecurityGroupId)
 
 	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
@@ -2247,7 +3149,57 @@ func init() {
 
 	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
 
-	TrustStoreConfiguration_certificateAuthorityCertificates = TrustStoreConfiguration.AddMember("certificateAuthorityCertificates", _CertificateAuthorityCertificates)
+	UpdateType_GATEWAY_CONFIG_UPDATE = UpdateType.AddMember("GATEWAY_CONFIG_UPDATE", smithyprelude.Unit)
+
+	UpdateType_LINK_CONFIG_UPDATE = UpdateType.AddMember("LINK_CONFIG_UPDATE", smithyprelude.Unit)
+
+	UpdateType_LINK_FLOW_UPDATE = UpdateType.AddMember("LINK_FLOW_UPDATE", smithyprelude.Unit)
+
+	UpdateType_ROUTING_RULE_UPDATE = UpdateType.AddMember("ROUTING_RULE_UPDATE", smithyprelude.Unit)
+
+	UpdateStatus_IN_PROGRESS = UpdateStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	UpdateStatus_SUCCESSFUL = UpdateStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
+
+	UpdateStatus_FAILED = UpdateStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	UpdateTarget_gateway = UpdateTarget.AddMember("gateway", smithyprelude.Unit)
+
+	UpdateTarget_link = UpdateTarget.AddMember("link", LinkTarget)
+
+	UpdateTarget_routingRule = UpdateTarget.AddMember("routingRule", RoutingRuleTarget)
+
+	UpdateParameters_responderGatewayConfig = UpdateParameters.AddMember("responderGatewayConfig", ResponderGatewayConfigParameters)
+
+	UpdateParameters_linkConfig = UpdateParameters.AddMember("linkConfig", LinkConfigParameters)
+
+	UpdateParameters_linkFlow = UpdateParameters.AddMember("linkFlow", LinkFlowParameters)
+
+	UpdateParameters_routingRule = UpdateParameters.AddMember("routingRule", RoutingRuleParameters)
+
+	Update_updateId = Update.AddMember("updateId", _UpdateId)
+
+	Update_type = Update.AddMember("type", UpdateType)
+
+	Update_status = Update.AddMember("status", UpdateStatus)
+
+	Update_target = Update.AddMember("target", UpdateTarget)
+
+	Update_createdAt = Update.AddMember("createdAt", smithyprelude.Timestamp)
+
+	Update_parameters = Update.AddMember("parameters", UpdateParameters)
+
+	Update_errorDetails = Update.AddMember("errorDetails", _ErrorDetails)
+
+	UpdateSummary_updateId = UpdateSummary.AddMember("updateId", _UpdateId)
+
+	UpdateSummary_type = UpdateSummary.AddMember("type", UpdateType)
+
+	UpdateSummary_status = UpdateSummary.AddMember("status", UpdateStatus)
+
+	UpdateSummary_createdAt = UpdateSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	_UpdateSummaryList_member = _UpdateSummaryList.AddMember("member", UpdateSummary)
 
 	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
 
@@ -2282,6 +3234,8 @@ func init() {
 	AcceptLinkResponse_logSettings = AcceptLinkResponse.AddMember("logSettings", LinkLogSettings)
 
 	AcceptLinkResponse_connectivityType = AcceptLinkResponse.AddMember("connectivityType", ConnectivityType)
+
+	AcceptLinkResponse_errorDetails = AcceptLinkResponse.AddMember("errorDetails", _ErrorDetails)
 
 	AcceptLinkResponse_linkId = AcceptLinkResponse.AddMember("linkId", _LinkId)
 
@@ -2350,6 +3304,8 @@ func init() {
 	CreateLinkResponse_logSettings = CreateLinkResponse.AddMember("logSettings", LinkLogSettings)
 
 	CreateLinkResponse_connectivityType = CreateLinkResponse.AddMember("connectivityType", ConnectivityType)
+
+	CreateLinkResponse_errorDetails = CreateLinkResponse.AddMember("errorDetails", _ErrorDetails)
 
 	CreateLinkResponse_linkId = CreateLinkResponse.AddMember("linkId", _LinkId)
 
@@ -2503,6 +3459,48 @@ func init() {
 
 	DisassociateCertificateResponse_status = DisassociateCertificateResponse.AddMember("status", CertificateAssociationStatus)
 
+	GetAvailableModuleRequest_moduleId = GetAvailableModuleRequest.AddMember("moduleId", _ModuleId, &smithytraits.HTTPLabel{})
+
+	GetAvailableModuleResponse_moduleId = GetAvailableModuleResponse.AddMember("moduleId", _ModuleId)
+
+	GetAvailableModuleResponse_moduleArn = GetAvailableModuleResponse.AddMember("moduleArn", _ModuleArn)
+
+	GetAvailableModuleResponse_moduleName = GetAvailableModuleResponse.AddMember("moduleName", _ModuleName)
+
+	GetAvailableModuleResponse_description = GetAvailableModuleResponse.AddMember("description", _ModuleDescription)
+
+	GetAvailableModuleResponse_subscriptionType = GetAvailableModuleResponse.AddMember("subscriptionType", SubscriptionType)
+
+	GetAvailableModuleResponse_subscriptionStatus = GetAvailableModuleResponse.AddMember("subscriptionStatus", SubscriptionStatus)
+
+	GetAvailableModuleResponse_marketplaceProductId = GetAvailableModuleResponse.AddMember("marketplaceProductId", smithyprelude.String)
+
+	GetAvailableModuleResponse_createdAt = GetAvailableModuleResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	GetAvailableModuleVersionRequest_moduleId = GetAvailableModuleVersionRequest.AddMember("moduleId", _ModuleId, &smithytraits.HTTPLabel{})
+
+	GetAvailableModuleVersionRequest_version = GetAvailableModuleVersionRequest.AddMember("version", _SemanticVersion, &smithytraits.HTTPLabel{})
+
+	GetAvailableModuleVersionResponse_moduleId = GetAvailableModuleVersionResponse.AddMember("moduleId", _ModuleId)
+
+	GetAvailableModuleVersionResponse_version = GetAvailableModuleVersionResponse.AddMember("version", _SemanticVersion)
+
+	GetAvailableModuleVersionResponse_moduleVersionArn = GetAvailableModuleVersionResponse.AddMember("moduleVersionArn", _ModuleVersionArn)
+
+	GetAvailableModuleVersionResponse_status = GetAvailableModuleVersionResponse.AddMember("status", ModuleVersionStatus)
+
+	GetAvailableModuleVersionResponse_permissions = GetAvailableModuleVersionResponse.AddMember("permissions", _ModulePermissionList)
+
+	GetAvailableModuleVersionResponse_configurableActions = GetAvailableModuleVersionResponse.AddMember("configurableActions", _ConfigurableActionList)
+
+	GetAvailableModuleVersionResponse_configurationSchema = GetAvailableModuleVersionResponse.AddMember("configurationSchema", _ConfigurationSchema)
+
+	GetAvailableModuleVersionResponse_releaseNotes = GetAvailableModuleVersionResponse.AddMember("releaseNotes", _ReleaseNotes)
+
+	GetAvailableModuleVersionResponse_createdAt = GetAvailableModuleVersionResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	GetAvailableModuleVersionResponse_updatedAt = GetAvailableModuleVersionResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
 	GetCertificateAssociationRequest_gatewayId = GetCertificateAssociationRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
 	GetCertificateAssociationRequest_acmCertificateArn = GetCertificateAssociationRequest.AddMember("acmCertificateArn", _AcmCertificateArn, &smithytraits.HTTPQuery{Name: "acmCertificateArn"})
@@ -2516,6 +3514,8 @@ func init() {
 	GetCertificateAssociationResponse_associatedAt = GetCertificateAssociationResponse.AddMember("associatedAt", smithyprelude.Timestamp)
 
 	GetCertificateAssociationResponse_updatedAt = GetCertificateAssociationResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	GetCertificateAssociationResponse_errorDetails = GetCertificateAssociationResponse.AddMember("errorDetails", _ErrorDetails)
 
 	GetInboundExternalLinkRequest_gatewayId = GetInboundExternalLinkRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
@@ -2545,6 +3545,12 @@ func init() {
 
 	GetInboundExternalLinkResponse_connectivityType = GetInboundExternalLinkResponse.AddMember("connectivityType", ConnectivityType)
 
+	GetInboundExternalLinkResponse_errorDetails = GetInboundExternalLinkResponse.AddMember("errorDetails", _ErrorDetails)
+
+	GetInboundExternalLinkResponse_lockToken = GetInboundExternalLinkResponse.AddMember("lockToken", _LockToken)
+
+	GetInboundExternalLinkResponse_flows = GetInboundExternalLinkResponse.AddMember("flows", _FlowList)
+
 	GetLinkRequest_gatewayId = GetLinkRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
 	GetLinkRequest_linkId = GetLinkRequest.AddMember("linkId", _LinkId, &smithytraits.HTTPLabel{})
@@ -2571,6 +3577,8 @@ func init() {
 
 	GetLinkResponse_connectivityType = GetLinkResponse.AddMember("connectivityType", ConnectivityType)
 
+	GetLinkResponse_errorDetails = GetLinkResponse.AddMember("errorDetails", _ErrorDetails)
+
 	GetLinkResponse_linkId = GetLinkResponse.AddMember("linkId", _LinkId)
 
 	GetLinkResponse_tags = GetLinkResponse.AddMember("tags", _TagsMap)
@@ -2578,6 +3586,10 @@ func init() {
 	GetLinkResponse_httpResponderAllowed = GetLinkResponse.AddMember("httpResponderAllowed", smithyprelude.Boolean)
 
 	GetLinkResponse_timeoutInMillis = GetLinkResponse.AddMember("timeoutInMillis", _LinkTimeoutInMillis)
+
+	GetLinkResponse_lockToken = GetLinkResponse.AddMember("lockToken", _LockToken)
+
+	GetLinkResponse_flows = GetLinkResponse.AddMember("flows", _FlowList)
 
 	GetLinkRoutingRuleRequest_gatewayId = GetLinkRoutingRuleRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
@@ -2602,6 +3614,8 @@ func init() {
 	GetLinkRoutingRuleResponse_updatedAt = GetLinkRoutingRuleResponse.AddMember("updatedAt", smithyprelude.Timestamp)
 
 	GetLinkRoutingRuleResponse_tags = GetLinkRoutingRuleResponse.AddMember("tags", _TagsMap)
+
+	GetLinkRoutingRuleResponse_errorDetails = GetLinkRoutingRuleResponse.AddMember("errorDetails", _ErrorDetails)
 
 	GetOutboundExternalLinkRequest_gatewayId = GetOutboundExternalLinkRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
@@ -2631,6 +3645,12 @@ func init() {
 
 	GetOutboundExternalLinkResponse_connectivityType = GetOutboundExternalLinkResponse.AddMember("connectivityType", ConnectivityType)
 
+	GetOutboundExternalLinkResponse_errorDetails = GetOutboundExternalLinkResponse.AddMember("errorDetails", _ErrorDetails)
+
+	GetOutboundExternalLinkResponse_lockToken = GetOutboundExternalLinkResponse.AddMember("lockToken", _LockToken)
+
+	GetOutboundExternalLinkResponse_flows = GetOutboundExternalLinkResponse.AddMember("flows", _FlowList)
+
 	GetRequesterGatewayRequest_gatewayId = GetRequesterGatewayRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
 	GetRequesterGatewayResponse_status = GetRequesterGatewayResponse.AddMember("status", RequesterGatewayStatus)
@@ -2642,6 +3662,8 @@ func init() {
 	GetRequesterGatewayResponse_createdAt = GetRequesterGatewayResponse.AddMember("createdAt", smithyprelude.Timestamp)
 
 	GetRequesterGatewayResponse_updatedAt = GetRequesterGatewayResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	GetRequesterGatewayResponse_errorDetails = GetRequesterGatewayResponse.AddMember("errorDetails", _ErrorDetails)
 
 	GetRequesterGatewayResponse_vpcId = GetRequesterGatewayResponse.AddMember("vpcId", _VpcId)
 
@@ -2673,6 +3695,8 @@ func init() {
 
 	GetResponderGatewayResponse_updatedAt = GetResponderGatewayResponse.AddMember("updatedAt", smithyprelude.Timestamp)
 
+	GetResponderGatewayResponse_errorDetails = GetResponderGatewayResponse.AddMember("errorDetails", _ErrorDetails)
+
 	GetResponderGatewayResponse_domainName = GetResponderGatewayResponse.AddMember("domainName", _DomainName)
 
 	GetResponderGatewayResponse_port = GetResponderGatewayResponse.AddMember("port", smithyprelude.Integer)
@@ -2700,6 +3724,36 @@ func init() {
 	GetResponderGatewayResponse_externalInboundEndpoint = GetResponderGatewayResponse.AddMember("externalInboundEndpoint", _DomainName)
 
 	GetResponderGatewayResponse_clientRoutingPolicy = GetResponderGatewayResponse.AddMember("clientRoutingPolicy", ClientRoutingPolicy)
+
+	GetUpdateRequest_gatewayId = GetUpdateRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
+
+	GetUpdateRequest_updateId = GetUpdateRequest.AddMember("updateId", _UpdateId, &smithytraits.HTTPLabel{})
+
+	GetUpdateResponse_update = GetUpdateResponse.AddMember("update", Update)
+
+	ListAvailableModulesRequest_subscriptionType = ListAvailableModulesRequest.AddMember("subscriptionType", SubscriptionType, &smithytraits.HTTPQuery{Name: "subscriptionType"})
+
+	ListAvailableModulesRequest_maxResults = ListAvailableModulesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAvailableModulesRequest_nextToken = ListAvailableModulesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAvailableModulesResponse_modules = ListAvailableModulesResponse.AddMember("modules", _AvailableModuleSummaryList)
+
+	ListAvailableModulesResponse_nextToken = ListAvailableModulesResponse.AddMember("nextToken", smithyprelude.String)
+
+	ListAvailableModuleVersionsRequest_moduleId = ListAvailableModuleVersionsRequest.AddMember("moduleId", _ModuleId, &smithytraits.HTTPLabel{})
+
+	ListAvailableModuleVersionsRequest_status = ListAvailableModuleVersionsRequest.AddMember("status", ModuleVersionStatus, &smithytraits.HTTPQuery{Name: "status"})
+
+	ListAvailableModuleVersionsRequest_maxResults = ListAvailableModuleVersionsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAvailableModuleVersionsRequest_nextToken = ListAvailableModuleVersionsRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAvailableModuleVersionsResponse_moduleId = ListAvailableModuleVersionsResponse.AddMember("moduleId", _ModuleId)
+
+	ListAvailableModuleVersionsResponse_versions = ListAvailableModuleVersionsResponse.AddMember("versions", _AvailableModuleVersionSummaryList)
+
+	ListAvailableModuleVersionsResponse_nextToken = ListAvailableModuleVersionsResponse.AddMember("nextToken", smithyprelude.String)
 
 	ListCertificateAssociationsRequest_gatewayId = ListCertificateAssociationsRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
@@ -2753,6 +3807,42 @@ func init() {
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagsMap)
 
+	ListUpdatesRequest_gatewayId = ListUpdatesRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
+
+	ListUpdatesRequest_linkId = ListUpdatesRequest.AddMember("linkId", _LinkId, &smithytraits.HTTPQuery{Name: "linkId"})
+
+	ListUpdatesRequest_ruleId = ListUpdatesRequest.AddMember("ruleId", _RuleId, &smithytraits.HTTPQuery{Name: "ruleId"})
+
+	ListUpdatesRequest_type = ListUpdatesRequest.AddMember("type", UpdateType, &smithytraits.HTTPQuery{Name: "type"})
+
+	ListUpdatesRequest_status = ListUpdatesRequest.AddMember("status", UpdateStatus, &smithytraits.HTTPQuery{Name: "status"})
+
+	ListUpdatesRequest_nextToken = ListUpdatesRequest.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListUpdatesRequest_maxResults = ListUpdatesRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListUpdatesResponse_updates = ListUpdatesResponse.AddMember("updates", _UpdateSummaryList)
+
+	ListUpdatesResponse_nextToken = ListUpdatesResponse.AddMember("nextToken", smithyprelude.String)
+
+	PutLinkFlowsRequest_gatewayId = PutLinkFlowsRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
+
+	PutLinkFlowsRequest_linkId = PutLinkFlowsRequest.AddMember("linkId", _LinkId, &smithytraits.HTTPLabel{})
+
+	PutLinkFlowsRequest_clientToken = PutLinkFlowsRequest.AddMember("clientToken", _ClientToken)
+
+	PutLinkFlowsRequest_lockToken = PutLinkFlowsRequest.AddMember("lockToken", _LockToken)
+
+	PutLinkFlowsRequest_flows = PutLinkFlowsRequest.AddMember("flows", _FlowList)
+
+	PutLinkFlowsResponse_gatewayId = PutLinkFlowsResponse.AddMember("gatewayId", _GatewayId)
+
+	PutLinkFlowsResponse_linkId = PutLinkFlowsResponse.AddMember("linkId", _LinkId)
+
+	PutLinkFlowsResponse_status = PutLinkFlowsResponse.AddMember("status", LinkStatus)
+
+	PutLinkFlowsResponse_updateId = PutLinkFlowsResponse.AddMember("updateId", _UpdateId)
+
 	RejectLinkRequest_gatewayId = RejectLinkRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
 	RejectLinkRequest_linkId = RejectLinkRequest.AddMember("linkId", _LinkId, &smithytraits.HTTPLabel{})
@@ -2779,6 +3869,8 @@ func init() {
 
 	RejectLinkResponse_connectivityType = RejectLinkResponse.AddMember("connectivityType", ConnectivityType)
 
+	RejectLinkResponse_errorDetails = RejectLinkResponse.AddMember("errorDetails", _ErrorDetails)
+
 	RejectLinkResponse_linkId = RejectLinkResponse.AddMember("linkId", _LinkId)
 
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _RtbTaggableResourceArn, &smithytraits.HTTPLabel{})
@@ -2797,6 +3889,8 @@ func init() {
 
 	UpdateLinkRequest_timeoutInMillis = UpdateLinkRequest.AddMember("timeoutInMillis", _LinkTimeoutInMillis)
 
+	UpdateLinkRequest_clientToken = UpdateLinkRequest.AddMember("clientToken", smithyprelude.String)
+
 	UpdateLinkModuleFlowRequest_clientToken = UpdateLinkModuleFlowRequest.AddMember("clientToken", smithyprelude.String)
 
 	UpdateLinkModuleFlowRequest_gatewayId = UpdateLinkModuleFlowRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
@@ -2811,9 +3905,13 @@ func init() {
 
 	UpdateLinkModuleFlowResponse_status = UpdateLinkModuleFlowResponse.AddMember("status", LinkStatus)
 
+	UpdateLinkModuleFlowResponse_updateId = UpdateLinkModuleFlowResponse.AddMember("updateId", _UpdateId)
+
 	UpdateLinkResponse_linkId = UpdateLinkResponse.AddMember("linkId", _LinkId)
 
 	UpdateLinkResponse_status = UpdateLinkResponse.AddMember("status", LinkStatus)
+
+	UpdateLinkResponse_updateId = UpdateLinkResponse.AddMember("updateId", _UpdateId)
 
 	UpdateLinkRoutingRuleRequest_gatewayId = UpdateLinkRoutingRuleRequest.AddMember("gatewayId", _GatewayId, &smithytraits.HTTPLabel{})
 
@@ -2825,11 +3923,15 @@ func init() {
 
 	UpdateLinkRoutingRuleRequest_conditions = UpdateLinkRoutingRuleRequest.AddMember("conditions", RuleCondition)
 
+	UpdateLinkRoutingRuleRequest_clientToken = UpdateLinkRoutingRuleRequest.AddMember("clientToken", smithyprelude.String)
+
 	UpdateLinkRoutingRuleResponse_ruleId = UpdateLinkRoutingRuleResponse.AddMember("ruleId", _RuleId)
 
 	UpdateLinkRoutingRuleResponse_status = UpdateLinkRoutingRuleResponse.AddMember("status", RuleStatus)
 
 	UpdateLinkRoutingRuleResponse_updatedAt = UpdateLinkRoutingRuleResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	UpdateLinkRoutingRuleResponse_updateId = UpdateLinkRoutingRuleResponse.AddMember("updateId", _UpdateId)
 
 	UpdateRequesterGatewayRequest_clientToken = UpdateRequesterGatewayRequest.AddMember("clientToken", smithyprelude.String)
 
@@ -2866,5 +3968,7 @@ func init() {
 	UpdateResponderGatewayResponse_status = UpdateResponderGatewayResponse.AddMember("status", ResponderGatewayStatus)
 
 	UpdateResponderGatewayResponse_clientRoutingPolicy = UpdateResponderGatewayResponse.AddMember("clientRoutingPolicy", ClientRoutingPolicy)
+
+	UpdateResponderGatewayResponse_updateId = UpdateResponderGatewayResponse.AddMember("updateId", _UpdateId)
 
 }

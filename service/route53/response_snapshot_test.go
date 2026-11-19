@@ -439,6 +439,8 @@ func TestCheckResponseSnapshot_CreateHealthCheck(t *testing.T) {
 				},
 				InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 				RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+				EndpointType:                 types.EndpointType("PUBLIC"),
+				HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 			},
 			HealthCheckVersion: ptr.Int64(1),
 			CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
@@ -501,6 +503,8 @@ func TestCheckResponseSnapshot_CreateHealthCheck(t *testing.T) {
 			},
 			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+			EndpointType:                 types.EndpointType("PUBLIC"),
+			HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 		},
 	})
 	if err != nil {
@@ -508,6 +512,62 @@ func TestCheckResponseSnapshot_CreateHealthCheck(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateHealthCheck.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateHealthCheckSource(t *testing.T) {
+	want := &CreateHealthCheckSourceOutput{
+		HealthCheckSourceId:     ptr.String("__HealthCheckSourceId__"),
+		HealthCheckSourceStatus: types.HealthCheckSourceStatus("CREATE_PENDING"),
+		Location:                ptr.String("__Location__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateHealthCheckSource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateHealthCheckSource(context.Background(), &CreateHealthCheckSourceInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetConfigurationList: []types.SubnetConfiguration{
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateHealthCheckSource.response", err)
 	}
 }
 
@@ -930,6 +990,30 @@ func TestCheckResponseSnapshot_DeleteHealthCheck(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteHealthCheck.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	want := &DeleteHealthCheckSourceOutput{
+		HealthCheckSourceId:     ptr.String("__HealthCheckSourceId__"),
+		HealthCheckSourceStatus: types.HealthCheckSourceStatus("CREATE_PENDING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteHealthCheckSource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteHealthCheckSource(context.Background(), &DeleteHealthCheckSourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteHealthCheckSource.response", err)
 	}
 }
 
@@ -1432,6 +1516,8 @@ func TestCheckResponseSnapshot_GetHealthCheck(t *testing.T) {
 				},
 				InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 				RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+				EndpointType:                 types.EndpointType("PUBLIC"),
+				HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 			},
 			HealthCheckVersion: ptr.Int64(1),
 			CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
@@ -1532,6 +1618,55 @@ func TestCheckResponseSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetHealthCheckLastFailureReason.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetHealthCheckSource(t *testing.T) {
+	want := &GetHealthCheckSourceOutput{
+		HealthCheckSource: &types.HealthCheckSource{
+			HealthCheckSourceId:     ptr.String("__HealthCheckSourceId__"),
+			HealthCheckSourceStatus: types.HealthCheckSourceStatus("CREATE_PENDING"),
+			HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+				VpcId: ptr.String("__VpcId__"),
+				SubnetConfigurationList: []types.SubnetConfiguration{
+					{
+						SubnetId:           ptr.String("__SubnetId__"),
+						AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+						SecurityGroupIdList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						SubnetId:           ptr.String("__SubnetId__"),
+						AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+						SecurityGroupIdList: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			StatusReasonCode: types.HealthCheckSourceStatusReasonCode("INSUFFICIENT_SUBNET_IPS"),
+			StatusReason:     ptr.String("__StatusReason__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetHealthCheckSource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetHealthCheckSource(context.Background(), &GetHealthCheckSourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetHealthCheckSource.response", err)
 	}
 }
 
@@ -2009,6 +2144,86 @@ func TestCheckResponseSnapshot_ListGeoLocations(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListHealthCheckSources(t *testing.T) {
+	want := &ListHealthCheckSourcesOutput{
+		HealthCheckSources: []types.HealthCheckSource{
+			{
+				HealthCheckSourceId:     ptr.String("__HealthCheckSourceId__"),
+				HealthCheckSourceStatus: types.HealthCheckSourceStatus("CREATE_PENDING"),
+				HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+					VpcId: ptr.String("__VpcId__"),
+					SubnetConfigurationList: []types.SubnetConfiguration{
+						{
+							SubnetId:           ptr.String("__SubnetId__"),
+							AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+							SecurityGroupIdList: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							SubnetId:           ptr.String("__SubnetId__"),
+							AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+							SecurityGroupIdList: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				StatusReasonCode: types.HealthCheckSourceStatusReasonCode("INSUFFICIENT_SUBNET_IPS"),
+				StatusReason:     ptr.String("__StatusReason__"),
+			},
+			{
+				HealthCheckSourceId:     ptr.String("__HealthCheckSourceId__"),
+				HealthCheckSourceStatus: types.HealthCheckSourceStatus("CREATE_PENDING"),
+				HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+					VpcId: ptr.String("__VpcId__"),
+					SubnetConfigurationList: []types.SubnetConfiguration{
+						{
+							SubnetId:           ptr.String("__SubnetId__"),
+							AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+							SecurityGroupIdList: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							SubnetId:           ptr.String("__SubnetId__"),
+							AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+							SecurityGroupIdList: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				StatusReasonCode: types.HealthCheckSourceStatusReasonCode("INSUFFICIENT_SUBNET_IPS"),
+				StatusReason:     ptr.String("__StatusReason__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListHealthCheckSources.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListHealthCheckSources(context.Background(), &ListHealthCheckSourcesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListHealthCheckSources.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListHealthChecks(t *testing.T) {
 	want := &ListHealthChecksOutput{
 		HealthChecks: []types.HealthCheck{
@@ -2047,6 +2262,8 @@ func TestCheckResponseSnapshot_ListHealthChecks(t *testing.T) {
 					},
 					InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 					RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+					EndpointType:                 types.EndpointType("PUBLIC"),
+					HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 				},
 				HealthCheckVersion: ptr.Int64(1),
 				CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
@@ -2104,6 +2321,8 @@ func TestCheckResponseSnapshot_ListHealthChecks(t *testing.T) {
 					},
 					InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 					RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+					EndpointType:                 types.EndpointType("PUBLIC"),
+					HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 				},
 				HealthCheckVersion: ptr.Int64(1),
 				CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
@@ -2149,6 +2368,154 @@ func TestCheckResponseSnapshot_ListHealthChecks(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListHealthChecks.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListHealthChecksBySource(t *testing.T) {
+	want := &ListHealthChecksBySourceOutput{
+		HealthChecks: []types.HealthCheck{
+			{
+				Id:              ptr.String("__Id__"),
+				CallerReference: ptr.String("__CallerReference__"),
+				LinkedService: &types.LinkedService{
+					ServicePrincipal: ptr.String("__ServicePrincipal__"),
+					Description:      ptr.String("__Description__"),
+				},
+				HealthCheckConfig: &types.HealthCheckConfig{
+					IPAddress:                ptr.String("__IPAddress__"),
+					Port:                     ptr.Int32(1),
+					Type:                     types.HealthCheckType("HTTP"),
+					ResourcePath:             ptr.String("__ResourcePath__"),
+					FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+					SearchString:             ptr.String("__SearchString__"),
+					RequestInterval:          ptr.Int32(1),
+					FailureThreshold:         ptr.Int32(1),
+					MeasureLatency:           ptr.Bool(true),
+					Inverted:                 ptr.Bool(true),
+					Disabled:                 ptr.Bool(true),
+					HealthThreshold:          ptr.Int32(1),
+					ChildHealthChecks: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EnableSNI: ptr.Bool(true),
+					Regions: []types.HealthCheckRegion{
+						types.HealthCheckRegion("us-east-1"),
+						types.HealthCheckRegion("us-east-1"),
+					},
+					AlarmIdentifier: &types.AlarmIdentifier{
+						Region: types.CloudWatchRegion("us-east-1"),
+						Name:   ptr.String("__Name__"),
+					},
+					InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+					RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+					EndpointType:                 types.EndpointType("PUBLIC"),
+					HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
+				},
+				HealthCheckVersion: ptr.Int64(1),
+				CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
+					EvaluationPeriods:  ptr.Int32(1),
+					Threshold:          ptr.Float64(1.0),
+					ComparisonOperator: types.ComparisonOperator("GreaterThanOrEqualToThreshold"),
+					Period:             ptr.Int32(1),
+					MetricName:         ptr.String("__MetricName__"),
+					Namespace:          ptr.String("__Namespace__"),
+					Statistic:          types.Statistic("Average"),
+					Dimensions: []types.Dimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+			{
+				Id:              ptr.String("__Id__"),
+				CallerReference: ptr.String("__CallerReference__"),
+				LinkedService: &types.LinkedService{
+					ServicePrincipal: ptr.String("__ServicePrincipal__"),
+					Description:      ptr.String("__Description__"),
+				},
+				HealthCheckConfig: &types.HealthCheckConfig{
+					IPAddress:                ptr.String("__IPAddress__"),
+					Port:                     ptr.Int32(1),
+					Type:                     types.HealthCheckType("HTTP"),
+					ResourcePath:             ptr.String("__ResourcePath__"),
+					FullyQualifiedDomainName: ptr.String("__FullyQualifiedDomainName__"),
+					SearchString:             ptr.String("__SearchString__"),
+					RequestInterval:          ptr.Int32(1),
+					FailureThreshold:         ptr.Int32(1),
+					MeasureLatency:           ptr.Bool(true),
+					Inverted:                 ptr.Bool(true),
+					Disabled:                 ptr.Bool(true),
+					HealthThreshold:          ptr.Int32(1),
+					ChildHealthChecks: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EnableSNI: ptr.Bool(true),
+					Regions: []types.HealthCheckRegion{
+						types.HealthCheckRegion("us-east-1"),
+						types.HealthCheckRegion("us-east-1"),
+					},
+					AlarmIdentifier: &types.AlarmIdentifier{
+						Region: types.CloudWatchRegion("us-east-1"),
+						Name:   ptr.String("__Name__"),
+					},
+					InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
+					RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+					EndpointType:                 types.EndpointType("PUBLIC"),
+					HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
+				},
+				HealthCheckVersion: ptr.Int64(1),
+				CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
+					EvaluationPeriods:  ptr.Int32(1),
+					Threshold:          ptr.Float64(1.0),
+					ComparisonOperator: types.ComparisonOperator("GreaterThanOrEqualToThreshold"),
+					Period:             ptr.Int32(1),
+					MetricName:         ptr.String("__MetricName__"),
+					Namespace:          ptr.String("__Namespace__"),
+					Statistic:          types.Statistic("Average"),
+					Dimensions: []types.Dimension{
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Name:  ptr.String("__Name__"),
+							Value: ptr.String("__Value__"),
+						},
+					},
+				},
+			},
+		},
+		Marker:      ptr.String("__Marker__"),
+		IsTruncated: true,
+		NextMarker:  ptr.String("__NextMarker__"),
+		MaxItems:    ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListHealthChecksBySource.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListHealthChecksBySource(context.Background(), &ListHealthChecksBySourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+		Marker:              ptr.String("__Marker__"),
+		MaxItems:            ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListHealthChecksBySource.response", err)
 	}
 }
 
@@ -3032,6 +3399,8 @@ func TestCheckResponseSnapshot_UpdateHealthCheck(t *testing.T) {
 				},
 				InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 				RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+				EndpointType:                 types.EndpointType("PUBLIC"),
+				HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 			},
 			HealthCheckVersion: ptr.Int64(1),
 			CloudWatchAlarmConfiguration: &types.CloudWatchAlarmConfiguration{
@@ -3093,6 +3462,7 @@ func TestCheckResponseSnapshot_UpdateHealthCheck(t *testing.T) {
 			types.ResettableElementName("FullyQualifiedDomainName"),
 			types.ResettableElementName("FullyQualifiedDomainName"),
 		},
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3698,6 +4068,8 @@ func TestCheckResponseSnapshot_Error_HealthCheckAlreadyExists(t *testing.T) {
 			},
 			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+			EndpointType:                 types.EndpointType("PUBLIC"),
+			HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 		},
 	})
 	if opErr == nil {
@@ -3736,6 +4108,64 @@ func TestCheckResponseSnapshot_Error_HealthCheckInUse(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "HealthCheckInUse.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_HealthCheckSourceAlreadyExists(t *testing.T) {
+	want := &types.HealthCheckSourceAlreadyExists{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("HealthCheckSourceAlreadyExists.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateHealthCheckSource(context.Background(), &CreateHealthCheckSourceInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetConfigurationList: []types.SubnetConfiguration{
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.HealthCheckSourceAlreadyExists
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.HealthCheckSourceAlreadyExists, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "HealthCheckSourceAlreadyExists.error", err)
 	}
 }
 
@@ -3781,6 +4211,7 @@ func TestCheckResponseSnapshot_Error_HealthCheckVersionMismatch(t *testing.T) {
 			types.ResettableElementName("FullyQualifiedDomainName"),
 			types.ResettableElementName("FullyQualifiedDomainName"),
 		},
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -4978,6 +5409,48 @@ func TestCheckResponseSnapshot_Error_NoSuchHealthCheck(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_NoSuchHealthCheckSource(t *testing.T) {
+	want := &types.NoSuchHealthCheckSource{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("NoSuchHealthCheckSource.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.ChangeTagsForResource(context.Background(), &ChangeTagsForResourceInput{
+		ResourceType: types.TagResourceType("healthcheck"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		AddTags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		RemoveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.NoSuchHealthCheckSource
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.NoSuchHealthCheckSource, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "NoSuchHealthCheckSource.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_NoSuchHostedZone(t *testing.T) {
 	want := &types.NoSuchHostedZone{
 		Message: ptr.String("__Message__"),
@@ -5342,6 +5815,64 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_TooManyHealthCheckSources(t *testing.T) {
+	want := &types.TooManyHealthCheckSources{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("TooManyHealthCheckSources.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateHealthCheckSource(context.Background(), &CreateHealthCheckSourceInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetConfigurationList: []types.SubnetConfiguration{
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.TooManyHealthCheckSources
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.TooManyHealthCheckSources, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "TooManyHealthCheckSources.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_TooManyHealthChecks(t *testing.T) {
 	want := &types.TooManyHealthChecks{
 		Message: ptr.String("__Message__"),
@@ -5384,6 +5915,8 @@ func TestCheckResponseSnapshot_Error_TooManyHealthChecks(t *testing.T) {
 			},
 			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+			EndpointType:                 types.EndpointType("PUBLIC"),
+			HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 		},
 	})
 	if opErr == nil {

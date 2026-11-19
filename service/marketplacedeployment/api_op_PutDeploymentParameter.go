@@ -42,7 +42,7 @@ type PutDeploymentParameterInput struct {
 	Catalog *string
 
 	// The deployment parameter targeted to the acceptor of an agreement for which to
-	// create the AWS Secret Manager resource.
+	// create the AWS Secrets Manager resource.
 	//
 	// This member is required.
 	DeploymentParameter *types.DeploymentParameterInput

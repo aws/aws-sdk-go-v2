@@ -3976,6 +3976,9 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 					},
 				},
 			},
+			VoicemailInfo: &types.VoicemailInfo{
+				NumberOfVoicemails: ptr.Int32(1),
+			},
 		},
 	}
 	proto := restjson1.New(schemas.AmazonConnectService)

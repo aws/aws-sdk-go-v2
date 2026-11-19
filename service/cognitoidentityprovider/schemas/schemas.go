@@ -203,6 +203,11 @@ var ConfirmSignUp = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ConfirmSignUp",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateCIMDPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CreateCIMDPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CreateGroup",
@@ -251,6 +256,11 @@ var CreateUserPoolDomain = smithy.NewSchema(smithy.ShapeID{
 var CreateUserPoolReplica = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CreateUserPoolReplica",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteCIMDPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DeleteCIMDPolicy",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteGroup = smithy.NewSchema(smithy.ShapeID{
@@ -316,6 +326,11 @@ var DeleteUserPoolReplica = smithy.NewSchema(smithy.ShapeID{
 var DeleteWebAuthnCredential = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "DeleteWebAuthnCredential",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeCIMDPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DescribeCIMDPolicy",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeIdentityProvider = smithy.NewSchema(smithy.ShapeID{
@@ -486,6 +501,16 @@ var InitiateAuth = smithy.NewSchema(smithy.ShapeID{
 var InitiatePointInTimeRecovery = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "InitiatePointInTimeRecovery",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListCIMDPolicies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListCIMDPolicies",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListClientMetadataURLs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListClientMetadataURLs",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListDevices = smithy.NewSchema(smithy.ShapeID{
@@ -666,6 +691,16 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 var UpdateAuthEventFeedback = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UpdateAuthEventFeedback",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateCIMDPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "UpdateCIMDPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateClientMetadataURLState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "UpdateClientMetadataURLState",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateDeviceStatus = smithy.NewSchema(smithy.ShapeID{
@@ -1192,6 +1227,18 @@ var _BooleanType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BooleanType",
 }, smithy.ShapeTypeBoolean, 0)
 
+var CachedCIMDURLDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CachedCIMDURLDoesNotExistException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
+var CachedCIMDURLDoesNotExistException_message *smithy.Schema
+
+var _CacheDurationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CacheDurationType",
+}, smithy.ShapeTypeInteger, 0)
+
 var _CallbackURLsListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CallbackURLsListType",
@@ -1280,6 +1327,66 @@ var ChallengeResponseType_ChallengeName *smithy.Schema
 
 var ChallengeResponseType_ChallengeResponse *smithy.Schema
 
+var CIMDCacheActionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CIMDCacheActionType",
+}, smithy.ShapeTypeEnum, 2)
+var CIMDCacheActionType_REFRESH *smithy.Schema
+
+var CIMDCacheActionType_INVALIDATE *smithy.Schema
+
+var _CIMDPolicyIdType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CIMDPolicyIdType",
+}, smithy.ShapeTypeString, 0)
+
+var _CIMDPolicyNameType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CIMDPolicyNameType",
+}, smithy.ShapeTypeString, 0)
+
+var _CIMDPolicySummaryListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CIMDPolicySummaryListType",
+}, smithy.ShapeTypeList, 1)
+var _CIMDPolicySummaryListType_member *smithy.Schema
+
+var CIMDPolicySummaryType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CIMDPolicySummaryType",
+}, smithy.ShapeTypeStructure, 6)
+var CIMDPolicySummaryType_CIMDPolicyId *smithy.Schema
+
+var CIMDPolicySummaryType_ClientId *smithy.Schema
+
+var CIMDPolicySummaryType_PolicyName *smithy.Schema
+
+var CIMDPolicySummaryType_CacheDuration *smithy.Schema
+
+var CIMDPolicySummaryType_CreationDate *smithy.Schema
+
+var CIMDPolicySummaryType_LastModifiedDate *smithy.Schema
+
+var CIMDPolicyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CIMDPolicyType",
+}, smithy.ShapeTypeStructure, 8)
+var CIMDPolicyType_UserPoolId *smithy.Schema
+
+var CIMDPolicyType_CIMDPolicyId *smithy.Schema
+
+var CIMDPolicyType_ClientId *smithy.Schema
+
+var CIMDPolicyType_PolicyName *smithy.Schema
+
+var CIMDPolicyType_CacheDuration *smithy.Schema
+
+var CIMDPolicyType_URLPatterns *smithy.Schema
+
+var CIMDPolicyType_CreationDate *smithy.Schema
+
+var CIMDPolicyType_LastModifiedDate *smithy.Schema
+
 var ClientAuthenticationResultType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ClientAuthenticationResultType",
@@ -1303,6 +1410,22 @@ var _ClientMetadataType_key *smithy.Schema
 
 var _ClientMetadataType_value *smithy.Schema
 
+var _ClientMetadataURLListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ClientMetadataURLListType",
+}, smithy.ShapeTypeList, 1)
+var _ClientMetadataURLListType_member *smithy.Schema
+
+var ClientMetadataURLType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ClientMetadataURLType",
+}, smithy.ShapeTypeStructure, 3)
+var ClientMetadataURLType_URL *smithy.Schema
+
+var ClientMetadataURLType_CachedDate *smithy.Schema
+
+var ClientMetadataURLType_ExpirationDate *smithy.Schema
+
 var _ClientNameType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ClientNameType",
@@ -1317,6 +1440,11 @@ var _ClientPermissionListType_member *smithy.Schema
 var _ClientPermissionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "ClientPermissionType",
+}, smithy.ShapeTypeString, 0)
+
+var _ClientSecretArnType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ClientSecretArnType",
 }, smithy.ShapeTypeString, 0)
 
 var _ClientSecretDescriptorListType = smithy.NewSchema(smithy.ShapeID{
@@ -2464,6 +2592,11 @@ var _MessageType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MessageType",
 }, smithy.ShapeTypeString, 0)
 
+var _MetadataURLType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "MetadataURLType",
+}, smithy.ShapeTypeString, 0)
+
 var MFAMethodNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "MFAMethodNotFoundException",
@@ -3559,6 +3692,17 @@ var UpdateReplicaStatusType_ACTIVE *smithy.Schema
 
 var UpdateReplicaStatusType_INACTIVE *smithy.Schema
 
+var _URLPatternListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "URLPatternListType",
+}, smithy.ShapeTypeList, 1)
+var _URLPatternListType_member *smithy.Schema
+
+var _URLPatternType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "URLPatternType",
+}, smithy.ShapeTypeString, 0)
+
 var UserAttributeUpdateSettingsType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UserAttributeUpdateSettingsType",
@@ -3746,7 +3890,7 @@ var _UserPoolClientListType_member *smithy.Schema
 var UserPoolClientType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UserPoolClientType",
-}, smithy.ShapeTypeStructure, 27)
+}, smithy.ShapeTypeStructure, 28)
 var UserPoolClientType_UserPoolId *smithy.Schema
 
 var UserPoolClientType_ClientName *smithy.Schema
@@ -3754,6 +3898,8 @@ var UserPoolClientType_ClientName *smithy.Schema
 var UserPoolClientType_ClientId *smithy.Schema
 
 var UserPoolClientType_ClientSecret *smithy.Schema
+
+var UserPoolClientType_ClientSecretArn *smithy.Schema
 
 var UserPoolClientType_LastModifiedDate *smithy.Schema
 
@@ -4894,6 +5040,26 @@ var ConfirmSignUpResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ConfirmSignUpResponse_Session *smithy.Schema
 
+var CreateCIMDPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CreateCIMDPolicyRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateCIMDPolicyRequest_UserPoolId *smithy.Schema
+
+var CreateCIMDPolicyRequest_ClientId *smithy.Schema
+
+var CreateCIMDPolicyRequest_PolicyName *smithy.Schema
+
+var CreateCIMDPolicyRequest_CacheDuration *smithy.Schema
+
+var CreateCIMDPolicyRequest_URLPatterns *smithy.Schema
+
+var CreateCIMDPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "CreateCIMDPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateCIMDPolicyResponse_CIMDPolicy *smithy.Schema
+
 var CreateGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CreateGroupRequest",
@@ -5019,7 +5185,7 @@ var CreateUserImportJobResponse_UserImportJob *smithy.Schema
 var CreateUserPoolClientRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "CreateUserPoolClientRequest",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var CreateUserPoolClientRequest_UserPoolId *smithy.Schema
 
 var CreateUserPoolClientRequest_ClientName *smithy.Schema
@@ -5067,6 +5233,8 @@ var CreateUserPoolClientRequest_EnablePropagateAdditionalUserContextData *smithy
 var CreateUserPoolClientRequest_AuthSessionValidity *smithy.Schema
 
 var CreateUserPoolClientRequest_RefreshTokenRotation *smithy.Schema
+
+var CreateUserPoolClientRequest_PublishSecretsInAWSSecretsManager *smithy.Schema
 
 var CreateUserPoolClientResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -5179,6 +5347,19 @@ var CreateUserPoolReplicaResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateUserPoolReplicaResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateUserPoolReplicaResponse_UserPoolReplica *smithy.Schema
+
+var DeleteCIMDPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DeleteCIMDPolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteCIMDPolicyRequest_UserPoolId *smithy.Schema
+
+var DeleteCIMDPolicyRequest_CIMDPolicyId *smithy.Schema
+
+var DeleteCIMDPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DeleteCIMDPolicyResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -5307,6 +5488,20 @@ var DeleteWebAuthnCredentialResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "DeleteWebAuthnCredentialResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var DescribeCIMDPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DescribeCIMDPolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeCIMDPolicyRequest_UserPoolId *smithy.Schema
+
+var DescribeCIMDPolicyRequest_CIMDPolicyId *smithy.Schema
+
+var DescribeCIMDPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "DescribeCIMDPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeCIMDPolicyResponse_CIMDPolicy *smithy.Schema
 
 var DescribeIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -5858,6 +6053,44 @@ var InitiatePointInTimeRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InitiatePointInTimeRecoveryResponse",
 }, smithy.ShapeTypeStructure, 1)
 var InitiatePointInTimeRecoveryResponse_Restoration *smithy.Schema
+
+var ListCIMDPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListCIMDPoliciesRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListCIMDPoliciesRequest_UserPoolId *smithy.Schema
+
+var ListCIMDPoliciesRequest_NextToken *smithy.Schema
+
+var ListCIMDPoliciesRequest_MaxResults *smithy.Schema
+
+var ListCIMDPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListCIMDPoliciesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListCIMDPoliciesResponse_NextToken *smithy.Schema
+
+var ListCIMDPoliciesResponse_CIMDPolicies *smithy.Schema
+
+var ListClientMetadataURLsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListClientMetadataURLsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListClientMetadataURLsRequest_UserPoolId *smithy.Schema
+
+var ListClientMetadataURLsRequest_CIMDPolicyId *smithy.Schema
+
+var ListClientMetadataURLsRequest_NextToken *smithy.Schema
+
+var ListClientMetadataURLsRequest_MaxResults *smithy.Schema
+
+var ListClientMetadataURLsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "ListClientMetadataURLsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListClientMetadataURLsResponse_NextToken *smithy.Schema
+
+var ListClientMetadataURLsResponse_ClientMetadataURLs *smithy.Schema
 
 var ListDevicesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -6516,6 +6749,45 @@ var UpdateAuthEventFeedbackResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateAuthEventFeedbackResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateCIMDPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "UpdateCIMDPolicyRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateCIMDPolicyRequest_UserPoolId *smithy.Schema
+
+var UpdateCIMDPolicyRequest_CIMDPolicyId *smithy.Schema
+
+var UpdateCIMDPolicyRequest_ClientId *smithy.Schema
+
+var UpdateCIMDPolicyRequest_PolicyName *smithy.Schema
+
+var UpdateCIMDPolicyRequest_CacheDuration *smithy.Schema
+
+var UpdateCIMDPolicyRequest_URLPatterns *smithy.Schema
+
+var UpdateCIMDPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "UpdateCIMDPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateCIMDPolicyResponse_CIMDPolicy *smithy.Schema
+
+var UpdateClientMetadataURLStateRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "UpdateClientMetadataURLStateRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateClientMetadataURLStateRequest_UserPoolId *smithy.Schema
+
+var UpdateClientMetadataURLStateRequest_CIMDPolicyId *smithy.Schema
+
+var UpdateClientMetadataURLStateRequest_URL *smithy.Schema
+
+var UpdateClientMetadataURLStateRequest_Action *smithy.Schema
+
+var UpdateClientMetadataURLStateResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cognitoidentityprovider",
+	Name:      "UpdateClientMetadataURLStateResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var UpdateDeviceStatusRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UpdateDeviceStatusRequest",
@@ -6666,7 +6938,7 @@ var UpdateUserAttributesResponse_CodeDeliveryDetailsList *smithy.Schema
 var UpdateUserPoolClientRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
 	Name:      "UpdateUserPoolClientRequest",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var UpdateUserPoolClientRequest_UserPoolId *smithy.Schema
 
 var UpdateUserPoolClientRequest_ClientId *smithy.Schema
@@ -6712,6 +6984,8 @@ var UpdateUserPoolClientRequest_EnablePropagateAdditionalUserContextData *smithy
 var UpdateUserPoolClientRequest_AuthSessionValidity *smithy.Schema
 
 var UpdateUserPoolClientRequest_RefreshTokenRotation *smithy.Schema
+
+var UpdateUserPoolClientRequest_PublishSecretsInAWSSecretsManager *smithy.Schema
 
 var UpdateUserPoolClientResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cognitoidentityprovider",
@@ -7224,6 +7498,8 @@ func init() {
 
 	_BlockedIPRangeListType_member = _BlockedIPRangeListType.AddMember("member", _StringType)
 
+	CachedCIMDURLDoesNotExistException_message = CachedCIMDURLDoesNotExistException.AddMember("message", _MessageType)
+
 	_CallbackURLsListType_member = _CallbackURLsListType.AddMember("member", _RedirectUrlType)
 
 	_ChallengeParametersType_key = _ChallengeParametersType.AddMember("key", _StringType)
@@ -7234,6 +7510,42 @@ func init() {
 
 	_ChallengeResponsesType_value = _ChallengeResponsesType.AddMember("value", _StringType)
 
+	CIMDCacheActionType_REFRESH = CIMDCacheActionType.AddMember("REFRESH", smithyprelude.Unit)
+
+	CIMDCacheActionType_INVALIDATE = CIMDCacheActionType.AddMember("INVALIDATE", smithyprelude.Unit)
+
+	CIMDPolicySummaryType_CIMDPolicyId = CIMDPolicySummaryType.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
+	CIMDPolicySummaryType_ClientId = CIMDPolicySummaryType.AddMember("ClientId", _ClientIdType)
+
+	CIMDPolicySummaryType_PolicyName = CIMDPolicySummaryType.AddMember("PolicyName", _CIMDPolicyNameType)
+
+	CIMDPolicySummaryType_CacheDuration = CIMDPolicySummaryType.AddMember("CacheDuration", _CacheDurationType)
+
+	CIMDPolicySummaryType_CreationDate = CIMDPolicySummaryType.AddMember("CreationDate", _DateType)
+
+	CIMDPolicySummaryType_LastModifiedDate = CIMDPolicySummaryType.AddMember("LastModifiedDate", _DateType)
+
+	_CIMDPolicySummaryListType_member = _CIMDPolicySummaryListType.AddMember("member", CIMDPolicySummaryType)
+
+	_URLPatternListType_member = _URLPatternListType.AddMember("member", _URLPatternType)
+
+	CIMDPolicyType_UserPoolId = CIMDPolicyType.AddMember("UserPoolId", _UserPoolIdType)
+
+	CIMDPolicyType_CIMDPolicyId = CIMDPolicyType.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
+	CIMDPolicyType_ClientId = CIMDPolicyType.AddMember("ClientId", _ClientIdType)
+
+	CIMDPolicyType_PolicyName = CIMDPolicyType.AddMember("PolicyName", _CIMDPolicyNameType)
+
+	CIMDPolicyType_CacheDuration = CIMDPolicyType.AddMember("CacheDuration", _CacheDurationType)
+
+	CIMDPolicyType_URLPatterns = CIMDPolicyType.AddMember("URLPatterns", _URLPatternListType)
+
+	CIMDPolicyType_CreationDate = CIMDPolicyType.AddMember("CreationDate", _DateType)
+
+	CIMDPolicyType_LastModifiedDate = CIMDPolicyType.AddMember("LastModifiedDate", _DateType)
+
 	ClientAuthenticationResultType_AccessToken = ClientAuthenticationResultType.AddMember("AccessToken", _TokenModelType)
 
 	ClientAuthenticationResultType_ExpiresIn = ClientAuthenticationResultType.AddMember("ExpiresIn", _IntegerType)
@@ -7243,6 +7555,14 @@ func init() {
 	_ClientMetadataType_key = _ClientMetadataType.AddMember("key", _StringType)
 
 	_ClientMetadataType_value = _ClientMetadataType.AddMember("value", _StringType)
+
+	ClientMetadataURLType_URL = ClientMetadataURLType.AddMember("URL", _MetadataURLType)
+
+	ClientMetadataURLType_CachedDate = ClientMetadataURLType.AddMember("CachedDate", _DateType)
+
+	ClientMetadataURLType_ExpirationDate = ClientMetadataURLType.AddMember("ExpirationDate", _DateType)
+
+	_ClientMetadataURLListType_member = _ClientMetadataURLListType.AddMember("member", ClientMetadataURLType)
 
 	_ClientPermissionListType_member = _ClientPermissionListType.AddMember("member", _ClientPermissionType)
 
@@ -8174,6 +8494,8 @@ func init() {
 
 	UserPoolClientType_ClientSecret = UserPoolClientType.AddMember("ClientSecret", _ClientSecretType)
 
+	UserPoolClientType_ClientSecretArn = UserPoolClientType.AddMember("ClientSecretArn", _ClientSecretArnType)
+
 	UserPoolClientType_LastModifiedDate = UserPoolClientType.AddMember("LastModifiedDate", _DateType)
 
 	UserPoolClientType_CreationDate = UserPoolClientType.AddMember("CreationDate", _DateType)
@@ -8814,6 +9136,18 @@ func init() {
 
 	ConfirmSignUpResponse_Session = ConfirmSignUpResponse.AddMember("Session", _SessionType)
 
+	CreateCIMDPolicyRequest_UserPoolId = CreateCIMDPolicyRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	CreateCIMDPolicyRequest_ClientId = CreateCIMDPolicyRequest.AddMember("ClientId", _ClientIdType)
+
+	CreateCIMDPolicyRequest_PolicyName = CreateCIMDPolicyRequest.AddMember("PolicyName", _CIMDPolicyNameType)
+
+	CreateCIMDPolicyRequest_CacheDuration = CreateCIMDPolicyRequest.AddMember("CacheDuration", _CacheDurationType)
+
+	CreateCIMDPolicyRequest_URLPatterns = CreateCIMDPolicyRequest.AddMember("URLPatterns", _URLPatternListType)
+
+	CreateCIMDPolicyResponse_CIMDPolicy = CreateCIMDPolicyResponse.AddMember("CIMDPolicy", CIMDPolicyType)
+
 	CreateGroupRequest_GroupName = CreateGroupRequest.AddMember("GroupName", _GroupNameType)
 
 	CreateGroupRequest_UserPoolId = CreateGroupRequest.AddMember("UserPoolId", _UserPoolIdType)
@@ -8936,6 +9270,8 @@ func init() {
 
 	CreateUserPoolClientRequest_RefreshTokenRotation = CreateUserPoolClientRequest.AddMember("RefreshTokenRotation", RefreshTokenRotationType)
 
+	CreateUserPoolClientRequest_PublishSecretsInAWSSecretsManager = CreateUserPoolClientRequest.AddMember("PublishSecretsInAWSSecretsManager", _WrappedBooleanType)
+
 	CreateUserPoolClientResponse_UserPoolClient = CreateUserPoolClientResponse.AddMember("UserPoolClient", UserPoolClientType)
 
 	CreateUserPoolDomainRequest_Domain = CreateUserPoolDomainRequest.AddMember("Domain", _DomainType)
@@ -9020,6 +9356,10 @@ func init() {
 
 	CreateUserPoolReplicaResponse_UserPoolReplica = CreateUserPoolReplicaResponse.AddMember("UserPoolReplica", UserPoolReplicaType)
 
+	DeleteCIMDPolicyRequest_UserPoolId = DeleteCIMDPolicyRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	DeleteCIMDPolicyRequest_CIMDPolicyId = DeleteCIMDPolicyRequest.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
 	DeleteGroupRequest_GroupName = DeleteGroupRequest.AddMember("GroupName", _GroupNameType)
 
 	DeleteGroupRequest_UserPoolId = DeleteGroupRequest.AddMember("UserPoolId", _UserPoolIdType)
@@ -9071,6 +9411,12 @@ func init() {
 	DeleteWebAuthnCredentialRequest_AccessToken = DeleteWebAuthnCredentialRequest.AddMember("AccessToken", _TokenModelType)
 
 	DeleteWebAuthnCredentialRequest_CredentialId = DeleteWebAuthnCredentialRequest.AddMember("CredentialId", _StringType)
+
+	DescribeCIMDPolicyRequest_UserPoolId = DescribeCIMDPolicyRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	DescribeCIMDPolicyRequest_CIMDPolicyId = DescribeCIMDPolicyRequest.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
+	DescribeCIMDPolicyResponse_CIMDPolicy = DescribeCIMDPolicyResponse.AddMember("CIMDPolicy", CIMDPolicyType)
 
 	DescribeIdentityProviderRequest_UserPoolId = DescribeIdentityProviderRequest.AddMember("UserPoolId", _UserPoolIdType)
 
@@ -9353,6 +9699,28 @@ func init() {
 	InitiatePointInTimeRecoveryRequest_RestoreTimestamp = InitiatePointInTimeRecoveryRequest.AddMember("RestoreTimestamp", _DateType)
 
 	InitiatePointInTimeRecoveryResponse_Restoration = InitiatePointInTimeRecoveryResponse.AddMember("Restoration", RestorationType)
+
+	ListCIMDPoliciesRequest_UserPoolId = ListCIMDPoliciesRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	ListCIMDPoliciesRequest_NextToken = ListCIMDPoliciesRequest.AddMember("NextToken", _PaginationKeyType)
+
+	ListCIMDPoliciesRequest_MaxResults = ListCIMDPoliciesRequest.AddMember("MaxResults", _PoolQueryLimitType)
+
+	ListCIMDPoliciesResponse_NextToken = ListCIMDPoliciesResponse.AddMember("NextToken", _PaginationKeyType)
+
+	ListCIMDPoliciesResponse_CIMDPolicies = ListCIMDPoliciesResponse.AddMember("CIMDPolicies", _CIMDPolicySummaryListType)
+
+	ListClientMetadataURLsRequest_UserPoolId = ListClientMetadataURLsRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	ListClientMetadataURLsRequest_CIMDPolicyId = ListClientMetadataURLsRequest.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
+	ListClientMetadataURLsRequest_NextToken = ListClientMetadataURLsRequest.AddMember("NextToken", _PaginationKeyType)
+
+	ListClientMetadataURLsRequest_MaxResults = ListClientMetadataURLsRequest.AddMember("MaxResults", _PoolQueryLimitType)
+
+	ListClientMetadataURLsResponse_NextToken = ListClientMetadataURLsResponse.AddMember("NextToken", _PaginationKeyType)
+
+	ListClientMetadataURLsResponse_ClientMetadataURLs = ListClientMetadataURLsResponse.AddMember("ClientMetadataURLs", _ClientMetadataURLListType)
 
 	ListDevicesRequest_AccessToken = ListDevicesRequest.AddMember("AccessToken", _TokenModelType)
 
@@ -9716,6 +10084,28 @@ func init() {
 
 	UpdateAuthEventFeedbackRequest_FeedbackValue = UpdateAuthEventFeedbackRequest.AddMember("FeedbackValue", FeedbackValueType)
 
+	UpdateCIMDPolicyRequest_UserPoolId = UpdateCIMDPolicyRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	UpdateCIMDPolicyRequest_CIMDPolicyId = UpdateCIMDPolicyRequest.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
+	UpdateCIMDPolicyRequest_ClientId = UpdateCIMDPolicyRequest.AddMember("ClientId", _ClientIdType)
+
+	UpdateCIMDPolicyRequest_PolicyName = UpdateCIMDPolicyRequest.AddMember("PolicyName", _CIMDPolicyNameType)
+
+	UpdateCIMDPolicyRequest_CacheDuration = UpdateCIMDPolicyRequest.AddMember("CacheDuration", _CacheDurationType)
+
+	UpdateCIMDPolicyRequest_URLPatterns = UpdateCIMDPolicyRequest.AddMember("URLPatterns", _URLPatternListType)
+
+	UpdateCIMDPolicyResponse_CIMDPolicy = UpdateCIMDPolicyResponse.AddMember("CIMDPolicy", CIMDPolicyType)
+
+	UpdateClientMetadataURLStateRequest_UserPoolId = UpdateClientMetadataURLStateRequest.AddMember("UserPoolId", _UserPoolIdType)
+
+	UpdateClientMetadataURLStateRequest_CIMDPolicyId = UpdateClientMetadataURLStateRequest.AddMember("CIMDPolicyId", _CIMDPolicyIdType)
+
+	UpdateClientMetadataURLStateRequest_URL = UpdateClientMetadataURLStateRequest.AddMember("URL", _MetadataURLType)
+
+	UpdateClientMetadataURLStateRequest_Action = UpdateClientMetadataURLStateRequest.AddMember("Action", CIMDCacheActionType)
+
 	UpdateDeviceStatusRequest_AccessToken = UpdateDeviceStatusRequest.AddMember("AccessToken", _TokenModelType)
 
 	UpdateDeviceStatusRequest_DeviceKey = UpdateDeviceStatusRequest.AddMember("DeviceKey", _DeviceKeyType)
@@ -9843,6 +10233,8 @@ func init() {
 	UpdateUserPoolClientRequest_AuthSessionValidity = UpdateUserPoolClientRequest.AddMember("AuthSessionValidity", _AuthSessionValidityType)
 
 	UpdateUserPoolClientRequest_RefreshTokenRotation = UpdateUserPoolClientRequest.AddMember("RefreshTokenRotation", RefreshTokenRotationType)
+
+	UpdateUserPoolClientRequest_PublishSecretsInAWSSecretsManager = UpdateUserPoolClientRequest.AddMember("PublishSecretsInAWSSecretsManager", _WrappedBooleanType)
 
 	UpdateUserPoolClientResponse_UserPoolClient = UpdateUserPoolClientResponse.AddMember("UserPoolClient", UserPoolClientType)
 

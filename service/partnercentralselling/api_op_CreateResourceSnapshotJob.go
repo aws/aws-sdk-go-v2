@@ -31,6 +31,7 @@ func (c *Client) CreateResourceSnapshotJob(ctx context.Context, params *CreateRe
 	return out, nil
 }
 
+// Contains the request parameters for the CreateResourceSnapshotJob operation.
 type CreateResourceSnapshotJobInput struct {
 
 	// Specifies the catalog in which to create the snapshot job. Valid values are AWS
@@ -104,6 +105,7 @@ func (v *CreateResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializ
 	}
 }
 
+// Contains the response that the CreateResourceSnapshotJob action returns.
 type CreateResourceSnapshotJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created snapshot job.

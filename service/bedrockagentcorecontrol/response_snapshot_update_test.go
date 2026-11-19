@@ -4033,6 +4033,9 @@ func TestUpdateResponseSnapshot_GetCapacityProvider(t *testing.T) {
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
 						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
+						},
 					},
 				},
 				VpcConfiguration: &types.VpcConfiguration{

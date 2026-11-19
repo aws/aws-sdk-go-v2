@@ -607,6 +607,20 @@ func TestCheckRequestSnapshot_CreateCodeSecurityIntegration(t *testing.T) {
 			Value: types.CreateGitLabSelfManagedIntegrationDetail{
 				InstanceUrl: ptr.String("__InstanceUrl__"),
 				AccessToken: ptr.String("__AccessToken__"),
+				VpcConfiguration: &types.CodeSecurityIntegrationVpcConfiguration{
+					VpcId:                  ptr.String("__VpcId__"),
+					VpcEndpointId:          ptr.String("__VpcEndpointId__"),
+					CodeConnectionsHostArn: ptr.String("__CodeConnectionsHostArn__"),
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TlsCertificate: ptr.String("__TlsCertificate__"),
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -6092,7 +6106,8 @@ func TestCheckRequestSnapshot_UpdateCodeSecurityIntegration(t *testing.T) {
 		IntegrationArn: ptr.String("__IntegrationArn__"),
 		Details: &types.UpdateIntegrationDetailsMemberGitlabSelfManaged{
 			Value: types.UpdateGitLabSelfManagedIntegrationDetail{
-				AuthCode: ptr.String("__AuthCode__"),
+				AuthCode:   ptr.String("__AuthCode__"),
+				StateToken: ptr.String("__StateToken__"),
 			},
 		},
 	}
@@ -7624,6 +7639,20 @@ func TestUpdateRequestSnapshot_CreateCodeSecurityIntegration(t *testing.T) {
 			Value: types.CreateGitLabSelfManagedIntegrationDetail{
 				InstanceUrl: ptr.String("__InstanceUrl__"),
 				AccessToken: ptr.String("__AccessToken__"),
+				VpcConfiguration: &types.CodeSecurityIntegrationVpcConfiguration{
+					VpcId:                  ptr.String("__VpcId__"),
+					VpcEndpointId:          ptr.String("__VpcEndpointId__"),
+					CodeConnectionsHostArn: ptr.String("__CodeConnectionsHostArn__"),
+					SubnetIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					SecurityGroups: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TlsCertificate: ptr.String("__TlsCertificate__"),
+				},
 			},
 		},
 		Tags: map[string]string{
@@ -13109,7 +13138,8 @@ func TestUpdateRequestSnapshot_UpdateCodeSecurityIntegration(t *testing.T) {
 		IntegrationArn: ptr.String("__IntegrationArn__"),
 		Details: &types.UpdateIntegrationDetailsMemberGitlabSelfManaged{
 			Value: types.UpdateGitLabSelfManagedIntegrationDetail{
-				AuthCode: ptr.String("__AuthCode__"),
+				AuthCode:   ptr.String("__AuthCode__"),
+				StateToken: ptr.String("__StateToken__"),
 			},
 		},
 	}

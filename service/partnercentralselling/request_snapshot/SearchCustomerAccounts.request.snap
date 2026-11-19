@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.SearchCustomerAccounts
+
+{"Catalog":"__Catalog__","Filter":{"AndAllFilters":[{},{}],"ContainsAll":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"ContainsAny":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"EqualsTo":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"GreaterThan":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"GreaterThanOrEquals":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"LessThan":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"LessThanOrEquals":{"Key":"ENRICHMENT_STATUS","Value":{"StringValue":"__FilterValueMemberStringValue__"}},"OrAllFilters":[{},{}]},"MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"COMPANY_NAME","SortOrder":"ASCENDING"}}

@@ -173,6 +173,16 @@ type GetCostCategoriesInput struct {
 	//
 	//   - NormalizedUsageAmount
 	//
+	//   - BilledCost
+	//
+	//   - ContractedCost
+	//
+	//   - ListCost
+	//
+	//   - PublicEquivalentBilledCost
+	//
+	//   - PublicOnDemandCost
+	//
 	// The supported key values for the SortOrder value are ASCENDING and DESCENDING .
 	//
 	// When you use the SortBy value, the NextPageToken and SearchString key values

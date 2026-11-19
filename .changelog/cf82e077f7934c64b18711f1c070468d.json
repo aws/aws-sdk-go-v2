@@ -1,0 +1,8 @@
+{
+    "id": "cf82e077-f793-4c64-b187-11f1c070468d",
+    "type": "feature",
+    "description": "Amazon Connect adds voicemail support, with new reference types, file use case types, contact details, and a voicemail task contact subtype for managing voicemail recordings and transcripts.",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -231,6 +231,14 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 	want := &CreateRegistryRecordOutput{
 		RecordArn: ptr.String("__RecordArn__"),
 		Status:    types.RegistryRecordStatus("DRAFT"),
+		AuthorizationData: &types.AuthorizationDataMemberOauth2{
+			Value: types.OAuth2AuthorizationData{
+				AuthorizationUrl:       ptr.String("__AuthorizationUrl__"),
+				UserId:                 ptr.String("__UserId__"),
+				AuthorizationAttemptId: ptr.String("__AuthorizationAttemptId__"),
+				ExpiresAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -273,6 +281,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -289,6 +298,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -316,6 +326,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -332,6 +343,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -363,6 +375,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -379,11 +392,61 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -409,6 +472,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -425,6 +489,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -450,6 +515,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -466,6 +532,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -473,6 +540,10 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 					},
 				},
 			},
+		},
+		Artifact: &types.RegistryRecordArtifactUpload{
+			Content: []byte("blob"),
+			Sha256:  ptr.String("__Sha256__"),
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		ClientToken:   ptr.String("__ClientToken__"),
@@ -851,6 +922,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -867,6 +939,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -894,6 +967,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -910,6 +984,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -941,6 +1016,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -957,11 +1033,61 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -987,6 +1113,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1003,6 +1130,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1028,6 +1156,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1044,6 +1173,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1217,6 +1347,18 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 		CreatedBy:                            ptr.String("__CreatedBy__"),
 		CustomMetadata:                       document.NewLazyDocument("__Document__"),
 		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
+		Artifact: &types.RegistryRecordArtifactDownload{
+			Sha256:      ptr.String("__Sha256__"),
+			DownloadUrl: ptr.String("__DownloadUrl__"),
+		},
+		SynchronizedSource: &types.RegistryRecordSynchronizedSourceMemberS3{
+			Value: types.S3SynchronizedSource{
+				Url:            ptr.String("__Url__"),
+				SynchronizedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				VersionId:      ptr.String("__VersionId__"),
+				ETag:           ptr.String("__ETag__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1907,6 +2049,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1923,6 +2066,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1950,6 +2094,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1966,6 +2111,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1997,6 +2143,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -2013,11 +2160,61 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -2043,6 +2240,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2059,6 +2257,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2084,6 +2283,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2100,6 +2300,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2273,6 +2474,14 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 		CreatedBy:                            ptr.String("__CreatedBy__"),
 		CustomMetadata:                       document.NewLazyDocument("__Document__"),
 		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
+		AuthorizationData: &types.AuthorizationDataMemberOauth2{
+			Value: types.OAuth2AuthorizationData{
+				AuthorizationUrl:       ptr.String("__AuthorizationUrl__"),
+				UserId:                 ptr.String("__UserId__"),
+				AuthorizationAttemptId: ptr.String("__AuthorizationAttemptId__"),
+				ExpiresAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2371,11 +2580,18 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 				},
 			},
 		},
+		Artifact: &types.UpdatedRegistryRecordArtifact{
+			OptionalValue: &types.RegistryRecordArtifactUpload{
+				Content: []byte("blob"),
+				Sha256:  ptr.String("__Sha256__"),
+			},
+		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		CustomMetadata: &types.UpdatedCustomMetadataMap{
 			OptionalValue: document.NewLazyDocument("__Document__"),
 		},
 		TriggerSynchronization: ptr.Bool(true),
+		ForceAuthentication:    ptr.Bool(true),
 		Provenance: []types.Provenance{
 			{
 				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
@@ -2848,6 +3064,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2864,6 +3081,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2891,6 +3109,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2907,6 +3126,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2938,6 +3158,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -2954,11 +3175,61 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -2984,6 +3255,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3000,6 +3272,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3025,6 +3298,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3041,6 +3315,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3048,6 +3323,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 					},
 				},
 			},
+		},
+		Artifact: &types.RegistryRecordArtifactUpload{
+			Content: []byte("blob"),
+			Sha256:  ptr.String("__Sha256__"),
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		ClientToken:   ptr.String("__ClientToken__"),

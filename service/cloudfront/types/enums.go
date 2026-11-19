@@ -596,6 +596,25 @@ func (MinimumProtocolVersion) Values() []MinimumProtocolVersion {
 	}
 }
 
+type OnDomainTakeover string
+
+// Enum values for OnDomainTakeover
+const (
+	OnDomainTakeoverAllow  OnDomainTakeover = "allow"
+	OnDomainTakeoverReject OnDomainTakeover = "reject"
+)
+
+// Values returns all known values for OnDomainTakeover. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnDomainTakeover) Values() []OnDomainTakeover {
+	return []OnDomainTakeover{
+		"allow",
+		"reject",
+	}
+}
+
 type OriginAccessControlOriginTypes string
 
 // Enum values for OriginAccessControlOriginTypes
@@ -920,6 +939,25 @@ func (ResponseHeadersPolicyType) Values() []ResponseHeadersPolicyType {
 	return []ResponseHeadersPolicyType{
 		"managed",
 		"custom",
+	}
+}
+
+type ServeOn string
+
+// Enum values for ServeOn
+const (
+	ServeOnAny               ServeOn = "any"
+	ServeOnAnycastIpListOnly ServeOn = "anycast-ip-list-only"
+)
+
+// Values returns all known values for ServeOn. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServeOn) Values() []ServeOn {
+	return []ServeOn{
+		"any",
+		"anycast-ip-list-only",
 	}
 }
 

@@ -310,6 +310,46 @@ func (m *validateOpDisassociateCertificate) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAvailableModule struct {
+}
+
+func (*validateOpGetAvailableModule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAvailableModule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAvailableModuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAvailableModuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAvailableModuleVersion struct {
+}
+
+func (*validateOpGetAvailableModuleVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAvailableModuleVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAvailableModuleVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAvailableModuleVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCertificateAssociation struct {
 }
 
@@ -450,6 +490,46 @@ func (m *validateOpGetResponderGateway) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetUpdate struct {
+}
+
+func (*validateOpGetUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAvailableModuleVersions struct {
+}
+
+func (*validateOpListAvailableModuleVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailableModuleVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailableModuleVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailableModuleVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCertificateAssociations struct {
 }
 
@@ -525,6 +605,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListUpdates struct {
+}
+
+func (*validateOpListUpdates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUpdates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUpdatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUpdatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutLinkFlows struct {
+}
+
+func (*validateOpPutLinkFlows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutLinkFlows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutLinkFlowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutLinkFlowsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +870,14 @@ func addOpDisassociateCertificateValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateCertificate{}, middleware.After)
 }
 
+func addOpGetAvailableModuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAvailableModule{}, middleware.After)
+}
+
+func addOpGetAvailableModuleVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAvailableModuleVersion{}, middleware.After)
+}
+
 func addOpGetCertificateAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCertificateAssociation{}, middleware.After)
 }
@@ -778,6 +906,14 @@ func addOpGetResponderGatewayValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetResponderGateway{}, middleware.After)
 }
 
+func addOpGetUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUpdate{}, middleware.After)
+}
+
+func addOpListAvailableModuleVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailableModuleVersions{}, middleware.After)
+}
+
 func addOpListCertificateAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCertificateAssociations{}, middleware.After)
 }
@@ -792,6 +928,14 @@ func addOpListLinksValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListUpdatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUpdates{}, middleware.After)
+}
+
+func addOpPutLinkFlowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutLinkFlows{}, middleware.After)
 }
 
 func addOpRejectLinkValidationMiddleware(stack *middleware.Stack) error {
@@ -961,6 +1105,140 @@ func validateFilterCriterion(v *types.FilterCriterion) error {
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlow(v *types.Flow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Flow"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Pipeline == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pipeline"))
+	} else if v.Pipeline != nil {
+		if err := validateFlowPipeline(v.Pipeline); err != nil {
+			invalidParams.AddNested("Pipeline", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowList(v []types.Flow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowList"}
+	for i := range v {
+		if err := validateFlow(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowModule(v *types.FlowModule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowModule"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ModuleVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModuleVersionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowModuleList(v []types.FlowModule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowModuleList"}
+	for i := range v {
+		if err := validateFlowModule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowPhase(v *types.FlowPhase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowPhase"}
+	if v.Modules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Modules"))
+	} else if v.Modules != nil {
+		if err := validateFlowModuleList(v.Modules); err != nil {
+			invalidParams.AddNested("Modules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowPhaseList(v []types.FlowPhase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowPhaseList"}
+	for i := range v {
+		if err := validateFlowPhase(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFlowPipeline(v types.FlowPipeline) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowPipeline"}
+	switch uv := v.(type) {
+	case *types.FlowPipelineMemberPhased:
+		if err := validatePhasedPipeline(&uv.Value); err != nil {
+			invalidParams.AddNested("[phased]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FlowPipelineMemberSequential:
+		if err := validateSequentialPipeline(&uv.Value); err != nil {
+			invalidParams.AddNested("[sequential]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1205,6 +1483,25 @@ func validateOpenRtbAttributeModuleParameters(v *types.OpenRtbAttributeModulePar
 	}
 }
 
+func validatePhasedPipeline(v *types.PhasedPipeline) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PhasedPipeline"}
+	if v.Phases == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Phases"))
+	} else if v.Phases != nil {
+		if err := validateFlowPhaseList(v.Phases); err != nil {
+			invalidParams.AddNested("Phases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateQueryStringKeyValuePair(v *types.QueryStringKeyValuePair) error {
 	if v == nil {
 		return nil
@@ -1269,6 +1566,25 @@ func validateRuleCondition(v *types.RuleCondition) error {
 	if v.QueryStringEquals != nil {
 		if err := validateQueryStringKeyValuePair(v.QueryStringEquals); err != nil {
 			invalidParams.AddNested("QueryStringEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSequentialPipeline(v *types.SequentialPipeline) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SequentialPipeline"}
+	if v.Modules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Modules"))
+	} else if v.Modules != nil {
+		if err := validateFlowModuleList(v.Modules); err != nil {
+			invalidParams.AddNested("Modules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1660,6 +1976,39 @@ func validateOpDisassociateCertificateInput(v *DisassociateCertificateInput) err
 	}
 }
 
+func validateOpGetAvailableModuleInput(v *GetAvailableModuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAvailableModuleInput"}
+	if v.ModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAvailableModuleVersionInput(v *GetAvailableModuleVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAvailableModuleVersionInput"}
+	if v.ModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModuleId"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCertificateAssociationInput(v *GetCertificateAssociationInput) error {
 	if v == nil {
 		return nil
@@ -1783,6 +2132,39 @@ func validateOpGetResponderGatewayInput(v *GetResponderGatewayInput) error {
 	}
 }
 
+func validateOpGetUpdateInput(v *GetUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUpdateInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.UpdateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAvailableModuleVersionsInput(v *ListAvailableModuleVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailableModuleVersionsInput"}
+	if v.ModuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListCertificateAssociationsInput(v *ListCertificateAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -1838,6 +2220,49 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListUpdatesInput(v *ListUpdatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUpdatesInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutLinkFlowsInput(v *PutLinkFlowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutLinkFlowsInput"}
+	if v.GatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayId"))
+	}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if v.LockToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
+	}
+	if v.Flows == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Flows"))
+	} else if v.Flows != nil {
+		if err := validateFlowList(v.Flows); err != nil {
+			invalidParams.AddNested("Flows", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

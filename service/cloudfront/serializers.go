@@ -1005,6 +1005,19 @@ func awsRestxml_serializeOpDocumentCreateConnectionGroupInput(v *CreateConnectio
 			return err
 		}
 	}
+	if v.ViewerFallback != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ViewerFallback",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentViewerFallback(v.ViewerFallback, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1332,6 +1345,17 @@ func awsRestxml_serializeOpDocumentCreateDistributionTenantInput(v *CreateDistri
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Name)
+	}
+	if len(v.OnDomainTakeover) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OnDomainTakeover",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OnDomainTakeover))
 	}
 	if v.Parameters != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -12536,6 +12560,19 @@ func awsRestxml_serializeOpDocumentUpdateConnectionGroupInput(v *UpdateConnectio
 		el := value.MemberElement(root)
 		el.Boolean(*v.Ipv6Enabled)
 	}
+	if v.ViewerFallback != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ViewerFallback",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentViewerFallback(v.ViewerFallback, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -12906,6 +12943,17 @@ func awsRestxml_serializeOpDocumentUpdateDistributionTenantInput(v *UpdateDistri
 		if err := awsRestxml_serializeDocumentManagedCertificateRequest(v.ManagedCertificateRequest, el); err != nil {
 			return err
 		}
+	}
+	if len(v.OnDomainTakeover) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OnDomainTakeover",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OnDomainTakeover))
 	}
 	if v.Parameters != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -16639,6 +16687,17 @@ func awsRestxml_serializeDocumentDomainItem(v *types.DomainItem, value smithyxml
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Domain)
+	}
+	if len(v.ServeOn) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ServeOn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ServeOn))
 	}
 	return nil
 }
@@ -20576,6 +20635,22 @@ func awsRestxml_serializeDocumentViewerCertificate(v *types.ViewerCertificate, v
 		}
 		el := value.MemberElement(root)
 		el.String(string(v.SSLSupportMethod))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentViewerFallback(v *types.ViewerFallback, value smithyxml.Value) error {
+	defer value.Close()
+	if v.DistributionId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DistributionId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.DistributionId)
 	}
 	return nil
 }

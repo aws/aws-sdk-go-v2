@@ -499,6 +499,12 @@ func serializeServiceConfiguration(s smithy.ShapeSerializer, schema *smithy.Sche
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ServiceConfigurationMemberSourceAwsOrg:
+		s.WriteUnion(schema, schemas.ServiceConfiguration_sourceAwsOrg)
+		s.WriteStruct(schemas.ServiceConfiguration_sourceAwsOrg)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -1041,6 +1047,10 @@ func deserializeServiceConfiguration(d smithy.ShapeDeserializer, s *smithy.Schem
 			vv := &ServiceConfigurationMemberSourceAws{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ServiceConfiguration_sourceAwsOrg:
+			vv := &ServiceConfigurationMemberSourceAwsOrg{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
@@ -1148,6 +1158,14 @@ func deserializeUserMessageBlock(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 		return nil
 	})
+}
+
+func serializeAccountIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
 }
 
 func serializeAgentSpaceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgentSpace) {
@@ -1344,6 +1362,16 @@ func serializeNewRelicEntityGuids(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOrgSourceIssueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OrgSourceIssue) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -1548,6 +1576,27 @@ func serializeWebIdentityTokenAudienceList(s smithy.ShapeSerializer, schema *smi
 		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
+}
+
+func deserializeAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeAgentSpaceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgentSpace) error {
@@ -2020,6 +2069,28 @@ func deserializeNewRelicEntityGuids(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrgSourceIssueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]OrgSourceIssue) error {
+	*v = make([]OrgSourceIssue, 0)
+	var vv OrgSourceIssue
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero OrgSourceIssue
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = OrgSourceIssue{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

@@ -1936,6 +1936,11 @@ var ClusterMetadata_awsEcsMetadataDetails *smithy.Schema
 
 var ClusterMetadata_awsEksMetadataDetails *smithy.Schema
 
+var _CodeConnectionsHostArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "CodeConnectionsHostArn",
+}, smithy.ShapeTypeString, 0)
+
 var CodeFilePath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "CodeFilePath",
@@ -2091,6 +2096,22 @@ var CodeSecurityIntegrationSummary_statusReason *smithy.Schema
 var CodeSecurityIntegrationSummary_createdOn *smithy.Schema
 
 var CodeSecurityIntegrationSummary_lastUpdateOn *smithy.Schema
+
+var CodeSecurityIntegrationVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "CodeSecurityIntegrationVpcConfiguration",
+}, smithy.ShapeTypeStructure, 6)
+var CodeSecurityIntegrationVpcConfiguration_vpcId *smithy.Schema
+
+var CodeSecurityIntegrationVpcConfiguration_vpcEndpointId *smithy.Schema
+
+var CodeSecurityIntegrationVpcConfiguration_codeConnectionsHostArn *smithy.Schema
+
+var CodeSecurityIntegrationVpcConfiguration_subnetIds *smithy.Schema
+
+var CodeSecurityIntegrationVpcConfiguration_securityGroups *smithy.Schema
+
+var CodeSecurityIntegrationVpcConfiguration_tlsCertificate *smithy.Schema
 
 var CodeSecurityResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -2812,19 +2833,31 @@ var CreateCisTargets_accountIds *smithy.Schema
 
 var CreateCisTargets_targetResourceTags *smithy.Schema
 
+var CreateGitHubEnterpriseIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "CreateGitHubEnterpriseIntegrationDetail",
+}, smithy.ShapeTypeStructure, 2)
+var CreateGitHubEnterpriseIntegrationDetail_instanceUrl *smithy.Schema
+
+var CreateGitHubEnterpriseIntegrationDetail_vpcConfiguration *smithy.Schema
+
 var CreateGitLabSelfManagedIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "CreateGitLabSelfManagedIntegrationDetail",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var CreateGitLabSelfManagedIntegrationDetail_instanceUrl *smithy.Schema
 
 var CreateGitLabSelfManagedIntegrationDetail_accessToken *smithy.Schema
 
+var CreateGitLabSelfManagedIntegrationDetail_vpcConfiguration *smithy.Schema
+
 var CreateIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "CreateIntegrationDetail",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var CreateIntegrationDetail_gitlabSelfManaged *smithy.Schema
+
+var CreateIntegrationDetail_githubEnterprise *smithy.Schema
 
 var _Currency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -3961,6 +3994,17 @@ var _GitHubAuthCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GitHubAuthCode",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var GitHubEnterpriseServerAppRegistrationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GitHubEnterpriseServerAppRegistrationDetail",
+}, smithy.ShapeTypeStructure, 1)
+var GitHubEnterpriseServerAppRegistrationDetail_manifestCode *smithy.Schema
+
+var _GitHubEnterpriseServerManifestCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "GitHubEnterpriseServerManifestCode",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _GitHubInstallationId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "GitHubInstallationId",
@@ -4093,7 +4137,7 @@ var _IntegrationName = smithy.NewSchema(smithy.ShapeID{
 var IntegrationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "IntegrationStatus",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 11)
 var IntegrationStatus_PENDING *smithy.Schema
 
 var IntegrationStatus_IN_PROGRESS *smithy.Schema
@@ -4104,6 +4148,18 @@ var IntegrationStatus_INACTIVE *smithy.Schema
 
 var IntegrationStatus_DISABLING *smithy.Schema
 
+var IntegrationStatus_ESTABLISHING_CONNECTION_IN_PROGRESS *smithy.Schema
+
+var IntegrationStatus_ESTABLISHING_CONNECTION_COMPLETED *smithy.Schema
+
+var IntegrationStatus_ESTABLISHING_CONNECTION_FAILED *smithy.Schema
+
+var IntegrationStatus_PENDING_MANIFEST_CODE *smithy.Schema
+
+var IntegrationStatus_DELETE_IN_PROGRESS *smithy.Schema
+
+var IntegrationStatus_DELETE_FAILED *smithy.Schema
+
 var _IntegrationSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "IntegrationSummaries",
@@ -4113,10 +4169,12 @@ var _IntegrationSummaries_member *smithy.Schema
 var IntegrationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "IntegrationType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var IntegrationType_GITLAB_SELF_MANAGED *smithy.Schema
 
 var IntegrationType_GITHUB *smithy.Schema
+
+var IntegrationType_GITHUB_ENTERPRISE_SERVER *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -4811,6 +4869,11 @@ var _Permissions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Permissions",
 }, smithy.ShapeTypeList, 1)
 var _Permissions_member *smithy.Schema
+
+var _PkceState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "PkceState",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _Platform = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -5975,6 +6038,11 @@ var _TitleSortBy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TitleSortBy",
 }, smithy.ShapeTypeString, 0)
 
+var _TlsCertificate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "TlsCertificate",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _Tool = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "Tool",
@@ -6015,27 +6083,51 @@ var UpdateConfigurationInheritance_ecrConfiguration *smithy.Schema
 
 var UpdateConfigurationInheritance_amiConfiguration *smithy.Schema
 
+var UpdateGitHubEnterpriseServerAppInstallationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "UpdateGitHubEnterpriseServerAppInstallationDetail",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateGitHubEnterpriseServerAppInstallationDetail_code *smithy.Schema
+
+var UpdateGitHubEnterpriseServerAppInstallationDetail_installationId *smithy.Schema
+
+var UpdateGitHubEnterpriseServerAppInstallationDetail_stateToken *smithy.Schema
+
+var UpdateGitHubEnterpriseServerIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "UpdateGitHubEnterpriseServerIntegrationDetail",
+}, smithy.ShapeTypeUnion, 2)
+var UpdateGitHubEnterpriseServerIntegrationDetail_appInstallation *smithy.Schema
+
+var UpdateGitHubEnterpriseServerIntegrationDetail_appRegistration *smithy.Schema
+
 var UpdateGitHubIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "UpdateGitHubIntegrationDetail",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateGitHubIntegrationDetail_code *smithy.Schema
 
 var UpdateGitHubIntegrationDetail_installationId *smithy.Schema
 
+var UpdateGitHubIntegrationDetail_stateToken *smithy.Schema
+
 var UpdateGitLabSelfManagedIntegrationDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "UpdateGitLabSelfManagedIntegrationDetail",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var UpdateGitLabSelfManagedIntegrationDetail_authCode *smithy.Schema
+
+var UpdateGitLabSelfManagedIntegrationDetail_stateToken *smithy.Schema
 
 var UpdateIntegrationDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "UpdateIntegrationDetails",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var UpdateIntegrationDetails_gitlabSelfManaged *smithy.Schema
 
 var UpdateIntegrationDetails_github *smithy.Schema
+
+var UpdateIntegrationDetails_githubEnterpriseServer *smithy.Schema
 
 var Usage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -6273,6 +6365,11 @@ var VMScannerState_status *smithy.Schema
 var _VMScannerStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "VMScannerStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "VpcEndpointId",
 }, smithy.ShapeTypeString, 0)
 
 var _VpcId = smithy.NewSchema(smithy.ShapeID{
@@ -6924,7 +7021,7 @@ var GetCodeSecurityIntegrationRequest_tags *smithy.Schema
 var GetCodeSecurityIntegrationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "GetCodeSecurityIntegrationResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var GetCodeSecurityIntegrationResponse_integrationArn *smithy.Schema
 
 var GetCodeSecurityIntegrationResponse_name *smithy.Schema
@@ -6940,6 +7037,10 @@ var GetCodeSecurityIntegrationResponse_createdOn *smithy.Schema
 var GetCodeSecurityIntegrationResponse_lastUpdateOn *smithy.Schema
 
 var GetCodeSecurityIntegrationResponse_authorizationUrl *smithy.Schema
+
+var GetCodeSecurityIntegrationResponse_vpcConfiguration *smithy.Schema
+
+var GetCodeSecurityIntegrationResponse_instanceUrl *smithy.Schema
 
 var GetCodeSecurityIntegrationResponse_tags *smithy.Schema
 
@@ -9227,6 +9328,8 @@ func init() {
 
 	IntegrationType_GITHUB = IntegrationType.AddMember("GITHUB", smithyprelude.Unit)
 
+	IntegrationType_GITHUB_ENTERPRISE_SERVER = IntegrationType.AddMember("GITHUB_ENTERPRISE_SERVER", smithyprelude.Unit)
+
 	IntegrationStatus_PENDING = IntegrationStatus.AddMember("PENDING", smithyprelude.Unit)
 
 	IntegrationStatus_IN_PROGRESS = IntegrationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
@@ -9236,6 +9339,18 @@ func init() {
 	IntegrationStatus_INACTIVE = IntegrationStatus.AddMember("INACTIVE", smithyprelude.Unit)
 
 	IntegrationStatus_DISABLING = IntegrationStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	IntegrationStatus_ESTABLISHING_CONNECTION_IN_PROGRESS = IntegrationStatus.AddMember("ESTABLISHING_CONNECTION_IN_PROGRESS", smithyprelude.Unit)
+
+	IntegrationStatus_ESTABLISHING_CONNECTION_COMPLETED = IntegrationStatus.AddMember("ESTABLISHING_CONNECTION_COMPLETED", smithyprelude.Unit)
+
+	IntegrationStatus_ESTABLISHING_CONNECTION_FAILED = IntegrationStatus.AddMember("ESTABLISHING_CONNECTION_FAILED", smithyprelude.Unit)
+
+	IntegrationStatus_PENDING_MANIFEST_CODE = IntegrationStatus.AddMember("PENDING_MANIFEST_CODE", smithyprelude.Unit)
+
+	IntegrationStatus_DELETE_IN_PROGRESS = IntegrationStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
+
+	IntegrationStatus_DELETE_FAILED = IntegrationStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
 
 	CodeSecurityIntegrationSummary_integrationArn = CodeSecurityIntegrationSummary.AddMember("integrationArn", _CodeSecurityIntegrationArn)
 
@@ -9250,6 +9365,18 @@ func init() {
 	CodeSecurityIntegrationSummary_createdOn = CodeSecurityIntegrationSummary.AddMember("createdOn", smithyprelude.Timestamp)
 
 	CodeSecurityIntegrationSummary_lastUpdateOn = CodeSecurityIntegrationSummary.AddMember("lastUpdateOn", smithyprelude.Timestamp)
+
+	CodeSecurityIntegrationVpcConfiguration_vpcId = CodeSecurityIntegrationVpcConfiguration.AddMember("vpcId", _VpcId)
+
+	CodeSecurityIntegrationVpcConfiguration_vpcEndpointId = CodeSecurityIntegrationVpcConfiguration.AddMember("vpcEndpointId", _VpcEndpointId)
+
+	CodeSecurityIntegrationVpcConfiguration_codeConnectionsHostArn = CodeSecurityIntegrationVpcConfiguration.AddMember("codeConnectionsHostArn", _CodeConnectionsHostArn)
+
+	CodeSecurityIntegrationVpcConfiguration_subnetIds = CodeSecurityIntegrationVpcConfiguration.AddMember("subnetIds", _SubnetIdList)
+
+	CodeSecurityIntegrationVpcConfiguration_securityGroups = CodeSecurityIntegrationVpcConfiguration.AddMember("securityGroups", _SecurityGroupIdList)
+
+	CodeSecurityIntegrationVpcConfiguration_tlsCertificate = CodeSecurityIntegrationVpcConfiguration.AddMember("tlsCertificate", _TlsCertificate)
 
 	PeriodicScanFrequency_WEEKLY = PeriodicScanFrequency.AddMember("WEEKLY", smithyprelude.Unit)
 
@@ -9725,11 +9852,19 @@ func init() {
 
 	CreateCisTargets_targetResourceTags = CreateCisTargets.AddMember("targetResourceTags", _TargetResourceTags)
 
+	CreateGitHubEnterpriseIntegrationDetail_instanceUrl = CreateGitHubEnterpriseIntegrationDetail.AddMember("instanceUrl", _InstanceUrl)
+
+	CreateGitHubEnterpriseIntegrationDetail_vpcConfiguration = CreateGitHubEnterpriseIntegrationDetail.AddMember("vpcConfiguration", CodeSecurityIntegrationVpcConfiguration)
+
 	CreateGitLabSelfManagedIntegrationDetail_instanceUrl = CreateGitLabSelfManagedIntegrationDetail.AddMember("instanceUrl", _InstanceUrl)
 
 	CreateGitLabSelfManagedIntegrationDetail_accessToken = CreateGitLabSelfManagedIntegrationDetail.AddMember("accessToken", _GitLabAccessToken)
 
+	CreateGitLabSelfManagedIntegrationDetail_vpcConfiguration = CreateGitLabSelfManagedIntegrationDetail.AddMember("vpcConfiguration", CodeSecurityIntegrationVpcConfiguration)
+
 	CreateIntegrationDetail_gitlabSelfManaged = CreateIntegrationDetail.AddMember("gitlabSelfManaged", CreateGitLabSelfManagedIntegrationDetail)
+
+	CreateIntegrationDetail_githubEnterprise = CreateIntegrationDetail.AddMember("githubEnterprise", CreateGitHubEnterpriseIntegrationDetail)
 
 	Cvss2_baseScore = Cvss2.AddMember("baseScore", _CvssBaseScore)
 
@@ -10409,6 +10544,8 @@ func init() {
 
 	GcpProviderDetailUpdate_autoInstallVMScanner = GcpProviderDetailUpdate.AddMember("autoInstallVMScanner", smithyprelude.Boolean)
 
+	GitHubEnterpriseServerAppRegistrationDetail_manifestCode = GitHubEnterpriseServerAppRegistrationDetail.AddMember("manifestCode", _GitHubEnterpriseServerManifestCode)
+
 	_IntegrationSummaries_member = _IntegrationSummaries.AddMember("member", CodeSecurityIntegrationSummary)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
@@ -10661,15 +10798,31 @@ func init() {
 
 	UpdateConfigurationInheritance_amiConfiguration = UpdateConfigurationInheritance.AddMember("amiConfiguration", _InheritanceMode)
 
+	UpdateGitHubEnterpriseServerAppInstallationDetail_code = UpdateGitHubEnterpriseServerAppInstallationDetail.AddMember("code", _GitHubAuthCode)
+
+	UpdateGitHubEnterpriseServerAppInstallationDetail_installationId = UpdateGitHubEnterpriseServerAppInstallationDetail.AddMember("installationId", _GitHubInstallationId)
+
+	UpdateGitHubEnterpriseServerAppInstallationDetail_stateToken = UpdateGitHubEnterpriseServerAppInstallationDetail.AddMember("stateToken", _PkceState)
+
+	UpdateGitHubEnterpriseServerIntegrationDetail_appInstallation = UpdateGitHubEnterpriseServerIntegrationDetail.AddMember("appInstallation", UpdateGitHubEnterpriseServerAppInstallationDetail)
+
+	UpdateGitHubEnterpriseServerIntegrationDetail_appRegistration = UpdateGitHubEnterpriseServerIntegrationDetail.AddMember("appRegistration", GitHubEnterpriseServerAppRegistrationDetail)
+
 	UpdateGitHubIntegrationDetail_code = UpdateGitHubIntegrationDetail.AddMember("code", _GitHubAuthCode)
 
 	UpdateGitHubIntegrationDetail_installationId = UpdateGitHubIntegrationDetail.AddMember("installationId", _GitHubInstallationId)
 
+	UpdateGitHubIntegrationDetail_stateToken = UpdateGitHubIntegrationDetail.AddMember("stateToken", _PkceState)
+
 	UpdateGitLabSelfManagedIntegrationDetail_authCode = UpdateGitLabSelfManagedIntegrationDetail.AddMember("authCode", _GitLabAuthCode)
+
+	UpdateGitLabSelfManagedIntegrationDetail_stateToken = UpdateGitLabSelfManagedIntegrationDetail.AddMember("stateToken", _PkceState)
 
 	UpdateIntegrationDetails_gitlabSelfManaged = UpdateIntegrationDetails.AddMember("gitlabSelfManaged", UpdateGitLabSelfManagedIntegrationDetail)
 
 	UpdateIntegrationDetails_github = UpdateIntegrationDetails.AddMember("github", UpdateGitHubIntegrationDetail)
+
+	UpdateIntegrationDetails_githubEnterpriseServer = UpdateIntegrationDetails.AddMember("githubEnterpriseServer", UpdateGitHubEnterpriseServerIntegrationDetail)
 
 	Usage_type = Usage.AddMember("type", _UsageType)
 
@@ -10996,6 +11149,10 @@ func init() {
 	GetCodeSecurityIntegrationResponse_lastUpdateOn = GetCodeSecurityIntegrationResponse.AddMember("lastUpdateOn", smithyprelude.Timestamp)
 
 	GetCodeSecurityIntegrationResponse_authorizationUrl = GetCodeSecurityIntegrationResponse.AddMember("authorizationUrl", _AuthorizationUrl)
+
+	GetCodeSecurityIntegrationResponse_vpcConfiguration = GetCodeSecurityIntegrationResponse.AddMember("vpcConfiguration", CodeSecurityIntegrationVpcConfiguration)
+
+	GetCodeSecurityIntegrationResponse_instanceUrl = GetCodeSecurityIntegrationResponse.AddMember("instanceUrl", _InstanceUrl)
 
 	GetCodeSecurityIntegrationResponse_tags = GetCodeSecurityIntegrationResponse.AddMember("tags", _TagMap)
 

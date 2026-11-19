@@ -170,6 +170,14 @@ func TestUpdateResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 	want := &CreateRegistryRecordOutput{
 		RecordArn: ptr.String("__RecordArn__"),
 		Status:    types.RegistryRecordStatus("DRAFT"),
+		AuthorizationData: &types.AuthorizationDataMemberOauth2{
+			Value: types.OAuth2AuthorizationData{
+				AuthorizationUrl:       ptr.String("__AuthorizationUrl__"),
+				UserId:                 ptr.String("__UserId__"),
+				AuthorizationAttemptId: ptr.String("__AuthorizationAttemptId__"),
+				ExpiresAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.CreateRegistryRecord, schemas.CreateRegistryRecordResponse, schemas.CreateRegistryRecordResponse)
@@ -399,6 +407,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -415,6 +424,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -442,6 +452,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -458,6 +469,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -489,6 +501,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -505,11 +518,61 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -535,6 +598,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -551,6 +615,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -576,6 +641,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -592,6 +658,7 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -765,6 +832,18 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 		CreatedBy:                            ptr.String("__CreatedBy__"),
 		CustomMetadata:                       document.NewLazyDocument("__Document__"),
 		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
+		Artifact: &types.RegistryRecordArtifactDownload{
+			Sha256:      ptr.String("__Sha256__"),
+			DownloadUrl: ptr.String("__DownloadUrl__"),
+		},
+		SynchronizedSource: &types.RegistryRecordSynchronizedSourceMemberS3{
+			Value: types.S3SynchronizedSource{
+				Url:            ptr.String("__Url__"),
+				SynchronizedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				VersionId:      ptr.String("__VersionId__"),
+				ETag:           ptr.String("__ETag__"),
+			},
+		},
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.GetRegistryRecord, schemas.GetRegistryRecordResponse, schemas.GetRegistryRecordResponse)
@@ -1320,6 +1399,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1336,6 +1416,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1363,6 +1444,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1379,6 +1461,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1410,6 +1493,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -1426,11 +1510,61 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -1456,6 +1590,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1472,6 +1607,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1497,6 +1633,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1513,6 +1650,7 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1686,6 +1824,14 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 		CreatedBy:                            ptr.String("__CreatedBy__"),
 		CustomMetadata:                       document.NewLazyDocument("__Document__"),
 		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
+		AuthorizationData: &types.AuthorizationDataMemberOauth2{
+			Value: types.OAuth2AuthorizationData{
+				AuthorizationUrl:       ptr.String("__AuthorizationUrl__"),
+				UserId:                 ptr.String("__UserId__"),
+				AuthorizationAttemptId: ptr.String("__AuthorizationAttemptId__"),
+				ExpiresAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRegistryRecord, schemas.UpdateRegistryRecordResponse, schemas.UpdateRegistryRecordResponse)

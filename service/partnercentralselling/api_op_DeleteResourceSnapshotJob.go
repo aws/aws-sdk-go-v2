@@ -9,8 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Use this action to deletes a previously created resource snapshot job. The job
-//
+// Use this action to deletes a previously created resource snapshot job. The job
 // must be in a stopped state before it can be deleted.
 func (c *Client) DeleteResourceSnapshotJob(ctx context.Context, params *DeleteResourceSnapshotJobInput, optFns ...func(*Options)) (*DeleteResourceSnapshotJobOutput, error) {
 	if params == nil {
@@ -27,15 +26,16 @@ func (c *Client) DeleteResourceSnapshotJob(ctx context.Context, params *DeleteRe
 	return out, nil
 }
 
+// Contains the request parameters for the DeleteResourceSnapshotJob operation.
 type DeleteResourceSnapshotJobInput struct {
 
-	//  Specifies the catalog from which to delete the snapshot job. Valid values are
+	// Specifies the catalog from which to delete the snapshot job. Valid values are
 	// AWS and Sandbox .
 	//
 	// This member is required.
 	Catalog *string
 
-	//  The unique identifier of the resource snapshot job to be deleted.
+	// The unique identifier of the resource snapshot job to be deleted.
 	//
 	// This member is required.
 	ResourceSnapshotJobIdentifier *string

@@ -144,6 +144,10 @@ type CreateLinkOutput struct {
 	// The direction of the link.
 	Direction types.LinkDirection
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
 
@@ -182,6 +186,9 @@ func (v *CreateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Direction != "" {
 		s.WriteString(schemas.CreateLinkResponse_direction, string(v.Direction))
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.CreateLinkResponse_errorDetails, v.ErrorDetails)
 	}
 	if v.FlowModules != nil {
 		serializeModuleConfigurationList(s, schemas.CreateLinkResponse_flowModules, v.FlowModules)
@@ -236,6 +243,8 @@ func (v *CreateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Direction = types.LinkDirection(ev)
 			return nil
+		case schemas.CreateLinkResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.CreateLinkResponse_errorDetails, &v.ErrorDetails)
 		case schemas.CreateLinkResponse_flowModules:
 			return deserializeModuleConfigurationList(d, schemas.CreateLinkResponse_flowModules, &v.FlowModules)
 		case schemas.CreateLinkResponse_gatewayId:

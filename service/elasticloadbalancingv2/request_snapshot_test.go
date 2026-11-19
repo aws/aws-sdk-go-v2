@@ -506,6 +506,20 @@ func TestCheckRequestSnapshot_CreateListener(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2153,6 +2167,20 @@ func TestCheckRequestSnapshot_ModifyListener(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3359,6 +3387,20 @@ func TestUpdateRequestSnapshot_CreateListener(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -5006,6 +5048,20 @@ func TestUpdateRequestSnapshot_ModifyListener(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	}
 	body := &bytes.Buffer{}

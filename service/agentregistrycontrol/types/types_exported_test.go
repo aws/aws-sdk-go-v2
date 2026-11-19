@@ -7,6 +7,42 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol/types"
 )
 
+func ExampleAgentSkillsSourceConfiguration_outputUsage() {
+	var union types.AgentSkillsSourceConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentSkillsSourceConfigurationMemberS3:
+		_ = v.Value // Value is types.S3SourceConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3SourceConfiguration
+
+func ExampleAuthorizationData_outputUsage() {
+	var union types.AuthorizationData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AuthorizationDataMemberOauth2:
+		_ = v.Value // Value is types.OAuth2AuthorizationData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OAuth2AuthorizationData
+
 func ExampleAuthorizerConfiguration_outputUsage() {
 	var union types.AuthorizerConfiguration
 	// type switches can be used to check the union value
@@ -90,6 +126,28 @@ func ExampleRegistryRecordCredentialProviderUnion_outputUsage() {
 
 var _ *types.RegistryRecordIamCredentialProvider
 var _ *types.RegistryRecordOAuthCredentialProvider
+
+func ExampleRegistryRecordSynchronizedSource_outputUsage() {
+	var union types.RegistryRecordSynchronizedSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RegistryRecordSynchronizedSourceMemberGitHub:
+		_ = v.Value // Value is types.GitHubSynchronizedSource
+
+	case *types.RegistryRecordSynchronizedSourceMemberS3:
+		_ = v.Value // Value is types.S3SynchronizedSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3SynchronizedSource
+var _ *types.GitHubSynchronizedSource
 
 func ExampleSelfManagedLatticeResource_outputUsage() {
 	var union types.SelfManagedLatticeResource

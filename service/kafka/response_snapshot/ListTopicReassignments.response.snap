@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","reassignments":[{"completedTopics":1,"creationTime":"2000-01-01T00:00:00Z","status":"PENDING","targetInstanceType":"__TargetInstanceType__","topicReassignmentOperationArn":"__TopicReassignmentOperationArn__","totalTopics":1},{"completedTopics":1,"creationTime":"2000-01-01T00:00:00Z","status":"PENDING","targetInstanceType":"__TargetInstanceType__","topicReassignmentOperationArn":"__TopicReassignmentOperationArn__","totalTopics":1}]}

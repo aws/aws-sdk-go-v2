@@ -17,7 +17,10 @@ import (
 	"time"
 )
 
-// Retrieves the details of a registry record
+// Retrieves the details of a registry record. The response describes the record's
+// latest revision, including a revision that isn't approved yet. For a skill
+// record, the operation also returns the skill package in artifact and the source
+// that the registry last synchronized the skill from in synchronizedSource .
 func (c *Client) GetRegistryRecord(ctx context.Context, params *GetRegistryRecordInput, optFns ...func(*Options)) (*GetRegistryRecordOutput, error) {
 	if params == nil {
 		params = &GetRegistryRecordInput{}
@@ -106,6 +109,16 @@ type GetRegistryRecordOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The skill package of the record's latest revision, including a revision in DRAFT
+	// or PENDING_APPROVAL status, as a download URL and a SHA-256 checksum. While an
+	// update of the record is in progress or after it fails, this is the last package
+	// that passed validation, unless the update switches between an uploaded package
+	// and a synchronized one: then it is absent until the update succeeds. Absent
+	// while the record is being created or after its creation fails, and when the
+	// record has no package, for example when its content is inline or it synchronizes
+	// only SKILL.md.
+	Artifact *types.RegistryRecordArtifactDownload
+
 	// The ID of the Amazon Web Services account that created the registry record.
 	CreatedBy *string
 
@@ -126,7 +139,9 @@ type GetRegistryRecordOutput struct {
 	// A description of the registry record.
 	Description *string
 
-	// The typed descriptors that define the content of the registry record.
+	// The typed descriptors that define the content of the registry record. For a
+	// skill record with a skill package or a synchronized source, skillMd.data
+	// contains the SKILL.md that the registry took from the package or the source.
 	Descriptors *types.Descriptors
 
 	// The human-readable display name of the registry record.
@@ -144,6 +159,15 @@ type GetRegistryRecordOutput struct {
 	// indicates a failure state.
 	StatusReason *string
 
+	// The source that the registry last synchronized the record's skill content from,
+	// including when the registry read the source and which version it read. Absent
+	// until the first successful synchronization, and after an update replaces the
+	// synchronized content, for example with an uploaded package. A failed
+	// synchronization leaves this member unchanged. After you change the source, this
+	// member shows the previous source until the registry successfully synchronizes
+	// from the new source.
+	SynchronizedSource types.RegistryRecordSynchronizedSource
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -157,6 +181,11 @@ func (v *GetRegistryRecordOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifact != nil {
+		s.WriteStruct(schemas.GetRegistryRecordResponse_artifact)
+		v.Artifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetRegistryRecordResponse_createdAt, *v.CreatedAt)
 	}
@@ -210,6 +239,9 @@ func (v *GetRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GetRegistryRecordResponse_statusReason, *v.StatusReason)
 	}
+	if v.SynchronizedSource != nil {
+		serializeRegistryRecordSynchronizedSource(s, schemas.GetRegistryRecordResponse_synchronizedSource, v.SynchronizedSource)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetRegistryRecordResponse_updatedAt, *v.UpdatedAt)
 	}
@@ -217,6 +249,9 @@ func (v *GetRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRegistryRecordResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetRegistryRecordResponse_artifact:
+			v.Artifact = &types.RegistryRecordArtifactDownload{}
+			return v.Artifact.Deserialize(d)
 		case schemas.GetRegistryRecordResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetRegistryRecordResponse_createdAt, v.CreatedAt)
@@ -285,6 +320,8 @@ func (v *GetRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.GetRegistryRecordResponse_statusReason:
 			v.StatusReason = new(string)
 			return d.ReadString(schemas.GetRegistryRecordResponse_statusReason, v.StatusReason)
+		case schemas.GetRegistryRecordResponse_synchronizedSource:
+			return deserializeRegistryRecordSynchronizedSource(d, schemas.GetRegistryRecordResponse_synchronizedSource, &v.SynchronizedSource)
 		case schemas.GetRegistryRecordResponse_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetRegistryRecordResponse_updatedAt, v.UpdatedAt)

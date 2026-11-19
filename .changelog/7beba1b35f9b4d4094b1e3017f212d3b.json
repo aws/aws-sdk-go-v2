@@ -1,0 +1,8 @@
+{
+    "id": "7beba1b3-5f9b-4d40-94b1-e3017f212d3b",
+    "type": "feature",
+    "description": "This release adds Webhook event sources, which receive events from third-party providers over HTTPS and authenticate them with a static token, HTTP Basic authentication, or an HMAC signature, and Amazon MSK subscribers, which deliver events to a topic in an Amazon MSK and MSK Serverless cluster.",
+    "modules": [
+        "service/eventbridgev2"
+    ]
+}

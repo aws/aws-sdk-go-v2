@@ -11,8 +11,9 @@ import (
 )
 
 // Retrieves the reservation coverage for your account, which you can use to see
-// how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon
-// Relational Database Service, or Amazon Redshift usage is covered by a
+// how much of your Amazon Elastic Compute Cloud, Amazon Relational Database
+// Service, Amazon ElastiCache, Amazon MemoryDB, Amazon Redshift, Amazon
+// Elasticsearch Service, or Amazon OpenSearch Service usage is covered by a
 // reservation. An organization's management account can see the coverage of the
 // associated member accounts. This supports dimensions, cost categories, and
 // nested expressions. For any time period, you can filter data about reservation
@@ -28,9 +29,9 @@ import (
 //
 //   - INSTANCE_TYPE
 //
-//   - LINKED_ACCOUNT
+//   - INSTANCE_TYPE_FAMILY
 //
-//   - OPERATING_SYSTEM
+//   - LINKED_ACCOUNT
 //
 //   - PLATFORM
 //
@@ -41,6 +42,9 @@ import (
 //   - TAG
 //
 //   - TENANCY
+//
+// The dimensions that you can use depend on the service in the SERVICE filter.
+// For details, see Filter .
 //
 // To determine valid values for a dimension, use the GetDimensionValues
 // operation.
@@ -73,8 +77,7 @@ type GetReservationCoverageInput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
-	// Filters utilization data by dimensions. You can filter by the following
-	// dimensions:
+	// Filters coverage data by dimensions. You can filter by the following dimensions:
 	//
 	//   - AZ
 	//
@@ -86,9 +89,9 @@ type GetReservationCoverageInput struct {
 	//
 	//   - INSTANCE_TYPE
 	//
-	//   - LINKED_ACCOUNT
+	//   - INSTANCE_TYPE_FAMILY
 	//
-	//   - OPERATING_SYSTEM
+	//   - LINKED_ACCOUNT
 	//
 	//   - PLATFORM
 	//
@@ -96,9 +99,21 @@ type GetReservationCoverageInput struct {
 	//
 	//   - SERVICE
 	//
+	// Supported values for SERVICE are Amazon Elastic Compute Cloud - Compute, Amazon
+	//   Relational Database Service, Amazon ElastiCache, Amazon MemoryDB, Amazon
+	//   Redshift, Amazon Elasticsearch Service, and Amazon OpenSearch Service. You can
+	//   specify up to two SERVICE values.
+	//
 	//   - TAG
 	//
 	//   - TENANCY
+	//
+	// The dimensions that you can use depend on the service in the SERVICE filter.
+	// CACHE_ENGINE applies only to Amazon ElastiCache and Amazon MemoryDB.
+	// DATABASE_ENGINE and DEPLOYMENT_OPTION apply only to Amazon Relational Database
+	// Service. INSTANCE_TYPE_FAMILY , PLATFORM , and TENANCY apply only to Amazon
+	// Elastic Compute Cloud - Compute. If you specify two SERVICE values, use only
+	// dimensions that both services support.
 	//
 	// GetReservationCoverage uses the same [Expression] object as the other operations, but only
 	// AND is supported among each dimension. You can nest only one level deep. If
@@ -121,29 +136,25 @@ type GetReservationCoverageInput struct {
 	// granularities.
 	Granularity types.Granularity
 
-	// You can group the data by the following attributes:
+	// You can group the data by the following attributes. The attributes that you can
+	// use depend on the service in the SERVICE filter. If you don't provide a SERVICE
+	// filter, Cost Explorer uses Amazon Elastic Compute Cloud - Compute.
 	//
-	//   - AZ
+	//   - Amazon Elastic Compute Cloud - Compute: AZ , INSTANCE_TYPE ,
+	//   INSTANCE_TYPE_FAMILY , LINKED_ACCOUNT , PLATFORM , REGION , and TENANCY
 	//
-	//   - CACHE_ENGINE
+	//   - Amazon Relational Database Service: AZ , DATABASE_ENGINE , DEPLOYMENT_OPTION
+	//   , INSTANCE_TYPE , LINKED_ACCOUNT , and REGION
 	//
-	//   - DATABASE_ENGINE
+	//   - Amazon ElastiCache and Amazon MemoryDB: AZ , CACHE_ENGINE , INSTANCE_TYPE ,
+	//   LINKED_ACCOUNT , and REGION
 	//
-	//   - DEPLOYMENT_OPTION
+	//   - Amazon Redshift, Amazon Elasticsearch Service, and Amazon OpenSearch
+	//   Service: AZ , INSTANCE_TYPE , LINKED_ACCOUNT , and REGION
 	//
-	//   - INSTANCE_TYPE
-	//
-	//   - INVOICING_ENTITY
-	//
-	//   - LINKED_ACCOUNT
-	//
-	//   - OPERATING_SYSTEM
-	//
-	//   - PLATFORM
-	//
-	//   - REGION
-	//
-	//   - TENANCY
+	// If you specify two SERVICE values, use only attributes that both services
+	// support. You can specify up to four attributes, and only the DIMENSION type is
+	// supported.
 	GroupBy []types.GroupDefinition
 
 	// The maximum number of objects that you returned for this request. If more
@@ -155,7 +166,10 @@ type GetReservationCoverageInput struct {
 	// The measurement that you want your reservation coverage reported in.
 	//
 	// Valid values are Hour , Unit , and Cost . You can use multiple values in a
-	// request.
+	// request. Hour returns CoverageHours , Unit returns CoverageNormalizedUnits , and
+	// Cost returns CoverageCost . Unit is supported only for Amazon Elastic Compute
+	// Cloud - Compute. If you don't specify Metrics , the response includes only
+	// CoverageHours .
 	Metrics []string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the

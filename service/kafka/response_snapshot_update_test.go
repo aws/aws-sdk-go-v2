@@ -213,6 +213,34 @@ func TestUpdateResponseSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateAssessment(t *testing.T) {
+	want := &CreateAssessmentOutput{
+		AssessmentArn:  ptr.String("__AssessmentArn__"),
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:         types.AssessmentStatus("IN_PROGRESS"),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAssessment, schemas.CreateAssessmentResponse, schemas.CreateAssessmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAssessment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 	want := &CreateChannelOutput{
 		ChannelArn:          ptr.String("__ChannelArn__"),
@@ -414,6 +442,31 @@ func TestUpdateResponseSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteAssessment(t *testing.T) {
+	want := &DeleteAssessmentOutput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		Status:        types.AssessmentStatus("IN_PROGRESS"),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAssessment, schemas.DeleteAssessmentResponse, schemas.DeleteAssessmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAssessment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 	want := &DeleteChannelOutput{
 		ChannelArn:          ptr.String("__ChannelArn__"),
@@ -583,6 +636,53 @@ func TestUpdateResponseSnapshot_DeleteVpcConnection(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteVpcConnection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeAssessment(t *testing.T) {
+	want := &DescribeAssessmentOutput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		AssessmentParameters: &types.AssessmentParameters{
+			TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		},
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		CompletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:         types.AssessmentStatus("IN_PROGRESS"),
+		StatusMessage:  ptr.String("__StatusMessage__"),
+		Summary: &types.AssessmentSummary{
+			ByCategory: map[string]int32{
+				"key0": 1,
+			},
+			BySeverity: map[string]int32{
+				"key0": 1,
+			},
+			FindingsCapped:      ptr.Bool(true),
+			HasBlockingFindings: ptr.Bool(true),
+			TotalFindings:       ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeAssessment, schemas.DescribeAssessmentResponse, schemas.DescribeAssessmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeAssessment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -903,6 +1003,10 @@ func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 func TestUpdateResponseSnapshot_DescribeClusterOperation(t *testing.T) {
 	want := &DescribeClusterOperationOutput{
 		ClusterOperationInfo: &types.ClusterOperationInfo{
+			BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+				TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+				TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+			},
 			ClientRequestId: ptr.String("__ClientRequestId__"),
 			ClusterArn:      ptr.String("__ClusterArn__"),
 			CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1248,6 +1352,10 @@ func TestUpdateResponseSnapshot_DescribeClusterOperationV2(t *testing.T) {
 			OperationState: ptr.String("__OperationState__"),
 			OperationType:  ptr.String("__OperationType__"),
 			Provisioned: &types.ClusterOperationV2Provisioned{
+				BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+					TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+					TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				},
 				OperationSteps: []types.ClusterOperationStep{
 					{
 						StepInfo: &types.ClusterOperationStepInfo{
@@ -2102,6 +2210,10 @@ func TestUpdateResponseSnapshot_DescribeTopic(t *testing.T) {
 		PartitionCount:    ptr.Int32(1),
 		Configs:           ptr.String("__Configs__"),
 		Status:            types.TopicState("CREATING"),
+		ReplicaIds: []int32{
+			1,
+			1,
+		},
 	}
 	proto := restjson1.New(schemas.Kafka)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeTopic, schemas.DescribeTopicResponse, schemas.DescribeTopicResponse)
@@ -2169,6 +2281,51 @@ func TestUpdateResponseSnapshot_DescribeTopicPartitions(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeTopicPartitions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeTopicReassignment(t *testing.T) {
+	want := &DescribeTopicReassignmentOutput{
+		ClusterArn:      ptr.String("__ClusterArn__"),
+		CompletedTopics: ptr.Int32(1),
+		CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorInfo: &types.ErrorInfo{
+			ErrorCode:   ptr.String("__ErrorCode__"),
+			ErrorString: ptr.String("__ErrorString__"),
+		},
+		LastUpdateTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MigratedPartitions:            ptr.Int32(1),
+		Status:                        types.TopicReassignmentStatus("PENDING"),
+		TargetInstanceType:            ptr.String("__TargetInstanceType__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+		TopicsToExclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TopicsToInclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TotalPartitions: ptr.Int32(1),
+		TotalTopics:     ptr.Int32(1),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeTopicReassignment, schemas.DescribeTopicReassignmentResponse, schemas.DescribeTopicReassignmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeTopicReassignment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2314,6 +2471,100 @@ func TestUpdateResponseSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListAssessmentFindings(t *testing.T) {
+	want := &ListAssessmentFindingsOutput{
+		Findings: []types.AssessmentFinding{
+			{
+				Category:  types.FindingCategory("INFRASTRUCTURE"),
+				FindingId: ptr.String("__FindingId__"),
+				Message:   ptr.String("__Message__"),
+				Remediation: &types.FindingRemediation{
+					Action:           ptr.String("__Action__"),
+					DocumentationUrl: ptr.String("__DocumentationUrl__"),
+				},
+				Resource: ptr.String("__Resource__"),
+				Severity: types.FindingSeverity("ERROR"),
+			},
+			{
+				Category:  types.FindingCategory("INFRASTRUCTURE"),
+				FindingId: ptr.String("__FindingId__"),
+				Message:   ptr.String("__Message__"),
+				Remediation: &types.FindingRemediation{
+					Action:           ptr.String("__Action__"),
+					DocumentationUrl: ptr.String("__DocumentationUrl__"),
+				},
+				Resource: ptr.String("__Resource__"),
+				Severity: types.FindingSeverity("ERROR"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.ListAssessmentFindings, schemas.ListAssessmentFindingsResponse, schemas.ListAssessmentFindingsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAssessmentFindings.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListAssessments(t *testing.T) {
+	want := &ListAssessmentsOutput{
+		Assessments: []types.AssessmentInfo{
+			{
+				AssessmentArn:  ptr.String("__AssessmentArn__"),
+				AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+				ClusterArn:     ptr.String("__ClusterArn__"),
+				CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:         types.AssessmentStatus("IN_PROGRESS"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				AssessmentArn:  ptr.String("__AssessmentArn__"),
+				AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+				ClusterArn:     ptr.String("__ClusterArn__"),
+				CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:         types.AssessmentStatus("IN_PROGRESS"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.ListAssessments, schemas.ListAssessmentsResponse, schemas.ListAssessmentsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAssessments.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 	want := &ListChannelsOutput{
 		Channels: []types.ChannelInfo{
@@ -2400,6 +2651,10 @@ func TestUpdateResponseSnapshot_ListClusterOperations(t *testing.T) {
 	want := &ListClusterOperationsOutput{
 		ClusterOperationInfoList: []types.ClusterOperationInfo{
 			{
+				BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+					TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+					TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				},
 				ClientRequestId: ptr.String("__ClientRequestId__"),
 				ClusterArn:      ptr.String("__ClusterArn__"),
 				CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -2710,6 +2965,10 @@ func TestUpdateResponseSnapshot_ListClusterOperations(t *testing.T) {
 				},
 			},
 			{
+				BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+					TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+					TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				},
 				ClientRequestId: ptr.String("__ClientRequestId__"),
 				ClusterArn:      ptr.String("__ClusterArn__"),
 				CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -3933,6 +4192,7 @@ func TestUpdateResponseSnapshot_ListNodes(t *testing.T) {
 				BrokerNodeInfo: &types.BrokerNodeInfo{
 					AttachedENIId:      ptr.String("__AttachedENIId__"),
 					BrokerId:           ptr.Float64(1.0),
+					BrokerNodeType:     types.BrokerNodeType("STANDARD"),
 					ClientSubnet:       ptr.String("__ClientSubnet__"),
 					ClientVpcIpAddress: ptr.String("__ClientVpcIpAddress__"),
 					CurrentBrokerSoftwareInfo: &types.BrokerSoftwareInfo{
@@ -3970,6 +4230,7 @@ func TestUpdateResponseSnapshot_ListNodes(t *testing.T) {
 				BrokerNodeInfo: &types.BrokerNodeInfo{
 					AttachedENIId:      ptr.String("__AttachedENIId__"),
 					BrokerId:           ptr.Float64(1.0),
+					BrokerNodeType:     types.BrokerNodeType("STANDARD"),
 					ClientSubnet:       ptr.String("__ClientSubnet__"),
 					ClientVpcIpAddress: ptr.String("__ClientVpcIpAddress__"),
 					CurrentBrokerSoftwareInfo: &types.BrokerSoftwareInfo{
@@ -4186,6 +4447,48 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListTopicReassignments(t *testing.T) {
+	want := &ListTopicReassignmentsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		Reassignments: []types.TopicReassignmentInfo{
+			{
+				CompletedTopics:               ptr.Int32(1),
+				CreationTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:                        types.TopicReassignmentStatus("PENDING"),
+				TargetInstanceType:            ptr.String("__TargetInstanceType__"),
+				TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				TotalTopics:                   ptr.Int32(1),
+			},
+			{
+				CompletedTopics:               ptr.Int32(1),
+				CreationTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:                        types.TopicReassignmentStatus("PENDING"),
+				TargetInstanceType:            ptr.String("__TargetInstanceType__"),
+				TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				TotalTopics:                   ptr.Int32(1),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.ListTopicReassignments, schemas.ListTopicReassignmentsResponse, schemas.ListTopicReassignmentsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListTopicReassignments.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTopics(t *testing.T) {
 	want := &ListTopicsOutput{
 		Topics: []types.TopicInfo{
@@ -4195,6 +4498,10 @@ func TestUpdateResponseSnapshot_ListTopics(t *testing.T) {
 				ReplicationFactor:     ptr.Int32(1),
 				PartitionCount:        ptr.Int32(1),
 				OutOfSyncReplicaCount: ptr.Int32(1),
+				ReplicaIds: []int32{
+					1,
+					1,
+				},
 			},
 			{
 				TopicArn:              ptr.String("__TopicArn__"),
@@ -4202,6 +4509,10 @@ func TestUpdateResponseSnapshot_ListTopics(t *testing.T) {
 				ReplicationFactor:     ptr.Int32(1),
 				PartitionCount:        ptr.Int32(1),
 				OutOfSyncReplicaCount: ptr.Int32(1),
+				ReplicaIds: []int32{
+					1,
+					1,
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4335,6 +4646,57 @@ func TestUpdateResponseSnapshot_RejectClientVpcConnection(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("RejectClientVpcConnection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartTopicReassignment(t *testing.T) {
+	want := &StartTopicReassignmentOutput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		Status:                        types.TopicReassignmentStatus("PENDING"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.StartTopicReassignment, schemas.StartTopicReassignmentResponse, schemas.StartTopicReassignmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartTopicReassignment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StopTopicReassignment(t *testing.T) {
+	want := &StopTopicReassignmentOutput{
+		Status:                        types.TopicReassignmentStatus("PENDING"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	proto := restjson1.New(schemas.Kafka)
+	opSchema := smithy.NewOperationSchema(schemas.StopTopicReassignment, schemas.StopTopicReassignmentResponse, schemas.StopTopicReassignmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StopTopicReassignment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4796,7 +5158,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message:          ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Kafka)
-	opSchema := smithy.NewOperationSchema(schemas.CreateChannel, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAssessment, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

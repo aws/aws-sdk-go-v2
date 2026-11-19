@@ -6,7 +6,12 @@
 // The AWS Marketplace Deployment Service supports the Quick Launch experience,
 // which is a deployment option for software as a service (SaaS) products. Quick
 // Launch simplifies and reduces the time, resources, and steps required to
-// configure, deploy, and launch a products. The AWS Marketplace Deployment Service
+// configure, deploy, and launch a product. The AWS Marketplace Deployment Service
 // provides sellers with a secure method for passing deployment parameters, such as
 // API keys and external IDs, to buyers during the Quick Launch experience.
+//
+// You can also use the AWS Marketplace Deployment Service to publish deployment
+// configurations. A deployment configuration defines how buyers access a product's
+// delivery option after they subscribe. For example, for the Data as a Service
+// delivery option, it specifies the seller's fulfillment URL.
 package marketplacedeployment

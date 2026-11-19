@@ -294,6 +294,21 @@ type CreateUserPoolClientInput struct {
 	// Defaults to LEGACY .
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
+	// Specifies whether Amazon Cognito stores and manages this app client's secret in [Amazon Web Services Secrets Manager]
+	// instead of returning the plaintext value. Applies only when GenerateSecret is
+	// true . When you set this parameter to true , the response returns
+	// ClientSecretArn instead of ClientSecret . Amazon Cognito starts the first
+	// rotation of the secret right away, and then rotates the secret every 7 days by
+	// default. You can change the rotation schedule in Secrets Manager.
+	//
+	// Defaults to false . If you don't set this parameter, Amazon Cognito doesn't
+	// manage the secret in Secrets Manager and returns the plaintext ClientSecret
+	// value. The Amazon Cognito console turns on this option by default when it
+	// creates an app client with a generated client secret.
+	//
+	// [Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+	PublishSecretsInAWSSecretsManager *bool
+
 	// The list of user attributes that you want your app client to have read access
 	// to. After your user authenticates in your app, their access token authorizes
 	// them to read their own attribute value for any attribute in this list.
@@ -432,6 +447,9 @@ func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PreventUserExistenceErrors != "" {
 		s.WriteString(schemas.CreateUserPoolClientRequest_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
+	}
+	if v.PublishSecretsInAWSSecretsManager != nil {
+		s.WriteBool(schemas.CreateUserPoolClientRequest_PublishSecretsInAWSSecretsManager, *v.PublishSecretsInAWSSecretsManager)
 	}
 	if v.ReadAttributes != nil {
 		serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_ReadAttributes, v.ReadAttributes)

@@ -133,6 +133,23 @@ func (ExecutionPolicy) Values() []ExecutionPolicy {
 	}
 }
 
+type JobSubmitPluginType string
+
+// Enum values for JobSubmitPluginType
+const (
+	JobSubmitPluginTypeStarlark JobSubmitPluginType = "STARLARK"
+)
+
+// Values returns all known values for JobSubmitPluginType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobSubmitPluginType) Values() []JobSubmitPluginType {
+	return []JobSubmitPluginType{
+		"STARLARK",
+	}
+}
+
 type LaunchTemplateMode string
 
 // Enum values for LaunchTemplateMode

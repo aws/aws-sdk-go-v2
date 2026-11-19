@@ -1,0 +1,5 @@
+POST /v1/clusters/__ClusterArn__/assessments
+
+Content-Type: application/json
+
+{"assessmentParameters":{"targetInstanceType":"__TargetInstanceType__"},"assessmentType":"UPDATE_BROKER_TYPE","tags":{"key0":"__Value__"}}

@@ -20,6 +20,11 @@ import (
 // By default, this action does not return certificates with a
 // CertificateKeyPairOrigin of ACME . To include ACME certificates, specify ACME
 // in the CertificateKeyPairOrigins filter.
+//
+// By default, this action does not return certificates with a RootHierarchyType
+// of N2_AMAZON_MANAGED or N2_SFG2_AMAZON_MANAGED . To list only Amazon N2
+// certificates, specify one or both of these values in the RootHierarchyTypes
+// filter.
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}
@@ -59,6 +64,13 @@ type ListCertificatesInput struct {
 	// of NextToken from the response you just received.
 	NextToken *string
 
+	// Filter the certificate list by root hierarchy type. Specify one or more
+	// RootHierarchyType values. By default, this action does not return certificates
+	// with a RootHierarchyType of N2_AMAZON_MANAGED or N2_SFG2_AMAZON_MANAGED . To
+	// list only Amazon N2 certificates, specify one or both of these values in the
+	// RootHierarchyTypes filter.
+	RootHierarchyTypes []types.RootHierarchyType
+
 	// Specifies the field to sort results by. If you specify SortBy , you must also
 	// specify SortOrder .
 	SortBy types.SortBy
@@ -93,6 +105,9 @@ func (v *ListCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCertificatesRequest_NextToken, *v.NextToken)
+	}
+	if v.RootHierarchyTypes != nil {
+		serializeRootHierarchyTypes(s, schemas.ListCertificatesRequest_RootHierarchyTypes, v.RootHierarchyTypes)
 	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ListCertificatesRequest_SortBy, string(v.SortBy))

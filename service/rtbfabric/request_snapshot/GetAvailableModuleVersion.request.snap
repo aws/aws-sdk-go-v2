@@ -1,0 +1,3 @@
+GET /available-modules/__ModuleId__/versions/__Version__
+
+

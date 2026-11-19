@@ -3968,6 +3968,9 @@ type Channel struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *InputSpecification
 
+	// Specification of JPEG XS inputs for this channel
+	JpegXsInputSpecification *JpegXsInputSpecification
+
 	// Linked Channel Settings for this channel.
 	LinkedChannelSettings *DescribeLinkedChannelSettings
 
@@ -4059,6 +4062,11 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.JpegXsInputSpecification != nil {
+		s.WriteStruct(schemas.Channel_JpegXsInputSpecification)
+		v.JpegXsInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LinkedChannelSettings != nil {
 		s.WriteStruct(schemas.Channel_LinkedChannelSettings)
 		v.LinkedChannelSettings.SerializeMembers(s)
@@ -4138,6 +4146,9 @@ func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Channel_InputSpecification:
 			v.InputSpecification = &InputSpecification{}
 			return v.InputSpecification.Deserialize(d)
+		case schemas.Channel_JpegXsInputSpecification:
+			v.JpegXsInputSpecification = &JpegXsInputSpecification{}
+			return v.JpegXsInputSpecification.Deserialize(d)
 		case schemas.Channel_LinkedChannelSettings:
 			v.LinkedChannelSettings = &DescribeLinkedChannelSettings{}
 			return v.LinkedChannelSettings.Deserialize(d)
@@ -4413,6 +4424,9 @@ type ChannelSummary struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *InputSpecification
 
+	// Specification of JPEG XS inputs for this channel
+	JpegXsInputSpecification *JpegXsInputSpecification
+
 	// Linked Channel Settings for this channel.
 	LinkedChannelSettings *DescribeLinkedChannelSettings
 
@@ -4499,6 +4513,11 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.JpegXsInputSpecification != nil {
+		s.WriteStruct(schemas.ChannelSummary_JpegXsInputSpecification)
+		v.JpegXsInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LinkedChannelSettings != nil {
 		s.WriteStruct(schemas.ChannelSummary_LinkedChannelSettings)
 		v.LinkedChannelSettings.SerializeMembers(s)
@@ -4575,6 +4594,9 @@ func (v *ChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ChannelSummary_InputSpecification:
 			v.InputSpecification = &InputSpecification{}
 			return v.InputSpecification.Deserialize(d)
+		case schemas.ChannelSummary_JpegXsInputSpecification:
+			v.JpegXsInputSpecification = &JpegXsInputSpecification{}
+			return v.JpegXsInputSpecification.Deserialize(d)
 		case schemas.ChannelSummary_LinkedChannelSettings:
 			v.LinkedChannelSettings = &DescribeLinkedChannelSettings{}
 			return v.LinkedChannelSettings.Deserialize(d)
@@ -14767,6 +14789,68 @@ func (v *IpPoolUpdateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.IpPoolUpdateRequest_Cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.IpPoolUpdateRequest_Cidr, v.Cidr)
+		}
+		return nil
+	})
+}
+
+// Specification of the JPEG XS input for this channel. Use instead of
+// inputSpecification when the input codec is JPEG XS.
+type JpegXsInputSpecification struct {
+
+	// Input codec. Must be JPEGXS.
+	Codec InputCodec
+
+	// Maximum JPEG XS input bitrate
+	MaximumBitrate JpegXsInputMaximumBitrate
+
+	// Maximum JPEG XS input resolution
+	Resolution JpegXsInputResolution
+
+	noSmithyDocumentSerde
+}
+
+func (v *JpegXsInputSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JpegXsInputSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JpegXsInputSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Codec != "" {
+		s.WriteString(schemas.JpegXsInputSpecification_Codec, string(v.Codec))
+	}
+	if v.MaximumBitrate != "" {
+		s.WriteString(schemas.JpegXsInputSpecification_MaximumBitrate, string(v.MaximumBitrate))
+	}
+	if v.Resolution != "" {
+		s.WriteString(schemas.JpegXsInputSpecification_Resolution, string(v.Resolution))
+	}
+}
+func (v *JpegXsInputSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JpegXsInputSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JpegXsInputSpecification_Codec:
+			var ev string
+			if err := d.ReadString(schemas.JpegXsInputSpecification_Codec, &ev); err != nil {
+				return err
+			}
+			v.Codec = InputCodec(ev)
+			return nil
+		case schemas.JpegXsInputSpecification_MaximumBitrate:
+			var ev string
+			if err := d.ReadString(schemas.JpegXsInputSpecification_MaximumBitrate, &ev); err != nil {
+				return err
+			}
+			v.MaximumBitrate = JpegXsInputMaximumBitrate(ev)
+			return nil
+		case schemas.JpegXsInputSpecification_Resolution:
+			var ev string
+			if err := d.ReadString(schemas.JpegXsInputSpecification_Resolution, &ev); err != nil {
+				return err
+			}
+			v.Resolution = JpegXsInputResolution(ev)
+			return nil
 		}
 		return nil
 	})

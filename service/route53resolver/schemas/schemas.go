@@ -228,6 +228,11 @@ var ListFirewallDomains = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListFirewallDomains",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListFirewallRuleDomains = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "ListFirewallRuleDomains",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListFirewallRuleGroupAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ListFirewallRuleGroupAssociations",
@@ -400,6 +405,16 @@ var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "Arn",
 }, smithy.ShapeTypeString, 0)
+
+var AutoAllowlistConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "AutoAllowlistConfig",
+}, smithy.ShapeTypeStructure, 3)
+var AutoAllowlistConfig_InitialDataTimeframeHours *smithy.Schema
+
+var AutoAllowlistConfig_ImportFromFirewallDomainListId *smithy.Schema
+
+var AutoAllowlistConfig_AutoAllowlistFirewallDomainListId *smithy.Schema
 
 var AutodefinedReverseFlag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -630,10 +645,12 @@ var _DomainListFileUrl = smithy.NewSchema(smithy.ShapeID{
 var DomainListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "DomainListType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var DomainListType_THREAT *smithy.Schema
 
 var DomainListType_CONTENT *smithy.Schema
+
+var DomainListType_AUTOALLOWLIST *smithy.Schema
 
 var _DomainName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -752,7 +769,7 @@ var FirewallDomainList_ManagedListType *smithy.Schema
 var FirewallDomainListMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "FirewallDomainListMetadata",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 10)
 var FirewallDomainListMetadata_Id *smithy.Schema
 
 var FirewallDomainListMetadata_Arn *smithy.Schema
@@ -766,6 +783,12 @@ var FirewallDomainListMetadata_ManagedOwnerName *smithy.Schema
 var FirewallDomainListMetadata_ManagedListType *smithy.Schema
 
 var FirewallDomainListMetadata_Category *smithy.Schema
+
+var FirewallDomainListMetadata_FirewallRuleGroupId *smithy.Schema
+
+var FirewallDomainListMetadata_FirewallThreatProtectionId *smithy.Schema
+
+var FirewallDomainListMetadata_Status *smithy.Schema
 
 var _FirewallDomainListMetadataList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -806,15 +829,39 @@ var _FirewallDomains = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FirewallDomains_member *smithy.Schema
 
+var FirewallDomainStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallDomainStatus",
+}, smithy.ShapeTypeEnum, 4)
+var FirewallDomainStatus_OBSERVED *smithy.Schema
+
+var FirewallDomainStatus_ALLOWED *smithy.Schema
+
+var FirewallDomainStatus_DENIED *smithy.Schema
+
+var FirewallDomainStatus_UNKNOWN *smithy.Schema
+
+var FirewallDomainStatusFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallDomainStatusFilter",
+}, smithy.ShapeTypeEnum, 3)
+var FirewallDomainStatusFilter_OBSERVED *smithy.Schema
+
+var FirewallDomainStatusFilter_ALLOWED *smithy.Schema
+
+var FirewallDomainStatusFilter_DENIED *smithy.Schema
+
 var FirewallDomainUpdateOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "FirewallDomainUpdateOperation",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var FirewallDomainUpdateOperation_ADD *smithy.Schema
 
 var FirewallDomainUpdateOperation_REMOVE *smithy.Schema
 
 var FirewallDomainUpdateOperation_REPLACE *smithy.Schema
+
+var FirewallDomainUpdateOperation_DENY *smithy.Schema
 
 var FirewallFailOpenStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -869,6 +916,49 @@ var FirewallRule_FirewallRuleType *smithy.Schema
 var FirewallRule_Status *smithy.Schema
 
 var FirewallRule_StatusMessage *smithy.Schema
+
+var FirewallRuleDomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallRuleDomain",
+}, smithy.ShapeTypeStructure, 5)
+var FirewallRuleDomain_DomainName *smithy.Schema
+
+var FirewallRuleDomain_DomainStatus *smithy.Schema
+
+var FirewallRuleDomain_Last24HourRequests *smithy.Schema
+
+var FirewallRuleDomain_TotalRequests *smithy.Schema
+
+var FirewallRuleDomain_AddedTime *smithy.Schema
+
+var _FirewallRuleDomainRequestCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallRuleDomainRequestCount",
+}, smithy.ShapeTypeLong, 0)
+
+var _FirewallRuleDomains = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallRuleDomains",
+}, smithy.ShapeTypeList, 1)
+var _FirewallRuleDomains_member *smithy.Schema
+
+var FirewallRuleDomainSortBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallRuleDomainSortBy",
+}, smithy.ShapeTypeEnum, 3)
+var FirewallRuleDomainSortBy_TIME_ADDED *smithy.Schema
+
+var FirewallRuleDomainSortBy_DAILY_TOTAL *smithy.Schema
+
+var FirewallRuleDomainSortBy_TOTAL_REQUESTS *smithy.Schema
+
+var FirewallRuleDomainSortOrder = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "FirewallRuleDomainSortOrder",
+}, smithy.ShapeTypeEnum, 2)
+var FirewallRuleDomainSortOrder_ASC *smithy.Schema
+
+var FirewallRuleDomainSortOrder_DESC *smithy.Schema
 
 var FirewallRuleGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -998,7 +1088,7 @@ var _FirewallRuleStatusMessage = smithy.NewSchema(smithy.ShapeID{
 var FirewallRuleType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "FirewallRuleType",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var FirewallRuleType_PartnerThreatProtection *smithy.Schema
 
 var FirewallRuleType_FirewallAdvancedContentCategory *smithy.Schema
@@ -1006,6 +1096,8 @@ var FirewallRuleType_FirewallAdvancedContentCategory *smithy.Schema
 var FirewallRuleType_FirewallAdvancedThreatCategory *smithy.Schema
 
 var FirewallRuleType_DnsThreatProtection *smithy.Schema
+
+var FirewallRuleType_AutoAllowlist *smithy.Schema
 
 var FirewallRuleTypeDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -1026,6 +1118,11 @@ var _FirewallRuleTypeDefinitions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FirewallRuleTypeDefinitions",
 }, smithy.ShapeTypeList, 1)
 var _FirewallRuleTypeDefinitions_member *smithy.Schema
+
+var _InitialDataTimeframeHours = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "InitialDataTimeframeHours",
+}, smithy.ShapeTypeInteger, 0)
 
 var _InstanceCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -1193,6 +1290,18 @@ var _ListFirewallConfigsMaxResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "ListFirewallConfigsMaxResult",
 }, smithy.ShapeTypeInteger, 0)
+
+var ListFirewallRuleDomainsQueryOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "ListFirewallRuleDomainsQueryOptions",
+}, smithy.ShapeTypeStructure, 4)
+var ListFirewallRuleDomainsQueryOptions_DomainStatus *smithy.Schema
+
+var ListFirewallRuleDomainsQueryOptions_SortBy *smithy.Schema
+
+var ListFirewallRuleDomainsQueryOptions_SortOrder *smithy.Schema
+
+var ListFirewallRuleDomainsQueryOptions_DomainNameFilter *smithy.Schema
 
 var _ListResolverConfigsMaxResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -2443,8 +2552,12 @@ var GetFirewallDomainListRequest_FirewallDomainListId *smithy.Schema
 var GetFirewallDomainListResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
 	Name:      "GetFirewallDomainListResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 3)
 var GetFirewallDomainListResponse_FirewallDomainList *smithy.Schema
+
+var GetFirewallDomainListResponse_FirewallRuleGroupId *smithy.Schema
+
+var GetFirewallDomainListResponse_FirewallThreatProtectionId *smithy.Schema
 
 var GetFirewallRuleGroupAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -2673,6 +2786,30 @@ var ListFirewallDomainsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListFirewallDomainsResponse_NextToken *smithy.Schema
 
 var ListFirewallDomainsResponse_Domains *smithy.Schema
+
+var ListFirewallRuleDomainsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "ListFirewallRuleDomainsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListFirewallRuleDomainsRequest_FirewallRuleGroupId *smithy.Schema
+
+var ListFirewallRuleDomainsRequest_FirewallThreatProtectionId *smithy.Schema
+
+var ListFirewallRuleDomainsRequest_FirewallDomainListId *smithy.Schema
+
+var ListFirewallRuleDomainsRequest_QueryOptions *smithy.Schema
+
+var ListFirewallRuleDomainsRequest_MaxResults *smithy.Schema
+
+var ListFirewallRuleDomainsRequest_NextToken *smithy.Schema
+
+var ListFirewallRuleDomainsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.route53resolver",
+	Name:      "ListFirewallRuleDomainsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListFirewallRuleDomainsResponse_Domains *smithy.Schema
+
+var ListFirewallRuleDomainsResponse_NextToken *smithy.Schema
 
 var ListFirewallRuleGroupAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.route53resolver",
@@ -3217,6 +3354,12 @@ func init() {
 
 	Action_ALERT = Action.AddMember("ALERT", smithyprelude.Unit)
 
+	AutoAllowlistConfig_InitialDataTimeframeHours = AutoAllowlistConfig.AddMember("InitialDataTimeframeHours", _InitialDataTimeframeHours)
+
+	AutoAllowlistConfig_ImportFromFirewallDomainListId = AutoAllowlistConfig.AddMember("ImportFromFirewallDomainListId", _ResourceId)
+
+	AutoAllowlistConfig_AutoAllowlistFirewallDomainListId = AutoAllowlistConfig.AddMember("AutoAllowlistFirewallDomainListId", _ResourceId)
+
 	AutodefinedReverseFlag_ENABLE = AutodefinedReverseFlag.AddMember("ENABLE", smithyprelude.Unit)
 
 	AutodefinedReverseFlag_DISABLE = AutodefinedReverseFlag.AddMember("DISABLE", smithyprelude.Unit)
@@ -3264,6 +3407,8 @@ func init() {
 	FirewallRuleType_FirewallAdvancedThreatCategory = FirewallRuleType.AddMember("FirewallAdvancedThreatCategory", FirewallAdvancedThreatCategoryConfig)
 
 	FirewallRuleType_DnsThreatProtection = FirewallRuleType.AddMember("DnsThreatProtection", DnsThreatProtectionRuleTypeConfig)
+
+	FirewallRuleType_AutoAllowlist = FirewallRuleType.AddMember("AutoAllowlist", AutoAllowlistConfig)
 
 	CreateFirewallRuleEntry_CreatorRequestId = CreateFirewallRuleEntry.AddMember("CreatorRequestId", _CreatorRequestId)
 
@@ -3367,6 +3512,8 @@ func init() {
 
 	DomainListType_CONTENT = DomainListType.AddMember("CONTENT", smithyprelude.Unit)
 
+	DomainListType_AUTOALLOWLIST = DomainListType.AddMember("AUTOALLOWLIST", smithyprelude.Unit)
+
 	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
 
 	Filter_Name = Filter.AddMember("Name", _FilterName)
@@ -3441,15 +3588,37 @@ func init() {
 
 	FirewallDomainListMetadata_Category = FirewallDomainListMetadata.AddMember("Category", _Category)
 
+	FirewallDomainListMetadata_FirewallRuleGroupId = FirewallDomainListMetadata.AddMember("FirewallRuleGroupId", _ResourceId)
+
+	FirewallDomainListMetadata_FirewallThreatProtectionId = FirewallDomainListMetadata.AddMember("FirewallThreatProtectionId", _ResourceId)
+
+	FirewallDomainListMetadata_Status = FirewallDomainListMetadata.AddMember("Status", FirewallDomainListStatus)
+
 	_FirewallDomainListMetadataList_member = _FirewallDomainListMetadataList.AddMember("member", FirewallDomainListMetadata)
 
 	_FirewallDomains_member = _FirewallDomains.AddMember("member", _FirewallDomainName)
+
+	FirewallDomainStatus_OBSERVED = FirewallDomainStatus.AddMember("OBSERVED", smithyprelude.Unit)
+
+	FirewallDomainStatus_ALLOWED = FirewallDomainStatus.AddMember("ALLOWED", smithyprelude.Unit)
+
+	FirewallDomainStatus_DENIED = FirewallDomainStatus.AddMember("DENIED", smithyprelude.Unit)
+
+	FirewallDomainStatus_UNKNOWN = FirewallDomainStatus.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	FirewallDomainStatusFilter_OBSERVED = FirewallDomainStatusFilter.AddMember("OBSERVED", smithyprelude.Unit)
+
+	FirewallDomainStatusFilter_ALLOWED = FirewallDomainStatusFilter.AddMember("ALLOWED", smithyprelude.Unit)
+
+	FirewallDomainStatusFilter_DENIED = FirewallDomainStatusFilter.AddMember("DENIED", smithyprelude.Unit)
 
 	FirewallDomainUpdateOperation_ADD = FirewallDomainUpdateOperation.AddMember("ADD", smithyprelude.Unit)
 
 	FirewallDomainUpdateOperation_REMOVE = FirewallDomainUpdateOperation.AddMember("REMOVE", smithyprelude.Unit)
 
 	FirewallDomainUpdateOperation_REPLACE = FirewallDomainUpdateOperation.AddMember("REPLACE", smithyprelude.Unit)
+
+	FirewallDomainUpdateOperation_DENY = FirewallDomainUpdateOperation.AddMember("DENY", smithyprelude.Unit)
 
 	FirewallRule_FirewallRuleGroupId = FirewallRule.AddMember("FirewallRuleGroupId", _ResourceId)
 
@@ -3490,6 +3659,28 @@ func init() {
 	FirewallRule_Status = FirewallRule.AddMember("Status", _FirewallRuleStatus)
 
 	FirewallRule_StatusMessage = FirewallRule.AddMember("StatusMessage", _FirewallRuleStatusMessage)
+
+	FirewallRuleDomain_DomainName = FirewallRuleDomain.AddMember("DomainName", _FirewallDomainName)
+
+	FirewallRuleDomain_DomainStatus = FirewallRuleDomain.AddMember("DomainStatus", FirewallDomainStatus)
+
+	FirewallRuleDomain_Last24HourRequests = FirewallRuleDomain.AddMember("Last24HourRequests", _FirewallRuleDomainRequestCount)
+
+	FirewallRuleDomain_TotalRequests = FirewallRuleDomain.AddMember("TotalRequests", _FirewallRuleDomainRequestCount)
+
+	FirewallRuleDomain_AddedTime = FirewallRuleDomain.AddMember("AddedTime", _Rfc3339TimeString)
+
+	_FirewallRuleDomains_member = _FirewallRuleDomains.AddMember("member", FirewallRuleDomain)
+
+	FirewallRuleDomainSortBy_TIME_ADDED = FirewallRuleDomainSortBy.AddMember("TIME_ADDED", smithyprelude.Unit)
+
+	FirewallRuleDomainSortBy_DAILY_TOTAL = FirewallRuleDomainSortBy.AddMember("DAILY_TOTAL", smithyprelude.Unit)
+
+	FirewallRuleDomainSortBy_TOTAL_REQUESTS = FirewallRuleDomainSortBy.AddMember("TOTAL_REQUESTS", smithyprelude.Unit)
+
+	FirewallRuleDomainSortOrder_ASC = FirewallRuleDomainSortOrder.AddMember("ASC", smithyprelude.Unit)
+
+	FirewallRuleDomainSortOrder_DESC = FirewallRuleDomainSortOrder.AddMember("DESC", smithyprelude.Unit)
 
 	FirewallRuleGroupStatus_COMPLETE = FirewallRuleGroupStatus.AddMember("COMPLETE", smithyprelude.Unit)
 
@@ -3674,6 +3865,14 @@ func init() {
 	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
 
 	LimitExceededException_ResourceType = LimitExceededException.AddMember("ResourceType", _String)
+
+	ListFirewallRuleDomainsQueryOptions_DomainStatus = ListFirewallRuleDomainsQueryOptions.AddMember("DomainStatus", FirewallDomainStatusFilter)
+
+	ListFirewallRuleDomainsQueryOptions_SortBy = ListFirewallRuleDomainsQueryOptions.AddMember("SortBy", FirewallRuleDomainSortBy)
+
+	ListFirewallRuleDomainsQueryOptions_SortOrder = ListFirewallRuleDomainsQueryOptions.AddMember("SortOrder", FirewallRuleDomainSortOrder)
+
+	ListFirewallRuleDomainsQueryOptions_DomainNameFilter = ListFirewallRuleDomainsQueryOptions.AddMember("DomainNameFilter", _FirewallDomainName)
 
 	OutpostResolverStatus_CREATING = OutpostResolverStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -4275,6 +4474,10 @@ func init() {
 
 	GetFirewallDomainListResponse_FirewallDomainList = GetFirewallDomainListResponse.AddMember("FirewallDomainList", FirewallDomainList)
 
+	GetFirewallDomainListResponse_FirewallRuleGroupId = GetFirewallDomainListResponse.AddMember("FirewallRuleGroupId", _ResourceId)
+
+	GetFirewallDomainListResponse_FirewallThreatProtectionId = GetFirewallDomainListResponse.AddMember("FirewallThreatProtectionId", _ResourceId)
+
 	GetFirewallRuleGroupAssociationRequest_FirewallRuleGroupAssociationId = GetFirewallRuleGroupAssociationRequest.AddMember("FirewallRuleGroupAssociationId", _ResourceId)
 
 	GetFirewallRuleGroupAssociationResponse_FirewallRuleGroupAssociation = GetFirewallRuleGroupAssociationResponse.AddMember("FirewallRuleGroupAssociation", FirewallRuleGroupAssociation)
@@ -4366,6 +4569,22 @@ func init() {
 	ListFirewallDomainsResponse_NextToken = ListFirewallDomainsResponse.AddMember("NextToken", _NextToken)
 
 	ListFirewallDomainsResponse_Domains = ListFirewallDomainsResponse.AddMember("Domains", _FirewallDomains)
+
+	ListFirewallRuleDomainsRequest_FirewallRuleGroupId = ListFirewallRuleDomainsRequest.AddMember("FirewallRuleGroupId", _ResourceId)
+
+	ListFirewallRuleDomainsRequest_FirewallThreatProtectionId = ListFirewallRuleDomainsRequest.AddMember("FirewallThreatProtectionId", _ResourceId)
+
+	ListFirewallRuleDomainsRequest_FirewallDomainListId = ListFirewallRuleDomainsRequest.AddMember("FirewallDomainListId", _ResourceId)
+
+	ListFirewallRuleDomainsRequest_QueryOptions = ListFirewallRuleDomainsRequest.AddMember("QueryOptions", ListFirewallRuleDomainsQueryOptions)
+
+	ListFirewallRuleDomainsRequest_MaxResults = ListFirewallRuleDomainsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListFirewallRuleDomainsRequest_NextToken = ListFirewallRuleDomainsRequest.AddMember("NextToken", _NextToken)
+
+	ListFirewallRuleDomainsResponse_Domains = ListFirewallRuleDomainsResponse.AddMember("Domains", _FirewallRuleDomains)
+
+	ListFirewallRuleDomainsResponse_NextToken = ListFirewallRuleDomainsResponse.AddMember("NextToken", _NextToken)
 
 	ListFirewallRuleGroupAssociationsRequest_FirewallRuleGroupId = ListFirewallRuleGroupAssociationsRequest.AddMember("FirewallRuleGroupId", _ResourceId)
 

@@ -25,6 +25,7 @@ func (c *Client) StartResourceSnapshotJob(ctx context.Context, params *StartReso
 	return out, nil
 }
 
+// Contains the request parameters for the StartResourceSnapshotJob operation.
 type StartResourceSnapshotJobInput struct {
 
 	// Specifies the catalog related to the request. Valid values are:

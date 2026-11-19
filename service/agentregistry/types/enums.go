@@ -73,15 +73,17 @@ type RegistryRecordStatus string
 
 // Enum values for RegistryRecordStatus
 const (
-	RegistryRecordStatusDraft           RegistryRecordStatus = "DRAFT"
-	RegistryRecordStatusPendingApproval RegistryRecordStatus = "PENDING_APPROVAL"
-	RegistryRecordStatusApproved        RegistryRecordStatus = "APPROVED"
-	RegistryRecordStatusRejected        RegistryRecordStatus = "REJECTED"
-	RegistryRecordStatusDeprecated      RegistryRecordStatus = "DEPRECATED"
-	RegistryRecordStatusCreating        RegistryRecordStatus = "CREATING"
-	RegistryRecordStatusUpdating        RegistryRecordStatus = "UPDATING"
-	RegistryRecordStatusCreateFailed    RegistryRecordStatus = "CREATE_FAILED"
-	RegistryRecordStatusUpdateFailed    RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusDraft             RegistryRecordStatus = "DRAFT"
+	RegistryRecordStatusPendingApproval   RegistryRecordStatus = "PENDING_APPROVAL"
+	RegistryRecordStatusApproved          RegistryRecordStatus = "APPROVED"
+	RegistryRecordStatusRejected          RegistryRecordStatus = "REJECTED"
+	RegistryRecordStatusDeprecated        RegistryRecordStatus = "DEPRECATED"
+	RegistryRecordStatusCreating          RegistryRecordStatus = "CREATING"
+	RegistryRecordStatusUpdating          RegistryRecordStatus = "UPDATING"
+	RegistryRecordStatusCreateFailed      RegistryRecordStatus = "CREATE_FAILED"
+	RegistryRecordStatusUpdateFailed      RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusCreatePendingAuth RegistryRecordStatus = "CREATE_PENDING_AUTH"
+	RegistryRecordStatusUpdatePendingAuth RegistryRecordStatus = "UPDATE_PENDING_AUTH"
 )
 
 // Values returns all known values for RegistryRecordStatus. Note that this can be
@@ -99,6 +101,37 @@ func (RegistryRecordStatus) Values() []RegistryRecordStatus {
 		"UPDATING",
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
+		"CREATE_PENDING_AUTH",
+		"UPDATE_PENDING_AUTH",
+	}
+}
+
+type SearchType string
+
+// Enum values for SearchType
+const (
+	//  Combines keyword ranking and semantic ranking. Use this type when a query
+	// mixes specific terms with a natural language description.
+	SearchTypeHybrid SearchType = "HYBRID"
+	//  Ranks records by semantic similarity to the query. Use this type for natural
+	// language descriptions of a task. Returns the most similar records even when none
+	// of them closely matches the query.
+	SearchTypeSemantic SearchType = "SEMANTIC"
+	//  Ranks records by keyword match between the query terms and the record name,
+	// description, descriptors, and custom metadata text values. Use this type for
+	// queries built from specific terms, such as tool names or API names.
+	SearchTypeKeyword SearchType = "KEYWORD"
+)
+
+// Values returns all known values for SearchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchType) Values() []SearchType {
+	return []SearchType{
+		"HYBRID",
+		"SEMANTIC",
+		"KEYWORD",
 	}
 }
 
@@ -111,6 +144,7 @@ const (
 	ValidationExceptionReasonIdempotentParameterMismatchException ValidationExceptionReason = "IdempotentParameterMismatchException"
 	ValidationExceptionReasonRootEventInOtherSession              ValidationExceptionReason = "EventInOtherSession"
 	ValidationExceptionReasonResourceConflict                     ValidationExceptionReason = "ResourceConflict"
+	ValidationExceptionReasonUnsupportedInRegion                  ValidationExceptionReason = "UnsupportedInRegion"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -124,5 +158,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"IdempotentParameterMismatchException",
 		"EventInOtherSession",
 		"ResourceConflict",
+		"UnsupportedInRegion",
 	}
 }

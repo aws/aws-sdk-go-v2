@@ -1,0 +1,8 @@
+{
+    "id": "b27f24f2-bb6c-434a-a7ec-905ffd872d09",
+    "type": "feature",
+    "description": "BatchGetDiscoverableRegistryRecord returns a short-lived download URL and SHA-256 checksum for approved skill packages. SearchDiscoverableRegistryRecords adds searchType (KEYWORD, SEMANTIC, HYBRID) and pagination. Adds bearer token authentication for registries that use JWT authorization.",
+    "modules": [
+        "service/agentregistry"
+    ]
+}

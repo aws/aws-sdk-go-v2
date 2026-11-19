@@ -2,6 +2,46 @@
 
 package types
 
+type AssessmentStatus string
+
+// Enum values for AssessmentStatus
+const (
+	AssessmentStatusInProgress AssessmentStatus = "IN_PROGRESS"
+	AssessmentStatusComplete   AssessmentStatus = "COMPLETE"
+	AssessmentStatusFailed     AssessmentStatus = "FAILED"
+	AssessmentStatusDeleting   AssessmentStatus = "DELETING"
+)
+
+// Values returns all known values for AssessmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentStatus) Values() []AssessmentStatus {
+	return []AssessmentStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+		"DELETING",
+	}
+}
+
+type AssessmentType string
+
+// Enum values for AssessmentType
+const (
+	AssessmentTypeUpdateBrokerType AssessmentType = "UPDATE_BROKER_TYPE"
+)
+
+// Values returns all known values for AssessmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssessmentType) Values() []AssessmentType {
+	return []AssessmentType{
+		"UPDATE_BROKER_TYPE",
+	}
+}
+
 type BrokerAZDistribution string
 
 // Enum values for BrokerAZDistribution
@@ -16,6 +56,25 @@ const (
 func (BrokerAZDistribution) Values() []BrokerAZDistribution {
 	return []BrokerAZDistribution{
 		"DEFAULT",
+	}
+}
+
+type BrokerNodeType string
+
+// Enum values for BrokerNodeType
+const (
+	BrokerNodeTypeStandard BrokerNodeType = "STANDARD"
+	BrokerNodeTypeExpress  BrokerNodeType = "EXPRESS"
+)
+
+// Values returns all known values for BrokerNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrokerNodeType) Values() []BrokerNodeType {
+	return []BrokerNodeType{
+		"STANDARD",
+		"EXPRESS",
 	}
 }
 
@@ -219,6 +278,52 @@ func (EnhancedMonitoring) Values() []EnhancedMonitoring {
 		"PER_BROKER",
 		"PER_TOPIC_PER_BROKER",
 		"PER_TOPIC_PER_PARTITION",
+	}
+}
+
+type FindingCategory string
+
+// Enum values for FindingCategory
+const (
+	FindingCategoryInfrastructure      FindingCategory = "INFRASTRUCTURE"
+	FindingCategoryBrokerConfiguration FindingCategory = "BROKER_CONFIGURATION"
+	FindingCategoryTopicConfiguration  FindingCategory = "TOPIC_CONFIGURATION"
+	FindingCategoryCapacity            FindingCategory = "CAPACITY"
+	FindingCategoryHealth              FindingCategory = "HEALTH"
+)
+
+// Values returns all known values for FindingCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingCategory) Values() []FindingCategory {
+	return []FindingCategory{
+		"INFRASTRUCTURE",
+		"BROKER_CONFIGURATION",
+		"TOPIC_CONFIGURATION",
+		"CAPACITY",
+		"HEALTH",
+	}
+}
+
+type FindingSeverity string
+
+// Enum values for FindingSeverity
+const (
+	FindingSeverityError   FindingSeverity = "ERROR"
+	FindingSeverityWarning FindingSeverity = "WARNING"
+	FindingSeverityInfo    FindingSeverity = "INFO"
+)
+
+// Values returns all known values for FindingSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FindingSeverity) Values() []FindingSeverity {
+	return []FindingSeverity{
+		"ERROR",
+		"WARNING",
+		"INFO",
 	}
 }
 
@@ -559,6 +664,71 @@ func (TokenEndpointAuthenticationMethod) Values() []TokenEndpointAuthenticationM
 		"POST",
 		"BASIC",
 		"NONE",
+	}
+}
+
+type TopicReassignment string
+
+// Enum values for TopicReassignment
+const (
+	TopicReassignmentAuto   TopicReassignment = "AUTO"
+	TopicReassignmentManual TopicReassignment = "MANUAL"
+)
+
+// Values returns all known values for TopicReassignment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicReassignment) Values() []TopicReassignment {
+	return []TopicReassignment{
+		"AUTO",
+		"MANUAL",
+	}
+}
+
+type TopicReassignmentMode string
+
+// Enum values for TopicReassignmentMode
+const (
+	TopicReassignmentModeAuto   TopicReassignmentMode = "AUTO"
+	TopicReassignmentModeManual TopicReassignmentMode = "MANUAL"
+)
+
+// Values returns all known values for TopicReassignmentMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicReassignmentMode) Values() []TopicReassignmentMode {
+	return []TopicReassignmentMode{
+		"AUTO",
+		"MANUAL",
+	}
+}
+
+type TopicReassignmentStatus string
+
+// Enum values for TopicReassignmentStatus
+const (
+	TopicReassignmentStatusPending    TopicReassignmentStatus = "PENDING"
+	TopicReassignmentStatusInProgress TopicReassignmentStatus = "IN_PROGRESS"
+	TopicReassignmentStatusStopping   TopicReassignmentStatus = "STOPPING"
+	TopicReassignmentStatusComplete   TopicReassignmentStatus = "COMPLETE"
+	TopicReassignmentStatusFailed     TopicReassignmentStatus = "FAILED"
+	TopicReassignmentStatusStopped    TopicReassignmentStatus = "STOPPED"
+)
+
+// Values returns all known values for TopicReassignmentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicReassignmentStatus) Values() []TopicReassignmentStatus {
+	return []TopicReassignmentStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"STOPPING",
+		"COMPLETE",
+		"FAILED",
+		"STOPPED",
 	}
 }
 

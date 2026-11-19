@@ -933,6 +933,9 @@ func TestCheckRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
 						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
+						},
 					},
 				},
 				VpcConfiguration: &types.VpcConfiguration{
@@ -9835,6 +9838,9 @@ func TestUpdateRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},

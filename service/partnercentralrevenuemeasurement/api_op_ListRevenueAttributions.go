@@ -35,6 +35,10 @@ type ListRevenueAttributionsInput struct {
 	// This member is required.
 	Catalog types.CatalogName
 
+	// Filter results by context. Filters are combined with AND; values within a
+	// filter are combined with OR.
+	ContextFilters []types.ContextFilter
+
 	// Filter results to only include revenue attributions created after this
 	// timestamp.
 	CreatedAfter *time.Time
@@ -72,6 +76,9 @@ func (v *ListRevenueAttributionsInput) Serialize(s smithy.ShapeSerializer) {
 func (v *ListRevenueAttributionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != "" {
 		s.WriteString(schemas.ListRevenueAttributionsInput_Catalog, string(v.Catalog))
+	}
+	if v.ContextFilters != nil {
+		serializeContextFilterList(s, schemas.ListRevenueAttributionsInput_ContextFilters, v.ContextFilters)
 	}
 	if v.CreatedAfter != nil {
 		s.WriteTime(schemas.ListRevenueAttributionsInput_CreatedAfter, *v.CreatedAfter)

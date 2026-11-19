@@ -34,6 +34,7 @@ func (c *Client) AssignOpportunity(ctx context.Context, params *AssignOpportunit
 	return out, nil
 }
 
+// Contains the request parameters for the AssignOpportunity operation.
 type AssignOpportunityInput struct {
 
 	// Specifies the user or team member responsible for managing the assigned

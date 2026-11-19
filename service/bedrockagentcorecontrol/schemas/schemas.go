@@ -1846,6 +1846,12 @@ var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AwsAccountId",
 }, smithy.ShapeTypeString, 0)
 
+var AwsBillingConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AwsBillingConnectorConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var AwsBillingConnectorConfiguration_iamRoleArn *smithy.Schema
+
 var _BatchPutLimitEntries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "BatchPutLimitEntries",
@@ -2886,6 +2892,12 @@ var ContentType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var ContentType_MEMORY_RECORDS *smithy.Schema
 
+var CpuOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "CpuOptions",
+}, smithy.ShapeTypeStructure, 1)
+var CpuOptions_nestedVirtualization *smithy.Schema
+
 var CredentialProvider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CredentialProvider",
@@ -3002,10 +3014,12 @@ var CredentialRotationConfig_coinbaseCDP *smithy.Schema
 var CredentialsProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CredentialsProviderConfiguration",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var CredentialsProviderConfiguration_coinbaseCDP *smithy.Schema
 
 var CredentialsProviderConfiguration_stripePrivy *smithy.Schema
+
+var CredentialsProviderConfiguration_awsBilling *smithy.Schema
 
 var _CredentialsProviderConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5889,7 +5903,7 @@ var LambdaTransformConfiguration_arn *smithy.Schema
 var LaunchParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "LaunchParameters",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var LaunchParameters_operatingSystem *smithy.Schema
 
 var LaunchParameters_instanceRequirements *smithy.Schema
@@ -5907,6 +5921,8 @@ var LaunchParameters_sshKeyName *smithy.Schema
 var LaunchParameters_instanceProfileArn *smithy.Schema
 
 var LaunchParameters_propagatedTags *smithy.Schema
+
+var LaunchParameters_cpuOptions *smithy.Schema
 
 var LaunchTemplateSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -6726,6 +6742,14 @@ var _NaturalLanguage = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NaturalLanguage",
 }, smithy.ShapeTypeString, 0)
 
+var NestedVirtualization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "NestedVirtualization",
+}, smithy.ShapeTypeEnum, 2)
+var NestedVirtualization_ENABLED *smithy.Schema
+
+var NestedVirtualization_DISABLED *smithy.Schema
+
 var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "NetworkConfiguration",
@@ -7209,10 +7233,12 @@ var PaymentConnectorSummary_lastUpdatedAt *smithy.Schema
 var PaymentConnectorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "PaymentConnectorType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var PaymentConnectorType_COINBASE_CDP *smithy.Schema
 
 var PaymentConnectorType_STRIPE_PRIVY *smithy.Schema
+
+var PaymentConnectorType_AWS_BILLING *smithy.Schema
 
 var _PaymentCredentialProviderArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -15086,6 +15112,8 @@ func init() {
 
 	AuthorizerType_AUTHENTICATE_ONLY = AuthorizerType.AddMember("AUTHENTICATE_ONLY", smithyprelude.Unit)
 
+	AwsBillingConnectorConfiguration_iamRoleArn = AwsBillingConnectorConfiguration.AddMember("iamRoleArn", _RoleArn)
+
 	_DimensionKeys_member = _DimensionKeys.AddMember("member", _DimensionKey)
 
 	_Dimensions_key = _Dimensions.AddMember("key", _DimensionKey)
@@ -15506,6 +15534,12 @@ func init() {
 
 	_LicenseSpecificationList_member = _LicenseSpecificationList.AddMember("member", LicenseSpecification)
 
+	NestedVirtualization_ENABLED = NestedVirtualization.AddMember("ENABLED", smithyprelude.Unit)
+
+	NestedVirtualization_DISABLED = NestedVirtualization.AddMember("DISABLED", smithyprelude.Unit)
+
+	CpuOptions_nestedVirtualization = CpuOptions.AddMember("nestedVirtualization", NestedVirtualization)
+
 	LaunchParameters_operatingSystem = LaunchParameters.AddMember("operatingSystem", OperatingSystem)
 
 	LaunchParameters_instanceRequirements = LaunchParameters.AddMember("instanceRequirements", InstanceRequirements)
@@ -15523,6 +15557,8 @@ func init() {
 	LaunchParameters_instanceProfileArn = LaunchParameters.AddMember("instanceProfileArn", _InstanceProfileArn)
 
 	LaunchParameters_propagatedTags = LaunchParameters.AddMember("propagatedTags", _TagsMap)
+
+	LaunchParameters_cpuOptions = LaunchParameters.AddMember("cpuOptions", CpuOptions)
 
 	LaunchTemplateSource_launchParameters = LaunchTemplateSource.AddMember("launchParameters", LaunchParameters)
 
@@ -15905,6 +15941,8 @@ func init() {
 	CredentialsProviderConfiguration_coinbaseCDP = CredentialsProviderConfiguration.AddMember("coinbaseCDP", PaymentCredentialProviderConfiguration)
 
 	CredentialsProviderConfiguration_stripePrivy = CredentialsProviderConfiguration.AddMember("stripePrivy", PaymentCredentialProviderConfiguration)
+
+	CredentialsProviderConfiguration_awsBilling = CredentialsProviderConfiguration.AddMember("awsBilling", AwsBillingConnectorConfiguration)
 
 	_CredentialsProviderConfigurations_member = _CredentialsProviderConfigurations.AddMember("member", CredentialsProviderConfiguration)
 
@@ -17985,6 +18023,8 @@ func init() {
 	PaymentConnectorType_COINBASE_CDP = PaymentConnectorType.AddMember("COINBASE_CDP", smithyprelude.Unit)
 
 	PaymentConnectorType_STRIPE_PRIVY = PaymentConnectorType.AddMember("STRIPE_PRIVY", smithyprelude.Unit)
+
+	PaymentConnectorType_AWS_BILLING = PaymentConnectorType.AddMember("AWS_BILLING", smithyprelude.Unit)
 
 	PaymentConnectorSummary_paymentConnectorId = PaymentConnectorSummary.AddMember("paymentConnectorId", _PaymentConnectorId)
 

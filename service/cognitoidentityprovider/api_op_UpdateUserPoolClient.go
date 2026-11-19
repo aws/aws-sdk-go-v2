@@ -281,6 +281,29 @@ type UpdateUserPoolClientInput struct {
 	// Defaults to LEGACY .
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
+	// Specifies whether Amazon Cognito stores and manages this app client's secret in [Amazon Web Services Secrets Manager]
+	// instead of returning the plaintext value. When you set this parameter to true ,
+	// the response returns ClientSecretArn instead of ClientSecret . By default,
+	// Amazon Cognito rotates the secret every 7 days. You can change the rotation
+	// schedule in Secrets Manager.
+	//
+	// Set to true to migrate an existing generated secret into Secrets Manager, or
+	// false to move it back to Amazon Cognito and delete the Secrets Manager secret.
+	// If you omit this parameter, Amazon Cognito doesn't change how it manages the
+	// existing secret. Applies only to app clients that already have a generated
+	// secret.
+	//
+	// When you set it to true , Amazon Cognito starts managing the app client's secret
+	// in Secrets Manager and rotates it right away. If the app client has two secrets,
+	// that first rotation deletes the older one.
+	//
+	// When you set this parameter to false , Amazon Cognito immediately and
+	// permanently deletes the Secrets Manager secret. There's no recovery window.
+	// Applications that read the secret from Secrets Manager can no longer get it.
+	//
+	// [Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+	PublishSecretsInAWSSecretsManager *bool
+
 	// The list of user attributes that you want your app client to have read access
 	// to. After your user authenticates in your app, their access token authorizes
 	// them to read their own attribute value for any attribute in this list.
@@ -416,6 +439,9 @@ func (v *UpdateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.PreventUserExistenceErrors != "" {
 		s.WriteString(schemas.UpdateUserPoolClientRequest_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
+	}
+	if v.PublishSecretsInAWSSecretsManager != nil {
+		s.WriteBool(schemas.UpdateUserPoolClientRequest_PublishSecretsInAWSSecretsManager, *v.PublishSecretsInAWSSecretsManager)
 	}
 	if v.ReadAttributes != nil {
 		serializeClientPermissionListType(s, schemas.UpdateUserPoolClientRequest_ReadAttributes, v.ReadAttributes)

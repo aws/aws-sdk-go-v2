@@ -37,6 +37,7 @@ func (c *Client) DisassociateOpportunity(ctx context.Context, params *Disassocia
 	return out, nil
 }
 
+// Contains the request parameters for the DisassociateOpportunity operation.
 type DisassociateOpportunityInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string

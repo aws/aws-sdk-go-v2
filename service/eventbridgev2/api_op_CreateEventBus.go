@@ -34,8 +34,9 @@ type CreateEventBusInput struct {
 
 	// Name of an event bus. The first character must be alphanumeric; the remaining
 	// characters may also include '.', '-', and '_'. The grammar matches the name
-	// segment of EventBusArn (event-busv2//), so every valid name can be represented
-	// in the bus's ARN. The same type is used everywhere a bus name appears.
+	// segment of EventBusArn (event-busv2/<name>/<id>), so every valid name can be
+	// represented in the bus's ARN. The same type is used everywhere a bus name
+	// appears.
 	//
 	// This member is required.
 	Name *string
@@ -108,21 +109,28 @@ type CreateEventBusOutput struct {
 
 	// Name of an event bus. The first character must be alphanumeric; the remaining
 	// characters may also include '.', '-', and '_'. The grammar matches the name
-	// segment of EventBusArn (event-busv2//), so every valid name can be represented
-	// in the bus's ARN. The same type is used everywhere a bus name appears.
+	// segment of EventBusArn (event-busv2/<name>/<id>), so every valid name can be
+	// represented in the bus's ARN. The same type is used everywhere a bus name
+	// appears.
 	Name *string
 
 	// Lifecycle state of an event bus.
 	//
 	//   - CREATING: Bus creation is in progress.
+	//
 	//   - CREATE_FAILED: Bus creation failed; see StateReason. The bus cannot be
 	//   recovered or recreated in place: delete it with DeleteEventBus, then create a
 	//   new bus.
+	//
 	//   - ACTIVE: Bus is fully operational and can accept events.
+	//
 	//   - UPDATING: Bus update is in progress.
+	//
 	//   - UPDATE_FAILED: Bus update failed; the bus remains operational with its
 	//   previous configuration.
+	//
 	//   - DELETING: Bus deletion is actively in progress.
+	//
 	//   - DELETE_FAILED: Bus deletion failed; see StateReason. Retry DeleteEventBus
 	//   after removing subscribers and event sources.
 	State types.BusState

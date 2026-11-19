@@ -242,6 +242,30 @@ func TestCheckSnapshot_DisassociateCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAvailableModule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAvailableModule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAvailableModule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAvailableModuleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAvailableModuleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAvailableModuleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCertificateAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCertificateAssociation(context.Background(), nil, func(o *Options) {
@@ -326,6 +350,42 @@ func TestCheckSnapshot_GetResponderGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAvailableModules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAvailableModules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAvailableModules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAvailableModuleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAvailableModuleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAvailableModuleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCertificateAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificateAssociations(context.Background(), nil, func(o *Options) {
@@ -391,6 +451,30 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListUpdates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUpdates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUpdates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutLinkFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLinkFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutLinkFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -673,6 +757,30 @@ func TestUpdateSnapshot_DisassociateCertificate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAvailableModule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAvailableModule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAvailableModule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAvailableModuleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAvailableModuleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAvailableModuleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCertificateAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCertificateAssociation(context.Background(), nil, func(o *Options) {
@@ -757,6 +865,42 @@ func TestUpdateSnapshot_GetResponderGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAvailableModules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAvailableModules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAvailableModules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAvailableModuleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAvailableModuleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAvailableModuleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCertificateAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCertificateAssociations(context.Background(), nil, func(o *Options) {
@@ -822,6 +966,30 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListUpdates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUpdates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUpdates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutLinkFlows(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutLinkFlows(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutLinkFlows")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

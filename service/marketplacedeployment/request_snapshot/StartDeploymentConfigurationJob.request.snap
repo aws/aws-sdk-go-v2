@@ -1,0 +1,5 @@
+POST /catalogs/__Catalog__/products/__ProductId__/delivery-options/data-as-a-service/deployment-configuration/jobs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"dataAsAService":{"fulfillmentUrl":"__FulfillmentUrl__"}},"tags":{"key0":"__Value__"}}

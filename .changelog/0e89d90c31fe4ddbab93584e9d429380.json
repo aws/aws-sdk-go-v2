@@ -1,0 +1,8 @@
+{
+    "id": "0e89d90c-31fe-4ddb-ab93-584e9d429380",
+    "type": "feature",
+    "description": "Adds support for disassociating replica tables in S3 Tables replication with the new DisassociateTableReplication API, which promotes a read-only replica table to a standalone table.",
+    "modules": [
+        "service/s3tables"
+    ]
+}

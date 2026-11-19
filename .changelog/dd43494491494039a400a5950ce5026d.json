@@ -1,0 +1,8 @@
+{
+    "id": "dd434944-9149-4039-a400-a5950ce5026d",
+    "type": "feature",
+    "description": "Added support for Job Submit Plugins in AWS PCS.",
+    "modules": [
+        "service/pcs"
+    ]
+}

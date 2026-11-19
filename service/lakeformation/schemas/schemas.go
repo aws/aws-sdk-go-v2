@@ -1663,7 +1663,7 @@ var _ResultStream = smithy.NewSchema(smithy.ShapeID{
 var RLSPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
 	Name:      "RLSPolicy",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var RLSPolicy_CatalogId *smithy.Schema
 
 var RLSPolicy_Name *smithy.Schema
@@ -1671,6 +1671,10 @@ var RLSPolicy_Name *smithy.Schema
 var RLSPolicy_AttachmentColumns *smithy.Schema
 
 var RLSPolicy_FilterExpression *smithy.Schema
+
+var RLSPolicy_Status *smithy.Schema
+
+var RLSPolicy_StatusReason *smithy.Schema
 
 var RLSPolicyAttachment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -1707,6 +1711,22 @@ var RLSPolicyResource = smithy.NewSchema(smithy.ShapeID{
 var RLSPolicyResource_CatalogId *smithy.Schema
 
 var RLSPolicyResource_Name *smithy.Schema
+
+var RLSPolicyStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "RLSPolicyStatus",
+}, smithy.ShapeTypeEnum, 2)
+var RLSPolicyStatus_VALID *smithy.Schema
+
+var RLSPolicyStatus_INVALID *smithy.Schema
+
+var RLSPolicyStatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lakeformation",
+	Name:      "RLSPolicyStatusReason",
+}, smithy.ShapeTypeEnum, 2)
+var RLSPolicyStatusReason_REFERENCED_UDF_DELETED *smithy.Schema
+
+var RLSPolicyStatusReason_REFERENCED_LOOKUP_TABLE_DELETED *smithy.Schema
 
 var RowFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lakeformation",
@@ -3954,6 +3974,14 @@ func init() {
 
 	ResourceShareType_ALL = ResourceShareType.AddMember("ALL", smithyprelude.Unit)
 
+	RLSPolicyStatus_VALID = RLSPolicyStatus.AddMember("VALID", smithyprelude.Unit)
+
+	RLSPolicyStatus_INVALID = RLSPolicyStatus.AddMember("INVALID", smithyprelude.Unit)
+
+	RLSPolicyStatusReason_REFERENCED_UDF_DELETED = RLSPolicyStatusReason.AddMember("REFERENCED_UDF_DELETED", smithyprelude.Unit)
+
+	RLSPolicyStatusReason_REFERENCED_LOOKUP_TABLE_DELETED = RLSPolicyStatusReason.AddMember("REFERENCED_LOOKUP_TABLE_DELETED", smithyprelude.Unit)
+
 	RLSPolicy_CatalogId = RLSPolicy.AddMember("CatalogId", _CatalogIdString)
 
 	RLSPolicy_Name = RLSPolicy.AddMember("Name", _NameString)
@@ -3961,6 +3989,10 @@ func init() {
 	RLSPolicy_AttachmentColumns = RLSPolicy.AddMember("AttachmentColumns", _ColumnList)
 
 	RLSPolicy_FilterExpression = RLSPolicy.AddMember("FilterExpression", _PredicateString)
+
+	RLSPolicy_Status = RLSPolicy.AddMember("Status", RLSPolicyStatus)
+
+	RLSPolicy_StatusReason = RLSPolicy.AddMember("StatusReason", RLSPolicyStatusReason)
 
 	RLSPolicyAttachment_CatalogId = RLSPolicyAttachment.AddMember("CatalogId", _CatalogIdString)
 

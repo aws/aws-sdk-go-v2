@@ -128,8 +128,9 @@ type DomainListType string
 
 // Enum values for DomainListType
 const (
-	DomainListTypeThreat  DomainListType = "THREAT"
-	DomainListTypeContent DomainListType = "CONTENT"
+	DomainListTypeThreat        DomainListType = "THREAT"
+	DomainListTypeContent       DomainListType = "CONTENT"
+	DomainListTypeAutoallowlist DomainListType = "AUTOALLOWLIST"
 )
 
 // Values returns all known values for DomainListType. Note that this can be
@@ -140,6 +141,7 @@ func (DomainListType) Values() []DomainListType {
 	return []DomainListType{
 		"THREAT",
 		"CONTENT",
+		"AUTOALLOWLIST",
 	}
 }
 
@@ -206,6 +208,50 @@ func (FirewallDomainRedirectionAction) Values() []FirewallDomainRedirectionActio
 	}
 }
 
+type FirewallDomainStatus string
+
+// Enum values for FirewallDomainStatus
+const (
+	FirewallDomainStatusObserved FirewallDomainStatus = "OBSERVED"
+	FirewallDomainStatusAllowed  FirewallDomainStatus = "ALLOWED"
+	FirewallDomainStatusDenied   FirewallDomainStatus = "DENIED"
+	FirewallDomainStatusUnknown  FirewallDomainStatus = "UNKNOWN"
+)
+
+// Values returns all known values for FirewallDomainStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallDomainStatus) Values() []FirewallDomainStatus {
+	return []FirewallDomainStatus{
+		"OBSERVED",
+		"ALLOWED",
+		"DENIED",
+		"UNKNOWN",
+	}
+}
+
+type FirewallDomainStatusFilter string
+
+// Enum values for FirewallDomainStatusFilter
+const (
+	FirewallDomainStatusFilterObserved FirewallDomainStatusFilter = "OBSERVED"
+	FirewallDomainStatusFilterAllowed  FirewallDomainStatusFilter = "ALLOWED"
+	FirewallDomainStatusFilterDenied   FirewallDomainStatusFilter = "DENIED"
+)
+
+// Values returns all known values for FirewallDomainStatusFilter. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallDomainStatusFilter) Values() []FirewallDomainStatusFilter {
+	return []FirewallDomainStatusFilter{
+		"OBSERVED",
+		"ALLOWED",
+		"DENIED",
+	}
+}
+
 type FirewallDomainUpdateOperation string
 
 // Enum values for FirewallDomainUpdateOperation
@@ -213,6 +259,7 @@ const (
 	FirewallDomainUpdateOperationAdd     FirewallDomainUpdateOperation = "ADD"
 	FirewallDomainUpdateOperationRemove  FirewallDomainUpdateOperation = "REMOVE"
 	FirewallDomainUpdateOperationReplace FirewallDomainUpdateOperation = "REPLACE"
+	FirewallDomainUpdateOperationDeny    FirewallDomainUpdateOperation = "DENY"
 )
 
 // Values returns all known values for FirewallDomainUpdateOperation. Note that
@@ -225,6 +272,7 @@ func (FirewallDomainUpdateOperation) Values() []FirewallDomainUpdateOperation {
 		"ADD",
 		"REMOVE",
 		"REPLACE",
+		"DENY",
 	}
 }
 
@@ -246,6 +294,46 @@ func (FirewallFailOpenStatus) Values() []FirewallFailOpenStatus {
 		"ENABLED",
 		"DISABLED",
 		"USE_LOCAL_RESOURCE_SETTING",
+	}
+}
+
+type FirewallRuleDomainSortBy string
+
+// Enum values for FirewallRuleDomainSortBy
+const (
+	FirewallRuleDomainSortByTimeAdded     FirewallRuleDomainSortBy = "TIME_ADDED"
+	FirewallRuleDomainSortByDailyTotal    FirewallRuleDomainSortBy = "DAILY_TOTAL"
+	FirewallRuleDomainSortByTotalRequests FirewallRuleDomainSortBy = "TOTAL_REQUESTS"
+)
+
+// Values returns all known values for FirewallRuleDomainSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallRuleDomainSortBy) Values() []FirewallRuleDomainSortBy {
+	return []FirewallRuleDomainSortBy{
+		"TIME_ADDED",
+		"DAILY_TOTAL",
+		"TOTAL_REQUESTS",
+	}
+}
+
+type FirewallRuleDomainSortOrder string
+
+// Enum values for FirewallRuleDomainSortOrder
+const (
+	FirewallRuleDomainSortOrderAsc  FirewallRuleDomainSortOrder = "ASC"
+	FirewallRuleDomainSortOrderDesc FirewallRuleDomainSortOrder = "DESC"
+)
+
+// Values returns all known values for FirewallRuleDomainSortOrder. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallRuleDomainSortOrder) Values() []FirewallRuleDomainSortOrder {
+	return []FirewallRuleDomainSortOrder{
+		"ASC",
+		"DESC",
 	}
 }
 

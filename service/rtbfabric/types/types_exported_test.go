@@ -29,6 +29,50 @@ func ExampleAction_outputUsage() {
 var _ *types.HeaderTagAction
 var _ *types.NoBidAction
 
+func ExampleFlowPipeline_outputUsage() {
+	var union types.FlowPipeline
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FlowPipelineMemberPhased:
+		_ = v.Value // Value is types.PhasedPipeline
+
+	case *types.FlowPipelineMemberSequential:
+		_ = v.Value // Value is types.SequentialPipeline
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SequentialPipeline
+var _ *types.PhasedPipeline
+
+func ExampleLinkFlowParameters_outputUsage() {
+	var union types.LinkFlowParameters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LinkFlowParametersMemberFlows:
+		_ = v.Value // Value is []types.Flow
+
+	case *types.LinkFlowParametersMemberModules:
+		_ = v.Value // Value is []types.ModuleConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.Flow
+var _ []types.ModuleConfiguration
+
 func ExampleManagedEndpointConfiguration_outputUsage() {
 	var union types.ManagedEndpointConfiguration
 	// type switches can be used to check the union value
@@ -76,3 +120,59 @@ func ExampleModuleParameters_outputUsage() {
 var _ *types.OpenRtbAttributeModuleParameters
 var _ *types.NoBidModuleParameters
 var _ *types.RateLimiterModuleParameters
+
+func ExampleUpdateParameters_outputUsage() {
+	var union types.UpdateParameters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateParametersMemberLinkConfig:
+		_ = v.Value // Value is types.LinkConfigParameters
+
+	case *types.UpdateParametersMemberLinkFlow:
+		_ = v.Value // Value is types.LinkFlowParameters
+
+	case *types.UpdateParametersMemberResponderGatewayConfig:
+		_ = v.Value // Value is types.ResponderGatewayConfigParameters
+
+	case *types.UpdateParametersMemberRoutingRule:
+		_ = v.Value // Value is types.RoutingRuleParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LinkConfigParameters
+var _ *types.ResponderGatewayConfigParameters
+var _ *types.RoutingRuleParameters
+var _ types.LinkFlowParameters
+
+func ExampleUpdateTarget_outputUsage() {
+	var union types.UpdateTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateTargetMemberGateway:
+		_ = v.Value // Value is types.Unit
+
+	case *types.UpdateTargetMemberLink:
+		_ = v.Value // Value is types.LinkTarget
+
+	case *types.UpdateTargetMemberRoutingRule:
+		_ = v.Value // Value is types.RoutingRuleTarget
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LinkTarget
+var _ *types.Unit
+var _ *types.RoutingRuleTarget

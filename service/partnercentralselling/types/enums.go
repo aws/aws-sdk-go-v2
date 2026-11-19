@@ -6,7 +6,10 @@ type AccessDeniedExceptionErrorCode string
 
 // Enum values for AccessDeniedExceptionErrorCode
 const (
-	AccessDeniedExceptionErrorCodeIncompatibleBenefitAwsPartnerState AccessDeniedExceptionErrorCode = "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE"
+	AccessDeniedExceptionErrorCodeIncompatibleBenefitAwsPartnerState    AccessDeniedExceptionErrorCode = "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE"
+	AccessDeniedExceptionErrorCodeSearchOpportunitiesNotEnabled         AccessDeniedExceptionErrorCode = "SEARCH_OPPORTUNITIES_NOT_ENABLED"
+	AccessDeniedExceptionErrorCodeSearchOpportunitiesDataNotRoutedToDdb AccessDeniedExceptionErrorCode = "SEARCH_OPPORTUNITIES_DATA_NOT_ROUTED_TO_DDB"
+	AccessDeniedExceptionErrorCodeOpportunityBulkJobNotEnabled          AccessDeniedExceptionErrorCode = "OPPORTUNITY_BULK_JOB_NOT_ENABLED"
 )
 
 // Values returns all known values for AccessDeniedExceptionErrorCode. Note that
@@ -17,6 +20,57 @@ const (
 func (AccessDeniedExceptionErrorCode) Values() []AccessDeniedExceptionErrorCode {
 	return []AccessDeniedExceptionErrorCode{
 		"INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE",
+		"SEARCH_OPPORTUNITIES_NOT_ENABLED",
+		"SEARCH_OPPORTUNITIES_DATA_NOT_ROUTED_TO_DDB",
+		"OPPORTUNITY_BULK_JOB_NOT_ENABLED",
+	}
+}
+
+type AggregatableField string
+
+// Enum values for AggregatableField
+const (
+	// Group by the enrichment status of the customer account.
+	AggregatableFieldEnrichmentStatus AggregatableField = "ENRICHMENT_STATUS"
+	// Group by the industry of the customer, as classified by AWS.
+	AggregatableFieldAwsIndustry AggregatableField = "AWS_INDUSTRY"
+	// Group by the market segment of the customer.
+	AggregatableFieldSegment AggregatableField = "SEGMENT"
+	// Group by the region of the customer.
+	AggregatableFieldRegion AggregatableField = "REGION"
+	// Group by the category of the recommended solution.
+	AggregatableFieldSolutionCategory AggregatableField = "SOLUTION_CATEGORY"
+	// Group by whether the customer qualifies for account planning.
+	AggregatableFieldAccountPlanningQualification AggregatableField = "ACCOUNT_PLANNING_QUALIFICATION"
+	// Group by the AWS programs that the customer is eligible for.
+	AggregatableFieldProgramEligibility AggregatableField = "PROGRAM_ELIGIBILITY"
+	// Group by the AWS Marketplace engagement score of the customer.
+	AggregatableFieldMarketplaceEngagementScore AggregatableField = "MARKETPLACE_ENGAGEMENT_SCORE"
+	// Group by the geographic area of the customer.
+	AggregatableFieldGeo AggregatableField = "GEO"
+	// Group by the country of the customer.
+	AggregatableFieldCountry AggregatableField = "COUNTRY"
+	// Group by the score of the recommended solution.
+	AggregatableFieldSolutionScore AggregatableField = "SOLUTION_SCORE"
+)
+
+// Values returns all known values for AggregatableField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggregatableField) Values() []AggregatableField {
+	return []AggregatableField{
+		"ENRICHMENT_STATUS",
+		"AWS_INDUSTRY",
+		"SEGMENT",
+		"REGION",
+		"SOLUTION_CATEGORY",
+		"ACCOUNT_PLANNING_QUALIFICATION",
+		"PROGRAM_ELIGIBILITY",
+		"MARKETPLACE_ENGAGEMENT_SCORE",
+		"GEO",
+		"COUNTRY",
+		"SOLUTION_SCORE",
 	}
 }
 
@@ -259,6 +313,144 @@ func (AwsPartition) Values() []AwsPartition {
 	}
 }
 
+type BulkFileFormat string
+
+// Enum values for BulkFileFormat
+const (
+	BulkFileFormatCsv BulkFileFormat = "CSV"
+)
+
+// Values returns all known values for BulkFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkFileFormat) Values() []BulkFileFormat {
+	return []BulkFileFormat{
+		"CSV",
+	}
+}
+
+type BulkJobStatus string
+
+// Enum values for BulkJobStatus
+const (
+	// The job was created and is waiting to start.
+	BulkJobStatusSubmitted BulkJobStatus = "SUBMITTED"
+	// The job is processing records.
+	BulkJobStatusInProgress BulkJobStatus = "IN_PROGRESS"
+	// The job finished processing all records. Some records might have failed.
+	BulkJobStatusCompleted BulkJobStatus = "COMPLETED"
+	// The job failed. See FailureReason for details.
+	BulkJobStatusFailed BulkJobStatus = "FAILED"
+)
+
+// Values returns all known values for BulkJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkJobStatus) Values() []BulkJobStatus {
+	return []BulkJobStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type BulkOperationType string
+
+// Enum values for BulkOperationType
+const (
+	// The job creates new opportunities.
+	BulkOperationTypeBulkCreate BulkOperationType = "BULK_CREATE"
+	// The job updates existing opportunities.
+	BulkOperationTypeBulkUpdate BulkOperationType = "BULK_UPDATE"
+)
+
+// Values returns all known values for BulkOperationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkOperationType) Values() []BulkOperationType {
+	return []BulkOperationType{
+		"BULK_CREATE",
+		"BULK_UPDATE",
+	}
+}
+
+type BulkRecordStatus string
+
+// Enum values for BulkRecordStatus
+const (
+	// The record was processed successfully.
+	BulkRecordStatusSucceeded BulkRecordStatus = "SUCCEEDED"
+	// The record failed.
+	BulkRecordStatusFailed BulkRecordStatus = "FAILED"
+)
+
+// Values returns all known values for BulkRecordStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkRecordStatus) Values() []BulkRecordStatus {
+	return []BulkRecordStatus{
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type BulkReportStatus string
+
+// Enum values for BulkReportStatus
+const (
+	// The report hasn't been generated yet.
+	BulkReportStatusNotStarted BulkReportStatus = "NOT_STARTED"
+	// The report is being generated.
+	BulkReportStatusInProgress BulkReportStatus = "IN_PROGRESS"
+	// The report is ready to download.
+	BulkReportStatusAvailable BulkReportStatus = "AVAILABLE"
+	// The report couldn't be generated. See FailureReason for details.
+	BulkReportStatusFailed BulkReportStatus = "FAILED"
+	// The report was generated but its retention window has passed, so the stored
+	// file no longer exists and no download URL can be issued.
+	BulkReportStatusExpired BulkReportStatus = "EXPIRED"
+)
+
+// Values returns all known values for BulkReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkReportStatus) Values() []BulkReportStatus {
+	return []BulkReportStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"AVAILABLE",
+		"FAILED",
+		"EXPIRED",
+	}
+}
+
+type BulkReportType string
+
+// Enum values for BulkReportType
+const (
+	// The report covers only the records that failed.
+	BulkReportTypeFailedRecords BulkReportType = "FAILED_RECORDS"
+	// Reserved for future use.
+	BulkReportTypeAllRecords BulkReportType = "ALL_RECORDS"
+)
+
+// Values returns all known values for BulkReportType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BulkReportType) Values() []BulkReportType {
+	return []BulkReportType{
+		"FAILED_RECORDS",
+		"ALL_RECORDS",
+	}
+}
+
 type Channel string
 
 // Enum values for Channel
@@ -387,6 +579,27 @@ func (CompetitorName) Values() []CompetitorName {
 		"Other- Cost Optimization",
 		"No Competition",
 		"*Other",
+	}
+}
+
+type ContactWindow string
+
+// Enum values for ContactWindow
+const (
+	ContactWindowMorning   ContactWindow = "MORNING"
+	ContactWindowAfternoon ContactWindow = "AFTERNOON"
+	ContactWindowEvening   ContactWindow = "EVENING"
+)
+
+// Values returns all known values for ContactWindow. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContactWindow) Values() []ContactWindow {
+	return []ContactWindow{
+		"MORNING",
+		"AFTERNOON",
+		"EVENING",
 	}
 }
 
@@ -1254,6 +1467,65 @@ func (CurrencyCode) Values() []CurrencyCode {
 	}
 }
 
+type CustomerAccountFailureReason string
+
+// Enum values for CustomerAccountFailureReason
+const (
+	// The customer is already mapped by another customer account.
+	// ExistingCustomerAccountArn identifies that account.
+	CustomerAccountFailureReasonDuplicateCustomerMatch CustomerAccountFailureReason = "DUPLICATE_CUSTOMER_MATCH"
+	// An error occurred while processing the customer account.
+	CustomerAccountFailureReasonProcessingError CustomerAccountFailureReason = "PROCESSING_ERROR"
+)
+
+// Values returns all known values for CustomerAccountFailureReason. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerAccountFailureReason) Values() []CustomerAccountFailureReason {
+	return []CustomerAccountFailureReason{
+		"DUPLICATE_CUSTOMER_MATCH",
+		"PROCESSING_ERROR",
+	}
+}
+
+type DayOfWeek string
+
+// Enum values for DayOfWeek
+const (
+	// The day is Monday.
+	DayOfWeekMonday DayOfWeek = "MONDAY"
+	// The day is Tuesday.
+	DayOfWeekTuesday DayOfWeek = "TUESDAY"
+	// The day is Wednesday.
+	DayOfWeekWednesday DayOfWeek = "WEDNESDAY"
+	// The day is Thursday.
+	DayOfWeekThursday DayOfWeek = "THURSDAY"
+	// The day is Friday.
+	DayOfWeekFriday DayOfWeek = "FRIDAY"
+	// The day is Saturday.
+	DayOfWeekSaturday DayOfWeek = "SATURDAY"
+	// The day is Sunday.
+	DayOfWeekSunday DayOfWeek = "SUNDAY"
+)
+
+// Values returns all known values for DayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
+	}
+}
+
 type DeliveryModel string
 
 // Enum values for DeliveryModel
@@ -1288,6 +1560,7 @@ const (
 	EngagementContextTypeCustomerProject   EngagementContextType = "CustomerProject"
 	EngagementContextTypeLead              EngagementContextType = "Lead"
 	EngagementContextTypeProspectingResult EngagementContextType = "ProspectingResult"
+	EngagementContextTypeCustomerAccount   EngagementContextType = "CustomerAccount"
 )
 
 // Values returns all known values for EngagementContextType. Note that this can
@@ -1299,6 +1572,28 @@ func (EngagementContextType) Values() []EngagementContextType {
 		"CustomerProject",
 		"Lead",
 		"ProspectingResult",
+		"CustomerAccount",
+	}
+}
+
+type EngagementGroupSortName string
+
+// Enum values for EngagementGroupSortName
+const (
+	// Sort by the number of engagements in the group.
+	EngagementGroupSortNameCount EngagementGroupSortName = "Count"
+	// Sort by the date and time when the group was last updated.
+	EngagementGroupSortNameUpdatedAt EngagementGroupSortName = "UpdatedAt"
+)
+
+// Values returns all known values for EngagementGroupSortName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngagementGroupSortName) Values() []EngagementGroupSortName {
+	return []EngagementGroupSortName{
+		"Count",
+		"UpdatedAt",
 	}
 }
 
@@ -1306,8 +1601,9 @@ type EngagementInvitationPayloadType string
 
 // Enum values for EngagementInvitationPayloadType
 const (
-	EngagementInvitationPayloadTypeOpportunityInvitation EngagementInvitationPayloadType = "OpportunityInvitation"
-	EngagementInvitationPayloadTypeLeadInvitation        EngagementInvitationPayloadType = "LeadInvitation"
+	EngagementInvitationPayloadTypeOpportunityInvitation     EngagementInvitationPayloadType = "OpportunityInvitation"
+	EngagementInvitationPayloadTypeLeadInvitation            EngagementInvitationPayloadType = "LeadInvitation"
+	EngagementInvitationPayloadTypeAccountPlanningInvitation EngagementInvitationPayloadType = "AccountPlanningInvitation"
 )
 
 // Values returns all known values for EngagementInvitationPayloadType. Note that
@@ -1319,6 +1615,7 @@ func (EngagementInvitationPayloadType) Values() []EngagementInvitationPayloadTyp
 	return []EngagementInvitationPayloadType{
 		"OpportunityInvitation",
 		"LeadInvitation",
+		"AccountPlanningInvitation",
 	}
 }
 
@@ -1343,6 +1640,201 @@ func (EngagementScore) Values() []EngagementScore {
 	}
 }
 
+type EngagementSearchFilterName string
+
+// Enum values for EngagementSearchFilterName
+const (
+	// Filter on the engagement id field.
+	EngagementSearchFilterNameEngagementId EngagementSearchFilterName = "EngagementId"
+	// Filter on the title field.
+	EngagementSearchFilterNameTitle EngagementSearchFilterName = "Title"
+	// Filter on the partner id field.
+	EngagementSearchFilterNamePartnerId EngagementSearchFilterName = "PartnerId"
+	// Filter on the created at field.
+	EngagementSearchFilterNameCreatedAt EngagementSearchFilterName = "CreatedAt"
+	// Filter on the last modified at field.
+	EngagementSearchFilterNameLastModifiedAt EngagementSearchFilterName = "LastModifiedAt"
+	// Filter on the member count field.
+	EngagementSearchFilterNameMemberCount EngagementSearchFilterName = "MemberCount"
+	// Filter on the prospecting customer geo field.
+	EngagementSearchFilterNameProspectingCustomerGeo EngagementSearchFilterName = "ProspectingCustomerGeo"
+	// Filter on the prospecting customer region field.
+	EngagementSearchFilterNameProspectingCustomerRegion EngagementSearchFilterName = "ProspectingCustomerRegion"
+	// Filter on the prospecting customer industry field.
+	EngagementSearchFilterNameProspectingCustomerIndustry EngagementSearchFilterName = "ProspectingCustomerIndustry"
+	// Filter on the prospecting customer segment field.
+	EngagementSearchFilterNameProspectingCustomerSegment EngagementSearchFilterName = "ProspectingCustomerSegment"
+	// Filter on the prospecting customer country field.
+	EngagementSearchFilterNameProspectingCustomerCountry EngagementSearchFilterName = "ProspectingCustomerCountry"
+	// Filter on the prospecting customer company size field.
+	EngagementSearchFilterNameProspectingCustomerCompanySize EngagementSearchFilterName = "ProspectingCustomerCompanySize"
+	// Filter on the prospecting insights marketplace engagement score field.
+	EngagementSearchFilterNameProspectingInsightsMarketplaceEngagementScore EngagementSearchFilterName = "ProspectingInsightsMarketplaceEngagementScore"
+	// Filter on the prospecting insights solution category field.
+	EngagementSearchFilterNameProspectingInsightsSolutionCategory EngagementSearchFilterName = "ProspectingInsightsSolutionCategory"
+	// Filter on the prospecting insights solution sub category field.
+	EngagementSearchFilterNameProspectingInsightsSolutionSubCategory EngagementSearchFilterName = "ProspectingInsightsSolutionSubCategory"
+	// Filter on the lead qualification status field.
+	EngagementSearchFilterNameLeadQualificationStatus EngagementSearchFilterName = "LeadQualificationStatus"
+	// Filter on the lead readiness score field.
+	EngagementSearchFilterNameLeadReadinessScore EngagementSearchFilterName = "LeadReadinessScore"
+	// Filter on the lead customer industry field.
+	EngagementSearchFilterNameLeadCustomerIndustry EngagementSearchFilterName = "LeadCustomerIndustry"
+	// Filter on the lead customer country code field.
+	EngagementSearchFilterNameLeadCustomerCountryCode EngagementSearchFilterName = "LeadCustomerCountryCode"
+	// Filter on the lead customer aws maturity field.
+	EngagementSearchFilterNameLeadCustomerAwsMaturity EngagementSearchFilterName = "LeadCustomerAwsMaturity"
+	// Filter on the lead customer market segment field.
+	EngagementSearchFilterNameLeadCustomerMarketSegment EngagementSearchFilterName = "LeadCustomerMarketSegment"
+	// Filter on the lead interactions source type field.
+	EngagementSearchFilterNameLeadInteractionsSourceType EngagementSearchFilterName = "LeadInteractionsSourceType"
+	// Filter on the lead customer company name field.
+	EngagementSearchFilterNameLeadCustomerCompanyName EngagementSearchFilterName = "LeadCustomerCompanyName"
+	// Filter on the lead interactions contact first name field.
+	EngagementSearchFilterNameLeadInteractionsContactFirstName EngagementSearchFilterName = "LeadInteractionsContactFirstName"
+	// Filter on the lead interactions contact last name field.
+	EngagementSearchFilterNameLeadInteractionsContactLastName EngagementSearchFilterName = "LeadInteractionsContactLastName"
+	// Filter on the lead interactions usecase field.
+	EngagementSearchFilterNameLeadInteractionsUsecase EngagementSearchFilterName = "LeadInteractionsUsecase"
+	// Filter on the lead interactions source name field.
+	EngagementSearchFilterNameLeadInteractionsSourceName EngagementSearchFilterName = "LeadInteractionsSourceName"
+	// Filter on the lead interactions contact business title field.
+	EngagementSearchFilterNameLeadInteractionsContactBusinessTitle EngagementSearchFilterName = "LeadInteractionsContactBusinessTitle"
+	// Filter on the context type field.
+	EngagementSearchFilterNameContextType EngagementSearchFilterName = "ContextType"
+)
+
+// Values returns all known values for EngagementSearchFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngagementSearchFilterName) Values() []EngagementSearchFilterName {
+	return []EngagementSearchFilterName{
+		"EngagementId",
+		"Title",
+		"PartnerId",
+		"CreatedAt",
+		"LastModifiedAt",
+		"MemberCount",
+		"ProspectingCustomerGeo",
+		"ProspectingCustomerRegion",
+		"ProspectingCustomerIndustry",
+		"ProspectingCustomerSegment",
+		"ProspectingCustomerCountry",
+		"ProspectingCustomerCompanySize",
+		"ProspectingInsightsMarketplaceEngagementScore",
+		"ProspectingInsightsSolutionCategory",
+		"ProspectingInsightsSolutionSubCategory",
+		"LeadQualificationStatus",
+		"LeadReadinessScore",
+		"LeadCustomerIndustry",
+		"LeadCustomerCountryCode",
+		"LeadCustomerAwsMaturity",
+		"LeadCustomerMarketSegment",
+		"LeadInteractionsSourceType",
+		"LeadCustomerCompanyName",
+		"LeadInteractionsContactFirstName",
+		"LeadInteractionsContactLastName",
+		"LeadInteractionsUsecase",
+		"LeadInteractionsSourceName",
+		"LeadInteractionsContactBusinessTitle",
+		"ContextType",
+	}
+}
+
+type EngagementSearchSortName string
+
+// Enum values for EngagementSearchSortName
+const (
+	// Sort by the engagement id field.
+	EngagementSearchSortNameEngagementId EngagementSearchSortName = "EngagementId"
+	// Sort by the title field.
+	EngagementSearchSortNameTitle EngagementSearchSortName = "Title"
+	// Sort by the partner id field.
+	EngagementSearchSortNamePartnerId EngagementSearchSortName = "PartnerId"
+	// Sort by the created at field.
+	EngagementSearchSortNameCreatedAt EngagementSearchSortName = "CreatedAt"
+	// Sort by the last modified at field.
+	EngagementSearchSortNameLastModifiedAt EngagementSearchSortName = "LastModifiedAt"
+	// Sort by the member count field.
+	EngagementSearchSortNameMemberCount EngagementSearchSortName = "MemberCount"
+	// Sort by the prospecting customer geo field.
+	EngagementSearchSortNameProspectingCustomerGeo EngagementSearchSortName = "ProspectingCustomerGeo"
+	// Sort by the prospecting customer region field.
+	EngagementSearchSortNameProspectingCustomerRegion EngagementSearchSortName = "ProspectingCustomerRegion"
+	// Sort by the prospecting customer industry field.
+	EngagementSearchSortNameProspectingCustomerIndustry EngagementSearchSortName = "ProspectingCustomerIndustry"
+	// Sort by the prospecting customer segment field.
+	EngagementSearchSortNameProspectingCustomerSegment EngagementSearchSortName = "ProspectingCustomerSegment"
+	// Sort by the prospecting customer country field.
+	EngagementSearchSortNameProspectingCustomerCountry EngagementSearchSortName = "ProspectingCustomerCountry"
+	// Sort by the prospecting customer company size field.
+	EngagementSearchSortNameProspectingCustomerCompanySize EngagementSearchSortName = "ProspectingCustomerCompanySize"
+	// Sort by the prospecting insights marketplace engagement score field.
+	EngagementSearchSortNameProspectingInsightsMarketplaceEngagementScore EngagementSearchSortName = "ProspectingInsightsMarketplaceEngagementScore"
+	// Sort by the prospecting insights solution category field.
+	EngagementSearchSortNameProspectingInsightsSolutionCategory EngagementSearchSortName = "ProspectingInsightsSolutionCategory"
+	// Sort by the prospecting insights solution sub category field.
+	EngagementSearchSortNameProspectingInsightsSolutionSubCategory EngagementSearchSortName = "ProspectingInsightsSolutionSubCategory"
+	// Sort by the lead qualification status field.
+	EngagementSearchSortNameLeadQualificationStatus EngagementSearchSortName = "LeadQualificationStatus"
+	// Sort by the lead readiness score field.
+	EngagementSearchSortNameLeadReadinessScore EngagementSearchSortName = "LeadReadinessScore"
+	// Sort by the lead customer industry field.
+	EngagementSearchSortNameLeadCustomerIndustry EngagementSearchSortName = "LeadCustomerIndustry"
+	// Sort by the lead customer country code field.
+	EngagementSearchSortNameLeadCustomerCountryCode EngagementSearchSortName = "LeadCustomerCountryCode"
+	// Sort by the lead customer aws maturity field.
+	EngagementSearchSortNameLeadCustomerAwsMaturity EngagementSearchSortName = "LeadCustomerAwsMaturity"
+	// Sort by the lead customer market segment field.
+	EngagementSearchSortNameLeadCustomerMarketSegment EngagementSearchSortName = "LeadCustomerMarketSegment"
+	// Sort by the lead customer company name field.
+	EngagementSearchSortNameLeadCustomerCompanyName EngagementSearchSortName = "LeadCustomerCompanyName"
+	// Sort by the lead interactions contact first name field.
+	EngagementSearchSortNameLeadInteractionsContactFirstName EngagementSearchSortName = "LeadInteractionsContactFirstName"
+	// Sort by the lead interactions contact last name field.
+	EngagementSearchSortNameLeadInteractionsContactLastName EngagementSearchSortName = "LeadInteractionsContactLastName"
+	// Sort by the lead interactions usecase field.
+	EngagementSearchSortNameLeadInteractionsUsecase EngagementSearchSortName = "LeadInteractionsUsecase"
+	// Sort by the lead interactions contact business title field.
+	EngagementSearchSortNameLeadInteractionsContactBusinessTitle EngagementSearchSortName = "LeadInteractionsContactBusinessTitle"
+)
+
+// Values returns all known values for EngagementSearchSortName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EngagementSearchSortName) Values() []EngagementSearchSortName {
+	return []EngagementSearchSortName{
+		"EngagementId",
+		"Title",
+		"PartnerId",
+		"CreatedAt",
+		"LastModifiedAt",
+		"MemberCount",
+		"ProspectingCustomerGeo",
+		"ProspectingCustomerRegion",
+		"ProspectingCustomerIndustry",
+		"ProspectingCustomerSegment",
+		"ProspectingCustomerCountry",
+		"ProspectingCustomerCompanySize",
+		"ProspectingInsightsMarketplaceEngagementScore",
+		"ProspectingInsightsSolutionCategory",
+		"ProspectingInsightsSolutionSubCategory",
+		"LeadQualificationStatus",
+		"LeadReadinessScore",
+		"LeadCustomerIndustry",
+		"LeadCustomerCountryCode",
+		"LeadCustomerAwsMaturity",
+		"LeadCustomerMarketSegment",
+		"LeadCustomerCompanyName",
+		"LeadInteractionsContactFirstName",
+		"LeadInteractionsContactLastName",
+		"LeadInteractionsUsecase",
+		"LeadInteractionsContactBusinessTitle",
+	}
+}
+
 type EngagementSortName string
 
 // Enum values for EngagementSortName
@@ -1357,6 +1849,33 @@ const (
 func (EngagementSortName) Values() []EngagementSortName {
 	return []EngagementSortName{
 		"CreatedDate",
+	}
+}
+
+type EnrichmentStatus string
+
+// Enum values for EnrichmentStatus
+const (
+	// AWS is matching the customer account to a customer.
+	EnrichmentStatusPending EnrichmentStatus = "PENDING"
+	// AWS matched the customer account to a customer and added enrichment information.
+	EnrichmentStatusEnriched EnrichmentStatus = "ENRICHED"
+	// AWS couldn't match the customer account to a customer.
+	EnrichmentStatusNoMatchFound EnrichmentStatus = "NO_MATCH_FOUND"
+	// The customer account needs your action. See ReasonCode and Message for details.
+	EnrichmentStatusActionRequired EnrichmentStatus = "ACTION_REQUIRED"
+)
+
+// Values returns all known values for EnrichmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnrichmentStatus) Values() []EnrichmentStatus {
+	return []EnrichmentStatus{
+		"PENDING",
+		"ENRICHED",
+		"NO_MATCH_FOUND",
+		"ACTION_REQUIRED",
 	}
 }
 
@@ -1375,6 +1894,63 @@ const (
 func (ExpectedContractDurationTerm) Values() []ExpectedContractDurationTerm {
 	return []ExpectedContractDurationTerm{
 		"Months",
+	}
+}
+
+type FilterableField string
+
+// Enum values for FilterableField
+const (
+	// Filter by the enrichment status of the customer account.
+	FilterableFieldEnrichmentStatus FilterableField = "ENRICHMENT_STATUS"
+	// Filter by the customer company name.
+	FilterableFieldCompanyName FilterableField = "COMPANY_NAME"
+	// Filter by the industry of the customer, as classified by AWS.
+	FilterableFieldAwsIndustry FilterableField = "AWS_INDUSTRY"
+	// Filter by whether the customer qualifies for account planning.
+	FilterableFieldAccountPlanningQualification FilterableField = "ACCOUNT_PLANNING_QUALIFICATION"
+	// Filter by the AWS programs that the customer is eligible for.
+	FilterableFieldProgramEligibility FilterableField = "PROGRAM_ELIGIBILITY"
+	// Filter by the import that created the customer account.
+	FilterableFieldImportId FilterableField = "IMPORT_ID"
+	// Filter by the date when the customer account was created.
+	FilterableFieldCreatedDate FilterableField = "CREATED_DATE"
+	// Filter by the date when the customer account was last modified.
+	FilterableFieldLastModifiedDate FilterableField = "LAST_MODIFIED_DATE"
+	// Filter by the geographic area of the customer.
+	FilterableFieldGeo FilterableField = "GEO"
+	// Filter by the country of the customer.
+	FilterableFieldCountry FilterableField = "COUNTRY"
+	// Filter by the market segment of the customer.
+	FilterableFieldSegment FilterableField = "SEGMENT"
+	// Filter by the category of the recommended solution.
+	FilterableFieldSolutionCategory FilterableField = "SOLUTION_CATEGORY"
+	// Filter by the AWS Marketplace engagement score of the customer.
+	FilterableFieldMarketplaceEngagementScore FilterableField = "MARKETPLACE_ENGAGEMENT_SCORE"
+	// Filter by the score of the recommended solution.
+	FilterableFieldSolutionScore FilterableField = "SOLUTION_SCORE"
+)
+
+// Values returns all known values for FilterableField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FilterableField) Values() []FilterableField {
+	return []FilterableField{
+		"ENRICHMENT_STATUS",
+		"COMPANY_NAME",
+		"AWS_INDUSTRY",
+		"ACCOUNT_PLANNING_QUALIFICATION",
+		"PROGRAM_ELIGIBILITY",
+		"IMPORT_ID",
+		"CREATED_DATE",
+		"LAST_MODIFIED_DATE",
+		"GEO",
+		"COUNTRY",
+		"SEGMENT",
+		"SOLUTION_CATEGORY",
+		"MARKETPLACE_ENGAGEMENT_SCORE",
+		"SOLUTION_SCORE",
 	}
 }
 
@@ -1589,6 +2165,130 @@ func (OpportunityOrigin) Values() []OpportunityOrigin {
 	}
 }
 
+type OpportunitySearchFilterName string
+
+// Enum values for OpportunitySearchFilterName
+const (
+	OpportunitySearchFilterNameOpportunityId                OpportunitySearchFilterName = "OpportunityId"
+	OpportunitySearchFilterNameStage                        OpportunitySearchFilterName = "Stage"
+	OpportunitySearchFilterNameReviewStatus                 OpportunitySearchFilterName = "ReviewStatus"
+	OpportunitySearchFilterNameCustomerCompanyName          OpportunitySearchFilterName = "CustomerCompanyName"
+	OpportunitySearchFilterNameLastModifiedDate             OpportunitySearchFilterName = "LastModifiedDate"
+	OpportunitySearchFilterNameTargetCloseDate              OpportunitySearchFilterName = "TargetCloseDate"
+	OpportunitySearchFilterNameCreatedDate                  OpportunitySearchFilterName = "CreatedDate"
+	OpportunitySearchFilterNameCountryCode                  OpportunitySearchFilterName = "CountryCode"
+	OpportunitySearchFilterNamePartnerProjectTitle          OpportunitySearchFilterName = "PartnerProjectTitle"
+	OpportunitySearchFilterNameOpportunityType              OpportunitySearchFilterName = "OpportunityType"
+	OpportunitySearchFilterNamePartnerOpportunityIdentifier OpportunitySearchFilterName = "PartnerOpportunityIdentifier"
+	OpportunitySearchFilterNameIndustry                     OpportunitySearchFilterName = "Industry"
+	OpportunitySearchFilterNameAwsAccountId                 OpportunitySearchFilterName = "AwsAccountId"
+	OpportunitySearchFilterNameApnPrograms                  OpportunitySearchFilterName = "ApnPrograms"
+	OpportunitySearchFilterNameOrigin                       OpportunitySearchFilterName = "Origin"
+	OpportunitySearchFilterNameTags                         OpportunitySearchFilterName = "Tags"
+	OpportunitySearchFilterNameNextStep                     OpportunitySearchFilterName = "NextStep"
+	OpportunitySearchFilterNameOfferId                      OpportunitySearchFilterName = "OfferId"
+	OpportunitySearchFilterNameOfferSetId                   OpportunitySearchFilterName = "OfferSetId"
+	OpportunitySearchFilterNameAwsMarketplaceSolution       OpportunitySearchFilterName = "AwsMarketplaceSolution"
+	OpportunitySearchFilterNameCosellMotion                 OpportunitySearchFilterName = "CosellMotion"
+	OpportunitySearchFilterNameOpportunityOwner             OpportunitySearchFilterName = "OpportunityOwner"
+	OpportunitySearchFilterNameEstimatedMrr                 OpportunitySearchFilterName = "EstimatedMrr"
+	OpportunitySearchFilterNameEngagementScore              OpportunitySearchFilterName = "EngagementScore"
+)
+
+// Values returns all known values for OpportunitySearchFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpportunitySearchFilterName) Values() []OpportunitySearchFilterName {
+	return []OpportunitySearchFilterName{
+		"OpportunityId",
+		"Stage",
+		"ReviewStatus",
+		"CustomerCompanyName",
+		"LastModifiedDate",
+		"TargetCloseDate",
+		"CreatedDate",
+		"CountryCode",
+		"PartnerProjectTitle",
+		"OpportunityType",
+		"PartnerOpportunityIdentifier",
+		"Industry",
+		"AwsAccountId",
+		"ApnPrograms",
+		"Origin",
+		"Tags",
+		"NextStep",
+		"OfferId",
+		"OfferSetId",
+		"AwsMarketplaceSolution",
+		"CosellMotion",
+		"OpportunityOwner",
+		"EstimatedMrr",
+		"EngagementScore",
+	}
+}
+
+type OpportunitySearchSortName string
+
+// Enum values for OpportunitySearchSortName
+const (
+	OpportunitySearchSortNameOpportunityId                OpportunitySearchSortName = "OpportunityId"
+	OpportunitySearchSortNameStage                        OpportunitySearchSortName = "Stage"
+	OpportunitySearchSortNameReviewStatus                 OpportunitySearchSortName = "ReviewStatus"
+	OpportunitySearchSortNameCustomerCompanyName          OpportunitySearchSortName = "CustomerCompanyName"
+	OpportunitySearchSortNameLastModifiedDate             OpportunitySearchSortName = "LastModifiedDate"
+	OpportunitySearchSortNameTargetCloseDate              OpportunitySearchSortName = "TargetCloseDate"
+	OpportunitySearchSortNameCreatedDate                  OpportunitySearchSortName = "CreatedDate"
+	OpportunitySearchSortNameCountryCode                  OpportunitySearchSortName = "CountryCode"
+	OpportunitySearchSortNamePartnerProjectTitle          OpportunitySearchSortName = "PartnerProjectTitle"
+	OpportunitySearchSortNameOpportunityType              OpportunitySearchSortName = "OpportunityType"
+	OpportunitySearchSortNamePartnerOpportunityIdentifier OpportunitySearchSortName = "PartnerOpportunityIdentifier"
+	OpportunitySearchSortNameIndustry                     OpportunitySearchSortName = "Industry"
+	OpportunitySearchSortNameAwsAccountId                 OpportunitySearchSortName = "AwsAccountId"
+	OpportunitySearchSortNameOrigin                       OpportunitySearchSortName = "Origin"
+	OpportunitySearchSortNameNextStep                     OpportunitySearchSortName = "NextStep"
+	OpportunitySearchSortNameCosellMotion                 OpportunitySearchSortName = "CosellMotion"
+	OpportunitySearchSortNameOpportunityOwner             OpportunitySearchSortName = "OpportunityOwner"
+	OpportunitySearchSortNameEngagementScore              OpportunitySearchSortName = "EngagementScore"
+	OpportunitySearchSortNameEstimatedMrr                 OpportunitySearchSortName = "EstimatedMrr"
+	OpportunitySearchSortNameTags                         OpportunitySearchSortName = "Tags"
+	OpportunitySearchSortNameOfferId                      OpportunitySearchSortName = "OfferId"
+	OpportunitySearchSortNameOfferSetId                   OpportunitySearchSortName = "OfferSetId"
+	OpportunitySearchSortNameApnPrograms                  OpportunitySearchSortName = "ApnPrograms"
+)
+
+// Values returns all known values for OpportunitySearchSortName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpportunitySearchSortName) Values() []OpportunitySearchSortName {
+	return []OpportunitySearchSortName{
+		"OpportunityId",
+		"Stage",
+		"ReviewStatus",
+		"CustomerCompanyName",
+		"LastModifiedDate",
+		"TargetCloseDate",
+		"CreatedDate",
+		"CountryCode",
+		"PartnerProjectTitle",
+		"OpportunityType",
+		"PartnerOpportunityIdentifier",
+		"Industry",
+		"AwsAccountId",
+		"Origin",
+		"NextStep",
+		"CosellMotion",
+		"OpportunityOwner",
+		"EngagementScore",
+		"EstimatedMrr",
+		"Tags",
+		"OfferId",
+		"OfferSetId",
+		"ApnPrograms",
+	}
+}
+
 type OpportunitySortName string
 
 // Enum values for OpportunitySortName
@@ -1744,6 +2444,30 @@ func (ProspectingTaskStatus) Values() []ProspectingTaskStatus {
 		"IN_PROGRESS",
 		"COMPLETED",
 		"FAILED",
+	}
+}
+
+type ReadinessLevel string
+
+// Enum values for ReadinessLevel
+const (
+	// Leads that are ready for direct sales outreach.
+	ReadinessLevelSalesReady ReadinessLevel = "SalesReady"
+	// Leads that are suited to a marketing campaign rather than direct outreach.
+	ReadinessLevelMarketingReady ReadinessLevel = "MarketingReady"
+	// Leads with low potential that are suited to a nurture campaign.
+	ReadinessLevelLowPotential ReadinessLevel = "LowPotential"
+)
+
+// Values returns all known values for ReadinessLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReadinessLevel) Values() []ReadinessLevel {
+	return []ReadinessLevel{
+		"SalesReady",
+		"MarketingReady",
+		"LowPotential",
 	}
 }
 
@@ -2000,6 +2724,27 @@ func (SalesInvolvementType) Values() []SalesInvolvementType {
 	}
 }
 
+type SearchEngagementScore string
+
+// Enum values for SearchEngagementScore
+const (
+	SearchEngagementScoreHigh   SearchEngagementScore = "High"
+	SearchEngagementScoreMedium SearchEngagementScore = "Medium"
+	SearchEngagementScoreLow    SearchEngagementScore = "Low"
+)
+
+// Values returns all known values for SearchEngagementScore. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchEngagementScore) Values() []SearchEngagementScore {
+	return []SearchEngagementScore{
+		"High",
+		"Medium",
+		"Low",
+	}
+}
+
 type SolutionSortName string
 
 // Enum values for SolutionSortName
@@ -2043,6 +2788,38 @@ func (SolutionStatus) Values() []SolutionStatus {
 		"Active",
 		"Inactive",
 		"Draft",
+	}
+}
+
+type SortableField string
+
+// Enum values for SortableField
+const (
+	// Sort by the customer company name.
+	SortableFieldCompanyName SortableField = "COMPANY_NAME"
+	// Sort by the date when the customer account was created.
+	SortableFieldCreatedDate SortableField = "CREATED_DATE"
+	// Sort by the date when the customer account was last modified.
+	SortableFieldLastModifiedDate SortableField = "LAST_MODIFIED_DATE"
+	// Sort by the AWS Marketplace engagement score. Scores sort in the order High ,
+	// Medium , Low , with accounts that have no score last.
+	SortableFieldMarketplaceEngagementScore SortableField = "MARKETPLACE_ENGAGEMENT_SCORE"
+	// Sort by the score of the recommended solution. Scores sort in the order High ,
+	// Medium , Low , with accounts that have no score last.
+	SortableFieldSolutionScore SortableField = "SOLUTION_SCORE"
+)
+
+// Values returns all known values for SortableField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortableField) Values() []SortableField {
+	return []SortableField{
+		"COMPANY_NAME",
+		"CREATED_DATE",
+		"LAST_MODIFIED_DATE",
+		"MARKETPLACE_ENGAGEMENT_SCORE",
+		"SOLUTION_SCORE",
 	}
 }
 

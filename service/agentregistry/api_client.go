@@ -18,6 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/timeouts"
 	"github.com/aws/aws-sdk-go-v2/service/agentregistry/schemas"
 	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/auth/bearer"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
@@ -205,6 +206,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPSignerV4(&options)
 
 	resolveEndpointResolverV2(&options)
+
+	resolveBearerAuthSigner(&options)
 
 	resolveTracerProvider(&options)
 
@@ -427,6 +430,7 @@ func resolveAuthSchemes(options *Options) {
 				Logger:     options.Logger,
 				LogSigning: options.ClientLogMode.IsSigning(),
 			}),
+			internalauth.NewHTTPAuthScheme("smithy.api#httpBearerAuth", &internalauthsmithy.BearerTokenSignerAdapter{Signer: options.BearerAuthSigner}),
 		}
 	}
 }
@@ -564,6 +568,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		RuntimeEnvironment:         cfg.RuntimeEnvironment,
 		HTTPClient:                 cfg.HTTPClient,
 		Credentials:                cfg.Credentials,
+		BearerAuthTokenProvider:    cfg.BearerAuthTokenProvider,
 		APIOptions:                 cfg.APIOptions,
 		Logger:                     cfg.Logger,
 		ClientLogMode:              cfg.ClientLogMode,
@@ -854,6 +859,16 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
+}
+
+func resolveBearerAuthSigner(o *Options) {
+	if o.BearerAuthSigner != nil {
+		return
+	}
+	o.BearerAuthSigner = newDefaultBearerAuthSigner(*o)
+}
+func newDefaultBearerAuthSigner(o Options) bearer.Signer {
+	return bearer.NewSignHTTPSMessage()
 }
 
 func initializeTimeOffsetResolver(c *Client) {

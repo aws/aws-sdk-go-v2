@@ -302,6 +302,8 @@ func TestCheckRequestSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 		},
 		MaxResults: ptr.Int32(1),
 		Filters:    document.NewLazyDocument("__Document__"),
+		SearchType: types.SearchType("HYBRID"),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -421,6 +423,8 @@ func TestUpdateRequestSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 		},
 		MaxResults: ptr.Int32(1),
 		Filters:    document.NewLazyDocument("__Document__"),
+		SearchType: types.SearchType("HYBRID"),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

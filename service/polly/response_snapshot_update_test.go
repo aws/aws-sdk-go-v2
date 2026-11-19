@@ -141,6 +141,73 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_CreateVoice(t *testing.T) {
+	want := &CreateVoiceOutput{
+		Voice: &types.Voice{
+			Arn:          ptr.String("__Arn__"),
+			Gender:       types.Gender("Female"),
+			Id:           types.VoiceId("Aditi"),
+			LanguageCode: types.LanguageCode("arb"),
+			LanguageName: ptr.String("__LanguageName__"),
+			Name:         ptr.String("__Name__"),
+			Origin:       types.VoiceOrigin("aws"),
+			Status:       types.VoiceStatus("pending"),
+			StatusReason: ptr.String("__StatusReason__"),
+			AdditionalLanguageCodes: []types.LanguageCode{
+				types.LanguageCode("arb"),
+				types.LanguageCode("arb"),
+			},
+			SupportedEngines: []types.Engine{
+				types.Engine("standard"),
+				types.Engine("standard"),
+			},
+			VoiceCreationData: &types.VoiceCreationData{
+				Recordings: []types.Recording{
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+				},
+			},
+			CustomerManagedEncryption: &types.CustomerManagedEncryption{
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				EncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.CreateVoiceOutput, schemas.CreateVoiceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateVoice.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteLexicon(t *testing.T) {
 	want := &DeleteLexiconOutput{}
 	proto := restjson1.New(schemas.Parrot_v1)
@@ -163,15 +230,41 @@ func TestUpdateResponseSnapshot_DeleteLexicon(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteVoice(t *testing.T) {
+	want := &DeleteVoiceOutput{}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteVoice, schemas.DeleteVoiceOutput, schemas.DeleteVoiceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteVoice.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeVoices(t *testing.T) {
 	want := &DescribeVoicesOutput{
 		Voices: []types.Voice{
 			{
+				Arn:          ptr.String("__Arn__"),
 				Gender:       types.Gender("Female"),
 				Id:           types.VoiceId("Aditi"),
 				LanguageCode: types.LanguageCode("arb"),
 				LanguageName: ptr.String("__LanguageName__"),
 				Name:         ptr.String("__Name__"),
+				Origin:       types.VoiceOrigin("aws"),
+				Status:       types.VoiceStatus("pending"),
+				StatusReason: ptr.String("__StatusReason__"),
 				AdditionalLanguageCodes: []types.LanguageCode{
 					types.LanguageCode("arb"),
 					types.LanguageCode("arb"),
@@ -180,13 +273,42 @@ func TestUpdateResponseSnapshot_DescribeVoices(t *testing.T) {
 					types.Engine("standard"),
 					types.Engine("standard"),
 				},
+				VoiceCreationData: &types.VoiceCreationData{
+					Recordings: []types.Recording{
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+					},
+				},
+				CustomerManagedEncryption: &types.CustomerManagedEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					EncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
+				Arn:          ptr.String("__Arn__"),
 				Gender:       types.Gender("Female"),
 				Id:           types.VoiceId("Aditi"),
 				LanguageCode: types.LanguageCode("arb"),
 				LanguageName: ptr.String("__LanguageName__"),
 				Name:         ptr.String("__Name__"),
+				Origin:       types.VoiceOrigin("aws"),
+				Status:       types.VoiceStatus("pending"),
+				StatusReason: ptr.String("__StatusReason__"),
 				AdditionalLanguageCodes: []types.LanguageCode{
 					types.LanguageCode("arb"),
 					types.LanguageCode("arb"),
@@ -195,6 +317,31 @@ func TestUpdateResponseSnapshot_DescribeVoices(t *testing.T) {
 					types.Engine("standard"),
 					types.Engine("standard"),
 				},
+				VoiceCreationData: &types.VoiceCreationData{
+					Recordings: []types.Recording{
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+					},
+				},
+				CustomerManagedEncryption: &types.CustomerManagedEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					EncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -296,6 +443,73 @@ func TestUpdateResponseSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetSpeechSynthesisTask.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetVoice(t *testing.T) {
+	want := &GetVoiceOutput{
+		Voice: &types.Voice{
+			Arn:          ptr.String("__Arn__"),
+			Gender:       types.Gender("Female"),
+			Id:           types.VoiceId("Aditi"),
+			LanguageCode: types.LanguageCode("arb"),
+			LanguageName: ptr.String("__LanguageName__"),
+			Name:         ptr.String("__Name__"),
+			Origin:       types.VoiceOrigin("aws"),
+			Status:       types.VoiceStatus("pending"),
+			StatusReason: ptr.String("__StatusReason__"),
+			AdditionalLanguageCodes: []types.LanguageCode{
+				types.LanguageCode("arb"),
+				types.LanguageCode("arb"),
+			},
+			SupportedEngines: []types.Engine{
+				types.Engine("standard"),
+				types.Engine("standard"),
+			},
+			VoiceCreationData: &types.VoiceCreationData{
+				Recordings: []types.Recording{
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+				},
+			},
+			CustomerManagedEncryption: &types.CustomerManagedEncryption{
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				EncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.GetVoice, schemas.GetVoiceOutput, schemas.GetVoiceOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetVoice.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -584,6 +798,58 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
+	want := &types.AccessDeniedException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 403, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.ResourceType("lexicon"),
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteVoice, schemas.ConflictException, schemas.ConflictException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_EngineNotSupportedException(t *testing.T) {
 	want := &types.EngineNotSupportedException{
 		Message: ptr.String("__Message__"),
@@ -789,7 +1055,7 @@ func TestUpdateResponseSnapshot_Error_InvalidTagParameterException(t *testing.T)
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Parrot_v1)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.InvalidTagParameterException, schemas.InvalidTagParameterException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.InvalidTagParameterException, schemas.InvalidTagParameterException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -991,7 +1257,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		ResourceType: types.ResourceType("lexicon"),
 	}
 	proto := restjson1.New(schemas.Parrot_v1)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteVoice, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1016,7 +1282,7 @@ func TestUpdateResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Parrot_v1)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteLexicon, schemas.ServiceFailureException, schemas.ServiceFailureException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.ServiceFailureException, schemas.ServiceFailureException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1032,6 +1298,33 @@ func TestUpdateResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ServiceFailureException.error", 500, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
+	want := &types.ServiceQuotaExceededException{
+		Message:     ptr.String("__Message__"),
+		QuotaCode:   types.QuotaCode("input-stream-inbound-event-timeout"),
+		ServiceCode: types.ServiceCode("polly"),
+	}
+	proto := restjson1.New(schemas.Parrot_v1)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ServiceQuotaExceededException.error", 402, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1126,7 +1419,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		},
 	}
 	proto := restjson1.New(schemas.Parrot_v1)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1151,7 +1444,7 @@ func TestUpdateResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.Parrot_v1)
-	opSchema := smithy.NewOperationSchema(schemas.PutLexicon, schemas.TooManyTagsException, schemas.TooManyTagsException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.TooManyTagsException, schemas.TooManyTagsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1237,7 +1530,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		},
 	}
 	proto := restjson1.New(schemas.Parrot_v1)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateVoice, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

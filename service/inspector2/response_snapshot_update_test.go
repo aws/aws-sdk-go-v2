@@ -1554,6 +1554,21 @@ func TestUpdateResponseSnapshot_GetCodeSecurityIntegration(t *testing.T) {
 		CreatedOn:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastUpdateOn:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		AuthorizationUrl: ptr.String("__AuthorizationUrl__"),
+		VpcConfiguration: &types.CodeSecurityIntegrationVpcConfiguration{
+			VpcId:                  ptr.String("__VpcId__"),
+			VpcEndpointId:          ptr.String("__VpcEndpointId__"),
+			CodeConnectionsHostArn: ptr.String("__CodeConnectionsHostArn__"),
+			SubnetIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SecurityGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			TlsCertificate: ptr.String("__TlsCertificate__"),
+		},
+		InstanceUrl: ptr.String("__InstanceUrl__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},

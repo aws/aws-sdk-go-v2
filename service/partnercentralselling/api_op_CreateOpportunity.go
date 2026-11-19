@@ -45,6 +45,7 @@ func (c *Client) CreateOpportunity(ctx context.Context, params *CreateOpportunit
 	return out, nil
 }
 
+// Contains the request parameters for the CreateOpportunity operation.
 type CreateOpportunityInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string
@@ -230,6 +231,7 @@ func (v *CreateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the CreateOpportunity action returns.
 type CreateOpportunityOutput struct {
 
 	// Read-only, system-generated Opportunity unique identifier. Amazon Web Services

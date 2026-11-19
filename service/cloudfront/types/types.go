@@ -1268,6 +1268,11 @@ type ConnectionGroup struct {
 	// A complex type that contains zero or more Tag elements.
 	Tags *Tags
 
+	// The distribution whose certificate CloudFront uses for viewer requests that
+	// arrive on the connection group's Anycast static IPs without Server Name
+	// Indication (SNI).
+	ViewerFallback *ViewerFallback
+
 	noSmithyDocumentSerde
 }
 
@@ -1332,6 +1337,11 @@ type ConnectionGroupSummary struct {
 
 	// The status of the connection group.
 	Status *string
+
+	// The distribution whose certificate CloudFront uses for viewer requests that
+	// arrive on the connection group's Anycast static IPs without Server Name
+	// Indication (SNI).
+	ViewerFallback *ViewerFallback
 
 	noSmithyDocumentSerde
 }
@@ -2920,6 +2930,19 @@ type DomainItem struct {
 	// This member is required.
 	Domain *string
 
+	// Specifies which requests for this domain CloudFront routes to the distribution
+	// tenant. Valid values are:
+	//
+	//   - any – CloudFront routes requests for this domain to the distribution tenant
+	//   regardless of the IP address that they arrive on. This is the default if you
+	//   don't specify a value.
+	//
+	//   - anycast-ip-list-only – CloudFront routes requests for this domain to the
+	//   distribution tenant only when they arrive on the Anycast static IPs of the
+	//   distribution tenant's connection group. CloudFront treats requests that arrive
+	//   on other IP addresses as requests for an unknown domain.
+	ServeOn ServeOn
+
 	noSmithyDocumentSerde
 }
 
@@ -2930,6 +2953,19 @@ type DomainResult struct {
 	//
 	// This member is required.
 	Domain *string
+
+	// Specifies which requests for this domain CloudFront routes to the distribution
+	// tenant. Valid values are:
+	//
+	//   - any – CloudFront routes requests for this domain to the distribution tenant
+	//   regardless of the IP address that they arrive on. This is the default if you
+	//   don't specify a value.
+	//
+	//   - anycast-ip-list-only – CloudFront routes requests for this domain to the
+	//   distribution tenant only when they arrive on the Anycast static IPs of the
+	//   distribution tenant's connection group. CloudFront treats requests that arrive
+	//   on other IP addresses as requests for an unknown domain.
+	ServeOn ServeOn
 
 	// Whether the domain is active or inactive.
 	Status DomainStatus
@@ -6908,6 +6944,18 @@ type ViewerCertificate struct {
 	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home
 	// [server name indication (SNI)]: https://en.wikipedia.org/wiki/Server_Name_Indication
 	SSLSupportMethod SSLSupportMethod
+
+	noSmithyDocumentSerde
+}
+
+// The distribution whose certificate CloudFront uses for viewer requests that
+// arrive on the connection group's Anycast static IPs without Server Name
+// Indication (SNI). You can specify one distribution per Anycast static IP list.
+type ViewerFallback struct {
+
+	// The ID of the distribution whose certificate CloudFront uses to establish TLS
+	// connections for viewer requests that don't include SNI.
+	DistributionId *string
 
 	noSmithyDocumentSerde
 }

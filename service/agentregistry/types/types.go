@@ -473,7 +473,9 @@ func (v *DescriptorSource) Deserialize(d smithy.ShapeDeserializer) error {
 // retrieved from.
 type DescriptorSourceFromUrl struct {
 
-	//  The URL from which the descriptor content is retrieved.
+	//  The URL from which the descriptor content is retrieved. For an agent skill
+	// that synchronizes its SKILL.md from GitHub, this is the GitHub folder URL. The
+	// data plane doesn't return Amazon S3 ( s3:// ) source URLs.
 	//
 	// This member is required.
 	Url *string
@@ -844,6 +846,53 @@ func (v *McpToolsDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The skill package of a registry record, as a short-lived download URL and the
+// package's SHA-256 checksum. Responses never include the package bytes.
+type RegistryRecordArtifactDownload struct {
+
+	// A presigned Amazon S3 URL that downloads the package. The URL is valid for up
+	// to 5 minutes, and the response doesn't include its expiry time. To get a new
+	// URL, call the operation again. Anyone who has the URL can download the package
+	// until it expires, so don't log, store, or share it.
+	DownloadUrl *string
+
+	// The SHA-256 checksum of the package, as 64 lowercase hexadecimal characters.
+	// The download response carries no signature that you can check, so compare the
+	// checksum of the file that you download with this value before you use the
+	// package.
+	Sha256 *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegistryRecordArtifactDownload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistryRecordArtifactDownload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegistryRecordArtifactDownload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownloadUrl != nil {
+		s.WriteString(schemas.RegistryRecordArtifactDownload_downloadUrl, *v.DownloadUrl)
+	}
+	if v.Sha256 != nil {
+		s.WriteString(schemas.RegistryRecordArtifactDownload_sha256, *v.Sha256)
+	}
+}
+func (v *RegistryRecordArtifactDownload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegistryRecordArtifactDownload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegistryRecordArtifactDownload_downloadUrl:
+			v.DownloadUrl = new(string)
+			return d.ReadString(schemas.RegistryRecordArtifactDownload_downloadUrl, v.DownloadUrl)
+		case schemas.RegistryRecordArtifactDownload_sha256:
+			v.Sha256 = new(string)
+			return d.ReadString(schemas.RegistryRecordArtifactDownload_sha256, v.Sha256)
+		}
+		return nil
+	})
+}
+
 // A single filter applied to a ListDiscoverableRegistryRecords request.
 type RegistryRecordFilter struct {
 
@@ -996,6 +1045,12 @@ type RegistryRecordSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	//  The skill package of the record's latest approved revision, as the package's
+	// SHA-256 checksum and a download URL that is valid for up to 5 minutes. Only
+	// BatchGetDiscoverableRegistryRecord returns this member, not
+	// SearchDiscoverableRegistryRecords . Absent when the record has no skill package.
+	Artifact *RegistryRecordArtifactDownload
+
 	//  The custom metadata attached to this registry record. Values are strings
 	// (maximum 128 characters) or booleans. This field is only present if the registry
 	// has a custom metadata schema configured.
@@ -1018,6 +1073,11 @@ func (v *RegistryRecordSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistryRecordSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifact != nil {
+		s.WriteStruct(schemas.RegistryRecordSummary_artifact)
+		v.Artifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RegistryRecordSummary_createdAt, *v.CreatedAt)
 	}
@@ -1063,6 +1123,9 @@ func (v *RegistryRecordSummary) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistryRecordSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RegistryRecordSummary_artifact:
+			v.Artifact = &RegistryRecordArtifactDownload{}
+			return v.Artifact.Deserialize(d)
 		case schemas.RegistryRecordSummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.RegistryRecordSummary_createdAt, v.CreatedAt)

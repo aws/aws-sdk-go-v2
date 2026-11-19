@@ -1946,6 +1946,17 @@ var PreferredProtocol_TCP *smithy.Schema
 
 var PreferredProtocol_UDP *smithy.Schema
 
+var _ProcessCompatibilityList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ProcessCompatibilityList",
+}, smithy.ShapeTypeList, 1)
+var _ProcessCompatibilityList_member *smithy.Schema
+
+var _ProcessImageName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "ProcessImageName",
+}, smithy.ShapeTypeString, 0)
+
 var _RedirectURL = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "RedirectURL",
@@ -2189,7 +2200,7 @@ var SoftwareDeploymentStatus_FAILED_TO_UNINSTALL *smithy.Schema
 var Stack = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "Stack",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var Stack_Arn *smithy.Schema
 
 var Stack_Name *smithy.Schema
@@ -2220,6 +2231,8 @@ var Stack_StreamingExperienceSettings *smithy.Schema
 
 var Stack_ContentRedirection *smithy.Schema
 
+var Stack_WebAuthnRedirection *smithy.Schema
+
 var Stack_AgentAccessConfig *smithy.Schema
 
 var Stack_StorageConnectorAuthentication *smithy.Schema
@@ -2227,7 +2240,7 @@ var Stack_StorageConnectorAuthentication *smithy.Schema
 var StackAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "StackAttribute",
-}, smithy.ShapeTypeEnum, 16)
+}, smithy.ShapeTypeEnum, 17)
 var StackAttribute_STORAGE_CONNECTORS *smithy.Schema
 
 var StackAttribute_STORAGE_CONNECTOR_HOMEFOLDERS *smithy.Schema
@@ -2253,6 +2266,8 @@ var StackAttribute_ACCESS_ENDPOINTS *smithy.Schema
 var StackAttribute_STREAMING_EXPERIENCE_SETTINGS *smithy.Schema
 
 var StackAttribute_CONTENT_REDIRECTION *smithy.Schema
+
+var StackAttribute_WEB_AUTHN_REDIRECTION *smithy.Schema
 
 var StackAttribute_AGENT_ACCESS_CONFIG *smithy.Schema
 
@@ -2689,6 +2704,14 @@ var VpcConfig_SubnetIds *smithy.Schema
 
 var VpcConfig_SecurityGroupIds *smithy.Schema
 
+var WebAuthnRedirection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.appstream",
+	Name:      "WebAuthnRedirection",
+}, smithy.ShapeTypeStructure, 2)
+var WebAuthnRedirection_Enabled *smithy.Schema
+
+var WebAuthnRedirection_ProcessCompatibilityList *smithy.Schema
+
 var _WorkspaceImageId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "WorkspaceImageId",
@@ -3124,7 +3147,7 @@ var CreateImportedImageResult_Image *smithy.Schema
 var CreateStackRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "CreateStackRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateStackRequest_Name *smithy.Schema
 
 var CreateStackRequest_Description *smithy.Schema
@@ -3150,6 +3173,8 @@ var CreateStackRequest_EmbedHostDomains *smithy.Schema
 var CreateStackRequest_StreamingExperienceSettings *smithy.Schema
 
 var CreateStackRequest_ContentRedirection *smithy.Schema
+
+var CreateStackRequest_WebAuthnRedirection *smithy.Schema
 
 var CreateStackRequest_AgentAccessConfig *smithy.Schema
 
@@ -4285,7 +4310,7 @@ var UpdateImagePermissionsResult = smithy.NewSchema(smithy.ShapeID{
 var UpdateStackRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.appstream",
 	Name:      "UpdateStackRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdateStackRequest_DisplayName *smithy.Schema
 
 var UpdateStackRequest_Description *smithy.Schema
@@ -4313,6 +4338,8 @@ var UpdateStackRequest_EmbedHostDomains *smithy.Schema
 var UpdateStackRequest_StreamingExperienceSettings *smithy.Schema
 
 var UpdateStackRequest_ContentRedirection *smithy.Schema
+
+var UpdateStackRequest_WebAuthnRedirection *smithy.Schema
 
 var UpdateStackRequest_AgentAccessConfig *smithy.Schema
 
@@ -5277,6 +5304,8 @@ func init() {
 
 	PreferredProtocol_UDP = PreferredProtocol.AddMember("UDP", smithyprelude.Unit)
 
+	_ProcessCompatibilityList_member = _ProcessCompatibilityList.AddMember("member", _ProcessImageName)
+
 	RequestLimitExceededException_Message = RequestLimitExceededException.AddMember("Message", _ErrorMessage)
 
 	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _ErrorMessage)
@@ -5389,6 +5418,10 @@ func init() {
 
 	StreamingExperienceSettings_PreferredProtocol = StreamingExperienceSettings.AddMember("PreferredProtocol", PreferredProtocol)
 
+	WebAuthnRedirection_Enabled = WebAuthnRedirection.AddMember("Enabled", _BooleanObject)
+
+	WebAuthnRedirection_ProcessCompatibilityList = WebAuthnRedirection.AddMember("ProcessCompatibilityList", _ProcessCompatibilityList)
+
 	StorageConnectorAuthentication_FORCE_REAUTHENTICATION = StorageConnectorAuthentication.AddMember("FORCE_REAUTHENTICATION", smithyprelude.Unit)
 
 	StorageConnectorAuthentication_REUSE_CREDENTIALS = StorageConnectorAuthentication.AddMember("REUSE_CREDENTIALS", smithyprelude.Unit)
@@ -5423,6 +5456,8 @@ func init() {
 
 	Stack_ContentRedirection = Stack.AddMember("ContentRedirection", ContentRedirection)
 
+	Stack_WebAuthnRedirection = Stack.AddMember("WebAuthnRedirection", WebAuthnRedirection)
+
 	Stack_AgentAccessConfig = Stack.AddMember("AgentAccessConfig", AgentAccessConfig)
 
 	Stack_StorageConnectorAuthentication = Stack.AddMember("StorageConnectorAuthentication", StorageConnectorAuthentication)
@@ -5452,6 +5487,8 @@ func init() {
 	StackAttribute_STREAMING_EXPERIENCE_SETTINGS = StackAttribute.AddMember("STREAMING_EXPERIENCE_SETTINGS", smithyprelude.Unit)
 
 	StackAttribute_CONTENT_REDIRECTION = StackAttribute.AddMember("CONTENT_REDIRECTION", smithyprelude.Unit)
+
+	StackAttribute_WEB_AUTHN_REDIRECTION = StackAttribute.AddMember("WEB_AUTHN_REDIRECTION", smithyprelude.Unit)
 
 	StackAttribute_AGENT_ACCESS_CONFIG = StackAttribute.AddMember("AGENT_ACCESS_CONFIG", smithyprelude.Unit)
 
@@ -5856,6 +5893,8 @@ func init() {
 	CreateStackRequest_StreamingExperienceSettings = CreateStackRequest.AddMember("StreamingExperienceSettings", StreamingExperienceSettings)
 
 	CreateStackRequest_ContentRedirection = CreateStackRequest.AddMember("ContentRedirection", ContentRedirection)
+
+	CreateStackRequest_WebAuthnRedirection = CreateStackRequest.AddMember("WebAuthnRedirection", WebAuthnRedirection)
 
 	CreateStackRequest_AgentAccessConfig = CreateStackRequest.AddMember("AgentAccessConfig", AgentAccessConfig)
 
@@ -6438,6 +6477,8 @@ func init() {
 	UpdateStackRequest_StreamingExperienceSettings = UpdateStackRequest.AddMember("StreamingExperienceSettings", StreamingExperienceSettings)
 
 	UpdateStackRequest_ContentRedirection = UpdateStackRequest.AddMember("ContentRedirection", ContentRedirection)
+
+	UpdateStackRequest_WebAuthnRedirection = UpdateStackRequest.AddMember("WebAuthnRedirection", WebAuthnRedirection)
 
 	UpdateStackRequest_AgentAccessConfig = UpdateStackRequest.AddMember("AgentAccessConfig", AgentAccessConfigForUpdate)
 

@@ -1,4 +1,4 @@
 200
 Content-Type: application/xml
 
-<ListOpenIDConnectProvidersResponse><ListOpenIDConnectProvidersResult><OpenIDConnectProviderList><member><Arn>__Arn__</Arn></member><member><Arn>__Arn__</Arn></member></OpenIDConnectProviderList></ListOpenIDConnectProvidersResult></ListOpenIDConnectProvidersResponse>
+<ListOpenIDConnectProvidersResponse><ListOpenIDConnectProvidersResult><OpenIDConnectProviderList><member><Arn>__Arn__</Arn><IsTrustedIdentityPropagationEnabled>true</IsTrustedIdentityPropagationEnabled></member><member><Arn>__Arn__</Arn><IsTrustedIdentityPropagationEnabled>true</IsTrustedIdentityPropagationEnabled></member></OpenIDConnectProviderList></ListOpenIDConnectProvidersResult></ListOpenIDConnectProvidersResponse>

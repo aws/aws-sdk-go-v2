@@ -35,11 +35,12 @@ func (c *Client) StartEngagementFromOpportunityTask(ctx context.Context, params 
 	return out, nil
 }
 
+// Contains the request parameters for the StartEngagementFromOpportunityTask
+// operation.
 type StartEngagementFromOpportunityTaskInput struct {
 
-	// Indicates the level of AWS involvement in the opportunity. This field helps
-	// track AWS participation throughout the engagement, such as providing technical
-	// support, deal assistance, and sales support.
+	// Specifies the level of AWS involvement for the opportunity. The value includes
+	// the involvement type and the visibility of that involvement.
 	//
 	// This member is required.
 	AwsSubmission *types.AwsSubmission
@@ -95,6 +96,8 @@ func (v *StartEngagementFromOpportunityTaskInput) SerializeMembers(s smithy.Shap
 	}
 }
 
+// Contains the response that the StartEngagementFromOpportunityTask action
+// returns.
 type StartEngagementFromOpportunityTaskOutput struct {
 
 	// The identifier of the newly created Engagement. Only populated if TaskStatus is

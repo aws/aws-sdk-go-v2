@@ -1809,11 +1809,17 @@ type IntegrationStatus string
 
 // Enum values for IntegrationStatus
 const (
-	IntegrationStatusPending    IntegrationStatus = "PENDING"
-	IntegrationStatusInProgress IntegrationStatus = "IN_PROGRESS"
-	IntegrationStatusActive     IntegrationStatus = "ACTIVE"
-	IntegrationStatusInactive   IntegrationStatus = "INACTIVE"
-	IntegrationStatusDisabling  IntegrationStatus = "DISABLING"
+	IntegrationStatusPending                          IntegrationStatus = "PENDING"
+	IntegrationStatusInProgress                       IntegrationStatus = "IN_PROGRESS"
+	IntegrationStatusActive                           IntegrationStatus = "ACTIVE"
+	IntegrationStatusInactive                         IntegrationStatus = "INACTIVE"
+	IntegrationStatusDisabling                        IntegrationStatus = "DISABLING"
+	IntegrationStatusEstablishingConnectionInProgress IntegrationStatus = "ESTABLISHING_CONNECTION_IN_PROGRESS"
+	IntegrationStatusEstablishingConnectionCompleted  IntegrationStatus = "ESTABLISHING_CONNECTION_COMPLETED"
+	IntegrationStatusEstablishingConnectionFailed     IntegrationStatus = "ESTABLISHING_CONNECTION_FAILED"
+	IntegrationStatusPendingManifestCode              IntegrationStatus = "PENDING_MANIFEST_CODE"
+	IntegrationStatusDeleteInProgress                 IntegrationStatus = "DELETE_IN_PROGRESS"
+	IntegrationStatusDeleteFailed                     IntegrationStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for IntegrationStatus. Note that this can be
@@ -1827,6 +1833,12 @@ func (IntegrationStatus) Values() []IntegrationStatus {
 		"ACTIVE",
 		"INACTIVE",
 		"DISABLING",
+		"ESTABLISHING_CONNECTION_IN_PROGRESS",
+		"ESTABLISHING_CONNECTION_COMPLETED",
+		"ESTABLISHING_CONNECTION_FAILED",
+		"PENDING_MANIFEST_CODE",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
 	}
 }
 
@@ -1834,8 +1846,9 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeGitlabSelfManaged IntegrationType = "GITLAB_SELF_MANAGED"
-	IntegrationTypeGithub            IntegrationType = "GITHUB"
+	IntegrationTypeGitlabSelfManaged      IntegrationType = "GITLAB_SELF_MANAGED"
+	IntegrationTypeGithub                 IntegrationType = "GITHUB"
+	IntegrationTypeGithubEnterpriseServer IntegrationType = "GITHUB_ENTERPRISE_SERVER"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -1846,6 +1859,7 @@ func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"GITLAB_SELF_MANAGED",
 		"GITHUB",
+		"GITHUB_ENTERPRISE_SERVER",
 	}
 }
 

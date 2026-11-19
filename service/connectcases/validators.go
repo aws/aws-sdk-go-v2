@@ -2184,6 +2184,11 @@ func validateRelatedItemUpdateContent(v types.RelatedItemUpdateContent) error {
 			invalidParams.AddNested("[custom]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RelatedItemUpdateContentMemberSla:
+		if err := validateSlaUpdateContent(uv.Value); err != nil {
+			invalidParams.AddNested("[sla]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2347,6 +2352,40 @@ func validateSlaInputContent(v types.SlaInputContent) error {
 	case *types.SlaInputContentMemberSlaInputConfiguration:
 		if err := validateSlaInputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[slaInputConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlaUpdateConfiguration(v *types.SlaUpdateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlaUpdateConfiguration"}
+	if v.TargetSlaMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetSlaMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlaUpdateContent(v types.SlaUpdateContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlaUpdateContent"}
+	switch uv := v.(type) {
+	case *types.SlaUpdateContentMemberSlaUpdateConfiguration:
+		if err := validateSlaUpdateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[slaUpdateConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
 	}

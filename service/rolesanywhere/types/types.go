@@ -637,6 +637,9 @@ type ProfileDetail struct {
 	// credentials.
 	SessionPolicy *string
 
+	// The trusted identity propagation (TIP) settings of the profile.
+	TipConfiguration *TipConfiguration
+
 	// The ISO-8601 timestamp when the profile was last updated.
 	UpdatedAt *time.Time
 
@@ -698,6 +701,11 @@ func (v *ProfileDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionPolicy != nil {
 		s.WriteString(schemas.ProfileDetail_sessionPolicy, *v.SessionPolicy)
 	}
+	if v.TipConfiguration != nil {
+		s.WriteStruct(schemas.ProfileDetail_tipConfiguration)
+		v.TipConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ProfileDetail_updatedAt, *v.UpdatedAt)
 	}
@@ -750,6 +758,9 @@ func (v *ProfileDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ProfileDetail_sessionPolicy:
 			v.SessionPolicy = new(string)
 			return d.ReadString(schemas.ProfileDetail_sessionPolicy, v.SessionPolicy)
+		case schemas.ProfileDetail_tipConfiguration:
+			v.TipConfiguration = &TipConfiguration{}
+			return v.TipConfiguration.Deserialize(d)
 		case schemas.ProfileDetail_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.ProfileDetail_updatedAt, v.UpdatedAt)
@@ -1074,6 +1085,95 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Tag_value:
 			v.Value = new(string)
 			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// The trusted identity propagation (TIP) settings of a profile. When you enable
+// TIP, sessions from the profile include the identity from the certificate in
+// aws:OriginIdentity condition keys, which callers can't set.
+type TipConfiguration struct {
+
+	// Specifies whether you use trusted identity propagation (TIP) for the profile.
+	// This field supports the following values:
+	//
+	//   - ENABLED – Sessions from the profile include the aws:OriginIdentity condition
+	//   keys.
+	//
+	//   - DISABLED – Sessions from the profile don't include these keys.
+	//
+	// This member is required.
+	Status TipStatus
+
+	// The certificate field whose value becomes the subject,
+	// aws:OriginIdentity/Subject . This field supports the following values:
+	//
+	//   - x509Subject/CN (default) – The common name (CN) in the certificate's Subject.
+	//
+	//   - x509SAN/URI – The first URI in the certificate's Subject Alternative Name
+	//   (SAN) extension.
+	//
+	// The profile's attribute mappings must include a rule for this field, and the
+	// default attribute mappings include one for each value. If the certificate has no
+	// value for the field, CreateSession denies the request.
+	SubjectSource TipSubjectSource
+
+	// Specifies whether the certificates for the profile identify workloads or
+	// people. This field supports the following values:
+	//
+	//   - workload – The certificates identify workloads.
+	//
+	//   - user – The certificates identify people.
+	//
+	// Sessions include the value in aws:OriginIdentity/SubjectType . If you omit this
+	// field, sessions don't include that key.
+	SubjectType TipSubjectType
+
+	noSmithyDocumentSerde
+}
+
+func (v *TipConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TipConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TipConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.TipConfiguration_status, string(v.Status))
+	}
+	if v.SubjectSource != "" {
+		s.WriteString(schemas.TipConfiguration_subjectSource, string(v.SubjectSource))
+	}
+	if v.SubjectType != "" {
+		s.WriteString(schemas.TipConfiguration_subjectType, string(v.SubjectType))
+	}
+}
+func (v *TipConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TipConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TipConfiguration_status:
+			var ev string
+			if err := d.ReadString(schemas.TipConfiguration_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TipStatus(ev)
+			return nil
+		case schemas.TipConfiguration_subjectSource:
+			var ev string
+			if err := d.ReadString(schemas.TipConfiguration_subjectSource, &ev); err != nil {
+				return err
+			}
+			v.SubjectSource = TipSubjectSource(ev)
+			return nil
+		case schemas.TipConfiguration_subjectType:
+			var ev string
+			if err := d.ReadString(schemas.TipConfiguration_subjectType, &ev); err != nil {
+				return err
+			}
+			v.SubjectType = TipSubjectType(ev)
+			return nil
 		}
 		return nil
 	})

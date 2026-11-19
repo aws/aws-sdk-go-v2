@@ -117,6 +117,9 @@ type UpdateFirewallRuleInput struct {
 	// TRUST_REDIRECTION_DOMAIN : Inspects only the first domain in the redirection
 	// chain. You don't need to add the subsequent domains in the domain in the
 	// redirection list to the domain list.
+	//
+	// You can't set this value on an AutoAllowlist rule, which always inspects the
+	// redirection chain.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
 
 	// The rule type configuration for the firewall rule. This is a tagged union — set
@@ -136,7 +139,14 @@ type UpdateFirewallRuleInput struct {
 	//   Amazon Web Services Marketplace. The selected partner must be an active
 	//   subscription on the calling account.
 	//
-	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes. It doesn't return
+	// AutoAllowlist .
+	//
+	// You can't specify FirewallRuleType when you update an AutoAllowlist rule, even
+	// with its current values. InitialDataTimeframeHours and
+	// ImportFromFirewallDomainListId can't be changed. To change them, delete the rule
+	// and create a new one. Deleting an AutoAllowlist rule also deletes its managed
+	// domain list and the domains that you allowed.
 	FirewallRuleType *types.FirewallRuleType
 
 	//  The DNS Firewall Advanced rule ID.
@@ -190,6 +200,9 @@ type UpdateFirewallRuleInput struct {
 	// If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals
 	//   AAAA, this action will not be applied to synthetic IPv6 addresses generated when
 	//   DNS64 is enabled.
+	//
+	// You can't set Qtype on an AutoAllowlist rule, because the rule applies to all
+	// query types.
 	//
 	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 	Qtype *string

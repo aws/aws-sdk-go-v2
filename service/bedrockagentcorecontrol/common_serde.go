@@ -261,6 +261,12 @@ func serializeCredentialRotationConfig(s smithy.ShapeSerializer, schema *smithy.
 
 func serializeCredentialsProviderConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.CredentialsProviderConfiguration) {
 	switch vv := v.(type) {
+	case *types.CredentialsProviderConfigurationMemberAwsBilling:
+		s.WriteUnion(schema, schemas.CredentialsProviderConfiguration_awsBilling)
+		s.WriteStruct(schemas.CredentialsProviderConfiguration_awsBilling)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.CredentialsProviderConfigurationMemberCoinbaseCDP:
 		s.WriteUnion(schema, schemas.CredentialsProviderConfiguration_coinbaseCDP)
 		s.WriteStruct(schemas.CredentialsProviderConfiguration_coinbaseCDP)
@@ -1833,6 +1839,10 @@ func deserializeCredentialRotationConfig(d smithy.ShapeDeserializer, s *smithy.S
 func deserializeCredentialsProviderConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.CredentialsProviderConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.CredentialsProviderConfiguration_awsBilling:
+			vv := &types.CredentialsProviderConfigurationMemberAwsBilling{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.CredentialsProviderConfiguration_coinbaseCDP:
 			vv := &types.CredentialsProviderConfigurationMemberCoinbaseCDP{}
 			*v = vv

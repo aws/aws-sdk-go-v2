@@ -35,6 +35,9 @@ func ExampleAcmCertificateMetadataFilter_outputUsage() {
 	case *types.AcmCertificateMetadataFilterMemberRenewalStatus:
 		_ = v.Value // Value is types.RenewalStatus
 
+	case *types.AcmCertificateMetadataFilterMemberRootHierarchyType:
+		_ = v.Value // Value is types.RootHierarchyType
+
 	case *types.AcmCertificateMetadataFilterMemberStatus:
 		_ = v.Value // Value is types.CertificateStatus
 
@@ -59,6 +62,7 @@ var _ *string
 var _ types.CertificateExport
 var _ types.CertificateManagedBy
 var _ *bool
+var _ types.RootHierarchyType
 var _ types.CertificateKeyPairOrigin
 var _ types.CertificateStatus
 var _ types.RenewalStatus

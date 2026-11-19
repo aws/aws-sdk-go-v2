@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	smithyprelude "github.com/aws/smithy-go/prelude"
 	"time"
 )
 
@@ -102,6 +103,175 @@ func (v *AutoScalingGroupsConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.AutoScalingGroupsConfiguration_roleArn:
 			v.RoleArn = new(string)
 			return d.ReadString(schemas.AutoScalingGroupsConfiguration_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
+// A module that you can attach, as ListAvailableModules returns it.
+// ListAvailableModules and GetAvailableModule never return how a module is
+// implemented.
+type AvailableModuleSummary struct {
+
+	// The module's ARN.
+	//
+	// This member is required.
+	ModuleArn *string
+
+	// The module's ID.
+	//
+	// This member is required.
+	ModuleId *string
+
+	// A label, not unique: modules can share a name.
+	//
+	// This member is required.
+	ModuleName *string
+
+	// Specifies whether your access to the module is current.
+	//
+	// This member is required.
+	SubscriptionStatus SubscriptionStatus
+
+	// The type of access that you have to the module.
+	//
+	// This member is required.
+	SubscriptionType SubscriptionType
+
+	// The Marketplace product the module is sold under. Present only when
+	// subscriptionType is MARKETPLACE.
+	MarketplaceProductId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AvailableModuleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailableModuleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailableModuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketplaceProductId != nil {
+		s.WriteString(schemas.AvailableModuleSummary_marketplaceProductId, *v.MarketplaceProductId)
+	}
+	if v.ModuleArn != nil {
+		s.WriteString(schemas.AvailableModuleSummary_moduleArn, *v.ModuleArn)
+	}
+	if v.ModuleId != nil {
+		s.WriteString(schemas.AvailableModuleSummary_moduleId, *v.ModuleId)
+	}
+	if v.ModuleName != nil {
+		s.WriteString(schemas.AvailableModuleSummary_moduleName, *v.ModuleName)
+	}
+	if v.SubscriptionStatus != "" {
+		s.WriteString(schemas.AvailableModuleSummary_subscriptionStatus, string(v.SubscriptionStatus))
+	}
+	if v.SubscriptionType != "" {
+		s.WriteString(schemas.AvailableModuleSummary_subscriptionType, string(v.SubscriptionType))
+	}
+}
+func (v *AvailableModuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailableModuleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailableModuleSummary_marketplaceProductId:
+			v.MarketplaceProductId = new(string)
+			return d.ReadString(schemas.AvailableModuleSummary_marketplaceProductId, v.MarketplaceProductId)
+		case schemas.AvailableModuleSummary_moduleArn:
+			v.ModuleArn = new(string)
+			return d.ReadString(schemas.AvailableModuleSummary_moduleArn, v.ModuleArn)
+		case schemas.AvailableModuleSummary_moduleId:
+			v.ModuleId = new(string)
+			return d.ReadString(schemas.AvailableModuleSummary_moduleId, v.ModuleId)
+		case schemas.AvailableModuleSummary_moduleName:
+			v.ModuleName = new(string)
+			return d.ReadString(schemas.AvailableModuleSummary_moduleName, v.ModuleName)
+		case schemas.AvailableModuleSummary_subscriptionStatus:
+			var ev string
+			if err := d.ReadString(schemas.AvailableModuleSummary_subscriptionStatus, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionStatus = SubscriptionStatus(ev)
+			return nil
+		case schemas.AvailableModuleSummary_subscriptionType:
+			var ev string
+			if err := d.ReadString(schemas.AvailableModuleSummary_subscriptionType, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionType = SubscriptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A version of a module that you can attach, as ListAvailableModuleVersions
+// returns it. ListAvailableModuleVersions and GetAvailableModuleVersion never
+// return how a version is implemented.
+type AvailableModuleVersionSummary struct {
+
+	// The time when the version was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The version's ARN.
+	//
+	// This member is required.
+	ModuleVersionArn *string
+
+	// ACTIVE or DEPRECATED.
+	//
+	// This member is required.
+	Status ModuleVersionStatus
+
+	// The version.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AvailableModuleVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailableModuleVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailableModuleVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AvailableModuleVersionSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ModuleVersionArn != nil {
+		s.WriteString(schemas.AvailableModuleVersionSummary_moduleVersionArn, *v.ModuleVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AvailableModuleVersionSummary_status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AvailableModuleVersionSummary_version, *v.Version)
+	}
+}
+func (v *AvailableModuleVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailableModuleVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailableModuleVersionSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AvailableModuleVersionSummary_createdAt, v.CreatedAt)
+		case schemas.AvailableModuleVersionSummary_moduleVersionArn:
+			v.ModuleVersionArn = new(string)
+			return d.ReadString(schemas.AvailableModuleVersionSummary_moduleVersionArn, v.ModuleVersionArn)
+		case schemas.AvailableModuleVersionSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AvailableModuleVersionSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ModuleVersionStatus(ev)
+			return nil
+		case schemas.AvailableModuleVersionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AvailableModuleVersionSummary_version, v.Version)
 		}
 		return nil
 	})
@@ -261,6 +431,63 @@ func (v *EksEndpointsConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Describes one cause of a failure of a resource or an update, with an error
+// code, a description, and the IDs of the resources involved.
+type ErrorDetail struct {
+
+	// The error code for what failed.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// A description of the failure.
+	//
+	// This member is required.
+	Message *string
+
+	// The IDs of the resources involved, such as a subnet or security group.
+	ResourceIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.ErrorDetail_code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ErrorDetail_message, *v.Message)
+	}
+	if v.ResourceIds != nil {
+		serializeAwsResourceIdList(s, schemas.ErrorDetail_resourceIds, v.ResourceIds)
+	}
+}
+func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetail_code:
+			var ev string
+			if err := d.ReadString(schemas.ErrorDetail_code, &ev); err != nil {
+				return err
+			}
+			v.Code = ErrorCode(ev)
+			return nil
+		case schemas.ErrorDetail_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ErrorDetail_message, v.Message)
+		case schemas.ErrorDetail_resourceIds:
+			return deserializeAwsResourceIdList(d, schemas.ErrorDetail_resourceIds, &v.ResourceIds)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration of a filter.
 type Filter struct {
 
@@ -334,6 +561,224 @@ func (v *FilterCriterion) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// One flow on a link: a set of modules that runs on the link's bid requests.
+type Flow struct {
+
+	// The flow's name, unique within the link.
+	//
+	// This member is required.
+	Name *string
+
+	// The pipeline that the flow's modules run in. In a sequential pipeline, each
+	// module sees the previous module's output. In a phased pipeline, a phase's
+	// modules see the prior phase's output, not each other's.
+	//
+	// This member is required.
+	Pipeline FlowPipeline
+
+	noSmithyDocumentSerde
+}
+
+func (v *Flow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Flow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Flow_name, *v.Name)
+	}
+	if v.Pipeline != nil {
+		serializeFlowPipeline(s, schemas.Flow_pipeline, v.Pipeline)
+	}
+}
+func (v *Flow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Flow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Flow_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Flow_name, v.Name)
+		case schemas.Flow_pipeline:
+			return deserializeFlowPipeline(d, schemas.Flow_pipeline, &v.Pipeline)
+		}
+		return nil
+	})
+}
+
+// A version attached to a flow, with its settings.
+type FlowModule struct {
+
+	// The version to attach. It must be ACTIVE and available to you (see
+	// ListAvailableModuleVersions). You can keep a version that's already in the
+	// link's flows after it's deprecated, but you can't give it a higher share of
+	// traffic.
+	//
+	// This member is required.
+	ModuleVersionArn *string
+
+	// The module's name, unique within the flow.
+	//
+	// This member is required.
+	Name *string
+
+	// The percentage of the flow's requests that the module runs on. The flow skips
+	// the module on the rest of the requests. The default is 100.
+	ActivationPercentage *float32
+
+	// RTB Fabric validates the value against the version's configurationSchema and
+	// rejects a value that fails with ValidationException. Omit it when the schema is
+	// empty or fully defaulted.
+	ConfigurationValues *string
+
+	// Specifies what happens when the module fails – when its call fails or times
+	// out, or when an express module's dataset is stale. The default is OPEN.
+	FailureMode FailureMode
+
+	// The capabilities to turn on, chosen from the version's configurableActions . If
+	// the version exposes one, it's the default. If the version exposes more than one,
+	// this field is required. If it exposes none, omit this field.
+	SelectedActions []ConfigurableAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *FlowModule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlowModule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlowModule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationPercentage != nil {
+		s.WriteFloat32(schemas.FlowModule_activationPercentage, *v.ActivationPercentage)
+	}
+	if v.ConfigurationValues != nil {
+		s.WriteString(schemas.FlowModule_configurationValues, *v.ConfigurationValues)
+	}
+	if v.FailureMode != "" {
+		s.WriteString(schemas.FlowModule_failureMode, string(v.FailureMode))
+	}
+	if v.ModuleVersionArn != nil {
+		s.WriteString(schemas.FlowModule_moduleVersionArn, *v.ModuleVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FlowModule_name, *v.Name)
+	}
+	if v.SelectedActions != nil {
+		serializeSelectedActionList(s, schemas.FlowModule_selectedActions, v.SelectedActions)
+	}
+}
+func (v *FlowModule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlowModule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlowModule_activationPercentage:
+			v.ActivationPercentage = new(float32)
+			return d.ReadFloat32(schemas.FlowModule_activationPercentage, v.ActivationPercentage)
+		case schemas.FlowModule_configurationValues:
+			v.ConfigurationValues = new(string)
+			return d.ReadString(schemas.FlowModule_configurationValues, v.ConfigurationValues)
+		case schemas.FlowModule_failureMode:
+			var ev string
+			if err := d.ReadString(schemas.FlowModule_failureMode, &ev); err != nil {
+				return err
+			}
+			v.FailureMode = FailureMode(ev)
+			return nil
+		case schemas.FlowModule_moduleVersionArn:
+			v.ModuleVersionArn = new(string)
+			return d.ReadString(schemas.FlowModule_moduleVersionArn, v.ModuleVersionArn)
+		case schemas.FlowModule_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FlowModule_name, v.Name)
+		case schemas.FlowModule_selectedActions:
+			return deserializeSelectedActionList(d, schemas.FlowModule_selectedActions, &v.SelectedActions)
+		}
+		return nil
+	})
+}
+
+// One phase of a phased pipeline. Its modules run concurrently on the previous
+// phase's output.
+type FlowPhase struct {
+
+	// At most one MUTATE_REQUEST_BODY module.
+	//
+	// This member is required.
+	Modules []FlowModule
+
+	noSmithyDocumentSerde
+}
+
+func (v *FlowPhase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlowPhase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlowPhase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Modules != nil {
+		serializeFlowModuleList(s, schemas.FlowPhase_modules, v.Modules)
+	}
+}
+func (v *FlowPhase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlowPhase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlowPhase_modules:
+			return deserializeFlowModuleList(d, schemas.FlowPhase_modules, &v.Modules)
+		}
+		return nil
+	})
+}
+
+// How a flow's modules run. In sequential , each module sees the previous module's
+// output; in phased , a phase's modules see the prior phase's output, not each
+// other's. Set exactly one. New members can be added, so handle an unknown one.
+//
+// The following types satisfy this interface:
+//
+//	FlowPipelineMemberPhased
+//	FlowPipelineMemberSequential
+type FlowPipeline interface {
+	isFlowPipeline()
+}
+
+// Phases run in order; a phase's modules run concurrently on the same input. Use
+// it when a phase's modules don't depend on each other.
+type FlowPipelineMemberPhased struct {
+	Value PhasedPipeline
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowPipelineMemberPhased) isFlowPipeline() {}
+func (v *FlowPipelineMemberPhased) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlowPipeline_phased)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FlowPipelineMemberPhased) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Modules run in list order. Use it when each module needs the previous module's
+// output.
+type FlowPipelineMemberSequential struct {
+	Value SequentialPipeline
+
+	noSmithyDocumentSerde
+}
+
+func (*FlowPipelineMemberSequential) isFlowPipeline() {}
+func (v *FlowPipelineMemberSequential) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlowPipeline_sequential)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FlowPipelineMemberSequential) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Describes the header tag for a bid action.
@@ -606,6 +1051,88 @@ func (v *LinkAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A requested link configuration.
+type LinkConfigParameters struct {
+
+	// Describes the settings for a link log.
+	LogSettings *LinkLogSettings
+
+	// The timeout value in milliseconds.
+	TimeoutInMillis *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *LinkConfigParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkConfigParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkConfigParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogSettings != nil {
+		s.WriteStruct(schemas.LinkConfigParameters_logSettings)
+		v.LogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutInMillis != nil {
+		s.WriteInt64(schemas.LinkConfigParameters_timeoutInMillis, *v.TimeoutInMillis)
+	}
+}
+func (v *LinkConfigParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkConfigParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkConfigParameters_logSettings:
+			v.LogSettings = &LinkLogSettings{}
+			return v.LogSettings.Deserialize(d)
+		case schemas.LinkConfigParameters_timeoutInMillis:
+			v.TimeoutInMillis = new(int64)
+			return d.ReadInt64(schemas.LinkConfigParameters_timeoutInMillis, v.TimeoutInMillis)
+		}
+		return nil
+	})
+}
+
+// A requested link flow.
+//
+// The following types satisfy this interface:
+//
+//	LinkFlowParametersMemberFlows
+//	LinkFlowParametersMemberModules
+type LinkFlowParameters interface {
+	isLinkFlowParameters()
+}
+
+// A link's flows: at most one.
+type LinkFlowParametersMemberFlows struct {
+	Value []Flow
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkFlowParametersMemberFlows) isLinkFlowParameters() {}
+func (v *LinkFlowParametersMemberFlows) Serialize(s smithy.ShapeSerializer) {
+	serializeFlowList(s, schemas.LinkFlowParameters_flows, v.Value)
+}
+func (v *LinkFlowParametersMemberFlows) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeFlowList(d, schemas.LinkFlowParameters_flows, &v.Value)
+}
+
+// The requested modules.
+type LinkFlowParametersMemberModules struct {
+	Value []ModuleConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*LinkFlowParametersMemberModules) isLinkFlowParameters() {}
+func (v *LinkFlowParametersMemberModules) Serialize(s smithy.ShapeSerializer) {
+	serializeModuleConfigurationList(s, schemas.LinkFlowParameters_modules, v.Value)
+}
+func (v *LinkFlowParametersMemberModules) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeModuleConfigurationList(d, schemas.LinkFlowParameters_modules, &v.Value)
+}
+
 // Describes the settings for a link log.
 type LinkLogSettings struct {
 
@@ -674,6 +1201,10 @@ type LinkRoutingRuleSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []ErrorDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -691,6 +1222,9 @@ func (v *LinkRoutingRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.LinkRoutingRuleSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.LinkRoutingRuleSummary_errorDetails, v.ErrorDetails)
 	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.LinkRoutingRuleSummary_priority, *v.Priority)
@@ -714,6 +1248,8 @@ func (v *LinkRoutingRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LinkRoutingRuleSummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.LinkRoutingRuleSummary_createdAt, v.CreatedAt)
+		case schemas.LinkRoutingRuleSummary_errorDetails:
+			return deserializeErrorDetails(d, schemas.LinkRoutingRuleSummary_errorDetails, &v.ErrorDetails)
 		case schemas.LinkRoutingRuleSummary_priority:
 			v.Priority = new(int32)
 			return d.ReadInt32(schemas.LinkRoutingRuleSummary_priority, v.Priority)
@@ -730,6 +1266,39 @@ func (v *LinkRoutingRuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LinkRoutingRuleSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.LinkRoutingRuleSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The link an update targeted.
+type LinkTarget struct {
+
+	// The unique identifier of the link.
+	//
+	// This member is required.
+	LinkId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *LinkTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkId != nil {
+		s.WriteString(schemas.LinkTarget_linkId, *v.LinkId)
+	}
+}
+func (v *LinkTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkTarget_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.LinkTarget_linkId, v.LinkId)
 		}
 		return nil
 	})
@@ -810,6 +1379,10 @@ type ListLinksResponseStructure struct {
 	// The direction of the link.
 	Direction LinkDirection
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []ErrorDetail
+
 	// Describes the configuration of flow modules.
 	FlowModules []ModuleConfiguration
 
@@ -848,6 +1421,9 @@ func (v *ListLinksResponseStructure) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.Direction != "" {
 		s.WriteString(schemas.ListLinksResponseStructure_direction, string(v.Direction))
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.ListLinksResponseStructure_errorDetails, v.ErrorDetails)
 	}
 	if v.FlowModules != nil {
 		serializeModuleConfigurationList(s, schemas.ListLinksResponseStructure_flowModules, v.FlowModules)
@@ -905,6 +1481,8 @@ func (v *ListLinksResponseStructure) Deserialize(d smithy.ShapeDeserializer) err
 			}
 			v.Direction = LinkDirection(ev)
 			return nil
+		case schemas.ListLinksResponseStructure_errorDetails:
+			return deserializeErrorDetails(d, schemas.ListLinksResponseStructure_errorDetails, &v.ErrorDetails)
 		case schemas.ListLinksResponseStructure_flowModules:
 			return deserializeModuleConfigurationList(d, schemas.ListLinksResponseStructure_flowModules, &v.FlowModules)
 		case schemas.ListLinksResponseStructure_gatewayId:
@@ -1253,6 +1831,39 @@ func (v *OpenRtbAttributeModuleParameters) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// Phases that run in order; each starts after the previous one completes.
+type PhasedPipeline struct {
+
+	// At most 8 modules in total across the phases; more fails with
+	// ValidationException.
+	//
+	// This member is required.
+	Phases []FlowPhase
+
+	noSmithyDocumentSerde
+}
+
+func (v *PhasedPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhasedPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhasedPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Phases != nil {
+		serializeFlowPhaseList(s, schemas.PhasedPipeline_phases, v.Phases)
+	}
+}
+func (v *PhasedPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhasedPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhasedPipeline_phases:
+			return deserializeFlowPhaseList(d, schemas.PhasedPipeline_phases, &v.Phases)
+		}
+		return nil
+	})
+}
+
 // A key-value pair for query string matching in a routing rule condition.
 type QueryStringKeyValuePair struct {
 
@@ -1397,6 +2008,210 @@ func (v *ResponderErrorMaskingForHttpCode) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// A requested responder gateway configuration.
+type ResponderGatewayConfigParameters struct {
+
+	// The networking port.
+	//
+	// This member is required.
+	Port *int32
+
+	// The networking protocol.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	// The gateway's client routing policy.
+	ClientRoutingPolicy ClientRoutingPolicy
+
+	// The gateway's description.
+	Description *string
+
+	// The gateway's domain name.
+	DomainName *string
+
+	// Listener configuration for the protocols (HTTP, HTTPS, or both) accepted by the
+	// gateway.
+	ListenerConfig *ListenerConfig
+
+	// Describes the configuration of a managed endpoint.
+	ManagedEndpointConfiguration ManagedEndpointConfiguration
+
+	// Describes the configuration of a trust store.
+	TrustStoreConfiguration *TrustStoreConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResponderGatewayConfigParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponderGatewayConfigParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponderGatewayConfigParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRoutingPolicy != "" {
+		s.WriteString(schemas.ResponderGatewayConfigParameters_clientRoutingPolicy, string(v.ClientRoutingPolicy))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ResponderGatewayConfigParameters_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.ResponderGatewayConfigParameters_domainName, *v.DomainName)
+	}
+	if v.ListenerConfig != nil {
+		s.WriteStruct(schemas.ResponderGatewayConfigParameters_listenerConfig)
+		v.ListenerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedEndpointConfiguration != nil {
+		serializeManagedEndpointConfiguration(s, schemas.ResponderGatewayConfigParameters_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.ResponderGatewayConfigParameters_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.ResponderGatewayConfigParameters_protocol, string(v.Protocol))
+	}
+	if v.TrustStoreConfiguration != nil {
+		s.WriteStruct(schemas.ResponderGatewayConfigParameters_trustStoreConfiguration)
+		v.TrustStoreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResponderGatewayConfigParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponderGatewayConfigParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponderGatewayConfigParameters_clientRoutingPolicy:
+			var ev string
+			if err := d.ReadString(schemas.ResponderGatewayConfigParameters_clientRoutingPolicy, &ev); err != nil {
+				return err
+			}
+			v.ClientRoutingPolicy = ClientRoutingPolicy(ev)
+			return nil
+		case schemas.ResponderGatewayConfigParameters_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ResponderGatewayConfigParameters_description, v.Description)
+		case schemas.ResponderGatewayConfigParameters_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ResponderGatewayConfigParameters_domainName, v.DomainName)
+		case schemas.ResponderGatewayConfigParameters_listenerConfig:
+			v.ListenerConfig = &ListenerConfig{}
+			return v.ListenerConfig.Deserialize(d)
+		case schemas.ResponderGatewayConfigParameters_managedEndpointConfiguration:
+			return deserializeManagedEndpointConfiguration(d, schemas.ResponderGatewayConfigParameters_managedEndpointConfiguration, &v.ManagedEndpointConfiguration)
+		case schemas.ResponderGatewayConfigParameters_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.ResponderGatewayConfigParameters_port, v.Port)
+		case schemas.ResponderGatewayConfigParameters_protocol:
+			var ev string
+			if err := d.ReadString(schemas.ResponderGatewayConfigParameters_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.ResponderGatewayConfigParameters_trustStoreConfiguration:
+			v.TrustStoreConfiguration = &TrustStoreConfiguration{}
+			return v.TrustStoreConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A requested routing rule.
+type RoutingRuleParameters struct {
+
+	// The conditions for a routing rule. All specified fields must match for the rule
+	// to apply (AND logic). At least one condition field must be set.
+	//
+	// This member is required.
+	Conditions *RuleCondition
+
+	// WAF-style evaluation priority. Lower number = evaluated first (priority 1
+	// before 10). Gaps are allowed (1, 10, 20 is valid). Must be between 1 and 1000
+	// inclusive. Uniqueness per link among non-deleted rules is enforced at the API
+	// layer (HTTP 409 on conflict).
+	//
+	// This member is required.
+	Priority *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingRuleParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingRuleParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingRuleParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Conditions != nil {
+		s.WriteStruct(schemas.RoutingRuleParameters_conditions)
+		v.Conditions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.RoutingRuleParameters_priority, *v.Priority)
+	}
+}
+func (v *RoutingRuleParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingRuleParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingRuleParameters_conditions:
+			v.Conditions = &RuleCondition{}
+			return v.Conditions.Deserialize(d)
+		case schemas.RoutingRuleParameters_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.RoutingRuleParameters_priority, v.Priority)
+		}
+		return nil
+	})
+}
+
+// The routing rule an update targeted.
+type RoutingRuleTarget struct {
+
+	// The unique identifier of the rule's link.
+	//
+	// This member is required.
+	LinkId *string
+
+	// Identifier for a routing rule
+	//
+	// This member is required.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoutingRuleTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingRuleTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingRuleTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkId != nil {
+		s.WriteString(schemas.RoutingRuleTarget_linkId, *v.LinkId)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.RoutingRuleTarget_ruleId, *v.RuleId)
+	}
+}
+func (v *RoutingRuleTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingRuleTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingRuleTarget_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.RoutingRuleTarget_linkId, v.LinkId)
+		case schemas.RoutingRuleTarget_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.RoutingRuleTarget_ruleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // The conditions for a routing rule. All specified fields must match for the rule
 // to apply (AND logic). At least one condition field must be set.
 type RuleCondition struct {
@@ -1477,6 +2292,38 @@ func (v *RuleCondition) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Modules that run one after another, each on the previous module's output.
+type SequentialPipeline struct {
+
+	// In execution order.
+	//
+	// This member is required.
+	Modules []FlowModule
+
+	noSmithyDocumentSerde
+}
+
+func (v *SequentialPipeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SequentialPipeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SequentialPipeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Modules != nil {
+		serializeFlowModuleList(s, schemas.SequentialPipeline_modules, v.Modules)
+	}
+}
+func (v *SequentialPipeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SequentialPipeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SequentialPipeline_modules:
+			return deserializeFlowModuleList(d, schemas.SequentialPipeline_modules, &v.Modules)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration of a trust store.
 type TrustStoreConfiguration struct {
 
@@ -1509,6 +2356,340 @@ func (v *TrustStoreConfiguration) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// An accepted configuration change and its status.
+type Update struct {
+
+	// The timestamp of when the update was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The status of the update.
+	//
+	// This member is required.
+	Status UpdateStatus
+
+	// The resource that the update targeted.
+	//
+	// This member is required.
+	Target UpdateTarget
+
+	// The type of change.
+	//
+	// This member is required.
+	Type UpdateType
+
+	// The unique identifier of the update.
+	//
+	// This member is required.
+	UpdateId *string
+
+	// The causes of the failure. Present only when the update has failed.
+	ErrorDetails []ErrorDetail
+
+	// The changes that the update requested.
+	Parameters UpdateParameters
+
+	noSmithyDocumentSerde
+}
+
+func (v *Update) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Update)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Update) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Update_createdAt, *v.CreatedAt)
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.Update_errorDetails, v.ErrorDetails)
+	}
+	if v.Parameters != nil {
+		serializeUpdateParameters(s, schemas.Update_parameters, v.Parameters)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Update_status, string(v.Status))
+	}
+	if v.Target != nil {
+		serializeUpdateTarget(s, schemas.Update_target, v.Target)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Update_type, string(v.Type))
+	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.Update_updateId, *v.UpdateId)
+	}
+}
+func (v *Update) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Update, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Update_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Update_createdAt, v.CreatedAt)
+		case schemas.Update_errorDetails:
+			return deserializeErrorDetails(d, schemas.Update_errorDetails, &v.ErrorDetails)
+		case schemas.Update_parameters:
+			return deserializeUpdateParameters(d, schemas.Update_parameters, &v.Parameters)
+		case schemas.Update_status:
+			var ev string
+			if err := d.ReadString(schemas.Update_status, &ev); err != nil {
+				return err
+			}
+			v.Status = UpdateStatus(ev)
+			return nil
+		case schemas.Update_target:
+			return deserializeUpdateTarget(d, schemas.Update_target, &v.Target)
+		case schemas.Update_type:
+			var ev string
+			if err := d.ReadString(schemas.Update_type, &ev); err != nil {
+				return err
+			}
+			v.Type = UpdateType(ev)
+			return nil
+		case schemas.Update_updateId:
+			v.UpdateId = new(string)
+			return d.ReadString(schemas.Update_updateId, v.UpdateId)
+		}
+		return nil
+	})
+}
+
+// What an update requested.
+//
+// The following types satisfy this interface:
+//
+//	UpdateParametersMemberLinkConfig
+//	UpdateParametersMemberLinkFlow
+//	UpdateParametersMemberResponderGatewayConfig
+//	UpdateParametersMemberRoutingRule
+type UpdateParameters interface {
+	isUpdateParameters()
+}
+
+// The requested link configuration.
+type UpdateParametersMemberLinkConfig struct {
+	Value LinkConfigParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateParametersMemberLinkConfig) isUpdateParameters() {}
+func (v *UpdateParametersMemberLinkConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParameters_linkConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateParametersMemberLinkConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The requested link flow.
+type UpdateParametersMemberLinkFlow struct {
+	Value LinkFlowParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateParametersMemberLinkFlow) isUpdateParameters() {}
+func (v *UpdateParametersMemberLinkFlow) Serialize(s smithy.ShapeSerializer) {
+	serializeLinkFlowParameters(s, schemas.UpdateParameters_linkFlow, v.Value)
+}
+func (v *UpdateParametersMemberLinkFlow) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeLinkFlowParameters(d, schemas.UpdateParameters_linkFlow, &v.Value)
+}
+
+// The requested responder gateway configuration.
+type UpdateParametersMemberResponderGatewayConfig struct {
+	Value ResponderGatewayConfigParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateParametersMemberResponderGatewayConfig) isUpdateParameters() {}
+func (v *UpdateParametersMemberResponderGatewayConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParameters_responderGatewayConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateParametersMemberResponderGatewayConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The requested routing rule.
+type UpdateParametersMemberRoutingRule struct {
+	Value RoutingRuleParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateParametersMemberRoutingRule) isUpdateParameters() {}
+func (v *UpdateParametersMemberRoutingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParameters_routingRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateParametersMemberRoutingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of an update.
+type UpdateSummary struct {
+
+	// The timestamp of when the update was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The status of the update.
+	//
+	// This member is required.
+	Status UpdateStatus
+
+	// The type of change.
+	//
+	// This member is required.
+	Type UpdateType
+
+	// The unique identifier of the update.
+	//
+	// This member is required.
+	UpdateId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSummary_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateSummary_type, string(v.Type))
+	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.UpdateSummary_updateId, *v.UpdateId)
+	}
+}
+func (v *UpdateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateSummary_createdAt, v.CreatedAt)
+		case schemas.UpdateSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = UpdateStatus(ev)
+			return nil
+		case schemas.UpdateSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = UpdateType(ev)
+			return nil
+		case schemas.UpdateSummary_updateId:
+			v.UpdateId = new(string)
+			return d.ReadString(schemas.UpdateSummary_updateId, v.UpdateId)
+		}
+		return nil
+	})
+}
+
+// What an update targeted.
+//
+// The following types satisfy this interface:
+//
+//	UpdateTargetMemberGateway
+//	UpdateTargetMemberLink
+//	UpdateTargetMemberRoutingRule
+type UpdateTarget interface {
+	isUpdateTarget()
+}
+
+// The gateway itself.
+type UpdateTargetMemberGateway struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateTargetMemberGateway) isUpdateTarget() {}
+func (v *UpdateTargetMemberGateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTarget_gateway)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateTargetMemberGateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A link on the gateway.
+type UpdateTargetMemberLink struct {
+	Value LinkTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateTargetMemberLink) isUpdateTarget() {}
+func (v *UpdateTargetMemberLink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTarget_link)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateTargetMemberLink) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A routing rule on one of the gateway's links.
+type UpdateTargetMemberRoutingRule struct {
+	Value RoutingRuleTarget
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateTargetMemberRoutingRule) isUpdateTarget() {}
+func (v *UpdateTargetMemberRoutingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTarget_routingRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateTargetMemberRoutingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
+func (v *Unit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(smithyprelude.Unit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Unit) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Unit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, smithyprelude.Unit, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1521,5 +2702,9 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAction()                       {}
+func (*UnknownUnionMember) isFlowPipeline()                 {}
+func (*UnknownUnionMember) isLinkFlowParameters()           {}
 func (*UnknownUnionMember) isManagedEndpointConfiguration() {}
 func (*UnknownUnionMember) isModuleParameters()             {}
+func (*UnknownUnionMember) isUpdateParameters()             {}
+func (*UnknownUnionMember) isUpdateTarget()                 {}

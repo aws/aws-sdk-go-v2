@@ -6486,6 +6486,11 @@ type StackSet struct {
 	// The name that's associated with the StackSet.
 	StackSetName *string
 
+	// The Amazon S3 bucket path where CloudFormation stores the execution role stack
+	// template body. CloudFormation uses this bucket only when you specify a custom
+	// execution role template.
+	StackSetOutputBucketPath *string
+
 	// The status of the StackSet.
 	Status StackSetStatus
 
@@ -6555,6 +6560,9 @@ func (v *StackSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StackSetName != nil {
 		s.WriteString(schemas.StackSet_StackSetName, *v.StackSetName)
 	}
+	if v.StackSetOutputBucketPath != nil {
+		s.WriteString(schemas.StackSet_StackSetOutputBucketPath, *v.StackSetOutputBucketPath)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StackSet_Status, string(v.Status))
 	}
@@ -6610,6 +6618,9 @@ func (v *StackSet) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StackSet_StackSetName:
 			v.StackSetName = new(string)
 			return d.ReadString(schemas.StackSet_StackSetName, v.StackSetName)
+		case schemas.StackSet_StackSetOutputBucketPath:
+			v.StackSetOutputBucketPath = new(string)
+			return d.ReadString(schemas.StackSet_StackSetOutputBucketPath, v.StackSetOutputBucketPath)
 		case schemas.StackSet_Status:
 			var ev string
 			if err := d.ReadString(schemas.StackSet_Status, &ev); err != nil {

@@ -44,6 +44,24 @@ func (AgentCoreRuntimeServerProtocol) Values() []AgentCoreRuntimeServerProtocol 
 	}
 }
 
+type AgentSkillsRepositoryProvider string
+
+// Enum values for AgentSkillsRepositoryProvider
+const (
+	AgentSkillsRepositoryProviderGithub AgentSkillsRepositoryProvider = "GITHUB"
+)
+
+// Values returns all known values for AgentSkillsRepositoryProvider. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentSkillsRepositoryProvider) Values() []AgentSkillsRepositoryProvider {
+	return []AgentSkillsRepositoryProvider{
+		"GITHUB",
+	}
+}
+
 type AutoApprovalRule string
 
 // Enum values for AutoApprovalRule
@@ -302,6 +320,7 @@ type RegistryRecordOAuthGrantType string
 // Enum values for RegistryRecordOAuthGrantType
 const (
 	RegistryRecordOAuthGrantTypeClientCredentials RegistryRecordOAuthGrantType = "CLIENT_CREDENTIALS"
+	RegistryRecordOAuthGrantTypeAuthorizationCode RegistryRecordOAuthGrantType = "AUTHORIZATION_CODE"
 )
 
 // Values returns all known values for RegistryRecordOAuthGrantType. Note that
@@ -312,6 +331,7 @@ const (
 func (RegistryRecordOAuthGrantType) Values() []RegistryRecordOAuthGrantType {
 	return []RegistryRecordOAuthGrantType{
 		"CLIENT_CREDENTIALS",
+		"AUTHORIZATION_CODE",
 	}
 }
 
@@ -319,15 +339,17 @@ type RegistryRecordStatus string
 
 // Enum values for RegistryRecordStatus
 const (
-	RegistryRecordStatusDraft           RegistryRecordStatus = "DRAFT"
-	RegistryRecordStatusPendingApproval RegistryRecordStatus = "PENDING_APPROVAL"
-	RegistryRecordStatusApproved        RegistryRecordStatus = "APPROVED"
-	RegistryRecordStatusRejected        RegistryRecordStatus = "REJECTED"
-	RegistryRecordStatusDeprecated      RegistryRecordStatus = "DEPRECATED"
-	RegistryRecordStatusCreating        RegistryRecordStatus = "CREATING"
-	RegistryRecordStatusUpdating        RegistryRecordStatus = "UPDATING"
-	RegistryRecordStatusCreateFailed    RegistryRecordStatus = "CREATE_FAILED"
-	RegistryRecordStatusUpdateFailed    RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusDraft             RegistryRecordStatus = "DRAFT"
+	RegistryRecordStatusPendingApproval   RegistryRecordStatus = "PENDING_APPROVAL"
+	RegistryRecordStatusApproved          RegistryRecordStatus = "APPROVED"
+	RegistryRecordStatusRejected          RegistryRecordStatus = "REJECTED"
+	RegistryRecordStatusDeprecated        RegistryRecordStatus = "DEPRECATED"
+	RegistryRecordStatusCreating          RegistryRecordStatus = "CREATING"
+	RegistryRecordStatusUpdating          RegistryRecordStatus = "UPDATING"
+	RegistryRecordStatusCreateFailed      RegistryRecordStatus = "CREATE_FAILED"
+	RegistryRecordStatusUpdateFailed      RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusCreatePendingAuth RegistryRecordStatus = "CREATE_PENDING_AUTH"
+	RegistryRecordStatusUpdatePendingAuth RegistryRecordStatus = "UPDATE_PENDING_AUTH"
 )
 
 // Values returns all known values for RegistryRecordStatus. Note that this can be
@@ -345,6 +367,8 @@ func (RegistryRecordStatus) Values() []RegistryRecordStatus {
 		"UPDATING",
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
+		"CREATE_PENDING_AUTH",
+		"UPDATE_PENDING_AUTH",
 	}
 }
 
@@ -405,6 +429,7 @@ const (
 	ValidationExceptionReasonIdempotentParameterMismatchException ValidationExceptionReason = "IdempotentParameterMismatchException"
 	ValidationExceptionReasonRootEventInOtherSession              ValidationExceptionReason = "EventInOtherSession"
 	ValidationExceptionReasonResourceConflict                     ValidationExceptionReason = "ResourceConflict"
+	ValidationExceptionReasonUnsupportedInRegion                  ValidationExceptionReason = "UnsupportedInRegion"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -418,5 +443,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"IdempotentParameterMismatchException",
 		"EventInOtherSession",
 		"ResourceConflict",
+		"UnsupportedInRegion",
 	}
 }

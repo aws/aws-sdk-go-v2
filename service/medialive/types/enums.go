@@ -4277,9 +4277,10 @@ type InputCodec string
 
 // Enum values for InputCodec
 const (
-	InputCodecMpeg2 InputCodec = "MPEG2"
-	InputCodecAvc   InputCodec = "AVC"
-	InputCodecHevc  InputCodec = "HEVC"
+	InputCodecMpeg2  InputCodec = "MPEG2"
+	InputCodecAvc    InputCodec = "AVC"
+	InputCodecHevc   InputCodec = "HEVC"
+	InputCodecJpegxs InputCodec = "JPEGXS"
 )
 
 // Values returns all known values for InputCodec. Note that this can be expanded
@@ -4291,6 +4292,7 @@ func (InputCodec) Values() []InputCodec {
 		"MPEG2",
 		"AVC",
 		"HEVC",
+		"JPEGXS",
 	}
 }
 
@@ -4938,6 +4940,40 @@ func (InputType) Values() []InputType {
 		"SDI",
 		"MEDIACONNECT_ROUTER",
 		"SRT_LISTENER",
+	}
+}
+
+type JpegXsInputMaximumBitrate string
+
+// Enum values for JpegXsInputMaximumBitrate
+const (
+	JpegXsInputMaximumBitrateMax500Mbps JpegXsInputMaximumBitrate = "MAX_500_MBPS"
+)
+
+// Values returns all known values for JpegXsInputMaximumBitrate. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JpegXsInputMaximumBitrate) Values() []JpegXsInputMaximumBitrate {
+	return []JpegXsInputMaximumBitrate{
+		"MAX_500_MBPS",
+	}
+}
+
+type JpegXsInputResolution string
+
+// Enum values for JpegXsInputResolution
+const (
+	JpegXsInputResolutionHd JpegXsInputResolution = "HD"
+)
+
+// Values returns all known values for JpegXsInputResolution. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JpegXsInputResolution) Values() []JpegXsInputResolution {
+	return []JpegXsInputResolution{
+		"HD",
 	}
 }
 
@@ -6228,12 +6264,13 @@ type ReservationCodec string
 
 // Enum values for ReservationCodec
 const (
-	ReservationCodecMpeg2 ReservationCodec = "MPEG2"
-	ReservationCodecAvc   ReservationCodec = "AVC"
-	ReservationCodecHevc  ReservationCodec = "HEVC"
-	ReservationCodecAudio ReservationCodec = "AUDIO"
-	ReservationCodecLink  ReservationCodec = "LINK"
-	ReservationCodecAv1   ReservationCodec = "AV1"
+	ReservationCodecMpeg2  ReservationCodec = "MPEG2"
+	ReservationCodecAvc    ReservationCodec = "AVC"
+	ReservationCodecHevc   ReservationCodec = "HEVC"
+	ReservationCodecAudio  ReservationCodec = "AUDIO"
+	ReservationCodecLink   ReservationCodec = "LINK"
+	ReservationCodecAv1    ReservationCodec = "AV1"
+	ReservationCodecJpegxs ReservationCodec = "JPEGXS"
 )
 
 // Values returns all known values for ReservationCodec. Note that this can be
@@ -6248,6 +6285,7 @@ func (ReservationCodec) Values() []ReservationCodec {
 		"AUDIO",
 		"LINK",
 		"AV1",
+		"JPEGXS",
 	}
 }
 
@@ -6255,9 +6293,10 @@ type ReservationMaximumBitrate string
 
 // Enum values for ReservationMaximumBitrate
 const (
-	ReservationMaximumBitrateMax10Mbps ReservationMaximumBitrate = "MAX_10_MBPS"
-	ReservationMaximumBitrateMax20Mbps ReservationMaximumBitrate = "MAX_20_MBPS"
-	ReservationMaximumBitrateMax50Mbps ReservationMaximumBitrate = "MAX_50_MBPS"
+	ReservationMaximumBitrateMax10Mbps  ReservationMaximumBitrate = "MAX_10_MBPS"
+	ReservationMaximumBitrateMax20Mbps  ReservationMaximumBitrate = "MAX_20_MBPS"
+	ReservationMaximumBitrateMax50Mbps  ReservationMaximumBitrate = "MAX_50_MBPS"
+	ReservationMaximumBitrateMax500Mbps ReservationMaximumBitrate = "MAX_500_MBPS"
 )
 
 // Values returns all known values for ReservationMaximumBitrate. Note that this
@@ -6269,6 +6308,7 @@ func (ReservationMaximumBitrate) Values() []ReservationMaximumBitrate {
 		"MAX_10_MBPS",
 		"MAX_20_MBPS",
 		"MAX_50_MBPS",
+		"MAX_500_MBPS",
 	}
 }
 

@@ -135,11 +135,17 @@ type CreateStackSetInput struct {
 	//   StackSet directly, you must acknowledge this capability. For more information,
 	//   see [Perform custom processing on CloudFormation templates with template macros].
 	//
-	// StackSets with service-managed permissions don't currently support the use of
-	//   macros in templates. (This includes the [AWS::Include]and [AWS::Serverless]transforms, which are macros
-	//   hosted by CloudFormation.) Even if you specify this capability for a StackSet
-	//   with service-managed permissions, if you reference a macro in your template the
-	//   StackSet operation will fail.
+	// With service-managed permissions, CloudFormation can process macros, nested
+	//   stacks, and transforms in your StackSet template only when you provide a custom
+	//   execution role template. (Macros include the [AWS::Include]and [AWS::Serverless]transforms, which are macros
+	//   hosted by CloudFormation.) The default service-managed execution role can't
+	//   provision them: if you reference a macro in your template, the StackSet
+	//   operation fails even when you specify this capability.
+	//
+	// To use macros, nested stacks, or transforms with service-managed permissions,
+	//   specify a custom execution role template in ExecutionRoleTemplateBody or
+	//   ExecutionRoleTemplateUrl , and specify both CAPABILITY_NAMED_IAM and
+	//   CAPABILITY_AUTO_EXPAND .
 	//
 	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
@@ -166,15 +172,40 @@ type CreateStackSetInput struct {
 	// StackSet's purpose or other important information.
 	Description *string
 
-	// The name of the IAM execution role to use to create the StackSet. If you do not
-	// specify an execution role, CloudFormation uses the
-	// AWSCloudFormationStackSetExecutionRole role for the StackSet operation.
+	// The name of the IAM execution role that CloudFormation uses for StackSet
+	// operations in your target accounts.
 	//
-	// Specify an IAM role only if you are using customized execution roles to control
-	// which stack resources users and groups can include in their StackSets.
+	// [Self-managed permissions] If you do not specify an execution role,
+	// CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the
+	// StackSet operation. Specify an IAM role only if you are using customized
+	// execution roles to control which stack resources users and groups can include in
+	// their StackSets.
 	//
-	// Valid only if the permissions model is SELF_MANAGED .
+	// [Service-managed permissions] Set this name when you use custom execution
+	// roles. The role that your custom execution role template provisions in your
+	// target accounts must have this same name, and the name must begin with
+	// stacksets-exec-custom- .
 	ExecutionRoleName *string
+
+	// The body of the template that creates a custom execution role in target
+	// accounts. This parameter applies only when the permissions model is
+	// SERVICE_MANAGED .
+	//
+	// Conditional: Specify either ExecutionRoleTemplateBody or
+	// ExecutionRoleTemplateUrl , but not both. If you don't specify either,
+	// CloudFormation uses the default service-managed execution role in target
+	// accounts.
+	ExecutionRoleTemplateBody *string
+
+	// The URL of an Amazon S3 object that contains the template that creates a custom
+	// execution role in target accounts. This parameter applies only when the
+	// permissions model is SERVICE_MANAGED .
+	//
+	// Conditional: Specify either ExecutionRoleTemplateBody or
+	// ExecutionRoleTemplateUrl , but not both. If you don't specify either,
+	// CloudFormation uses the default service-managed execution role in target
+	// accounts.
+	ExecutionRoleTemplateUrl *string
 
 	// Describes whether CloudFormation performs non-conflicting operations
 	// concurrently and queues conflicting operations.
@@ -201,6 +232,11 @@ type CreateStackSetInput struct {
 	// The stack ID you are importing into a new StackSet. Specify the Amazon Resource
 	// Name (ARN) of the stack.
 	StackId *string
+
+	// The name of the Amazon S3 bucket that stores the execution role stack template
+	// body. CloudFormation uses this bucket only when you specify a custom execution
+	// role template.
+	StackSetOutputBucket *string
 
 	// The key-value pairs to associate with this StackSet and the stacks created from
 	// it. CloudFormation also propagates these tags to supported resources that are
@@ -261,6 +297,12 @@ func (v *CreateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleName != nil {
 		s.WriteString(schemas.CreateStackSetInput_ExecutionRoleName, *v.ExecutionRoleName)
 	}
+	if v.ExecutionRoleTemplateBody != nil {
+		s.WriteString(schemas.CreateStackSetInput_ExecutionRoleTemplateBody, *v.ExecutionRoleTemplateBody)
+	}
+	if v.ExecutionRoleTemplateUrl != nil {
+		s.WriteString(schemas.CreateStackSetInput_ExecutionRoleTemplateUrl, *v.ExecutionRoleTemplateUrl)
+	}
 	if v.ManagedExecution != nil {
 		s.WriteStruct(schemas.CreateStackSetInput_ManagedExecution)
 		v.ManagedExecution.SerializeMembers(s)
@@ -277,6 +319,9 @@ func (v *CreateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.StackSetName != nil {
 		s.WriteString(schemas.CreateStackSetInput_StackSetName, *v.StackSetName)
+	}
+	if v.StackSetOutputBucket != nil {
+		s.WriteString(schemas.CreateStackSetInput_StackSetOutputBucket, *v.StackSetOutputBucket)
 	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.CreateStackSetInput_Tags, v.Tags)

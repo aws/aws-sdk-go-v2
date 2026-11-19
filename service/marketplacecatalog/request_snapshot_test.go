@@ -417,6 +417,10 @@ func TestCheckRequestSnapshot_ListAssessments(t *testing.T) {
 		AssessmentTargetFilter: &types.AssessmentTargetFilter{
 			EntityId:    ptr.String("__EntityId__"),
 			ChangeSetId: ptr.String("__ChangeSetId__"),
+			EntityIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		FrameworkFilters: &types.FrameworkFiltersMemberAMISecurityFilters{
 			Value: types.AMISecurityFilters{
@@ -635,6 +639,49 @@ func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartAssessment(t *testing.T) {
+	input := &StartAssessmentInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FrameworkId: ptr.String("__FrameworkId__"),
+		EntityId:    ptr.String("__EntityId__"),
+		Controls: []types.ControlInput{
+			{
+				ControlId: ptr.String("__ControlId__"),
+				Input:     document.NewLazyDocument("__Document__"),
+			},
+			{
+				ControlId: ptr.String("__ControlId__"),
+				Input:     document.NewLazyDocument("__Document__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAssessment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -999,6 +1046,10 @@ func TestUpdateRequestSnapshot_ListAssessments(t *testing.T) {
 		AssessmentTargetFilter: &types.AssessmentTargetFilter{
 			EntityId:    ptr.String("__EntityId__"),
 			ChangeSetId: ptr.String("__ChangeSetId__"),
+			EntityIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		FrameworkFilters: &types.FrameworkFiltersMemberAMISecurityFilters{
 			Value: types.AMISecurityFilters{
@@ -1217,6 +1268,49 @@ func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartAssessment(t *testing.T) {
+	input := &StartAssessmentInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FrameworkId: ptr.String("__FrameworkId__"),
+		EntityId:    ptr.String("__EntityId__"),
+		Controls: []types.ControlInput{
+			{
+				ControlId: ptr.String("__ControlId__"),
+				Input:     document.NewLazyDocument("__Document__"),
+			},
+			{
+				ControlId: ptr.String("__ControlId__"),
+				Input:     document.NewLazyDocument("__Document__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAssessment"); err != nil {
 		t.Fatal(err)
 	}
 }

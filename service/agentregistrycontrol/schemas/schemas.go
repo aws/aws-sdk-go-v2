@@ -186,8 +186,14 @@ var AgentCoreRuntimeSourceDetails_workloadIdentityDetails *smithy.Schema
 var AgentSkillsAdditionalData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "AgentSkillsAdditionalData",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 4)
 var AgentSkillsAdditionalData_skillMd *smithy.Schema
+
+var AgentSkillsAdditionalData_skillPackage *smithy.Schema
+
+var AgentSkillsAdditionalData_repositoryProvider *smithy.Schema
+
+var AgentSkillsAdditionalData_sourceConfiguration *smithy.Schema
 
 var AgentSkillsDefinitionDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -208,6 +214,24 @@ var AgentSkillsMdDescriptor_data *smithy.Schema
 var AgentSkillsMdDescriptor_dataSchemaVersion *smithy.Schema
 
 var AgentSkillsMdDescriptor_source *smithy.Schema
+
+var AgentSkillsPackageDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentSkillsPackageDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var AgentSkillsPackageDescriptor_source *smithy.Schema
+
+var AgentSkillsRepositoryProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentSkillsRepositoryProvider",
+}, smithy.ShapeTypeEnum, 1)
+var AgentSkillsRepositoryProvider_GITHUB *smithy.Schema
+
+var AgentSkillsSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentSkillsSourceConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var AgentSkillsSourceConfiguration_s3 *smithy.Schema
 
 var AgUiDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -253,6 +277,22 @@ var ApprovalConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ApprovalConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var ApprovalConfiguration_autoApprovalRules *smithy.Schema
+
+var _ArtifactContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ArtifactContent",
+}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
+
+var _AuthorizationAttemptId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AuthorizationAttemptId",
+}, smithy.ShapeTypeString, 0)
+
+var AuthorizationData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AuthorizationData",
+}, smithy.ShapeTypeUnion, 1)
+var AuthorizationData_oauth2 *smithy.Schema
 
 var AuthorizerConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -421,7 +461,7 @@ var _CustomMetadataSchemaDefinition = smithy.NewSchema(smithy.ShapeID{
 var _CustomParameterMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "CustomParameterMap",
-}, smithy.ShapeTypeMap, 2)
+}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
 var _CustomParameterMap_key *smithy.Schema
 
 var _CustomParameterMap_value *smithy.Schema
@@ -518,6 +558,21 @@ var _FilterValues = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FilterValues",
 }, smithy.ShapeTypeList, 1)
 var _FilterValues_member *smithy.Schema
+
+var _GitCommitId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "GitCommitId",
+}, smithy.ShapeTypeString, 0)
+
+var GitHubSynchronizedSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "GitHubSynchronizedSource",
+}, smithy.ShapeTypeStructure, 3)
+var GitHubSynchronizedSource_url *smithy.Schema
+
+var GitHubSynchronizedSource_synchronizedAt *smithy.Schema
+
+var GitHubSynchronizedSource_commitId *smithy.Schema
 
 var HttpDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -632,6 +687,38 @@ var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "NonBlankString",
 }, smithy.ShapeTypeString, 0)
+
+var OAuth2AuthorizationData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "OAuth2AuthorizationData",
+}, smithy.ShapeTypeStructure, 4)
+var OAuth2AuthorizationData_authorizationUrl *smithy.Schema
+
+var OAuth2AuthorizationData_userId *smithy.Schema
+
+var OAuth2AuthorizationData_authorizationAttemptId *smithy.Schema
+
+var OAuth2AuthorizationData_expiresAt *smithy.Schema
+
+var _OAuthAuthorizationUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "OAuthAuthorizationUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _OAuthReturnUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "OAuthReturnUrl",
+}, smithy.ShapeTypeString, 0)
+
+var _OAuthUserId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "OAuthUserId",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _PresignedDownloadUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PresignedDownloadUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var PrivateEndpoint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -788,6 +875,22 @@ var _RegistryRecordArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegistryRecordArn",
 }, smithy.ShapeTypeString, 0)
 
+var RegistryRecordArtifactDownload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "RegistryRecordArtifactDownload",
+}, smithy.ShapeTypeStructure, 2)
+var RegistryRecordArtifactDownload_sha256 *smithy.Schema
+
+var RegistryRecordArtifactDownload_downloadUrl *smithy.Schema
+
+var RegistryRecordArtifactUpload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "RegistryRecordArtifactUpload",
+}, smithy.ShapeTypeStructure, 2)
+var RegistryRecordArtifactUpload_content *smithy.Schema
+
+var RegistryRecordArtifactUpload_sha256 *smithy.Schema
+
 var RegistryRecordCredentialProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RegistryRecordCredentialProviderConfiguration",
@@ -870,7 +973,7 @@ var _RegistryRecordName = smithy.NewSchema(smithy.ShapeID{
 var RegistryRecordOAuthCredentialProvider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RegistryRecordOAuthCredentialProvider",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var RegistryRecordOAuthCredentialProvider_providerArn *smithy.Schema
 
 var RegistryRecordOAuthCredentialProvider_grantType *smithy.Schema
@@ -879,16 +982,20 @@ var RegistryRecordOAuthCredentialProvider_scopes *smithy.Schema
 
 var RegistryRecordOAuthCredentialProvider_customParameters *smithy.Schema
 
+var RegistryRecordOAuthCredentialProvider_returnUrl *smithy.Schema
+
 var RegistryRecordOAuthGrantType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RegistryRecordOAuthGrantType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var RegistryRecordOAuthGrantType_CLIENT_CREDENTIALS *smithy.Schema
+
+var RegistryRecordOAuthGrantType_AUTHORIZATION_CODE *smithy.Schema
 
 var RegistryRecordStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RegistryRecordStatus",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
 var RegistryRecordStatus_DRAFT *smithy.Schema
 
 var RegistryRecordStatus_PENDING_APPROVAL *smithy.Schema
@@ -906,6 +1013,10 @@ var RegistryRecordStatus_UPDATING *smithy.Schema
 var RegistryRecordStatus_CREATE_FAILED *smithy.Schema
 
 var RegistryRecordStatus_UPDATE_FAILED *smithy.Schema
+
+var RegistryRecordStatus_CREATE_PENDING_AUTH *smithy.Schema
+
+var RegistryRecordStatus_UPDATE_PENDING_AUTH *smithy.Schema
 
 var RegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -946,6 +1057,14 @@ var _RegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegistryRecordSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _RegistryRecordSummaryList_member *smithy.Schema
+
+var RegistryRecordSynchronizedSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "RegistryRecordSynchronizedSource",
+}, smithy.ShapeTypeUnion, 2)
+var RegistryRecordSynchronizedSource_s3 *smithy.Schema
+
+var RegistryRecordSynchronizedSource_gitHub *smithy.Schema
 
 var _RegistryRecordVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1030,6 +1149,39 @@ var _RoutingDomain = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RoutingDomain",
 }, smithy.ShapeTypeString, 0)
 
+var _S3BucketOwnerAccountId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "S3BucketOwnerAccountId",
+}, smithy.ShapeTypeString, 0)
+
+var _S3ObjectETag = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "S3ObjectETag",
+}, smithy.ShapeTypeString, 0)
+
+var _S3ObjectVersionId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "S3ObjectVersionId",
+}, smithy.ShapeTypeString, 0)
+
+var S3SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "S3SourceConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var S3SourceConfiguration_bucketOwnerAccountId *smithy.Schema
+
+var S3SynchronizedSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "S3SynchronizedSource",
+}, smithy.ShapeTypeStructure, 4)
+var S3SynchronizedSource_url *smithy.Schema
+
+var S3SynchronizedSource_synchronizedAt *smithy.Schema
+
+var S3SynchronizedSource_versionId *smithy.Schema
+
+var S3SynchronizedSource_eTag *smithy.Schema
+
 var _ScopeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "ScopeList",
@@ -1059,6 +1211,11 @@ var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
+
+var _Sha256Hash = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "Sha256Hash",
+}, smithy.ShapeTypeString, 0)
 
 var SourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1091,6 +1248,11 @@ var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SubnetIds",
 }, smithy.ShapeTypeList, 1)
 var _SubnetIds_member *smithy.Schema
+
+var _SynchronizedSourceUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "SynchronizedSourceUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _TagKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1148,8 +1310,14 @@ var UpdatedAgentSkillsAdditionalData_optionalValue *smithy.Schema
 var UpdatedAgentSkillsAdditionalDataFields = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdatedAgentSkillsAdditionalDataFields",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 4)
 var UpdatedAgentSkillsAdditionalDataFields_skillMd *smithy.Schema
+
+var UpdatedAgentSkillsAdditionalDataFields_skillPackage *smithy.Schema
+
+var UpdatedAgentSkillsAdditionalDataFields_repositoryProvider *smithy.Schema
+
+var UpdatedAgentSkillsAdditionalDataFields_sourceConfiguration *smithy.Schema
 
 var UpdatedAgentSkillsDefinitionDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1182,6 +1350,24 @@ var UpdatedAgentSkillsMdDescriptorFields_data *smithy.Schema
 var UpdatedAgentSkillsMdDescriptorFields_dataSchemaVersion *smithy.Schema
 
 var UpdatedAgentSkillsMdDescriptorFields_source *smithy.Schema
+
+var UpdatedAgentSkillsPackageDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedAgentSkillsPackageDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedAgentSkillsPackageDescriptor_optionalValue *smithy.Schema
+
+var UpdatedAgentSkillsRepositoryProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedAgentSkillsRepositoryProvider",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedAgentSkillsRepositoryProvider_optionalValue *smithy.Schema
+
+var UpdatedAgentSkillsSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedAgentSkillsSourceConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedAgentSkillsSourceConfiguration_optionalValue *smithy.Schema
 
 var UpdatedAgUiDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1351,6 +1537,12 @@ var UpdatedMcpToolsDescriptorFields_data *smithy.Schema
 
 var UpdatedMcpToolsDescriptorFields_dataSchemaVersion *smithy.Schema
 
+var UpdatedRegistryRecordArtifact = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedRegistryRecordArtifact",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedRegistryRecordArtifact_optionalValue *smithy.Schema
+
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "ValidationException",
@@ -1379,7 +1571,7 @@ var _ValidationExceptionFieldList_member *smithy.Schema
 var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
 
 var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
@@ -1389,6 +1581,8 @@ var ValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION *smithy.Sc
 var ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION *smithy.Schema
 
 var ValidationExceptionReason_RESOURCE_CONFLICT *smithy.Schema
+
+var ValidationExceptionReason_UNSUPPORTED_IN_REGION *smithy.Schema
 
 var _VpcIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1432,7 +1626,7 @@ var CreateRegistryResponse_registryArn *smithy.Schema
 var CreateRegistryRecordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "CreateRegistryRecordRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateRegistryRecordRequest_registryId *smithy.Schema
 
 var CreateRegistryRecordRequest_name *smithy.Schema
@@ -1444,6 +1638,8 @@ var CreateRegistryRecordRequest_description *smithy.Schema
 var CreateRegistryRecordRequest_recordType *smithy.Schema
 
 var CreateRegistryRecordRequest_descriptors *smithy.Schema
+
+var CreateRegistryRecordRequest_artifact *smithy.Schema
 
 var CreateRegistryRecordRequest_recordVersion *smithy.Schema
 
@@ -1458,10 +1654,12 @@ var CreateRegistryRecordRequest_tags *smithy.Schema
 var CreateRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "CreateRegistryRecordResponse",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var CreateRegistryRecordResponse_recordArn *smithy.Schema
 
 var CreateRegistryRecordResponse_status *smithy.Schema
+
+var CreateRegistryRecordResponse_authorizationData *smithy.Schema
 
 var DeleteRegistryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1535,7 +1733,7 @@ var GetRegistryRecordRequest_recordId *smithy.Schema
 var GetRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "GetRegistryRecordResponse",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 20)
 var GetRegistryRecordResponse_registryArn *smithy.Schema
 
 var GetRegistryRecordResponse_recordArn *smithy.Schema
@@ -1571,6 +1769,10 @@ var GetRegistryRecordResponse_createdBy *smithy.Schema
 var GetRegistryRecordResponse_customMetadata *smithy.Schema
 
 var GetRegistryRecordResponse_customMetadataSchemaComplianceStatus *smithy.Schema
+
+var GetRegistryRecordResponse_artifact *smithy.Schema
+
+var GetRegistryRecordResponse_synchronizedSource *smithy.Schema
 
 var ListRegistriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1721,7 +1923,7 @@ var UpdateRegistryResponse_updatedAt *smithy.Schema
 var UpdateRegistryRecordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistryRecordRequest",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 13)
 var UpdateRegistryRecordRequest_registryId *smithy.Schema
 
 var UpdateRegistryRecordRequest_recordId *smithy.Schema
@@ -1736,18 +1938,22 @@ var UpdateRegistryRecordRequest_recordType *smithy.Schema
 
 var UpdateRegistryRecordRequest_descriptors *smithy.Schema
 
+var UpdateRegistryRecordRequest_artifact *smithy.Schema
+
 var UpdateRegistryRecordRequest_recordVersion *smithy.Schema
 
 var UpdateRegistryRecordRequest_customMetadata *smithy.Schema
 
 var UpdateRegistryRecordRequest_triggerSynchronization *smithy.Schema
 
+var UpdateRegistryRecordRequest_forceAuthentication *smithy.Schema
+
 var UpdateRegistryRecordRequest_provenance *smithy.Schema
 
 var UpdateRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistryRecordResponse",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var UpdateRegistryRecordResponse_registryArn *smithy.Schema
 
 var UpdateRegistryRecordResponse_recordArn *smithy.Schema
@@ -1783,6 +1989,8 @@ var UpdateRegistryRecordResponse_createdBy *smithy.Schema
 var UpdateRegistryRecordResponse_customMetadata *smithy.Schema
 
 var UpdateRegistryRecordResponse_customMetadataSchemaComplianceStatus *smithy.Schema
+
+var UpdateRegistryRecordResponse_authorizationData *smithy.Schema
 
 var UpdateRegistryRecordStatusRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1821,6 +2029,8 @@ func init() {
 
 	RegistryRecordOAuthGrantType_CLIENT_CREDENTIALS = RegistryRecordOAuthGrantType.AddMember("CLIENT_CREDENTIALS", smithyprelude.Unit)
 
+	RegistryRecordOAuthGrantType_AUTHORIZATION_CODE = RegistryRecordOAuthGrantType.AddMember("AUTHORIZATION_CODE", smithyprelude.Unit)
+
 	_ScopeList_member = _ScopeList.AddMember("member", smithyprelude.String)
 
 	_CustomParameterMap_key = _CustomParameterMap.AddMember("key", smithyprelude.String)
@@ -1834,6 +2044,8 @@ func init() {
 	RegistryRecordOAuthCredentialProvider_scopes = RegistryRecordOAuthCredentialProvider.AddMember("scopes", _ScopeList)
 
 	RegistryRecordOAuthCredentialProvider_customParameters = RegistryRecordOAuthCredentialProvider.AddMember("customParameters", _CustomParameterMap)
+
+	RegistryRecordOAuthCredentialProvider_returnUrl = RegistryRecordOAuthCredentialProvider.AddMember("returnUrl", _OAuthReturnUrl)
 
 	RegistryRecordIamCredentialProvider_roleArn = RegistryRecordIamCredentialProvider.AddMember("roleArn", _IamRoleArn)
 
@@ -1985,7 +2197,21 @@ func init() {
 
 	AgentSkillsMdDescriptor_source = AgentSkillsMdDescriptor.AddMember("source", DescriptorSource)
 
+	AgentSkillsPackageDescriptor_source = AgentSkillsPackageDescriptor.AddMember("source", DescriptorSource)
+
+	AgentSkillsRepositoryProvider_GITHUB = AgentSkillsRepositoryProvider.AddMember("GITHUB", smithyprelude.Unit)
+
+	S3SourceConfiguration_bucketOwnerAccountId = S3SourceConfiguration.AddMember("bucketOwnerAccountId", _S3BucketOwnerAccountId)
+
+	AgentSkillsSourceConfiguration_s3 = AgentSkillsSourceConfiguration.AddMember("s3", S3SourceConfiguration)
+
 	AgentSkillsAdditionalData_skillMd = AgentSkillsAdditionalData.AddMember("skillMd", AgentSkillsMdDescriptor)
+
+	AgentSkillsAdditionalData_skillPackage = AgentSkillsAdditionalData.AddMember("skillPackage", AgentSkillsPackageDescriptor)
+
+	AgentSkillsAdditionalData_repositoryProvider = AgentSkillsAdditionalData.AddMember("repositoryProvider", AgentSkillsRepositoryProvider)
+
+	AgentSkillsAdditionalData_sourceConfiguration = AgentSkillsAdditionalData.AddMember("sourceConfiguration", AgentSkillsSourceConfiguration)
 
 	AgentSkillsDefinitionDescriptor_data = AgentSkillsDefinitionDescriptor.AddMember("data", _DescriptorData)
 
@@ -2000,6 +2226,16 @@ func init() {
 	_AutoApprovalRuleList_member = _AutoApprovalRuleList.AddMember("member", AutoApprovalRule)
 
 	ApprovalConfiguration_autoApprovalRules = ApprovalConfiguration.AddMember("autoApprovalRules", _AutoApprovalRuleList)
+
+	OAuth2AuthorizationData_authorizationUrl = OAuth2AuthorizationData.AddMember("authorizationUrl", _OAuthAuthorizationUrl)
+
+	OAuth2AuthorizationData_userId = OAuth2AuthorizationData.AddMember("userId", _OAuthUserId)
+
+	OAuth2AuthorizationData_authorizationAttemptId = OAuth2AuthorizationData.AddMember("authorizationAttemptId", _AuthorizationAttemptId)
+
+	OAuth2AuthorizationData_expiresAt = OAuth2AuthorizationData.AddMember("expiresAt", _DateTimestamp)
+
+	AuthorizationData_oauth2 = AuthorizationData.AddMember("oauth2", OAuth2AuthorizationData)
 
 	AutoDetectionScope_ORGANIZATION = AutoDetectionScope.AddMember("ORGANIZATION", smithyprelude.Unit)
 
@@ -2085,6 +2321,12 @@ func init() {
 
 	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
 
+	GitHubSynchronizedSource_url = GitHubSynchronizedSource.AddMember("url", _SynchronizedSourceUrl)
+
+	GitHubSynchronizedSource_synchronizedAt = GitHubSynchronizedSource.AddMember("synchronizedAt", _DateTimestamp)
+
+	GitHubSynchronizedSource_commitId = GitHubSynchronizedSource.AddMember("commitId", _GitCommitId)
+
 	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
 
 	ProvenanceRelation_DETECTED_FROM = ProvenanceRelation.AddMember("DETECTED_FROM", smithyprelude.Unit)
@@ -2125,6 +2367,14 @@ func init() {
 
 	_RegistryFilterList_member = _RegistryFilterList.AddMember("member", RegistryFilter)
 
+	RegistryRecordArtifactDownload_sha256 = RegistryRecordArtifactDownload.AddMember("sha256", _Sha256Hash)
+
+	RegistryRecordArtifactDownload_downloadUrl = RegistryRecordArtifactDownload.AddMember("downloadUrl", _PresignedDownloadUrl)
+
+	RegistryRecordArtifactUpload_content = RegistryRecordArtifactUpload.AddMember("content", _ArtifactContent)
+
+	RegistryRecordArtifactUpload_sha256 = RegistryRecordArtifactUpload.AddMember("sha256", _Sha256Hash)
+
 	RegistryRecordFilterName_NAME = RegistryRecordFilterName.AddMember("NAME", smithyprelude.Unit)
 
 	RegistryRecordFilterName_STATUS = RegistryRecordFilterName.AddMember("STATUS", smithyprelude.Unit)
@@ -2154,6 +2404,10 @@ func init() {
 	RegistryRecordStatus_CREATE_FAILED = RegistryRecordStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
 
 	RegistryRecordStatus_UPDATE_FAILED = RegistryRecordStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
+
+	RegistryRecordStatus_CREATE_PENDING_AUTH = RegistryRecordStatus.AddMember("CREATE_PENDING_AUTH", smithyprelude.Unit)
+
+	RegistryRecordStatus_UPDATE_PENDING_AUTH = RegistryRecordStatus.AddMember("UPDATE_PENDING_AUTH", smithyprelude.Unit)
 
 	RegistryRecordSummary_registryArn = RegistryRecordSummary.AddMember("registryArn", _RegistryArn)
 
@@ -2186,6 +2440,18 @@ func init() {
 	RegistryRecordSummary_customMetadataSchemaComplianceStatus = RegistryRecordSummary.AddMember("customMetadataSchemaComplianceStatus", CustomMetadataSchemaComplianceStatus)
 
 	_RegistryRecordSummaryList_member = _RegistryRecordSummaryList.AddMember("member", RegistryRecordSummary)
+
+	S3SynchronizedSource_url = S3SynchronizedSource.AddMember("url", _SynchronizedSourceUrl)
+
+	S3SynchronizedSource_synchronizedAt = S3SynchronizedSource.AddMember("synchronizedAt", _DateTimestamp)
+
+	S3SynchronizedSource_versionId = S3SynchronizedSource.AddMember("versionId", _S3ObjectVersionId)
+
+	S3SynchronizedSource_eTag = S3SynchronizedSource.AddMember("eTag", _S3ObjectETag)
+
+	RegistryRecordSynchronizedSource_s3 = RegistryRecordSynchronizedSource.AddMember("s3", S3SynchronizedSource)
+
+	RegistryRecordSynchronizedSource_gitHub = RegistryRecordSynchronizedSource.AddMember("gitHub", GitHubSynchronizedSource)
 
 	RegistryStatus_CREATING = RegistryStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -2257,7 +2523,19 @@ func init() {
 
 	UpdatedAgentSkillsMdDescriptor_optionalValue = UpdatedAgentSkillsMdDescriptor.AddMember("optionalValue", UpdatedAgentSkillsMdDescriptorFields)
 
+	UpdatedAgentSkillsPackageDescriptor_optionalValue = UpdatedAgentSkillsPackageDescriptor.AddMember("optionalValue", AgentSkillsPackageDescriptor)
+
+	UpdatedAgentSkillsRepositoryProvider_optionalValue = UpdatedAgentSkillsRepositoryProvider.AddMember("optionalValue", AgentSkillsRepositoryProvider)
+
+	UpdatedAgentSkillsSourceConfiguration_optionalValue = UpdatedAgentSkillsSourceConfiguration.AddMember("optionalValue", AgentSkillsSourceConfiguration)
+
 	UpdatedAgentSkillsAdditionalDataFields_skillMd = UpdatedAgentSkillsAdditionalDataFields.AddMember("skillMd", UpdatedAgentSkillsMdDescriptor)
+
+	UpdatedAgentSkillsAdditionalDataFields_skillPackage = UpdatedAgentSkillsAdditionalDataFields.AddMember("skillPackage", UpdatedAgentSkillsPackageDescriptor)
+
+	UpdatedAgentSkillsAdditionalDataFields_repositoryProvider = UpdatedAgentSkillsAdditionalDataFields.AddMember("repositoryProvider", UpdatedAgentSkillsRepositoryProvider)
+
+	UpdatedAgentSkillsAdditionalDataFields_sourceConfiguration = UpdatedAgentSkillsAdditionalDataFields.AddMember("sourceConfiguration", UpdatedAgentSkillsSourceConfiguration)
 
 	UpdatedAgentSkillsAdditionalData_optionalValue = UpdatedAgentSkillsAdditionalData.AddMember("optionalValue", UpdatedAgentSkillsAdditionalDataFields)
 
@@ -2331,6 +2609,8 @@ func init() {
 
 	UpdatedDisplayName_optionalValue = UpdatedDisplayName.AddMember("optionalValue", _RegistryRecordDisplayName)
 
+	UpdatedRegistryRecordArtifact_optionalValue = UpdatedRegistryRecordArtifact.AddMember("optionalValue", RegistryRecordArtifactUpload)
+
 	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
 
 	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
@@ -2340,6 +2620,8 @@ func init() {
 	ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = ValidationExceptionReason.AddMember("ROOT_EVENT_IN_OTHER_SESSION", smithyprelude.Unit)
 
 	ValidationExceptionReason_RESOURCE_CONFLICT = ValidationExceptionReason.AddMember("RESOURCE_CONFLICT", smithyprelude.Unit)
+
+	ValidationExceptionReason_UNSUPPORTED_IN_REGION = ValidationExceptionReason.AddMember("UNSUPPORTED_IN_REGION", smithyprelude.Unit)
 
 	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
 
@@ -2385,6 +2667,8 @@ func init() {
 
 	CreateRegistryRecordRequest_descriptors = CreateRegistryRecordRequest.AddMember("descriptors", Descriptors)
 
+	CreateRegistryRecordRequest_artifact = CreateRegistryRecordRequest.AddMember("artifact", RegistryRecordArtifactUpload)
+
 	CreateRegistryRecordRequest_recordVersion = CreateRegistryRecordRequest.AddMember("recordVersion", _RegistryRecordVersion)
 
 	CreateRegistryRecordRequest_clientToken = CreateRegistryRecordRequest.AddMember("clientToken", _ClientToken)
@@ -2398,6 +2682,8 @@ func init() {
 	CreateRegistryRecordResponse_recordArn = CreateRegistryRecordResponse.AddMember("recordArn", _RegistryRecordArn)
 
 	CreateRegistryRecordResponse_status = CreateRegistryRecordResponse.AddMember("status", RegistryRecordStatus)
+
+	CreateRegistryRecordResponse_authorizationData = CreateRegistryRecordResponse.AddMember("authorizationData", AuthorizationData)
 
 	DeleteRegistryRequest_registryId = DeleteRegistryRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 
@@ -2474,6 +2760,10 @@ func init() {
 	GetRegistryRecordResponse_customMetadata = GetRegistryRecordResponse.AddMember("customMetadata", _CustomMetadataDocument)
 
 	GetRegistryRecordResponse_customMetadataSchemaComplianceStatus = GetRegistryRecordResponse.AddMember("customMetadataSchemaComplianceStatus", CustomMetadataSchemaComplianceStatus)
+
+	GetRegistryRecordResponse_artifact = GetRegistryRecordResponse.AddMember("artifact", RegistryRecordArtifactDownload)
+
+	GetRegistryRecordResponse_synchronizedSource = GetRegistryRecordResponse.AddMember("synchronizedSource", RegistryRecordSynchronizedSource)
 
 	ListRegistriesRequest_maxResults = ListRegistriesRequest.AddMember("maxResults", _MaxResults)
 
@@ -2577,11 +2867,15 @@ func init() {
 
 	UpdateRegistryRecordRequest_descriptors = UpdateRegistryRecordRequest.AddMember("descriptors", UpdatedDescriptors)
 
+	UpdateRegistryRecordRequest_artifact = UpdateRegistryRecordRequest.AddMember("artifact", UpdatedRegistryRecordArtifact)
+
 	UpdateRegistryRecordRequest_recordVersion = UpdateRegistryRecordRequest.AddMember("recordVersion", _RegistryRecordVersion)
 
 	UpdateRegistryRecordRequest_customMetadata = UpdateRegistryRecordRequest.AddMember("customMetadata", UpdatedCustomMetadataMap)
 
 	UpdateRegistryRecordRequest_triggerSynchronization = UpdateRegistryRecordRequest.AddMember("triggerSynchronization", smithyprelude.Boolean)
+
+	UpdateRegistryRecordRequest_forceAuthentication = UpdateRegistryRecordRequest.AddMember("forceAuthentication", smithyprelude.Boolean)
 
 	UpdateRegistryRecordRequest_provenance = UpdateRegistryRecordRequest.AddMember("provenance", _ProvenanceList)
 
@@ -2620,6 +2914,8 @@ func init() {
 	UpdateRegistryRecordResponse_customMetadata = UpdateRegistryRecordResponse.AddMember("customMetadata", _CustomMetadataDocument)
 
 	UpdateRegistryRecordResponse_customMetadataSchemaComplianceStatus = UpdateRegistryRecordResponse.AddMember("customMetadataSchemaComplianceStatus", CustomMetadataSchemaComplianceStatus)
+
+	UpdateRegistryRecordResponse_authorizationData = UpdateRegistryRecordResponse.AddMember("authorizationData", AuthorizationData)
 
 	UpdateRegistryRecordStatusRequest_registryId = UpdateRegistryRecordStatusRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 

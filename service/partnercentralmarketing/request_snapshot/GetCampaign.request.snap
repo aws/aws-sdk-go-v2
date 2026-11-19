@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/GetCampaign
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿rCampaignIdentifierv__CampaignIdentifier__gCatalogcAWSÿ

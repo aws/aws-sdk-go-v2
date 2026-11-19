@@ -120,6 +120,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/UntagResource",
 	Code: 200})
 
+var UpdateMarketplaceRevenueShare = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "UpdateMarketplaceRevenueShare",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/UpdateMarketplaceRevenueShare",
+	Code: 200})
+
 var UpdateMarketplaceRevenueShareAllocation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "UpdateMarketplaceRevenueShareAllocation",
@@ -183,7 +190,7 @@ var AttributionSortBy_LAST_MODIFIED_DATE *smithy.Schema
 var AttributionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "AttributionSummary",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var AttributionSummary_Arn *smithy.Schema
 
 var AttributionSummary_Id *smithy.Schema
@@ -209,6 +216,8 @@ var AttributionSummary_EffectiveUntil *smithy.Schema
 var AttributionSummary_TotalActiveRevenueAttributionAllocationCount *smithy.Schema
 
 var AttributionSummary_TotalRevenueAttributionAllocationCount *smithy.Schema
+
+var AttributionSummary_Context *smithy.Schema
 
 var CatalogName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
@@ -243,6 +252,36 @@ var ConflictExceptionReason_CONCURRENT_MODIFICATION *smithy.Schema
 var ConflictExceptionReason_RESOURCE_ALREADY_EXISTS *smithy.Schema
 
 var ConflictExceptionReason_REVISION_MISMATCH *smithy.Schema
+
+var ContextFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "ContextFilter",
+}, smithy.ShapeTypeStructure, 2)
+var ContextFilter_Key *smithy.Schema
+
+var ContextFilter_Values *smithy.Schema
+
+var _ContextFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "ContextFilterList",
+}, smithy.ShapeTypeList, 1)
+var _ContextFilterList_member *smithy.Schema
+
+var _ContextFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "ContextFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _ContextFilterValueList_member *smithy.Schema
+
+var _ContextKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "ContextKey",
+}, smithy.ShapeTypeString, 0)
+
+var _ContextValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "ContextValue",
+}, smithy.ShapeTypeString, 0)
 
 var _CustomerAwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
@@ -314,6 +353,11 @@ var _MarketplaceProductId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MarketplaceProductId",
 }, smithy.ShapeTypeString, 0)
 
+var _MarketplaceProductIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceProductIdentifier",
+}, smithy.ShapeTypeString, 0)
+
 var _MarketplaceProductIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "MarketplaceProductIdList",
@@ -344,14 +388,10 @@ var MarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM *smithy.Schema
 var MarketplaceRevenueShareAllocationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "MarketplaceRevenueShareAllocationSummary",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 8)
 var MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId *smithy.Schema
 
-var MarketplaceRevenueShareAllocationSummary_ProductId *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_ProductName *smithy.Schema
-
-var MarketplaceRevenueShareAllocationSummary_Arn *smithy.Schema
+var MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var MarketplaceRevenueShareAllocationSummary_EffectiveFrom *smithy.Schema
 
@@ -371,6 +411,77 @@ var _MarketplaceRevenueShareAllocationSummaryList = smithy.NewSchema(smithy.Shap
 }, smithy.ShapeTypeList, 1)
 var _MarketplaceRevenueShareAllocationSummaryList_member *smithy.Schema
 
+var _MarketplaceRevenueShareArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareArn",
+}, smithy.ShapeTypeString, 0)
+
+var _MarketplaceRevenueShareId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareId",
+}, smithy.ShapeTypeString, 0)
+
+var _MarketplaceRevenueShareIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _MarketplaceRevenueShareIdentifierList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareIdentifierList",
+}, smithy.ShapeTypeList, 1)
+var _MarketplaceRevenueShareIdentifierList_member *smithy.Schema
+
+var MarketplaceRevenueShareProductDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareProductDetail",
+}, smithy.ShapeTypeStructure, 4)
+var MarketplaceRevenueShareProductDetail_ProductId *smithy.Schema
+
+var MarketplaceRevenueShareProductDetail_ProductCode *smithy.Schema
+
+var MarketplaceRevenueShareProductDetail_ProductName *smithy.Schema
+
+var MarketplaceRevenueShareProductDetail_Accounts *smithy.Schema
+
+var _MarketplaceRevenueShareProductDetailList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareProductDetailList",
+}, smithy.ShapeTypeList, 1)
+var _MarketplaceRevenueShareProductDetailList_member *smithy.Schema
+
+var MarketplaceRevenueShareProductEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareProductEntry",
+}, smithy.ShapeTypeStructure, 2)
+var MarketplaceRevenueShareProductEntry_ProductId *smithy.Schema
+
+var MarketplaceRevenueShareProductEntry_Accounts *smithy.Schema
+
+var _MarketplaceRevenueShareProductEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareProductEntryList",
+}, smithy.ShapeTypeList, 1)
+var _MarketplaceRevenueShareProductEntryList_member *smithy.Schema
+
+var MarketplaceRevenueShareProductSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareProductSummary",
+}, smithy.ShapeTypeStructure, 4)
+var MarketplaceRevenueShareProductSummary_ProductId *smithy.Schema
+
+var MarketplaceRevenueShareProductSummary_ProductCode *smithy.Schema
+
+var MarketplaceRevenueShareProductSummary_ProductName *smithy.Schema
+
+var MarketplaceRevenueShareProductSummary_Accounts *smithy.Schema
+
+var _MarketplaceRevenueShareProductSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "MarketplaceRevenueShareProductSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _MarketplaceRevenueShareProductSummaryList_member *smithy.Schema
+
 var MarketplaceRevenueShareSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "MarketplaceRevenueShareSortBy",
@@ -380,22 +491,24 @@ var MarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE *smithy.Schema
 var MarketplaceRevenueShareSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "MarketplaceRevenueShareSummary",
-}, smithy.ShapeTypeStructure, 10)
-var MarketplaceRevenueShareSummary_ProductId *smithy.Schema
+}, smithy.ShapeTypeStructure, 11)
+var MarketplaceRevenueShareSummary_Id *smithy.Schema
 
 var MarketplaceRevenueShareSummary_Arn *smithy.Schema
 
 var MarketplaceRevenueShareSummary_Catalog *smithy.Schema
 
-var MarketplaceRevenueShareSummary_ProductCode *smithy.Schema
-
-var MarketplaceRevenueShareSummary_ProductName *smithy.Schema
+var MarketplaceRevenueShareSummary_Products *smithy.Schema
 
 var MarketplaceRevenueShareSummary_CreatedDate *smithy.Schema
 
 var MarketplaceRevenueShareSummary_LastModifiedDate *smithy.Schema
 
 var MarketplaceRevenueShareSummary_LatestRevision *smithy.Schema
+
+var MarketplaceRevenueShareSummary_EffectiveFrom *smithy.Schema
+
+var MarketplaceRevenueShareSummary_EffectiveUntil *smithy.Schema
 
 var MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount *smithy.Schema
 
@@ -407,15 +520,14 @@ var _MarketplaceRevenueShareSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _MarketplaceRevenueShareSummaryList_member *smithy.Schema
 
-var _MarketplaceRevenueShareTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
-	Name:      "MarketplaceRevenueShareTagList",
-}, smithy.ShapeTypeList, 1)
-var _MarketplaceRevenueShareTagList_member *smithy.Schema
-
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "NextToken",
+}, smithy.ShapeTypeString, 0)
+
+var _ProductCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "ProductCode",
 }, smithy.ShapeTypeString, 0)
 
 var _ProductCodeList = smithy.NewSchema(smithy.ShapeID{
@@ -554,6 +666,14 @@ var RevenueAttributionAllocationTaskStatus_COMPLETE *smithy.Schema
 
 var RevenueAttributionAllocationTaskStatus_FAILED *smithy.Schema
 
+var _RevenueAttributionContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueAttributionContext",
+}, smithy.ShapeTypeMap, 2)
+var _RevenueAttributionContext_key *smithy.Schema
+
+var _RevenueAttributionContext_value *smithy.Schema
+
 var _RevenueAttributionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "RevenueAttributionId",
@@ -608,6 +728,74 @@ var _RevenueSharePercent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "RevenueSharePercent",
 }, smithy.ShapeTypeString, 0)
+
+var _RevenueShareProductAccountCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var RevenueShareProductAccountDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountDetail",
+}, smithy.ShapeTypeStructure, 3)
+var RevenueShareProductAccountDetail_AccountType *smithy.Schema
+
+var RevenueShareProductAccountDetail_Count *smithy.Schema
+
+var RevenueShareProductAccountDetail_AccountIds *smithy.Schema
+
+var _RevenueShareProductAccountDetailList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountDetailList",
+}, smithy.ShapeTypeList, 1)
+var _RevenueShareProductAccountDetailList_member *smithy.Schema
+
+var RevenueShareProductAccountEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountEntry",
+}, smithy.ShapeTypeStructure, 2)
+var RevenueShareProductAccountEntry_AccountType *smithy.Schema
+
+var RevenueShareProductAccountEntry_AccountIds *smithy.Schema
+
+var _RevenueShareProductAccountEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountEntryList",
+}, smithy.ShapeTypeList, 1)
+var _RevenueShareProductAccountEntryList_member *smithy.Schema
+
+var _RevenueShareProductAccountId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountId",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _RevenueShareProductAccountIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountIdList",
+}, smithy.ShapeTypeList, 1)
+var _RevenueShareProductAccountIdList_member *smithy.Schema
+
+var RevenueShareProductAccountSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RevenueShareProductAccountSummary_AccountType *smithy.Schema
+
+var RevenueShareProductAccountSummary_Count *smithy.Schema
+
+var _RevenueShareProductAccountSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _RevenueShareProductAccountSummaryList_member *smithy.Schema
+
+var RevenueShareProductAccountType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "RevenueShareProductAccountType",
+}, smithy.ShapeTypeEnum, 2)
+var RevenueShareProductAccountType_DEPLOYMENT *smithy.Schema
+
+var RevenueShareProductAccountType_ORGANIZATION *smithy.Schema
 
 var _RevisionToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
@@ -726,12 +914,14 @@ var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED *smithy.Schema
 var CreateMarketplaceRevenueShareAllocationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "CreateMarketplaceRevenueShareAllocationInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateMarketplaceRevenueShareAllocationInput_Catalog *smithy.Schema
 
-var CreateMarketplaceRevenueShareAllocationInput_ProductId *smithy.Schema
+var CreateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var CreateMarketplaceRevenueShareAllocationInput_ClientToken *smithy.Schema
+
+var CreateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision *smithy.Schema
 
 var CreateMarketplaceRevenueShareAllocationInput_EffectiveFrom *smithy.Schema
 
@@ -742,14 +932,10 @@ var CreateMarketplaceRevenueShareAllocationInput_RevenueSharePercent *smithy.Sch
 var CreateMarketplaceRevenueShareAllocationOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "CreateMarketplaceRevenueShareAllocationOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 10)
 var CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId *smithy.Schema
 
-var CreateMarketplaceRevenueShareAllocationOutput_ProductId *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_ProductName *smithy.Schema
-
-var CreateMarketplaceRevenueShareAllocationOutput_Arn *smithy.Schema
+var CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var CreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom *smithy.Schema
 
@@ -763,7 +949,9 @@ var CreateMarketplaceRevenueShareAllocationOutput_CreatedDate *smithy.Schema
 
 var CreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate *smithy.Schema
 
-var CreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision *smithy.Schema
+var CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision *smithy.Schema
+
+var CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision *smithy.Schema
 
 var CreateMarketplaceRevenueShareInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
@@ -773,23 +961,21 @@ var CreateMarketplaceRevenueShareInput_Catalog *smithy.Schema
 
 var CreateMarketplaceRevenueShareInput_ClientToken *smithy.Schema
 
-var CreateMarketplaceRevenueShareInput_ProductId *smithy.Schema
+var CreateMarketplaceRevenueShareInput_Products *smithy.Schema
 
 var CreateMarketplaceRevenueShareInput_Tags *smithy.Schema
 
 var CreateMarketplaceRevenueShareOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "CreateMarketplaceRevenueShareOutput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateMarketplaceRevenueShareOutput_ProductId *smithy.Schema
+}, smithy.ShapeTypeStructure, 7)
+var CreateMarketplaceRevenueShareOutput_Id *smithy.Schema
 
 var CreateMarketplaceRevenueShareOutput_Arn *smithy.Schema
 
 var CreateMarketplaceRevenueShareOutput_Catalog *smithy.Schema
 
-var CreateMarketplaceRevenueShareOutput_ProductCode *smithy.Schema
-
-var CreateMarketplaceRevenueShareOutput_ProductName *smithy.Schema
+var CreateMarketplaceRevenueShareOutput_Products *smithy.Schema
 
 var CreateMarketplaceRevenueShareOutput_CreatedDate *smithy.Schema
 
@@ -800,7 +986,7 @@ var CreateMarketplaceRevenueShareOutput_Revision *smithy.Schema
 var CreateRevenueAttributionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "CreateRevenueAttributionInput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateRevenueAttributionInput_Catalog *smithy.Schema
 
 var CreateRevenueAttributionInput_ClientToken *smithy.Schema
@@ -815,10 +1001,12 @@ var CreateRevenueAttributionInput_ProductIdentifier *smithy.Schema
 
 var CreateRevenueAttributionInput_Tags *smithy.Schema
 
+var CreateRevenueAttributionInput_Context *smithy.Schema
+
 var CreateRevenueAttributionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "CreateRevenueAttributionOutput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateRevenueAttributionOutput_Id *smithy.Schema
 
 var CreateRevenueAttributionOutput_Arn *smithy.Schema
@@ -833,13 +1021,15 @@ var CreateRevenueAttributionOutput_MarketplaceProduct *smithy.Schema
 
 var CreateRevenueAttributionOutput_Revision *smithy.Schema
 
+var CreateRevenueAttributionOutput_Context *smithy.Schema
+
 var GetMarketplaceRevenueShareAllocationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "GetMarketplaceRevenueShareAllocationInput",
 }, smithy.ShapeTypeStructure, 4)
 var GetMarketplaceRevenueShareAllocationInput_Catalog *smithy.Schema
 
-var GetMarketplaceRevenueShareAllocationInput_ProductId *smithy.Schema
+var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId *smithy.Schema
 
@@ -848,14 +1038,10 @@ var GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision *s
 var GetMarketplaceRevenueShareAllocationOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "GetMarketplaceRevenueShareAllocationOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 10)
 var GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId *smithy.Schema
 
-var GetMarketplaceRevenueShareAllocationOutput_ProductId *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_ProductName *smithy.Schema
-
-var GetMarketplaceRevenueShareAllocationOutput_Arn *smithy.Schema
+var GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var GetMarketplaceRevenueShareAllocationOutput_EffectiveFrom *smithy.Schema
 
@@ -869,7 +1055,9 @@ var GetMarketplaceRevenueShareAllocationOutput_CreatedDate *smithy.Schema
 
 var GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate *smithy.Schema
 
-var GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision *smithy.Schema
+var GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision *smithy.Schema
+
+var GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision *smithy.Schema
 
 var GetMarketplaceRevenueShareInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
@@ -877,23 +1065,21 @@ var GetMarketplaceRevenueShareInput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 3)
 var GetMarketplaceRevenueShareInput_Catalog *smithy.Schema
 
-var GetMarketplaceRevenueShareInput_ProductId *smithy.Schema
+var GetMarketplaceRevenueShareInput_Identifier *smithy.Schema
 
 var GetMarketplaceRevenueShareInput_Revision *smithy.Schema
 
 var GetMarketplaceRevenueShareOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "GetMarketplaceRevenueShareOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetMarketplaceRevenueShareOutput_ProductId *smithy.Schema
+}, smithy.ShapeTypeStructure, 12)
+var GetMarketplaceRevenueShareOutput_Id *smithy.Schema
 
 var GetMarketplaceRevenueShareOutput_Arn *smithy.Schema
 
 var GetMarketplaceRevenueShareOutput_Catalog *smithy.Schema
 
-var GetMarketplaceRevenueShareOutput_ProductCode *smithy.Schema
-
-var GetMarketplaceRevenueShareOutput_ProductName *smithy.Schema
+var GetMarketplaceRevenueShareOutput_Products *smithy.Schema
 
 var GetMarketplaceRevenueShareOutput_CreatedDate *smithy.Schema
 
@@ -902,6 +1088,10 @@ var GetMarketplaceRevenueShareOutput_LastModifiedDate *smithy.Schema
 var GetMarketplaceRevenueShareOutput_Revision *smithy.Schema
 
 var GetMarketplaceRevenueShareOutput_LatestRevision *smithy.Schema
+
+var GetMarketplaceRevenueShareOutput_EffectiveFrom *smithy.Schema
+
+var GetMarketplaceRevenueShareOutput_EffectiveUntil *smithy.Schema
 
 var GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount *smithy.Schema
 
@@ -996,7 +1186,7 @@ var GetRevenueAttributionInput_Revision *smithy.Schema
 var GetRevenueAttributionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "GetRevenueAttributionOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var GetRevenueAttributionOutput_Arn *smithy.Schema
 
 var GetRevenueAttributionOutput_Id *smithy.Schema
@@ -1027,19 +1217,25 @@ var GetRevenueAttributionOutput_TotalActiveRevenueAttributionAllocationCount *sm
 
 var GetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount *smithy.Schema
 
+var GetRevenueAttributionOutput_Context *smithy.Schema
+
 var ListMarketplaceRevenueShareAllocationsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "ListMarketplaceRevenueShareAllocationsInput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var ListMarketplaceRevenueShareAllocationsInput_Catalog *smithy.Schema
 
-var ListMarketplaceRevenueShareAllocationsInput_ProductId *smithy.Schema
+var ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
-var ListMarketplaceRevenueShareAllocationsInput_Status *smithy.Schema
+var ListMarketplaceRevenueShareAllocationsInput_StatusFilter *smithy.Schema
 
 var ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom *smithy.Schema
 
 var ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom *smithy.Schema
+
+var ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveUntil *smithy.Schema
+
+var ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveUntil *smithy.Schema
 
 var ListMarketplaceRevenueShareAllocationsInput_SortBy *smithy.Schema
 
@@ -1062,8 +1258,10 @@ var ListMarketplaceRevenueShareAllocationsOutput_NextToken *smithy.Schema
 var ListMarketplaceRevenueSharesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "ListMarketplaceRevenueSharesInput",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var ListMarketplaceRevenueSharesInput_Catalog *smithy.Schema
+
+var ListMarketplaceRevenueSharesInput_Identifiers *smithy.Schema
 
 var ListMarketplaceRevenueSharesInput_ProductIds *smithy.Schema
 
@@ -1134,7 +1332,7 @@ var ListRevenueAttributionAllocationsOutput_NextToken *smithy.Schema
 var ListRevenueAttributionsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "ListRevenueAttributionsInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ListRevenueAttributionsInput_Catalog *smithy.Schema
 
 var ListRevenueAttributionsInput_Identifiers *smithy.Schema
@@ -1150,6 +1348,8 @@ var ListRevenueAttributionsInput_SortOrder *smithy.Schema
 var ListRevenueAttributionsInput_MaxResults *smithy.Schema
 
 var ListRevenueAttributionsInput_NextToken *smithy.Schema
+
+var ListRevenueAttributionsInput_ContextFilters *smithy.Schema
 
 var ListRevenueAttributionsOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
@@ -1222,20 +1422,16 @@ var UntagResourceInput_tagKeys *smithy.Schema
 var UpdateMarketplaceRevenueShareAllocationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "UpdateMarketplaceRevenueShareAllocationInput",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 7)
 var UpdateMarketplaceRevenueShareAllocationInput_Catalog *smithy.Schema
 
-var UpdateMarketplaceRevenueShareAllocationInput_ProductId *smithy.Schema
+var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId *smithy.Schema
 
 var UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision *smithy.Schema
 
 var UpdateMarketplaceRevenueShareAllocationInput_ClientToken *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil *smithy.Schema
 
 var UpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent *smithy.Schema
 
@@ -1244,14 +1440,10 @@ var UpdateMarketplaceRevenueShareAllocationInput_Status *smithy.Schema
 var UpdateMarketplaceRevenueShareAllocationOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "UpdateMarketplaceRevenueShareAllocationOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId *smithy.Schema
 
-var UpdateMarketplaceRevenueShareAllocationOutput_ProductId *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_ProductName *smithy.Schema
-
-var UpdateMarketplaceRevenueShareAllocationOutput_Arn *smithy.Schema
+var UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier *smithy.Schema
 
 var UpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom *smithy.Schema
 
@@ -1265,12 +1457,42 @@ var UpdateMarketplaceRevenueShareAllocationOutput_CreatedDate *smithy.Schema
 
 var UpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate *smithy.Schema
 
-var UpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision *smithy.Schema
+var UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision *smithy.Schema
+
+var UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision *smithy.Schema
+
+var UpdateMarketplaceRevenueShareInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "UpdateMarketplaceRevenueShareInput",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateMarketplaceRevenueShareInput_Catalog *smithy.Schema
+
+var UpdateMarketplaceRevenueShareInput_Identifier *smithy.Schema
+
+var UpdateMarketplaceRevenueShareInput_ClientToken *smithy.Schema
+
+var UpdateMarketplaceRevenueShareInput_Revision *smithy.Schema
+
+var UpdateMarketplaceRevenueShareInput_Products *smithy.Schema
+
+var UpdateMarketplaceRevenueShareOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
+	Name:      "UpdateMarketplaceRevenueShareOutput",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateMarketplaceRevenueShareOutput_Id *smithy.Schema
+
+var UpdateMarketplaceRevenueShareOutput_Arn *smithy.Schema
+
+var UpdateMarketplaceRevenueShareOutput_Products *smithy.Schema
+
+var UpdateMarketplaceRevenueShareOutput_LastModifiedDate *smithy.Schema
+
+var UpdateMarketplaceRevenueShareOutput_LatestRevision *smithy.Schema
 
 var UpdateRevenueAttributionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "UpdateRevenueAttributionInput",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateRevenueAttributionInput_Catalog *smithy.Schema
 
 var UpdateRevenueAttributionInput_Identifier *smithy.Schema
@@ -1281,10 +1503,12 @@ var UpdateRevenueAttributionInput_Description *smithy.Schema
 
 var UpdateRevenueAttributionInput_Revision *smithy.Schema
 
+var UpdateRevenueAttributionInput_Context *smithy.Schema
+
 var UpdateRevenueAttributionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralrevenuemeasurement",
 	Name:      "UpdateRevenueAttributionOutput",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateRevenueAttributionOutput_Id *smithy.Schema
 
 var UpdateRevenueAttributionOutput_Arn *smithy.Schema
@@ -1294,6 +1518,8 @@ var UpdateRevenueAttributionOutput_Description *smithy.Schema
 var UpdateRevenueAttributionOutput_LastModifiedDate *smithy.Schema
 
 var UpdateRevenueAttributionOutput_LatestRevision *smithy.Schema
+
+var UpdateRevenueAttributionOutput_Context *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -1324,6 +1550,10 @@ func init() {
 
 	MarketplaceProductSummary_ProductName = MarketplaceProductSummary.AddMember("ProductName", smithyprelude.String)
 
+	_RevenueAttributionContext_key = _RevenueAttributionContext.AddMember("key", _ContextKey)
+
+	_RevenueAttributionContext_value = _RevenueAttributionContext.AddMember("value", _ContextValue)
+
 	AttributionSummary_Arn = AttributionSummary.AddMember("Arn", smithyprelude.String)
 
 	AttributionSummary_Id = AttributionSummary.AddMember("Id", _RevenueAttributionId)
@@ -1350,6 +1580,8 @@ func init() {
 
 	AttributionSummary_TotalRevenueAttributionAllocationCount = AttributionSummary.AddMember("TotalRevenueAttributionAllocationCount", _AllocationCount)
 
+	AttributionSummary_Context = AttributionSummary.AddMember("Context", _RevenueAttributionContext)
+
 	ConflictExceptionReason_CONFLICT_CLIENT_TOKEN = ConflictExceptionReason.AddMember("CONFLICT_CLIENT_TOKEN", smithyprelude.Unit)
 
 	ConflictExceptionReason_CONCURRENT_MODIFICATION = ConflictExceptionReason.AddMember("CONCURRENT_MODIFICATION", smithyprelude.Unit)
@@ -1361,6 +1593,14 @@ func init() {
 	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
 
 	ConflictException_Reason = ConflictException.AddMember("Reason", ConflictExceptionReason)
+
+	_ContextFilterValueList_member = _ContextFilterValueList.AddMember("member", _ContextValue)
+
+	ContextFilter_Key = ContextFilter.AddMember("Key", _ContextKey)
+
+	ContextFilter_Values = ContextFilter.AddMember("Values", _ContextFilterValueList)
+
+	_ContextFilterList_member = _ContextFilterList.AddMember("member", ContextFilter)
 
 	_CustomerAwsAccountIdFilterList_member = _CustomerAwsAccountIdFilterList.AddMember("member", _CustomerAwsAccountId)
 
@@ -1392,17 +1632,13 @@ func init() {
 
 	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
 
-	_MarketplaceProductIdList_member = _MarketplaceProductIdList.AddMember("member", _MarketplaceProductId)
+	_MarketplaceProductIdList_member = _MarketplaceProductIdList.AddMember("member", _MarketplaceProductIdentifier)
 
 	MarketplaceRevenueShareAllocationSortField_EFFECTIVE_FROM = MarketplaceRevenueShareAllocationSortField.AddMember("EFFECTIVE_FROM", smithyprelude.Unit)
 
 	MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId = MarketplaceRevenueShareAllocationSummary.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
 
-	MarketplaceRevenueShareAllocationSummary_ProductId = MarketplaceRevenueShareAllocationSummary.AddMember("ProductId", _MarketplaceProductId)
-
-	MarketplaceRevenueShareAllocationSummary_ProductName = MarketplaceRevenueShareAllocationSummary.AddMember("ProductName", smithyprelude.String)
-
-	MarketplaceRevenueShareAllocationSummary_Arn = MarketplaceRevenueShareAllocationSummary.AddMember("Arn", smithyprelude.String)
+	MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareIdentifier = MarketplaceRevenueShareAllocationSummary.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareId)
 
 	MarketplaceRevenueShareAllocationSummary_EffectiveFrom = MarketplaceRevenueShareAllocationSummary.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
@@ -1418,37 +1654,87 @@ func init() {
 
 	_MarketplaceRevenueShareAllocationSummaryList_member = _MarketplaceRevenueShareAllocationSummaryList.AddMember("member", MarketplaceRevenueShareAllocationSummary)
 
+	_MarketplaceRevenueShareIdentifierList_member = _MarketplaceRevenueShareIdentifierList.AddMember("member", _MarketplaceRevenueShareIdentifier)
+
+	RevenueShareProductAccountType_DEPLOYMENT = RevenueShareProductAccountType.AddMember("DEPLOYMENT", smithyprelude.Unit)
+
+	RevenueShareProductAccountType_ORGANIZATION = RevenueShareProductAccountType.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	_RevenueShareProductAccountIdList_member = _RevenueShareProductAccountIdList.AddMember("member", _RevenueShareProductAccountId)
+
+	RevenueShareProductAccountDetail_AccountType = RevenueShareProductAccountDetail.AddMember("AccountType", RevenueShareProductAccountType)
+
+	RevenueShareProductAccountDetail_Count = RevenueShareProductAccountDetail.AddMember("Count", _RevenueShareProductAccountCount)
+
+	RevenueShareProductAccountDetail_AccountIds = RevenueShareProductAccountDetail.AddMember("AccountIds", _RevenueShareProductAccountIdList)
+
+	_RevenueShareProductAccountDetailList_member = _RevenueShareProductAccountDetailList.AddMember("member", RevenueShareProductAccountDetail)
+
+	MarketplaceRevenueShareProductDetail_ProductId = MarketplaceRevenueShareProductDetail.AddMember("ProductId", _MarketplaceProductId)
+
+	MarketplaceRevenueShareProductDetail_ProductCode = MarketplaceRevenueShareProductDetail.AddMember("ProductCode", _ProductCode)
+
+	MarketplaceRevenueShareProductDetail_ProductName = MarketplaceRevenueShareProductDetail.AddMember("ProductName", smithyprelude.String)
+
+	MarketplaceRevenueShareProductDetail_Accounts = MarketplaceRevenueShareProductDetail.AddMember("Accounts", _RevenueShareProductAccountDetailList)
+
+	_MarketplaceRevenueShareProductDetailList_member = _MarketplaceRevenueShareProductDetailList.AddMember("member", MarketplaceRevenueShareProductDetail)
+
+	RevenueShareProductAccountEntry_AccountType = RevenueShareProductAccountEntry.AddMember("AccountType", RevenueShareProductAccountType)
+
+	RevenueShareProductAccountEntry_AccountIds = RevenueShareProductAccountEntry.AddMember("AccountIds", _RevenueShareProductAccountIdList)
+
+	_RevenueShareProductAccountEntryList_member = _RevenueShareProductAccountEntryList.AddMember("member", RevenueShareProductAccountEntry)
+
+	MarketplaceRevenueShareProductEntry_ProductId = MarketplaceRevenueShareProductEntry.AddMember("ProductId", _MarketplaceProductIdentifier)
+
+	MarketplaceRevenueShareProductEntry_Accounts = MarketplaceRevenueShareProductEntry.AddMember("Accounts", _RevenueShareProductAccountEntryList)
+
+	_MarketplaceRevenueShareProductEntryList_member = _MarketplaceRevenueShareProductEntryList.AddMember("member", MarketplaceRevenueShareProductEntry)
+
+	RevenueShareProductAccountSummary_AccountType = RevenueShareProductAccountSummary.AddMember("AccountType", RevenueShareProductAccountType)
+
+	RevenueShareProductAccountSummary_Count = RevenueShareProductAccountSummary.AddMember("Count", _RevenueShareProductAccountCount)
+
+	_RevenueShareProductAccountSummaryList_member = _RevenueShareProductAccountSummaryList.AddMember("member", RevenueShareProductAccountSummary)
+
+	MarketplaceRevenueShareProductSummary_ProductId = MarketplaceRevenueShareProductSummary.AddMember("ProductId", _MarketplaceProductId)
+
+	MarketplaceRevenueShareProductSummary_ProductCode = MarketplaceRevenueShareProductSummary.AddMember("ProductCode", _ProductCode)
+
+	MarketplaceRevenueShareProductSummary_ProductName = MarketplaceRevenueShareProductSummary.AddMember("ProductName", smithyprelude.String)
+
+	MarketplaceRevenueShareProductSummary_Accounts = MarketplaceRevenueShareProductSummary.AddMember("Accounts", _RevenueShareProductAccountSummaryList)
+
+	_MarketplaceRevenueShareProductSummaryList_member = _MarketplaceRevenueShareProductSummaryList.AddMember("member", MarketplaceRevenueShareProductSummary)
+
 	MarketplaceRevenueShareSortBy_LAST_MODIFIED_DATE = MarketplaceRevenueShareSortBy.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
 
-	MarketplaceRevenueShareSummary_ProductId = MarketplaceRevenueShareSummary.AddMember("ProductId", _MarketplaceProductId)
+	MarketplaceRevenueShareSummary_Id = MarketplaceRevenueShareSummary.AddMember("Id", _MarketplaceRevenueShareId)
 
-	MarketplaceRevenueShareSummary_Arn = MarketplaceRevenueShareSummary.AddMember("Arn", smithyprelude.String)
+	MarketplaceRevenueShareSummary_Arn = MarketplaceRevenueShareSummary.AddMember("Arn", _MarketplaceRevenueShareArn)
 
 	MarketplaceRevenueShareSummary_Catalog = MarketplaceRevenueShareSummary.AddMember("Catalog", CatalogName)
 
-	MarketplaceRevenueShareSummary_ProductCode = MarketplaceRevenueShareSummary.AddMember("ProductCode", smithyprelude.String)
-
-	MarketplaceRevenueShareSummary_ProductName = MarketplaceRevenueShareSummary.AddMember("ProductName", smithyprelude.String)
+	MarketplaceRevenueShareSummary_Products = MarketplaceRevenueShareSummary.AddMember("Products", _MarketplaceRevenueShareProductSummaryList)
 
 	MarketplaceRevenueShareSummary_CreatedDate = MarketplaceRevenueShareSummary.AddMember("CreatedDate", smithyprelude.Timestamp)
 
 	MarketplaceRevenueShareSummary_LastModifiedDate = MarketplaceRevenueShareSummary.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
-	MarketplaceRevenueShareSummary_LatestRevision = MarketplaceRevenueShareSummary.AddMember("LatestRevision", smithyprelude.Integer)
+	MarketplaceRevenueShareSummary_LatestRevision = MarketplaceRevenueShareSummary.AddMember("LatestRevision", _RevisionToken)
 
-	MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount = MarketplaceRevenueShareSummary.AddMember("TotalActiveMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
+	MarketplaceRevenueShareSummary_EffectiveFrom = MarketplaceRevenueShareSummary.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
-	MarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount = MarketplaceRevenueShareSummary.AddMember("TotalMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
+	MarketplaceRevenueShareSummary_EffectiveUntil = MarketplaceRevenueShareSummary.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
+
+	MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount = MarketplaceRevenueShareSummary.AddMember("TotalActiveMarketplaceRevenueShareAllocationCount", _AllocationCount)
+
+	MarketplaceRevenueShareSummary_TotalMarketplaceRevenueShareAllocationCount = MarketplaceRevenueShareSummary.AddMember("TotalMarketplaceRevenueShareAllocationCount", _AllocationCount)
 
 	_MarketplaceRevenueShareSummaryList_member = _MarketplaceRevenueShareSummaryList.AddMember("member", MarketplaceRevenueShareSummary)
 
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_MarketplaceRevenueShareTagList_member = _MarketplaceRevenueShareTagList.AddMember("member", Tag)
-
-	_ProductCodeList_member = _ProductCodeList.AddMember("member", smithyprelude.String)
+	_ProductCodeList_member = _ProductCodeList.AddMember("member", _ProductCode)
 
 	ResourceNotFoundExceptionReason_RESOURCE_NOT_FOUND = ResourceNotFoundExceptionReason.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
 
@@ -1560,6 +1846,10 @@ func init() {
 
 	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
 
+	Tag_Key = Tag.AddMember("Key", _TagKey)
+
+	Tag_Value = Tag.AddMember("Value", _TagValue)
+
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
 	_TagList_member = _TagList.AddMember("member", Tag)
@@ -1590,9 +1880,11 @@ func init() {
 
 	CreateMarketplaceRevenueShareAllocationInput_Catalog = CreateMarketplaceRevenueShareAllocationInput.AddMember("Catalog", CatalogName)
 
-	CreateMarketplaceRevenueShareAllocationInput_ProductId = CreateMarketplaceRevenueShareAllocationInput.AddMember("ProductId", _MarketplaceProductId)
+	CreateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier = CreateMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareIdentifier)
 
 	CreateMarketplaceRevenueShareAllocationInput_ClientToken = CreateMarketplaceRevenueShareAllocationInput.AddMember("ClientToken", _ClientToken)
+
+	CreateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision = CreateMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
 
 	CreateMarketplaceRevenueShareAllocationInput_EffectiveFrom = CreateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
@@ -1602,11 +1894,7 @@ func init() {
 
 	CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = CreateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
 
-	CreateMarketplaceRevenueShareAllocationOutput_ProductId = CreateMarketplaceRevenueShareAllocationOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	CreateMarketplaceRevenueShareAllocationOutput_ProductName = CreateMarketplaceRevenueShareAllocationOutput.AddMember("ProductName", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareAllocationOutput_Arn = CreateMarketplaceRevenueShareAllocationOutput.AddMember("Arn", smithyprelude.String)
+	CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier = CreateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareId)
 
 	CreateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = CreateMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
@@ -1620,31 +1908,31 @@ func init() {
 
 	CreateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = CreateMarketplaceRevenueShareAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
-	CreateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = CreateMarketplaceRevenueShareAllocationOutput.AddMember("LatestMarketplaceRevenueShareRevision", _RevisionToken)
+	CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision = CreateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
+
+	CreateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision = CreateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareLatestRevision", _RevisionToken)
 
 	CreateMarketplaceRevenueShareInput_Catalog = CreateMarketplaceRevenueShareInput.AddMember("Catalog", CatalogName)
 
 	CreateMarketplaceRevenueShareInput_ClientToken = CreateMarketplaceRevenueShareInput.AddMember("ClientToken", _ClientToken)
 
-	CreateMarketplaceRevenueShareInput_ProductId = CreateMarketplaceRevenueShareInput.AddMember("ProductId", _MarketplaceProductId)
+	CreateMarketplaceRevenueShareInput_Products = CreateMarketplaceRevenueShareInput.AddMember("Products", _MarketplaceRevenueShareProductEntryList)
 
-	CreateMarketplaceRevenueShareInput_Tags = CreateMarketplaceRevenueShareInput.AddMember("Tags", _MarketplaceRevenueShareTagList)
+	CreateMarketplaceRevenueShareInput_Tags = CreateMarketplaceRevenueShareInput.AddMember("Tags", _TagList)
 
-	CreateMarketplaceRevenueShareOutput_ProductId = CreateMarketplaceRevenueShareOutput.AddMember("ProductId", _MarketplaceProductId)
+	CreateMarketplaceRevenueShareOutput_Id = CreateMarketplaceRevenueShareOutput.AddMember("Id", _MarketplaceRevenueShareId)
 
-	CreateMarketplaceRevenueShareOutput_Arn = CreateMarketplaceRevenueShareOutput.AddMember("Arn", smithyprelude.String)
+	CreateMarketplaceRevenueShareOutput_Arn = CreateMarketplaceRevenueShareOutput.AddMember("Arn", _MarketplaceRevenueShareArn)
 
 	CreateMarketplaceRevenueShareOutput_Catalog = CreateMarketplaceRevenueShareOutput.AddMember("Catalog", CatalogName)
 
-	CreateMarketplaceRevenueShareOutput_ProductCode = CreateMarketplaceRevenueShareOutput.AddMember("ProductCode", smithyprelude.String)
-
-	CreateMarketplaceRevenueShareOutput_ProductName = CreateMarketplaceRevenueShareOutput.AddMember("ProductName", smithyprelude.String)
+	CreateMarketplaceRevenueShareOutput_Products = CreateMarketplaceRevenueShareOutput.AddMember("Products", _MarketplaceRevenueShareProductSummaryList)
 
 	CreateMarketplaceRevenueShareOutput_CreatedDate = CreateMarketplaceRevenueShareOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
 
 	CreateMarketplaceRevenueShareOutput_LastModifiedDate = CreateMarketplaceRevenueShareOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
-	CreateMarketplaceRevenueShareOutput_Revision = CreateMarketplaceRevenueShareOutput.AddMember("Revision", smithyprelude.Integer)
+	CreateMarketplaceRevenueShareOutput_Revision = CreateMarketplaceRevenueShareOutput.AddMember("Revision", _RevisionToken)
 
 	CreateRevenueAttributionInput_Catalog = CreateRevenueAttributionInput.AddMember("Catalog", CatalogName)
 
@@ -1660,6 +1948,8 @@ func init() {
 
 	CreateRevenueAttributionInput_Tags = CreateRevenueAttributionInput.AddMember("Tags", _TagList)
 
+	CreateRevenueAttributionInput_Context = CreateRevenueAttributionInput.AddMember("Context", _RevenueAttributionContext)
+
 	CreateRevenueAttributionOutput_Id = CreateRevenueAttributionOutput.AddMember("Id", _RevenueAttributionId)
 
 	CreateRevenueAttributionOutput_Arn = CreateRevenueAttributionOutput.AddMember("Arn", smithyprelude.String)
@@ -1674,9 +1964,11 @@ func init() {
 
 	CreateRevenueAttributionOutput_Revision = CreateRevenueAttributionOutput.AddMember("Revision", _RevisionToken)
 
+	CreateRevenueAttributionOutput_Context = CreateRevenueAttributionOutput.AddMember("Context", _RevenueAttributionContext)
+
 	GetMarketplaceRevenueShareAllocationInput_Catalog = GetMarketplaceRevenueShareAllocationInput.AddMember("Catalog", CatalogName)
 
-	GetMarketplaceRevenueShareAllocationInput_ProductId = GetMarketplaceRevenueShareAllocationInput.AddMember("ProductId", _MarketplaceProductId)
+	GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier = GetMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareIdentifier)
 
 	GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = GetMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
 
@@ -1684,11 +1976,7 @@ func init() {
 
 	GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = GetMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
 
-	GetMarketplaceRevenueShareAllocationOutput_ProductId = GetMarketplaceRevenueShareAllocationOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	GetMarketplaceRevenueShareAllocationOutput_ProductName = GetMarketplaceRevenueShareAllocationOutput.AddMember("ProductName", smithyprelude.String)
-
-	GetMarketplaceRevenueShareAllocationOutput_Arn = GetMarketplaceRevenueShareAllocationOutput.AddMember("Arn", smithyprelude.String)
+	GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier = GetMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareId)
 
 	GetMarketplaceRevenueShareAllocationOutput_EffectiveFrom = GetMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
@@ -1702,35 +1990,39 @@ func init() {
 
 	GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate = GetMarketplaceRevenueShareAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
-	GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = GetMarketplaceRevenueShareAllocationOutput.AddMember("LatestMarketplaceRevenueShareRevision", _RevisionToken)
+	GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision = GetMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
+
+	GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision = GetMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareLatestRevision", _RevisionToken)
 
 	GetMarketplaceRevenueShareInput_Catalog = GetMarketplaceRevenueShareInput.AddMember("Catalog", CatalogName)
 
-	GetMarketplaceRevenueShareInput_ProductId = GetMarketplaceRevenueShareInput.AddMember("ProductId", _MarketplaceProductId)
+	GetMarketplaceRevenueShareInput_Identifier = GetMarketplaceRevenueShareInput.AddMember("Identifier", _MarketplaceRevenueShareIdentifier)
 
-	GetMarketplaceRevenueShareInput_Revision = GetMarketplaceRevenueShareInput.AddMember("Revision", smithyprelude.Integer)
+	GetMarketplaceRevenueShareInput_Revision = GetMarketplaceRevenueShareInput.AddMember("Revision", _RevisionToken)
 
-	GetMarketplaceRevenueShareOutput_ProductId = GetMarketplaceRevenueShareOutput.AddMember("ProductId", _MarketplaceProductId)
+	GetMarketplaceRevenueShareOutput_Id = GetMarketplaceRevenueShareOutput.AddMember("Id", _MarketplaceRevenueShareId)
 
-	GetMarketplaceRevenueShareOutput_Arn = GetMarketplaceRevenueShareOutput.AddMember("Arn", smithyprelude.String)
+	GetMarketplaceRevenueShareOutput_Arn = GetMarketplaceRevenueShareOutput.AddMember("Arn", _MarketplaceRevenueShareArn)
 
 	GetMarketplaceRevenueShareOutput_Catalog = GetMarketplaceRevenueShareOutput.AddMember("Catalog", CatalogName)
 
-	GetMarketplaceRevenueShareOutput_ProductCode = GetMarketplaceRevenueShareOutput.AddMember("ProductCode", smithyprelude.String)
-
-	GetMarketplaceRevenueShareOutput_ProductName = GetMarketplaceRevenueShareOutput.AddMember("ProductName", smithyprelude.String)
+	GetMarketplaceRevenueShareOutput_Products = GetMarketplaceRevenueShareOutput.AddMember("Products", _MarketplaceRevenueShareProductDetailList)
 
 	GetMarketplaceRevenueShareOutput_CreatedDate = GetMarketplaceRevenueShareOutput.AddMember("CreatedDate", smithyprelude.Timestamp)
 
 	GetMarketplaceRevenueShareOutput_LastModifiedDate = GetMarketplaceRevenueShareOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
-	GetMarketplaceRevenueShareOutput_Revision = GetMarketplaceRevenueShareOutput.AddMember("Revision", smithyprelude.Integer)
+	GetMarketplaceRevenueShareOutput_Revision = GetMarketplaceRevenueShareOutput.AddMember("Revision", _RevisionToken)
 
-	GetMarketplaceRevenueShareOutput_LatestRevision = GetMarketplaceRevenueShareOutput.AddMember("LatestRevision", smithyprelude.Integer)
+	GetMarketplaceRevenueShareOutput_LatestRevision = GetMarketplaceRevenueShareOutput.AddMember("LatestRevision", _RevisionToken)
 
-	GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount = GetMarketplaceRevenueShareOutput.AddMember("TotalActiveMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
+	GetMarketplaceRevenueShareOutput_EffectiveFrom = GetMarketplaceRevenueShareOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
-	GetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount = GetMarketplaceRevenueShareOutput.AddMember("TotalMarketplaceRevenueShareAllocationCount", smithyprelude.Integer)
+	GetMarketplaceRevenueShareOutput_EffectiveUntil = GetMarketplaceRevenueShareOutput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
+
+	GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount = GetMarketplaceRevenueShareOutput.AddMember("TotalActiveMarketplaceRevenueShareAllocationCount", _AllocationCount)
+
+	GetMarketplaceRevenueShareOutput_TotalMarketplaceRevenueShareAllocationCount = GetMarketplaceRevenueShareOutput.AddMember("TotalMarketplaceRevenueShareAllocationCount", _AllocationCount)
 
 	GetRevenueAttributionAllocationInput_Catalog = GetRevenueAttributionAllocationInput.AddMember("Catalog", CatalogName)
 
@@ -1828,15 +2120,21 @@ func init() {
 
 	GetRevenueAttributionOutput_TotalRevenueAttributionAllocationCount = GetRevenueAttributionOutput.AddMember("TotalRevenueAttributionAllocationCount", _AllocationCount)
 
+	GetRevenueAttributionOutput_Context = GetRevenueAttributionOutput.AddMember("Context", _RevenueAttributionContext)
+
 	ListMarketplaceRevenueShareAllocationsInput_Catalog = ListMarketplaceRevenueShareAllocationsInput.AddMember("Catalog", CatalogName)
 
-	ListMarketplaceRevenueShareAllocationsInput_ProductId = ListMarketplaceRevenueShareAllocationsInput.AddMember("ProductId", _MarketplaceProductId)
+	ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareIdentifier = ListMarketplaceRevenueShareAllocationsInput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareIdentifier)
 
-	ListMarketplaceRevenueShareAllocationsInput_Status = ListMarketplaceRevenueShareAllocationsInput.AddMember("Status", AllocationStatus)
+	ListMarketplaceRevenueShareAllocationsInput_StatusFilter = ListMarketplaceRevenueShareAllocationsInput.AddMember("StatusFilter", AllocationStatus)
 
 	ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom = ListMarketplaceRevenueShareAllocationsInput.AddMember("AfterEffectiveFrom", _AllocationEffectiveDateString)
 
 	ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom = ListMarketplaceRevenueShareAllocationsInput.AddMember("BeforeEffectiveFrom", _AllocationEffectiveDateString)
+
+	ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveUntil = ListMarketplaceRevenueShareAllocationsInput.AddMember("AfterEffectiveUntil", _AllocationEffectiveDateString)
+
+	ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveUntil = ListMarketplaceRevenueShareAllocationsInput.AddMember("BeforeEffectiveUntil", _AllocationEffectiveDateString)
 
 	ListMarketplaceRevenueShareAllocationsInput_SortBy = ListMarketplaceRevenueShareAllocationsInput.AddMember("SortBy", MarketplaceRevenueShareAllocationSortField)
 
@@ -1853,6 +2151,8 @@ func init() {
 	ListMarketplaceRevenueShareAllocationsOutput_NextToken = ListMarketplaceRevenueShareAllocationsOutput.AddMember("NextToken", _NextToken)
 
 	ListMarketplaceRevenueSharesInput_Catalog = ListMarketplaceRevenueSharesInput.AddMember("Catalog", CatalogName)
+
+	ListMarketplaceRevenueSharesInput_Identifiers = ListMarketplaceRevenueSharesInput.AddMember("Identifiers", _MarketplaceRevenueShareIdentifierList)
 
 	ListMarketplaceRevenueSharesInput_ProductIds = ListMarketplaceRevenueSharesInput.AddMember("ProductIds", _MarketplaceProductIdList)
 
@@ -1924,6 +2224,8 @@ func init() {
 
 	ListRevenueAttributionsInput_NextToken = ListRevenueAttributionsInput.AddMember("NextToken", _NextToken)
 
+	ListRevenueAttributionsInput_ContextFilters = ListRevenueAttributionsInput.AddMember("ContextFilters", _ContextFilterList)
+
 	ListRevenueAttributionsOutput_RevenueAttributionSummaries = ListRevenueAttributionsOutput.AddMember("RevenueAttributionSummaries", _RevenueAttributionSummaries)
 
 	ListRevenueAttributionsOutput_NextToken = ListRevenueAttributionsOutput.AddMember("NextToken", _NextToken)
@@ -1966,7 +2268,7 @@ func init() {
 
 	UpdateMarketplaceRevenueShareAllocationInput_Catalog = UpdateMarketplaceRevenueShareAllocationInput.AddMember("Catalog", CatalogName)
 
-	UpdateMarketplaceRevenueShareAllocationInput_ProductId = UpdateMarketplaceRevenueShareAllocationInput.AddMember("ProductId", _MarketplaceProductId)
+	UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier = UpdateMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareIdentifier)
 
 	UpdateMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId = UpdateMarketplaceRevenueShareAllocationInput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
 
@@ -1974,21 +2276,13 @@ func init() {
 
 	UpdateMarketplaceRevenueShareAllocationInput_ClientToken = UpdateMarketplaceRevenueShareAllocationInput.AddMember("ClientToken", _ClientToken)
 
-	UpdateMarketplaceRevenueShareAllocationInput_EffectiveFrom = UpdateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
-
-	UpdateMarketplaceRevenueShareAllocationInput_EffectiveUntil = UpdateMarketplaceRevenueShareAllocationInput.AddMember("EffectiveUntil", _AllocationEffectiveDateString)
-
 	UpdateMarketplaceRevenueShareAllocationInput_RevenueSharePercent = UpdateMarketplaceRevenueShareAllocationInput.AddMember("RevenueSharePercent", _RevenueSharePercent)
 
 	UpdateMarketplaceRevenueShareAllocationInput_Status = UpdateMarketplaceRevenueShareAllocationInput.AddMember("Status", AllocationStatus)
 
 	UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareAllocationId", _MarketplaceRevenueShareAllocationId)
 
-	UpdateMarketplaceRevenueShareAllocationOutput_ProductId = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("ProductId", _MarketplaceProductId)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_ProductName = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("ProductName", smithyprelude.String)
-
-	UpdateMarketplaceRevenueShareAllocationOutput_Arn = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("Arn", smithyprelude.String)
+	UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareIdentifier", _MarketplaceRevenueShareId)
 
 	UpdateMarketplaceRevenueShareAllocationOutput_EffectiveFrom = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("EffectiveFrom", _AllocationEffectiveDateString)
 
@@ -2002,7 +2296,29 @@ func init() {
 
 	UpdateMarketplaceRevenueShareAllocationOutput_LastModifiedDate = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
-	UpdateMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("LatestMarketplaceRevenueShareRevision", _RevisionToken)
+	UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareRevision", _RevisionToken)
+
+	UpdateMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision = UpdateMarketplaceRevenueShareAllocationOutput.AddMember("MarketplaceRevenueShareLatestRevision", _RevisionToken)
+
+	UpdateMarketplaceRevenueShareInput_Catalog = UpdateMarketplaceRevenueShareInput.AddMember("Catalog", CatalogName)
+
+	UpdateMarketplaceRevenueShareInput_Identifier = UpdateMarketplaceRevenueShareInput.AddMember("Identifier", _MarketplaceRevenueShareIdentifier)
+
+	UpdateMarketplaceRevenueShareInput_ClientToken = UpdateMarketplaceRevenueShareInput.AddMember("ClientToken", _ClientToken)
+
+	UpdateMarketplaceRevenueShareInput_Revision = UpdateMarketplaceRevenueShareInput.AddMember("Revision", _RevisionToken)
+
+	UpdateMarketplaceRevenueShareInput_Products = UpdateMarketplaceRevenueShareInput.AddMember("Products", _MarketplaceRevenueShareProductEntryList)
+
+	UpdateMarketplaceRevenueShareOutput_Id = UpdateMarketplaceRevenueShareOutput.AddMember("Id", _MarketplaceRevenueShareId)
+
+	UpdateMarketplaceRevenueShareOutput_Arn = UpdateMarketplaceRevenueShareOutput.AddMember("Arn", _MarketplaceRevenueShareArn)
+
+	UpdateMarketplaceRevenueShareOutput_Products = UpdateMarketplaceRevenueShareOutput.AddMember("Products", _MarketplaceRevenueShareProductSummaryList)
+
+	UpdateMarketplaceRevenueShareOutput_LastModifiedDate = UpdateMarketplaceRevenueShareOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
+
+	UpdateMarketplaceRevenueShareOutput_LatestRevision = UpdateMarketplaceRevenueShareOutput.AddMember("LatestRevision", _RevisionToken)
 
 	UpdateRevenueAttributionInput_Catalog = UpdateRevenueAttributionInput.AddMember("Catalog", CatalogName)
 
@@ -2014,6 +2330,8 @@ func init() {
 
 	UpdateRevenueAttributionInput_Revision = UpdateRevenueAttributionInput.AddMember("Revision", _RevisionToken)
 
+	UpdateRevenueAttributionInput_Context = UpdateRevenueAttributionInput.AddMember("Context", _RevenueAttributionContext)
+
 	UpdateRevenueAttributionOutput_Id = UpdateRevenueAttributionOutput.AddMember("Id", _RevenueAttributionId)
 
 	UpdateRevenueAttributionOutput_Arn = UpdateRevenueAttributionOutput.AddMember("Arn", smithyprelude.String)
@@ -2023,5 +2341,7 @@ func init() {
 	UpdateRevenueAttributionOutput_LastModifiedDate = UpdateRevenueAttributionOutput.AddMember("LastModifiedDate", smithyprelude.Timestamp)
 
 	UpdateRevenueAttributionOutput_LatestRevision = UpdateRevenueAttributionOutput.AddMember("LatestRevision", _RevisionToken)
+
+	UpdateRevenueAttributionOutput_Context = UpdateRevenueAttributionOutput.AddMember("Context", _RevenueAttributionContext)
 
 }

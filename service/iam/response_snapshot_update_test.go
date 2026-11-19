@@ -3231,6 +3231,23 @@ func TestUpdateResponseSnapshot_GetOpenIDConnectProvider(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
+		IdentityStoreArn:          ptr.String("__IdentityStoreArn__"),
 	}
 	proto := restxml.New(schemas.AWSIdentityManagementV20100508)
 	opSchema := serdeRespQueryOpSchema(schemas.GetOpenIDConnectProvider, schemas.GetOpenIDConnectProviderResponse, schemas.GetOpenIDConnectProviderResponse)
@@ -3586,8 +3603,39 @@ func TestUpdateResponseSnapshot_GetSAMLProvider(t *testing.T) {
 	want := &GetSAMLProviderOutput{
 		SAMLProviderUUID:     ptr.String("__SAMLProviderUUID__"),
 		SAMLMetadataDocument: ptr.String("__SAMLMetadataDocument__"),
-		CreateDate:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ValidUntil:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		SAMLKeyHashes: []types.SAMLKeyHashEntry{
+			{
+				IssuerURL: ptr.String("__IssuerURL__"),
+				KeyHashes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				IssuerURL: ptr.String("__IssuerURL__"),
+				KeyHashes: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ValidUntil: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -3609,6 +3657,8 @@ func TestUpdateResponseSnapshot_GetSAMLProvider(t *testing.T) {
 				Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
+		IdentityStoreArn:          ptr.String("__IdentityStoreArn__"),
 	}
 	proto := restxml.New(schemas.AWSIdentityManagementV20100508)
 	opSchema := serdeRespQueryOpSchema(schemas.GetSAMLProvider, schemas.GetSAMLProviderResponse, schemas.GetSAMLProviderResponse)
@@ -4973,10 +5023,12 @@ func TestUpdateResponseSnapshot_ListOpenIDConnectProviders(t *testing.T) {
 	want := &ListOpenIDConnectProvidersOutput{
 		OpenIDConnectProviderList: []types.OpenIDConnectProviderListEntry{
 			{
-				Arn: ptr.String("__Arn__"),
+				Arn:                                 ptr.String("__Arn__"),
+				IsTrustedIdentityPropagationEnabled: true,
 			},
 			{
-				Arn: ptr.String("__Arn__"),
+				Arn:                                 ptr.String("__Arn__"),
+				IsTrustedIdentityPropagationEnabled: true,
 			},
 		},
 	}
@@ -5446,14 +5498,16 @@ func TestUpdateResponseSnapshot_ListSAMLProviders(t *testing.T) {
 	want := &ListSAMLProvidersOutput{
 		SAMLProviderList: []types.SAMLProviderListEntry{
 			{
-				Arn:        ptr.String("__Arn__"),
-				ValidUntil: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                                 ptr.String("__Arn__"),
+				ValidUntil:                          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreateDate:                          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				IsTrustedIdentityPropagationEnabled: true,
 			},
 			{
-				Arn:        ptr.String("__Arn__"),
-				ValidUntil: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				CreateDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Arn:                                 ptr.String("__Arn__"),
+				ValidUntil:                          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreateDate:                          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				IsTrustedIdentityPropagationEnabled: true,
 			},
 		},
 	}
@@ -7350,6 +7404,29 @@ func TestUpdateResponseSnapshot_UpdateLoginProfile(t *testing.T) {
 	}
 	body = serdeRespQueryResultEnvelope(body, "UpdateLoginProfile")
 	if err := serdeRespWriteSnapshot("UpdateLoginProfile.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateOpenIDConnectProvider(t *testing.T) {
+	want := &UpdateOpenIDConnectProviderOutput{}
+	proto := restxml.New(schemas.AWSIdentityManagementV20100508)
+	opSchema := serdeRespQueryOpSchema(schemas.UpdateOpenIDConnectProvider, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespQueryResultEnvelope(body, "UpdateOpenIDConnectProvider")
+	if err := serdeRespWriteSnapshot("UpdateOpenIDConnectProvider.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

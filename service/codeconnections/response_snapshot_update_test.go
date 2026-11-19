@@ -375,6 +375,7 @@ func TestUpdateResponseSnapshot_GetConnection(t *testing.T) {
 			OwnerAccountId:   ptr.String("__OwnerAccountId__"),
 			ConnectionStatus: types.ConnectionStatus("PENDING"),
 			HostArn:          ptr.String("__HostArn__"),
+			ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 		},
 	}
 	proto := rpcv2.NewCBOR(schemas.CodeConnections_20231201)
@@ -724,6 +725,7 @@ func TestUpdateResponseSnapshot_ListConnections(t *testing.T) {
 				OwnerAccountId:   ptr.String("__OwnerAccountId__"),
 				ConnectionStatus: types.ConnectionStatus("PENDING"),
 				HostArn:          ptr.String("__HostArn__"),
+				ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 			},
 			{
 				ConnectionName:   ptr.String("__ConnectionName__"),
@@ -732,6 +734,7 @@ func TestUpdateResponseSnapshot_ListConnections(t *testing.T) {
 				OwnerAccountId:   ptr.String("__OwnerAccountId__"),
 				ConnectionStatus: types.ConnectionStatus("PENDING"),
 				HostArn:          ptr.String("__HostArn__"),
+				ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1300,7 +1303,7 @@ func TestUpdateResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := rpcv2.NewCBOR(schemas.CodeConnections_20231201)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRepositoryLink, schemas.InvalidInputException, schemas.InvalidInputException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateConnection, schemas.InvalidInputException, schemas.InvalidInputException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1550,7 +1553,7 @@ func TestUpdateResponseSnapshot_Error_UnsupportedProviderTypeException(t *testin
 		Message: ptr.String("__Message__"),
 	}
 	proto := rpcv2.NewCBOR(schemas.CodeConnections_20231201)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteRepositoryLink, schemas.UnsupportedProviderTypeException, schemas.UnsupportedProviderTypeException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateConnection, schemas.UnsupportedProviderTypeException, schemas.UnsupportedProviderTypeException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

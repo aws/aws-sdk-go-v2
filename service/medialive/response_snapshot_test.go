@@ -5121,7 +5121,8 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateChannel.response")
@@ -8739,7 +8740,8 @@ func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -13970,7 +13972,8 @@ func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteChannel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -18251,7 +18254,8 @@ func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeChannel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -20239,7 +20243,8 @@ func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				InferenceSettings: nil,
+				InferenceSettings:        nil,
+				JpegXsInputSpecification: nil,
 			},
 			{},
 		},
@@ -25790,7 +25795,8 @@ func TestCheckResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestartChannelPipelines.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -29436,7 +29442,8 @@ func TestCheckResponseSnapshot_StartChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartChannel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -33495,7 +33502,8 @@ func TestCheckResponseSnapshot_StopChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopChannel.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -37257,7 +37265,8 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateChannel.response")
@@ -40869,8 +40878,9 @@ func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings:     nil,
-		SpecialRouterSettings: nil,
+		InferenceSettings:        nil,
+		SpecialRouterSettings:    nil,
+		JpegXsInputSpecification: nil,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -44496,7 +44506,8 @@ func TestCheckResponseSnapshot_UpdateChannelClass(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateChannelClass.response")

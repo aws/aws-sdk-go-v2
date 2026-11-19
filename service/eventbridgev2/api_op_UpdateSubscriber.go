@@ -12,6 +12,9 @@ import (
 )
 
 // Updates a subscriber. Fields omitted from the request are left unchanged.
+// Changing an Amazon MSK subscriber's connectivity can re-provision it; when it
+// does, the subscriber resumes delivering once its ConnectivityState returns to
+// ACTIVE (see the MskSubscriberActive waiter).
 func (c *Client) UpdateSubscriber(ctx context.Context, params *UpdateSubscriberInput, optFns ...func(*Options)) (*UpdateSubscriberOutput, error) {
 	if params == nil {
 		params = &UpdateSubscriberInput{}
@@ -75,8 +78,7 @@ type UpdateSubscriberInput struct {
 	// healthy". Delivery requires State RUNNING on a subscriber that is not revoked.
 	State types.SubscriberState
 
-	// Not applicable to universal (aws-sdk) targets, whose input transformation is
-	// UniversalTargetParameters.Input; a Transformer on such a target is rejected.
+	// Transformer configuration for a subscriber.
 	Transformer *types.Transformer
 
 	noSmithyDocumentSerde
@@ -165,6 +167,11 @@ type UpdateSubscriberOutput struct {
 	// The Amazon Resource Name (ARN) that uniquely identifies a subscriber.
 	SubscriberArn *string
 
+	// Values EventBridge manages for a subscriber that depend on its target type.
+	// Only the member for the subscriber's target type is set. Returned in responses
+	// only; the customer never supplies these values.
+	SubscriberDetails *types.SubscriberDetails
+
 	// Delivery ordering mode of a subscriber: FIFO delivers events in order within an
 	// event group; UNORDERED delivers without an ordering guarantee.
 	Type types.OrderingType
@@ -205,6 +212,11 @@ func (v *UpdateSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubscriberArn != nil {
 		s.WriteString(schemas.UpdateSubscriberResponse_SubscriberArn, *v.SubscriberArn)
 	}
+	if v.SubscriberDetails != nil {
+		s.WriteStruct(schemas.UpdateSubscriberResponse_SubscriberDetails)
+		v.SubscriberDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateSubscriberResponse_Type, string(v.Type))
 	}
@@ -241,6 +253,9 @@ func (v *UpdateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateSubscriberResponse_SubscriberArn:
 			v.SubscriberArn = new(string)
 			return d.ReadString(schemas.UpdateSubscriberResponse_SubscriberArn, v.SubscriberArn)
+		case schemas.UpdateSubscriberResponse_SubscriberDetails:
+			v.SubscriberDetails = &types.SubscriberDetails{}
+			return v.SubscriberDetails.Deserialize(d)
 		case schemas.UpdateSubscriberResponse_Type:
 			var ev string
 			if err := d.ReadString(schemas.UpdateSubscriberResponse_Type, &ev); err != nil {

@@ -278,6 +278,18 @@ func TestCheckSnapshot_GetPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetUsageLinesEstimatedCost(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUsageLinesEstimatedCost(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetUsageLinesEstimatedCost")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetWorkloadEstimate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetWorkloadEstimate(context.Background(), nil, func(o *Options) {
@@ -702,6 +714,18 @@ func TestUpdateSnapshot_GetPreferences(t *testing.T) {
 	_, err := svc.GetPreferences(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPreferences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetUsageLinesEstimatedCost(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetUsageLinesEstimatedCost(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetUsageLinesEstimatedCost")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

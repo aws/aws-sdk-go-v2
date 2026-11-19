@@ -187,6 +187,26 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 						ParameterValue: ptr.String("__ParameterValue__"),
 					},
 				},
+				JobSubmitPlugins: []types.JobSubmitPlugin{
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+				},
 				AuthKey: &types.SlurmAuthKey{
 					SecretArn:     ptr.String("__SecretArn__"),
 					SecretVersion: ptr.String("__SecretVersion__"),
@@ -596,6 +616,26 @@ func TestUpdateResponseSnapshot_GetCluster(t *testing.T) {
 					{
 						ParameterName:  ptr.String("__ParameterName__"),
 						ParameterValue: ptr.String("__ParameterValue__"),
+					},
+				},
+				JobSubmitPlugins: []types.JobSubmitPlugin{
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
 					},
 				},
 				AuthKey: &types.SlurmAuthKey{
@@ -1251,6 +1291,26 @@ func TestUpdateResponseSnapshot_UpdateCluster(t *testing.T) {
 					{
 						ParameterName:  ptr.String("__ParameterName__"),
 						ParameterValue: ptr.String("__ParameterValue__"),
+					},
+				},
+				JobSubmitPlugins: []types.JobSubmitPlugin{
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
 					},
 				},
 				AuthKey: &types.SlurmAuthKey{

@@ -7,6 +7,58 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
 )
 
+func ExampleContentAlternatives_outputUsage() {
+	var union types.ContentAlternatives
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentAlternativesMemberAdditionalResources:
+		_ = v.Value // Value is []types.AdditionalResourcesAlternative
+
+	case *types.ContentAlternativesMemberCaseStudies:
+		_ = v.Value // Value is []types.CaseStudiesAlternative
+
+	case *types.ContentAlternativesMemberText:
+		_ = v.Value // Value is []types.TextAlternative
+
+	case *types.ContentAlternativesMemberTextList:
+		_ = v.Value // Value is []types.TextListAlternative
+
+	case *types.ContentAlternativesMemberUseCases:
+		_ = v.Value // Value is []types.UseCasesAlternative
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.TextListAlternative
+var _ []types.UseCasesAlternative
+var _ []types.TextAlternative
+var _ []types.AdditionalResourcesAlternative
+var _ []types.CaseStudiesAlternative
+
+func ExampleControlSummary_outputUsage() {
+	var union types.ControlSummary
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ControlSummaryMemberListingRecommendations:
+		_ = v.Value // Value is types.ListingRecommendations
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.ListingRecommendations
+
 func ExampleEntityTypeFilters_outputUsage() {
 	var union types.EntityTypeFilters
 	// type switches can be used to check the union value
@@ -147,6 +199,12 @@ func ExampleFrameworkSummary_outputUsage() {
 	case *types.FrameworkSummaryMemberContainerSecuritySummary:
 		_ = v.Value // Value is types.ContainerSecuritySummary
 
+	case *types.FrameworkSummaryMemberListingQualitySummary:
+		_ = v.Value // Value is types.ListingQualitySummary
+
+	case *types.FrameworkSummaryMemberListingRecommendationsSummary:
+		_ = v.Value // Value is types.ListingRecommendationsSummary
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -157,4 +215,32 @@ func ExampleFrameworkSummary_outputUsage() {
 }
 
 var _ *types.ContainerSecuritySummary
+var _ *types.ListingQualitySummary
 var _ *types.AMISecuritySummary
+var _ *types.ListingRecommendationsSummary
+
+func ExampleListingRecommendations_outputUsage() {
+	var union types.ListingRecommendations
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ListingRecommendationsMemberFeatureRecommendations:
+		_ = v.Value // Value is types.FeatureRecommendations
+
+	case *types.ListingRecommendationsMemberProductContentRecommendations:
+		_ = v.Value // Value is types.ProductContentRecommendations
+
+	case *types.ListingRecommendationsMemberSolutionContentRecommendations:
+		_ = v.Value // Value is types.SolutionContentRecommendations
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SolutionContentRecommendations
+var _ *types.ProductContentRecommendations
+var _ *types.FeatureRecommendations

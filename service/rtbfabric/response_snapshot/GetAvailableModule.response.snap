@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"description":"__Description__","marketplaceProductId":"__MarketplaceProductId__","moduleArn":"__ModuleArn__","moduleId":"__ModuleId__","moduleName":"__ModuleName__","subscriptionStatus":"ACTIVE","subscriptionType":"MARKETPLACE"}

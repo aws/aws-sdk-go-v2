@@ -53,6 +53,7 @@ type ListAssessmentsInput struct {
 
 	// The unique identifier of a framework. When specified, only assessments
 	// performed against this framework are returned. For example, AMISecurity .
+	// Required when you use EntityIds in AssessmentTargetFilter .
 	FrameworkId *string
 
 	// Specifies the upper limit of the elements on a single page. If a value isn't

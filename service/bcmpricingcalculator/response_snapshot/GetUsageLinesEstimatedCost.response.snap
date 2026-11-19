@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.GetUsageLinesEstimatedCost
+
+{"currency":"USD","errors":[{"errorCode":"BAD_REQUEST","errorMessage":"__ErrorMessage__","key":"__Key__","operation":"__Operation__","serviceCode":"__ServiceCode__","usageType":"__UsageType__"},{"errorCode":"BAD_REQUEST","errorMessage":"__ErrorMessage__","key":"__Key__","operation":"__Operation__","serviceCode":"__ServiceCode__","usageType":"__UsageType__"}],"lineItems":[{"estimatedCost":{"cost":1,"currency":"USD","usageAmount":1,"usageUnit":"__UsageUnit__"},"key":"__Key__","operation":"__Operation__","serviceCode":"__ServiceCode__","usageType":"__UsageType__"},{"estimatedCost":{"cost":1,"currency":"USD","usageAmount":1,"usageUnit":"__UsageUnit__"},"key":"__Key__","operation":"__Operation__","serviceCode":"__ServiceCode__","usageType":"__UsageType__"}],"rateType":"BEFORE_DISCOUNTS","totalCost":1}

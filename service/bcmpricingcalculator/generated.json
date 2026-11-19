@@ -26,6 +26,7 @@
         "api_op_GetBillEstimate.go",
         "api_op_GetBillScenario.go",
         "api_op_GetPreferences.go",
+        "api_op_GetUsageLinesEstimatedCost.go",
         "api_op_GetWorkloadEstimate.go",
         "api_op_ListBillEstimateCommitments.go",
         "api_op_ListBillEstimateInputCommitmentModifications.go",

@@ -29,6 +29,7 @@ func (c *Client) GetAwsOpportunitySummary(ctx context.Context, params *GetAwsOpp
 	return out, nil
 }
 
+// Contains the request parameters for the GetAwsOpportunitySummary operation.
 type GetAwsOpportunitySummaryInput struct {
 
 	// Specifies the catalog in which the AWS Opportunity is located. Accepted values
@@ -62,6 +63,7 @@ func (v *GetAwsOpportunitySummaryInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 }
 
+// Contains the response that the GetAwsOpportunitySummary action returns.
 type GetAwsOpportunitySummaryOutput struct {
 
 	// Specifies the catalog in which the AWS Opportunity exists. This is the
@@ -73,6 +75,10 @@ type GetAwsOpportunitySummaryOutput struct {
 	// Engagement classification for this opportunity. Read-only. Null before scoring.
 	// Known values: AWS Field-engaged , Agent-engaged , Partner-led .
 	CosellMotion *string
+
+	// The plain-language reason for the current CosellMotion value. Read-only. Null
+	// when CosellMotion is null.
+	CosellMotionReason *string
 
 	// Provides details about the customer associated with the AWS Opportunity,
 	// including account information, industry, and other customer data. These details
@@ -151,6 +157,9 @@ func (v *GetAwsOpportunitySummaryOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CosellMotion != nil {
 		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_CosellMotion, *v.CosellMotion)
 	}
+	if v.CosellMotionReason != nil {
+		s.WriteString(schemas.GetAwsOpportunitySummaryResponse_CosellMotionReason, *v.CosellMotionReason)
+	}
 	if v.Customer != nil {
 		s.WriteStruct(schemas.GetAwsOpportunitySummaryResponse_Customer)
 		v.Customer.SerializeMembers(s)
@@ -209,6 +218,9 @@ func (v *GetAwsOpportunitySummaryOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.GetAwsOpportunitySummaryResponse_CosellMotion:
 			v.CosellMotion = new(string)
 			return d.ReadString(schemas.GetAwsOpportunitySummaryResponse_CosellMotion, v.CosellMotion)
+		case schemas.GetAwsOpportunitySummaryResponse_CosellMotionReason:
+			v.CosellMotionReason = new(string)
+			return d.ReadString(schemas.GetAwsOpportunitySummaryResponse_CosellMotionReason, v.CosellMotionReason)
 		case schemas.GetAwsOpportunitySummaryResponse_Customer:
 			v.Customer = &types.AwsOpportunityCustomer{}
 			return v.Customer.Deserialize(d)

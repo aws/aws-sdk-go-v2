@@ -103,6 +103,16 @@ func serializeFirewallDomains(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeFirewallRuleDomains(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FirewallRuleDomain) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFirewallRuleGroupAssociations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FirewallRuleGroupAssociation) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -517,6 +527,28 @@ func deserializeFirewallDomains(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFirewallRuleDomains(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FirewallRuleDomain) error {
+	*v = make([]types.FirewallRuleDomain, 0)
+	var vv types.FirewallRuleDomain
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.FirewallRuleDomain
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.FirewallRuleDomain{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

@@ -25,6 +25,7 @@ func (c *Client) StopResourceSnapshotJob(ctx context.Context, params *StopResour
 	return out, nil
 }
 
+// Contains the request parameters for the StopResourceSnapshotJob operation.
 type StopResourceSnapshotJobInput struct {
 
 	// Specifies the catalog related to the request. Valid values are:

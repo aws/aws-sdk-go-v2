@@ -768,6 +768,21 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateTipConfiguration(v *types.TipConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TipConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateProfileInput(v *CreateProfileInput) error {
 	if v == nil {
 		return nil
@@ -782,6 +797,11 @@ func validateOpCreateProfileInput(v *CreateProfileInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TipConfiguration != nil {
+		if err := validateTipConfiguration(v.TipConfiguration); err != nil {
+			invalidParams.AddNested("TipConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1204,6 +1224,11 @@ func validateOpUpdateProfileInput(v *UpdateProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProfileInput"}
 	if v.ProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.TipConfiguration != nil {
+		if err := validateTipConfiguration(v.TipConfiguration); err != nil {
+			invalidParams.AddNested("TipConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

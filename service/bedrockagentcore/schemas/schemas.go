@@ -890,6 +890,35 @@ var AvailableLimits_availableSpendAmount *smithy.Schema
 
 var AvailableLimits_updatedAt *smithy.Schema
 
+var AwsBillingPaymentOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AwsBillingPaymentOptions",
+}, smithy.ShapeTypeStructure, 1)
+var AwsBillingPaymentOptions_dpopJwk *smithy.Schema
+
+var _AwsBillingPaymentToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AwsBillingPaymentToken",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var AwsBillingX402PaymentInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AwsBillingX402PaymentInput",
+}, smithy.ShapeTypeStructure, 3)
+var AwsBillingX402PaymentInput_version *smithy.Schema
+
+var AwsBillingX402PaymentInput_payload *smithy.Schema
+
+var AwsBillingX402PaymentInput_options *smithy.Schema
+
+var AwsBillingX402PaymentOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "AwsBillingX402PaymentOutput",
+}, smithy.ShapeTypeStructure, 2)
+var AwsBillingX402PaymentOutput_version *smithy.Schema
+
+var AwsBillingX402PaymentOutput_paymentToken *smithy.Schema
+
 var BasicAuth = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "BasicAuth",
@@ -1835,6 +1864,18 @@ var _DomainPatterns = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DomainPatterns",
 }, smithy.ShapeTypeList, 1)
 var _DomainPatterns_member *smithy.Schema
+
+var DpopJwk = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "DpopJwk",
+}, smithy.ShapeTypeStructure, 4)
+var DpopJwk_kty *smithy.Schema
+
+var DpopJwk_crv *smithy.Schema
+
+var DpopJwk_x *smithy.Schema
+
+var DpopJwk_y *smithy.Schema
 
 var DuplicateIdException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -3667,6 +3708,22 @@ var InvokeHarnessStreamOutput_runtimeClientError *smithy.Schema
 
 var InvokeHarnessStreamOutput_hookEvent *smithy.Schema
 
+var JwkEllipticCurve = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "JwkEllipticCurve",
+}, smithy.ShapeTypeEnum, 3)
+var JwkEllipticCurve_P256 *smithy.Schema
+
+var JwkEllipticCurve_P384 *smithy.Schema
+
+var JwkEllipticCurve_P521 *smithy.Schema
+
+var JwkKeyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "JwkKeyType",
+}, smithy.ShapeTypeEnum, 1)
+var JwkKeyType_EC *smithy.Schema
+
 var _JwtKeyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "JwtKeyId",
@@ -4512,10 +4569,12 @@ var PaymentHttpMethodType_PATCH *smithy.Schema
 var PaymentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "PaymentInput",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var PaymentInput_cryptoX402 *smithy.Schema
 
 var PaymentInput_mpp *smithy.Schema
+
+var PaymentInput_awsBillingX402 *smithy.Schema
 
 var PaymentInstrument = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -4604,10 +4663,12 @@ var _PaymentManagerArn = smithy.NewSchema(smithy.ShapeID{
 var PaymentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "PaymentOutput",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var PaymentOutput_cryptoX402 *smithy.Schema
 
 var PaymentOutput_mpp *smithy.Schema
+
+var PaymentOutput_awsBillingX402 *smithy.Schema
 
 var _PaymentRequestHostType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -4701,10 +4762,12 @@ var PaymentTokenResponseOutput_stripePrivyTokenResponse *smithy.Schema
 var PaymentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "PaymentType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var PaymentType_CRYPTO_X402 *smithy.Schema
 
 var PaymentType_MPP *smithy.Schema
+
+var PaymentType_AWS_BILLING_X402 *smithy.Schema
 
 var _Permit2AllowanceLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -8699,6 +8762,34 @@ func init() {
 
 	AvailableLimits_updatedAt = AvailableLimits.AddMember("updatedAt", _DateTimestamp)
 
+	JwkKeyType_EC = JwkKeyType.AddMember("EC", smithyprelude.Unit)
+
+	JwkEllipticCurve_P256 = JwkEllipticCurve.AddMember("P256", smithyprelude.Unit)
+
+	JwkEllipticCurve_P384 = JwkEllipticCurve.AddMember("P384", smithyprelude.Unit)
+
+	JwkEllipticCurve_P521 = JwkEllipticCurve.AddMember("P521", smithyprelude.Unit)
+
+	DpopJwk_kty = DpopJwk.AddMember("kty", JwkKeyType)
+
+	DpopJwk_crv = DpopJwk.AddMember("crv", JwkEllipticCurve)
+
+	DpopJwk_x = DpopJwk.AddMember("x", smithyprelude.String)
+
+	DpopJwk_y = DpopJwk.AddMember("y", smithyprelude.String)
+
+	AwsBillingPaymentOptions_dpopJwk = AwsBillingPaymentOptions.AddMember("dpopJwk", DpopJwk)
+
+	AwsBillingX402PaymentInput_version = AwsBillingX402PaymentInput.AddMember("version", _Version)
+
+	AwsBillingX402PaymentInput_payload = AwsBillingX402PaymentInput.AddMember("payload", _PaymentDocument)
+
+	AwsBillingX402PaymentInput_options = AwsBillingX402PaymentInput.AddMember("options", AwsBillingPaymentOptions)
+
+	AwsBillingX402PaymentOutput_version = AwsBillingX402PaymentOutput.AddMember("version", _Version)
+
+	AwsBillingX402PaymentOutput_paymentToken = AwsBillingX402PaymentOutput.AddMember("paymentToken", _AwsBillingPaymentToken)
+
 	BasicAuth_secretArn = BasicAuth.AddMember("secretArn", _SecretArn)
 
 	BatchEvaluationSourceConfig_batchEvaluationArn = BatchEvaluationSourceConfig.AddMember("batchEvaluationArn", _BatchEvaluationArn)
@@ -10729,6 +10820,8 @@ func init() {
 
 	PaymentInput_mpp = PaymentInput.AddMember("mpp", MppPaymentInput)
 
+	PaymentInput_awsBillingX402 = PaymentInput.AddMember("awsBillingX402", AwsBillingX402PaymentInput)
+
 	PaymentInstrumentType_EMBEDDED_CRYPTO_WALLET = PaymentInstrumentType.AddMember("EMBEDDED_CRYPTO_WALLET", smithyprelude.Unit)
 
 	PaymentInstrumentDetails_embeddedCryptoWallet = PaymentInstrumentDetails.AddMember("embeddedCryptoWallet", EmbeddedCryptoWallet)
@@ -10782,6 +10875,8 @@ func init() {
 	PaymentOutput_cryptoX402 = PaymentOutput.AddMember("cryptoX402", CryptoX402PaymentOutput)
 
 	PaymentOutput_mpp = PaymentOutput.AddMember("mpp", MppPaymentOutput)
+
+	PaymentOutput_awsBillingX402 = PaymentOutput.AddMember("awsBillingX402", AwsBillingX402PaymentOutput)
 
 	SessionLimits_maxSpendAmount = SessionLimits.AddMember("maxSpendAmount", Amount)
 
@@ -10850,6 +10945,8 @@ func init() {
 	PaymentType_CRYPTO_X402 = PaymentType.AddMember("CRYPTO_X402", smithyprelude.Unit)
 
 	PaymentType_MPP = PaymentType.AddMember("MPP", smithyprelude.Unit)
+
+	PaymentType_AWS_BILLING_X402 = PaymentType.AddMember("AWS_BILLING_X402", smithyprelude.Unit)
 
 	ProgrammingLanguage_PYTHON = ProgrammingLanguage.AddMember("PYTHON", smithyprelude.Unit)
 

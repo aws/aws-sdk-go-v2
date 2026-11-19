@@ -1023,6 +1023,9 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
 						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
+						},
 					},
 				},
 				VpcConfiguration: &types.VpcConfiguration{
@@ -6052,6 +6055,9 @@ func TestCheckResponseSnapshot_GetCapacityProvider(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},
@@ -15799,6 +15805,9 @@ func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},

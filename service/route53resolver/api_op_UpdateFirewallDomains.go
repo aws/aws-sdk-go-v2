@@ -11,6 +11,22 @@ import (
 )
 
 // Updates the firewall domain list from an array of domain specifications.
+//
+// For an AutoAllowlist rule's managed domain list, use ADD to approve observed
+// domains, REMOVE to stop allowing domains, unless a wildcard entry that's still
+// on the list matches them, and DENY to dismiss observed domains. REPLACE and ImportFirewallDomains
+// aren't supported for these lists.
+//
+// DNS Firewall throttles UpdateFirewallDomains requests based on both the request
+// rate and the total number of domains across your requests.
+//
+// # Best Practice for Updating Domain Lists
+//
+// If you only need to modify a subset of domains, use the ADD or REMOVE
+// operations instead of REPLACE . With REPLACE , you send the complete list you
+// want to end up with, and throttling counts every domain in that request,
+// including domains that aren't changing, which can use up your available
+// throttling capacity.
 func (c *Client) UpdateFirewallDomains(ctx context.Context, params *UpdateFirewallDomainsInput, optFns ...func(*Options)) (*UpdateFirewallDomainsOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallDomainsInput{}
@@ -52,13 +68,22 @@ type UpdateFirewallDomainsInput struct {
 
 	// What you want DNS Firewall to do with the domains that you are providing:
 	//
-	//   - ADD - Add the domains to the ones that are already in the domain list.
+	//   - ADD - Add the domains to the ones that are already in the domain list. For
+	//   an AutoAllowlist rule's managed domain list, this also marks the observed
+	//   domains as allowed.
 	//
 	//   - REMOVE - Search the domain list for the domains and remove them from the
-	//   list.
+	//   list. For an AutoAllowlist rule's managed domain list, the rule no longer allows
+	//   the removed domains, unless a wildcard entry that's still on the list matches
+	//   them.
 	//
 	//   - REPLACE - Update the domain list to exactly match the list that you are
-	//   providing.
+	//   providing. Not supported for an AutoAllowlist rule's managed domain list.
+	//
+	//   - DENY - For an AutoAllowlist rule's managed domain list only, mark the
+	//   specified observed domains as denied so that they're no longer listed for
+	//   review. If a domain is on the managed domain list, DENY also removes it from
+	//   the list. Specify fully qualified domain names. Wildcards aren't accepted.
 	//
 	// This member is required.
 	Operation types.FirewallDomainUpdateOperation

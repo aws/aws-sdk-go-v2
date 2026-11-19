@@ -45,7 +45,9 @@ import (
 // For functions with a long timeout, your client might disconnect during
 // synchronous invocation while it waits for a response. Configure your HTTP
 // client, SDK, firewall, proxy, or operating system to allow for long connections
-// with timeout or keep-alive settings.
+// with timeout or keep-alive settings. Synchronous invocations can run for up to
+// 30 minutes. Set the read timeout of your client higher than the function
+// timeout, and turn on TCP keep-alive.
 //
 // This operation requires permission for the [lambda:InvokeFunction] action. For details on how to set
 // up permissions for cross-account invocations, see [Granting function access to other accounts].
@@ -96,6 +98,8 @@ type InvokeInput struct {
 	// Up to 3,583 bytes of base64-encoded data about the invoking client to pass to
 	// the function in the context object. Lambda passes the ClientContext object to
 	// your function for synchronous invocations only.
+	//
+	// ClientContext is logged to CloudTrail if you turn on data events.
 	ClientContext *string
 
 	// A unique name for the durable execution. If you invoke a durable function using

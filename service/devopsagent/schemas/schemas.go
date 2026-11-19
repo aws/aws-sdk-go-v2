@@ -477,6 +477,12 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
+var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "AccountIdList",
+}, smithy.ShapeTypeList, 1)
+var _AccountIdList_member *smithy.Schema
+
 var AdditionalServiceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "AdditionalServiceDetails",
@@ -520,7 +526,7 @@ var AdditionalServiceRegistrationStep_oauth *smithy.Schema
 var AgentSpace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "AgentSpace",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var AgentSpace_name *smithy.Schema
 
 var AgentSpace_description *smithy.Schema
@@ -536,6 +542,8 @@ var AgentSpace_kmsKeyArn *smithy.Schema
 var AgentSpace_agentSpaceId *smithy.Schema
 
 var AgentSpace_preferences *smithy.Schema
+
+var AgentSpace_awsSourceMode *smithy.Schema
 
 var _AgentSpaceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -876,10 +884,15 @@ var AuthFlow_IDC *smithy.Schema
 
 var AuthFlow_IDP *smithy.Schema
 
+var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "AwsAccountId",
+}, smithy.ShapeTypeString, 0)
+
 var AWSConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "AWSConfiguration",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var AWSConfiguration_assumableRoleArn *smithy.Schema
 
 var AWSConfiguration_accountId *smithy.Schema
@@ -889,6 +902,16 @@ var AWSConfiguration_accountType *smithy.Schema
 var AWSConfiguration_agentElevatedRoleArn *smithy.Schema
 
 var AWSConfiguration_agentElevatedRoleArnStatus *smithy.Schema
+
+var AWSConfiguration_serviceManagementRoleArn *smithy.Schema
+
+var AwsSourceMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "AwsSourceMode",
+}, smithy.ShapeTypeEnum, 2)
+var AwsSourceMode_STANDALONE *smithy.Schema
+
+var AwsSourceMode_ORGANIZATION *smithy.Schema
 
 var AzureConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -1938,6 +1961,62 @@ var OrderType_ASC *smithy.Schema
 
 var OrderType_DESC *smithy.Schema
 
+var OrgSourceAccountReasonCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "OrgSourceAccountReasonCode",
+}, smithy.ShapeTypeEnum, 7)
+var OrgSourceAccountReasonCode_ACCOUNT_SUSPENDED *smithy.Schema
+
+var OrgSourceAccountReasonCode_ACCOUNT_NOT_IN_SCOPE *smithy.Schema
+
+var OrgSourceAccountReasonCode_MANAGEMENT_ACCOUNT_NOT_SUPPORTED *smithy.Schema
+
+var OrgSourceAccountReasonCode_STACK_INSTANCE_INOPERABLE *smithy.Schema
+
+var OrgSourceAccountReasonCode_ACCESS_DENIED *smithy.Schema
+
+var OrgSourceAccountReasonCode_DEPLOYMENT_FAILED *smithy.Schema
+
+var OrgSourceAccountReasonCode_SECONDARY_ACCOUNT_LIMIT_EXCEEDED *smithy.Schema
+
+var OrgSourceDeploymentState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "OrgSourceDeploymentState",
+}, smithy.ShapeTypeStructure, 3)
+var OrgSourceDeploymentState_deployedAccountCount *smithy.Schema
+
+var OrgSourceDeploymentState_issues *smithy.Schema
+
+var OrgSourceDeploymentState_lastEvaluatedAt *smithy.Schema
+
+var OrgSourceIssue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "OrgSourceIssue",
+}, smithy.ShapeTypeStructure, 4)
+var OrgSourceIssue_reasonCode *smithy.Schema
+
+var OrgSourceIssue_accountCount *smithy.Schema
+
+var OrgSourceIssue_accountIds *smithy.Schema
+
+var OrgSourceIssue_message *smithy.Schema
+
+var _OrgSourceIssueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "OrgSourceIssueList",
+}, smithy.ShapeTypeList, 1)
+var _OrgSourceIssueList_member *smithy.Schema
+
+var _OrgSourceIssueMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "OrgSourceIssueMessage",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _OrgUnitId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "OrgUnitId",
+}, smithy.ShapeTypeString, 0)
+
 var PagerDutyAuthorizationConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "PagerDutyAuthorizationConfig",
@@ -2827,8 +2906,10 @@ var Service_REMOTE_AGENT_SIGV4 *smithy.Schema
 var ServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "ServiceConfiguration",
-}, smithy.ShapeTypeUnion, 21)
+}, smithy.ShapeTypeUnion, 22)
 var ServiceConfiguration_sourceAws *smithy.Schema
+
+var ServiceConfiguration_sourceAwsOrg *smithy.Schema
 
 var ServiceConfiguration_aws *smithy.Schema
 
@@ -3053,6 +3134,24 @@ var SourceAwsConfiguration_externalId *smithy.Schema
 var SourceAwsConfiguration_agentElevatedRoleArn *smithy.Schema
 
 var SourceAwsConfiguration_agentElevatedRoleArnStatus *smithy.Schema
+
+var SourceAwsOrgConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "SourceAwsOrgConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var SourceAwsOrgConfiguration_accountType *smithy.Schema
+
+var SourceAwsOrgConfiguration_organizationalUnit *smithy.Schema
+
+var SourceAwsOrgConfiguration_deploymentState *smithy.Schema
+
+var SourceAwsOrgUnit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devopsagent",
+	Name:      "SourceAwsOrgUnit",
+}, smithy.ShapeTypeStructure, 2)
+var SourceAwsOrgUnit_organizationalUnitId *smithy.Schema
+
+var SourceAwsOrgUnit_accountIds *smithy.Schema
 
 var _SubnetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -3489,7 +3588,7 @@ var AssociateServiceOutput_webhook *smithy.Schema
 var CreateAgentSpaceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "CreateAgentSpaceInput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateAgentSpaceInput_name *smithy.Schema
 
 var CreateAgentSpaceInput_description *smithy.Schema
@@ -3503,6 +3602,8 @@ var CreateAgentSpaceInput_clientToken *smithy.Schema
 var CreateAgentSpaceInput_tags *smithy.Schema
 
 var CreateAgentSpaceInput_preferences *smithy.Schema
+
+var CreateAgentSpaceInput_awsSourceMode *smithy.Schema
 
 var CreateAgentSpaceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -4459,7 +4560,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateAgentSpaceInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
 	Name:      "UpdateAgentSpaceInput",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateAgentSpaceInput_agentSpaceId *smithy.Schema
 
 var UpdateAgentSpaceInput_name *smithy.Schema
@@ -4469,6 +4570,8 @@ var UpdateAgentSpaceInput_description *smithy.Schema
 var UpdateAgentSpaceInput_locale *smithy.Schema
 
 var UpdateAgentSpaceInput_preferences *smithy.Schema
+
+var UpdateAgentSpaceInput_awsSourceMode *smithy.Schema
 
 var UpdateAgentSpaceOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devopsagent",
@@ -4730,6 +4833,8 @@ var ValidateAwsAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
 func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
 
+	_AccountIdList_member = _AccountIdList.AddMember("member", _AwsAccountId)
+
 	GithubRepoOwnerType_ORGANIZATION = GithubRepoOwnerType.AddMember("ORGANIZATION", smithyprelude.Unit)
 
 	GithubRepoOwnerType_USER = GithubRepoOwnerType.AddMember("USER", smithyprelude.Unit)
@@ -4900,6 +5005,10 @@ func init() {
 
 	_AgentSpacePreferences_value = _AgentSpacePreferences.AddMember("value", smithyprelude.Boolean)
 
+	AwsSourceMode_STANDALONE = AwsSourceMode.AddMember("STANDALONE", smithyprelude.Unit)
+
+	AwsSourceMode_ORGANIZATION = AwsSourceMode.AddMember("ORGANIZATION", smithyprelude.Unit)
+
 	AgentSpace_name = AgentSpace.AddMember("name", _AgentSpaceName)
 
 	AgentSpace_description = AgentSpace.AddMember("description", _Description)
@@ -4915,6 +5024,8 @@ func init() {
 	AgentSpace_agentSpaceId = AgentSpace.AddMember("agentSpaceId", _AgentSpaceId)
 
 	AgentSpace_preferences = AgentSpace.AddMember("preferences", _AgentSpacePreferences)
+
+	AgentSpace_awsSourceMode = AgentSpace.AddMember("awsSourceMode", AwsSourceMode)
 
 	_AgentSpaceList_member = _AgentSpaceList.AddMember("member", AgentSpace)
 
@@ -5050,6 +5161,46 @@ func init() {
 
 	SourceAwsConfiguration_agentElevatedRoleArnStatus = SourceAwsConfiguration.AddMember("agentElevatedRoleArnStatus", ValidationStatus)
 
+	SourceAwsOrgUnit_organizationalUnitId = SourceAwsOrgUnit.AddMember("organizationalUnitId", _OrgUnitId)
+
+	SourceAwsOrgUnit_accountIds = SourceAwsOrgUnit.AddMember("accountIds", _AccountIdList)
+
+	OrgSourceAccountReasonCode_ACCOUNT_SUSPENDED = OrgSourceAccountReasonCode.AddMember("ACCOUNT_SUSPENDED", smithyprelude.Unit)
+
+	OrgSourceAccountReasonCode_ACCOUNT_NOT_IN_SCOPE = OrgSourceAccountReasonCode.AddMember("ACCOUNT_NOT_IN_SCOPE", smithyprelude.Unit)
+
+	OrgSourceAccountReasonCode_MANAGEMENT_ACCOUNT_NOT_SUPPORTED = OrgSourceAccountReasonCode.AddMember("MANAGEMENT_ACCOUNT_NOT_SUPPORTED", smithyprelude.Unit)
+
+	OrgSourceAccountReasonCode_STACK_INSTANCE_INOPERABLE = OrgSourceAccountReasonCode.AddMember("STACK_INSTANCE_INOPERABLE", smithyprelude.Unit)
+
+	OrgSourceAccountReasonCode_ACCESS_DENIED = OrgSourceAccountReasonCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	OrgSourceAccountReasonCode_DEPLOYMENT_FAILED = OrgSourceAccountReasonCode.AddMember("DEPLOYMENT_FAILED", smithyprelude.Unit)
+
+	OrgSourceAccountReasonCode_SECONDARY_ACCOUNT_LIMIT_EXCEEDED = OrgSourceAccountReasonCode.AddMember("SECONDARY_ACCOUNT_LIMIT_EXCEEDED", smithyprelude.Unit)
+
+	OrgSourceIssue_reasonCode = OrgSourceIssue.AddMember("reasonCode", OrgSourceAccountReasonCode)
+
+	OrgSourceIssue_accountCount = OrgSourceIssue.AddMember("accountCount", smithyprelude.Integer)
+
+	OrgSourceIssue_accountIds = OrgSourceIssue.AddMember("accountIds", _AccountIdList)
+
+	OrgSourceIssue_message = OrgSourceIssue.AddMember("message", _OrgSourceIssueMessage)
+
+	_OrgSourceIssueList_member = _OrgSourceIssueList.AddMember("member", OrgSourceIssue)
+
+	OrgSourceDeploymentState_deployedAccountCount = OrgSourceDeploymentState.AddMember("deployedAccountCount", smithyprelude.Integer)
+
+	OrgSourceDeploymentState_issues = OrgSourceDeploymentState.AddMember("issues", _OrgSourceIssueList)
+
+	OrgSourceDeploymentState_lastEvaluatedAt = OrgSourceDeploymentState.AddMember("lastEvaluatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	SourceAwsOrgConfiguration_accountType = SourceAwsOrgConfiguration.AddMember("accountType", SourceAccountType)
+
+	SourceAwsOrgConfiguration_organizationalUnit = SourceAwsOrgConfiguration.AddMember("organizationalUnit", SourceAwsOrgUnit)
+
+	SourceAwsOrgConfiguration_deploymentState = SourceAwsOrgConfiguration.AddMember("deploymentState", OrgSourceDeploymentState)
+
 	MonitorAccountType_MONITOR = MonitorAccountType.AddMember("MONITOR", smithyprelude.Unit)
 
 	AWSConfiguration_assumableRoleArn = AWSConfiguration.AddMember("assumableRoleArn", _RoleArn)
@@ -5061,6 +5212,8 @@ func init() {
 	AWSConfiguration_agentElevatedRoleArn = AWSConfiguration.AddMember("agentElevatedRoleArn", _RoleArn)
 
 	AWSConfiguration_agentElevatedRoleArnStatus = AWSConfiguration.AddMember("agentElevatedRoleArnStatus", ValidationStatus)
+
+	AWSConfiguration_serviceManagementRoleArn = AWSConfiguration.AddMember("serviceManagementRoleArn", _RoleArn)
 
 	GitHubConfiguration_repoName = GitHubConfiguration.AddMember("repoName", smithyprelude.String)
 
@@ -5199,6 +5352,8 @@ func init() {
 	ReleaseManagementConfiguration_networkAccess = ReleaseManagementConfiguration.AddMember("networkAccess", NetworkAccessConfiguration)
 
 	ServiceConfiguration_sourceAws = ServiceConfiguration.AddMember("sourceAws", SourceAwsConfiguration)
+
+	ServiceConfiguration_sourceAwsOrg = ServiceConfiguration.AddMember("sourceAwsOrg", SourceAwsOrgConfiguration)
 
 	ServiceConfiguration_aws = ServiceConfiguration.AddMember("aws", AWSConfiguration)
 
@@ -6330,6 +6485,8 @@ func init() {
 
 	CreateAgentSpaceInput_preferences = CreateAgentSpaceInput.AddMember("preferences", _AgentSpacePreferences)
 
+	CreateAgentSpaceInput_awsSourceMode = CreateAgentSpaceInput.AddMember("awsSourceMode", AwsSourceMode)
+
 	CreateAgentSpaceOutput_agentSpace = CreateAgentSpaceOutput.AddMember("agentSpace", AgentSpace)
 
 	CreateAgentSpaceOutput_tags = CreateAgentSpaceOutput.AddMember("tags", _Tags)
@@ -6881,6 +7038,8 @@ func init() {
 	UpdateAgentSpaceInput_locale = UpdateAgentSpaceInput.AddMember("locale", _Locale)
 
 	UpdateAgentSpaceInput_preferences = UpdateAgentSpaceInput.AddMember("preferences", _AgentSpacePreferences)
+
+	UpdateAgentSpaceInput_awsSourceMode = UpdateAgentSpaceInput.AddMember("awsSourceMode", AwsSourceMode)
 
 	UpdateAgentSpaceOutput_agentSpace = UpdateAgentSpaceOutput.AddMember("agentSpace", AgentSpace)
 

@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateHealthCheck(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateHostedZone(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHostedZone(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_DeleteHealthCheck(t *testing.T) {
 	_, err := svc.DeleteHealthCheck(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteHealthCheckSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -518,6 +542,18 @@ func TestCheckSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetHealthCheckStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetHealthCheckStatus(context.Background(), nil, func(o *Options) {
@@ -691,6 +727,30 @@ func TestCheckSnapshot_ListHealthChecks(t *testing.T) {
 	_, err := svc.ListHealthChecks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListHealthChecks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHealthChecksBySource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthChecksBySource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHealthChecksBySource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHealthCheckSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthCheckSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHealthCheckSources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1033,6 +1093,18 @@ func TestUpdateSnapshot_CreateHealthCheck(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateHostedZone(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHostedZone(context.Background(), nil, func(o *Options) {
@@ -1170,6 +1242,18 @@ func TestUpdateSnapshot_DeleteHealthCheck(t *testing.T) {
 	_, err := svc.DeleteHealthCheck(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteHealthCheckSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1405,6 +1489,18 @@ func TestUpdateSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetHealthCheckStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetHealthCheckStatus(context.Background(), nil, func(o *Options) {
@@ -1578,6 +1674,30 @@ func TestUpdateSnapshot_ListHealthChecks(t *testing.T) {
 	_, err := svc.ListHealthChecks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListHealthChecks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHealthChecksBySource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthChecksBySource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHealthChecksBySource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHealthCheckSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthCheckSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHealthCheckSources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

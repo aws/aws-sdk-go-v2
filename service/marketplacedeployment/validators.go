@@ -10,6 +10,66 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpGetDeploymentConfiguration struct {
+}
+
+func (*validateOpGetDeploymentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeploymentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeploymentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeploymentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDeploymentConfigurationJob struct {
+}
+
+func (*validateOpGetDeploymentConfigurationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeploymentConfigurationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeploymentConfigurationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeploymentConfigurationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDeploymentConfigurationJobs struct {
+}
+
+func (*validateOpListDeploymentConfigurationJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDeploymentConfigurationJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDeploymentConfigurationJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDeploymentConfigurationJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -45,6 +105,26 @@ func (m *validateOpPutDeploymentParameter) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutDeploymentParameterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDeploymentConfigurationJob struct {
+}
+
+func (*validateOpStartDeploymentConfigurationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDeploymentConfigurationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDeploymentConfigurationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDeploymentConfigurationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -90,6 +170,18 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpGetDeploymentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeploymentConfiguration{}, middleware.After)
+}
+
+func addOpGetDeploymentConfigurationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeploymentConfigurationJob{}, middleware.After)
+}
+
+func addOpListDeploymentConfigurationJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDeploymentConfigurationJobs{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -98,12 +190,50 @@ func addOpPutDeploymentParameterValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpPutDeploymentParameter{}, middleware.After)
 }
 
+func addOpStartDeploymentConfigurationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDeploymentConfigurationJob{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateDataAsAServiceConfigurationDetail(v *types.DataAsAServiceConfigurationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataAsAServiceConfigurationDetail"}
+	if v.FulfillmentUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FulfillmentUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeploymentConfigurationDetail(v types.DeploymentConfigurationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentConfigurationDetail"}
+	switch uv := v.(type) {
+	case *types.DeploymentConfigurationDetailMemberDataAsAService:
+		if err := validateDataAsAServiceConfigurationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[dataAsAService]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDeploymentParameterInput(v *types.DeploymentParameterInput) error {
@@ -116,6 +246,72 @@ func validateDeploymentParameterInput(v *types.DeploymentParameterInput) error {
 	}
 	if v.SecretString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDeploymentConfigurationInput(v *GetDeploymentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentConfigurationInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if len(v.DeliveryOptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryOptionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDeploymentConfigurationJobInput(v *GetDeploymentConfigurationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentConfigurationJobInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if len(v.DeliveryOptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryOptionType"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDeploymentConfigurationJobsInput(v *ListDeploymentConfigurationJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDeploymentConfigurationJobsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if len(v.DeliveryOptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryOptionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -158,6 +354,34 @@ func validateOpPutDeploymentParameterInput(v *PutDeploymentParameterInput) error
 	} else if v.DeploymentParameter != nil {
 		if err := validateDeploymentParameterInput(v.DeploymentParameter); err != nil {
 			invalidParams.AddNested("DeploymentParameter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDeploymentConfigurationJobInput(v *StartDeploymentConfigurationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDeploymentConfigurationJobInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if len(v.DeliveryOptionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryOptionType"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateDeploymentConfigurationDetail(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

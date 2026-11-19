@@ -437,6 +437,37 @@ func (e *HealthCheckInUse) ErrorCode() string {
 }
 func (e *HealthCheckInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The health check source that you're attempting to create already exists. Route
+// 53 returns this error when you submit a request that has the same value for
+// CallerReference as an existing health check source and one or more values that
+// differ from the existing health check source. To create another health check
+// source, specify a new value for CallerReference . To find the existing health
+// check source, call ListHealthCheckSources .
+type HealthCheckSourceAlreadyExists struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *HealthCheckSourceAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *HealthCheckSourceAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *HealthCheckSourceAlreadyExists) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "HealthCheckSourceAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *HealthCheckSourceAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The value of HealthCheckVersion in the request doesn't match the value of
 // HealthCheckVersion in the health check.
 type HealthCheckVersionMismatch struct {
@@ -1353,6 +1384,33 @@ func (e *NoSuchHealthCheck) ErrorCode() string {
 }
 func (e *NoSuchHealthCheck) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No health check source exists with the specified ID. Verify that the ID is
+// correct and that the health check source hasn't been deleted.
+type NoSuchHealthCheckSource struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoSuchHealthCheckSource) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchHealthCheckSource) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchHealthCheckSource) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NoSuchHealthCheckSource"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NoSuchHealthCheckSource) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // No hosted zone exists with the ID that you specified.
 type NoSuchHostedZone struct {
 	Message *string
@@ -1650,7 +1708,9 @@ func (e *ThrottlingException) ErrorCode() string {
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This health check can't be created because the current account has reached the
-// limit on the number of active health checks.
+// limit on the number of active health checks, or because the health check source
+// for a private health check has reached its limit on active health checks. In the
+// second case, specify a different health check source.
 //
 // For information about default limits, see [Limits] in the Amazon Route 53 Developer
 // Guide.
@@ -1689,6 +1749,45 @@ func (e *TooManyHealthChecks) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You can't create this health check source because the current account has
+// reached its maximum number of health check sources. The maximum includes every
+// health check source that hasn't reached DELETE_COMPLETED status, including a
+// health check source with a status of CREATE_FAILED .
+//
+// For information about default limits, see [Limits] in the Amazon Route 53 Developer
+// Guide.
+//
+// For information about how to get the current limit for an account, see [GetAccountLimit]. To
+// request a higher limit, [create a case]with the Amazon Web Services Support Center.
+//
+// [Limits]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
+// [GetAccountLimit]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html
+// [create a case]: http://aws.amazon.com/route53-request
+type TooManyHealthCheckSources struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyHealthCheckSources) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyHealthCheckSources) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyHealthCheckSources) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TooManyHealthCheckSources"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TooManyHealthCheckSources) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This operation can't be completed either because the current account has
 // reached the limit on the number of hosted zones or because you've reached the

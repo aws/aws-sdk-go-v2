@@ -222,7 +222,7 @@ var _ClusterName = smithy.NewSchema(smithy.ShapeID{
 var ClusterSlurmConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "ClusterSlurmConfiguration",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ClusterSlurmConfiguration_scaleDownIdleTimeInSeconds *smithy.Schema
 
 var ClusterSlurmConfiguration_slurmCustomSettings *smithy.Schema
@@ -230,6 +230,8 @@ var ClusterSlurmConfiguration_slurmCustomSettings *smithy.Schema
 var ClusterSlurmConfiguration_slurmdbdCustomSettings *smithy.Schema
 
 var ClusterSlurmConfiguration_cgroupCustomSettings *smithy.Schema
+
+var ClusterSlurmConfiguration_jobSubmitPlugins *smithy.Schema
 
 var ClusterSlurmConfiguration_authKey *smithy.Schema
 
@@ -242,7 +244,7 @@ var ClusterSlurmConfiguration_slurmRest *smithy.Schema
 var ClusterSlurmConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "ClusterSlurmConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds *smithy.Schema
 
 var ClusterSlurmConfigurationRequest_slurmCustomSettings *smithy.Schema
@@ -250,6 +252,8 @@ var ClusterSlurmConfigurationRequest_slurmCustomSettings *smithy.Schema
 var ClusterSlurmConfigurationRequest_slurmdbdCustomSettings *smithy.Schema
 
 var ClusterSlurmConfigurationRequest_cgroupCustomSettings *smithy.Schema
+
+var ClusterSlurmConfigurationRequest_jobSubmitPlugins *smithy.Schema
 
 var ClusterSlurmConfigurationRequest_accounting *smithy.Schema
 
@@ -541,6 +545,38 @@ var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
 	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
+
+var JobSubmitPlugin = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "JobSubmitPlugin",
+}, smithy.ShapeTypeStructure, 3)
+var JobSubmitPlugin_name *smithy.Schema
+
+var JobSubmitPlugin_type *smithy.Schema
+
+var JobSubmitPlugin_scriptSource *smithy.Schema
+
+var _JobSubmitPluginList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "JobSubmitPluginList",
+}, smithy.ShapeTypeList, 1)
+var _JobSubmitPluginList_member *smithy.Schema
+
+var JobSubmitPluginType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "JobSubmitPluginType",
+}, smithy.ShapeTypeEnum, 1)
+var JobSubmitPluginType_STARLARK *smithy.Schema
+
+var JobSubmitScriptSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "JobSubmitScriptSource",
+}, smithy.ShapeTypeStructure, 3)
+var JobSubmitScriptSource_scriptLocation *smithy.Schema
+
+var JobSubmitScriptSource_s3VersionId *smithy.Schema
+
+var JobSubmitScriptSource_checksum *smithy.Schema
 
 var JwtAuth = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
@@ -1038,7 +1074,7 @@ var UpdateAccountingRequest_mode *smithy.Schema
 var UpdateClusterSlurmConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "UpdateClusterSlurmConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds *smithy.Schema
 
 var UpdateClusterSlurmConfigurationRequest_slurmCustomSettings *smithy.Schema
@@ -1046,6 +1082,8 @@ var UpdateClusterSlurmConfigurationRequest_slurmCustomSettings *smithy.Schema
 var UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings *smithy.Schema
 
 var UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings *smithy.Schema
+
+var UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins *smithy.Schema
 
 var UpdateClusterSlurmConfigurationRequest_accounting *smithy.Schema
 
@@ -1560,6 +1598,22 @@ func init() {
 
 	_SlurmdbdCustomSettings_member = _SlurmdbdCustomSettings.AddMember("member", SlurmdbdCustomSetting)
 
+	JobSubmitPluginType_STARLARK = JobSubmitPluginType.AddMember("STARLARK", smithyprelude.Unit)
+
+	JobSubmitScriptSource_scriptLocation = JobSubmitScriptSource.AddMember("scriptLocation", smithyprelude.String)
+
+	JobSubmitScriptSource_s3VersionId = JobSubmitScriptSource.AddMember("s3VersionId", smithyprelude.String)
+
+	JobSubmitScriptSource_checksum = JobSubmitScriptSource.AddMember("checksum", smithyprelude.String)
+
+	JobSubmitPlugin_name = JobSubmitPlugin.AddMember("name", smithyprelude.String)
+
+	JobSubmitPlugin_type = JobSubmitPlugin.AddMember("type", JobSubmitPluginType)
+
+	JobSubmitPlugin_scriptSource = JobSubmitPlugin.AddMember("scriptSource", JobSubmitScriptSource)
+
+	_JobSubmitPluginList_member = _JobSubmitPluginList.AddMember("member", JobSubmitPlugin)
+
 	SlurmAuthKey_secretArn = SlurmAuthKey.AddMember("secretArn", smithyprelude.String)
 
 	SlurmAuthKey_secretVersion = SlurmAuthKey.AddMember("secretVersion", smithyprelude.String)
@@ -1583,6 +1637,8 @@ func init() {
 	ClusterSlurmConfiguration_slurmdbdCustomSettings = ClusterSlurmConfiguration.AddMember("slurmdbdCustomSettings", _SlurmdbdCustomSettings)
 
 	ClusterSlurmConfiguration_cgroupCustomSettings = ClusterSlurmConfiguration.AddMember("cgroupCustomSettings", _CgroupCustomSettings)
+
+	ClusterSlurmConfiguration_jobSubmitPlugins = ClusterSlurmConfiguration.AddMember("jobSubmitPlugins", _JobSubmitPluginList)
 
 	ClusterSlurmConfiguration_authKey = ClusterSlurmConfiguration.AddMember("authKey", SlurmAuthKey)
 
@@ -1677,6 +1733,8 @@ func init() {
 	ClusterSlurmConfigurationRequest_slurmdbdCustomSettings = ClusterSlurmConfigurationRequest.AddMember("slurmdbdCustomSettings", _SlurmdbdCustomSettings)
 
 	ClusterSlurmConfigurationRequest_cgroupCustomSettings = ClusterSlurmConfigurationRequest.AddMember("cgroupCustomSettings", _CgroupCustomSettings)
+
+	ClusterSlurmConfigurationRequest_jobSubmitPlugins = ClusterSlurmConfigurationRequest.AddMember("jobSubmitPlugins", _JobSubmitPluginList)
 
 	ClusterSlurmConfigurationRequest_accounting = ClusterSlurmConfigurationRequest.AddMember("accounting", AccountingRequest)
 
@@ -1991,6 +2049,8 @@ func init() {
 	UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings = UpdateClusterSlurmConfigurationRequest.AddMember("slurmdbdCustomSettings", _SlurmdbdCustomSettings)
 
 	UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings = UpdateClusterSlurmConfigurationRequest.AddMember("cgroupCustomSettings", _CgroupCustomSettings)
+
+	UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins = UpdateClusterSlurmConfigurationRequest.AddMember("jobSubmitPlugins", _JobSubmitPluginList)
 
 	UpdateClusterSlurmConfigurationRequest_accounting = UpdateClusterSlurmConfigurationRequest.AddMember("accounting", UpdateAccountingRequest)
 

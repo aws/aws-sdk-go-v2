@@ -1,0 +1,8 @@
+{
+    "id": "d5499cfa-be68-4733-9d14-c791b079979a",
+    "type": "feature",
+    "description": "Route 53 Private Endpoint Health Checks support",
+    "modules": [
+        "service/route53"
+    ]
+}

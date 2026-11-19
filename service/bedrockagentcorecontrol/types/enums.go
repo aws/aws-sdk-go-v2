@@ -1702,6 +1702,25 @@ func (Monitoring) Values() []Monitoring {
 	}
 }
 
+type NestedVirtualization string
+
+// Enum values for NestedVirtualization
+const (
+	NestedVirtualizationEnabled  NestedVirtualization = "ENABLED"
+	NestedVirtualizationDisabled NestedVirtualization = "DISABLED"
+)
+
+// Values returns all known values for NestedVirtualization. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NestedVirtualization) Values() []NestedVirtualization {
+	return []NestedVirtualization{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type NetworkMode string
 
 // Enum values for NetworkMode
@@ -1965,6 +1984,7 @@ type PaymentConnectorType string
 const (
 	PaymentConnectorTypeCoinbaseCdp PaymentConnectorType = "CoinbaseCDP"
 	PaymentConnectorTypeStripePrivy PaymentConnectorType = "StripePrivy"
+	PaymentConnectorTypeAwsBilling  PaymentConnectorType = "AwsBilling"
 )
 
 // Values returns all known values for PaymentConnectorType. Note that this can be
@@ -1975,6 +1995,7 @@ func (PaymentConnectorType) Values() []PaymentConnectorType {
 	return []PaymentConnectorType{
 		"CoinbaseCDP",
 		"StripePrivy",
+		"AwsBilling",
 	}
 }
 

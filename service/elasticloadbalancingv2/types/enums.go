@@ -136,6 +136,68 @@ func (CapacityReservationStateEnum) Values() []CapacityReservationStateEnum {
 	}
 }
 
+type ClientCertificateIdentityFilterAction string
+
+// Enum values for ClientCertificateIdentityFilterAction
+const (
+	ClientCertificateIdentityFilterActionAccept ClientCertificateIdentityFilterAction = "accept"
+)
+
+// Values returns all known values for ClientCertificateIdentityFilterAction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientCertificateIdentityFilterAction) Values() []ClientCertificateIdentityFilterAction {
+	return []ClientCertificateIdentityFilterAction{
+		"accept",
+	}
+}
+
+type ClientCertificateIdentityFilterField string
+
+// Enum values for ClientCertificateIdentityFilterField
+const (
+	ClientCertificateIdentityFilterFieldSubjectCn ClientCertificateIdentityFilterField = "subject-cn"
+	ClientCertificateIdentityFilterFieldSubjectOu ClientCertificateIdentityFilterField = "subject-ou"
+	ClientCertificateIdentityFilterFieldSanDns    ClientCertificateIdentityFilterField = "san-dns"
+	ClientCertificateIdentityFilterFieldSanUri    ClientCertificateIdentityFilterField = "san-uri"
+)
+
+// Values returns all known values for ClientCertificateIdentityFilterField. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientCertificateIdentityFilterField) Values() []ClientCertificateIdentityFilterField {
+	return []ClientCertificateIdentityFilterField{
+		"subject-cn",
+		"subject-ou",
+		"san-dns",
+		"san-uri",
+	}
+}
+
+type ClientCertificateIdentityFilterMatchType string
+
+// Enum values for ClientCertificateIdentityFilterMatchType
+const (
+	ClientCertificateIdentityFilterMatchTypeExact  ClientCertificateIdentityFilterMatchType = "exact"
+	ClientCertificateIdentityFilterMatchTypePrefix ClientCertificateIdentityFilterMatchType = "prefix"
+)
+
+// Values returns all known values for ClientCertificateIdentityFilterMatchType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientCertificateIdentityFilterMatchType) Values() []ClientCertificateIdentityFilterMatchType {
+	return []ClientCertificateIdentityFilterMatchType{
+		"exact",
+		"prefix",
+	}
+}
+
 type DescribeTargetHealthInputIncludeEnum string
 
 // Enum values for DescribeTargetHealthInputIncludeEnum

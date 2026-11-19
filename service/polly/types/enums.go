@@ -2,6 +2,58 @@
 
 package types
 
+type AudioFormat string
+
+// Enum values for AudioFormat
+const (
+	AudioFormatWav       AudioFormat = "wav"
+	AudioFormatFlac      AudioFormat = "flac"
+	AudioFormatOggVorbis AudioFormat = "ogg_vorbis"
+	AudioFormatMp3       AudioFormat = "mp3"
+)
+
+// Values returns all known values for AudioFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioFormat) Values() []AudioFormat {
+	return []AudioFormat{
+		"wav",
+		"flac",
+		"ogg_vorbis",
+		"mp3",
+	}
+}
+
+type CustomVoiceLanguageCode string
+
+// Enum values for CustomVoiceLanguageCode
+const (
+	CustomVoiceLanguageCodeDeDe CustomVoiceLanguageCode = "de-DE"
+	CustomVoiceLanguageCodeEnUs CustomVoiceLanguageCode = "en-US"
+	CustomVoiceLanguageCodeEsUs CustomVoiceLanguageCode = "es-US"
+	CustomVoiceLanguageCodeFrFr CustomVoiceLanguageCode = "fr-FR"
+	CustomVoiceLanguageCodeHiIn CustomVoiceLanguageCode = "hi-IN"
+	CustomVoiceLanguageCodeItIt CustomVoiceLanguageCode = "it-IT"
+	CustomVoiceLanguageCodePtBr CustomVoiceLanguageCode = "pt-BR"
+)
+
+// Values returns all known values for CustomVoiceLanguageCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomVoiceLanguageCode) Values() []CustomVoiceLanguageCode {
+	return []CustomVoiceLanguageCode{
+		"de-DE",
+		"en-US",
+		"es-US",
+		"fr-FR",
+		"hi-IN",
+		"it-IT",
+		"pt-BR",
+	}
+}
+
 type Engine string
 
 // Enum values for Engine
@@ -178,6 +230,7 @@ type QuotaCode string
 const (
 	QuotaCodeInputStreamInboundEventTimeout QuotaCode = "input-stream-inbound-event-timeout"
 	QuotaCodeInputStreamTimeout             QuotaCode = "input-stream-timeout"
+	QuotaCodeCustomVoiceMaxCount            QuotaCode = "custom-voice-max-count"
 )
 
 // Values returns all known values for QuotaCode. Note that this can be expanded
@@ -188,6 +241,7 @@ func (QuotaCode) Values() []QuotaCode {
 	return []QuotaCode{
 		"input-stream-inbound-event-timeout",
 		"input-stream-timeout",
+		"custom-voice-max-count",
 	}
 }
 
@@ -196,6 +250,7 @@ type ResourceType string
 // Enum values for ResourceType
 const (
 	ResourceTypeLexicon ResourceType = "lexicon"
+	ResourceTypeVoice   ResourceType = "voice"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -205,6 +260,7 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"lexicon",
+		"voice",
 	}
 }
 
@@ -298,6 +354,8 @@ const (
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
 	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
 	ValidationExceptionReasonInvalidInboundEvent   ValidationExceptionReason = "invalidInboundEvent"
+	ValidationExceptionReasonKmsKeyNotFound        ValidationExceptionReason = "kmsKeyNotFound"
+	ValidationExceptionReasonKmsKeyUnusable        ValidationExceptionReason = "kmsKeyUnusable"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -310,6 +368,8 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"fieldValidationFailed",
 		"other",
 		"invalidInboundEvent",
+		"kmsKeyNotFound",
+		"kmsKeyUnusable",
 	}
 }
 
@@ -557,5 +617,45 @@ func (VoiceId) Values() []VoiceId {
 		"Leo",
 		"Nate",
 		"Tina",
+	}
+}
+
+type VoiceOrigin string
+
+// Enum values for VoiceOrigin
+const (
+	VoiceOriginAws      VoiceOrigin = "aws"
+	VoiceOriginCustomer VoiceOrigin = "customer"
+)
+
+// Values returns all known values for VoiceOrigin. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceOrigin) Values() []VoiceOrigin {
+	return []VoiceOrigin{
+		"aws",
+		"customer",
+	}
+}
+
+type VoiceStatus string
+
+// Enum values for VoiceStatus
+const (
+	VoiceStatusPending VoiceStatus = "pending"
+	VoiceStatusActive  VoiceStatus = "active"
+	VoiceStatusFailed  VoiceStatus = "failed"
+)
+
+// Values returns all known values for VoiceStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VoiceStatus) Values() []VoiceStatus {
+	return []VoiceStatus{
+		"pending",
+		"active",
+		"failed",
 	}
 }

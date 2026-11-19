@@ -1,0 +1,8 @@
+{
+    "id": "64bb8ea0-3b83-46c7-8964-c7b4b61a72c7",
+    "type": "feature",
+    "description": "Adds parameters to support custom execution roles for service-managed stack sets to CreateStackSet, UpdateStackSet, and DescribeStackSet, enabling the use of Macros, Transforms, and Nested Stacks.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

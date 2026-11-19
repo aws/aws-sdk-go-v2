@@ -1,0 +1,8 @@
+{
+    "id": "f371ef65-b318-4b7e-a30b-3b59ba907bbe",
+    "type": "feature",
+    "description": "Amazon Inspector Code Security now supports GitHub Enterprise Server integrations. For GitHub Enterprise Server and GitLab Self-Managed, you can connect over a private network by adding a VPC configuration when you create an integration.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

@@ -153,8 +153,13 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -192,6 +197,11 @@ func TestCheckResponseSnapshot_CreateProfile(t *testing.T) {
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -336,8 +346,13 @@ func TestCheckResponseSnapshot_DeleteAttributeMapping(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -446,8 +461,13 @@ func TestCheckResponseSnapshot_DeleteProfile(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -607,8 +627,13 @@ func TestCheckResponseSnapshot_DisableProfile(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -768,8 +793,13 @@ func TestCheckResponseSnapshot_EnableProfile(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -929,8 +959,13 @@ func TestCheckResponseSnapshot_GetProfile(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -1223,8 +1258,13 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 						},
 					},
 				},
-				AliasName:         ptr.String("__AliasName__"),
-				AliasArn:          ptr.String("__AliasArn__"),
+				AliasName: ptr.String("__AliasName__"),
+				AliasArn:  ptr.String("__AliasArn__"),
+				TipConfiguration: &types.TipConfiguration{
+					Status:        types.TipStatus("ENABLED"),
+					SubjectType:   types.TipSubjectType("user"),
+					SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+				},
 				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 			{
@@ -1271,8 +1311,13 @@ func TestCheckResponseSnapshot_ListProfiles(t *testing.T) {
 						},
 					},
 				},
-				AliasName:         ptr.String("__AliasName__"),
-				AliasArn:          ptr.String("__AliasArn__"),
+				AliasName: ptr.String("__AliasName__"),
+				AliasArn:  ptr.String("__AliasArn__"),
+				TipConfiguration: &types.TipConfiguration{
+					Status:        types.TipStatus("ENABLED"),
+					SubjectType:   types.TipSubjectType("user"),
+					SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+				},
 				PreviousAliasName: ptr.String("__PreviousAliasName__"),
 			},
 		},
@@ -1513,8 +1558,13 @@ func TestCheckResponseSnapshot_PutAttributeMapping(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -1822,8 +1872,13 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 					},
 				},
 			},
-			AliasName:         ptr.String("__AliasName__"),
-			AliasArn:          ptr.String("__AliasArn__"),
+			AliasName: ptr.String("__AliasName__"),
+			AliasArn:  ptr.String("__AliasArn__"),
+			TipConfiguration: &types.TipConfiguration{
+				Status:        types.TipStatus("ENABLED"),
+				SubjectType:   types.TipSubjectType("user"),
+				SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+			},
 			PreviousAliasName: ptr.String("__PreviousAliasName__"),
 		},
 	}
@@ -1850,6 +1905,11 @@ func TestCheckResponseSnapshot_UpdateProfile(t *testing.T) {
 		DurationSeconds:       ptr.Int32(1),
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1962,6 +2022,11 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2046,6 +2111,11 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2134,6 +2204,11 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

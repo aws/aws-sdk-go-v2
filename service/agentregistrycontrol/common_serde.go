@@ -8,6 +8,28 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeAgentSkillsSourceConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AgentSkillsSourceConfiguration) {
+	switch vv := v.(type) {
+	case *types.AgentSkillsSourceConfigurationMemberS3:
+		s.WriteUnion(schema, schemas.AgentSkillsSourceConfiguration_s3)
+		s.WriteStruct(schemas.AgentSkillsSourceConfiguration_s3)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeAuthorizationData(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AuthorizationData) {
+	switch vv := v.(type) {
+	case *types.AuthorizationDataMemberOauth2:
+		s.WriteUnion(schema, schemas.AuthorizationData_oauth2)
+		s.WriteStruct(schemas.AuthorizationData_oauth2)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeAuthorizerConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AuthorizerConfiguration) {
 	switch vv := v.(type) {
 	case *types.AuthorizerConfigurationMemberCustomJWTAuthorizer:
@@ -64,6 +86,23 @@ func serializeRegistryRecordCredentialProviderUnion(s smithy.ShapeSerializer, sc
 	}
 }
 
+func serializeRegistryRecordSynchronizedSource(s smithy.ShapeSerializer, schema *smithy.Schema, v types.RegistryRecordSynchronizedSource) {
+	switch vv := v.(type) {
+	case *types.RegistryRecordSynchronizedSourceMemberGitHub:
+		s.WriteUnion(schema, schemas.RegistryRecordSynchronizedSource_gitHub)
+		s.WriteStruct(schemas.RegistryRecordSynchronizedSource_gitHub)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.RegistryRecordSynchronizedSourceMemberS3:
+		s.WriteUnion(schema, schemas.RegistryRecordSynchronizedSource_s3)
+		s.WriteStruct(schemas.RegistryRecordSynchronizedSource_s3)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeSelfManagedLatticeResource(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SelfManagedLatticeResource) {
 	switch vv := v.(type) {
 	case *types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier:
@@ -88,6 +127,30 @@ func serializeSourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v t
 		s.CloseStruct()
 		s.CloseUnion()
 	}
+}
+
+func deserializeAgentSkillsSourceConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AgentSkillsSourceConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgentSkillsSourceConfiguration_s3:
+			vv := &types.AgentSkillsSourceConfigurationMemberS3{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAuthorizationData(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AuthorizationData) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AuthorizationData_oauth2:
+			vv := &types.AuthorizationDataMemberOauth2{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeAuthorizerConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AuthorizerConfiguration) error {
@@ -143,6 +206,22 @@ func deserializeRegistryRecordCredentialProviderUnion(d smithy.ShapeDeserializer
 			return vv.Deserialize(d)
 		case schemas.RegistryRecordCredentialProviderUnion_oauthCredentialProvider:
 			vv := &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeRegistryRecordSynchronizedSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.RegistryRecordSynchronizedSource) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RegistryRecordSynchronizedSource_gitHub:
+			vv := &types.RegistryRecordSynchronizedSourceMemberGitHub{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RegistryRecordSynchronizedSource_s3:
+			vv := &types.RegistryRecordSynchronizedSourceMemberS3{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

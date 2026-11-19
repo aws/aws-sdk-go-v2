@@ -97,8 +97,16 @@ type GetCodeSecurityIntegrationOutput struct {
 	// Otherwise, it is null.
 	AuthorizationUrl *string
 
+	// The URL of the self-managed GitLab or GitHub Enterprise Server instance
+	// associated with the integration.
+	InstanceUrl *string
+
 	// The tags associated with the code security integration.
 	Tags map[string]string
+
+	// The VPC configuration associated with the integration, if it connects to a
+	// repository provider in a private network.
+	VpcConfiguration *types.CodeSecurityIntegrationVpcConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -118,6 +126,9 @@ func (v *GetCodeSecurityIntegrationOutput) SerializeMembers(s smithy.ShapeSerial
 	}
 	if v.CreatedOn != nil {
 		s.WriteTime(schemas.GetCodeSecurityIntegrationResponse_createdOn, *v.CreatedOn)
+	}
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_instanceUrl, *v.InstanceUrl)
 	}
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_integrationArn, *v.IntegrationArn)
@@ -140,6 +151,11 @@ func (v *GetCodeSecurityIntegrationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Type != "" {
 		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_type, string(v.Type))
 	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.GetCodeSecurityIntegrationResponse_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *GetCodeSecurityIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCodeSecurityIntegrationResponse, func(s *smithy.Schema) error {
@@ -150,6 +166,9 @@ func (v *GetCodeSecurityIntegrationOutput) Deserialize(d smithy.ShapeDeserialize
 		case schemas.GetCodeSecurityIntegrationResponse_createdOn:
 			v.CreatedOn = new(time.Time)
 			return d.ReadTime(schemas.GetCodeSecurityIntegrationResponse_createdOn, v.CreatedOn)
+		case schemas.GetCodeSecurityIntegrationResponse_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.GetCodeSecurityIntegrationResponse_instanceUrl, v.InstanceUrl)
 		case schemas.GetCodeSecurityIntegrationResponse_integrationArn:
 			v.IntegrationArn = new(string)
 			return d.ReadString(schemas.GetCodeSecurityIntegrationResponse_integrationArn, v.IntegrationArn)
@@ -178,6 +197,9 @@ func (v *GetCodeSecurityIntegrationOutput) Deserialize(d smithy.ShapeDeserialize
 			}
 			v.Type = types.IntegrationType(ev)
 			return nil
+		case schemas.GetCodeSecurityIntegrationResponse_vpcConfiguration:
+			v.VpcConfiguration = &types.CodeSecurityIntegrationVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
 		}
 		return nil
 	})

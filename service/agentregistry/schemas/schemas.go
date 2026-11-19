@@ -277,6 +277,11 @@ var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NonBlankString",
 }, smithy.ShapeTypeString, 0)
 
+var _PresignedDownloadUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "PresignedDownloadUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RecordIdentifier",
@@ -316,6 +321,14 @@ var _RegistryRecordArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordArn",
 }, smithy.ShapeTypeString, 0)
+
+var RegistryRecordArtifactDownload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "RegistryRecordArtifactDownload",
+}, smithy.ShapeTypeStructure, 2)
+var RegistryRecordArtifactDownload_sha256 *smithy.Schema
+
+var RegistryRecordArtifactDownload_downloadUrl *smithy.Schema
 
 var _RegistryRecordDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -377,7 +390,7 @@ var _RegistryRecordsEntryList_member *smithy.Schema
 var RegistryRecordStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordStatus",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 11)
 var RegistryRecordStatus_DRAFT *smithy.Schema
 
 var RegistryRecordStatus_PENDING_APPROVAL *smithy.Schema
@@ -396,10 +409,14 @@ var RegistryRecordStatus_CREATE_FAILED *smithy.Schema
 
 var RegistryRecordStatus_UPDATE_FAILED *smithy.Schema
 
+var RegistryRecordStatus_CREATE_PENDING_AUTH *smithy.Schema
+
+var RegistryRecordStatus_UPDATE_PENDING_AUTH *smithy.Schema
+
 var RegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var RegistryRecordSummary_registryArn *smithy.Schema
 
 var RegistryRecordSummary_recordArn *smithy.Schema
@@ -426,6 +443,8 @@ var RegistryRecordSummary_updatedAt *smithy.Schema
 
 var RegistryRecordSummary_customMetadata *smithy.Schema
 
+var RegistryRecordSummary_artifact *smithy.Schema
+
 var _RegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RegistryRecordSummaryList",
@@ -448,6 +467,21 @@ var _SearchQuery = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "SearchQuery",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var SearchType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "SearchType",
+}, smithy.ShapeTypeEnum, 3)
+var SearchType_HYBRID *smithy.Schema
+
+var SearchType_SEMANTIC *smithy.Schema
+
+var SearchType_KEYWORD *smithy.Schema
+
+var _Sha256Hash = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "Sha256Hash",
+}, smithy.ShapeTypeString, 0)
 
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -491,7 +525,7 @@ var _ValidationExceptionFieldList_member *smithy.Schema
 var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
 
 var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
@@ -501,6 +535,8 @@ var ValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION *smithy.Sc
 var ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION *smithy.Schema
 
 var ValidationExceptionReason_RESOURCE_CONFLICT *smithy.Schema
+
+var ValidationExceptionReason_UNSUPPORTED_IN_REGION *smithy.Schema
 
 var BatchGetDiscoverableRegistryRecordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -539,7 +575,7 @@ var ListDiscoverableRegistryRecordsResponse_nextToken *smithy.Schema
 var SearchDiscoverableRegistryRecordsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "SearchDiscoverableRegistryRecordsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var SearchDiscoverableRegistryRecordsRequest_searchQuery *smithy.Schema
 
 var SearchDiscoverableRegistryRecordsRequest_registryIds *smithy.Schema
@@ -548,11 +584,19 @@ var SearchDiscoverableRegistryRecordsRequest_maxResults *smithy.Schema
 
 var SearchDiscoverableRegistryRecordsRequest_filters *smithy.Schema
 
+var SearchDiscoverableRegistryRecordsRequest_searchType *smithy.Schema
+
+var SearchDiscoverableRegistryRecordsRequest_nextToken *smithy.Schema
+
 var SearchDiscoverableRegistryRecordsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "SearchDiscoverableRegistryRecordsResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 3)
 var SearchDiscoverableRegistryRecordsResponse_registryRecords *smithy.Schema
+
+var SearchDiscoverableRegistryRecordsResponse_searchType *smithy.Schema
+
+var SearchDiscoverableRegistryRecordsResponse_nextToken *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -663,6 +707,10 @@ func init() {
 
 	RegistryRecordStatus_UPDATE_FAILED = RegistryRecordStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
 
+	RegistryRecordStatus_CREATE_PENDING_AUTH = RegistryRecordStatus.AddMember("CREATE_PENDING_AUTH", smithyprelude.Unit)
+
+	RegistryRecordStatus_UPDATE_PENDING_AUTH = RegistryRecordStatus.AddMember("UPDATE_PENDING_AUTH", smithyprelude.Unit)
+
 	DiscoverableRegistryRecordSummary_registryArn = DiscoverableRegistryRecordSummary.AddMember("registryArn", _RegistryArn)
 
 	DiscoverableRegistryRecordSummary_recordArn = DiscoverableRegistryRecordSummary.AddMember("recordArn", _RegistryRecordArn)
@@ -692,6 +740,10 @@ func init() {
 	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
 
 	_RegistryIdList_member = _RegistryIdList.AddMember("member", _RegistryIdentifier)
+
+	RegistryRecordArtifactDownload_sha256 = RegistryRecordArtifactDownload.AddMember("sha256", _Sha256Hash)
+
+	RegistryRecordArtifactDownload_downloadUrl = RegistryRecordArtifactDownload.AddMember("downloadUrl", _PresignedDownloadUrl)
 
 	RegistryRecordFilterName_RECORD_TYPE = RegistryRecordFilterName.AddMember("RECORD_TYPE", smithyprelude.Unit)
 
@@ -737,9 +789,17 @@ func init() {
 
 	RegistryRecordSummary_customMetadata = RegistryRecordSummary.AddMember("customMetadata", _CustomMetadataDocument)
 
+	RegistryRecordSummary_artifact = RegistryRecordSummary.AddMember("artifact", RegistryRecordArtifactDownload)
+
 	_RegistryRecordSummaryList_member = _RegistryRecordSummaryList.AddMember("member", RegistryRecordSummary)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
+
+	SearchType_HYBRID = SearchType.AddMember("HYBRID", smithyprelude.Unit)
+
+	SearchType_SEMANTIC = SearchType.AddMember("SEMANTIC", smithyprelude.Unit)
+
+	SearchType_KEYWORD = SearchType.AddMember("KEYWORD", smithyprelude.Unit)
 
 	ThrottlingException_message = ThrottlingException.AddMember("message", _NonBlankString)
 
@@ -754,6 +814,8 @@ func init() {
 	ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = ValidationExceptionReason.AddMember("ROOT_EVENT_IN_OTHER_SESSION", smithyprelude.Unit)
 
 	ValidationExceptionReason_RESOURCE_CONFLICT = ValidationExceptionReason.AddMember("RESOURCE_CONFLICT", smithyprelude.Unit)
+
+	ValidationExceptionReason_UNSUPPORTED_IN_REGION = ValidationExceptionReason.AddMember("UNSUPPORTED_IN_REGION", smithyprelude.Unit)
 
 	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
 
@@ -793,6 +855,14 @@ func init() {
 
 	SearchDiscoverableRegistryRecordsRequest_filters = SearchDiscoverableRegistryRecordsRequest.AddMember("filters", _MetadataFilterExpression)
 
+	SearchDiscoverableRegistryRecordsRequest_searchType = SearchDiscoverableRegistryRecordsRequest.AddMember("searchType", SearchType)
+
+	SearchDiscoverableRegistryRecordsRequest_nextToken = SearchDiscoverableRegistryRecordsRequest.AddMember("nextToken", smithyprelude.String)
+
 	SearchDiscoverableRegistryRecordsResponse_registryRecords = SearchDiscoverableRegistryRecordsResponse.AddMember("registryRecords", _RegistryRecordSummaryList)
+
+	SearchDiscoverableRegistryRecordsResponse_searchType = SearchDiscoverableRegistryRecordsResponse.AddMember("searchType", SearchType)
+
+	SearchDiscoverableRegistryRecordsResponse_nextToken = SearchDiscoverableRegistryRecordsResponse.AddMember("nextToken", smithyprelude.String)
 
 }

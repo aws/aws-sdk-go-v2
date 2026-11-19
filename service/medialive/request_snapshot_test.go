@@ -4415,7 +4415,8 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -11172,8 +11173,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings:     nil,
-		SpecialRouterSettings: nil,
+		InferenceSettings:        nil,
+		SpecialRouterSettings:    nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -16397,7 +16399,8 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -23154,8 +23157,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings:     nil,
-		SpecialRouterSettings: nil,
+		InferenceSettings:        nil,
+		SpecialRouterSettings:    nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
