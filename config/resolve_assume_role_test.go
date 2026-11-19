@@ -27,7 +27,7 @@ func TestAssumeRole(t *testing.T) {
 		return &http.Response{
 			StatusCode: 200,
 			Body: io.NopCloser(bytes.NewReader(fmt.Appendf(nil, assumeRoleRespMsg,
-				time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z")))),
+				time.Now().UTC().Add(15*time.Minute).Format("2006-01-02T15:04:05Z")))),
 		}, nil
 	})
 
@@ -78,7 +78,7 @@ func TestAssumeRole_WithMFA(t *testing.T) {
 		return &http.Response{
 			StatusCode: 200,
 			Body: io.NopCloser(bytes.NewReader(fmt.Appendf(nil, assumeRoleRespMsg,
-				time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z")))),
+				time.Now().UTC().Add(15*time.Minute).Format("2006-01-02T15:04:05Z")))),
 		}, nil
 	})
 
@@ -173,7 +173,7 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 			StatusCode: 200,
 			Body: io.NopCloser(bytes.NewReader(fmt.Appendf(nil,
 				assumeRoleRespMsg,
-				time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z")))),
+				time.Now().UTC().Add(15*time.Minute).Format("2006-01-02T15:04:05Z")))),
 		}, nil
 	})
 

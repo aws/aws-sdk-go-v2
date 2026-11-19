@@ -229,6 +229,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	ignoreAnonymousAuth(&options)
 
+	wrapCredentialsCache(&options)
+
 	finalizeSTSRetryableErrors(&options)
 
 	wrapWithAnonymousAuth(&options)
