@@ -59,6 +59,10 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		return 0, err
 	}
 
+	if len(p) == 0 {
+		return 0, nil
+	}
+
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
@@ -210,10 +214,6 @@ type outChunk struct {
 }
 
 func (r *concurrentReader) read(p []byte) (int, error) {
-	if len(p) == 0 {
-		return 0, nil
-	}
-
 	if r.getType == types.GetObjectParts {
 		return r.partRead(p)
 	}
