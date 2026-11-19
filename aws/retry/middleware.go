@@ -93,8 +93,13 @@ func (r Attempt) logf(logger logging.Logger, classification logging.Classificati
 func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
-	ctx, span := tracing.StartSpan(ctx, "RetryLoop")
-	defer span.End()
+	// Older generated clients already wrap retry middleware in a RetryLoop span.
+	// Leave that span's lifetime to its owner instead of creating a nested copy.
+	if span, _ := tracing.GetSpan(ctx); span.Name() != "RetryLoop" {
+		var span tracing.Span
+		ctx, span = tracing.StartSpan(ctx, "RetryLoop")
+		defer span.End()
+	}
 
 	var attemptClockSkew time.Duration
 	if !r.DisableClockSkewCorrection && r.ClientSkew != nil {
