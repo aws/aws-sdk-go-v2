@@ -29,6 +29,23 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.polly#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.polly#ServiceErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>You don't have sufficient permissions to perform this action. For a\n      custom voice that uses a customer managed key, Amazon Polly also returns this\n      exception if you don't have the required Amazon Web Services KMS permissions on the\n      key.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.polly#Alphabet": {
             "type": "string"
         },
@@ -59,6 +76,35 @@
                 "smithy.api#documentation": "<p>Contains a chunk of synthesized audio data.</p>"
             }
         },
+        "com.amazonaws.polly#AudioFormat": {
+            "type": "enum",
+            "members": {
+                "WAV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "wav"
+                    }
+                },
+                "FLAC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "flac"
+                    }
+                },
+                "OGG_VORBIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ogg_vorbis"
+                    }
+                },
+                "MP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp3"
+                    }
+                }
+            }
+        },
         "com.amazonaws.polly#AudioStream": {
             "type": "blob",
             "traits": {
@@ -68,11 +114,51 @@
         "com.amazonaws.polly#AvailabilityErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.polly#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[!-~]+$"
+            }
+        },
         "com.amazonaws.polly#CloseStreamEvent": {
             "type": "structure",
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>Indicates the end of the input stream. After sending this event, the input stream\n     will be closed and all audio will be returned.</p>"
+            }
+        },
+        "com.amazonaws.polly#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.polly#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.polly#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that the request conflicts with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.polly#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource that the request conflicts with.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource. For\n      a custom voice, the voice isn't in the status that the operation\n      requires. Check the status with <code>GetVoice</code>, and then try\n      again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.polly#ContentType": {
@@ -83,6 +169,204 @@
         },
         "com.amazonaws.polly#CoralAvailabilityThrottlingReason": {
             "type": "string"
+        },
+        "com.amazonaws.polly#CreateVoice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.polly#CreateVoiceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.polly#CreateVoiceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.polly#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.polly#InvalidTagParameterException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.polly#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a custom voice from recordings of a speaker and returns it\n      in <code>pending</code> status. Use <code>GetVoice</code> to check the\n      status. When the status is <code>active</code>, you can use the voice ID\n      in <code>SynthesizeSpeech</code>, <code>StartSpeechSynthesisTask</code>,\n      and <code>StartSpeechSynthesisStream</code>.</p>\n         <p>The <code>custom-voice-max-count</code> service quota limits the\n      number of custom voices in your account in each Region. If you reach the\n      quota, the request fails with\n      <code>ServiceQuotaExceededException</code>.</p>\n         <p>This operation requires permissions to perform the\n      <code>polly:CreateVoice</code> action. You also need\n      <code>s3:GetObject</code> permission on each recording that you specify by\n      <code>S3Url</code>. If you specify a customer managed key, you also need\n      <code>kms:DescribeKey</code>, <code>kms:GenerateDataKey</code>, and\n      <code>kms:Decrypt</code> permissions on the key. If you specify\n      <code>Tags</code>, you also need the <code>polly:TagResource</code>\n      permission.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/voices",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.polly#CreateVoiceInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.polly#CustomVoiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the voice. Use the name to identify the voice in your\n      application. The name can contain letters, digits, hyphens, and\n      underscores, and can be up to 64 characters long. The name doesn't have to\n      be unique. The name isn't the voice ID, which Amazon Polly assigns.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.polly#CustomVoiceLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the recordings, for example, <code>en-US</code>.\n      Amazon Polly doesn't detect the language from the recordings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TermsAccepted": {
+                    "target": "com.amazonaws.polly#TermsAccepted",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Confirms the following two statements:</p>\n         <ul>\n            <li>\n               <p>\"I confirm that I have obtained all necessary consents required\n          under any applicable laws and regulations, including biometric privacy\n          laws, from the owner of this voice to clone these voice\n          samples.\"</p>\n            </li>\n            <li>\n               <p>\"I confirm that I will not use the generated content for any\n          illegal, fraudulent, or harmful purpose and reaffirm my obligation to\n          abide by the AWS Service Terms, Biometric Notice and Consent Terms,\n          AWS Responsible AI Policy, and AWS Acceptable Use Policy.\"</p>\n            </li>\n         </ul>\n         <p>You can read the <a href=\"https://aws.amazon.com/service-terms/\">AWS Service Terms</a>, the <a href=\"https://aws.amazon.com/legal/biometric-notice-and-consent-terms/\">Biometric Notice and Consent Terms</a>, the <a href=\"https://aws.amazon.com/ai/responsible-ai/policy/\">AWS Responsible\n        AI Policy</a>, and the <a href=\"https://aws.amazon.com/aup/\">AWS\n        Acceptable Use Policy</a> on the Amazon Web Services website.</p>\n         <p>You must set this parameter to <code>true</code> to create a voice.\n      Otherwise, the request fails with <code>ValidationException</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VoiceCreationData": {
+                    "target": "com.amazonaws.polly#VoiceCreationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recordings that Amazon Polly uses to create the voice.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomerManagedEncryption": {
+                    "target": "com.amazonaws.polly#CustomerManagedEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key that you want Amazon Polly to encrypt the voice\n      with. If you omit this parameter, Amazon Polly encrypts the voice with an Amazon Web Services\n      owned key.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.polly#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you apply to the voice to help you categorize and\n      organize it. Each tag consists of a key and an optional value, both of\n      which you define.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.polly#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the\n      idempotency of the request. If you don't specify a client token, the\n      Amazon Web Services SDKs generate one for you. If you retry a request that succeeded\n      with the same client token and the same parameters, Amazon Polly returns the\n      voice that the first request created and doesn't create a second\n      voice.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.polly#CreateVoiceOutput": {
+            "type": "structure",
+            "members": {
+                "Voice": {
+                    "target": "com.amazonaws.polly#Voice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new voice, in <code>pending</code> status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.polly#CustomVoiceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^vc-[0-9a-f]+$"
+            }
+        },
+        "com.amazonaws.polly#CustomVoiceLanguageCode": {
+            "type": "enum",
+            "members": {
+                "DE_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-DE"
+                    }
+                },
+                "EN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-US"
+                    }
+                },
+                "ES_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-US"
+                    }
+                },
+                "FR_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-FR"
+                    }
+                },
+                "HI_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hi-IN"
+                    }
+                },
+                "IT_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it-IT"
+                    }
+                },
+                "PT_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-BR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.polly#CustomVoiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.polly#CustomerManagedEncryption": {
+            "type": "structure",
+            "members": {
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.polly#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key. The key must be a\n      symmetric encryption key in the same Amazon Web Services Region as the voice. To create\n      the voice, you need <code>kms:DescribeKey</code>,\n      <code>kms:GenerateDataKey</code>, and <code>kms:Decrypt</code> permissions\n      on the key. To synthesize speech with the voice, you need\n      <code>kms:Decrypt</code> permission on the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionContext": {
+                    "target": "com.amazonaws.polly#EncryptionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pairs that Amazon Polly includes as the encryption context\n      when it encrypts or decrypts the voice with the key. You can use these\n      pairs in key policy conditions. Don't use keys that start with\n      <code>aws:</code>, which are reserved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The customer managed key that encrypts your custom voice. If you\n      don't specify a key, Amazon Polly encrypts the voice with an Amazon Web Services owned\n      key.</p>"
+            }
         },
         "com.amazonaws.polly#DateTime": {
             "type": "timestamp"
@@ -145,6 +429,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.polly#DeleteVoice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.polly#DeleteVoiceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.polly#DeleteVoiceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.polly#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a custom voice. <code>DescribeVoices</code> and\n      <code>GetVoice</code> stop returning the voice immediately. You can't\n      restore a deleted voice.</p>\n         <p>You can delete a voice in <code>active</code> or <code>failed</code>\n      status. If the voice is in <code>pending</code> status, the request fails\n      with <code>ConflictException</code>. If no custom voice with the specified\n      ID exists in your account and Region, the request fails with\n      <code>ResourceNotFoundException</code>. You can delete the voice even if\n      you disabled its Amazon Web Services KMS key or scheduled it for deletion.</p>\n         <p>This operation requires permissions to perform the\n      <code>polly:DeleteVoice</code> action.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/voices/{VoiceId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.polly#DeleteVoiceInput": {
+            "type": "structure",
+            "members": {
+                "VoiceId": {
+                    "target": "com.amazonaws.polly#CustomVoiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the custom voice to delete, for example,\n      <code>vc-9a8fa85dd3</code>. You can't specify the ARN of the\n      voice.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.polly#DeleteVoiceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.polly#DescribeVoices": {
             "type": "operation",
             "input": {
@@ -162,7 +504,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of voices that are available for use when\n      requesting speech synthesis. Each voice speaks a specified language, is\n      either male or female, and is identified by an ID, which is the ASCII\n      version of the voice name. </p>\n         <p>When synthesizing speech ( <code>SynthesizeSpeech</code> ), you\n      provide the voice ID for the voice you want from the list of voices\n      returned by <code>DescribeVoices</code>.</p>\n         <p>For example, you want your news reader application to read news in\n      a specific language, but giving a user the option to choose the voice.\n      Using the <code>DescribeVoices</code> operation you can provide the user\n      with a list of available voices to select from.</p>\n         <p> You can optionally specify a language code to filter the available\n      voices. For example, if you specify <code>en-US</code>, the operation\n      returns a list of all available US English voices. </p>\n         <p>This operation requires permissions to perform the\n        <code>polly:DescribeVoices</code> action.</p>",
+                "smithy.api#documentation": "<p>Returns the list of voices: the voices that Amazon Polly provides and\n      the custom voices in your account. Each voice speaks a specified language\n      and is identified by an ID. A voice that Amazon Polly provides is either male or\n      female, and its ID is the ASCII version of the voice name.</p>\n         <p>When synthesizing speech (<code>SynthesizeSpeech</code>), you\n      provide the voice ID for the voice you want from the list of voices\n      returned by <code>DescribeVoices</code>.</p>\n         <p>For example, your news reader application reads news in a specific\n      language, and you want to give users the option to choose the voice. With\n      the <code>DescribeVoices</code> operation, you can provide a list of\n      available voices for users to choose from.</p>\n         <p> You can optionally specify a language code to filter the available\n      voices. For example, if you specify <code>en-US</code>, the operation\n      returns a list of all available US English voices. </p>\n         <p>The list includes custom voices in every status. For each voice, <code>Origin</code> indicates whether Amazon Polly\n      provides the voice or you created it. You can use a custom voice for\n      synthesis only when its status is <code>active</code>. A voice in\n      <code>failed</code> status stays in the list until you delete it.</p>\n         <p>For a custom voice, <code>DescribeVoices</code> returns\n      <code>Origin</code>, <code>Id</code>, <code>Name</code>,\n      <code>Status</code>, <code>LanguageCode</code>, <code>LanguageName</code>,\n      <code>SupportedEngines</code>, and <code>CreationTime</code>. To get\n      <code>Arn</code>, <code>StatusReason</code>,\n      <code>VoiceCreationData</code>, and\n      <code>CustomerManagedEncryption</code>, use <code>GetVoice</code>.</p>\n         <p>The <code>LanguageCode</code> and <code>Engine</code> filters apply\n      to custom voices in the same way as to voices that Amazon Polly\n      provides.</p>\n         <p>This operation requires permissions to perform the\n        <code>polly:DescribeVoices</code> action.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To describe available voices",
@@ -272,6 +614,39 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.polly#EncryptionContext": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.polly#EncryptionContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.polly#EncryptionContextValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.polly#EncryptionContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.polly#EncryptionContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.polly#Engine": {
@@ -485,6 +860,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.polly#GetVoice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.polly#GetVoiceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.polly#GetVoiceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.polly#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status and properties of a custom voice. Use this\n      operation after <code>CreateVoice</code> to check whether the status of\n      the voice is <code>active</code> or <code>failed</code>. Unlike\n      <code>DescribeVoices</code>, <code>GetVoice</code> also returns\n      <code>Arn</code>, <code>VoiceCreationData</code>,\n      <code>CustomerManagedEncryption</code>, and\n      <code>StatusReason</code>. If no custom voice with the specified ID exists\n      in your account and Region, the request fails with\n      <code>ResourceNotFoundException</code>.</p>\n         <p>This operation requires permissions to perform the\n      <code>polly:GetVoice</code> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/voices/{VoiceId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "VoiceActive": {
+                        "documentation": "Wait until a custom voice is active and can be used for speech synthesis.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Voice.Status",
+                                        "expected": "active",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Voice.Status",
+                                        "expected": "failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    }
+                }
+            }
+        },
+        "com.amazonaws.polly#GetVoiceInput": {
+            "type": "structure",
+            "members": {
+                "VoiceId": {
+                    "target": "com.amazonaws.polly#CustomVoiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the custom voice that <code>CreateVoice</code> returned,\n      for example, <code>vc-9a8fa85dd3</code>. You can't specify the ARN of the\n      voice.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.polly#GetVoiceOutput": {
+            "type": "structure",
+            "members": {
+                "Voice": {
+                    "target": "com.amazonaws.polly#Voice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom voice.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.polly#IncludeAdditionalLanguageCodes": {
             "type": "boolean",
             "traits": {
@@ -606,6 +1071,16 @@
                 "smithy.api#documentation": "<p>The provided Task ID is not valid. Please provide a valid Task ID and\n      try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.polly#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-(cn|iso(-b)?|us-gov|eusc))?:kms:[a-z0-9_-]{1,50}:\\d{12}:key/[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.polly#LanguageCode": {
@@ -1247,7 +1722,8 @@
                     "method": "GET",
                     "uri": "/v1/listTagsForResource",
                     "code": 200
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.polly#ListTagsForResourceInput": {
@@ -1256,7 +1732,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.polly#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which\n      to list the tags. Currently, the only supported resource is an Amazon Polly\n      lexicon.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to list the tags for.\n      You can tag Amazon Polly lexicons and custom voices.</p>",
                         "smithy.api#httpQuery": "arn",
                         "smithy.api#required": {}
                     }
@@ -1404,7 +1880,13 @@
             "version": "2016-06-10",
             "operations": [
                 {
+                    "target": "com.amazonaws.polly#CreateVoice"
+                },
+                {
                     "target": "com.amazonaws.polly#DeleteLexicon"
+                },
+                {
+                    "target": "com.amazonaws.polly#DeleteVoice"
                 },
                 {
                     "target": "com.amazonaws.polly#DescribeVoices"
@@ -1414,6 +1896,9 @@
                 },
                 {
                     "target": "com.amazonaws.polly#GetSpeechSynthesisTask"
+                },
+                {
+                    "target": "com.amazonaws.polly#GetVoice"
                 },
                 {
                     "target": "com.amazonaws.polly#ListLexicons"
@@ -2664,6 +3149,76 @@
                     "traits": {
                         "smithy.api#enumValue": "input-stream-timeout"
                     }
+                },
+                "CUSTOM_VOICE_MAX_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "custom-voice-max-count"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.polly#Recording": {
+            "type": "structure",
+            "members": {
+                "Format": {
+                    "target": "com.amazonaws.polly#AudioFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio format of the recording: <code>wav</code>,\n      <code>flac</code>, <code>ogg_vorbis</code>, or <code>mp3</code>. The\n      format must match the audio data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Data": {
+                    "target": "com.amazonaws.polly#RecordingData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio source of the recording. Specify either an Amazon S3\n      object or the audio data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recording of the speaker whose voice you want to create. The\n      recording specifies its audio format and its audio source.</p>"
+            }
+        },
+        "com.amazonaws.polly#RecordingBytes": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5242880
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.polly#RecordingData": {
+            "type": "structure",
+            "members": {
+                "S3Url": {
+                    "target": "com.amazonaws.polly#S3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URL of the audio object, in the form\n      <code>s3://bucket/key</code>. You need <code>s3:GetObject</code>\n      permission on the object.</p>"
+                    }
+                },
+                "Bytes": {
+                    "target": "com.amazonaws.polly#RecordingBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio data, passed directly in the request. The data must be\n      in the format that <code>Format</code> specifies and can be up to 5 MB.\n      Amazon Polly doesn't store the audio after it creates the voice, and doesn't\n      return this field in responses.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio source of a recording. In a <code>CreateVoice</code>\n      request, specify exactly one of <code>S3Url</code> and <code>Bytes</code>.\n      In a response, a recording that Amazon Polly read from Amazon S3 includes its\n      <code>S3Url</code>. A recording that you passed as <code>Bytes</code>\n      includes neither field, because Amazon Polly doesn't return the\n      audio.</p>"
+            }
+        },
+        "com.amazonaws.polly#RecordingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.polly#Recording"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -2701,7 +3256,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Polly can't find the specified resource. Verify that the resource\n      exists in the Amazon Web Services account and Region of the request and that its ARN is\n      spelled correctly, and then try again.</p>",
+                "smithy.api#documentation": "<p>Amazon Polly can't find the specified resource. Verify that the resource\n      exists in the Amazon Web Services account and Region of the request and that its ARN or\n      ID is spelled correctly, and then try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2714,7 +3269,23 @@
                     "traits": {
                         "smithy.api#enumValue": "lexicon"
                     }
+                },
+                "VOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "voice"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.polly#S3Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]/.+$"
             }
         },
         "com.amazonaws.polly#SampleRate": {
@@ -2730,6 +3301,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.polly#ServiceErrorMessage": {
+            "type": "string"
         },
         "com.amazonaws.polly#ServiceFailureException": {
             "type": "structure",
@@ -2850,6 +3424,12 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.polly#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.polly#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.polly#ServiceFailureException"
                 },
                 {
@@ -2863,7 +3443,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection. \n      Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,\n       and receive synthesized audio as it becomes available.</p>\n         <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html\">SynthesizeSpeech</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection. \n      Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,\n       and receive synthesized audio as it becomes available.</p>\n         <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html\">SynthesizeSpeech</a>\n               </p>\n            </li>\n         </ul>\n         <p>To use a custom voice, specify its ID in <code>VoiceId</code>. The\n      voice must be in <code>active</code> status. If the voice is in\n      <code>pending</code> or <code>failed</code> status, the request fails with\n      <code>ConflictException</code>. If no custom voice with the specified ID\n      exists in your account and Region, the request fails with\n      <code>ResourceNotFoundException</code>. If the custom voice uses a\n      customer managed key, you need <code>kms:Decrypt</code> permission on the\n      key. If you disabled the key or scheduled it for deletion, the request\n      fails with <code>ValidationException</code>. If you don't have permission\n      to use the key, the request fails with\n      <code>AccessDeniedException</code>. If Amazon Web Services KMS throttles Amazon Polly's\n      request to use the key, the request fails with\n      <code>ThrottlingException</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/synthesisStream",
@@ -2977,7 +3557,7 @@
                 "VoiceId": {
                     "target": "com.amazonaws.polly#VoiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The voice ID to use for the synthesis. To get a list of available voice IDs, use the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation. To use a custom voice, specify the voice ID that <code>CreateVoice</code> returned, for example, <code>vc-9a8fa85dd3</code>. You can't specify the ARN of a voice.</p>",
                         "smithy.api#httpHeader": "x-amzn-VoiceId",
                         "smithy.api#required": {}
                     }
@@ -3019,6 +3599,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.polly#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.polly#EngineNotSupportedException"
                 },
                 {
@@ -3046,6 +3629,9 @@
                     "target": "com.amazonaws.polly#MarksNotSupportedForFormatException"
                 },
                 {
+                    "target": "com.amazonaws.polly#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.polly#ServiceFailureException"
                 },
                 {
@@ -3056,7 +3642,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows the creation of an asynchronous synthesis task, by starting a\n      new <code>SpeechSynthesisTask</code>. This operation requires all the\n      standard information needed for speech synthesis, plus the name of an\n      Amazon S3 bucket for the service to store the output of the synthesis task\n      and two optional parameters (<code>OutputS3KeyPrefix</code> and\n        <code>SnsTopicArn</code>). Once the synthesis task is created, this\n      operation will return a <code>SpeechSynthesisTask</code> object, which\n      will include an identifier of this task as well as the current status. The\n        <code>SpeechSynthesisTask</code> object is available for 72 hours after\n      starting the asynchronous synthesis task.</p>",
+                "smithy.api#documentation": "<p>Starts an asynchronous synthesis task by creating a new\n      <code>SpeechSynthesisTask</code>. This operation requires all the standard\n      information needed for speech synthesis, plus the name of an Amazon S3\n      bucket for the service to store the output of the synthesis task and two\n      optional parameters (<code>OutputS3KeyPrefix</code> and\n      <code>SnsTopicArn</code>). After Amazon Polly creates the synthesis task, the\n      operation returns a <code>SpeechSynthesisTask</code> object that includes\n      an identifier for the task and its current status. The\n      <code>SpeechSynthesisTask</code> object is available for 72 hours after\n      you start the asynchronous synthesis task.</p>\n         <p>To use a custom voice, specify its ID in <code>VoiceId</code>. The\n      voice must be in <code>active</code> status. If the voice is in\n      <code>pending</code> or <code>failed</code> status, the request fails with\n      <code>ConflictException</code>. If no custom voice with the specified ID\n      exists in your account and Region, the request fails with\n      <code>ResourceNotFoundException</code>. If the custom voice uses a\n      customer managed key, you need <code>kms:Decrypt</code> permission on the\n      key. If you disable the key or schedule it for deletion before the task\n      runs, the task fails and <code>TaskStatusReason</code> describes the\n      cause.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/synthesisTasks",
@@ -3139,7 +3725,7 @@
                 "VoiceId": {
                     "target": "com.amazonaws.polly#VoiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Voice ID to use for the synthesis. </p>",
+                        "smithy.api#documentation": "<p>The voice ID to use for the synthesis. To use a custom voice, specify the\n      voice ID that <code>CreateVoice</code> returned, for example,\n      <code>vc-9a8fa85dd3</code>. You can't specify the ARN of a voice.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3161,6 +3747,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.polly#StatusReason": {
+            "type": "string"
         },
         "com.amazonaws.polly#StreamClosedEvent": {
             "type": "structure",
@@ -3305,6 +3894,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.polly#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.polly#EngineNotSupportedException"
                 },
                 {
@@ -3323,6 +3915,9 @@
                     "target": "com.amazonaws.polly#MarksNotSupportedForFormatException"
                 },
                 {
+                    "target": "com.amazonaws.polly#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.polly#ServiceFailureException"
                 },
                 {
@@ -3333,7 +3928,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes.\n      SSML input must be valid, well-formed SSML. Some alphabets might not be\n      available with all the voices (for example, Cyrillic might not be read at\n      all by English voices) unless phoneme mapping is used. For more\n      information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html\">How it Works</a>.</p>",
+                "smithy.api#documentation": "<p>Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes.\n      SSML input must be valid, well-formed SSML. Some alphabets might not be\n      available with all the voices (for example, Cyrillic might not be read at\n      all by English voices) unless phoneme mapping is used. For more\n      information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html\">How it Works</a>.</p>\n         <p>To use a custom voice, specify its ID in <code>VoiceId</code>. The\n      voice must be in <code>active</code> status. If the voice is in\n      <code>pending</code> or <code>failed</code> status, the request fails with\n      <code>ConflictException</code>. If no custom voice with the specified ID\n      exists in your account and Region, the request fails with\n      <code>ResourceNotFoundException</code>.</p>\n         <p>If the custom voice uses a customer managed key, you need\n      <code>kms:Decrypt</code> permission on the key. If you disabled the key or\n      scheduled it for deletion, the request fails with\n      <code>ValidationException</code>. If you don't have permission to use the\n      key, the request fails with <code>AccessDeniedException</code>. If Amazon Web Services\n      KMS throttles Amazon Polly's request to use the key, the request fails with\n      <code>ThrottlingException</code>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To synthesize speech",
@@ -3418,7 +4013,7 @@
                 "VoiceId": {
                     "target": "com.amazonaws.polly#VoiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p> Voice ID to use for the synthesis. You can get a list of available\n      voice IDs by calling the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation. </p>",
+                        "smithy.api#documentation": "<p>The voice ID to use for the synthesis. You can get a list of available\n      voice IDs by calling the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html\">DescribeVoices</a> operation. To use a custom voice, specify the\n      voice ID that <code>CreateVoice</code> returned, for example,\n      <code>vc-9a8fa85dd3</code>. You can't specify the ARN of a voice.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3551,7 +4146,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.polly#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags.\n      Currently, the only supported resource is an Amazon Polly lexicon.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to add tags to. You\n      can tag Amazon Polly lexicons and custom voices.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3620,6 +4215,12 @@
         },
         "com.amazonaws.polly#TaskStatusReason": {
             "type": "string"
+        },
+        "com.amazonaws.polly#TermsAccepted": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.polly#Text": {
             "type": "string"
@@ -3822,7 +4423,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.polly#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to remove\n      tags. Currently, the only supported resource is an Amazon Polly lexicon.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove tags from.\n      You can tag Amazon Polly lexicons and custom voices.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3857,7 +4458,7 @@
                 "reason": {
                     "target": "com.amazonaws.polly#ValidationExceptionReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason the request failed validation.</p>",
+                        "smithy.api#documentation": "<p>The reason the request failed validation. If Amazon Polly can't use the\n      Amazon Web Services KMS key that you specified in <code>CreateVoice</code>,\n      <code>fields</code> names <code>CustomerManagedEncryption.KmsKeyArn</code>\n      and the reason is one of the following:</p>\n         <dl>\n            <dt>kmsKeyNotFound</dt>\n            <dd>\n               <p>No key with the specified ARN exists.</p>\n            </dd>\n            <dt>kmsKeyUnusable</dt>\n            <dd>\n               <p>The key is disabled, scheduled for deletion, or missing its\n            key material, or it isn't a symmetric encryption key.</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3934,22 +4535,40 @@
                     "traits": {
                         "smithy.api#enumValue": "invalidInboundEvent"
                     }
+                },
+                "KMS_KEY_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kmsKeyNotFound"
+                    }
+                },
+                "KMS_KEY_UNUSABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kmsKeyUnusable"
+                    }
                 }
             }
         },
         "com.amazonaws.polly#Voice": {
             "type": "structure",
             "members": {
+                "Arn": {
+                    "target": "com.amazonaws.polly#VoiceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a custom voice, in the form\n      <code>arn:partition:polly:region:account-id:voice/voice-id</code>.\n      <code>CreateVoice</code> and <code>GetVoice</code> return this field.\n      Voices that Amazon Polly provides don't have an ARN.</p>"
+                    }
+                },
                 "Gender": {
                     "target": "com.amazonaws.polly#Gender",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gender of the voice.</p>"
+                        "smithy.api#documentation": "<p>The gender of the voice. Custom voices don't include this\n      field.</p>"
                     }
                 },
                 "Id": {
                     "target": "com.amazonaws.polly#VoiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Polly assigned voice ID. This is the ID that you specify when\n      calling the <code>SynthesizeSpeech</code> operation.</p>"
+                        "smithy.api#documentation": "<p>The voice ID that Amazon Polly assigns. You specify this ID when you\n      call the <code>SynthesizeSpeech</code> operation. For a custom voice,\n      Amazon Polly assigns an ID that consists of <code>vc-</code> followed by\n      hexadecimal characters, for example, <code>vc-9a8fa85dd3</code>.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -3967,7 +4586,25 @@
                 "Name": {
                     "target": "com.amazonaws.polly#VoiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the voice (for example, Salli, Kendra, etc.). This provides\n      a human readable voice name that you might display in your\n      application.</p>"
+                        "smithy.api#documentation": "<p>The name of the voice, for example, Salli or Kendra. The name is\n      human-readable, and you might display it in your application. For a custom\n      voice, this is the <code>Name</code> that you specified in\n      <code>CreateVoice</code>.</p>"
+                    }
+                },
+                "Origin": {
+                    "target": "com.amazonaws.polly#VoiceOrigin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates who provides the voice. The origin is one of the\n      following:</p>\n         <dl>\n            <dt>aws</dt>\n            <dd>\n               <p>A voice that Amazon Polly provides.</p>\n            </dd>\n            <dt>customer</dt>\n            <dd>\n               <p>A custom voice that you created with\n            <code>CreateVoice</code>.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.polly#VoiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a custom voice. Voices that Amazon Polly provides don't\n      include this field. The status is one of the following:</p>\n         <dl>\n            <dt>pending</dt>\n            <dd>\n               <p>Amazon Polly is creating the voice.</p>\n            </dd>\n            <dt>active</dt>\n            <dd>\n               <p>The voice is ready for speech synthesis.</p>\n            </dd>\n            <dt>failed</dt>\n            <dd>\n               <p>Amazon Polly couldn't create the voice. <code>StatusReason</code>\n            describes why.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.polly#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of a custom voice. When the\n      status is <code>failed</code>, this field describes why Amazon Polly couldn't\n      create the voice.</p>"
                     }
                 },
                 "AdditionalLanguageCodes": {
@@ -3981,10 +4618,49 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies which engines (<code>standard</code>, <code>neural</code>,\n      <code>long-form</code> or <code>generative</code>) are supported by a given voice.</p>"
                     }
+                },
+                "VoiceCreationData": {
+                    "target": "com.amazonaws.polly#VoiceCreationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data from which you created the custom voice.\n      <code>CreateVoice</code> and <code>GetVoice</code> return this field. The\n      response doesn't include the audio: a recording that Amazon Polly read from\n      Amazon S3 includes its <code>S3Url</code>, and a recording that you passed\n      as <code>Bytes</code> has no fields in <code>Data</code>.</p>"
+                    }
+                },
+                "CustomerManagedEncryption": {
+                    "target": "com.amazonaws.polly#CustomerManagedEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key that encrypts your custom voice.\n      <code>CreateVoice</code> and <code>GetVoice</code> return this field if\n      you specified a key in <code>CreateVoice</code>.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.polly#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when you created the custom voice. Voices that\n      Amazon Polly provides don't include this field.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Description of the voice.</p>"
+                "smithy.api#documentation": "<p>Describes a voice. Amazon Polly provides voices, and you can create custom\n      voices with <code>CreateVoice</code>. <code>Origin</code> indicates\n      whether Amazon Polly provides the voice or you created it.\n      <code>DescribeVoices</code> returns a subset of the fields for each\n      voice. <code>GetVoice</code> returns all fields of a custom\n      voice.</p>"
+            }
+        },
+        "com.amazonaws.polly#VoiceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-(cn|iso(-b)?|us-gov|eusc))?:polly:[a-z0-9_-]{1,50}:\\d{12}:voice/[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.polly#VoiceCreationData": {
+            "type": "structure",
+            "members": {
+                "Recordings": {
+                    "target": "com.amazonaws.polly#RecordingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recordings of the speaker. Each recording specifies its audio\n      format and its audio source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio that you provide to create a custom voice.</p>"
             }
         },
         "com.amazonaws.polly#VoiceId": {
@@ -4696,6 +5372,46 @@
         },
         "com.amazonaws.polly#VoiceName": {
             "type": "string"
+        },
+        "com.amazonaws.polly#VoiceOrigin": {
+            "type": "enum",
+            "members": {
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws"
+                    }
+                },
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "customer"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.polly#VoiceStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            }
         }
     }
 }

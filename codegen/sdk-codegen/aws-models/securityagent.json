@@ -3213,6 +3213,44 @@
                 "smithy.api#documentation": "<p>List of code locations.</p>"
             }
         },
+        "com.amazonaws.securityagent#CodeRemediationJobStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "NO_CHANGE_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_CHANGE_REQUIRED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Code remediation status for a particular repository.</p>"
+            }
+        },
         "com.amazonaws.securityagent#CodeRemediationStrategy": {
             "type": "enum",
             "members": {
@@ -3241,20 +3279,20 @@
                 "status": {
                     "target": "com.amazonaws.securityagent#CodeRemediationTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the code remediation task.</p>",
+                        "smithy.api#documentation": "<p>The current status of the overall code remediation task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "statusReason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason for the current status of the code remediation task.</p>"
+                        "smithy.api#documentation": "<p>The reason for the current status of the overall code remediation task.</p>"
                     }
                 },
                 "taskDetails": {
                     "target": "com.amazonaws.securityagent#CodeRemediationTaskDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of details for the code remediation task, including repository name, code diff link, and pull request link.</p>"
+                        "smithy.api#documentation": "<p>The list of details for a code remediation task, including repository names, status of code remediation for each associated repository, and generated code diff or pull request links.</p>"
                     }
                 }
             },
@@ -3268,7 +3306,7 @@
                 "repoName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository where the remediation was applied.</p>"
+                        "smithy.api#documentation": "<p>The name of an associated repository where the remediation was applied.</p>"
                     }
                 },
                 "codeDiffLink": {
@@ -3281,6 +3319,24 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The link to the pull request created for the remediation.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the code remediation task for the particular repository.</p>"
+                    }
+                },
+                "statusCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A category classifier if a repository's code remediation fails.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive reason when a repository's code remediation fails.</p>"
                     }
                 }
             },

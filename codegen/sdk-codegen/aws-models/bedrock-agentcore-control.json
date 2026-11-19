@@ -2547,6 +2547,21 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AwsBillingConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "iamRoleArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Marketplace service-linked role in the account that owns the payment manager. The service sets this value when it creates the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an AWS Billing payment connector. Payments made through an AWS Billing payment connector are charged to the AWS account that owns the payment manager, and appear on that account's AWS bill as AWS Marketplace charges.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimits": {
             "type": "operation",
             "input": {
@@ -5241,6 +5256,20 @@
                         "smithy.api#enumValue": "MEMORY_RECORDS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CpuOptions": {
+            "type": "structure",
+            "members": {
+                "nestedVirtualization": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NestedVirtualization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether your agents can use hardware virtualization on their instances. The following values are possible:</p> <ul> <li> <p> <code>ENABLED</code> – Your agents can use hardware virtualization on their instances. To use this value, choose the <code>LINUX_X86_64</code> operating system and instance types that support nested virtualization.</p> </li> <li> <p> <code>DISABLED</code> – Your agents can't use hardware virtualization on their instances. This is the default.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CPU configuration for capacity provider instances, including nested virtualization.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CreateAgentRuntime": {
@@ -8588,8 +8617,9 @@
                 "credentialProviderConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CredentialsProviderConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.</p> <p>For an <code>AwsBilling</code> payment connector, omit this parameter or specify an empty list. The service uses the AWS Marketplace service-linked role in your account, which must exist before you create the connector, and you must have permission to call <code>iam:GetRole</code> on it.</p>"
                     }
                 },
                 "provisionMode": {
@@ -9943,10 +9973,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The credential provider configuration for a Stripe Privy payment connector.</p>"
                     }
+                },
+                "awsBilling": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AwsBillingConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an AWS Billing payment connector. The service sets this configuration when it creates the connector and returns it in responses. Don't specify it when you create an AWS Billing payment connector.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The credential provider configuration for a payment connector. Specifies the payment provider type and its associated credential provider.</p>"
+                "smithy.api#documentation": "<p>The configuration for a payment connector. Specifies the payment provider type and either its associated credential provider or, for an AWS Billing payment connector, its billing configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CredentialsProviderConfigurations": {
@@ -24795,6 +24831,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to propagate to all Amazon EC2 resources (instances, volumes, and network interfaces) that the capacity provider creates.</p>"
                     }
+                },
+                "cpuOptions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CpuOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The central processing unit (CPU) options for the instances that the capacity provider launches.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30524,6 +30566,23 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#NestedVirtualization": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#NetworkConfiguration": {
             "type": "structure",
             "members": {
@@ -31829,6 +31888,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "StripePrivy"
+                    }
+                },
+                "AWS_BILLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsBilling"
                     }
                 }
             }

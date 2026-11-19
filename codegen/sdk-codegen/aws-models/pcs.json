@@ -1202,6 +1202,12 @@
                         "smithy.api#documentation": "<p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>"
                     }
                 },
+                "jobSubmitPlugins": {
+                    "target": "com.amazonaws.pcs#JobSubmitPluginList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job submit plugins to run on the cluster controller. Use job submit plugins to execute custom scripts during job submission and job modification to validate or modify the job's configuration. Custom scripts can accept or reject jobs based on their configuration or modify the configuration before job execution.</p>"
+                    }
+                },
                 "authKey": {
                     "target": "com.amazonaws.pcs#SlurmAuthKey",
                     "traits": {
@@ -1260,6 +1266,12 @@
                     "target": "com.amazonaws.pcs#CgroupCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>"
+                    }
+                },
+                "jobSubmitPlugins": {
+                    "target": "com.amazonaws.pcs#JobSubmitPluginList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job submit plugins to run on the cluster controller. Use job submit plugins to execute custom scripts during job submission and job modification to validate or modify the job's configuration. Custom scripts can accept or reject jobs based on their configuration or modify the configuration before job execution.</p>"
                     }
                 },
                 "accounting": {
@@ -2919,6 +2931,106 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.pcs#JobSubmitPlugin": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the plugin. The name can be up to 64 characters long. Valid characters are letters, numbers, spaces, underscores (<code>_</code>), and hyphens (<code>-</code>). The first character must be a letter or a number.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.pcs#JobSubmitPluginType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime language used to execute the custom script. Valid values:</p> <ul> <li> <p> <code>STARLARK</code> – The script uses Starlark syntax.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scriptSource": {
+                    "target": "com.amazonaws.pcs#JobSubmitScriptSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source location and integrity information for the script.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A job submit plugin configuration, including its name, runtime language, and script source.</p>"
+            }
+        },
+        "com.amazonaws.pcs#JobSubmitPluginList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pcs#JobSubmitPlugin"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.pcs#JobSubmitPluginType": {
+            "type": "enum",
+            "members": {
+                "STARLARK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARLARK"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The runtime language used to execute the custom script. Valid values:</p> <ul> <li> <p> <code>STARLARK</code> – The script uses Starlark syntax.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.pcs#JobSubmitScriptSource": {
+            "type": "structure",
+            "members": {
+                "scriptLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the script. Specify an Amazon S3 URI in the format <code>s3://bucket-name/key</code>.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3VersionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 version ID of the script. Use this value to pin the script to a specific version in a versioned Amazon S3 bucket.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                },
+                "checksum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA-256 checksum of the script content, as a 64-character hexadecimal string. This value is optional. When specified, PCS uses this value to verify the integrity of the downloaded script.</p>",
+                        "smithy.api#length": {
+                            "min": 64,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{64}$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source location and integrity information for the script.</p>"
             }
         },
         "com.amazonaws.pcs#JwtAuth": {
@@ -4916,6 +5028,12 @@
                     "target": "com.amazonaws.pcs#CgroupCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Cgroup-specific configuration that directly maps to Cgroup settings.</p>"
+                    }
+                },
+                "jobSubmitPlugins": {
+                    "target": "com.amazonaws.pcs#JobSubmitPluginList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job submit plugins to run on the cluster controller. Use job submit plugins to execute custom scripts during job submission and job modification to validate or modify the job's configuration. Custom scripts can accept or reject jobs based on their configuration or modify the configuration before job execution.</p>"
                     }
                 },
                 "accounting": {

@@ -5501,7 +5501,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.lambda#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds, and the maximum allowed value is 900 seconds. For functions using Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds, and the maximum allowed value is 1,800 seconds. For functions using Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]
@@ -13931,21 +13931,6 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
-                        "input": {
-                            "FunctionName": "my-function",
-                            "Qualifier": "BLUE"
-                        },
-                        "output": {
-                            "AllocatedProvisionedConcurrentExecutions": 100,
-                            "AvailableProvisionedConcurrentExecutions": 100,
-                            "LastModified": "2019-12-31T20:28:49+0000",
-                            "RequestedProvisionedConcurrentExecutions": 100,
-                            "Status": "READY"
-                        },
-                        "title": "To view a provisioned concurrency configuration"
-                    },
-                    {
                         "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
@@ -13959,6 +13944,21 @@
                             "Status": "READY"
                         },
                         "title": "To get a provisioned concurrency configuration"
+                    },
+                    {
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "AllocatedProvisionedConcurrentExecutions": 100,
+                            "AvailableProvisionedConcurrentExecutions": 100,
+                            "LastModified": "2019-12-31T20:28:49+0000",
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "Status": "READY"
+                        },
+                        "title": "To view a provisioned concurrency configuration"
                     }
                 ],
                 "smithy.api#http": {
@@ -14829,7 +14829,7 @@
                 "ClientContext": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object. Lambda passes the <code>ClientContext</code> object to your function for synchronous invocations only.</p>",
+                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object. Lambda passes the <code>ClientContext</code> object to your function for synchronous invocations only.</p> <p> <code>ClientContext</code> is logged to CloudTrail if you turn on data events.</p>",
                         "smithy.api#httpHeader": "X-Amz-Client-Context",
                         "smithy.api#tags": [
                             "feature:public"
@@ -15152,7 +15152,7 @@
                         }
                     }
                 },
-                "smithy.api#documentation": "<p>Invokes a Lambda Event Function. You can invoke a function synchronously (and wait for the response), or asynchronously. By default, Lambda invokes your function synchronously (i.e. the<code>InvocationType</code> is <code>RequestResponse</code>). To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>. Lambda passes the <code>ClientContext</code> object to your function for synchronous invocations only.</p> <p>For synchronous invocations, the maximum payload size is 6 MB. For asynchronous invocations, the maximum payload size is 1 MB.</p> <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html\">synchronous invocation</a>, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html\">trace</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html\">Error handling and automatic retries in Lambda</a>.</p> <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a>, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq\">dead-letter queue</a>.</p> <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html\">quota</a> errors, or issues with your function's code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if running the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might disconnect during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings.</p> <p>This operation requires permission for the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html\">lambda:InvokeFunction</a> action. For details on how to set up permissions for cross-account invocations, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke\">Granting function access to other accounts</a>.</p>",
+                "smithy.api#documentation": "<p>Invokes a Lambda Event Function. You can invoke a function synchronously (and wait for the response), or asynchronously. By default, Lambda invokes your function synchronously (i.e. the<code>InvocationType</code> is <code>RequestResponse</code>). To invoke a function asynchronously, set <code>InvocationType</code> to <code>Event</code>. Lambda passes the <code>ClientContext</code> object to your function for synchronous invocations only.</p> <p>For synchronous invocations, the maximum payload size is 6 MB. For asynchronous invocations, the maximum payload size is 1 MB.</p> <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html\">synchronous invocation</a>, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html\">trace</a>.</p> <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type, client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html\">Error handling and automatic retries in Lambda</a>.</p> <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a>, Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple times, even if no error occurs. To retain events that were not processed, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq\">dead-letter queue</a>.</p> <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html\">quota</a> errors, or issues with your function's code and configuration. For example, Lambda returns <code>TooManyRequestsException</code> if running the function would cause you to exceed a concurrency limit at either the account level (<code>ConcurrentInvocationLimitExceeded</code>) or function level (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p> <p>For functions with a long timeout, your client might disconnect during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. Synchronous invocations can run for up to 30 minutes. Set the read timeout of your client higher than the function timeout, and turn on TCP keep-alive.</p> <p>This operation requires permission for the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html\">lambda:InvokeFunction</a> action. For details on how to set up permissions for cross-account invocations, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke\">Granting function access to other accounts</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "documentation": "The following example invokes version 1 of a function named my-function with an empty event payload.",
@@ -15674,7 +15674,7 @@
                 "ClientContext": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.</p>",
+                        "smithy.api#documentation": "<p>Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.</p> <p> <code>ClientContext</code> is logged to CloudTrail if you turn on data events.</p>",
                         "smithy.api#httpHeader": "X-Amz-Client-Context",
                         "smithy.api#tags": [
                             "feature:public"
@@ -27836,7 +27836,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.lambda#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds, and the maximum allowed value is 900 seconds. For functions using Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds, and the maximum allowed value is 1,800 seconds. For functions using Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>",
                         "smithy.api#tags": [
                             "feature:public"
                         ]

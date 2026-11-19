@@ -37,6 +37,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Validation status of the agentElevatedRoleArn. Updated asynchronously after the customer registers an elevated role. Possible values: PENDING_CONFIRMATION (validation in progress), VALID (role validated), INVALID (validation failed).</p>"
                     }
+                },
+                "serviceManagementRoleArn": {
+                    "target": "com.amazonaws.devopsagent#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Organizations service-managed role that AIDevOps uses to deploy and manage resources across the accounts in your Amazon Web Services Organization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -58,6 +64,19 @@
                 "smithy.api#documentation": "<p>Access to the requested resource is denied due to insufficient permissions.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.devopsagent#AccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#AwsAccountId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.devopsagent#AdditionalServiceDetails": {
@@ -228,6 +247,12 @@
                     "target": "com.amazonaws.devopsagent#AgentSpacePreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>The preferences configured on the agent space. Preferences that are not set take their default values.</p>"
+                    }
+                },
+                "awsSourceMode": {
+                    "target": "com.amazonaws.devopsagent#AwsSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services source mode for the AgentSpace, indicating whether its Amazon Web Services source configuration targets an individual Amazon Web Services account or an Amazon Web Services Organization.</p>"
                     }
                 }
             },
@@ -1270,6 +1295,29 @@
                 "smithy.api#documentation": "<p>Authentication flow type for operator app.</p>"
             }
         },
+        "com.amazonaws.devopsagent#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.devopsagent#AwsSourceMode": {
+            "type": "enum",
+            "members": {
+                "STANDALONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standalone"
+                    }
+                },
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "organization"
+                    }
+                }
+            }
+        },
         "com.amazonaws.devopsagent#AzureConfiguration": {
             "type": "structure",
             "members": {
@@ -1653,6 +1701,13 @@
                     "target": "com.amazonaws.devopsagent#AgentSpacePreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>The preferences to configure on the agent space. Preferences not provided take their default values.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "awsSourceMode": {
+                    "target": "com.amazonaws.devopsagent#AwsSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the AgentSpace's Amazon Web Services source configuration targets an individual Amazon Web Services account or an Amazon Web Services Organization.</p>",
                         "smithy.api#notProperty": {}
                     }
                 }
@@ -9430,6 +9485,148 @@
                 "smithy.api#documentation": "<p>Sort order options for journal operations</p>"
             }
         },
+        "com.amazonaws.devopsagent#OrgSourceAccountReasonCode": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accountSuspended"
+                    }
+                },
+                "ACCOUNT_NOT_IN_SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accountNotInScope"
+                    }
+                },
+                "MANAGEMENT_ACCOUNT_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "managementAccountNotSupported"
+                    }
+                },
+                "STACK_INSTANCE_INOPERABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stackInstanceInoperable"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accessDenied"
+                    }
+                },
+                "DEPLOYMENT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deploymentFailed"
+                    }
+                },
+                "SECONDARY_ACCOUNT_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "secondaryAccountLimitExceeded"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#OrgSourceDeploymentState": {
+            "type": "structure",
+            "members": {
+                "deployedAccountCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accounts in the targeted Amazon Web Services Organization or organizational unit that have successfully been deployed to.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "issues": {
+                    "target": "com.amazonaws.devopsagent#OrgSourceIssueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issues encountered while deploying the source configuration across the accounts in the Amazon Web Services Organization.</p>"
+                    }
+                },
+                "lastEvaluatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent evaluation of the organization-wide deployment state.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the current rollout state of an Amazon Web Services Organization source configuration, including the number of accounts that have been deployed to and any issues encountered during deployment.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#OrgSourceIssue": {
+            "type": "structure",
+            "members": {
+                "reasonCode": {
+                    "target": "com.amazonaws.devopsagent#OrgSourceAccountReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that identifies the reason for the issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accounts affected by this issue.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.devopsagent#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs affected by this issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.devopsagent#OrgSourceIssueMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the issue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an issue encountered while deploying or evaluating an Amazon Web Services Organization source configuration.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#OrgSourceIssueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#OrgSourceIssue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.devopsagent#OrgSourceIssueMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.devopsagent#OrgUnitId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"
+            }
+        },
         "com.amazonaws.devopsagent#PagerDutyAuthorizationConfig": {
             "type": "union",
             "members": {
@@ -12162,6 +12359,12 @@
                         "smithy.api#documentation": "<p>AWS source account configuration for monitoring resources.</p>"
                     }
                 },
+                "sourceAwsOrg": {
+                    "target": "com.amazonaws.devopsagent#SourceAwsOrgConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Organization source configuration used to monitor resources across an entire Amazon Web Services Organization or specified organizational units.</p>"
+                    }
+                },
                 "aws": {
                     "target": "com.amazonaws.devopsagent#AWSConfiguration",
                     "traits": {
@@ -12816,6 +13019,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for AWS source account integration. Setting the role ARNs on this configuration requires the caller to have at least the iam:PassRole permission (see assumableRoleArn).</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#SourceAwsOrgConfiguration": {
+            "type": "structure",
+            "members": {
+                "accountType": {
+                    "target": "com.amazonaws.devopsagent#SourceAccountType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account type for this configuration. For Amazon Web Services Organization-level configurations, this value is <code>source</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organizationalUnit": {
+                    "target": "com.amazonaws.devopsagent#SourceAwsOrgUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational units within the Amazon Web Services Organization that are targeted for source monitoring.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentState": {
+                    "target": "com.amazonaws.devopsagent#OrgSourceDeploymentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current deployment state of the Amazon Web Services Organization-wide source configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Web Services Organization-wide source account integration. Use this configuration to monitor Amazon Web Services resources across multiple accounts within an organization or within targeted organizational units.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#SourceAwsOrgUnit": {
+            "type": "structure",
+            "members": {
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.devopsagent#OrgUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Organizations organizational unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.devopsagent#AccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs that belong to this organizational unit and are targeted for source monitoring.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies an Organizations organizational unit and its member accounts that are targeted for source monitoring.</p>"
             }
         },
         "com.amazonaws.devopsagent#SubnetId": {
@@ -13844,6 +14096,13 @@
                     "target": "com.amazonaws.devopsagent#AgentSpacePreferences",
                     "traits": {
                         "smithy.api#documentation": "<p>The preferences to configure on the agent space. When provided, this replaces the full set of configured preferences; preferences not included revert to their default values. When omitted, the current preferences are left unchanged.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "awsSourceMode": {
+                    "target": "com.amazonaws.devopsagent#AwsSourceMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the AgentSpace's Amazon Web Services source configuration targets an individual Amazon Web Services account or an Amazon Web Services Organization. Use this parameter to switch an existing AgentSpace between source modes.</p>",
                         "smithy.api#notProperty": {}
                     }
                 }

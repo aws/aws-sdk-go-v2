@@ -108,6 +108,9 @@
                     "target": "com.amazonaws.marketplacecatalog#PutResourcePolicy"
                 },
                 {
+                    "target": "com.amazonaws.marketplacecatalog#StartAssessment"
+                },
+                {
                     "target": "com.amazonaws.marketplacecatalog#StartChangeSet"
                 },
                 {
@@ -1063,6 +1066,81 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.marketplacecatalog#AdditionalResource": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource. Currently, the only value that the service returns is\n            <code>Link</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Text": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to display for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An additional resource for a listing, with its type, display text, and URL.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AdditionalResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#AdditionalResource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AdditionalResourcesAlternative": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.marketplacecatalog#AdditionalResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed additional resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this alternative is recommended.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A proposed set of additional resources for a listing.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#AdditionalResourcesAlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#AdditionalResourcesAlternative"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#AmiProductEntityIdFilter": {
             "type": "structure",
             "members": {
@@ -1434,6 +1512,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID of the change set that triggered the assessments you want to\n            list.</p>"
                     }
+                },
+                "EntityIds": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 50 entity IDs whose assessments you want to list. The response includes\n            only the latest published assessment of each entity. You must also specify\n            <code>FrameworkId</code> in the request, and you can't combine <code>EntityIds</code>\n            with <code>EntityId</code> or <code>ChangeSetId</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1647,6 +1731,61 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.marketplacecatalog#CaseStudiesAlternative": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.marketplacecatalog#CaseStudyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed case studies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this set of case studies fits the solution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A proposed set of case studies for a solution.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#CaseStudiesAlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#CaseStudiesAlternative"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#CaseStudyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ListingCaseStudy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#CaseStudyTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#Catalog": {
             "type": "string",
             "traits": {
@@ -1654,7 +1793,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z]+$"
+                "smithy.api#pattern": "^(?![.-])(?!.*[.-]{2})(?![0-9]+\\.[0-9.]+$)[a-zA-Z0-9.-]{1,47}(?<![.-])$"
             }
         },
         "com.amazonaws.marketplacecatalog#Change": {
@@ -1878,6 +2017,28 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[A-Z][\\w]*$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#CitationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#RecommendationCitation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#CitationUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^https://\\S+$"
             }
         },
         "com.amazonaws.marketplacecatalog#ClientRequestToken": {
@@ -2192,6 +2353,97 @@
                 "smithy.api#documentation": "<p>The details of the resource assessed under the Container Security framework.</p>"
             }
         },
+        "com.amazonaws.marketplacecatalog#ContentAlternatives": {
+            "type": "union",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.marketplacecatalog#TextAlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed values for a text field, such as <code>ProductTitle</code> or\n            <code>LongDescription</code>. You can have up to 3 alternatives.</p>"
+                    }
+                },
+                "TextList": {
+                    "target": "com.amazonaws.marketplacecatalog#TextListAlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed values for <code>Highlights</code>, <code>SearchKeywords</code>, or\n            <code>Categories</code>. You can have up to 3 alternatives.</p>"
+                    }
+                },
+                "AdditionalResources": {
+                    "target": "com.amazonaws.marketplacecatalog#AdditionalResourcesAlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed values for <code>AdditionalResources</code>. You can have up to 3\n            alternatives.</p>"
+                    }
+                },
+                "UseCases": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCasesAlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed values for <code>UseCases</code>. You can have up to 3 alternatives.</p>"
+                    }
+                },
+                "CaseStudies": {
+                    "target": "com.amazonaws.marketplacecatalog#CaseStudiesAlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed values for <code>CaseStudies</code>. You can have up to 3\n            alternatives.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The proposed values for a listing field. Exactly one member is set, depending on\n            the field. The list in that member is empty if the status of the recommendation is\n            <code>INSUFFICIENT_CONTEXT</code>.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContentRecommendation": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommendation. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GENERATED</code> - The service proposed values for the field.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONTEXT</code> - The service couldn't propose a value. The follow-up questions say what is missing.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alternatives": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentAlternatives",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed values for the field, in ranked order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FollowUpQuestions": {
+                    "target": "com.amazonaws.marketplacecatalog#FollowUpQuestionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Questions that you can answer to get a better recommendation. The list is empty if\n            there are none.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Findings": {
+                    "target": "com.amazonaws.marketplacecatalog#FindingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The checklist of criteria for the field, in ranked order. It includes the criteria\n            that the field passes and the criteria that it fails. The list is empty if there are\n            none.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recommendation for a listing field.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ContentRecommendationStatus": {
+            "type": "enum",
+            "members": {
+                "GENERATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATED"
+                    }
+                },
+                "INSUFFICIENT_CONTEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CONTEXT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#ControlAssessment": {
             "type": "structure",
             "members": {
@@ -2207,10 +2459,22 @@
                         "smithy.api#documentation": "<p>The result of the control evaluation.</p>"
                     }
                 },
+                "VerificationSource": {
+                    "target": "com.amazonaws.marketplacecatalog#VerificationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where the result of the control came from. This value doesn't say whether the control\n            passed. A control that you attested to can still have a result of <code>PASS</code>. Valid values\n            are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_VERIFIED</code> - AWS evaluated the control.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SELF_ATTESTED</code> - You attested to the result of the control.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "Errors": {
                     "target": "com.amazonaws.marketplacecatalog#ControlErrorList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of <code>ControlError</code> objects associated with the control\n            evaluation.</p>"
+                    }
+                },
+                "ControlSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#ControlSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of what the control produced, such as recommendations for the listing.</p>"
                     }
                 }
             },
@@ -2283,6 +2547,53 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.marketplacecatalog#ControlError"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ControlInput": {
+            "type": "structure",
+            "members": {
+                "ControlId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the control to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Input": {
+                    "target": "com.amazonaws.marketplacecatalog#JsonDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. The input for the control, as a JSON document. The fields that a control accepts\n            depend on the control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A control to run as part of an assessment, and the input to run it with.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ControlInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ControlInput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ControlSummary": {
+            "type": "union",
+            "members": {
+                "ListingRecommendations": {
+                    "target": "com.amazonaws.marketplacecatalog#ListingRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations that a listing recommendations control produced for the\n            listing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of what a control produced. Exactly one member is set, corresponding to\n            the kind of control.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#DataProductEntityIdFilter": {
@@ -3087,6 +3398,18 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
             }
         },
+        "com.amazonaws.marketplacecatalog#EntityIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ResourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#EntityNameString": {
             "type": "string",
             "traits": {
@@ -3128,6 +3451,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityRevision": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
                 }
             }
         },
@@ -3705,6 +4037,76 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#FeatureRecommendation": {
+            "type": "structure",
+            "members": {
+                "FeatureId": {
+                    "target": "com.amazonaws.marketplacecatalog#RecommendedFeatureId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature that is recommended. Valid values are\n            <code>REQUEST_PRIVATE_OFFER</code>, <code>REQUEST_A_DEMO</code>,\n            <code>PROMOTIONAL_MEDIA</code>, <code>FREE_TRIAL</code>, and\n            <code>QUICK_LAUNCH</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.marketplacecatalog#RecommendedAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What you should do. It might contain a link to the console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why the feature is recommended.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.marketplacecatalog#RecommendationSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How much the recommendation blocks the listing. Valid values are\n            <code>BLOCKING</code> and <code>ADVISORY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#RecommendedFeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the listing has the feature. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PASS</code> - The listing already has the feature.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAIL</code> - The feature is one to turn on.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recommended AWS Marketplace feature for a listing.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FeatureRecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#FeatureRecommendation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FeatureRecommendations": {
+            "type": "structure",
+            "members": {
+                "Recommendations": {
+                    "target": "com.amazonaws.marketplacecatalog#FeatureRecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended features, in ranked order. The list has at most one entry for each\n            feature and up to 5 entries.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The feature recommendations for a listing, for a product or a solution.</p>"
+            }
+        },
         "com.amazonaws.marketplacecatalog#FieldName": {
             "type": "string",
             "traits": {
@@ -3713,6 +4115,36 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\-_\\.\\/]+$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FieldText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FieldTextItem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FieldTextList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#FieldTextItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#Filter": {
@@ -3767,6 +4199,79 @@
                 "smithy.api#pattern": "^(.)+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#FindingDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FindingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ListingFinding"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FollowUpQuestion": {
+            "type": "structure",
+            "members": {
+                "Question": {
+                    "target": "com.amazonaws.marketplacecatalog#FollowUpQuestionText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The question to answer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Justification": {
+                    "target": "com.amazonaws.marketplacecatalog#FollowUpQuestionJustification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why the question is asked.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A question that you can answer to get a better recommendation, and the\n            reason that it's asked.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FollowUpQuestionJustification": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FollowUpQuestionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#FollowUpQuestion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#FollowUpQuestionText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#FrameworkFilters": {
             "type": "union",
             "members": {
@@ -3810,6 +4315,18 @@
                     "target": "com.amazonaws.marketplacecatalog#ContainerSecuritySummary",
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the resource assessed under the Container Security framework.</p>"
+                    }
+                },
+                "ListingQualitySummary": {
+                    "target": "com.amazonaws.marketplacecatalog#ListingQualitySummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the resource assessed under the Listing Quality framework.</p>"
+                    }
+                },
+                "ListingRecommendationsSummary": {
+                    "target": "com.amazonaws.marketplacecatalog#ListingRecommendationsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the resource assessed under the Listing Recommendations framework.</p>"
                     }
                 }
             },
@@ -3993,7 +4510,7 @@
                 "FrameworkId": {
                     "target": "com.amazonaws.marketplacecatalog#FrameworkId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of a framework. When specified, only assessments performed\n            against this framework are returned. For example, <code>AMISecurity</code>.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of a framework. When specified, only assessments performed\n            against this framework are returned. For example, <code>AMISecurity</code>. Required\n            when you use <code>EntityIds</code> in <code>AssessmentTargetFilter</code>.</p>"
                     }
                 },
                 "AssessmentTargetFilter": {
@@ -4351,6 +4868,241 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingCaseStudy": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the case study entity. Identify a case study by this ID and not by\n            <code>Title</code>, which you can edit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.marketplacecatalog#CaseStudyTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the case study.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this case study was selected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recommended case study.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingFinding": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.marketplacecatalog#RecommendedAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What you should do to meet the criterion.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.marketplacecatalog#FindingDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What the criterion asks for. The text is the same for every listing. The reasoning\n            for a specific listing is in the rationale of the alternatives.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.marketplacecatalog#RecommendationSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How much the criterion blocks the listing. It is set on every row. For a row with\n            a status of <code>PASS</code>, it is the weight of a criterion that is already met.\n            Valid values are <code>BLOCKING</code> and <code>ADVISORY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.marketplacecatalog#ListingFindingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result for the criterion. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PASS</code> - The criterion is met and no action is needed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAIL</code> - The criterion isn't met or wasn't scored.</p>\n            </li>\n         </ul>\n         <p>This value is different from the status of the content recommendation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One row of the checklist of criteria for a listing field. A row is either a\n            criterion that the field already meets or advice for a criterion that it doesn't.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingFindingStatus": {
+            "type": "enum",
+            "members": {
+                "PASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASS"
+                    }
+                },
+                "FAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingQualitySummary": {
+            "type": "structure",
+            "members": {
+                "Tier": {
+                    "target": "com.amazonaws.marketplacecatalog#ListingQualityTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality tier of the listing. Valid values are <code>NEEDS_IMPROVEMENT</code>,\n            <code>BASIC</code>, <code>STRONG</code>, and <code>EXCELLENT</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityRevision": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityRevision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the entity that the tier was evaluated against. To check whether the\n            tier is out of date, compare this value with the current revision of the entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the resource assessed under the Listing Quality framework.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingQualityTier": {
+            "type": "enum",
+            "members": {
+                "NEEDS_IMPROVEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEEDS_IMPROVEMENT"
+                    }
+                },
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "STRONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRONG"
+                    }
+                },
+                "EXCELLENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCELLENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingRecommendations": {
+            "type": "union",
+            "members": {
+                "ProductContentRecommendations": {
+                    "target": "com.amazonaws.marketplacecatalog#ProductContentRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content recommendations for a product listing.</p>"
+                    }
+                },
+                "SolutionContentRecommendations": {
+                    "target": "com.amazonaws.marketplacecatalog#SolutionContentRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content recommendations for a solution listing.</p>"
+                    }
+                },
+                "FeatureRecommendations": {
+                    "target": "com.amazonaws.marketplacecatalog#FeatureRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations for AWS Marketplace features to use with the listing, for a\n            product or a solution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommendations that a listing recommendations control produced. Exactly one\n            member is set, corresponding to the control: content recommendations for a product,\n            content recommendations for a solution, or feature recommendations.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingRecommendationsSummary": {
+            "type": "structure",
+            "members": {
+                "Tier": {
+                    "target": "com.amazonaws.marketplacecatalog#ListingQualityTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality tier of the listing. Valid values are <code>NEEDS_IMPROVEMENT</code>,\n            <code>BASIC</code>, <code>STRONG</code>, and <code>EXCELLENT</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityRevision": {
+                    "target": "com.amazonaws.marketplacecatalog#EntityRevision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of the entity that the recommendations were generated against. To check whether\n            the recommendations are out of date, compare this value with the current revision of the\n            entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the resource assessed under the Listing Recommendations framework.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListingUseCase": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the use case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rank": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseRank",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rank of the use case. A rank of 1 is the strongest match. Valid values range\n            from 1 to 5.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseTaxonomyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the use case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Group": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseTaxonomyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group of the use case in the taxonomy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subgroup": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseTaxonomyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subgroup of the use case in the taxonomy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseCaseDetails": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the solution serves the use case.</p>"
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this use case is recommended.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A use case from the AWS Marketplace use case taxonomy.</p>"
             }
         },
         "com.amazonaws.marketplacecatalog#MachineLearningProductEntityIdFilter": {
@@ -4826,6 +5578,12 @@
                     "target": "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>Allows filtering on the <code>ResaleAuthorizationId</code> of an offer.</p>\n         <note>\n            <p>Not all offers have a <code>ResaleAuthorizationId</code>. The response will only\n                include offers for which you have permissions.</p>\n         </note>"
+                    }
+                },
+                "SubsidiaryAuthorizationId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that matches offers by the ID of the subsidiary authorization that they were created\n            from.</p>\n         <note>\n            <p>Not all offers have a <code>SubsidiaryAuthorizationId</code>.</p>\n         </note>"
                     }
                 },
                 "ReleaseDate": {
@@ -5574,6 +6332,12 @@
                         "smithy.api#enumValue": "ResaleAuthorizationId"
                     }
                 },
+                "SubsidiaryAuthorizationId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubsidiaryAuthorizationId"
+                    }
+                },
                 "ReleaseDate": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5679,6 +6443,42 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of subsidiary authorization IDs to filter offers by. You can include up to 10\n            subsidiary authorization IDs in this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that matches offers by the ID of the subsidiary authorization they were\n            created from.</p>\n         <note>\n            <p>Not all offers have a <code>SubsidiaryAuthorizationId</code>.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 22
+                },
+                "smithy.api#pattern": "^subauthz-[a-zA-Z0-9]{13}$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#OfferSummary": {
             "type": "structure",
             "members": {
@@ -5698,6 +6498,12 @@
                     "target": "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The ResaleAuthorizationId of the offer.</p>"
+                    }
+                },
+                "SubsidiaryAuthorizationId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferSubsidiaryAuthorizationIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subsidiary authorization that the offer was created from. The ID begins with\n            <code>subauthz-</code> followed by 13 alphanumeric characters.</p>"
                     }
                 },
                 "ReleaseDate": {
@@ -5916,6 +6722,69 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#ProductContentRecommendations": {
+            "type": "structure",
+            "members": {
+                "ProductTitle": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the product title.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the short description.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the long description.</p>"
+                    }
+                },
+                "SupportDescription": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the support description.</p>"
+                    }
+                },
+                "Highlights": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the highlights.</p>"
+                    }
+                },
+                "SearchKeywords": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the search keywords.</p>"
+                    }
+                },
+                "Categories": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the categories.</p>"
+                    }
+                },
+                "AdditionalResources": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the additional resources. Each alternative has up to 3\n            resources.</p>"
+                    }
+                },
+                "Citations": {
+                    "target": "com.amazonaws.marketplacecatalog#CitationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sources that the recommendations are based on. You can have up to 5 sources.\n            The list is empty if there are none.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content recommendations for a product listing, with one member for each\n            listing field. A member is absent if nothing is recommended for that field.</p>"
+            }
+        },
         "com.amazonaws.marketplacecatalog#PutResourcePolicy": {
             "type": "operation",
             "input": {
@@ -5977,6 +6846,108 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#Rationale": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#RecommendationCitation": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.marketplacecatalog#CitationUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS URL of the source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A source that the recommendations are based on.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#RecommendationSeverity": {
+            "type": "enum",
+            "members": {
+                "BLOCKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCKING"
+                    }
+                },
+                "ADVISORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADVISORY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#RecommendedAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#RecommendedFeatureId": {
+            "type": "enum",
+            "members": {
+                "REQUEST_PRIVATE_OFFER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_PRIVATE_OFFER"
+                    }
+                },
+                "REQUEST_A_DEMO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_A_DEMO"
+                    }
+                },
+                "PROMOTIONAL_MEDIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROMOTIONAL_MEDIA"
+                    }
+                },
+                "FREE_TRIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREE_TRIAL"
+                    }
+                },
+                "QUICK_LAUNCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICK_LAUNCH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#RecommendedFeatureStatus": {
+            "type": "enum",
+            "members": {
+                "PASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASS"
+                    }
+                },
+                "FAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#RequestedChangeList": {
@@ -7121,6 +8092,33 @@
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#ResourceText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResourceUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#SaaSProductEntityIdFilter": {
             "type": "structure",
             "members": {
@@ -7426,6 +8424,63 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.marketplacecatalog#SolutionContentRecommendations": {
+            "type": "structure",
+            "members": {
+                "Title": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the external title of the solution.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the value proposition of the solution.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the long description of the solution.</p>"
+                    }
+                },
+                "IntegrationDetails": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the integration details of the solution.</p>"
+                    }
+                },
+                "AdditionalResources": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the additional resources. Each alternative has up to 8\n            resources.</p>"
+                    }
+                },
+                "UseCases": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the use cases of the solution.</p>"
+                    }
+                },
+                "CaseStudies": {
+                    "target": "com.amazonaws.marketplacecatalog#ContentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation for the case studies of the solution. Each alternative has up\n            to 20 case studies.</p>"
+                    }
+                },
+                "Citations": {
+                    "target": "com.amazonaws.marketplacecatalog#CitationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sources that the recommendations are based on. You can have up to 5 sources.\n            The list is empty if there are none.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content recommendations for a solution listing, with one member for each\n            listing field. A member is absent if nothing is recommended for that field.</p>"
+            }
+        },
         "com.amazonaws.marketplacecatalog#Sort": {
             "type": "structure",
             "members": {
@@ -7471,6 +8526,108 @@
                         "smithy.api#enumValue": "DESCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#StartAssessment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#StartAssessmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#StartAssessmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an assessment of a product entity against a framework. An\n            <i>assessment</i> is the result of evaluating an entity against the\n            controls of a framework. You choose the controls to run and provide the input that each\n            control needs.</p>\n         <p>The assessment runs asynchronously. This action returns the ID of the assessment\n            immediately. To get its status and the results of each control, use the\n            <code>DescribeAssessment</code> action. To find assessments that you started earlier,\n            use the <code>ListAssessments</code> action.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartAssessment",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#StartAssessmentRequest": {
+            "type": "structure",
+            "members": {
+                "Catalog": {
+                    "target": "com.amazonaws.marketplacecatalog#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.marketplacecatalog#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique token to identify the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "FrameworkId": {
+                    "target": "com.amazonaws.marketplacecatalog#FrameworkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the framework that defines the controls to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityId": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the product entity to assess.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Controls": {
+                    "target": "com.amazonaws.marketplacecatalog#ControlInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The controls to provide input for. Every control in the framework is included in the\n            assessment, and a control that you don't specify gets no input. You can specify\n            1–100 controls.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.marketplacecatalog#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags to apply to the assessment when you create it. Each tag is a key-value\n            pair. You can specify 1–200 tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#StartAssessmentResponse": {
+            "type": "structure",
+            "members": {
+                "AssessmentId": {
+                    "target": "com.amazonaws.marketplacecatalog#AssessmentIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the assessment that was started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacecatalog#StartChangeSet": {
@@ -8178,6 +9335,21 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.marketplacecatalog#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.marketplacecatalog#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#TagResource": {
             "type": "operation",
             "input": {
@@ -8249,6 +9421,74 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TextAlternative": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.marketplacecatalog#FieldText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed text. The limit of the field itself, such as 255 characters for a\n            title, applies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this alternative is recommended.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A proposed text value for a listing field.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TextAlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#TextAlternative"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TextListAlternative": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.marketplacecatalog#FieldTextList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed list of text values. The list has 1–15 items.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this alternative is recommended.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A proposed list of text values for a listing field.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TextListAlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#TextListAlternative"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#ThrottlingException": {
@@ -8325,6 +9565,88 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCaseDetails": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCaseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#ListingUseCase"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCaseRank": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCaseTaxonomyValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCasesAlternative": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.marketplacecatalog#UseCaseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed use cases, in ranked order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rationale": {
+                    "target": "com.amazonaws.marketplacecatalog#Rationale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why this alternative is recommended.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A proposed set of use cases for a solution.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UseCasesAlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#UseCasesAlternative"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#ValidationException": {
@@ -8434,6 +9756,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#VerificationSource": {
+            "type": "enum",
+            "members": {
+                "AWS_VERIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_VERIFIED"
+                    }
+                },
+                "SELF_ATTESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF_ATTESTED"
+                    }
                 }
             }
         },

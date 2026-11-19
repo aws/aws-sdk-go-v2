@@ -3240,6 +3240,12 @@
                 "ContentRedirection": {
                     "target": "com.amazonaws.appstream#ContentRedirection"
                 },
+                "WebAuthnRedirection": {
+                    "target": "com.amazonaws.appstream#WebAuthnRedirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for WebAuthn redirection between the streaming session and the user's local device. Use ProcessCompatibilityList to specify which processes can use WebAuthn redirection on Windows fleets.</p>"
+                    }
+                },
                 "AgentAccessConfig": {
                     "target": "com.amazonaws.appstream#AgentAccessConfig",
                     "traits": {
@@ -10093,6 +10099,30 @@
                 }
             }
         },
+        "com.amazonaws.appstream#ProcessCompatibilityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ProcessImageName"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of process executable names on the remote host for which you enable WebAuthn redirection. Matching is case-insensitive, and duplicates are not allowed.</p>\n         <p>If you omit this field on a Windows fleet, WorkSpaces Applications uses a built-in default list of common browser and sign-in processes. If you specify a list, your list replaces the default list rather than adding to it. Include any default entries that your workloads still need.</p>\n         <p>WorkSpaces Applications does not support this field on Linux fleets.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.appstream#ProcessImageName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The file name of a process executable on the remote host for which you want to redirect WebAuthn requests. For example, chrome.exe.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 260
+                },
+                "smithy.api#pattern": "^[\\p{L}0-9_](?:[\\p{L}0-9._ ()+-]*[\\p{L}0-9._()+-])?(?<!\\.[eE][xX][eE])\\.[eE][xX][eE]$"
+            }
+        },
         "com.amazonaws.appstream#RedirectURL": {
             "type": "string",
             "traits": {
@@ -10743,6 +10773,12 @@
                         "smithy.api#documentation": "<p>Configuration for bidirectional URL redirection between the streaming session and the local client. Use HostToClient to redirect URLs from the remote desktop to the local browser.</p>"
                     }
                 },
+                "WebAuthnRedirection": {
+                    "target": "com.amazonaws.appstream#WebAuthnRedirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for WebAuthn redirection between the streaming session and the user's local device. Use ProcessCompatibilityList to specify which processes can use WebAuthn redirection on Windows fleets.</p>"
+                    }
+                },
                 "AgentAccessConfig": {
                     "target": "com.amazonaws.appstream#AgentAccessConfig",
                     "traits": {
@@ -10841,6 +10877,12 @@
                         "smithy.api#enumValue": "CONTENT_REDIRECTION"
                     }
                 },
+                "WEB_AUTHN_REDIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_AUTHN_REDIRECTION"
+                    }
+                },
                 "AGENT_ACCESS_CONFIG": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -10861,7 +10903,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The stack attributes to delete.</p>\n         <ul>\n            <li>\n               <p>STORAGE_CONNECTORS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_HOMEFOLDERS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_GOOGLE_DRIVE</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_ONE_DRIVE</p>\n            </li>\n            <li>\n               <p>REDIRECT_URL</p>\n            </li>\n            <li>\n               <p>FEEDBACK_URL</p>\n            </li>\n            <li>\n               <p>THEME_NAME</p>\n            </li>\n            <li>\n               <p>USER_SETTINGS</p>\n            </li>\n            <li>\n               <p>EMBED_HOST_DOMAINS</p>\n            </li>\n            <li>\n               <p>IAM_ROLE_ARN</p>\n            </li>\n            <li>\n               <p>ACCESS_ENDPOINTS</p>\n            </li>\n            <li>\n               <p>STREAMING_EXPERIENCE_SETTINGS</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG_KMS_KEY_ARN</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_AUTHENTICATION</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The stack attributes to delete.</p>\n         <ul>\n            <li>\n               <p>STORAGE_CONNECTORS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_HOMEFOLDERS</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_GOOGLE_DRIVE</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_ONE_DRIVE</p>\n            </li>\n            <li>\n               <p>REDIRECT_URL</p>\n            </li>\n            <li>\n               <p>FEEDBACK_URL</p>\n            </li>\n            <li>\n               <p>THEME_NAME</p>\n            </li>\n            <li>\n               <p>USER_SETTINGS</p>\n            </li>\n            <li>\n               <p>EMBED_HOST_DOMAINS</p>\n            </li>\n            <li>\n               <p>IAM_ROLE_ARN</p>\n            </li>\n            <li>\n               <p>ACCESS_ENDPOINTS</p>\n            </li>\n            <li>\n               <p>STREAMING_EXPERIENCE_SETTINGS</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG</p>\n            </li>\n            <li>\n               <p>AGENT_ACCESS_CONFIG_KMS_KEY_ARN</p>\n            </li>\n            <li>\n               <p>STORAGE_CONNECTOR_AUTHENTICATION</p>\n            </li>\n            <li>\n               <p>WEB_AUTHN_REDIRECTION</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.appstream#StackAttributes": {
@@ -12686,6 +12728,12 @@
                 "ContentRedirection": {
                     "target": "com.amazonaws.appstream#ContentRedirection"
                 },
+                "WebAuthnRedirection": {
+                    "target": "com.amazonaws.appstream#WebAuthnRedirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for WebAuthn redirection between the streaming session and the user's local device. Use ProcessCompatibilityList to specify which processes can use WebAuthn redirection on Windows fleets. To remove WebAuthn redirection, use AttributesToDelete with the WEB_AUTHN_REDIRECTION value.</p>"
+                    }
+                },
                 "AgentAccessConfig": {
                     "target": "com.amazonaws.appstream#AgentAccessConfigForUpdate",
                     "traits": {
@@ -12824,7 +12872,7 @@
         "com.amazonaws.appstream#UrlPattern": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A glob pattern using wildcards (* for zero or more characters, ? for exactly one character) to match URLs for redirection rules. Patterns do not include a protocol prefix; HTTPS is enforced automatically. Valid examples: *, *.example.com, github.com/myorg/*, api?.example.com Invalid examples: https://example.com (no protocol), empty string</p>",
+                "smithy.api#documentation": "<p>A glob pattern using wildcards (* for zero or more characters, ? for exactly one character) to match URLs for redirection rules. The pattern must begin with a supported scheme prefix — http://, https://, ftp://, sftp://, or mailto: — and cannot contain whitespace, commas, semicolons, or angle brackets; maximum length 2048 characters. Valid examples: https://*.example.com, , sftp://files.example.com/*, mailto:*@example.com. Invalid examples: *.example.com (no scheme), https://exam ple.com (contains whitespace), empty string.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -13288,6 +13336,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes VPC configuration information for fleets and image builders.</p>"
+            }
+        },
+        "com.amazonaws.appstream#WebAuthnRedirection": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies whether WebAuthn redirection is enabled for the stack.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcessCompatibilityList": {
+                    "target": "com.amazonaws.appstream#ProcessCompatibilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of process executable names for which you enable WebAuthn redirection. For example, chrome.exe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the WebAuthn redirection configuration for a stack. With WebAuthn redirection, your users can complete passkey and security-key authentication from a streaming session by using an authenticator attached to their local device.</p>"
             }
         },
         "com.amazonaws.appstream#WorkspaceImageId": {

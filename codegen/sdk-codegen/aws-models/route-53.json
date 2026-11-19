@@ -68,6 +68,9 @@
                     "target": "com.amazonaws.route53#CreateHealthCheck"
                 },
                 {
+                    "target": "com.amazonaws.route53#CreateHealthCheckSource"
+                },
+                {
                     "target": "com.amazonaws.route53#CreateHostedZone"
                 },
                 {
@@ -102,6 +105,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53#DeleteHealthCheck"
+                },
+                {
+                    "target": "com.amazonaws.route53#DeleteHealthCheckSource"
                 },
                 {
                     "target": "com.amazonaws.route53#DeleteHostedZone"
@@ -161,6 +167,9 @@
                     "target": "com.amazonaws.route53#GetHealthCheckLastFailureReason"
                 },
                 {
+                    "target": "com.amazonaws.route53#GetHealthCheckSource"
+                },
+                {
                     "target": "com.amazonaws.route53#GetHealthCheckStatus"
                 },
                 {
@@ -204,6 +213,12 @@
                 },
                 {
                     "target": "com.amazonaws.route53#ListHealthChecks"
+                },
+                {
+                    "target": "com.amazonaws.route53#ListHealthChecksBySource"
+                },
+                {
+                    "target": "com.amazonaws.route53#ListHealthCheckSources"
                 },
                 {
                     "target": "com.amazonaws.route53#ListHostedZones"
@@ -2598,7 +2613,7 @@
                 "Type": {
                     "target": "com.amazonaws.route53#AccountLimitType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The limit that you requested. Valid values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>MAX_HEALTH_CHECKS_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of health checks that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_HOSTED_ZONES_BY_OWNER</b>: The maximum number\n\t\t\t\t\tof hosted zones that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_REUSABLE_DELEGATION_SETS_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of reusable delegation sets that you can create using the current\n\t\t\t\t\taccount.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICIES_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of traffic policies that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of traffic policy instances that you can create using the current\n\t\t\t\t\taccount. (Traffic policy instances are referred to as traffic flow policy\n\t\t\t\t\trecords in the Amazon Route 53 console.)</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The limit that you requested. Valid values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>MAX_HEALTH_CHECKS_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of health checks that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_HEALTH_CHECK_SOURCES_BY_OWNER</b> The maximum\n\t\t\t\t\tnumber of health check sources that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_HOSTED_ZONES_BY_OWNER</b>: The maximum number\n\t\t\t\t\tof hosted zones that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_REUSABLE_DELEGATION_SETS_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of reusable delegation sets that you can create using the current\n\t\t\t\t\taccount.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICIES_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of traffic policies that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of traffic policy instances that you can create using the current\n\t\t\t\t\taccount. (Traffic policy instances are referred to as traffic flow policy\n\t\t\t\t\trecords in the Amazon Route 53 console.)</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2645,6 +2660,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MAX_TRAFFIC_POLICIES_BY_OWNER"
+                    }
+                },
+                "MAX_HEALTH_CHECK_SOURCES_BY_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_HEALTH_CHECK_SOURCES_BY_OWNER"
                     }
                 }
             }
@@ -2903,6 +2924,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains the response information for the\n\t\t\t\t<code>AssociateVPCWithHostedZone</code> request.</p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53#AvailabilityZoneId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.route53#Bias": {
@@ -3751,6 +3781,9 @@
                     "target": "com.amazonaws.route53#NoSuchHealthCheck"
                 },
                 {
+                    "target": "com.amazonaws.route53#NoSuchHealthCheckSource"
+                },
+                {
                     "target": "com.amazonaws.route53#NoSuchHostedZone"
                 },
                 {
@@ -3761,7 +3794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds, edits, or deletes tags for a health check or a hosted zone.</p>\n         <p>For information about using tags for cost allocation, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n\t\t\t\tTags</a> in the <i>Billing and Cost Management User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds, edits, or deletes tags for a health check, a health check source, or a hosted zone.</p>\n         <p>For information about using tags for cost allocation, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation\n\t\t\t\tTags</a> in the <i>Billing and Cost Management User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add or remove tags from a hosted zone or health check",
@@ -3799,7 +3832,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.route53#TagResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resource.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of the resource.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for health check sources is <code>healthchecksource</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3815,7 +3848,7 @@
                 "AddTags": {
                     "target": "com.amazonaws.route53#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A complex type that contains a list of the tags that you want to add to the specified\n\t\t\thealth check or hosted zone and/or the tags that you want to edit <code>Value</code>\n\t\t\tfor.</p>\n         <p>You can add a maximum of 10 tags to a health check or a hosted zone.</p>"
+                        "smithy.api#documentation": "<p>A complex type that contains a list of the tags that you want to add to the specified\n\t\t\thealth check or hosted zone and/or the tags that you want to edit <code>Value</code>\n\t\t\tfor.</p>\n         <p>You can add a maximum of 10 tags to a health check, a health check source, or a hosted zone.</p>"
                     }
                 },
                 "RemoveTagKeys": {
@@ -4715,7 +4748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new health check.</p>\n         <p>For information about adding health checks to resource record sets, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResourceRecordSet.html#Route53-Type-ResourceRecordSet-HealthCheckId\">HealthCheckId</a> in <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html\">ChangeResourceRecordSets</a>. </p>\n         <p>\n            <b>ELB Load Balancers</b>\n         </p>\n         <p>If you're registering EC2 instances with an Elastic Load Balancing (ELB) load\n\t\t\tbalancer, do not create Amazon Route 53 health checks for the EC2 instances. When you\n\t\t\tregister an EC2 instance with a load balancer, you configure settings for an ELB health\n\t\t\tcheck, which performs a similar function to a Route 53 health check.</p>\n         <p>\n            <b>Private Hosted Zones</b>\n         </p>\n         <p>You can associate health checks with failover resource record sets in a private hosted\n\t\t\tzone. Note the following:</p>\n         <ul>\n            <li>\n               <p>Route 53 health checkers are outside the VPC. To check the health of an\n\t\t\t\t\tendpoint within a VPC by IP address, you must assign a public IP address to the\n\t\t\t\t\tinstance in the VPC.</p>\n            </li>\n            <li>\n               <p>You can configure a health checker to check the health of an external resource\n\t\t\t\t\tthat the instance relies on, such as a database server.</p>\n            </li>\n            <li>\n               <p>You can create a CloudWatch metric, associate an alarm with the metric, and\n\t\t\t\t\tthen create a health check that is based on the state of the alarm. For example,\n\t\t\t\t\tyou might create a CloudWatch metric that checks the status of the Amazon EC2\n\t\t\t\t\t\t<code>StatusCheckFailed</code> metric, add an alarm to the metric, and then\n\t\t\t\t\tcreate a health check that is based on the state of the alarm. For information\n\t\t\t\t\tabout creating CloudWatch metrics and alarms by using the CloudWatch console,\n\t\t\t\t\tsee the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html\">Amazon\n\t\t\t\t\t\tCloudWatch User Guide</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a new health check.</p>\n         <p>For information about adding health checks to resource record sets, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResourceRecordSet.html#Route53-Type-ResourceRecordSet-HealthCheckId\">HealthCheckId</a> in <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html\">ChangeResourceRecordSets</a>. </p>\n         <p>\n            <b>ELB Load Balancers</b>\n         </p>\n         <p>If you're registering EC2 instances with an Elastic Load Balancing (ELB) load\n\t\t\tbalancer, do not create Amazon Route 53 health checks for the EC2 instances. When you\n\t\t\tregister an EC2 instance with a load balancer, you configure settings for an ELB health\n\t\t\tcheck, which performs a similar function to a Route 53 health check.</p>\n         <p>\n            <b>Private Hosted Zones</b>\n         </p>\n         <p>You can associate health checks with failover resource record sets in a private hosted\n\t\t\tzone. Note the following:</p>\n         <ul>\n            <li>\n               <p>For a public health check, Route 53 health checkers are outside the VPC. To\n\t\t\t\t\tcheck the health of an endpoint within a VPC by IP address, you must assign a\n\t\t\t\t\tpublic IP address to the instance in the VPC.</p>\n            </li>\n            <li>\n               <p>To check the health of an endpoint within a VPC by using a private IP\n\t\t\t\t\taddress, use a private endpoint health check (<code>EndpointType</code> of\n\t\t\t\t\t<code>PRIVATE</code>). For more information, see\n\t\t\t\t\t<code>CreateHealthCheckSource</code>.</p>\n            </li>\n            <li>\n               <p>You can configure a health checker to check the health of an external resource\n\t\t\t\t\tthat the instance relies on, such as a database server.</p>\n            </li>\n            <li>\n               <p>You can create a CloudWatch metric, associate an alarm with the metric, and\n\t\t\t\t\tthen create a health check that is based on the state of the alarm. For example,\n\t\t\t\t\tyou might create a CloudWatch metric that checks the status of the Amazon EC2\n\t\t\t\t\t\t<code>StatusCheckFailed</code> metric, add an alarm to the metric, and then\n\t\t\t\t\tcreate a health check that is based on the state of the alarm. For information\n\t\t\t\t\tabout creating CloudWatch metrics and alarms by using the CloudWatch console,\n\t\t\t\t\tsee the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html\">Amazon\n\t\t\t\t\t\tCloudWatch User Guide</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/healthcheck",
@@ -4767,6 +4800,97 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type containing the response information for the new health check.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53#CreateHealthCheckSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#CreateHealthCheckSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#CreateHealthCheckSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#HealthCheckSourceAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidVPCId"
+                },
+                {
+                    "target": "com.amazonaws.route53#TooManyHealthCheckSources"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a health check source, which defines the virtual private cloud (VPC), subnets, and security groups from which Route 53 sends private endpoint health check requests. To use this operation, you must have the <code>route53:CreateHealthCheckSource</code> permission. You must also have permission to create a service-linked role.</p>\n         <p>Specify a VPC, one subnet in each Availability Zone that Route 53 uses for private endpoint health checks in the Amazon Web Services Region, and one or more security groups for each subnet. The security groups must allow outbound traffic to the endpoints that you want to check.</p>\n         <p>Route 53 creates a health check source asynchronously, and the initial <code>HealthCheckSourceStatus</code> is <code>CREATE_PENDING</code>. Call <code>GetHealthCheckSource</code> until the status is <code>CREATE_COMPLETED</code> before you create health checks that use the source. You can't change the configuration of a health check source after you create it.</p>\n         <p>If AWS Identity and Access Management (IAM) is still deleting the Route 53 service-linked role for your account, the request fails with <code>InvalidInput</code>. Retry after the deletion completes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2013-04-01/healthchecksource",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.route53#CreateHealthCheckSourceRequest": {
+            "type": "structure",
+            "members": {
+                "CallerReference": {
+                    "target": "com.amazonaws.route53#HealthCheckNonce",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that ensures that the operation completes no more than one time. If you retry a <code>CreateHealthCheckSource</code> request with the same <code>CallerReference</code> and the same settings as a previous request, Route 53 returns the existing health check source without creating a duplicate. If that health check source has a status of <code>CREATE_FAILED</code>, Route 53 tries to create it again. To create a new health check source after a failure, specify a new value for <code>CallerReference</code>. If a health check source with the same <code>CallerReference</code> already exists and the settings differ, Route 53 returns a <code>HealthCheckSourceAlreadyExists</code> error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "HealthCheckSourceConfig": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains the virtual private cloud (VPC), subnets, and security groups for the health check source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.route53#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains a list of the tags that you want to apply to the health check source when you create it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the virtual private cloud (VPC), subnets, and security groups that are required to create a health check source, and a caller reference that identifies the request.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53#CreateHealthCheckSourceResponse": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the new health check source. Route 53 assigns this ID when it creates the source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HealthCheckSourceStatus": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the health check source. Immediately after you create a health check source, the status is <code>CREATE_PENDING</code>. If the request is a retry with the same <code>CallerReference</code>, the status is the current status of the existing health check source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.route53#ResourceURI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique URL representing the new health check source.</p>",
+                        "smithy.api#httpHeader": "Location",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the ID, status, and location URL of the new health check source.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5965,6 +6089,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53#DeleteHealthCheckSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#DeleteHealthCheckSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#DeleteHealthCheckSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHealthCheckSource"
+                },
+                {
+                    "target": "com.amazonaws.route53#PriorRequestNotComplete"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a health check source. Before you delete a health check source, delete or update any health checks that reference it. Otherwise, the request fails with <code>InvalidInput</code>. The request also fails with <code>InvalidInput</code> if the status of the health check source is <code>CREATE_PENDING</code> or <code>CREATE_IN_PROGRESS</code>. Wait until the status is <code>CREATE_COMPLETED</code> or <code>CREATE_FAILED</code>, and then try again.</p>\n         <p>Route 53 deletes a health check source asynchronously, and the initial <code>HealthCheckSourceStatus</code> is <code>DELETE_PENDING</code>. Call <code>GetHealthCheckSource</code> to track progress. After the deletion completes, <code>GetHealthCheckSource</code> returns <code>NoSuchHealthCheckSource</code> and the health check source no longer appears in the results of <code>ListHealthCheckSources</code>. If you delete a health check source that is already deleted, the request fails with <code>NoSuchHealthCheckSource</code>.</p>\n         <p>To use this operation, you must have the <code>route53:DeleteHealthCheckSource</code> permission. You must also have permission to create a service-linked role.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2013-04-01/healthchecksource/{HealthCheckSourceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#DeleteHealthCheckSourceRequest": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the ID of the health check source that you want to delete.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53#DeleteHealthCheckSourceResponse": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source that is being deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HealthCheckSourceStatus": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the health check source after Route 53 accepts the delete request. The value is <code>DELETE_PENDING</code>, or the current status if deletion of the health check source was already in progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the ID and status of the health check source that <code>DeleteHealthCheckSource</code> deletes.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53#DeleteHostedZone": {
             "type": "operation",
             "input": {
@@ -6742,6 +6934,23 @@
         "com.amazonaws.route53#EnableSNI": {
             "type": "boolean"
         },
+        "com.amazonaws.route53#EndpointType": {
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53#ErrorMessage": {
             "type": "string"
         },
@@ -6976,7 +7185,7 @@
                 "Type": {
                     "target": "com.amazonaws.route53#AccountLimitType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The limit that you want to get. Valid values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>MAX_HEALTH_CHECKS_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of health checks that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_HOSTED_ZONES_BY_OWNER</b>: The maximum number\n\t\t\t\t\tof hosted zones that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_REUSABLE_DELEGATION_SETS_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of reusable delegation sets that you can create using the current\n\t\t\t\t\taccount.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICIES_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of traffic policies that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of traffic policy instances that you can create using the current\n\t\t\t\t\taccount. (Traffic policy instances are referred to as traffic flow policy\n\t\t\t\t\trecords in the Amazon Route 53 console.)</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The limit that you want to get. Valid values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>MAX_HEALTH_CHECKS_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of health checks that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_HEALTH_CHECK_SOURCES_BY_OWNER</b> The maximum\n\t\t\t\t\tnumber of health check sources that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_HOSTED_ZONES_BY_OWNER</b>: The maximum number\n\t\t\t\t\tof hosted zones that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_REUSABLE_DELEGATION_SETS_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of reusable delegation sets that you can create using the current\n\t\t\t\t\taccount.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICIES_BY_OWNER</b>: The maximum\n\t\t\t\t\tnumber of traffic policies that you can create using the current account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER</b>: The\n\t\t\t\t\tmaximum number of traffic policy instances that you can create using the current\n\t\t\t\t\taccount. (Traffic policy instances are referred to as traffic flow policy\n\t\t\t\t\trecords in the Amazon Route 53 console.)</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7421,6 +7630,128 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains the response to a <code>GetHealthCheck</code>\n\t\t\trequest.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53#GetHealthCheckSource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#GetHealthCheckSourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#GetHealthCheckSourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHealthCheckSource"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specified health check source, including its status and the virtual private cloud (VPC), subnets, and security groups that it uses.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2013-04-01/healthchecksource/{HealthCheckSourceId}",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "HealthCheckSourceCreated": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "HealthCheckSource.HealthCheckSourceStatus",
+                                        "expected": "CREATE_COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "HealthCheckSource.HealthCheckSourceStatus",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "NoSuchHealthCheckSource"
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    },
+                    "HealthCheckSourceDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "NoSuchHealthCheckSource"
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "HealthCheckSource.HealthCheckSourceStatus",
+                                        "expected": "DELETE_COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "HealthCheckSource.HealthCheckSourceStatus",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#GetHealthCheckSourceRequest": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source that you want to get information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the ID of the health check source that you want to get information about.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53#GetHealthCheckSourceResponse": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSource": {
+                    "target": "com.amazonaws.route53#HealthCheckSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains information about the specified health check source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the health check source that <code>GetHealthCheckSource</code> returns.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -8144,7 +8475,7 @@
                 "IPAddress": {
                     "target": "com.amazonaws.route53#IPAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 or IPv6 IP address of the endpoint that you want Amazon Route 53 to perform\n\t\t\thealth checks on. If you don't specify a value for <code>IPAddress</code>, Route 53\n\t\t\tsends a DNS request to resolve the domain name that you specify in\n\t\t\t\t<code>FullyQualifiedDomainName</code> at the interval that you specify in\n\t\t\t\t<code>RequestInterval</code>. Using an IP address returned by DNS, Route 53 then\n\t\t\tchecks the health of the endpoint.</p>\n         <p>Use one of the following formats for the value of <code>IPAddress</code>: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 address</b>: four values between 0 and 255,\n\t\t\t\t\tseparated by periods (.), for example, <code>192.0.2.44</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IPv6 address</b>: eight groups of four\n\t\t\t\t\thexadecimal values, separated by colons (:), for example,\n\t\t\t\t\t\t<code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>. You can also shorten\n\t\t\t\t\tIPv6 addresses as described in RFC 5952, for example,\n\t\t\t\t\t\t<code>2001:db8:85a3::abcd:1:2345</code>.</p>\n            </li>\n         </ul>\n         <p>If the endpoint is an EC2 instance, we recommend that you create an Elastic IP\n\t\t\taddress, associate it with your EC2 instance, and specify the Elastic IP address for\n\t\t\t\t<code>IPAddress</code>. This ensures that the IP address of your instance will never\n\t\t\tchange.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName\">FullyQualifiedDomainName</a>. </p>\n         <p>Constraints: Route 53 can't check the health of endpoints for which the IP address is\n\t\t\tin local, private, non-routable, or multicast ranges. For more information about IP\n\t\t\taddresses for which you can't create health checks, see the following documents:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5735\">RFC 5735, Special Use IPv4\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc6598\">RFC 6598, IANA-Reserved IPv4\n\t\t\t\t\t\tPrefix for Shared Address Space</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5156\">RFC 5156, Special-Use IPv6\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n         </ul>\n         <p>When the value of <code>Type</code> is <code>CALCULATED</code> or\n\t\t\t\t<code>CLOUDWATCH_METRIC</code>, omit <code>IPAddress</code>.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 or IPv6 IP address of the endpoint that you want Amazon Route 53 to perform\n\t\t\thealth checks on. If you don't specify a value for <code>IPAddress</code>, Route 53\n\t\t\tsends a DNS request to resolve the domain name that you specify in\n\t\t\t\t<code>FullyQualifiedDomainName</code> at the interval that you specify in\n\t\t\t\t<code>RequestInterval</code>. Using an IP address returned by DNS, Route 53 then\n\t\t\tchecks the health of the endpoint.</p>\n         <p>Use one of the following formats for the value of <code>IPAddress</code>: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 address</b>: four values between 0 and 255,\n\t\t\t\t\tseparated by periods (.), for example, <code>192.0.2.44</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IPv6 address</b>: eight groups of four\n\t\t\t\t\thexadecimal values, separated by colons (:), for example,\n\t\t\t\t\t\t<code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>. You can also shorten\n\t\t\t\t\tIPv6 addresses as described in RFC 5952, for example,\n\t\t\t\t\t\t<code>2001:db8:85a3::abcd:1:2345</code>.</p>\n            </li>\n         </ul>\n         <p>For a public health check, if the endpoint is an EC2 instance, we recommend that you create an Elastic IP\n\t\t\taddress, associate it with your EC2 instance, and specify the Elastic IP address for\n\t\t\t\t<code>IPAddress</code>. This ensures that the IP address of your instance will never\n\t\t\tchange.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName\">FullyQualifiedDomainName</a>. </p>\n         <p>Constraints: For a public health check (<code>EndpointType</code> of <code>PUBLIC</code>, the\n\t\t\tdefault), Route 53 can't check the health of endpoints for which the IP address is\n\t\t\tin local, private, non-routable, or multicast ranges. For more information about IP\n\t\t\taddresses for which you can't create public health checks, see the following documents:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5735\">RFC 5735, Special Use IPv4\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc6598\">RFC 6598, IANA-Reserved IPv4\n\t\t\t\t\t\tPrefix for Shared Address Space</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5156\">RFC 5156, Special-Use IPv6\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n         </ul>\n         <p>For a private endpoint health check (<code>EndpointType</code> of <code>PRIVATE</code>),\n\t\t\tif you specify <code>IPAddress</code>, it must be a private IPv4 or IPv6 address. Route 53 sends health checks to it from\n\t\t\tthe health check source that you specify in <code>HealthCheckSourceId</code>.</p>\n         <p>When the value of <code>Type</code> is <code>CALCULATED</code> or\n\t\t\t\t<code>CLOUDWATCH_METRIC</code>, omit <code>IPAddress</code>.</p>"
                     }
                 },
                 "Port": {
@@ -8248,6 +8579,18 @@
                     "target": "com.amazonaws.route53#RoutingControlArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller\n\t\t\trouting control.</p>\n         <p>For more information about Route 53 Application Recovery Controller, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route-53-recovery.html\">Route 53 Application Recovery Controller Developer Guide.</a>.</p>"
+                    }
+                },
+                "EndpointType": {
+                    "target": "com.amazonaws.route53#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the health check targets a public endpoint or a private endpoint in a\n\t\t\tvirtual private cloud (VPC). Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The health check targets an endpoint that is reachable over the\n\t\t\t\t\tinternet. This is the default.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The health check targets a private endpoint in your virtual private cloud. You must also\n\t\t\t\t\tspecify <code>HealthCheckSourceId</code>. <code>PRIVATE</code> isn't supported for health\n\t\t\t\t\tchecks with a <code>Type</code> of <code>CALCULATED</code>, <code>CLOUDWATCH_METRIC</code>, or <code>RECOVERY_CONTROL</code>.</p>\n            </li>\n         </ul>\n         <important>\n            <p>You can't change the value of <code>EndpointType</code> after you create a health\n\t\t\t\tcheck.</p>\n         </important>"
+                    }
+                },
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source that Route 53 uses to send health checks to a private\n\t\t\tendpoint. Required when <code>EndpointType</code> is <code>PRIVATE</code>.</p>\n         <p>You can change <code>HealthCheckSourceId</code> on an existing private health check. You can't add it to a public\n\t\t\thealth check.</p>\n         <p>Each health check source supports a limited number of active health checks. If you reach that limit, specify a different health check source.</p>"
                     }
                 }
             },
@@ -8399,6 +8742,203 @@
                 "smithy.api#length": {
                     "min": 3,
                     "max": 64
+                }
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSource": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source. Route 53 assigns this ID when it creates the source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HealthCheckSourceStatus": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the health check source. The health check source status can have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - Route 53 accepted the request to create the source and hasn't started creating it. You can't use the source in a health check until its status is <code>CREATE_COMPLETED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - Route 53 is creating the source. You can't use the source in a health check until its status is <code>CREATE_COMPLETED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_COMPLETED</code> - The source is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Route 53 couldn't create the source. <code>StatusReasonCode</code> and <code>StatusReason</code> explain why.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code> - Route 53 accepted the request to delete the source and hasn't started deleting it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code> - Route 53 is deleting the source.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_COMPLETED</code> - Route 53 has deleted the source. You can't retrieve a health check source in this status: <code>GetHealthCheckSource</code> returns <code>NoSuchHealthCheckSource</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> - Route 53 couldn't delete the source. <code>StatusReasonCode</code> and <code>StatusReason</code> explain why.</p>\n            </li>\n         </ul>\n         <p>If the status is <code>CREATE_FAILED</code>, fix the cause that <code>StatusReasonCode</code> indicates, and then either retry <code>CreateHealthCheckSource</code> with the same <code>CallerReference</code> and settings, or delete the source and create a new one. If the status is <code>DELETE_FAILED</code>, retry the <code>DeleteHealthCheckSource</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HealthCheckSourceConfig": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtual private cloud (VPC), subnets, and security groups for the health check source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusReasonCode": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceStatusReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that indicates why the health check source has a status of <code>CREATE_FAILED</code> or <code>DELETE_FAILED</code>. Route 53 returns this member only when the status is one of those values. The code can have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_SUBNET_IPS</code> - One of the specified subnets doesn't have enough free private IP addresses. Check the available IP addresses in each subnet, and delete network interfaces that you don't need.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2_LIMIT_EXCEEDED</code> - Your account reached an Amazon virtual private cloud (VPC) quota for network interfaces or security groups. Delete network interfaces that you don't need, specify fewer security groups, or request a quota increase.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_SUBNET</code> - One of the specified subnets doesn't exist or isn't valid, or an <code>AvailabilityZoneId</code> doesn't match the Availability Zone of its subnet. Check that each subnet ID is correct, that the subnet exists, and that each <code>AvailabilityZoneId</code> matches its subnet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_SECURITY_GROUP</code> - One of the specified security groups doesn't exist or isn't valid. Check that each security group ID is correct and that the security group exists.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_CONFIGURATION</code> - The combination of VPC, subnets, and security groups isn't valid. Check that <code>VpcId</code> is correct and exists, that each subnet is in that VPC, and that the security groups for each subnet are in the same VPC as that subnet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLR_MISSING_OR_NOT_ASSUMABLE</code> - Route 53 couldn't assume its service-linked role in your account. In IAM, check that the service-linked role for Route 53 private endpoint health checks exists and that no deletion task for it is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code> - Route 53 encountered an internal error. Contact Amazon Web Services Support and provide the health check source ID.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why the health check source has a status of <code>CREATE_FAILED</code> or <code>DELETE_FAILED</code>, and what you can do about it. The text corresponds to the value of <code>StatusReasonCode</code>. Route 53 returns this member only when <code>StatusReasonCode</code> is present.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains information about a health check source: its ID, its status, and the virtual private cloud (VPC), subnets, and security groups from which Route 53 sends health check requests to private endpoints.</p>"
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSourceAlreadyExists": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The health check source that you're attempting to create already exists. Route 53 returns this error when you submit a request that has the same value for <code>CallerReference</code> as an existing health check source and one or more values that differ from the existing health check source. To create another health check source, specify a new value for <code>CallerReference</code>. To find the existing health check source, call <code>ListHealthCheckSources</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSourceConfig": {
+            "type": "structure",
+            "members": {
+                "VpcId": {
+                    "target": "com.amazonaws.route53#VPCId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual private cloud (VPC) that contains the subnets for the health check source. All subnets in <code>SubnetConfigurationList</code> must belong to this VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubnetConfigurationList": {
+                    "target": "com.amazonaws.route53#SubnetConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains two or three <code>SubnetConfiguration</code> elements, one in each Availability Zone that Route 53 uses for private endpoint health checks in the Amazon Web Services Region. The Availability Zones must be distinct. Route 53 creates network interfaces in each subnet and sends health check requests from all of them.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains the virtual private cloud (VPC), subnets, and security groups for a health check source. You can't change these values after you create the source.</p>"
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSourceStatus": {
+            "type": "enum",
+            "members": {
+                "CREATE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_PENDING"
+                    }
+                },
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_COMPLETED"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_PENDING"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_COMPLETED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSourceStatusReason": {
+            "type": "string"
+        },
+        "com.amazonaws.route53#HealthCheckSourceStatusReasonCode": {
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_SUBNET_IPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_SUBNET_IPS"
+                    }
+                },
+                "EC2_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_LIMIT_EXCEEDED"
+                    }
+                },
+                "INVALID_SUBNET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SUBNET"
+                    }
+                },
+                "INVALID_SECURITY_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SECURITY_GROUP"
+                    }
+                },
+                "INVALID_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CONFIGURATION"
+                    }
+                },
+                "SLR_MISSING_OR_NOT_ASSUMABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLR_MISSING_OR_NOT_ASSUMABLE"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#HealthCheckSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53#HealthCheckSource",
+                "traits": {
+                    "smithy.api#xmlName": "HealthCheckSource"
                 }
             }
         },
@@ -9649,6 +10189,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53#ListHealthCheckSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#ListHealthCheckSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#ListHealthCheckSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#InvalidInput"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the health check sources that are associated with the current Amazon Web Services account.</p>\n         <p>Results are paginated. To get more results, specify the <code>NextToken</code> value from the previous response for <code>NextToken</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2013-04-01/healthchecksource",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "HealthCheckSources",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53#ListHealthCheckSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.route53#PageMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> value from the previous response, if it included one. Specify it to get the next group of health check sources.</p>",
+                        "smithy.api#httpQuery": "nexttoken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of health check sources that you want <code>ListHealthCheckSources</code> to return. Route 53 returns a maximum of 100 health check sources. If you specify a value greater than 100, Route 53 returns only the first 100.</p>",
+                        "smithy.api#httpQuery": "maxresults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the parameters for retrieving a list of the health check sources that are associated with the current Amazon Web Services account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53#ListHealthCheckSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSources": {
+                    "target": "com.amazonaws.route53#HealthCheckSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains one <code>HealthCheckSource</code> element for each health check source that is associated with the current Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53#PageMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. If there are more health check sources to list, specify this value for <code>NextToken</code> in the next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the health check sources and pagination information that <code>ListHealthCheckSources</code> returns.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53#ListHealthChecks": {
             "type": "operation",
             "input": {
@@ -9678,6 +10291,111 @@
                     "items": "HealthChecks",
                     "pageSize": "MaxItems"
                 }
+            }
+        },
+        "com.amazonaws.route53#ListHealthChecksBySource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#ListHealthChecksBySourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#ListHealthChecksBySourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHealthCheckSource"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the health checks that use a specified health check source.</p>\n         <p>Results are paginated. If <code>IsTruncated</code> is <code>true</code>, specify the <code>NextMarker</code> value for <code>marker</code> to get more results.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2013-04-01/healthchecks/source/{HealthCheckSourceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "HealthChecks",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.route53#ListHealthChecksBySourceRequest": {
+            "type": "structure",
+            "members": {
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source whose health checks you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.route53#PageMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextMarker</code> value from the previous response, if the value of <code>IsTruncated</code> was <code>true</code>. Specify it to get the next group of health checks. If <code>IsTruncated</code> was <code>false</code>, there are no more health checks to get.</p>",
+                        "smithy.api#httpQuery": "marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of health checks that you want <code>ListHealthChecksBySource</code> to return. Route 53 returns a maximum of 1000 health checks. If you specify a value greater than 1000, Route 53 returns only the first 1000.</p>",
+                        "smithy.api#httpQuery": "maxitems"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the parameters for retrieving a list of the health checks that use a specified health check source.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53#ListHealthChecksBySourceResponse": {
+            "type": "structure",
+            "members": {
+                "HealthChecks": {
+                    "target": "com.amazonaws.route53#HealthChecks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains one <code>HealthCheck</code> element for each health check that uses the specified health check source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.route53#PageMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that you specified for the <code>marker</code> parameter in the call to <code>ListHealthChecksBySource</code> that produced the current response. This value is present for the second and subsequent calls to <code>ListHealthChecksBySource</code>.</p>"
+                    }
+                },
+                "IsTruncated": {
+                    "target": "com.amazonaws.route53#PageTruncated",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether there are more health checks to list. If the value is <code>true</code>, specify the <code>NextMarker</code> value for <code>marker</code> to get the next group of health checks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.route53#PageMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the first health check in the next group of health checks. If <code>IsTruncated</code> is <code>true</code>, specify this value in the <code>marker</code> parameter of another <code>ListHealthChecksBySource</code> request.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that you specified for the <code>maxitems</code> parameter in the call to <code>ListHealthChecksBySource</code> that produced the current response.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the health checks and pagination information that <code>ListHealthChecksBySource</code> returns.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53#ListHealthChecksRequest": {
@@ -10483,6 +11201,9 @@
                     "target": "com.amazonaws.route53#NoSuchHealthCheck"
                 },
                 {
+                    "target": "com.amazonaws.route53#NoSuchHealthCheckSource"
+                },
+                {
                     "target": "com.amazonaws.route53#NoSuchHostedZone"
                 },
                 {
@@ -10507,7 +11228,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.route53#TagResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resource.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of the resource.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for health check sources is <code>healthchecksource</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10558,6 +11279,9 @@
                     "target": "com.amazonaws.route53#NoSuchHealthCheck"
                 },
                 {
+                    "target": "com.amazonaws.route53#NoSuchHealthCheckSource"
+                },
+                {
                     "target": "com.amazonaws.route53#NoSuchHostedZone"
                 },
                 {
@@ -10582,7 +11306,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.route53#TagResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resources.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of the resources.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for health check sources is <code>healthchecksource</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11404,6 +12128,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>No health check exists with the specified ID.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.route53#NoSuchHealthCheckSource": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>No health check source exists with the specified ID. Verify that the ID is correct and that the health check source hasn't been deleted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -12472,7 +13209,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.route53#TagResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the resource.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the resource.</p>\n         <ul>\n            <li>\n               <p>The resource type for health checks is <code>healthcheck</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for health check sources is <code>healthchecksource</code>.</p>\n            </li>\n            <li>\n               <p>The resource type for hosted zones is <code>hostedzone</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResourceId": {
@@ -12558,6 +13295,30 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
+                }
+            }
+        },
+        "com.amazonaws.route53#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.route53#SecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53#SecurityGroupId",
+                "traits": {
+                    "smithy.api#xmlName": "SecurityGroupId"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -12683,6 +13444,59 @@
                 "smithy.api#documentation": "<p>A complex type that contains the status that one Amazon Route 53 health checker\n\t\t\treports and the time of the health check.</p>"
             }
         },
+        "com.amazonaws.route53#SubnetConfiguration": {
+            "type": "structure",
+            "members": {
+                "SubnetId": {
+                    "target": "com.amazonaws.route53#SubnetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the subnet that Route 53 uses to send health check requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.route53#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone that contains the subnet, for example <code>use1-az1</code>. Specify the Availability Zone ID, not the Availability Zone name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroupIdList": {
+                    "target": "com.amazonaws.route53#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security groups in the same virtual private cloud (VPC) to associate with the network interfaces that Route 53 creates in this subnet. The security groups must allow outbound traffic to the endpoints that the health checks monitor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that identifies one subnet for a health check source and the security groups that Route 53 associates with the network interfaces that it creates in that subnet.</p>"
+            }
+        },
+        "com.amazonaws.route53#SubnetConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53#SubnetConfiguration",
+                "traits": {
+                    "smithy.api#xmlName": "SubnetConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.route53#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.route53#SubnetMask": {
             "type": "string",
             "traits": {
@@ -12797,6 +13611,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "hostedzone"
+                    }
+                },
+                "healthchecksource": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "healthchecksource"
                     }
                 }
             }
@@ -12959,6 +13779,18 @@
         "com.amazonaws.route53#TimeStamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.route53#TooManyHealthCheckSources": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can't create this health check source because the current account has reached its maximum number of health check sources. The maximum includes every health check source that hasn't reached <code>DELETE_COMPLETED</code> status, including a health check source with a status of <code>CREATE_FAILED</code>.</p>\n         <p>For information about default limits, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html\">Limits</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n         <p>For information about how to get the current limit for an account, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html\">GetAccountLimit</a>. To request a higher limit, <a href=\"http://aws.amazon.com/route53-request\">create a case</a> with the Amazon Web Services Support Center.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.route53#TooManyHealthChecks": {
             "type": "structure",
             "members": {
@@ -12967,7 +13799,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This health check can't be created because the current account has reached the limit\n\t\t\ton the number of active health checks.</p>\n         <p>For information about default limits, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html\">Limits</a> in the\n\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n         <p>For information about how to get the current limit for an account, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html\">GetAccountLimit</a>. To request a higher limit, <a href=\"http://aws.amazon.com/route53-request\">create a case</a> with the Amazon Web Services Support\n\t\t\tCenter.</p>\n         <p>You have reached the maximum number of active health checks for an Amazon Web Services account. To request a higher limit, <a href=\"http://aws.amazon.com/route53-request\">create a case</a> with the Amazon Web Services Support\n\t\t\tCenter.</p>",
+                "smithy.api#documentation": "<p>This health check can't be created because the current account has reached the limit\n\t\t\ton the number of active health checks, or because the health check source for a private\n\t\t\thealth check has reached its limit on active health checks. In the second case,\n\t\t\tspecify a different health check source.</p>\n         <p>For information about default limits, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html\">Limits</a> in the\n\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n         <p>For information about how to get the current limit for an account, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html\">GetAccountLimit</a>. To request a higher limit, <a href=\"http://aws.amazon.com/route53-request\">create a case</a> with the Amazon Web Services Support\n\t\t\tCenter.</p>\n         <p>You have reached the maximum number of active health checks for an Amazon Web Services account. To request a higher limit, <a href=\"http://aws.amazon.com/route53-request\">create a case</a> with the Amazon Web Services Support\n\t\t\tCenter.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -13427,7 +14259,7 @@
                 "IPAddress": {
                     "target": "com.amazonaws.route53#IPAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to perform\n\t\t\thealth checks on. If you don't specify a value for <code>IPAddress</code>, Route 53\n\t\t\tsends a DNS request to resolve the domain name that you specify in\n\t\t\t\t<code>FullyQualifiedDomainName</code> at the interval that you specify in\n\t\t\t\t<code>RequestInterval</code>. Using an IP address that is returned by DNS, Route 53\n\t\t\tthen checks the health of the endpoint.</p>\n         <p>Use one of the following formats for the value of <code>IPAddress</code>: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 address</b>: four values between 0 and 255,\n\t\t\t\t\tseparated by periods (.), for example, <code>192.0.2.44</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IPv6 address</b>: eight groups of four\n\t\t\t\t\thexadecimal values, separated by colons (:), for example,\n\t\t\t\t\t\t<code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>. You can also shorten\n\t\t\t\t\tIPv6 addresses as described in RFC 5952, for example,\n\t\t\t\t\t\t<code>2001:db8:85a3::abcd:1:2345</code>.</p>\n            </li>\n         </ul>\n         <p>If the endpoint is an EC2 instance, we recommend that you create an Elastic IP\n\t\t\taddress, associate it with your EC2 instance, and specify the Elastic IP address for\n\t\t\t\t<code>IPAddress</code>. This ensures that the IP address of your instance never\n\t\t\tchanges. For more information, see the applicable documentation:</p>\n         <ul>\n            <li>\n               <p>Linux: <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP\n\t\t\t\t\t\tAddresses (EIP)</a> in the <i>Amazon EC2 User Guide for Linux\n\t\t\t\t\t\tInstances</i>\n               </p>\n            </li>\n            <li>\n               <p>Windows: <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html\">Elastic IP\n\t\t\t\t\t\tAddresses (EIP)</a> in the <i>Amazon EC2 User Guide for Windows\n\t\t\t\t\t\tInstances</i>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If a health check already has a value for <code>IPAddress</code>, you can change\n\t\t\t\tthe value. However, you can't update an existing health check to add or remove the\n\t\t\t\tvalue of <code>IPAddress</code>. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName\">FullyQualifiedDomainName</a>. </p>\n         <p>Constraints: Route 53 can't check the health of endpoints for which the IP address is\n\t\t\tin local, private, non-routable, or multicast ranges. For more information about IP\n\t\t\taddresses for which you can't create health checks, see the following documents:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5735\">RFC 5735, Special Use IPv4\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc6598\">RFC 6598, IANA-Reserved IPv4\n\t\t\t\t\t\tPrefix for Shared Address Space</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5156\">RFC 5156, Special-Use IPv6\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to perform\n\t\t\thealth checks on. If you don't specify a value for <code>IPAddress</code>, Route 53\n\t\t\tsends a DNS request to resolve the domain name that you specify in\n\t\t\t\t<code>FullyQualifiedDomainName</code> at the interval that you specify in\n\t\t\t\t<code>RequestInterval</code>. Using an IP address that is returned by DNS, Route 53\n\t\t\tthen checks the health of the endpoint.</p>\n         <p>Use one of the following formats for the value of <code>IPAddress</code>: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 address</b>: four values between 0 and 255,\n\t\t\t\t\tseparated by periods (.), for example, <code>192.0.2.44</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IPv6 address</b>: eight groups of four\n\t\t\t\t\thexadecimal values, separated by colons (:), for example,\n\t\t\t\t\t\t<code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>. You can also shorten\n\t\t\t\t\tIPv6 addresses as described in RFC 5952, for example,\n\t\t\t\t\t\t<code>2001:db8:85a3::abcd:1:2345</code>.</p>\n            </li>\n         </ul>\n         <p>For a public health check, if the endpoint is an EC2 instance, we recommend that you create an Elastic IP\n\t\t\taddress, associate it with your EC2 instance, and specify the Elastic IP address for\n\t\t\t\t<code>IPAddress</code>. This ensures that the IP address of your instance never\n\t\t\tchanges. For more information, see the applicable documentation:</p>\n         <ul>\n            <li>\n               <p>Linux: <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP\n\t\t\t\t\t\tAddresses (EIP)</a> in the <i>Amazon EC2 User Guide for Linux\n\t\t\t\t\t\tInstances</i>\n               </p>\n            </li>\n            <li>\n               <p>Windows: <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html\">Elastic IP\n\t\t\t\t\t\tAddresses (EIP)</a> in the <i>Amazon EC2 User Guide for Windows\n\t\t\t\t\t\tInstances</i>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If a health check already has a value for <code>IPAddress</code>, you can change\n\t\t\t\tthe value. However, you can't update an existing health check to add or remove the\n\t\t\t\tvalue of <code>IPAddress</code>. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName\">FullyQualifiedDomainName</a>. </p>\n         <p>Constraints: For a public health check (<code>EndpointType</code> of <code>PUBLIC</code>, the\n\t\t\tdefault), Route 53 can't check the health of endpoints for which the IP address is\n\t\t\tin local, private, non-routable, or multicast ranges. For more information about IP\n\t\t\taddresses for which you can't create public health checks, see the following documents:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5735\">RFC 5735, Special Use IPv4\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc6598\">RFC 6598, IANA-Reserved IPv4\n\t\t\t\t\t\tPrefix for Shared Address Space</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://tools.ietf.org/html/rfc5156\">RFC 5156, Special-Use IPv6\n\t\t\t\t\t\tAddresses</a>\n               </p>\n            </li>\n         </ul>\n         <p>For a private endpoint health check (<code>EndpointType</code> of <code>PRIVATE</code>),\n\t\t\tif you specify <code>IPAddress</code>, it must be a private IPv4 or IPv6 address. Route 53 sends health checks to it from\n\t\t\tthe health check source that you specify in <code>HealthCheckSourceId</code>.</p>"
                     }
                 },
                 "Port": {
@@ -13512,6 +14344,12 @@
                     "target": "com.amazonaws.route53#ResettableElementNameList",
                     "traits": {
                         "smithy.api#documentation": "<p>A complex type that contains one <code>ResettableElementName</code> element for each\n\t\t\telement that you want to reset to the default value. Valid values for\n\t\t\t\t<code>ResettableElementName</code> include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ChildHealthChecks</code>: Amazon Route 53 resets <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ChildHealthChecks\">ChildHealthChecks</a> to null.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FullyQualifiedDomainName</code>: Route 53 resets <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName\">FullyQualifiedDomainName</a>. to null.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Regions</code>: Route 53 resets the <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions\">Regions</a> list to the default set of regions. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourcePath</code>: Route 53 resets <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath\">ResourcePath</a> to null.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "HealthCheckSourceId": {
+                    "target": "com.amazonaws.route53#HealthCheckSourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the health check source from which Route 53 sends requests to the endpoint. Applies only to health checks that have an <code>EndpointType</code> of <code>PRIVATE</code>. The health check source must be in the same account and have a status of <code>CREATE_COMPLETED</code>.</p>\n         <p>Each health check source supports a limited number of active health checks. If you reach that limit, specify a different health check source.</p>"
                     }
                 }
             },

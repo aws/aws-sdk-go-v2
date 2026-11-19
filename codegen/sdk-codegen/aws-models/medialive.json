@@ -4102,6 +4102,13 @@
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
                     }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
+                    }
                 }
             },
             "traits": {
@@ -4555,6 +4562,13 @@
                     "traits": {
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
+                    }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
                     }
                 }
             },
@@ -6079,6 +6093,13 @@
                     "traits": {
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
+                    }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
                     }
                 }
             },
@@ -8826,6 +8847,13 @@
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
                     }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
+                    }
                 }
             },
             "traits": {
@@ -11024,6 +11052,13 @@
                     "traits": {
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
+                    }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
                     }
                 }
             },
@@ -20907,6 +20942,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HEVC"
                     }
+                },
+                "JPEGXS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JPEGXS"
+                    }
                 }
             },
             "traits": {
@@ -23017,6 +23058,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "Used in UpdateNetworkRequest."
+            }
+        },
+        "com.amazonaws.medialive#JpegXsInputMaximumBitrate": {
+            "type": "enum",
+            "members": {
+                "MAX_500_MBPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_500_MBPS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Maximum JPEG XS input bitrate in megabits per second"
+            }
+        },
+        "com.amazonaws.medialive#JpegXsInputResolution": {
+            "type": "enum",
+            "members": {
+                "HD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Maximum JPEG XS input resolution; HD is 720 to 1080 lines of vertical resolution"
+            }
+        },
+        "com.amazonaws.medialive#JpegXsInputSpecification": {
+            "type": "structure",
+            "members": {
+                "Codec": {
+                    "target": "com.amazonaws.medialive#InputCodec",
+                    "traits": {
+                        "smithy.api#documentation": "Input codec. Must be JPEGXS.",
+                        "smithy.api#jsonName": "codec"
+                    }
+                },
+                "MaximumBitrate": {
+                    "target": "com.amazonaws.medialive#JpegXsInputMaximumBitrate",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum JPEG XS input bitrate",
+                        "smithy.api#jsonName": "maximumBitrate"
+                    }
+                },
+                "Resolution": {
+                    "target": "com.amazonaws.medialive#JpegXsInputResolution",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum JPEG XS input resolution",
+                        "smithy.api#jsonName": "resolution"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specification of the JPEG XS input for this channel. Use instead of inputSpecification when the input codec is JPEG XS."
             }
         },
         "com.amazonaws.medialive#KeyProviderSettings": {
@@ -32204,6 +32302,12 @@
                     "traits": {
                         "smithy.api#enumValue": "AV1"
                     }
+                },
+                "JPEGXS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JPEGXS"
+                    }
                 }
             },
             "traits": {
@@ -32229,6 +32333,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MAX_50_MBPS"
+                    }
+                },
+                "MAX_500_MBPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_500_MBPS"
                     }
                 }
             },
@@ -32708,6 +32818,13 @@
                     "traits": {
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
+                    }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
                     }
                 }
             },
@@ -35405,6 +35522,13 @@
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
                     }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
+                    }
                 }
             },
             "traits": {
@@ -36748,6 +36872,13 @@
                     "traits": {
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
+                    }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
                     }
                 }
             },
@@ -38332,6 +38463,13 @@
                     "traits": {
                         "smithy.api#documentation": "When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output\nis created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This\nsetting object can only by used by that service.",
                         "smithy.api#jsonName": "specialRouterSettings"
+                    }
+                },
+                "JpegXsInputSpecification": {
+                    "target": "com.amazonaws.medialive#JpegXsInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "Specification of JPEG XS inputs for this channel",
+                        "smithy.api#jsonName": "jpegXsInputSpecification"
                     }
                 }
             },
