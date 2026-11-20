@@ -2246,7 +2246,7 @@ var NotServiceResourceError_Message *smithy.Schema
 var OntapDeploymentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "OntapDeploymentType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 6)
 var OntapDeploymentType_MULTI_AZ_1 *smithy.Schema
 
 var OntapDeploymentType_SINGLE_AZ_1 *smithy.Schema
@@ -2254,6 +2254,10 @@ var OntapDeploymentType_SINGLE_AZ_1 *smithy.Schema
 var OntapDeploymentType_SINGLE_AZ_2 *smithy.Schema
 
 var OntapDeploymentType_MULTI_AZ_2 *smithy.Schema
+
+var OntapDeploymentType_SINGLE_AZ_3 *smithy.Schema
+
+var OntapDeploymentType_MULTI_AZ_3 *smithy.Schema
 
 var _OntapEndpointIpAddresses = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -5258,6 +5262,10 @@ func init() {
 	OntapDeploymentType_SINGLE_AZ_2 = OntapDeploymentType.AddMember("SINGLE_AZ_2", smithyprelude.Unit)
 
 	OntapDeploymentType_MULTI_AZ_2 = OntapDeploymentType.AddMember("MULTI_AZ_2", smithyprelude.Unit)
+
+	OntapDeploymentType_SINGLE_AZ_3 = OntapDeploymentType.AddMember("SINGLE_AZ_3", smithyprelude.Unit)
+
+	OntapDeploymentType_MULTI_AZ_3 = OntapDeploymentType.AddMember("MULTI_AZ_3", smithyprelude.Unit)
 
 	_OntapEndpointIpAddresses_member = _OntapEndpointIpAddresses.AddMember("member", _IpAddress)
 

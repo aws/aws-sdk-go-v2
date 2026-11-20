@@ -1,0 +1,8 @@
+{
+    "id": "caf1e429-a1b1-4a24-90b2-b98d89ef1331",
+    "type": "feature",
+    "description": "Adds read-only support for internet gateway firewalls, which are created and managed by AWS Network Security Manager. Adds FirewallType to firewall operations and IgwFirewallConfiguration to Firewall.",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

@@ -742,6 +742,8 @@ const (
 	OntapDeploymentTypeSingleAz1 OntapDeploymentType = "SINGLE_AZ_1"
 	OntapDeploymentTypeSingleAz2 OntapDeploymentType = "SINGLE_AZ_2"
 	OntapDeploymentTypeMultiAz2  OntapDeploymentType = "MULTI_AZ_2"
+	OntapDeploymentTypeSingleAz3 OntapDeploymentType = "SINGLE_AZ_3"
+	OntapDeploymentTypeMultiAz3  OntapDeploymentType = "MULTI_AZ_3"
 )
 
 // Values returns all known values for OntapDeploymentType. Note that this can be
@@ -754,6 +756,8 @@ func (OntapDeploymentType) Values() []OntapDeploymentType {
 		"SINGLE_AZ_1",
 		"SINGLE_AZ_2",
 		"MULTI_AZ_2",
+		"SINGLE_AZ_3",
+		"MULTI_AZ_3",
 	}
 }
 

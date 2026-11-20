@@ -439,6 +439,175 @@ func TestCheckRequestSnapshot_CreateAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateBlueprint(t *testing.T) {
+	input := &CreateBlueprintInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		BlueprintName:      ptr.String("__BlueprintName__"),
+		Schema:             ptr.String("__Schema__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateBlueprintVersion(t *testing.T) {
+	input := &CreateBlueprintVersionInput{
+		BlueprintArn:       ptr.String("__BlueprintArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateBlueprintVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBlueprintVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateProject(t *testing.T) {
+	input := &CreateProjectInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteAdapter(t *testing.T) {
 	input := &DeleteAdapterInput{
 		AdapterId: ptr.String("__AdapterId__"),
@@ -490,6 +659,61 @@ func TestCheckRequestSnapshot_DeleteAdapterVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAdapterVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteBlueprint(t *testing.T) {
+	input := &DeleteBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteProject(t *testing.T) {
+	input := &DeleteProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProject"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -583,6 +807,34 @@ func TestCheckRequestSnapshot_GetAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetBlueprint(t *testing.T) {
+	input := &GetBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetDocumentAnalysis(t *testing.T) {
 	input := &GetDocumentAnalysisInput{
 		JobId:      ptr.String("__JobId__"),
@@ -608,6 +860,33 @@ func TestCheckRequestSnapshot_GetDocumentAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDocumentAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetDocumentInsights(t *testing.T) {
+	input := &GetDocumentInsightsInput{
+		JobArn: ptr.String("__JobArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDocumentInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDocumentInsights"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -726,6 +1005,33 @@ func TestCheckRequestSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetProject(t *testing.T) {
+	input := &GetProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListAdapters(t *testing.T) {
 	input := &ListAdaptersInput{
 		AfterCreationTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -783,6 +1089,71 @@ func TestCheckRequestSnapshot_ListAdapterVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAdapterVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListBlueprints(t *testing.T) {
+	input := &ListBlueprintsInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		ProjectFilter: &types.ProjectFilter{
+			ProjectArn: ptr.String("__ProjectArn__"),
+		},
+		ResourceOwner: types.ResourceOwner("ACCOUNT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListBlueprints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBlueprints"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListProjects(t *testing.T) {
+	input := &ListProjectsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		BlueprintFilter: &types.BlueprintFilter{
+			BlueprintArn:     ptr.String("__BlueprintArn__"),
+			BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProjects(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProjects"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -898,6 +1269,63 @@ func TestCheckRequestSnapshot_StartDocumentAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDocumentAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartDocumentInsights(t *testing.T) {
+	input := &StartDocumentInsightsInput{
+		InputConfiguration: &types.InputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Blueprints: []types.BlueprintItem{
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			},
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartDocumentInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDocumentInsights"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1121,6 +1549,139 @@ func TestCheckRequestSnapshot_UpdateAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAdapter"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateBlueprint(t *testing.T) {
+	input := &UpdateBlueprintInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		Schema:       ptr.String("__Schema__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateProject(t *testing.T) {
+	input := &UpdateProjectInput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProject"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1370,6 +1931,175 @@ func TestUpdateRequestSnapshot_CreateAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateBlueprint(t *testing.T) {
+	input := &CreateBlueprintInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		BlueprintName:      ptr.String("__BlueprintName__"),
+		Schema:             ptr.String("__Schema__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateBlueprintVersion(t *testing.T) {
+	input := &CreateBlueprintVersionInput{
+		BlueprintArn:       ptr.String("__BlueprintArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateBlueprintVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBlueprintVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateProject(t *testing.T) {
+	input := &CreateProjectInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteAdapter(t *testing.T) {
 	input := &DeleteAdapterInput{
 		AdapterId: ptr.String("__AdapterId__"),
@@ -1421,6 +2151,61 @@ func TestUpdateRequestSnapshot_DeleteAdapterVersion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAdapterVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteBlueprint(t *testing.T) {
+	input := &DeleteBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteProject(t *testing.T) {
+	input := &DeleteProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProject"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1514,6 +2299,34 @@ func TestUpdateRequestSnapshot_GetAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetBlueprint(t *testing.T) {
+	input := &GetBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetDocumentAnalysis(t *testing.T) {
 	input := &GetDocumentAnalysisInput{
 		JobId:      ptr.String("__JobId__"),
@@ -1539,6 +2352,33 @@ func TestUpdateRequestSnapshot_GetDocumentAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDocumentAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetDocumentInsights(t *testing.T) {
+	input := &GetDocumentInsightsInput{
+		JobArn: ptr.String("__JobArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetDocumentInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDocumentInsights"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1657,6 +2497,33 @@ func TestUpdateRequestSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetProject(t *testing.T) {
+	input := &GetProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListAdapters(t *testing.T) {
 	input := &ListAdaptersInput{
 		AfterCreationTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1714,6 +2581,71 @@ func TestUpdateRequestSnapshot_ListAdapterVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAdapterVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListBlueprints(t *testing.T) {
+	input := &ListBlueprintsInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		ProjectFilter: &types.ProjectFilter{
+			ProjectArn: ptr.String("__ProjectArn__"),
+		},
+		ResourceOwner: types.ResourceOwner("ACCOUNT"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListBlueprints(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBlueprints"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListProjects(t *testing.T) {
+	input := &ListProjectsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		BlueprintFilter: &types.BlueprintFilter{
+			BlueprintArn:     ptr.String("__BlueprintArn__"),
+			BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProjects(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProjects"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1829,6 +2761,63 @@ func TestUpdateRequestSnapshot_StartDocumentAnalysis(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDocumentAnalysis"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartDocumentInsights(t *testing.T) {
+	input := &StartDocumentInsightsInput{
+		InputConfiguration: &types.InputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Blueprints: []types.BlueprintItem{
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			},
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartDocumentInsights(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartDocumentInsights"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2052,6 +3041,139 @@ func TestUpdateRequestSnapshot_UpdateAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAdapter"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateBlueprint(t *testing.T) {
+	input := &UpdateBlueprintInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		Schema:       ptr.String("__Schema__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateBlueprint(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateBlueprint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateProject(t *testing.T) {
+	input := &UpdateProjectInput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProject"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -2104,7 +2104,8 @@ func TestUpdateResponseSnapshot_CreateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -2123,7 +2124,8 @@ func TestUpdateResponseSnapshot_CreateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -3749,6 +3751,13 @@ func TestUpdateResponseSnapshot_GetAsset(t *testing.T) {
 				ContentSummary: ptr.String("__ContentSummary__"),
 				Id:             ptr.String("__Id__"),
 			},
+		},
+		OwnershipTransfer: &types.AssetOwnershipTransfer{
+			Status:          types.AssetOwnershipTransferStatus("IN_PROGRESS"),
+			SourceProjectId: ptr.String("__SourceProjectId__"),
+			TargetProjectId: ptr.String("__TargetProjectId__"),
+			StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	proto := restjson1.New(schemas.DataZone)
@@ -5589,7 +5598,8 @@ func TestUpdateResponseSnapshot_GetProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -5608,7 +5618,8 @@ func TestUpdateResponseSnapshot_GetProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -10932,6 +10943,38 @@ func TestUpdateResponseSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateAssetOwner(t *testing.T) {
+	want := &UpdateAssetOwnerOutput{
+		Id:       ptr.String("__Id__"),
+		Revision: ptr.String("__Revision__"),
+		OwnershipTransfer: &types.AssetOwnershipTransfer{
+			Status:          types.AssetOwnershipTransferStatus("IN_PROGRESS"),
+			SourceProjectId: ptr.String("__SourceProjectId__"),
+			TargetProjectId: ptr.String("__TargetProjectId__"),
+			StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := restjson1.New(schemas.DataZone)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateAssetOwner, schemas.UpdateAssetOwnerOutput, schemas.UpdateAssetOwnerOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateAssetOwner.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateConnection(t *testing.T) {
 	want := &UpdateConnectionOutput{
 		Configurations: []types.Configuration{
@@ -11889,7 +11932,8 @@ func TestUpdateResponseSnapshot_UpdateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -11908,7 +11952,8 @@ func TestUpdateResponseSnapshot_UpdateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),

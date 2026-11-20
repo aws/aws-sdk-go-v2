@@ -12774,8 +12774,26 @@ type PackageFilter struct {
 	// An object that contains details on the name of the package to filter on.
 	Name *StringFilter
 
+	// An object that contains details on the package URL (purl) qualifier to filter
+	// on.
+	PurlQualifier *PurlQualifierFilter
+
 	// An object that contains details on the package release to filter on.
 	Release *StringFilter
+
+	// An object that contains details on the runtime reachability status of the
+	// package to filter on. For more information, see [Understanding runtime reachability]in the Amazon Inspector user
+	// guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachability *RuntimeReachabilityFilter
+
+	// An object that contains details on the runtime reachability reason of the
+	// package to filter on. For more information, see [Understanding runtime reachability]in the Amazon Inspector user
+	// guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachabilityReason *RuntimeReachabilityReasonFilter
 
 	// An object that describes the details of a string filter.
 	SourceLambdaLayerArn *StringFilter
@@ -12816,9 +12834,24 @@ func (v *PackageFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Name.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.PurlQualifier != nil {
+		s.WriteStruct(schemas.PackageFilter_purlQualifier)
+		v.PurlQualifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Release != nil {
 		s.WriteStruct(schemas.PackageFilter_release)
 		v.Release.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeReachability != nil {
+		s.WriteStruct(schemas.PackageFilter_runtimeReachability)
+		v.RuntimeReachability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeReachabilityReason != nil {
+		s.WriteStruct(schemas.PackageFilter_runtimeReachabilityReason)
+		v.RuntimeReachabilityReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SourceLambdaLayerArn != nil {
@@ -12852,9 +12885,18 @@ func (v *PackageFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PackageFilter_name:
 			v.Name = &StringFilter{}
 			return v.Name.Deserialize(d)
+		case schemas.PackageFilter_purlQualifier:
+			v.PurlQualifier = &PurlQualifierFilter{}
+			return v.PurlQualifier.Deserialize(d)
 		case schemas.PackageFilter_release:
 			v.Release = &StringFilter{}
 			return v.Release.Deserialize(d)
+		case schemas.PackageFilter_runtimeReachability:
+			v.RuntimeReachability = &RuntimeReachabilityFilter{}
+			return v.RuntimeReachability.Deserialize(d)
+		case schemas.PackageFilter_runtimeReachabilityReason:
+			v.RuntimeReachabilityReason = &RuntimeReachabilityReasonFilter{}
+			return v.RuntimeReachabilityReason.Deserialize(d)
 		case schemas.PackageFilter_sourceLambdaLayerArn:
 			v.SourceLambdaLayerArn = &StringFilter{}
 			return v.SourceLambdaLayerArn.Deserialize(d)
@@ -13426,6 +13468,67 @@ func (v *ProviderFilter) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Value = ConnectorCloudProvider(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// An object that describes the details of a package URL (purl) qualifier filter.
+type PurlQualifierFilter struct {
+
+	// The operator to use when comparing values in the filter.
+	//
+	// This member is required.
+	Comparison MapComparison
+
+	// The package URL (purl) qualifier key to filter on.
+	//
+	// This member is required.
+	Key PurlQualifierKey
+
+	// The package URL (purl) qualifier value to filter on.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PurlQualifierFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurlQualifierFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurlQualifierFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparison != "" {
+		s.WriteString(schemas.PurlQualifierFilter_comparison, string(v.Comparison))
+	}
+	if v.Key != "" {
+		s.WriteString(schemas.PurlQualifierFilter_key, string(v.Key))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PurlQualifierFilter_value, *v.Value)
+	}
+}
+func (v *PurlQualifierFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurlQualifierFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurlQualifierFilter_comparison:
+			var ev string
+			if err := d.ReadString(schemas.PurlQualifierFilter_comparison, &ev); err != nil {
+				return err
+			}
+			v.Comparison = MapComparison(ev)
+			return nil
+		case schemas.PurlQualifierFilter_key:
+			var ev string
+			if err := d.ReadString(schemas.PurlQualifierFilter_key, &ev); err != nil {
+				return err
+			}
+			v.Key = PurlQualifierKey(ev)
+			return nil
+		case schemas.PurlQualifierFilter_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PurlQualifierFilter_value, v.Value)
 		}
 		return nil
 	})
@@ -14607,6 +14710,110 @@ func (v *ResourceStringFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceStringFilter_value:
 			v.Value = new(string)
 			return d.ReadString(schemas.ResourceStringFilter_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// An object that describes the details of a runtime reachability filter.
+type RuntimeReachabilityFilter struct {
+
+	// The operator to use when comparing values in the filter.
+	//
+	// This member is required.
+	Comparison RuntimeReachabilityComparison
+
+	// The runtime reachability status to filter on.
+	//
+	// This member is required.
+	Value RuntimeReachability
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeReachabilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeReachabilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeReachabilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparison != "" {
+		s.WriteString(schemas.RuntimeReachabilityFilter_comparison, string(v.Comparison))
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.RuntimeReachabilityFilter_value, string(v.Value))
+	}
+}
+func (v *RuntimeReachabilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeReachabilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeReachabilityFilter_comparison:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityFilter_comparison, &ev); err != nil {
+				return err
+			}
+			v.Comparison = RuntimeReachabilityComparison(ev)
+			return nil
+		case schemas.RuntimeReachabilityFilter_value:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityFilter_value, &ev); err != nil {
+				return err
+			}
+			v.Value = RuntimeReachability(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// An object that describes the details of a runtime reachability reason filter.
+type RuntimeReachabilityReasonFilter struct {
+
+	// The operator to use when comparing values in the filter.
+	//
+	// This member is required.
+	Comparison RuntimeReachabilityComparison
+
+	// The runtime reachability reason to filter on.
+	//
+	// This member is required.
+	Value RuntimeReachabilityReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeReachabilityReasonFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeReachabilityReasonFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeReachabilityReasonFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparison != "" {
+		s.WriteString(schemas.RuntimeReachabilityReasonFilter_comparison, string(v.Comparison))
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.RuntimeReachabilityReasonFilter_value, string(v.Value))
+	}
+}
+func (v *RuntimeReachabilityReasonFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeReachabilityReasonFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeReachabilityReasonFilter_comparison:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityReasonFilter_comparison, &ev); err != nil {
+				return err
+			}
+			v.Comparison = RuntimeReachabilityComparison(ev)
+			return nil
+		case schemas.RuntimeReachabilityReasonFilter_value:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityReasonFilter_value, &ev); err != nil {
+				return err
+			}
+			v.Value = RuntimeReachabilityReason(ev)
+			return nil
 		}
 		return nil
 	})
@@ -17798,11 +18005,26 @@ type VulnerablePackage struct {
 	// The package manager of the vulnerable package.
 	PackageManager PackageManager
 
+	// The package URL (purl) of the vulnerable package.
+	Purl *string
+
 	// The release of the vulnerable package.
 	Release *string
 
 	// The code to run in your environment to update packages with a fix available.
 	Remediation *string
+
+	// The runtime reachability status of the vulnerable package. For more
+	// information, see [Understanding runtime reachability]in the Amazon Inspector user guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachability RuntimeReachability
+
+	// The reason for the runtime reachability status of the vulnerable package. For
+	// more information, see [Understanding runtime reachability]in the Amazon Inspector user guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachabilityReason RuntimeReachabilityReason
 
 	// The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function
 	// affected by a finding.
@@ -17839,11 +18061,20 @@ func (v *VulnerablePackage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageManager != "" {
 		s.WriteString(schemas.VulnerablePackage_packageManager, string(v.PackageManager))
 	}
+	if v.Purl != nil {
+		s.WriteString(schemas.VulnerablePackage_purl, *v.Purl)
+	}
 	if v.Release != nil {
 		s.WriteString(schemas.VulnerablePackage_release, *v.Release)
 	}
 	if v.Remediation != nil {
 		s.WriteString(schemas.VulnerablePackage_remediation, *v.Remediation)
+	}
+	if v.RuntimeReachability != "" {
+		s.WriteString(schemas.VulnerablePackage_runtimeReachability, string(v.RuntimeReachability))
+	}
+	if v.RuntimeReachabilityReason != "" {
+		s.WriteString(schemas.VulnerablePackage_runtimeReachabilityReason, string(v.RuntimeReachabilityReason))
 	}
 	if v.SourceLambdaLayerArn != nil {
 		s.WriteString(schemas.VulnerablePackage_sourceLambdaLayerArn, *v.SourceLambdaLayerArn)
@@ -17879,12 +18110,29 @@ func (v *VulnerablePackage) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.PackageManager = PackageManager(ev)
 			return nil
+		case schemas.VulnerablePackage_purl:
+			v.Purl = new(string)
+			return d.ReadString(schemas.VulnerablePackage_purl, v.Purl)
 		case schemas.VulnerablePackage_release:
 			v.Release = new(string)
 			return d.ReadString(schemas.VulnerablePackage_release, v.Release)
 		case schemas.VulnerablePackage_remediation:
 			v.Remediation = new(string)
 			return d.ReadString(schemas.VulnerablePackage_remediation, v.Remediation)
+		case schemas.VulnerablePackage_runtimeReachability:
+			var ev string
+			if err := d.ReadString(schemas.VulnerablePackage_runtimeReachability, &ev); err != nil {
+				return err
+			}
+			v.RuntimeReachability = RuntimeReachability(ev)
+			return nil
+		case schemas.VulnerablePackage_runtimeReachabilityReason:
+			var ev string
+			if err := d.ReadString(schemas.VulnerablePackage_runtimeReachabilityReason, &ev); err != nil {
+				return err
+			}
+			v.RuntimeReachabilityReason = RuntimeReachabilityReason(ev)
+			return nil
 		case schemas.VulnerablePackage_sourceLambdaLayerArn:
 			v.SourceLambdaLayerArn = new(string)
 			return d.ReadString(schemas.VulnerablePackage_sourceLambdaLayerArn, v.SourceLambdaLayerArn)

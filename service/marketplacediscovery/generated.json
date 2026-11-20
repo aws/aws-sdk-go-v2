@@ -15,6 +15,7 @@
         "api_op_GetOfferTerms.go",
         "api_op_GetProduct.go",
         "api_op_ListFulfillmentOptions.go",
+        "api_op_ListListingAttributes.go",
         "api_op_ListPurchaseOptions.go",
         "api_op_SearchFacets.go",
         "api_op_SearchListings.go",

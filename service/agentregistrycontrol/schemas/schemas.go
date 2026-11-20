@@ -8,6 +8,20 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var AssociatePublisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AssociatePublisher",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/associations",
+	Code: 201})
+
+var CreatePublisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "CreatePublisher",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/publishers",
+	Code: 201})
+
 var CreateRegistry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "CreateRegistry",
@@ -21,6 +35,13 @@ var CreateRegistryRecord = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/registries/{registryId}/records",
 	Code: 202})
+
+var DeletePublisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DeletePublisher",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/publishers/{publisherArn}",
+	Code: 204})
 
 var DeleteRegistry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -36,6 +57,20 @@ var DeleteRegistryRecord = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/registries/{registryId}/records/{recordId}",
 	Code: 200})
 
+var DisassociatePublisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DisassociatePublisher",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/associations/{recordArn+}",
+	Code: 204})
+
+var GetPublisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "GetPublisher",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/publishers/{publisherArn}",
+	Code: 200})
+
 var GetRegistry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "GetRegistry",
@@ -48,6 +83,20 @@ var GetRegistryRecord = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetRegistryRecord",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/registries/{registryId}/records/{recordId}",
+	Code: 200})
+
+var ListPublisherAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ListPublisherAssociations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/associations",
+	Code: 200})
+
+var ListPublishers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ListPublishers",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/publishers",
 	Code: 200})
 
 var ListRegistries = smithy.NewSchema(smithy.ShapeID{
@@ -92,6 +141,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{resourceArn+}",
 	Code: 204})
 
+var UpdatePublisherAssociationApprovalStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatePublisherAssociationApprovalStatus",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/associations/{recordArn+}",
+	Code: 200})
+
 var UpdateRegistry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistry",
@@ -112,6 +168,13 @@ var UpdateRegistryRecordStatus = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/registries/{registryId}/records/{recordId}/status",
 	Code: 202})
+
+var ValidatePublisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ValidatePublisher",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/publishers/{publisherArn}/verification",
+	Code: 200})
 
 var _AgentRegistryControl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -283,6 +346,26 @@ var _ArtifactContent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ArtifactContent",
 }, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
 
+var AssociationApprovalStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AssociationApprovalStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AssociationApprovalStatus_APPROVED *smithy.Schema
+
+var AssociationApprovalStatus_REJECTED *smithy.Schema
+
+var AssociationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AssociationStatus",
+}, smithy.ShapeTypeEnum, 4)
+var AssociationStatus_PENDING_APPROVAL *smithy.Schema
+
+var AssociationStatus_APPROVED *smithy.Schema
+
+var AssociationStatus_REJECTED *smithy.Schema
+
+var AssociationStatus_SUSPENDED *smithy.Schema
+
 var _AuthorizationAttemptId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "AuthorizationAttemptId",
@@ -351,6 +434,67 @@ var AutoDetectionStatus = smithy.NewSchema(smithy.ShapeID{
 var AutoDetectionStatus_ACTIVE *smithy.Schema
 
 var AutoDetectionStatus_INACTIVE *smithy.Schema
+
+var BotCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "BotCategory",
+}, smithy.ShapeTypeEnum, 18)
+var BotCategory_ADVERTISING *smithy.Schema
+
+var BotCategory_ARCHIVER *smithy.Schema
+
+var BotCategory_CONTENT_FETCHER *smithy.Schema
+
+var BotCategory_EMAIL_CLIENT *smithy.Schema
+
+var BotCategory_HTTP_LIBRARY *smithy.Schema
+
+var BotCategory_LINK_CHECKER *smithy.Schema
+
+var BotCategory_MISCELLANEOUS *smithy.Schema
+
+var BotCategory_MONITORING *smithy.Schema
+
+var BotCategory_PAGE_PREVIEW *smithy.Schema
+
+var BotCategory_SCRAPING_FRAMEWORK *smithy.Schema
+
+var BotCategory_SEARCH_ENGINE *smithy.Schema
+
+var BotCategory_SECURITY *smithy.Schema
+
+var BotCategory_SEO *smithy.Schema
+
+var BotCategory_SOCIAL_MEDIA *smithy.Schema
+
+var BotCategory_AI_TRAINING *smithy.Schema
+
+var BotCategory_AI_SEARCH *smithy.Schema
+
+var BotCategory_AI_ASSISTANT *smithy.Schema
+
+var BotCategory_AI_CONTENT_OPTIMIZATION *smithy.Schema
+
+var _Category = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "Category",
+}, smithy.ShapeTypeString, 0)
+
+var _CategoryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "CategoryList",
+}, smithy.ShapeTypeList, 1)
+var _CategoryList_member *smithy.Schema
+
+var _ChallengeRecordName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ChallengeRecordName",
+}, smithy.ShapeTypeString, 0)
+
+var _ChallengeRecordValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ChallengeRecordValue",
+}, smithy.ShapeTypeString, 0)
 
 var ClaimMatchOperatorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -476,6 +620,13 @@ var _DateTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DateTimestamp",
 }, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
 
+var DependencyException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DependencyException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 503})
+var DependencyException_message *smithy.Schema
+
 var _Description = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "Description",
@@ -489,7 +640,7 @@ var _DescriptorData = smithy.NewSchema(smithy.ShapeID{
 var Descriptors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "Descriptors",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Descriptors_mcpServer *smithy.Schema
 
 var Descriptors_a2aAgentCard *smithy.Schema
@@ -501,6 +652,8 @@ var Descriptors_custom *smithy.Schema
 var Descriptors_http *smithy.Schema
 
 var Descriptors_agui *smithy.Schema
+
+var Descriptors_signatureAgentCard *smithy.Schema
 
 var DescriptorSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -534,6 +687,19 @@ var _DiscoveryUrl = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DiscoveryUrl",
 }, smithy.ShapeTypeString, 0)
 
+var DomainChallenge = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DomainChallenge",
+}, smithy.ShapeTypeStructure, 2)
+var DomainChallenge_recordName *smithy.Schema
+
+var DomainChallenge_recordValue *smithy.Schema
+
+var _DomainName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DomainName",
+}, smithy.ShapeTypeString, 0)
+
 var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "EncryptionConfiguration",
@@ -547,6 +713,11 @@ var EndpointIpAddressType = smithy.NewSchema(smithy.ShapeID{
 var EndpointIpAddressType_IPV4 *smithy.Schema
 
 var EndpointIpAddressType_IPV6 *smithy.Schema
+
+var _errorMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "errorMessage",
+}, smithy.ShapeTypeString, 0)
 
 var _FilterValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -594,6 +765,18 @@ var _IamSigningServiceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "IamSigningServiceName",
 }, smithy.ShapeTypeString, 0)
+
+var Identifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "Identifier",
+}, smithy.ShapeTypeUnion, 1)
+var Identifier_domain *smithy.Schema
+
+var IdentifierType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "IdentifierType",
+}, smithy.ShapeTypeEnum, 1)
+var IdentifierType_DOMAIN *smithy.Schema
 
 var _InboundTokenClaimNameType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -787,6 +970,60 @@ var _ProvenanceSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ProvenanceSummaryList_member *smithy.Schema
 
+var _PublicIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PublicIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var PublisherAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PublisherAssociation",
+}, smithy.ShapeTypeStructure, 5)
+var PublisherAssociation_recordArn *smithy.Schema
+
+var PublisherAssociation_publicIdentifier *smithy.Schema
+
+var PublisherAssociation_publisher *smithy.Schema
+
+var PublisherAssociation_status *smithy.Schema
+
+var PublisherAssociation_statusReason *smithy.Schema
+
+var _PublisherAssociationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PublisherAssociationList",
+}, smithy.ShapeTypeList, 1)
+var _PublisherAssociationList_member *smithy.Schema
+
+var _PublisherIdentifierArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PublisherIdentifierArn",
+}, smithy.ShapeTypeString, 0)
+
+var PublisherSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PublisherSummary",
+}, smithy.ShapeTypeStructure, 7)
+var PublisherSummary_value *smithy.Schema
+
+var PublisherSummary_identifierType *smithy.Schema
+
+var PublisherSummary_status *smithy.Schema
+
+var PublisherSummary_createdAt *smithy.Schema
+
+var PublisherSummary_publisherArn *smithy.Schema
+
+var PublisherSummary_associationCount *smithy.Schema
+
+var PublisherSummary_pendingAssociationApprovalCount *smithy.Schema
+
+var _PublisherSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "PublisherSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _PublisherSummaryList_member *smithy.Schema
+
 var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RecordIdentifier",
@@ -795,7 +1032,7 @@ var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 var RecordType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var RecordType_MCP *smithy.Schema
 
 var RecordType_AGENT *smithy.Schema
@@ -805,6 +1042,8 @@ var RecordType_CUSTOM *smithy.Schema
 var RecordType_SKILL *smithy.Schema
 
 var RecordType_GATEWAY *smithy.Schema
+
+var RecordType_WEB_BOT *smithy.Schema
 
 var RecordTypeSchemaOverride = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1217,6 +1456,24 @@ var _Sha256Hash = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Sha256Hash",
 }, smithy.ShapeTypeString, 0)
 
+var SignatureAgentCardAdditionalData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "SignatureAgentCardAdditionalData",
+}, smithy.ShapeTypeStructure, 1)
+var SignatureAgentCardAdditionalData_category *smithy.Schema
+
+var SignatureAgentCardDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "SignatureAgentCardDescriptor",
+}, smithy.ShapeTypeStructure, 4)
+var SignatureAgentCardDescriptor_data *smithy.Schema
+
+var SignatureAgentCardDescriptor_dataSchemaVersion *smithy.Schema
+
+var SignatureAgentCardDescriptor_source *smithy.Schema
+
+var SignatureAgentCardDescriptor_additionalData *smithy.Schema
+
 var SourceDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "SourceDetails",
@@ -1237,6 +1494,16 @@ var SourceType = smithy.NewSchema(smithy.ShapeID{
 var SourceType_AWS_BEDROCK_AGENTCORE_RUNTIME *smithy.Schema
 
 var SourceType_AWS_BEDROCK_AGENTCORE_GATEWAY *smithy.Schema
+
+var _StatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "StatusReason",
+}, smithy.ShapeTypeString, 0)
+
+var _Subdomain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "Subdomain",
+}, smithy.ShapeTypeString, 0)
 
 var _SubnetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1264,6 +1531,14 @@ var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagKeyList",
 }, smithy.ShapeTypeList, 1)
 var _TagKeyList_member *smithy.Schema
+
+var _TagMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "TagMap",
+}, smithy.ShapeTypeMap, 2)
+var _TagMap_key *smithy.Schema
+
+var _TagMap_value *smithy.Schema
 
 var _TagsMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1399,6 +1674,12 @@ var UpdatedAutoDetectionConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdatedAutoDetectionConfiguration_optionalValue *smithy.Schema
 
+var UpdatedBotCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedBotCategory",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedBotCategory_optionalValue *smithy.Schema
+
 var UpdatedCustomDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdatedCustomDescriptor",
@@ -1450,7 +1731,7 @@ var UpdatedDescriptors_optionalValue *smithy.Schema
 var UpdatedDescriptorsFields = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdatedDescriptorsFields",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var UpdatedDescriptorsFields_mcpServer *smithy.Schema
 
 var UpdatedDescriptorsFields_a2aAgentCard *smithy.Schema
@@ -1462,6 +1743,8 @@ var UpdatedDescriptorsFields_custom *smithy.Schema
 var UpdatedDescriptorsFields_http *smithy.Schema
 
 var UpdatedDescriptorsFields_agui *smithy.Schema
+
+var UpdatedDescriptorsFields_signatureAgentCard *smithy.Schema
 
 var UpdatedDescriptorSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1543,6 +1826,36 @@ var UpdatedRegistryRecordArtifact = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdatedRegistryRecordArtifact_optionalValue *smithy.Schema
 
+var UpdatedSignatureAgentCardAdditionalData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedSignatureAgentCardAdditionalData",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedSignatureAgentCardAdditionalData_optionalValue *smithy.Schema
+
+var UpdatedSignatureAgentCardAdditionalDataFields = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedSignatureAgentCardAdditionalDataFields",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedSignatureAgentCardAdditionalDataFields_category *smithy.Schema
+
+var UpdatedSignatureAgentCardDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedSignatureAgentCardDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedSignatureAgentCardDescriptor_optionalValue *smithy.Schema
+
+var UpdatedSignatureAgentCardDescriptorFields = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedSignatureAgentCardDescriptorFields",
+}, smithy.ShapeTypeStructure, 4)
+var UpdatedSignatureAgentCardDescriptorFields_data *smithy.Schema
+
+var UpdatedSignatureAgentCardDescriptorFields_dataSchemaVersion *smithy.Schema
+
+var UpdatedSignatureAgentCardDescriptorFields_source *smithy.Schema
+
+var UpdatedSignatureAgentCardDescriptorFields_additionalData *smithy.Schema
+
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "ValidationException",
@@ -1584,6 +1897,20 @@ var ValidationExceptionReason_RESOURCE_CONFLICT *smithy.Schema
 
 var ValidationExceptionReason_UNSUPPORTED_IN_REGION *smithy.Schema
 
+var VerificationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "VerificationStatus",
+}, smithy.ShapeTypeEnum, 5)
+var VerificationStatus_ACTION_REQUIRED *smithy.Schema
+
+var VerificationStatus_ACTIVE *smithy.Schema
+
+var VerificationStatus_FAILED *smithy.Schema
+
+var VerificationStatus_SUSPENDED *smithy.Schema
+
+var VerificationStatus_DELETING *smithy.Schema
+
 var _VpcIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "VpcIdentifier",
@@ -1594,6 +1921,66 @@ var WorkloadIdentityDetails = smithy.NewSchema(smithy.ShapeID{
 	Name:      "WorkloadIdentityDetails",
 }, smithy.ShapeTypeStructure, 1)
 var WorkloadIdentityDetails_workloadIdentityArn *smithy.Schema
+
+var AssociatePublisherRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AssociatePublisherRequest",
+}, smithy.ShapeTypeStructure, 5)
+var AssociatePublisherRequest_recordArn *smithy.Schema
+
+var AssociatePublisherRequest_publisherArn *smithy.Schema
+
+var AssociatePublisherRequest_subdomain *smithy.Schema
+
+var AssociatePublisherRequest_categories *smithy.Schema
+
+var AssociatePublisherRequest_clientToken *smithy.Schema
+
+var AssociatePublisherResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AssociatePublisherResponse",
+}, smithy.ShapeTypeStructure, 5)
+var AssociatePublisherResponse_recordArn *smithy.Schema
+
+var AssociatePublisherResponse_publicIdentifier *smithy.Schema
+
+var AssociatePublisherResponse_publisher *smithy.Schema
+
+var AssociatePublisherResponse_status *smithy.Schema
+
+var AssociatePublisherResponse_statusReason *smithy.Schema
+
+var CreatePublisherRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "CreatePublisherRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CreatePublisherRequest_value *smithy.Schema
+
+var CreatePublisherRequest_tags *smithy.Schema
+
+var CreatePublisherRequest_clientToken *smithy.Schema
+
+var CreatePublisherResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "CreatePublisherResponse",
+}, smithy.ShapeTypeStructure, 9)
+var CreatePublisherResponse_value *smithy.Schema
+
+var CreatePublisherResponse_identifierType *smithy.Schema
+
+var CreatePublisherResponse_status *smithy.Schema
+
+var CreatePublisherResponse_statusReason *smithy.Schema
+
+var CreatePublisherResponse_domainChallenge *smithy.Schema
+
+var CreatePublisherResponse_tags *smithy.Schema
+
+var CreatePublisherResponse_createdAt *smithy.Schema
+
+var CreatePublisherResponse_updatedAt *smithy.Schema
+
+var CreatePublisherResponse_publisherArn *smithy.Schema
 
 var CreateRegistryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1661,6 +2048,12 @@ var CreateRegistryRecordResponse_status *smithy.Schema
 
 var CreateRegistryRecordResponse_authorizationData *smithy.Schema
 
+var DeletePublisherRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DeletePublisherRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeletePublisherRequest_publisherArn *smithy.Schema
+
 var DeleteRegistryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "DeleteRegistryRequest",
@@ -1685,6 +2078,40 @@ var DeleteRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "DeleteRegistryRecordResponse",
 }, smithy.ShapeTypeStructure, 0)
+
+var DisassociatePublisherRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "DisassociatePublisherRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DisassociatePublisherRequest_recordArn *smithy.Schema
+
+var GetPublisherRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "GetPublisherRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetPublisherRequest_publisherArn *smithy.Schema
+
+var Publisher = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "Publisher",
+}, smithy.ShapeTypeStructure, 9)
+var Publisher_value *smithy.Schema
+
+var Publisher_identifierType *smithy.Schema
+
+var Publisher_status *smithy.Schema
+
+var Publisher_statusReason *smithy.Schema
+
+var Publisher_domainChallenge *smithy.Schema
+
+var Publisher_tags *smithy.Schema
+
+var Publisher_createdAt *smithy.Schema
+
+var Publisher_updatedAt *smithy.Schema
+
+var Publisher_publisherArn *smithy.Schema
 
 var GetRegistryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1773,6 +2200,40 @@ var GetRegistryRecordResponse_customMetadataSchemaComplianceStatus *smithy.Schem
 var GetRegistryRecordResponse_artifact *smithy.Schema
 
 var GetRegistryRecordResponse_synchronizedSource *smithy.Schema
+
+var ListPublisherAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ListPublisherAssociationsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListPublisherAssociationsRequest_publisherArn *smithy.Schema
+
+var ListPublisherAssociationsRequest_maxResults *smithy.Schema
+
+var ListPublisherAssociationsRequest_nextToken *smithy.Schema
+
+var ListPublisherAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ListPublisherAssociationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListPublisherAssociationsResponse_items *smithy.Schema
+
+var ListPublisherAssociationsResponse_nextToken *smithy.Schema
+
+var ListPublishersRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ListPublishersRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ListPublishersRequest_maxResults *smithy.Schema
+
+var ListPublishersRequest_nextToken *smithy.Schema
+
+var ListPublishersResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ListPublishersResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListPublishersResponse_items *smithy.Schema
+
+var ListPublishersResponse_nextToken *smithy.Schema
 
 var ListRegistriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1870,6 +2331,21 @@ var UntagResourceRequest_tagKeys *smithy.Schema
 var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UntagResourceResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var UpdatePublisherAssociationApprovalStatusRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatePublisherAssociationApprovalStatusRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdatePublisherAssociationApprovalStatusRequest_recordArn *smithy.Schema
+
+var UpdatePublisherAssociationApprovalStatusRequest_approvalStatus *smithy.Schema
+
+var UpdatePublisherAssociationApprovalStatusRequest_approvalStatusReason *smithy.Schema
+
+var UpdatePublisherAssociationApprovalStatusResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatePublisherAssociationApprovalStatusResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var UpdateRegistryRequest = smithy.NewSchema(smithy.ShapeID{
@@ -2019,6 +2495,34 @@ var UpdateRegistryRecordStatusResponse_status *smithy.Schema
 var UpdateRegistryRecordStatusResponse_statusReason *smithy.Schema
 
 var UpdateRegistryRecordStatusResponse_updatedAt *smithy.Schema
+
+var ValidatePublisherRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ValidatePublisherRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ValidatePublisherRequest_publisherArn *smithy.Schema
+
+var ValidatePublisherResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ValidatePublisherResponse",
+}, smithy.ShapeTypeStructure, 9)
+var ValidatePublisherResponse_value *smithy.Schema
+
+var ValidatePublisherResponse_identifierType *smithy.Schema
+
+var ValidatePublisherResponse_status *smithy.Schema
+
+var ValidatePublisherResponse_statusReason *smithy.Schema
+
+var ValidatePublisherResponse_domainChallenge *smithy.Schema
+
+var ValidatePublisherResponse_tags *smithy.Schema
+
+var ValidatePublisherResponse_createdAt *smithy.Schema
+
+var ValidatePublisherResponse_updatedAt *smithy.Schema
+
+var ValidatePublisherResponse_publisherArn *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -2227,6 +2731,18 @@ func init() {
 
 	ApprovalConfiguration_autoApprovalRules = ApprovalConfiguration.AddMember("autoApprovalRules", _AutoApprovalRuleList)
 
+	AssociationApprovalStatus_APPROVED = AssociationApprovalStatus.AddMember("APPROVED", smithyprelude.Unit)
+
+	AssociationApprovalStatus_REJECTED = AssociationApprovalStatus.AddMember("REJECTED", smithyprelude.Unit)
+
+	AssociationStatus_PENDING_APPROVAL = AssociationStatus.AddMember("PENDING_APPROVAL", smithyprelude.Unit)
+
+	AssociationStatus_APPROVED = AssociationStatus.AddMember("APPROVED", smithyprelude.Unit)
+
+	AssociationStatus_REJECTED = AssociationStatus.AddMember("REJECTED", smithyprelude.Unit)
+
+	AssociationStatus_SUSPENDED = AssociationStatus.AddMember("SUSPENDED", smithyprelude.Unit)
+
 	OAuth2AuthorizationData_authorizationUrl = OAuth2AuthorizationData.AddMember("authorizationUrl", _OAuthAuthorizationUrl)
 
 	OAuth2AuthorizationData_userId = OAuth2AuthorizationData.AddMember("userId", _OAuthUserId)
@@ -2253,6 +2769,44 @@ func init() {
 
 	AutoDetection_statusReason = AutoDetection.AddMember("statusReason", smithyprelude.String)
 
+	BotCategory_ADVERTISING = BotCategory.AddMember("ADVERTISING", smithyprelude.Unit)
+
+	BotCategory_ARCHIVER = BotCategory.AddMember("ARCHIVER", smithyprelude.Unit)
+
+	BotCategory_CONTENT_FETCHER = BotCategory.AddMember("CONTENT_FETCHER", smithyprelude.Unit)
+
+	BotCategory_EMAIL_CLIENT = BotCategory.AddMember("EMAIL_CLIENT", smithyprelude.Unit)
+
+	BotCategory_HTTP_LIBRARY = BotCategory.AddMember("HTTP_LIBRARY", smithyprelude.Unit)
+
+	BotCategory_LINK_CHECKER = BotCategory.AddMember("LINK_CHECKER", smithyprelude.Unit)
+
+	BotCategory_MISCELLANEOUS = BotCategory.AddMember("MISCELLANEOUS", smithyprelude.Unit)
+
+	BotCategory_MONITORING = BotCategory.AddMember("MONITORING", smithyprelude.Unit)
+
+	BotCategory_PAGE_PREVIEW = BotCategory.AddMember("PAGE_PREVIEW", smithyprelude.Unit)
+
+	BotCategory_SCRAPING_FRAMEWORK = BotCategory.AddMember("SCRAPING_FRAMEWORK", smithyprelude.Unit)
+
+	BotCategory_SEARCH_ENGINE = BotCategory.AddMember("SEARCH_ENGINE", smithyprelude.Unit)
+
+	BotCategory_SECURITY = BotCategory.AddMember("SECURITY", smithyprelude.Unit)
+
+	BotCategory_SEO = BotCategory.AddMember("SEO", smithyprelude.Unit)
+
+	BotCategory_SOCIAL_MEDIA = BotCategory.AddMember("SOCIAL_MEDIA", smithyprelude.Unit)
+
+	BotCategory_AI_TRAINING = BotCategory.AddMember("AI_TRAINING", smithyprelude.Unit)
+
+	BotCategory_AI_SEARCH = BotCategory.AddMember("AI_SEARCH", smithyprelude.Unit)
+
+	BotCategory_AI_ASSISTANT = BotCategory.AddMember("AI_ASSISTANT", smithyprelude.Unit)
+
+	BotCategory_AI_CONTENT_OPTIMIZATION = BotCategory.AddMember("AI_CONTENT_OPTIMIZATION", smithyprelude.Unit)
+
+	_CategoryList_member = _CategoryList.AddMember("member", _Category)
+
 	ConflictException_message = ConflictException.AddMember("message", _NonBlankString)
 
 	CustomDescriptor_data = CustomDescriptor.AddMember("data", _DescriptorData)
@@ -2271,6 +2825,8 @@ func init() {
 
 	RecordType_GATEWAY = RecordType.AddMember("GATEWAY", smithyprelude.Unit)
 
+	RecordType_WEB_BOT = RecordType.AddMember("WEB_BOT", smithyprelude.Unit)
+
 	RecordTypeSchemaOverride_recordType = RecordTypeSchemaOverride.AddMember("recordType", RecordType)
 
 	RecordTypeSchemaOverride_schema = RecordTypeSchemaOverride.AddMember("schema", _CustomMetadataSchemaDefinition)
@@ -2280,6 +2836,8 @@ func init() {
 	CustomMetadataSchemaConfiguration_defaultSchema = CustomMetadataSchemaConfiguration.AddMember("defaultSchema", _CustomMetadataSchemaDefinition)
 
 	CustomMetadataSchemaConfiguration_recordTypeSchemaOverrides = CustomMetadataSchemaConfiguration.AddMember("recordTypeSchemaOverrides", _RecordTypeSchemaOverrideList)
+
+	DependencyException_message = DependencyException.AddMember("message", _errorMessage)
 
 	McpToolsDescriptor_data = McpToolsDescriptor.AddMember("data", _DescriptorData)
 
@@ -2297,6 +2855,16 @@ func init() {
 
 	HttpDescriptor_source = HttpDescriptor.AddMember("source", DescriptorSource)
 
+	SignatureAgentCardAdditionalData_category = SignatureAgentCardAdditionalData.AddMember("category", BotCategory)
+
+	SignatureAgentCardDescriptor_data = SignatureAgentCardDescriptor.AddMember("data", _DescriptorData)
+
+	SignatureAgentCardDescriptor_dataSchemaVersion = SignatureAgentCardDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
+
+	SignatureAgentCardDescriptor_source = SignatureAgentCardDescriptor.AddMember("source", DescriptorSource)
+
+	SignatureAgentCardDescriptor_additionalData = SignatureAgentCardDescriptor.AddMember("additionalData", SignatureAgentCardAdditionalData)
+
 	Descriptors_mcpServer = Descriptors.AddMember("mcpServer", McpServerDescriptor)
 
 	Descriptors_a2aAgentCard = Descriptors.AddMember("a2aAgentCard", A2aAgentCardDescriptor)
@@ -2309,6 +2877,8 @@ func init() {
 
 	Descriptors_agui = Descriptors.AddMember("agui", AgUiDescriptor)
 
+	Descriptors_signatureAgentCard = Descriptors.AddMember("signatureAgentCard", SignatureAgentCardDescriptor)
+
 	RegistryAuthorizerType_CUSTOM_JWT = RegistryAuthorizerType.AddMember("CUSTOM_JWT", smithyprelude.Unit)
 
 	RegistryAuthorizerType_AWS_IAM = RegistryAuthorizerType.AddMember("AWS_IAM", smithyprelude.Unit)
@@ -2316,6 +2886,10 @@ func init() {
 	DiscoveryConfiguration_authorizerConfiguration = DiscoveryConfiguration.AddMember("authorizerConfiguration", AuthorizerConfiguration)
 
 	DiscoveryConfiguration_authorizerType = DiscoveryConfiguration.AddMember("authorizerType", RegistryAuthorizerType)
+
+	DomainChallenge_recordName = DomainChallenge.AddMember("recordName", _ChallengeRecordName)
+
+	DomainChallenge_recordValue = DomainChallenge.AddMember("recordValue", _ChallengeRecordValue)
 
 	EncryptionConfiguration_kmsKeyArn = EncryptionConfiguration.AddMember("kmsKeyArn", _KmsKeyArn)
 
@@ -2326,6 +2900,10 @@ func init() {
 	GitHubSynchronizedSource_synchronizedAt = GitHubSynchronizedSource.AddMember("synchronizedAt", _DateTimestamp)
 
 	GitHubSynchronizedSource_commitId = GitHubSynchronizedSource.AddMember("commitId", _GitCommitId)
+
+	Identifier_domain = Identifier.AddMember("domain", _DomainName)
+
+	IdentifierType_DOMAIN = IdentifierType.AddMember("DOMAIN", smithyprelude.Unit)
 
 	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
 
@@ -2356,6 +2934,44 @@ func init() {
 	ProvenanceSummary_sourceType = ProvenanceSummary.AddMember("sourceType", SourceType)
 
 	_ProvenanceSummaryList_member = _ProvenanceSummaryList.AddMember("member", ProvenanceSummary)
+
+	PublisherAssociation_recordArn = PublisherAssociation.AddMember("recordArn", _RegistryRecordArn)
+
+	PublisherAssociation_publicIdentifier = PublisherAssociation.AddMember("publicIdentifier", _PublicIdentifier)
+
+	PublisherAssociation_publisher = PublisherAssociation.AddMember("publisher", _PublisherIdentifierArn)
+
+	PublisherAssociation_status = PublisherAssociation.AddMember("status", AssociationStatus)
+
+	PublisherAssociation_statusReason = PublisherAssociation.AddMember("statusReason", _StatusReason)
+
+	_PublisherAssociationList_member = _PublisherAssociationList.AddMember("member", PublisherAssociation)
+
+	VerificationStatus_ACTION_REQUIRED = VerificationStatus.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
+
+	VerificationStatus_ACTIVE = VerificationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	VerificationStatus_FAILED = VerificationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	VerificationStatus_SUSPENDED = VerificationStatus.AddMember("SUSPENDED", smithyprelude.Unit)
+
+	VerificationStatus_DELETING = VerificationStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	PublisherSummary_value = PublisherSummary.AddMember("value", Identifier)
+
+	PublisherSummary_identifierType = PublisherSummary.AddMember("identifierType", IdentifierType)
+
+	PublisherSummary_status = PublisherSummary.AddMember("status", VerificationStatus)
+
+	PublisherSummary_createdAt = PublisherSummary.AddMember("createdAt", smithyprelude.Timestamp)
+
+	PublisherSummary_publisherArn = PublisherSummary.AddMember("publisherArn", _PublisherIdentifierArn)
+
+	PublisherSummary_associationCount = PublisherSummary.AddMember("associationCount", smithyprelude.Integer)
+
+	PublisherSummary_pendingAssociationApprovalCount = PublisherSummary.AddMember("pendingAssociationApprovalCount", smithyprelude.Integer)
+
+	_PublisherSummaryList_member = _PublisherSummaryList.AddMember("member", PublisherSummary)
 
 	RegistryFilterName_STATUS = RegistryFilterName.AddMember("STATUS", smithyprelude.Unit)
 
@@ -2499,6 +3115,10 @@ func init() {
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
+	_TagMap_key = _TagMap.AddMember("key", _TagKey)
+
+	_TagMap_value = _TagMap.AddMember("value", _TagValue)
+
 	ThrottlingException_message = ThrottlingException.AddMember("message", _NonBlankString)
 
 	UpdatedDescriptorData_optionalValue = UpdatedDescriptorData.AddMember("optionalValue", _DescriptorData)
@@ -2557,6 +3177,8 @@ func init() {
 
 	UpdatedAutoDetectionConfiguration_optionalValue = UpdatedAutoDetectionConfiguration.AddMember("optionalValue", AutoDetectionConfiguration)
 
+	UpdatedBotCategory_optionalValue = UpdatedBotCategory.AddMember("optionalValue", BotCategory)
+
 	UpdatedCustomDescriptorFields_data = UpdatedCustomDescriptorFields.AddMember("data", UpdatedDescriptorData)
 
 	UpdatedCustomDescriptor_optionalValue = UpdatedCustomDescriptor.AddMember("optionalValue", UpdatedCustomDescriptorFields)
@@ -2591,6 +3213,20 @@ func init() {
 
 	UpdatedHttpDescriptor_optionalValue = UpdatedHttpDescriptor.AddMember("optionalValue", UpdatedHttpDescriptorFields)
 
+	UpdatedSignatureAgentCardAdditionalDataFields_category = UpdatedSignatureAgentCardAdditionalDataFields.AddMember("category", UpdatedBotCategory)
+
+	UpdatedSignatureAgentCardAdditionalData_optionalValue = UpdatedSignatureAgentCardAdditionalData.AddMember("optionalValue", UpdatedSignatureAgentCardAdditionalDataFields)
+
+	UpdatedSignatureAgentCardDescriptorFields_data = UpdatedSignatureAgentCardDescriptorFields.AddMember("data", UpdatedDescriptorData)
+
+	UpdatedSignatureAgentCardDescriptorFields_dataSchemaVersion = UpdatedSignatureAgentCardDescriptorFields.AddMember("dataSchemaVersion", UpdatedDataSchemaVersion)
+
+	UpdatedSignatureAgentCardDescriptorFields_source = UpdatedSignatureAgentCardDescriptorFields.AddMember("source", UpdatedDescriptorSource)
+
+	UpdatedSignatureAgentCardDescriptorFields_additionalData = UpdatedSignatureAgentCardDescriptorFields.AddMember("additionalData", UpdatedSignatureAgentCardAdditionalData)
+
+	UpdatedSignatureAgentCardDescriptor_optionalValue = UpdatedSignatureAgentCardDescriptor.AddMember("optionalValue", UpdatedSignatureAgentCardDescriptorFields)
+
 	UpdatedDescriptorsFields_mcpServer = UpdatedDescriptorsFields.AddMember("mcpServer", UpdatedMcpServerDescriptor)
 
 	UpdatedDescriptorsFields_a2aAgentCard = UpdatedDescriptorsFields.AddMember("a2aAgentCard", UpdatedA2aAgentCardDescriptor)
@@ -2602,6 +3238,8 @@ func init() {
 	UpdatedDescriptorsFields_http = UpdatedDescriptorsFields.AddMember("http", UpdatedHttpDescriptor)
 
 	UpdatedDescriptorsFields_agui = UpdatedDescriptorsFields.AddMember("agui", UpdatedAgUiDescriptor)
+
+	UpdatedDescriptorsFields_signatureAgentCard = UpdatedDescriptorsFields.AddMember("signatureAgentCard", UpdatedSignatureAgentCardDescriptor)
 
 	UpdatedDescriptors_optionalValue = UpdatedDescriptors.AddMember("optionalValue", UpdatedDescriptorsFields)
 
@@ -2634,6 +3272,50 @@ func init() {
 	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
 
 	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
+
+	AssociatePublisherRequest_recordArn = AssociatePublisherRequest.AddMember("recordArn", _RegistryRecordArn)
+
+	AssociatePublisherRequest_publisherArn = AssociatePublisherRequest.AddMember("publisherArn", _PublisherIdentifierArn)
+
+	AssociatePublisherRequest_subdomain = AssociatePublisherRequest.AddMember("subdomain", _Subdomain)
+
+	AssociatePublisherRequest_categories = AssociatePublisherRequest.AddMember("categories", _CategoryList)
+
+	AssociatePublisherRequest_clientToken = AssociatePublisherRequest.AddMember("clientToken", _ClientToken)
+
+	AssociatePublisherResponse_recordArn = AssociatePublisherResponse.AddMember("recordArn", _RegistryRecordArn)
+
+	AssociatePublisherResponse_publicIdentifier = AssociatePublisherResponse.AddMember("publicIdentifier", _PublicIdentifier)
+
+	AssociatePublisherResponse_publisher = AssociatePublisherResponse.AddMember("publisher", _PublisherIdentifierArn)
+
+	AssociatePublisherResponse_status = AssociatePublisherResponse.AddMember("status", AssociationStatus)
+
+	AssociatePublisherResponse_statusReason = AssociatePublisherResponse.AddMember("statusReason", _StatusReason)
+
+	CreatePublisherRequest_value = CreatePublisherRequest.AddMember("value", Identifier)
+
+	CreatePublisherRequest_tags = CreatePublisherRequest.AddMember("tags", _TagMap)
+
+	CreatePublisherRequest_clientToken = CreatePublisherRequest.AddMember("clientToken", _ClientToken)
+
+	CreatePublisherResponse_value = CreatePublisherResponse.AddMember("value", Identifier)
+
+	CreatePublisherResponse_identifierType = CreatePublisherResponse.AddMember("identifierType", IdentifierType)
+
+	CreatePublisherResponse_status = CreatePublisherResponse.AddMember("status", VerificationStatus)
+
+	CreatePublisherResponse_statusReason = CreatePublisherResponse.AddMember("statusReason", _StatusReason)
+
+	CreatePublisherResponse_domainChallenge = CreatePublisherResponse.AddMember("domainChallenge", DomainChallenge)
+
+	CreatePublisherResponse_tags = CreatePublisherResponse.AddMember("tags", _TagMap)
+
+	CreatePublisherResponse_createdAt = CreatePublisherResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	CreatePublisherResponse_updatedAt = CreatePublisherResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	CreatePublisherResponse_publisherArn = CreatePublisherResponse.AddMember("publisherArn", _PublisherIdentifierArn)
 
 	CreateRegistryRequest_name = CreateRegistryRequest.AddMember("name", _RegistryName)
 
@@ -2685,6 +3367,8 @@ func init() {
 
 	CreateRegistryRecordResponse_authorizationData = CreateRegistryRecordResponse.AddMember("authorizationData", AuthorizationData)
 
+	DeletePublisherRequest_publisherArn = DeletePublisherRequest.AddMember("publisherArn", _PublisherIdentifierArn, &smithytraits.HTTPLabel{})
+
 	DeleteRegistryRequest_registryId = DeleteRegistryRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 
 	DeleteRegistryResponse_status = DeleteRegistryResponse.AddMember("status", RegistryStatus)
@@ -2692,6 +3376,28 @@ func init() {
 	DeleteRegistryRecordRequest_registryId = DeleteRegistryRecordRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 
 	DeleteRegistryRecordRequest_recordId = DeleteRegistryRecordRequest.AddMember("recordId", _RecordIdentifier, &smithytraits.HTTPLabel{})
+
+	DisassociatePublisherRequest_recordArn = DisassociatePublisherRequest.AddMember("recordArn", _RegistryRecordArn, &smithytraits.HTTPLabel{})
+
+	GetPublisherRequest_publisherArn = GetPublisherRequest.AddMember("publisherArn", _PublisherIdentifierArn, &smithytraits.HTTPLabel{})
+
+	Publisher_value = Publisher.AddMember("value", Identifier)
+
+	Publisher_identifierType = Publisher.AddMember("identifierType", IdentifierType)
+
+	Publisher_status = Publisher.AddMember("status", VerificationStatus)
+
+	Publisher_statusReason = Publisher.AddMember("statusReason", _StatusReason)
+
+	Publisher_domainChallenge = Publisher.AddMember("domainChallenge", DomainChallenge)
+
+	Publisher_tags = Publisher.AddMember("tags", _TagMap)
+
+	Publisher_createdAt = Publisher.AddMember("createdAt", smithyprelude.Timestamp)
+
+	Publisher_updatedAt = Publisher.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	Publisher_publisherArn = Publisher.AddMember("publisherArn", _PublisherIdentifierArn)
 
 	GetRegistryRequest_registryId = GetRegistryRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 
@@ -2765,6 +3471,24 @@ func init() {
 
 	GetRegistryRecordResponse_synchronizedSource = GetRegistryRecordResponse.AddMember("synchronizedSource", RegistryRecordSynchronizedSource)
 
+	ListPublisherAssociationsRequest_publisherArn = ListPublisherAssociationsRequest.AddMember("publisherArn", _PublisherIdentifierArn, &smithytraits.HTTPQuery{Name: "publisherArn"})
+
+	ListPublisherAssociationsRequest_maxResults = ListPublisherAssociationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListPublisherAssociationsRequest_nextToken = ListPublisherAssociationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListPublisherAssociationsResponse_items = ListPublisherAssociationsResponse.AddMember("items", _PublisherAssociationList)
+
+	ListPublisherAssociationsResponse_nextToken = ListPublisherAssociationsResponse.AddMember("nextToken", _NextToken)
+
+	ListPublishersRequest_maxResults = ListPublishersRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListPublishersRequest_nextToken = ListPublishersRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListPublishersResponse_items = ListPublishersResponse.AddMember("items", _PublisherSummaryList)
+
+	ListPublishersResponse_nextToken = ListPublishersResponse.AddMember("nextToken", _NextToken)
+
 	ListRegistriesRequest_maxResults = ListRegistriesRequest.AddMember("maxResults", _MaxResults)
 
 	ListRegistriesRequest_nextToken = ListRegistriesRequest.AddMember("nextToken", _NextToken)
@@ -2812,6 +3536,12 @@ func init() {
 	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
 
 	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
+
+	UpdatePublisherAssociationApprovalStatusRequest_recordArn = UpdatePublisherAssociationApprovalStatusRequest.AddMember("recordArn", _RegistryRecordArn, &smithytraits.HTTPLabel{})
+
+	UpdatePublisherAssociationApprovalStatusRequest_approvalStatus = UpdatePublisherAssociationApprovalStatusRequest.AddMember("approvalStatus", AssociationApprovalStatus)
+
+	UpdatePublisherAssociationApprovalStatusRequest_approvalStatusReason = UpdatePublisherAssociationApprovalStatusRequest.AddMember("approvalStatusReason", _StatusReason)
 
 	UpdateRegistryRequest_registryId = UpdateRegistryRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 
@@ -2936,5 +3666,25 @@ func init() {
 	UpdateRegistryRecordStatusResponse_statusReason = UpdateRegistryRecordStatusResponse.AddMember("statusReason", smithyprelude.String)
 
 	UpdateRegistryRecordStatusResponse_updatedAt = UpdateRegistryRecordStatusResponse.AddMember("updatedAt", _DateTimestamp)
+
+	ValidatePublisherRequest_publisherArn = ValidatePublisherRequest.AddMember("publisherArn", _PublisherIdentifierArn, &smithytraits.HTTPLabel{})
+
+	ValidatePublisherResponse_value = ValidatePublisherResponse.AddMember("value", Identifier)
+
+	ValidatePublisherResponse_identifierType = ValidatePublisherResponse.AddMember("identifierType", IdentifierType)
+
+	ValidatePublisherResponse_status = ValidatePublisherResponse.AddMember("status", VerificationStatus)
+
+	ValidatePublisherResponse_statusReason = ValidatePublisherResponse.AddMember("statusReason", _StatusReason)
+
+	ValidatePublisherResponse_domainChallenge = ValidatePublisherResponse.AddMember("domainChallenge", DomainChallenge)
+
+	ValidatePublisherResponse_tags = ValidatePublisherResponse.AddMember("tags", _TagMap)
+
+	ValidatePublisherResponse_createdAt = ValidatePublisherResponse.AddMember("createdAt", smithyprelude.Timestamp)
+
+	ValidatePublisherResponse_updatedAt = ValidatePublisherResponse.AddMember("updatedAt", smithyprelude.Timestamp)
+
+	ValidatePublisherResponse_publisherArn = ValidatePublisherResponse.AddMember("publisherArn", _PublisherIdentifierArn)
 
 }

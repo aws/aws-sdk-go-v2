@@ -3805,6 +3805,9 @@ type CaptionSelectorSettings struct {
 	// Teletext Source Settings
 	TeletextSourceSettings *TeletextSourceSettings
 
+	// Webvtt Source Settings
+	WebvttSourceSettings *WebvttSourceSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -3855,6 +3858,11 @@ func (v *CaptionSelectorSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TeletextSourceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.WebvttSourceSettings != nil {
+		s.WriteStruct(schemas.CaptionSelectorSettings_WebvttSourceSettings)
+		v.WebvttSourceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *CaptionSelectorSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CaptionSelectorSettings, func(s *smithy.Schema) error {
@@ -3883,6 +3891,9 @@ func (v *CaptionSelectorSettings) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.CaptionSelectorSettings_TeletextSourceSettings:
 			v.TeletextSourceSettings = &TeletextSourceSettings{}
 			return v.TeletextSourceSettings.Deserialize(d)
+		case schemas.CaptionSelectorSettings_WebvttSourceSettings:
+			v.WebvttSourceSettings = &WebvttSourceSettings{}
+			return v.WebvttSourceSettings.Deserialize(d)
 		}
 		return nil
 	})
@@ -7526,6 +7537,25 @@ func (v *EmbeddedCaptionPositionSettings) Deserialize(d smithy.ShapeDeserializer
 // Embedded Destination Settings
 type EmbeddedDestinationSettings struct {
 
+	// CC Channel / Service number for 608/708 encode mode. Serves as both the 608 CC
+	// channel and the 708 service number (e.g., 1 = CC1 + Service 1). Only takes
+	// effect when the source is non-embedded (teletext, smart captions, etc.) —
+	// ignored in passthrough mode.
+	//
+	// Range 1-4: valid for embedded608Only, embedded708Only, or embedded608And708.
+	// Range 5-63: valid for embedded708Only.
+	CaptionServiceChannel *int32
+
+	// Controls what the encoder generates when in encode mode (non-embedded source →
+	// embedded destination). Ignored in passthrough mode (embedded source → embedded
+	// destination).
+	//
+	//   - "embedded608Only": Generate CEA-608 CC pairs only (channel must be 1-4)
+	//   - "embedded708Only": Generate CEA-708 service blocks only (channel 1-63)
+	//   - "embedded608And708": Generate both 608 CC pairs and 708 service blocks
+	//   (channel 1-4 gets both, 5-63 gets 708 only)
+	EmbeddedMode EmbeddedModeType
+
 	// Specifies the position of the output captions. Applies only when styleControl
 	// is set to manual.
 	Position *EmbeddedCaptionPositionSettings
@@ -7550,6 +7580,12 @@ func (v *EmbeddedDestinationSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EmbeddedDestinationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaptionServiceChannel != nil {
+		s.WriteInt32(schemas.EmbeddedDestinationSettings_CaptionServiceChannel, *v.CaptionServiceChannel)
+	}
+	if v.EmbeddedMode != "" {
+		s.WriteString(schemas.EmbeddedDestinationSettings_EmbeddedMode, string(v.EmbeddedMode))
+	}
 	if v.Position != nil {
 		s.WriteStruct(schemas.EmbeddedDestinationSettings_Position)
 		v.Position.SerializeMembers(s)
@@ -7562,6 +7598,16 @@ func (v *EmbeddedDestinationSettings) SerializeMembers(s smithy.ShapeSerializer)
 func (v *EmbeddedDestinationSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmbeddedDestinationSettings, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EmbeddedDestinationSettings_CaptionServiceChannel:
+			v.CaptionServiceChannel = new(int32)
+			return d.ReadInt32(schemas.EmbeddedDestinationSettings_CaptionServiceChannel, v.CaptionServiceChannel)
+		case schemas.EmbeddedDestinationSettings_EmbeddedMode:
+			var ev string
+			if err := d.ReadString(schemas.EmbeddedDestinationSettings_EmbeddedMode, &ev); err != nil {
+				return err
+			}
+			v.EmbeddedMode = EmbeddedModeType(ev)
+			return nil
 		case schemas.EmbeddedDestinationSettings_Position:
 			v.Position = &EmbeddedCaptionPositionSettings{}
 			return v.Position.Deserialize(d)
@@ -26761,10 +26807,10 @@ type WebvttDestinationSettings struct {
 
 	// Controls whether the color and position of the source captions is passed
 	// through to the WebVTT output captions. PASSTHROUGH - Valid only if the source
-	// captions are EMBEDDED, TELETEXT, or SMART SUBTITLES. NO_STYLE_DATA - Don't pass
-	// through the style. The output captions will not contain any font styling
-	// information. MANUAL - Applies the specified styling and positioning. All other
-	// styling and positioning is given default values.
+	// captions are EMBEDDED, TELETEXT, SMART SUBTITLES, or WEBVTT. NO_STYLE_DATA -
+	// Don't pass through the style. The output captions will not contain any font
+	// styling information. MANUAL - Applies the specified styling and positioning. All
+	// other styling and positioning is given default values.
 	StyleControl WebvttDestinationStyleControl
 
 	noSmithyDocumentSerde
@@ -26799,6 +26845,58 @@ func (v *WebvttDestinationSettings) Deserialize(d smithy.ShapeDeserializer) erro
 			}
 			v.StyleControl = WebvttDestinationStyleControl(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Webvtt Source Settings
+type WebvttSourceSettings struct {
+
+	// Optional. The "GROUP-ID" attribute of the #EXT-X-MEDIA subtitle rendition to
+	// use from the HLS source. Specify it together with name; the pair must exactly
+	// match one rendition, otherwise this caption selector produces no captions. If
+	// neither groupId nor name is specified, MediaLive selects the rendition whose
+	// LANGUAGE matches the caption selector's language code (case-insensitive), then
+	// the DEFAULT=YES rendition, then the first subtitle rendition listed in the
+	// master playlist.
+	GroupId *string
+
+	// Optional. The "NAME" attribute of the #EXT-X-MEDIA subtitle rendition to use
+	// from the HLS source. Specify it together with groupId; the pair must exactly
+	// match one rendition, otherwise this caption selector produces no captions. If
+	// neither groupId nor name is specified, MediaLive selects the rendition whose
+	// LANGUAGE matches the caption selector's language code (case-insensitive), then
+	// the DEFAULT=YES rendition, then the first subtitle rendition listed in the
+	// master playlist.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WebvttSourceSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebvttSourceSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebvttSourceSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.WebvttSourceSettings_GroupId, *v.GroupId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WebvttSourceSettings_Name, *v.Name)
+	}
+}
+func (v *WebvttSourceSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebvttSourceSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebvttSourceSettings_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.WebvttSourceSettings_GroupId, v.GroupId)
+		case schemas.WebvttSourceSettings_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WebvttSourceSettings_Name, v.Name)
 		}
 		return nil
 	})

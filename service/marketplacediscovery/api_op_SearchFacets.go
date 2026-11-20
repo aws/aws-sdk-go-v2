@@ -11,9 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns available facet values for filtering listings, such as categories,
-// pricing models, fulfillment option types, publishers, and customer ratings. Each
-// facet value includes a count of matching listings.
+// Retrieves the available facet values for filtering listings, such as
+// categories, pricing models, fulfillment option types, publishers, and customer
+// ratings. Each facet value includes a count of matching listings.
 func (c *Client) SearchFacets(ctx context.Context, params *SearchFacetsInput, optFns ...func(*Options)) (*SearchFacetsOutput, error) {
 	if params == nil {
 		params = &SearchFacetsInput{}
@@ -31,22 +31,25 @@ func (c *Client) SearchFacets(ctx context.Context, params *SearchFacetsInput, op
 
 type SearchFacetsInput struct {
 
-	// A list of specific facet types to retrieve. If empty or null, all available
-	// facets are returned.
+	// The facet types to retrieve. If you omit this field or leave it empty, the
+	// service returns all available facets.
 	FacetTypes []types.SearchFacetType
 
-	// Filters to apply before retrieving facets. Multiple filters are combined with
-	// AND logic. Multiple values within the same filter are combined with OR logic.
+	// Filters to apply before retrieving facets. A result must match every filter.
+	// Within one filter, a result matches if it has any of the values.
 	Filters []types.SearchFilter
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	// The search query text to filter listings before retrieving facets.
@@ -92,8 +95,11 @@ type SearchFacetsOutput struct {
 	// This member is required.
 	TotalResults *int64
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

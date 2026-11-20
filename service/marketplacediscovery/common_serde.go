@@ -85,6 +85,57 @@ func serializeFulfillmentOption(s smithy.ShapeSerializer, schema *smithy.Schema,
 	}
 }
 
+func serializeListingAttributeResults(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ListingAttributeResults) {
+	switch vv := v.(type) {
+	case *types.ListingAttributeResultsMemberCaseStudy:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_caseStudy)
+		s.WriteStruct(schemas.ListingAttributeResults_caseStudy)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberSpecializationDetail:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_specializationDetail)
+		serializeSpecializationDetail(s, schemas.ListingAttributeResults_specializationDetail, vv.Value)
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberTrustCenterCertification:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_trustCenterCertification)
+		s.WriteStruct(schemas.ListingAttributeResults_trustCenterCertification)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberTrustCenterControl:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_trustCenterControl)
+		s.WriteStruct(schemas.ListingAttributeResults_trustCenterControl)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberTrustCenterDocument:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_trustCenterDocument)
+		s.WriteStruct(schemas.ListingAttributeResults_trustCenterDocument)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberTrustCenterFaq:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_trustCenterFaq)
+		s.WriteStruct(schemas.ListingAttributeResults_trustCenterFaq)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberTrustCenterSource:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_trustCenterSource)
+		s.WriteStruct(schemas.ListingAttributeResults_trustCenterSource)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.ListingAttributeResultsMemberTrustCenterUpdate:
+		s.WriteUnion(schema, schemas.ListingAttributeResults_trustCenterUpdate)
+		s.WriteStruct(schemas.ListingAttributeResults_trustCenterUpdate)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeOfferTerm(s smithy.ShapeSerializer, schema *smithy.Schema, v types.OfferTerm) {
 	switch vv := v.(type) {
 	case *types.OfferTermMemberByolPricingTerm:
@@ -202,6 +253,34 @@ func serializePromotionalMedia(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	}
 }
 
+func serializeSaasDeploymentTemplate(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SaasDeploymentTemplate) {
+	switch vv := v.(type) {
+	case *types.SaasDeploymentTemplateMemberCloudFormationDeploymentTemplate:
+		s.WriteUnion(schema, schemas.SaasDeploymentTemplate_cloudFormationDeploymentTemplate)
+		s.WriteStruct(schemas.SaasDeploymentTemplate_cloudFormationDeploymentTemplate)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeSpecializationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SpecializationDetail) {
+	switch vv := v.(type) {
+	case *types.SpecializationDetailMemberSpecialization:
+		s.WriteUnion(schema, schemas.SpecializationDetail_specialization)
+		s.WriteStruct(schemas.SpecializationDetail_specialization)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.SpecializationDetailMemberSpecializationCategory:
+		s.WriteUnion(schema, schemas.SpecializationDetail_specializationCategory)
+		s.WriteStruct(schemas.SpecializationDetail_specializationCategory)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeTermTemplate(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TermTemplate) {
 	switch vv := v.(type) {
 	case *types.TermTemplateMemberPaymentScheduleTermTemplate:
@@ -262,6 +341,46 @@ func deserializeFulfillmentOption(d smithy.ShapeDeserializer, s *smithy.Schema, 
 			return vv.Deserialize(d)
 		case schemas.FulfillmentOption_sageMakerModelFulfillmentOption:
 			vv := &types.FulfillmentOptionMemberSageMakerModelFulfillmentOption{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeListingAttributeResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ListingAttributeResults) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ListingAttributeResults_caseStudy:
+			vv := &types.ListingAttributeResultsMemberCaseStudy{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_specializationDetail:
+			vv := &types.ListingAttributeResultsMemberSpecializationDetail{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_trustCenterCertification:
+			vv := &types.ListingAttributeResultsMemberTrustCenterCertification{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_trustCenterControl:
+			vv := &types.ListingAttributeResultsMemberTrustCenterControl{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_trustCenterDocument:
+			vv := &types.ListingAttributeResultsMemberTrustCenterDocument{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_trustCenterFaq:
+			vv := &types.ListingAttributeResultsMemberTrustCenterFaq{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_trustCenterSource:
+			vv := &types.ListingAttributeResultsMemberTrustCenterSource{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingAttributeResults_trustCenterUpdate:
+			vv := &types.ListingAttributeResultsMemberTrustCenterUpdate{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -361,6 +480,34 @@ func deserializePromotionalMedia(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeSaasDeploymentTemplate(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.SaasDeploymentTemplate) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.SaasDeploymentTemplate_cloudFormationDeploymentTemplate:
+			vv := &types.SaasDeploymentTemplateMemberCloudFormationDeploymentTemplate{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeSpecializationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.SpecializationDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.SpecializationDetail_specialization:
+			vv := &types.SpecializationDetailMemberSpecialization{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.SpecializationDetail_specializationCategory:
+			vv := &types.SpecializationDetailMemberSpecializationCategory{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeTermTemplate(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TermTemplate) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -410,6 +557,24 @@ func serializeAmazonMachineImageSecurityGroupList(s smithy.ShapeSerializer, sche
 }
 
 func serializeAwsSupportedServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AwsSupportedService) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCaseStudyIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeCaseStudyResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CaseStudyResource) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -553,6 +718,22 @@ func serializeListingAssociatedEntityList(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeListingAttributeResultsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListingAttributeResults) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeListingAttributeResults(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeListingAttributeTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListingAttributeType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeListingBadgeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListingBadge) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -659,6 +840,16 @@ func serializePromotionalMediaList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializePurchaseIndicatorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PurchaseIndicator) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePurchaseOptionAssociatedEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PurchaseOptionAssociatedEntity) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -717,6 +908,16 @@ func serializeRateCardList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeRegionalPriceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RegionalPrice) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Resource) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -733,6 +934,14 @@ func serializeReviewSourceSummaryList(s smithy.ShapeSerializer, schema *smithy.S
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSaasDeploymentTemplateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SaasDeploymentTemplate) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeSaasDeploymentTemplate(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -791,10 +1000,48 @@ func serializeSellerEngagementList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeSpecializationTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SpecializationTypeDetail) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeTermTemplateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TermTemplate) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeTermTemplate(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeTrustCenterCertificationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustCenterCertificationSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTrustCenterControlDomainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustCenterControlDomain) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeTrustCenterSourceSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustCenterSourceSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -810,6 +1057,16 @@ func serializeUsageBasedRateCardList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeUseCaseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UseCaseEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUseCaseSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UseCaseSummaryEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -918,6 +1175,49 @@ func deserializeAwsSupportedServiceList(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		vv = types.AwsSupportedService{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCaseStudyIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCaseStudyResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CaseStudyResource) error {
+	*v = make([]types.CaseStudyResource, 0)
+	var vv types.CaseStudyResource
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CaseStudyResource
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CaseStudyResource{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1232,6 +1532,48 @@ func deserializeListingAssociatedEntityList(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func deserializeListingAttributeResultsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListingAttributeResults) error {
+	*v = make([]types.ListingAttributeResults, 0)
+	var vv types.ListingAttributeResults
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ListingAttributeResults
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeListingAttributeResults(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeListingAttributeTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListingAttributeType) error {
+	*v = make([]types.ListingAttributeType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ListingAttributeType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ListingAttributeType(vv))
+		return nil
+	})
+}
+
 func deserializeListingBadgeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListingBadge) error {
 	*v = make([]types.ListingBadge, 0)
 	var vv types.ListingBadge
@@ -1472,6 +1814,28 @@ func deserializePromotionalMediaList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializePurchaseIndicatorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PurchaseIndicator) error {
+	*v = make([]types.PurchaseIndicator, 0)
+	var vv types.PurchaseIndicator
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PurchaseIndicator
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PurchaseIndicator{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePurchaseOptionAssociatedEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PurchaseOptionAssociatedEntity) error {
 	*v = make([]types.PurchaseOptionAssociatedEntity, 0)
 	var vv types.PurchaseOptionAssociatedEntity
@@ -1603,6 +1967,28 @@ func deserializeRateCardList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeRegionalPriceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegionalPrice) error {
+	*v = make([]types.RegionalPrice, 0)
+	var vv types.RegionalPrice
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RegionalPrice
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RegionalPrice{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Resource) error {
 	*v = make([]types.Resource, 0)
 	var vv types.Resource
@@ -1639,6 +2025,27 @@ func deserializeReviewSourceSummaryList(d smithy.ShapeDeserializer, s *smithy.Sc
 
 		vv = types.ReviewSourceSummary{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSaasDeploymentTemplateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SaasDeploymentTemplate) error {
+	*v = make([]types.SaasDeploymentTemplate, 0)
+	var vv types.SaasDeploymentTemplate
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SaasDeploymentTemplate
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeSaasDeploymentTemplate(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -1776,6 +2183,28 @@ func deserializeSellerEngagementList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeSpecializationTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SpecializationTypeDetail) error {
+	*v = make([]types.SpecializationTypeDetail, 0)
+	var vv types.SpecializationTypeDetail
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SpecializationTypeDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SpecializationTypeDetail{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeTermTemplateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TermTemplate) error {
 	*v = make([]types.TermTemplate, 0)
 	var vv types.TermTemplate
@@ -1789,6 +2218,71 @@ func deserializeTermTemplateList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		if err := deserializeTermTemplate(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTrustCenterCertificationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TrustCenterCertificationSummary) error {
+	*v = make([]types.TrustCenterCertificationSummary, 0)
+	var vv types.TrustCenterCertificationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TrustCenterCertificationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.TrustCenterCertificationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTrustCenterControlDomainList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TrustCenterControlDomain) error {
+	*v = make([]types.TrustCenterControlDomain, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TrustCenterControlDomain
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.TrustCenterControlDomain(vv))
+		return nil
+	})
+}
+
+func deserializeTrustCenterSourceSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TrustCenterSourceSummary) error {
+	*v = make([]types.TrustCenterSourceSummary, 0)
+	var vv types.TrustCenterSourceSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TrustCenterSourceSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.TrustCenterSourceSummary{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1832,6 +2326,28 @@ func deserializeUseCaseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 		}
 
 		vv = types.UseCaseEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUseCaseSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UseCaseSummaryEntry) error {
+	*v = make([]types.UseCaseSummaryEntry, 0)
+	var vv types.UseCaseSummaryEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UseCaseSummaryEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.UseCaseSummaryEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

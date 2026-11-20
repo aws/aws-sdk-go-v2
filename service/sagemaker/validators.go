@@ -30,6 +30,26 @@ func (m *validateOpAddAssociation) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddInferenceGateway struct {
+}
+
+func (*validateOpAddInferenceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddInferenceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddInferenceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddInferenceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddTags struct {
 }
 
@@ -765,6 +785,26 @@ func (m *validateOpCreateFlowDefinition) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFlowDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGlobalInferenceGateway struct {
+}
+
+func (*validateOpCreateGlobalInferenceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGlobalInferenceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGlobalInferenceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGlobalInferenceGatewayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2250,6 +2290,26 @@ func (m *validateOpDeleteFlowDefinition) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteGlobalInferenceGateway struct {
+}
+
+func (*validateOpDeleteGlobalInferenceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGlobalInferenceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGlobalInferenceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGlobalInferenceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteHubContent struct {
 }
 
@@ -3690,6 +3750,26 @@ func (m *validateOpDescribeFlowDefinition) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeGlobalInferenceGateway struct {
+}
+
+func (*validateOpDescribeGlobalInferenceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeGlobalInferenceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeGlobalInferenceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeGlobalInferenceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeHubContent struct {
 }
 
@@ -4990,6 +5070,26 @@ func (m *validateOpListClusterOperations) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListGlobalInferenceGateways struct {
+}
+
+func (*validateOpListGlobalInferenceGateways) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGlobalInferenceGateways) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGlobalInferenceGatewaysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGlobalInferenceGatewaysInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListHubContents struct {
 }
 
@@ -5045,6 +5145,26 @@ func (m *validateOpListImageVersions) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListImageVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInferenceGateways struct {
+}
+
+func (*validateOpListInferenceGateways) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInferenceGateways) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInferenceGatewaysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInferenceGatewaysInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5370,6 +5490,26 @@ func (m *validateOpListUltraServersByReservedCapacity) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpMoveClusterNodes struct {
+}
+
+func (*validateOpMoveClusterNodes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpMoveClusterNodes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*MoveClusterNodesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpMoveClusterNodesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEndpointPolicy struct {
 }
 
@@ -5425,6 +5565,26 @@ func (m *validateOpRegisterDevices) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRegisterDevicesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveInferenceGateway struct {
+}
+
+func (*validateOpRemoveInferenceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveInferenceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveInferenceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveInferenceGatewayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6450,6 +6610,26 @@ func (m *validateOpUpdateFeatureMetadata) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateGlobalInferenceGateway struct {
+}
+
+func (*validateOpUpdateGlobalInferenceGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGlobalInferenceGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGlobalInferenceGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGlobalInferenceGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateHubContent struct {
 }
 
@@ -7034,6 +7214,10 @@ func addOpAddAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddAssociation{}, middleware.After)
 }
 
+func addOpAddInferenceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddInferenceGateway{}, middleware.After)
+}
+
 func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
@@ -7180,6 +7364,10 @@ func addOpCreateFeatureGroupValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpCreateFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFlowDefinition{}, middleware.After)
+}
+
+func addOpCreateGlobalInferenceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGlobalInferenceGateway{}, middleware.After)
 }
 
 func addOpCreateHubContentPresignedUrlsValidationMiddleware(stack *middleware.Stack) error {
@@ -7478,6 +7666,10 @@ func addOpDeleteFlowDefinitionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteFlowDefinition{}, middleware.After)
 }
 
+func addOpDeleteGlobalInferenceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGlobalInferenceGateway{}, middleware.After)
+}
+
 func addOpDeleteHubContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHubContent{}, middleware.After)
 }
@@ -7766,6 +7958,10 @@ func addOpDescribeFlowDefinitionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeFlowDefinition{}, middleware.After)
 }
 
+func addOpDescribeGlobalInferenceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeGlobalInferenceGateway{}, middleware.After)
+}
+
 func addOpDescribeHubContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeHubContent{}, middleware.After)
 }
@@ -8026,6 +8222,10 @@ func addOpListClusterOperationsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListClusterOperations{}, middleware.After)
 }
 
+func addOpListGlobalInferenceGatewaysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGlobalInferenceGateways{}, middleware.After)
+}
+
 func addOpListHubContentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListHubContents{}, middleware.After)
 }
@@ -8036,6 +8236,10 @@ func addOpListHubContentVersionsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListImageVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImageVersions{}, middleware.After)
+}
+
+func addOpListInferenceGatewaysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInferenceGateways{}, middleware.After)
 }
 
 func addOpListInferenceRecommendationsJobStepsValidationMiddleware(stack *middleware.Stack) error {
@@ -8102,6 +8306,10 @@ func addOpListUltraServersByReservedCapacityValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpListUltraServersByReservedCapacity{}, middleware.After)
 }
 
+func addOpMoveClusterNodesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpMoveClusterNodes{}, middleware.After)
+}
+
 func addOpPutEndpointPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEndpointPolicy{}, middleware.After)
 }
@@ -8112,6 +8320,10 @@ func addOpPutModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack
 
 func addOpRegisterDevicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterDevices{}, middleware.After)
+}
+
+func addOpRemoveInferenceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveInferenceGateway{}, middleware.After)
 }
 
 func addOpRenderUiTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -8316,6 +8528,10 @@ func addOpUpdateFeatureGroupValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateFeatureMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFeatureMetadata{}, middleware.After)
+}
+
+func addOpUpdateGlobalInferenceGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGlobalInferenceGateway{}, middleware.After)
 }
 
 func addOpUpdateHubContentValidationMiddleware(stack *middleware.Stack) error {
@@ -12156,6 +12372,129 @@ func validateGitConfig(v *types.GitConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GitConfig"}
 	if v.RepositoryUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayFilter(v *types.GlobalInferenceGatewayFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayFilters(v []types.GlobalInferenceGatewayFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayFilters"}
+	for i := range v {
+		if err := validateGlobalInferenceGatewayFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayMember(v *types.GlobalInferenceGatewayMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayMember"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayMemberFilter(v *types.GlobalInferenceGatewayMemberFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayMemberFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayMemberFilters(v []types.GlobalInferenceGatewayMemberFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayMemberFilters"}
+	for i := range v {
+		if err := validateGlobalInferenceGatewayMemberFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayMembers(v []types.GlobalInferenceGatewayMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayMembers"}
+	for i := range v {
+		if err := validateGlobalInferenceGatewayMember(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlobalInferenceGatewayRouting(v *types.GlobalInferenceGatewayRouting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalInferenceGatewayRouting"}
+	if v.Weights == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weights"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17101,6 +17440,30 @@ func validateOpAddAssociationInput(v *AddAssociationInput) error {
 	}
 }
 
+func validateOpAddInferenceGatewayInput(v *AddInferenceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddInferenceGatewayInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsInput(v *AddTagsInput) error {
 	if v == nil {
 		return nil
@@ -18288,6 +18651,41 @@ func validateOpCreateFlowDefinitionInput(v *CreateFlowDefinitionInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGlobalInferenceGatewayInput(v *CreateGlobalInferenceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGlobalInferenceGatewayInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Routing != nil {
+		if err := validateGlobalInferenceGatewayRouting(v.Routing); err != nil {
+			invalidParams.AddNested("Routing", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.Gateways == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gateways"))
+	} else if v.Gateways != nil {
+		if err := validateGlobalInferenceGatewayMembers(v.Gateways); err != nil {
+			invalidParams.AddNested("Gateways", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -20343,6 +20741,21 @@ func validateOpDeleteFlowDefinitionInput(v *DeleteFlowDefinitionInput) error {
 	}
 }
 
+func validateOpDeleteGlobalInferenceGatewayInput(v *DeleteGlobalInferenceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGlobalInferenceGatewayInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteHubContentInput(v *DeleteHubContentInput) error {
 	if v == nil {
 		return nil
@@ -21477,6 +21890,21 @@ func validateOpDescribeFlowDefinitionInput(v *DescribeFlowDefinitionInput) error
 	}
 }
 
+func validateOpDescribeGlobalInferenceGatewayInput(v *DescribeGlobalInferenceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeGlobalInferenceGatewayInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeHubContentInput(v *DescribeHubContentInput) error {
 	if v == nil {
 		return nil
@@ -22498,6 +22926,23 @@ func validateOpListClusterOperationsInput(v *ListClusterOperationsInput) error {
 	}
 }
 
+func validateOpListGlobalInferenceGatewaysInput(v *ListGlobalInferenceGatewaysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGlobalInferenceGatewaysInput"}
+	if v.Filters != nil {
+		if err := validateGlobalInferenceGatewayFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListHubContentsInput(v *ListHubContentsInput) error {
 	if v == nil {
 		return nil
@@ -22544,6 +22989,26 @@ func validateOpListImageVersionsInput(v *ListImageVersionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImageVersionsInput"}
 	if v.ImageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInferenceGatewaysInput(v *ListInferenceGatewaysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInferenceGatewaysInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Filters != nil {
+		if err := validateGlobalInferenceGatewayMemberFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -22799,6 +23264,30 @@ func validateOpListUltraServersByReservedCapacityInput(v *ListUltraServersByRese
 	}
 }
 
+func validateOpMoveClusterNodesInput(v *MoveClusterNodesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MoveClusterNodesInput"}
+	if v.SourceClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceClusterArn"))
+	}
+	if v.SourceInstanceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceInstanceGroupName"))
+	}
+	if v.TargetClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetClusterArn"))
+	}
+	if v.TargetInstanceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetInstanceGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutEndpointPolicyInput(v *PutEndpointPolicyInput) error {
 	if v == nil {
 		return nil
@@ -22854,6 +23343,30 @@ func validateOpRegisterDevicesInput(v *RegisterDevicesInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveInferenceGatewayInput(v *RemoveInferenceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveInferenceGatewayInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -23820,6 +24333,28 @@ func validateOpUpdateFeatureMetadataInput(v *UpdateFeatureMetadataInput) error {
 	}
 	if v.FeatureName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGlobalInferenceGatewayInput(v *UpdateGlobalInferenceGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlobalInferenceGatewayInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Routing == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Routing"))
+	} else if v.Routing != nil {
+		if err := validateGlobalInferenceGatewayRouting(v.Routing); err != nil {
+			invalidParams.AddNested("Routing", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

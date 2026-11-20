@@ -353,6 +353,11 @@ var InvalidParameterValueException_Type *smithy.Schema
 
 var InvalidParameterValueException_message *smithy.Schema
 
+var _KmsKeyIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lambdamicrovms",
+	Name:      "KmsKeyIdentifier",
+}, smithy.ShapeTypeString, 0)
+
 var _ListOfPortSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "ListOfPortSpecification",
@@ -568,7 +573,7 @@ var MicrovmImageVersionStatus_INACTIVE *smithy.Schema
 var MicrovmImageVersionSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "MicrovmImageVersionSummary",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var MicrovmImageVersionSummary_baseImageArn *smithy.Schema
 
 var MicrovmImageVersionSummary_baseImageVersion *smithy.Schema
@@ -592,6 +597,8 @@ var MicrovmImageVersionSummary_additionalOsCapabilities *smithy.Schema
 var MicrovmImageVersionSummary_hooks *smithy.Schema
 
 var MicrovmImageVersionSummary_environmentVariables *smithy.Schema
+
+var MicrovmImageVersionSummary_kmsKeyIdentifier *smithy.Schema
 
 var MicrovmImageVersionSummary_imageArn *smithy.Schema
 
@@ -866,7 +873,7 @@ var CreateMicrovmAuthTokenResponse_authToken *smithy.Schema
 var CreateMicrovmImageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "CreateMicrovmImageRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateMicrovmImageRequest_baseImageArn *smithy.Schema
 
 var CreateMicrovmImageRequest_baseImageVersion *smithy.Schema
@@ -891,6 +898,8 @@ var CreateMicrovmImageRequest_hooks *smithy.Schema
 
 var CreateMicrovmImageRequest_environmentVariables *smithy.Schema
 
+var CreateMicrovmImageRequest_kmsKeyIdentifier *smithy.Schema
+
 var CreateMicrovmImageRequest_name *smithy.Schema
 
 var CreateMicrovmImageRequest_tags *smithy.Schema
@@ -900,7 +909,7 @@ var CreateMicrovmImageRequest_clientToken *smithy.Schema
 var CreateMicrovmImageResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "CreateMicrovmImageResponse",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var CreateMicrovmImageResponse_imageArn *smithy.Schema
 
 var CreateMicrovmImageResponse_name *smithy.Schema
@@ -936,6 +945,8 @@ var CreateMicrovmImageResponse_additionalOsCapabilities *smithy.Schema
 var CreateMicrovmImageResponse_hooks *smithy.Schema
 
 var CreateMicrovmImageResponse_environmentVariables *smithy.Schema
+
+var CreateMicrovmImageResponse_kmsKeyIdentifier *smithy.Schema
 
 var CreateMicrovmImageResponse_tags *smithy.Schema
 
@@ -1060,7 +1071,7 @@ var GetMicrovmImageVersionInput_imageVersion *smithy.Schema
 var GetMicrovmImageVersionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "GetMicrovmImageVersionOutput",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var GetMicrovmImageVersionOutput_baseImageArn *smithy.Schema
 
 var GetMicrovmImageVersionOutput_baseImageVersion *smithy.Schema
@@ -1084,6 +1095,8 @@ var GetMicrovmImageVersionOutput_additionalOsCapabilities *smithy.Schema
 var GetMicrovmImageVersionOutput_hooks *smithy.Schema
 
 var GetMicrovmImageVersionOutput_environmentVariables *smithy.Schema
+
+var GetMicrovmImageVersionOutput_kmsKeyIdentifier *smithy.Schema
 
 var GetMicrovmImageVersionOutput_imageArn *smithy.Schema
 
@@ -1110,7 +1123,7 @@ var GetMicrovmRequest_microvmIdentifier *smithy.Schema
 var GetMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "GetMicrovmResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var GetMicrovmResponse_microvmId *smithy.Schema
 
 var GetMicrovmResponse_state *smithy.Schema
@@ -1132,6 +1145,8 @@ var GetMicrovmResponse_startedAt *smithy.Schema
 var GetMicrovmResponse_terminatedAt *smithy.Schema
 
 var GetMicrovmResponse_stateReason *smithy.Schema
+
+var GetMicrovmResponse_kmsKeyIdentifier *smithy.Schema
 
 var GetMicrovmResponse_ingressNetworkConnectors *smithy.Schema
 
@@ -1279,7 +1294,7 @@ var ResumeMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
 var RunMicrovmRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "RunMicrovmRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var RunMicrovmRequest_ingressNetworkConnectors *smithy.Schema
 
 var RunMicrovmRequest_egressNetworkConnectors *smithy.Schema
@@ -1294,6 +1309,8 @@ var RunMicrovmRequest_idlePolicy *smithy.Schema
 
 var RunMicrovmRequest_logging *smithy.Schema
 
+var RunMicrovmRequest_kmsKeyIdentifier *smithy.Schema
+
 var RunMicrovmRequest_runHookPayload *smithy.Schema
 
 var RunMicrovmRequest_maximumDurationInSeconds *smithy.Schema
@@ -1303,7 +1320,7 @@ var RunMicrovmRequest_clientToken *smithy.Schema
 var RunMicrovmResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "RunMicrovmResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var RunMicrovmResponse_microvmId *smithy.Schema
 
 var RunMicrovmResponse_state *smithy.Schema
@@ -1325,6 +1342,8 @@ var RunMicrovmResponse_startedAt *smithy.Schema
 var RunMicrovmResponse_terminatedAt *smithy.Schema
 
 var RunMicrovmResponse_stateReason *smithy.Schema
+
+var RunMicrovmResponse_kmsKeyIdentifier *smithy.Schema
 
 var RunMicrovmResponse_ingressNetworkConnectors *smithy.Schema
 
@@ -1371,7 +1390,7 @@ var UntagResourceRequest_TagKeys *smithy.Schema
 var UpdateMicrovmImageRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "UpdateMicrovmImageRequest",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var UpdateMicrovmImageRequest_baseImageArn *smithy.Schema
 
 var UpdateMicrovmImageRequest_baseImageVersion *smithy.Schema
@@ -1396,6 +1415,8 @@ var UpdateMicrovmImageRequest_hooks *smithy.Schema
 
 var UpdateMicrovmImageRequest_environmentVariables *smithy.Schema
 
+var UpdateMicrovmImageRequest_kmsKeyIdentifier *smithy.Schema
+
 var UpdateMicrovmImageRequest_imageIdentifier *smithy.Schema
 
 var UpdateMicrovmImageRequest_clientToken *smithy.Schema
@@ -1403,7 +1424,7 @@ var UpdateMicrovmImageRequest_clientToken *smithy.Schema
 var UpdateMicrovmImageResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "UpdateMicrovmImageResponse",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var UpdateMicrovmImageResponse_imageArn *smithy.Schema
 
 var UpdateMicrovmImageResponse_name *smithy.Schema
@@ -1440,6 +1461,8 @@ var UpdateMicrovmImageResponse_hooks *smithy.Schema
 
 var UpdateMicrovmImageResponse_environmentVariables *smithy.Schema
 
+var UpdateMicrovmImageResponse_kmsKeyIdentifier *smithy.Schema
+
 var UpdateMicrovmImageResponse_updatedAt *smithy.Schema
 
 var UpdateMicrovmImageResponse_imageVersion *smithy.Schema
@@ -1457,7 +1480,7 @@ var UpdateMicrovmImageVersionRequest_status *smithy.Schema
 var UpdateMicrovmImageVersionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lambdamicrovms",
 	Name:      "UpdateMicrovmImageVersionResponse",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var UpdateMicrovmImageVersionResponse_baseImageArn *smithy.Schema
 
 var UpdateMicrovmImageVersionResponse_baseImageVersion *smithy.Schema
@@ -1481,6 +1504,8 @@ var UpdateMicrovmImageVersionResponse_additionalOsCapabilities *smithy.Schema
 var UpdateMicrovmImageVersionResponse_hooks *smithy.Schema
 
 var UpdateMicrovmImageVersionResponse_environmentVariables *smithy.Schema
+
+var UpdateMicrovmImageVersionResponse_kmsKeyIdentifier *smithy.Schema
 
 var UpdateMicrovmImageVersionResponse_imageArn *smithy.Schema
 
@@ -1741,6 +1766,8 @@ func init() {
 
 	MicrovmImageVersionSummary_environmentVariables = MicrovmImageVersionSummary.AddMember("environmentVariables", _EnvironmentVariableMap)
 
+	MicrovmImageVersionSummary_kmsKeyIdentifier = MicrovmImageVersionSummary.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
+
 	MicrovmImageVersionSummary_imageArn = MicrovmImageVersionSummary.AddMember("imageArn", _NonBlankString)
 
 	MicrovmImageVersionSummary_imageVersion = MicrovmImageVersionSummary.AddMember("imageVersion", _NonBlankString)
@@ -1865,6 +1892,8 @@ func init() {
 
 	CreateMicrovmImageRequest_environmentVariables = CreateMicrovmImageRequest.AddMember("environmentVariables", _EnvironmentVariableMap)
 
+	CreateMicrovmImageRequest_kmsKeyIdentifier = CreateMicrovmImageRequest.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
+
 	CreateMicrovmImageRequest_name = CreateMicrovmImageRequest.AddMember("name", _ImageName)
 
 	CreateMicrovmImageRequest_tags = CreateMicrovmImageRequest.AddMember("tags", _Tags)
@@ -1906,6 +1935,8 @@ func init() {
 	CreateMicrovmImageResponse_hooks = CreateMicrovmImageResponse.AddMember("hooks", Hooks)
 
 	CreateMicrovmImageResponse_environmentVariables = CreateMicrovmImageResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
+
+	CreateMicrovmImageResponse_kmsKeyIdentifier = CreateMicrovmImageResponse.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
 
 	CreateMicrovmImageResponse_tags = CreateMicrovmImageResponse.AddMember("tags", _Tags)
 
@@ -2007,6 +2038,8 @@ func init() {
 
 	GetMicrovmImageVersionOutput_environmentVariables = GetMicrovmImageVersionOutput.AddMember("environmentVariables", _EnvironmentVariableMap)
 
+	GetMicrovmImageVersionOutput_kmsKeyIdentifier = GetMicrovmImageVersionOutput.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
+
 	GetMicrovmImageVersionOutput_imageArn = GetMicrovmImageVersionOutput.AddMember("imageArn", _NonBlankString)
 
 	GetMicrovmImageVersionOutput_imageVersion = GetMicrovmImageVersionOutput.AddMember("imageVersion", _NonBlankString)
@@ -2046,6 +2079,8 @@ func init() {
 	GetMicrovmResponse_terminatedAt = GetMicrovmResponse.AddMember("terminatedAt", smithyprelude.Timestamp)
 
 	GetMicrovmResponse_stateReason = GetMicrovmResponse.AddMember("stateReason", _NonBlankString)
+
+	GetMicrovmResponse_kmsKeyIdentifier = GetMicrovmResponse.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
 
 	GetMicrovmResponse_ingressNetworkConnectors = GetMicrovmResponse.AddMember("ingressNetworkConnectors", _NetworkConnectorList)
 
@@ -2139,6 +2174,8 @@ func init() {
 
 	RunMicrovmRequest_logging = RunMicrovmRequest.AddMember("logging", Logging)
 
+	RunMicrovmRequest_kmsKeyIdentifier = RunMicrovmRequest.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
+
 	RunMicrovmRequest_runHookPayload = RunMicrovmRequest.AddMember("runHookPayload", _RunHookPayload)
 
 	RunMicrovmRequest_maximumDurationInSeconds = RunMicrovmRequest.AddMember("maximumDurationInSeconds", smithyprelude.Integer)
@@ -2166,6 +2203,8 @@ func init() {
 	RunMicrovmResponse_terminatedAt = RunMicrovmResponse.AddMember("terminatedAt", smithyprelude.Timestamp)
 
 	RunMicrovmResponse_stateReason = RunMicrovmResponse.AddMember("stateReason", _NonBlankString)
+
+	RunMicrovmResponse_kmsKeyIdentifier = RunMicrovmResponse.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
 
 	RunMicrovmResponse_ingressNetworkConnectors = RunMicrovmResponse.AddMember("ingressNetworkConnectors", _NetworkConnectorList)
 
@@ -2207,6 +2246,8 @@ func init() {
 
 	UpdateMicrovmImageRequest_environmentVariables = UpdateMicrovmImageRequest.AddMember("environmentVariables", _EnvironmentVariableMap)
 
+	UpdateMicrovmImageRequest_kmsKeyIdentifier = UpdateMicrovmImageRequest.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
+
 	UpdateMicrovmImageRequest_imageIdentifier = UpdateMicrovmImageRequest.AddMember("imageIdentifier", _MicrovmImageIdentifier, &smithytraits.HTTPLabel{})
 
 	UpdateMicrovmImageRequest_clientToken = UpdateMicrovmImageRequest.AddMember("clientToken", smithyprelude.String)
@@ -2247,6 +2288,8 @@ func init() {
 
 	UpdateMicrovmImageResponse_environmentVariables = UpdateMicrovmImageResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
 
+	UpdateMicrovmImageResponse_kmsKeyIdentifier = UpdateMicrovmImageResponse.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
+
 	UpdateMicrovmImageResponse_updatedAt = UpdateMicrovmImageResponse.AddMember("updatedAt", smithyprelude.Timestamp)
 
 	UpdateMicrovmImageResponse_imageVersion = UpdateMicrovmImageResponse.AddMember("imageVersion", _NonBlankString)
@@ -2280,6 +2323,8 @@ func init() {
 	UpdateMicrovmImageVersionResponse_hooks = UpdateMicrovmImageVersionResponse.AddMember("hooks", Hooks)
 
 	UpdateMicrovmImageVersionResponse_environmentVariables = UpdateMicrovmImageVersionResponse.AddMember("environmentVariables", _EnvironmentVariableMap)
+
+	UpdateMicrovmImageVersionResponse_kmsKeyIdentifier = UpdateMicrovmImageVersionResponse.AddMember("kmsKeyIdentifier", _KmsKeyIdentifier)
 
 	UpdateMicrovmImageVersionResponse_imageArn = UpdateMicrovmImageVersionResponse.AddMember("imageArn", _NonBlankString)
 

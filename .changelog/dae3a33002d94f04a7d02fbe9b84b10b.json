@@ -1,0 +1,8 @@
+{
+    "id": "dae3a330-02d9-4f04-a7d0-2fbe9b84b10b",
+    "type": "feature",
+    "description": "Adds support for API Portal, a new Amazon API Gateway feature that discovers the APIs running behind API Gateway, Application Load Balancer, and CloudFront across an AWS Organization, evaluates their security posture, and publishes documentation portals for them.",
+    "modules": [
+        "service/apiportal"
+    ]
+}

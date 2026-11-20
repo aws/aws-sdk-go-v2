@@ -51,8 +51,8 @@ type ChangeTagsForResourceInput struct {
 	ResourceType types.TagResourceType
 
 	// A complex type that contains a list of the tags that you want to add to the
-	// specified health check or hosted zone and/or the tags that you want to edit
-	// Value for.
+	// specified health check, health check source, or hosted zone and/or the tags that
+	// you want to edit Value for.
 	//
 	// You can add a maximum of 10 tags to a health check, a health check source, or a
 	// hosted zone.

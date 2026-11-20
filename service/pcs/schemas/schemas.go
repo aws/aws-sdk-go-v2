@@ -302,7 +302,7 @@ var ClusterSummary_status *smithy.Schema
 var ComputeNodeGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "ComputeNodeGroup",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var ComputeNodeGroup_amiId *smithy.Schema
 
 var ComputeNodeGroup_securityGroupIds *smithy.Schema
@@ -342,6 +342,8 @@ var ComputeNodeGroup_spotOptions *smithy.Schema
 var ComputeNodeGroup_slurmConfiguration *smithy.Schema
 
 var ComputeNodeGroup_nodeLifecycleActions *smithy.Schema
+
+var ComputeNodeGroup_instanceHealthChecks *smithy.Schema
 
 var ComputeNodeGroup_errorInfo *smithy.Schema
 
@@ -456,6 +458,44 @@ var CustomLaunchTemplate_id *smithy.Schema
 
 var CustomLaunchTemplate_version *smithy.Schema
 
+var DeepHealthCheckOnStart = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "DeepHealthCheckOnStart",
+}, smithy.ShapeTypeStructure, 2)
+var DeepHealthCheckOnStart_profile *smithy.Schema
+
+var DeepHealthCheckOnStart_repairAction *smithy.Schema
+
+var DeepHealthCheckOnStartProfile = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "DeepHealthCheckOnStartProfile",
+}, smithy.ShapeTypeEnum, 4)
+var DeepHealthCheckOnStartProfile_NONE *smithy.Schema
+
+var DeepHealthCheckOnStartProfile_QUICK *smithy.Schema
+
+var DeepHealthCheckOnStartProfile_MEDIUM *smithy.Schema
+
+var DeepHealthCheckOnStartProfile_LONG *smithy.Schema
+
+var DeepHealthCheckOnStartRepairAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "DeepHealthCheckOnStartRepairAction",
+}, smithy.ShapeTypeEnum, 4)
+var DeepHealthCheckOnStartRepairAction_AUTO *smithy.Schema
+
+var DeepHealthCheckOnStartRepairAction_REPLACE *smithy.Schema
+
+var DeepHealthCheckOnStartRepairAction_ISOLATE *smithy.Schema
+
+var DeepHealthCheckOnStartRepairAction_NONE *smithy.Schema
+
+var DeepHealthChecks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "DeepHealthChecks",
+}, smithy.ShapeTypeStructure, 1)
+var DeepHealthChecks_onStart *smithy.Schema
+
 var Endpoint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "Endpoint",
@@ -522,11 +562,55 @@ var _GresCustomSettings = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _GresCustomSettings_member *smithy.Schema
 
+var HealthMonitoring = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "HealthMonitoring",
+}, smithy.ShapeTypeStructure, 2)
+var HealthMonitoring_mode *smithy.Schema
+
+var HealthMonitoring_repairAction *smithy.Schema
+
+var HealthMonitoringMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "HealthMonitoringMode",
+}, smithy.ShapeTypeEnum, 2)
+var HealthMonitoringMode_NONE *smithy.Schema
+
+var HealthMonitoringMode_STANDARD *smithy.Schema
+
+var HealthMonitoringRepairAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "HealthMonitoringRepairAction",
+}, smithy.ShapeTypeEnum, 4)
+var HealthMonitoringRepairAction_AUTO *smithy.Schema
+
+var HealthMonitoringRepairAction_REPLACE *smithy.Schema
+
+var HealthMonitoringRepairAction_ISOLATE *smithy.Schema
+
+var HealthMonitoringRepairAction_NONE *smithy.Schema
+
 var InstanceConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "InstanceConfig",
 }, smithy.ShapeTypeStructure, 1)
 var InstanceConfig_instanceType *smithy.Schema
+
+var InstanceHealthChecks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "InstanceHealthChecks",
+}, smithy.ShapeTypeStructure, 2)
+var InstanceHealthChecks_healthMonitoring *smithy.Schema
+
+var InstanceHealthChecks_deepHealthChecks *smithy.Schema
+
+var InstanceHealthChecksRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "InstanceHealthChecksRequest",
+}, smithy.ShapeTypeStructure, 2)
+var InstanceHealthChecksRequest_healthMonitoring *smithy.Schema
+
+var InstanceHealthChecksRequest_deepHealthChecks *smithy.Schema
 
 var _InstanceList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
@@ -1099,6 +1183,14 @@ var UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings *smithy.
 
 var UpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings *smithy.Schema
 
+var UpdateInstanceHealthChecksRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pcs",
+	Name:      "UpdateInstanceHealthChecksRequest",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateInstanceHealthChecksRequest_healthMonitoring *smithy.Schema
+
+var UpdateInstanceHealthChecksRequest_deepHealthChecks *smithy.Schema
+
 var UpdateNodeLifecycleActionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "UpdateNodeLifecycleActionsRequest",
@@ -1189,7 +1281,7 @@ var CreateClusterResponse_cluster *smithy.Schema
 var CreateComputeNodeGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "CreateComputeNodeGroupRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var CreateComputeNodeGroupRequest_amiId *smithy.Schema
 
 var CreateComputeNodeGroupRequest_securityGroupIds *smithy.Schema
@@ -1219,6 +1311,8 @@ var CreateComputeNodeGroupRequest_spotOptions *smithy.Schema
 var CreateComputeNodeGroupRequest_slurmConfiguration *smithy.Schema
 
 var CreateComputeNodeGroupRequest_nodeLifecycleActions *smithy.Schema
+
+var CreateComputeNodeGroupRequest_instanceHealthChecks *smithy.Schema
 
 var CreateComputeNodeGroupRequest_clientToken *smithy.Schema
 
@@ -1410,7 +1504,7 @@ var RegisterComputeNodeGroupInstanceRequest_bootstrapId *smithy.Schema
 var RegisterComputeNodeGroupInstanceResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "RegisterComputeNodeGroupInstanceResponse",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var RegisterComputeNodeGroupInstanceResponse_nodeID *smithy.Schema
 
 var RegisterComputeNodeGroupInstanceResponse_sharedSecret *smithy.Schema
@@ -1426,6 +1520,8 @@ var RegisterComputeNodeGroupInstanceResponse_computeNodeGroupName *smithy.Schema
 var RegisterComputeNodeGroupInstanceResponse_nodeLifecycleActions *smithy.Schema
 
 var RegisterComputeNodeGroupInstanceResponse_schedulerVersion *smithy.Schema
+
+var RegisterComputeNodeGroupInstanceResponse_instanceHealthChecks *smithy.Schema
 
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
@@ -1474,7 +1570,7 @@ var UpdateClusterResponse_cluster *smithy.Schema
 var UpdateComputeNodeGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pcs",
 	Name:      "UpdateComputeNodeGroupRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateComputeNodeGroupRequest_amiId *smithy.Schema
 
 var UpdateComputeNodeGroupRequest_securityGroupIds *smithy.Schema
@@ -1502,6 +1598,8 @@ var UpdateComputeNodeGroupRequest_iamInstanceProfileArn *smithy.Schema
 var UpdateComputeNodeGroupRequest_slurmConfiguration *smithy.Schema
 
 var UpdateComputeNodeGroupRequest_nodeLifecycleActions *smithy.Schema
+
+var UpdateComputeNodeGroupRequest_instanceHealthChecks *smithy.Schema
 
 var UpdateComputeNodeGroupRequest_clientToken *smithy.Schema
 
@@ -1848,6 +1946,48 @@ func init() {
 
 	NodeLifecycleActions_scriptCachingPolicy = NodeLifecycleActions.AddMember("scriptCachingPolicy", ScriptCachingPolicy)
 
+	HealthMonitoringMode_NONE = HealthMonitoringMode.AddMember("NONE", smithyprelude.Unit)
+
+	HealthMonitoringMode_STANDARD = HealthMonitoringMode.AddMember("STANDARD", smithyprelude.Unit)
+
+	HealthMonitoringRepairAction_AUTO = HealthMonitoringRepairAction.AddMember("AUTO", smithyprelude.Unit)
+
+	HealthMonitoringRepairAction_REPLACE = HealthMonitoringRepairAction.AddMember("REPLACE", smithyprelude.Unit)
+
+	HealthMonitoringRepairAction_ISOLATE = HealthMonitoringRepairAction.AddMember("ISOLATE", smithyprelude.Unit)
+
+	HealthMonitoringRepairAction_NONE = HealthMonitoringRepairAction.AddMember("NONE", smithyprelude.Unit)
+
+	HealthMonitoring_mode = HealthMonitoring.AddMember("mode", HealthMonitoringMode)
+
+	HealthMonitoring_repairAction = HealthMonitoring.AddMember("repairAction", HealthMonitoringRepairAction)
+
+	DeepHealthCheckOnStartProfile_NONE = DeepHealthCheckOnStartProfile.AddMember("NONE", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartProfile_QUICK = DeepHealthCheckOnStartProfile.AddMember("QUICK", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartProfile_MEDIUM = DeepHealthCheckOnStartProfile.AddMember("MEDIUM", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartProfile_LONG = DeepHealthCheckOnStartProfile.AddMember("LONG", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartRepairAction_AUTO = DeepHealthCheckOnStartRepairAction.AddMember("AUTO", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartRepairAction_REPLACE = DeepHealthCheckOnStartRepairAction.AddMember("REPLACE", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartRepairAction_ISOLATE = DeepHealthCheckOnStartRepairAction.AddMember("ISOLATE", smithyprelude.Unit)
+
+	DeepHealthCheckOnStartRepairAction_NONE = DeepHealthCheckOnStartRepairAction.AddMember("NONE", smithyprelude.Unit)
+
+	DeepHealthCheckOnStart_profile = DeepHealthCheckOnStart.AddMember("profile", DeepHealthCheckOnStartProfile)
+
+	DeepHealthCheckOnStart_repairAction = DeepHealthCheckOnStart.AddMember("repairAction", DeepHealthCheckOnStartRepairAction)
+
+	DeepHealthChecks_onStart = DeepHealthChecks.AddMember("onStart", DeepHealthCheckOnStart)
+
+	InstanceHealthChecks_healthMonitoring = InstanceHealthChecks.AddMember("healthMonitoring", HealthMonitoring)
+
+	InstanceHealthChecks_deepHealthChecks = InstanceHealthChecks.AddMember("deepHealthChecks", DeepHealthChecks)
+
 	ComputeNodeGroup_amiId = ComputeNodeGroup.AddMember("amiId", _AmiId)
 
 	ComputeNodeGroup_securityGroupIds = ComputeNodeGroup.AddMember("securityGroupIds", _SecurityGroupIdList)
@@ -1888,6 +2028,8 @@ func init() {
 
 	ComputeNodeGroup_nodeLifecycleActions = ComputeNodeGroup.AddMember("nodeLifecycleActions", NodeLifecycleActions)
 
+	ComputeNodeGroup_instanceHealthChecks = ComputeNodeGroup.AddMember("instanceHealthChecks", InstanceHealthChecks)
+
 	ComputeNodeGroup_errorInfo = ComputeNodeGroup.AddMember("errorInfo", _ErrorInfoList)
 
 	ComputeNodeGroupConfiguration_computeNodeGroupId = ComputeNodeGroupConfiguration.AddMember("computeNodeGroupId", smithyprelude.String)
@@ -1921,6 +2063,10 @@ func init() {
 	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
 
 	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
+
+	InstanceHealthChecksRequest_healthMonitoring = InstanceHealthChecksRequest.AddMember("healthMonitoring", HealthMonitoring)
+
+	InstanceHealthChecksRequest_deepHealthChecks = InstanceHealthChecksRequest.AddMember("deepHealthChecks", DeepHealthChecks)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
@@ -2062,6 +2208,10 @@ func init() {
 
 	UpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings = UpdateComputeNodeGroupSlurmConfigurationRequest.AddMember("gresCustomSettings", _GresCustomSettings)
 
+	UpdateInstanceHealthChecksRequest_healthMonitoring = UpdateInstanceHealthChecksRequest.AddMember("healthMonitoring", HealthMonitoring)
+
+	UpdateInstanceHealthChecksRequest_deepHealthChecks = UpdateInstanceHealthChecksRequest.AddMember("deepHealthChecks", DeepHealthChecks)
+
 	UpdateNodeLifecycleActionsRequest_stages = UpdateNodeLifecycleActionsRequest.AddMember("stages", NodeLifecycleStages)
 
 	UpdateNodeLifecycleActionsRequest_scriptCachingPolicy = UpdateNodeLifecycleActionsRequest.AddMember("scriptCachingPolicy", ScriptCachingPolicy)
@@ -2135,6 +2285,8 @@ func init() {
 	CreateComputeNodeGroupRequest_slurmConfiguration = CreateComputeNodeGroupRequest.AddMember("slurmConfiguration", ComputeNodeGroupSlurmConfigurationRequest)
 
 	CreateComputeNodeGroupRequest_nodeLifecycleActions = CreateComputeNodeGroupRequest.AddMember("nodeLifecycleActions", NodeLifecycleActionsRequest)
+
+	CreateComputeNodeGroupRequest_instanceHealthChecks = CreateComputeNodeGroupRequest.AddMember("instanceHealthChecks", InstanceHealthChecksRequest)
 
 	CreateComputeNodeGroupRequest_clientToken = CreateComputeNodeGroupRequest.AddMember("clientToken", _SBClientToken)
 
@@ -2240,6 +2392,8 @@ func init() {
 
 	RegisterComputeNodeGroupInstanceResponse_schedulerVersion = RegisterComputeNodeGroupInstanceResponse.AddMember("schedulerVersion", smithyprelude.String)
 
+	RegisterComputeNodeGroupInstanceResponse_instanceHealthChecks = RegisterComputeNodeGroupInstanceResponse.AddMember("instanceHealthChecks", InstanceHealthChecks)
+
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn)
 
 	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _RequestTagMap)
@@ -2285,6 +2439,8 @@ func init() {
 	UpdateComputeNodeGroupRequest_slurmConfiguration = UpdateComputeNodeGroupRequest.AddMember("slurmConfiguration", UpdateComputeNodeGroupSlurmConfigurationRequest)
 
 	UpdateComputeNodeGroupRequest_nodeLifecycleActions = UpdateComputeNodeGroupRequest.AddMember("nodeLifecycleActions", UpdateNodeLifecycleActionsRequest)
+
+	UpdateComputeNodeGroupRequest_instanceHealthChecks = UpdateComputeNodeGroupRequest.AddMember("instanceHealthChecks", UpdateInstanceHealthChecksRequest)
 
 	UpdateComputeNodeGroupRequest_clientToken = UpdateComputeNodeGroupRequest.AddMember("clientToken", _SBClientToken)
 

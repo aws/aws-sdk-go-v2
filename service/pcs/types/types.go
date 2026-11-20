@@ -753,6 +753,11 @@ type ComputeNodeGroup struct {
 	// The list of errors that occurred during compute node group provisioning.
 	ErrorInfo []ErrorInfo
 
+	// The instance health check settings of the compute node group. Instance health
+	// checks detect faults on instances in the compute node group and respond with the
+	// repair action that you choose.
+	InstanceHealthChecks *InstanceHealthChecks
+
 	// Indicates whether the compute node group uses a custom launch template or a
 	// launch template that PCS manages. The default value is CUSTOM .
 	//
@@ -846,6 +851,11 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceConfigs != nil {
 		serializeInstanceList(s, schemas.ComputeNodeGroup_instanceConfigs, v.InstanceConfigs)
 	}
+	if v.InstanceHealthChecks != nil {
+		s.WriteStruct(schemas.ComputeNodeGroup_instanceHealthChecks)
+		v.InstanceHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LaunchTemplateMode != "" {
 		s.WriteString(schemas.ComputeNodeGroup_launchTemplateMode, string(v.LaunchTemplateMode))
 	}
@@ -919,6 +929,9 @@ func (v *ComputeNodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ComputeNodeGroup_id, v.Id)
 		case schemas.ComputeNodeGroup_instanceConfigs:
 			return deserializeInstanceList(d, schemas.ComputeNodeGroup_instanceConfigs, &v.InstanceConfigs)
+		case schemas.ComputeNodeGroup_instanceHealthChecks:
+			v.InstanceHealthChecks = &InstanceHealthChecks{}
+			return v.InstanceHealthChecks.Deserialize(d)
 		case schemas.ComputeNodeGroup_launchTemplateMode:
 			var ev string
 			if err := d.ReadString(schemas.ComputeNodeGroup_launchTemplateMode, &ev); err != nil {
@@ -1275,6 +1288,125 @@ func (v *CustomLaunchTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The deep health check that runs each time an instance starts, including after a
+// reboot, before the compute node accepts jobs.
+type DeepHealthCheckOnStart struct {
+
+	// The deep health check profile to run. Each profile other than NONE runs NVIDIA
+	// Data Center GPU Manager (DCGM) diagnostics. More thorough profiles run more
+	// tests and add more time to instance launch. A profile other than NONE requires
+	// instance types with NVIDIA GPUs. This value is required when you specify onStart
+	// . There is no default value. Valid values:
+	//
+	//   - NONE – Turns off the deep health check. You can't specify repairAction with
+	//   this profile.
+	//
+	//   - QUICK – Runs basic GPU tests (DCGM diagnostics level 1). This profile adds
+	//   the least time to instance launch.
+	//
+	//   - MEDIUM – Runs extended GPU tests (DCGM diagnostics level 2).
+	//
+	//   - LONG – Runs GPU stress and diagnostic tests (DCGM diagnostics level 3). This
+	//   profile adds the most time to instance launch.
+	Profile DeepHealthCheckOnStartProfile
+
+	// The action that PCS takes when an instance fails the deep health check. You
+	// can't specify this value when profile is NONE . If you don't specify this value
+	// and profile isn't NONE , PCS uses AUTO . GetComputeNodeGroup doesn't return a
+	// repairAction that you didn't specify. Valid values:
+	//
+	//   - AUTO – PCS chooses the repair action based on the fault.
+	//
+	//   - REPLACE – Replaces the instance before it accepts jobs.
+	//
+	//   - ISOLATE – Stops new jobs on the instance and keeps the instance running
+	//   until you investigate.
+	//
+	//   - NONE – Records the fault in Slurm and leaves the instance available for jobs.
+	RepairAction DeepHealthCheckOnStartRepairAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeepHealthCheckOnStart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeepHealthCheckOnStart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeepHealthCheckOnStart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != "" {
+		s.WriteString(schemas.DeepHealthCheckOnStart_profile, string(v.Profile))
+	}
+	if v.RepairAction != "" {
+		s.WriteString(schemas.DeepHealthCheckOnStart_repairAction, string(v.RepairAction))
+	}
+}
+func (v *DeepHealthCheckOnStart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeepHealthCheckOnStart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeepHealthCheckOnStart_profile:
+			var ev string
+			if err := d.ReadString(schemas.DeepHealthCheckOnStart_profile, &ev); err != nil {
+				return err
+			}
+			v.Profile = DeepHealthCheckOnStartProfile(ev)
+			return nil
+		case schemas.DeepHealthCheckOnStart_repairAction:
+			var ev string
+			if err := d.ReadString(schemas.DeepHealthCheckOnStart_repairAction, &ev); err != nil {
+				return err
+			}
+			v.RepairAction = DeepHealthCheckOnStartRepairAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The deep health check settings of a compute node group. Deep health checks test
+// the graphics processing units (GPUs) of an instance each time it starts,
+// including after a reboot, before it accepts jobs. Deep health checks with a
+// profile other than NONE require instance types with NVIDIA GPUs.
+type DeepHealthChecks struct {
+
+	// The deep health check to run each time an instance starts, including after a
+	// reboot, before the compute node accepts jobs. If the check fails after a reboot,
+	// PCS takes the same repairAction as at launch. For example, with REPLACE , PCS
+	// replaces the instance instead of returning it to service. If the compute node
+	// group has scripts in the nodeBootstrapped stage of nodeLifecycleActions , the
+	// deep health check runs after those scripts. If a script fails and its onError
+	// setting terminates the compute node, the deep health check doesn't run. This
+	// value is required when you specify deepHealthChecks .
+	OnStart *DeepHealthCheckOnStart
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeepHealthChecks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeepHealthChecks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeepHealthChecks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnStart != nil {
+		s.WriteStruct(schemas.DeepHealthChecks_onStart)
+		v.OnStart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeepHealthChecks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeepHealthChecks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeepHealthChecks_onStart:
+			v.OnStart = &DeepHealthCheckOnStart{}
+			return v.OnStart.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An endpoint available for interaction with the scheduler.
 type Endpoint struct {
 
@@ -1402,6 +1534,74 @@ func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The health monitoring settings of a compute node group. Health monitoring
+// continuously checks running instances for hardware and software faults.
+type HealthMonitoring struct {
+
+	// The health monitoring mode. This value is required when you specify
+	// healthMonitoring . There is no default value. Valid values:
+	//
+	//   - NONE – Turns off health monitoring. You can't specify repairAction with this
+	//   mode.
+	//
+	//   - STANDARD – Continuously checks running instances for hardware and software
+	//   faults.
+	Mode HealthMonitoringMode
+
+	// The action that PCS takes when health monitoring finds a fault on an instance.
+	// You can't specify this value when mode is NONE . If you don't specify this value
+	// and mode isn't NONE , PCS uses AUTO . GetComputeNodeGroup doesn't return a
+	// repairAction that you didn't specify. Valid values:
+	//
+	//   - AUTO – PCS chooses the repair action based on the fault.
+	//
+	//   - REPLACE – Replaces the instance after running jobs finish.
+	//
+	//   - ISOLATE – Stops new jobs on the instance and keeps the instance running
+	//   until you investigate.
+	//
+	//   - NONE – Records the fault in Slurm and leaves the instance available for jobs.
+	RepairAction HealthMonitoringRepairAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *HealthMonitoring) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthMonitoring)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthMonitoring) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.HealthMonitoring_mode, string(v.Mode))
+	}
+	if v.RepairAction != "" {
+		s.WriteString(schemas.HealthMonitoring_repairAction, string(v.RepairAction))
+	}
+}
+func (v *HealthMonitoring) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthMonitoring, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthMonitoring_mode:
+			var ev string
+			if err := d.ReadString(schemas.HealthMonitoring_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = HealthMonitoringMode(ev)
+			return nil
+		case schemas.HealthMonitoring_repairAction:
+			var ev string
+			if err := d.ReadString(schemas.HealthMonitoring_repairAction, &ev); err != nil {
+				return err
+			}
+			v.RepairAction = HealthMonitoringRepairAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An EC2 instance configuration PCS uses to launch compute nodes.
 type InstanceConfig struct {
 
@@ -1430,6 +1630,105 @@ func (v *InstanceConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InstanceConfig_instanceType:
 			v.InstanceType = new(string)
 			return d.ReadString(schemas.InstanceConfig_instanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
+// The instance health check settings of a compute node group. Instance health
+// checks detect faults on instances in the compute node group and respond with the
+// repair action that you choose.
+type InstanceHealthChecks struct {
+
+	// The deep health check settings. Deep health checks test the graphics processing
+	// units (GPUs) of an instance each time it starts, including after a reboot,
+	// before it accepts jobs.
+	DeepHealthChecks *DeepHealthChecks
+
+	// The health monitoring settings. Health monitoring continuously checks running
+	// instances for hardware and software faults.
+	HealthMonitoring *HealthMonitoring
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceHealthChecks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceHealthChecks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceHealthChecks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeepHealthChecks != nil {
+		s.WriteStruct(schemas.InstanceHealthChecks_deepHealthChecks)
+		v.DeepHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthMonitoring != nil {
+		s.WriteStruct(schemas.InstanceHealthChecks_healthMonitoring)
+		v.HealthMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceHealthChecks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceHealthChecks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceHealthChecks_deepHealthChecks:
+			v.DeepHealthChecks = &DeepHealthChecks{}
+			return v.DeepHealthChecks.Deserialize(d)
+		case schemas.InstanceHealthChecks_healthMonitoring:
+			v.HealthMonitoring = &HealthMonitoring{}
+			return v.HealthMonitoring.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The instance health check settings to configure on a compute node group when
+// you create it. Specify healthMonitoring , deepHealthChecks , or both. You can't
+// specify an empty object ( {} ).
+type InstanceHealthChecksRequest struct {
+
+	// The deep health check settings. Deep health checks test the graphics processing
+	// units (GPUs) of an instance each time it starts, including after a reboot,
+	// before it accepts jobs. If you specify this object, it can't be empty.
+	DeepHealthChecks *DeepHealthChecks
+
+	// The health monitoring settings. Health monitoring continuously checks running
+	// instances for hardware and software faults. If you specify this object, it can't
+	// be empty.
+	HealthMonitoring *HealthMonitoring
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceHealthChecksRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceHealthChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceHealthChecksRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeepHealthChecks != nil {
+		s.WriteStruct(schemas.InstanceHealthChecksRequest_deepHealthChecks)
+		v.DeepHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthMonitoring != nil {
+		s.WriteStruct(schemas.InstanceHealthChecksRequest_healthMonitoring)
+		v.HealthMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceHealthChecksRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceHealthChecksRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceHealthChecksRequest_deepHealthChecks:
+			v.DeepHealthChecks = &DeepHealthChecks{}
+			return v.DeepHealthChecks.Deserialize(d)
+		case schemas.InstanceHealthChecksRequest_healthMonitoring:
+			v.HealthMonitoring = &HealthMonitoring{}
+			return v.HealthMonitoring.Deserialize(d)
 		}
 		return nil
 	})
@@ -3051,6 +3350,58 @@ func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) Deserialize(d smithy.S
 			return d.ReadInt32(schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
 		case schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings:
 			return deserializeSlurmCustomSettings(d, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
+}
+
+// The instance health check settings to configure on a compute node group when
+// you update it. These settings replace all of the current instance health check
+// settings of the compute node group. Specify healthMonitoring , deepHealthChecks
+// , or both. You can't specify an empty object ( {} ).
+type UpdateInstanceHealthChecksRequest struct {
+
+	// The deep health check settings. Deep health checks test the graphics processing
+	// units (GPUs) of an instance each time it starts, including after a reboot,
+	// before it accepts jobs. If you specify this object, it can't be empty. If you
+	// omit this object, deep health checks are turned off.
+	DeepHealthChecks *DeepHealthChecks
+
+	// The health monitoring settings. Health monitoring continuously checks running
+	// instances for hardware and software faults. If you specify this object, it can't
+	// be empty. If you omit this object, health monitoring is turned off.
+	HealthMonitoring *HealthMonitoring
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateInstanceHealthChecksRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceHealthChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceHealthChecksRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeepHealthChecks != nil {
+		s.WriteStruct(schemas.UpdateInstanceHealthChecksRequest_deepHealthChecks)
+		v.DeepHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthMonitoring != nil {
+		s.WriteStruct(schemas.UpdateInstanceHealthChecksRequest_healthMonitoring)
+		v.HealthMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInstanceHealthChecksRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstanceHealthChecksRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInstanceHealthChecksRequest_deepHealthChecks:
+			v.DeepHealthChecks = &DeepHealthChecks{}
+			return v.DeepHealthChecks.Deserialize(d)
+		case schemas.UpdateInstanceHealthChecksRequest_healthMonitoring:
+			v.HealthMonitoring = &HealthMonitoring{}
+			return v.HealthMonitoring.Deserialize(d)
 		}
 		return nil
 	})

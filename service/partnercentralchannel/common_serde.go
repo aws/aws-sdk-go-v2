@@ -8,6 +8,39 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeChannelContractDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ChannelContractDetails) {
+	switch vv := v.(type) {
+	case *types.ChannelContractDetailsMemberManagedServicesAttestationDetails:
+		s.WriteUnion(schema, schemas.ChannelContractDetails_managedServicesAttestationDetails)
+		s.WriteStruct(schemas.ChannelContractDetails_managedServicesAttestationDetails)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeChannelContractPayload(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ChannelContractPayload) {
+	switch vv := v.(type) {
+	case *types.ChannelContractPayloadMemberManagedServicesAttestationPayload:
+		s.WriteUnion(schema, schemas.ChannelContractPayload_managedServicesAttestationPayload)
+		s.WriteStruct(schemas.ChannelContractPayload_managedServicesAttestationPayload)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeChannelContractSummaryDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ChannelContractSummaryDetails) {
+	switch vv := v.(type) {
+	case *types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails:
+		s.WriteUnion(schema, schemas.ChannelContractSummaryDetails_managedServicesAttestationDetails)
+		s.WriteStruct(schemas.ChannelContractSummaryDetails_managedServicesAttestationDetails)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeChannelHandshakePayload(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ChannelHandshakePayload) {
 	switch vv := v.(type) {
 	case *types.ChannelHandshakePayloadMemberRevokeServicePeriodPayload:
@@ -42,6 +75,28 @@ func serializeHandshakeDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	case *types.HandshakeDetailMemberStartServicePeriodHandshakeDetail:
 		s.WriteUnion(schema, schemas.HandshakeDetail_startServicePeriodHandshakeDetail)
 		s.WriteStruct(schemas.HandshakeDetail_startServicePeriodHandshakeDetail)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeListChannelContractsTypeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ListChannelContractsTypeFilters) {
+	switch vv := v.(type) {
+	case *types.ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters:
+		s.WriteUnion(schema, schemas.ListChannelContractsTypeFilters_managedServicesAttestationTypeFilters)
+		s.WriteStruct(schemas.ListChannelContractsTypeFilters_managedServicesAttestationTypeFilters)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeListChannelContractsTypeSort(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ListChannelContractsTypeSort) {
+	switch vv := v.(type) {
+	case *types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort:
+		s.WriteUnion(schema, schemas.ListChannelContractsTypeSort_managedServicesAttestationTypeSort)
+		s.WriteStruct(schemas.ListChannelContractsTypeSort_managedServicesAttestationTypeSort)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -117,6 +172,42 @@ func serializeSupportPlan(s smithy.ShapeSerializer, schema *smithy.Schema, v typ
 	}
 }
 
+func deserializeChannelContractDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ChannelContractDetails) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ChannelContractDetails_managedServicesAttestationDetails:
+			vv := &types.ChannelContractDetailsMemberManagedServicesAttestationDetails{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeChannelContractPayload(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ChannelContractPayload) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ChannelContractPayload_managedServicesAttestationPayload:
+			vv := &types.ChannelContractPayloadMemberManagedServicesAttestationPayload{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeChannelContractSummaryDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ChannelContractSummaryDetails) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ChannelContractSummaryDetails_managedServicesAttestationDetails:
+			vv := &types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeChannelHandshakePayload(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ChannelHandshakePayload) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -146,6 +237,30 @@ func deserializeHandshakeDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			return vv.Deserialize(d)
 		case schemas.HandshakeDetail_startServicePeriodHandshakeDetail:
 			vv := &types.HandshakeDetailMemberStartServicePeriodHandshakeDetail{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeListChannelContractsTypeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ListChannelContractsTypeFilters) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ListChannelContractsTypeFilters_managedServicesAttestationTypeFilters:
+			vv := &types.ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeListChannelContractsTypeSort(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ListChannelContractsTypeSort) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ListChannelContractsTypeSort_managedServicesAttestationTypeSort:
+			vv := &types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -237,6 +352,32 @@ func serializeAssociationTypeList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeChannelContractLegalEntityNameFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeChannelContractStatusFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChannelContractStatus) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeChannelContractSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChannelContractSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeChannelHandshakeSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ChannelHandshakeSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -248,6 +389,22 @@ func serializeChannelHandshakeSummaries(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeHandshakeStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HandshakeStatus) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeManagedServicesSupportedServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ManagedServicesSupportedService) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMemberAccountIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -298,6 +455,14 @@ func serializeProgramManagementAccountSummaries(s smithy.ShapeSerializer, schema
 }
 
 func serializeRelationshipDisplayNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRelationshipIdentifierFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -414,6 +579,70 @@ func deserializeAssociationTypeList(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeChannelContractLegalEntityNameFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeChannelContractStatusFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ChannelContractStatus) error {
+	*v = make([]types.ChannelContractStatus, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChannelContractStatus
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ChannelContractStatus(vv))
+		return nil
+	})
+}
+
+func deserializeChannelContractSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ChannelContractSummary) error {
+	*v = make([]types.ChannelContractSummary, 0)
+	var vv types.ChannelContractSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChannelContractSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ChannelContractSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeChannelHandshakeSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ChannelHandshakeSummary) error {
 	*v = make([]types.ChannelHandshakeSummary, 0)
 	var vv types.ChannelHandshakeSummary
@@ -453,6 +682,48 @@ func deserializeHandshakeStatusList(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		*v = append(*v, types.HandshakeStatus(vv))
+		return nil
+	})
+}
+
+func deserializeManagedServicesSupportedServiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ManagedServicesSupportedService) error {
+	*v = make([]types.ManagedServicesSupportedService, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ManagedServicesSupportedService
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ManagedServicesSupportedService(vv))
+		return nil
+	})
+}
+
+func deserializeMemberAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -564,6 +835,27 @@ func deserializeProgramManagementAccountSummaries(d smithy.ShapeDeserializer, s 
 }
 
 func deserializeRelationshipDisplayNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRelationshipIdentifierFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

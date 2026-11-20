@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"publicIdentifier":"__PublicIdentifier__","publisher":"__Publisher__","recordArn":"__RecordArn__","status":"PENDING_APPROVAL","statusReason":"__StatusReason__"},{"publicIdentifier":"__PublicIdentifier__","publisher":"__Publisher__","recordArn":"__RecordArn__","status":"PENDING_APPROVAL","statusReason":"__StatusReason__"}],"nextToken":"__NextToken__"}

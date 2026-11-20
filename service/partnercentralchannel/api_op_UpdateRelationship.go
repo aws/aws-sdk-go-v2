@@ -47,7 +47,8 @@ type UpdateRelationshipInput struct {
 	// The new display name for the relationship.
 	DisplayName *string
 
-	// The updated support plan for the relationship.
+	// The updated support plan for the relationship. Applies only to billing transfer
+	// relationships.
 	RequestedSupportPlan types.SupportPlan
 
 	// The current revision number of the relationship.

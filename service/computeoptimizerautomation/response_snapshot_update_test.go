@@ -186,6 +186,18 @@ func TestUpdateResponseSnapshot_CreateAutomationRule(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		Priority: ptr.String("__Priority__"),
 		RecommendedActionTypes: []types.RecommendedActionType{
@@ -384,6 +396,28 @@ func TestUpdateResponseSnapshot_DeleteAutomationRule(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteOrganizationEnrollmentConfiguration(t *testing.T) {
+	want := &DeleteOrganizationEnrollmentConfigurationOutput{}
+	proto := rpcv2.NewCBOR(schemas.ComputeOptimizerAutomationService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteOrganizationEnrollmentConfiguration, schemas.DeleteOrganizationEnrollmentConfigurationResponse, schemas.DeleteOrganizationEnrollmentConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteOrganizationEnrollmentConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DisassociateAccounts(t *testing.T) {
 	want := &DisassociateAccountsOutput{
 		AccountIds: []string{
@@ -470,6 +504,18 @@ func TestUpdateResponseSnapshot_GetAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -656,6 +702,7 @@ func TestUpdateResponseSnapshot_GetEnrollmentConfiguration(t *testing.T) {
 		StatusReason:         ptr.String("__StatusReason__"),
 		OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
 		LastUpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OrganizationEnrollmentConfigurationStatus: types.OrganizationEnrollmentConfigurationStatus("Active"),
 	}
 	proto := rpcv2.NewCBOR(schemas.ComputeOptimizerAutomationService)
 	opSchema := smithy.NewOperationSchema(schemas.GetEnrollmentConfiguration, schemas.GetEnrollmentConfigurationResponse, schemas.GetEnrollmentConfigurationResponse)
@@ -684,6 +731,10 @@ func TestUpdateResponseSnapshot_ListAccounts(t *testing.T) {
 				AccountId:            ptr.String("__AccountId__"),
 				Status:               types.EnrollmentStatus("Active"),
 				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
 				StatusReason:         ptr.String("__StatusReason__"),
 				LastUpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -691,6 +742,10 @@ func TestUpdateResponseSnapshot_ListAccounts(t *testing.T) {
 				AccountId:            ptr.String("__AccountId__"),
 				Status:               types.EnrollmentStatus("Active"),
 				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
 				StatusReason:         ptr.String("__StatusReason__"),
 				LastUpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1112,6 +1167,18 @@ func TestUpdateResponseSnapshot_ListAutomationRules(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedOrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				Priority: ptr.String("__Priority__"),
 				RecommendedActionTypes: []types.RecommendedActionType{
@@ -1138,6 +1205,18 @@ func TestUpdateResponseSnapshot_ListAutomationRules(t *testing.T) {
 				OrganizationConfiguration: &types.OrganizationConfiguration{
 					RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 					AccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedOrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedAccountIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -1175,6 +1254,86 @@ func TestUpdateResponseSnapshot_ListAutomationRules(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListAutomationRules.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListOrganizationEnrollmentConfigurations(t *testing.T) {
+	want := &ListOrganizationEnrollmentConfigurationsOutput{
+		OrganizationEnrollmentConfigurations: []types.OrganizationEnrollmentConfiguration{
+			{
+				TargetId:             ptr.String("__TargetId__"),
+				TargetType:           types.OrganizationTargetType("Account"),
+				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+			},
+			{
+				TargetId:             ptr.String("__TargetId__"),
+				TargetType:           types.OrganizationTargetType("Account"),
+				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.ComputeOptimizerAutomationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListOrganizationEnrollmentConfigurations, schemas.ListOrganizationEnrollmentConfigurationsResponse, schemas.ListOrganizationEnrollmentConfigurationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListOrganizationEnrollmentConfigurations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListOrganizationalUnits(t *testing.T) {
+	want := &ListOrganizationalUnitsOutput{
+		OrganizationalUnits: []types.OrganizationalUnitInfo{
+			{
+				OrganizationalUnitId:     ptr.String("__OrganizationalUnitId__"),
+				AutoEnrollMemberAccounts: types.AutoEnrollMemberAccounts("All"),
+				OrganizationRuleMode:     types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
+			},
+			{
+				OrganizationalUnitId:     ptr.String("__OrganizationalUnitId__"),
+				AutoEnrollMemberAccounts: types.AutoEnrollMemberAccounts("All"),
+				OrganizationRuleMode:     types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.ComputeOptimizerAutomationService)
+	opSchema := smithy.NewOperationSchema(schemas.ListOrganizationalUnits, schemas.ListOrganizationalUnitsResponse, schemas.ListOrganizationalUnitsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListOrganizationalUnits.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1386,6 +1545,28 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_PutOrganizationEnrollmentConfiguration(t *testing.T) {
+	want := &PutOrganizationEnrollmentConfigurationOutput{}
+	proto := rpcv2.NewCBOR(schemas.ComputeOptimizerAutomationService)
+	opSchema := smithy.NewOperationSchema(schemas.PutOrganizationEnrollmentConfiguration, schemas.PutOrganizationEnrollmentConfigurationResponse, schemas.PutOrganizationEnrollmentConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutOrganizationEnrollmentConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RollbackAutomationEvent(t *testing.T) {
 	want := &RollbackAutomationEventOutput{
 		EventId:     ptr.String("__EventId__"),
@@ -1491,6 +1672,18 @@ func TestUpdateResponseSnapshot_UpdateAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -1708,6 +1901,31 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AccessDeniedException.error", 403, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.ComputeOptimizerAutomationService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteOrganizationEnrollmentConfiguration, schemas.ConflictException, schemas.ConflictException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceCBORType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ConflictException.error", 409, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

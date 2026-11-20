@@ -81,13 +81,13 @@ func (v *AssociateGlossaryTermsInput) SerializeMembers(s smithy.ShapeSerializer)
 type AssociateGlossaryTermsOutput struct {
 
 	// The unique identifier of the asset.
-	AssetIdentifier *string
+	AssetId *string
 
 	// The glossary terms now associated with the asset.
 	GlossaryTerms []string
 
 	// The identifier of the item within the iterable form, if applicable.
-	ItemIdentifier *string
+	ItemId *string
 
 	// The name of the iterable form, if the association targets an item.
 	IterableFormName *string
@@ -105,14 +105,14 @@ func (v *AssociateGlossaryTermsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateGlossaryTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetIdentifier != nil {
-		s.WriteString(schemas.AssociateGlossaryTermsResponse_AssetIdentifier, *v.AssetIdentifier)
+	if v.AssetId != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsResponse_AssetId, *v.AssetId)
 	}
 	if v.GlossaryTerms != nil {
-		serializeGlossaryTermIdList(s, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, v.GlossaryTerms)
+		serializeGlossaryTermIdOutputList(s, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, v.GlossaryTerms)
 	}
-	if v.ItemIdentifier != nil {
-		s.WriteString(schemas.AssociateGlossaryTermsResponse_ItemIdentifier, *v.ItemIdentifier)
+	if v.ItemId != nil {
+		s.WriteString(schemas.AssociateGlossaryTermsResponse_ItemId, *v.ItemId)
 	}
 	if v.IterableFormName != nil {
 		s.WriteString(schemas.AssociateGlossaryTermsResponse_IterableFormName, *v.IterableFormName)
@@ -121,14 +121,14 @@ func (v *AssociateGlossaryTermsOutput) SerializeMembers(s smithy.ShapeSerializer
 func (v *AssociateGlossaryTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateGlossaryTermsResponse, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.AssociateGlossaryTermsResponse_AssetIdentifier:
-			v.AssetIdentifier = new(string)
-			return d.ReadString(schemas.AssociateGlossaryTermsResponse_AssetIdentifier, v.AssetIdentifier)
+		case schemas.AssociateGlossaryTermsResponse_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.AssociateGlossaryTermsResponse_AssetId, v.AssetId)
 		case schemas.AssociateGlossaryTermsResponse_GlossaryTerms:
-			return deserializeGlossaryTermIdList(d, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, &v.GlossaryTerms)
-		case schemas.AssociateGlossaryTermsResponse_ItemIdentifier:
-			v.ItemIdentifier = new(string)
-			return d.ReadString(schemas.AssociateGlossaryTermsResponse_ItemIdentifier, v.ItemIdentifier)
+			return deserializeGlossaryTermIdOutputList(d, schemas.AssociateGlossaryTermsResponse_GlossaryTerms, &v.GlossaryTerms)
+		case schemas.AssociateGlossaryTermsResponse_ItemId:
+			v.ItemId = new(string)
+			return d.ReadString(schemas.AssociateGlossaryTermsResponse_ItemId, v.ItemId)
 		case schemas.AssociateGlossaryTermsResponse_IterableFormName:
 			v.IterableFormName = new(string)
 			return d.ReadString(schemas.AssociateGlossaryTermsResponse_IterableFormName, v.IterableFormName)

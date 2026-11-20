@@ -1,0 +1,5 @@
+PATCH /products/__ProductId__
+
+Content-Type: application/json
+
+{"apiSelectionConfiguration":{"apiSelectionMode":"CUSTOM","ruleFilters":[{"key":"RESOURCE_ARN","values":["__Member__","__Member__"]},{"key":"RESOURCE_ARN","values":["__Member__","__Member__"]}]},"description":"__Description__","displayName":"__DisplayName__","displayOrder":{"contents":[{"productApiPageArns":["__Member__","__Member__"],"sectionName":"__SectionName__"},{"productApiPageArns":["__Member__","__Member__"],"sectionName":"__SectionName__"}],"overviewPageArn":"__OverviewPageArn__","productPageArns":["__Member__","__Member__"]}}

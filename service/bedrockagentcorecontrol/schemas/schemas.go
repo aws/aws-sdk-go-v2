@@ -4323,12 +4323,16 @@ var _GatewayInterceptionPoints_member *smithy.Schema
 var GatewayInterceptorConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GatewayInterceptorConfiguration",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var GatewayInterceptorConfiguration_interceptor *smithy.Schema
 
 var GatewayInterceptorConfiguration_interceptionPoints *smithy.Schema
 
 var GatewayInterceptorConfiguration_inputConfiguration *smithy.Schema
+
+var GatewayInterceptorConfiguration_responseInterceptionMode *smithy.Schema
+
+var GatewayInterceptorConfiguration_responseStreamingConfiguration *smithy.Schema
 
 var _GatewayInterceptorConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -6190,6 +6194,11 @@ var _MatchValueStringList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MatchValueStringList",
 }, smithy.ShapeTypeList, 1)
 var _MatchValueStringList_member *smithy.Schema
+
+var _MaxEventsPerInvocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "MaxEventsPerInvocation",
+}, smithy.ShapeTypeInteger, 0)
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -8202,11 +8211,25 @@ var ResourceType_SYSTEM *smithy.Schema
 
 var ResourceType_CUSTOM *smithy.Schema
 
+var ResponseInterceptionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResponseInterceptionMode",
+}, smithy.ShapeTypeEnum, 2)
+var ResponseInterceptionMode_BUFFERED *smithy.Schema
+
+var ResponseInterceptionMode_STREAM *smithy.Schema
+
 var _ResponseListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ResponseListType",
 }, smithy.ShapeTypeList, 1)
 var _ResponseListType_member *smithy.Schema
+
+var ResponseStreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResponseStreamingConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ResponseStreamingConfiguration_maxEventsPerInvocation *smithy.Schema
 
 var _ResponseType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -16684,11 +16707,21 @@ func init() {
 
 	InterceptorInputConfiguration_payloadFilter = InterceptorInputConfiguration.AddMember("payloadFilter", InterceptorPayloadFilter)
 
+	ResponseInterceptionMode_BUFFERED = ResponseInterceptionMode.AddMember("BUFFERED", smithyprelude.Unit)
+
+	ResponseInterceptionMode_STREAM = ResponseInterceptionMode.AddMember("STREAM", smithyprelude.Unit)
+
+	ResponseStreamingConfiguration_maxEventsPerInvocation = ResponseStreamingConfiguration.AddMember("maxEventsPerInvocation", _MaxEventsPerInvocation)
+
 	GatewayInterceptorConfiguration_interceptor = GatewayInterceptorConfiguration.AddMember("interceptor", InterceptorConfiguration)
 
 	GatewayInterceptorConfiguration_interceptionPoints = GatewayInterceptorConfiguration.AddMember("interceptionPoints", _GatewayInterceptionPoints)
 
 	GatewayInterceptorConfiguration_inputConfiguration = GatewayInterceptorConfiguration.AddMember("inputConfiguration", InterceptorInputConfiguration)
+
+	GatewayInterceptorConfiguration_responseInterceptionMode = GatewayInterceptorConfiguration.AddMember("responseInterceptionMode", ResponseInterceptionMode)
+
+	GatewayInterceptorConfiguration_responseStreamingConfiguration = GatewayInterceptorConfiguration.AddMember("responseStreamingConfiguration", ResponseStreamingConfiguration)
 
 	_GatewayInterceptorConfigurations_member = _GatewayInterceptorConfigurations.AddMember("member", GatewayInterceptorConfiguration)
 

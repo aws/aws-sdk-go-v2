@@ -499,9 +499,10 @@ func TestUpdateResponseSnapshot_GetCentralizationRuleForOrganization(t *testing.
 				},
 				Scope: ptr.String("__Scope__"),
 				SourceLogsConfiguration: &types.SourceLogsConfiguration{
-					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
-					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
-					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+					LogGroupSelectionCriteria:    ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria:  ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:    types.EncryptedLogGroupStrategy("ALLOW"),
+					CentralizeWithDataProtection: types.CentralizeWithDataProtection("ENABLED"),
 				},
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),

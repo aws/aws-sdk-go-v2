@@ -83,6 +83,24 @@ func ExampleClaimMatchValueType_outputUsage() {
 var _ *string
 var _ []string
 
+func ExampleIdentifier_outputUsage() {
+	var union types.Identifier
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IdentifierMemberDomain:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExamplePrivateEndpoint_outputUsage() {
 	var union types.PrivateEndpoint
 	// type switches can be used to check the union value

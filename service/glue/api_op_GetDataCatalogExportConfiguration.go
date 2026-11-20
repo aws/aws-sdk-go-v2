@@ -45,21 +45,15 @@ func (v *GetDataCatalogExportConfigurationInput) SerializeMembers(s smithy.Shape
 // operation.
 type GetDataCatalogExportConfigurationOutput struct {
 
+	// The export setting and current export state for asset metadata.
+	Assets *types.AssetsExportResult
+
 	// The timestamp at which the export configuration was created.
 	CreatedAt *time.Time
 
-	// The encryption configuration for the exported data.
-	EncryptionConfiguration *types.ExportEncryptionConfiguration
-
-	// The export setting for the data catalog. Valid values are ENABLED and DISABLED .
-	ExportSetting types.ExportSetting
-
-	// The ARN of the S3 Tables bucket where catalog metadata is exported.
-	S3TableBucketArn *string
-
-	// The current status of the export. Valid values are ENABLING , ENABLED ,
-	// DISABLING , DISABLED , and FAILED .
-	Status types.ExportStatus
+	// The S3 Tables configuration for the export, including the table bucket that
+	// holds the exported catalog metadata and its encryption configuration.
+	S3TablesConfiguration *types.S3TablesConfigurationResult
 
 	// The timestamp at which the export configuration was last updated.
 	UpdatedAt *time.Time
@@ -77,22 +71,18 @@ func (v *GetDataCatalogExportConfigurationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GetDataCatalogExportConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assets != nil {
+		s.WriteStruct(schemas.GetDataCatalogExportConfigurationOutput_Assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetDataCatalogExportConfigurationOutput_CreatedAt, *v.CreatedAt)
 	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.GetDataCatalogExportConfigurationOutput_EncryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
+	if v.S3TablesConfiguration != nil {
+		s.WriteStruct(schemas.GetDataCatalogExportConfigurationOutput_S3TablesConfiguration)
+		v.S3TablesConfiguration.SerializeMembers(s)
 		s.CloseStruct()
-	}
-	if v.ExportSetting != "" {
-		s.WriteString(schemas.GetDataCatalogExportConfigurationOutput_ExportSetting, string(v.ExportSetting))
-	}
-	if v.S3TableBucketArn != nil {
-		s.WriteString(schemas.GetDataCatalogExportConfigurationOutput_S3TableBucketArn, *v.S3TableBucketArn)
-	}
-	if v.Status != "" {
-		s.WriteString(schemas.GetDataCatalogExportConfigurationOutput_Status, string(v.Status))
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetDataCatalogExportConfigurationOutput_UpdatedAt, *v.UpdatedAt)
@@ -101,29 +91,15 @@ func (v *GetDataCatalogExportConfigurationOutput) SerializeMembers(s smithy.Shap
 func (v *GetDataCatalogExportConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataCatalogExportConfigurationOutput, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetDataCatalogExportConfigurationOutput_Assets:
+			v.Assets = &types.AssetsExportResult{}
+			return v.Assets.Deserialize(d)
 		case schemas.GetDataCatalogExportConfigurationOutput_CreatedAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetDataCatalogExportConfigurationOutput_CreatedAt, v.CreatedAt)
-		case schemas.GetDataCatalogExportConfigurationOutput_EncryptionConfiguration:
-			v.EncryptionConfiguration = &types.ExportEncryptionConfiguration{}
-			return v.EncryptionConfiguration.Deserialize(d)
-		case schemas.GetDataCatalogExportConfigurationOutput_ExportSetting:
-			var ev string
-			if err := d.ReadString(schemas.GetDataCatalogExportConfigurationOutput_ExportSetting, &ev); err != nil {
-				return err
-			}
-			v.ExportSetting = types.ExportSetting(ev)
-			return nil
-		case schemas.GetDataCatalogExportConfigurationOutput_S3TableBucketArn:
-			v.S3TableBucketArn = new(string)
-			return d.ReadString(schemas.GetDataCatalogExportConfigurationOutput_S3TableBucketArn, v.S3TableBucketArn)
-		case schemas.GetDataCatalogExportConfigurationOutput_Status:
-			var ev string
-			if err := d.ReadString(schemas.GetDataCatalogExportConfigurationOutput_Status, &ev); err != nil {
-				return err
-			}
-			v.Status = types.ExportStatus(ev)
-			return nil
+		case schemas.GetDataCatalogExportConfigurationOutput_S3TablesConfiguration:
+			v.S3TablesConfiguration = &types.S3TablesConfigurationResult{}
+			return v.S3TablesConfiguration.Deserialize(d)
 		case schemas.GetDataCatalogExportConfigurationOutput_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetDataCatalogExportConfigurationOutput_UpdatedAt, v.UpdatedAt)

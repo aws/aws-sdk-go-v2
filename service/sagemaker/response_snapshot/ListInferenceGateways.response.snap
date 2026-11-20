@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListInferenceGateways
+
+{"InferenceGatewaySummaries":[{"ClusterArn":"__ClusterArn__","FailureReason":"__FailureReason__","Name":"__Name__","Namespace":"__Namespace__","Status":"ADDING"},{"ClusterArn":"__ClusterArn__","FailureReason":"__FailureReason__","Name":"__Name__","Namespace":"__Namespace__","Status":"ADDING"}],"NextToken":"__NextToken__"}

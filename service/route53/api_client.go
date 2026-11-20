@@ -1011,6 +1011,18 @@ func sanitizeURLInput(input interface{}) error {
 			i.Id = &v
 		}
 
+	case *GetHostedZoneChangeBatchInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+		if i.ChangeId != nil {
+			idx := strings.LastIndex(*i.ChangeId, `/`)
+			v := (*i.ChangeId)[idx+1:]
+			i.ChangeId = &v
+		}
+
 	case *GetHostedZoneLimitInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
@@ -1032,6 +1044,18 @@ func sanitizeURLInput(input interface{}) error {
 			i.DelegationSetId = &v
 		}
 
+	case *ListHostedZoneChangeBatchesInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+		if i.StartAfterChangeId != nil {
+			idx := strings.LastIndex(*i.StartAfterChangeId, `/`)
+			v := (*i.StartAfterChangeId)[idx+1:]
+			i.StartAfterChangeId = &v
+		}
+
 	case *ListHostedZonesInput:
 		if i.DelegationSetId != nil {
 			idx := strings.LastIndex(*i.DelegationSetId, `/`)
@@ -1047,6 +1071,13 @@ func sanitizeURLInput(input interface{}) error {
 		}
 
 	case *ListQueryLoggingConfigsInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
+	case *ListResourceRecordSetChangesInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
 			v := (*i.HostedZoneId)[idx+1:]
@@ -1110,6 +1141,13 @@ func sanitizeURLInput(input interface{}) error {
 		}
 
 	case *UpdateHostedZoneFeaturesInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
+	case *UpdateHostedZoneTierInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
 			v := (*i.HostedZoneId)[idx+1:]

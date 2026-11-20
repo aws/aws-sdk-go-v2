@@ -3,8 +3,11 @@
 // Package marketplacediscovery provides the API client, operations, and parameter
 // types for AWS Marketplace Discovery.
 //
-// The AWS Marketplace Discovery API provides programmatic access to the AWS
-// Marketplace catalog, including searching and browsing listings, retrieving
-// product details and fulfillment options, and accessing public and private offer
-// pricing and terms.
+// With the AWS Marketplace Discovery API (Discovery API), you have programmatic
+// access to the AWS Marketplace catalog. You can search and browse listings,
+// retrieve product details and fulfillment options, and access public and private
+// offer pricing and terms. For more information, see [Using the AWS Marketplace Discovery API]in the AWS Marketplace
+// Developer Guide.
+//
+// [Using the AWS Marketplace Discovery API]: https://docs.aws.amazon.com/marketplace/latest/developerguide/discovery-apis.html
 package marketplacediscovery

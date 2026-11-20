@@ -35,6 +35,7 @@ const (
 	AttachmentStatusError    AttachmentStatus = "ERROR"
 	AttachmentStatusScaling  AttachmentStatus = "SCALING"
 	AttachmentStatusReady    AttachmentStatus = "READY"
+	AttachmentStatusStandby  AttachmentStatus = "STANDBY"
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
@@ -49,6 +50,7 @@ func (AttachmentStatus) Values() []AttachmentStatus {
 		"ERROR",
 		"SCALING",
 		"READY",
+		"STANDBY",
 	}
 }
 
@@ -241,6 +243,23 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EnforcementMode string
+
+// Enum values for EnforcementMode
+const (
+	EnforcementModePolicyControlled EnforcementMode = "POLICY_CONTROLLED"
+)
+
+// Values returns all known values for EnforcementMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnforcementMode) Values() []EnforcementMode {
+	return []EnforcementMode{
+		"POLICY_CONTROLLED",
+	}
+}
+
 type FirewallPolicyErrorCode string
 
 // Enum values for FirewallPolicyErrorCode
@@ -388,6 +407,7 @@ const (
 	FirewallStatusValueDeleting     FirewallStatusValue = "DELETING"
 	FirewallStatusValueReady        FirewallStatusValue = "READY"
 	FirewallStatusValueFailed       FirewallStatusValue = "FAILED"
+	FirewallStatusValueStandby      FirewallStatusValue = "STANDBY"
 )
 
 // Values returns all known values for FirewallStatusValue. Note that this can be
@@ -400,6 +420,26 @@ func (FirewallStatusValue) Values() []FirewallStatusValue {
 		"DELETING",
 		"READY",
 		"FAILED",
+		"STANDBY",
+	}
+}
+
+type FirewallType string
+
+// Enum values for FirewallType
+const (
+	FirewallTypeFirewall    FirewallType = "FIREWALL"
+	FirewallTypeIgwFirewall FirewallType = "IGW_FIREWALL"
+)
+
+// Values returns all known values for FirewallType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallType) Values() []FirewallType {
+	return []FirewallType{
+		"FIREWALL",
+		"IGW_FIREWALL",
 	}
 }
 

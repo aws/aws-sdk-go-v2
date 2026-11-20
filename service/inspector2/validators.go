@@ -3913,6 +3913,21 @@ func validatePackageFilter(v *types.PackageFilter) error {
 			invalidParams.AddNested("FilePath", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RuntimeReachability != nil {
+		if err := validateRuntimeReachabilityFilter(v.RuntimeReachability); err != nil {
+			invalidParams.AddNested("RuntimeReachability", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuntimeReachabilityReason != nil {
+		if err := validateRuntimeReachabilityReasonFilter(v.RuntimeReachabilityReason); err != nil {
+			invalidParams.AddNested("RuntimeReachabilityReason", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PurlQualifier != nil {
+		if err := validatePurlQualifierFilter(v.PurlQualifier); err != nil {
+			invalidParams.AddNested("PurlQualifier", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4029,6 +4044,24 @@ func validateProviderFilterList(v []types.ProviderFilter) error {
 		if err := validateProviderFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePurlQualifierFilter(v *types.PurlQualifierFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurlQualifierFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4257,6 +4290,42 @@ func validateResourceTagFilterList(v []types.TagFilter) error {
 		if err := validateTagFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeReachabilityFilter(v *types.RuntimeReachabilityFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeReachabilityFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeReachabilityReasonFilter(v *types.RuntimeReachabilityReasonFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeReachabilityReasonFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

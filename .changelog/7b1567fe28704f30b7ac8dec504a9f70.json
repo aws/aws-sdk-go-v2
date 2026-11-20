@@ -1,0 +1,8 @@
+{
+    "id": "7b1567fe-2870-4f30-b7ac-8dec504a9f70",
+    "type": "feature",
+    "description": "This release adds support for the DTS-X and DTS audio codecs, AV1 encoding improvements including Fast decode, GOP size in seconds, and temporal adaptive quantization, and Dynamic Multiview for H.264 and H.265 outputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

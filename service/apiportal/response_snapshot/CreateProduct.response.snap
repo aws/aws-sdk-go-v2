@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiSelectionConfiguration":{"apiSelectionMode":"CUSTOM","ruleFilters":[{"key":"RESOURCE_ARN","values":["__Member__","__Member__"]},{"key":"RESOURCE_ARN","values":["__Member__","__Member__"]}]},"description":"__Description__","displayName":"__DisplayName__","displayOrder":{"contents":[{"productApiPageArns":["__Member__","__Member__"],"sectionName":"__SectionName__"},{"productApiPageArns":["__Member__","__Member__"],"sectionName":"__SectionName__"}],"overviewPageArn":"__OverviewPageArn__","productPageArns":["__Member__","__Member__"]},"failureReason":"API_PAGE_ATTACHED","productArn":"__ProductArn__","productId":"__ProductId__","status":"ACTIVE","tags":{"key0":"__Value__"},"updatedAt":946684800}

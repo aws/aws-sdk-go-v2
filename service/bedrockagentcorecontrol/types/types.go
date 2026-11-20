@@ -8226,6 +8226,24 @@ type GatewayInterceptorConfiguration struct {
 	// the input to the interceptor is constructed
 	InputConfiguration *InterceptorInputConfiguration
 
+	// Specifies how the interceptor processes streamed target responses. You can set
+	// this field only on an interceptor that includes the RESPONSE interception
+	// point. Valid values include:
+	//
+	//   - BUFFERED - The gateway collects the complete target response and then
+	//   invokes the interceptor once. This is the default.
+	//
+	//   - STREAM - The gateway sends a streamed target response to the interceptor in
+	//   batches of events and returns each processed batch to the client as soon as it's
+	//   ready. Non-streamed responses still use BUFFERED processing. If you specify
+	//   STREAM , you must also specify responseStreamingConfiguration , and the input
+	//   configuration can't exclude the response body.
+	ResponseInterceptionMode ResponseInterceptionMode
+
+	// Specifies the batching settings for a streamed response. Specify this field
+	// only when responseInterceptionMode is STREAM . You must specify it for STREAM .
+	ResponseStreamingConfiguration *ResponseStreamingConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -8247,6 +8265,14 @@ func (v *GatewayInterceptorConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.Interceptor != nil {
 		serializeInterceptorConfiguration(s, schemas.GatewayInterceptorConfiguration_interceptor, v.Interceptor)
 	}
+	if v.ResponseInterceptionMode != "" {
+		s.WriteString(schemas.GatewayInterceptorConfiguration_responseInterceptionMode, string(v.ResponseInterceptionMode))
+	}
+	if v.ResponseStreamingConfiguration != nil {
+		s.WriteStruct(schemas.GatewayInterceptorConfiguration_responseStreamingConfiguration)
+		v.ResponseStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *GatewayInterceptorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GatewayInterceptorConfiguration, func(s *smithy.Schema) error {
@@ -8258,6 +8284,16 @@ func (v *GatewayInterceptorConfiguration) Deserialize(d smithy.ShapeDeserializer
 			return deserializeGatewayInterceptionPoints(d, schemas.GatewayInterceptorConfiguration_interceptionPoints, &v.InterceptionPoints)
 		case schemas.GatewayInterceptorConfiguration_interceptor:
 			return deserializeInterceptorConfiguration(d, schemas.GatewayInterceptorConfiguration_interceptor, &v.Interceptor)
+		case schemas.GatewayInterceptorConfiguration_responseInterceptionMode:
+			var ev string
+			if err := d.ReadString(schemas.GatewayInterceptorConfiguration_responseInterceptionMode, &ev); err != nil {
+				return err
+			}
+			v.ResponseInterceptionMode = ResponseInterceptionMode(ev)
+			return nil
+		case schemas.GatewayInterceptorConfiguration_responseStreamingConfiguration:
+			v.ResponseStreamingConfiguration = &ResponseStreamingConfiguration{}
+			return v.ResponseStreamingConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -20450,6 +20486,41 @@ func (v *ResourceLocationMemberS3) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *ResourceLocationMemberS3) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// Specifies the settings that the gateway uses to send a streamed target response
+// to the interceptor in batches.
+type ResponseStreamingConfiguration struct {
+
+	// Specifies the maximum number of response events that the gateway sends to the
+	// interceptor in one invocation. The interceptor's output for the first batch
+	// determines the status code and headers of the response. The gateway ignores the
+	// status code and headers that the interceptor returns for later batches.
+	MaxEventsPerInvocation *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResponseStreamingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseStreamingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseStreamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxEventsPerInvocation != nil {
+		s.WriteInt32(schemas.ResponseStreamingConfiguration_maxEventsPerInvocation, *v.MaxEventsPerInvocation)
+	}
+}
+func (v *ResponseStreamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseStreamingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseStreamingConfiguration_maxEventsPerInvocation:
+			v.MaxEventsPerInvocation = new(int32)
+			return d.ReadInt32(schemas.ResponseStreamingConfiguration_maxEventsPerInvocation, v.MaxEventsPerInvocation)
+		}
+		return nil
+	})
 }
 
 // The configuration for the root volume of a capacity provider instance. Specify

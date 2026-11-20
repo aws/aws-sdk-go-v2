@@ -1191,6 +1191,11 @@ var ___integerMin1Max6 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__integerMin1Max6",
 }, smithy.ShapeTypeInteger, 0)
 
+var ___integerMin1Max63 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "__integerMin1Max63",
+}, smithy.ShapeTypeInteger, 0)
+
 var ___integerMin1Max65535 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "__integerMin1Max65535",
@@ -3291,7 +3296,7 @@ var CaptionSelector_SelectorSettings *smithy.Schema
 var CaptionSelectorSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "CaptionSelectorSettings",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CaptionSelectorSettings_AncillarySourceSettings *smithy.Schema
 
 var CaptionSelectorSettings_AribSourceSettings *smithy.Schema
@@ -3307,6 +3312,8 @@ var CaptionSelectorSettings_Scte27SourceSettings *smithy.Schema
 var CaptionSelectorSettings_TeletextSourceSettings *smithy.Schema
 
 var CaptionSelectorSettings_SmartSubtitleSourceSettings *smithy.Schema
+
+var CaptionSelectorSettings_WebvttSourceSettings *smithy.Schema
 
 var CaptionSynchronizationMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -4648,10 +4655,14 @@ var EmbeddedConvert608To708_UPCONVERT *smithy.Schema
 var EmbeddedDestinationSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "EmbeddedDestinationSettings",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var EmbeddedDestinationSettings_Position *smithy.Schema
 
 var EmbeddedDestinationSettings_StyleControl *smithy.Schema
+
+var EmbeddedDestinationSettings_CaptionServiceChannel *smithy.Schema
+
+var EmbeddedDestinationSettings_EmbeddedMode *smithy.Schema
 
 var EmbeddedDestinationStyleControl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -4660,6 +4671,16 @@ var EmbeddedDestinationStyleControl = smithy.NewSchema(smithy.ShapeID{
 var EmbeddedDestinationStyleControl_MANUAL *smithy.Schema
 
 var EmbeddedDestinationStyleControl_PASSTHROUGH *smithy.Schema
+
+var EmbeddedModeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "EmbeddedModeType",
+}, smithy.ShapeTypeEnum, 3)
+var EmbeddedModeType_EMBEDDED_608_AND_708 *smithy.Schema
+
+var EmbeddedModeType_EMBEDDED_608_ONLY *smithy.Schema
+
+var EmbeddedModeType_EMBEDDED_708_ONLY *smithy.Schema
 
 var EmbeddedPlusScte20DestinationSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -10570,6 +10591,14 @@ var WebvttDestinationStyleControl_PASSTHROUGH *smithy.Schema
 
 var WebvttDestinationStyleControl_MANUAL *smithy.Schema
 
+var WebvttSourceSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "WebvttSourceSettings",
+}, smithy.ShapeTypeStructure, 2)
+var WebvttSourceSettings_GroupId *smithy.Schema
+
+var WebvttSourceSettings_Name *smithy.Schema
+
 var AcceptInputDeviceTransferRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "AcceptInputDeviceTransferRequest",
@@ -14613,9 +14642,19 @@ func init() {
 
 	EmbeddedDestinationStyleControl_PASSTHROUGH = EmbeddedDestinationStyleControl.AddMember("PASSTHROUGH", smithyprelude.Unit)
 
+	EmbeddedModeType_EMBEDDED_608_AND_708 = EmbeddedModeType.AddMember("EMBEDDED_608_AND_708", smithyprelude.Unit)
+
+	EmbeddedModeType_EMBEDDED_608_ONLY = EmbeddedModeType.AddMember("EMBEDDED_608_ONLY", smithyprelude.Unit)
+
+	EmbeddedModeType_EMBEDDED_708_ONLY = EmbeddedModeType.AddMember("EMBEDDED_708_ONLY", smithyprelude.Unit)
+
 	EmbeddedDestinationSettings_Position = EmbeddedDestinationSettings.AddMember("Position", EmbeddedCaptionPositionSettings, &smithytraits.JSONName{Name: "position"})
 
 	EmbeddedDestinationSettings_StyleControl = EmbeddedDestinationSettings.AddMember("StyleControl", EmbeddedDestinationStyleControl, &smithytraits.JSONName{Name: "styleControl"})
+
+	EmbeddedDestinationSettings_CaptionServiceChannel = EmbeddedDestinationSettings.AddMember("CaptionServiceChannel", ___integerMin1Max63, &smithytraits.JSONName{Name: "captionServiceChannel"})
+
+	EmbeddedDestinationSettings_EmbeddedMode = EmbeddedDestinationSettings.AddMember("EmbeddedMode", EmbeddedModeType, &smithytraits.JSONName{Name: "embeddedMode"})
 
 	TtmlDestinationStyleControl_PASSTHROUGH = TtmlDestinationStyleControl.AddMember("PASSTHROUGH", smithyprelude.Unit)
 
@@ -14797,6 +14836,10 @@ func init() {
 
 	SmartSubtitleSourceSettings_InferenceFeedOutput = SmartSubtitleSourceSettings.AddMember("InferenceFeedOutput", ___string, &smithytraits.JSONName{Name: "inferenceFeedOutput"})
 
+	WebvttSourceSettings_GroupId = WebvttSourceSettings.AddMember("GroupId", ___stringMin1, &smithytraits.JSONName{Name: "groupId"})
+
+	WebvttSourceSettings_Name = WebvttSourceSettings.AddMember("Name", ___stringMin1, &smithytraits.JSONName{Name: "name"})
+
 	CaptionSelectorSettings_AncillarySourceSettings = CaptionSelectorSettings.AddMember("AncillarySourceSettings", AncillarySourceSettings, &smithytraits.JSONName{Name: "ancillarySourceSettings"})
 
 	CaptionSelectorSettings_AribSourceSettings = CaptionSelectorSettings.AddMember("AribSourceSettings", AribSourceSettings, &smithytraits.JSONName{Name: "aribSourceSettings"})
@@ -14812,6 +14855,8 @@ func init() {
 	CaptionSelectorSettings_TeletextSourceSettings = CaptionSelectorSettings.AddMember("TeletextSourceSettings", TeletextSourceSettings, &smithytraits.JSONName{Name: "teletextSourceSettings"})
 
 	CaptionSelectorSettings_SmartSubtitleSourceSettings = CaptionSelectorSettings.AddMember("SmartSubtitleSourceSettings", SmartSubtitleSourceSettings, &smithytraits.JSONName{Name: "smartSubtitleSourceSettings"})
+
+	CaptionSelectorSettings_WebvttSourceSettings = CaptionSelectorSettings.AddMember("WebvttSourceSettings", WebvttSourceSettings, &smithytraits.JSONName{Name: "webvttSourceSettings"})
 
 	CaptionSelector_LanguageCode = CaptionSelector.AddMember("LanguageCode", ___string, &smithytraits.JSONName{Name: "languageCode"})
 

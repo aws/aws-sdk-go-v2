@@ -1,0 +1,5 @@
+POST /products/__ProductId__/apipages
+
+Content-Type: application/json
+
+{"displayContent":{"none":{}},"managedApiId":"__ManagedApiId__","tags":{"key0":"__Value__"},"tryItState":"ENABLED"}

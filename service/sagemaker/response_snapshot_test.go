@@ -133,6 +133,40 @@ func TestCheckResponseSnapshot_AddAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AddInferenceGateway(t *testing.T) {
+	want := &AddInferenceGatewayOutput{
+		Arn:  ptr.String("__Arn__"),
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Gateway: &types.GlobalInferenceGatewayMember{
+			Name:       ptr.String("__Name__"),
+			Namespace:  ptr.String("__Namespace__"),
+			ClusterArn: ptr.String("__ClusterArn__"),
+		},
+		Status: types.GlobalInferenceGatewayMemberStatus("ADDING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AddInferenceGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AddInferenceGateway(context.Background(), &AddInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AddInferenceGateway.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 	want := &AddTagsOutput{
 		Tags: []types.Tag{
@@ -4529,6 +4563,85 @@ func TestCheckResponseSnapshot_CreateFlowDefinition(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateFlowDefinition.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateGlobalInferenceGateway(t *testing.T) {
+	want := &CreateGlobalInferenceGatewayOutput{
+		Arn:              ptr.String("__Arn__"),
+		Id:               ptr.String("__Id__"),
+		Name:             ptr.String("__Name__"),
+		Status:           types.GlobalInferenceGatewayStatus("CREATING"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		Gateways: []types.GlobalInferenceGatewayMember{
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateGlobalInferenceGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateGlobalInferenceGateway(context.Background(), &CreateGlobalInferenceGatewayInput{
+		Name: ptr.String("__Name__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Gateways: []types.GlobalInferenceGatewayMember{
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateGlobalInferenceGateway.response", err)
 	}
 }
 
@@ -10932,6 +11045,31 @@ func TestCheckResponseSnapshot_DeleteFlowDefinition(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteFlowDefinition.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteGlobalInferenceGateway(t *testing.T) {
+	want := &DeleteGlobalInferenceGatewayOutput{
+		Arn:  ptr.String("__Arn__"),
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteGlobalInferenceGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteGlobalInferenceGateway(context.Background(), &DeleteGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteGlobalInferenceGateway.response", err)
 	}
 }
 
@@ -17363,6 +17501,45 @@ func TestCheckResponseSnapshot_DescribeFlowDefinition(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeFlowDefinition.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeGlobalInferenceGateway(t *testing.T) {
+	want := &DescribeGlobalInferenceGatewayOutput{
+		Arn:                    ptr.String("__Arn__"),
+		Id:                     ptr.String("__Id__"),
+		Name:                   ptr.String("__Name__"),
+		ExecutionRoleArn:       ptr.String("__ExecutionRoleArn__"),
+		Status:                 types.GlobalInferenceGatewayStatus("CREATING"),
+		EndpointUrl:            ptr.String("__EndpointUrl__"),
+		VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		CreationTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeGlobalInferenceGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeGlobalInferenceGateway(context.Background(), &DescribeGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeGlobalInferenceGateway.response", err)
 	}
 }
 
@@ -26497,6 +26674,56 @@ func TestCheckResponseSnapshot_ListFlowDefinitions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListGlobalInferenceGateways(t *testing.T) {
+	want := &ListGlobalInferenceGatewaysOutput{
+		GlobalInferenceGatewaySummaries: []types.GlobalInferenceGatewaySummary{
+			{
+				Arn:          ptr.String("__Arn__"),
+				Id:           ptr.String("__Id__"),
+				Name:         ptr.String("__Name__"),
+				Status:       types.GlobalInferenceGatewayStatus("CREATING"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:          ptr.String("__Arn__"),
+				Id:           ptr.String("__Id__"),
+				Name:         ptr.String("__Name__"),
+				Status:       types.GlobalInferenceGatewayStatus("CREATING"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListGlobalInferenceGateways.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListGlobalInferenceGateways(context.Background(), &ListGlobalInferenceGatewaysInput{
+		Filters: []types.GlobalInferenceGatewayFilter{
+			{
+				Name:  types.GlobalInferenceGatewayFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GlobalInferenceGatewayFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListGlobalInferenceGateways.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListHubContentVersions(t *testing.T) {
 	want := &ListHubContentVersionsOutput{
 		HubContentSummaries: []types.HubContentInfo{
@@ -27044,6 +27271,57 @@ func TestCheckResponseSnapshot_ListInferenceExperiments(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListInferenceExperiments.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListInferenceGateways(t *testing.T) {
+	want := &ListInferenceGatewaysOutput{
+		InferenceGatewaySummaries: []types.GlobalInferenceGatewayMemberSummary{
+			{
+				Name:          ptr.String("__Name__"),
+				Namespace:     ptr.String("__Namespace__"),
+				ClusterArn:    ptr.String("__ClusterArn__"),
+				Status:        types.GlobalInferenceGatewayMemberStatus("ADDING"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Namespace:     ptr.String("__Namespace__"),
+				ClusterArn:    ptr.String("__ClusterArn__"),
+				Status:        types.GlobalInferenceGatewayMemberStatus("ADDING"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListInferenceGateways.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListInferenceGateways(context.Background(), &ListInferenceGatewaysInput{
+		Identifier: ptr.String("__Identifier__"),
+		Filters: []types.GlobalInferenceGatewayMemberFilter{
+			{
+				Name:  types.GlobalInferenceGatewayMemberFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GlobalInferenceGatewayMemberFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListInferenceGateways.response", err)
 	}
 }
 
@@ -30506,6 +30784,73 @@ func TestCheckResponseSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_MoveClusterNodes(t *testing.T) {
+	want := &MoveClusterNodesOutput{
+		Successful: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Failed: []types.MoveClusterNodesError{
+			{
+				Code:    types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message: ptr.String("__Message__"),
+				NodeId:  ptr.String("__NodeId__"),
+			},
+			{
+				Code:    types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message: ptr.String("__Message__"),
+				NodeId:  ptr.String("__NodeId__"),
+			},
+		},
+		SuccessfulNodeLogicalIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FailedNodeLogicalIds: []types.MoveClusterNodeLogicalIdsError{
+			{
+				Code:          types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message:       ptr.String("__Message__"),
+				NodeLogicalId: ptr.String("__NodeLogicalId__"),
+			},
+			{
+				Code:          types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message:       ptr.String("__Message__"),
+				NodeLogicalId: ptr.String("__NodeLogicalId__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("MoveClusterNodes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.MoveClusterNodes(context.Background(), &MoveClusterNodesInput{
+		SourceClusterArn:        ptr.String("__SourceClusterArn__"),
+		SourceInstanceGroupName: ptr.String("__SourceInstanceGroupName__"),
+		TargetClusterArn:        ptr.String("__TargetClusterArn__"),
+		TargetInstanceGroupName: ptr.String("__TargetInstanceGroupName__"),
+		InstanceCount:           ptr.Int32(1),
+		NodeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeLogicalIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "MoveClusterNodes.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutEndpointPolicy(t *testing.T) {
 	want := &PutEndpointPolicyOutput{
 		EndpointArn: ptr.String("__EndpointArn__"),
@@ -30666,6 +31011,40 @@ func TestCheckResponseSnapshot_RegisterDevices(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "RegisterDevices.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_RemoveInferenceGateway(t *testing.T) {
+	want := &RemoveInferenceGatewayOutput{
+		Arn:  ptr.String("__Arn__"),
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Gateway: &types.GlobalInferenceGatewayMember{
+			Name:       ptr.String("__Name__"),
+			Namespace:  ptr.String("__Namespace__"),
+			ClusterArn: ptr.String("__ClusterArn__"),
+		},
+		Status: types.GlobalInferenceGatewayMemberStatus("ADDING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RemoveInferenceGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RemoveInferenceGateway(context.Background(), &RemoveInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RemoveInferenceGateway.response", err)
 	}
 }
 
@@ -43962,6 +44341,48 @@ func TestCheckResponseSnapshot_UpdateFeatureMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateGlobalInferenceGateway(t *testing.T) {
+	want := &UpdateGlobalInferenceGatewayOutput{
+		Arn:    ptr.String("__Arn__"),
+		Id:     ptr.String("__Id__"),
+		Name:   ptr.String("__Name__"),
+		Status: types.GlobalInferenceGatewayStatus("CREATING"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateGlobalInferenceGateway.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateGlobalInferenceGateway(context.Background(), &UpdateGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateGlobalInferenceGateway.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateHub(t *testing.T) {
 	want := &UpdateHubOutput{
 		HubArn: ptr.String("__HubArn__"),
@@ -46533,22 +46954,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateClusterExtension(context.Background(), &CreateClusterExtensionInput{
-		ClusterArn:          ptr.String("__ClusterArn__"),
-		ExtensionName:       ptr.String("__ExtensionName__"),
-		ExtensionVersion:    ptr.String("__ExtensionVersion__"),
-		ConfigurationValues: ptr.String("__ConfigurationValues__"),
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		ClientToken: ptr.String("__ClientToken__"),
+	_, opErr := svc.AddInferenceGateway(context.Background(), &AddInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -46670,54 +47080,11 @@ func TestCheckResponseSnapshot_Error_ResourceInUse(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateAIBenchmarkJob(context.Background(), &CreateAIBenchmarkJobInput{
-		AIBenchmarkJobName: ptr.String("__AIBenchmarkJobName__"),
-		BenchmarkTarget: &types.AIBenchmarkTargetMemberEndpoint{
-			Value: types.AIBenchmarkEndpoint{
-				Identifier:              ptr.String("__Identifier__"),
-				TargetContainerHostname: ptr.String("__TargetContainerHostname__"),
-				InferenceComponents: []types.AIBenchmarkInferenceComponent{
-					{
-						Identifier: ptr.String("__Identifier__"),
-					},
-					{
-						Identifier: ptr.String("__Identifier__"),
-					},
-				},
-			},
-		},
-		OutputConfig: &types.AIBenchmarkOutputConfig{
-			S3OutputLocation: ptr.String("__S3OutputLocation__"),
-			MlflowConfig: &types.AIMlflowConfig{
-				MlflowResourceArn:    ptr.String("__MlflowResourceArn__"),
-				MlflowExperimentName: ptr.String("__MlflowExperimentName__"),
-				MlflowRunName:        ptr.String("__MlflowRunName__"),
-			},
-		},
-		AIWorkloadConfigIdentifier: ptr.String("__AIWorkloadConfigIdentifier__"),
-		RoleArn:                    ptr.String("__RoleArn__"),
-		NetworkConfig: &types.AIBenchmarkNetworkConfig{
-			VpcConfig: &types.VpcConfig{
-				SecurityGroupIds: []string{
-					"__Member__",
-					"__Member__",
-				},
-				Subnets: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
+	_, opErr := svc.AddInferenceGateway(context.Background(), &AddInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","resourceCoverages":[{"coverageStatus":"IN_EFFECT","deploymentArns":["__Member__","__Member__"],"entityArn":"__EntityArn__","entityType":"Rule","firewallType":"WAF","resourceArn":"__ResourceArn__","resourceOwnerAccountId":"__ResourceOwnerAccountId__","resourceType":"AWS::ApiGateway::Stage","updatedAt":"2000-01-01T00:00:00Z"},{"coverageStatus":"IN_EFFECT","deploymentArns":["__Member__","__Member__"],"entityArn":"__EntityArn__","entityType":"Rule","firewallType":"WAF","resourceArn":"__ResourceArn__","resourceOwnerAccountId":"__ResourceOwnerAccountId__","resourceType":"AWS::ApiGateway::Stage","updatedAt":"2000-01-01T00:00:00Z"}]}

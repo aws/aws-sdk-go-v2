@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AddInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddInferenceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AddTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTags(context.Background(), nil, func(o *Options) {
@@ -511,6 +523,18 @@ func TestCheckSnapshot_CreateFlowDefinition(t *testing.T) {
 	_, err := svc.CreateFlowDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateFlowDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGlobalInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1406,6 +1430,18 @@ func TestCheckSnapshot_DeleteFlowDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGlobalInferenceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteHub(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteHub(context.Background(), nil, func(o *Options) {
@@ -2263,6 +2299,18 @@ func TestCheckSnapshot_DescribeFlowDefinition(t *testing.T) {
 	_, err := svc.DescribeFlowDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeFlowDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeGlobalInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3410,6 +3458,18 @@ func TestCheckSnapshot_ListFlowDefinitions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListGlobalInferenceGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGlobalInferenceGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGlobalInferenceGateways")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListHubContents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHubContents(context.Background(), nil, func(o *Options) {
@@ -3511,6 +3571,18 @@ func TestCheckSnapshot_ListInferenceExperiments(t *testing.T) {
 	_, err := svc.ListInferenceExperiments(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListInferenceExperiments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInferenceGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInferenceGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInferenceGateways")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4142,6 +4214,18 @@ func TestCheckSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_MoveClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.MoveClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "MoveClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutEndpointPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutEndpointPolicy(context.Background(), nil, func(o *Options) {
@@ -4183,6 +4267,18 @@ func TestCheckSnapshot_RegisterDevices(t *testing.T) {
 	_, err := svc.RegisterDevices(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RegisterDevices")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RemoveInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemoveInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4814,6 +4910,18 @@ func TestCheckSnapshot_UpdateFeatureMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGlobalInferenceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateHub(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateHub(context.Background(), nil, func(o *Options) {
@@ -5166,6 +5274,18 @@ func TestUpdateSnapshot_AddAssociation(t *testing.T) {
 	_, err := svc.AddAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AddInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5610,6 +5730,18 @@ func TestUpdateSnapshot_CreateFlowDefinition(t *testing.T) {
 	_, err := svc.CreateFlowDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateFlowDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGlobalInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6505,6 +6637,18 @@ func TestUpdateSnapshot_DeleteFlowDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGlobalInferenceGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteHub(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteHub(context.Background(), nil, func(o *Options) {
@@ -7362,6 +7506,18 @@ func TestUpdateSnapshot_DescribeFlowDefinition(t *testing.T) {
 	_, err := svc.DescribeFlowDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeFlowDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeGlobalInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8509,6 +8665,18 @@ func TestUpdateSnapshot_ListFlowDefinitions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListGlobalInferenceGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGlobalInferenceGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGlobalInferenceGateways")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListHubContents(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHubContents(context.Background(), nil, func(o *Options) {
@@ -8610,6 +8778,18 @@ func TestUpdateSnapshot_ListInferenceExperiments(t *testing.T) {
 	_, err := svc.ListInferenceExperiments(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListInferenceExperiments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInferenceGateways(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInferenceGateways(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInferenceGateways")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9241,6 +9421,18 @@ func TestUpdateSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_MoveClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.MoveClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "MoveClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutEndpointPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutEndpointPolicy(context.Background(), nil, func(o *Options) {
@@ -9282,6 +9474,18 @@ func TestUpdateSnapshot_RegisterDevices(t *testing.T) {
 	_, err := svc.RegisterDevices(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterDevices")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RemoveInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemoveInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -9906,6 +10110,18 @@ func TestUpdateSnapshot_UpdateFeatureMetadata(t *testing.T) {
 	_, err := svc.UpdateFeatureMetadata(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateFeatureMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGlobalInferenceGateway(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlobalInferenceGateway(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGlobalInferenceGateway")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

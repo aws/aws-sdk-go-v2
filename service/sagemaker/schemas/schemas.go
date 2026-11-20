@@ -13,6 +13,11 @@ var AddAssociation = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AddAssociation",
 }, smithy.ShapeTypeOperation, 0)
 
+var AddInferenceGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AddInferenceGateway",
+}, smithy.ShapeTypeOperation, 0)
+
 var AddTags = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AddTags",
@@ -196,6 +201,11 @@ var CreateFeatureGroup = smithy.NewSchema(smithy.ShapeID{
 var CreateFlowDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CreateFlowDefinition",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateGlobalInferenceGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateGlobalInferenceGateway",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateHub = smithy.NewSchema(smithy.ShapeID{
@@ -568,6 +578,11 @@ var DeleteFlowDefinition = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteFlowDefinition",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteGlobalInferenceGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteGlobalInferenceGateway",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteHub = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteHub",
@@ -926,6 +941,11 @@ var DescribeFeatureMetadata = smithy.NewSchema(smithy.ShapeID{
 var DescribeFlowDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeFlowDefinition",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeGlobalInferenceGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeGlobalInferenceGateway",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeHub = smithy.NewSchema(smithy.ShapeID{
@@ -1403,6 +1423,11 @@ var ListFlowDefinitions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListFlowDefinitions",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListGlobalInferenceGateways = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListGlobalInferenceGateways",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListHubContents = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListHubContents",
@@ -1446,6 +1471,11 @@ var ListInferenceComponents = smithy.NewSchema(smithy.ShapeID{
 var ListInferenceExperiments = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListInferenceExperiments",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListInferenceGateways = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListInferenceGateways",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListInferenceRecommendationsJobs = smithy.NewSchema(smithy.ShapeID{
@@ -1708,6 +1738,11 @@ var ListWorkteams = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListWorkteams",
 }, smithy.ShapeTypeOperation, 0)
 
+var MoveClusterNodes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodes",
+}, smithy.ShapeTypeOperation, 0)
+
 var PutEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PutEndpointPolicy",
@@ -1726,6 +1761,11 @@ var QueryLineage = smithy.NewSchema(smithy.ShapeID{
 var RegisterDevices = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "RegisterDevices",
+}, smithy.ShapeTypeOperation, 0)
+
+var RemoveInferenceGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RemoveInferenceGateway",
 }, smithy.ShapeTypeOperation, 0)
 
 var RenderUiTemplate = smithy.NewSchema(smithy.ShapeID{
@@ -1986,6 +2026,11 @@ var UpdateFeatureGroup = smithy.NewSchema(smithy.ShapeID{
 var UpdateFeatureMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "UpdateFeatureMetadata",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateGlobalInferenceGateway = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateGlobalInferenceGateway",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateHub = smithy.NewSchema(smithy.ShapeID{
@@ -6480,7 +6525,7 @@ var ClusterInstanceRequirements_InstanceTypes *smithy.Schema
 var ClusterInstanceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ClusterInstanceStatus",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 9)
 var ClusterInstanceStatus_RUNNING *smithy.Schema
 
 var ClusterInstanceStatus_FAILURE *smithy.Schema
@@ -6494,6 +6539,10 @@ var ClusterInstanceStatus_SYSTEM_UPDATING *smithy.Schema
 var ClusterInstanceStatus_DEEP_HEALTH_CHECK_IN_PROGRESS *smithy.Schema
 
 var ClusterInstanceStatus_NOT_FOUND *smithy.Schema
+
+var ClusterInstanceStatus_DETACH_IN_PROGRESS *smithy.Schema
+
+var ClusterInstanceStatus_ATTACH_IN_PROGRESS *smithy.Schema
 
 var ClusterInstanceStatusDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -11057,6 +11106,233 @@ var GitConfigForUpdate_SecretArn *smithy.Schema
 var _GitConfigUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "GitConfigUrl",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayArn",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayClientToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayClientToken",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayClusterArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayClusterArn",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayEndpointUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayEndpointUrl",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayExecutionRoleArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayExecutionRoleArn",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayFailureReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayFailureReason",
+}, smithy.ShapeTypeString, 0)
+
+var GlobalInferenceGatewayFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayFilter",
+}, smithy.ShapeTypeStructure, 2)
+var GlobalInferenceGatewayFilter_Name *smithy.Schema
+
+var GlobalInferenceGatewayFilter_Value *smithy.Schema
+
+var GlobalInferenceGatewayFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayFilterName",
+}, smithy.ShapeTypeEnum, 1)
+var GlobalInferenceGatewayFilterName_STATUS *smithy.Schema
+
+var _GlobalInferenceGatewayFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayFilters",
+}, smithy.ShapeTypeList, 1)
+var _GlobalInferenceGatewayFilters_member *smithy.Schema
+
+var _GlobalInferenceGatewayFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayId",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayKubernetesNamespace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayKubernetesNamespace",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayKubernetesResourceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayKubernetesResourceName",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var GlobalInferenceGatewayMember = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMember",
+}, smithy.ShapeTypeStructure, 3)
+var GlobalInferenceGatewayMember_Name *smithy.Schema
+
+var GlobalInferenceGatewayMember_Namespace *smithy.Schema
+
+var GlobalInferenceGatewayMember_ClusterArn *smithy.Schema
+
+var GlobalInferenceGatewayMemberFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberFilter",
+}, smithy.ShapeTypeStructure, 2)
+var GlobalInferenceGatewayMemberFilter_Name *smithy.Schema
+
+var GlobalInferenceGatewayMemberFilter_Value *smithy.Schema
+
+var GlobalInferenceGatewayMemberFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberFilterName",
+}, smithy.ShapeTypeEnum, 2)
+var GlobalInferenceGatewayMemberFilterName_STATUS *smithy.Schema
+
+var GlobalInferenceGatewayMemberFilterName_CLUSTER_ARN *smithy.Schema
+
+var _GlobalInferenceGatewayMemberFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberFilters",
+}, smithy.ShapeTypeList, 1)
+var _GlobalInferenceGatewayMemberFilters_member *smithy.Schema
+
+var _GlobalInferenceGatewayMemberFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayMembers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMembers",
+}, smithy.ShapeTypeList, 1)
+var _GlobalInferenceGatewayMembers_member *smithy.Schema
+
+var GlobalInferenceGatewayMemberStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberStatus",
+}, smithy.ShapeTypeEnum, 4)
+var GlobalInferenceGatewayMemberStatus_ADDING *smithy.Schema
+
+var GlobalInferenceGatewayMemberStatus_ACTIVE *smithy.Schema
+
+var GlobalInferenceGatewayMemberStatus_REMOVING *smithy.Schema
+
+var GlobalInferenceGatewayMemberStatus_FAILED *smithy.Schema
+
+var _GlobalInferenceGatewayMemberSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberSummaries",
+}, smithy.ShapeTypeList, 1)
+var _GlobalInferenceGatewayMemberSummaries_member *smithy.Schema
+
+var GlobalInferenceGatewayMemberSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayMemberSummary",
+}, smithy.ShapeTypeStructure, 5)
+var GlobalInferenceGatewayMemberSummary_Name *smithy.Schema
+
+var GlobalInferenceGatewayMemberSummary_Namespace *smithy.Schema
+
+var GlobalInferenceGatewayMemberSummary_ClusterArn *smithy.Schema
+
+var GlobalInferenceGatewayMemberSummary_Status *smithy.Schema
+
+var GlobalInferenceGatewayMemberSummary_FailureReason *smithy.Schema
+
+var _GlobalInferenceGatewayName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayName",
+}, smithy.ShapeTypeString, 0)
+
+var _GlobalInferenceGatewayNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayNextToken",
+}, smithy.ShapeTypeString, 0)
+
+var GlobalInferenceGatewayRouting = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayRouting",
+}, smithy.ShapeTypeStructure, 1)
+var GlobalInferenceGatewayRouting_Weights *smithy.Schema
+
+var _GlobalInferenceGatewayRoutingWeight = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayRoutingWeight",
+}, smithy.ShapeTypeFloat, 0)
+
+var GlobalInferenceGatewayRoutingWeights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayRoutingWeights",
+}, smithy.ShapeTypeStructure, 4)
+var GlobalInferenceGatewayRoutingWeights_KVHeadroom *smithy.Schema
+
+var GlobalInferenceGatewayRoutingWeights_QueueDepth *smithy.Schema
+
+var GlobalInferenceGatewayRoutingWeights_RegionProximity *smithy.Schema
+
+var GlobalInferenceGatewayRoutingWeights_ErrorRate *smithy.Schema
+
+var GlobalInferenceGatewayStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayStatus",
+}, smithy.ShapeTypeEnum, 5)
+var GlobalInferenceGatewayStatus_CREATING *smithy.Schema
+
+var GlobalInferenceGatewayStatus_ACTIVE *smithy.Schema
+
+var GlobalInferenceGatewayStatus_UPDATING *smithy.Schema
+
+var GlobalInferenceGatewayStatus_DELETING *smithy.Schema
+
+var GlobalInferenceGatewayStatus_FAILED *smithy.Schema
+
+var _GlobalInferenceGatewaySummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewaySummaries",
+}, smithy.ShapeTypeList, 1)
+var _GlobalInferenceGatewaySummaries_member *smithy.Schema
+
+var GlobalInferenceGatewaySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewaySummary",
+}, smithy.ShapeTypeStructure, 5)
+var GlobalInferenceGatewaySummary_Arn *smithy.Schema
+
+var GlobalInferenceGatewaySummary_Id *smithy.Schema
+
+var GlobalInferenceGatewaySummary_Name *smithy.Schema
+
+var GlobalInferenceGatewaySummary_Status *smithy.Schema
+
+var GlobalInferenceGatewaySummary_CreationTime *smithy.Schema
+
+var _GlobalInferenceGatewayVpcEndpointServiceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GlobalInferenceGatewayVpcEndpointServiceName",
 }, smithy.ShapeTypeString, 0)
 
 var _Group = smithy.NewSchema(smithy.ShapeID{
@@ -16729,6 +17005,67 @@ var _MountPath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "MountPath",
 }, smithy.ShapeTypeString, 0)
+
+var _MoveClusterNodeIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodeIds",
+}, smithy.ShapeTypeList, 1)
+var _MoveClusterNodeIds_member *smithy.Schema
+
+var _MoveClusterNodeLogicalIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodeLogicalIds",
+}, smithy.ShapeTypeList, 1)
+var _MoveClusterNodeLogicalIds_member *smithy.Schema
+
+var MoveClusterNodeLogicalIdsError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodeLogicalIdsError",
+}, smithy.ShapeTypeStructure, 3)
+var MoveClusterNodeLogicalIdsError_Code *smithy.Schema
+
+var MoveClusterNodeLogicalIdsError_Message *smithy.Schema
+
+var MoveClusterNodeLogicalIdsError_NodeLogicalId *smithy.Schema
+
+var _MoveClusterNodeLogicalIdsErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodeLogicalIdsErrorList",
+}, smithy.ShapeTypeList, 1)
+var _MoveClusterNodeLogicalIdsErrorList_member *smithy.Schema
+
+var MoveClusterNodesError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodesError",
+}, smithy.ShapeTypeStructure, 3)
+var MoveClusterNodesError_Code *smithy.Schema
+
+var MoveClusterNodesError_Message *smithy.Schema
+
+var MoveClusterNodesError_NodeId *smithy.Schema
+
+var MoveClusterNodesErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodesErrorCode",
+}, smithy.ShapeTypeEnum, 4)
+var MoveClusterNodesErrorCode_NODE_ID_NOT_FOUND *smithy.Schema
+
+var MoveClusterNodesErrorCode_INVALID_NODE_STATUS *smithy.Schema
+
+var MoveClusterNodesErrorCode_NODE_ID_IN_USE *smithy.Schema
+
+var MoveClusterNodesErrorCode_NODE_INSTANCE_TYPE_MISMATCH *smithy.Schema
+
+var _MoveClusterNodesErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodesErrorList",
+}, smithy.ShapeTypeList, 1)
+var _MoveClusterNodesErrorList_member *smithy.Schema
+
+var _MoveClusterNodesInstanceCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodesInstanceCount",
+}, smithy.ShapeTypeInteger, 0)
 
 var MultiModelConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -26058,6 +26395,32 @@ var AddAssociationResponse_SourceArn *smithy.Schema
 
 var AddAssociationResponse_DestinationArn *smithy.Schema
 
+var AddInferenceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AddInferenceGatewayRequest",
+}, smithy.ShapeTypeStructure, 4)
+var AddInferenceGatewayRequest_Identifier *smithy.Schema
+
+var AddInferenceGatewayRequest_ClusterArn *smithy.Schema
+
+var AddInferenceGatewayRequest_Namespace *smithy.Schema
+
+var AddInferenceGatewayRequest_Name *smithy.Schema
+
+var AddInferenceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AddInferenceGatewayResponse",
+}, smithy.ShapeTypeStructure, 5)
+var AddInferenceGatewayResponse_Arn *smithy.Schema
+
+var AddInferenceGatewayResponse_Id *smithy.Schema
+
+var AddInferenceGatewayResponse_Name *smithy.Schema
+
+var AddInferenceGatewayResponse_Gateway *smithy.Schema
+
+var AddInferenceGatewayResponse_Status *smithy.Schema
+
 var AddTagsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AddTagsInput",
@@ -26917,6 +27280,40 @@ var CreateFlowDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateFlowDefinitionResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateFlowDefinitionResponse_FlowDefinitionArn *smithy.Schema
+
+var CreateGlobalInferenceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateGlobalInferenceGatewayRequest",
+}, smithy.ShapeTypeStructure, 6)
+var CreateGlobalInferenceGatewayRequest_Name *smithy.Schema
+
+var CreateGlobalInferenceGatewayRequest_Routing *smithy.Schema
+
+var CreateGlobalInferenceGatewayRequest_ExecutionRoleArn *smithy.Schema
+
+var CreateGlobalInferenceGatewayRequest_Gateways *smithy.Schema
+
+var CreateGlobalInferenceGatewayRequest_ClientToken *smithy.Schema
+
+var CreateGlobalInferenceGatewayRequest_Tags *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CreateGlobalInferenceGatewayResponse",
+}, smithy.ShapeTypeStructure, 7)
+var CreateGlobalInferenceGatewayResponse_Arn *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse_Id *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse_Name *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse_Status *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse_ExecutionRoleArn *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse_Routing *smithy.Schema
+
+var CreateGlobalInferenceGatewayResponse_Gateways *smithy.Schema
 
 var CreateHubContentPresignedUrlsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -28400,6 +28797,22 @@ var DeleteFlowDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteFlowDefinitionResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeleteGlobalInferenceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteGlobalInferenceGatewayRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteGlobalInferenceGatewayRequest_Identifier *smithy.Schema
+
+var DeleteGlobalInferenceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DeleteGlobalInferenceGatewayResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteGlobalInferenceGatewayResponse_Arn *smithy.Schema
+
+var DeleteGlobalInferenceGatewayResponse_Id *smithy.Schema
+
+var DeleteGlobalInferenceGatewayResponse_Name *smithy.Schema
+
 var DeleteHubContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeleteHubContentRequest",
@@ -29870,6 +30283,36 @@ var DescribeFlowDefinitionResponse_OutputConfig *smithy.Schema
 var DescribeFlowDefinitionResponse_RoleArn *smithy.Schema
 
 var DescribeFlowDefinitionResponse_FailureReason *smithy.Schema
+
+var DescribeGlobalInferenceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeGlobalInferenceGatewayRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeGlobalInferenceGatewayRequest_Identifier *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeGlobalInferenceGatewayResponse",
+}, smithy.ShapeTypeStructure, 10)
+var DescribeGlobalInferenceGatewayResponse_Arn *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_Id *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_Name *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_ExecutionRoleArn *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_Status *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_EndpointUrl *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_VpcEndpointServiceName *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_Routing *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_CreationTime *smithy.Schema
+
+var DescribeGlobalInferenceGatewayResponse_FailureReason *smithy.Schema
 
 var DescribeHubContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -32810,6 +33253,24 @@ var ListFlowDefinitionsResponse_FlowDefinitionSummaries *smithy.Schema
 
 var ListFlowDefinitionsResponse_NextToken *smithy.Schema
 
+var ListGlobalInferenceGatewaysRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListGlobalInferenceGatewaysRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListGlobalInferenceGatewaysRequest_Filters *smithy.Schema
+
+var ListGlobalInferenceGatewaysRequest_NextToken *smithy.Schema
+
+var ListGlobalInferenceGatewaysRequest_MaxResults *smithy.Schema
+
+var ListGlobalInferenceGatewaysResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListGlobalInferenceGatewaysResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListGlobalInferenceGatewaysResponse_GlobalInferenceGatewaySummaries *smithy.Schema
+
+var ListGlobalInferenceGatewaysResponse_NextToken *smithy.Schema
+
 var ListHubContentsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListHubContentsRequest",
@@ -33089,6 +33550,26 @@ var ListInferenceExperimentsResponse = smithy.NewSchema(smithy.ShapeID{
 var ListInferenceExperimentsResponse_InferenceExperiments *smithy.Schema
 
 var ListInferenceExperimentsResponse_NextToken *smithy.Schema
+
+var ListInferenceGatewaysRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListInferenceGatewaysRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListInferenceGatewaysRequest_Identifier *smithy.Schema
+
+var ListInferenceGatewaysRequest_Filters *smithy.Schema
+
+var ListInferenceGatewaysRequest_NextToken *smithy.Schema
+
+var ListInferenceGatewaysRequest_MaxResults *smithy.Schema
+
+var ListInferenceGatewaysResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListInferenceGatewaysResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListInferenceGatewaysResponse_InferenceGatewaySummaries *smithy.Schema
+
+var ListInferenceGatewaysResponse_NextToken *smithy.Schema
 
 var ListInferenceRecommendationsJobsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -34484,6 +34965,38 @@ var ListWorkteamsResponse_Workteams *smithy.Schema
 
 var ListWorkteamsResponse_NextToken *smithy.Schema
 
+var MoveClusterNodesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodesRequest",
+}, smithy.ShapeTypeStructure, 8)
+var MoveClusterNodesRequest_SourceClusterArn *smithy.Schema
+
+var MoveClusterNodesRequest_SourceInstanceGroupName *smithy.Schema
+
+var MoveClusterNodesRequest_TargetClusterArn *smithy.Schema
+
+var MoveClusterNodesRequest_TargetInstanceGroupName *smithy.Schema
+
+var MoveClusterNodesRequest_InstanceCount *smithy.Schema
+
+var MoveClusterNodesRequest_NodeIds *smithy.Schema
+
+var MoveClusterNodesRequest_NodeLogicalIds *smithy.Schema
+
+var MoveClusterNodesRequest_ClientToken *smithy.Schema
+
+var MoveClusterNodesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "MoveClusterNodesResponse",
+}, smithy.ShapeTypeStructure, 4)
+var MoveClusterNodesResponse_Successful *smithy.Schema
+
+var MoveClusterNodesResponse_Failed *smithy.Schema
+
+var MoveClusterNodesResponse_SuccessfulNodeLogicalIds *smithy.Schema
+
+var MoveClusterNodesResponse_FailedNodeLogicalIds *smithy.Schema
+
 var PutEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PutEndpointPolicyRequest",
@@ -34549,6 +35062,32 @@ var RegisterDevicesRequest_DeviceFleetName *smithy.Schema
 var RegisterDevicesRequest_Devices *smithy.Schema
 
 var RegisterDevicesRequest_Tags *smithy.Schema
+
+var RemoveInferenceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RemoveInferenceGatewayRequest",
+}, smithy.ShapeTypeStructure, 4)
+var RemoveInferenceGatewayRequest_Identifier *smithy.Schema
+
+var RemoveInferenceGatewayRequest_ClusterArn *smithy.Schema
+
+var RemoveInferenceGatewayRequest_Namespace *smithy.Schema
+
+var RemoveInferenceGatewayRequest_Name *smithy.Schema
+
+var RemoveInferenceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "RemoveInferenceGatewayResponse",
+}, smithy.ShapeTypeStructure, 5)
+var RemoveInferenceGatewayResponse_Arn *smithy.Schema
+
+var RemoveInferenceGatewayResponse_Id *smithy.Schema
+
+var RemoveInferenceGatewayResponse_Name *smithy.Schema
+
+var RemoveInferenceGatewayResponse_Gateway *smithy.Schema
+
+var RemoveInferenceGatewayResponse_Status *smithy.Schema
 
 var RenderUiTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -35295,6 +35834,28 @@ var UpdateFeatureMetadataRequest_Description *smithy.Schema
 var UpdateFeatureMetadataRequest_ParameterAdditions *smithy.Schema
 
 var UpdateFeatureMetadataRequest_ParameterRemovals *smithy.Schema
+
+var UpdateGlobalInferenceGatewayRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateGlobalInferenceGatewayRequest",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateGlobalInferenceGatewayRequest_Identifier *smithy.Schema
+
+var UpdateGlobalInferenceGatewayRequest_Routing *smithy.Schema
+
+var UpdateGlobalInferenceGatewayResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "UpdateGlobalInferenceGatewayResponse",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateGlobalInferenceGatewayResponse_Arn *smithy.Schema
+
+var UpdateGlobalInferenceGatewayResponse_Id *smithy.Schema
+
+var UpdateGlobalInferenceGatewayResponse_Name *smithy.Schema
+
+var UpdateGlobalInferenceGatewayResponse_Status *smithy.Schema
+
+var UpdateGlobalInferenceGatewayResponse_Routing *smithy.Schema
 
 var UpdateHubContentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -41021,6 +41582,10 @@ func init() {
 
 	ClusterInstanceStatus_NOT_FOUND = ClusterInstanceStatus.AddMember("NOT_FOUND", smithyprelude.Unit)
 
+	ClusterInstanceStatus_DETACH_IN_PROGRESS = ClusterInstanceStatus.AddMember("DETACH_IN_PROGRESS", smithyprelude.Unit)
+
+	ClusterInstanceStatus_ATTACH_IN_PROGRESS = ClusterInstanceStatus.AddMember("ATTACH_IN_PROGRESS", smithyprelude.Unit)
+
 	ClusterInstanceStatusDetails_Status = ClusterInstanceStatusDetails.AddMember("Status", ClusterInstanceStatus)
 
 	ClusterInstanceStatusDetails_Message = ClusterInstanceStatusDetails.AddMember("Message", smithyprelude.String)
@@ -43899,6 +44464,84 @@ func init() {
 
 	GitConfigForUpdate_SecretArn = GitConfigForUpdate.AddMember("SecretArn", _SecretArn)
 
+	GlobalInferenceGatewayFilterName_STATUS = GlobalInferenceGatewayFilterName.AddMember("STATUS", smithyprelude.Unit)
+
+	GlobalInferenceGatewayFilter_Name = GlobalInferenceGatewayFilter.AddMember("Name", GlobalInferenceGatewayFilterName)
+
+	GlobalInferenceGatewayFilter_Value = GlobalInferenceGatewayFilter.AddMember("Value", _GlobalInferenceGatewayFilterValue)
+
+	_GlobalInferenceGatewayFilters_member = _GlobalInferenceGatewayFilters.AddMember("member", GlobalInferenceGatewayFilter)
+
+	GlobalInferenceGatewayMember_Name = GlobalInferenceGatewayMember.AddMember("Name", _GlobalInferenceGatewayKubernetesResourceName)
+
+	GlobalInferenceGatewayMember_Namespace = GlobalInferenceGatewayMember.AddMember("Namespace", _GlobalInferenceGatewayKubernetesNamespace)
+
+	GlobalInferenceGatewayMember_ClusterArn = GlobalInferenceGatewayMember.AddMember("ClusterArn", _GlobalInferenceGatewayClusterArn)
+
+	GlobalInferenceGatewayMemberFilterName_STATUS = GlobalInferenceGatewayMemberFilterName.AddMember("STATUS", smithyprelude.Unit)
+
+	GlobalInferenceGatewayMemberFilterName_CLUSTER_ARN = GlobalInferenceGatewayMemberFilterName.AddMember("CLUSTER_ARN", smithyprelude.Unit)
+
+	GlobalInferenceGatewayMemberFilter_Name = GlobalInferenceGatewayMemberFilter.AddMember("Name", GlobalInferenceGatewayMemberFilterName)
+
+	GlobalInferenceGatewayMemberFilter_Value = GlobalInferenceGatewayMemberFilter.AddMember("Value", _GlobalInferenceGatewayMemberFilterValue)
+
+	_GlobalInferenceGatewayMemberFilters_member = _GlobalInferenceGatewayMemberFilters.AddMember("member", GlobalInferenceGatewayMemberFilter)
+
+	_GlobalInferenceGatewayMembers_member = _GlobalInferenceGatewayMembers.AddMember("member", GlobalInferenceGatewayMember)
+
+	GlobalInferenceGatewayMemberStatus_ADDING = GlobalInferenceGatewayMemberStatus.AddMember("ADDING", smithyprelude.Unit)
+
+	GlobalInferenceGatewayMemberStatus_ACTIVE = GlobalInferenceGatewayMemberStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	GlobalInferenceGatewayMemberStatus_REMOVING = GlobalInferenceGatewayMemberStatus.AddMember("REMOVING", smithyprelude.Unit)
+
+	GlobalInferenceGatewayMemberStatus_FAILED = GlobalInferenceGatewayMemberStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	GlobalInferenceGatewayMemberSummary_Name = GlobalInferenceGatewayMemberSummary.AddMember("Name", _GlobalInferenceGatewayKubernetesResourceName)
+
+	GlobalInferenceGatewayMemberSummary_Namespace = GlobalInferenceGatewayMemberSummary.AddMember("Namespace", _GlobalInferenceGatewayKubernetesNamespace)
+
+	GlobalInferenceGatewayMemberSummary_ClusterArn = GlobalInferenceGatewayMemberSummary.AddMember("ClusterArn", _GlobalInferenceGatewayClusterArn)
+
+	GlobalInferenceGatewayMemberSummary_Status = GlobalInferenceGatewayMemberSummary.AddMember("Status", GlobalInferenceGatewayMemberStatus)
+
+	GlobalInferenceGatewayMemberSummary_FailureReason = GlobalInferenceGatewayMemberSummary.AddMember("FailureReason", _GlobalInferenceGatewayFailureReason)
+
+	_GlobalInferenceGatewayMemberSummaries_member = _GlobalInferenceGatewayMemberSummaries.AddMember("member", GlobalInferenceGatewayMemberSummary)
+
+	GlobalInferenceGatewayRoutingWeights_KVHeadroom = GlobalInferenceGatewayRoutingWeights.AddMember("KVHeadroom", _GlobalInferenceGatewayRoutingWeight)
+
+	GlobalInferenceGatewayRoutingWeights_QueueDepth = GlobalInferenceGatewayRoutingWeights.AddMember("QueueDepth", _GlobalInferenceGatewayRoutingWeight)
+
+	GlobalInferenceGatewayRoutingWeights_RegionProximity = GlobalInferenceGatewayRoutingWeights.AddMember("RegionProximity", _GlobalInferenceGatewayRoutingWeight)
+
+	GlobalInferenceGatewayRoutingWeights_ErrorRate = GlobalInferenceGatewayRoutingWeights.AddMember("ErrorRate", _GlobalInferenceGatewayRoutingWeight)
+
+	GlobalInferenceGatewayRouting_Weights = GlobalInferenceGatewayRouting.AddMember("Weights", GlobalInferenceGatewayRoutingWeights)
+
+	GlobalInferenceGatewayStatus_CREATING = GlobalInferenceGatewayStatus.AddMember("CREATING", smithyprelude.Unit)
+
+	GlobalInferenceGatewayStatus_ACTIVE = GlobalInferenceGatewayStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	GlobalInferenceGatewayStatus_UPDATING = GlobalInferenceGatewayStatus.AddMember("UPDATING", smithyprelude.Unit)
+
+	GlobalInferenceGatewayStatus_DELETING = GlobalInferenceGatewayStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	GlobalInferenceGatewayStatus_FAILED = GlobalInferenceGatewayStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	GlobalInferenceGatewaySummary_Arn = GlobalInferenceGatewaySummary.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	GlobalInferenceGatewaySummary_Id = GlobalInferenceGatewaySummary.AddMember("Id", _GlobalInferenceGatewayId)
+
+	GlobalInferenceGatewaySummary_Name = GlobalInferenceGatewaySummary.AddMember("Name", _GlobalInferenceGatewayName)
+
+	GlobalInferenceGatewaySummary_Status = GlobalInferenceGatewaySummary.AddMember("Status", GlobalInferenceGatewayStatus)
+
+	GlobalInferenceGatewaySummary_CreationTime = GlobalInferenceGatewaySummary.AddMember("CreationTime", _Timestamp)
+
+	_GlobalInferenceGatewaySummaries_member = _GlobalInferenceGatewaySummaries.AddMember("member", GlobalInferenceGatewaySummary)
+
 	_GroupPatternsList_member = _GroupPatternsList.AddMember("member", _GroupNamePattern)
 
 	_Groups_member = _Groups.AddMember("member", _Group)
@@ -46606,6 +47249,34 @@ func init() {
 	MonitoringScheduleSummary_MonitoringType = MonitoringScheduleSummary.AddMember("MonitoringType", MonitoringType)
 
 	_MonitoringScheduleSummaryList_member = _MonitoringScheduleSummaryList.AddMember("member", MonitoringScheduleSummary)
+
+	_MoveClusterNodeIds_member = _MoveClusterNodeIds.AddMember("member", _ClusterNodeId)
+
+	_MoveClusterNodeLogicalIds_member = _MoveClusterNodeLogicalIds.AddMember("member", _ClusterNodeLogicalId)
+
+	MoveClusterNodesErrorCode_NODE_ID_NOT_FOUND = MoveClusterNodesErrorCode.AddMember("NODE_ID_NOT_FOUND", smithyprelude.Unit)
+
+	MoveClusterNodesErrorCode_INVALID_NODE_STATUS = MoveClusterNodesErrorCode.AddMember("INVALID_NODE_STATUS", smithyprelude.Unit)
+
+	MoveClusterNodesErrorCode_NODE_ID_IN_USE = MoveClusterNodesErrorCode.AddMember("NODE_ID_IN_USE", smithyprelude.Unit)
+
+	MoveClusterNodesErrorCode_NODE_INSTANCE_TYPE_MISMATCH = MoveClusterNodesErrorCode.AddMember("NODE_INSTANCE_TYPE_MISMATCH", smithyprelude.Unit)
+
+	MoveClusterNodeLogicalIdsError_Code = MoveClusterNodeLogicalIdsError.AddMember("Code", MoveClusterNodesErrorCode)
+
+	MoveClusterNodeLogicalIdsError_Message = MoveClusterNodeLogicalIdsError.AddMember("Message", _String)
+
+	MoveClusterNodeLogicalIdsError_NodeLogicalId = MoveClusterNodeLogicalIdsError.AddMember("NodeLogicalId", _ClusterNodeLogicalId)
+
+	_MoveClusterNodeLogicalIdsErrorList_member = _MoveClusterNodeLogicalIdsErrorList.AddMember("member", MoveClusterNodeLogicalIdsError)
+
+	MoveClusterNodesError_Code = MoveClusterNodesError.AddMember("Code", MoveClusterNodesErrorCode)
+
+	MoveClusterNodesError_Message = MoveClusterNodesError.AddMember("Message", _String)
+
+	MoveClusterNodesError_NodeId = MoveClusterNodesError.AddMember("NodeId", _ClusterNodeId)
+
+	_MoveClusterNodesErrorList_member = _MoveClusterNodesErrorList.AddMember("member", MoveClusterNodesError)
 
 	_NeoVpcSecurityGroupIds_member = _NeoVpcSecurityGroupIds.AddMember("member", _NeoVpcSecurityGroupId)
 
@@ -49451,6 +50122,24 @@ func init() {
 
 	AddAssociationResponse_DestinationArn = AddAssociationResponse.AddMember("DestinationArn", _AssociationEntityArn)
 
+	AddInferenceGatewayRequest_Identifier = AddInferenceGatewayRequest.AddMember("Identifier", _GlobalInferenceGatewayIdentifier)
+
+	AddInferenceGatewayRequest_ClusterArn = AddInferenceGatewayRequest.AddMember("ClusterArn", _GlobalInferenceGatewayClusterArn)
+
+	AddInferenceGatewayRequest_Namespace = AddInferenceGatewayRequest.AddMember("Namespace", _GlobalInferenceGatewayKubernetesNamespace)
+
+	AddInferenceGatewayRequest_Name = AddInferenceGatewayRequest.AddMember("Name", _GlobalInferenceGatewayKubernetesResourceName)
+
+	AddInferenceGatewayResponse_Arn = AddInferenceGatewayResponse.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	AddInferenceGatewayResponse_Id = AddInferenceGatewayResponse.AddMember("Id", _GlobalInferenceGatewayId)
+
+	AddInferenceGatewayResponse_Name = AddInferenceGatewayResponse.AddMember("Name", _GlobalInferenceGatewayName)
+
+	AddInferenceGatewayResponse_Gateway = AddInferenceGatewayResponse.AddMember("Gateway", GlobalInferenceGatewayMember)
+
+	AddInferenceGatewayResponse_Status = AddInferenceGatewayResponse.AddMember("Status", GlobalInferenceGatewayMemberStatus)
+
 	AddTagsInput_ResourceArn = AddTagsInput.AddMember("ResourceArn", _ResourceArn)
 
 	AddTagsInput_Tags = AddTagsInput.AddMember("Tags", _TagList)
@@ -50026,6 +50715,32 @@ func init() {
 	CreateFlowDefinitionRequest_Tags = CreateFlowDefinitionRequest.AddMember("Tags", _TagList)
 
 	CreateFlowDefinitionResponse_FlowDefinitionArn = CreateFlowDefinitionResponse.AddMember("FlowDefinitionArn", _FlowDefinitionArn)
+
+	CreateGlobalInferenceGatewayRequest_Name = CreateGlobalInferenceGatewayRequest.AddMember("Name", _GlobalInferenceGatewayName)
+
+	CreateGlobalInferenceGatewayRequest_Routing = CreateGlobalInferenceGatewayRequest.AddMember("Routing", GlobalInferenceGatewayRouting)
+
+	CreateGlobalInferenceGatewayRequest_ExecutionRoleArn = CreateGlobalInferenceGatewayRequest.AddMember("ExecutionRoleArn", _GlobalInferenceGatewayExecutionRoleArn)
+
+	CreateGlobalInferenceGatewayRequest_Gateways = CreateGlobalInferenceGatewayRequest.AddMember("Gateways", _GlobalInferenceGatewayMembers)
+
+	CreateGlobalInferenceGatewayRequest_ClientToken = CreateGlobalInferenceGatewayRequest.AddMember("ClientToken", _GlobalInferenceGatewayClientToken)
+
+	CreateGlobalInferenceGatewayRequest_Tags = CreateGlobalInferenceGatewayRequest.AddMember("Tags", _TagList)
+
+	CreateGlobalInferenceGatewayResponse_Arn = CreateGlobalInferenceGatewayResponse.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	CreateGlobalInferenceGatewayResponse_Id = CreateGlobalInferenceGatewayResponse.AddMember("Id", _GlobalInferenceGatewayId)
+
+	CreateGlobalInferenceGatewayResponse_Name = CreateGlobalInferenceGatewayResponse.AddMember("Name", _GlobalInferenceGatewayName)
+
+	CreateGlobalInferenceGatewayResponse_Status = CreateGlobalInferenceGatewayResponse.AddMember("Status", GlobalInferenceGatewayStatus)
+
+	CreateGlobalInferenceGatewayResponse_ExecutionRoleArn = CreateGlobalInferenceGatewayResponse.AddMember("ExecutionRoleArn", _GlobalInferenceGatewayExecutionRoleArn)
+
+	CreateGlobalInferenceGatewayResponse_Routing = CreateGlobalInferenceGatewayResponse.AddMember("Routing", GlobalInferenceGatewayRouting)
+
+	CreateGlobalInferenceGatewayResponse_Gateways = CreateGlobalInferenceGatewayResponse.AddMember("Gateways", _GlobalInferenceGatewayMembers)
 
 	CreateHubContentPresignedUrlsRequest_HubName = CreateHubContentPresignedUrlsRequest.AddMember("HubName", _HubNameOrArn)
 
@@ -50974,6 +51689,14 @@ func init() {
 	DeleteFeatureGroupRequest_FeatureGroupName = DeleteFeatureGroupRequest.AddMember("FeatureGroupName", _FeatureGroupName)
 
 	DeleteFlowDefinitionRequest_FlowDefinitionName = DeleteFlowDefinitionRequest.AddMember("FlowDefinitionName", _FlowDefinitionName)
+
+	DeleteGlobalInferenceGatewayRequest_Identifier = DeleteGlobalInferenceGatewayRequest.AddMember("Identifier", _GlobalInferenceGatewayIdentifier)
+
+	DeleteGlobalInferenceGatewayResponse_Arn = DeleteGlobalInferenceGatewayResponse.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	DeleteGlobalInferenceGatewayResponse_Id = DeleteGlobalInferenceGatewayResponse.AddMember("Id", _GlobalInferenceGatewayId)
+
+	DeleteGlobalInferenceGatewayResponse_Name = DeleteGlobalInferenceGatewayResponse.AddMember("Name", _GlobalInferenceGatewayName)
 
 	DeleteHubContentRequest_HubName = DeleteHubContentRequest.AddMember("HubName", _HubNameOrArn)
 
@@ -51962,6 +52685,28 @@ func init() {
 	DescribeFlowDefinitionResponse_RoleArn = DescribeFlowDefinitionResponse.AddMember("RoleArn", _RoleArn)
 
 	DescribeFlowDefinitionResponse_FailureReason = DescribeFlowDefinitionResponse.AddMember("FailureReason", _FailureReason)
+
+	DescribeGlobalInferenceGatewayRequest_Identifier = DescribeGlobalInferenceGatewayRequest.AddMember("Identifier", _GlobalInferenceGatewayIdentifier)
+
+	DescribeGlobalInferenceGatewayResponse_Arn = DescribeGlobalInferenceGatewayResponse.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	DescribeGlobalInferenceGatewayResponse_Id = DescribeGlobalInferenceGatewayResponse.AddMember("Id", _GlobalInferenceGatewayId)
+
+	DescribeGlobalInferenceGatewayResponse_Name = DescribeGlobalInferenceGatewayResponse.AddMember("Name", _GlobalInferenceGatewayName)
+
+	DescribeGlobalInferenceGatewayResponse_ExecutionRoleArn = DescribeGlobalInferenceGatewayResponse.AddMember("ExecutionRoleArn", _GlobalInferenceGatewayExecutionRoleArn)
+
+	DescribeGlobalInferenceGatewayResponse_Status = DescribeGlobalInferenceGatewayResponse.AddMember("Status", GlobalInferenceGatewayStatus)
+
+	DescribeGlobalInferenceGatewayResponse_EndpointUrl = DescribeGlobalInferenceGatewayResponse.AddMember("EndpointUrl", _GlobalInferenceGatewayEndpointUrl)
+
+	DescribeGlobalInferenceGatewayResponse_VpcEndpointServiceName = DescribeGlobalInferenceGatewayResponse.AddMember("VpcEndpointServiceName", _GlobalInferenceGatewayVpcEndpointServiceName)
+
+	DescribeGlobalInferenceGatewayResponse_Routing = DescribeGlobalInferenceGatewayResponse.AddMember("Routing", GlobalInferenceGatewayRouting)
+
+	DescribeGlobalInferenceGatewayResponse_CreationTime = DescribeGlobalInferenceGatewayResponse.AddMember("CreationTime", _Timestamp)
+
+	DescribeGlobalInferenceGatewayResponse_FailureReason = DescribeGlobalInferenceGatewayResponse.AddMember("FailureReason", _GlobalInferenceGatewayFailureReason)
 
 	DescribeHubContentRequest_HubName = DescribeHubContentRequest.AddMember("HubName", _HubNameOrArn)
 
@@ -54137,6 +54882,16 @@ func init() {
 
 	ListFlowDefinitionsResponse_NextToken = ListFlowDefinitionsResponse.AddMember("NextToken", _NextToken)
 
+	ListGlobalInferenceGatewaysRequest_Filters = ListGlobalInferenceGatewaysRequest.AddMember("Filters", _GlobalInferenceGatewayFilters)
+
+	ListGlobalInferenceGatewaysRequest_NextToken = ListGlobalInferenceGatewaysRequest.AddMember("NextToken", _GlobalInferenceGatewayNextToken)
+
+	ListGlobalInferenceGatewaysRequest_MaxResults = ListGlobalInferenceGatewaysRequest.AddMember("MaxResults", _GlobalInferenceGatewayMaxResults)
+
+	ListGlobalInferenceGatewaysResponse_GlobalInferenceGatewaySummaries = ListGlobalInferenceGatewaysResponse.AddMember("GlobalInferenceGatewaySummaries", _GlobalInferenceGatewaySummaries)
+
+	ListGlobalInferenceGatewaysResponse_NextToken = ListGlobalInferenceGatewaysResponse.AddMember("NextToken", _GlobalInferenceGatewayNextToken)
+
 	ListHubContentsRequest_HubName = ListHubContentsRequest.AddMember("HubName", _HubNameOrArn)
 
 	ListHubContentsRequest_HubContentType = ListHubContentsRequest.AddMember("HubContentType", HubContentType)
@@ -54344,6 +55099,18 @@ func init() {
 	ListInferenceExperimentsResponse_InferenceExperiments = ListInferenceExperimentsResponse.AddMember("InferenceExperiments", _InferenceExperimentList)
 
 	ListInferenceExperimentsResponse_NextToken = ListInferenceExperimentsResponse.AddMember("NextToken", _NextToken)
+
+	ListInferenceGatewaysRequest_Identifier = ListInferenceGatewaysRequest.AddMember("Identifier", _GlobalInferenceGatewayIdentifier)
+
+	ListInferenceGatewaysRequest_Filters = ListInferenceGatewaysRequest.AddMember("Filters", _GlobalInferenceGatewayMemberFilters)
+
+	ListInferenceGatewaysRequest_NextToken = ListInferenceGatewaysRequest.AddMember("NextToken", _GlobalInferenceGatewayNextToken)
+
+	ListInferenceGatewaysRequest_MaxResults = ListInferenceGatewaysRequest.AddMember("MaxResults", _GlobalInferenceGatewayMaxResults)
+
+	ListInferenceGatewaysResponse_InferenceGatewaySummaries = ListInferenceGatewaysResponse.AddMember("InferenceGatewaySummaries", _GlobalInferenceGatewayMemberSummaries)
+
+	ListInferenceGatewaysResponse_NextToken = ListInferenceGatewaysResponse.AddMember("NextToken", _GlobalInferenceGatewayNextToken)
 
 	ListInferenceRecommendationsJobsRequest_CreationTimeAfter = ListInferenceRecommendationsJobsRequest.AddMember("CreationTimeAfter", _CreationTime)
 
@@ -55323,6 +56090,30 @@ func init() {
 
 	ListWorkteamsResponse_NextToken = ListWorkteamsResponse.AddMember("NextToken", _NextToken)
 
+	MoveClusterNodesRequest_SourceClusterArn = MoveClusterNodesRequest.AddMember("SourceClusterArn", _ClusterArn)
+
+	MoveClusterNodesRequest_SourceInstanceGroupName = MoveClusterNodesRequest.AddMember("SourceInstanceGroupName", _ClusterInstanceGroupName)
+
+	MoveClusterNodesRequest_TargetClusterArn = MoveClusterNodesRequest.AddMember("TargetClusterArn", _ClusterArn)
+
+	MoveClusterNodesRequest_TargetInstanceGroupName = MoveClusterNodesRequest.AddMember("TargetInstanceGroupName", _ClusterInstanceGroupName)
+
+	MoveClusterNodesRequest_InstanceCount = MoveClusterNodesRequest.AddMember("InstanceCount", _MoveClusterNodesInstanceCount)
+
+	MoveClusterNodesRequest_NodeIds = MoveClusterNodesRequest.AddMember("NodeIds", _MoveClusterNodeIds)
+
+	MoveClusterNodesRequest_NodeLogicalIds = MoveClusterNodesRequest.AddMember("NodeLogicalIds", _MoveClusterNodeLogicalIds)
+
+	MoveClusterNodesRequest_ClientToken = MoveClusterNodesRequest.AddMember("ClientToken", _String)
+
+	MoveClusterNodesResponse_Successful = MoveClusterNodesResponse.AddMember("Successful", _MoveClusterNodeIds)
+
+	MoveClusterNodesResponse_Failed = MoveClusterNodesResponse.AddMember("Failed", _MoveClusterNodesErrorList)
+
+	MoveClusterNodesResponse_SuccessfulNodeLogicalIds = MoveClusterNodesResponse.AddMember("SuccessfulNodeLogicalIds", _MoveClusterNodeLogicalIds)
+
+	MoveClusterNodesResponse_FailedNodeLogicalIds = MoveClusterNodesResponse.AddMember("FailedNodeLogicalIds", _MoveClusterNodeLogicalIdsErrorList)
+
 	PutEndpointPolicyRequest_EndpointName = PutEndpointPolicyRequest.AddMember("EndpointName", _EndpointName)
 
 	PutEndpointPolicyRequest_ResourcePolicy = PutEndpointPolicyRequest.AddMember("ResourcePolicy", _EndpointPolicyDocument)
@@ -55360,6 +56151,24 @@ func init() {
 	RegisterDevicesRequest_Devices = RegisterDevicesRequest.AddMember("Devices", _Devices)
 
 	RegisterDevicesRequest_Tags = RegisterDevicesRequest.AddMember("Tags", _TagList)
+
+	RemoveInferenceGatewayRequest_Identifier = RemoveInferenceGatewayRequest.AddMember("Identifier", _GlobalInferenceGatewayIdentifier)
+
+	RemoveInferenceGatewayRequest_ClusterArn = RemoveInferenceGatewayRequest.AddMember("ClusterArn", _GlobalInferenceGatewayClusterArn)
+
+	RemoveInferenceGatewayRequest_Namespace = RemoveInferenceGatewayRequest.AddMember("Namespace", _GlobalInferenceGatewayKubernetesNamespace)
+
+	RemoveInferenceGatewayRequest_Name = RemoveInferenceGatewayRequest.AddMember("Name", _GlobalInferenceGatewayKubernetesResourceName)
+
+	RemoveInferenceGatewayResponse_Arn = RemoveInferenceGatewayResponse.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	RemoveInferenceGatewayResponse_Id = RemoveInferenceGatewayResponse.AddMember("Id", _GlobalInferenceGatewayId)
+
+	RemoveInferenceGatewayResponse_Name = RemoveInferenceGatewayResponse.AddMember("Name", _GlobalInferenceGatewayName)
+
+	RemoveInferenceGatewayResponse_Gateway = RemoveInferenceGatewayResponse.AddMember("Gateway", GlobalInferenceGatewayMember)
+
+	RemoveInferenceGatewayResponse_Status = RemoveInferenceGatewayResponse.AddMember("Status", GlobalInferenceGatewayMemberStatus)
 
 	RenderUiTemplateRequest_UiTemplate = RenderUiTemplateRequest.AddMember("UiTemplate", UiTemplate)
 
@@ -55764,6 +56573,20 @@ func init() {
 	UpdateFeatureMetadataRequest_ParameterAdditions = UpdateFeatureMetadataRequest.AddMember("ParameterAdditions", _FeatureParameterAdditions)
 
 	UpdateFeatureMetadataRequest_ParameterRemovals = UpdateFeatureMetadataRequest.AddMember("ParameterRemovals", _FeatureParameterRemovals)
+
+	UpdateGlobalInferenceGatewayRequest_Identifier = UpdateGlobalInferenceGatewayRequest.AddMember("Identifier", _GlobalInferenceGatewayIdentifier)
+
+	UpdateGlobalInferenceGatewayRequest_Routing = UpdateGlobalInferenceGatewayRequest.AddMember("Routing", GlobalInferenceGatewayRouting)
+
+	UpdateGlobalInferenceGatewayResponse_Arn = UpdateGlobalInferenceGatewayResponse.AddMember("Arn", _GlobalInferenceGatewayArn)
+
+	UpdateGlobalInferenceGatewayResponse_Id = UpdateGlobalInferenceGatewayResponse.AddMember("Id", _GlobalInferenceGatewayId)
+
+	UpdateGlobalInferenceGatewayResponse_Name = UpdateGlobalInferenceGatewayResponse.AddMember("Name", _GlobalInferenceGatewayName)
+
+	UpdateGlobalInferenceGatewayResponse_Status = UpdateGlobalInferenceGatewayResponse.AddMember("Status", GlobalInferenceGatewayStatus)
+
+	UpdateGlobalInferenceGatewayResponse_Routing = UpdateGlobalInferenceGatewayResponse.AddMember("Routing", GlobalInferenceGatewayRouting)
 
 	UpdateHubContentRequest_HubName = UpdateHubContentRequest.AddMember("HubName", _HubNameOrArn)
 

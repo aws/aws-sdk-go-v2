@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPayments.ListFinancialRecords
+
+{"issuedAfter":946684800,"issuedBefore":946684800,"maxResults":1,"nextToken":"__NextToken__","settlementStatuses":["OPEN","OPEN"],"sortBy":"ISSUED_AT","sortOrder":"ASCENDING","types":["INVOICE","INVOICE"]}

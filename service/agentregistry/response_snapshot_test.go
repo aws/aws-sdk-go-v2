@@ -176,6 +176,18 @@ func TestCheckResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T) 
 							},
 						},
 					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
+						},
+					},
 				},
 				RecordVersion:  ptr.String("__RecordVersion__"),
 				Status:         types.RegistryRecordStatus("DRAFT"),
@@ -250,6 +262,18 @@ func TestCheckResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T) 
 							FromUrl: &types.DescriptorSourceFromUrl{
 								Url: ptr.String("__Url__"),
 							},
+						},
+					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
 						},
 					},
 				},
@@ -458,6 +482,18 @@ func TestCheckResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 							},
 						},
 					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
+						},
+					},
 				},
 				RecordVersion:  ptr.String("__RecordVersion__"),
 				Status:         types.RegistryRecordStatus("DRAFT"),
@@ -532,6 +568,18 @@ func TestCheckResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 							FromUrl: &types.DescriptorSourceFromUrl{
 								Url: ptr.String("__Url__"),
 							},
+						},
+					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
 						},
 					},
 				},

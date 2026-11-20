@@ -113,6 +113,46 @@ var _BatchGetDiscoverableRegistryRecordErrorList = smithy.NewSchema(smithy.Shape
 }, smithy.ShapeTypeList, 1)
 var _BatchGetDiscoverableRegistryRecordErrorList_member *smithy.Schema
 
+var BotCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "BotCategory",
+}, smithy.ShapeTypeEnum, 18)
+var BotCategory_ADVERTISING *smithy.Schema
+
+var BotCategory_ARCHIVER *smithy.Schema
+
+var BotCategory_CONTENT_FETCHER *smithy.Schema
+
+var BotCategory_EMAIL_CLIENT *smithy.Schema
+
+var BotCategory_HTTP_LIBRARY *smithy.Schema
+
+var BotCategory_LINK_CHECKER *smithy.Schema
+
+var BotCategory_MISCELLANEOUS *smithy.Schema
+
+var BotCategory_MONITORING *smithy.Schema
+
+var BotCategory_PAGE_PREVIEW *smithy.Schema
+
+var BotCategory_SCRAPING_FRAMEWORK *smithy.Schema
+
+var BotCategory_SEARCH_ENGINE *smithy.Schema
+
+var BotCategory_SECURITY *smithy.Schema
+
+var BotCategory_SEO *smithy.Schema
+
+var BotCategory_SOCIAL_MEDIA *smithy.Schema
+
+var BotCategory_AI_TRAINING *smithy.Schema
+
+var BotCategory_AI_SEARCH *smithy.Schema
+
+var BotCategory_AI_ASSISTANT *smithy.Schema
+
+var BotCategory_AI_CONTENT_OPTIMIZATION *smithy.Schema
+
 var CustomDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "CustomDescriptor",
@@ -147,7 +187,7 @@ var _DescriptorData = smithy.NewSchema(smithy.ShapeID{
 var Descriptors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "Descriptors",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Descriptors_mcpServer *smithy.Schema
 
 var Descriptors_a2aAgentCard *smithy.Schema
@@ -159,6 +199,8 @@ var Descriptors_custom *smithy.Schema
 var Descriptors_http *smithy.Schema
 
 var Descriptors_agui *smithy.Schema
+
+var Descriptors_signatureAgentCard *smithy.Schema
 
 var DescriptorSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -290,7 +332,7 @@ var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 var RecordType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var RecordType_MCP *smithy.Schema
 
 var RecordType_AGENT *smithy.Schema
@@ -300,6 +342,8 @@ var RecordType_CUSTOM *smithy.Schema
 var RecordType_SKILL *smithy.Schema
 
 var RecordType_GATEWAY *smithy.Schema
+
+var RecordType_WEB_BOT *smithy.Schema
 
 var _RegistryArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -483,6 +527,24 @@ var _Sha256Hash = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Sha256Hash",
 }, smithy.ShapeTypeString, 0)
 
+var SignatureAgentCardAdditionalData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "SignatureAgentCardAdditionalData",
+}, smithy.ShapeTypeStructure, 1)
+var SignatureAgentCardAdditionalData_category *smithy.Schema
+
+var SignatureAgentCardDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "SignatureAgentCardDescriptor",
+}, smithy.ShapeTypeStructure, 4)
+var SignatureAgentCardDescriptor_data *smithy.Schema
+
+var SignatureAgentCardDescriptor_dataSchemaVersion *smithy.Schema
+
+var SignatureAgentCardDescriptor_source *smithy.Schema
+
+var SignatureAgentCardDescriptor_additionalData *smithy.Schema
+
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "ThrottlingException",
@@ -645,6 +707,42 @@ func init() {
 
 	_BatchGetDiscoverableRegistryRecordErrorList_member = _BatchGetDiscoverableRegistryRecordErrorList.AddMember("member", BatchGetDiscoverableRegistryRecordError)
 
+	BotCategory_ADVERTISING = BotCategory.AddMember("ADVERTISING", smithyprelude.Unit)
+
+	BotCategory_ARCHIVER = BotCategory.AddMember("ARCHIVER", smithyprelude.Unit)
+
+	BotCategory_CONTENT_FETCHER = BotCategory.AddMember("CONTENT_FETCHER", smithyprelude.Unit)
+
+	BotCategory_EMAIL_CLIENT = BotCategory.AddMember("EMAIL_CLIENT", smithyprelude.Unit)
+
+	BotCategory_HTTP_LIBRARY = BotCategory.AddMember("HTTP_LIBRARY", smithyprelude.Unit)
+
+	BotCategory_LINK_CHECKER = BotCategory.AddMember("LINK_CHECKER", smithyprelude.Unit)
+
+	BotCategory_MISCELLANEOUS = BotCategory.AddMember("MISCELLANEOUS", smithyprelude.Unit)
+
+	BotCategory_MONITORING = BotCategory.AddMember("MONITORING", smithyprelude.Unit)
+
+	BotCategory_PAGE_PREVIEW = BotCategory.AddMember("PAGE_PREVIEW", smithyprelude.Unit)
+
+	BotCategory_SCRAPING_FRAMEWORK = BotCategory.AddMember("SCRAPING_FRAMEWORK", smithyprelude.Unit)
+
+	BotCategory_SEARCH_ENGINE = BotCategory.AddMember("SEARCH_ENGINE", smithyprelude.Unit)
+
+	BotCategory_SECURITY = BotCategory.AddMember("SECURITY", smithyprelude.Unit)
+
+	BotCategory_SEO = BotCategory.AddMember("SEO", smithyprelude.Unit)
+
+	BotCategory_SOCIAL_MEDIA = BotCategory.AddMember("SOCIAL_MEDIA", smithyprelude.Unit)
+
+	BotCategory_AI_TRAINING = BotCategory.AddMember("AI_TRAINING", smithyprelude.Unit)
+
+	BotCategory_AI_SEARCH = BotCategory.AddMember("AI_SEARCH", smithyprelude.Unit)
+
+	BotCategory_AI_ASSISTANT = BotCategory.AddMember("AI_ASSISTANT", smithyprelude.Unit)
+
+	BotCategory_AI_CONTENT_OPTIMIZATION = BotCategory.AddMember("AI_CONTENT_OPTIMIZATION", smithyprelude.Unit)
+
 	CustomDescriptor_data = CustomDescriptor.AddMember("data", _DescriptorData)
 
 	McpToolsDescriptor_data = McpToolsDescriptor.AddMember("data", _DescriptorData)
@@ -663,6 +761,16 @@ func init() {
 
 	HttpDescriptor_source = HttpDescriptor.AddMember("source", DescriptorSource)
 
+	SignatureAgentCardAdditionalData_category = SignatureAgentCardAdditionalData.AddMember("category", BotCategory)
+
+	SignatureAgentCardDescriptor_data = SignatureAgentCardDescriptor.AddMember("data", _DescriptorData)
+
+	SignatureAgentCardDescriptor_dataSchemaVersion = SignatureAgentCardDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
+
+	SignatureAgentCardDescriptor_source = SignatureAgentCardDescriptor.AddMember("source", DescriptorSource)
+
+	SignatureAgentCardDescriptor_additionalData = SignatureAgentCardDescriptor.AddMember("additionalData", SignatureAgentCardAdditionalData)
+
 	Descriptors_mcpServer = Descriptors.AddMember("mcpServer", McpServerDescriptor)
 
 	Descriptors_a2aAgentCard = Descriptors.AddMember("a2aAgentCard", A2aAgentCardDescriptor)
@@ -674,6 +782,8 @@ func init() {
 	Descriptors_http = Descriptors.AddMember("http", HttpDescriptor)
 
 	Descriptors_agui = Descriptors.AddMember("agui", AgUiDescriptor)
+
+	Descriptors_signatureAgentCard = Descriptors.AddMember("signatureAgentCard", SignatureAgentCardDescriptor)
 
 	_DescriptorTypeList_member = _DescriptorTypeList.AddMember("member", smithyprelude.String)
 
@@ -688,6 +798,8 @@ func init() {
 	RecordType_SKILL = RecordType.AddMember("SKILL", smithyprelude.Unit)
 
 	RecordType_GATEWAY = RecordType.AddMember("GATEWAY", smithyprelude.Unit)
+
+	RecordType_WEB_BOT = RecordType.AddMember("WEB_BOT", smithyprelude.Unit)
 
 	RegistryRecordStatus_DRAFT = RegistryRecordStatus.AddMember("DRAFT", smithyprelude.Unit)
 

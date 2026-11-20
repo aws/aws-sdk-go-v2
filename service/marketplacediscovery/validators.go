@@ -130,6 +130,26 @@ func (m *validateOpListFulfillmentOptions) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListListingAttributes struct {
+}
+
+func (*validateOpListListingAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListListingAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListListingAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListListingAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPurchaseOptions struct {
 }
 
@@ -212,6 +232,10 @@ func addOpGetProductValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListFulfillmentOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFulfillmentOptions{}, middleware.After)
+}
+
+func addOpListListingAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListListingAttributes{}, middleware.After)
 }
 
 func addOpListPurchaseOptionsValidationMiddleware(stack *middleware.Stack) error {
@@ -378,6 +402,24 @@ func validateOpListFulfillmentOptionsInput(v *ListFulfillmentOptionsInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListFulfillmentOptionsInput"}
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListListingAttributesInput(v *ListListingAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListListingAttributesInput"}
+	if v.ListingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListingId"))
+	}
+	if v.AttributeTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

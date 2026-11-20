@@ -1,0 +1,5 @@
+POST /products
+
+Content-Type: application/json
+
+{"apiSelectionConfiguration":{"apiSelectionMode":"CUSTOM","ruleFilters":[{"key":"RESOURCE_ARN","values":["__Member__","__Member__"]},{"key":"RESOURCE_ARN","values":["__Member__","__Member__"]}]},"description":"__Description__","displayName":"__DisplayName__","tags":{"key0":"__Value__"}}

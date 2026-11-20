@@ -1,0 +1,8 @@
+{
+    "id": "f81c8d05-201e-4bc1-aa02-fca0c82e8e6f",
+    "type": "feature",
+    "description": "Add support for the use of virtual devices on Device Farm.",
+    "modules": [
+        "service/devicefarm"
+    ]
+}

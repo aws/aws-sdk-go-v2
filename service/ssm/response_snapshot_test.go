@@ -1920,6 +1920,10 @@ func TestCheckResponseSnapshot_CreateDocument(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			CloudProviders: []types.CloudProvider{
+				types.CloudProvider("AWS"),
+				types.CloudProvider("AWS"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDocument.response")
@@ -1979,6 +1983,10 @@ func TestCheckResponseSnapshot_CreateDocument(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
 		},
 	})
 	if err != nil {
@@ -4524,6 +4532,10 @@ func TestCheckResponseSnapshot_DescribeDocument(t *testing.T) {
 			CategoryEnum: []string{
 				"__Member__",
 				"__Member__",
+			},
+			CloudProviders: []types.CloudProvider{
+				types.CloudProvider("AWS"),
+				types.CloudProvider("AWS"),
 			},
 		},
 	}
@@ -10172,6 +10184,10 @@ func TestCheckResponseSnapshot_ListDocumentVersions(t *testing.T) {
 				Status:            types.DocumentStatus("Creating"),
 				StatusInformation: ptr.String("__StatusInformation__"),
 				ReviewStatus:      types.ReviewStatus("APPROVED"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 			{
 				Name:              ptr.String("__Name__"),
@@ -10184,6 +10200,10 @@ func TestCheckResponseSnapshot_ListDocumentVersions(t *testing.T) {
 				Status:            types.DocumentStatus("Creating"),
 				StatusInformation: ptr.String("__StatusInformation__"),
 				ReviewStatus:      types.ReviewStatus("APPROVED"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -10253,6 +10273,10 @@ func TestCheckResponseSnapshot_ListDocuments(t *testing.T) {
 				},
 				ReviewStatus: types.ReviewStatus("APPROVED"),
 				Author:       ptr.String("__Author__"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -10295,6 +10319,10 @@ func TestCheckResponseSnapshot_ListDocuments(t *testing.T) {
 				},
 				ReviewStatus: types.ReviewStatus("APPROVED"),
 				Author:       ptr.String("__Author__"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -13361,6 +13389,10 @@ func TestCheckResponseSnapshot_UpdateDocument(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			CloudProviders: []types.CloudProvider{
+				types.CloudProvider("AWS"),
+				types.CloudProvider("AWS"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateDocument.response")
@@ -13397,6 +13429,10 @@ func TestCheckResponseSnapshot_UpdateDocument(t *testing.T) {
 		DocumentVersion: ptr.String("__DocumentVersion__"),
 		DocumentFormat:  types.DocumentFormat("YAML"),
 		TargetType:      ptr.String("__TargetType__"),
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -16214,6 +16250,10 @@ func TestCheckResponseSnapshot_Error_DocumentAlreadyExists(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -16288,6 +16328,10 @@ func TestCheckResponseSnapshot_Error_DocumentLimitExceeded(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
 		},
 	})
 	if opErr == nil {
@@ -16377,6 +16421,10 @@ func TestCheckResponseSnapshot_Error_DocumentVersionLimitExceeded(t *testing.T) 
 		DocumentVersion: ptr.String("__DocumentVersion__"),
 		DocumentFormat:  types.DocumentFormat("YAML"),
 		TargetType:      ptr.String("__TargetType__"),
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -16455,6 +16503,10 @@ func TestCheckResponseSnapshot_Error_DuplicateDocumentContent(t *testing.T) {
 		DocumentVersion: ptr.String("__DocumentVersion__"),
 		DocumentFormat:  types.DocumentFormat("YAML"),
 		TargetType:      ptr.String("__TargetType__"),
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -16506,6 +16558,10 @@ func TestCheckResponseSnapshot_Error_DuplicateDocumentVersionName(t *testing.T) 
 		DocumentVersion: ptr.String("__DocumentVersion__"),
 		DocumentFormat:  types.DocumentFormat("YAML"),
 		TargetType:      ptr.String("__TargetType__"),
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -17817,6 +17873,10 @@ func TestCheckResponseSnapshot_Error_InvalidDocumentContent(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -17921,6 +17981,10 @@ func TestCheckResponseSnapshot_Error_InvalidDocumentSchemaVersion(t *testing.T) 
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
 		},
 	})
 	if opErr == nil {
@@ -21098,6 +21162,10 @@ func TestCheckResponseSnapshot_Error_MaxDocumentSizeExceeded(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -21172,6 +21240,10 @@ func TestCheckResponseSnapshot_Error_NoLongerSupportedException(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
 		},
 	})
 	if opErr == nil {

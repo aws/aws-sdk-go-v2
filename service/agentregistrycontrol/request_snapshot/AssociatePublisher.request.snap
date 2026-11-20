@@ -1,0 +1,5 @@
+POST /associations
+
+Content-Type: application/json
+
+{"categories":["__Member__","__Member__"],"clientToken":"__ClientToken__","publisherArn":"__PublisherArn__","recordArn":"__RecordArn__","subdomain":"__Subdomain__"}

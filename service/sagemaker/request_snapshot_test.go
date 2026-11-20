@@ -235,6 +235,36 @@ func TestCheckRequestSnapshot_AddAssociation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AddInferenceGateway(t *testing.T) {
+	input := &AddInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AddInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddInferenceGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AddTags(t *testing.T) {
 	input := &AddTagsInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -4413,6 +4443,65 @@ func TestCheckRequestSnapshot_CreateFlowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateFlowDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateGlobalInferenceGateway(t *testing.T) {
+	input := &CreateGlobalInferenceGatewayInput{
+		Name: ptr.String("__Name__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Gateways: []types.GlobalInferenceGatewayMember{
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGlobalInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11137,6 +11226,33 @@ func TestCheckRequestSnapshot_DeleteFlowDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteGlobalInferenceGateway(t *testing.T) {
+	input := &DeleteGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGlobalInferenceGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteHub(t *testing.T) {
 	input := &DeleteHubInput{
 		HubName: ptr.String("__HubName__"),
@@ -13114,6 +13230,33 @@ func TestCheckRequestSnapshot_DescribeFlowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeFlowDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeGlobalInferenceGateway(t *testing.T) {
+	input := &DescribeGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGlobalInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15965,6 +16108,44 @@ func TestCheckRequestSnapshot_ListFlowDefinitions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListGlobalInferenceGateways(t *testing.T) {
+	input := &ListGlobalInferenceGatewaysInput{
+		Filters: []types.GlobalInferenceGatewayFilter{
+			{
+				Name:  types.GlobalInferenceGatewayFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GlobalInferenceGatewayFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGlobalInferenceGateways(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGlobalInferenceGateways"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListHubContents(t *testing.T) {
 	input := &ListHubContentsInput{
 		HubName:            ptr.String("__HubName__"),
@@ -16281,6 +16462,45 @@ func TestCheckRequestSnapshot_ListInferenceExperiments(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceExperiments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListInferenceGateways(t *testing.T) {
+	input := &ListInferenceGatewaysInput{
+		Identifier: ptr.String("__Identifier__"),
+		Filters: []types.GlobalInferenceGatewayMemberFilter{
+			{
+				Name:  types.GlobalInferenceGatewayMemberFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GlobalInferenceGatewayMemberFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInferenceGateways(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceGateways"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18042,6 +18262,46 @@ func TestCheckRequestSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_MoveClusterNodes(t *testing.T) {
+	input := &MoveClusterNodesInput{
+		SourceClusterArn:        ptr.String("__SourceClusterArn__"),
+		SourceInstanceGroupName: ptr.String("__SourceInstanceGroupName__"),
+		TargetClusterArn:        ptr.String("__TargetClusterArn__"),
+		TargetInstanceGroupName: ptr.String("__TargetInstanceGroupName__"),
+		InstanceCount:           ptr.Int32(1),
+		NodeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeLogicalIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.MoveClusterNodes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "MoveClusterNodes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutEndpointPolicy(t *testing.T) {
 	input := &PutEndpointPolicyInput{
 		EndpointName:   ptr.String("__EndpointName__"),
@@ -18195,6 +18455,36 @@ func TestCheckRequestSnapshot_RegisterDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterDevices"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_RemoveInferenceGateway(t *testing.T) {
+	input := &RemoveInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RemoveInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -21059,6 +21349,41 @@ func TestCheckRequestSnapshot_UpdateFeatureMetadata(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateGlobalInferenceGateway(t *testing.T) {
+	input := &UpdateGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGlobalInferenceGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateHub(t *testing.T) {
 	input := &UpdateHubInput{
 		HubName:        ptr.String("__HubName__"),
@@ -23662,6 +23987,36 @@ func TestUpdateRequestSnapshot_AddAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddAssociation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AddInferenceGateway(t *testing.T) {
+	input := &AddInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AddInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -27844,6 +28199,65 @@ func TestUpdateRequestSnapshot_CreateFlowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateFlowDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateGlobalInferenceGateway(t *testing.T) {
+	input := &CreateGlobalInferenceGatewayInput{
+		Name: ptr.String("__Name__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Gateways: []types.GlobalInferenceGatewayMember{
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateGlobalInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34568,6 +34982,33 @@ func TestUpdateRequestSnapshot_DeleteFlowDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteGlobalInferenceGateway(t *testing.T) {
+	input := &DeleteGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteGlobalInferenceGateway"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteHub(t *testing.T) {
 	input := &DeleteHubInput{
 		HubName: ptr.String("__HubName__"),
@@ -36545,6 +36986,33 @@ func TestUpdateRequestSnapshot_DescribeFlowDefinition(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeFlowDefinition"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeGlobalInferenceGateway(t *testing.T) {
+	input := &DescribeGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeGlobalInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -39396,6 +39864,44 @@ func TestUpdateRequestSnapshot_ListFlowDefinitions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListGlobalInferenceGateways(t *testing.T) {
+	input := &ListGlobalInferenceGatewaysInput{
+		Filters: []types.GlobalInferenceGatewayFilter{
+			{
+				Name:  types.GlobalInferenceGatewayFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GlobalInferenceGatewayFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListGlobalInferenceGateways(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListGlobalInferenceGateways"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListHubContents(t *testing.T) {
 	input := &ListHubContentsInput{
 		HubName:            ptr.String("__HubName__"),
@@ -39712,6 +40218,45 @@ func TestUpdateRequestSnapshot_ListInferenceExperiments(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceExperiments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListInferenceGateways(t *testing.T) {
+	input := &ListInferenceGatewaysInput{
+		Identifier: ptr.String("__Identifier__"),
+		Filters: []types.GlobalInferenceGatewayMemberFilter{
+			{
+				Name:  types.GlobalInferenceGatewayMemberFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Name:  types.GlobalInferenceGatewayMemberFilterName("Status"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInferenceGateways(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInferenceGateways"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -41473,6 +42018,46 @@ func TestUpdateRequestSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_MoveClusterNodes(t *testing.T) {
+	input := &MoveClusterNodesInput{
+		SourceClusterArn:        ptr.String("__SourceClusterArn__"),
+		SourceInstanceGroupName: ptr.String("__SourceInstanceGroupName__"),
+		TargetClusterArn:        ptr.String("__TargetClusterArn__"),
+		TargetInstanceGroupName: ptr.String("__TargetInstanceGroupName__"),
+		InstanceCount:           ptr.Int32(1),
+		NodeIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		NodeLogicalIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.MoveClusterNodes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "MoveClusterNodes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PutEndpointPolicy(t *testing.T) {
 	input := &PutEndpointPolicyInput{
 		EndpointName:   ptr.String("__EndpointName__"),
@@ -41626,6 +42211,36 @@ func TestUpdateRequestSnapshot_RegisterDevices(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RegisterDevices"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_RemoveInferenceGateway(t *testing.T) {
+	input := &RemoveInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		ClusterArn: ptr.String("__ClusterArn__"),
+		Namespace:  ptr.String("__Namespace__"),
+		Name:       ptr.String("__Name__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RemoveInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -44486,6 +45101,41 @@ func TestUpdateRequestSnapshot_UpdateFeatureMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateFeatureMetadata"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateGlobalInferenceGateway(t *testing.T) {
+	input := &UpdateGlobalInferenceGatewayInput{
+		Identifier: ptr.String("__Identifier__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateGlobalInferenceGateway(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateGlobalInferenceGateway"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -71,6 +71,7 @@ const (
 	DictionaryLanguageDeu DictionaryLanguage = "deu"
 	DictionaryLanguageSpa DictionaryLanguage = "spa"
 	DictionaryLanguagePor DictionaryLanguage = "por"
+	DictionaryLanguageAra DictionaryLanguage = "ara"
 )
 
 // Values returns all known values for DictionaryLanguage. Note that this can be
@@ -85,6 +86,7 @@ func (DictionaryLanguage) Values() []DictionaryLanguage {
 		"deu",
 		"spa",
 		"por",
+		"ara",
 	}
 }
 
@@ -355,6 +357,7 @@ const (
 	TranscriptionLanguageDeu   TranscriptionLanguage = "deu"
 	TranscriptionLanguageSpa   TranscriptionLanguage = "spa"
 	TranscriptionLanguagePor   TranscriptionLanguage = "por"
+	TranscriptionLanguageAra   TranscriptionLanguage = "ara"
 )
 
 // Values returns all known values for TranscriptionLanguage. Note that this can
@@ -372,5 +375,6 @@ func (TranscriptionLanguage) Values() []TranscriptionLanguage {
 		"deu",
 		"spa",
 		"por",
+		"ara",
 	}
 }

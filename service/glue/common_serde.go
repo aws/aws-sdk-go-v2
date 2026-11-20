@@ -1161,6 +1161,14 @@ func serializeGlossaryTermIdList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeGlossaryTermIdOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeGlossaryTermItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlossaryTermItem) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -4775,6 +4783,27 @@ func deserializeGlossaryTermIdList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeGlossaryTermIdOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeGlossaryTermItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GlossaryTermItem) error {
 	*v = make([]types.GlossaryTermItem, 0)
 	var vv types.GlossaryTermItem
@@ -7625,6 +7654,17 @@ func serializeAdditionalPlanOptionsMap(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseMap()
 }
 
+func serializeAssetFormInputMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.AssetFormInput) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeAssetFormMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.AssetFormEntry) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -7636,7 +7676,7 @@ func serializeAssetFormMap(s smithy.ShapeSerializer, schema *smithy.Schema, v ma
 	s.CloseMap()
 }
 
-func serializeAssetTypeFormsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.AssetTypeFormReference) {
+func serializeAssetTypeFormOutputMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.AssetTypeFormOutput) {
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -8128,6 +8168,28 @@ func deserializeAdditionalPlanOptionsMap(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeAssetFormInputMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.AssetFormInput) error {
+	*v = make(map[string]types.AssetFormInput)
+	var vv types.AssetFormInput
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AssetFormInput
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.AssetFormInput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
 func deserializeAssetFormMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.AssetFormEntry) error {
 	*v = make(map[string]types.AssetFormEntry)
 	var vv types.AssetFormEntry
@@ -8150,19 +8212,19 @@ func deserializeAssetFormMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	})
 }
 
-func deserializeAssetTypeFormsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.AssetTypeFormReference) error {
-	*v = make(map[string]types.AssetTypeFormReference)
-	var vv types.AssetTypeFormReference
+func deserializeAssetTypeFormOutputMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.AssetTypeFormOutput) error {
+	*v = make(map[string]types.AssetTypeFormOutput)
+	var vv types.AssetTypeFormOutput
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
 		} else if isNil {
-			var zero types.AssetTypeFormReference
+			var zero types.AssetTypeFormOutput
 			(*v)[k] = zero
 			return nil
 		}
 
-		vv = types.AssetTypeFormReference{}
+		vv = types.AssetTypeFormOutput{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

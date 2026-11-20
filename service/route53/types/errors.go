@@ -376,6 +376,35 @@ func (e *DNSSECNotFound) ErrorCode() string {
 }
 func (e *DNSSECNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This error occurs when a feature that the operation requires isn't turned on
+// for the hosted zone. For example, the tier of the hosted zone doesn't include
+// Change History. To resolve this error, turn on the feature, or move the hosted
+// zone to a tier that includes it.
+type FeatureNotEnabled struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FeatureNotEnabled) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FeatureNotEnabled) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FeatureNotEnabled) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FeatureNotEnabled"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FeatureNotEnabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 //	The health check you're attempting to create already exists. Amazon Route 53
 //
 // returns this error when you submit a request that has the following values:
@@ -1717,10 +1746,6 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 //
 // For information about how to get the current limit for an account, see [GetAccountLimit]. To
 // request a higher limit, [create a case]with the Amazon Web Services Support Center.
-//
-// You have reached the maximum number of active health checks for an Amazon Web
-// Services account. To request a higher limit, [create a case]with the Amazon Web Services
-// Support Center.
 //
 // [Limits]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
 // [GetAccountLimit]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetAccountLimit.html

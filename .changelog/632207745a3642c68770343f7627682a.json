@@ -1,0 +1,8 @@
+{
+    "id": "63220774-5a36-42c6-8770-343f7627682a",
+    "type": "feature",
+    "description": "Adds organization enrollment configurations, which enable Automation and set the organization rule mode for the organization root, organizational units (OUs), and accounts. Organization rules can include and exclude OUs, and recommended actions and automation events can be filtered by OU.",
+    "modules": [
+        "service/computeoptimizerautomation"
+    ]
+}

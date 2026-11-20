@@ -141,9 +141,9 @@ type AdministrativeAction struct {
 	//   locks on an Amazon FSx for OpenZFS file system.
 	//
 	//   - DOWNLOAD_DATA_FROM_BACKUP - An FSx for ONTAP backup is being restored to a
-	//   new volume on a second-generation file system. Once the all the file metadata is
-	//   loaded onto the volume, you can mount the volume with read-only access. during
-	//   this process.
+	//   new volume on a second-generation or third-generation file system. Once the all
+	//   the file metadata is loaded onto the volume, you can mount the volume with
+	//   read-only access. during this process.
 	//
 	//   - VOLUME_INITIALIZE_WITH_SNAPSHOT - A volume is being created from a snapshot
 	//   on a different FSx for OpenZFS file system. You can initiate this from the
@@ -191,23 +191,23 @@ type AdministrativeAction struct {
 	//
 	//   - COMPLETED - Amazon FSx has finished processing the administrative task.
 	//
-	// For a backup restore to a second-generation FSx for ONTAP file system,
-	//   indicates that all data has been downloaded to the volume, and clients now have
-	//   read-write access to volume.
+	// For a backup restore to a second-generation or third-generation FSx for ONTAP
+	//   file system, indicates that all data has been downloaded to the volume, and
+	//   clients now have read-write access to volume.
 	//
 	//   - UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has
 	//   updated the file system with the new storage capacity, and is now performing the
 	//   storage-optimization process.
 	//
-	//   - PENDING - For a backup restore to a second-generation FSx for ONTAP file
-	//   system, indicates that the file metadata is being downloaded onto the volume.
-	//   The volume's Lifecycle state is CREATING.
+	//   - PENDING - For a backup restore to a second-generation or third-generation
+	//   FSx for ONTAP file system, indicates that the file metadata is being downloaded
+	//   onto the volume. The volume's Lifecycle state is CREATING.
 	//
-	//   - IN_PROGRESS - For a backup restore to a second-generation FSx for ONTAP file
-	//   system, indicates that all metadata has been downloaded to the new volume and
-	//   client can access data with read-only access while Amazon FSx downloads the file
-	//   data to the volume. Track the progress of this process with the
-	//   ProgressPercent element.
+	//   - IN_PROGRESS - For a backup restore to a second-generation or
+	//   third-generation FSx for ONTAP file system, indicates that all metadata has been
+	//   downloaded to the new volume and client can access data with read-only access
+	//   while Amazon FSx downloads the file data to the volume. Track the progress of
+	//   this process with the ProgressPercent element.
 	Status Status
 
 	// The target value for the administration action, provided in the UpdateFileSystem
@@ -932,10 +932,21 @@ type CompletionReport struct {
 	// Required if Enabled is set to true . Specifies the location of the report on the
 	// file system's linked S3 data repository. An absolute path that defines where the
 	// completion report will be stored in the destination location. The Path you
-	// provide must be located within the file system’s ExportPath. An example Path
-	// value is "s3://amzn-s3-demo-bucket/myExportPath/optionalPrefix". The report
-	// provides the following information for each file in the report: FilePath,
-	// FileStatus, and ErrorCode.
+	// provide must be within the Amazon S3 location that the file system is linked to.
+	// That location depends on how the file system is configured:
+	//
+	//   - The DataRepositoryPath of one of the associations, if the file system has
+	//   data repository associations
+	//
+	//   - The ExportPath , if the file system was created with an ImportPath and an
+	//   ExportPath
+	//
+	// For example, if an association links to s3://amzn-s3-demo-bucket/myPrefix , then
+	// s3://amzn-s3-demo-bucket/myPrefix/reports is valid. The path
+	// s3://amzn-s3-demo-bucket/reports is not.
+	//
+	// The report provides the following information for each file in the report:
+	// FilePath, FileStatus, and ErrorCode.
 	Path *string
 
 	// Required if Enabled is set to true . Specifies the scope of the CompletionReport
@@ -1393,6 +1404,9 @@ type CreateFileSystemLustreConfiguration struct {
 	// (Optional) Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage
 	// (GDS) support is enabled for the Amazon FSx for Lustre file system.
 	//
+	// On file systems that use the Intelligent-Tiering storage class, you can enable
+	// EFA only when ThroughputCapacity is 4000 MBps or a multiple of 4000 MBps.
+	//
 	// (Default = false )
 	EfaEnabled *bool
 
@@ -1472,8 +1486,9 @@ type CreateFileSystemLustreConfiguration struct {
 
 	// Specifies the throughput of an FSx for Lustre file system using the
 	// Intelligent-Tiering storage class, measured in megabytes per second (MBps).
-	// Valid values are 4000 MBps or multiples of 4000 MBps. You pay for the amount of
-	// throughput that you provision.
+	// Valid values are 1000 MBps, 2000 MBps, and multiples of 4000 MBps, up to a
+	// maximum of 2000000 MBps. You pay for the amount of throughput that you
+	// provision.
 	ThroughputCapacity *int32
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
@@ -1646,9 +1661,9 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	//
-	//   - In AUTOMATIC mode (supported only on SSD file systems), FSx for Lustre
-	//   automatically provisions and scales the number of Metadata IOPS for your file
-	//   system based on your file system storage capacity.
+	//   - In AUTOMATIC mode, FSx for Lustre provisions and scales Metadata IOPS for
+	//   you. For SSD file systems, the number is based on storage capacity. For
+	//   Intelligent-Tiering file systems, it is based on throughput capacity.
 	//
 	//   - In USER_PROVISIONED mode, you specify the number of Metadata IOPS to
 	//   provision for your file system.
@@ -1663,12 +1678,17 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
 	//   multiples of 12000 up to a maximum of 192000 .
 	//
-	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
+	//   - For Intelligent-Tiering file systems, valid values are 1500 , 3000 , 6000 ,
+	//   12000 , and multiples of 12000 up to a maximum of 192000 .
+	//
+	// You can't provision fewer Metadata IOPS than AUTOMATIC mode provisions for your
+	// file system.
 	//
 	// Iops doesn’t have a default value. If you're using USER_PROVISIONED mode, you
 	// can choose to specify a valid value. If you're using AUTOMATIC mode, you cannot
 	// specify a value because FSx for Lustre automatically sets the value based on
-	// your file system storage capacity.
+	// your file system's storage capacity for SSD file systems, and on throughput
+	// capacity for Intelligent-Tiering file systems.
 	Iops *int32
 
 	noSmithyDocumentSerde
@@ -1728,6 +1748,14 @@ type CreateFileSystemOntapConfiguration struct {
 	//   pairs for Single-AZ redundancy. This is a second-generation FSx for ONTAP file
 	//   system.
 	//
+	//   - MULTI_AZ_3 - A high availability file system configured for Multi-AZ
+	//   redundancy to tolerate temporary AZ unavailability. This is a third-generation
+	//   FSx for ONTAP file system.
+	//
+	//   - SINGLE_AZ_3 - A file system configured with multiple high-availability (HA)
+	//   pairs for Single-AZ redundancy. This is a third-generation FSx for ONTAP file
+	//   system.
+	//
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
 	// refer to [Choosing a file system deployment type].
 	//
@@ -1737,7 +1765,8 @@ type CreateFileSystemOntapConfiguration struct {
 	DeploymentType OntapDeploymentType
 
 	// The number of days to retain automatic backups. Setting this property to 0
-	// disables automatic backups. You can retain automatic backups for a maximum of 90
+	// disables automatic backups and deletes all existing automatic backups for the
+	// file system's volumes. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
 	AutomaticBackupRetentionDays *int32
 
@@ -1773,12 +1802,13 @@ type CreateFileSystemOntapConfiguration struct {
 
 	// Specifies how many high-availability (HA) pairs of file servers will power your
 	// file system. First-generation file systems are powered by 1 HA pair.
-	// Second-generation multi-AZ file systems are powered by 1 HA pair. Second
-	// generation single-AZ file systems are powered by up to 12 HA pairs. The default
-	// value is 1. The value of this property affects the values of StorageCapacity ,
-	// Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs] in the FSx for ONTAP
-	// user guide. Block storage protocol support (iSCSI and NVMe over TCP) is disabled
-	// on file systems with more than 6 HA pairs. For more information, see [Using block storage protocols].
+	// Second-generation and third-generation multi-AZ file systems are powered by 1 HA
+	// pair. Second-generation and third-generation single-AZ file systems are powered
+	// by up to 12 HA pairs. The default value is 1. The value of this property affects
+	// the values of StorageCapacity , Iops , and ThroughputCapacity . For more
+	// information, see [High-availability (HA) pairs]in the FSx for ONTAP user guide. Block storage protocol
+	// support (iSCSI and NVMe over TCP) is disabled on file systems with more than 6
+	// HA pairs. For more information, see [Using block storage protocols].
 	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
@@ -1786,14 +1816,15 @@ type CreateFileSystemOntapConfiguration struct {
 	//   - The value of HAPairs is less than 1 or greater than 12.
 	//
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
-	//   SINGLE_AZ_1 , MULTI_AZ_1 , or MULTI_AZ_2 .
+	//   SINGLE_AZ_1 , MULTI_AZ_1 , MULTI_AZ_2 , or MULTI_AZ_3 .
 	//
 	// [Using block storage protocols]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/supported-fsx-clients.html#using-block-storage
 	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/administering-file-systems.html#HA-pairs
 	HAPairs *int32
 
-	// Required when DeploymentType is set to MULTI_AZ_1 or MULTI_AZ_2 . This specifies
-	// the subnet in which you want the preferred file server to be located.
+	// Required when DeploymentType is set to MULTI_AZ_1 , MULTI_AZ_2 , or MULTI_AZ_3 .
+	// This specifies the subnet in which you want the preferred file server to be
+	// located.
 	PreferredSubnetId *string
 
 	// (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the
@@ -1841,14 +1872,20 @@ type CreateFileSystemOntapConfiguration struct {
 	//
 	//   - For MULTI_AZ_2 , valid values are 384, 768, 1536, 3072, or 6144 MBps.
 	//
+	//   - For SINGLE_AZ_3 , valid values are 1536, 3072, 6144, 12288, or 18432 MBps.
+	//
+	//   - For MULTI_AZ_3 , valid values are 384, 768, 1536, 3072, 6144, 12288, or
+	//   18432 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
 	//
-	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).
+	//   - The value of deployment type is SINGLE_AZ_2 or SINGLE_AZ_3 and
+	//   ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a
+	//   value between 1 and 12).
 	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
@@ -5666,9 +5703,9 @@ type FileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for the file
 	// system.
 	//
-	//   - In AUTOMATIC mode (supported only on SSD file systems), FSx for Lustre
-	//   automatically provisions and scales the number of Metadata IOPS on your file
-	//   system based on your file system storage capacity.
+	//   - In AUTOMATIC mode, FSx for Lustre provisions and scales Metadata IOPS for
+	//   you. For SSD file systems, the number is based on storage capacity. For
+	//   Intelligent-Tiering file systems, it is based on throughput capacity.
 	//
 	//   - In USER_PROVISIONED mode, you can choose to specify the number of Metadata
 	//   IOPS to provision for your file system.
@@ -5681,7 +5718,8 @@ type FileSystemLustreMetadataConfiguration struct {
 	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
 	//   multiples of 12000 up to a maximum of 192000 .
 	//
-	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
+	//   - For Intelligent-Tiering file systems, valid values are 1500 , 3000 , 6000 ,
+	//   12000 , and multiples of 12000 up to a maximum of 192000 .
 	Iops *int32
 
 	noSmithyDocumentSerde
@@ -6204,8 +6242,8 @@ type LustreReadCacheConfiguration struct {
 	// file system's SSD read cache, in gibibytes (GiB).
 	//
 	// The SSD read cache size is distributed across provisioned file servers in your
-	// file system. Intelligent-Tiering file systems support a minimum of 32 GiB and
-	// maximum of 131072 GiB for SSD read cache size for every 4,000 MB/s of throughput
+	// file system. Intelligent-Tiering file systems support a minimum of 8 GiB and
+	// maximum of 32768 GiB for SSD read cache size for every 1000 MBps of throughput
 	// capacity provisioned.
 	SizeGiB *int32
 
@@ -6390,7 +6428,8 @@ func (v *NFSDataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer)
 type OntapFileSystemConfiguration struct {
 
 	// The number of days to retain automatic backups. Setting this property to 0
-	// disables automatic backups. You can retain automatic backups for a maximum of 90
+	// disables automatic backups and deletes all existing automatic backups for the
+	// file system's volumes. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
 	AutomaticBackupRetentionDays *int32
 
@@ -6415,6 +6454,14 @@ type OntapFileSystemConfiguration struct {
 	//
 	//   - SINGLE_AZ_2 - A file system configured with multiple high-availability (HA)
 	//   pairs for Single-AZ redundancy. This is a second-generation FSx for ONTAP file
+	//   system.
+	//
+	//   - MULTI_AZ_3 - A high availability file system configured for Multi-AZ
+	//   redundancy to tolerate temporary AZ unavailability. This is a third-generation
+	//   FSx for ONTAP file system.
+	//
+	//   - SINGLE_AZ_3 - A file system configured with multiple high-availability (HA)
+	//   pairs for Single-AZ redundancy. This is a third-generation FSx for ONTAP file
 	//   system.
 	//
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
@@ -6464,7 +6511,7 @@ type OntapFileSystemConfiguration struct {
 	//   - The value of HAPairs is less than 1 or greater than 12.
 	//
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
-	//   SINGLE_AZ_1 , MULTI_AZ_1 , or MULTI_AZ_2 .
+	//   SINGLE_AZ_1 , MULTI_AZ_1 , MULTI_AZ_2 , or MULTI_AZ_3 .
 	//
 	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
 	HAPairs *int32
@@ -6500,14 +6547,20 @@ type OntapFileSystemConfiguration struct {
 	//
 	//   - For MULTI_AZ_2 , valid values are 384, 768, 1536, 3072, or 6144 MBps.
 	//
+	//   - For SINGLE_AZ_3 , valid values are 1536, 3072, 6144, 12288, or 18432 MBps.
+	//
+	//   - For MULTI_AZ_3 , valid values are 384, 768, 1536, 3072, 6144, 12288, or
+	//   18432 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value.
 	//
-	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).
+	//   - The value of deployment type is SINGLE_AZ_2 or SINGLE_AZ_3 and
+	//   ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a
+	//   value between 1 and 12).
 	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
@@ -8131,6 +8184,11 @@ type S3AccessPointAttachment struct {
 	//   - FAILED - The S3 access point attachment is in a failed state. Delete and
 	//   detach the S3 access point attachment, and create a new one.
 	//
+	//   - MISCONFIGURED - The S3 access point attachment has a configuration issue
+	//   that prevents it from serving requests. Amazon FSx periodically checks for this
+	//   condition and automatically returns the access point to AVAILABLE when the issue
+	//   is resolved.
+	//
 	//   - UPDATING - Amazon FSx is updating the S3 access point attachment
 	Lifecycle S3AccessPointAttachmentLifecycle
 
@@ -8462,8 +8520,9 @@ func (v *S3DataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 // is joined.
 type SelfManagedActiveDirectoryAttributes struct {
 
-	// A list of up to three IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory.
+	// A list of IP addresses of DNS servers or domain controllers in the self-managed
+	// AD directory. FSx for ONTAP SVMs support up to three IP addresses, FSx for
+	// Windows supports up to two.
 	DnsIps []string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
@@ -8550,8 +8609,9 @@ func (v *SelfManagedActiveDirectoryAttributes) Deserialize(d smithy.ShapeDeseria
 // [Managing FSx for ONTAP SVMs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
 type SelfManagedActiveDirectoryConfiguration struct {
 
-	// A list of up to three IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory.
+	// A list of IP addresses of DNS servers or domain controllers in the self-managed
+	// AD directory. FSx for ONTAP SVMs support up to three IP addresses, FSx for
+	// Windows supports up to two.
 	//
 	// This member is required.
 	DnsIps []string
@@ -8677,8 +8737,9 @@ func (v *SelfManagedActiveDirectoryConfiguration) Deserialize(d smithy.ShapeDese
 // ONTAP SVM is joined.
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
-	// A list of up to three DNS server or domain controller IP addresses in your
-	// self-managed Active Directory domain.
+	// A list of IP addresses of DNS servers or domain controllers in the self-managed
+	// AD directory. FSx for ONTAP SVMs support up to three IP addresses, FSx for
+	// Windows supports up to two.
 	DnsIps []string
 
 	// Specifies the updated Amazon Resource Name (ARN) of the Amazon Web Services
@@ -9777,10 +9838,10 @@ type UpdateFileSystemLustreConfiguration struct {
 	// clients that try to access your file system as a root user.
 	RootSquashConfiguration *LustreRootSquashConfiguration
 
-	// The throughput of an Amazon FSx for Lustre file system using an
-	// Intelligent-Tiering storage class, measured in megabytes per second (MBps). You
-	// can only increase your file system's throughput. Valid values are 4000 MBps or
-	// multiples of 4000 MBps.
+	// The throughput of an FSx for Lustre file system using the Intelligent-Tiering
+	// storage class, measured in megabytes per second (MBps). You can only increase
+	// your file system's throughput capacity. Valid values are 1000 MBps, 2000 MBps,
+	// and multiples of 4000 MBps, up to a maximum of 2000000 MBps.
 	ThroughputCapacity *int32
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
@@ -9904,29 +9965,31 @@ type UpdateFileSystemLustreMetadataConfiguration struct {
 	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
 	//   multiples of 12000 up to a maximum of 192000 .
 	//
-	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
+	//   - For Intelligent-Tiering file systems, valid values are 1500 , 3000 , 6000 ,
+	//   12000 , and multiples of 12000 up to a maximum of 192000 .
 	//
 	// The value you provide must be greater than or equal to the current number of
-	// Metadata IOPS provisioned for the file system.
+	// Metadata IOPS provisioned for the file system. You can't provision fewer
+	// Metadata IOPS than AUTOMATIC mode provisions for your file system.
 	Iops *int32
 
 	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	//
-	//   - To increase the Metadata IOPS or to switch an SSD file system from
-	//   AUTOMATIC, specify USER_PROVISIONED as the value for this parameter. Then use
-	//   the Iops parameter to provide a Metadata IOPS value that is greater than or
-	//   equal to the current number of Metadata IOPS provisioned for the file system.
+	//   - To increase the Metadata IOPS or to switch from AUTOMATIC mode, specify
+	//   USER_PROVISIONED as the value for this parameter. Then use the Iops parameter
+	//   to provide a Metadata IOPS value that is greater than or equal to the current
+	//   number of Metadata IOPS provisioned for the file system.
 	//
-	//   - To switch from USER_PROVISIONED mode on an SSD file system, specify
-	//   AUTOMATIC as the value for this parameter, but do not input a value for Iops.
+	//   - To switch from USER_PROVISIONED mode, specify AUTOMATIC as the value for
+	//   this parameter, but do not input a value for Iops.
 	//
-	//   - If you request to switch from USER_PROVISIONED to AUTOMATIC mode and the
-	//   current Metadata IOPS value is greater than the automated default, FSx for
-	//   Lustre rejects the request because downscaling Metadata IOPS is not supported.
-	//
-	//   - AUTOMATIC mode is not supported on Intelligent-Tiering file systems. For
-	//   Intelligent-Tiering file systems, use USER_PROVISIONED mode.
+	//   - FSx for Lustre rejects a switch to AUTOMATIC mode when your current
+	//   Metadata IOPS value is greater than what AUTOMATIC mode provisions, because
+	//   decreasing Metadata IOPS is not supported. To unblock the switch, increase
+	//   storage capacity for SSD file systems, or throughput capacity for
+	//   Intelligent-Tiering file systems, until AUTOMATIC mode provisions at least your
+	//   current Metadata IOPS.
 	Mode MetadataConfigurationMode
 
 	noSmithyDocumentSerde
@@ -9972,7 +10035,8 @@ type UpdateFileSystemOntapConfiguration struct {
 	AddRouteTableIds []string
 
 	// The number of days to retain automatic backups. Setting this property to 0
-	// disables automatic backups. You can retain automatic backups for a maximum of 90
+	// disables automatic backups and deletes all existing automatic backups for the
+	// file system's volumes. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
 	AutomaticBackupRetentionDays *int32
 
@@ -10007,10 +10071,10 @@ type UpdateFileSystemOntapConfiguration struct {
 	FsxAdminPassword *string
 
 	// Use to update the number of high-availability (HA) pairs for a
-	// second-generation single-AZ file system. If you increase the number of HA pairs
-	// for your file system, you must specify proportional increases for
-	// StorageCapacity , Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs] in
-	// the FSx for ONTAP user guide. Block storage protocol support (iSCSI and NVMe
+	// second-generation or third-generation single-AZ file system. If you increase the
+	// number of HA pairs for your file system, you must specify proportional increases
+	// for StorageCapacity , Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs]
+	// in the FSx for ONTAP user guide. Block storage protocol support (iSCSI and NVMe
 	// over TCP) is disabled on file systems with more than 6 HA pairs. For more
 	// information, see [Using block storage protocols].
 	//
@@ -10056,14 +10120,20 @@ type UpdateFileSystemOntapConfiguration struct {
 	//
 	//   - For MULTI_AZ_2 , valid values are 384, 768, 1536, 3072, or 6144 MBps.
 	//
+	//   - For SINGLE_AZ_3 , valid values are 1536, 3072, 6144, 12288, or 18432 MBps.
+	//
+	//   - For MULTI_AZ_3 , valid values are 384, 768, 1536, 3072, 6144, 12288, or
+	//   18432 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
 	//
-	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).
+	//   - The value of deployment type is SINGLE_AZ_2 or SINGLE_AZ_3 and
+	//   ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a
+	//   value between 1 and 12).
 	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32

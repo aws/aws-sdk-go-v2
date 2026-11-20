@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociatePublisher struct {
+}
+
+func (*validateOpAssociatePublisher) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociatePublisher) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociatePublisherInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociatePublisherInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePublisher struct {
+}
+
+func (*validateOpCreatePublisher) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePublisher) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePublisherInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePublisherInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRegistry struct {
 }
 
@@ -50,6 +90,26 @@ func (m *validateOpCreateRegistryRecord) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePublisher struct {
+}
+
+func (*validateOpDeletePublisher) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePublisher) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePublisherInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePublisherInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRegistry struct {
 }
 
@@ -85,6 +145,46 @@ func (m *validateOpDeleteRegistryRecord) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRegistryRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociatePublisher struct {
+}
+
+func (*validateOpDisassociatePublisher) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociatePublisher) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociatePublisherInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociatePublisherInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPublisher struct {
+}
+
+func (*validateOpGetPublisher) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPublisher) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPublisherInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPublisherInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +350,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePublisherAssociationApprovalStatus struct {
+}
+
+func (*validateOpUpdatePublisherAssociationApprovalStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePublisherAssociationApprovalStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePublisherAssociationApprovalStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePublisherAssociationApprovalStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRegistry struct {
 }
 
@@ -310,6 +430,34 @@ func (m *validateOpUpdateRegistryRecordStatus) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpValidatePublisher struct {
+}
+
+func (*validateOpValidatePublisher) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpValidatePublisher) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ValidatePublisherInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpValidatePublisherInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAssociatePublisherValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociatePublisher{}, middleware.After)
+}
+
+func addOpCreatePublisherValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePublisher{}, middleware.After)
+}
+
 func addOpCreateRegistryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRegistry{}, middleware.After)
 }
@@ -318,12 +466,24 @@ func addOpCreateRegistryRecordValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateRegistryRecord{}, middleware.After)
 }
 
+func addOpDeletePublisherValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePublisher{}, middleware.After)
+}
+
 func addOpDeleteRegistryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRegistry{}, middleware.After)
 }
 
 func addOpDeleteRegistryRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRegistryRecord{}, middleware.After)
+}
+
+func addOpDisassociatePublisherValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociatePublisher{}, middleware.After)
+}
+
+func addOpGetPublisherValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPublisher{}, middleware.After)
 }
 
 func addOpGetRegistryValidationMiddleware(stack *middleware.Stack) error {
@@ -358,6 +518,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdatePublisherAssociationApprovalStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePublisherAssociationApprovalStatus{}, middleware.After)
+}
+
 func addOpUpdateRegistryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRegistry{}, middleware.After)
 }
@@ -368,6 +532,10 @@ func addOpUpdateRegistryRecordValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateRegistryRecordStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRegistryRecordStatus{}, middleware.After)
+}
+
+func addOpValidatePublisherValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpValidatePublisher{}, middleware.After)
 }
 
 func validateA2aAgentCardDescriptor(v *types.A2aAgentCardDescriptor) error {
@@ -693,6 +861,11 @@ func validateDescriptors(v *types.Descriptors) error {
 	if v.Agui != nil {
 		if err := validateAgUiDescriptor(v.Agui); err != nil {
 			invalidParams.AddNested("Agui", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SignatureAgentCard != nil {
+		if err := validateSignatureAgentCardDescriptor(v.SignatureAgentCard); err != nil {
+			invalidParams.AddNested("SignatureAgentCard", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1117,6 +1290,23 @@ func validateRegistryRecordOAuthCredentialProvider(v *types.RegistryRecordOAuthC
 	}
 }
 
+func validateSignatureAgentCardDescriptor(v *types.SignatureAgentCardDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignatureAgentCardDescriptor"}
+	if v.Source != nil {
+		if err := validateDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceDetails(v types.SourceDetails) error {
 	if v == nil {
 		return nil
@@ -1431,6 +1621,11 @@ func validateUpdatedDescriptorsFields(v *types.UpdatedDescriptorsFields) error {
 			invalidParams.AddNested("Agui", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SignatureAgentCard != nil {
+		if err := validateUpdatedSignatureAgentCardDescriptor(v.SignatureAgentCard); err != nil {
+			invalidParams.AddNested("SignatureAgentCard", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1557,6 +1752,40 @@ func validateUpdatedRegistryRecordArtifact(v *types.UpdatedRegistryRecordArtifac
 	}
 }
 
+func validateUpdatedSignatureAgentCardDescriptor(v *types.UpdatedSignatureAgentCardDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedSignatureAgentCardDescriptor"}
+	if v.OptionalValue != nil {
+		if err := validateUpdatedSignatureAgentCardDescriptorFields(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedSignatureAgentCardDescriptorFields(v *types.UpdatedSignatureAgentCardDescriptorFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedSignatureAgentCardDescriptorFields"}
+	if v.Source != nil {
+		if err := validateUpdatedDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkloadIdentityDetails(v *types.WorkloadIdentityDetails) error {
 	if v == nil {
 		return nil
@@ -1564,6 +1793,39 @@ func validateWorkloadIdentityDetails(v *types.WorkloadIdentityDetails) error {
 	invalidParams := smithy.InvalidParamsError{Context: "WorkloadIdentityDetails"}
 	if v.WorkloadIdentityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadIdentityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociatePublisherInput(v *AssociatePublisherInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociatePublisherInput"}
+	if v.RecordArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordArn"))
+	}
+	if v.PublisherArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublisherArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePublisherInput(v *CreatePublisherInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePublisherInput"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1645,6 +1907,21 @@ func validateOpCreateRegistryRecordInput(v *CreateRegistryRecordInput) error {
 	}
 }
 
+func validateOpDeletePublisherInput(v *DeletePublisherInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePublisherInput"}
+	if v.PublisherArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublisherArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRegistryInput(v *DeleteRegistryInput) error {
 	if v == nil {
 		return nil
@@ -1670,6 +1947,36 @@ func validateOpDeleteRegistryRecordInput(v *DeleteRegistryRecordInput) error {
 	}
 	if v.RecordId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociatePublisherInput(v *DisassociatePublisherInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociatePublisherInput"}
+	if v.RecordArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPublisherInput(v *GetPublisherInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPublisherInput"}
+	if v.PublisherArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublisherArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1817,6 +2124,27 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdatePublisherAssociationApprovalStatusInput(v *UpdatePublisherAssociationApprovalStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublisherAssociationApprovalStatusInput"}
+	if v.RecordArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordArn"))
+	}
+	if len(v.ApprovalStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApprovalStatus"))
+	}
+	if v.ApprovalStatusReason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApprovalStatusReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateRegistryInput(v *UpdateRegistryInput) error {
 	if v == nil {
 		return nil
@@ -1896,6 +2224,21 @@ func validateOpUpdateRegistryRecordStatusInput(v *UpdateRegistryRecordStatusInpu
 	}
 	if v.StatusReason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatusReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpValidatePublisherInput(v *ValidatePublisherInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidatePublisherInput"}
+	if v.PublisherArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublisherArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "6aaa0803-f8c1-4d18-8949-a98f5a2f2093",
+    "type": "feature",
+    "description": "Adds the SearchPublicRecords API, which searches public registry records for AI agents, tools, and skills that their publishers have made discoverable.",
+    "modules": [
+        "service/agentdiscovery"
+    ]
+}

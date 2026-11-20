@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"accountId":"__AccountId__","classification":"SHADOW","discoverySource":"API_GATEWAY","firstSeen":946684800,"host":"__Host__","lastSeen":946684800,"managedBy":"SELF","method":"GET","path":"__Path__","port":1,"region":"__Region__","resourceArn":"__ResourceArn__","visibility":"PUBLIC","wafStatus":"ENABLED","workloads":["MCP","MCP"]},{"accountId":"__AccountId__","classification":"SHADOW","discoverySource":"API_GATEWAY","firstSeen":946684800,"host":"__Host__","lastSeen":946684800,"managedBy":"SELF","method":"GET","path":"__Path__","port":1,"region":"__Region__","resourceArn":"__ResourceArn__","visibility":"PUBLIC","wafStatus":"ENABLED","workloads":["MCP","MCP"]}],"nextToken":"__NextToken__"}

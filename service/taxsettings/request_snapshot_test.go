@@ -359,6 +359,7 @@ func TestCheckRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+					VatCreditMethod:                 ptr.Bool(true),
 				},
 				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -397,6 +398,19 @@ func TestCheckRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					TaxRegime:         ptr.String("__TaxRegime__"),
 					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
+				UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+					TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+					TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+					EmiratesId:                ptr.String("__EmiratesId__"),
+				},
+				NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+					TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+				},
+				NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+					PeppolId: ptr.String("__PeppolId__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -897,6 +911,7 @@ func TestCheckRequestSnapshot_PutTaxRegistration(t *testing.T) {
 					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+					VatCreditMethod:                 ptr.Bool(true),
 				},
 				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -935,6 +950,19 @@ func TestCheckRequestSnapshot_PutTaxRegistration(t *testing.T) {
 					TaxRegime:         ptr.String("__TaxRegime__"),
 					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
+				UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+					TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+					TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+					EmiratesId:                ptr.String("__EmiratesId__"),
+				},
+				NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+					TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+				},
+				NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+					PeppolId: ptr.String("__PeppolId__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -1141,6 +1169,7 @@ func TestUpdateRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+					VatCreditMethod:                 ptr.Bool(true),
 				},
 				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -1179,6 +1208,19 @@ func TestUpdateRequestSnapshot_BatchPutTaxRegistration(t *testing.T) {
 					TaxRegime:         ptr.String("__TaxRegime__"),
 					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
+				UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+					TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+					TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+					EmiratesId:                ptr.String("__EmiratesId__"),
+				},
+				NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+					TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+				},
+				NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+					PeppolId: ptr.String("__PeppolId__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{
@@ -1679,6 +1721,7 @@ func TestUpdateRequestSnapshot_PutTaxRegistration(t *testing.T) {
 					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+					VatCreditMethod:                 ptr.Bool(true),
 				},
 				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -1717,6 +1760,19 @@ func TestUpdateRequestSnapshot_PutTaxRegistration(t *testing.T) {
 					TaxRegime:         ptr.String("__TaxRegime__"),
 					TaxRegimeFullName: ptr.String("__TaxRegimeFullName__"),
 					CfdiUsageCode:     ptr.String("__CfdiUsageCode__"),
+				},
+				UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+					TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+					TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+					EmiratesId:                ptr.String("__EmiratesId__"),
+				},
+				NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+					TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+				},
+				NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+					PeppolId: ptr.String("__PeppolId__"),
 				},
 			},
 			VerificationDetails: &types.VerificationDetails{

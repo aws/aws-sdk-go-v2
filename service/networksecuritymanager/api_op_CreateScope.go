@@ -56,6 +56,14 @@ type CreateScopeInput struct {
 	// A description of the scope.
 	ScopeDescription *string
 
+	// The specialized type of the scope. Omit this value to create a standard scope
+	// that you can associate with a deployment. Set it to create a scope that is built
+	// for one specific purpose: a specialized scope can be used only for the purpose
+	// that its type defines, is validated against that use, and can't be associated
+	// with a deployment. This value is set when the scope is created and can't be
+	// changed.
+	SpecializedScopeType types.SpecializedScopeType
+
 	// The tags to add to the resource when it is created.
 	Tags map[string]string
 
@@ -85,6 +93,9 @@ func (v *CreateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ScopeName != nil {
 		s.WriteString(schemas.CreateScopeInput_scopeName, *v.ScopeName)
+	}
+	if v.SpecializedScopeType != "" {
+		s.WriteString(schemas.CreateScopeInput_specializedScopeType, string(v.SpecializedScopeType))
 	}
 	if v.Tags != nil {
 		serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
@@ -131,6 +142,13 @@ type CreateScopeOutput struct {
 	// A description of the scope.
 	ScopeDescription *string
 
+	// The specialized type of the scope, if the scope is built for one specific
+	// purpose. A scope with no specializedScopeType is a standard scope that you can
+	// associate with a deployment. A specialized scope can be used only for the
+	// purpose that its type defines and can't be associated with a deployment. This
+	// value is set when the scope is created and can't be changed.
+	SpecializedScopeType types.SpecializedScopeType
+
 	// A token used for optimistic concurrency control. Each read and write returns an
 	// updateToken . Provide the most recent value on your next update to detect and
 	// prevent conflicting concurrent modifications.
@@ -175,6 +193,9 @@ func (v *CreateScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScopeName != nil {
 		s.WriteString(schemas.CreateScopeOutput_scopeName, *v.ScopeName)
 	}
+	if v.SpecializedScopeType != "" {
+		s.WriteString(schemas.CreateScopeOutput_specializedScopeType, string(v.SpecializedScopeType))
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateScopeOutput_status, string(v.Status))
 	}
@@ -212,6 +233,13 @@ func (v *CreateScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateScopeOutput_scopeName:
 			v.ScopeName = new(string)
 			return d.ReadString(schemas.CreateScopeOutput_scopeName, v.ScopeName)
+		case schemas.CreateScopeOutput_specializedScopeType:
+			var ev string
+			if err := d.ReadString(schemas.CreateScopeOutput_specializedScopeType, &ev); err != nil {
+				return err
+			}
+			v.SpecializedScopeType = types.SpecializedScopeType(ev)
+			return nil
 		case schemas.CreateScopeOutput_status:
 			var ev string
 			if err := d.ReadString(schemas.CreateScopeOutput_status, &ev); err != nil {

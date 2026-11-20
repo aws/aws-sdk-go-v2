@@ -95,8 +95,8 @@ type CreateLanguageModelInput struct {
 	ModelName *string
 
 	// Specifies the encryption configuration for your custom language model. Your
-	// model artifacts are encrypted with the specified KMS key or with an AWS-owned
-	// key if a key is not supplied.
+	// model artifacts are encrypted with the specified KMS key or with an Amazon Web
+	// Services owned key if a key is not supplied.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to a new

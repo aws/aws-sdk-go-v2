@@ -870,6 +870,26 @@ func (m *validateOpListAutonomousDatabasePeers) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAutonomousDatabaseRefreshableClones struct {
+}
+
+func (*validateOpListAutonomousDatabaseRefreshableClones) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAutonomousDatabaseRefreshableClones) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAutonomousDatabaseRefreshableClonesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAutonomousDatabaseRefreshableClonesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAutonomousVirtualMachines struct {
 }
 
@@ -1065,6 +1085,26 @@ func (m *validateOpStartAutonomousDatabase) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartAutonomousDatabaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAutonomousDatabaseRefresh struct {
+}
+
+func (*validateOpStartAutonomousDatabaseRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAutonomousDatabaseRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAutonomousDatabaseRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAutonomousDatabaseRefreshInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1582,6 +1622,10 @@ func addOpListAutonomousDatabasePeersValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpListAutonomousDatabasePeers{}, middleware.After)
 }
 
+func addOpListAutonomousDatabaseRefreshableClonesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAutonomousDatabaseRefreshableClones{}, middleware.After)
+}
+
 func addOpListAutonomousVirtualMachinesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAutonomousVirtualMachines{}, middleware.After)
 }
@@ -1620,6 +1664,10 @@ func addOpShrinkAutonomousDatabaseValidationMiddleware(stack *middleware.Stack) 
 
 func addOpStartAutonomousDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAutonomousDatabase{}, middleware.After)
+}
+
+func addOpStartAutonomousDatabaseRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAutonomousDatabaseRefresh{}, middleware.After)
 }
 
 func addOpStartDbNodeValidationMiddleware(stack *middleware.Stack) error {
@@ -2634,6 +2682,21 @@ func validateOpListAutonomousDatabasePeersInput(v *ListAutonomousDatabasePeersIn
 	}
 }
 
+func validateOpListAutonomousDatabaseRefreshableClonesInput(v *ListAutonomousDatabaseRefreshableClonesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAutonomousDatabaseRefreshableClonesInput"}
+	if v.AutonomousDatabaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutonomousDatabaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAutonomousVirtualMachinesInput(v *ListAutonomousVirtualMachinesInput) error {
 	if v == nil {
 		return nil
@@ -2780,6 +2843,21 @@ func validateOpStartAutonomousDatabaseInput(v *StartAutonomousDatabaseInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartAutonomousDatabaseInput"}
+	if v.AutonomousDatabaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutonomousDatabaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAutonomousDatabaseRefreshInput(v *StartAutonomousDatabaseRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAutonomousDatabaseRefreshInput"}
 	if v.AutonomousDatabaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutonomousDatabaseId"))
 	}

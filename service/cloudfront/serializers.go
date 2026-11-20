@@ -15994,6 +15994,17 @@ func awsRestxml_serializeDocumentCustomOriginConfig(v *types.CustomOriginConfig,
 		el := value.MemberElement(root)
 		el.String(string(v.IpAddressType))
 	}
+	if len(v.OriginHttpVersion) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginHttpVersion",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OriginHttpVersion))
+	}
 	if v.OriginKeepaliveTimeout != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -20686,6 +20697,17 @@ func awsRestxml_serializeDocumentViewerMtlsConfig(v *types.ViewerMtlsConfig, val
 
 func awsRestxml_serializeDocumentVpcOriginConfig(v *types.VpcOriginConfig, value smithyxml.Value) error {
 	defer value.Close()
+	if len(v.OriginHttpVersion) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginHttpVersion",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OriginHttpVersion))
+	}
 	if v.OriginKeepaliveTimeout != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

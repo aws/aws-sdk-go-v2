@@ -40434,6 +40434,19 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 				sv.IpAddressType = types.IpAddressType(xtv)
 			}
 
+		case strings.EqualFold("OriginHttpVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.OriginHttpVersion = types.OriginHttpVersion(xtv)
+			}
+
 		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -63162,6 +63175,19 @@ func awsRestxml_deserializeDocumentVpcOriginConfig(v **types.VpcOriginConfig, de
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("OriginHttpVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.OriginHttpVersion = types.OriginHttpVersion(xtv)
+			}
+
 		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

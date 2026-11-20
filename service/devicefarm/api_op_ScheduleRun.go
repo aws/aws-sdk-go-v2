@@ -52,6 +52,10 @@ type ScheduleRunInput struct {
 	// and the maximum number of devices to be included in the run.
 	//
 	// Either devicePoolArn or deviceSelectionConfiguration is required in a request.
+	//
+	// If the filters select devices by attribute and do not include a DEVICE_TYPE
+	// filter, only physical devices are selected. If the filters select devices by
+	// ARN, the run uses the devices you list.
 	DeviceSelectionConfiguration *types.DeviceSelectionConfiguration
 
 	// Specifies configuration information about a test run, such as the execution

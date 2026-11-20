@@ -8,6 +8,13 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var ArchiveProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ArchiveProject",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/projects/{projectIdentifier}/archive",
+	Code: 200})
+
 var BatchDeleteAdvancedPromptOptimizationJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "BatchDeleteAdvancedPromptOptimizationJob",
@@ -141,6 +148,13 @@ var CreateModelInvocationJob = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/model-invocation-job",
 	Code: 200})
 
+var CreateProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "CreateProject",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/projects",
+	Code: 200})
+
 var CreatePromptRouter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "CreatePromptRouter",
@@ -154,6 +168,13 @@ var CreateProvisionedModelThroughput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/provisioned-model-throughput",
 	Code: 201})
+
+var DeleteAccountDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteAccountDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/data_retention/storage/{modelProvider}",
+	Code: 200})
 
 var DeleteAutomatedReasoningPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -239,6 +260,20 @@ var DeleteModelInvocationLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/logging/modelinvocations",
 	Code: 200})
 
+var DeleteOrganizationDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteOrganizationDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/data_retention/organization-storage/{modelProvider}",
+	Code: 200})
+
+var DeleteProjectDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteProjectDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}",
+	Code: 200})
+
 var DeletePromptRouter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "DeletePromptRouter",
@@ -279,6 +314,13 @@ var GetAccountDataRetention = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetAccountDataRetention",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/data-retention",
+	Code: 200})
+
+var GetAccountDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetAccountDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/data_retention/storage/{modelProvider}",
 	Code: 200})
 
 var GetAdvancedPromptOptimizationJob = smithy.NewSchema(smithy.ShapeID{
@@ -435,6 +477,27 @@ var GetModelInvocationLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/logging/modelinvocations",
 	Code: 200})
 
+var GetOrganizationDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetOrganizationDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/data_retention/organization-storage/{modelProvider}",
+	Code: 200})
+
+var GetProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetProject",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/projects/{projectIdentifier}",
+	Code: 200})
+
+var GetProjectDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetProjectDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}",
+	Code: 200})
+
 var GetPromptRouter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "GetPromptRouter",
@@ -454,6 +517,34 @@ var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetResourcePolicy",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resource-policy/{resourceArn}",
+	Code: 200})
+
+var GetTrustedAccessProgram = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgram",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/trusted-access-programs/{programIdentifier}",
+	Code: 200})
+
+var GetTrustedAccessProgramAccountEnrollment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramAccountEnrollment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/trusted-access-programs/{programIdentifier}/account-enrollment",
+	Code: 200})
+
+var GetTrustedAccessProgramOrganizationEnrollment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramOrganizationEnrollment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/trusted-access-programs/{programIdentifier}/organization-enrollment",
+	Code: 200})
+
+var GetTrustedAccessProgramProjectEnrollment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramProjectEnrollment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/trusted-access-programs/{programIdentifier}/project-enrollment/{projectIdentifier}",
 	Code: 200})
 
 var GetUseCaseForModelAccess = smithy.NewSchema(smithy.ShapeID{
@@ -596,6 +687,13 @@ var ListModelInvocationJobs = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/model-invocation-jobs",
 	Code: 200})
 
+var ListProjects = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ListProjects",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/projects",
+	Code: 200})
+
 var ListPromptRouters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "ListPromptRouters",
@@ -617,11 +715,25 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/listTagsForResource",
 	Code: 200})
 
+var ListTrustedAccessPrograms = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ListTrustedAccessPrograms",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/trusted-access-programs",
+	Code: 200})
+
 var PutAccountDataRetention = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "PutAccountDataRetention",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/data-retention",
+	Code: 200})
+
+var PutAccountDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutAccountDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/data_retention/storage/{modelProvider}",
 	Code: 200})
 
 var PutEnforcedGuardrailConfiguration = smithy.NewSchema(smithy.ShapeID{
@@ -638,12 +750,47 @@ var PutModelInvocationLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/logging/modelinvocations",
 	Code: 200})
 
+var PutOrganizationDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutOrganizationDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/data_retention/organization-storage/{modelProvider}",
+	Code: 200})
+
+var PutProjectDataRetentionStorage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutProjectDataRetentionStorage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}",
+	Code: 200})
+
 var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "PutResourcePolicy",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/resource-policy",
 	Code: 201})
+
+var PutTrustedAccessProgramAccountEnrollment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramAccountEnrollment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/trusted-access-programs/{programIdentifier}/account-enrollment",
+	Code: 200})
+
+var PutTrustedAccessProgramOrganizationEnrollment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramOrganizationEnrollment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/trusted-access-programs/{programIdentifier}/organization-enrollment",
+	Code: 200})
+
+var PutTrustedAccessProgramProjectEnrollment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramProjectEnrollment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/trusted-access-programs/{programIdentifier}/project-enrollment/{projectIdentifier}",
+	Code: 200})
 
 var PutUseCaseForModelAccess = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -671,6 +818,27 @@ var StartAutomatedReasoningPolicyTestWorkflow = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartAutomatedReasoningPolicyTestWorkflow",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/test-workflows",
+	Code: 200})
+
+var StartTrustedAccessProgramAccountApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramAccountApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/trusted-access-programs/{programIdentifier}/account-application",
+	Code: 200})
+
+var StartTrustedAccessProgramOrganizationApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramOrganizationApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/trusted-access-programs/{programIdentifier}/organization-application",
+	Code: 200})
+
+var StartTrustedAccessProgramProjectApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramProjectApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/trusted-access-programs/{programIdentifier}/project-application/{projectIdentifier}",
 	Code: 200})
 
 var StopAdvancedPromptOptimizationJob = smithy.NewSchema(smithy.ShapeID{
@@ -755,6 +923,13 @@ var UpdateMarketplaceModelEndpoint = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateMarketplaceModelEndpoint",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/marketplace-model/endpoints/{endpointArn}",
+	Code: 200})
+
+var UpdateProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "UpdateProject",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/projects/{projectIdentifier}",
 	Code: 200})
 
 var UpdateProvisionedModelThroughput = smithy.NewSchema(smithy.ShapeID{
@@ -2826,6 +3001,57 @@ var DataRetentionMode_AWS_REVIEW *smithy.Schema
 var DataRetentionMode_PROVIDER_DATA_SHARE *smithy.Schema
 
 var DataRetentionMode_INHERIT *smithy.Schema
+
+var _DataRetentionStorageBucketArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DataRetentionStorageBucketArn",
+}, smithy.ShapeTypeString, 0)
+
+var DataRetentionStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DataRetentionStorageConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var DataRetentionStorageConfiguration_kmsKeyArn *smithy.Schema
+
+var DataRetentionStorageConfiguration_s3BucketArn *smithy.Schema
+
+var DataRetentionStorageConfiguration_s3BucketOwner *smithy.Schema
+
+var DataRetentionStorageDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DataRetentionStorageDestination",
+}, smithy.ShapeTypeEnum, 2)
+var DataRetentionStorageDestination_CUSTOMER_MANAGED *smithy.Schema
+
+var DataRetentionStorageDestination_AMAZON_MANAGED *smithy.Schema
+
+var DataRetentionStorageModelProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DataRetentionStorageModelProvider",
+}, smithy.ShapeTypeEnum, 2)
+var DataRetentionStorageModelProvider_ANTHROPIC *smithy.Schema
+
+var DataRetentionStorageModelProvider_OPENAI *smithy.Schema
+
+var DataRetentionStorageResourceStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DataRetentionStorageResourceStatus",
+}, smithy.ShapeTypeEnum, 3)
+var DataRetentionStorageResourceStatus_PENDING *smithy.Schema
+
+var DataRetentionStorageResourceStatus_ACTIVE *smithy.Schema
+
+var DataRetentionStorageResourceStatus_ACCESS_DENIED *smithy.Schema
+
+var DataRetentionStorageScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DataRetentionStorageScope",
+}, smithy.ShapeTypeEnum, 3)
+var DataRetentionStorageScope_ACCOUNT *smithy.Schema
+
+var DataRetentionStorageScope_ORGANIZATION *smithy.Schema
+
+var DataRetentionStorageScope_PROJECT *smithy.Schema
 
 var DimensionalPriceRate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -5215,6 +5441,69 @@ var PricingTerm = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var PricingTerm_rateCard *smithy.Schema
 
+var _ProjectArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectArn",
+}, smithy.ShapeTypeString, 0)
+
+var ProjectDataRetention = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectDataRetention",
+}, smithy.ShapeTypeStructure, 1)
+var ProjectDataRetention_mode *smithy.Schema
+
+var _ProjectIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _ProjectMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ProjectName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _ProjectResourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectResourceId",
+}, smithy.ShapeTypeString, 0)
+
+var ProjectStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectStatus",
+}, smithy.ShapeTypeEnum, 2)
+var ProjectStatus_ACTIVE *smithy.Schema
+
+var ProjectStatus_ARCHIVED *smithy.Schema
+
+var ProjectSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectSummary",
+}, smithy.ShapeTypeStructure, 7)
+var ProjectSummary_id *smithy.Schema
+
+var ProjectSummary_arn *smithy.Schema
+
+var ProjectSummary_name *smithy.Schema
+
+var ProjectSummary_status *smithy.Schema
+
+var ProjectSummary_createdAt *smithy.Schema
+
+var ProjectSummary_archivedAt *smithy.Schema
+
+var ProjectSummary_dataRetention *smithy.Schema
+
+var _ProjectSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ProjectSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ProjectSummaryList_member *smithy.Schema
+
 var _PromptRouterArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "PromptRouterArn",
@@ -5948,6 +6237,127 @@ var TrainingMetrics = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var TrainingMetrics_trainingLoss *smithy.Schema
 
+var TrustedAccessProgramApplicationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramApplicationResult",
+}, smithy.ShapeTypeUnion, 1)
+var TrustedAccessProgramApplicationResult_providerHandoff *smithy.Schema
+
+var _TrustedAccessProgramApplicationToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramApplicationToken",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _TrustedAccessProgramId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramId",
+}, smithy.ShapeTypeString, 0)
+
+var _TrustedAccessProgramIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _TrustedAccessProgramName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramName",
+}, smithy.ShapeTypeString, 0)
+
+var TrustedAccessProgramOptIn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramOptIn",
+}, smithy.ShapeTypeEnum, 3)
+var TrustedAccessProgramOptIn_INHERIT *smithy.Schema
+
+var TrustedAccessProgramOptIn_ENABLED *smithy.Schema
+
+var TrustedAccessProgramOptIn_DISABLED *smithy.Schema
+
+var TrustedAccessProgramProviderHandoff = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramProviderHandoff",
+}, smithy.ShapeTypeStructure, 3)
+var TrustedAccessProgramProviderHandoff_enrollmentUrl *smithy.Schema
+
+var TrustedAccessProgramProviderHandoff_applicationToken *smithy.Schema
+
+var TrustedAccessProgramProviderHandoff_applicationTokenExpiresAt *smithy.Schema
+
+var TrustedAccessProgramScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramScope",
+}, smithy.ShapeTypeEnum, 4)
+var TrustedAccessProgramScope_ORGANIZATION *smithy.Schema
+
+var TrustedAccessProgramScope_ACCOUNT *smithy.Schema
+
+var TrustedAccessProgramScope_PROJECT *smithy.Schema
+
+var TrustedAccessProgramScope_PROGRAM_DEFAULT *smithy.Schema
+
+var TrustedAccessProgramStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramStatus",
+}, smithy.ShapeTypeEnum, 5)
+var TrustedAccessProgramStatus_REQUESTABLE *smithy.Schema
+
+var TrustedAccessProgramStatus_ELIGIBLE *smithy.Schema
+
+var TrustedAccessProgramStatus_ENABLED *smithy.Schema
+
+var TrustedAccessProgramStatus_DISABLED *smithy.Schema
+
+var TrustedAccessProgramStatus_REVOKED *smithy.Schema
+
+var _TrustedAccessProgramSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramSummaries",
+}, smithy.ShapeTypeList, 1)
+var _TrustedAccessProgramSummaries_member *smithy.Schema
+
+var TrustedAccessProgramSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramSummary",
+}, smithy.ShapeTypeStructure, 13)
+var TrustedAccessProgramSummary_programId *smithy.Schema
+
+var TrustedAccessProgramSummary_name *smithy.Schema
+
+var TrustedAccessProgramSummary_description *smithy.Schema
+
+var TrustedAccessProgramSummary_providerName *smithy.Schema
+
+var TrustedAccessProgramSummary_detailsUrl *smithy.Schema
+
+var TrustedAccessProgramSummary_enrollmentUrl *smithy.Schema
+
+var TrustedAccessProgramSummary_status *smithy.Schema
+
+var TrustedAccessProgramSummary_statusReason *smithy.Schema
+
+var TrustedAccessProgramSummary_source *smithy.Schema
+
+var TrustedAccessProgramSummary_eligibilityScope *smithy.Schema
+
+var TrustedAccessProgramSummary_resolvedFor *smithy.Schema
+
+var TrustedAccessProgramSummary_optIn *smithy.Schema
+
+var TrustedAccessProgramSummary_updatedAt *smithy.Schema
+
+var _TrustedAccessProgramUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessProgramUrl",
+}, smithy.ShapeTypeString, 0)
+
+var TrustedAccessResolutionContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "TrustedAccessResolutionContext",
+}, smithy.ShapeTypeStructure, 2)
+var TrustedAccessResolutionContext_accountId *smithy.Schema
+
+var TrustedAccessResolutionContext_projectArn *smithy.Schema
+
 var _UsePromptResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "UsePromptResponse",
@@ -6045,6 +6455,30 @@ var VpcConfig = smithy.NewSchema(smithy.ShapeID{
 var VpcConfig_subnetIds *smithy.Schema
 
 var VpcConfig_securityGroupIds *smithy.Schema
+
+var ArchiveProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ArchiveProjectRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ArchiveProjectRequest_projectIdentifier *smithy.Schema
+
+var ArchiveProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ArchiveProjectResponse",
+}, smithy.ShapeTypeStructure, 7)
+var ArchiveProjectResponse_id *smithy.Schema
+
+var ArchiveProjectResponse_arn *smithy.Schema
+
+var ArchiveProjectResponse_name *smithy.Schema
+
+var ArchiveProjectResponse_status *smithy.Schema
+
+var ArchiveProjectResponse_createdAt *smithy.Schema
+
+var ArchiveProjectResponse_archivedAt *smithy.Schema
+
+var ArchiveProjectResponse_dataRetention *smithy.Schema
 
 var BatchDeleteAdvancedPromptOptimizationJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -6511,6 +6945,34 @@ var CreateModelInvocationJobResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateModelInvocationJobResponse_jobArn *smithy.Schema
 
+var CreateProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "CreateProjectRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CreateProjectRequest_name *smithy.Schema
+
+var CreateProjectRequest_tags *smithy.Schema
+
+var CreateProjectRequest_dataRetention *smithy.Schema
+
+var CreateProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "CreateProjectResponse",
+}, smithy.ShapeTypeStructure, 7)
+var CreateProjectResponse_id *smithy.Schema
+
+var CreateProjectResponse_arn *smithy.Schema
+
+var CreateProjectResponse_name *smithy.Schema
+
+var CreateProjectResponse_status *smithy.Schema
+
+var CreateProjectResponse_createdAt *smithy.Schema
+
+var CreateProjectResponse_archivedAt *smithy.Schema
+
+var CreateProjectResponse_dataRetention *smithy.Schema
+
 var CreatePromptRouterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "CreatePromptRouterRequest",
@@ -6556,6 +7018,17 @@ var CreateProvisionedModelThroughputResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateProvisionedModelThroughputResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateProvisionedModelThroughputResponse_provisionedModelArn *smithy.Schema
+
+var DeleteAccountDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteAccountDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteAccountDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var DeleteAccountDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteAccountDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteAutomatedReasoningPolicyBuildWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -6700,6 +7173,30 @@ var DeleteModelInvocationLoggingConfigurationResponse = smithy.NewSchema(smithy.
 	Name:      "DeleteModelInvocationLoggingConfigurationResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeleteOrganizationDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteOrganizationDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteOrganizationDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var DeleteOrganizationDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteOrganizationDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteProjectDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteProjectDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteProjectDataRetentionStorageRequest_projectIdentifier *smithy.Schema
+
+var DeleteProjectDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var DeleteProjectDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "DeleteProjectDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeletePromptRouterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "DeletePromptRouterRequest",
@@ -6768,6 +7265,30 @@ var GetAccountDataRetentionResponse = smithy.NewSchema(smithy.ShapeID{
 var GetAccountDataRetentionResponse_mode *smithy.Schema
 
 var GetAccountDataRetentionResponse_updatedAt *smithy.Schema
+
+var GetAccountDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetAccountDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetAccountDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetAccountDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 7)
+var GetAccountDataRetentionStorageResponse_scope *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse_modelProvider *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse_storageDestination *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse_storageConfiguration *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse_updatedAt *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse_kmsKeyStatus *smithy.Schema
+
+var GetAccountDataRetentionStorageResponse_s3BucketStatus *smithy.Schema
 
 var GetAdvancedPromptOptimizationJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -7086,8 +7607,10 @@ var GetFoundationModelAvailabilityResponse_regionAvailability *smithy.Schema
 var GetFoundationModelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "GetFoundationModelRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetFoundationModelRequest_modelIdentifier *smithy.Schema
+
+var GetFoundationModelRequest_projectIdentifier *smithy.Schema
 
 var GetFoundationModelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -7180,8 +7703,10 @@ var GetImportedModelResponse_customModelUnits *smithy.Schema
 var GetInferenceProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "GetInferenceProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetInferenceProfileRequest_inferenceProfileIdentifier *smithy.Schema
+
+var GetInferenceProfileRequest_projectIdentifier *smithy.Schema
 
 var GetInferenceProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -7402,6 +7927,82 @@ var GetModelInvocationLoggingConfigurationResponse = smithy.NewSchema(smithy.Sha
 }, smithy.ShapeTypeStructure, 1)
 var GetModelInvocationLoggingConfigurationResponse_loggingConfig *smithy.Schema
 
+var GetOrganizationDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetOrganizationDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetOrganizationDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetOrganizationDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 7)
+var GetOrganizationDataRetentionStorageResponse_scope *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse_modelProvider *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse_storageDestination *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse_storageConfiguration *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse_updatedAt *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse_kmsKeyStatus *smithy.Schema
+
+var GetOrganizationDataRetentionStorageResponse_s3BucketStatus *smithy.Schema
+
+var GetProjectDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetProjectDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetProjectDataRetentionStorageRequest_projectIdentifier *smithy.Schema
+
+var GetProjectDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetProjectDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetProjectDataRetentionStorageResponse_scope *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_modelProvider *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_storageDestination *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_storageConfiguration *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_updatedAt *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_kmsKeyStatus *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_s3BucketStatus *smithy.Schema
+
+var GetProjectDataRetentionStorageResponse_projectArn *smithy.Schema
+
+var GetProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetProjectRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetProjectRequest_projectIdentifier *smithy.Schema
+
+var GetProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetProjectResponse",
+}, smithy.ShapeTypeStructure, 7)
+var GetProjectResponse_id *smithy.Schema
+
+var GetProjectResponse_arn *smithy.Schema
+
+var GetProjectResponse_name *smithy.Schema
+
+var GetProjectResponse_status *smithy.Schema
+
+var GetProjectResponse_createdAt *smithy.Schema
+
+var GetProjectResponse_archivedAt *smithy.Schema
+
+var GetProjectResponse_dataRetention *smithy.Schema
+
 var GetPromptRouterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "GetPromptRouterRequest",
@@ -7479,6 +8080,88 @@ var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetResourcePolicyResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetResourcePolicyResponse_resourcePolicy *smithy.Schema
+
+var GetTrustedAccessProgramAccountEnrollmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramAccountEnrollmentRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetTrustedAccessProgramAccountEnrollmentRequest_programIdentifier *smithy.Schema
+
+var GetTrustedAccessProgramAccountEnrollmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramAccountEnrollmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetTrustedAccessProgramAccountEnrollmentResponse_optIn *smithy.Schema
+
+var GetTrustedAccessProgramAccountEnrollmentResponse_updatedAt *smithy.Schema
+
+var GetTrustedAccessProgramRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetTrustedAccessProgramRequest_programIdentifier *smithy.Schema
+
+var GetTrustedAccessProgramRequest_projectIdentifier *smithy.Schema
+
+var GetTrustedAccessProgramOrganizationEnrollmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramOrganizationEnrollmentRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetTrustedAccessProgramOrganizationEnrollmentRequest_programIdentifier *smithy.Schema
+
+var GetTrustedAccessProgramOrganizationEnrollmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramOrganizationEnrollmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetTrustedAccessProgramOrganizationEnrollmentResponse_optIn *smithy.Schema
+
+var GetTrustedAccessProgramOrganizationEnrollmentResponse_updatedAt *smithy.Schema
+
+var GetTrustedAccessProgramResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramResponse",
+}, smithy.ShapeTypeStructure, 13)
+var GetTrustedAccessProgramResponse_programId *smithy.Schema
+
+var GetTrustedAccessProgramResponse_name *smithy.Schema
+
+var GetTrustedAccessProgramResponse_description *smithy.Schema
+
+var GetTrustedAccessProgramResponse_providerName *smithy.Schema
+
+var GetTrustedAccessProgramResponse_detailsUrl *smithy.Schema
+
+var GetTrustedAccessProgramResponse_enrollmentUrl *smithy.Schema
+
+var GetTrustedAccessProgramResponse_status *smithy.Schema
+
+var GetTrustedAccessProgramResponse_statusReason *smithy.Schema
+
+var GetTrustedAccessProgramResponse_source *smithy.Schema
+
+var GetTrustedAccessProgramResponse_eligibilityScope *smithy.Schema
+
+var GetTrustedAccessProgramResponse_resolvedFor *smithy.Schema
+
+var GetTrustedAccessProgramResponse_optIn *smithy.Schema
+
+var GetTrustedAccessProgramResponse_updatedAt *smithy.Schema
+
+var GetTrustedAccessProgramProjectEnrollmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramProjectEnrollmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetTrustedAccessProgramProjectEnrollmentRequest_programIdentifier *smithy.Schema
+
+var GetTrustedAccessProgramProjectEnrollmentRequest_projectIdentifier *smithy.Schema
+
+var GetTrustedAccessProgramProjectEnrollmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "GetTrustedAccessProgramProjectEnrollmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetTrustedAccessProgramProjectEnrollmentResponse_optIn *smithy.Schema
+
+var GetTrustedAccessProgramProjectEnrollmentResponse_updatedAt *smithy.Schema
 
 var GetUseCaseForModelAccessRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -7712,7 +8395,7 @@ var ListFoundationModelAgreementOffersResponse_offers *smithy.Schema
 var ListFoundationModelsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "ListFoundationModelsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var ListFoundationModelsRequest_byProvider *smithy.Schema
 
 var ListFoundationModelsRequest_byCustomizationType *smithy.Schema
@@ -7720,6 +8403,8 @@ var ListFoundationModelsRequest_byCustomizationType *smithy.Schema
 var ListFoundationModelsRequest_byOutputModality *smithy.Schema
 
 var ListFoundationModelsRequest_byInferenceType *smithy.Schema
+
+var ListFoundationModelsRequest_projectIdentifier *smithy.Schema
 
 var ListFoundationModelsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -7774,12 +8459,14 @@ var ListImportedModelsResponse_modelSummaries *smithy.Schema
 var ListInferenceProfilesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "ListInferenceProfilesRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ListInferenceProfilesRequest_maxResults *smithy.Schema
 
 var ListInferenceProfilesRequest_nextToken *smithy.Schema
 
 var ListInferenceProfilesRequest_typeEquals *smithy.Schema
+
+var ListInferenceProfilesRequest_projectIdentifier *smithy.Schema
 
 var ListInferenceProfilesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -7923,6 +8610,24 @@ var ListModelInvocationJobsResponse_nextToken *smithy.Schema
 
 var ListModelInvocationJobsResponse_invocationJobSummaries *smithy.Schema
 
+var ListProjectsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ListProjectsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListProjectsRequest_nextToken *smithy.Schema
+
+var ListProjectsRequest_maxResults *smithy.Schema
+
+var ListProjectsRequest_statusFilter *smithy.Schema
+
+var ListProjectsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ListProjectsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListProjectsResponse_projectSummaries *smithy.Schema
+
+var ListProjectsResponse_nextToken *smithy.Schema
+
 var ListPromptRoutersRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "ListPromptRoutersRequest",
@@ -7983,6 +8688,24 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
 
+var ListTrustedAccessProgramsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ListTrustedAccessProgramsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListTrustedAccessProgramsRequest_projectIdentifier *smithy.Schema
+
+var ListTrustedAccessProgramsRequest_maxResults *smithy.Schema
+
+var ListTrustedAccessProgramsRequest_nextToken *smithy.Schema
+
+var ListTrustedAccessProgramsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "ListTrustedAccessProgramsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTrustedAccessProgramsResponse_programSummaries *smithy.Schema
+
+var ListTrustedAccessProgramsResponse_nextToken *smithy.Schema
+
 var PutAccountDataRetentionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "PutAccountDataRetentionRequest",
@@ -7996,6 +8719,34 @@ var PutAccountDataRetentionResponse = smithy.NewSchema(smithy.ShapeID{
 var PutAccountDataRetentionResponse_mode *smithy.Schema
 
 var PutAccountDataRetentionResponse_updatedAt *smithy.Schema
+
+var PutAccountDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutAccountDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 3)
+var PutAccountDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var PutAccountDataRetentionStorageRequest_storageDestination *smithy.Schema
+
+var PutAccountDataRetentionStorageRequest_storageConfiguration *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutAccountDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 7)
+var PutAccountDataRetentionStorageResponse_scope *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse_modelProvider *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse_storageDestination *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse_storageConfiguration *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse_updatedAt *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse_kmsKeyStatus *smithy.Schema
+
+var PutAccountDataRetentionStorageResponse_s3BucketStatus *smithy.Schema
 
 var PutEnforcedGuardrailConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -8026,6 +8777,66 @@ var PutModelInvocationLoggingConfigurationResponse = smithy.NewSchema(smithy.Sha
 	Name:      "PutModelInvocationLoggingConfigurationResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var PutOrganizationDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutOrganizationDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 3)
+var PutOrganizationDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var PutOrganizationDataRetentionStorageRequest_storageDestination *smithy.Schema
+
+var PutOrganizationDataRetentionStorageRequest_storageConfiguration *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutOrganizationDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 7)
+var PutOrganizationDataRetentionStorageResponse_scope *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse_modelProvider *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse_storageDestination *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse_storageConfiguration *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse_updatedAt *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse_kmsKeyStatus *smithy.Schema
+
+var PutOrganizationDataRetentionStorageResponse_s3BucketStatus *smithy.Schema
+
+var PutProjectDataRetentionStorageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutProjectDataRetentionStorageRequest",
+}, smithy.ShapeTypeStructure, 4)
+var PutProjectDataRetentionStorageRequest_projectIdentifier *smithy.Schema
+
+var PutProjectDataRetentionStorageRequest_modelProvider *smithy.Schema
+
+var PutProjectDataRetentionStorageRequest_storageDestination *smithy.Schema
+
+var PutProjectDataRetentionStorageRequest_storageConfiguration *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutProjectDataRetentionStorageResponse",
+}, smithy.ShapeTypeStructure, 8)
+var PutProjectDataRetentionStorageResponse_scope *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_modelProvider *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_storageDestination *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_storageConfiguration *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_updatedAt *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_kmsKeyStatus *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_s3BucketStatus *smithy.Schema
+
+var PutProjectDataRetentionStorageResponse_projectArn *smithy.Schema
+
 var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
 	Name:      "PutResourcePolicyRequest",
@@ -8039,6 +8850,56 @@ var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutResourcePolicyResponse",
 }, smithy.ShapeTypeStructure, 1)
 var PutResourcePolicyResponse_resourceArn *smithy.Schema
+
+var PutTrustedAccessProgramAccountEnrollmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramAccountEnrollmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var PutTrustedAccessProgramAccountEnrollmentRequest_programIdentifier *smithy.Schema
+
+var PutTrustedAccessProgramAccountEnrollmentRequest_optIn *smithy.Schema
+
+var PutTrustedAccessProgramAccountEnrollmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramAccountEnrollmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var PutTrustedAccessProgramAccountEnrollmentResponse_optIn *smithy.Schema
+
+var PutTrustedAccessProgramAccountEnrollmentResponse_updatedAt *smithy.Schema
+
+var PutTrustedAccessProgramOrganizationEnrollmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramOrganizationEnrollmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var PutTrustedAccessProgramOrganizationEnrollmentRequest_programIdentifier *smithy.Schema
+
+var PutTrustedAccessProgramOrganizationEnrollmentRequest_optIn *smithy.Schema
+
+var PutTrustedAccessProgramOrganizationEnrollmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramOrganizationEnrollmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var PutTrustedAccessProgramOrganizationEnrollmentResponse_optIn *smithy.Schema
+
+var PutTrustedAccessProgramOrganizationEnrollmentResponse_updatedAt *smithy.Schema
+
+var PutTrustedAccessProgramProjectEnrollmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramProjectEnrollmentRequest",
+}, smithy.ShapeTypeStructure, 3)
+var PutTrustedAccessProgramProjectEnrollmentRequest_programIdentifier *smithy.Schema
+
+var PutTrustedAccessProgramProjectEnrollmentRequest_projectIdentifier *smithy.Schema
+
+var PutTrustedAccessProgramProjectEnrollmentRequest_optIn *smithy.Schema
+
+var PutTrustedAccessProgramProjectEnrollmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "PutTrustedAccessProgramProjectEnrollmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var PutTrustedAccessProgramProjectEnrollmentResponse_optIn *smithy.Schema
+
+var PutTrustedAccessProgramProjectEnrollmentResponse_updatedAt *smithy.Schema
 
 var PutUseCaseForModelAccessRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -8102,6 +8963,44 @@ var StartAutomatedReasoningPolicyTestWorkflowResponse = smithy.NewSchema(smithy.
 	Name:      "StartAutomatedReasoningPolicyTestWorkflowResponse",
 }, smithy.ShapeTypeStructure, 1)
 var StartAutomatedReasoningPolicyTestWorkflowResponse_policyArn *smithy.Schema
+
+var StartTrustedAccessProgramAccountApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramAccountApplicationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var StartTrustedAccessProgramAccountApplicationRequest_programIdentifier *smithy.Schema
+
+var StartTrustedAccessProgramAccountApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramAccountApplicationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartTrustedAccessProgramAccountApplicationResponse_result *smithy.Schema
+
+var StartTrustedAccessProgramOrganizationApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramOrganizationApplicationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var StartTrustedAccessProgramOrganizationApplicationRequest_programIdentifier *smithy.Schema
+
+var StartTrustedAccessProgramOrganizationApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramOrganizationApplicationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartTrustedAccessProgramOrganizationApplicationResponse_result *smithy.Schema
+
+var StartTrustedAccessProgramProjectApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramProjectApplicationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StartTrustedAccessProgramProjectApplicationRequest_programIdentifier *smithy.Schema
+
+var StartTrustedAccessProgramProjectApplicationRequest_projectIdentifier *smithy.Schema
+
+var StartTrustedAccessProgramProjectApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "StartTrustedAccessProgramProjectApplicationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartTrustedAccessProgramProjectApplicationResponse_result *smithy.Schema
 
 var StopAdvancedPromptOptimizationJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -8320,6 +9219,34 @@ var UpdateMarketplaceModelEndpointResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateMarketplaceModelEndpointResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateMarketplaceModelEndpointResponse_marketplaceModelEndpoint *smithy.Schema
+
+var UpdateProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "UpdateProjectRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateProjectRequest_projectIdentifier *smithy.Schema
+
+var UpdateProjectRequest_name *smithy.Schema
+
+var UpdateProjectRequest_dataRetention *smithy.Schema
+
+var UpdateProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrock",
+	Name:      "UpdateProjectResponse",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateProjectResponse_id *smithy.Schema
+
+var UpdateProjectResponse_arn *smithy.Schema
+
+var UpdateProjectResponse_name *smithy.Schema
+
+var UpdateProjectResponse_status *smithy.Schema
+
+var UpdateProjectResponse_createdAt *smithy.Schema
+
+var UpdateProjectResponse_archivedAt *smithy.Schema
+
+var UpdateProjectResponse_dataRetention *smithy.Schema
 
 var UpdateProvisionedModelThroughputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrock",
@@ -9400,6 +10327,32 @@ func init() {
 	DataRetentionMode_PROVIDER_DATA_SHARE = DataRetentionMode.AddMember("PROVIDER_DATA_SHARE", smithyprelude.Unit)
 
 	DataRetentionMode_INHERIT = DataRetentionMode.AddMember("INHERIT", smithyprelude.Unit)
+
+	DataRetentionStorageConfiguration_kmsKeyArn = DataRetentionStorageConfiguration.AddMember("kmsKeyArn", _KmsKeyArn)
+
+	DataRetentionStorageConfiguration_s3BucketArn = DataRetentionStorageConfiguration.AddMember("s3BucketArn", _DataRetentionStorageBucketArn)
+
+	DataRetentionStorageConfiguration_s3BucketOwner = DataRetentionStorageConfiguration.AddMember("s3BucketOwner", _AccountId)
+
+	DataRetentionStorageDestination_CUSTOMER_MANAGED = DataRetentionStorageDestination.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
+
+	DataRetentionStorageDestination_AMAZON_MANAGED = DataRetentionStorageDestination.AddMember("AMAZON_MANAGED", smithyprelude.Unit)
+
+	DataRetentionStorageModelProvider_ANTHROPIC = DataRetentionStorageModelProvider.AddMember("ANTHROPIC", smithyprelude.Unit)
+
+	DataRetentionStorageModelProvider_OPENAI = DataRetentionStorageModelProvider.AddMember("OPENAI", smithyprelude.Unit)
+
+	DataRetentionStorageResourceStatus_PENDING = DataRetentionStorageResourceStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	DataRetentionStorageResourceStatus_ACTIVE = DataRetentionStorageResourceStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	DataRetentionStorageResourceStatus_ACCESS_DENIED = DataRetentionStorageResourceStatus.AddMember("ACCESS_DENIED", smithyprelude.Unit)
+
+	DataRetentionStorageScope_ACCOUNT = DataRetentionStorageScope.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	DataRetentionStorageScope_ORGANIZATION = DataRetentionStorageScope.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	DataRetentionStorageScope_PROJECT = DataRetentionStorageScope.AddMember("PROJECT", smithyprelude.Unit)
 
 	DimensionalPriceRate_dimension = DimensionalPriceRate.AddMember("dimension", smithyprelude.String)
 
@@ -10639,6 +11592,28 @@ func init() {
 
 	OutputDataConfig_s3Uri = OutputDataConfig.AddMember("s3Uri", _S3Uri)
 
+	ProjectDataRetention_mode = ProjectDataRetention.AddMember("mode", DataRetentionMode)
+
+	ProjectStatus_ACTIVE = ProjectStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ProjectStatus_ARCHIVED = ProjectStatus.AddMember("ARCHIVED", smithyprelude.Unit)
+
+	ProjectSummary_id = ProjectSummary.AddMember("id", _ProjectResourceId)
+
+	ProjectSummary_arn = ProjectSummary.AddMember("arn", _ProjectArn)
+
+	ProjectSummary_name = ProjectSummary.AddMember("name", _ProjectName)
+
+	ProjectSummary_status = ProjectSummary.AddMember("status", ProjectStatus)
+
+	ProjectSummary_createdAt = ProjectSummary.AddMember("createdAt", _Timestamp)
+
+	ProjectSummary_archivedAt = ProjectSummary.AddMember("archivedAt", _Timestamp)
+
+	ProjectSummary_dataRetention = ProjectSummary.AddMember("dataRetention", ProjectDataRetention)
+
+	_ProjectSummaryList_member = _ProjectSummaryList.AddMember("member", ProjectSummary)
+
 	PromptRouterStatus_AVAILABLE = PromptRouterStatus.AddMember("AVAILABLE", smithyprelude.Unit)
 
 	RoutingCriteria_responseQualityDifference = RoutingCriteria.AddMember("responseQualityDifference", smithyprelude.Double)
@@ -10743,6 +11718,70 @@ func init() {
 
 	TrainingMetrics_trainingLoss = TrainingMetrics.AddMember("trainingLoss", _MetricFloat)
 
+	TrustedAccessProgramProviderHandoff_enrollmentUrl = TrustedAccessProgramProviderHandoff.AddMember("enrollmentUrl", _TrustedAccessProgramUrl)
+
+	TrustedAccessProgramProviderHandoff_applicationToken = TrustedAccessProgramProviderHandoff.AddMember("applicationToken", _TrustedAccessProgramApplicationToken)
+
+	TrustedAccessProgramProviderHandoff_applicationTokenExpiresAt = TrustedAccessProgramProviderHandoff.AddMember("applicationTokenExpiresAt", _Timestamp)
+
+	TrustedAccessProgramApplicationResult_providerHandoff = TrustedAccessProgramApplicationResult.AddMember("providerHandoff", TrustedAccessProgramProviderHandoff)
+
+	TrustedAccessProgramOptIn_INHERIT = TrustedAccessProgramOptIn.AddMember("INHERIT", smithyprelude.Unit)
+
+	TrustedAccessProgramOptIn_ENABLED = TrustedAccessProgramOptIn.AddMember("ENABLED", smithyprelude.Unit)
+
+	TrustedAccessProgramOptIn_DISABLED = TrustedAccessProgramOptIn.AddMember("DISABLED", smithyprelude.Unit)
+
+	TrustedAccessProgramScope_ORGANIZATION = TrustedAccessProgramScope.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	TrustedAccessProgramScope_ACCOUNT = TrustedAccessProgramScope.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	TrustedAccessProgramScope_PROJECT = TrustedAccessProgramScope.AddMember("PROJECT", smithyprelude.Unit)
+
+	TrustedAccessProgramScope_PROGRAM_DEFAULT = TrustedAccessProgramScope.AddMember("PROGRAM_DEFAULT", smithyprelude.Unit)
+
+	TrustedAccessProgramStatus_REQUESTABLE = TrustedAccessProgramStatus.AddMember("REQUESTABLE", smithyprelude.Unit)
+
+	TrustedAccessProgramStatus_ELIGIBLE = TrustedAccessProgramStatus.AddMember("ELIGIBLE", smithyprelude.Unit)
+
+	TrustedAccessProgramStatus_ENABLED = TrustedAccessProgramStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	TrustedAccessProgramStatus_DISABLED = TrustedAccessProgramStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	TrustedAccessProgramStatus_REVOKED = TrustedAccessProgramStatus.AddMember("REVOKED", smithyprelude.Unit)
+
+	TrustedAccessResolutionContext_accountId = TrustedAccessResolutionContext.AddMember("accountId", _AccountId)
+
+	TrustedAccessResolutionContext_projectArn = TrustedAccessResolutionContext.AddMember("projectArn", _ProjectArn)
+
+	TrustedAccessProgramSummary_programId = TrustedAccessProgramSummary.AddMember("programId", _TrustedAccessProgramId)
+
+	TrustedAccessProgramSummary_name = TrustedAccessProgramSummary.AddMember("name", _TrustedAccessProgramName)
+
+	TrustedAccessProgramSummary_description = TrustedAccessProgramSummary.AddMember("description", smithyprelude.String)
+
+	TrustedAccessProgramSummary_providerName = TrustedAccessProgramSummary.AddMember("providerName", _BrandedName)
+
+	TrustedAccessProgramSummary_detailsUrl = TrustedAccessProgramSummary.AddMember("detailsUrl", _TrustedAccessProgramUrl)
+
+	TrustedAccessProgramSummary_enrollmentUrl = TrustedAccessProgramSummary.AddMember("enrollmentUrl", _TrustedAccessProgramUrl)
+
+	TrustedAccessProgramSummary_status = TrustedAccessProgramSummary.AddMember("status", TrustedAccessProgramStatus)
+
+	TrustedAccessProgramSummary_statusReason = TrustedAccessProgramSummary.AddMember("statusReason", smithyprelude.String)
+
+	TrustedAccessProgramSummary_source = TrustedAccessProgramSummary.AddMember("source", TrustedAccessProgramScope)
+
+	TrustedAccessProgramSummary_eligibilityScope = TrustedAccessProgramSummary.AddMember("eligibilityScope", TrustedAccessProgramScope)
+
+	TrustedAccessProgramSummary_resolvedFor = TrustedAccessProgramSummary.AddMember("resolvedFor", TrustedAccessResolutionContext)
+
+	TrustedAccessProgramSummary_optIn = TrustedAccessProgramSummary.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	TrustedAccessProgramSummary_updatedAt = TrustedAccessProgramSummary.AddMember("updatedAt", _Timestamp)
+
+	_TrustedAccessProgramSummaries_member = _TrustedAccessProgramSummaries.AddMember("member", TrustedAccessProgramSummary)
+
 	Validator_s3Uri = Validator.AddMember("s3Uri", _S3Uri)
 
 	_Validators_member = _Validators.AddMember("member", Validator)
@@ -10754,6 +11793,22 @@ func init() {
 	ValidatorMetric_validationLoss = ValidatorMetric.AddMember("validationLoss", _MetricFloat)
 
 	_ValidationMetrics_member = _ValidationMetrics.AddMember("member", ValidatorMetric)
+
+	ArchiveProjectRequest_projectIdentifier = ArchiveProjectRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	ArchiveProjectResponse_id = ArchiveProjectResponse.AddMember("id", _ProjectResourceId)
+
+	ArchiveProjectResponse_arn = ArchiveProjectResponse.AddMember("arn", _ProjectArn)
+
+	ArchiveProjectResponse_name = ArchiveProjectResponse.AddMember("name", _ProjectName)
+
+	ArchiveProjectResponse_status = ArchiveProjectResponse.AddMember("status", ProjectStatus)
+
+	ArchiveProjectResponse_createdAt = ArchiveProjectResponse.AddMember("createdAt", _Timestamp)
+
+	ArchiveProjectResponse_archivedAt = ArchiveProjectResponse.AddMember("archivedAt", _Timestamp)
+
+	ArchiveProjectResponse_dataRetention = ArchiveProjectResponse.AddMember("dataRetention", ProjectDataRetention)
 
 	BatchDeleteAdvancedPromptOptimizationJobRequest_jobIdentifiers = BatchDeleteAdvancedPromptOptimizationJobRequest.AddMember("jobIdentifiers", _AdvancedPromptOptimizationJobIdentifiers)
 
@@ -11067,6 +12122,26 @@ func init() {
 
 	CreateModelInvocationJobResponse_jobArn = CreateModelInvocationJobResponse.AddMember("jobArn", _ModelInvocationJobArn)
 
+	CreateProjectRequest_name = CreateProjectRequest.AddMember("name", _ProjectName)
+
+	CreateProjectRequest_tags = CreateProjectRequest.AddMember("tags", _TagList)
+
+	CreateProjectRequest_dataRetention = CreateProjectRequest.AddMember("dataRetention", ProjectDataRetention)
+
+	CreateProjectResponse_id = CreateProjectResponse.AddMember("id", _ProjectResourceId)
+
+	CreateProjectResponse_arn = CreateProjectResponse.AddMember("arn", _ProjectArn)
+
+	CreateProjectResponse_name = CreateProjectResponse.AddMember("name", _ProjectName)
+
+	CreateProjectResponse_status = CreateProjectResponse.AddMember("status", ProjectStatus)
+
+	CreateProjectResponse_createdAt = CreateProjectResponse.AddMember("createdAt", _Timestamp)
+
+	CreateProjectResponse_archivedAt = CreateProjectResponse.AddMember("archivedAt", _Timestamp)
+
+	CreateProjectResponse_dataRetention = CreateProjectResponse.AddMember("dataRetention", ProjectDataRetention)
+
 	CreatePromptRouterRequest_clientRequestToken = CreatePromptRouterRequest.AddMember("clientRequestToken", _IdempotencyToken)
 
 	CreatePromptRouterRequest_promptRouterName = CreatePromptRouterRequest.AddMember("promptRouterName", _PromptRouterName)
@@ -11096,6 +12171,8 @@ func init() {
 	CreateProvisionedModelThroughputRequest_tags = CreateProvisionedModelThroughputRequest.AddMember("tags", _TagList)
 
 	CreateProvisionedModelThroughputResponse_provisionedModelArn = CreateProvisionedModelThroughputResponse.AddMember("provisionedModelArn", _ProvisionedModelArn)
+
+	DeleteAccountDataRetentionStorageRequest_modelProvider = DeleteAccountDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
 
 	DeleteAutomatedReasoningPolicyBuildWorkflowRequest_policyArn = DeleteAutomatedReasoningPolicyBuildWorkflowRequest.AddMember("policyArn", _AutomatedReasoningPolicyArn, &smithytraits.HTTPLabel{})
 
@@ -11131,6 +12208,12 @@ func init() {
 
 	DeleteMarketplaceModelEndpointRequest_endpointArn = DeleteMarketplaceModelEndpointRequest.AddMember("endpointArn", _Arn, &smithytraits.HTTPLabel{})
 
+	DeleteOrganizationDataRetentionStorageRequest_modelProvider = DeleteOrganizationDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	DeleteProjectDataRetentionStorageRequest_projectIdentifier = DeleteProjectDataRetentionStorageRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	DeleteProjectDataRetentionStorageRequest_modelProvider = DeleteProjectDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
 	DeletePromptRouterRequest_promptRouterArn = DeletePromptRouterRequest.AddMember("promptRouterArn", _PromptRouterArn, &smithytraits.HTTPLabel{})
 
 	DeleteProvisionedModelThroughputRequest_provisionedModelId = DeleteProvisionedModelThroughputRequest.AddMember("provisionedModelId", _ProvisionedModelId, &smithytraits.HTTPLabel{})
@@ -11146,6 +12229,22 @@ func init() {
 	GetAccountDataRetentionResponse_mode = GetAccountDataRetentionResponse.AddMember("mode", DataRetentionMode)
 
 	GetAccountDataRetentionResponse_updatedAt = GetAccountDataRetentionResponse.AddMember("updatedAt", _Timestamp)
+
+	GetAccountDataRetentionStorageRequest_modelProvider = GetAccountDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	GetAccountDataRetentionStorageResponse_scope = GetAccountDataRetentionStorageResponse.AddMember("scope", DataRetentionStorageScope)
+
+	GetAccountDataRetentionStorageResponse_modelProvider = GetAccountDataRetentionStorageResponse.AddMember("modelProvider", DataRetentionStorageModelProvider)
+
+	GetAccountDataRetentionStorageResponse_storageDestination = GetAccountDataRetentionStorageResponse.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	GetAccountDataRetentionStorageResponse_storageConfiguration = GetAccountDataRetentionStorageResponse.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	GetAccountDataRetentionStorageResponse_updatedAt = GetAccountDataRetentionStorageResponse.AddMember("updatedAt", _Timestamp)
+
+	GetAccountDataRetentionStorageResponse_kmsKeyStatus = GetAccountDataRetentionStorageResponse.AddMember("kmsKeyStatus", DataRetentionStorageResourceStatus)
+
+	GetAccountDataRetentionStorageResponse_s3BucketStatus = GetAccountDataRetentionStorageResponse.AddMember("s3BucketStatus", DataRetentionStorageResourceStatus)
 
 	GetAdvancedPromptOptimizationJobRequest_jobIdentifier = GetAdvancedPromptOptimizationJobRequest.AddMember("jobIdentifier", _AdvancedPromptOptimizationJobIdentifier, &smithytraits.HTTPLabel{})
 
@@ -11367,6 +12466,8 @@ func init() {
 
 	GetFoundationModelRequest_modelIdentifier = GetFoundationModelRequest.AddMember("modelIdentifier", _GetFoundationModelIdentifier, &smithytraits.HTTPLabel{})
 
+	GetFoundationModelRequest_projectIdentifier = GetFoundationModelRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPQuery{Name: "projectIdentifier"})
+
 	GetFoundationModelResponse_modelDetails = GetFoundationModelResponse.AddMember("modelDetails", FoundationModelDetails)
 
 	GetGuardrailRequest_guardrailIdentifier = GetGuardrailRequest.AddMember("guardrailIdentifier", _GuardrailIdentifier, &smithytraits.HTTPLabel{})
@@ -11436,6 +12537,8 @@ func init() {
 	GetImportedModelResponse_customModelUnits = GetImportedModelResponse.AddMember("customModelUnits", CustomModelUnits)
 
 	GetInferenceProfileRequest_inferenceProfileIdentifier = GetInferenceProfileRequest.AddMember("inferenceProfileIdentifier", _InferenceProfileIdentifier, &smithytraits.HTTPLabel{})
+
+	GetInferenceProfileRequest_projectIdentifier = GetInferenceProfileRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPQuery{Name: "projectIdentifier"})
 
 	GetInferenceProfileResponse_inferenceProfileName = GetInferenceProfileResponse.AddMember("inferenceProfileName", _InferenceProfileName)
 
@@ -11603,6 +12706,58 @@ func init() {
 
 	GetModelInvocationLoggingConfigurationResponse_loggingConfig = GetModelInvocationLoggingConfigurationResponse.AddMember("loggingConfig", LoggingConfig)
 
+	GetOrganizationDataRetentionStorageRequest_modelProvider = GetOrganizationDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	GetOrganizationDataRetentionStorageResponse_scope = GetOrganizationDataRetentionStorageResponse.AddMember("scope", DataRetentionStorageScope)
+
+	GetOrganizationDataRetentionStorageResponse_modelProvider = GetOrganizationDataRetentionStorageResponse.AddMember("modelProvider", DataRetentionStorageModelProvider)
+
+	GetOrganizationDataRetentionStorageResponse_storageDestination = GetOrganizationDataRetentionStorageResponse.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	GetOrganizationDataRetentionStorageResponse_storageConfiguration = GetOrganizationDataRetentionStorageResponse.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	GetOrganizationDataRetentionStorageResponse_updatedAt = GetOrganizationDataRetentionStorageResponse.AddMember("updatedAt", _Timestamp)
+
+	GetOrganizationDataRetentionStorageResponse_kmsKeyStatus = GetOrganizationDataRetentionStorageResponse.AddMember("kmsKeyStatus", DataRetentionStorageResourceStatus)
+
+	GetOrganizationDataRetentionStorageResponse_s3BucketStatus = GetOrganizationDataRetentionStorageResponse.AddMember("s3BucketStatus", DataRetentionStorageResourceStatus)
+
+	GetProjectDataRetentionStorageRequest_projectIdentifier = GetProjectDataRetentionStorageRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	GetProjectDataRetentionStorageRequest_modelProvider = GetProjectDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	GetProjectDataRetentionStorageResponse_scope = GetProjectDataRetentionStorageResponse.AddMember("scope", DataRetentionStorageScope)
+
+	GetProjectDataRetentionStorageResponse_modelProvider = GetProjectDataRetentionStorageResponse.AddMember("modelProvider", DataRetentionStorageModelProvider)
+
+	GetProjectDataRetentionStorageResponse_storageDestination = GetProjectDataRetentionStorageResponse.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	GetProjectDataRetentionStorageResponse_storageConfiguration = GetProjectDataRetentionStorageResponse.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	GetProjectDataRetentionStorageResponse_updatedAt = GetProjectDataRetentionStorageResponse.AddMember("updatedAt", _Timestamp)
+
+	GetProjectDataRetentionStorageResponse_kmsKeyStatus = GetProjectDataRetentionStorageResponse.AddMember("kmsKeyStatus", DataRetentionStorageResourceStatus)
+
+	GetProjectDataRetentionStorageResponse_s3BucketStatus = GetProjectDataRetentionStorageResponse.AddMember("s3BucketStatus", DataRetentionStorageResourceStatus)
+
+	GetProjectDataRetentionStorageResponse_projectArn = GetProjectDataRetentionStorageResponse.AddMember("projectArn", _ProjectArn)
+
+	GetProjectRequest_projectIdentifier = GetProjectRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	GetProjectResponse_id = GetProjectResponse.AddMember("id", _ProjectResourceId)
+
+	GetProjectResponse_arn = GetProjectResponse.AddMember("arn", _ProjectArn)
+
+	GetProjectResponse_name = GetProjectResponse.AddMember("name", _ProjectName)
+
+	GetProjectResponse_status = GetProjectResponse.AddMember("status", ProjectStatus)
+
+	GetProjectResponse_createdAt = GetProjectResponse.AddMember("createdAt", _Timestamp)
+
+	GetProjectResponse_archivedAt = GetProjectResponse.AddMember("archivedAt", _Timestamp)
+
+	GetProjectResponse_dataRetention = GetProjectResponse.AddMember("dataRetention", ProjectDataRetention)
+
 	GetPromptRouterRequest_promptRouterArn = GetPromptRouterRequest.AddMember("promptRouterArn", _PromptRouterArn, &smithytraits.HTTPLabel{})
 
 	GetPromptRouterResponse_promptRouterName = GetPromptRouterResponse.AddMember("promptRouterName", _PromptRouterName)
@@ -11656,6 +12811,56 @@ func init() {
 	GetResourcePolicyRequest_resourceArn = GetResourcePolicyRequest.AddMember("resourceArn", _ResourcePolicyResourceArn, &smithytraits.HTTPLabel{})
 
 	GetResourcePolicyResponse_resourcePolicy = GetResourcePolicyResponse.AddMember("resourcePolicy", _ResourcePolicyDocument)
+
+	GetTrustedAccessProgramAccountEnrollmentRequest_programIdentifier = GetTrustedAccessProgramAccountEnrollmentRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	GetTrustedAccessProgramAccountEnrollmentResponse_optIn = GetTrustedAccessProgramAccountEnrollmentResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	GetTrustedAccessProgramAccountEnrollmentResponse_updatedAt = GetTrustedAccessProgramAccountEnrollmentResponse.AddMember("updatedAt", _Timestamp)
+
+	GetTrustedAccessProgramRequest_programIdentifier = GetTrustedAccessProgramRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	GetTrustedAccessProgramRequest_projectIdentifier = GetTrustedAccessProgramRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPQuery{Name: "projectIdentifier"})
+
+	GetTrustedAccessProgramOrganizationEnrollmentRequest_programIdentifier = GetTrustedAccessProgramOrganizationEnrollmentRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	GetTrustedAccessProgramOrganizationEnrollmentResponse_optIn = GetTrustedAccessProgramOrganizationEnrollmentResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	GetTrustedAccessProgramOrganizationEnrollmentResponse_updatedAt = GetTrustedAccessProgramOrganizationEnrollmentResponse.AddMember("updatedAt", _Timestamp)
+
+	GetTrustedAccessProgramResponse_programId = GetTrustedAccessProgramResponse.AddMember("programId", _TrustedAccessProgramId)
+
+	GetTrustedAccessProgramResponse_name = GetTrustedAccessProgramResponse.AddMember("name", _TrustedAccessProgramName)
+
+	GetTrustedAccessProgramResponse_description = GetTrustedAccessProgramResponse.AddMember("description", smithyprelude.String)
+
+	GetTrustedAccessProgramResponse_providerName = GetTrustedAccessProgramResponse.AddMember("providerName", _BrandedName)
+
+	GetTrustedAccessProgramResponse_detailsUrl = GetTrustedAccessProgramResponse.AddMember("detailsUrl", _TrustedAccessProgramUrl)
+
+	GetTrustedAccessProgramResponse_enrollmentUrl = GetTrustedAccessProgramResponse.AddMember("enrollmentUrl", _TrustedAccessProgramUrl)
+
+	GetTrustedAccessProgramResponse_status = GetTrustedAccessProgramResponse.AddMember("status", TrustedAccessProgramStatus)
+
+	GetTrustedAccessProgramResponse_statusReason = GetTrustedAccessProgramResponse.AddMember("statusReason", smithyprelude.String)
+
+	GetTrustedAccessProgramResponse_source = GetTrustedAccessProgramResponse.AddMember("source", TrustedAccessProgramScope)
+
+	GetTrustedAccessProgramResponse_eligibilityScope = GetTrustedAccessProgramResponse.AddMember("eligibilityScope", TrustedAccessProgramScope)
+
+	GetTrustedAccessProgramResponse_resolvedFor = GetTrustedAccessProgramResponse.AddMember("resolvedFor", TrustedAccessResolutionContext)
+
+	GetTrustedAccessProgramResponse_optIn = GetTrustedAccessProgramResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	GetTrustedAccessProgramResponse_updatedAt = GetTrustedAccessProgramResponse.AddMember("updatedAt", _Timestamp)
+
+	GetTrustedAccessProgramProjectEnrollmentRequest_programIdentifier = GetTrustedAccessProgramProjectEnrollmentRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	GetTrustedAccessProgramProjectEnrollmentRequest_projectIdentifier = GetTrustedAccessProgramProjectEnrollmentRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	GetTrustedAccessProgramProjectEnrollmentResponse_optIn = GetTrustedAccessProgramProjectEnrollmentResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	GetTrustedAccessProgramProjectEnrollmentResponse_updatedAt = GetTrustedAccessProgramProjectEnrollmentResponse.AddMember("updatedAt", _Timestamp)
 
 	GetUseCaseForModelAccessResponse_formData = GetUseCaseForModelAccessResponse.AddMember("formData", _AcknowledgementFormDataBody)
 
@@ -11805,6 +13010,8 @@ func init() {
 
 	ListFoundationModelsRequest_byInferenceType = ListFoundationModelsRequest.AddMember("byInferenceType", InferenceType, &smithytraits.HTTPQuery{Name: "byInferenceType"})
 
+	ListFoundationModelsRequest_projectIdentifier = ListFoundationModelsRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPQuery{Name: "projectIdentifier"})
+
 	ListFoundationModelsResponse_modelSummaries = ListFoundationModelsResponse.AddMember("modelSummaries", _FoundationModelSummaryList)
 
 	ListGuardrailsRequest_guardrailIdentifier = ListGuardrailsRequest.AddMember("guardrailIdentifier", _GuardrailIdentifier, &smithytraits.HTTPQuery{Name: "guardrailIdentifier"})
@@ -11840,6 +13047,8 @@ func init() {
 	ListInferenceProfilesRequest_nextToken = ListInferenceProfilesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 
 	ListInferenceProfilesRequest_typeEquals = ListInferenceProfilesRequest.AddMember("typeEquals", InferenceProfileType, &smithytraits.HTTPQuery{Name: "type"})
+
+	ListInferenceProfilesRequest_projectIdentifier = ListInferenceProfilesRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPQuery{Name: "projectIdentifier"})
 
 	ListInferenceProfilesResponse_inferenceProfileSummaries = ListInferenceProfilesResponse.AddMember("inferenceProfileSummaries", _InferenceProfileSummaries)
 
@@ -11939,6 +13148,16 @@ func init() {
 
 	ListModelInvocationJobsResponse_invocationJobSummaries = ListModelInvocationJobsResponse.AddMember("invocationJobSummaries", _ModelInvocationJobSummaries)
 
+	ListProjectsRequest_nextToken = ListProjectsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListProjectsRequest_maxResults = ListProjectsRequest.AddMember("maxResults", _ProjectMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListProjectsRequest_statusFilter = ListProjectsRequest.AddMember("statusFilter", ProjectStatus, &smithytraits.HTTPQuery{Name: "statusFilter"})
+
+	ListProjectsResponse_projectSummaries = ListProjectsResponse.AddMember("projectSummaries", _ProjectSummaryList)
+
+	ListProjectsResponse_nextToken = ListProjectsResponse.AddMember("nextToken", _PaginationToken)
+
 	ListPromptRoutersRequest_maxResults = ListPromptRoutersRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListPromptRoutersRequest_nextToken = ListPromptRoutersRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -11975,11 +13194,41 @@ func init() {
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
 
+	ListTrustedAccessProgramsRequest_projectIdentifier = ListTrustedAccessProgramsRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPQuery{Name: "projectIdentifier"})
+
+	ListTrustedAccessProgramsRequest_maxResults = ListTrustedAccessProgramsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTrustedAccessProgramsRequest_nextToken = ListTrustedAccessProgramsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTrustedAccessProgramsResponse_programSummaries = ListTrustedAccessProgramsResponse.AddMember("programSummaries", _TrustedAccessProgramSummaries)
+
+	ListTrustedAccessProgramsResponse_nextToken = ListTrustedAccessProgramsResponse.AddMember("nextToken", _PaginationToken)
+
 	PutAccountDataRetentionRequest_mode = PutAccountDataRetentionRequest.AddMember("mode", DataRetentionMode)
 
 	PutAccountDataRetentionResponse_mode = PutAccountDataRetentionResponse.AddMember("mode", DataRetentionMode)
 
 	PutAccountDataRetentionResponse_updatedAt = PutAccountDataRetentionResponse.AddMember("updatedAt", _Timestamp)
+
+	PutAccountDataRetentionStorageRequest_modelProvider = PutAccountDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	PutAccountDataRetentionStorageRequest_storageDestination = PutAccountDataRetentionStorageRequest.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	PutAccountDataRetentionStorageRequest_storageConfiguration = PutAccountDataRetentionStorageRequest.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	PutAccountDataRetentionStorageResponse_scope = PutAccountDataRetentionStorageResponse.AddMember("scope", DataRetentionStorageScope)
+
+	PutAccountDataRetentionStorageResponse_modelProvider = PutAccountDataRetentionStorageResponse.AddMember("modelProvider", DataRetentionStorageModelProvider)
+
+	PutAccountDataRetentionStorageResponse_storageDestination = PutAccountDataRetentionStorageResponse.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	PutAccountDataRetentionStorageResponse_storageConfiguration = PutAccountDataRetentionStorageResponse.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	PutAccountDataRetentionStorageResponse_updatedAt = PutAccountDataRetentionStorageResponse.AddMember("updatedAt", _Timestamp)
+
+	PutAccountDataRetentionStorageResponse_kmsKeyStatus = PutAccountDataRetentionStorageResponse.AddMember("kmsKeyStatus", DataRetentionStorageResourceStatus)
+
+	PutAccountDataRetentionStorageResponse_s3BucketStatus = PutAccountDataRetentionStorageResponse.AddMember("s3BucketStatus", DataRetentionStorageResourceStatus)
 
 	PutEnforcedGuardrailConfigurationRequest_configId = PutEnforcedGuardrailConfigurationRequest.AddMember("configId", _AccountEnforcedGuardrailConfigurationId)
 
@@ -11993,11 +13242,81 @@ func init() {
 
 	PutModelInvocationLoggingConfigurationRequest_loggingConfig = PutModelInvocationLoggingConfigurationRequest.AddMember("loggingConfig", LoggingConfig)
 
+	PutOrganizationDataRetentionStorageRequest_modelProvider = PutOrganizationDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	PutOrganizationDataRetentionStorageRequest_storageDestination = PutOrganizationDataRetentionStorageRequest.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	PutOrganizationDataRetentionStorageRequest_storageConfiguration = PutOrganizationDataRetentionStorageRequest.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	PutOrganizationDataRetentionStorageResponse_scope = PutOrganizationDataRetentionStorageResponse.AddMember("scope", DataRetentionStorageScope)
+
+	PutOrganizationDataRetentionStorageResponse_modelProvider = PutOrganizationDataRetentionStorageResponse.AddMember("modelProvider", DataRetentionStorageModelProvider)
+
+	PutOrganizationDataRetentionStorageResponse_storageDestination = PutOrganizationDataRetentionStorageResponse.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	PutOrganizationDataRetentionStorageResponse_storageConfiguration = PutOrganizationDataRetentionStorageResponse.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	PutOrganizationDataRetentionStorageResponse_updatedAt = PutOrganizationDataRetentionStorageResponse.AddMember("updatedAt", _Timestamp)
+
+	PutOrganizationDataRetentionStorageResponse_kmsKeyStatus = PutOrganizationDataRetentionStorageResponse.AddMember("kmsKeyStatus", DataRetentionStorageResourceStatus)
+
+	PutOrganizationDataRetentionStorageResponse_s3BucketStatus = PutOrganizationDataRetentionStorageResponse.AddMember("s3BucketStatus", DataRetentionStorageResourceStatus)
+
+	PutProjectDataRetentionStorageRequest_projectIdentifier = PutProjectDataRetentionStorageRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	PutProjectDataRetentionStorageRequest_modelProvider = PutProjectDataRetentionStorageRequest.AddMember("modelProvider", DataRetentionStorageModelProvider, &smithytraits.HTTPLabel{})
+
+	PutProjectDataRetentionStorageRequest_storageDestination = PutProjectDataRetentionStorageRequest.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	PutProjectDataRetentionStorageRequest_storageConfiguration = PutProjectDataRetentionStorageRequest.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	PutProjectDataRetentionStorageResponse_scope = PutProjectDataRetentionStorageResponse.AddMember("scope", DataRetentionStorageScope)
+
+	PutProjectDataRetentionStorageResponse_modelProvider = PutProjectDataRetentionStorageResponse.AddMember("modelProvider", DataRetentionStorageModelProvider)
+
+	PutProjectDataRetentionStorageResponse_storageDestination = PutProjectDataRetentionStorageResponse.AddMember("storageDestination", DataRetentionStorageDestination)
+
+	PutProjectDataRetentionStorageResponse_storageConfiguration = PutProjectDataRetentionStorageResponse.AddMember("storageConfiguration", DataRetentionStorageConfiguration)
+
+	PutProjectDataRetentionStorageResponse_updatedAt = PutProjectDataRetentionStorageResponse.AddMember("updatedAt", _Timestamp)
+
+	PutProjectDataRetentionStorageResponse_kmsKeyStatus = PutProjectDataRetentionStorageResponse.AddMember("kmsKeyStatus", DataRetentionStorageResourceStatus)
+
+	PutProjectDataRetentionStorageResponse_s3BucketStatus = PutProjectDataRetentionStorageResponse.AddMember("s3BucketStatus", DataRetentionStorageResourceStatus)
+
+	PutProjectDataRetentionStorageResponse_projectArn = PutProjectDataRetentionStorageResponse.AddMember("projectArn", _ProjectArn)
+
 	PutResourcePolicyRequest_resourceArn = PutResourcePolicyRequest.AddMember("resourceArn", _ResourcePolicyResourceArn)
 
 	PutResourcePolicyRequest_resourcePolicy = PutResourcePolicyRequest.AddMember("resourcePolicy", _ResourcePolicyDocument)
 
 	PutResourcePolicyResponse_resourceArn = PutResourcePolicyResponse.AddMember("resourceArn", _ResourcePolicyResourceArn)
+
+	PutTrustedAccessProgramAccountEnrollmentRequest_programIdentifier = PutTrustedAccessProgramAccountEnrollmentRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	PutTrustedAccessProgramAccountEnrollmentRequest_optIn = PutTrustedAccessProgramAccountEnrollmentRequest.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	PutTrustedAccessProgramAccountEnrollmentResponse_optIn = PutTrustedAccessProgramAccountEnrollmentResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	PutTrustedAccessProgramAccountEnrollmentResponse_updatedAt = PutTrustedAccessProgramAccountEnrollmentResponse.AddMember("updatedAt", _Timestamp)
+
+	PutTrustedAccessProgramOrganizationEnrollmentRequest_programIdentifier = PutTrustedAccessProgramOrganizationEnrollmentRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	PutTrustedAccessProgramOrganizationEnrollmentRequest_optIn = PutTrustedAccessProgramOrganizationEnrollmentRequest.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	PutTrustedAccessProgramOrganizationEnrollmentResponse_optIn = PutTrustedAccessProgramOrganizationEnrollmentResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	PutTrustedAccessProgramOrganizationEnrollmentResponse_updatedAt = PutTrustedAccessProgramOrganizationEnrollmentResponse.AddMember("updatedAt", _Timestamp)
+
+	PutTrustedAccessProgramProjectEnrollmentRequest_programIdentifier = PutTrustedAccessProgramProjectEnrollmentRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	PutTrustedAccessProgramProjectEnrollmentRequest_projectIdentifier = PutTrustedAccessProgramProjectEnrollmentRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	PutTrustedAccessProgramProjectEnrollmentRequest_optIn = PutTrustedAccessProgramProjectEnrollmentRequest.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	PutTrustedAccessProgramProjectEnrollmentResponse_optIn = PutTrustedAccessProgramProjectEnrollmentResponse.AddMember("optIn", TrustedAccessProgramOptIn)
+
+	PutTrustedAccessProgramProjectEnrollmentResponse_updatedAt = PutTrustedAccessProgramProjectEnrollmentResponse.AddMember("updatedAt", _Timestamp)
 
 	PutUseCaseForModelAccessRequest_formData = PutUseCaseForModelAccessRequest.AddMember("formData", _AcknowledgementFormDataBody)
 
@@ -12028,6 +13347,20 @@ func init() {
 	StartAutomatedReasoningPolicyTestWorkflowRequest_clientRequestToken = StartAutomatedReasoningPolicyTestWorkflowRequest.AddMember("clientRequestToken", _IdempotencyToken)
 
 	StartAutomatedReasoningPolicyTestWorkflowResponse_policyArn = StartAutomatedReasoningPolicyTestWorkflowResponse.AddMember("policyArn", _AutomatedReasoningPolicyArn)
+
+	StartTrustedAccessProgramAccountApplicationRequest_programIdentifier = StartTrustedAccessProgramAccountApplicationRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	StartTrustedAccessProgramAccountApplicationResponse_result = StartTrustedAccessProgramAccountApplicationResponse.AddMember("result", TrustedAccessProgramApplicationResult)
+
+	StartTrustedAccessProgramOrganizationApplicationRequest_programIdentifier = StartTrustedAccessProgramOrganizationApplicationRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	StartTrustedAccessProgramOrganizationApplicationResponse_result = StartTrustedAccessProgramOrganizationApplicationResponse.AddMember("result", TrustedAccessProgramApplicationResult)
+
+	StartTrustedAccessProgramProjectApplicationRequest_programIdentifier = StartTrustedAccessProgramProjectApplicationRequest.AddMember("programIdentifier", _TrustedAccessProgramIdentifier, &smithytraits.HTTPLabel{})
+
+	StartTrustedAccessProgramProjectApplicationRequest_projectIdentifier = StartTrustedAccessProgramProjectApplicationRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	StartTrustedAccessProgramProjectApplicationResponse_result = StartTrustedAccessProgramProjectApplicationResponse.AddMember("result", TrustedAccessProgramApplicationResult)
 
 	StopAdvancedPromptOptimizationJobRequest_jobIdentifier = StopAdvancedPromptOptimizationJobRequest.AddMember("jobIdentifier", _AdvancedPromptOptimizationJobIdentifier, &smithytraits.HTTPLabel{})
 
@@ -12144,6 +13477,26 @@ func init() {
 	UpdateMarketplaceModelEndpointRequest_clientRequestToken = UpdateMarketplaceModelEndpointRequest.AddMember("clientRequestToken", _IdempotencyToken)
 
 	UpdateMarketplaceModelEndpointResponse_marketplaceModelEndpoint = UpdateMarketplaceModelEndpointResponse.AddMember("marketplaceModelEndpoint", MarketplaceModelEndpoint)
+
+	UpdateProjectRequest_projectIdentifier = UpdateProjectRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPLabel{})
+
+	UpdateProjectRequest_name = UpdateProjectRequest.AddMember("name", _ProjectName)
+
+	UpdateProjectRequest_dataRetention = UpdateProjectRequest.AddMember("dataRetention", ProjectDataRetention)
+
+	UpdateProjectResponse_id = UpdateProjectResponse.AddMember("id", _ProjectResourceId)
+
+	UpdateProjectResponse_arn = UpdateProjectResponse.AddMember("arn", _ProjectArn)
+
+	UpdateProjectResponse_name = UpdateProjectResponse.AddMember("name", _ProjectName)
+
+	UpdateProjectResponse_status = UpdateProjectResponse.AddMember("status", ProjectStatus)
+
+	UpdateProjectResponse_createdAt = UpdateProjectResponse.AddMember("createdAt", _Timestamp)
+
+	UpdateProjectResponse_archivedAt = UpdateProjectResponse.AddMember("archivedAt", _Timestamp)
+
+	UpdateProjectResponse_dataRetention = UpdateProjectResponse.AddMember("dataRetention", ProjectDataRetention)
 
 	UpdateProvisionedModelThroughputRequest_provisionedModelId = UpdateProvisionedModelThroughputRequest.AddMember("provisionedModelId", _ProvisionedModelId, &smithytraits.HTTPLabel{})
 

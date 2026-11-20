@@ -1,0 +1,5 @@
+POST /publishers
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","tags":{"key0":"__Value__"},"value":{"domain":"__IdentifierMemberDomain__"}}

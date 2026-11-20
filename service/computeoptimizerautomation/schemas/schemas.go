@@ -23,6 +23,11 @@ var DeleteAutomationRule = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteAutomationRule",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteOrganizationEnrollmentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "DeleteOrganizationEnrollmentConfiguration",
+}, smithy.ShapeTypeOperation, 0)
+
 var DisassociateAccounts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "DisassociateAccounts",
@@ -78,6 +83,16 @@ var ListAutomationRules = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAutomationRules",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListOrganizationalUnits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ListOrganizationalUnits",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListOrganizationEnrollmentConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ListOrganizationEnrollmentConfigurations",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListRecommendedActions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ListRecommendedActions",
@@ -91,6 +106,11 @@ var ListRecommendedActionSummaries = smithy.NewSchema(smithy.ShapeID{
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ListTagsForResource",
+}, smithy.ShapeTypeOperation, 0)
+
+var PutOrganizationEnrollmentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "PutOrganizationEnrollmentConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
 var RollbackAutomationEvent = smithy.NewSchema(smithy.ShapeID{
@@ -151,12 +171,14 @@ var _AccountIdList_member *smithy.Schema
 var AccountInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "AccountInfo",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var AccountInfo_accountId *smithy.Schema
 
 var AccountInfo_status *smithy.Schema
 
 var AccountInfo_organizationRuleMode *smithy.Schema
+
+var AccountInfo_organizationRuleModeSource *smithy.Schema
 
 var AccountInfo_statusReason *smithy.Schema
 
@@ -167,6 +189,14 @@ var _AccountInfoList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AccountInfoList",
 }, smithy.ShapeTypeList, 1)
 var _AccountInfoList_member *smithy.Schema
+
+var AutoEnrollMemberAccounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "AutoEnrollMemberAccounts",
+}, smithy.ShapeTypeEnum, 2)
+var AutoEnrollMemberAccounts_ALL *smithy.Schema
+
+var AutoEnrollMemberAccounts_NONE *smithy.Schema
 
 var AutomationEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -370,6 +400,13 @@ var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS *smithy.Schema
 var ComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS *smithy.Schema
 
 var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS *smithy.Schema
+
+var ConflictException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ConflictException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var ConflictException_message *smithy.Schema
 
 var Criteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -587,19 +624,96 @@ var OptInRequiredException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 403})
 var OptInRequiredException_message *smithy.Schema
 
+var _OrganizationalUnitId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationalUnitId",
+}, smithy.ShapeTypeString, 0)
+
+var _OrganizationalUnitIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationalUnitIds",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalUnitIds_member *smithy.Schema
+
+var OrganizationalUnitInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationalUnitInfo",
+}, smithy.ShapeTypeStructure, 4)
+var OrganizationalUnitInfo_organizationalUnitId *smithy.Schema
+
+var OrganizationalUnitInfo_autoEnrollMemberAccounts *smithy.Schema
+
+var OrganizationalUnitInfo_organizationRuleMode *smithy.Schema
+
+var OrganizationalUnitInfo_organizationRuleModeSource *smithy.Schema
+
+var _OrganizationalUnitInfoList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationalUnitInfoList",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationalUnitInfoList_member *smithy.Schema
+
 var OrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "OrganizationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 5)
 var OrganizationConfiguration_ruleApplyOrder *smithy.Schema
 
 var OrganizationConfiguration_accountIds *smithy.Schema
+
+var OrganizationConfiguration_organizationalUnitIds *smithy.Schema
+
+var OrganizationConfiguration_excludedOrganizationalUnitIds *smithy.Schema
+
+var OrganizationConfiguration_excludedAccountIds *smithy.Schema
 
 var _OrganizationConfigurationAccountIds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "OrganizationConfigurationAccountIds",
 }, smithy.ShapeTypeList, 1)
 var _OrganizationConfigurationAccountIds_member *smithy.Schema
+
+var _OrganizationConfigurationOrganizationalUnitIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationConfigurationOrganizationalUnitIds",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationConfigurationOrganizationalUnitIds_member *smithy.Schema
+
+var OrganizationEnrollmentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationEnrollmentConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var OrganizationEnrollmentConfiguration_targetId *smithy.Schema
+
+var OrganizationEnrollmentConfiguration_targetType *smithy.Schema
+
+var OrganizationEnrollmentConfiguration_organizationRuleMode *smithy.Schema
+
+var _OrganizationEnrollmentConfigurations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationEnrollmentConfigurations",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationEnrollmentConfigurations_member *smithy.Schema
+
+var OrganizationEnrollmentConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationEnrollmentConfigurationStatus",
+}, smithy.ShapeTypeEnum, 2)
+var OrganizationEnrollmentConfigurationStatus_ACTIVE *smithy.Schema
+
+var OrganizationEnrollmentConfigurationStatus_INACTIVE *smithy.Schema
+
+var OrganizationEnrollmentConfigurationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationEnrollmentConfigurationType",
+}, smithy.ShapeTypeEnum, 1)
+var OrganizationEnrollmentConfigurationType_ORGANIZATION_RULE_MODE *smithy.Schema
+
+var _OrganizationEnrollmentConfigurationTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationEnrollmentConfigurationTypes",
+}, smithy.ShapeTypeList, 1)
+var _OrganizationEnrollmentConfigurationTypes_member *smithy.Schema
 
 var OrganizationRuleMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -609,11 +723,53 @@ var OrganizationRuleMode_ANY_ALLOWED *smithy.Schema
 
 var OrganizationRuleMode_NONE_ALLOWED *smithy.Schema
 
+var OrganizationRuleModeSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationRuleModeSource",
+}, smithy.ShapeTypeStructure, 2)
+var OrganizationRuleModeSource_sourceType *smithy.Schema
+
+var OrganizationRuleModeSource_sourceTargetId *smithy.Schema
+
+var OrganizationRuleModeSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationRuleModeSourceType",
+}, smithy.ShapeTypeEnum, 4)
+var OrganizationRuleModeSourceType_APPLIED *smithy.Schema
+
+var OrganizationRuleModeSourceType_INHERITED *smithy.Schema
+
+var OrganizationRuleModeSourceType_DIRECT *smithy.Schema
+
+var OrganizationRuleModeSourceType_DEFAULT *smithy.Schema
+
 var OrganizationScope = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "OrganizationScope",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 4)
 var OrganizationScope_accountIds *smithy.Schema
+
+var OrganizationScope_organizationalUnitIds *smithy.Schema
+
+var OrganizationScope_excludedOrganizationalUnitIds *smithy.Schema
+
+var OrganizationScope_excludedAccountIds *smithy.Schema
+
+var OrganizationTarget = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationTarget",
+}, smithy.ShapeTypeUnion, 2)
+var OrganizationTarget_accountId *smithy.Schema
+
+var OrganizationTarget_organizationalUnitId *smithy.Schema
+
+var OrganizationTargetType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "OrganizationTargetType",
+}, smithy.ShapeTypeEnum, 2)
+var OrganizationTargetType_ACCOUNT *smithy.Schema
+
+var OrganizationTargetType_ORGANIZATIONAL_UNIT *smithy.Schema
 
 var PreviewResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -1119,6 +1275,21 @@ var DeleteAutomationRuleResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteAutomationRuleResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var DeleteOrganizationEnrollmentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "DeleteOrganizationEnrollmentConfigurationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteOrganizationEnrollmentConfigurationRequest_target *smithy.Schema
+
+var DeleteOrganizationEnrollmentConfigurationRequest_configurationTypes *smithy.Schema
+
+var DeleteOrganizationEnrollmentConfigurationRequest_clientToken *smithy.Schema
+
+var DeleteOrganizationEnrollmentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "DeleteOrganizationEnrollmentConfigurationResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DisassociateAccountsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "DisassociateAccountsRequest",
@@ -1225,7 +1396,7 @@ var GetEnrollmentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
 var GetEnrollmentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "GetEnrollmentConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var GetEnrollmentConfigurationResponse_status *smithy.Schema
 
 var GetEnrollmentConfigurationResponse_statusReason *smithy.Schema
@@ -1233,6 +1404,8 @@ var GetEnrollmentConfigurationResponse_statusReason *smithy.Schema
 var GetEnrollmentConfigurationResponse_organizationRuleMode *smithy.Schema
 
 var GetEnrollmentConfigurationResponse_lastUpdatedTimestamp *smithy.Schema
+
+var GetEnrollmentConfigurationResponse_organizationEnrollmentConfigurationStatus *smithy.Schema
 
 var ListAccountsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -1253,8 +1426,10 @@ var ListAccountsResponse_nextToken *smithy.Schema
 var ListAutomationEventsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ListAutomationEventsRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ListAutomationEventsRequest_filters *smithy.Schema
+
+var ListAutomationEventsRequest_organizationalUnitIds *smithy.Schema
 
 var ListAutomationEventsRequest_startTimeInclusive *smithy.Schema
 
@@ -1293,8 +1468,10 @@ var ListAutomationEventStepsResponse_nextToken *smithy.Schema
 var ListAutomationEventSummariesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ListAutomationEventSummariesRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var ListAutomationEventSummariesRequest_filters *smithy.Schema
+
+var ListAutomationEventSummariesRequest_organizationalUnitIds *smithy.Schema
 
 var ListAutomationEventSummariesRequest_startDateInclusive *smithy.Schema
 
@@ -1378,11 +1555,49 @@ var ListAutomationRulesResponse_automationRules *smithy.Schema
 
 var ListAutomationRulesResponse_nextToken *smithy.Schema
 
+var ListOrganizationalUnitsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ListOrganizationalUnitsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListOrganizationalUnitsRequest_organizationalUnitIds *smithy.Schema
+
+var ListOrganizationalUnitsRequest_maxResults *smithy.Schema
+
+var ListOrganizationalUnitsRequest_nextToken *smithy.Schema
+
+var ListOrganizationalUnitsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ListOrganizationalUnitsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListOrganizationalUnitsResponse_organizationalUnits *smithy.Schema
+
+var ListOrganizationalUnitsResponse_nextToken *smithy.Schema
+
+var ListOrganizationEnrollmentConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ListOrganizationEnrollmentConfigurationsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListOrganizationEnrollmentConfigurationsRequest_targetType *smithy.Schema
+
+var ListOrganizationEnrollmentConfigurationsRequest_maxResults *smithy.Schema
+
+var ListOrganizationEnrollmentConfigurationsRequest_nextToken *smithy.Schema
+
+var ListOrganizationEnrollmentConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "ListOrganizationEnrollmentConfigurationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListOrganizationEnrollmentConfigurationsResponse_organizationEnrollmentConfigurations *smithy.Schema
+
+var ListOrganizationEnrollmentConfigurationsResponse_nextToken *smithy.Schema
+
 var ListRecommendedActionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ListRecommendedActionsRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ListRecommendedActionsRequest_filters *smithy.Schema
+
+var ListRecommendedActionsRequest_organizationalUnitIds *smithy.Schema
 
 var ListRecommendedActionsRequest_maxResults *smithy.Schema
 
@@ -1399,8 +1614,10 @@ var ListRecommendedActionsResponse_nextToken *smithy.Schema
 var ListRecommendedActionSummariesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
 	Name:      "ListRecommendedActionSummariesRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ListRecommendedActionSummariesRequest_filters *smithy.Schema
+
+var ListRecommendedActionSummariesRequest_organizationalUnitIds *smithy.Schema
 
 var ListRecommendedActionSummariesRequest_maxResults *smithy.Schema
 
@@ -1425,6 +1642,21 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListTagsForResourceResponse",
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_tags *smithy.Schema
+
+var PutOrganizationEnrollmentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "PutOrganizationEnrollmentConfigurationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var PutOrganizationEnrollmentConfigurationRequest_target *smithy.Schema
+
+var PutOrganizationEnrollmentConfigurationRequest_organizationRuleMode *smithy.Schema
+
+var PutOrganizationEnrollmentConfigurationRequest_clientToken *smithy.Schema
+
+var PutOrganizationEnrollmentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.computeoptimizerautomation",
+	Name:      "PutOrganizationEnrollmentConfigurationResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var RollbackAutomationEventRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.computeoptimizerautomation",
@@ -1589,17 +1821,35 @@ func init() {
 
 	OrganizationRuleMode_NONE_ALLOWED = OrganizationRuleMode.AddMember("NONE_ALLOWED", smithyprelude.Unit)
 
+	OrganizationRuleModeSourceType_APPLIED = OrganizationRuleModeSourceType.AddMember("APPLIED", smithyprelude.Unit)
+
+	OrganizationRuleModeSourceType_INHERITED = OrganizationRuleModeSourceType.AddMember("INHERITED", smithyprelude.Unit)
+
+	OrganizationRuleModeSourceType_DIRECT = OrganizationRuleModeSourceType.AddMember("DIRECT", smithyprelude.Unit)
+
+	OrganizationRuleModeSourceType_DEFAULT = OrganizationRuleModeSourceType.AddMember("DEFAULT", smithyprelude.Unit)
+
+	OrganizationRuleModeSource_sourceType = OrganizationRuleModeSource.AddMember("sourceType", OrganizationRuleModeSourceType)
+
+	OrganizationRuleModeSource_sourceTargetId = OrganizationRuleModeSource.AddMember("sourceTargetId", smithyprelude.String)
+
 	AccountInfo_accountId = AccountInfo.AddMember("accountId", _AccountId)
 
 	AccountInfo_status = AccountInfo.AddMember("status", EnrollmentStatus)
 
 	AccountInfo_organizationRuleMode = AccountInfo.AddMember("organizationRuleMode", OrganizationRuleMode)
 
+	AccountInfo_organizationRuleModeSource = AccountInfo.AddMember("organizationRuleModeSource", OrganizationRuleModeSource)
+
 	AccountInfo_statusReason = AccountInfo.AddMember("statusReason", smithyprelude.String)
 
 	AccountInfo_lastUpdatedTimestamp = AccountInfo.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
 
 	_AccountInfoList_member = _AccountInfoList.AddMember("member", AccountInfo)
+
+	AutoEnrollMemberAccounts_ALL = AutoEnrollMemberAccounts.AddMember("ALL", smithyprelude.Unit)
+
+	AutoEnrollMemberAccounts_NONE = AutoEnrollMemberAccounts.AddMember("NONE", smithyprelude.Unit)
 
 	EventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = EventType.AddMember("SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME", smithyprelude.Unit)
 
@@ -1745,9 +1995,17 @@ func init() {
 
 	_OrganizationConfigurationAccountIds_member = _OrganizationConfigurationAccountIds.AddMember("member", _AccountId)
 
+	_OrganizationConfigurationOrganizationalUnitIds_member = _OrganizationConfigurationOrganizationalUnitIds.AddMember("member", _OrganizationalUnitId)
+
 	OrganizationConfiguration_ruleApplyOrder = OrganizationConfiguration.AddMember("ruleApplyOrder", RuleApplyOrder)
 
 	OrganizationConfiguration_accountIds = OrganizationConfiguration.AddMember("accountIds", _OrganizationConfigurationAccountIds)
+
+	OrganizationConfiguration_organizationalUnitIds = OrganizationConfiguration.AddMember("organizationalUnitIds", _OrganizationConfigurationOrganizationalUnitIds)
+
+	OrganizationConfiguration_excludedOrganizationalUnitIds = OrganizationConfiguration.AddMember("excludedOrganizationalUnitIds", _OrganizationConfigurationOrganizationalUnitIds)
+
+	OrganizationConfiguration_excludedAccountIds = OrganizationConfiguration.AddMember("excludedAccountIds", _OrganizationConfigurationAccountIds)
 
 	RecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = RecommendedActionType.AddMember("SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME", smithyprelude.Unit)
 
@@ -1843,6 +2101,8 @@ func init() {
 
 	ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS", smithyprelude.Unit)
 
+	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
+
 	_StringCriteriaValues_member = _StringCriteriaValues.AddMember("member", _StringCriteriaValue)
 
 	StringCriteriaCondition_comparison = StringCriteriaCondition.AddMember("comparison", ComparisonOperator)
@@ -1921,7 +2181,49 @@ func init() {
 
 	OptInRequiredException_message = OptInRequiredException.AddMember("message", smithyprelude.String)
 
+	_OrganizationalUnitIds_member = _OrganizationalUnitIds.AddMember("member", _OrganizationalUnitId)
+
+	OrganizationalUnitInfo_organizationalUnitId = OrganizationalUnitInfo.AddMember("organizationalUnitId", _OrganizationalUnitId)
+
+	OrganizationalUnitInfo_autoEnrollMemberAccounts = OrganizationalUnitInfo.AddMember("autoEnrollMemberAccounts", AutoEnrollMemberAccounts)
+
+	OrganizationalUnitInfo_organizationRuleMode = OrganizationalUnitInfo.AddMember("organizationRuleMode", OrganizationRuleMode)
+
+	OrganizationalUnitInfo_organizationRuleModeSource = OrganizationalUnitInfo.AddMember("organizationRuleModeSource", OrganizationRuleModeSource)
+
+	_OrganizationalUnitInfoList_member = _OrganizationalUnitInfoList.AddMember("member", OrganizationalUnitInfo)
+
+	OrganizationTargetType_ACCOUNT = OrganizationTargetType.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	OrganizationTargetType_ORGANIZATIONAL_UNIT = OrganizationTargetType.AddMember("ORGANIZATIONAL_UNIT", smithyprelude.Unit)
+
+	OrganizationEnrollmentConfiguration_targetId = OrganizationEnrollmentConfiguration.AddMember("targetId", smithyprelude.String)
+
+	OrganizationEnrollmentConfiguration_targetType = OrganizationEnrollmentConfiguration.AddMember("targetType", OrganizationTargetType)
+
+	OrganizationEnrollmentConfiguration_organizationRuleMode = OrganizationEnrollmentConfiguration.AddMember("organizationRuleMode", OrganizationRuleMode)
+
+	_OrganizationEnrollmentConfigurations_member = _OrganizationEnrollmentConfigurations.AddMember("member", OrganizationEnrollmentConfiguration)
+
+	OrganizationEnrollmentConfigurationStatus_ACTIVE = OrganizationEnrollmentConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	OrganizationEnrollmentConfigurationStatus_INACTIVE = OrganizationEnrollmentConfigurationStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	OrganizationEnrollmentConfigurationType_ORGANIZATION_RULE_MODE = OrganizationEnrollmentConfigurationType.AddMember("ORGANIZATION_RULE_MODE", smithyprelude.Unit)
+
+	_OrganizationEnrollmentConfigurationTypes_member = _OrganizationEnrollmentConfigurationTypes.AddMember("member", OrganizationEnrollmentConfigurationType)
+
 	OrganizationScope_accountIds = OrganizationScope.AddMember("accountIds", _OrganizationConfigurationAccountIds)
+
+	OrganizationScope_organizationalUnitIds = OrganizationScope.AddMember("organizationalUnitIds", _OrganizationConfigurationOrganizationalUnitIds)
+
+	OrganizationScope_excludedOrganizationalUnitIds = OrganizationScope.AddMember("excludedOrganizationalUnitIds", _OrganizationConfigurationOrganizationalUnitIds)
+
+	OrganizationScope_excludedAccountIds = OrganizationScope.AddMember("excludedAccountIds", _OrganizationConfigurationAccountIds)
+
+	OrganizationTarget_accountId = OrganizationTarget.AddMember("accountId", _AccountId)
+
+	OrganizationTarget_organizationalUnitId = OrganizationTarget.AddMember("organizationalUnitId", _OrganizationalUnitId)
 
 	ResourceDetails_ebsVolume = ResourceDetails.AddMember("ebsVolume", EbsVolume)
 
@@ -2097,6 +2399,12 @@ func init() {
 
 	DeleteAutomationRuleRequest_clientToken = DeleteAutomationRuleRequest.AddMember("clientToken", _ClientToken)
 
+	DeleteOrganizationEnrollmentConfigurationRequest_target = DeleteOrganizationEnrollmentConfigurationRequest.AddMember("target", OrganizationTarget)
+
+	DeleteOrganizationEnrollmentConfigurationRequest_configurationTypes = DeleteOrganizationEnrollmentConfigurationRequest.AddMember("configurationTypes", _OrganizationEnrollmentConfigurationTypes)
+
+	DeleteOrganizationEnrollmentConfigurationRequest_clientToken = DeleteOrganizationEnrollmentConfigurationRequest.AddMember("clientToken", _ClientToken)
+
 	DisassociateAccountsRequest_accountIds = DisassociateAccountsRequest.AddMember("accountIds", _AccountIdList)
 
 	DisassociateAccountsRequest_clientToken = DisassociateAccountsRequest.AddMember("clientToken", _ClientToken)
@@ -2179,6 +2487,8 @@ func init() {
 
 	GetEnrollmentConfigurationResponse_lastUpdatedTimestamp = GetEnrollmentConfigurationResponse.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
 
+	GetEnrollmentConfigurationResponse_organizationEnrollmentConfigurationStatus = GetEnrollmentConfigurationResponse.AddMember("organizationEnrollmentConfigurationStatus", OrganizationEnrollmentConfigurationStatus)
+
 	ListAccountsRequest_maxResults = ListAccountsRequest.AddMember("maxResults", smithyprelude.Integer)
 
 	ListAccountsRequest_nextToken = ListAccountsRequest.AddMember("nextToken", _NextToken)
@@ -2188,6 +2498,8 @@ func init() {
 	ListAccountsResponse_nextToken = ListAccountsResponse.AddMember("nextToken", _NextToken)
 
 	ListAutomationEventsRequest_filters = ListAutomationEventsRequest.AddMember("filters", _AutomationEventFilterList)
+
+	ListAutomationEventsRequest_organizationalUnitIds = ListAutomationEventsRequest.AddMember("organizationalUnitIds", _OrganizationalUnitIds)
 
 	ListAutomationEventsRequest_startTimeInclusive = ListAutomationEventsRequest.AddMember("startTimeInclusive", smithyprelude.Timestamp)
 
@@ -2212,6 +2524,8 @@ func init() {
 	ListAutomationEventStepsResponse_nextToken = ListAutomationEventStepsResponse.AddMember("nextToken", _NextToken)
 
 	ListAutomationEventSummariesRequest_filters = ListAutomationEventSummariesRequest.AddMember("filters", _AutomationEventFilterList)
+
+	ListAutomationEventSummariesRequest_organizationalUnitIds = ListAutomationEventSummariesRequest.AddMember("organizationalUnitIds", _OrganizationalUnitIds)
 
 	ListAutomationEventSummariesRequest_startDateInclusive = ListAutomationEventSummariesRequest.AddMember("startDateInclusive", smithyprelude.String)
 
@@ -2267,7 +2581,29 @@ func init() {
 
 	ListAutomationRulesResponse_nextToken = ListAutomationRulesResponse.AddMember("nextToken", _NextToken)
 
+	ListOrganizationalUnitsRequest_organizationalUnitIds = ListOrganizationalUnitsRequest.AddMember("organizationalUnitIds", _OrganizationalUnitIds)
+
+	ListOrganizationalUnitsRequest_maxResults = ListOrganizationalUnitsRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListOrganizationalUnitsRequest_nextToken = ListOrganizationalUnitsRequest.AddMember("nextToken", _NextToken)
+
+	ListOrganizationalUnitsResponse_organizationalUnits = ListOrganizationalUnitsResponse.AddMember("organizationalUnits", _OrganizationalUnitInfoList)
+
+	ListOrganizationalUnitsResponse_nextToken = ListOrganizationalUnitsResponse.AddMember("nextToken", _NextToken)
+
+	ListOrganizationEnrollmentConfigurationsRequest_targetType = ListOrganizationEnrollmentConfigurationsRequest.AddMember("targetType", OrganizationTargetType)
+
+	ListOrganizationEnrollmentConfigurationsRequest_maxResults = ListOrganizationEnrollmentConfigurationsRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListOrganizationEnrollmentConfigurationsRequest_nextToken = ListOrganizationEnrollmentConfigurationsRequest.AddMember("nextToken", _NextToken)
+
+	ListOrganizationEnrollmentConfigurationsResponse_organizationEnrollmentConfigurations = ListOrganizationEnrollmentConfigurationsResponse.AddMember("organizationEnrollmentConfigurations", _OrganizationEnrollmentConfigurations)
+
+	ListOrganizationEnrollmentConfigurationsResponse_nextToken = ListOrganizationEnrollmentConfigurationsResponse.AddMember("nextToken", _NextToken)
+
 	ListRecommendedActionsRequest_filters = ListRecommendedActionsRequest.AddMember("filters", _RecommendedActionFilterList)
+
+	ListRecommendedActionsRequest_organizationalUnitIds = ListRecommendedActionsRequest.AddMember("organizationalUnitIds", _OrganizationalUnitIds)
 
 	ListRecommendedActionsRequest_maxResults = ListRecommendedActionsRequest.AddMember("maxResults", smithyprelude.Integer)
 
@@ -2278,6 +2614,8 @@ func init() {
 	ListRecommendedActionsResponse_nextToken = ListRecommendedActionsResponse.AddMember("nextToken", _NextToken)
 
 	ListRecommendedActionSummariesRequest_filters = ListRecommendedActionSummariesRequest.AddMember("filters", _RecommendedActionFilterList)
+
+	ListRecommendedActionSummariesRequest_organizationalUnitIds = ListRecommendedActionSummariesRequest.AddMember("organizationalUnitIds", _OrganizationalUnitIds)
 
 	ListRecommendedActionSummariesRequest_maxResults = ListRecommendedActionSummariesRequest.AddMember("maxResults", smithyprelude.Integer)
 
@@ -2290,6 +2628,12 @@ func init() {
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _RuleArn)
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
+
+	PutOrganizationEnrollmentConfigurationRequest_target = PutOrganizationEnrollmentConfigurationRequest.AddMember("target", OrganizationTarget)
+
+	PutOrganizationEnrollmentConfigurationRequest_organizationRuleMode = PutOrganizationEnrollmentConfigurationRequest.AddMember("organizationRuleMode", OrganizationRuleMode)
+
+	PutOrganizationEnrollmentConfigurationRequest_clientToken = PutOrganizationEnrollmentConfigurationRequest.AddMember("clientToken", _ClientToken)
 
 	RollbackAutomationEventRequest_eventId = RollbackAutomationEventRequest.AddMember("eventId", _EventId)
 

@@ -111,6 +111,9 @@ func ExampleFirewallSyncReason_outputUsage() {
 	case *types.FirewallSyncReasonMemberInvalidFirewall:
 		_ = v.Value // Value is types.InvalidFirewallReasons
 
+	case *types.FirewallSyncReasonMemberInvalidResource:
+		_ = v.Value // Value is map[string][]types.InvalidResourceIssue
+
 	case *types.FirewallSyncReasonMemberMissingFirewall:
 		_ = v.Value // Value is string
 
@@ -124,6 +127,7 @@ func ExampleFirewallSyncReason_outputUsage() {
 }
 
 var _ *string
+var _ map[string][]types.InvalidResourceIssue
 var _ *types.InvalidFirewallReasons
 
 func ExampleOutOfSyncReasonsView_outputUsage() {

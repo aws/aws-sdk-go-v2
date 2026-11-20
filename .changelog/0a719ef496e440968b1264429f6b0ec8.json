@@ -1,0 +1,8 @@
+{
+    "id": "0a719ef4-96e4-4096-8b12-64429f6b0ec8",
+    "type": "feature",
+    "description": "This release adds the TranscribeAudio API for synchronous transcription. Send a media file inline or from Amazon S3 and receive the transcript in the same response, with support for speaker, channel identification, language identification, custom vocabularies, vocabulary filters, and PII redaction.",
+    "modules": [
+        "service/transcribe"
+    ]
+}

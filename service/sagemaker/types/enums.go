@@ -2226,6 +2226,8 @@ const (
 	ClusterInstanceStatusSystemUpdating            ClusterInstanceStatus = "SystemUpdating"
 	ClusterInstanceStatusDeepHealthCheckInProgress ClusterInstanceStatus = "DeepHealthCheckInProgress"
 	ClusterInstanceStatusNotFound                  ClusterInstanceStatus = "NotFound"
+	ClusterInstanceStatusDetachInProgress          ClusterInstanceStatus = "DetachInProgress"
+	ClusterInstanceStatusAttachInProgress          ClusterInstanceStatus = "AttachInProgress"
 )
 
 // Values returns all known values for ClusterInstanceStatus. Note that this can
@@ -2241,6 +2243,8 @@ func (ClusterInstanceStatus) Values() []ClusterInstanceStatus {
 		"SystemUpdating",
 		"DeepHealthCheckInProgress",
 		"NotFound",
+		"DetachInProgress",
+		"AttachInProgress",
 	}
 }
 
@@ -4040,6 +4044,112 @@ func (Framework) Values() []Framework {
 		"TFLITE",
 		"DARKNET",
 		"SKLEARN",
+	}
+}
+
+type GlobalInferenceGatewayFilterName string
+
+// Enum values for GlobalInferenceGatewayFilterName
+const (
+	// Filter by the status of the global inference gateway.
+	GlobalInferenceGatewayFilterNameStatus GlobalInferenceGatewayFilterName = "Status"
+)
+
+// Values returns all known values for GlobalInferenceGatewayFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalInferenceGatewayFilterName) Values() []GlobalInferenceGatewayFilterName {
+	return []GlobalInferenceGatewayFilterName{
+		"Status",
+	}
+}
+
+type GlobalInferenceGatewayMemberFilterName string
+
+// Enum values for GlobalInferenceGatewayMemberFilterName
+const (
+	// Filter by the status of the in-cluster inference gateway.
+	GlobalInferenceGatewayMemberFilterNameStatus GlobalInferenceGatewayMemberFilterName = "Status"
+	// Filter by the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.
+	GlobalInferenceGatewayMemberFilterNameClusterArn GlobalInferenceGatewayMemberFilterName = "ClusterArn"
+)
+
+// Values returns all known values for GlobalInferenceGatewayMemberFilterName.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalInferenceGatewayMemberFilterName) Values() []GlobalInferenceGatewayMemberFilterName {
+	return []GlobalInferenceGatewayMemberFilterName{
+		"Status",
+		"ClusterArn",
+	}
+}
+
+type GlobalInferenceGatewayMemberStatus string
+
+// Enum values for GlobalInferenceGatewayMemberStatus
+const (
+	// The in-cluster inference gateway is being added and doesn't receive requests
+	// yet.
+	GlobalInferenceGatewayMemberStatusAdding GlobalInferenceGatewayMemberStatus = "ADDING"
+	// The in-cluster inference gateway is added and receives requests.
+	GlobalInferenceGatewayMemberStatusActive GlobalInferenceGatewayMemberStatus = "ACTIVE"
+	// The in-cluster inference gateway is being removed.
+	GlobalInferenceGatewayMemberStatusRemoving GlobalInferenceGatewayMemberStatus = "REMOVING"
+	// Adding or removing the in-cluster inference gateway failed. For details, see
+	// FailureReason . After you fix the cause, remove the in-cluster inference gateway
+	// and add it again.
+	GlobalInferenceGatewayMemberStatusFailed GlobalInferenceGatewayMemberStatus = "FAILED"
+)
+
+// Values returns all known values for GlobalInferenceGatewayMemberStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalInferenceGatewayMemberStatus) Values() []GlobalInferenceGatewayMemberStatus {
+	return []GlobalInferenceGatewayMemberStatus{
+		"ADDING",
+		"ACTIVE",
+		"REMOVING",
+		"FAILED",
+	}
+}
+
+type GlobalInferenceGatewayStatus string
+
+// Enum values for GlobalInferenceGatewayStatus
+const (
+	// The global inference gateway is being created. Don't send inference requests to
+	// it yet.
+	GlobalInferenceGatewayStatusCreating GlobalInferenceGatewayStatus = "CREATING"
+	// The global inference gateway is serving requests, and no operation is in
+	// progress.
+	GlobalInferenceGatewayStatusActive GlobalInferenceGatewayStatus = "ACTIVE"
+	// An update, add, or remove operation is in progress. The global inference
+	// gateway continues to serve requests.
+	GlobalInferenceGatewayStatusUpdating GlobalInferenceGatewayStatus = "UPDATING"
+	// The global inference gateway is being deleted.
+	GlobalInferenceGatewayStatusDeleting GlobalInferenceGatewayStatus = "DELETING"
+	// The global inference gateway failed. For details, see FailureReason .
+	GlobalInferenceGatewayStatusFailed GlobalInferenceGatewayStatus = "FAILED"
+)
+
+// Values returns all known values for GlobalInferenceGatewayStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalInferenceGatewayStatus) Values() []GlobalInferenceGatewayStatus {
+	return []GlobalInferenceGatewayStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
 	}
 }
 
@@ -6707,6 +6817,29 @@ func (MonitoringType) Values() []MonitoringType {
 		"ModelQuality",
 		"ModelBias",
 		"ModelExplainability",
+	}
+}
+
+type MoveClusterNodesErrorCode string
+
+// Enum values for MoveClusterNodesErrorCode
+const (
+	MoveClusterNodesErrorCodeNodeIdNotFound           MoveClusterNodesErrorCode = "NodeIdNotFound"
+	MoveClusterNodesErrorCodeInvalidNodeStatus        MoveClusterNodesErrorCode = "InvalidNodeStatus"
+	MoveClusterNodesErrorCodeNodeIdInUse              MoveClusterNodesErrorCode = "NodeIdInUse"
+	MoveClusterNodesErrorCodeNodeInstanceTypeMismatch MoveClusterNodesErrorCode = "NodeInstanceTypeMismatch"
+)
+
+// Values returns all known values for MoveClusterNodesErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MoveClusterNodesErrorCode) Values() []MoveClusterNodesErrorCode {
+	return []MoveClusterNodesErrorCode{
+		"NodeIdNotFound",
+		"InvalidNodeStatus",
+		"NodeIdInUse",
+		"NodeInstanceTypeMismatch",
 	}
 }
 

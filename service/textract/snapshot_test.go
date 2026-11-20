@@ -122,6 +122,42 @@ func TestCheckSnapshot_CreateAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateBlueprintVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBlueprintVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateBlueprintVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAdapter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAdapter(context.Background(), nil, func(o *Options) {
@@ -139,6 +175,30 @@ func TestCheckSnapshot_DeleteAdapterVersion(t *testing.T) {
 	_, err := svc.DeleteAdapterVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteAdapterVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -182,11 +242,35 @@ func TestCheckSnapshot_GetAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDocumentAnalysis(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDocumentAnalysis(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDocumentAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDocumentInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDocumentInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -242,6 +326,18 @@ func TestCheckSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAdapters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAdapters(context.Background(), nil, func(o *Options) {
@@ -266,6 +362,30 @@ func TestCheckSnapshot_ListAdapterVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListBlueprints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBlueprints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBlueprints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProjects(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProjects(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -283,6 +403,18 @@ func TestCheckSnapshot_StartDocumentAnalysis(t *testing.T) {
 	_, err := svc.StartDocumentAnalysis(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartDocumentAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartDocumentInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDocumentInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDocumentInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -361,6 +493,30 @@ func TestCheckSnapshot_UpdateAdapter(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AnalyzeDocument(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AnalyzeDocument(context.Background(), nil, func(o *Options) {
@@ -421,6 +577,42 @@ func TestUpdateSnapshot_CreateAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateBlueprintVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBlueprintVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateBlueprintVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAdapter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAdapter(context.Background(), nil, func(o *Options) {
@@ -438,6 +630,30 @@ func TestUpdateSnapshot_DeleteAdapterVersion(t *testing.T) {
 	_, err := svc.DeleteAdapterVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAdapterVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -481,11 +697,35 @@ func TestUpdateSnapshot_GetAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDocumentAnalysis(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDocumentAnalysis(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDocumentAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDocumentInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDocumentInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDocumentInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -541,6 +781,18 @@ func TestUpdateSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAdapters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAdapters(context.Background(), nil, func(o *Options) {
@@ -565,6 +817,30 @@ func TestUpdateSnapshot_ListAdapterVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListBlueprints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBlueprints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBlueprints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProjects(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProjects(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -582,6 +858,18 @@ func TestUpdateSnapshot_StartDocumentAnalysis(t *testing.T) {
 	_, err := svc.StartDocumentAnalysis(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartDocumentAnalysis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDocumentInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDocumentInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDocumentInsights")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -654,6 +942,30 @@ func TestUpdateSnapshot_UpdateAdapter(t *testing.T) {
 	_, err := svc.UpdateAdapter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAdapter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateBlueprint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBlueprint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBlueprint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

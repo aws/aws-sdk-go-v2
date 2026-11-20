@@ -1047,6 +1047,12 @@ type AudioCodecSettings struct {
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output
 	Codec AudioCodec
 
+	// Required when you set Codec to the value DTSC.
+	DtscSettings *DtscSettings
+
+	// Required when you set Codec to the value DTSX.
+	DtsxSettings *DtsxSettings
+
 	// Required when you set Codec to the value EAC3_ATMOS.
 	Eac3AtmosSettings *Eac3AtmosSettings
 
@@ -1107,6 +1113,16 @@ func (v *AudioCodecSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Codec != "" {
 		s.WriteString(schemas.AudioCodecSettings_Codec, string(v.Codec))
+	}
+	if v.DtscSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_DtscSettings)
+		v.DtscSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DtsxSettings != nil {
+		s.WriteStruct(schemas.AudioCodecSettings_DtsxSettings)
+		v.DtsxSettings.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Eac3AtmosSettings != nil {
 		s.WriteStruct(schemas.AudioCodecSettings_Eac3AtmosSettings)
@@ -1171,6 +1187,12 @@ func (v *AudioCodecSettings) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Codec = AudioCodec(ev)
 			return nil
+		case schemas.AudioCodecSettings_DtscSettings:
+			v.DtscSettings = &DtscSettings{}
+			return v.DtscSettings.Deserialize(d)
+		case schemas.AudioCodecSettings_DtsxSettings:
+			v.DtsxSettings = &DtsxSettings{}
+			return v.DtsxSettings.Deserialize(d)
 		case schemas.AudioCodecSettings_Eac3AtmosSettings:
 			v.Eac3AtmosSettings = &Eac3AtmosSettings{}
 			return v.Eac3AtmosSettings.Deserialize(d)
@@ -2260,8 +2282,19 @@ func (v *Av1QvbrSettings) Deserialize(d smithy.ShapeDeserializer) error {
 // AV1.
 type Av1Settings struct {
 
-	// Specify the strength of any adaptive quantization filters that you enable. The
-	// value that you choose here applies to Spatial adaptive quantization.
+	// Specify whether MediaConvert applies adaptive quantization in this output. With
+	// AV1, adaptive quantization is on or off; there is no strength to choose. Choose
+	// Auto to let MediaConvert manage adaptive quantization for you. MediaConvert
+	// enables both Spatial adaptive quantization and Temporal adaptive quantization,
+	// and you can't specify either one yourself. To choose the filters yourself, set
+	// Adaptive quantization to any of the strength values, Low, Medium, High, Higher
+	// or Max, and then use the related settings Spatial adaptive quantization and
+	// Temporal adaptive quantization. With AV1 these strength values all behave the
+	// same, because AV1 adaptive quantization has no strength. If you don't want
+	// MediaConvert to do any adaptive quantization in this transcode, set Adaptive
+	// quantization to Off. Related settings: The value that you choose here applies to
+	// the following settings: Av1SpatialAdaptiveQuantization and
+	// Av1TemporalAdaptiveQuantization.
 	AdaptiveQuantization Av1AdaptiveQuantization
 
 	// Specify the Bit depth. You can choose 8-bit or 10-bit.
@@ -2270,6 +2303,12 @@ type Av1Settings struct {
 	// Specify the average bitrate in bits per second. Required when Rate control mode
 	// is CBR.
 	Bitrate *int32
+
+	// Choose Enabled to limit the AV1 feature set that MediaConvert uses, which
+	// reduces the complexity of decoding your output in software. Keep the default
+	// value, Disabled, unless your playback devices need the simpler bitstream.
+	// Encoding with Fast decode is slightly slower and gives comparable video quality.
+	FastDecode Av1FastDecode
 
 	// Film grain synthesis replaces film grain present in your content with similar
 	// quality synthesized AV1 film grain. We recommend that you choose Enabled to
@@ -2321,18 +2360,26 @@ type Av1Settings struct {
 	// number for Framerate. In this example, specify 23.976.
 	FramerateNumerator *int32
 
-	// Specify the GOP length (keyframe interval) in frames. With AV1, MediaConvert
-	// doesn't support GOP length in seconds. This value must be greater than zero and
-	// preferably equal to 1 + ((numberBFrames + 1) * x), where x is an integer value.
+	// Specify the GOP length (keyframe interval). Use GOP size units to say whether
+	// this value is in frames or in seconds. This value must be greater than zero.
+	// With AV1, MediaConvert can't choose the GOP length for you, so you must specify
+	// it.
 	GopSize *float64
+
+	// Specify the units for GOP size. If you don't specify a value, MediaConvert
+	// treats GOP size as a number of frames. With AV1, MediaConvert can't choose the
+	// GOP length for you, so there is no automatic option here: specify the GOP length
+	// in the related setting GOP size, in frames or in seconds.
+	GopSizeUnits Av1GopSizeUnits
 
 	// Maximum bitrate in bits/second. For example, enter five megabits per second as
 	// 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate *int32
 
-	// Specify from the number of B-frames, in the range of 0-15. For AV1 encoding, we
-	// recommend using 7 or 15. Choose a larger number for a lower bitrate and smaller
-	// file size; choose a smaller number for better video quality.
+	// Specify the number of B-frames between reference frames, in the range of 0-15.
+	// For AV1 encoding, we recommend the default value, 15, which gives the lowest
+	// bitrate and smallest file size. Choose a smaller number for better video quality
+	// at a higher bitrate.
 	NumberBFramesBetweenReferenceFrames *int32
 
 	// Optionally choose one or more per frame metric reports to generate along with
@@ -2362,12 +2409,15 @@ type Av1Settings struct {
 	// variable bitrate (QVBR) and constant bitrate (CBR). You can''t use VBR.'
 	RateControlMode Av1RateControlMode
 
-	// Optional. Use this setting to have the service insert I-frames at scene changes
-	// that it automatically detects. For AV1, scene change detection is disabled by
-	// default. Choose Enabled to insert I-frames at detected scene changes, which can
-	// improve video quality. If this output uses QVBR, you can instead choose
-	// Transition detection for further video quality improvement. For more information
-	// about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
+	// Keep the default value, Enabled, to have MediaConvert insert I-frames at scene
+	// changes that it automatically detects, which improves video quality. Choose
+	// Disabled if you need a strictly fixed keyframe cadence instead. With AV1,
+	// MediaConvert doesn't support Transition detection. Transition detection is
+	// accepted for backward compatibility but behaves exactly the same as Enabled, so
+	// we recommend that you use Enabled instead. It also keeps the QVBR requirement it
+	// has for other codecs: if you choose Transition detection in an AV1 output, Rate
+	// control mode must be QVBR. Choose Enabled to get the same result with any rate
+	// control mode.
 	SceneChangeDetect Av1SceneChangeDetect
 
 	// Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or
@@ -2388,21 +2438,42 @@ type Av1Settings struct {
 	// to Max bitrate.
 	SlidingWindowPeakBitrate *int32
 
-	// Keep the default value, Enabled, to adjust quantization within each frame based
-	// on spatial variation of content complexity. When you enable this feature, the
-	// encoder uses fewer bits on areas that can sustain more distortion with no
-	// noticeable visual degradation and uses more bits on areas where any small
-	// distortion will be noticeable. For example, complex textured blocks are encoded
-	// with fewer bits and smooth textured blocks are encoded with more bits. Enabling
-	// this feature will almost always improve your video quality. Note, though, that
-	// this feature doesn't take into account where the viewer's attention is likely to
-	// be. If viewers are likely to be focusing their attention on a part of the screen
-	// with a lot of complex texture, you might choose to disable this feature. Related
-	// setting: When you enable spatial adaptive quantization, set the value for
-	// Adaptive quantization depending on your content. For homogeneous content, such
-	// as cartoons and video games, set it to Low. For content with a wider variety of
-	// textures, set it to High or Higher.
+	// Only use this setting when you set Adaptive quantization to one of the strength
+	// values, Low, Medium, High, Higher or Max. When you set Adaptive quantization to
+	// Auto, MediaConvert enables this feature for you and you can't specify it
+	// manually. When you enable adaptive quantization, the default value for
+	// Av1SpatialAdaptiveQuantization is Enabled. Keep this default value to adjust
+	// quantization within each frame based on spatial variation of content complexity.
+	// When you enable this feature, the encoder uses fewer bits on areas that can
+	// sustain more distortion with no noticeable visual degradation and uses more bits
+	// on areas where any small distortion will be noticeable. For example, complex
+	// textured blocks are encoded with fewer bits and smooth textured blocks are
+	// encoded with more bits. Enabling this feature will almost always improve your
+	// video quality. Note, though, that this feature doesn't take into account where
+	// the viewer's attention is likely to be. If viewers are likely to be focusing
+	// their attention on a part of the screen with a lot of complex texture, you might
+	// choose to disable this feature. Related setting: With AV1 this filter is on or
+	// off; the Adaptive quantization value does not change its strength.
 	SpatialAdaptiveQuantization Av1SpatialAdaptiveQuantization
+
+	// Only use this setting when you set Adaptive quantization to one of the strength
+	// values, Low, Medium, High, Higher or Max. When you set Adaptive quantization to
+	// Auto, MediaConvert enables this feature for you and you can't specify it
+	// manually. When you enable adaptive quantization, the default value for
+	// Av1TemporalAdaptiveQuantization is Enabled. Keep this default value to adjust
+	// quantization within each frame based on temporal variation of content
+	// complexity. When you enable this feature, the encoder uses fewer bits on areas
+	// of the frame that aren't moving and uses more bits on complex objects with sharp
+	// edges that move a lot. For example, this feature improves the readability of
+	// text tickers on newscasts and scoreboards on sports matches. Enabling this
+	// feature will almost always improve your video quality. Note, though, that this
+	// feature doesn't take into account where the viewer's attention is likely to be.
+	// If viewers are likely to be focusing their attention on a part of the screen
+	// that doesn't have moving objects with sharp edges, such as sports athletes'
+	// faces, you might choose to set Av1TemporalAdaptiveQuantization to Disabled.
+	// Related setting: With AV1 this filter is on or off; the Adaptive quantization
+	// value does not change its strength.
+	TemporalAdaptiveQuantization Av1TemporalAdaptiveQuantization
 
 	noSmithyDocumentSerde
 }
@@ -2423,6 +2494,9 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Bitrate != nil {
 		s.WriteInt32(schemas.Av1Settings_Bitrate, *v.Bitrate)
 	}
+	if v.FastDecode != "" {
+		s.WriteString(schemas.Av1Settings_FastDecode, string(v.FastDecode))
+	}
 	if v.FilmGrainSynthesis != "" {
 		s.WriteString(schemas.Av1Settings_FilmGrainSynthesis, string(v.FilmGrainSynthesis))
 	}
@@ -2440,6 +2514,9 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.GopSize != nil {
 		s.WriteFloat64(schemas.Av1Settings_GopSize, *v.GopSize)
+	}
+	if v.GopSizeUnits != "" {
+		s.WriteString(schemas.Av1Settings_GopSizeUnits, string(v.GopSizeUnits))
 	}
 	if v.MaxBitrate != nil {
 		s.WriteInt32(schemas.Av1Settings_MaxBitrate, *v.MaxBitrate)
@@ -2473,6 +2550,9 @@ func (v *Av1Settings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpatialAdaptiveQuantization != "" {
 		s.WriteString(schemas.Av1Settings_SpatialAdaptiveQuantization, string(v.SpatialAdaptiveQuantization))
 	}
+	if v.TemporalAdaptiveQuantization != "" {
+		s.WriteString(schemas.Av1Settings_TemporalAdaptiveQuantization, string(v.TemporalAdaptiveQuantization))
+	}
 }
 func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Av1Settings, func(s *smithy.Schema) error {
@@ -2494,6 +2574,13 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Av1Settings_Bitrate:
 			v.Bitrate = new(int32)
 			return d.ReadInt32(schemas.Av1Settings_Bitrate, v.Bitrate)
+		case schemas.Av1Settings_FastDecode:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_FastDecode, &ev); err != nil {
+				return err
+			}
+			v.FastDecode = Av1FastDecode(ev)
+			return nil
 		case schemas.Av1Settings_FilmGrainSynthesis:
 			var ev string
 			if err := d.ReadString(schemas.Av1Settings_FilmGrainSynthesis, &ev); err != nil {
@@ -2524,6 +2611,13 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Av1Settings_GopSize:
 			v.GopSize = new(float64)
 			return d.ReadFloat64(schemas.Av1Settings_GopSize, v.GopSize)
+		case schemas.Av1Settings_GopSizeUnits:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_GopSizeUnits, &ev); err != nil {
+				return err
+			}
+			v.GopSizeUnits = Av1GopSizeUnits(ev)
+			return nil
 		case schemas.Av1Settings_MaxBitrate:
 			v.MaxBitrate = new(int32)
 			return d.ReadInt32(schemas.Av1Settings_MaxBitrate, v.MaxBitrate)
@@ -2564,6 +2658,13 @@ func (v *Av1Settings) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.SpatialAdaptiveQuantization = Av1SpatialAdaptiveQuantization(ev)
+			return nil
+		case schemas.Av1Settings_TemporalAdaptiveQuantization:
+			var ev string
+			if err := d.ReadString(schemas.Av1Settings_TemporalAdaptiveQuantization, &ev); err != nil {
+				return err
+			}
+			v.TemporalAdaptiveQuantization = Av1TemporalAdaptiveQuantization(ev)
 			return nil
 		}
 		return nil
@@ -7116,6 +7217,105 @@ func (v *DolbyVisionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Required when you set Codec to the value DTSC.
+type DtscSettings struct {
+
+	// Specify the bitrate for the DTS Digital Surround stream, in bits per second.
+	// The only valid value is 768000.
+	Bitrate *int32
+
+	// This value must be 48000. It represents the sample rate in Hz.
+	SampleRate *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *DtscSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DtscSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DtscSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.DtscSettings_Bitrate, *v.Bitrate)
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.DtscSettings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *DtscSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DtscSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DtscSettings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.DtscSettings_Bitrate, v.Bitrate)
+		case schemas.DtscSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.DtscSettings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
+}
+
+// Required when you set Codec to the value DTSX.
+type DtsxSettings struct {
+
+	// Specify the average bitrate for the DTS:X Profile 2 stream, in bits per second.
+	// Valid values depend on the coding mode: 160000, 192000, 224000, 256000, 288000
+	// and 320000 for CODING_MODE_5_1, and 288000, 384000 and 448000 for
+	// CODING_MODE_5_1_4.
+	Bitrate *int32
+
+	// DTS:X coding mode. Determines the number of input channels and the channel
+	// layout that the encoder emits. - CODING_MODE_5_1: 5.1 surround -
+	// CODING_MODE_5_1_4: 5.1.4 immersive
+	CodingMode DtsxCodingMode
+
+	// This value must be 48000. It represents the sample rate in Hz.
+	SampleRate *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *DtsxSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DtsxSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DtsxSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitrate != nil {
+		s.WriteInt32(schemas.DtsxSettings_Bitrate, *v.Bitrate)
+	}
+	if v.CodingMode != "" {
+		s.WriteString(schemas.DtsxSettings_CodingMode, string(v.CodingMode))
+	}
+	if v.SampleRate != nil {
+		s.WriteInt32(schemas.DtsxSettings_SampleRate, *v.SampleRate)
+	}
+}
+func (v *DtsxSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DtsxSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DtsxSettings_Bitrate:
+			v.Bitrate = new(int32)
+			return d.ReadInt32(schemas.DtsxSettings_Bitrate, v.Bitrate)
+		case schemas.DtsxSettings_CodingMode:
+			var ev string
+			if err := d.ReadString(schemas.DtsxSettings_CodingMode, &ev); err != nil {
+				return err
+			}
+			v.CodingMode = DtsxCodingMode(ev)
+			return nil
+		case schemas.DtsxSettings_SampleRate:
+			v.SampleRate = new(int32)
+			return d.ReadInt32(schemas.DtsxSettings_SampleRate, v.SampleRate)
+		}
+		return nil
+	})
+}
+
 // Settings for integer-second duration normalization. When this preprocessor is
 // present, the output duration will be adjusted to an exact integer-second
 // boundary. If the input is within the trim threshold of an integer second,
@@ -7946,6 +8146,61 @@ func (v *DynamicAudioSelector) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SelectorType = DynamicAudioSelectorType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Dynamic Multiview settings. Encodes this video output so that a downstream
+// packager can combine it with other outputs in a Dynamic Multiview presentation,
+// or replace parts of it. Available for H.264 and H.265 outputs. Enabling Dynamic
+// Multiview reduces compression efficiency.
+type DynamicMultiviewSettings struct {
+
+	// Choose Enabled to encode this video output for Dynamic Multiview. With no
+	// regions, the whole frame is one view in the presentation. With regions, only
+	// those rectangles can be replaced. Keep the default value, Disabled, to leave
+	// Dynamic Multiview off; regions must then be empty. Dynamic Multiview outputs
+	// must be progressive and use a Dynamic sub-GOP of Static. MediaConvert also
+	// overrides some encoder settings on these outputs: Explicit weighted prediction
+	// for H.264, and Tree block size and MV temporal predictor for H.265.
+	Enabled DynamicMultiviewSettingsEnabled
+
+	// Optional rectangles that a downstream packager can replace with other content,
+	// such as an ad. MediaConvert fills each region with black and encodes it
+	// independently of the rest of the frame. Leave empty to use the whole frame as
+	// one view. H.264 outputs support up to 8 regions; H.265 outputs support 1.
+	Regions []Rectangle
+
+	noSmithyDocumentSerde
+}
+
+func (v *DynamicMultiviewSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynamicMultiviewSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynamicMultiviewSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != "" {
+		s.WriteString(schemas.DynamicMultiviewSettings_Enabled, string(v.Enabled))
+	}
+	if v.Regions != nil {
+		serialize__listOfRectangle(s, schemas.DynamicMultiviewSettings_Regions, v.Regions)
+	}
+}
+func (v *DynamicMultiviewSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynamicMultiviewSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynamicMultiviewSettings_Enabled:
+			var ev string
+			if err := d.ReadString(schemas.DynamicMultiviewSettings_Enabled, &ev); err != nil {
+				return err
+			}
+			v.Enabled = DynamicMultiviewSettingsEnabled(ev)
+			return nil
+		case schemas.DynamicMultiviewSettings_Regions:
+			return deserialize__listOfRectangle(d, schemas.DynamicMultiviewSettings_Regions, &v.Regions)
 		}
 		return nil
 	})
@@ -19094,10 +19349,13 @@ func (v *NielsenNonLinearWatermarkSettings) Deserialize(d smithy.ShapeDeserializ
 }
 
 // Enable the Noise reducer feature to remove noise from your video output if
-// necessary. Enable or disable this feature for each output individually. This
-// setting is disabled by default. When you enable Noise reducer, you must also
-// select a value for Noise reducer filter. For AVC outputs, when you include Noise
-// reducer, you cannot include the Bandwidth reduction filter.
+// necessary. Enable or disable this feature for each output individually. When you
+// enable Noise reducer, you must also select a value for Noise reducer filter.
+// Note that MediaConvert applies the Perceptual filter at Strength 1 by default to
+// AVC, HEVC, AV1, MPEG-2, VP8, and VP9 outputs, whether or not you enable Noise
+// reducer. To turn that off, enable Noise reducer and set Noise reducer filter to
+// None. For AVC outputs, when you include Noise reducer, you cannot include the
+// Bandwidth reduction filter.
 type NoiseReducer struct {
 
 	// Use Noise reducer filter to select one of the following spatial image filtering
@@ -23056,6 +23314,12 @@ type VideoDescription struct {
 	// by default when Timecode insertion or Timecode track is enabled.
 	DropFrameTimecode DropFrameTimecode
 
+	// Dynamic Multiview settings. Encodes this video output so that a downstream
+	// packager can combine it with other outputs in a Dynamic Multiview presentation,
+	// or replace parts of it. Available for H.264 and H.265 outputs. Enabling Dynamic
+	// Multiview reduces compression efficiency.
+	DynamicMultiviewSettings *DynamicMultiviewSettings
+
 	// Applies only if you set AFD Signaling to Fixed. Use Fixed to specify a four-bit
 	// AFD value which the service will write on all frames of this video output.
 	FixedAfd *int32
@@ -23160,6 +23424,11 @@ func (v *VideoDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DropFrameTimecode != "" {
 		s.WriteString(schemas.VideoDescription_DropFrameTimecode, string(v.DropFrameTimecode))
 	}
+	if v.DynamicMultiviewSettings != nil {
+		s.WriteStruct(schemas.VideoDescription_DynamicMultiviewSettings)
+		v.DynamicMultiviewSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.FixedAfd != nil {
 		s.WriteInt32(schemas.VideoDescription_FixedAfd, *v.FixedAfd)
 	}
@@ -23239,6 +23508,9 @@ func (v *VideoDescription) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DropFrameTimecode = DropFrameTimecode(ev)
 			return nil
+		case schemas.VideoDescription_DynamicMultiviewSettings:
+			v.DynamicMultiviewSettings = &DynamicMultiviewSettings{}
+			return v.DynamicMultiviewSettings.Deserialize(d)
 		case schemas.VideoDescription_FixedAfd:
 			v.FixedAfd = new(int32)
 			return d.ReadInt32(schemas.VideoDescription_FixedAfd, v.FixedAfd)

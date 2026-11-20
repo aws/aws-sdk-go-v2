@@ -1046,6 +1046,9 @@ type Descriptors struct {
 	// The MCP server descriptor, populated when the record type is MCP.
 	McpServer *McpServerDescriptor
 
+	// The signature agent card descriptor, populated when the record type is WEB_BOT.
+	SignatureAgentCard *SignatureAgentCardDescriptor
+
 	noSmithyDocumentSerde
 }
 
@@ -1086,6 +1089,11 @@ func (v *Descriptors) SerializeMembers(s smithy.ShapeSerializer) {
 		v.McpServer.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SignatureAgentCard != nil {
+		s.WriteStruct(schemas.Descriptors_signatureAgentCard)
+		v.SignatureAgentCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Descriptors, func(s *smithy.Schema) error {
@@ -1108,6 +1116,9 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Descriptors_mcpServer:
 			v.McpServer = &McpServerDescriptor{}
 			return v.McpServer.Deserialize(d)
+		case schemas.Descriptors_signatureAgentCard:
+			v.SignatureAgentCard = &SignatureAgentCardDescriptor{}
+			return v.SignatureAgentCard.Deserialize(d)
 		}
 		return nil
 	})
@@ -1241,6 +1252,51 @@ func (v *DiscoveryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Server-generated DNS-01 challenge the caller must publish to prove ownership.
+type DomainChallenge struct {
+
+	// The name of the DNS TXT record to create, such as _acme-challenge.example.com .
+	//
+	// This member is required.
+	RecordName *string
+
+	// The value to publish in the DNS TXT record. A new value is issued each time
+	// verification restarts, and earlier values no longer verify the domain.
+	//
+	// This member is required.
+	RecordValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DomainChallenge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainChallenge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainChallenge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordName != nil {
+		s.WriteString(schemas.DomainChallenge_recordName, *v.RecordName)
+	}
+	if v.RecordValue != nil {
+		s.WriteString(schemas.DomainChallenge_recordValue, *v.RecordValue)
+	}
+}
+func (v *DomainChallenge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainChallenge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainChallenge_recordName:
+			v.RecordName = new(string)
+			return d.ReadString(schemas.DomainChallenge_recordName, v.RecordName)
+		case schemas.DomainChallenge_recordValue:
+			v.RecordValue = new(string)
+			return d.ReadString(schemas.DomainChallenge_recordValue, v.RecordValue)
+		}
+		return nil
+	})
+}
+
 // The server-side encryption configuration for a registry. Specifies a
 // customer-managed Amazon Web Services KMS key used to encrypt the registry's
 // content.
@@ -1369,6 +1425,32 @@ func (v *HttpDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// The identifier value. Discriminated union — exactly one member is set. GA
+// supports domain only; other identifier types are added as new members
+// (backward-compatible) in a later task.
+//
+// The following types satisfy this interface:
+//
+//	IdentifierMemberDomain
+type Identifier interface {
+	isIdentifier()
+}
+
+// FQDN per RFC-1035/1123, case-insensitive, at least two labels.
+type IdentifierMemberDomain struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*IdentifierMemberDomain) isIdentifier() {}
+func (v *IdentifierMemberDomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.Identifier_domain, v.Value)
+}
+func (v *IdentifierMemberDomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.Identifier_domain, &v.Value)
 }
 
 // A service-managed private endpoint provisioned within a customer VPC.
@@ -1892,6 +1974,231 @@ func (v *ProvenanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SourceType = SourceType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// An association between a registry record and a publisher, including the
+// record's public identifier.
+type PublisherAssociation struct {
+
+	// Server-generated public identifier. This is a URN, NOT an ARN: the public
+	// identifier is a public-facing, provider-neutral name (a Record may be hosted
+	// outside AWS), so it deliberately does not use the arn: scheme.
+	//
+	// Layout: urn:air:[<subdomain>.]<domain>:<namespace>:<identity>[;<kind>]
+	//
+	//   - authority [<subdomain>.]<domain> — the publisher FQDN, with the optional
+	//   subdomain folded in as a leading label (e.g. agents.acme.com ; without a
+	//   subdomain, just acme.com ).
+	//   - <namespace> — the association's category values concatenated with :
+	//   (zero-or-more segments; absent when no categories were supplied).
+	//   - <identity> — the Record name: letters, digits, . , _ , / and - , as Vestry
+	//   allows.
+	//   - <kind> — the artifact kind from the Record's recordType (ai-catalog issue
+	//   59): MCP is mcp , AGENT and CUSTOM are agent , SKILL is skill , WEB_BOT is
+	//   webbot . Absent for GATEWAY and when the association carried no recordType .
+	//   The kind is part of the identifier, so urn:air:acme.com:x;mcp and
+	//   urn:air:acme.com:x are two identifiers. Belfry mints ; ; the pattern also
+	//   admits # , + , $ and @ , so identifiers minted with # before the delimiter
+	//   settled on ; stay valid until they're re-minted. Examples:
+	//   urn:air:acme.com:finance-agent (no subdomain/categories),
+	//   urn:air:agents.acme.com:financial:money:finance-agent ,
+	//   urn:air:acme.com:weather;mcp .
+	//
+	// This member is required.
+	PublicIdentifier *string
+
+	// ARN for an Identifier resource. Global (region-less) resource, so the region
+	// field is empty; the resource segment carries the identifier value, which may
+	// contain dots.
+	//
+	// Named PublisherIdentifierArn (RegionalCP's local name) so RegionalCP consumes
+	// it without a rename — which keeps its c2j/SDK model (generated from the
+	// un-projected source, where the top-level c2j plugin runs to preserve
+	// @idempotencyToken) showing the correct shape name. GlobalCP renames this to
+	// identifierArn in its own coral-export projection.
+	//
+	// This member is required.
+	Publisher *string
+
+	// Registry Record Amazon Resource Name
+	//
+	// This member is required.
+	RecordArn *string
+
+	// The Record<->Publisher association's status.
+	//
+	// This member is required.
+	Status AssociationStatus
+
+	// The reason for the association's current status, such as why it is suspended.
+	// Present only when a reason is available.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublisherAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublisherAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublisherAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublicIdentifier != nil {
+		s.WriteString(schemas.PublisherAssociation_publicIdentifier, *v.PublicIdentifier)
+	}
+	if v.Publisher != nil {
+		s.WriteString(schemas.PublisherAssociation_publisher, *v.Publisher)
+	}
+	if v.RecordArn != nil {
+		s.WriteString(schemas.PublisherAssociation_recordArn, *v.RecordArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PublisherAssociation_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.PublisherAssociation_statusReason, *v.StatusReason)
+	}
+}
+func (v *PublisherAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublisherAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublisherAssociation_publicIdentifier:
+			v.PublicIdentifier = new(string)
+			return d.ReadString(schemas.PublisherAssociation_publicIdentifier, v.PublicIdentifier)
+		case schemas.PublisherAssociation_publisher:
+			v.Publisher = new(string)
+			return d.ReadString(schemas.PublisherAssociation_publisher, v.Publisher)
+		case schemas.PublisherAssociation_recordArn:
+			v.RecordArn = new(string)
+			return d.ReadString(schemas.PublisherAssociation_recordArn, v.RecordArn)
+		case schemas.PublisherAssociation_status:
+			var ev string
+			if err := d.ReadString(schemas.PublisherAssociation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssociationStatus(ev)
+			return nil
+		case schemas.PublisherAssociation_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.PublisherAssociation_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
+// Lightweight projection for list results.
+type PublisherSummary struct {
+
+	// The date and time that the publisher was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// ARN for an Identifier resource. Global (region-less) resource, so the region
+	// field is empty; the resource segment carries the identifier value, which may
+	// contain dots.
+	//
+	// Named PublisherIdentifierArn (RegionalCP's local name) so RegionalCP consumes
+	// it without a rename — which keeps its c2j/SDK model (generated from the
+	// un-projected source, where the top-level c2j plugin runs to preserve
+	// @idempotencyToken) showing the correct shape name. GlobalCP renames this to
+	// identifierArn in its own coral-export projection.
+	//
+	// This member is required.
+	PublisherArn *string
+
+	// The domain verification status of the publisher: ACTION_REQUIRED , ACTIVE ,
+	// SUSPENDED , FAILED , or DELETING . Only an ACTIVE publisher accepts new
+	// registry record associations.
+	//
+	// This member is required.
+	Status VerificationStatus
+
+	// The identifier value. Discriminated union — exactly one member is set. GA
+	// supports domain only; other identifier types are added as new members
+	// (backward-compatible) in a later task.
+	//
+	// This member is required.
+	Value Identifier
+
+	// The number of registry records associated with the publisher, in any
+	// association status. Omitted when the count isn't available.
+	AssociationCount *int32
+
+	// The identifier type. DOMAIN is the only supported value.
+	IdentifierType IdentifierType
+
+	// The number of the publisher's associations that are in PENDING_APPROVAL.
+	// Omitted when the count isn't available.
+	PendingAssociationApprovalCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublisherSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublisherSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublisherSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationCount != nil {
+		s.WriteInt32(schemas.PublisherSummary_associationCount, *v.AssociationCount)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PublisherSummary_createdAt, *v.CreatedAt)
+	}
+	if v.IdentifierType != "" {
+		s.WriteString(schemas.PublisherSummary_identifierType, string(v.IdentifierType))
+	}
+	if v.PendingAssociationApprovalCount != nil {
+		s.WriteInt32(schemas.PublisherSummary_pendingAssociationApprovalCount, *v.PendingAssociationApprovalCount)
+	}
+	if v.PublisherArn != nil {
+		s.WriteString(schemas.PublisherSummary_publisherArn, *v.PublisherArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PublisherSummary_status, string(v.Status))
+	}
+	if v.Value != nil {
+		serializeIdentifier(s, schemas.PublisherSummary_value, v.Value)
+	}
+}
+func (v *PublisherSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublisherSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublisherSummary_associationCount:
+			v.AssociationCount = new(int32)
+			return d.ReadInt32(schemas.PublisherSummary_associationCount, v.AssociationCount)
+		case schemas.PublisherSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PublisherSummary_createdAt, v.CreatedAt)
+		case schemas.PublisherSummary_identifierType:
+			var ev string
+			if err := d.ReadString(schemas.PublisherSummary_identifierType, &ev); err != nil {
+				return err
+			}
+			v.IdentifierType = IdentifierType(ev)
+			return nil
+		case schemas.PublisherSummary_pendingAssociationApprovalCount:
+			v.PendingAssociationApprovalCount = new(int32)
+			return d.ReadInt32(schemas.PublisherSummary_pendingAssociationApprovalCount, v.PendingAssociationApprovalCount)
+		case schemas.PublisherSummary_publisherArn:
+			v.PublisherArn = new(string)
+			return d.ReadString(schemas.PublisherSummary_publisherArn, v.PublisherArn)
+		case schemas.PublisherSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PublisherSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = VerificationStatus(ev)
+			return nil
+		case schemas.PublisherSummary_value:
+			return deserializeIdentifier(d, schemas.PublisherSummary_value, &v.Value)
 		}
 		return nil
 	})
@@ -2878,6 +3185,109 @@ func (v *SelfManagedLatticeResourceMemberResourceConfigurationIdentifier) Deseri
 	return d.ReadString(schemas.SelfManagedLatticeResource_resourceConfigurationIdentifier, &v.Value)
 }
 
+// The additional data for a signature agent card descriptor, such as the bot
+// category of the web bot.
+type SignatureAgentCardAdditionalData struct {
+
+	// The bot category that describes the purpose of the web bot identified by the
+	// signature agent card descriptor.
+	Category BotCategory
+
+	noSmithyDocumentSerde
+}
+
+func (v *SignatureAgentCardAdditionalData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignatureAgentCardAdditionalData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignatureAgentCardAdditionalData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.SignatureAgentCardAdditionalData_category, string(v.Category))
+	}
+}
+func (v *SignatureAgentCardAdditionalData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignatureAgentCardAdditionalData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignatureAgentCardAdditionalData_category:
+			var ev string
+			if err := d.ReadString(schemas.SignatureAgentCardAdditionalData_category, &ev); err != nil {
+				return err
+			}
+			v.Category = BotCategory(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Descriptor that defines the content of a signature agent card, which identifies
+// a web bot and references the JSON Web Key Set used to verify its HTTP message
+// signatures.
+type SignatureAgentCardDescriptor struct {
+
+	// Additional data associated with the signature agent card descriptor, such as
+	// the bot category.
+	AdditionalData *SignatureAgentCardAdditionalData
+
+	// The signature agent card content, serialized as descriptor payload data.
+	Data *string
+
+	// The schema version of the descriptor payload.
+	DataSchemaVersion *string
+
+	// The optional source configuration used to synchronize the signature agent card
+	// descriptor content.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *SignatureAgentCardDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignatureAgentCardDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignatureAgentCardDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalData != nil {
+		s.WriteStruct(schemas.SignatureAgentCardDescriptor_additionalData)
+		v.AdditionalData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.SignatureAgentCardDescriptor_data, *v.Data)
+	}
+	if v.DataSchemaVersion != nil {
+		s.WriteString(schemas.SignatureAgentCardDescriptor_dataSchemaVersion, *v.DataSchemaVersion)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.SignatureAgentCardDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SignatureAgentCardDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignatureAgentCardDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignatureAgentCardDescriptor_additionalData:
+			v.AdditionalData = &SignatureAgentCardAdditionalData{}
+			return v.AdditionalData.Deserialize(d)
+		case schemas.SignatureAgentCardDescriptor_data:
+			v.Data = new(string)
+			return d.ReadString(schemas.SignatureAgentCardDescriptor_data, v.Data)
+		case schemas.SignatureAgentCardDescriptor_dataSchemaVersion:
+			v.DataSchemaVersion = new(string)
+			return d.ReadString(schemas.SignatureAgentCardDescriptor_dataSchemaVersion, v.DataSchemaVersion)
+		case schemas.SignatureAgentCardDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The details about the upstream source from which a registry record was
 // detected. Exactly one member is populated, corresponding to the source type.
 //
@@ -3577,6 +3987,42 @@ func (v *UpdatedAutoDetectionConfiguration) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Leaf patch wrapper for a bot category. Omit to leave unchanged; supply an empty
+// object to unset; supply optionalValue to set.
+type UpdatedBotCategory struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue BotCategory
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedBotCategory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedBotCategory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedBotCategory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != "" {
+		s.WriteString(schemas.UpdatedBotCategory_optionalValue, string(v.OptionalValue))
+	}
+}
+func (v *UpdatedBotCategory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedBotCategory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedBotCategory_optionalValue:
+			var ev string
+			if err := d.ReadString(schemas.UpdatedBotCategory_optionalValue, &ev); err != nil {
+				return err
+			}
+			v.OptionalValue = BotCategory(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The custom descriptor patch wrapper. Omit to leave the descriptor unchanged;
 // supply an empty object to remove it; supply optionalValue to patch its fields.
 type UpdatedCustomDescriptor struct {
@@ -3869,6 +4315,9 @@ type UpdatedDescriptorsFields struct {
 	// The patch for the MCP server descriptor.
 	McpServer *UpdatedMcpServerDescriptor
 
+	// The patch for the signature agent card descriptor.
+	SignatureAgentCard *UpdatedSignatureAgentCardDescriptor
+
 	noSmithyDocumentSerde
 }
 
@@ -3909,6 +4358,11 @@ func (v *UpdatedDescriptorsFields) SerializeMembers(s smithy.ShapeSerializer) {
 		v.McpServer.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SignatureAgentCard != nil {
+		s.WriteStruct(schemas.UpdatedDescriptorsFields_signatureAgentCard)
+		v.SignatureAgentCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *UpdatedDescriptorsFields) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatedDescriptorsFields, func(s *smithy.Schema) error {
@@ -3931,6 +4385,9 @@ func (v *UpdatedDescriptorsFields) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.UpdatedDescriptorsFields_mcpServer:
 			v.McpServer = &UpdatedMcpServerDescriptor{}
 			return v.McpServer.Deserialize(d)
+		case schemas.UpdatedDescriptorsFields_signatureAgentCard:
+			v.SignatureAgentCard = &UpdatedSignatureAgentCardDescriptor{}
+			return v.SignatureAgentCard.Deserialize(d)
 		}
 		return nil
 	})
@@ -4387,6 +4844,177 @@ func (v *UpdatedRegistryRecordArtifact) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// The signature agent card additional-data patch wrapper. Omit to leave the
+// additional data unchanged; supply an empty object to remove it; supply
+// optionalValue to patch its fields.
+type UpdatedSignatureAgentCardAdditionalData struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *UpdatedSignatureAgentCardAdditionalDataFields
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedSignatureAgentCardAdditionalData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedSignatureAgentCardAdditionalData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedSignatureAgentCardAdditionalData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardAdditionalData_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedSignatureAgentCardAdditionalData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedSignatureAgentCardAdditionalData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedSignatureAgentCardAdditionalData_optionalValue:
+			v.OptionalValue = &UpdatedSignatureAgentCardAdditionalDataFields{}
+			return v.OptionalValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The set of signature agent card additional-data fields that can be individually
+// updated.
+type UpdatedSignatureAgentCardAdditionalDataFields struct {
+
+	// The patch for the bot category field.
+	Category *UpdatedBotCategory
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedSignatureAgentCardAdditionalDataFields) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedSignatureAgentCardAdditionalDataFields)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedSignatureAgentCardAdditionalDataFields) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardAdditionalDataFields_category)
+		v.Category.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedSignatureAgentCardAdditionalDataFields) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedSignatureAgentCardAdditionalDataFields, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedSignatureAgentCardAdditionalDataFields_category:
+			v.Category = &UpdatedBotCategory{}
+			return v.Category.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The signature agent card descriptor patch wrapper. Omit to leave the descriptor
+// unchanged; supply an empty object to remove it; supply optionalValue to patch
+// its fields.
+type UpdatedSignatureAgentCardDescriptor struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *UpdatedSignatureAgentCardDescriptorFields
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedSignatureAgentCardDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedSignatureAgentCardDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptor_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedSignatureAgentCardDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedSignatureAgentCardDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedSignatureAgentCardDescriptor_optionalValue:
+			v.OptionalValue = &UpdatedSignatureAgentCardDescriptorFields{}
+			return v.OptionalValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The set of signature agent card descriptor fields that can be individually
+// updated.
+type UpdatedSignatureAgentCardDescriptorFields struct {
+
+	// The patch for the descriptor's additional data field.
+	AdditionalData *UpdatedSignatureAgentCardAdditionalData
+
+	// The patch for the descriptor's data field.
+	Data *UpdatedDescriptorData
+
+	// The patch for the descriptor's data schema version field.
+	DataSchemaVersion *UpdatedDataSchemaVersion
+
+	// The patch for the descriptor's source field.
+	Source *UpdatedDescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedSignatureAgentCardDescriptorFields) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptorFields)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedSignatureAgentCardDescriptorFields) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalData != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptorFields_additionalData)
+		v.AdditionalData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Data != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptorFields_data)
+		v.Data.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataSchemaVersion != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptorFields_dataSchemaVersion)
+		v.DataSchemaVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.UpdatedSignatureAgentCardDescriptorFields_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedSignatureAgentCardDescriptorFields) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedSignatureAgentCardDescriptorFields, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedSignatureAgentCardDescriptorFields_additionalData:
+			v.AdditionalData = &UpdatedSignatureAgentCardAdditionalData{}
+			return v.AdditionalData.Deserialize(d)
+		case schemas.UpdatedSignatureAgentCardDescriptorFields_data:
+			v.Data = &UpdatedDescriptorData{}
+			return v.Data.Deserialize(d)
+		case schemas.UpdatedSignatureAgentCardDescriptorFields_dataSchemaVersion:
+			v.DataSchemaVersion = &UpdatedDataSchemaVersion{}
+			return v.DataSchemaVersion.Deserialize(d)
+		case schemas.UpdatedSignatureAgentCardDescriptorFields_source:
+			v.Source = &UpdatedDescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a single input field that failed validation.
 type ValidationExceptionField struct {
 
@@ -4482,6 +5110,7 @@ func (*UnknownUnionMember) isAgentSkillsSourceConfiguration()        {}
 func (*UnknownUnionMember) isAuthorizationData()                     {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
 func (*UnknownUnionMember) isClaimMatchValueType()                   {}
+func (*UnknownUnionMember) isIdentifier()                            {}
 func (*UnknownUnionMember) isPrivateEndpoint()                       {}
 func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion() {}
 func (*UnknownUnionMember) isRegistryRecordSynchronizedSource()      {}

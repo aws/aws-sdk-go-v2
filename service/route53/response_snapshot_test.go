@@ -277,6 +277,10 @@ func TestCheckResponseSnapshot_ChangeResourceRecordSets(t *testing.T) {
 							},
 							Bias: ptr.Int32(1),
 						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
 					},
 				},
 				{
@@ -322,6 +326,10 @@ func TestCheckResponseSnapshot_ChangeResourceRecordSets(t *testing.T) {
 								Longitude: ptr.String("__Longitude__"),
 							},
 							Bias: ptr.Int32(1),
+						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
 						},
 					},
 				},
@@ -578,8 +586,9 @@ func TestCheckResponseSnapshot_CreateHostedZone(t *testing.T) {
 			Name:            ptr.String("__Name__"),
 			CallerReference: ptr.String("__CallerReference__"),
 			Config: &types.HostedZoneConfig{
-				Comment:     ptr.String("__Comment__"),
-				PrivateZone: true,
+				Comment:        ptr.String("__Comment__"),
+				PrivateZone:    true,
+				HostedZoneTier: types.HostedZoneTier("STANDARD"),
 			},
 			ResourceRecordSetCount: ptr.Int64(1),
 			LinkedService: &types.LinkedService{
@@ -588,8 +597,23 @@ func TestCheckResponseSnapshot_CreateHostedZone(t *testing.T) {
 			},
 			Features: &types.HostedZoneFeatures{
 				AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+				PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+				ChangeHistory: &types.ChangeHistoryFeature{
+					Status:            types.FeatureEnablement("ENABLED"),
+					RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 				FailureReasons: &types.HostedZoneFailureReasons{
 					AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+				},
+				ChangeGuardrails: []types.ChangeGuardrail{
+					{
+						Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+						Status: types.ChangeGuardrailStatus("ENABLED"),
+					},
+					{
+						Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+						Status: types.ChangeGuardrailStatus("ENABLED"),
+					},
 				},
 			},
 		},
@@ -629,10 +653,22 @@ func TestCheckResponseSnapshot_CreateHostedZone(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1717,8 +1753,9 @@ func TestCheckResponseSnapshot_GetHostedZone(t *testing.T) {
 			Name:            ptr.String("__Name__"),
 			CallerReference: ptr.String("__CallerReference__"),
 			Config: &types.HostedZoneConfig{
-				Comment:     ptr.String("__Comment__"),
-				PrivateZone: true,
+				Comment:        ptr.String("__Comment__"),
+				PrivateZone:    true,
+				HostedZoneTier: types.HostedZoneTier("STANDARD"),
 			},
 			ResourceRecordSetCount: ptr.Int64(1),
 			LinkedService: &types.LinkedService{
@@ -1727,8 +1764,23 @@ func TestCheckResponseSnapshot_GetHostedZone(t *testing.T) {
 			},
 			Features: &types.HostedZoneFeatures{
 				AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+				PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+				ChangeHistory: &types.ChangeHistoryFeature{
+					Status:            types.FeatureEnablement("ENABLED"),
+					RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 				FailureReasons: &types.HostedZoneFailureReasons{
 					AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+				},
+				ChangeGuardrails: []types.ChangeGuardrail{
+					{
+						Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+						Status: types.ChangeGuardrailStatus("ENABLED"),
+					},
+					{
+						Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+						Status: types.ChangeGuardrailStatus("ENABLED"),
+					},
 				},
 			},
 		},
@@ -1767,6 +1819,143 @@ func TestCheckResponseSnapshot_GetHostedZone(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetHostedZone.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetHostedZoneChangeBatch(t *testing.T) {
+	want := &GetHostedZoneChangeBatchOutput{
+		ChangeBatchSummary: &types.ChangeBatchSummary{
+			ChangeId:    ptr.String("__ChangeId__"),
+			Operation:   types.ChangeHistoryOperation("CreateHostedZone"),
+			SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SubmittedBy: ptr.String("__SubmittedBy__"),
+			RequestId:   ptr.String("__RequestId__"),
+			Comment:     ptr.String("__Comment__"),
+			ChangeCount: ptr.Int64(1),
+		},
+		ChangeBatch: &types.ChangeBatch{
+			Comment: ptr.String("__Comment__"),
+			Changes: []types.Change{
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
+					},
+				},
+				{
+					Action: types.ChangeAction("CREATE"),
+					ResourceRecordSet: &types.ResourceRecordSet{
+						Name:          ptr.String("__Name__"),
+						Type:          types.RRType("SOA"),
+						SetIdentifier: ptr.String("__SetIdentifier__"),
+						Weight:        ptr.Int64(1),
+						Region:        types.ResourceRecordSetRegion("us-east-1"),
+						GeoLocation: &types.GeoLocation{
+							ContinentCode:   ptr.String("__ContinentCode__"),
+							CountryCode:     ptr.String("__CountryCode__"),
+							SubdivisionCode: ptr.String("__SubdivisionCode__"),
+						},
+						Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+						MultiValueAnswer: ptr.Bool(true),
+						TTL:              ptr.Int64(1),
+						ResourceRecords: []types.ResourceRecord{
+							{
+								Value: ptr.String("__Value__"),
+							},
+							{
+								Value: ptr.String("__Value__"),
+							},
+						},
+						AliasTarget: &types.AliasTarget{
+							HostedZoneId:         ptr.String("__HostedZoneId__"),
+							DNSName:              ptr.String("__DNSName__"),
+							EvaluateTargetHealth: true,
+						},
+						HealthCheckId:           ptr.String("__HealthCheckId__"),
+						TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+						CidrRoutingConfig: &types.CidrRoutingConfig{
+							CollectionId: ptr.String("__CollectionId__"),
+							LocationName: ptr.String("__LocationName__"),
+						},
+						GeoProximityLocation: &types.GeoProximityLocation{
+							AWSRegion:      ptr.String("__AWSRegion__"),
+							LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+							Coordinates: &types.Coordinates{
+								Latitude:  ptr.String("__Latitude__"),
+								Longitude: ptr.String("__Longitude__"),
+							},
+							Bias: ptr.Int32(1),
+						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetHostedZoneChangeBatch.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetHostedZoneChangeBatch(context.Background(), &GetHostedZoneChangeBatchInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeId:     ptr.String("__ChangeId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetHostedZoneChangeBatch.response", err)
 	}
 }
 
@@ -2519,6 +2708,55 @@ func TestCheckResponseSnapshot_ListHealthChecksBySource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListHostedZoneChangeBatches(t *testing.T) {
+	want := &ListHostedZoneChangeBatchesOutput{
+		ChangeBatchSummaries: []types.ChangeBatchSummary{
+			{
+				ChangeId:    ptr.String("__ChangeId__"),
+				Operation:   types.ChangeHistoryOperation("CreateHostedZone"),
+				SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SubmittedBy: ptr.String("__SubmittedBy__"),
+				RequestId:   ptr.String("__RequestId__"),
+				Comment:     ptr.String("__Comment__"),
+				ChangeCount: ptr.Int64(1),
+			},
+			{
+				ChangeId:    ptr.String("__ChangeId__"),
+				Operation:   types.ChangeHistoryOperation("CreateHostedZone"),
+				SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SubmittedBy: ptr.String("__SubmittedBy__"),
+				RequestId:   ptr.String("__RequestId__"),
+				Comment:     ptr.String("__Comment__"),
+				ChangeCount: ptr.Int64(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListHostedZoneChangeBatches.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListHostedZoneChangeBatches(context.Background(), &ListHostedZoneChangeBatchesInput{
+		HostedZoneId:       ptr.String("__HostedZoneId__"),
+		SubmittedAfter:     ptr.String("__SubmittedAfter__"),
+		SubmittedBefore:    ptr.String("__SubmittedBefore__"),
+		StartAfterChangeId: ptr.String("__StartAfterChangeId__"),
+		SortOrder:          types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListHostedZoneChangeBatches.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListHostedZones(t *testing.T) {
 	want := &ListHostedZonesOutput{
 		HostedZones: []types.HostedZone{
@@ -2527,8 +2765,9 @@ func TestCheckResponseSnapshot_ListHostedZones(t *testing.T) {
 				Name:            ptr.String("__Name__"),
 				CallerReference: ptr.String("__CallerReference__"),
 				Config: &types.HostedZoneConfig{
-					Comment:     ptr.String("__Comment__"),
-					PrivateZone: true,
+					Comment:        ptr.String("__Comment__"),
+					PrivateZone:    true,
+					HostedZoneTier: types.HostedZoneTier("STANDARD"),
 				},
 				ResourceRecordSetCount: ptr.Int64(1),
 				LinkedService: &types.LinkedService{
@@ -2537,8 +2776,23 @@ func TestCheckResponseSnapshot_ListHostedZones(t *testing.T) {
 				},
 				Features: &types.HostedZoneFeatures{
 					AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+					PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+					ChangeHistory: &types.ChangeHistoryFeature{
+						Status:            types.FeatureEnablement("ENABLED"),
+						RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
 					FailureReasons: &types.HostedZoneFailureReasons{
 						AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+					},
+					ChangeGuardrails: []types.ChangeGuardrail{
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
 					},
 				},
 			},
@@ -2547,8 +2801,9 @@ func TestCheckResponseSnapshot_ListHostedZones(t *testing.T) {
 				Name:            ptr.String("__Name__"),
 				CallerReference: ptr.String("__CallerReference__"),
 				Config: &types.HostedZoneConfig{
-					Comment:     ptr.String("__Comment__"),
-					PrivateZone: true,
+					Comment:        ptr.String("__Comment__"),
+					PrivateZone:    true,
+					HostedZoneTier: types.HostedZoneTier("STANDARD"),
 				},
 				ResourceRecordSetCount: ptr.Int64(1),
 				LinkedService: &types.LinkedService{
@@ -2557,8 +2812,23 @@ func TestCheckResponseSnapshot_ListHostedZones(t *testing.T) {
 				},
 				Features: &types.HostedZoneFeatures{
 					AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+					PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+					ChangeHistory: &types.ChangeHistoryFeature{
+						Status:            types.FeatureEnablement("ENABLED"),
+						RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
 					FailureReasons: &types.HostedZoneFailureReasons{
 						AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+					},
+					ChangeGuardrails: []types.ChangeGuardrail{
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
 					},
 				},
 			},
@@ -2598,8 +2868,9 @@ func TestCheckResponseSnapshot_ListHostedZonesByName(t *testing.T) {
 				Name:            ptr.String("__Name__"),
 				CallerReference: ptr.String("__CallerReference__"),
 				Config: &types.HostedZoneConfig{
-					Comment:     ptr.String("__Comment__"),
-					PrivateZone: true,
+					Comment:        ptr.String("__Comment__"),
+					PrivateZone:    true,
+					HostedZoneTier: types.HostedZoneTier("STANDARD"),
 				},
 				ResourceRecordSetCount: ptr.Int64(1),
 				LinkedService: &types.LinkedService{
@@ -2608,8 +2879,23 @@ func TestCheckResponseSnapshot_ListHostedZonesByName(t *testing.T) {
 				},
 				Features: &types.HostedZoneFeatures{
 					AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+					PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+					ChangeHistory: &types.ChangeHistoryFeature{
+						Status:            types.FeatureEnablement("ENABLED"),
+						RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
 					FailureReasons: &types.HostedZoneFailureReasons{
 						AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+					},
+					ChangeGuardrails: []types.ChangeGuardrail{
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
 					},
 				},
 			},
@@ -2618,8 +2904,9 @@ func TestCheckResponseSnapshot_ListHostedZonesByName(t *testing.T) {
 				Name:            ptr.String("__Name__"),
 				CallerReference: ptr.String("__CallerReference__"),
 				Config: &types.HostedZoneConfig{
-					Comment:     ptr.String("__Comment__"),
-					PrivateZone: true,
+					Comment:        ptr.String("__Comment__"),
+					PrivateZone:    true,
+					HostedZoneTier: types.HostedZoneTier("STANDARD"),
 				},
 				ResourceRecordSetCount: ptr.Int64(1),
 				LinkedService: &types.LinkedService{
@@ -2628,8 +2915,23 @@ func TestCheckResponseSnapshot_ListHostedZonesByName(t *testing.T) {
 				},
 				Features: &types.HostedZoneFeatures{
 					AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+					PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+					ChangeHistory: &types.ChangeHistoryFeature{
+						Status:            types.FeatureEnablement("ENABLED"),
+						RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
 					FailureReasons: &types.HostedZoneFailureReasons{
 						AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+					},
+					ChangeGuardrails: []types.ChangeGuardrail{
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
+						{
+							Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+							Status: types.ChangeGuardrailStatus("ENABLED"),
+						},
 					},
 				},
 			},
@@ -2744,6 +3046,148 @@ func TestCheckResponseSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListResourceRecordSetChanges(t *testing.T) {
+	want := &ListResourceRecordSetChangesOutput{
+		ResourceRecordSetChanges: []types.ResourceRecordSetChange{
+			{
+				ChangeId:    ptr.String("__ChangeId__"),
+				Operation:   types.ChangeHistoryOperation("CreateHostedZone"),
+				SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SubmittedBy: ptr.String("__SubmittedBy__"),
+				RequestId:   ptr.String("__RequestId__"),
+				Action:      types.ChangeAction("CREATE"),
+				ResourceRecordSet: &types.ResourceRecordSet{
+					Name:          ptr.String("__Name__"),
+					Type:          types.RRType("SOA"),
+					SetIdentifier: ptr.String("__SetIdentifier__"),
+					Weight:        ptr.Int64(1),
+					Region:        types.ResourceRecordSetRegion("us-east-1"),
+					GeoLocation: &types.GeoLocation{
+						ContinentCode:   ptr.String("__ContinentCode__"),
+						CountryCode:     ptr.String("__CountryCode__"),
+						SubdivisionCode: ptr.String("__SubdivisionCode__"),
+					},
+					Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+					MultiValueAnswer: ptr.Bool(true),
+					TTL:              ptr.Int64(1),
+					ResourceRecords: []types.ResourceRecord{
+						{
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+						},
+					},
+					AliasTarget: &types.AliasTarget{
+						HostedZoneId:         ptr.String("__HostedZoneId__"),
+						DNSName:              ptr.String("__DNSName__"),
+						EvaluateTargetHealth: true,
+					},
+					HealthCheckId:           ptr.String("__HealthCheckId__"),
+					TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+					CidrRoutingConfig: &types.CidrRoutingConfig{
+						CollectionId: ptr.String("__CollectionId__"),
+						LocationName: ptr.String("__LocationName__"),
+					},
+					GeoProximityLocation: &types.GeoProximityLocation{
+						AWSRegion:      ptr.String("__AWSRegion__"),
+						LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+						Coordinates: &types.Coordinates{
+							Latitude:  ptr.String("__Latitude__"),
+							Longitude: ptr.String("__Longitude__"),
+						},
+						Bias: ptr.Int32(1),
+					},
+					AZAffinity: &types.AZAffinity{
+						LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+						LocationId:   ptr.String("__LocationId__"),
+					},
+				},
+			},
+			{
+				ChangeId:    ptr.String("__ChangeId__"),
+				Operation:   types.ChangeHistoryOperation("CreateHostedZone"),
+				SubmittedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SubmittedBy: ptr.String("__SubmittedBy__"),
+				RequestId:   ptr.String("__RequestId__"),
+				Action:      types.ChangeAction("CREATE"),
+				ResourceRecordSet: &types.ResourceRecordSet{
+					Name:          ptr.String("__Name__"),
+					Type:          types.RRType("SOA"),
+					SetIdentifier: ptr.String("__SetIdentifier__"),
+					Weight:        ptr.Int64(1),
+					Region:        types.ResourceRecordSetRegion("us-east-1"),
+					GeoLocation: &types.GeoLocation{
+						ContinentCode:   ptr.String("__ContinentCode__"),
+						CountryCode:     ptr.String("__CountryCode__"),
+						SubdivisionCode: ptr.String("__SubdivisionCode__"),
+					},
+					Failover:         types.ResourceRecordSetFailover("PRIMARY"),
+					MultiValueAnswer: ptr.Bool(true),
+					TTL:              ptr.Int64(1),
+					ResourceRecords: []types.ResourceRecord{
+						{
+							Value: ptr.String("__Value__"),
+						},
+						{
+							Value: ptr.String("__Value__"),
+						},
+					},
+					AliasTarget: &types.AliasTarget{
+						HostedZoneId:         ptr.String("__HostedZoneId__"),
+						DNSName:              ptr.String("__DNSName__"),
+						EvaluateTargetHealth: true,
+					},
+					HealthCheckId:           ptr.String("__HealthCheckId__"),
+					TrafficPolicyInstanceId: ptr.String("__TrafficPolicyInstanceId__"),
+					CidrRoutingConfig: &types.CidrRoutingConfig{
+						CollectionId: ptr.String("__CollectionId__"),
+						LocationName: ptr.String("__LocationName__"),
+					},
+					GeoProximityLocation: &types.GeoProximityLocation{
+						AWSRegion:      ptr.String("__AWSRegion__"),
+						LocalZoneGroup: ptr.String("__LocalZoneGroup__"),
+						Coordinates: &types.Coordinates{
+							Latitude:  ptr.String("__Latitude__"),
+							Longitude: ptr.String("__Longitude__"),
+						},
+						Bias: ptr.Int32(1),
+					},
+					AZAffinity: &types.AZAffinity{
+						LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+						LocationId:   ptr.String("__LocationId__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListResourceRecordSetChanges.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListResourceRecordSetChanges(context.Background(), &ListResourceRecordSetChangesInput{
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+		RecordName:      ptr.String("__RecordName__"),
+		RecordType:      types.RRType("SOA"),
+		SubmittedAfter:  ptr.String("__SubmittedAfter__"),
+		SubmittedBefore: ptr.String("__SubmittedBefore__"),
+		SortOrder:       types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListResourceRecordSetChanges.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListResourceRecordSetProtections(t *testing.T) {
 	want := &ListResourceRecordSetProtectionsOutput{
 		ResourceRecordSetProtections: []types.ResourceRecordSetProtection{
@@ -2828,6 +3272,10 @@ func TestCheckResponseSnapshot_ListResourceRecordSets(t *testing.T) {
 					},
 					Bias: ptr.Int32(1),
 				},
+				AZAffinity: &types.AZAffinity{
+					LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+					LocationId:   ptr.String("__LocationId__"),
+				},
 			},
 			{
 				Name:          ptr.String("__Name__"),
@@ -2870,6 +3318,10 @@ func TestCheckResponseSnapshot_ListResourceRecordSets(t *testing.T) {
 						Longitude: ptr.String("__Longitude__"),
 					},
 					Bias: ptr.Int32(1),
+				},
+				AZAffinity: &types.AZAffinity{
+					LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+					LocationId:   ptr.String("__LocationId__"),
 				},
 			},
 		},
@@ -3479,8 +3931,9 @@ func TestCheckResponseSnapshot_UpdateHostedZoneComment(t *testing.T) {
 			Name:            ptr.String("__Name__"),
 			CallerReference: ptr.String("__CallerReference__"),
 			Config: &types.HostedZoneConfig{
-				Comment:     ptr.String("__Comment__"),
-				PrivateZone: true,
+				Comment:        ptr.String("__Comment__"),
+				PrivateZone:    true,
+				HostedZoneTier: types.HostedZoneTier("STANDARD"),
 			},
 			ResourceRecordSetCount: ptr.Int64(1),
 			LinkedService: &types.LinkedService{
@@ -3489,8 +3942,23 @@ func TestCheckResponseSnapshot_UpdateHostedZoneComment(t *testing.T) {
 			},
 			Features: &types.HostedZoneFeatures{
 				AcceleratedRecoveryStatus: types.AcceleratedRecoveryStatus("ENABLING"),
+				PublicDNSFallbackStatus:   types.FeatureStatus("ENABLED"),
+				ChangeHistory: &types.ChangeHistoryFeature{
+					Status:            types.FeatureEnablement("ENABLED"),
+					RetentionStartsAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 				FailureReasons: &types.HostedZoneFailureReasons{
 					AcceleratedRecovery: ptr.String("__AcceleratedRecovery__"),
+				},
+				ChangeGuardrails: []types.ChangeGuardrail{
+					{
+						Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+						Status: types.ChangeGuardrailStatus("ENABLED"),
+					},
+					{
+						Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+						Status: types.ChangeGuardrailStatus("ENABLED"),
+					},
 				},
 			},
 		},
@@ -3528,12 +3996,47 @@ func TestCheckResponseSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 	got, err := svc.UpdateHostedZoneFeatures(context.Background(), &UpdateHostedZoneFeaturesInput{
 		HostedZoneId:              ptr.String("__HostedZoneId__"),
 		EnableAcceleratedRecovery: ptr.Bool(true),
+		EnablePublicDNSFallback:   ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
+		DryRun: true,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateHostedZoneFeatures.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateHostedZoneTier(t *testing.T) {
+	want := &UpdateHostedZoneTierOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateHostedZoneTier.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateHostedZoneTier(context.Background(), &UpdateHostedZoneTierInput{
+		HostedZoneId:   ptr.String("__HostedZoneId__"),
+		HostedZoneTier: types.HostedZoneTier("STANDARD"),
+		DryRun:         true,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateHostedZoneTier.response", err)
 	}
 }
 
@@ -3972,10 +4475,22 @@ func TestCheckResponseSnapshot_Error_DelegationSetNotAvailable(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -4009,10 +4524,22 @@ func TestCheckResponseSnapshot_Error_DelegationSetNotReusable(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -4023,6 +4550,34 @@ func TestCheckResponseSnapshot_Error_DelegationSetNotReusable(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "DelegationSetNotReusable.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_FeatureNotEnabled(t *testing.T) {
+	want := &types.FeatureNotEnabled{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("FeatureNotEnabled.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetHostedZoneChangeBatch(context.Background(), &GetHostedZoneChangeBatchInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeId:     ptr.String("__ChangeId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.FeatureNotEnabled
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.FeatureNotEnabled, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "FeatureNotEnabled.error", err)
 	}
 }
 
@@ -4245,10 +4800,22 @@ func TestCheckResponseSnapshot_Error_HostedZoneAlreadyExists(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -4523,6 +5090,10 @@ func TestCheckResponseSnapshot_Error_InvalidChangeBatch(t *testing.T) {
 							},
 							Bias: ptr.Int32(1),
 						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
 					},
 				},
 				{
@@ -4569,6 +5140,10 @@ func TestCheckResponseSnapshot_Error_InvalidChangeBatch(t *testing.T) {
 							},
 							Bias: ptr.Int32(1),
 						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
 					},
 				},
 			},
@@ -4606,10 +5181,22 @@ func TestCheckResponseSnapshot_Error_InvalidDomainName(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -4750,11 +5337,14 @@ func TestCheckResponseSnapshot_Error_InvalidPaginationToken(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListHostedZonesByVPC(context.Background(), &ListHostedZonesByVPCInput{
-		VPCId:     ptr.String("__VPCId__"),
-		VPCRegion: types.VPCRegion("us-east-1"),
-		MaxItems:  ptr.Int32(1),
-		NextToken: ptr.String("__NextToken__"),
+	_, opErr := svc.ListHostedZoneChangeBatches(context.Background(), &ListHostedZoneChangeBatchesInput{
+		HostedZoneId:       ptr.String("__HostedZoneId__"),
+		SubmittedAfter:     ptr.String("__SubmittedAfter__"),
+		SubmittedBefore:    ptr.String("__SubmittedBefore__"),
+		StartAfterChangeId: ptr.String("__StartAfterChangeId__"),
+		SortOrder:          types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5239,10 +5829,22 @@ func TestCheckResponseSnapshot_Error_NoSuchDelegationSet(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5346,6 +5948,10 @@ func TestCheckResponseSnapshot_Error_NoSuchHealthCheck(t *testing.T) {
 							},
 							Bias: ptr.Int32(1),
 						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
 					},
 				},
 				{
@@ -5391,6 +5997,10 @@ func TestCheckResponseSnapshot_Error_NoSuchHealthCheck(t *testing.T) {
 								Longitude: ptr.String("__Longitude__"),
 							},
 							Bias: ptr.Int32(1),
+						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
 						},
 					},
 				},
@@ -5951,10 +6561,22 @@ func TestCheckResponseSnapshot_Error_TooManyHostedZones(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

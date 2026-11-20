@@ -47,14 +47,15 @@ type ListAutomationRulePreviewSummariesInput struct {
 	Criteria *types.Criteria
 
 	// The maximum number of automation rule preview summaries to return in a single
-	// response. Valid range is 1-1000.
+	// response. If you don't specify a value, the default is 100.
 	MaxResults *int32
 
 	// A token used for pagination to retrieve the next set of results when the
 	// response is truncated.
 	NextToken *string
 
-	// The organizational scope for the rule preview.
+	// The organizational scope for the rule preview. This parameter is required when
+	// ruleType is OrganizationRule . Don't specify it when ruleType is AccountRule .
 	OrganizationScope *types.OrganizationScope
 
 	noSmithyDocumentSerde
@@ -180,7 +181,7 @@ func (c *Client) addOperationListAutomationRulePreviewSummariesMiddlewares(stack
 // ListAutomationRulePreviewSummaries
 type ListAutomationRulePreviewSummariesPaginatorOptions struct {
 	// The maximum number of automation rule preview summaries to return in a single
-	// response. Valid range is 1-1000.
+	// response. If you don't specify a value, the default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

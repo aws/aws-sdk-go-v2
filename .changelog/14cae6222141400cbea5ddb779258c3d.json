@@ -1,0 +1,8 @@
+{
+    "id": "14cae622-2141-400c-bea5-ddb779258c3d",
+    "type": "feature",
+    "description": "Minor updates to the Glue Business Context APIs",
+    "modules": [
+        "service/glue"
+    ]
+}

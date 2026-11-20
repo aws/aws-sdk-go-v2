@@ -1401,6 +1401,19 @@ func TestCheckResponseSnapshot_CreateFilter(t *testing.T) {
 						Comparison: types.StringComparison("EQUALS"),
 						Value:      ptr.String("__Value__"),
 					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
+						Value:      ptr.String("__Value__"),
+					},
 				},
 				{
 					Name: &types.StringFilter{
@@ -1433,6 +1446,19 @@ func TestCheckResponseSnapshot_CreateFilter(t *testing.T) {
 					},
 					FilePath: &types.StringFilter{
 						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
 						Value:      ptr.String("__Value__"),
 					},
 				},
@@ -2182,6 +2208,19 @@ func TestCheckResponseSnapshot_CreateFindingsReport(t *testing.T) {
 						Comparison: types.StringComparison("EQUALS"),
 						Value:      ptr.String("__Value__"),
 					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
+						Value:      ptr.String("__Value__"),
+					},
 				},
 				{
 					Name: &types.StringFilter{
@@ -2214,6 +2253,19 @@ func TestCheckResponseSnapshot_CreateFindingsReport(t *testing.T) {
 					},
 					FilePath: &types.StringFilter{
 						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
 						Value:      ptr.String("__Value__"),
 					},
 				},
@@ -4075,6 +4127,19 @@ func TestCheckResponseSnapshot_GetFindingsReportStatus(t *testing.T) {
 						Comparison: types.StringComparison("EQUALS"),
 						Value:      ptr.String("__Value__"),
 					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
+						Value:      ptr.String("__Value__"),
+					},
 				},
 				{
 					Name: &types.StringFilter{
@@ -4107,6 +4172,19 @@ func TestCheckResponseSnapshot_GetFindingsReportStatus(t *testing.T) {
 					},
 					FilePath: &types.StringFilter{
 						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
 						Value:      ptr.String("__Value__"),
 					},
 				},
@@ -7252,6 +7330,19 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 								Comparison: types.StringComparison("EQUALS"),
 								Value:      ptr.String("__Value__"),
 							},
+							RuntimeReachability: &types.RuntimeReachabilityFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachability("REACHABLE"),
+							},
+							RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							},
+							PurlQualifier: &types.PurlQualifierFilter{
+								Comparison: types.MapComparison("EQUALS"),
+								Key:        types.PurlQualifierKey("arch"),
+								Value:      ptr.String("__Value__"),
+							},
 						},
 						{
 							Name: &types.StringFilter{
@@ -7284,6 +7375,19 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 							},
 							FilePath: &types.StringFilter{
 								Comparison: types.StringComparison("EQUALS"),
+								Value:      ptr.String("__Value__"),
+							},
+							RuntimeReachability: &types.RuntimeReachabilityFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachability("REACHABLE"),
+							},
+							RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							},
+							PurlQualifier: &types.PurlQualifierFilter{
+								Comparison: types.MapComparison("EQUALS"),
+								Key:        types.PurlQualifierKey("arch"),
 								Value:      ptr.String("__Value__"),
 							},
 						},
@@ -8019,6 +8123,19 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 								Comparison: types.StringComparison("EQUALS"),
 								Value:      ptr.String("__Value__"),
 							},
+							RuntimeReachability: &types.RuntimeReachabilityFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachability("REACHABLE"),
+							},
+							RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							},
+							PurlQualifier: &types.PurlQualifierFilter{
+								Comparison: types.MapComparison("EQUALS"),
+								Key:        types.PurlQualifierKey("arch"),
+								Value:      ptr.String("__Value__"),
+							},
 						},
 						{
 							Name: &types.StringFilter{
@@ -8051,6 +8168,19 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 							},
 							FilePath: &types.StringFilter{
 								Comparison: types.StringComparison("EQUALS"),
+								Value:      ptr.String("__Value__"),
+							},
+							RuntimeReachability: &types.RuntimeReachabilityFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachability("REACHABLE"),
+							},
+							RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+								Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+								Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							},
+							PurlQualifier: &types.PurlQualifierFilter{
+								Comparison: types.MapComparison("EQUALS"),
+								Key:        types.PurlQualifierKey("arch"),
 								Value:      ptr.String("__Value__"),
 							},
 						},
@@ -8929,30 +9059,36 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 					VulnerabilityId: ptr.String("__VulnerabilityId__"),
 					VulnerablePackages: []types.VulnerablePackage{
 						{
-							Name:                 ptr.String("__Name__"),
-							Version:              ptr.String("__Version__"),
-							SourceLayerHash:      ptr.String("__SourceLayerHash__"),
-							Epoch:                1,
-							Release:              ptr.String("__Release__"),
-							Arch:                 ptr.String("__Arch__"),
-							PackageManager:       types.PackageManager("BUNDLER"),
-							FilePath:             ptr.String("__FilePath__"),
-							FixedInVersion:       ptr.String("__FixedInVersion__"),
-							Remediation:          ptr.String("__Remediation__"),
-							SourceLambdaLayerArn: ptr.String("__SourceLambdaLayerArn__"),
+							Name:                      ptr.String("__Name__"),
+							Version:                   ptr.String("__Version__"),
+							SourceLayerHash:           ptr.String("__SourceLayerHash__"),
+							Epoch:                     1,
+							Release:                   ptr.String("__Release__"),
+							Arch:                      ptr.String("__Arch__"),
+							PackageManager:            types.PackageManager("BUNDLER"),
+							FilePath:                  ptr.String("__FilePath__"),
+							FixedInVersion:            ptr.String("__FixedInVersion__"),
+							Remediation:               ptr.String("__Remediation__"),
+							SourceLambdaLayerArn:      ptr.String("__SourceLambdaLayerArn__"),
+							RuntimeReachability:       types.RuntimeReachability("REACHABLE"),
+							RuntimeReachabilityReason: types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							Purl:                      ptr.String("__Purl__"),
 						},
 						{
-							Name:                 ptr.String("__Name__"),
-							Version:              ptr.String("__Version__"),
-							SourceLayerHash:      ptr.String("__SourceLayerHash__"),
-							Epoch:                1,
-							Release:              ptr.String("__Release__"),
-							Arch:                 ptr.String("__Arch__"),
-							PackageManager:       types.PackageManager("BUNDLER"),
-							FilePath:             ptr.String("__FilePath__"),
-							FixedInVersion:       ptr.String("__FixedInVersion__"),
-							Remediation:          ptr.String("__Remediation__"),
-							SourceLambdaLayerArn: ptr.String("__SourceLambdaLayerArn__"),
+							Name:                      ptr.String("__Name__"),
+							Version:                   ptr.String("__Version__"),
+							SourceLayerHash:           ptr.String("__SourceLayerHash__"),
+							Epoch:                     1,
+							Release:                   ptr.String("__Release__"),
+							Arch:                      ptr.String("__Arch__"),
+							PackageManager:            types.PackageManager("BUNDLER"),
+							FilePath:                  ptr.String("__FilePath__"),
+							FixedInVersion:            ptr.String("__FixedInVersion__"),
+							Remediation:               ptr.String("__Remediation__"),
+							SourceLambdaLayerArn:      ptr.String("__SourceLambdaLayerArn__"),
+							RuntimeReachability:       types.RuntimeReachability("REACHABLE"),
+							RuntimeReachabilityReason: types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							Purl:                      ptr.String("__Purl__"),
 						},
 					},
 					Source: ptr.String("__Source__"),
@@ -9400,30 +9536,36 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 					VulnerabilityId: ptr.String("__VulnerabilityId__"),
 					VulnerablePackages: []types.VulnerablePackage{
 						{
-							Name:                 ptr.String("__Name__"),
-							Version:              ptr.String("__Version__"),
-							SourceLayerHash:      ptr.String("__SourceLayerHash__"),
-							Epoch:                1,
-							Release:              ptr.String("__Release__"),
-							Arch:                 ptr.String("__Arch__"),
-							PackageManager:       types.PackageManager("BUNDLER"),
-							FilePath:             ptr.String("__FilePath__"),
-							FixedInVersion:       ptr.String("__FixedInVersion__"),
-							Remediation:          ptr.String("__Remediation__"),
-							SourceLambdaLayerArn: ptr.String("__SourceLambdaLayerArn__"),
+							Name:                      ptr.String("__Name__"),
+							Version:                   ptr.String("__Version__"),
+							SourceLayerHash:           ptr.String("__SourceLayerHash__"),
+							Epoch:                     1,
+							Release:                   ptr.String("__Release__"),
+							Arch:                      ptr.String("__Arch__"),
+							PackageManager:            types.PackageManager("BUNDLER"),
+							FilePath:                  ptr.String("__FilePath__"),
+							FixedInVersion:            ptr.String("__FixedInVersion__"),
+							Remediation:               ptr.String("__Remediation__"),
+							SourceLambdaLayerArn:      ptr.String("__SourceLambdaLayerArn__"),
+							RuntimeReachability:       types.RuntimeReachability("REACHABLE"),
+							RuntimeReachabilityReason: types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							Purl:                      ptr.String("__Purl__"),
 						},
 						{
-							Name:                 ptr.String("__Name__"),
-							Version:              ptr.String("__Version__"),
-							SourceLayerHash:      ptr.String("__SourceLayerHash__"),
-							Epoch:                1,
-							Release:              ptr.String("__Release__"),
-							Arch:                 ptr.String("__Arch__"),
-							PackageManager:       types.PackageManager("BUNDLER"),
-							FilePath:             ptr.String("__FilePath__"),
-							FixedInVersion:       ptr.String("__FixedInVersion__"),
-							Remediation:          ptr.String("__Remediation__"),
-							SourceLambdaLayerArn: ptr.String("__SourceLambdaLayerArn__"),
+							Name:                      ptr.String("__Name__"),
+							Version:                   ptr.String("__Version__"),
+							SourceLayerHash:           ptr.String("__SourceLayerHash__"),
+							Epoch:                     1,
+							Release:                   ptr.String("__Release__"),
+							Arch:                      ptr.String("__Arch__"),
+							PackageManager:            types.PackageManager("BUNDLER"),
+							FilePath:                  ptr.String("__FilePath__"),
+							FixedInVersion:            ptr.String("__FixedInVersion__"),
+							Remediation:               ptr.String("__Remediation__"),
+							SourceLambdaLayerArn:      ptr.String("__SourceLambdaLayerArn__"),
+							RuntimeReachability:       types.RuntimeReachability("REACHABLE"),
+							RuntimeReachabilityReason: types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+							Purl:                      ptr.String("__Purl__"),
 						},
 					},
 					Source: ptr.String("__Source__"),
@@ -9847,6 +9989,19 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 						Comparison: types.StringComparison("EQUALS"),
 						Value:      ptr.String("__Value__"),
 					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
+						Value:      ptr.String("__Value__"),
+					},
 				},
 				{
 					Name: &types.StringFilter{
@@ -9879,6 +10034,19 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 					},
 					FilePath: &types.StringFilter{
 						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
 						Value:      ptr.String("__Value__"),
 					},
 				},
@@ -11511,6 +11679,19 @@ func TestCheckResponseSnapshot_UpdateFilter(t *testing.T) {
 						Comparison: types.StringComparison("EQUALS"),
 						Value:      ptr.String("__Value__"),
 					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
+						Value:      ptr.String("__Value__"),
+					},
 				},
 				{
 					Name: &types.StringFilter{
@@ -11543,6 +11724,19 @@ func TestCheckResponseSnapshot_UpdateFilter(t *testing.T) {
 					},
 					FilePath: &types.StringFilter{
 						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
 						Value:      ptr.String("__Value__"),
 					},
 				},
@@ -12380,6 +12574,19 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 						Comparison: types.StringComparison("EQUALS"),
 						Value:      ptr.String("__Value__"),
 					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
+						Value:      ptr.String("__Value__"),
+					},
 				},
 				{
 					Name: &types.StringFilter{
@@ -12412,6 +12619,19 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 					},
 					FilePath: &types.StringFilter{
 						Comparison: types.StringComparison("EQUALS"),
+						Value:      ptr.String("__Value__"),
+					},
+					RuntimeReachability: &types.RuntimeReachabilityFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachability("REACHABLE"),
+					},
+					RuntimeReachabilityReason: &types.RuntimeReachabilityReasonFilter{
+						Comparison: types.RuntimeReachabilityComparison("EQUALS"),
+						Value:      types.RuntimeReachabilityReason("PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"),
+					},
+					PurlQualifier: &types.PurlQualifierFilter{
+						Comparison: types.MapComparison("EQUALS"),
+						Key:        types.PurlQualifierKey("arch"),
 						Value:      ptr.String("__Value__"),
 					},
 				},

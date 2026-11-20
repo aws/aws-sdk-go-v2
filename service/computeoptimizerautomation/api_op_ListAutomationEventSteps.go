@@ -35,8 +35,8 @@ type ListAutomationEventStepsInput struct {
 	// This member is required.
 	EventId *string
 
-	// The maximum number of automation event steps to return in a single response.
-	// Valid range is 1-1000.
+	// The maximum number of automation event steps to return in a single response. If
+	// you don't specify a value, the default is 100.
 	MaxResults *int32
 
 	// A token used for pagination to retrieve the next set of results when the
@@ -152,8 +152,8 @@ func (c *Client) addOperationListAutomationEventStepsMiddlewares(stack *middlewa
 // ListAutomationEventStepsPaginatorOptions is the paginator options for
 // ListAutomationEventSteps
 type ListAutomationEventStepsPaginatorOptions struct {
-	// The maximum number of automation event steps to return in a single response.
-	// Valid range is 1-1000.
+	// The maximum number of automation event steps to return in a single response. If
+	// you don't specify a value, the default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

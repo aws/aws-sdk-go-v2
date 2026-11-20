@@ -16,7 +16,7 @@ type AccountLimit struct {
 	//   - MAX_HEALTH_CHECKS_BY_OWNER: The maximum number of health checks that you
 	//   can create using the current account.
 	//
-	//   - MAX_HEALTH_CHECK_SOURCES_BY_OWNER The maximum number of health check
+	//   - MAX_HEALTH_CHECK_SOURCES_BY_OWNER: The maximum number of health check
 	//   sources that you can create using the current account.
 	//
 	//   - MAX_HOSTED_ZONES_BY_OWNER: The maximum number of hosted zones that you can
@@ -229,11 +229,11 @@ type AliasTarget struct {
 	// This member is required.
 	DNSName *string
 
-	//  Applies only to alias, failover alias, geolocation alias, latency alias, and
-	// weighted alias resource record sets: When EvaluateTargetHealth is true , an
-	// alias resource record set inherits the health of the referenced Amazon Web
-	// Services resource, such as an ELB load balancer or another resource record set
-	// in the hosted zone.
+	//  Applies only to alias, az-affinity alias, failover alias, geolocation alias,
+	// latency alias, and weighted alias resource record sets: When
+	// EvaluateTargetHealth is true , an alias resource record set inherits the health
+	// of the referenced Amazon Web Services resource, such as an ELB load balancer or
+	// another resource record set in the hosted zone.
 	//
 	// Note the following:
 	//
@@ -394,6 +394,63 @@ type AliasTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the location that an AZ-affinity resource record set answers DNS
+// queries from. For the location types, from most to least specific, see
+// LocationType . A query matches a location when Route 53 VPC Resolver reports
+// that the query came from an Availability Zone (AZ) in that location. If Route 53
+// doesn't know which AZ a query came from, the query matches only the record for
+// the Global location type. AZ-affinity routing chooses which record to return.
+// It doesn't restrict which clients can get a record. You must specify both
+// LocationType and LocationId .
+//
+// To have Route 53 fall back to a less specific location when a resource is
+// unhealthy, associate a health check with each record, or set
+// EvaluateTargetHealth to true for alias records. If every record that matches a
+// query is unhealthy, Route 53 responds with the most specific one.
+type AZAffinity struct {
+
+	// The ID of the location. You can specify only generally available Availability
+	// Zones and Zone Groups. Zone Group, Region, and partition IDs must belong to a
+	// partition that you can use. Specify the ID in lowercase, in the format that
+	// corresponds to LocationType :
+	//
+	//   - For AvailabilityZone , the Availability Zone ID (not the Availability Zone
+	//   name or a Local Zone ID), such as use1-az1 .
+	//
+	//   - For AvailabilityZoneGroup , the Zone Group that an Availability Zone belongs
+	//   to (not a Local Zone group), such as us-east-1-zg-1 .
+	//
+	//   - For Region , the Region code, such as us-east-1 .
+	//
+	//   - For Partition , the partition name, such as aws .
+	//
+	//   - For Global , the value global .
+	LocationId *string
+
+	// The level of the location that LocationId identifies. Valid values, from most
+	// to least specific:
+	//
+	//   - AvailabilityZone : A single Availability Zone.
+	//
+	//   - AvailabilityZoneGroup : A Zone Group, which is a group of Availability Zones
+	//   in an Amazon Web Services Region.
+	//
+	//   - Region : An entire Amazon Web Services Region.
+	//
+	//   - Partition : An entire Amazon Web Services partition.
+	//
+	//   - Global : All locations.
+	//
+	// We recommend that you create a record for the Global location type so that
+	// every query gets an answer. Route 53 responds with it when a query matches no
+	// more specific record, or when it's the only healthy record that matches. Without
+	// a Global record, Route 53 returns a "no answer" response to queries that don't
+	// match any other record.
+	LocationType AZAffinityLocationType
+
+	noSmithyDocumentSerde
+}
+
 // The information for each resource record set that you want to change.
 type Change struct {
 
@@ -437,6 +494,124 @@ type ChangeBatch struct {
 
 	//  Optional: Any comments you want to include about a change batch request.
 	Comment *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of one change batch in the change history of a hosted zone.
+type ChangeBatchSummary struct {
+
+	// The number of changes in the change batch. For CreateHostedZone , the value is 0.
+	//
+	// This member is required.
+	ChangeCount *int64
+
+	// The ID of the change batch. This is the same ID that ChangeResourceRecordSets
+	// returns in ChangeInfo/Id and that you pass to GetChange .
+	//
+	// This member is required.
+	ChangeId *string
+
+	// The Route 53 API operation that submitted the change batch:
+	// ChangeResourceRecordSets or CreateHostedZone . New values might be added, so
+	// ignore values that your code doesn't recognize.
+	//
+	// This member is required.
+	Operation ChangeHistoryOperation
+
+	// The date and time, in UTC, when the change batch was submitted.
+	//
+	// This member is required.
+	SubmittedAt *time.Time
+
+	// The comment that was submitted with the change batch, if any.
+	Comment *string
+
+	// The request ID of the call that submitted the change batch. CloudTrail records
+	// the same value in requestID , so you can use it to find the CloudTrail event for
+	// the change. This element is absent when there was no request.
+	RequestId *string
+
+	// The Amazon Resource Name of the principal that submitted the request, for
+	// example, arn:aws:sts::111122223333:assumed-role/Admin/my-session . This element
+	// is absent when Route 53 has no principal to record for the change.
+	SubmittedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// A Change Guardrail and its status. A Change Guardrail checks each change to the
+// records in a hosted zone, and rejects the change if the check fails.
+//
+// When you submit a ChangeResourceRecordSets request, Route 53 checks each change
+// against every guardrail that is turned on. If a check fails, Route 53 rejects
+// the whole request and returns an error that identifies the guardrail. If every
+// check passes, Route 53 applies the changes.
+//
+// For example, suppose that ALIAS_TARGET_CHECK is turned on, and an alias record
+// points to www.example.com . If you try to delete www.example.com , Route 53
+// rejects the request. To delete the record, first delete or change the alias
+// record.
+type ChangeGuardrail struct {
+
+	// The name of the guardrail. Valid values are the following:
+	//
+	// NS_FORMAT_CHECK This guardrail rejects an NS record whose value looks like a
+	// Route 53 name server but isn't one.
+	//
+	// NS_DELEGATION_AUTHORITY_CHECK This guardrail rejects an NS record that
+	// delegates a subdomain to Route 53 name servers that don't host it.
+	//
+	// This guardrail applies only to public hosted zones.
+	//
+	// NS_OCCLUSION_CHECK This guardrail rejects a change that leaves records under a
+	// delegated subdomain, where resolvers never use them.
+	//
+	// ALIAS_TARGET_CHECK This guardrail rejects deleting a record that an alias
+	// record in the same hosted zone points to.
+	//
+	// ACTIVE_RECORD_CHECK This guardrail rejects deleting a record that still
+	// receives DNS queries, if no other record with the same name and type remains to
+	// answer them.
+	//
+	// ACTIVE_DELEGATION_CHECK This guardrail rejects deleting the NS record for a
+	// subdomain while resolvers are still referred to it.
+	//
+	// The tier of the hosted zone determines which guardrails it includes and which
+	// ones you can turn on.
+	//
+	// This member is required.
+	Name ChangeGuardrailName
+
+	// The status of the guardrail. Valid values are the following:
+	//
+	// ENABLED ENABLED means that the guardrail is turned on.
+	//
+	// DISABLED DISABLED means that the guardrail is turned off.
+	//
+	// This member is required.
+	Status ChangeGuardrailStatus
+
+	noSmithyDocumentSerde
+}
+
+// The status of Change History for the hosted zone.
+type ChangeHistoryFeature struct {
+
+	// The earliest date and time from which you can read the change history of the
+	// hosted zone. Route 53 returns this value only when Status is ENABLED .
+	RetentionStartsAt *time.Time
+
+	// Indicates whether Change History is turned on for the hosted zone. Valid values
+	// are the following:
+	//
+	//   - ENABLED : Change History is turned on for the hosted zone.
+	//
+	//   - DISABLED : Change History is turned off for the hosted zone.
+	//
+	// Route 53 turns Change History on or off when the hosted zone moves to or from a
+	// tier that includes it.
+	Status FeatureEnablement
 
 	noSmithyDocumentSerde
 }
@@ -1435,6 +1610,21 @@ type HostedZoneConfig struct {
 	// Any comments that you want to include about the hosted zone.
 	Comment *string
 
+	// The tier of the hosted zone. The tier controls which features you get and which
+	// optional features you can turn on. Valid values are the following:
+	//
+	// STANDARD STANDARD is the default tier for new hosted zones.
+	//
+	// ADVANCED ADVANCED is a tier that includes Change History and offers more
+	// optional features.
+	//
+	// If you don't specify a tier when you create a hosted zone, Route 53 uses
+	// STANDARD . Route 53 always returns this value. For pricing information, see
+	// Amazon Route 53 pricing on the [AWS website].
+	//
+	// [AWS website]: https://aws.amazon.com/route53/pricing/
+	HostedZoneTier HostedZoneTier
+
 	// A value that indicates whether this is a private hosted zone.
 	PrivateZone bool
 
@@ -1459,9 +1649,28 @@ type HostedZoneFeatures struct {
 	// The current status of accelerated recovery for the hosted zone.
 	AcceleratedRecoveryStatus AcceleratedRecoveryStatus
 
+	// The name and status of each Change Guardrail for the hosted zone. For the
+	// guardrail names and statuses, see ChangeGuardrail .
+	ChangeGuardrails []ChangeGuardrail
+
+	// The status of Change History for the hosted zone, and the earliest time from
+	// which you can read its change history.
+	ChangeHistory *ChangeHistoryFeature
+
 	// Information about any failures that occurred when attempting to enable or
 	// configure features for the hosted zone.
 	FailureReasons *HostedZoneFailureReasons
+
+	// The current status of public DNS fallback for the hosted zone. Valid values:
+	//
+	//   - ENABLED : Public DNS fallback is enabled.
+	//
+	//   - DISABLED : Public DNS fallback is disabled.
+	//
+	//   - ENABLING : A request to enable public DNS fallback is still propagating.
+	//
+	//   - DISABLING : A request to disable public DNS fallback is still propagating.
+	PublicDNSFallbackStatus FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -1871,6 +2080,20 @@ type ResourceRecordSet struct {
 	// This member is required.
 	Type RRType
 
+	//  AZ-affinity resource record sets only: The location that this resource record
+	// set answers DNS queries from, such as an Availability Zone (AZ) or an Amazon Web
+	// Services Region. For each query, Route 53 starts with the most specific location
+	// that the query matches and falls back to a less specific location when there's
+	// no record for that location or the record is unhealthy (its health check fails
+	// or, for an alias record that has EvaluateTargetHealth set to true , its target
+	// is unhealthy). You must also specify SetIdentifier , and you can't specify
+	// another routing policy element, such as Weight , in the same resource record set.
+	//
+	// For more information, see [AZ-affinity routing] in the Amazon Route 53 Developer Guide.
+	//
+	// [AZ-affinity routing]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-azaffinity.html
+	AZAffinity *AZAffinity
+
 	//  Alias resource record sets only: Information about the Amazon Web Services
 	// resource, such as a CloudFront distribution or an Amazon S3 bucket, that you
 	// want to route traffic to.
@@ -2228,6 +2451,52 @@ type ResourceRecordSet struct {
 	//
 	// [Options for Configuring Route 53 Active-Active and Active-Passive Failover]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html
 	Weight *int64
+
+	noSmithyDocumentSerde
+}
+
+// One change to a resource record set in the change history of a hosted zone,
+// with the resource record set that the change wrote or deleted.
+type ResourceRecordSetChange struct {
+
+	// The action in the change: CREATE , DELETE , or UPSERT .
+	//
+	// This member is required.
+	Action ChangeAction
+
+	// The ID of the change batch that contains the change. To get every change in the
+	// change batch, specify this ID in GetHostedZoneChangeBatch .
+	//
+	// This member is required.
+	ChangeId *string
+
+	// The Route 53 API operation that submitted the change. New values might be
+	// added, so ignore values that your code doesn't recognize.
+	//
+	// This member is required.
+	Operation ChangeHistoryOperation
+
+	// The resource record set that the change wrote or deleted, in the same form that
+	// ListResourceRecordSets returns. For example, the name is in lowercase and ends
+	// with a dot. For an UPSERT or a DELETE , the response doesn't contain the values
+	// that the resource record set had before the change.
+	//
+	// This member is required.
+	ResourceRecordSet *ResourceRecordSet
+
+	// The date and time, in UTC, when the change batch that contains the change was
+	// submitted.
+	//
+	// This member is required.
+	SubmittedAt *time.Time
+
+	// The request ID of the call that submitted the change. CloudTrail records the
+	// same value in requestID . This element is absent when there was no request.
+	RequestId *string
+
+	// The Amazon Resource Name of the principal that submitted the request. This
+	// element is absent when Route 53 has no principal to record for the change.
+	SubmittedBy *string
 
 	noSmithyDocumentSerde
 }

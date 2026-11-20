@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","projectSummaries":[{"archivedAt":"2000-01-01T00:00:00Z","arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","dataRetention":{"mode":"default"},"id":"__Id__","name":"__Name__","status":"active"},{"archivedAt":"2000-01-01T00:00:00Z","arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","dataRetention":{"mode":"default"},"id":"__Id__","name":"__Name__","status":"active"}]}

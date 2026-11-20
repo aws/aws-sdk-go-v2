@@ -882,6 +882,235 @@ func TestUpdateResponseSnapshot_GetDecryptedAPIKey(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetEvent(t *testing.T) {
+	want := &GetEventOutput{
+		Event: &types.EventDetailSummary{
+			EventId:         ptr.String("__EventId__"),
+			EventStatus:     types.EventStatus("EVENT_STARTED"),
+			EventCategory:   types.EventCategory("API_SECURITY"),
+			StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ResourceArn:     ptr.String("__ResourceArn__"),
+			WebAclArn:       ptr.String("__WebAclArn__"),
+			ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+				Label:      ptr.String("__Label__"),
+				Category:   ptr.String("__Category__"),
+				Confidence: types.Confidence("LOW"),
+				ApiPatterns: []types.ApiPattern{
+					{
+						Method:      ptr.String("__Method__"),
+						PathPattern: ptr.String("__PathPattern__"),
+						Port:        1,
+						Domains: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Method:      ptr.String("__Method__"),
+						PathPattern: ptr.String("__PathPattern__"),
+						Port:        1,
+						Domains: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				EventActors: []types.EventActorReference{
+					{
+						EventActorId:    ptr.String("__EventActorId__"),
+						EventActorValue: ptr.String("__EventActorValue__"),
+					},
+					{
+						EventActorId:    ptr.String("__EventActorId__"),
+						EventActorValue: ptr.String("__EventActorValue__"),
+					},
+				},
+				Timeline: []types.EventTimelineEntry{
+					{
+						ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Label:      ptr.String("__Label__"),
+						Confidence: types.Confidence("LOW"),
+						ApiPatterns: []types.ApiPattern{
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Label:      ptr.String("__Label__"),
+						Confidence: types.Confidence("LOW"),
+						ApiPatterns: []types.ApiPattern{
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSWAF_20190729)
+	opSchema := smithy.NewOperationSchema(schemas.GetEvent, schemas.GetEventResponse, schemas.GetEventResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetEvent.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetEventActor(t *testing.T) {
+	want := &GetEventActorOutput{
+		EventActor: &types.EventActorDetail{
+			Summary: &types.EventActorDetailSummary{
+				EventActorId:    ptr.String("__EventActorId__"),
+				ClientIp:        ptr.String("__ClientIp__"),
+				TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+				Asn:             ptr.String("__Asn__"),
+				AsnOrganization: ptr.String("__AsnOrganization__"),
+				Country:         ptr.String("__Country__"),
+				AuthFingerprint: ptr.String("__AuthFingerprint__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Events: []types.RelatedEvent{
+				{
+					EventId:    ptr.String("__EventId__"),
+					StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					EventId:    ptr.String("__EventId__"),
+					StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			Changes: []types.EventActorChange{
+				{
+					ChangeTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ClientIp:        ptr.String("__ClientIp__"),
+					TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+					Asn:             ptr.String("__Asn__"),
+					AsnOrganization: ptr.String("__AsnOrganization__"),
+					Country:         ptr.String("__Country__"),
+				},
+				{
+					ChangeTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ClientIp:        ptr.String("__ClientIp__"),
+					TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+					Asn:             ptr.String("__Asn__"),
+					AsnOrganization: ptr.String("__AsnOrganization__"),
+					Country:         ptr.String("__Country__"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSWAF_20190729)
+	opSchema := smithy.NewOperationSchema(schemas.GetEventActor, schemas.GetEventActorResponse, schemas.GetEventActorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetEventActor.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetIPSet(t *testing.T) {
 	want := &GetIPSetOutput{
 		IPSet: &types.IPSet{
@@ -2481,6 +2710,17 @@ func TestUpdateResponseSnapshot_GetRuleGroup(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -2645,6 +2885,17 @@ func TestUpdateResponseSnapshot_GetRuleGroup(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -4053,6 +4304,17 @@ func TestUpdateResponseSnapshot_GetRuleGroup(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -4217,6 +4479,17 @@ func TestUpdateResponseSnapshot_GetRuleGroup(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -6069,6 +6342,17 @@ func TestUpdateResponseSnapshot_GetWebACL(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -6233,6 +6517,17 @@ func TestUpdateResponseSnapshot_GetWebACL(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -7641,6 +7936,17 @@ func TestUpdateResponseSnapshot_GetWebACL(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -7805,6 +8111,17 @@ func TestUpdateResponseSnapshot_GetWebACL(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -9432,6 +9749,17 @@ func TestUpdateResponseSnapshot_GetWebACLForResource(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -9596,6 +9924,17 @@ func TestUpdateResponseSnapshot_GetWebACLForResource(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -11004,6 +11343,17 @@ func TestUpdateResponseSnapshot_GetWebACLForResource(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -11168,6 +11518,17 @@ func TestUpdateResponseSnapshot_GetWebACLForResource(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -11850,6 +12211,494 @@ func TestUpdateResponseSnapshot_ListAvailableManagedRuleGroups(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListAvailableManagedRuleGroups.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListEventActors(t *testing.T) {
+	want := &ListEventActorsOutput{
+		EventActors: []types.EventActorSummary{
+			{
+				EventActorId:    ptr.String("__EventActorId__"),
+				ClientIp:        ptr.String("__ClientIp__"),
+				TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+				Asn:             ptr.String("__Asn__"),
+				AsnOrganization: ptr.String("__AsnOrganization__"),
+				Country:         ptr.String("__Country__"),
+				AuthFingerprint: ptr.String("__AuthFingerprint__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventCount:      1,
+			},
+			{
+				EventActorId:    ptr.String("__EventActorId__"),
+				ClientIp:        ptr.String("__ClientIp__"),
+				TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+				Asn:             ptr.String("__Asn__"),
+				AsnOrganization: ptr.String("__AsnOrganization__"),
+				Country:         ptr.String("__Country__"),
+				AuthFingerprint: ptr.String("__AuthFingerprint__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventCount:      1,
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	proto := awsjson.New11(schemas.AWSWAF_20190729)
+	opSchema := smithy.NewOperationSchema(schemas.ListEventActors, schemas.ListEventActorsResponse, schemas.ListEventActorsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListEventActors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListEvents(t *testing.T) {
+	want := &ListEventsOutput{
+		Events: []types.EventDetailSummary{
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	proto := awsjson.New11(schemas.AWSWAF_20190729)
+	opSchema := smithy.NewOperationSchema(schemas.ListEvents, schemas.ListEventsResponse, schemas.ListEventsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListEvents.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListEventsByWebACL(t *testing.T) {
+	want := &ListEventsByWebACLOutput{
+		Events: []types.EventDetailSummary{
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	proto := awsjson.New11(schemas.AWSWAF_20190729)
+	opSchema := smithy.NewOperationSchema(schemas.ListEventsByWebACL, schemas.ListEventsByWebACLResponse, schemas.ListEventsByWebACLResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListEventsByWebACL.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

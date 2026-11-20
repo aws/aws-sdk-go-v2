@@ -2426,6 +2426,27 @@ func (EmbeddedDestinationStyleControl) Values() []EmbeddedDestinationStyleContro
 	}
 }
 
+type EmbeddedModeType string
+
+// Enum values for EmbeddedModeType
+const (
+	EmbeddedModeTypeEmbedded608And708 EmbeddedModeType = "EMBEDDED_608_AND_708"
+	EmbeddedModeTypeEmbedded608Only   EmbeddedModeType = "EMBEDDED_608_ONLY"
+	EmbeddedModeTypeEmbedded708Only   EmbeddedModeType = "EMBEDDED_708_ONLY"
+)
+
+// Values returns all known values for EmbeddedModeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddedModeType) Values() []EmbeddedModeType {
+	return []EmbeddedModeType{
+		"EMBEDDED_608_AND_708",
+		"EMBEDDED_608_ONLY",
+		"EMBEDDED_708_ONLY",
+	}
+}
+
 type EmbeddedScte20Detection string
 
 // Enum values for EmbeddedScte20Detection

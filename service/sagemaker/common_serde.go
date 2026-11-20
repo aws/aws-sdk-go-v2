@@ -2118,6 +2118,56 @@ func serializeForecastQuantiles(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeGlobalInferenceGatewayFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlobalInferenceGatewayFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGlobalInferenceGatewayMemberFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlobalInferenceGatewayMemberFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGlobalInferenceGatewayMembers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlobalInferenceGatewayMember) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGlobalInferenceGatewayMemberSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlobalInferenceGatewayMemberSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGlobalInferenceGatewaySummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlobalInferenceGatewaySummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeGroupingAttributeNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2923,6 +2973,42 @@ func serializeMonitoringScheduleList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeMonitoringScheduleSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MonitoringScheduleSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMoveClusterNodeIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMoveClusterNodeLogicalIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMoveClusterNodeLogicalIdsErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MoveClusterNodeLogicalIdsError) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMoveClusterNodesErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MoveClusterNodesError) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -7509,6 +7595,116 @@ func deserializeForecastQuantiles(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	})
 }
 
+func deserializeGlobalInferenceGatewayFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GlobalInferenceGatewayFilter) error {
+	*v = make([]types.GlobalInferenceGatewayFilter, 0)
+	var vv types.GlobalInferenceGatewayFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GlobalInferenceGatewayFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GlobalInferenceGatewayFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGlobalInferenceGatewayMemberFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GlobalInferenceGatewayMemberFilter) error {
+	*v = make([]types.GlobalInferenceGatewayMemberFilter, 0)
+	var vv types.GlobalInferenceGatewayMemberFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GlobalInferenceGatewayMemberFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GlobalInferenceGatewayMemberFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGlobalInferenceGatewayMembers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GlobalInferenceGatewayMember) error {
+	*v = make([]types.GlobalInferenceGatewayMember, 0)
+	var vv types.GlobalInferenceGatewayMember
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GlobalInferenceGatewayMember
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GlobalInferenceGatewayMember{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGlobalInferenceGatewayMemberSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GlobalInferenceGatewayMemberSummary) error {
+	*v = make([]types.GlobalInferenceGatewayMemberSummary, 0)
+	var vv types.GlobalInferenceGatewayMemberSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GlobalInferenceGatewayMemberSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GlobalInferenceGatewayMemberSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGlobalInferenceGatewaySummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GlobalInferenceGatewaySummary) error {
+	*v = make([]types.GlobalInferenceGatewaySummary, 0)
+	var vv types.GlobalInferenceGatewaySummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GlobalInferenceGatewaySummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GlobalInferenceGatewaySummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeGroupingAttributeNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -9352,6 +9548,92 @@ func deserializeMonitoringScheduleSummaryList(d smithy.ShapeDeserializer, s *smi
 		}
 
 		vv = types.MonitoringScheduleSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMoveClusterNodeIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMoveClusterNodeLogicalIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMoveClusterNodeLogicalIdsErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MoveClusterNodeLogicalIdsError) error {
+	*v = make([]types.MoveClusterNodeLogicalIdsError, 0)
+	var vv types.MoveClusterNodeLogicalIdsError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MoveClusterNodeLogicalIdsError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MoveClusterNodeLogicalIdsError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMoveClusterNodesErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MoveClusterNodesError) error {
+	*v = make([]types.MoveClusterNodesError, 0)
+	var vv types.MoveClusterNodesError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MoveClusterNodesError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MoveClusterNodesError{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

@@ -14,7 +14,10 @@ import (
 //
 // removing centralized automation capabilities. Once disassociated, organization
 // rules no longer apply to the member account, and the management account (or
-// delegated administrator) cannot create Automation rules for that account.
+// delegated administrator) can't create automation rules for that account.
+//
+// Requests that include an account to which an organization enrollment
+// configuration applies are rejected.
 //
 // Only the management account or a delegated administrator can perform this
 // action.

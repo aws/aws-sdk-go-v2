@@ -60,6 +60,31 @@ func (AccountLimitType) Values() []AccountLimitType {
 	}
 }
 
+type AZAffinityLocationType string
+
+// Enum values for AZAffinityLocationType
+const (
+	AZAffinityLocationTypeAvailabilityZone      AZAffinityLocationType = "AvailabilityZone"
+	AZAffinityLocationTypeAvailabilityZoneGroup AZAffinityLocationType = "AvailabilityZoneGroup"
+	AZAffinityLocationTypeRegion                AZAffinityLocationType = "Region"
+	AZAffinityLocationTypePartition             AZAffinityLocationType = "Partition"
+	AZAffinityLocationTypeGlobal                AZAffinityLocationType = "Global"
+)
+
+// Values returns all known values for AZAffinityLocationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AZAffinityLocationType) Values() []AZAffinityLocationType {
+	return []AZAffinityLocationType{
+		"AvailabilityZone",
+		"AvailabilityZoneGroup",
+		"Region",
+		"Partition",
+		"Global",
+	}
+}
+
 type ChangeAction string
 
 // Enum values for ChangeAction
@@ -78,6 +103,92 @@ func (ChangeAction) Values() []ChangeAction {
 		"CREATE",
 		"DELETE",
 		"UPSERT",
+	}
+}
+
+type ChangeGuardrailName string
+
+// Enum values for ChangeGuardrailName
+const (
+	ChangeGuardrailNameNsFormatCheck              ChangeGuardrailName = "NS_FORMAT_CHECK"
+	ChangeGuardrailNameNsDelegationAuthorityCheck ChangeGuardrailName = "NS_DELEGATION_AUTHORITY_CHECK"
+	ChangeGuardrailNameNsOcclusionCheck           ChangeGuardrailName = "NS_OCCLUSION_CHECK"
+	ChangeGuardrailNameAliasTargetCheck           ChangeGuardrailName = "ALIAS_TARGET_CHECK"
+	ChangeGuardrailNameActiveRecordCheck          ChangeGuardrailName = "ACTIVE_RECORD_CHECK"
+	ChangeGuardrailNameActiveDelegationCheck      ChangeGuardrailName = "ACTIVE_DELEGATION_CHECK"
+)
+
+// Values returns all known values for ChangeGuardrailName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeGuardrailName) Values() []ChangeGuardrailName {
+	return []ChangeGuardrailName{
+		"NS_FORMAT_CHECK",
+		"NS_DELEGATION_AUTHORITY_CHECK",
+		"NS_OCCLUSION_CHECK",
+		"ALIAS_TARGET_CHECK",
+		"ACTIVE_RECORD_CHECK",
+		"ACTIVE_DELEGATION_CHECK",
+	}
+}
+
+type ChangeGuardrailStatus string
+
+// Enum values for ChangeGuardrailStatus
+const (
+	ChangeGuardrailStatusEnabled  ChangeGuardrailStatus = "ENABLED"
+	ChangeGuardrailStatusDisabled ChangeGuardrailStatus = "DISABLED"
+)
+
+// Values returns all known values for ChangeGuardrailStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeGuardrailStatus) Values() []ChangeGuardrailStatus {
+	return []ChangeGuardrailStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ChangeHistoryOperation string
+
+// Enum values for ChangeHistoryOperation
+const (
+	ChangeHistoryOperationCreateHostedZone         ChangeHistoryOperation = "CreateHostedZone"
+	ChangeHistoryOperationDeleteHostedZone         ChangeHistoryOperation = "DeleteHostedZone"
+	ChangeHistoryOperationChangeResourceRecordSets ChangeHistoryOperation = "ChangeResourceRecordSets"
+)
+
+// Values returns all known values for ChangeHistoryOperation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeHistoryOperation) Values() []ChangeHistoryOperation {
+	return []ChangeHistoryOperation{
+		"CreateHostedZone",
+		"DeleteHostedZone",
+		"ChangeResourceRecordSets",
+	}
+}
+
+type ChangeHistorySortOrder string
+
+// Enum values for ChangeHistorySortOrder
+const (
+	ChangeHistorySortOrderAscending  ChangeHistorySortOrder = "ASCENDING"
+	ChangeHistorySortOrderDescending ChangeHistorySortOrder = "DESCENDING"
+)
+
+// Values returns all known values for ChangeHistorySortOrder. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeHistorySortOrder) Values() []ChangeHistorySortOrder {
+	return []ChangeHistorySortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 
@@ -268,6 +379,48 @@ func (EndpointType) Values() []EndpointType {
 	}
 }
 
+type FeatureEnablement string
+
+// Enum values for FeatureEnablement
+const (
+	FeatureEnablementEnabled  FeatureEnablement = "ENABLED"
+	FeatureEnablementDisabled FeatureEnablement = "DISABLED"
+)
+
+// Values returns all known values for FeatureEnablement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureEnablement) Values() []FeatureEnablement {
+	return []FeatureEnablement{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled   FeatureStatus = "ENABLED"
+	FeatureStatusDisabled  FeatureStatus = "DISABLED"
+	FeatureStatusEnabling  FeatureStatus = "ENABLING"
+	FeatureStatusDisabling FeatureStatus = "DISABLING"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
+		"ENABLING",
+		"DISABLING",
+	}
+}
+
 type HealthCheckRegion string
 
 // Enum values for HealthCheckRegion
@@ -407,6 +560,25 @@ func (HostedZoneLimitType) Values() []HostedZoneLimitType {
 	return []HostedZoneLimitType{
 		"MAX_RRSETS_BY_ZONE",
 		"MAX_VPCS_ASSOCIATED_BY_ZONE",
+	}
+}
+
+type HostedZoneTier string
+
+// Enum values for HostedZoneTier
+const (
+	HostedZoneTierStandard HostedZoneTier = "STANDARD"
+	HostedZoneTierAdvanced HostedZoneTier = "ADVANCED"
+)
+
+// Values returns all known values for HostedZoneTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HostedZoneTier) Values() []HostedZoneTier {
+	return []HostedZoneTier{
+		"STANDARD",
+		"ADVANCED",
 	}
 }
 

@@ -498,7 +498,7 @@ func (v *CustomerArtifactPaths) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Represents a device type that an app is tested against.
+// Represents a device that an app is tested against.
 type Device struct {
 
 	// The device's ARN.
@@ -584,6 +584,20 @@ type Device struct {
 	// The resolution of the device.
 	Resolution *Resolution
 
+	// The device type.
+	//
+	// Allowed values include:
+	//
+	//   - PHYSICAL: A physical device.
+	//
+	//   - VIRTUAL: An emulator or simulator hosted by Device Farm.
+	//
+	// For iOS, a virtual device requires a simulator build of your app, and a
+	// physical device requires a device build. If the app does not match the device
+	// type, the device is reported as incompatible with a DEVICE_TYPE incompatibility
+	// message.
+	Type DeviceType
+
 	noSmithyDocumentSerde
 }
 
@@ -660,6 +674,9 @@ func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.Device_resolution)
 		v.Resolution.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Device_type, string(v.Type))
 	}
 }
 func (v *Device) Deserialize(d smithy.ShapeDeserializer) error {
@@ -739,6 +756,13 @@ func (v *Device) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Device_resolution:
 			v.Resolution = &Resolution{}
 			return v.Resolution.Deserialize(d)
+		case schemas.Device_type:
+			var ev string
+			if err := d.ReadString(schemas.Device_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DeviceType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -781,6 +805,10 @@ type DeviceFilter struct {
 	// Supported operators: EQUALS
 	//
 	// FORM_FACTOR The device form factor. Valid values are PHONE or TABLET.
+	//
+	// Supported operators: EQUALS
+	//
+	// DEVICE_TYPE The device type. Valid values are PHYSICAL or VIRTUAL.
 	//
 	// Supported operators: EQUALS
 	//
@@ -840,6 +868,8 @@ type DeviceFilter struct {
 	//   or TEMPORARY_NOT_AVAILABLE.
 	//
 	//   - The FORM_FACTOR attribute can be set to PHONE or TABLET.
+	//
+	//   - The DEVICE_TYPE attribute can be set to PHYSICAL or VIRTUAL.
 	//
 	//   - The FLEET_TYPE attribute can be set to PUBLIC or PRIVATE.
 	//
@@ -1045,6 +1075,11 @@ type DevicePool struct {
 	Name *string
 
 	// Information about the device pool's rules.
+	//
+	// A device pool contains either physical devices or virtual devices, but not
+	// both. If you define the pool with attribute rules and those rules do not include
+	// a DEVICE_TYPE rule, the pool contains only physical devices. If you define the
+	// pool by listing device ARNs, the pool contains the devices you list.
 	Rules []Rule
 
 	// The device pool's type.
@@ -1239,6 +1274,8 @@ type DeviceSelectionConfiguration struct {
 	//
 	//   - FORM_FACTOR: The device form factor. Valid values are PHONE or TABLET.
 	//
+	//   - DEVICE_TYPE: The device type. Valid values are PHYSICAL or VIRTUAL.
+	//
 	//   - MANUFACTURER: The device manufacturer (for example, Apple).
 	//
 	//   - REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
@@ -1290,7 +1327,13 @@ type DeviceSelectionConfiguration struct {
 	//
 	//   - The FORM_FACTOR attribute can be set to PHONE or TABLET.
 	//
+	//   - The DEVICE_TYPE attribute can be set to PHYSICAL or VIRTUAL.
+	//
 	//   - The FLEET_TYPE attribute can be set to PUBLIC or PRIVATE.
+	//
+	// If the filters select devices by attribute and do not include a DEVICE_TYPE
+	// filter, only physical devices are selected. If the filters select devices by
+	// ARN, the run uses the devices you list.
 	//
 	// [no longer supported]: https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html
 	//
@@ -1515,6 +1558,8 @@ type IncompatibilityMessage struct {
 	// Allowed values include:
 	//
 	//   - ARN
+	//
+	//   - DEVICE_TYPE (for example, physical or virtual)
 	//
 	//   - FORM_FACTOR (for example, phone or tablet)
 	//
@@ -3316,6 +3361,10 @@ type Rule struct {
 	//
 	// AVAILABILITY The current availability of the device. Valid values are
 	// AVAILABLE, HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.
+	//
+	// Supported operators: EQUALS
+	//
+	// DEVICE_TYPE The device type. Valid values are PHYSICAL or VIRTUAL.
 	//
 	// Supported operators: EQUALS
 	//

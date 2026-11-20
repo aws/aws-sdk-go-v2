@@ -137,8 +137,27 @@ type GetRunOutput struct {
 	// The run's parameters.
 	Parameters document.Interface
 
+	// For a run that you started with parametersUri , the service returns the location
+	// of the run parameters in this field instead of parameters . The value is one of
+	// the following values:
+	//
+	//   - A presigned HTTPS URL for the copy of the parameters file that Amazon Web
+	//   Services HealthOmics stores for the run
+	//
+	//   - The S3 URI that you submitted, if Amazon Web Services HealthOmics has not
+	//   stored a copy of the file yet or the run failed validation
+	//
+	// A presigned URL expires after a limited time. Call GetRun again to get a new
+	// URL. Treat the URL as a credential and do not share it. If the run failed
+	// because the parameters were not valid, check failureReason and statusMessage .
+	ParametersUri *string
+
 	// The run's priority.
 	Priority *int32
+
+	// Specifies whether this workflow run can read inputs from Amazon S3 buckets that
+	// use Requester Pays, as set in the StartRun or StartRunBatch request.
+	RequesterPaysEnabled *bool
 
 	// The run's resource digests.
 	ResourceDigests map[string]string
@@ -290,8 +309,14 @@ func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Parameters != nil {
 		s.WriteDocument(schemas.GetRunResponse_parameters, &smithydocument.Opaque{Value: v.Parameters})
 	}
+	if v.ParametersUri != nil {
+		s.WriteString(schemas.GetRunResponse_parametersUri, *v.ParametersUri)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.GetRunResponse_priority, *v.Priority)
+	}
+	if v.RequesterPaysEnabled != nil {
+		s.WriteBool(schemas.GetRunResponse_requesterPaysEnabled, *v.RequesterPaysEnabled)
 	}
 	if v.ResourceDigests != nil {
 		serializeRunResourceDigests(s, schemas.GetRunResponse_resourceDigests, v.ResourceDigests)
@@ -460,9 +485,15 @@ func (v *GetRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 				v.Parameters = internaldocument.NewDocumentUnmarshaler(ov.Value)
 			}
 			return nil
+		case schemas.GetRunResponse_parametersUri:
+			v.ParametersUri = new(string)
+			return d.ReadString(schemas.GetRunResponse_parametersUri, v.ParametersUri)
 		case schemas.GetRunResponse_priority:
 			v.Priority = new(int32)
 			return d.ReadInt32(schemas.GetRunResponse_priority, v.Priority)
+		case schemas.GetRunResponse_requesterPaysEnabled:
+			v.RequesterPaysEnabled = new(bool)
+			return d.ReadBool(schemas.GetRunResponse_requesterPaysEnabled, v.RequesterPaysEnabled)
 		case schemas.GetRunResponse_resourceDigests:
 			return deserializeRunResourceDigests(d, schemas.GetRunResponse_resourceDigests, &v.ResourceDigests)
 		case schemas.GetRunResponse_retentionMode:

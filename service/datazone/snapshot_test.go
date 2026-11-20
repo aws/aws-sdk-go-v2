@@ -2150,6 +2150,18 @@ func TestCheckSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAssetOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAssetOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAssetOwner")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateConnection(context.Background(), nil, func(o *Options) {
@@ -4482,6 +4494,18 @@ func TestUpdateSnapshot_UpdateAssetFilter(t *testing.T) {
 	_, err := svc.UpdateAssetFilter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAssetFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAssetOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAssetOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAssetOwner")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

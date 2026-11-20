@@ -19,6 +19,23 @@ func (BillingPeriodType) Values() []BillingPeriodType {
 	}
 }
 
+type CaseStudyResourceType string
+
+// Enum values for CaseStudyResourceType
+const (
+	CaseStudyResourceTypeCaseStudyWebsite CaseStudyResourceType = "CASE_STUDY_WEBSITE"
+)
+
+// Values returns all known values for CaseStudyResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CaseStudyResourceType) Values() []CaseStudyResourceType {
+	return []CaseStudyResourceType{
+		"CASE_STUDY_WEBSITE",
+	}
+}
+
 type DeployedOnAwsStatus string
 
 // Enum values for DeployedOnAwsStatus
@@ -123,6 +140,37 @@ func (LegalDocumentType) Values() []LegalDocumentType {
 	}
 }
 
+type ListingAttributeType string
+
+// Enum values for ListingAttributeType
+const (
+	ListingAttributeTypeCaseStudy                ListingAttributeType = "CASE_STUDY"
+	ListingAttributeTypeSpecializationDetail     ListingAttributeType = "SPECIALIZATION_DETAIL"
+	ListingAttributeTypeTrustCenterSource        ListingAttributeType = "TRUST_CENTER_SOURCE"
+	ListingAttributeTypeTrustCenterCertification ListingAttributeType = "TRUST_CENTER_CERTIFICATION"
+	ListingAttributeTypeTrustCenterDocument      ListingAttributeType = "TRUST_CENTER_DOCUMENT"
+	ListingAttributeTypeTrustCenterControl       ListingAttributeType = "TRUST_CENTER_CONTROL"
+	ListingAttributeTypeTrustCenterFaq           ListingAttributeType = "TRUST_CENTER_FAQ"
+	ListingAttributeTypeTrustCenterUpdate        ListingAttributeType = "TRUST_CENTER_UPDATE"
+)
+
+// Values returns all known values for ListingAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListingAttributeType) Values() []ListingAttributeType {
+	return []ListingAttributeType{
+		"CASE_STUDY",
+		"SPECIALIZATION_DETAIL",
+		"TRUST_CENTER_SOURCE",
+		"TRUST_CENTER_CERTIFICATION",
+		"TRUST_CENTER_DOCUMENT",
+		"TRUST_CENTER_CONTROL",
+		"TRUST_CENTER_FAQ",
+		"TRUST_CENTER_UPDATE",
+	}
+}
+
 type ListingBadgeType string
 
 // Enum values for ListingBadgeType
@@ -197,6 +245,25 @@ func (PricingUnitType) Values() []PricingUnitType {
 		"TIERS",
 		"REQUESTS",
 		"UNITS",
+	}
+}
+
+type PurchaseIndicatorType string
+
+// Enum values for PurchaseIndicatorType
+const (
+	PurchaseIndicatorTypeNotAvailableForSubscription        PurchaseIndicatorType = "NOT_AVAILABLE_FOR_SUBSCRIPTION"
+	PurchaseIndicatorTypeAvailableForUseWithoutSubscription PurchaseIndicatorType = "AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION"
+)
+
+// Values returns all known values for PurchaseIndicatorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PurchaseIndicatorType) Values() []PurchaseIndicatorType {
+	return []PurchaseIndicatorType{
+		"NOT_AVAILABLE_FOR_SUBSCRIPTION",
+		"AVAILABLE_FOR_USE_WITHOUT_SUBSCRIPTION",
 	}
 }
 
@@ -372,14 +439,19 @@ type SearchFacetType string
 
 // Enum values for SearchFacetType
 const (
-	SearchFacetTypeAverageCustomerRating SearchFacetType = "AVERAGE_CUSTOMER_RATING"
-	SearchFacetTypeCategory              SearchFacetType = "CATEGORY"
-	SearchFacetTypePublisher             SearchFacetType = "PUBLISHER"
-	SearchFacetTypeFulfillmentOptionType SearchFacetType = "FULFILLMENT_OPTION_TYPE"
-	SearchFacetTypePricingModel          SearchFacetType = "PRICING_MODEL"
-	SearchFacetTypePricingUnit           SearchFacetType = "PRICING_UNIT"
-	SearchFacetTypeDeployedOnAws         SearchFacetType = "DEPLOYED_ON_AWS"
-	SearchFacetTypeNumberOfProducts      SearchFacetType = "NUMBER_OF_PRODUCTS"
+	SearchFacetTypeAverageCustomerRating  SearchFacetType = "AVERAGE_CUSTOMER_RATING"
+	SearchFacetTypeCategory               SearchFacetType = "CATEGORY"
+	SearchFacetTypePublisher              SearchFacetType = "PUBLISHER"
+	SearchFacetTypeFulfillmentOptionType  SearchFacetType = "FULFILLMENT_OPTION_TYPE"
+	SearchFacetTypePricingModel           SearchFacetType = "PRICING_MODEL"
+	SearchFacetTypePricingUnit            SearchFacetType = "PRICING_UNIT"
+	SearchFacetTypeDeployedOnAws          SearchFacetType = "DEPLOYED_ON_AWS"
+	SearchFacetTypeNumberOfProducts       SearchFacetType = "NUMBER_OF_PRODUCTS"
+	SearchFacetTypeCertificates           SearchFacetType = "CERTIFICATES"
+	SearchFacetTypeSpecialization         SearchFacetType = "SPECIALIZATION"
+	SearchFacetTypeSpecializationCategory SearchFacetType = "SPECIALIZATION_CATEGORY"
+	SearchFacetTypeSellerEngagement       SearchFacetType = "SELLER_ENGAGEMENT"
+	SearchFacetTypeTrustCenter            SearchFacetType = "TRUST_CENTER"
 )
 
 // Values returns all known values for SearchFacetType. Note that this can be
@@ -396,6 +468,11 @@ func (SearchFacetType) Values() []SearchFacetType {
 		"PRICING_UNIT",
 		"DEPLOYED_ON_AWS",
 		"NUMBER_OF_PRODUCTS",
+		"CERTIFICATES",
+		"SPECIALIZATION",
+		"SPECIALIZATION_CATEGORY",
+		"SELLER_ENGAGEMENT",
+		"TRUST_CENTER",
 	}
 }
 
@@ -412,6 +489,12 @@ const (
 	SearchFilterTypePricingUnit              SearchFilterType = "PRICING_UNIT"
 	SearchFilterTypeDeployedOnAws            SearchFilterType = "DEPLOYED_ON_AWS"
 	SearchFilterTypeNumberOfProducts         SearchFilterType = "NUMBER_OF_PRODUCTS"
+	SearchFilterTypeCertificates             SearchFilterType = "CERTIFICATES"
+	SearchFilterTypeProductId                SearchFilterType = "PRODUCT_ID"
+	SearchFilterTypeSpecialization           SearchFilterType = "SPECIALIZATION"
+	SearchFilterTypeSpecializationCategory   SearchFilterType = "SPECIALIZATION_CATEGORY"
+	SearchFilterTypeSellerEngagement         SearchFilterType = "SELLER_ENGAGEMENT"
+	SearchFilterTypeTrustCenter              SearchFilterType = "TRUST_CENTER"
 )
 
 // Values returns all known values for SearchFilterType. Note that this can be
@@ -429,6 +512,12 @@ func (SearchFilterType) Values() []SearchFilterType {
 		"PRICING_UNIT",
 		"DEPLOYED_ON_AWS",
 		"NUMBER_OF_PRODUCTS",
+		"CERTIFICATES",
+		"PRODUCT_ID",
+		"SPECIALIZATION",
+		"SPECIALIZATION_CATEGORY",
+		"SELLER_ENGAGEMENT",
+		"TRUST_CENTER",
 	}
 }
 
@@ -510,6 +599,9 @@ type SellerEngagementType string
 const (
 	SellerEngagementTypeRequestForPrivateOffer SellerEngagementType = "REQUEST_FOR_PRIVATE_OFFER"
 	SellerEngagementTypeRequestForDemo         SellerEngagementType = "REQUEST_FOR_DEMO"
+	SellerEngagementTypeExpressPrivateOffer    SellerEngagementType = "EXPRESS_PRIVATE_OFFER"
+	SellerEngagementTypeBuyNow                 SellerEngagementType = "BUY_NOW"
+	SellerEngagementTypeTryForFree             SellerEngagementType = "TRY_FOR_FREE"
 )
 
 // Values returns all known values for SellerEngagementType. Note that this can be
@@ -520,6 +612,30 @@ func (SellerEngagementType) Values() []SellerEngagementType {
 	return []SellerEngagementType{
 		"REQUEST_FOR_PRIVATE_OFFER",
 		"REQUEST_FOR_DEMO",
+		"EXPRESS_PRIVATE_OFFER",
+		"BUY_NOW",
+		"TRY_FOR_FREE",
+	}
+}
+
+type SpecializationType string
+
+// Enum values for SpecializationType
+const (
+	SpecializationTypeUseCase  SpecializationType = "USE_CASE"
+	SpecializationTypeIndustry SpecializationType = "INDUSTRY"
+	SpecializationTypeServices SpecializationType = "SERVICES"
+)
+
+// Values returns all known values for SpecializationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpecializationType) Values() []SpecializationType {
+	return []SpecializationType{
+		"USE_CASE",
+		"INDUSTRY",
+		"SERVICES",
 	}
 }
 
@@ -561,6 +677,70 @@ func (TermType) Values() []TermType {
 		"ValidityTerm",
 		"VariablePaymentTerm",
 		"NetPaymentTerm",
+	}
+}
+
+type TrustCenterControlDomain string
+
+// Enum values for TrustCenterControlDomain
+const (
+	TrustCenterControlDomainSecurity     TrustCenterControlDomain = "SECURITY"
+	TrustCenterControlDomainAiGovernance TrustCenterControlDomain = "AI_GOVERNANCE"
+	TrustCenterControlDomainResilience   TrustCenterControlDomain = "RESILIENCE"
+)
+
+// Values returns all known values for TrustCenterControlDomain. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustCenterControlDomain) Values() []TrustCenterControlDomain {
+	return []TrustCenterControlDomain{
+		"SECURITY",
+		"AI_GOVERNANCE",
+		"RESILIENCE",
+	}
+}
+
+type TrustCenterDocumentAccessType string
+
+// Enum values for TrustCenterDocumentAccessType
+const (
+	TrustCenterDocumentAccessTypeDownload      TrustCenterDocumentAccessType = "DOWNLOAD"
+	TrustCenterDocumentAccessTypeView          TrustCenterDocumentAccessType = "VIEW"
+	TrustCenterDocumentAccessTypeRequestAccess TrustCenterDocumentAccessType = "REQUEST_ACCESS"
+)
+
+// Values returns all known values for TrustCenterDocumentAccessType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustCenterDocumentAccessType) Values() []TrustCenterDocumentAccessType {
+	return []TrustCenterDocumentAccessType{
+		"DOWNLOAD",
+		"VIEW",
+		"REQUEST_ACCESS",
+	}
+}
+
+type TrustCenterProvider string
+
+// Enum values for TrustCenterProvider
+const (
+	TrustCenterProviderDrata TrustCenterProvider = "DRATA"
+	TrustCenterProviderVanta TrustCenterProvider = "VANTA"
+	TrustCenterProviderOther TrustCenterProvider = "OTHER"
+)
+
+// Values returns all known values for TrustCenterProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustCenterProvider) Values() []TrustCenterProvider {
+	return []TrustCenterProvider{
+		"DRATA",
+		"VANTA",
+		"OTHER",
 	}
 }
 

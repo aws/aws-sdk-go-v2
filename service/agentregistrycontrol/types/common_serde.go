@@ -53,6 +53,15 @@ func serializeClaimMatchValueType(s smithy.ShapeSerializer, schema *smithy.Schem
 	}
 }
 
+func serializeIdentifier(s smithy.ShapeSerializer, schema *smithy.Schema, v Identifier) {
+	switch vv := v.(type) {
+	case *IdentifierMemberDomain:
+		s.WriteUnion(schema, schemas.Identifier_domain)
+		s.WriteString(schemas.Identifier_domain, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializePrivateEndpoint(s smithy.ShapeSerializer, schema *smithy.Schema, v PrivateEndpoint) {
 	switch vv := v.(type) {
 	case *PrivateEndpointMemberManagedVpcResource:
@@ -180,6 +189,18 @@ func deserializeClaimMatchValueType(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeIdentifier(d smithy.ShapeDeserializer, s *smithy.Schema, v *Identifier) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.Identifier_domain:
+			vv := &IdentifierMemberDomain{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializePrivateEndpoint(d smithy.ShapeDeserializer, s *smithy.Schema, v *PrivateEndpoint) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -288,6 +309,14 @@ func serializeAutoApprovalRuleList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCustomClaimValidationsType(s smithy.ShapeSerializer, schema *smithy.Schema, v []CustomClaimValidationType) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -335,6 +364,26 @@ func serializeProvenanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeProvenanceSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProvenanceSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePublisherAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PublisherAssociation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePublisherSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PublisherSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -530,6 +579,27 @@ func deserializeAutoApprovalRuleList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeCategoryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCustomClaimValidationsType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CustomClaimValidationType) error {
 	*v = make([]CustomClaimValidationType, 0)
 	var vv CustomClaimValidationType
@@ -651,6 +721,50 @@ func deserializeProvenanceSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		vv = ProvenanceSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePublisherAssociationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PublisherAssociation) error {
+	*v = make([]PublisherAssociation, 0)
+	var vv PublisherAssociation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PublisherAssociation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PublisherAssociation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePublisherSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PublisherSummary) error {
+	*v = make([]PublisherSummary, 0)
+	var vv PublisherSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero PublisherSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = PublisherSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -916,6 +1030,15 @@ func serializeResourceTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseMap()
 }
 
+func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -947,6 +1070,27 @@ func deserializeCustomParameterMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeResourceTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

@@ -412,6 +412,18 @@ func TestUpdateResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
+			},
 			ErrorInfo: []types.ErrorInfo{
 				{
 					Code:    ptr.String("__Code__"),
@@ -843,6 +855,18 @@ func TestUpdateResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
+			},
 			ErrorInfo: []types.ErrorInfo{
 				{
 					Code:    ptr.String("__Code__"),
@@ -1182,6 +1206,18 @@ func TestUpdateResponseSnapshot_RegisterComputeNodeGroupInstance(t *testing.T) {
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 		},
 		SchedulerVersion: ptr.String("__SchedulerVersion__"),
+		InstanceHealthChecks: &types.InstanceHealthChecks{
+			HealthMonitoring: &types.HealthMonitoring{
+				Mode:         types.HealthMonitoringMode("NONE"),
+				RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+			},
+			DeepHealthChecks: &types.DeepHealthChecks{
+				OnStart: &types.DeepHealthCheckOnStart{
+					Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+					RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+				},
+			},
+		},
 	}
 	proto := awsjson.New10(schemas.AWSParallelComputingService)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterComputeNodeGroupInstance, schemas.RegisterComputeNodeGroupInstanceResponse, schemas.RegisterComputeNodeGroupInstanceResponse)
@@ -1517,6 +1553,18 @@ func TestUpdateResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 					},
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
 			},
 			ErrorInfo: []types.ErrorInfo{
 				{

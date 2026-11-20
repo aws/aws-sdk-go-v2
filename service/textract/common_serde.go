@@ -65,6 +65,26 @@ func serializeBlockList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 	s.CloseList()
 }
 
+func serializeBlueprintItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BlueprintItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBlueprintSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BlueprintSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeContentClassifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContentClassifier) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -141,7 +161,25 @@ func serializeExpenseGroupPropertyList(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseList()
 }
 
+func serializeExtractionGranularityTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtractionGranularityType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeExtractionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Extraction) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFallbackBlueprintItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BlueprintItem) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -245,6 +283,14 @@ func serializeLineItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeOutputTextFormatTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OutputTextFormatType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializePageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -261,6 +307,14 @@ func serializePages(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) 
 	s.CloseList()
 }
 
+func serializePIIEntityTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PIIEntityType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializePolygon(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Point) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -272,6 +326,16 @@ func serializePolygon(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializePredictionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Prediction) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeProjectSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProjectSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -504,6 +568,50 @@ func deserializeBlockList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 	})
 }
 
+func deserializeBlueprintItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BlueprintItem) error {
+	*v = make([]types.BlueprintItem, 0)
+	var vv types.BlueprintItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BlueprintItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BlueprintItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBlueprintSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BlueprintSummary) error {
+	*v = make([]types.BlueprintSummary, 0)
+	var vv types.BlueprintSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BlueprintSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BlueprintSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeContentClassifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContentClassifier) error {
 	*v = make([]types.ContentClassifier, 0)
 	var vv string
@@ -678,6 +786,27 @@ func deserializeExpenseGroupPropertyList(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeExtractionGranularityTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtractionGranularityType) error {
+	*v = make([]types.ExtractionGranularityType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExtractionGranularityType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.ExtractionGranularityType(vv))
+		return nil
+	})
+}
+
 func deserializeExtractionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Extraction) error {
 	*v = make([]types.Extraction, 0)
 	var vv types.Extraction
@@ -691,6 +820,28 @@ func deserializeExtractionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		vv = types.Extraction{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFallbackBlueprintItems(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BlueprintItem) error {
+	*v = make([]types.BlueprintItem, 0)
+	var vv types.BlueprintItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BlueprintItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BlueprintItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -917,6 +1068,27 @@ func deserializeLineItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeOutputTextFormatTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OutputTextFormatType) error {
+	*v = make([]types.OutputTextFormatType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OutputTextFormatType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.OutputTextFormatType(vv))
+		return nil
+	})
+}
+
 func deserializePageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
 	*v = make([]int32, 0)
 	var vv int32
@@ -959,6 +1131,27 @@ func deserializePages(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) 
 	})
 }
 
+func deserializePIIEntityTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PIIEntityType) error {
+	*v = make([]types.PIIEntityType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PIIEntityType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.PIIEntityType(vv))
+		return nil
+	})
+}
+
 func deserializePolygon(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Point) error {
 	*v = make([]types.Point, 0)
 	var vv types.Point
@@ -994,6 +1187,28 @@ func deserializePredictionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		vv = types.Prediction{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeProjectSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProjectSummary) error {
+	*v = make([]types.ProjectSummary, 0)
+	var vv types.ProjectSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProjectSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ProjectSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1219,6 +1434,15 @@ func deserializeWarnings(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	})
 }
 
+func serializeKmsEncryptionContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1226,6 +1450,27 @@ func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeKmsEncryptionContext(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {

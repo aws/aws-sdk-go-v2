@@ -32,7 +32,21 @@ func (c *Client) CreateDictionary(ctx context.Context, params *CreateDictionaryI
 type CreateDictionaryInput struct {
 
 	// The language of the dictionary entries. Specify the language using an ISO
-	// 639-2/T three-letter code. Supported values: eng, fra, ita, deu, spa, por.
+	// 639-2/T three-letter code. Supported values:
+	//
+	//   - eng – English
+	//
+	//   - fra – French
+	//
+	//   - ita – Italian
+	//
+	//   - deu – German
+	//
+	//   - spa – Spanish
+	//
+	//   - por – Portuguese
+	//
+	//   - ara – Arabic
 	//
 	// This member is required.
 	Language types.DictionaryLanguage

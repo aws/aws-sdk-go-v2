@@ -36,6 +36,19 @@ func serializeRule(s smithy.ShapeSerializer, schema *smithy.Schema, v Rule) {
 	}
 }
 
+func serializeSyncMedia(s smithy.ShapeSerializer, schema *smithy.Schema, v SyncMedia) {
+	switch vv := v.(type) {
+	case *SyncMediaMemberMediaBytes:
+		s.WriteUnion(schema, schemas.SyncMedia_MediaBytes)
+		s.WriteBlob(schemas.SyncMedia_MediaBytes, vv.Value)
+		s.CloseUnion()
+	case *SyncMediaMemberMediaFileUri:
+		s.WriteUnion(schema, schemas.SyncMedia_MediaFileUri)
+		s.WriteString(schemas.SyncMedia_MediaFileUri, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func deserializeRule(d smithy.ShapeDeserializer, s *smithy.Schema, v *Rule) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -53,6 +66,22 @@ func deserializeRule(d smithy.ShapeDeserializer, s *smithy.Schema, v *Rule) erro
 			return vv.Deserialize(d)
 		case schemas.Rule_TranscriptFilter:
 			vv := &RuleMemberTranscriptFilter{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeSyncMedia(d smithy.ShapeDeserializer, s *smithy.Schema, v *SyncMedia) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.SyncMedia_MediaBytes:
+			vv := &SyncMediaMemberMediaBytes{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.SyncMedia_MediaFileUri:
+			vv := &SyncMediaMemberMediaFileUri{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -214,6 +243,44 @@ func serializeSubtitleFormats(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeSyncItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSyncLanguageCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncLanguageCodeItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSyncLanguageOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncLanguage) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSyncRedactionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SyncRedaction) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -270,7 +337,37 @@ func serializeVocabularies(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeVocabularyFilterEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []VocabularyFilterEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeVocabularyFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []VocabularyFilterInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeVocabularyPhraseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []VocabularyPhrase) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeVocabularySettingsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []VocabularySettingsEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -654,6 +751,93 @@ func deserializeSubtitleFormats(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	})
 }
 
+func deserializeSyncItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SyncItem) error {
+	*v = make([]SyncItem, 0)
+	var vv SyncItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SyncItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SyncItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSyncLanguageCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SyncLanguageCodeItem) error {
+	*v = make([]SyncLanguageCodeItem, 0)
+	var vv SyncLanguageCodeItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SyncLanguageCodeItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SyncLanguageCodeItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSyncLanguageOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SyncLanguage) error {
+	*v = make([]SyncLanguage, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SyncLanguage
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, SyncLanguage(vv))
+		return nil
+	})
+}
+
+func deserializeSyncRedactionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SyncRedaction) error {
+	*v = make([]SyncRedaction, 0)
+	var vv SyncRedaction
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SyncRedaction
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SyncRedaction{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -784,6 +968,28 @@ func deserializeVocabularies(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 	})
 }
 
+func deserializeVocabularyFilterEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VocabularyFilterEntry) error {
+	*v = make([]VocabularyFilterEntry, 0)
+	var vv VocabularyFilterEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero VocabularyFilterEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = VocabularyFilterEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeVocabularyFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VocabularyFilterInfo) error {
 	*v = make([]VocabularyFilterInfo, 0)
 	var vv VocabularyFilterInfo
@@ -797,6 +1003,50 @@ func deserializeVocabularyFilters(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = VocabularyFilterInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeVocabularyPhraseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VocabularyPhrase) error {
+	*v = make([]VocabularyPhrase, 0)
+	var vv VocabularyPhrase
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero VocabularyPhrase
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = VocabularyPhrase{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeVocabularySettingsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VocabularySettingsEntry) error {
+	*v = make([]VocabularySettingsEntry, 0)
+	var vv VocabularySettingsEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero VocabularySettingsEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = VocabularySettingsEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

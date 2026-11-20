@@ -1,0 +1,3 @@
+GET /resource-coverage/protected-resources?entityType=Rule&maxResults=1&nextToken=__NextToken__&resourceArn=__ResourceArn__
+
+

@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/ListOrganizationalUnits
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jmaxResultsinextTokenm__NextToken__uorganizationalUnitIdsŸj__Member__j__Member__ÿÿ

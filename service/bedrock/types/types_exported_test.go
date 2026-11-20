@@ -828,3 +828,21 @@ func ExampleRetrievalFilter_outputUsage() {
 
 var _ []types.RetrievalFilter
 var _ *types.FilterAttribute
+
+func ExampleTrustedAccessProgramApplicationResult_outputUsage() {
+	var union types.TrustedAccessProgramApplicationResult
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TrustedAccessProgramApplicationResultMemberProviderHandoff:
+		_ = v.Value // Value is types.TrustedAccessProgramProviderHandoff
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TrustedAccessProgramProviderHandoff

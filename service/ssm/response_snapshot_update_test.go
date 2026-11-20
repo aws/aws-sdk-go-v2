@@ -1370,6 +1370,10 @@ func TestUpdateResponseSnapshot_CreateDocument(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			CloudProviders: []types.CloudProvider{
+				types.CloudProvider("AWS"),
+				types.CloudProvider("AWS"),
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonSSM)
@@ -3618,6 +3622,10 @@ func TestUpdateResponseSnapshot_DescribeDocument(t *testing.T) {
 			CategoryEnum: []string{
 				"__Member__",
 				"__Member__",
+			},
+			CloudProviders: []types.CloudProvider{
+				types.CloudProvider("AWS"),
+				types.CloudProvider("AWS"),
 			},
 		},
 	}
@@ -8448,6 +8456,10 @@ func TestUpdateResponseSnapshot_ListDocumentVersions(t *testing.T) {
 				Status:            types.DocumentStatus("Creating"),
 				StatusInformation: ptr.String("__StatusInformation__"),
 				ReviewStatus:      types.ReviewStatus("APPROVED"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 			{
 				Name:              ptr.String("__Name__"),
@@ -8460,6 +8472,10 @@ func TestUpdateResponseSnapshot_ListDocumentVersions(t *testing.T) {
 				Status:            types.DocumentStatus("Creating"),
 				StatusInformation: ptr.String("__StatusInformation__"),
 				ReviewStatus:      types.ReviewStatus("APPROVED"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -8528,6 +8544,10 @@ func TestUpdateResponseSnapshot_ListDocuments(t *testing.T) {
 				},
 				ReviewStatus: types.ReviewStatus("APPROVED"),
 				Author:       ptr.String("__Author__"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -8570,6 +8590,10 @@ func TestUpdateResponseSnapshot_ListDocuments(t *testing.T) {
 				},
 				ReviewStatus: types.ReviewStatus("APPROVED"),
 				Author:       ptr.String("__Author__"),
+				CloudProviders: []types.CloudProvider{
+					types.CloudProvider("AWS"),
+					types.CloudProvider("AWS"),
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -10353,6 +10377,10 @@ func TestUpdateResponseSnapshot_UpdateDocument(t *testing.T) {
 			CategoryEnum: []string{
 				"__Member__",
 				"__Member__",
+			},
+			CloudProviders: []types.CloudProvider{
+				types.CloudProvider("AWS"),
+				types.CloudProvider("AWS"),
 			},
 		},
 	}

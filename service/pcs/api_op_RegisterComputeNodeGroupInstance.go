@@ -86,6 +86,11 @@ type RegisterComputeNodeGroupInstanceOutput struct {
 	// The name of the compute node group that the compute node registered into.
 	ComputeNodeGroupName *string
 
+	// The instance health check settings configured for the compute node group that
+	// the compute node registered into. The compute node uses these settings to
+	// configure health monitoring and deep health checks.
+	InstanceHealthChecks *types.InstanceHealthChecks
+
 	// The node lifecycle actions configured for the node group, including scripts to
 	// run when a compute node finishes bootstrapping or becomes ready to accept jobs.
 	NodeLifecycleActions *types.NodeLifecycleActions
@@ -119,6 +124,11 @@ func (v *RegisterComputeNodeGroupInstanceOutput) SerializeMembers(s smithy.Shape
 	if v.Endpoints != nil {
 		serializeEndpoints(s, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, v.Endpoints)
 	}
+	if v.InstanceHealthChecks != nil {
+		s.WriteStruct(schemas.RegisterComputeNodeGroupInstanceResponse_instanceHealthChecks)
+		v.InstanceHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.NodeID != nil {
 		s.WriteString(schemas.RegisterComputeNodeGroupInstanceResponse_nodeID, *v.NodeID)
 	}
@@ -148,6 +158,9 @@ func (v *RegisterComputeNodeGroupInstanceOutput) Deserialize(d smithy.ShapeDeser
 			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_computeNodeGroupName, v.ComputeNodeGroupName)
 		case schemas.RegisterComputeNodeGroupInstanceResponse_endpoints:
 			return deserializeEndpoints(d, schemas.RegisterComputeNodeGroupInstanceResponse_endpoints, &v.Endpoints)
+		case schemas.RegisterComputeNodeGroupInstanceResponse_instanceHealthChecks:
+			v.InstanceHealthChecks = &types.InstanceHealthChecks{}
+			return v.InstanceHealthChecks.Deserialize(d)
 		case schemas.RegisterComputeNodeGroupInstanceResponse_nodeID:
 			v.NodeID = new(string)
 			return d.ReadString(schemas.RegisterComputeNodeGroupInstanceResponse_nodeID, v.NodeID)

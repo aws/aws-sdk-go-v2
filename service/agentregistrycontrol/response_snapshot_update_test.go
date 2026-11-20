@@ -142,6 +142,73 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_AssociatePublisher(t *testing.T) {
+	want := &AssociatePublisherOutput{
+		RecordArn:        ptr.String("__RecordArn__"),
+		PublicIdentifier: ptr.String("__PublicIdentifier__"),
+		Publisher:        ptr.String("__Publisher__"),
+		Status:           types.AssociationStatus("PENDING_APPROVAL"),
+		StatusReason:     ptr.String("__StatusReason__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.AssociatePublisherResponse, schemas.AssociatePublisherResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AssociatePublisher.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreatePublisher(t *testing.T) {
+	want := &CreatePublisherOutput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		IdentifierType: types.IdentifierType("DOMAIN"),
+		Status:         types.VerificationStatus("ACTION_REQUIRED"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		DomainChallenge: &types.DomainChallenge{
+			RecordName:  ptr.String("__RecordName__"),
+			RecordValue: ptr.String("__RecordValue__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.CreatePublisher, schemas.CreatePublisherResponse, schemas.CreatePublisherResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreatePublisher.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateRegistry(t *testing.T) {
 	want := &CreateRegistryOutput{
 		RegistryArn: ptr.String("__RegistryArn__"),
@@ -199,6 +266,28 @@ func TestUpdateResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeletePublisher(t *testing.T) {
+	want := &DeletePublisherOutput{}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.DeletePublisher, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeletePublisher.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteRegistry(t *testing.T) {
 	want := &DeleteRegistryOutput{
 		Status: types.RegistryStatus("CREATING"),
@@ -241,6 +330,67 @@ func TestUpdateResponseSnapshot_DeleteRegistryRecord(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteRegistryRecord.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DisassociatePublisher(t *testing.T) {
+	want := &DisassociatePublisherOutput{}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociatePublisher, nil, nil)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociatePublisher.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetPublisher(t *testing.T) {
+	want := &GetPublisherOutput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		IdentifierType: types.IdentifierType("DOMAIN"),
+		Status:         types.VerificationStatus("ACTION_REQUIRED"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		DomainChallenge: &types.DomainChallenge{
+			RecordName:  ptr.String("__RecordName__"),
+			RecordValue: ptr.String("__RecordValue__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.GetPublisher, schemas.Publisher, schemas.Publisher)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetPublisher.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -666,6 +816,54 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 					},
 				},
 			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
+				},
+			},
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		Status:        types.RegistryRecordStatus("DRAFT"),
@@ -861,6 +1059,94 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetRegistryRecord.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListPublisherAssociations(t *testing.T) {
+	want := &ListPublisherAssociationsOutput{
+		Items: []types.PublisherAssociation{
+			{
+				RecordArn:        ptr.String("__RecordArn__"),
+				PublicIdentifier: ptr.String("__PublicIdentifier__"),
+				Publisher:        ptr.String("__Publisher__"),
+				Status:           types.AssociationStatus("PENDING_APPROVAL"),
+				StatusReason:     ptr.String("__StatusReason__"),
+			},
+			{
+				RecordArn:        ptr.String("__RecordArn__"),
+				PublicIdentifier: ptr.String("__PublicIdentifier__"),
+				Publisher:        ptr.String("__Publisher__"),
+				Status:           types.AssociationStatus("PENDING_APPROVAL"),
+				StatusReason:     ptr.String("__StatusReason__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.ListPublisherAssociations, schemas.ListPublisherAssociationsResponse, schemas.ListPublisherAssociationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPublisherAssociations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListPublishers(t *testing.T) {
+	want := &ListPublishersOutput{
+		Items: []types.PublisherSummary{
+			{
+				Value: &types.IdentifierMemberDomain{
+					Value: "__IdentifierMemberDomain__",
+				},
+				IdentifierType:                  types.IdentifierType("DOMAIN"),
+				Status:                          types.VerificationStatus("ACTION_REQUIRED"),
+				CreatedAt:                       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublisherArn:                    ptr.String("__PublisherArn__"),
+				AssociationCount:                ptr.Int32(1),
+				PendingAssociationApprovalCount: ptr.Int32(1),
+			},
+			{
+				Value: &types.IdentifierMemberDomain{
+					Value: "__IdentifierMemberDomain__",
+				},
+				IdentifierType:                  types.IdentifierType("DOMAIN"),
+				Status:                          types.VerificationStatus("ACTION_REQUIRED"),
+				CreatedAt:                       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublisherArn:                    ptr.String("__PublisherArn__"),
+				AssociationCount:                ptr.Int32(1),
+				PendingAssociationApprovalCount: ptr.Int32(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.ListPublishers, schemas.ListPublishersResponse, schemas.ListPublishersResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPublishers.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1233,6 +1519,28 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdatePublisherAssociationApprovalStatus(t *testing.T) {
+	want := &UpdatePublisherAssociationApprovalStatusOutput{}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.UpdatePublisherAssociationApprovalStatus, schemas.UpdatePublisherAssociationApprovalStatusResponse, schemas.UpdatePublisherAssociationApprovalStatusResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdatePublisherAssociationApprovalStatus.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1658,6 +1966,54 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 					},
 				},
 			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
+				},
+			},
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		Status:        types.RegistryRecordStatus("DRAFT"),
@@ -1882,12 +2238,51 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ValidatePublisher(t *testing.T) {
+	want := &ValidatePublisherOutput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		IdentifierType: types.IdentifierType("DOMAIN"),
+		Status:         types.VerificationStatus("ACTION_REQUIRED"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		DomainChallenge: &types.DomainChallenge{
+			RecordName:  ptr.String("__RecordName__"),
+			RecordValue: ptr.String("__RecordValue__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.ValidatePublisher, schemas.ValidatePublisherResponse, schemas.ValidatePublisherResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ValidatePublisher.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRegistry, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1912,7 +2307,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRegistry, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1932,12 +2327,37 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_DependencyException(t *testing.T) {
+	want := &types.DependencyException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.AgentRegistryControl)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.DependencyException, schemas.DependencyException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("DependencyException.error", 503, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 	want := &types.InternalServerException{
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRegistry, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1987,7 +2407,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRegistry, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2012,7 +2432,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRegistry, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2048,7 +2468,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		},
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
-	opSchema := smithy.NewOperationSchema(schemas.CreateRegistry, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociatePublisher, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

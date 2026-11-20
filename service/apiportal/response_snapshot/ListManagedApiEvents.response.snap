@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"endedAt":946684800,"eventId":"__EventId__","eventType":"WAF_API_SECURITY","startedAt":946684800,"status":"EVENT_STARTED","updatedAt":946684800,"wafApiSecurityEventDetail":{"category":"__Category__","confidence":"LOW","label":"__Label__","webAclArn":"__WebAclArn__"}},{"endedAt":946684800,"eventId":"__EventId__","eventType":"WAF_API_SECURITY","startedAt":946684800,"status":"EVENT_STARTED","updatedAt":946684800,"wafApiSecurityEventDetail":{"category":"__Category__","confidence":"LOW","label":"__Label__","webAclArn":"__WebAclArn__"}}],"nextToken":"__NextToken__"}

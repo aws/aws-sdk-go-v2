@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"id":"__Id__","ownershipTransfer":{"sourceProjectId":"__SourceProjectId__","startedAt":946684800,"status":"IN_PROGRESS","targetProjectId":"__TargetProjectId__","updatedAt":946684800},"revision":"__Revision__"}

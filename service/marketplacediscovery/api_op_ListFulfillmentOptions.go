@@ -11,9 +11,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the fulfillment options available for a product, including deployment
+// Retrieves the fulfillment options available for a product, including deployment
 // details such as version information, operating systems, usage instructions, and
-// release notes.
+// release notes. The operation returns results in pages. Use nextToken to
+// retrieve the next page.
 func (c *Client) ListFulfillmentOptions(ctx context.Context, params *ListFulfillmentOptionsInput, optFns ...func(*Options)) (*ListFulfillmentOptionsOutput, error) {
 	if params == nil {
 		params = &ListFulfillmentOptionsInput{}
@@ -36,18 +37,21 @@ type ListFulfillmentOptionsInput struct {
 	// This member is required.
 	ProductId *string
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of fulfillment options to return in each call. If you omit
+	// this field, the default is 25. Use nextToken to retrieve the next page.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -77,18 +81,18 @@ func (v *ListFulfillmentOptionsInput) SerializeMembers(s smithy.ShapeSerializer)
 type ListFulfillmentOptionsOutput struct {
 
 	// The fulfillment options available for the product. Each option describes how
-	// the buyer can deploy or access the product.
+	// you can deploy or access the product.
 	//
 	// This member is required.
 	FulfillmentOptions []types.FulfillmentOption
 
-	// A BCP 47 language tag or comma-separated priority list of language tags that
-	// specifies the preferred locale for response content. The field accepts a maximum
-	// of two language tags.
+	// A Best Current Practice 47 (BCP 47) language tag or comma-separated priority
+	// list of language tags that specifies the preferred locale for response content.
+	// The field accepts a maximum of two language tags.
 	//
 	// The service resolves a locale string to the nearest supported locale. If no
-	// supported locale matches, the service applies the fallback behavior described
-	// below.
+	// supported locale matches, the service applies the fallback behavior described in
+	// the following lists.
 	//
 	//   - Preferred locale (first tag) – The locale you want the service to return
 	//   content in.
@@ -97,48 +101,50 @@ type ListFulfillmentOptionsOutput struct {
 	//   or en ). The service returns content in this locale when translated content
 	//   for the preferred locale is unavailable.
 	//
-	// The field is optional. If omitted or null, the service returns content in the
-	// default locale ( en-US ).
+	// The field is optional. If you omit this field or set it to null, the service
+	// returns content in the default locale ( en-US ).
 	//
-	// Supported locales:
+	// The service supports the following locales:
 	//
-	//   - en-US – English (service default, also resolves from en )
+	// en-US English (service default, also resolves from en )
 	//
-	//   - fr – French
+	// fr French
 	//
-	//   - es – Spanish
+	// es Spanish
 	//
-	//   - ko – Korean
+	// ko Korean
 	//
-	//   - ja – Japanese
+	// ja Japanese
 	//
-	// Fallback behavior:
+	// The fallback behavior is as follows:
 	//
 	//   - If translated content for the preferred locale is unavailable, the service
 	//   returns content in the default locale.
 	//
-	//   - If the preferred locale is not supported and no fallback is provided, the
+	//   - If the preferred locale is not supported and you provide no fallback, the
 	//   service returns a ValidationException .
 	//
 	//   - If you provide an unsupported locale with the default locale as fallback
 	//   (for example, xx, en-US ), the service returns content in the default locale.
 	//
-	// Response locale field (Get APIs): The locale field in Get API responses
-	// indicates the locale of the returned content. You can use this field to
-	// determine whether the response contains content in the requested locale or the
-	// default locale.
+	// The locale field in Get API responses indicates the locale of the returned
+	// content. You can use this field to determine whether the response contains
+	// content in the requested locale or the default locale.
 	//
-	// Examples:
+	// The following examples show how the field works:
 	//
-	//   - fr – Request French content. If unavailable, falls back to en-US .
+	// fr Request French content. If unavailable, falls back to en-US .
 	//
-	//   - fr, en-US – Request French content with explicit fallback to English.
+	// fr, en-US Request French content with explicit fallback to English.
 	//
-	//   - en-US – Request content in the default locale.
+	// en-US Request content in the default locale.
 	Locale *string
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -223,8 +229,8 @@ func (c *Client) addOperationListFulfillmentOptionsMiddlewares(stack *middleware
 // ListFulfillmentOptionsPaginatorOptions is the paginator options for
 // ListFulfillmentOptions
 type ListFulfillmentOptionsPaginatorOptions struct {
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of fulfillment options to return in each call. If you omit
+	// this field, the default is 25. Use nextToken to retrieve the next page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

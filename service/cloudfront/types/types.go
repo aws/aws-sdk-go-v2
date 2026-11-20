@@ -1774,6 +1774,24 @@ type CustomOriginConfig struct {
 	// optimize reliability.
 	IpAddressType IpAddressType
 
+	// The HTTP version that CloudFront uses for requests to your custom origin. Valid
+	// values are http1.1 and http2 . If you don't specify a value, CloudFront uses
+	// HTTP/1.1.
+	//
+	// When you specify http2 , CloudFront offers HTTP/2 to the origin by using ALPN.
+	// If the origin doesn't negotiate HTTP/2, CloudFront uses HTTP/1.1. CloudFront
+	// uses HTTP/2 only over Transport Layer Security (TLS) 1.2 or later. Otherwise, it
+	// uses HTTP/1.1.
+	//
+	// If you use a version of an AWS SDK or the AWS CLI that doesn't support this
+	// field, an update that sends back a configuration you got from CloudFront removes
+	// the value, and CloudFront then uses HTTP/1.1.
+	//
+	// For more information, see [Origin HTTP version] in the Amazon CloudFront Developer Guide.
+	//
+	// [Origin HTTP version]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginHttpVersion
+	OriginHttpVersion OriginHttpVersion
+
 	// Specifies how long, in seconds, CloudFront persists its connection to the
 	// origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the
 	// default (if you don't specify otherwise) is 5 seconds.
@@ -7018,6 +7036,24 @@ type VpcOriginConfig struct {
 	//
 	// This member is required.
 	VpcOriginId *string
+
+	// The HTTP version that CloudFront uses for requests to the VPC origin for this
+	// distribution. Valid values are http1.1 and http2 . If you don't specify a value,
+	// CloudFront uses HTTP/1.1.
+	//
+	// When you specify http2 , CloudFront offers HTTP/2 to the origin by using ALPN.
+	// If the origin doesn't negotiate HTTP/2, CloudFront uses HTTP/1.1. CloudFront
+	// uses HTTP/2 only over Transport Layer Security (TLS) 1.2 or later. Otherwise, it
+	// uses HTTP/1.1.
+	//
+	// If you use a version of an AWS SDK or the AWS CLI that doesn't support this
+	// field, an update that sends back a configuration you got from CloudFront removes
+	// the value, and CloudFront then uses HTTP/1.1.
+	//
+	// For more information, see [Origin HTTP version] in the Amazon CloudFront Developer Guide.
+	//
+	// [Origin HTTP version]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginHttpVersion
+	OriginHttpVersion OriginHttpVersion
 
 	// Specifies how long, in seconds, CloudFront persists its connection to the
 	// origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the

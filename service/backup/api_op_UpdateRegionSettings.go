@@ -38,6 +38,17 @@ type UpdateRegionSettingsInput struct {
 	// [enable advanced DynamoDB backup programmatically]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
 	ResourceTypeManagementPreference map[string]bool
 
+	// Specifies whether you opt in to incremental backups for each resource type in
+	// the Region. Opt in when you want to reduce backup storage and backup time for
+	// large resources that change infrequently. Incremental backup opt-in is currently
+	// available for Amazon DynamoDB.
+	//
+	// To view your current incremental backup settings, use the DescribeRegionSettings
+	// API. For the resource types that each Backup feature supports, see the [Feature availability by resource]table.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+	ResourceTypeOptInIncremental map[string]bool
+
 	// Updates the list of services along with the opt-in preferences for the Region.
 	//
 	// If resource assignments are only based on tags, then service opt-in settings
@@ -61,6 +72,9 @@ func (v *UpdateRegionSettingsInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpdateRegionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceTypeManagementPreference != nil {
 		serializeResourceTypeManagementPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
+	}
+	if v.ResourceTypeOptInIncremental != nil {
+		serializeResourceTypeOptInIncremental(s, schemas.UpdateRegionSettingsInput_ResourceTypeOptInIncremental, v.ResourceTypeOptInIncremental)
 	}
 	if v.ResourceTypeOptInPreference != nil {
 		serializeResourceTypeOptInPreference(s, schemas.UpdateRegionSettingsInput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)

@@ -4750,7 +4750,7 @@ var _PackageEpoch = smithy.NewSchema(smithy.ShapeID{
 var PackageFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "PackageFilter",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 11)
 var PackageFilter_name *smithy.Schema
 
 var PackageFilter_version *smithy.Schema
@@ -4766,6 +4766,12 @@ var PackageFilter_sourceLayerHash *smithy.Schema
 var PackageFilter_sourceLambdaLayerArn *smithy.Schema
 
 var PackageFilter_filePath *smithy.Schema
+
+var PackageFilter_runtimeReachability *smithy.Schema
+
+var PackageFilter_runtimeReachabilityReason *smithy.Schema
+
+var PackageFilter_purlQualifier *smithy.Schema
 
 var _PackageFilterList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -4796,6 +4802,11 @@ var _PackageSortBy = smithy.NewSchema(smithy.ShapeID{
 var _PackageType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "PackageType",
+}, smithy.ShapeTypeString, 0)
+
+var _PackageUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "PackageUrl",
 }, smithy.ShapeTypeString, 0)
 
 var _PackageVersion = smithy.NewSchema(smithy.ShapeID{
@@ -5029,6 +5040,21 @@ var _ProviderPartition = smithy.NewSchema(smithy.ShapeID{
 var _ProviderRegion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "ProviderRegion",
+}, smithy.ShapeTypeString, 0)
+
+var PurlQualifierFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "PurlQualifierFilter",
+}, smithy.ShapeTypeStructure, 3)
+var PurlQualifierFilter_comparison *smithy.Schema
+
+var PurlQualifierFilter_key *smithy.Schema
+
+var PurlQualifierFilter_value *smithy.Schema
+
+var _PurlQualifierKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "PurlQualifierKey",
 }, smithy.ShapeTypeString, 0)
 
 var _Reason = smithy.NewSchema(smithy.ShapeID{
@@ -5387,6 +5413,37 @@ var _Runtime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "Runtime",
 }, smithy.ShapeTypeString, 0)
+
+var _RuntimeReachability = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "RuntimeReachability",
+}, smithy.ShapeTypeString, 0)
+
+var _RuntimeReachabilityComparison = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "RuntimeReachabilityComparison",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeReachabilityFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "RuntimeReachabilityFilter",
+}, smithy.ShapeTypeStructure, 2)
+var RuntimeReachabilityFilter_comparison *smithy.Schema
+
+var RuntimeReachabilityFilter_value *smithy.Schema
+
+var _RuntimeReachabilityReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "RuntimeReachabilityReason",
+}, smithy.ShapeTypeString, 0)
+
+var RuntimeReachabilityReasonFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.inspector2",
+	Name:      "RuntimeReachabilityReasonFilter",
+}, smithy.ShapeTypeStructure, 2)
+var RuntimeReachabilityReasonFilter_comparison *smithy.Schema
+
+var RuntimeReachabilityReasonFilter_value *smithy.Schema
 
 var _SbomReportFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -6463,7 +6520,7 @@ var _VulnerabilitySourceUrl = smithy.NewSchema(smithy.ShapeID{
 var VulnerablePackage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
 	Name:      "VulnerablePackage",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 14)
 var VulnerablePackage_name *smithy.Schema
 
 var VulnerablePackage_version *smithy.Schema
@@ -6485,6 +6542,12 @@ var VulnerablePackage_fixedInVersion *smithy.Schema
 var VulnerablePackage_remediation *smithy.Schema
 
 var VulnerablePackage_sourceLambdaLayerArn *smithy.Schema
+
+var VulnerablePackage_runtimeReachability *smithy.Schema
+
+var VulnerablePackage_runtimeReachabilityReason *smithy.Schema
+
+var VulnerablePackage_purl *smithy.Schema
 
 var _VulnerablePackageList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.inspector2",
@@ -10028,6 +10091,20 @@ func init() {
 
 	_PortRangeFilterList_member = _PortRangeFilterList.AddMember("member", PortRangeFilter)
 
+	RuntimeReachabilityFilter_comparison = RuntimeReachabilityFilter.AddMember("comparison", _RuntimeReachabilityComparison)
+
+	RuntimeReachabilityFilter_value = RuntimeReachabilityFilter.AddMember("value", _RuntimeReachability)
+
+	RuntimeReachabilityReasonFilter_comparison = RuntimeReachabilityReasonFilter.AddMember("comparison", _RuntimeReachabilityComparison)
+
+	RuntimeReachabilityReasonFilter_value = RuntimeReachabilityReasonFilter.AddMember("value", _RuntimeReachabilityReason)
+
+	PurlQualifierFilter_comparison = PurlQualifierFilter.AddMember("comparison", _MapComparison)
+
+	PurlQualifierFilter_key = PurlQualifierFilter.AddMember("key", _PurlQualifierKey)
+
+	PurlQualifierFilter_value = PurlQualifierFilter.AddMember("value", _MapValue)
+
 	PackageFilter_name = PackageFilter.AddMember("name", StringFilter)
 
 	PackageFilter_version = PackageFilter.AddMember("version", StringFilter)
@@ -10043,6 +10120,12 @@ func init() {
 	PackageFilter_sourceLambdaLayerArn = PackageFilter.AddMember("sourceLambdaLayerArn", StringFilter)
 
 	PackageFilter_filePath = PackageFilter.AddMember("filePath", StringFilter)
+
+	PackageFilter_runtimeReachability = PackageFilter.AddMember("runtimeReachability", RuntimeReachabilityFilter)
+
+	PackageFilter_runtimeReachabilityReason = PackageFilter.AddMember("runtimeReachabilityReason", RuntimeReachabilityReasonFilter)
+
+	PackageFilter_purlQualifier = PackageFilter.AddMember("purlQualifier", PurlQualifierFilter)
 
 	_PackageFilterList_member = _PackageFilterList.AddMember("member", PackageFilter)
 
@@ -10385,6 +10468,12 @@ func init() {
 	VulnerablePackage_remediation = VulnerablePackage.AddMember("remediation", _VulnerablePackageRemediation)
 
 	VulnerablePackage_sourceLambdaLayerArn = VulnerablePackage.AddMember("sourceLambdaLayerArn", _LambdaLayerArn)
+
+	VulnerablePackage_runtimeReachability = VulnerablePackage.AddMember("runtimeReachability", _RuntimeReachability)
+
+	VulnerablePackage_runtimeReachabilityReason = VulnerablePackage.AddMember("runtimeReachabilityReason", _RuntimeReachabilityReason)
+
+	VulnerablePackage_purl = VulnerablePackage.AddMember("purl", _PackageUrl)
 
 	_VulnerablePackageList_member = _VulnerablePackageList.AddMember("member", VulnerablePackage)
 

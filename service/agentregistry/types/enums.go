@@ -24,6 +24,57 @@ func (BatchGetDiscoverableRegistryRecordErrorCode) Values() []BatchGetDiscoverab
 	}
 }
 
+type BotCategory string
+
+// Enum values for BotCategory
+const (
+	BotCategoryAdvertising           BotCategory = "advertising"
+	BotCategoryArchiver              BotCategory = "archiver"
+	BotCategoryContentFetcher        BotCategory = "content_fetcher"
+	BotCategoryEmailClient           BotCategory = "email_client"
+	BotCategoryHttpLibrary           BotCategory = "http_library"
+	BotCategoryLinkChecker           BotCategory = "link_checker"
+	BotCategoryMiscellaneous         BotCategory = "miscellaneous"
+	BotCategoryMonitoring            BotCategory = "monitoring"
+	BotCategoryPagePreview           BotCategory = "page_preview"
+	BotCategoryScrapingFramework     BotCategory = "scraping_framework"
+	BotCategorySearchEngine          BotCategory = "search_engine"
+	BotCategorySecurity              BotCategory = "security"
+	BotCategorySeo                   BotCategory = "seo"
+	BotCategorySocialMedia           BotCategory = "social_media"
+	BotCategoryAiTraining            BotCategory = "ai_training"
+	BotCategoryAiSearch              BotCategory = "ai_search"
+	BotCategoryAiAssistant           BotCategory = "ai_assistant"
+	BotCategoryAiContentOptimization BotCategory = "ai_content_optimization"
+)
+
+// Values returns all known values for BotCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BotCategory) Values() []BotCategory {
+	return []BotCategory{
+		"advertising",
+		"archiver",
+		"content_fetcher",
+		"email_client",
+		"http_library",
+		"link_checker",
+		"miscellaneous",
+		"monitoring",
+		"page_preview",
+		"scraping_framework",
+		"search_engine",
+		"security",
+		"seo",
+		"social_media",
+		"ai_training",
+		"ai_search",
+		"ai_assistant",
+		"ai_content_optimization",
+	}
+}
+
 type RecordType string
 
 // Enum values for RecordType
@@ -33,6 +84,7 @@ const (
 	RecordTypeCustom  RecordType = "CUSTOM"
 	RecordTypeSkill   RecordType = "SKILL"
 	RecordTypeGateway RecordType = "GATEWAY"
+	RecordTypeWebBot  RecordType = "WEB_BOT"
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
@@ -46,6 +98,7 @@ func (RecordType) Values() []RecordType {
 		"CUSTOM",
 		"SKILL",
 		"GATEWAY",
+		"WEB_BOT",
 	}
 }
 

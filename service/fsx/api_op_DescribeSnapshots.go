@@ -17,7 +17,7 @@ import (
 // the endpoint that you're calling.
 //
 // When retrieving all snapshots, you can optionally specify the MaxResults
-// parameter to limit the number of snapshots in a response. If more backups
+// parameter to limit the number of snapshots in a response. If more snapshots
 // remain, Amazon FSx returns a NextToken value in the response. In this case,
 // send a later request with the NextToken request parameter set to the value of
 // NextToken from the last response.
@@ -33,7 +33,7 @@ import (
 //     descriptions while still including a NextToken value.
 //
 //   - The order of snapshots returned in the response of one DescribeSnapshots
-//     call and the order of backups returned across the responses of a multi-call
+//     call and the order of snapshots returned across the responses of a multi-call
 //     iteration is unspecified.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {

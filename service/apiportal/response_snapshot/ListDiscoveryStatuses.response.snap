@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"accountId":"__AccountId__","discoverySource":"API_GATEWAY","failureReason":"ACCESS_DENIED","status":"STOPPED"},{"accountId":"__AccountId__","discoverySource":"API_GATEWAY","failureReason":"ACCESS_DENIED","status":"STOPPED"}],"nextToken":"__NextToken__"}

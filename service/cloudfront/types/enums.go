@@ -703,6 +703,25 @@ func (OriginGroupSelectionCriteria) Values() []OriginGroupSelectionCriteria {
 	}
 }
 
+type OriginHttpVersion string
+
+// Enum values for OriginHttpVersion
+const (
+	OriginHttpVersionHttp11 OriginHttpVersion = "http1.1"
+	OriginHttpVersionHttp2  OriginHttpVersion = "http2"
+)
+
+// Values returns all known values for OriginHttpVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OriginHttpVersion) Values() []OriginHttpVersion {
+	return []OriginHttpVersion{
+		"http1.1",
+		"http2",
+	}
+}
+
 type OriginProtocolPolicy string
 
 // Enum values for OriginProtocolPolicy

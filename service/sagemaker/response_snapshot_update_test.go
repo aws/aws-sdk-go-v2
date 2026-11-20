@@ -166,6 +166,38 @@ func TestUpdateResponseSnapshot_AddAssociation(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AddInferenceGateway(t *testing.T) {
+	want := &AddInferenceGatewayOutput{
+		Arn:  ptr.String("__Arn__"),
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Gateway: &types.GlobalInferenceGatewayMember{
+			Name:       ptr.String("__Name__"),
+			Namespace:  ptr.String("__Namespace__"),
+			ClusterArn: ptr.String("__ClusterArn__"),
+		},
+		Status: types.GlobalInferenceGatewayMemberStatus("ADDING"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.AddInferenceGateway, schemas.AddInferenceGatewayResponse, schemas.AddInferenceGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AddInferenceGateway.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AddTags(t *testing.T) {
 	want := &AddTagsOutput{
 		Tags: []types.Tag{
@@ -1415,6 +1447,54 @@ func TestUpdateResponseSnapshot_CreateFlowDefinition(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateFlowDefinition.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateGlobalInferenceGateway(t *testing.T) {
+	want := &CreateGlobalInferenceGatewayOutput{
+		Arn:              ptr.String("__Arn__"),
+		Id:               ptr.String("__Id__"),
+		Name:             ptr.String("__Name__"),
+		Status:           types.GlobalInferenceGatewayStatus("CREATING"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		Gateways: []types.GlobalInferenceGatewayMember{
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+			{
+				Name:       ptr.String("__Name__"),
+				Namespace:  ptr.String("__Namespace__"),
+				ClusterArn: ptr.String("__ClusterArn__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.CreateGlobalInferenceGateway, schemas.CreateGlobalInferenceGatewayResponse, schemas.CreateGlobalInferenceGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateGlobalInferenceGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3170,6 +3250,32 @@ func TestUpdateResponseSnapshot_DeleteFlowDefinition(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteFlowDefinition.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteGlobalInferenceGateway(t *testing.T) {
+	want := &DeleteGlobalInferenceGatewayOutput{
+		Arn:  ptr.String("__Arn__"),
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteGlobalInferenceGateway, schemas.DeleteGlobalInferenceGatewayResponse, schemas.DeleteGlobalInferenceGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteGlobalInferenceGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9636,6 +9742,46 @@ func TestUpdateResponseSnapshot_DescribeFlowDefinition(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeFlowDefinition.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeGlobalInferenceGateway(t *testing.T) {
+	want := &DescribeGlobalInferenceGatewayOutput{
+		Arn:                    ptr.String("__Arn__"),
+		Id:                     ptr.String("__Id__"),
+		Name:                   ptr.String("__Name__"),
+		ExecutionRoleArn:       ptr.String("__ExecutionRoleArn__"),
+		Status:                 types.GlobalInferenceGatewayStatus("CREATING"),
+		EndpointUrl:            ptr.String("__EndpointUrl__"),
+		VpcEndpointServiceName: ptr.String("__VpcEndpointServiceName__"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+		CreationTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeGlobalInferenceGateway, schemas.DescribeGlobalInferenceGatewayResponse, schemas.DescribeGlobalInferenceGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeGlobalInferenceGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18584,6 +18730,46 @@ func TestUpdateResponseSnapshot_ListFlowDefinitions(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListGlobalInferenceGateways(t *testing.T) {
+	want := &ListGlobalInferenceGatewaysOutput{
+		GlobalInferenceGatewaySummaries: []types.GlobalInferenceGatewaySummary{
+			{
+				Arn:          ptr.String("__Arn__"),
+				Id:           ptr.String("__Id__"),
+				Name:         ptr.String("__Name__"),
+				Status:       types.GlobalInferenceGatewayStatus("CREATING"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:          ptr.String("__Arn__"),
+				Id:           ptr.String("__Id__"),
+				Name:         ptr.String("__Name__"),
+				Status:       types.GlobalInferenceGatewayStatus("CREATING"),
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListGlobalInferenceGateways, schemas.ListGlobalInferenceGatewaysResponse, schemas.ListGlobalInferenceGatewaysResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListGlobalInferenceGateways.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListHubContentVersions(t *testing.T) {
 	want := &ListHubContentVersionsOutput{
 		HubContentSummaries: []types.HubContentInfo{
@@ -19062,6 +19248,46 @@ func TestUpdateResponseSnapshot_ListInferenceExperiments(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListInferenceExperiments.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListInferenceGateways(t *testing.T) {
+	want := &ListInferenceGatewaysOutput{
+		InferenceGatewaySummaries: []types.GlobalInferenceGatewayMemberSummary{
+			{
+				Name:          ptr.String("__Name__"),
+				Namespace:     ptr.String("__Namespace__"),
+				ClusterArn:    ptr.String("__ClusterArn__"),
+				Status:        types.GlobalInferenceGatewayMemberStatus("ADDING"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+			{
+				Name:          ptr.String("__Name__"),
+				Namespace:     ptr.String("__Namespace__"),
+				ClusterArn:    ptr.String("__ClusterArn__"),
+				Status:        types.GlobalInferenceGatewayMemberStatus("ADDING"),
+				FailureReason: ptr.String("__FailureReason__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListInferenceGateways, schemas.ListInferenceGatewaysResponse, schemas.ListInferenceGatewaysResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListInferenceGateways.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -22224,6 +22450,61 @@ func TestUpdateResponseSnapshot_ListWorkteams(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_MoveClusterNodes(t *testing.T) {
+	want := &MoveClusterNodesOutput{
+		Successful: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Failed: []types.MoveClusterNodesError{
+			{
+				Code:    types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message: ptr.String("__Message__"),
+				NodeId:  ptr.String("__NodeId__"),
+			},
+			{
+				Code:    types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message: ptr.String("__Message__"),
+				NodeId:  ptr.String("__NodeId__"),
+			},
+		},
+		SuccessfulNodeLogicalIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		FailedNodeLogicalIds: []types.MoveClusterNodeLogicalIdsError{
+			{
+				Code:          types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message:       ptr.String("__Message__"),
+				NodeLogicalId: ptr.String("__NodeLogicalId__"),
+			},
+			{
+				Code:          types.MoveClusterNodesErrorCode("NodeIdNotFound"),
+				Message:       ptr.String("__Message__"),
+				NodeLogicalId: ptr.String("__NodeLogicalId__"),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.MoveClusterNodes, schemas.MoveClusterNodesResponse, schemas.MoveClusterNodesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("MoveClusterNodes.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutEndpointPolicy(t *testing.T) {
 	want := &PutEndpointPolicyOutput{
 		EndpointArn: ptr.String("__EndpointArn__"),
@@ -22338,6 +22619,38 @@ func TestUpdateResponseSnapshot_RegisterDevices(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("RegisterDevices.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_RemoveInferenceGateway(t *testing.T) {
+	want := &RemoveInferenceGatewayOutput{
+		Arn:  ptr.String("__Arn__"),
+		Id:   ptr.String("__Id__"),
+		Name: ptr.String("__Name__"),
+		Gateway: &types.GlobalInferenceGatewayMember{
+			Name:       ptr.String("__Name__"),
+			Namespace:  ptr.String("__Namespace__"),
+			ClusterArn: ptr.String("__ClusterArn__"),
+		},
+		Status: types.GlobalInferenceGatewayMemberStatus("ADDING"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.RemoveInferenceGateway, schemas.RemoveInferenceGatewayResponse, schemas.RemoveInferenceGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RemoveInferenceGateway.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -34231,6 +34544,41 @@ func TestUpdateResponseSnapshot_UpdateFeatureMetadata(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateGlobalInferenceGateway(t *testing.T) {
+	want := &UpdateGlobalInferenceGatewayOutput{
+		Arn:    ptr.String("__Arn__"),
+		Id:     ptr.String("__Id__"),
+		Name:   ptr.String("__Name__"),
+		Status: types.GlobalInferenceGatewayStatus("CREATING"),
+		Routing: &types.GlobalInferenceGatewayRouting{
+			Weights: &types.GlobalInferenceGatewayRoutingWeights{
+				KVHeadroom:      ptr.Float32(1.0),
+				QueueDepth:      ptr.Float32(1.0),
+				RegionProximity: ptr.Float32(1.0),
+				ErrorRate:       ptr.Float32(1.0),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateGlobalInferenceGateway, schemas.UpdateGlobalInferenceGatewayResponse, schemas.UpdateGlobalInferenceGatewayResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateGlobalInferenceGateway.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateHub(t *testing.T) {
 	want := &UpdateHubOutput{
 		HubArn: ptr.String("__HubArn__"),
@@ -35028,7 +35376,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.SageMaker)
-	opSchema := smithy.NewOperationSchema(schemas.CreateClusterExtension, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.AddInferenceGateway, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -35078,7 +35426,7 @@ func TestUpdateResponseSnapshot_Error_ResourceInUse(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New11(schemas.SageMaker)
-	opSchema := smithy.NewOperationSchema(schemas.CreateAIBenchmarkJob, schemas.ResourceInUse, schemas.ResourceInUse)
+	opSchema := smithy.NewOperationSchema(schemas.AddInferenceGateway, schemas.ResourceInUse, schemas.ResourceInUse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

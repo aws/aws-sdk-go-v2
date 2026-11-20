@@ -55,6 +55,10 @@ type CreateProgramManagementAccountInput struct {
 	// Key-value pairs to associate with the program management account.
 	Tags []types.Tag
 
+	// The type of the program management account (for example, resale billing
+	// transfer, managed services), required for the managed services provider program.
+	Type types.ProgramManagementAccountType
+
 	noSmithyDocumentSerde
 }
 
@@ -82,6 +86,9 @@ func (v *CreateProgramManagementAccountInput) SerializeMembers(s smithy.ShapeSer
 	}
 	if v.Tags != nil {
 		serializeTagList(s, schemas.CreateProgramManagementAccountRequest_tags, v.Tags)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateProgramManagementAccountRequest_type, string(v.Type))
 	}
 }
 

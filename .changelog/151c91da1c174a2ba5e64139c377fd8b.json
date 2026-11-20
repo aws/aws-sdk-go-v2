@@ -1,0 +1,8 @@
+{
+    "id": "151c91da-1c17-4a2b-a5e6-4139c377fd8b",
+    "type": "feature",
+    "description": "Adds responseInterceptionMode and responseStreamingConfiguration to gateway interceptor configurations. Set responseInterceptionMode to STREAM to have the response interceptor process streaming responses from HTTP and inference targets in batches of events.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

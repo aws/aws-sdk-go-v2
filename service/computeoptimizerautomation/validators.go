@@ -70,6 +70,26 @@ func (m *validateOpDeleteAutomationRule) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteOrganizationEnrollmentConfiguration struct {
+}
+
+func (*validateOpDeleteOrganizationEnrollmentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOrganizationEnrollmentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOrganizationEnrollmentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOrganizationEnrollmentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateAccounts struct {
 }
 
@@ -310,6 +330,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutOrganizationEnrollmentConfiguration struct {
+}
+
+func (*validateOpPutOrganizationEnrollmentConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutOrganizationEnrollmentConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutOrganizationEnrollmentConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutOrganizationEnrollmentConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRollbackAutomationEvent struct {
 }
 
@@ -442,6 +482,10 @@ func addOpDeleteAutomationRuleValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteAutomationRule{}, middleware.After)
 }
 
+func addOpDeleteOrganizationEnrollmentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOrganizationEnrollmentConfiguration{}, middleware.After)
+}
+
 func addOpDisassociateAccountsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateAccounts{}, middleware.After)
 }
@@ -488,6 +532,10 @@ func addOpListRecommendedActionSummariesValidationMiddleware(stack *middleware.S
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutOrganizationEnrollmentConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutOrganizationEnrollmentConfiguration{}, middleware.After)
 }
 
 func addOpRollbackAutomationEventValidationMiddleware(stack *middleware.Stack) error {
@@ -719,6 +767,24 @@ func validateOpDeleteAutomationRuleInput(v *DeleteAutomationRuleInput) error {
 	}
 }
 
+func validateOpDeleteOrganizationEnrollmentConfigurationInput(v *DeleteOrganizationEnrollmentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOrganizationEnrollmentConfigurationInput"}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if v.ConfigurationTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateAccountsInput(v *DisassociateAccountsInput) error {
 	if v == nil {
 		return nil
@@ -907,6 +973,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutOrganizationEnrollmentConfigurationInput(v *PutOrganizationEnrollmentConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutOrganizationEnrollmentConfigurationInput"}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

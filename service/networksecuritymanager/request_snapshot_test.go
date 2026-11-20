@@ -311,6 +311,25 @@ func TestCheckRequestSnapshot_CreatePolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		IsPublished: ptr.Bool(true),
 		Tags: map[string]string{
@@ -479,7 +498,8 @@ func TestCheckRequestSnapshot_CreateScope(t *testing.T) {
 				},
 			},
 		},
-		IsPublished: ptr.Bool(true),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		IsPublished:          ptr.Bool(true),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1082,6 +1102,36 @@ func TestCheckRequestSnapshot_ListDeploymentSnapshots(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListEntityCoverages(t *testing.T) {
+	input := &ListEntityCoveragesInput{
+		EntityArn:              ptr.String("__EntityArn__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEntityCoverages(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEntityCoverages"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListPolicies(t *testing.T) {
 	input := &ListPoliciesInput{
 		MaxResults: ptr.Int32(1),
@@ -1136,6 +1186,36 @@ func TestCheckRequestSnapshot_ListPolicySnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicySnapshots"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListProtectedResourceCoverages(t *testing.T) {
+	input := &ListProtectedResourceCoveragesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		EntityType:  types.ServiceResourceType("Rule"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProtectedResourceCoverages(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProtectedResourceCoverages"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1344,9 +1424,10 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListTemplates(t *testing.T) {
 	input := &ListTemplatesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
-		Status:     types.EntityStatusFilter("ACTIVE"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Status:        types.EntityStatusFilter("ACTIVE"),
+		TemplateOwner: types.TemplateOwner("CUSTOMER"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1571,6 +1652,25 @@ func TestCheckRequestSnapshot_UpdatePolicy(t *testing.T) {
 			WafConfig: &types.WafConfig{
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
+			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		IsPublished: ptr.Bool(true),
@@ -1842,6 +1942,25 @@ func TestUpdateRequestSnapshot_CreatePolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		IsPublished: ptr.Bool(true),
 		Tags: map[string]string{
@@ -2010,7 +2129,8 @@ func TestUpdateRequestSnapshot_CreateScope(t *testing.T) {
 				},
 			},
 		},
-		IsPublished: ptr.Bool(true),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		IsPublished:          ptr.Bool(true),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -2613,6 +2733,36 @@ func TestUpdateRequestSnapshot_ListDeploymentSnapshots(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListEntityCoverages(t *testing.T) {
+	input := &ListEntityCoveragesInput{
+		EntityArn:              ptr.String("__EntityArn__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEntityCoverages(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEntityCoverages"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListPolicies(t *testing.T) {
 	input := &ListPoliciesInput{
 		MaxResults: ptr.Int32(1),
@@ -2667,6 +2817,36 @@ func TestUpdateRequestSnapshot_ListPolicySnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPolicySnapshots"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListProtectedResourceCoverages(t *testing.T) {
+	input := &ListProtectedResourceCoveragesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		EntityType:  types.ServiceResourceType("Rule"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProtectedResourceCoverages(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProtectedResourceCoverages"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2875,9 +3055,10 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListTemplates(t *testing.T) {
 	input := &ListTemplatesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
-		Status:     types.EntityStatusFilter("ACTIVE"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Status:        types.EntityStatusFilter("ACTIVE"),
+		TemplateOwner: types.TemplateOwner("CUSTOMER"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3102,6 +3283,25 @@ func TestUpdateRequestSnapshot_UpdatePolicy(t *testing.T) {
 			WafConfig: &types.WafConfig{
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
+			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		IsPublished: ptr.Bool(true),

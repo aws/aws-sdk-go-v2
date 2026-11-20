@@ -206,6 +206,73 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_AssociatePublisher(t *testing.T) {
+	input := &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreatePublisher(t *testing.T) {
+	input := &CreatePublisherInput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateRegistry(t *testing.T) {
 	input := &CreateRegistryInput{
 		Name:        ptr.String("__Name__"),
@@ -622,6 +689,54 @@ func TestCheckRequestSnapshot_CreateRegistryRecord(t *testing.T) {
 					},
 				},
 			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
+				},
+			},
 		},
 		Artifact: &types.RegistryRecordArtifactUpload{
 			Content: []byte("blob"),
@@ -813,6 +928,33 @@ func TestCheckRequestSnapshot_CreateRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeletePublisher(t *testing.T) {
+	input := &DeletePublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteRegistry(t *testing.T) {
 	input := &DeleteRegistryInput{
 		RegistryId: ptr.String("__RegistryId__"),
@@ -868,6 +1010,60 @@ func TestCheckRequestSnapshot_DeleteRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DisassociatePublisher(t *testing.T) {
+	input := &DisassociatePublisherInput{
+		RecordArn: ptr.String("__RecordArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetPublisher(t *testing.T) {
+	input := &GetPublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetRegistry(t *testing.T) {
 	input := &GetRegistryInput{
 		RegistryId: ptr.String("__RegistryId__"),
@@ -919,6 +1115,63 @@ func TestCheckRequestSnapshot_GetRegistryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRegistryRecord"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListPublisherAssociations(t *testing.T) {
+	input := &ListPublisherAssociationsInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPublisherAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPublisherAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListPublishers(t *testing.T) {
+	input := &ListPublishersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPublishers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPublishers"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1124,6 +1377,35 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdatePublisherAssociationApprovalStatus(t *testing.T) {
+	input := &UpdatePublisherAssociationApprovalStatusInput{
+		RecordArn:            ptr.String("__RecordArn__"),
+		ApprovalStatus:       types.AssociationApprovalStatus("APPROVED"),
+		ApprovalStatusReason: ptr.String("__ApprovalStatusReason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdatePublisherAssociationApprovalStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePublisherAssociationApprovalStatus"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1342,37 +1624,19 @@ func TestCheckRequestSnapshot_UpdateRegistryRecord(t *testing.T) {
 				Agui: &types.UpdatedAgUiDescriptor{
 					OptionalValue: nil,
 				},
+				SignatureAgentCard: nil,
 			},
 		},
 		Artifact: &types.UpdatedRegistryRecordArtifact{
-			OptionalValue: &types.RegistryRecordArtifactUpload{
-				Content: []byte("blob"),
-				Sha256:  ptr.String("__Sha256__"),
-			},
+			OptionalValue: nil,
 		},
-		RecordVersion: ptr.String("__RecordVersion__"),
-		CustomMetadata: &types.UpdatedCustomMetadataMap{
-			OptionalValue: document.NewLazyDocument("__Document__"),
-		},
+		RecordVersion:          ptr.String("__RecordVersion__"),
+		CustomMetadata:         nil,
 		TriggerSynchronization: ptr.Bool(true),
 		ForceAuthentication:    ptr.Bool(true),
 		Provenance: []types.Provenance{
-			{
-				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
-				SourceId:   ptr.String("__SourceId__"),
-				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
-				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
-					Value: types.AgentCoreRuntimeSourceDetails{},
-				},
-			},
-			{
-				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
-				SourceId:   ptr.String("__SourceId__"),
-				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
-				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
-					Value: types.AgentCoreRuntimeSourceDetails{},
-				},
-			},
+			{},
+			{},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1427,6 +1691,100 @@ func TestCheckRequestSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckRequestSnapshot_ValidatePublisher(t *testing.T) {
+	input := &ValidatePublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ValidatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ValidatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateRequestSnapshot_AssociatePublisher(t *testing.T) {
+	input := &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreatePublisher(t *testing.T) {
+	input := &CreatePublisherInput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateRegistry(t *testing.T) {
 	input := &CreateRegistryInput{
 		Name:        ptr.String("__Name__"),
@@ -1843,6 +2201,54 @@ func TestUpdateRequestSnapshot_CreateRegistryRecord(t *testing.T) {
 					},
 				},
 			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
+				},
+			},
 		},
 		Artifact: &types.RegistryRecordArtifactUpload{
 			Content: []byte("blob"),
@@ -2034,6 +2440,33 @@ func TestUpdateRequestSnapshot_CreateRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeletePublisher(t *testing.T) {
+	input := &DeletePublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteRegistry(t *testing.T) {
 	input := &DeleteRegistryInput{
 		RegistryId: ptr.String("__RegistryId__"),
@@ -2089,6 +2522,60 @@ func TestUpdateRequestSnapshot_DeleteRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DisassociatePublisher(t *testing.T) {
+	input := &DisassociatePublisherInput{
+		RecordArn: ptr.String("__RecordArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociatePublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetPublisher(t *testing.T) {
+	input := &GetPublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPublisher"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetRegistry(t *testing.T) {
 	input := &GetRegistryInput{
 		RegistryId: ptr.String("__RegistryId__"),
@@ -2140,6 +2627,63 @@ func TestUpdateRequestSnapshot_GetRegistryRecord(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRegistryRecord"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListPublisherAssociations(t *testing.T) {
+	input := &ListPublisherAssociationsInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPublisherAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPublisherAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListPublishers(t *testing.T) {
+	input := &ListPublishersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPublishers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPublishers"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2345,6 +2889,35 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdatePublisherAssociationApprovalStatus(t *testing.T) {
+	input := &UpdatePublisherAssociationApprovalStatusInput{
+		RecordArn:            ptr.String("__RecordArn__"),
+		ApprovalStatus:       types.AssociationApprovalStatus("APPROVED"),
+		ApprovalStatusReason: ptr.String("__ApprovalStatusReason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdatePublisherAssociationApprovalStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdatePublisherAssociationApprovalStatus"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2563,37 +3136,19 @@ func TestUpdateRequestSnapshot_UpdateRegistryRecord(t *testing.T) {
 				Agui: &types.UpdatedAgUiDescriptor{
 					OptionalValue: nil,
 				},
+				SignatureAgentCard: nil,
 			},
 		},
 		Artifact: &types.UpdatedRegistryRecordArtifact{
-			OptionalValue: &types.RegistryRecordArtifactUpload{
-				Content: []byte("blob"),
-				Sha256:  ptr.String("__Sha256__"),
-			},
+			OptionalValue: nil,
 		},
-		RecordVersion: ptr.String("__RecordVersion__"),
-		CustomMetadata: &types.UpdatedCustomMetadataMap{
-			OptionalValue: document.NewLazyDocument("__Document__"),
-		},
+		RecordVersion:          ptr.String("__RecordVersion__"),
+		CustomMetadata:         nil,
 		TriggerSynchronization: ptr.Bool(true),
 		ForceAuthentication:    ptr.Bool(true),
 		Provenance: []types.Provenance{
-			{
-				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
-				SourceId:   ptr.String("__SourceId__"),
-				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
-				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
-					Value: types.AgentCoreRuntimeSourceDetails{},
-				},
-			},
-			{
-				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
-				SourceId:   ptr.String("__SourceId__"),
-				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
-				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
-					Value: types.AgentCoreRuntimeSourceDetails{},
-				},
-			},
+			{},
+			{},
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2645,6 +3200,33 @@ func TestUpdateRequestSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateRegistryRecordStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ValidatePublisher(t *testing.T) {
+	input := &ValidatePublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ValidatePublisher(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ValidatePublisher"); err != nil {
 		t.Fatal(err)
 	}
 }

@@ -468,7 +468,7 @@ var _DictionaryId = smithy.NewSchema(smithy.ShapeID{
 var DictionaryLanguage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "DictionaryLanguage",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var DictionaryLanguage_ENG *smithy.Schema
 
 var DictionaryLanguage_FRA *smithy.Schema
@@ -480,6 +480,8 @@ var DictionaryLanguage_DEU *smithy.Schema
 var DictionaryLanguage_SPA *smithy.Schema
 
 var DictionaryLanguage_POR *smithy.Schema
+
+var DictionaryLanguage_ARA *smithy.Schema
 
 var DictionaryStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -1176,7 +1178,7 @@ var TooManyRequestException_message *smithy.Schema
 var TranscriptionLanguage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
 	Name:      "TranscriptionLanguage",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 10)
 var TranscriptionLanguage_ENG *smithy.Schema
 
 var TranscriptionLanguage_ENG_AU *smithy.Schema
@@ -1194,6 +1196,8 @@ var TranscriptionLanguage_DEU *smithy.Schema
 var TranscriptionLanguage_SPA *smithy.Schema
 
 var TranscriptionLanguage_POR *smithy.Schema
+
+var TranscriptionLanguage_ARA *smithy.Schema
 
 var Trigger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elementalinference",
@@ -2227,6 +2231,8 @@ func init() {
 
 	TranscriptionLanguage_POR = TranscriptionLanguage.AddMember("POR", smithyprelude.Unit)
 
+	TranscriptionLanguage_ARA = TranscriptionLanguage.AddMember("ARA", smithyprelude.Unit)
+
 	ProfanityFilterMode_DISABLED = ProfanityFilterMode.AddMember("DISABLED", smithyprelude.Unit)
 
 	ProfanityFilterMode_CENSOR = ProfanityFilterMode.AddMember("CENSOR", smithyprelude.Unit)
@@ -2322,6 +2328,8 @@ func init() {
 	DictionaryLanguage_SPA = DictionaryLanguage.AddMember("SPA", smithyprelude.Unit)
 
 	DictionaryLanguage_POR = DictionaryLanguage.AddMember("POR", smithyprelude.Unit)
+
+	DictionaryLanguage_ARA = DictionaryLanguage.AddMember("ARA", smithyprelude.Unit)
 
 	DictionaryStatus_CREATING = DictionaryStatus.AddMember("CREATING", smithyprelude.Unit)
 

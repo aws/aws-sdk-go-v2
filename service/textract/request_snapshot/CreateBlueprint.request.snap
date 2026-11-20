@@ -1,0 +1,7 @@
+POST /service/Textract/operation/CreateBlueprint
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿mBlueprintNameq__BlueprintName__rClientRequestTokenv__ClientRequestToken__wEncryptionConfiguration¿tKmsEncryptionContext¿dkey0i__Value__ÿhKmsKeyIdl__KmsKeyId__ÿfSchemaj__Schema__dTags¿dkey0i__Value__ÿÿ

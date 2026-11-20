@@ -6473,6 +6473,88 @@ func (v *DataProcessingDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// You provide the Amazon S3 destination and AWS Key Management Service (AWS KMS)
+// key for retained data.
+//
+// Before saving a customer-managed destination, Amazon Bedrock validates that you
+// can use the bucket and key and that their resource policies permit the required
+// Amazon Bedrock access. If validation fails, Amazon Bedrock rejects the
+// configuration without saving it.
+//
+// You need s3:PutObject , s3:GetObject , kms:GenerateDataKey , and kms:Decrypt
+// permissions. The Amazon S3 bucket policy must allow the Amazon Bedrock service
+// principal, bedrock.amazonaws.com , to put, get, and delete objects with
+// conditions appropriate to the configuration scope.
+//
+// Use aws:SourceAccount for account scope, aws:SourceOrgID for organization
+// scope, and both aws:SourceAccount and the project's aws:SourceArn for project
+// scope. Validation rejects resource policies that allow the service principal to
+// access the destination without the required scope conditions.
+//
+// The key policy must permit kms:GenerateDataKey and kms:Decrypt for both uses of
+// the key: direct use by Amazon Bedrock with the scope conditions, and use through
+// Amazon S3 with a kms:ViaService condition for the bucket's Region and
+// kms:EncryptionContext:aws:s3:arn scoped to the bucket.
+type DataRetentionStorageConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the customer managed AWS Key Management
+	// Service (AWS KMS) key you use to encrypt retained data. Specify an enabled
+	// symmetric encryption key in the AWS Region where you register the configuration.
+	// You cannot specify a key alias.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket that receives retained
+	// data. The bucket must be in the AWS Region where you register the configuration.
+	//
+	// This member is required.
+	S3BucketArn *string
+
+	// The AWS account ID of the destination bucket's owner. You must specify the
+	// owner, even when the bucket belongs to another account. Amazon Bedrock uses this
+	// ID to verify bucket ownership for each delivery request.
+	//
+	// This member is required.
+	S3BucketOwner *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataRetentionStorageConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRetentionStorageConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRetentionStorageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.DataRetentionStorageConfiguration_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.DataRetentionStorageConfiguration_s3BucketArn, *v.S3BucketArn)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.DataRetentionStorageConfiguration_s3BucketOwner, *v.S3BucketOwner)
+	}
+}
+func (v *DataRetentionStorageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRetentionStorageConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRetentionStorageConfiguration_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.DataRetentionStorageConfiguration_kmsKeyArn, v.KmsKeyArn)
+		case schemas.DataRetentionStorageConfiguration_s3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.DataRetentionStorageConfiguration_s3BucketArn, v.S3BucketArn)
+		case schemas.DataRetentionStorageConfiguration_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.DataRetentionStorageConfiguration_s3BucketOwner, v.S3BucketOwner)
+		}
+		return nil
+	})
+}
+
 // Dimensional price rate.
 type DimensionalPriceRate struct {
 
@@ -13614,6 +13696,154 @@ func (v *PricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A project's data-retention setting: the project-scope mode, which may be inherit
+// to defer to the account scope or the model default. Uses the same mode space as
+// the account-level data-retention operations; the effective mode for a request
+// resolves project, then account, then model default.
+type ProjectDataRetention struct {
+
+	// The project's data retention mode. Use inherit to defer to the account setting
+	// or model default.
+	//
+	// This member is required.
+	Mode DataRetentionMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProjectDataRetention) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectDataRetention)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectDataRetention) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.ProjectDataRetention_mode, string(v.Mode))
+	}
+}
+func (v *ProjectDataRetention) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectDataRetention, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectDataRetention_mode:
+			var ev string
+			if err := d.ReadString(schemas.ProjectDataRetention_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = DataRetentionMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A project. The same field set every project-returning operation uses: create,
+// get, update, and archive all return the full project, and list returns one per
+// project.
+type ProjectSummary struct {
+
+	// The Amazon Resource Name (ARN) of the project.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time the project was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The project's data retention setting. A mode of inherit defers to the account
+	// setting or model default.
+	//
+	// This member is required.
+	DataRetention *ProjectDataRetention
+
+	// The project ID. The account's default project uses default ; a named project's
+	// generated ID starts with proj_ .
+	//
+	// This member is required.
+	Id *string
+
+	// The project's display name. Project names do not have to be unique.
+	//
+	// This member is required.
+	Name *string
+
+	// The project's lifecycle status.
+	//
+	// This member is required.
+	Status ProjectStatus
+
+	// The time the project was archived.
+	ArchivedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProjectSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchivedAt != nil {
+		s.WriteTime(schemas.ProjectSummary_archivedAt, *v.ArchivedAt)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ProjectSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ProjectSummary_createdAt, *v.CreatedAt)
+	}
+	if v.DataRetention != nil {
+		s.WriteStruct(schemas.ProjectSummary_dataRetention)
+		v.DataRetention.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ProjectSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProjectSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ProjectSummary_status, string(v.Status))
+	}
+}
+func (v *ProjectSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectSummary_archivedAt:
+			v.ArchivedAt = new(time.Time)
+			return d.ReadTime(schemas.ProjectSummary_archivedAt, v.ArchivedAt)
+		case schemas.ProjectSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ProjectSummary_arn, v.Arn)
+		case schemas.ProjectSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProjectSummary_createdAt, v.CreatedAt)
+		case schemas.ProjectSummary_dataRetention:
+			v.DataRetention = &ProjectDataRetention{}
+			return v.DataRetention.Deserialize(d)
+		case schemas.ProjectSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ProjectSummary_id, v.Id)
+		case schemas.ProjectSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProjectSummary_name, v.Name)
+		case schemas.ProjectSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ProjectSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ProjectStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about a prompt router.
 type PromptRouterSummary struct {
 
@@ -15613,6 +15843,319 @@ func (v *TrainingMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Result of preparing an application. A provider handoff does not submit an
+// application, grant eligibility, or change enrollment. Clients must tolerate
+// unknown union members.
+//
+// The following types satisfy this interface:
+//
+//	TrustedAccessProgramApplicationResultMemberProviderHandoff
+type TrustedAccessProgramApplicationResult interface {
+	isTrustedAccessProgramApplicationResult()
+}
+
+// Information for continuing the application with the provider.
+type TrustedAccessProgramApplicationResultMemberProviderHandoff struct {
+	Value TrustedAccessProgramProviderHandoff
+
+	noSmithyDocumentSerde
+}
+
+func (*TrustedAccessProgramApplicationResultMemberProviderHandoff) isTrustedAccessProgramApplicationResult() {
+}
+func (v *TrustedAccessProgramApplicationResultMemberProviderHandoff) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedAccessProgramApplicationResult_providerHandoff)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TrustedAccessProgramApplicationResultMemberProviderHandoff) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information needed to continue an application with the provider.
+type TrustedAccessProgramProviderHandoff struct {
+
+	// Opaque token binding the application to the authenticated customer, requested
+	// program, and scope.
+	//
+	// This member is required.
+	ApplicationToken *string
+
+	// Deadline for the provider to accept the application context. Start another
+	// application handoff if the token expires before acceptance.
+	//
+	// This member is required.
+	ApplicationTokenExpiresAt *time.Time
+
+	// Provider intake URL. When present, open it and paste the complete application
+	// token into the provider's token field. Omitted when the provider receives the
+	// application token through a separate integration.
+	EnrollmentUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrustedAccessProgramProviderHandoff) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedAccessProgramProviderHandoff)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustedAccessProgramProviderHandoff) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationToken != nil {
+		s.WriteString(schemas.TrustedAccessProgramProviderHandoff_applicationToken, *v.ApplicationToken)
+	}
+	if v.ApplicationTokenExpiresAt != nil {
+		s.WriteTime(schemas.TrustedAccessProgramProviderHandoff_applicationTokenExpiresAt, *v.ApplicationTokenExpiresAt)
+	}
+	if v.EnrollmentUrl != nil {
+		s.WriteString(schemas.TrustedAccessProgramProviderHandoff_enrollmentUrl, *v.EnrollmentUrl)
+	}
+}
+func (v *TrustedAccessProgramProviderHandoff) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustedAccessProgramProviderHandoff, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustedAccessProgramProviderHandoff_applicationToken:
+			v.ApplicationToken = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramProviderHandoff_applicationToken, v.ApplicationToken)
+		case schemas.TrustedAccessProgramProviderHandoff_applicationTokenExpiresAt:
+			v.ApplicationTokenExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.TrustedAccessProgramProviderHandoff_applicationTokenExpiresAt, v.ApplicationTokenExpiresAt)
+		case schemas.TrustedAccessProgramProviderHandoff_enrollmentUrl:
+			v.EnrollmentUrl = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramProviderHandoff_enrollmentUrl, v.EnrollmentUrl)
+		}
+		return nil
+	})
+}
+
+// Program details and participation resolved for the calling account and optional
+// named project.
+type TrustedAccessProgramSummary struct {
+
+	// Description of the program and its effects on model access or data handling.
+	//
+	// This member is required.
+	Description *string
+
+	// URL with program details, terms, and instructions for obtaining access.
+	//
+	// This member is required.
+	DetailsUrl *string
+
+	// Display name of the program.
+	//
+	// This member is required.
+	Name *string
+
+	// Resolved customer preference, preserved independently of eligibility, including
+	// while revoked.
+	//
+	// This member is required.
+	OptIn TrustedAccessProgramOptIn
+
+	// Identifier of the trusted access program.
+	//
+	// This member is required.
+	ProgramId *string
+
+	// Name of the model provider offering the program.
+	//
+	// This member is required.
+	ProviderName *string
+
+	// Account and optional project context for which participation was resolved.
+	//
+	// This member is required.
+	ResolvedFor *TrustedAccessResolutionContext
+
+	// Scope deciding the status. This can differ from the scope supplying the
+	// resolved opt-in preference and enrollment timestamps.
+	//
+	// This member is required.
+	Source TrustedAccessProgramScope
+
+	// Participation status resolved for the account and optional project context.
+	//
+	// This member is required.
+	Status TrustedAccessProgramStatus
+
+	// Scope supplying the applicable approval or most-specific revocation. Omitted
+	// when no approval or revocation applies.
+	EligibilityScope TrustedAccessProgramScope
+
+	// Provider application intake URL. Omitted when the program has no
+	// customer-facing intake URL.
+	EnrollmentUrl *string
+
+	// Nonempty explanation for requestable or revoked status. Omitted for other
+	// statuses.
+	StatusReason *string
+
+	// Last change to the enrollment supplying the resolved opt-in. Present for
+	// enabled or disabled, including while revoked; omitted for inherit.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrustedAccessProgramSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedAccessProgramSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustedAccessProgramSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_description, *v.Description)
+	}
+	if v.DetailsUrl != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_detailsUrl, *v.DetailsUrl)
+	}
+	if v.EligibilityScope != "" {
+		s.WriteString(schemas.TrustedAccessProgramSummary_eligibilityScope, string(v.EligibilityScope))
+	}
+	if v.EnrollmentUrl != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_enrollmentUrl, *v.EnrollmentUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_name, *v.Name)
+	}
+	if v.OptIn != "" {
+		s.WriteString(schemas.TrustedAccessProgramSummary_optIn, string(v.OptIn))
+	}
+	if v.ProgramId != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_programId, *v.ProgramId)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_providerName, *v.ProviderName)
+	}
+	if v.ResolvedFor != nil {
+		s.WriteStruct(schemas.TrustedAccessProgramSummary_resolvedFor)
+		v.ResolvedFor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.TrustedAccessProgramSummary_source, string(v.Source))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TrustedAccessProgramSummary_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.TrustedAccessProgramSummary_statusReason, *v.StatusReason)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.TrustedAccessProgramSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *TrustedAccessProgramSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustedAccessProgramSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustedAccessProgramSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_description, v.Description)
+		case schemas.TrustedAccessProgramSummary_detailsUrl:
+			v.DetailsUrl = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_detailsUrl, v.DetailsUrl)
+		case schemas.TrustedAccessProgramSummary_eligibilityScope:
+			var ev string
+			if err := d.ReadString(schemas.TrustedAccessProgramSummary_eligibilityScope, &ev); err != nil {
+				return err
+			}
+			v.EligibilityScope = TrustedAccessProgramScope(ev)
+			return nil
+		case schemas.TrustedAccessProgramSummary_enrollmentUrl:
+			v.EnrollmentUrl = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_enrollmentUrl, v.EnrollmentUrl)
+		case schemas.TrustedAccessProgramSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_name, v.Name)
+		case schemas.TrustedAccessProgramSummary_optIn:
+			var ev string
+			if err := d.ReadString(schemas.TrustedAccessProgramSummary_optIn, &ev); err != nil {
+				return err
+			}
+			v.OptIn = TrustedAccessProgramOptIn(ev)
+			return nil
+		case schemas.TrustedAccessProgramSummary_programId:
+			v.ProgramId = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_programId, v.ProgramId)
+		case schemas.TrustedAccessProgramSummary_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_providerName, v.ProviderName)
+		case schemas.TrustedAccessProgramSummary_resolvedFor:
+			v.ResolvedFor = &TrustedAccessResolutionContext{}
+			return v.ResolvedFor.Deserialize(d)
+		case schemas.TrustedAccessProgramSummary_source:
+			var ev string
+			if err := d.ReadString(schemas.TrustedAccessProgramSummary_source, &ev); err != nil {
+				return err
+			}
+			v.Source = TrustedAccessProgramScope(ev)
+			return nil
+		case schemas.TrustedAccessProgramSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.TrustedAccessProgramSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TrustedAccessProgramStatus(ev)
+			return nil
+		case schemas.TrustedAccessProgramSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.TrustedAccessProgramSummary_statusReason, v.StatusReason)
+		case schemas.TrustedAccessProgramSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.TrustedAccessProgramSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Account and optional project context evaluated when resolving a trusted access
+// program's status.
+type TrustedAccessResolutionContext struct {
+
+	// AWS account for which the program status was resolved, including applicable
+	// organization settings.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The canonical ARN of the authorized named project for which participation was
+	// resolved. Omitted when the request has no project context.
+	ProjectArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TrustedAccessResolutionContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustedAccessResolutionContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrustedAccessResolutionContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.TrustedAccessResolutionContext_accountId, *v.AccountId)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.TrustedAccessResolutionContext_projectArn, *v.ProjectArn)
+	}
+}
+func (v *TrustedAccessResolutionContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustedAccessResolutionContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustedAccessResolutionContext_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.TrustedAccessResolutionContext_accountId, v.AccountId)
+		case schemas.TrustedAccessResolutionContext_projectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.TrustedAccessResolutionContext_projectArn, v.ProjectArn)
+		}
+		return nil
+	})
+}
+
 // Array of up to 10 validators.
 type ValidationDataConfig struct {
 
@@ -16043,3 +16586,4 @@ func (*UnknownUnionMember) isRatingScaleItemValue()                             
 func (*UnknownUnionMember) isRequestMetadataFilters()                                {}
 func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration()           {}
 func (*UnknownUnionMember) isRetrievalFilter()                                       {}
+func (*UnknownUnionMember) isTrustedAccessProgramApplicationResult()                 {}

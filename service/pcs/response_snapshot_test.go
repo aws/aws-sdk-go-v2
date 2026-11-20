@@ -457,6 +457,18 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
+			},
 			ErrorInfo: []types.ErrorInfo{
 				{
 					Code:    ptr.String("__Code__"),
@@ -597,6 +609,18 @@ func TestCheckResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 				},
 			},
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+		},
+		InstanceHealthChecks: &types.InstanceHealthChecksRequest{
+			HealthMonitoring: &types.HealthMonitoring{
+				Mode:         types.HealthMonitoringMode("NONE"),
+				RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+			},
+			DeepHealthChecks: &types.DeepHealthChecks{
+				OnStart: &types.DeepHealthCheckOnStart{
+					Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+					RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+				},
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
@@ -1035,6 +1059,18 @@ func TestCheckResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
+			},
 			ErrorInfo: []types.ErrorInfo{
 				{
 					Code:    ptr.String("__Code__"),
@@ -1375,6 +1411,18 @@ func TestCheckResponseSnapshot_RegisterComputeNodeGroupInstance(t *testing.T) {
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 		},
 		SchedulerVersion: ptr.String("__SchedulerVersion__"),
+		InstanceHealthChecks: &types.InstanceHealthChecks{
+			HealthMonitoring: &types.HealthMonitoring{
+				Mode:         types.HealthMonitoringMode("NONE"),
+				RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+			},
+			DeepHealthChecks: &types.DeepHealthChecks{
+				OnStart: &types.DeepHealthCheckOnStart{
+					Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+					RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RegisterComputeNodeGroupInstance.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1779,6 +1827,18 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
+			},
 			ErrorInfo: []types.ErrorInfo{
 				{
 					Code:    ptr.String("__Code__"),
@@ -1911,6 +1971,18 @@ func TestCheckResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 				},
 			},
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+		},
+		InstanceHealthChecks: &types.UpdateInstanceHealthChecksRequest{
+			HealthMonitoring: &types.HealthMonitoring{
+				Mode:         types.HealthMonitoringMode("NONE"),
+				RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+			},
+			DeepHealthChecks: &types.DeepHealthChecks{
+				OnStart: &types.DeepHealthCheckOnStart{
+					Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+					RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+				},
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 	})
@@ -2462,6 +2534,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 				},
 			},
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+		},
+		InstanceHealthChecks: &types.InstanceHealthChecksRequest{
+			HealthMonitoring: &types.HealthMonitoring{
+				Mode:         types.HealthMonitoringMode("NONE"),
+				RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+			},
+			DeepHealthChecks: &types.DeepHealthChecks{
+				OnStart: &types.DeepHealthCheckOnStart{
+					Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+					RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+				},
+			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{

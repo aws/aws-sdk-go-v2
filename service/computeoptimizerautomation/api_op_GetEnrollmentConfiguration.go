@@ -52,6 +52,14 @@ type GetEnrollmentConfigurationOutput struct {
 	//  The timestamp of the last update to the enrollment configuration.
 	LastUpdatedTimestamp *time.Time
 
+	//  Specifies whether an organization enrollment configuration on your account, or
+	// inherited from a parent OU or the organization root, enables Automation for your
+	// member account. Associations made using AssociateAccounts don't affect this
+	// status. This field is returned for organization member accounts, including
+	// delegated administrators. It's omitted for management accounts and accounts that
+	// aren't in an organization.
+	OrganizationEnrollmentConfigurationStatus types.OrganizationEnrollmentConfigurationStatus
+
 	// Specifies whether the management account can create Automation rules that
 	// implement optimization actions for this account.
 	OrganizationRuleMode types.OrganizationRuleMode
@@ -75,6 +83,9 @@ func (v *GetEnrollmentConfigurationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
+	if v.OrganizationEnrollmentConfigurationStatus != "" {
+		s.WriteString(schemas.GetEnrollmentConfigurationResponse_organizationEnrollmentConfigurationStatus, string(v.OrganizationEnrollmentConfigurationStatus))
+	}
 	if v.OrganizationRuleMode != "" {
 		s.WriteString(schemas.GetEnrollmentConfigurationResponse_organizationRuleMode, string(v.OrganizationRuleMode))
 	}
@@ -91,6 +102,13 @@ func (v *GetEnrollmentConfigurationOutput) Deserialize(d smithy.ShapeDeserialize
 		case schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp:
 			v.LastUpdatedTimestamp = new(time.Time)
 			return d.ReadTime(schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetEnrollmentConfigurationResponse_organizationEnrollmentConfigurationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetEnrollmentConfigurationResponse_organizationEnrollmentConfigurationStatus, &ev); err != nil {
+				return err
+			}
+			v.OrganizationEnrollmentConfigurationStatus = types.OrganizationEnrollmentConfigurationStatus(ev)
+			return nil
 		case schemas.GetEnrollmentConfigurationResponse_organizationRuleMode:
 			var ev string
 			if err := d.ReadString(schemas.GetEnrollmentConfigurationResponse_organizationRuleMode, &ev); err != nil {

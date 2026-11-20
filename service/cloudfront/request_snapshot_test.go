@@ -654,12 +654,14 @@ func TestCheckRequestSnapshot_CreateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -708,12 +710,14 @@ func TestCheckRequestSnapshot_CreateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -1345,12 +1349,14 @@ func TestCheckRequestSnapshot_CreateDistributionWithTags(t *testing.T) {
 								OriginMtlsConfig: &types.OriginMtlsConfig{
 									ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 								},
+								OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 							},
 							VpcOriginConfig: &types.VpcOriginConfig{
 								VpcOriginId:            ptr.String("__VpcOriginId__"),
 								OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 								OriginReadTimeout:      ptr.Int32(1),
 								OriginKeepaliveTimeout: ptr.Int32(1),
+								OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 							},
 							ConnectionAttempts:        ptr.Int32(1),
 							ConnectionTimeout:         ptr.Int32(1),
@@ -1399,12 +1405,14 @@ func TestCheckRequestSnapshot_CreateDistributionWithTags(t *testing.T) {
 								OriginMtlsConfig: &types.OriginMtlsConfig{
 									ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 								},
+								OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 							},
 							VpcOriginConfig: &types.VpcOriginConfig{
 								VpcOriginId:            ptr.String("__VpcOriginId__"),
 								OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 								OriginReadTimeout:      ptr.Int32(1),
 								OriginKeepaliveTimeout: ptr.Int32(1),
+								OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 							},
 							ConnectionAttempts:        ptr.Int32(1),
 							ConnectionTimeout:         ptr.Int32(1),
@@ -6304,12 +6312,14 @@ func TestCheckRequestSnapshot_UpdateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -6358,12 +6368,14 @@ func TestCheckRequestSnapshot_UpdateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -8169,12 +8181,14 @@ func TestUpdateRequestSnapshot_CreateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -8223,12 +8237,14 @@ func TestUpdateRequestSnapshot_CreateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -8860,12 +8876,14 @@ func TestUpdateRequestSnapshot_CreateDistributionWithTags(t *testing.T) {
 								OriginMtlsConfig: &types.OriginMtlsConfig{
 									ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 								},
+								OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 							},
 							VpcOriginConfig: &types.VpcOriginConfig{
 								VpcOriginId:            ptr.String("__VpcOriginId__"),
 								OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 								OriginReadTimeout:      ptr.Int32(1),
 								OriginKeepaliveTimeout: ptr.Int32(1),
+								OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 							},
 							ConnectionAttempts:        ptr.Int32(1),
 							ConnectionTimeout:         ptr.Int32(1),
@@ -8914,12 +8932,14 @@ func TestUpdateRequestSnapshot_CreateDistributionWithTags(t *testing.T) {
 								OriginMtlsConfig: &types.OriginMtlsConfig{
 									ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 								},
+								OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 							},
 							VpcOriginConfig: &types.VpcOriginConfig{
 								VpcOriginId:            ptr.String("__VpcOriginId__"),
 								OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 								OriginReadTimeout:      ptr.Int32(1),
 								OriginKeepaliveTimeout: ptr.Int32(1),
+								OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 							},
 							ConnectionAttempts:        ptr.Int32(1),
 							ConnectionTimeout:         ptr.Int32(1),
@@ -13819,12 +13839,14 @@ func TestUpdateRequestSnapshot_UpdateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),
@@ -13873,12 +13895,14 @@ func TestUpdateRequestSnapshot_UpdateDistribution(t *testing.T) {
 							OriginMtlsConfig: &types.OriginMtlsConfig{
 								ClientCertificateArn: ptr.String("__ClientCertificateArn__"),
 							},
+							OriginHttpVersion: types.OriginHttpVersion("http1.1"),
 						},
 						VpcOriginConfig: &types.VpcOriginConfig{
 							VpcOriginId:            ptr.String("__VpcOriginId__"),
 							OwnerAccountId:         ptr.String("__OwnerAccountId__"),
 							OriginReadTimeout:      ptr.Int32(1),
 							OriginKeepaliveTimeout: ptr.Int32(1),
+							OriginHttpVersion:      types.OriginHttpVersion("http1.1"),
 						},
 						ConnectionAttempts:        ptr.Int32(1),
 						ConnectionTimeout:         ptr.Int32(1),

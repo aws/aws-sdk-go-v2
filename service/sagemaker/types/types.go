@@ -23681,6 +23681,430 @@ func (v *GitConfigForUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A filter for ListGlobalInferenceGateways . The filter matches the global
+// inference gateways whose attribute named by Name equals Value .
+type GlobalInferenceGatewayFilter struct {
+
+	// The attribute to filter global inference gateways on. The only supported value
+	// is Status .
+	//
+	// This member is required.
+	Name GlobalInferenceGatewayFilterName
+
+	// The value to match. For the Status filter, specify a global inference gateway
+	// status.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewayFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewayFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewayFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.GlobalInferenceGatewayFilter_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayFilter_Value, *v.Value)
+	}
+}
+func (v *GlobalInferenceGatewayFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewayFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewayFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.GlobalInferenceGatewayFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = GlobalInferenceGatewayFilterName(ev)
+			return nil
+		case schemas.GlobalInferenceGatewayFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// An in-cluster inference gateway, identified by the SageMaker HyperPod cluster
+// that runs it ( ClusterArn ), its Kubernetes namespace ( Namespace ), and the
+// name of the InferenceGatewayConfig resource that defines it ( Name ).
+type GlobalInferenceGatewayMember struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the
+	// in-cluster inference gateway. The cluster must be in the same account and
+	// partition as the global inference gateway. It can be in a different Region, but
+	// not in an opt-in Region.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// The name of the InferenceGatewayConfig resource that defines the in-cluster
+	// inference gateway.
+	//
+	// This member is required.
+	Name *string
+
+	// The Kubernetes namespace of the in-cluster inference gateway.
+	//
+	// This member is required.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewayMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewayMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewayMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMember_ClusterArn, *v.ClusterArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMember_Name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMember_Namespace, *v.Namespace)
+	}
+}
+func (v *GlobalInferenceGatewayMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewayMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewayMember_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMember_ClusterArn, v.ClusterArn)
+		case schemas.GlobalInferenceGatewayMember_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMember_Name, v.Name)
+		case schemas.GlobalInferenceGatewayMember_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMember_Namespace, v.Namespace)
+		}
+		return nil
+	})
+}
+
+// A filter for ListInferenceGateways . The filter matches the in-cluster inference
+// gateways whose attribute named by Name equals Value .
+type GlobalInferenceGatewayMemberFilter struct {
+
+	// The attribute to filter in-cluster inference gateways on. Supported values are
+	// Status and ClusterArn .
+	//
+	// This member is required.
+	Name GlobalInferenceGatewayMemberFilterName
+
+	// The value to match. For the Status filter, specify a status of an in-cluster
+	// inference gateway. For the ClusterArn filter, specify the Amazon Resource Name
+	// (ARN) of a SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewayMemberFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewayMemberFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewayMemberFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberFilter_Name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberFilter_Value, *v.Value)
+	}
+}
+func (v *GlobalInferenceGatewayMemberFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewayMemberFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewayMemberFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.GlobalInferenceGatewayMemberFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = GlobalInferenceGatewayMemberFilterName(ev)
+			return nil
+		case schemas.GlobalInferenceGatewayMemberFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMemberFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Summary information about an in-cluster inference gateway in a global inference
+// gateway, including its status.
+type GlobalInferenceGatewayMemberSummary struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the
+	// in-cluster inference gateway.
+	//
+	// This member is required.
+	ClusterArn *string
+
+	// The name of the InferenceGatewayConfig resource that defines the in-cluster
+	// inference gateway.
+	//
+	// This member is required.
+	Name *string
+
+	// The Kubernetes namespace of the in-cluster inference gateway.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The reason that adding or removing the in-cluster inference gateway failed.
+	// This value is set only when the status is FAILED .
+	FailureReason *string
+
+	// The status of the in-cluster inference gateway in the global inference gateway.
+	// This status describes the membership in the global inference gateway, not the
+	// health of the in-cluster inference gateway.
+	Status GlobalInferenceGatewayMemberStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewayMemberSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewayMemberSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewayMemberSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberSummary_ClusterArn, *v.ClusterArn)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberSummary_FailureReason, *v.FailureReason)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberSummary_Name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberSummary_Namespace, *v.Namespace)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GlobalInferenceGatewayMemberSummary_Status, string(v.Status))
+	}
+}
+func (v *GlobalInferenceGatewayMemberSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewayMemberSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewayMemberSummary_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMemberSummary_ClusterArn, v.ClusterArn)
+		case schemas.GlobalInferenceGatewayMemberSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMemberSummary_FailureReason, v.FailureReason)
+		case schemas.GlobalInferenceGatewayMemberSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMemberSummary_Name, v.Name)
+		case schemas.GlobalInferenceGatewayMemberSummary_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewayMemberSummary_Namespace, v.Namespace)
+		case schemas.GlobalInferenceGatewayMemberSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.GlobalInferenceGatewayMemberSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GlobalInferenceGatewayMemberStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The routing configuration of a global inference gateway. To add or remove
+// in-cluster inference gateways, use AddInferenceGateway and
+// RemoveInferenceGateway .
+type GlobalInferenceGatewayRouting struct {
+
+	// The weights that the global inference gateway applies to each routing signal
+	// when it scores the in-cluster inference gateways for a request.
+	//
+	// This member is required.
+	Weights *GlobalInferenceGatewayRoutingWeights
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewayRouting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewayRouting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewayRouting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Weights != nil {
+		s.WriteStruct(schemas.GlobalInferenceGatewayRouting_Weights)
+		v.Weights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GlobalInferenceGatewayRouting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewayRouting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewayRouting_Weights:
+			v.Weights = &GlobalInferenceGatewayRoutingWeights{}
+			return v.Weights.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The relative weights of the four routing signals, each from 0 to 1. Specify all
+// four weights or none. If you specify them, they must sum to 1.0, within 0.001.
+// If you specify none, the global inference gateway uses default weights.
+type GlobalInferenceGatewayRoutingWeights struct {
+
+	// The weight of the recent error rate of the cluster.
+	ErrorRate *float32
+
+	// The weight of the free key-value (KV) cache capacity on the cluster.
+	KVHeadroom *float32
+
+	// The weight of the number of requests that are waiting on the cluster.
+	QueueDepth *float32
+
+	// The weight of how close the cluster is to the caller.
+	RegionProximity *float32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewayRoutingWeights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewayRoutingWeights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewayRoutingWeights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorRate != nil {
+		s.WriteFloat32(schemas.GlobalInferenceGatewayRoutingWeights_ErrorRate, *v.ErrorRate)
+	}
+	if v.KVHeadroom != nil {
+		s.WriteFloat32(schemas.GlobalInferenceGatewayRoutingWeights_KVHeadroom, *v.KVHeadroom)
+	}
+	if v.QueueDepth != nil {
+		s.WriteFloat32(schemas.GlobalInferenceGatewayRoutingWeights_QueueDepth, *v.QueueDepth)
+	}
+	if v.RegionProximity != nil {
+		s.WriteFloat32(schemas.GlobalInferenceGatewayRoutingWeights_RegionProximity, *v.RegionProximity)
+	}
+}
+func (v *GlobalInferenceGatewayRoutingWeights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewayRoutingWeights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewayRoutingWeights_ErrorRate:
+			v.ErrorRate = new(float32)
+			return d.ReadFloat32(schemas.GlobalInferenceGatewayRoutingWeights_ErrorRate, v.ErrorRate)
+		case schemas.GlobalInferenceGatewayRoutingWeights_KVHeadroom:
+			v.KVHeadroom = new(float32)
+			return d.ReadFloat32(schemas.GlobalInferenceGatewayRoutingWeights_KVHeadroom, v.KVHeadroom)
+		case schemas.GlobalInferenceGatewayRoutingWeights_QueueDepth:
+			v.QueueDepth = new(float32)
+			return d.ReadFloat32(schemas.GlobalInferenceGatewayRoutingWeights_QueueDepth, v.QueueDepth)
+		case schemas.GlobalInferenceGatewayRoutingWeights_RegionProximity:
+			v.RegionProximity = new(float32)
+			return d.ReadFloat32(schemas.GlobalInferenceGatewayRoutingWeights_RegionProximity, v.RegionProximity)
+		}
+		return nil
+	})
+}
+
+// Summary information about a global inference gateway.
+type GlobalInferenceGatewaySummary struct {
+
+	// The Amazon Resource Name (ARN) of the global inference gateway.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the global inference gateway.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the global inference gateway.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the global inference gateway.
+	//
+	// This member is required.
+	Status GlobalInferenceGatewayStatus
+
+	// The time when the global inference gateway was created.
+	CreationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *GlobalInferenceGatewaySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalInferenceGatewaySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalInferenceGatewaySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GlobalInferenceGatewaySummary_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GlobalInferenceGatewaySummary_CreationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GlobalInferenceGatewaySummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GlobalInferenceGatewaySummary_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GlobalInferenceGatewaySummary_Status, string(v.Status))
+	}
+}
+func (v *GlobalInferenceGatewaySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalInferenceGatewaySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalInferenceGatewaySummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewaySummary_Arn, v.Arn)
+		case schemas.GlobalInferenceGatewaySummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GlobalInferenceGatewaySummary_CreationTime, v.CreationTime)
+		case schemas.GlobalInferenceGatewaySummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewaySummary_Id, v.Id)
+		case schemas.GlobalInferenceGatewaySummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GlobalInferenceGatewaySummary_Name, v.Name)
+		case schemas.GlobalInferenceGatewaySummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.GlobalInferenceGatewaySummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GlobalInferenceGatewayStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The SageMaker images that are hidden from the Studio user interface. You must
 // specify the SageMaker image name and version aliases.
 type HiddenSageMakerImage struct {
@@ -39983,6 +40407,154 @@ func (v *MonitoringStoppingCondition) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.MonitoringStoppingCondition_MaxRuntimeInSeconds:
 			v.MaxRuntimeInSeconds = new(int32)
 			return d.ReadInt32(schemas.MonitoringStoppingCondition_MaxRuntimeInSeconds, v.MaxRuntimeInSeconds)
+		}
+		return nil
+	})
+}
+
+// Describes why a node, identified by its NodeLogicalId , could not be moved in a
+// MoveClusterNodes request. Contains the NodeLogicalId , an error code, and an
+// error message.
+type MoveClusterNodeLogicalIdsError struct {
+
+	// The error code associated with the error encountered when moving the node. The
+	// error code is one of the following values:
+	//
+	//   - NodeIdNotFound : The node does not exist in the source instance group.
+	//
+	//   - InvalidNodeStatus : The node is not in a state that allows the move. For
+	//   example, the node is not Running , is not in a subnet of the target instance
+	//   group, or has an attached Amazon EBS volume that you must detach first.
+	//
+	//   - NodeIdInUse : Another operation is already in progress for this node. Wait
+	//   for the operation to complete before retrying.
+	//
+	//   - NodeInstanceTypeMismatch : The target instance group does not support the
+	//   node's instance type.
+	//
+	// This member is required.
+	Code MoveClusterNodesErrorCode
+
+	// A human-readable message describing the error encountered when moving the node.
+	//
+	// This member is required.
+	Message *string
+
+	// The NodeLogicalId of the node that could not be moved.
+	//
+	// This member is required.
+	NodeLogicalId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MoveClusterNodeLogicalIdsError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MoveClusterNodeLogicalIdsError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MoveClusterNodeLogicalIdsError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.MoveClusterNodeLogicalIdsError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MoveClusterNodeLogicalIdsError_Message, *v.Message)
+	}
+	if v.NodeLogicalId != nil {
+		s.WriteString(schemas.MoveClusterNodeLogicalIdsError_NodeLogicalId, *v.NodeLogicalId)
+	}
+}
+func (v *MoveClusterNodeLogicalIdsError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MoveClusterNodeLogicalIdsError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MoveClusterNodeLogicalIdsError_Code:
+			var ev string
+			if err := d.ReadString(schemas.MoveClusterNodeLogicalIdsError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = MoveClusterNodesErrorCode(ev)
+			return nil
+		case schemas.MoveClusterNodeLogicalIdsError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MoveClusterNodeLogicalIdsError_Message, v.Message)
+		case schemas.MoveClusterNodeLogicalIdsError_NodeLogicalId:
+			v.NodeLogicalId = new(string)
+			return d.ReadString(schemas.MoveClusterNodeLogicalIdsError_NodeLogicalId, v.NodeLogicalId)
+		}
+		return nil
+	})
+}
+
+// Describes why a node, identified by its instance ID, could not be moved in a
+// MoveClusterNodes request. Contains the instance ID, an error code, and an error
+// message.
+type MoveClusterNodesError struct {
+
+	// The error code associated with the error encountered when moving the node. The
+	// error code is one of the following values:
+	//
+	//   - NodeIdNotFound : The node does not exist in the source instance group.
+	//
+	//   - InvalidNodeStatus : The node is not in a state that allows the move. For
+	//   example, the node is not Running , is not in a subnet of the target instance
+	//   group, or has an attached Amazon EBS volume that you must detach first.
+	//
+	//   - NodeIdInUse : Another operation is already in progress for this node. Wait
+	//   for the operation to complete before retrying.
+	//
+	//   - NodeInstanceTypeMismatch : The target instance group does not support the
+	//   node's instance type.
+	//
+	// This member is required.
+	Code MoveClusterNodesErrorCode
+
+	// A human-readable message describing the error encountered when moving the node.
+	//
+	// This member is required.
+	Message *string
+
+	// The instance ID of the node that could not be moved.
+	//
+	// This member is required.
+	NodeId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MoveClusterNodesError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MoveClusterNodesError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MoveClusterNodesError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.MoveClusterNodesError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MoveClusterNodesError_Message, *v.Message)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.MoveClusterNodesError_NodeId, *v.NodeId)
+	}
+}
+func (v *MoveClusterNodesError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MoveClusterNodesError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MoveClusterNodesError_Code:
+			var ev string
+			if err := d.ReadString(schemas.MoveClusterNodesError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = MoveClusterNodesErrorCode(ev)
+			return nil
+		case schemas.MoveClusterNodesError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MoveClusterNodesError_Message, v.Message)
+		case schemas.MoveClusterNodesError_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.MoveClusterNodesError_NodeId, v.NodeId)
 		}
 		return nil
 	})

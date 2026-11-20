@@ -310,6 +310,25 @@ func TestUpdateResponseSnapshot_CreatePolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -360,6 +379,25 @@ func TestUpdateResponseSnapshot_CreatePolicySnapshot(t *testing.T) {
 			WafConfig: &types.WafConfig{
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
+			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -498,12 +536,13 @@ func TestUpdateResponseSnapshot_CreateScope(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.PiccoloCustomerAPIService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateScope, schemas.CreateScopeOutput, schemas.CreateScopeOutput)
@@ -567,12 +606,13 @@ func TestUpdateResponseSnapshot_CreateScopeSnapshot(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.PiccoloCustomerAPIService)
 	opSchema := smithy.NewOperationSchema(schemas.CreateScopeSnapshot, schemas.CreateScopeSnapshotOutput, schemas.CreateScopeSnapshotOutput)
@@ -991,6 +1031,25 @@ func TestUpdateResponseSnapshot_GetPolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -1092,12 +1151,13 @@ func TestUpdateResponseSnapshot_GetScope(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.PiccoloCustomerAPIService)
 	opSchema := smithy.NewOperationSchema(schemas.GetScope, schemas.GetScopeOutput, schemas.GetScopeOutput)
@@ -1363,6 +1423,60 @@ func TestUpdateResponseSnapshot_ListDeployments(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListEntityCoverages(t *testing.T) {
+	want := &ListEntityCoveragesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ResourceCoverages: []types.ResourceCoverageSummary{
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.PiccoloCustomerAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.ListEntityCoverages, schemas.ListEntityCoveragesOutput, schemas.ListEntityCoveragesOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListEntityCoverages.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListPolicies(t *testing.T) {
 	want := &ListPoliciesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -1455,6 +1569,60 @@ func TestUpdateResponseSnapshot_ListPolicySnapshots(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListPolicySnapshots.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListProtectedResourceCoverages(t *testing.T) {
+	want := &ListProtectedResourceCoveragesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ResourceCoverages: []types.ResourceCoverageSummary{
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.PiccoloCustomerAPIService)
+	opSchema := smithy.NewOperationSchema(schemas.ListProtectedResourceCoverages, schemas.ListProtectedResourceCoveragesOutput, schemas.ListProtectedResourceCoveragesOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListProtectedResourceCoverages.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1670,22 +1838,24 @@ func TestUpdateResponseSnapshot_ListScopeSnapshots(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		Snapshots: []types.ScopeSummary{
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -1714,22 +1884,24 @@ func TestUpdateResponseSnapshot_ListScopes(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		Scopes: []types.ScopeSummary{
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -1787,6 +1959,7 @@ func TestUpdateResponseSnapshot_ListTemplateSnapshots(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1797,6 +1970,7 @@ func TestUpdateResponseSnapshot_ListTemplateSnapshots(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1833,6 +2007,7 @@ func TestUpdateResponseSnapshot_ListTemplates(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1843,6 +2018,7 @@ func TestUpdateResponseSnapshot_ListTemplates(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -2071,6 +2247,25 @@ func TestUpdateResponseSnapshot_UpdatePolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -2172,12 +2367,13 @@ func TestUpdateResponseSnapshot_UpdateScope(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.PiccoloCustomerAPIService)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateScope, schemas.UpdateScopeOutput, schemas.UpdateScopeOutput)

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.ListChannelContracts
+
+{"catalog":"__Catalog__","contractType":"MANAGED_SERVICES_ATTESTATION","contractTypeFilters":{"managedServicesAttestationTypeFilters":{"legalEntityNames":["__Member__","__Member__"],"relationshipIdentifiers":["__Member__","__Member__"]}},"contractTypeSort":{"managedServicesAttestationTypeSort":{"sortBy":"UpdatedAt","sortOrder":"Ascending"}},"maxResults":1,"nextToken":"__NextToken__","statuses":["PENDING","PENDING"]}

@@ -102,6 +102,56 @@ func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// This exception is thrown on a database (or other dependency) error. Modeled as
+// a server error so SDKs retry it (5xx) and it feeds server-error alarming. Marked
+// @retryable because it represents a transient downstream failure that is safe to
+// retry (matches the forwarder's own retry-on-DependencyException behavior).
+type DependencyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DependencyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DependencyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DependencyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DependencyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DependencyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DependencyException_message, *v.Message)
+	}
+}
+func (v *DependencyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DependencyException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The request failed due to an unexpected internal error; the caller may retry.
 type InternalServerException struct {
 	Message *string

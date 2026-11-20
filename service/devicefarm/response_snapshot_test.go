@@ -342,6 +342,7 @@ func TestCheckResponseSnapshot_CreateRemoteAccessSession(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),
@@ -866,6 +867,7 @@ func TestCheckResponseSnapshot_GetDevice(t *testing.T) {
 			ModelId:      ptr.String("__ModelId__"),
 			FormFactor:   types.DeviceFormFactor("PHONE"),
 			Platform:     types.DevicePlatform("ANDROID"),
+			Type:         types.DeviceType("PHYSICAL"),
 			Os:           ptr.String("__Os__"),
 			Cpu: &types.CPU{
 				Frequency:    ptr.String("__Frequency__"),
@@ -1047,6 +1049,7 @@ func TestCheckResponseSnapshot_GetDevicePoolCompatibility(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -1133,6 +1136,7 @@ func TestCheckResponseSnapshot_GetDevicePoolCompatibility(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -1221,6 +1225,7 @@ func TestCheckResponseSnapshot_GetDevicePoolCompatibility(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -1307,6 +1312,7 @@ func TestCheckResponseSnapshot_GetDevicePoolCompatibility(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -1536,6 +1542,7 @@ func TestCheckResponseSnapshot_GetJob(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),
@@ -1834,6 +1841,7 @@ func TestCheckResponseSnapshot_GetRemoteAccessSession(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),
@@ -2571,6 +2579,7 @@ func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),
@@ -2644,6 +2653,7 @@ func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),
@@ -2828,6 +2838,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -2947,6 +2958,7 @@ func TestCheckResponseSnapshot_ListJobs(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -3418,6 +3430,7 @@ func TestCheckResponseSnapshot_ListRemoteAccessSessions(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -3532,6 +3545,7 @@ func TestCheckResponseSnapshot_ListRemoteAccessSessions(t *testing.T) {
 					ModelId:      ptr.String("__ModelId__"),
 					FormFactor:   types.DeviceFormFactor("PHONE"),
 					Platform:     types.DevicePlatform("ANDROID"),
+					Type:         types.DeviceType("PHYSICAL"),
 					Os:           ptr.String("__Os__"),
 					Cpu: &types.CPU{
 						Frequency:    ptr.String("__Frequency__"),
@@ -4417,6 +4431,7 @@ func TestCheckResponseSnapshot_ListUniqueProblems(t *testing.T) {
 								ModelId:      ptr.String("__ModelId__"),
 								FormFactor:   types.DeviceFormFactor("PHONE"),
 								Platform:     types.DevicePlatform("ANDROID"),
+								Type:         types.DeviceType("PHYSICAL"),
 								Os:           ptr.String("__Os__"),
 								Cpu: &types.CPU{
 									Frequency:    ptr.String("__Frequency__"),
@@ -4510,6 +4525,7 @@ func TestCheckResponseSnapshot_ListUniqueProblems(t *testing.T) {
 								ModelId:      ptr.String("__ModelId__"),
 								FormFactor:   types.DeviceFormFactor("PHONE"),
 								Platform:     types.DevicePlatform("ANDROID"),
+								Type:         types.DeviceType("PHYSICAL"),
 								Os:           ptr.String("__Os__"),
 								Cpu: &types.CPU{
 									Frequency:    ptr.String("__Frequency__"),
@@ -4608,6 +4624,7 @@ func TestCheckResponseSnapshot_ListUniqueProblems(t *testing.T) {
 								ModelId:      ptr.String("__ModelId__"),
 								FormFactor:   types.DeviceFormFactor("PHONE"),
 								Platform:     types.DevicePlatform("ANDROID"),
+								Type:         types.DeviceType("PHYSICAL"),
 								Os:           ptr.String("__Os__"),
 								Cpu: &types.CPU{
 									Frequency:    ptr.String("__Frequency__"),
@@ -4701,6 +4718,7 @@ func TestCheckResponseSnapshot_ListUniqueProblems(t *testing.T) {
 								ModelId:      ptr.String("__ModelId__"),
 								FormFactor:   types.DeviceFormFactor("PHONE"),
 								Platform:     types.DevicePlatform("ANDROID"),
+								Type:         types.DeviceType("PHYSICAL"),
 								Os:           ptr.String("__Os__"),
 								Cpu: &types.CPU{
 									Frequency:    ptr.String("__Frequency__"),
@@ -5303,6 +5321,7 @@ func TestCheckResponseSnapshot_StopJob(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),
@@ -5434,6 +5453,7 @@ func TestCheckResponseSnapshot_StopRemoteAccessSession(t *testing.T) {
 				ModelId:      ptr.String("__ModelId__"),
 				FormFactor:   types.DeviceFormFactor("PHONE"),
 				Platform:     types.DevicePlatform("ANDROID"),
+				Type:         types.DeviceType("PHYSICAL"),
 				Os:           ptr.String("__Os__"),
 				Cpu: &types.CPU{
 					Frequency:    ptr.String("__Frequency__"),

@@ -367,6 +367,11 @@ type Descriptors struct {
 	//  The MCP server descriptor, populated when the record type is MCP.
 	McpServer *McpServerDescriptor
 
+	//  The signature agent card descriptor, populated when the record represents a
+	// web bot. It identifies the JSON Web Key Set (JWKS) used to verify the bot's HTTP
+	// message signatures.
+	SignatureAgentCard *SignatureAgentCardDescriptor
+
 	noSmithyDocumentSerde
 }
 
@@ -407,6 +412,11 @@ func (v *Descriptors) SerializeMembers(s smithy.ShapeSerializer) {
 		v.McpServer.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SignatureAgentCard != nil {
+		s.WriteStruct(schemas.Descriptors_signatureAgentCard)
+		v.SignatureAgentCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Descriptors, func(s *smithy.Schema) error {
@@ -429,6 +439,9 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Descriptors_mcpServer:
 			v.McpServer = &McpServerDescriptor{}
 			return v.McpServer.Deserialize(d)
+		case schemas.Descriptors_signatureAgentCard:
+			v.SignatureAgentCard = &SignatureAgentCardDescriptor{}
+			return v.SignatureAgentCard.Deserialize(d)
 		}
 		return nil
 	})
@@ -1179,6 +1192,110 @@ func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegistryRecordSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.RegistryRecordSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The additional data for a signature agent card descriptor, such as the bot
+// category of the web bot.
+type SignatureAgentCardAdditionalData struct {
+
+	// The bot category that describes the purpose of the web bot identified by the
+	// signature agent card descriptor.
+	Category BotCategory
+
+	noSmithyDocumentSerde
+}
+
+func (v *SignatureAgentCardAdditionalData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignatureAgentCardAdditionalData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignatureAgentCardAdditionalData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.SignatureAgentCardAdditionalData_category, string(v.Category))
+	}
+}
+func (v *SignatureAgentCardAdditionalData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignatureAgentCardAdditionalData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignatureAgentCardAdditionalData_category:
+			var ev string
+			if err := d.ReadString(schemas.SignatureAgentCardAdditionalData_category, &ev); err != nil {
+				return err
+			}
+			v.Category = BotCategory(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+//	Descriptor that defines the content of a signature agent card, which
+//
+// identifies a web bot and references the JSON Web Key Set (JWKS) used to verify
+// its HTTP message signatures.
+type SignatureAgentCardDescriptor struct {
+
+	//  Additional data for the signature agent card, such as its AWS WAF bot category.
+	AdditionalData *SignatureAgentCardAdditionalData
+
+	//  The signature agent card descriptor content, serialized as descriptor payload
+	// data.
+	Data *string
+
+	//  The schema version of the descriptor payload.
+	DataSchemaVersion *string
+
+	//  The source location from which the signature agent card descriptor content was
+	// retrieved.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *SignatureAgentCardDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignatureAgentCardDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignatureAgentCardDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalData != nil {
+		s.WriteStruct(schemas.SignatureAgentCardDescriptor_additionalData)
+		v.AdditionalData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.SignatureAgentCardDescriptor_data, *v.Data)
+	}
+	if v.DataSchemaVersion != nil {
+		s.WriteString(schemas.SignatureAgentCardDescriptor_dataSchemaVersion, *v.DataSchemaVersion)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.SignatureAgentCardDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SignatureAgentCardDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignatureAgentCardDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignatureAgentCardDescriptor_additionalData:
+			v.AdditionalData = &SignatureAgentCardAdditionalData{}
+			return v.AdditionalData.Deserialize(d)
+		case schemas.SignatureAgentCardDescriptor_data:
+			v.Data = new(string)
+			return d.ReadString(schemas.SignatureAgentCardDescriptor_data, v.Data)
+		case schemas.SignatureAgentCardDescriptor_dataSchemaVersion:
+			v.DataSchemaVersion = new(string)
+			return d.ReadString(schemas.SignatureAgentCardDescriptor_dataSchemaVersion, v.DataSchemaVersion)
+		case schemas.SignatureAgentCardDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
 		}
 		return nil
 	})

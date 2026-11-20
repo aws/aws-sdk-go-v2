@@ -2404,6 +2404,25 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type ResponseInterceptionMode string
+
+// Enum values for ResponseInterceptionMode
+const (
+	ResponseInterceptionModeBuffered ResponseInterceptionMode = "BUFFERED"
+	ResponseInterceptionModeStream   ResponseInterceptionMode = "STREAM"
+)
+
+// Values returns all known values for ResponseInterceptionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseInterceptionMode) Values() []ResponseInterceptionMode {
+	return []ResponseInterceptionMode{
+		"BUFFERED",
+		"STREAM",
+	}
+}
+
 type RestApiMethod string
 
 // Enum values for RestApiMethod

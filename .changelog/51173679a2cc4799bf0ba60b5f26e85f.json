@@ -1,0 +1,8 @@
+{
+    "id": "51173679-a2cc-4799-bf0b-a60b5f26e85f",
+    "type": "feature",
+    "description": "Adds support for Norway, New Zealand and United Arab Emirates additional tax information, and the Vietnam VAT credit method and 20-digit payment voucher number.",
+    "modules": [
+        "service/taxsettings"
+    ]
+}
