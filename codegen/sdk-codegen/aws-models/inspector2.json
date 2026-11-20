@@ -17509,6 +17509,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details on the package file path to filter on.</p>"
                     }
+                },
+                "runtimeReachability": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the runtime reachability status of the package to filter on. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "runtimeReachabilityReason": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityReasonFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the runtime reachability reason of the package to filter on. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "purlQualifier": {
+                    "target": "com.amazonaws.inspector2#PurlQualifierFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the package URL (purl) qualifier to filter on.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17656,6 +17674,15 @@
                         "name": "ZIP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#PackageUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.inspector2#PackageVersion": {
@@ -18176,6 +18203,105 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^([a-z]{2}(-[a-z]+)+-\\d+|[a-z][a-z0-9]+|[a-z]+-[a-z]+[0-9]+(-[a-z])?)$"
+            }
+        },
+        "com.amazonaws.inspector2#PurlQualifierFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#MapComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.inspector2#PurlQualifierKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package URL (purl) qualifier key to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#MapValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package URL (purl) qualifier value to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details of a package URL (purl) qualifier filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#PurlQualifierKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "arch",
+                        "name": "ARCH"
+                    },
+                    {
+                        "value": "collector",
+                        "name": "COLLECTOR"
+                    },
+                    {
+                        "value": "dev_dependency",
+                        "name": "DEV_DEPENDENCY"
+                    },
+                    {
+                        "value": "distro",
+                        "name": "DISTRO"
+                    },
+                    {
+                        "value": "epoch",
+                        "name": "EPOCH"
+                    },
+                    {
+                        "value": "go_toolchain",
+                        "name": "GO_TOOLCHAIN"
+                    },
+                    {
+                        "value": "hardened",
+                        "name": "HARDENED"
+                    },
+                    {
+                        "value": "private",
+                        "name": "PRIVATE"
+                    },
+                    {
+                        "value": "rust_toolchain",
+                        "name": "RUST_TOOLCHAIN"
+                    },
+                    {
+                        "value": "scope",
+                        "name": "SCOPE"
+                    },
+                    {
+                        "value": "skip_chromium_download",
+                        "name": "SKIP_CHROMIUM_DOWNLOAD"
+                    },
+                    {
+                        "value": "source",
+                        "name": "SOURCE"
+                    },
+                    {
+                        "value": "stream",
+                        "name": "STREAM"
+                    },
+                    {
+                        "value": "transitive_dependency",
+                        "name": "TRANSITIVE_DEPENDENCY"
+                    },
+                    {
+                        "value": "unresolved",
+                        "name": "UNRESOLVED"
+                    },
+                    {
+                        "value": "vendor",
+                        "name": "VENDOR"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#Reason": {
@@ -19382,6 +19508,107 @@
                         "name": "NODEJS_20_X"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REACHABLE",
+                        "name": "REACHABLE"
+                    },
+                    {
+                        "value": "NOT_REACHABLE",
+                        "name": "NOT_REACHABLE"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityComparison": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "NOT_EQUALS",
+                        "name": "NOT_EQUALS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime reachability status to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details of a runtime reachability filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH",
+                        "name": "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"
+                    },
+                    {
+                        "value": "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH",
+                        "name": "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH"
+                    },
+                    {
+                        "value": "PROCESS_OBSERVED_IN_EC2_RUNTIME",
+                        "name": "PROCESS_OBSERVED_IN_EC2_RUNTIME"
+                    },
+                    {
+                        "value": "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME",
+                        "name": "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityReasonFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime reachability reason to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details of a runtime reachability reason filter.</p>"
             }
         },
         "com.amazonaws.inspector2#SbomReportFormat": {
@@ -23967,6 +24194,24 @@
                     "target": "com.amazonaws.inspector2#LambdaLayerArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function affected by a finding.</p>"
+                    }
+                },
+                "runtimeReachability": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime reachability status of the vulnerable package. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "runtimeReachabilityReason": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the runtime reachability status of the vulnerable package. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "purl": {
+                    "target": "com.amazonaws.inspector2#PackageUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package URL (purl) of the vulnerable package.</p>"
                     }
                 }
             },

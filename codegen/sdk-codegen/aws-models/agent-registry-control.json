@@ -173,6 +173,12 @@
             ],
             "resources": [
                 {
+                    "target": "com.amazonaws.agentregistrycontrol#AssociationResource"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherResource"
+                },
+                {
                     "target": "com.amazonaws.agentregistrycontrol#RegistryRecordResource"
                 },
                 {
@@ -590,6 +596,212 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.agentregistrycontrol#AssociatePublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#AssociatePublisherRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#AssociatePublisherResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to associate a registry record with a publisher",
+                    "resources": {
+                        "required": {
+                            "publisher": {},
+                            "registry-record": {}
+                        }
+                    },
+                    "requiredActions": [
+                        "agent-registry:GetRegistryRecord"
+                    ]
+                },
+                "smithy.api#documentation": "Associate a registry record with a publisher and assign the record a public identifier under the\npublisher's domain. The registry record must be APPROVED and the publisher must be ACTIVE. A\nregistry record can have only one publisher association. The new association starts in\nPENDING_APPROVAL until a curator approves or rejects it.\nA ConflictException (HTTP 409) means the publisher is not ACTIVE yet, the registry record already\nhas an association, or another registry record already holds the public identifier. To retry\nsafely, repeat the request with the same clientToken; a retry returns the original association.\nIf the publisher has reached its association quota, the request fails with\nServiceQuotaExceededException (HTTP 402). Remove an unused association or request a quota increase.",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/associations"
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#AssociatePublisherRequest": {
+            "type": "structure",
+            "members": {
+                "recordArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#RegistryRecordArn",
+                    "traits": {
+                        "smithy.api#documentation": "The Record being associated.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#documentation": "The Publisher to associate the Record with.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subdomain": {
+                    "target": "com.amazonaws.agentregistrycontrol#Subdomain",
+                    "traits": {
+                        "smithy.api#documentation": "Optional single DNS label placed in front of the publisher domain (e.g. \"agents\" ->\nagents.acme.com). Absent means the Record sits directly on the publisher domain."
+                    }
+                },
+                "categories": {
+                    "target": "com.amazonaws.agentregistrycontrol#CategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "Optional categorization/hierarchy applied to the public identifier."
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.agentregistrycontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "Optional client-provided idempotency token. Retries carrying the same token return the\noriginally-created association instead of creating a duplicate.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#AssociatePublisherResponse": {
+            "type": "structure",
+            "members": {
+                "recordArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#RegistryRecordArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "publicIdentifier": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublicIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisher": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.agentregistrycontrol#AssociationStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.agentregistrycontrol#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for the association's current status, such as why it is suspended. Present only\nwhen a reason is available."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The new association between the registry record and the publisher, including the record's public\nidentifier. A retry with the original clientToken returns the original association.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#AssociationApprovalStatus": {
+            "type": "enum",
+            "members": {
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The curator's decision on a Record's Publisher association."
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#AssociationResource": {
+            "type": "resource",
+            "identifiers": {
+                "recordArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#RegistryRecordArn"
+                }
+            },
+            "update": {
+                "target": "com.amazonaws.agentregistrycontrol#UpdatePublisherAssociationApprovalStatus"
+            },
+            "delete": {
+                "target": "com.amazonaws.agentregistrycontrol#DisassociatePublisher"
+            },
+            "list": {
+                "target": "com.amazonaws.agentregistrycontrol#ListPublisherAssociations"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AssociatePublisher"
+                }
+            ]
+        },
+        "com.amazonaws.agentregistrycontrol#AssociationStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING_APPROVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_APPROVAL"
+                    }
+                },
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The Record<->Publisher association's status."
+            }
+        },
         "com.amazonaws.agentregistrycontrol#AuthorizationAttemptId": {
             "type": "string",
             "traits": {
@@ -751,6 +963,164 @@
                 }
             }
         },
+        "com.amazonaws.agentregistrycontrol#BotCategory": {
+            "type": "enum",
+            "members": {
+                "ADVERTISING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advertising"
+                    }
+                },
+                "ARCHIVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "archiver"
+                    }
+                },
+                "CONTENT_FETCHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "content_fetcher"
+                    }
+                },
+                "EMAIL_CLIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "email_client"
+                    }
+                },
+                "HTTP_LIBRARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "http_library"
+                    }
+                },
+                "LINK_CHECKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "link_checker"
+                    }
+                },
+                "MISCELLANEOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "miscellaneous"
+                    }
+                },
+                "MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monitoring"
+                    }
+                },
+                "PAGE_PREVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "page_preview"
+                    }
+                },
+                "SCRAPING_FRAMEWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scraping_framework"
+                    }
+                },
+                "SEARCH_ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "search_engine"
+                    }
+                },
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "security"
+                    }
+                },
+                "SEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "seo"
+                    }
+                },
+                "SOCIAL_MEDIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "social_media"
+                    }
+                },
+                "AI_TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_training"
+                    }
+                },
+                "AI_SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_search"
+                    }
+                },
+                "AI_ASSISTANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_assistant"
+                    }
+                },
+                "AI_CONTENT_OPTIMIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_content_optimization"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The category that describes a web bot's purpose. The categories follow AWS WAF Bot Control bot categories. Valid values:</p> <ul> <li> <p> <code>advertising</code> - Bots used for advertising, such as third-party ad services that access a website programmatically.</p> </li> <li> <p> <code>archiver</code> - Bots that crawl the web and capture content to create archives.</p> </li> <li> <p> <code>content_fetcher</code> - Bots that visit a website on behalf of a user to fetch content, such as RSS feeds, or to verify content.</p> </li> <li> <p> <code>email_client</code> - Bots that check links in emails, such as those run by email providers to flag suspicious emails.</p> </li> <li> <p> <code>http_library</code> - Requests generated by the HTTP libraries of programming languages, such as API clients.</p> </li> <li> <p> <code>link_checker</code> - Bots that check for broken links.</p> </li> <li> <p> <code>miscellaneous</code> - Bots that don't match another category.</p> </li> <li> <p> <code>monitoring</code> - Bots that periodically access a website to monitor performance and uptime.</p> </li> <li> <p> <code>page_preview</code> - Bots that generate page and link previews when content is shared on messaging, social media, or collaboration tools.</p> </li> <li> <p> <code>scraping_framework</code> - Bots from web scraping frameworks that automate crawling and extracting website content.</p> </li> <li> <p> <code>search_engine</code> - Bots that crawl websites to index content for search engine results.</p> </li> <li> <p> <code>security</code> - Bots that scan web applications for vulnerabilities or perform security audits.</p> </li> <li> <p> <code>seo</code> - Bots that crawl a website to help improve its search engine rankings.</p> </li> <li> <p> <code>social_media</code> - Bots that social media platforms use to provide content summaries when users share content.</p> </li> <li> <p> <code>ai_training</code> - AI bots that collect content to train AI models.</p> </li> <li> <p> <code>ai_search</code> - AI bots that retrieve content to answer AI search queries.</p> </li> <li> <p> <code>ai_assistant</code> - AI bots that access content on behalf of a user's AI assistant or agent.</p> </li> <li> <p> <code>ai_content_optimization</code> - AI bots that analyze content to optimize it for AI-generated results.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#Category": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A single category token applied to a public identifier: lower-case letters, digits, `.`, `_` and `-`.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9._-]+$"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#CategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.agentregistrycontrol#Category"
+            },
+            "traits": {
+                "smithy.api#documentation": "Ordered categories/hierarchy applied to a public identifier. Bounded to keep identifiers small.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ChallengeRecordName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ChallengeRecordValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.agentregistrycontrol#ClaimMatchOperatorType": {
             "type": "enum",
             "members": {
@@ -819,6 +1189,147 @@
                 "smithy.api#documentation": "<p>The request conflicts with the current state of the resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#CreatePublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#CreatePublisherRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#CreatePublisherResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a publisher",
+                    "createsResources": [
+                        "publisher"
+                    ],
+                    "requiredActions": [
+                        "agent-registry:TagResource"
+                    ]
+                },
+                "smithy.api#documentation": "Create a publisher for a domain you control. The publisher starts in ACTION_REQUIRED, and the\nresponse includes a domainChallenge. To verify the domain, create a DNS TXT record with the\nchallenge's recordName and recordValue. When the registry finds the record, the publisher becomes\nACTIVE and you can associate registry records with it.\nYour account can have one publisher per domain. Creating a second publisher for the same domain\nfails with ConflictException unless the request repeats the original clientToken, which returns the\nexisting publisher. The request also fails with ConflictException when another account has already\nverified the domain.\nIf your account has reached its Publisher quota, the request fails with\nServiceQuotaExceededException (HTTP 402). Delete an unused Publisher or request a quota increase.",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/publishers"
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#CreatePublisherRequest": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.agentregistrycontrol#Identifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.agentregistrycontrol#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags to attach to the publisher. Each tag is a key-value pair. You can attach up to\n50 tags."
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.agentregistrycontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "Optional client-provided idempotency token. Retries of the same Create request carrying the\nsame token return the originally-created resource instead of creating a duplicate. Forwarded\nto BelfryGlobalCP. Optional and backward-compatible.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#CreatePublisherResponse": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.agentregistrycontrol#Identifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifierType": {
+                    "target": "com.amazonaws.agentregistrycontrol#IdentifierType",
+                    "traits": {
+                        "smithy.api#default": "DOMAIN",
+                        "smithy.api#documentation": "The identifier type. `DOMAIN` is the only supported value."
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.agentregistrycontrol#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The domain verification status of the publisher:\n\n- `ACTION_REQUIRED`: The registry is waiting to find the DNS TXT record described by\n  `domainChallenge`.\n- `ACTIVE`: The domain is verified. You can associate registry records with the publisher.\n- `SUSPENDED`: The domain was verified, but a later check found the TXT record missing or\n  changed. The publisher returns to `ACTIVE` when the record is found again, and becomes\n  `FAILED` if the record stays missing.\n- `FAILED`: Verification didn't succeed, for example because the TXT record wasn't found\n  in time or another account verified the domain first. Call `ValidatePublisher` to try\n  again.\n- `DELETING`: A delete is in progress.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.agentregistrycontrol#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for the publisher's current status, such as why verification failed. Present\nonly when a reason is available."
+                    }
+                },
+                "domainChallenge": {
+                    "target": "com.amazonaws.agentregistrycontrol#DomainChallenge"
+                },
+                "tags": {
+                    "target": "com.amazonaws.agentregistrycontrol#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags attached to the publisher."
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was last updated.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The new publisher, in ACTION_REQUIRED, with the domainChallenge to publish as a DNS TXT record.\nA retry with the original clientToken returns the existing publisher.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.agentregistrycontrol#CreateRegistry": {
@@ -1314,6 +1825,67 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.agentregistrycontrol#DeletePublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#DeletePublisherRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a publisher",
+                    "resources": {
+                        "required": {
+                            "publisher": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "Delete a publisher. A successful call returns an empty response. You can't delete a publisher\nthat has registry record associations; disassociate every registry record from it first. The\nrequest fails with ConflictException while the publisher has associations or another delete is in\nprogress. Association removals can take a few seconds to be reflected, so a delete that follows a\ndisassociation can briefly fail with ConflictException; retry after a short wait. If the publisher\nARN names your account and the publisher doesn't exist, the request fails with\nResourceNotFoundException.",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/publishers/{publisherArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#DeletePublisherRequest": {
+            "type": "structure",
+            "members": {
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.agentregistrycontrol#DeleteRegistry": {
             "type": "operation",
             "input": {
@@ -1463,6 +2035,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.agentregistrycontrol#DependencyException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.agentregistrycontrol#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This exception is thrown on a database (or other dependency) error. Modeled as a\nserver error so SDKs retry it (5xx) and it feeds server-error alarming. Marked\n@retryable because it represents a transient downstream failure that is safe to retry\n(matches the forwarder's own retry-on-DependencyException behavior).",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.agentregistrycontrol#Description": {
             "type": "string",
             "traits": {
@@ -1569,10 +2155,71 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AG-UI descriptor, populated for records detected from an AG-UI protocol source.</p>"
                     }
+                },
+                "signatureAgentCard": {
+                    "target": "com.amazonaws.agentregistrycontrol#SignatureAgentCardDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signature agent card descriptor, populated when the record type is WEB_BOT.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.</p>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#DisassociatePublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#DisassociatePublisherRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to remove a registry record's publisher association",
+                    "resources": {
+                        "required": {
+                            "registry-record": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "Remove a registry record's publisher association and release its public identifier. A successful\ncall returns an empty response. Disassociating a registry record that has no association succeeds.\nIf another account created the association, the request fails with AccessDeniedException.",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/associations/{recordArn+}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#DisassociatePublisherRequest": {
+            "type": "structure",
+            "members": {
+                "recordArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#RegistryRecordArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.agentregistrycontrol#DiscoveryConfiguration": {
@@ -1604,6 +2251,39 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[^\\s?#]+/\\.well-known/(openid-configuration|oauth-authorization-server)(/[^\\s?#]+)?$"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#DomainChallenge": {
+            "type": "structure",
+            "members": {
+                "recordName": {
+                    "target": "com.amazonaws.agentregistrycontrol#ChallengeRecordName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the DNS TXT record to create, such as `_acme-challenge.example.com`.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recordValue": {
+                    "target": "com.amazonaws.agentregistrycontrol#ChallengeRecordValue",
+                    "traits": {
+                        "smithy.api#documentation": "The value to publish in the DNS TXT record. A new value is issued each time verification\nrestarts, and earlier values no longer verify the domain.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Server-generated DNS-01 challenge the caller must publish to prove ownership."
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#DomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "FQDN per RFC-1035/1123, case-insensitive, at least two labels.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^(?=.{1,253}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,63}$"
             }
         },
         "com.amazonaws.agentregistrycontrol#EncryptionConfiguration": {
@@ -1662,6 +2342,64 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#GetPublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#GetPublisherRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#Publisher"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a publisher",
+                    "resources": {
+                        "required": {
+                            "publisher": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "Get a publisher, including its verification status and the DNS challenge for its domain. If the\npublisher ARN names your account and the publisher doesn't exist, the request fails with\nResourceNotFoundException.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/publishers/{publisherArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#GetPublisherRequest": {
+            "type": "structure",
+            "members": {
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.agentregistrycontrol#GetRegistry": {
@@ -2208,6 +2946,28 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
         },
+        "com.amazonaws.agentregistrycontrol#Identifier": {
+            "type": "union",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.agentregistrycontrol#DomainName"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The identifier value. Discriminated union — exactly one member is set.\nGA supports `domain` only; other identifier types are added as new members\n(backward-compatible) in a later task."
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#IdentifierType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.agentregistrycontrol#InboundTokenClaimNameType": {
             "type": "string",
             "traits": {
@@ -2261,6 +3021,175 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ListPublisherAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#ListPublisherAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#ListPublisherAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list the caller's publisher associations",
+                    "resources": {
+                        "required": {
+                            "publisher": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "List the registry record associations your account created. Pass publisherArn to list only the\nassociations for that publisher; omit it to list associations across all publishers. Results are\neventually consistent, so an association you just created or removed can take a few seconds to\nappear in or disappear from the list.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/associations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ListPublisherAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#httpQuery": "publisherArn"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.agentregistrycontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.agentregistrycontrol#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ListPublisherAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "The publisher associations on this page of results.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.agentregistrycontrol#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ListPublishers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#ListPublishersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#ListPublishersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list the caller's publishers"
+                },
+                "smithy.api#documentation": "List the publishers your account owns, followed by the ACTIVE publishers shared with your account.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/publishers"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ListPublishersRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.agentregistrycontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.agentregistrycontrol#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ListPublishersResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "Summaries of the publishers on this page of results.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.agentregistrycontrol#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.agentregistrycontrol#ListRegistries": {
@@ -2932,6 +3861,238 @@
                 }
             }
         },
+        "com.amazonaws.agentregistrycontrol#PublicIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Server-generated public identifier. This is a URN, NOT an ARN: the public identifier is a\npublic-facing, provider-neutral name (a Record may be hosted outside AWS), so it deliberately\ndoes not use the arn: scheme.\n\nLayout: `urn:air:[<subdomain>.]<domain>:<namespace>:<identity>[;<kind>]`\n  - authority `[<subdomain>.]<domain>` — the publisher FQDN, with the optional subdomain folded\n    in as a leading label (e.g. `agents.acme.com`; without a subdomain, just `acme.com`).\n  - `<namespace>` — the association's category values concatenated with `:` (zero-or-more\n    segments; absent when no categories were supplied).\n  - `<identity>` — the Record name: letters, digits, `.`, `_`, `/` and `-`, as Vestry allows.\n  - `<kind>` — the artifact kind from the Record's `recordType` (ai-catalog issue 59): `MCP` is `mcp`,\n    `AGENT` and `CUSTOM` are `agent`, `SKILL` is `skill`, `WEB_BOT` is `webbot`. Absent for `GATEWAY`\n    and when the association carried no `recordType`. The kind is part of the identifier, so\n    `urn:air:acme.com:x;mcp` and `urn:air:acme.com:x` are two identifiers. Belfry mints `;`; the\n    pattern also admits `#`, `+`, `$` and `@`, so identifiers minted with `#` before the delimiter\n    settled on `;` stay valid until they're re-minted.\nExamples: `urn:air:acme.com:finance-agent` (no subdomain/categories),\n`urn:air:agents.acme.com:financial:money:finance-agent`, `urn:air:acme.com:weather;mcp`.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^urn:air:([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,63}(:[a-z0-9._-]+)*:[a-zA-Z0-9._/-]+([#;+$@][a-z][a-z0-9-]*)?$"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#Publisher": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.agentregistrycontrol#Identifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifierType": {
+                    "target": "com.amazonaws.agentregistrycontrol#IdentifierType",
+                    "traits": {
+                        "smithy.api#default": "DOMAIN",
+                        "smithy.api#documentation": "The identifier type. `DOMAIN` is the only supported value."
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.agentregistrycontrol#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The domain verification status of the publisher:\n\n- `ACTION_REQUIRED`: The registry is waiting to find the DNS TXT record described by\n  `domainChallenge`.\n- `ACTIVE`: The domain is verified. You can associate registry records with the publisher.\n- `SUSPENDED`: The domain was verified, but a later check found the TXT record missing or\n  changed. The publisher returns to `ACTIVE` when the record is found again, and becomes\n  `FAILED` if the record stays missing.\n- `FAILED`: Verification didn't succeed, for example because the TXT record wasn't found\n  in time or another account verified the domain first. Call `ValidatePublisher` to try\n  again.\n- `DELETING`: A delete is in progress.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.agentregistrycontrol#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for the publisher's current status, such as why verification failed. Present\nonly when a reason is available."
+                    }
+                },
+                "domainChallenge": {
+                    "target": "com.amazonaws.agentregistrycontrol#DomainChallenge"
+                },
+                "tags": {
+                    "target": "com.amazonaws.agentregistrycontrol#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags attached to the publisher."
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was last updated.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A publisher, including its verification status and the DNS challenge for its domain.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#PublisherAssociation": {
+            "type": "structure",
+            "members": {
+                "recordArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#RegistryRecordArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "publicIdentifier": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublicIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisher": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.agentregistrycontrol#AssociationStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.agentregistrycontrol#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for the association's current status, such as why it is suspended. Present only\nwhen a reason is available."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An association between a registry record and a publisher, including the record's public\nidentifier."
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#PublisherAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.agentregistrycontrol#PublisherAssociation"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ARN for an Identifier resource. Global (region-less) resource, so the region field is\nempty; the resource segment carries the identifier value, which may contain dots.\n\nNamed `PublisherIdentifierArn` (RegionalCP's local name) so RegionalCP consumes it\nwithout a rename — which keeps its c2j/SDK model (generated from the un-projected\nsource, where the top-level c2j plugin runs to preserve @idempotencyToken) showing the\ncorrect shape name. GlobalCP renames this to `identifierArn` in its own coral-export\nprojection.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):[a-z0-9-]+::[0-9]{12}:[a-zA-Z0-9._/-]+$"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#PublisherResource": {
+            "type": "resource",
+            "identifiers": {
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.agentregistrycontrol#CreatePublisher"
+            },
+            "read": {
+                "target": "com.amazonaws.agentregistrycontrol#GetPublisher"
+            },
+            "delete": {
+                "target": "com.amazonaws.agentregistrycontrol#DeletePublisher"
+            },
+            "list": {
+                "target": "com.amazonaws.agentregistrycontrol#ListPublishers"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidatePublisher"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{publisherArn}",
+                    "absolute": true
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "publisher"
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#PublisherSummary": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.agentregistrycontrol#Identifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifierType": {
+                    "target": "com.amazonaws.agentregistrycontrol#IdentifierType",
+                    "traits": {
+                        "smithy.api#default": "DOMAIN",
+                        "smithy.api#documentation": "The identifier type. `DOMAIN` is the only supported value."
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.agentregistrycontrol#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The domain verification status of the publisher: `ACTION_REQUIRED`, `ACTIVE`, `SUSPENDED`,\n`FAILED`, or `DELETING`. Only an `ACTIVE` publisher accepts new registry record associations.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of registry records associated with the publisher, in any association status.\nOmitted when the count isn't available.",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                },
+                "pendingAssociationApprovalCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of the publisher's associations that are in PENDING_APPROVAL. Omitted when the\ncount isn't available.",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Lightweight projection for list results."
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#PublisherSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.agentregistrycontrol#PublisherSummary"
+            }
+        },
         "com.amazonaws.agentregistrycontrol#RecordIdentifier": {
             "type": "string",
             "traits": {
@@ -2974,6 +4135,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GATEWAY"
+                    }
+                },
+                "WEB_BOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_BOT"
                     }
                 }
             },
@@ -4032,6 +5199,52 @@
                 "smithy.api#pattern": "^[0-9a-f]{64}$"
             }
         },
+        "com.amazonaws.agentregistrycontrol#SignatureAgentCardAdditionalData": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.agentregistrycontrol#BotCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot category that describes the purpose of the web bot identified by the signature agent card descriptor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The additional data for a signature agent card descriptor, such as the bot category of the web bot.</p>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#SignatureAgentCardDescriptor": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "com.amazonaws.agentregistrycontrol#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signature agent card content, serialized as descriptor payload data.</p>"
+                    }
+                },
+                "dataSchemaVersion": {
+                    "target": "com.amazonaws.agentregistrycontrol#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the descriptor payload.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.agentregistrycontrol#DescriptorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional source configuration used to synchronize the signature agent card descriptor content.</p>"
+                    }
+                },
+                "additionalData": {
+                    "target": "com.amazonaws.agentregistrycontrol#SignatureAgentCardAdditionalData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional data associated with the signature agent card descriptor, such as the bot category.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Descriptor that defines the content of a signature agent card, which identifies a web bot and references the JSON Web Key Set used to verify its HTTP message signatures.</p>"
+            }
+        },
         "com.amazonaws.agentregistrycontrol#SourceDetails": {
             "type": "union",
             "members": {
@@ -4077,6 +5290,26 @@
                         "smithy.api#enumValue": "AWS::BedrockAgentCore::Gateway"
                     }
                 }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#StatusReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#Subdomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A single DNS label (RFC-1035): letters, digits, hyphens; no leading/trailing hyphen.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$"
             }
         },
         "com.amazonaws.agentregistrycontrol#SubmitRegistryRecordForApproval": {
@@ -4240,6 +5473,20 @@
                 "smithy.api#documentation": "A list of tag keys.",
                 "smithy.api#length": {
                     "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.agentregistrycontrol#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.agentregistrycontrol#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
                     "max": 50
                 }
             }
@@ -4412,6 +5659,84 @@
             }
         },
         "com.amazonaws.agentregistrycontrol#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#UpdatePublisherAssociationApprovalStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#UpdatePublisherAssociationApprovalStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#UpdatePublisherAssociationApprovalStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to approve or reject a registry record's publisher association",
+                    "resources": {
+                        "required": {
+                            "registry-record": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "Record the curator's decision (APPROVED or REJECTED) on a registry record's publisher association.\nA successful call returns an empty response. Repeating the decision the association already holds\nchanges nothing; the same approvalStatus with a different approvalStatusReason updates the reason.\nIf the caller has no publisher association for the registry record, the request fails with\nAccessDeniedException. A ConflictException (HTTP 409) means the association is not in a state\nthat accepts the decision (e.g. not PENDING_APPROVAL/APPROVED/REJECTED) or it changed while the\nrequest was being applied; read it again before deciding whether to resubmit.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/associations/{recordArn+}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#UpdatePublisherAssociationApprovalStatusRequest": {
+            "type": "structure",
+            "members": {
+                "recordArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#RegistryRecordArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "approvalStatus": {
+                    "target": "com.amazonaws.agentregistrycontrol#AssociationApprovalStatus",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "approvalStatusReason": {
+                    "target": "com.amazonaws.agentregistrycontrol#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The curator's reason for the decision; may be empty.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#UpdatePublisherAssociationApprovalStatusResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -5283,6 +6608,20 @@
                 "smithy.api#documentation": "<p>A wrapper for updating the auto-detection configuration of a registry with PATCH semantics. Include this wrapper to replace the auto-detection configuration with the specified value. Omit it to leave the auto-detection configuration unchanged. To clear the configuration, include the wrapper with a null <code>optionalValue</code>.</p>"
             }
         },
+        "com.amazonaws.agentregistrycontrol#UpdatedBotCategory": {
+            "type": "structure",
+            "members": {
+                "optionalValue": {
+                    "target": "com.amazonaws.agentregistrycontrol#BotCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Leaf patch wrapper for a bot category. Omit to leave unchanged; supply an empty object to unset; supply optionalValue to set.</p>"
+            }
+        },
         "com.amazonaws.agentregistrycontrol#UpdatedCustomDescriptor": {
             "type": "structure",
             "members": {
@@ -5446,6 +6785,12 @@
                     "target": "com.amazonaws.agentregistrycontrol#UpdatedAgUiDescriptor",
                     "traits": {
                         "smithy.api#documentation": "<p>The patch for the AG-UI descriptor.</p>"
+                    }
+                },
+                "signatureAgentCard": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch for the signature agent card descriptor.</p>"
                     }
                 }
             },
@@ -5631,6 +6976,201 @@
                 "smithy.api#documentation": "<p>The skill package patch wrapper. Omit to leave the package unchanged; supply an empty object to remove an uploaded package; supply optionalValue to upload a new package.</p>"
             }
         },
+        "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardAdditionalData": {
+            "type": "structure",
+            "members": {
+                "optionalValue": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardAdditionalDataFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The signature agent card additional-data patch wrapper. Omit to leave the additional data unchanged; supply an empty object to remove it; supply optionalValue to patch its fields.</p>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardAdditionalDataFields": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedBotCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch for the bot category field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The set of signature agent card additional-data fields that can be individually updated.</p>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardDescriptor": {
+            "type": "structure",
+            "members": {
+                "optionalValue": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardDescriptorFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to set for this field. Omit the wrapper to leave the field unchanged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The signature agent card descriptor patch wrapper. Omit to leave the descriptor unchanged; supply an empty object to remove it; supply optionalValue to patch its fields.</p>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardDescriptorFields": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedDescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch for the descriptor's data field.</p>"
+                    }
+                },
+                "dataSchemaVersion": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedDataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch for the descriptor's data schema version field.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedDescriptorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch for the descriptor's source field.</p>"
+                    }
+                },
+                "additionalData": {
+                    "target": "com.amazonaws.agentregistrycontrol#UpdatedSignatureAgentCardAdditionalData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patch for the descriptor's additional data field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The set of signature agent card descriptor fields that can be individually updated.</p>"
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ValidatePublisher": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.agentregistrycontrol#ValidatePublisherRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.agentregistrycontrol#ValidatePublisherResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.agentregistrycontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to start domain verification for a publisher",
+                    "resources": {
+                        "required": {
+                            "publisher": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "Restart domain verification for a publisher in FAILED or SUSPENDED. The publisher returns to\nACTION_REQUIRED with a new domainChallenge, which the response includes. Update the DNS TXT record\nwith the new recordValue; the previous value no longer verifies the domain. The request fails with\nConflictException when the publisher is ACTIVE, verification is already in progress\n(ACTION_REQUIRED), or the publisher is being deleted.",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/publishers/{publisherArn}/verification"
+                }
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ValidatePublisherRequest": {
+            "type": "structure",
+            "members": {
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.agentregistrycontrol#ValidatePublisherResponse": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.agentregistrycontrol#Identifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifierType": {
+                    "target": "com.amazonaws.agentregistrycontrol#IdentifierType",
+                    "traits": {
+                        "smithy.api#default": "DOMAIN",
+                        "smithy.api#documentation": "The identifier type. `DOMAIN` is the only supported value."
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.agentregistrycontrol#VerificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The domain verification status of the publisher:\n\n- `ACTION_REQUIRED`: The registry is waiting to find the DNS TXT record described by\n  `domainChallenge`.\n- `ACTIVE`: The domain is verified. You can associate registry records with the publisher.\n- `SUSPENDED`: The domain was verified, but a later check found the TXT record missing or\n  changed. The publisher returns to `ACTIVE` when the record is found again, and becomes\n  `FAILED` if the record stays missing.\n- `FAILED`: Verification didn't succeed, for example because the TXT record wasn't found\n  in time or another account verified the domain first. Call `ValidatePublisher` to try\n  again.\n- `DELETING`: A delete is in progress.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.agentregistrycontrol#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason for the publisher's current status, such as why verification failed. Present\nonly when a reason is available."
+                    }
+                },
+                "domainChallenge": {
+                    "target": "com.amazonaws.agentregistrycontrol#DomainChallenge"
+                },
+                "tags": {
+                    "target": "com.amazonaws.agentregistrycontrol#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags attached to the publisher."
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "The date and time that the publisher was last updated.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publisherArn": {
+                    "target": "com.amazonaws.agentregistrycontrol#PublisherIdentifierArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The publisher after verification restarts, in ACTION_REQUIRED with a new domainChallenge.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.agentregistrycontrol#ValidationException": {
             "type": "structure",
             "members": {
@@ -5731,6 +7271,42 @@
                 }
             }
         },
+        "com.amazonaws.agentregistrycontrol#VerificationStatus": {
+            "type": "enum",
+            "members": {
+                "ACTION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_REQUIRED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "A delete is in progress.",
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.agentregistrycontrol#VpcIdentifier": {
             "type": "string",
             "traits": {
@@ -5760,6 +7336,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>The workload identity details associated with a source resource. Present on the source details of a provenance entry when the upstream resource has a workload identity configured.</p>"
             }
+        },
+        "com.amazonaws.agentregistrycontrol#errorMessage": {
+            "type": "string"
         }
     }
 }

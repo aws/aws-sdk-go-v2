@@ -15781,6 +15781,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the input of the interceptor. This field specifies how the input to the interceptor is constructed</p>"
                     }
+                },
+                "responseInterceptionMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResponseInterceptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the interceptor processes streamed target responses. You can set this field only on an interceptor that includes the <code>RESPONSE</code> interception point. Valid values include:</p> <ul> <li> <p> <code>BUFFERED</code> - The gateway collects the complete target response and then invokes the interceptor once. This is the default.</p> </li> <li> <p> <code>STREAM</code> - The gateway sends a streamed target response to the interceptor in batches of events and returns each processed batch to the client as soon as it's ready. Non-streamed responses still use <code>BUFFERED</code> processing. If you specify <code>STREAM</code>, you must also specify <code>responseStreamingConfiguration</code>, and the input configuration can't exclude the response body.</p> </li> </ul>"
+                    }
+                },
+                "responseStreamingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResponseStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the batching settings for a streamed response. Specify this field only when <code>responseInterceptionMode</code> is <code>STREAM</code>. You must specify it for <code>STREAM</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29252,6 +29264,15 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#MaxEventsPerInvocation": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 8192
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#MaxResults": {
             "type": "integer",
             "traits": {
@@ -34660,10 +34681,41 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResponseInterceptionMode": {
+            "type": "enum",
+            "members": {
+                "BUFFERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUFFERED"
+                    }
+                },
+                "STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ResponseListType": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#ResponseType"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResponseStreamingConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxEventsPerInvocation": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxEventsPerInvocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of response events that the gateway sends to the interceptor in one invocation. The interceptor's output for the first batch determines the status code and headers of the response. The gateway ignores the status code and headers that the interceptor returns for later batches.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the settings that the gateway uses to send a streamed target response to the interceptor in batches.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ResponseType": {

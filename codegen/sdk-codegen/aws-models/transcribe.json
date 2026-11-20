@@ -66,12 +66,65 @@
             "members": {
                 "Message": {
                     "target": "com.amazonaws.transcribe#FailureReason"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.transcribe#BadRequestExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that identifies why the audio in your request was rejected. Currently,\n                <code>TranscribeAudio</code> returns this field, and only for problems with your\n            audio. It isn't returned for other validation errors.</p>\n         <p>Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>audioTooLong</code>: The audio is longer than the maximum duration of 1\n                    hour.</p>\n            </li>\n            <li>\n               <p>\n                  <code>audioTooShort</code>: The audio is shorter than 0.5 seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>audioFileTooLarge</code>: The audio is larger than the maximum\n                    size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unsupportedAudioFormat</code>: The media format isn't supported.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unsupportedChannelCount</code>: You enabled\n                        <code>ChannelIdentification</code> and the audio has more than two\n                    channels.</p>\n            </li>\n            <li>\n               <p>\n                  <code>invalidAudio</code>: Amazon Transcribe couldn't decode the audio.</p>\n            </li>\n            <li>\n               <p>\n                  <code>mediaDownloadFailed</code>: Amazon Transcribe couldn't download the audio at\n                    your <code>MediaFileUri</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request didn't pass one or more validation tests. This can occur when the entity\n            you're trying to delete doesn't exist or if it's in a non-terminal state (such as\n                <code>IN PROGRESS</code>). See the exception message field for more\n            information.</p>",
+                "smithy.api#documentation": "<p>Your request didn't pass one or more validation tests. This can occur when a\n            parameter has an invalid value, when you combine parameters in a way that isn't\n            supported, when the entity you're trying to delete doesn't exist, or if it's in a\n            non-terminal state (such as <code>IN PROGRESS</code>). See the exception message field\n            for more information.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.transcribe#BadRequestExceptionReason": {
+            "type": "enum",
+            "members": {
+                "AUDIO_TOO_LONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "audioTooLong"
+                    }
+                },
+                "AUDIO_TOO_SHORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "audioTooShort"
+                    }
+                },
+                "UNSUPPORTED_AUDIO_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupportedAudioFormat"
+                    }
+                },
+                "UNSUPPORTED_CHANNEL_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupportedChannelCount"
+                    }
+                },
+                "INVALID_AUDIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalidAudio"
+                    }
+                },
+                "AUDIO_FILE_TOO_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "audioFileTooLarge"
+                    }
+                },
+                "MEDIA_DOWNLOAD_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mediaDownloadFailed"
+                    }
+                }
             }
         },
         "com.amazonaws.transcribe#BaseModelName": {
@@ -619,7 +672,7 @@
                 "RedactionOutput": {
                     "target": "com.amazonaws.transcribe#RedactionOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify if you want only a redacted transcript, or if you want a redacted and an\n            unredacted transcript.</p>\n         <p>When you choose <code>redacted</code>\n            Amazon Transcribe creates only a redacted transcript.</p>\n         <p>When you choose <code>redacted_and_unredacted</code>\n            Amazon Transcribe creates a redacted and an unredacted transcript (as two separate\n            files).</p>",
+                        "smithy.api#documentation": "<p>Specify if you want only a redacted transcript, or if you want a redacted and an\n            unredacted transcript.</p>\n         <p>When you choose <code>redacted</code>\n            Amazon Transcribe creates only a redacted transcript.</p>\n         <p>When you choose <code>redacted_and_unredacted</code>\n            Amazon Transcribe creates a redacted and an unredacted transcript. For batch jobs,\n                Amazon Transcribe creates two separate files. For <code>TranscribeAudio</code>,\n                Amazon Transcribe returns them in <code>RedactedResults</code> and\n                <code>Results</code>, or writes them as two separate files if you use\n                <code>OutputConfiguration</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -631,7 +684,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Makes it possible to redact or flag specified personally identifiable information (PII) in \n            your transcript. If you use <code>ContentRedaction</code>, you must also include the \n            sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can \n            optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to \n            redact.</p>"
+                "smithy.api#documentation": "<p>Makes it possible to redact specified personally identifiable information (PII) in \n            your transcript. If you use <code>ContentRedaction</code>, you must also include the \n            sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can \n            optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to \n            redact.</p>"
             }
         },
         "com.amazonaws.transcribe#CreateCallAnalyticsCategory": {
@@ -780,7 +833,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.transcribe#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom language model. Your model artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom language model. Your model artifacts are encrypted with the specified KMS key or with an Amazon Web Services owned key if a key is not supplied.</p>"
                     }
                 },
                 "Tags": {
@@ -1044,7 +1097,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.transcribe#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom vocabulary filter. Your vocabulary filter artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom vocabulary filter. Your vocabulary filter artifacts are encrypted with the specified KMS key or with an Amazon Web Services owned key if a key is not supplied.</p>"
                     }
                 }
             },
@@ -1123,7 +1176,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.transcribe#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom vocabulary. Your vocabulary artifacts are encrypted with the specified KMS key or with an AWS-owned key if a key is not supplied.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom vocabulary. Your vocabulary artifacts are encrypted with the specified KMS key or with an Amazon Web Services owned key if a key is not supplied.</p>"
                     }
                 }
             },
@@ -1692,6 +1745,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.transcribe#Double": {
+            "type": "double"
+        },
         "com.amazonaws.transcribe#DurationInSeconds": {
             "type": "float"
         },
@@ -1713,7 +1769,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Encryption configuration for the invocation"
+                "smithy.api#documentation": "<p>The encryption configuration for your custom resource. Specify a customer managed KMS key, and optionally an encryption context, to encrypt your custom vocabulary, custom vocabulary filter, or custom language model artifacts at rest. If you do not provide a key, your artifacts are encrypted with an Amazon Web Services owned key.</p>"
             }
         },
         "com.amazonaws.transcribe#FailureReason": {
@@ -2570,6 +2626,9 @@
                 "smithy.api#documentation": "<p>Flag the presence or absence of interruptions in your Call Analytics transcription\n            output.</p>\n         <p>Rules using <code>InterruptionFilter</code> are designed to match:</p>\n         <ul>\n            <li>\n               <p>Instances where an agent interrupts a customer</p>\n            </li>\n            <li>\n               <p>Instances where a customer interrupts an agent</p>\n            </li>\n            <li>\n               <p>Either participant interrupting the other</p>\n            </li>\n            <li>\n               <p>A lack of interruptions</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch\">Rule criteria for post-call \n            categories</a> for usage examples.</p>"
             }
         },
+        "com.amazonaws.transcribe#ItemId": {
+            "type": "integer"
+        },
         "com.amazonaws.transcribe#JobExecutionSettings": {
             "type": "structure",
             "members": {
@@ -3346,6 +3405,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transcribe#LanguageCodeItem"
+            }
+        },
+        "com.amazonaws.transcribe#LanguageDetectionMode": {
+            "type": "enum",
+            "members": {
+                "IDENTIFY_LANGUAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTIFY_LANGUAGE"
+                    }
+                }
             }
         },
         "com.amazonaws.transcribe#LanguageIdSettings": {
@@ -4411,6 +4481,15 @@
                 "smithy.api#documentation": "<p>Describes the Amazon S3 location of the media file you want to use in your\n            request.</p>\n         <p>For information on supported media formats, refer to the <code>MediaFormat</code> \n            parameter or the <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio\">Media formats</a> section \n            in the Amazon S3 Developer Guide.</p>"
             }
         },
+        "com.amazonaws.transcribe#MediaBytesBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26214400
+                }
+            }
+        },
         "com.amazonaws.transcribe#MediaFormat": {
             "type": "enum",
             "members": {
@@ -5243,6 +5322,12 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
+        },
+        "com.amazonaws.transcribe#NumberOfChannels": {
+            "type": "integer"
+        },
+        "com.amazonaws.transcribe#NumberOfSpeakers": {
+            "type": "integer"
         },
         "com.amazonaws.transcribe#OutputBucketName": {
             "type": "string",
@@ -6284,7 +6369,7 @@
                 "ContentRedaction": {
                     "target": "com.amazonaws.transcribe#ContentRedaction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Makes it possible to redact or flag specified personally identifiable information (PII) in \n            your transcript. If you use <code>ContentRedaction</code>, you must also include the \n            sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can \n            optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to redact.\n            If you do not include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>"
+                        "smithy.api#documentation": "<p>Makes it possible to redact specified personally identifiable information (PII) in \n            your transcript. If you use <code>ContentRedaction</code>, you must also include the \n            sub-parameters: <code>RedactionOutput</code> and <code>RedactionType</code>. You can \n            optionally include <code>PiiEntityTypes</code> to choose which types of PII you want to redact.\n            If you do not include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>"
                     }
                 },
                 "IdentifyLanguage": {
@@ -6459,6 +6544,386 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains <code>GenerateAbstractiveSummary</code>, which is a required parameter if you\n\t    want to enable Generative call summarization in your Call Analytics request.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SyncItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.transcribe#ItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of this item in the transcript, starting at 0.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.transcribe#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word or punctuation mark. In <code>RedactedResults</code>, Amazon Transcribe\n            replaces redacted words with <code>[PII]</code>.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.transcribe#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds from the start of your audio, when this item starts.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribe#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds from the start of your audio, when this item ends.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribe#SyncLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of this item, as a locale (for example, <code>en-US</code>).</p>"
+                    }
+                },
+                "ChannelLabel": {
+                    "target": "com.amazonaws.transcribe#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio channel this item came from (<code>ch_0</code> or <code>ch_1</code>).\n            Present if you enabled <code>ChannelIdentification</code>.</p>\n         <p>Item start and end times are measured from the start of the audio, separately for\n            each channel.</p>"
+                    }
+                },
+                "SpeakerLabel": {
+                    "target": "com.amazonaws.transcribe#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The speaker of this item (for example, <code>spk_0</code>). Present if you enabled\n                <code>ShowSpeakerLabels</code>.</p>"
+                    }
+                },
+                "VocabularyFilterMatch": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this item matched a word in your custom vocabulary filter. Present\n            if you included <code>VocabularyFilterSettings</code>.</p>"
+                    }
+                },
+                "Redactions": {
+                    "target": "com.amazonaws.transcribe#SyncRedactionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of personally identifiable information (PII) that Amazon Transcribe\n            redacted from this item. Present only on redacted items in\n                <code>RedactedResults</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A word or punctuation mark in your transcript. Labels such as\n                <code>SpeakerLabel</code> and <code>ChannelLabel</code> are present only if you\n            enabled the related feature.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SyncItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#SyncItem"
+            }
+        },
+        "com.amazonaws.transcribe#SyncLanguage": {
+            "type": "enum",
+            "members": {
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
+                    }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es"
+                    }
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr"
+                    }
+                },
+                "IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it"
+                    }
+                },
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de"
+                    }
+                },
+                "JA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja"
+                    }
+                },
+                "PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt"
+                    }
+                },
+                "KO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko"
+                    }
+                },
+                "ZH_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-CN"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-TW"
+                    }
+                },
+                "ZH_HK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-HK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#SyncLanguageCode": {
+            "type": "enum",
+            "members": {
+                "EN_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-US"
+                    }
+                },
+                "EN_AB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-AB"
+                    }
+                },
+                "EN_AU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-AU"
+                    }
+                },
+                "EN_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-GB"
+                    }
+                },
+                "EN_IE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-IE"
+                    }
+                },
+                "EN_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-IN"
+                    }
+                },
+                "EN_WL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-WL"
+                    }
+                },
+                "EN_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-ZA"
+                    }
+                },
+                "EN_NZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-NZ"
+                    }
+                },
+                "ES_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-US"
+                    }
+                },
+                "ES_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-ES"
+                    }
+                },
+                "ES_MX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-MX"
+                    }
+                },
+                "FR_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-FR"
+                    }
+                },
+                "FR_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-CA"
+                    }
+                },
+                "IT_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it-IT"
+                    }
+                },
+                "DE_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-DE"
+                    }
+                },
+                "DE_CH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-CH"
+                    }
+                },
+                "JA_JP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja-JP"
+                    }
+                },
+                "PT_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-BR"
+                    }
+                },
+                "PT_PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-PT"
+                    }
+                },
+                "ZH_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-CN"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-TW"
+                    }
+                },
+                "ZH_HK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-HK"
+                    }
+                },
+                "KO_KR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko-KR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#SyncLanguageCodeItem": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribe#SyncLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identified language, as a locale (for example, <code>en-US</code>).</p>"
+                    }
+                },
+                "DurationInSeconds": {
+                    "target": "com.amazonaws.transcribe#DurationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total time, in seconds, the identified language is spoken in your audio.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A language identified in your audio, and how long it's spoken.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SyncLanguageCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#SyncLanguageCodeItem"
+            }
+        },
+        "com.amazonaws.transcribe#SyncLanguageOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#SyncLanguage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.transcribe#SyncMedia": {
+            "type": "union",
+            "members": {
+                "MediaBytes": {
+                    "target": "com.amazonaws.transcribe#MediaBytesBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your audio file, provided inline in the request. The maximum size is 25 MB (26,214,400\n            bytes) of audio, measured before base64 encoding.</p>\n         <p>If you use an Amazon Web Services SDK, the SDK base64-encodes the bytes for you. If you\n            call the API directly, base64-encode the bytes yourself.</p>"
+                    }
+                },
+                "MediaFileUri": {
+                    "target": "com.amazonaws.transcribe#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the media file you want to transcribe. For\n            example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>s3://amzn-s3-demo-bucket/my-media-file.flac</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3://amzn-s3-demo-bucket/media-files/my-media-file.flac</code>\n               </p>\n            </li>\n         </ul>\n         <p>The maximum file size is 500 MB. You must have read permission for the file.</p>\n         <p>The Amazon S3 bucket that contains your input media must be located in the\n            same Amazon Web Services Region where you're making your transcription request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio to transcribe. Specify exactly one of <code>MediaBytes</code> or\n                <code>MediaFileUri</code>.</p>\n         <p>Audio sent in the request (<code>MediaBytes</code>) can be up to 25 MB. Audio in\n            Amazon S3 (<code>MediaFileUri</code>) can be up to 500 MB.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SyncOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "OutputMediaFileUri": {
+                    "target": "com.amazonaws.transcribe#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where you want your transcript written. For\n            example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>s3://amzn-s3-demo-bucket/my-transcript.json</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3://amzn-s3-demo-bucket/transcripts/</code>\n               </p>\n            </li>\n         </ul>\n         <p>If the location ends with an object key, Amazon Transcribe writes the transcript to\n            that key. If it is a bucket or ends with a forward slash (<code>/</code>), it's treated\n            as a prefix, and Amazon Transcribe writes the transcript under it to a file named with the\n            request ID of your call and a <code>.json</code> extension.</p>\n         <p>If you use <code>ContentRedaction</code>, Amazon Transcribe writes the redacted\n            transcript to the same location and adds <code>redacted-</code> before the file name\n            (for example, <code>redacted-my-transcript.json</code>). With\n                <code>redacted_and_unredacted</code>, Amazon Transcribe writes both files.</p>\n         <p>If an object already exists at that key, Amazon Transcribe overwrites it.</p>\n         <p>In a response, this is the location where Amazon Transcribe wrote your\n            transcript. If you requested <code>redacted_and_unredacted</code> output, this is the\n            location of the unredacted transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location where your transcript is written.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SyncRedaction": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.transcribe#PiiEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of PII that was redacted, for example <code>NAME</code> or\n                <code>SSN</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A type of personally identifiable information (PII) redacted from an item.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SyncRedactionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#SyncRedaction"
             }
         },
         "com.amazonaws.transcribe#Tag": {
@@ -6765,6 +7230,9 @@
                 },
                 {
                     "target": "com.amazonaws.transcribe#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#TranscribeAudio"
                 },
                 {
                     "target": "com.amazonaws.transcribe#UntagResource"
@@ -8072,6 +8540,193 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:transcribe:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z-]*/[0-9a-zA-Z._-]+$"
             }
         },
+        "com.amazonaws.transcribe#TranscribeAudio": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#TranscribeAudioRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#TranscribeAudioResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Transcribes a media file and returns the transcript in the same response. There is\n            no job to start and no status to poll.</p>\n         <p>Use <code>TranscribeAudio</code> when you already have a complete media file and want\n            the transcript right away. For large files, long audio, or bulk processing, use .</p>\n         <p>You must include the following parameters in your <code>TranscribeAudio</code>\n            request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Media</code>: Your audio, either as inline bytes\n                        (<code>MediaBytes</code>) or as the Amazon S3 location of a media\n                    file (<code>MediaFileUri</code>).</p>\n            </li>\n            <li>\n               <p>One of <code>Language</code> or <code>LanguageDetectionMode</code>: Specify\n                    the language of your audio, or have Amazon Transcribe identify it.</p>\n            </li>\n         </ul>\n         <p>Your audio must be between 0.5 seconds and 1 hour long. Supported formats are WAV,\n            MP3, FLAC, M4A, MP4, Ogg, WebM, and AMR.</p>\n         <p>If you send your audio in the request (<code>MediaBytes</code>), the file can be up to\n            25 MB. If you provide an Amazon S3 location (<code>MediaFileUri</code>), the\n            file can be up to 500 MB.</p>\n         <p>Amazon Transcribe always turns on smart formatting, also known as inverse text\n            normalization (ITN). It writes numbers, dates, currency, and similar items in their\n            usual written form. For example, \"one hundred\" becomes \"100\". You can't turn smart\n            formatting off.</p>\n         <p>By default, Amazon Transcribe returns the transcript in\n                <code>TranscriptResponse</code>. If you include <code>OutputConfiguration</code>,\n                Amazon Transcribe writes the transcript to the Amazon S3 location you\n            specify instead, and the response contains only that location.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/synctranscriptions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribe#TranscribeAudioMetadata": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribe#SyncLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of your transcript, as a locale (for example,\n            <code>en-US</code>). Present if you used <code>LanguageDetectionMode</code>.</p>"
+                    }
+                },
+                "LanguageCodes": {
+                    "target": "com.amazonaws.transcribe#SyncLanguageCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language identified in your audio, and how long it's spoken. Present if you used\n                <code>LanguageDetectionMode</code>.</p>"
+                    }
+                },
+                "MediaFormat": {
+                    "target": "com.amazonaws.transcribe#MediaFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of your audio, as detected by Amazon Transcribe.</p>"
+                    }
+                },
+                "MediaSampleRateHertz": {
+                    "target": "com.amazonaws.transcribe#MediaSampleRateHertz",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample rate of your audio, in hertz, as detected by Amazon Transcribe.</p>"
+                    }
+                },
+                "SpeakersCount": {
+                    "target": "com.amazonaws.transcribe#NumberOfSpeakers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of speakers identified in your audio. Present if you enabled\n                <code>ShowSpeakerLabels</code>.</p>"
+                    }
+                },
+                "NumberOfChannels": {
+                    "target": "com.amazonaws.transcribe#NumberOfChannels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of audio channels in your media. Present if you enabled\n                <code>ChannelIdentification</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about your audio.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#TranscribeAudioRequest": {
+            "type": "structure",
+            "members": {
+                "Media": {
+                    "target": "com.amazonaws.transcribe#SyncMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio to transcribe. Specify exactly one of <code>MediaBytes</code> or\n                <code>MediaFileUri</code>.</p>\n         <p>Audio sent in the request (<code>MediaBytes</code>) can be up to 25 MB. Audio in\n            Amazon S3 (<code>MediaFileUri</code>) can be up to 500 MB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.transcribe#SyncLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language spoken in your audio, as a base language code (for example,\n                <code>en</code> or <code>es</code>).</p>\n         <p>Include either <code>Language</code> or <code>LanguageDetectionMode</code> in your\n            request, but not both.</p>"
+                    }
+                },
+                "LanguageDetectionMode": {
+                    "target": "com.amazonaws.transcribe#LanguageDetectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables automatic language identification. Use <code>IDENTIFY_LANGUAGE</code> if\n            your audio contains a single language that you don't know in advance.</p>\n         <p>You can optionally include <code>LanguageOptions</code> to limit identification to\n            languages you think may be present, which can improve accuracy.</p>\n         <p>Amazon Transcribe returns the identified language, as a locale (for example,\n                <code>en-US</code>), in the response metadata.</p>\n         <p>Include either <code>Language</code> or <code>LanguageDetectionMode</code> in your\n            request, but not both.</p>"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.transcribe#SyncLanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of two or more languages that you think may be present in your audio, as base language codes (for example, <code>en</code> and <code>es</code>).\n            Each language can appear only once. A list with only one language returns a\n                <code>BadRequestException</code>.</p>\n         <p>You can use <code>LanguageOptions</code> only with\n                <code>LanguageDetectionMode</code>.</p>"
+                    }
+                },
+                "ChannelIdentification": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables channel identification in multi-channel audio. Each channel is transcribed\n            independently, and each item in the transcript is labeled with its channel.</p>\n         <p>Channel identification supports up to two channels.</p>"
+                    }
+                },
+                "ShowSpeakerLabels": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables speaker partitioning (diarization) in your transcript. Speaker partitioning\n            labels the speech from individual speakers in your media file.</p>\n         <p>If you set <code>ShowSpeakerLabels</code> to <code>true</code>, you must also include\n                <code>MaxSpeakerLabels</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html\">Partitioning speakers\n                (diarization)</a>.</p>"
+                    }
+                },
+                "MaxSpeakerLabels": {
+                    "target": "com.amazonaws.transcribe#MaxSpeakers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the maximum number of speakers you want to partition in your media.</p>\n         <p>Note that if your media contains more speakers than the specified number, Amazon Transcribe treats multiple speakers as a single speaker.</p>\n         <p>You can set <code>MaxSpeakerLabels</code> only if <code>ShowSpeakerLabels</code> is\n                <code>true</code>.</p>"
+                    }
+                },
+                "VocabularySettings": {
+                    "target": "com.amazonaws.transcribe#VocabularySettingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom vocabularies to apply to your transcript, with one entry per language. In each\n            entry, you can reference a custom vocabulary you created or provide phrases inline. All\n            entries must use the same type, either all by name or all inline.</p>\n         <p>If you specify <code>Language</code>, include exactly one entry, and its\n                <code>Language</code> must match. If you use <code>LanguageDetectionMode</code>,\n            you can include one entry for each language in <code>LanguageOptions</code>.</p>"
+                    }
+                },
+                "VocabularyFilterSettings": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom vocabulary filters to apply to your transcript, and how to apply them.</p>"
+                    }
+                },
+                "ContentRedaction": {
+                    "target": "com.amazonaws.transcribe#ContentRedaction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Redacts personally identifiable information (PII) from your transcript. Amazon Transcribe returns the redacted transcript in <code>RedactedResults</code>.</p>\n         <p>If you set <code>RedactionOutput</code> to <code>redacted_and_unredacted</code>,\n                Amazon Transcribe also returns the unredacted transcript in\n            <code>Results</code>.</p>\n         <p>In Sync, content redaction has these limits:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Languages:</b> English (<code>en</code>),\n                    Spanish (<code>es</code>), French (<code>fr</code>), Italian (<code>it</code>),\n                    German (<code>de</code>), and Portuguese (<code>pt</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Language identification:</b> If you use\n                        <code>LanguageDetectionMode</code>, you must also include\n                        <code>LanguageOptions</code>, and every language in it must be one of the\n                    languages above. A request that has no <code>LanguageOptions</code>, or that\n                    lists a language that isn't supported, returns a\n                        <code>BadRequestException</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Regions:</b> Content redaction isn't available in\n                    the South America (São Paulo) Region (<code>sa-east-1</code>). It's\n                    available in the other Amazon Web Services Regions where Sync is available.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OutputConfiguration": {
+                    "target": "com.amazonaws.transcribe#SyncOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Writes the transcript to an Amazon S3 location instead of returning it in the\n            response. If you include <code>OutputConfiguration</code>, the response contains only\n            the output location.</p>\n         <p>You must have write permission for the location you specify.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transcribe#TranscribeAudioResponse": {
+            "type": "structure",
+            "members": {
+                "OutputConfiguration": {
+                    "target": "com.amazonaws.transcribe#SyncOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where your transcript was written. Present only if\n            you included <code>OutputConfiguration</code> in your request. In that case,\n                <code>TranscriptResponse</code> isn't returned.</p>"
+                    }
+                },
+                "TranscriptResponse": {
+                    "target": "com.amazonaws.transcribe#TranscriptResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your transcript and information about your audio. Present only if you didn't include\n                <code>OutputConfiguration</code> in your request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.transcribe#TranscribeAudioResults": {
+            "type": "structure",
+            "members": {
+                "Transcript": {
+                    "target": "com.amazonaws.transcribe#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full text of your transcript.</p>\n         <p>If you enabled <code>ChannelIdentification</code>, the text of channel\n                <code>ch_0</code> is followed by the text of channel <code>ch_1</code>.</p>"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.transcribe#SyncItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The words and punctuation in your transcript, with timing and any labels you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A transcript of your audio.</p>"
+            }
+        },
         "com.amazonaws.transcribe#Transcript": {
             "type": "structure",
             "members": {
@@ -8147,6 +8802,32 @@
                         "smithy.api#enumValue": "EXACT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.transcribe#TranscriptResponse": {
+            "type": "structure",
+            "members": {
+                "Metadata": {
+                    "target": "com.amazonaws.transcribe#TranscribeAudioMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about your audio, such as the detected language, format, and sample\n            rate.</p>"
+                    }
+                },
+                "Results": {
+                    "target": "com.amazonaws.transcribe#TranscribeAudioResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your unredacted transcript.</p>\n         <p>If you set <code>RedactionOutput</code> to <code>redacted</code>, Amazon Transcribe\n            doesn't return this field. Use <code>RedactedResults</code> instead.</p>"
+                    }
+                },
+                "RedactedResults": {
+                    "target": "com.amazonaws.transcribe#TranscribeAudioResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your transcript with personally identifiable information (PII) redacted. Present only\n            if you included <code>ContentRedaction</code> in your request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your transcript and information about your audio.</p>"
             }
         },
         "com.amazonaws.transcribe#TranscriptionJob": {
@@ -8654,7 +9335,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.transcribe#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the new encryption configuration for your custom language model. The model artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>"
+                        "smithy.api#documentation": "<p>Specifies the new encryption configuration for your custom language model. The model artifacts are re-encrypted in place using the specified KMS key or with an Amazon Web Services owned key if a key is not supplied.</p>"
                     }
                 }
             },
@@ -8884,7 +9565,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.transcribe#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the new encryption configuration for your custom vocabulary filter. The vocabulary filter artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom vocabulary filter. Your vocabulary filter artifacts are encrypted with the specified KMS key or with an Amazon Web Services owned key if a key is not supplied.</p>"
                     }
                 }
             },
@@ -8957,7 +9638,7 @@
                 "EncryptionConfiguration": {
                     "target": "com.amazonaws.transcribe#EncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the new encryption configuration for your custom vocabulary. The vocabulary artifacts are re-encrypted in place using the specified KMS key or with an AWS-owned key if a key is not supplied.</p>"
+                        "smithy.api#documentation": "<p>Specifies the encryption configuration for your custom vocabulary. Your vocabulary artifacts are encrypted with the specified KMS key or with an Amazon Web Services owned key if a key is not supplied.</p>"
                     }
                 }
             },
@@ -9011,6 +9692,45 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transcribe#VocabularyInfo"
+            }
+        },
+        "com.amazonaws.transcribe#VocabularyFilterEntry": {
+            "type": "structure",
+            "members": {
+                "Language": {
+                    "target": "com.amazonaws.transcribe#SyncLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language this custom vocabulary filter applies to, as a base language code (for example, <code>en</code>). Each language can appear in only one\n            entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyFilterName": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a custom vocabulary filter you created. The filter's language must match\n            this entry's <code>Language</code>.</p>\n         <p>Vocabulary filter names are case sensitive.</p>\n         <p>Include either <code>VocabularyFilterName</code> or <code>Words</code> in each entry,\n            but not both.</p>"
+                    }
+                },
+                "Words": {
+                    "target": "com.amazonaws.transcribe#Words",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The words to filter, provided inline. You don't need to create the vocabulary filter\n            first.</p>\n         <p>Include either <code>Words</code> or <code>VocabularyFilterName</code> in each entry,\n            but not both.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A custom vocabulary filter for one language. Specify exactly one of\n                <code>VocabularyFilterName</code> or <code>Words</code>.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#VocabularyFilterEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#VocabularyFilterEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.transcribe#VocabularyFilterInfo": {
@@ -9072,6 +9792,28 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
+        "com.amazonaws.transcribe#VocabularyFilterSettings": {
+            "type": "structure",
+            "members": {
+                "VocabularyFilterMethod": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify how you want your custom vocabulary filter applied to your transcript.</p>\n         <p>To replace words with <code>***</code>, choose <code>mask</code>.</p>\n         <p>To delete words, choose <code>remove</code>.</p>\n         <p>To flag words without changing them, choose <code>tag</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom vocabulary filters, with one entry per language. In each entry, you can\n            reference a custom vocabulary filter you created or provide words inline. All entries\n            must use the same type, either all by name or all inline.</p>\n         <p>If you specify <code>Language</code>, include exactly one entry, and its\n                <code>Language</code> must match. If you use <code>LanguageDetectionMode</code>,\n            you can include one entry for each language in <code>LanguageOptions</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Custom vocabulary filters to apply to your transcript, and how to apply them.</p>"
+            }
+        },
         "com.amazonaws.transcribe#VocabularyFilters": {
             "type": "list",
             "member": {
@@ -9120,6 +9862,78 @@
                 "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
+        "com.amazonaws.transcribe#VocabularyPhrase": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.transcribe#VocabularyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phrase to recognize in your audio.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayAs": {
+                    "target": "com.amazonaws.transcribe#VocabularyText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the phrase is written in your transcript. If you don't include\n                <code>DisplayAs</code>, the phrase is written as it appears in\n                <code>Text</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A phrase in an inline custom vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#VocabularyPhraseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#VocabularyPhrase"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.transcribe#VocabularySettingsEntry": {
+            "type": "structure",
+            "members": {
+                "Language": {
+                    "target": "com.amazonaws.transcribe#SyncLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language this custom vocabulary applies to, as a base language code (for example, <code>en</code>). Each language can appear in only one entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribe#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a custom vocabulary you created. The vocabulary must be in the\n                <code>READY</code> state, and its language must match this entry's\n                <code>Language</code>.</p>\n         <p>Vocabulary names are case sensitive.</p>\n         <p>Include either <code>VocabularyName</code> or <code>Phrases</code> in each entry, but\n            not both.</p>"
+                    }
+                },
+                "Phrases": {
+                    "target": "com.amazonaws.transcribe#VocabularyPhraseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Up to 100 phrases to use as a custom vocabulary, provided inline. You don't need to\n            create the vocabulary first.</p>\n         <p>Include either <code>Phrases</code> or <code>VocabularyName</code> in each entry, but\n            not both.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A custom vocabulary for one language. Specify exactly one of\n                <code>VocabularyName</code> or <code>Phrases</code>.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#VocabularySettingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#VocabularySettingsEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.transcribe#VocabularyState": {
             "type": "enum",
             "members": {
@@ -9140,6 +9954,15 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#VocabularyText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
