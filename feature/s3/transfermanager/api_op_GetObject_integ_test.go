@@ -5,9 +5,12 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"errors"
+	"fmt"
 	"io"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
@@ -123,4 +126,91 @@ func TestInteg_GetObject_RandomizedReassembly(t *testing.T) {
 		}
 		return got
 	})
+}
+
+// TestInteg_GetObjectMultipart downloads a multipart object with equal part
+// sizes in both modes.
+func TestInteg_GetObjectMultipart(t *testing.T) {
+	const mib = 1024 * 1024
+	partSizes := []int64{8 * mib, 8 * mib, 4 * mib}
+
+	cases := map[string]getObjectTestData{
+		"parts get": {
+			Body:       bytes.NewReader(largeObjectBuf),
+			ExpectBody: largeObjectBuf,
+			PartSizes:  partSizes,
+		},
+		"ranges get": {
+			Body:       bytes.NewReader(largeObjectBuf),
+			ExpectBody: largeObjectBuf,
+			PartSizes:  partSizes,
+			OptFns: []func(*Options){
+				func(opt *Options) {
+					opt.GetObjectType = types.GetObjectRanges
+				},
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			testGetObjectWithChangingPartSize(t, setupMetadata.Buckets.Source.Name, c)
+		})
+	}
+}
+
+// TestInteg_GetObjectEarlyClose closes the body partway through a download.
+// Close must return promptly, and Read must then fail without blocking.
+func TestInteg_GetObjectEarlyClose(t *testing.T) {
+	const mib = 1024 * 1024
+	ctx := context.Background()
+	bucket := setupMetadata.Buckets.Source.Name
+	key := UniqueID()
+	uploadMultipartExact(t, ctx, bucket, key, largeObjectBuf, []int64{8 * mib, 8 * mib, 4 * mib})
+
+	out, err := s3TransferManagerClient.GetObject(ctx, &GetObjectInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+	})
+	if err != nil {
+		t.Fatalf("expect no error getting object, got %v", err)
+	}
+
+	head := make([]byte, mib)
+	if _, err := io.ReadFull(out.Body, head); err != nil {
+		t.Fatalf("expect no error reading first MiB, got %v", err)
+	}
+	if !bytes.Equal(head, largeObjectBuf[:mib]) {
+		t.Fatalf("first MiB does not match the uploaded bytes")
+	}
+
+	closed := make(chan error, 1)
+	go func() { closed <- out.Body.(io.Closer).Close() }()
+	select {
+	case err := <-closed:
+		if err != nil {
+			t.Fatalf("expect no error closing body, got %v", err)
+		}
+	case <-time.After(30 * time.Second):
+		t.Fatalf("Close did not return within 30s")
+	}
+
+	// Read may still return parts that were already downloaded, but it must
+	// fail or return the rest of the object.
+	readErr := make(chan error, 1)
+	go func() {
+		rest, err := io.ReadAll(out.Body)
+		if err == nil && !bytes.Equal(append(head, rest...), largeObjectBuf) {
+			err = fmt.Errorf("read %d bytes after Close without an error", len(rest))
+		}
+		readErr <- err
+	}()
+	select {
+	case err := <-readErr:
+		if err != nil && !errors.Is(err, errReadClosed) {
+			t.Fatalf("expect read error %q after Close, got %v", errReadClosed, err)
+		}
+	case <-time.After(30 * time.Second):
+		t.Fatalf("Read after Close did not return within 30s")
+	}
 }
