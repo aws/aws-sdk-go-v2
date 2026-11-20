@@ -124,3 +124,30 @@ func TestInteg_GetObject_RandomizedReassembly(t *testing.T) {
 		return got
 	})
 }
+
+// TestInteg_GetObject_ZeroLengthRead uploads a 40 MiB (5-part) multipart object
+// and verifies that a zero-length Read on the GetObject body returns (0, nil)
+// without deadlocking, and that a subsequent io.ReadAll still streams the whole
+// object back byte for byte (GH #3641). Both GetObject branches are covered
+// since each has its own dispatch path.
+func TestInteg_GetObject_ZeroLengthRead(t *testing.T) {
+	// largeObjectBuf is 20 MiB; doubled it is 40 MiB, which is 5 parts at the
+	// 8 MiB default part size and matches the object shape from the issue.
+	body := append(append([]byte(nil), largeObjectBuf...), largeObjectBuf...)
+
+	cases := map[string]getObjectTestData{
+		"parts": {Body: bytes.NewReader(body)},
+		"ranges": {
+			Body: bytes.NewReader(body),
+			OptFns: []func(*Options){
+				func(o *Options) { o.GetObjectType = types.GetObjectRanges },
+			},
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			testGetObjectZeroLengthRead(t, setupMetadata.Buckets.Source.Name, c)
+		})
+	}
+}

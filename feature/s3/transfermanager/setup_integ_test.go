@@ -364,6 +364,72 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
 	}
 }
 
+// testGetObjectZeroLengthRead uploads testData.Body through the transfer manager
+// as a multipart object, then verifies that a zero-length Read on the GetObject
+// body returns (0, nil) without deadlocking and that a subsequent io.ReadAll
+// streams the whole object back byte for byte (GH #3641). Before the fix the
+// zero-length Read started the download pipeline but never drained the internal
+// channel, so a producer blocked forever and Read hung; context cancellation
+// could not unblock it. testData.OptFns selects the GetObject branch.
+func testGetObjectZeroLengthRead(t *testing.T, bucket string, testData getObjectTestData) {
+	key := UniqueID()
+	ctx := context.Background()
+
+	body, err := io.ReadAll(testData.Body)
+	if err != nil {
+		t.Fatalf("expect no error reading test body, got %v", err)
+	}
+
+	// Upload through the transfer manager so the object is a genuine multipart
+	// object and the streamed GET is chunked.
+	if _, err := s3TransferManagerClient.UploadObject(ctx, &UploadObjectInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+		Body:   bytes.NewReader(body),
+	}); err != nil {
+		t.Fatalf("expect no error uploading object, got %v", err)
+	}
+
+	out, err := s3TransferManagerClient.GetObject(ctx, &GetObjectInput{
+		Bucket: aws.String(bucket),
+		Key:    aws.String(key),
+	}, testData.OptFns...)
+	if err != nil {
+		t.Fatalf("expect no error getting object, got %v", err)
+	}
+
+	// (1) A zero-length Read must return (0, nil) promptly, not hang.
+	type readResult struct {
+		n   int
+		err error
+	}
+	zero := make(chan readResult, 1)
+	go func() {
+		n, err := out.Body.Read(make([]byte, 0))
+		zero <- readResult{n, err}
+	}()
+	select {
+	case res := <-zero:
+		if res.n != 0 || res.err != nil {
+			t.Fatalf("zero-length Read = (%d, %v), want (0, nil)", res.n, res.err)
+		}
+	case <-time.After(30 * time.Second):
+		t.Fatal("DEADLOCK: zero-length Read did not return within 30s (GH #3641)")
+	}
+
+	// (2) The same body must still stream the whole object afterwards.
+	got, err := io.ReadAll(out.Body)
+	if err != nil {
+		t.Fatalf("expect no error reading object after zero-length read, got %v", err)
+	}
+	if e, a := len(body), len(got); e != a {
+		t.Fatalf("expect %d bytes, got %d", e, a)
+	}
+	if !bytes.Equal(body, got) {
+		t.Fatal("expect streamed bytes to equal the uploaded object")
+	}
+}
+
 // testGetObjectWithChangingPartSize uploads testData.Body as a multipart object
 // whose parts have unequal sizes (testData.PartSizes), then reads it back through
 // the transfer manager's GetObject and asserts the streamed bytes exactly equal
