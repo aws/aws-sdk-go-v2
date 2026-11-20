@@ -1,8 +1,0 @@
-{
-    "id": "02fa99b0-b56c-46bc-9c15-837766090b44",
-    "type": "feature",
-    "description": "This release adds ResourceTypeOptInIncremental to the UpdateRegionSettings request and the DescribeRegionSettings response, so customers can opt in to or out of incremental backups. It currently applies only to Amazon DynamoDB table backups.",
-    "modules": [
-        "service/backup"
-    ]
-}

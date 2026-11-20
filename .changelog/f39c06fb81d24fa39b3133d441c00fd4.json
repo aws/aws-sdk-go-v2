@@ -1,8 +1,0 @@
-{
-    "id": "f39c06fb-81d2-4fa3-9b31-33d441c00fd4",
-    "type": "feature",
-    "description": "Amazon CloudFront now supports HTTP2 connections to custom and VPC origins, so you can multiplex many requests over fewer origin connections, including WebSocket connections to HTTP2 origins that support extended CONNECT.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

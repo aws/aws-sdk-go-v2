@@ -1,3 +1,7 @@
+# v1.75.0 (2026-11-20)
+
+* **Feature**: Adds support for FSx for NetApp ONTAP 3rd Generation file systems and API operations for new FSx for NetApp ONTAP resources
+
 # v1.74.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

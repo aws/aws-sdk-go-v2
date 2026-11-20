@@ -1,8 +1,0 @@
-{
-    "id": "e762c61d-d2bb-4cc4-8e43-42f717ab5c12",
-    "type": "feature",
-    "description": "This release adds documentation for the T9g instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs, adds the disable-complete state for IPAM routing policy registrations, and adds Network Firewall automated Internet firewall API changes.",
-    "modules": [
-        "service/ec2"
-    ]
-}

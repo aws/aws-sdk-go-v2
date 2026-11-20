@@ -1,3 +1,7 @@
+# v1.9.0 (2026-11-20)
+
+* **Feature**: Adds support for the WEBBOT registry record type
+
 # v1.8.0 (2026-11-19)
 
 * **Feature**: BatchGetDiscoverableRegistryRecord returns a short-lived download URL and SHA-256 checksum for approved skill packages. SearchDiscoverableRegistryRecords adds searchType (KEYWORD, SEMANTIC, HYBRID) and pagination. Adds bearer token authentication for registries that use JWT authorization.

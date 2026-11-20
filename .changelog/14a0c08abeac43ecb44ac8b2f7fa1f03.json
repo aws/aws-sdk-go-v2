@@ -1,8 +1,0 @@
-{
-    "id": "14a0c08a-beac-43ec-b44a-c8b2f7fa1f03",
-    "type": "feature",
-    "description": "Adds support for Network Firewall automated internet firewall to Network Security Manager",
-    "modules": [
-        "service/networksecuritymanager"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "f94572fc-ec1e-40f8-9126-10250b668aa7",
-    "type": "feature",
-    "description": "Adds the parametersUri field to StartRun, which lets you provide run parameters in a JSON file in Amazon S3 instead of inline. GetRun returns parametersUri for runs started this way.",
-    "modules": [
-        "service/omics"
-    ]
-}

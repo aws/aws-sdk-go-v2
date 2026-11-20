@@ -1,8 +1,0 @@
-{
-    "id": "c6795692-7300-42a1-bf0b-fda4ddd6998a",
-    "type": "feature",
-    "description": "Initial release of AWS Payments API, which lets you view your account balance, invoices, credit memos, and payment instruments.",
-    "modules": [
-        "service/payments"
-    ]
-}

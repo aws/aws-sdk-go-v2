@@ -1,8 +1,0 @@
-{
-    "id": "6e5b369e-8e65-4a3f-85ca-cb462430a1be",
-    "type": "feature",
-    "description": "Adds the InvokeGlobalInferenceGateway and InvokeGlobalInferenceGatewayWithResponseStream APIs for sending inference requests to a SageMaker HyperPod Global Inference Gateway.",
-    "modules": [
-        "service/sagemakergatewayruntime"
-    ]
-}

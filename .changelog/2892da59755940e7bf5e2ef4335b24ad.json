@@ -1,8 +1,0 @@
-{
-    "id": "2892da59-7559-40e7-bf5e-2ef4335b24ad",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now supports converting captions from non-embedded sources, such as Teletext and Smart Subtitles, into CEA-608 and CEA-708 embedded captions, and supports WebVTT subtitle renditions from HLS inputs as a caption source.",
-    "modules": [
-        "service/medialive"
-    ]
-}

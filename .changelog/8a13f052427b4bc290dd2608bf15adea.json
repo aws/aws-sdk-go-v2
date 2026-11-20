@@ -1,8 +1,0 @@
-{
-    "id": "8a13f052-427b-4bc2-90dd-2608bf15adea",
-    "type": "feature",
-    "description": "AWS Lambda MicroVMs now supports customer managed keys (CMK) in AWS Key Management Service (AWS KMS), enabling you to encrypt Lambda MicroVM data at rest using keys you control.",
-    "modules": [
-        "service/lambdamicrovms"
-    ]
-}

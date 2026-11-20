@@ -1,8 +1,0 @@
-{
-    "id": "9cea4a30-76ee-46ea-8bc0-03310a62ef6d",
-    "type": "feature",
-    "description": "Amazon DataZone now supports detaching a project from its project profile via UpdateProject, specifying the environment blueprint ID in environment configuration user parameters, and transferring asset ownership from a source project to a target project via UpdateAssetOwner.",
-    "modules": [
-        "service/datazone"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "a1622891-c08e-49e6-a56f-ffde4fbfc0a8",
-    "type": "feature",
-    "description": "Enablement for Network Firewall and Omni Events via Observability Admin Telemetry Rule for account and organization level",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}

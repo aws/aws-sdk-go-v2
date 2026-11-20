@@ -1,3 +1,7 @@
+# v1.77.0 (2026-11-20)
+
+* **Feature**: Amazon CloudFront now supports HTTP2 connections to custom and VPC origins, so you can multiplex many requests over fewer origin connections, including WebSocket connections to HTTP2 origins that support extended CONNECT.
+
 # v1.76.0 (2026-11-19)
 
 * **Feature**: Amazon CloudFront adds configuration for SNI-less clients on Anycast static IPs, introduces Anycast IP based domain routing for Distribution Tenants, provides automatic domain ownership validation when creating or updating Distribution Tenants, and enables HTTP traffic via DNS validation.

@@ -1,8 +1,0 @@
-{
-    "id": "eac50070-6b7d-40ea-b5aa-a4c625083599",
-    "type": "feature",
-    "description": "Adds the ListAutonomousDatabaseRefreshableClones and StartAutonomousDatabaseRefresh APIs for listing and refreshing refreshable clones of Autonomous Database Serverless.",
-    "modules": [
-        "service/odb"
-    ]
-}

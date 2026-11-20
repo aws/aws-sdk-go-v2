@@ -1,8 +1,0 @@
-{
-    "id": "91552f59-e830-40bd-9ec3-86a0df3dbe9d",
-    "type": "feature",
-    "description": "Adds Arabic (ara) as a supported language for subtitling transcription and custom vocabulary dictionaries.",
-    "modules": [
-        "service/elementalinference"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "5f19f864-5d04-457d-9702-94478013b276",
-    "type": "feature",
-    "description": "Adds support for the WEBBOT registry record type",
-    "modules": [
-        "service/agentregistry"
-    ]
-}

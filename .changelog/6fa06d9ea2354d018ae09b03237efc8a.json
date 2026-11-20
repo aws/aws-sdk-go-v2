@@ -1,8 +1,0 @@
-{
-    "id": "6fa06d9e-a235-4d01-8ae0-9b03237efc8a",
-    "type": "feature",
-    "description": "Amazon Bedrock adds APIs to manage projects, discover and apply to Trusted Access Programs, manage enrollments, and configure data retention storage for accounts, organizations, and projects. Model and inference profile discovery now supports project context.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.11.0 (2026-11-20)
+
+* **Feature**: Adds APIs to create publishers, verify that a publisher owns a domain, and associate registry records with a publisher. Publishers can approve or reject each association.
+
 # v1.10.0 (2026-11-19)
 
 * **Feature**: Adds skill packages and skill source sync for agent skill records. Upload a skill package (ZIP) or sync SKILL.md or the full package from Amazon S3 or GitHub. GetRegistryRecord returns a short-lived download URL and SHA-256 checksum. GitHub sources use OAuth 2.0 user authorization.

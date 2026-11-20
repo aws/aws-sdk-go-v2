@@ -1,8 +1,0 @@
-{
-    "id": "d32cda09-4b87-4009-802b-e1b736252b9a",
-    "type": "feature",
-    "description": "Amazon Textract Insights uses generative AI to split, classify, and extract data from documents with one asynchronous API. Get text, layout, and tables as Markdown, HTML, or CSV, plus summaries and figure captions, and extract the fields you define in a blueprint with confidence scores and locations",
-    "modules": [
-        "service/textract"
-    ]
-}

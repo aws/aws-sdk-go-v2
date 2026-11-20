@@ -1,8 +1,0 @@
-{
-    "id": "bab63990-2438-42f2-a78f-30c6289f20be",
-    "type": "feature",
-    "description": "Added support for Instance Health Checks in AWS PCS.",
-    "modules": [
-        "service/pcs"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "21210c70-796d-48a8-b239-f640421a0afb",
-    "type": "feature",
-    "description": "Adds support for FSx for NetApp ONTAP 3rd Generation file systems and API operations for new FSx for NetApp ONTAP resources",
-    "modules": [
-        "service/fsx"
-    ]
-}

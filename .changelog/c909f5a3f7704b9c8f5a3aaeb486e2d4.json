@@ -1,8 +1,0 @@
-{
-    "id": "c909f5a3-f770-4b9c-8f5a-3aaeb486e2d4",
-    "type": "feature",
-    "description": "Amazon Route 53 support for advanced hosted zones. Including change guardrails, public dns fallback, change history. Also support for AZAffinityRouting.",
-    "modules": [
-        "service/route53"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.35.0 (2026-11-20)
+
+* **Feature**: Enablement for Network Firewall and Omni Events via Observability Admin Telemetry Rule for account and organization level
+
 # v1.34.0 (2026-11-17)
 
 * **Feature**: This release adds Microsoft Azure connectors, third-party telemetry enrichment and StartTelemetryPipelineRefresh, to discover Azure resources, enrich their telemetry and refresh external-cloud pipelines.
