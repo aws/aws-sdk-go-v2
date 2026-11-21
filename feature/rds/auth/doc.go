@@ -4,5 +4,5 @@
 // Before using the authentication please visit the docs here to ensure
 // the database has the proper policies to allow for IAM token authentication.
 // https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html#UsingWithRDS.IAMDBAuth.Availability
-// https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds
+// https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/sdk-utilities-rds.html
 package auth
