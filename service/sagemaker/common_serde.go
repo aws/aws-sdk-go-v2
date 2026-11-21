@@ -104,6 +104,23 @@ func serializeAutoMLProblemTypeResolvedAttributes(s smithy.ShapeSerializer, sche
 	}
 }
 
+func serializeCapacityReservationResourceAssociation(s smithy.ShapeSerializer, schema *smithy.Schema, v types.CapacityReservationResourceAssociation) {
+	switch vv := v.(type) {
+	case *types.CapacityReservationResourceAssociationMemberEndpoints:
+		s.WriteUnion(schema, schemas.CapacityReservationResourceAssociation_Endpoints)
+		s.WriteStruct(schemas.CapacityReservationResourceAssociation_Endpoints)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.CapacityReservationResourceAssociationMemberHyperPodClusters:
+		s.WriteUnion(schema, schemas.CapacityReservationResourceAssociation_HyperPodClusters)
+		s.WriteStruct(schemas.CapacityReservationResourceAssociation_HyperPodClusters)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeClusterInstanceStorageConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ClusterInstanceStorageConfig) {
 	switch vv := v.(type) {
 	case *types.ClusterInstanceStorageConfigMemberEbsVolumeConfig:
@@ -393,6 +410,22 @@ func deserializeAutoMLProblemTypeResolvedAttributes(d smithy.ShapeDeserializer, 
 			return vv.Deserialize(d)
 		case schemas.AutoMLProblemTypeResolvedAttributes_TextGenerationResolvedAttributes:
 			vv := &types.AutoMLProblemTypeResolvedAttributesMemberTextGenerationResolvedAttributes{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeCapacityReservationResourceAssociation(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.CapacityReservationResourceAssociation) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.CapacityReservationResourceAssociation_Endpoints:
+			vv := &types.CapacityReservationResourceAssociationMemberEndpoints{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.CapacityReservationResourceAssociation_HyperPodClusters:
+			vv := &types.CapacityReservationResourceAssociationMemberHyperPodClusters{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -1127,6 +1160,62 @@ func serializeBatchReplaceClusterNodesErrors(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeCandidateSteps(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AutoMLCandidateStep) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCapacityReservationFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CapacityReservationFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCapacityReservationFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeCapacityReservationInstanceUsageSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CapacityReservationInstanceUsage) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCapacityReservationResourceAssociations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CapacityReservationResourceAssociation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeCapacityReservationResourceAssociation(s, schema.ListMember(), vv)
+	}
+	s.CloseList()
+}
+
+func serializeCapacityReservationResourceUsageSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CapacityReservationResourceUsage) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCapacityReservationSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CapacityReservationSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -5310,6 +5399,136 @@ func deserializeCandidateSteps(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		vv = types.AutoMLCandidateStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCapacityReservationFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CapacityReservationFilter) error {
+	*v = make([]types.CapacityReservationFilter, 0)
+	var vv types.CapacityReservationFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CapacityReservationFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CapacityReservationFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCapacityReservationFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCapacityReservationInstanceUsageSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CapacityReservationInstanceUsage) error {
+	*v = make([]types.CapacityReservationInstanceUsage, 0)
+	var vv types.CapacityReservationInstanceUsage
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CapacityReservationInstanceUsage
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CapacityReservationInstanceUsage{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCapacityReservationResourceAssociations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CapacityReservationResourceAssociation) error {
+	*v = make([]types.CapacityReservationResourceAssociation, 0)
+	var vv types.CapacityReservationResourceAssociation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CapacityReservationResourceAssociation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeCapacityReservationResourceAssociation(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCapacityReservationResourceUsageSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CapacityReservationResourceUsage) error {
+	*v = make([]types.CapacityReservationResourceUsage, 0)
+	var vv types.CapacityReservationResourceUsage
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CapacityReservationResourceUsage
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CapacityReservationResourceUsage{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCapacityReservationSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CapacityReservationSummary) error {
+	*v = make([]types.CapacityReservationSummary, 0)
+	var vv types.CapacityReservationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CapacityReservationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CapacityReservationSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

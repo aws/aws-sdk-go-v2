@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Errors":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","PrincipalArn":"__PrincipalArn__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","PrincipalArn":"__PrincipalArn__"}],"PolicyArn":"__PolicyArn__","Success":[{"PrincipalArn":"__PrincipalArn__"},{"PrincipalArn":"__PrincipalArn__"}]}

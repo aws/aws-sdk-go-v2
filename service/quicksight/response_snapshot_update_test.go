@@ -234,6 +234,50 @@ func TestUpdateResponseSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_BatchDeletePolicyAssignmentByPolicy(t *testing.T) {
+	want := &BatchDeletePolicyAssignmentByPolicyOutput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Success: []types.BatchDeletePolicyAssignmentSuccess{
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+			},
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+			},
+		},
+		Errors: []types.BatchDeletePolicyAssignmentError{
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.BatchDeletePolicyAssignmentByPolicy, schemas.BatchDeletePolicyAssignmentByPolicyResponse, schemas.BatchDeletePolicyAssignmentByPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchDeletePolicyAssignmentByPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	want := &BatchDeleteTopicReviewedAnswerOutput{
 		TopicId:  ptr.String("__TopicId__"),
@@ -360,6 +404,54 @@ func TestUpdateResponseSnapshot_BatchDescribeUserLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_BatchPutPolicyAssignmentByPolicy(t *testing.T) {
+	want := &BatchPutPolicyAssignmentByPolicyOutput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Success: []types.BatchPutPolicyAssignmentSuccess{
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ReplacedPolicyArn: ptr.String("__ReplacedPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ReplacedPolicyArn: ptr.String("__ReplacedPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+		},
+		Errors: []types.BatchPutPolicyAssignmentError{
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.BatchPutPolicyAssignmentByPolicy, schemas.BatchPutPolicyAssignmentByPolicyResponse, schemas.BatchPutPolicyAssignmentByPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("BatchPutPolicyAssignmentByPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CancelIngestion(t *testing.T) {
 	want := &CancelIngestionOutput{
 		Arn:         ptr.String("__Arn__"),
@@ -383,6 +475,76 @@ func TestUpdateResponseSnapshot_CancelIngestion(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CancelIngestion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateAccessControlApplication(t *testing.T) {
+	want := &CreateAccessControlApplicationOutput{
+		Status:                         ptr.Int32(200),
+		RequestId:                      ptr.String("__RequestId__"),
+		ApplicationId:                  ptr.String("__ApplicationId__"),
+		Arn:                            ptr.String("__Arn__"),
+		AccessControlApplicationStatus: types.AccessControlApplicationStatus("ENABLED"),
+		CreatedTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TenantUrl:                      ptr.String("__TenantUrl__"),
+		IdcApplicationArn:              ptr.String("__IdcApplicationArn__"),
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigCreateOutput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailCreateOutput: &types.QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ClientId: ptr.String("__ClientId__"),
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAccessControlApplication, schemas.CreateAccessControlApplicationResponse, schemas.CreateAccessControlApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAccessControlApplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateAccessControlApplicationSecret(t *testing.T) {
+	want := &CreateAccessControlApplicationSecretOutput{
+		Status:         ptr.Int32(200),
+		RequestId:      ptr.String("__RequestId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.CreateAccessControlApplicationSecret, schemas.CreateAccessControlApplicationSecretResponse, schemas.CreateAccessControlApplicationSecretResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateAccessControlApplicationSecret.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1075,6 +1237,36 @@ func TestUpdateResponseSnapshot_CreateIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateInboundConnector(t *testing.T) {
+	want := &CreateInboundConnectorOutput{
+		Status:                 ptr.Int32(200),
+		RequestId:              ptr.String("__RequestId__"),
+		InboundConnectorId:     ptr.String("__InboundConnectorId__"),
+		Arn:                    ptr.String("__Arn__"),
+		TenantUrl:              ptr.String("__TenantUrl__"),
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+		CreatedTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.CreateInboundConnector, schemas.CreateInboundConnectorResponse, schemas.CreateInboundConnectorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateInboundConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateIngestion(t *testing.T) {
 	want := &CreateIngestionOutput{
 		Arn:             ptr.String("__Arn__"),
@@ -1127,6 +1319,33 @@ func TestUpdateResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateKnowledgeBase.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &CreateKnowledgeBaseRefreshScheduleOutput{
+		ScheduleId:       ptr.String("__ScheduleId__"),
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.CreateKnowledgeBaseRefreshSchedule, schemas.CreateKnowledgeBaseRefreshScheduleResponse, schemas.CreateKnowledgeBaseRefreshScheduleResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateKnowledgeBaseRefreshSchedule.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1518,6 +1737,57 @@ func TestUpdateResponseSnapshot_CreateVPCConnection(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateVPCConnection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteAccessControlApplication(t *testing.T) {
+	want := &DeleteAccessControlApplicationOutput{
+		Status:        ptr.Int32(200),
+		RequestId:     ptr.String("__RequestId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAccessControlApplication, schemas.DeleteAccessControlApplicationResponse, schemas.DeleteAccessControlApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAccessControlApplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteAccessControlApplicationSecret(t *testing.T) {
+	want := &DeleteAccessControlApplicationSecretOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAccessControlApplicationSecret, schemas.DeleteAccessControlApplicationSecretResponse, schemas.DeleteAccessControlApplicationSecretResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAccessControlApplicationSecret.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2131,6 +2401,32 @@ func TestUpdateResponseSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteInboundConnector(t *testing.T) {
+	want := &DeleteInboundConnectorOutput{
+		Status:             ptr.Int32(200),
+		RequestId:          ptr.String("__RequestId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteInboundConnector, schemas.DeleteInboundConnectorResponse, schemas.DeleteInboundConnectorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteInboundConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	want := &DeleteKnowledgeBaseOutput{
 		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
@@ -2154,6 +2450,33 @@ func TestUpdateResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteKnowledgeBase.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &DeleteKnowledgeBaseRefreshScheduleOutput{
+		ScheduleId:       ptr.String("__ScheduleId__"),
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteKnowledgeBaseRefreshSchedule, schemas.DeleteKnowledgeBaseRefreshScheduleResponse, schemas.DeleteKnowledgeBaseRefreshScheduleResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteKnowledgeBaseRefreshSchedule.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2230,6 +2553,28 @@ func TestUpdateResponseSnapshot_DeleteOAuthClientApplication(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteOAuthClientApplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeletePolicyAssignment(t *testing.T) {
+	want := &DeletePolicyAssignmentOutput{}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DeletePolicyAssignment, schemas.DeletePolicyAssignmentResponse, schemas.DeletePolicyAssignmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeletePolicyAssignment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2629,6 +2974,68 @@ func TestUpdateResponseSnapshot_DeleteVPCConnection(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteVPCConnection.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeAccessControlApplication(t *testing.T) {
+	want := &DescribeAccessControlApplicationOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		AccessControlApplication: &types.AccessControlApplication{
+			ApplicationId:      ptr.String("__ApplicationId__"),
+			Arn:                ptr.String("__Arn__"),
+			Name:               ptr.String("__Name__"),
+			Namespace:          ptr.String("__Namespace__"),
+			AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+			Status:             types.AccessControlApplicationStatus("ENABLED"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TenantUrl:          ptr.String("__TenantUrl__"),
+			Description:        ptr.String("__Description__"),
+			IdcApplicationArn:  ptr.String("__IdcApplicationArn__"),
+			IdpAuthorizingConfiguration: &types.IdpAuthorizingConfig{
+				IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+				IdpAuthorizingConfigurationDetail: &types.IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode{
+					Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+						ClientId:  ptr.String("__ClientId__"),
+						IssuerUrl: ptr.String("__IssuerUrl__"),
+					},
+				},
+				IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+					IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+				},
+			},
+			QuickAuthenticationConfiguration: &types.QuickAuthenticationConfig{
+				QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+				QuickAuthenticationConfigurationDetail: &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{
+					Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+						RedirectUris: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ClientId: ptr.String("__ClientId__"),
+					},
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeAccessControlApplication, schemas.DescribeAccessControlApplicationResponse, schemas.DescribeAccessControlApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeAccessControlApplication.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7175,6 +7582,9 @@ func TestUpdateResponseSnapshot_DescribeCustomPermissions(t *testing.T) {
 				CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 				ShareMCPAction:                             types.CapabilityState("DENY"),
 				UseMCPAction:                               types.CapabilityState("DENY"),
+				LocalMCPAction:                             types.CapabilityState("DENY"),
+				CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+				UseLocalMCPAction:                          types.CapabilityState("DENY"),
 				OpenAPIAction:                              types.CapabilityState("DENY"),
 				CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 				ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -12067,6 +12477,22 @@ func TestUpdateResponseSnapshot_DescribeDataSet(t *testing.T) {
 					},
 				},
 			},
+			UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+				{
+					ColumnId:   ptr.String("__ColumnId__"),
+					ColumnName: ptr.String("__ColumnName__"),
+					Expression: ptr.String("__Expression__"),
+					Type:       types.ColumnDataType("STRING"),
+					SubType:    types.ColumnDataSubType("FLOAT"),
+				},
+				{
+					ColumnId:   ptr.String("__ColumnId__"),
+					ColumnName: ptr.String("__ColumnName__"),
+					Expression: ptr.String("__Expression__"),
+					Type:       types.ColumnDataType("STRING"),
+					SubType:    types.ColumnDataSubType("FLOAT"),
+				},
+			},
 		},
 		RequestId: ptr.String("__RequestId__"),
 		Status:    200,
@@ -12633,6 +13059,44 @@ func TestUpdateResponseSnapshot_DescribeIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeInboundConnector(t *testing.T) {
+	want := &DescribeInboundConnectorOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		InboundConnector: &types.InboundConnector{
+			InboundConnectorId: ptr.String("__InboundConnectorId__"),
+			Arn:                ptr.String("__Arn__"),
+			Name:               ptr.String("__Name__"),
+			Status:             types.InboundConnectorStatus("ENABLED"),
+			TenantUrl:          ptr.String("__TenantUrl__"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			InboundConnectorConfiguration: &types.InboundConnectorConfig{
+				InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+			},
+			Description: ptr.String("__Description__"),
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeInboundConnector, schemas.DescribeInboundConnectorResponse, schemas.DescribeInboundConnectorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeInboundConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeIngestion(t *testing.T) {
 	want := &DescribeIngestionOutput{
 		Ingestion: &types.Ingestion{
@@ -12875,6 +13339,44 @@ func TestUpdateResponseSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeKnowledgeBasePermissions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribeKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &DescribeKnowledgeBaseRefreshScheduleOutput{
+		Schedule: &types.KnowledgeBaseRefreshScheduleSummary{
+			ScheduleId: ptr.String("__ScheduleId__"),
+			ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+				Interval: types.KbRefreshInterval("DAILY"),
+				RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+					DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+					DayOfMonth: ptr.String("__DayOfMonth__"),
+				},
+			},
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:     types.ScheduleState("ENABLED"),
+		},
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeKnowledgeBaseRefreshSchedule, schemas.DescribeKnowledgeBaseRefreshScheduleResponse, schemas.DescribeKnowledgeBaseRefreshScheduleResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeKnowledgeBaseRefreshSchedule.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18204,6 +18706,33 @@ func TestUpdateResponseSnapshot_GetIdentityContext(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetPolicyAssignment(t *testing.T) {
+	want := &GetPolicyAssignmentOutput{
+		PolicyArn:  ptr.String("__PolicyArn__"),
+		PolicyName: ptr.String("__PolicyName__"),
+		UpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Revision:   ptr.Int64(1),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.GetPolicyAssignment, schemas.GetPolicyAssignmentResponse, schemas.GetPolicyAssignmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetPolicyAssignment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	want := &GetSessionEmbedUrlOutput{
 		EmbedUrl:  ptr.String("__EmbedUrl__"),
@@ -18226,6 +18755,106 @@ func TestUpdateResponseSnapshot_GetSessionEmbedUrl(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetSessionEmbedUrl.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListAccessControlApplications(t *testing.T) {
+	want := &ListAccessControlApplicationsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		AccessControlApplications: []types.AccessControlApplicationSummary{
+			{
+				ApplicationId:      ptr.String("__ApplicationId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+				Status:             types.AccessControlApplicationStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigSummary{
+					IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+					IdpAuthorizingConfigurationSummaryDetail: &types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode{
+						Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+							ClientId:  ptr.String("__ClientId__"),
+							IssuerUrl: ptr.String("__IssuerUrl__"),
+						},
+					},
+					IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+						IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+					},
+				},
+				QuickAuthenticationConfiguration: &types.QuickAuthenticationConfig{
+					QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+					QuickAuthenticationConfigurationDetail: &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{
+						Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+							RedirectUris: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ClientId: ptr.String("__ClientId__"),
+						},
+					},
+				},
+				Description: ptr.String("__Description__"),
+			},
+			{
+				ApplicationId:      ptr.String("__ApplicationId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+				Status:             types.AccessControlApplicationStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigSummary{
+					IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+					IdpAuthorizingConfigurationSummaryDetail: &types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode{
+						Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+							ClientId:  ptr.String("__ClientId__"),
+							IssuerUrl: ptr.String("__IssuerUrl__"),
+						},
+					},
+					IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+						IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+					},
+				},
+				QuickAuthenticationConfiguration: &types.QuickAuthenticationConfig{
+					QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+					QuickAuthenticationConfigurationDetail: &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{
+						Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+							RedirectUris: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ClientId: ptr.String("__ClientId__"),
+						},
+					},
+				},
+				Description: ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.ListAccessControlApplications, schemas.ListAccessControlApplicationsResponse, schemas.ListAccessControlApplicationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAccessControlApplications.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18835,6 +19464,9 @@ func TestUpdateResponseSnapshot_ListCustomPermissions(t *testing.T) {
 					CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 					ShareMCPAction:                             types.CapabilityState("DENY"),
 					UseMCPAction:                               types.CapabilityState("DENY"),
+					LocalMCPAction:                             types.CapabilityState("DENY"),
+					CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+					UseLocalMCPAction:                          types.CapabilityState("DENY"),
 					OpenAPIAction:                              types.CapabilityState("DENY"),
 					CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 					ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -19421,6 +20053,9 @@ func TestUpdateResponseSnapshot_ListCustomPermissions(t *testing.T) {
 					CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 					ShareMCPAction:                             types.CapabilityState("DENY"),
 					UseMCPAction:                               types.CapabilityState("DENY"),
+					LocalMCPAction:                             types.CapabilityState("DENY"),
+					CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+					UseLocalMCPAction:                          types.CapabilityState("DENY"),
 					OpenAPIAction:                              types.CapabilityState("DENY"),
 					CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 					ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -20513,6 +21148,96 @@ func TestUpdateResponseSnapshot_ListIdentityPropagationConfigs(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListInboundConnectorApplicationAssociations(t *testing.T) {
+	want := &ListInboundConnectorApplicationAssociationsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		ApplicationAssociations: []types.InboundConnectorApplicationAssociationSummary{
+			{
+				AccessControlApplicationArn: ptr.String("__AccessControlApplicationArn__"),
+				CreatedTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AccessControlApplicationArn: ptr.String("__AccessControlApplicationArn__"),
+				CreatedTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.ListInboundConnectorApplicationAssociations, schemas.ListInboundConnectorApplicationAssociationsResponse, schemas.ListInboundConnectorApplicationAssociationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListInboundConnectorApplicationAssociations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListInboundConnectors(t *testing.T) {
+	want := &ListInboundConnectorsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		InboundConnectorSummaries: []types.InboundConnectorSummary{
+			{
+				InboundConnectorId: ptr.String("__InboundConnectorId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Status:             types.InboundConnectorStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				InboundConnectorConfiguration: &types.InboundConnectorConfig{
+					InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+				},
+				Description: ptr.String("__Description__"),
+			},
+			{
+				InboundConnectorId: ptr.String("__InboundConnectorId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Status:             types.InboundConnectorStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				InboundConnectorConfiguration: &types.InboundConnectorConfig{
+					InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+				},
+				Description: ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.ListInboundConnectors, schemas.ListInboundConnectorsResponse, schemas.ListInboundConnectorsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListInboundConnectors.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListIngestions(t *testing.T) {
 	want := &ListIngestionsOutput{
 		Ingestions: []types.Ingestion{
@@ -20583,6 +21308,59 @@ func TestUpdateResponseSnapshot_ListIngestions(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListIngestions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListKnowledgeBaseRefreshSchedules(t *testing.T) {
+	want := &ListKnowledgeBaseRefreshSchedulesOutput{
+		ScheduleSummaries: []types.KnowledgeBaseRefreshScheduleSummary{
+			{
+				ScheduleId: ptr.String("__ScheduleId__"),
+				ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+					Interval: types.KbRefreshInterval("DAILY"),
+					RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+						DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+						DayOfMonth: ptr.String("__DayOfMonth__"),
+					},
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:     types.ScheduleState("ENABLED"),
+			},
+			{
+				ScheduleId: ptr.String("__ScheduleId__"),
+				ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+					Interval: types.KbRefreshInterval("DAILY"),
+					RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+						DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+						DayOfMonth: ptr.String("__DayOfMonth__"),
+					},
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:     types.ScheduleState("ENABLED"),
+			},
+		},
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		NextToken:        ptr.String("__NextToken__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.ListKnowledgeBaseRefreshSchedules, schemas.ListKnowledgeBaseRefreshSchedulesResponse, schemas.ListKnowledgeBaseRefreshSchedulesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListKnowledgeBaseRefreshSchedules.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -20801,6 +21579,44 @@ func TestUpdateResponseSnapshot_ListOAuthClientApplications(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListOAuthClientApplications.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListPrincipalsForPolicy(t *testing.T) {
+	want := &ListPrincipalsForPolicyOutput{
+		Principals: []types.PolicyPrincipal{
+			{
+				PrincipalArn:  ptr.String("__PrincipalArn__"),
+				PrincipalType: types.PrincipalType("USER"),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Revision:      ptr.Int64(1),
+			},
+			{
+				PrincipalArn:  ptr.String("__PrincipalArn__"),
+				PrincipalType: types.PrincipalType("USER"),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Revision:      ptr.Int64(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.ListPrincipalsForPolicy, schemas.ListPrincipalsForPolicyResponse, schemas.ListPrincipalsForPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPrincipalsForPolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -25442,6 +26258,32 @@ func TestUpdateResponseSnapshot_PutDataSetRefreshProperties(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_PutPolicyAssignment(t *testing.T) {
+	want := &PutPolicyAssignmentOutput{
+		PolicyArn:         ptr.String("__PolicyArn__"),
+		ReplacedPolicyArn: ptr.String("__ReplacedPolicyArn__"),
+		Revision:          ptr.Int64(1),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.PutPolicyAssignment, schemas.PutPolicyAssignmentResponse, schemas.PutPolicyAssignmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutPolicyAssignment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RegisterUser(t *testing.T) {
 	want := &RegisterUserOutput{
 		User: &types.User{
@@ -26382,6 +27224,65 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UntagResource.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateAccessControlApplication(t *testing.T) {
+	want := &UpdateAccessControlApplicationOutput{
+		Status:                         ptr.Int32(200),
+		RequestId:                      ptr.String("__RequestId__"),
+		ApplicationId:                  ptr.String("__ApplicationId__"),
+		Arn:                            ptr.String("__Arn__"),
+		AccessControlApplicationStatus: types.AccessControlApplicationStatus("ENABLED"),
+		LastUpdatedTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateAccessControlApplication, schemas.UpdateAccessControlApplicationResponse, schemas.UpdateAccessControlApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateAccessControlApplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateAccessControlApplicationSecret(t *testing.T) {
+	want := &UpdateAccessControlApplicationSecretOutput{
+		Status:         ptr.Int32(200),
+		RequestId:      ptr.String("__RequestId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RegionalSecretManagerArns: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateAccessControlApplicationSecret, schemas.UpdateAccessControlApplicationSecretResponse, schemas.UpdateAccessControlApplicationSecretResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateAccessControlApplicationSecret.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -27662,6 +28563,60 @@ func TestUpdateResponseSnapshot_UpdateIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateInboundConnector(t *testing.T) {
+	want := &UpdateInboundConnectorOutput{
+		Status:                 ptr.Int32(200),
+		RequestId:              ptr.String("__RequestId__"),
+		InboundConnectorId:     ptr.String("__InboundConnectorId__"),
+		Arn:                    ptr.String("__Arn__"),
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+		LastUpdatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateInboundConnector, schemas.UpdateInboundConnectorResponse, schemas.UpdateInboundConnectorResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateInboundConnector.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateInboundConnectorApplicationAssociations(t *testing.T) {
+	want := &UpdateInboundConnectorApplicationAssociationsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateInboundConnectorApplicationAssociations, schemas.UpdateInboundConnectorApplicationAssociationsResponse, schemas.UpdateInboundConnectorApplicationAssociationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateInboundConnectorApplicationAssociations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateIpRestriction(t *testing.T) {
 	want := &UpdateIpRestrictionOutput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -27802,6 +28757,33 @@ func TestUpdateResponseSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateKnowledgeBasePermissions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &UpdateKnowledgeBaseRefreshScheduleOutput{
+		ScheduleId:       ptr.String("__ScheduleId__"),
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateKnowledgeBaseRefreshSchedule, schemas.UpdateKnowledgeBaseRefreshScheduleResponse, schemas.UpdateKnowledgeBaseRefreshScheduleResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateKnowledgeBaseRefreshSchedule.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -29272,6 +30254,42 @@ func TestUpdateResponseSnapshot_Error_UnsupportedUserEditionException(t *testing
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedUserEditionException.error", 403, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message:   ptr.String("__Message__"),
+		RequestId: ptr.String("__RequestId__"),
+		FieldList: []types.ValidationExceptionField{
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.QuickSight_20180401)
+	opSchema := smithy.NewOperationSchema(schemas.BatchDeletePolicyAssignmentByPolicy, schemas.ValidationException, schemas.ValidationException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

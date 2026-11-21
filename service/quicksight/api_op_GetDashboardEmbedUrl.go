@@ -31,12 +31,12 @@ import (
 //     (maximum). You can use the optional SessionLifetimeInMinutes parameter to
 //     customize session duration.
 //
-// For more information, see [Embedding Analytics Using GetDashboardEmbedUrl] in the Amazon Quick User Guide.
+// For more information, see [Embedding Analytics Using GetDashboardEmbedUrl] in the Quick User Guide.
 //
 // For more information about the high-level steps for embedding and for an
-// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
+// interactive demo of the ways you can customize embedding, visit the [Quick Developer Portal].
 //
-// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 // [Embedding Analytics Using GetDashboardEmbedUrl]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html
 func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardEmbedUrlInput, optFns ...func(*Options)) (*GetDashboardEmbedUrlOutput, error) {
 	if params == nil {
@@ -104,9 +104,9 @@ type GetDashboardEmbedUrlInput struct {
 	// which enables the undo/redo button.
 	UndoRedoDisabled bool
 
-	// The Amazon Quick user's Amazon Resource Name (ARN), for use with QUICKSIGHT
-	// identity type. You can use this for any Amazon Quick users in your account
-	// (readers, authors, or admins) authenticated as one of the following:
+	// The Quick user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity
+	// type. You can use this for any Quick users in your account (readers, authors, or
+	// admins) authenticated as one of the following:
 	//
 	//   - Active Directory (AD) users or group members
 	//

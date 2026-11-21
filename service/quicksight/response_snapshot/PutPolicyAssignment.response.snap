@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"PolicyArn":"__PolicyArn__","ReplacedPolicyArn":"__ReplacedPolicyArn__","Revision":1}

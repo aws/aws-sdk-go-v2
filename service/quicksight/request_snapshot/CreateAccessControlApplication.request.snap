@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/access-control-applications
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","AuthenticationType":"OIDC","Description":"__Description__","IdpAuthorizingConfiguration":{"IdcTrustedTokenIssuerConfiguration":{"IdcTrustedTokenIssuerArn":"__IdcTrustedTokenIssuerArn__"},"IdpAuthorizingConfigurationDetailInput":{"ExternalIdpPublicAuthCode":{"ClientId":"__ClientId__","IssuerUrl":"__IssuerUrl__"}},"IdpAuthorizingType":"EXTERNAL_IDP_PUBLIC_AUTH_CODE"},"Name":"__Name__","Namespace":"__Namespace__","QuickAuthenticationConfiguration":{"QuickAuthenticationConfigurationDetailInput":{"QuickManagedPublicAuthCode":{"RedirectUris":["__Member__","__Member__"]}},"QuickAuthenticationType":"QUICK_MANAGED_PUBLIC_AUTH_CODE"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

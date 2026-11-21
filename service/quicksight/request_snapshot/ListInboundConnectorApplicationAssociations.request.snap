@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/inbound-connectors/__InboundConnectorId__/associations?max-results=1&next-token=__NextToken__
+
+

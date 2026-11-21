@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccessControlApplicationStatus":"ENABLED","ApplicationId":"__ApplicationId__","Arn":"__Arn__","LastUpdatedTime":946684800,"RequestId":"__RequestId__","Status":200}

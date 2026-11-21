@@ -8325,6 +8325,736 @@ func (v *CapacityReservation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details about a SageMaker Capacity Reservation. A SageMaker Capacity
+// Reservation reserves a number of instances of one instance type in one
+// Availability Zone for a period of time.
+type CapacityReservationDetail struct {
+
+	// The ID of the Availability Zone of the reserved instances, for example use1-az1
+	// . An Availability Zone ID identifies the same physical zone in every account.
+	//
+	// This member is required.
+	AvailabilityZoneId *string
+
+	// The time when the SageMaker Capacity Reservation was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The SageMaker AI instance type of the reserved instances, for example
+	// ml.p5.48xlarge .
+	//
+	// This member is required.
+	InstanceType *string
+
+	// The ID of the Amazon Web Services account that owns the SageMaker Capacity
+	// Reservation.
+	//
+	// This member is required.
+	Owner *string
+
+	// The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+	//
+	// This member is required.
+	SMCapacityReservationArn *string
+
+	// The ID of the SageMaker Capacity Reservation. The ID is the last part of the
+	// ARN and starts with smcr- .
+	//
+	// This member is required.
+	SMCapacityReservationId *string
+
+	// The time when the reserved instances become available.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The status of the SageMaker Capacity Reservation. SageMaker AI sets the status
+	// from the start and end times of the reservation. Valid values:
+	//
+	// Scheduled The current time is before StartTime .
+	//
+	// Active The current time is between StartTime and EndTime . You can use the
+	// reserved instances.
+	//
+	// Expired The current time is at or after EndTime .
+	//
+	// This member is required.
+	Status CapacityReservationStatus
+
+	// The number of instances in the SageMaker Capacity Reservation.
+	//
+	// This member is required.
+	TotalInstanceCount *int32
+
+	// The name of the Availability Zone of the reserved instances, for example
+	// us-east-1a . Availability Zone names can map to different physical zones in
+	// different accounts. To identify the same zone across accounts, use
+	// AvailabilityZoneId .
+	AvailabilityZone *string
+
+	// The time when the SageMaker Capacity Reservation ends. This value is not
+	// returned if the reservation has no end time.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CapacityReservationDetail_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CapacityReservationDetail_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CapacityReservationDetail_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CapacityReservationDetail_EndTime, *v.EndTime)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CapacityReservationDetail_InstanceType, *v.InstanceType)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.CapacityReservationDetail_Owner, *v.Owner)
+	}
+	if v.SMCapacityReservationArn != nil {
+		s.WriteString(schemas.CapacityReservationDetail_SMCapacityReservationArn, *v.SMCapacityReservationArn)
+	}
+	if v.SMCapacityReservationId != nil {
+		s.WriteString(schemas.CapacityReservationDetail_SMCapacityReservationId, *v.SMCapacityReservationId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CapacityReservationDetail_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CapacityReservationDetail_Status, string(v.Status))
+	}
+	if v.TotalInstanceCount != nil {
+		s.WriteInt32(schemas.CapacityReservationDetail_TotalInstanceCount, *v.TotalInstanceCount)
+	}
+}
+func (v *CapacityReservationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationDetail_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.CapacityReservationDetail_AvailabilityZone, v.AvailabilityZone)
+		case schemas.CapacityReservationDetail_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.CapacityReservationDetail_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.CapacityReservationDetail_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationDetail_CreationTime, v.CreationTime)
+		case schemas.CapacityReservationDetail_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationDetail_EndTime, v.EndTime)
+		case schemas.CapacityReservationDetail_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.CapacityReservationDetail_InstanceType, v.InstanceType)
+		case schemas.CapacityReservationDetail_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.CapacityReservationDetail_Owner, v.Owner)
+		case schemas.CapacityReservationDetail_SMCapacityReservationArn:
+			v.SMCapacityReservationArn = new(string)
+			return d.ReadString(schemas.CapacityReservationDetail_SMCapacityReservationArn, v.SMCapacityReservationArn)
+		case schemas.CapacityReservationDetail_SMCapacityReservationId:
+			v.SMCapacityReservationId = new(string)
+			return d.ReadString(schemas.CapacityReservationDetail_SMCapacityReservationId, v.SMCapacityReservationId)
+		case schemas.CapacityReservationDetail_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationDetail_StartTime, v.StartTime)
+		case schemas.CapacityReservationDetail_Status:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationDetail_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CapacityReservationStatus(ev)
+			return nil
+		case schemas.CapacityReservationDetail_TotalInstanceCount:
+			v.TotalInstanceCount = new(int32)
+			return d.ReadInt32(schemas.CapacityReservationDetail_TotalInstanceCount, v.TotalInstanceCount)
+		}
+		return nil
+	})
+}
+
+// The association between the SageMaker AI endpoints in your account and a
+// SageMaker Capacity Reservation, through one ML capacity reservation. To use the
+// reserved instances for an endpoint, specify the ML capacity reservation ARN in
+// the MlReservationArn field of ProductionVariantCapacityReservationConfig when
+// you call CreateEndpointConfig .
+type CapacityReservationEndpointsAssociation struct {
+
+	// The time when SageMaker AI started the current association. This time resets
+	// when you add the association again after it was removed or after it failed.
+	//
+	// This member is required.
+	AssociatedTime *time.Time
+
+	// The status of the association. Valid values:
+	//
+	// Pending SageMaker AI is adding or removing the association.
+	//
+	// Active The resources are associated with the SageMaker Capacity Reservation and
+	// can use its instances.
+	//
+	// Inactive The resources are not associated with the SageMaker Capacity
+	// Reservation.
+	//
+	// This member is required.
+	Status CapacityReservationOptInStatus
+
+	// Whether one endpoint or multiple endpoints can use the ML capacity reservation.
+	// Valid values:
+	//
+	// SingleEndpoint Only one endpoint can use the ML capacity reservation.
+	//
+	// MultipleEndpoints Multiple endpoints can use the ML capacity reservation.
+	EndpointSharing CapacityReservationEndpointSharing
+
+	// The reason that the most recent attempt to add or remove the association
+	// failed. This value is returned only when the most recent attempt failed. After a
+	// failure to add the association, the status is Inactive . After a failure to
+	// remove the association, the status is Active .
+	FailureReason *string
+
+	// How endpoints in your account match the ML capacity reservation. Valid values:
+	//
+	// Open Endpoints in your account use the ML capacity reservation automatically
+	// when their instance type matches. You don't specify the ML capacity reservation
+	// ARN when you create the endpoint.
+	//
+	// Targeted An endpoint uses the ML capacity reservation only when you specify its
+	// ARN when you create or update the endpoint.
+	MatchCriteria CapacityReservationMatchCriteria
+
+	// The Amazon Resource Name (ARN) of the ML capacity reservation. Specify this ARN
+	// in CreateEndpointConfig to use the reserved instances for an endpoint. For a
+	// new ML capacity reservation, this value is returned when the status is Active .
+	MlReservationArn *string
+
+	// The name of the ML capacity reservation. The name is the last part of the ML
+	// capacity reservation ARN.
+	MlReservationId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationEndpointsAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationEndpointsAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationEndpointsAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedTime != nil {
+		s.WriteTime(schemas.CapacityReservationEndpointsAssociation_AssociatedTime, *v.AssociatedTime)
+	}
+	if v.EndpointSharing != "" {
+		s.WriteString(schemas.CapacityReservationEndpointsAssociation_EndpointSharing, string(v.EndpointSharing))
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CapacityReservationEndpointsAssociation_FailureReason, *v.FailureReason)
+	}
+	if v.MatchCriteria != "" {
+		s.WriteString(schemas.CapacityReservationEndpointsAssociation_MatchCriteria, string(v.MatchCriteria))
+	}
+	if v.MlReservationArn != nil {
+		s.WriteString(schemas.CapacityReservationEndpointsAssociation_MlReservationArn, *v.MlReservationArn)
+	}
+	if v.MlReservationId != nil {
+		s.WriteString(schemas.CapacityReservationEndpointsAssociation_MlReservationId, *v.MlReservationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CapacityReservationEndpointsAssociation_Status, string(v.Status))
+	}
+}
+func (v *CapacityReservationEndpointsAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationEndpointsAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationEndpointsAssociation_AssociatedTime:
+			v.AssociatedTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationEndpointsAssociation_AssociatedTime, v.AssociatedTime)
+		case schemas.CapacityReservationEndpointsAssociation_EndpointSharing:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationEndpointsAssociation_EndpointSharing, &ev); err != nil {
+				return err
+			}
+			v.EndpointSharing = CapacityReservationEndpointSharing(ev)
+			return nil
+		case schemas.CapacityReservationEndpointsAssociation_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CapacityReservationEndpointsAssociation_FailureReason, v.FailureReason)
+		case schemas.CapacityReservationEndpointsAssociation_MatchCriteria:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationEndpointsAssociation_MatchCriteria, &ev); err != nil {
+				return err
+			}
+			v.MatchCriteria = CapacityReservationMatchCriteria(ev)
+			return nil
+		case schemas.CapacityReservationEndpointsAssociation_MlReservationArn:
+			v.MlReservationArn = new(string)
+			return d.ReadString(schemas.CapacityReservationEndpointsAssociation_MlReservationArn, v.MlReservationArn)
+		case schemas.CapacityReservationEndpointsAssociation_MlReservationId:
+			v.MlReservationId = new(string)
+			return d.ReadString(schemas.CapacityReservationEndpointsAssociation_MlReservationId, v.MlReservationId)
+		case schemas.CapacityReservationEndpointsAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationEndpointsAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CapacityReservationOptInStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A filter for the ListCapacityReservations operation. A reservation matches the
+// filter when its value for Name equals any of the values in Values .
+type CapacityReservationFilter struct {
+
+	// The name of the field to filter on. The only supported value is Status .
+	//
+	// This member is required.
+	Name CapacityReservationFilterName
+
+	// The values to match. For the Status filter, valid values are Scheduled , Active
+	// , and Expired . Values are case sensitive. You can specify up to 10 values.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.CapacityReservationFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeCapacityReservationFilterValues(s, schemas.CapacityReservationFilter_Values, v.Values)
+	}
+}
+func (v *CapacityReservationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = CapacityReservationFilterName(ev)
+			return nil
+		case schemas.CapacityReservationFilter_Values:
+			return deserializeCapacityReservationFilterValues(d, schemas.CapacityReservationFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// The association between the SageMaker AI HyperPod clusters in your account and
+// a SageMaker Capacity Reservation.
+type CapacityReservationHyperPodClustersAssociation struct {
+
+	// The time when SageMaker AI started the current association. This time resets
+	// when you add the association again after it was removed or after it failed.
+	//
+	// This member is required.
+	AssociatedTime *time.Time
+
+	// The status of the association. Valid values:
+	//
+	// Pending SageMaker AI is adding or removing the association.
+	//
+	// Active The resources are associated with the SageMaker Capacity Reservation and
+	// can use its instances.
+	//
+	// Inactive The resources are not associated with the SageMaker Capacity
+	// Reservation.
+	//
+	// This member is required.
+	Status CapacityReservationOptInStatus
+
+	// The reason that the most recent attempt to add or remove the association
+	// failed. This value is returned only when the most recent attempt failed. After a
+	// failure to add the association, the status is Inactive . After a failure to
+	// remove the association, the status is Active .
+	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationHyperPodClustersAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationHyperPodClustersAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationHyperPodClustersAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedTime != nil {
+		s.WriteTime(schemas.CapacityReservationHyperPodClustersAssociation_AssociatedTime, *v.AssociatedTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CapacityReservationHyperPodClustersAssociation_FailureReason, *v.FailureReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CapacityReservationHyperPodClustersAssociation_Status, string(v.Status))
+	}
+}
+func (v *CapacityReservationHyperPodClustersAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationHyperPodClustersAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationHyperPodClustersAssociation_AssociatedTime:
+			v.AssociatedTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationHyperPodClustersAssociation_AssociatedTime, v.AssociatedTime)
+		case schemas.CapacityReservationHyperPodClustersAssociation_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CapacityReservationHyperPodClustersAssociation_FailureReason, v.FailureReason)
+		case schemas.CapacityReservationHyperPodClustersAssociation_Status:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationHyperPodClustersAssociation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CapacityReservationOptInStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The instances from a SageMaker Capacity Reservation that one account uses.
+type CapacityReservationInstanceUsage struct {
+
+	// The ID of the Amazon Web Services account that uses the instances.
+	//
+	// This member is required.
+	AccountId *string
+
+	// The number of instances that the account uses, across all resource types.
+	//
+	// This member is required.
+	InUseInstanceCount *int32
+
+	// The instance usage for each resource type that has instances in use in the
+	// account.
+	//
+	// This member is required.
+	ResourcesUsage []CapacityReservationResourceUsage
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationInstanceUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationInstanceUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationInstanceUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CapacityReservationInstanceUsage_AccountId, *v.AccountId)
+	}
+	if v.InUseInstanceCount != nil {
+		s.WriteInt32(schemas.CapacityReservationInstanceUsage_InUseInstanceCount, *v.InUseInstanceCount)
+	}
+	if v.ResourcesUsage != nil {
+		serializeCapacityReservationResourceUsageSet(s, schemas.CapacityReservationInstanceUsage_ResourcesUsage, v.ResourcesUsage)
+	}
+}
+func (v *CapacityReservationInstanceUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationInstanceUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationInstanceUsage_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.CapacityReservationInstanceUsage_AccountId, v.AccountId)
+		case schemas.CapacityReservationInstanceUsage_InUseInstanceCount:
+			v.InUseInstanceCount = new(int32)
+			return d.ReadInt32(schemas.CapacityReservationInstanceUsage_InUseInstanceCount, v.InUseInstanceCount)
+		case schemas.CapacityReservationInstanceUsage_ResourcesUsage:
+			return deserializeCapacityReservationResourceUsageSet(d, schemas.CapacityReservationInstanceUsage_ResourcesUsage, &v.ResourcesUsage)
+		}
+		return nil
+	})
+}
+
+// An association between one type of resource in your account and a SageMaker
+// Capacity Reservation. Each item contains exactly one member.
+//
+// The following types satisfy this interface:
+//
+//	CapacityReservationResourceAssociationMemberEndpoints
+//	CapacityReservationResourceAssociationMemberHyperPodClusters
+type CapacityReservationResourceAssociation interface {
+	isCapacityReservationResourceAssociation()
+}
+
+// The association between the SageMaker AI endpoints in your account and the
+// SageMaker Capacity Reservation, through one ML capacity reservation. The
+// response includes one item for each ML capacity reservation.
+type CapacityReservationResourceAssociationMemberEndpoints struct {
+	Value CapacityReservationEndpointsAssociation
+
+	noSmithyDocumentSerde
+}
+
+func (*CapacityReservationResourceAssociationMemberEndpoints) isCapacityReservationResourceAssociation() {
+}
+func (v *CapacityReservationResourceAssociationMemberEndpoints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationResourceAssociation_Endpoints)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CapacityReservationResourceAssociationMemberEndpoints) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The association between the SageMaker AI HyperPod clusters in your account and
+// the SageMaker Capacity Reservation. The association applies to all HyperPod
+// clusters in your account.
+type CapacityReservationResourceAssociationMemberHyperPodClusters struct {
+	Value CapacityReservationHyperPodClustersAssociation
+
+	noSmithyDocumentSerde
+}
+
+func (*CapacityReservationResourceAssociationMemberHyperPodClusters) isCapacityReservationResourceAssociation() {
+}
+func (v *CapacityReservationResourceAssociationMemberHyperPodClusters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationResourceAssociation_HyperPodClusters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CapacityReservationResourceAssociationMemberHyperPodClusters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The instances from a SageMaker Capacity Reservation that one resource type uses
+// in an account.
+type CapacityReservationResourceUsage struct {
+
+	// The number of instances from the SageMaker Capacity Reservation that are in use.
+	//
+	// This member is required.
+	InUseInstanceCount *int32
+
+	// The type of resource that uses the instances. Valid values:
+	//
+	// HyperPodClusters SageMaker AI HyperPod clusters.
+	//
+	// Endpoints SageMaker AI endpoints.
+	//
+	// This member is required.
+	ResourceType CapacityReservationResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationResourceUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationResourceUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationResourceUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InUseInstanceCount != nil {
+		s.WriteInt32(schemas.CapacityReservationResourceUsage_InUseInstanceCount, *v.InUseInstanceCount)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CapacityReservationResourceUsage_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *CapacityReservationResourceUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationResourceUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationResourceUsage_InUseInstanceCount:
+			v.InUseInstanceCount = new(int32)
+			return d.ReadInt32(schemas.CapacityReservationResourceUsage_InUseInstanceCount, v.InUseInstanceCount)
+		case schemas.CapacityReservationResourceUsage_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationResourceUsage_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = CapacityReservationResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Summary information about a SageMaker Capacity Reservation.
+type CapacityReservationSummary struct {
+
+	// The ID of the Availability Zone of the reserved instances, for example use1-az1
+	// . An Availability Zone ID identifies the same physical zone in every account.
+	//
+	// This member is required.
+	AvailabilityZoneId *string
+
+	// The time when the SageMaker Capacity Reservation was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The SageMaker AI instance type of the reserved instances, for example
+	// ml.p5.48xlarge .
+	//
+	// This member is required.
+	InstanceType *string
+
+	// The ID of the Amazon Web Services account that owns the SageMaker Capacity
+	// Reservation.
+	//
+	// This member is required.
+	Owner *string
+
+	// The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.
+	//
+	// This member is required.
+	SMCapacityReservationArn *string
+
+	// The ID of the SageMaker Capacity Reservation. The ID is the last part of the
+	// ARN and starts with smcr- .
+	//
+	// This member is required.
+	SMCapacityReservationId *string
+
+	// The time when the reserved instances become available.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The status of the SageMaker Capacity Reservation. SageMaker AI sets the status
+	// from the start and end times of the reservation. Valid values:
+	//
+	// Scheduled The current time is before StartTime .
+	//
+	// Active The current time is between StartTime and EndTime . You can use the
+	// reserved instances.
+	//
+	// Expired The current time is at or after EndTime .
+	//
+	// This member is required.
+	Status CapacityReservationStatus
+
+	// The number of instances in the SageMaker Capacity Reservation.
+	//
+	// This member is required.
+	TotalInstanceCount *int32
+
+	// The name of the Availability Zone of the reserved instances, for example
+	// us-east-1a . Availability Zone names can map to different physical zones in
+	// different accounts. To identify the same zone across accounts, use
+	// AvailabilityZoneId .
+	AvailabilityZone *string
+
+	// The time when the SageMaker Capacity Reservation ends. This value is not
+	// returned if the reservation has no end time.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CapacityReservationSummary_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CapacityReservationSummary_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CapacityReservationSummary_CreationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CapacityReservationSummary_EndTime, *v.EndTime)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CapacityReservationSummary_InstanceType, *v.InstanceType)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.CapacityReservationSummary_Owner, *v.Owner)
+	}
+	if v.SMCapacityReservationArn != nil {
+		s.WriteString(schemas.CapacityReservationSummary_SMCapacityReservationArn, *v.SMCapacityReservationArn)
+	}
+	if v.SMCapacityReservationId != nil {
+		s.WriteString(schemas.CapacityReservationSummary_SMCapacityReservationId, *v.SMCapacityReservationId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CapacityReservationSummary_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CapacityReservationSummary_Status, string(v.Status))
+	}
+	if v.TotalInstanceCount != nil {
+		s.WriteInt32(schemas.CapacityReservationSummary_TotalInstanceCount, *v.TotalInstanceCount)
+	}
+}
+func (v *CapacityReservationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationSummary_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.CapacityReservationSummary_AvailabilityZone, v.AvailabilityZone)
+		case schemas.CapacityReservationSummary_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.CapacityReservationSummary_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.CapacityReservationSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationSummary_CreationTime, v.CreationTime)
+		case schemas.CapacityReservationSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationSummary_EndTime, v.EndTime)
+		case schemas.CapacityReservationSummary_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.CapacityReservationSummary_InstanceType, v.InstanceType)
+		case schemas.CapacityReservationSummary_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.CapacityReservationSummary_Owner, v.Owner)
+		case schemas.CapacityReservationSummary_SMCapacityReservationArn:
+			v.SMCapacityReservationArn = new(string)
+			return d.ReadString(schemas.CapacityReservationSummary_SMCapacityReservationArn, v.SMCapacityReservationArn)
+		case schemas.CapacityReservationSummary_SMCapacityReservationId:
+			v.SMCapacityReservationId = new(string)
+			return d.ReadString(schemas.CapacityReservationSummary_SMCapacityReservationId, v.SMCapacityReservationId)
+		case schemas.CapacityReservationSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CapacityReservationSummary_StartTime, v.StartTime)
+		case schemas.CapacityReservationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CapacityReservationStatus(ev)
+			return nil
+		case schemas.CapacityReservationSummary_TotalInstanceCount:
+			v.TotalInstanceCount = new(int32)
+			return d.ReadInt32(schemas.CapacityReservationSummary_TotalInstanceCount, v.TotalInstanceCount)
+		}
+		return nil
+	})
+}
+
 // Specifies the type and size of the endpoint capacity to activate for a
 // blue/green deployment, a rolling deployment, or a rollback strategy. You can
 // specify your batches as either instance count or the overall percentage or your
@@ -62395,19 +63125,20 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAIAdapterSource()                     {}
-func (*UnknownUnionMember) isAIBenchmarkTarget()                   {}
-func (*UnknownUnionMember) isAIDatasetConfig()                     {}
-func (*UnknownUnionMember) isAIModelSource()                       {}
-func (*UnknownUnionMember) isAutoMLProblemTypeConfig()             {}
-func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes() {}
-func (*UnknownUnionMember) isClusterInstanceStorageConfig()        {}
-func (*UnknownUnionMember) isCollectionConfig()                    {}
-func (*UnknownUnionMember) isCustomFileSystem()                    {}
-func (*UnknownUnionMember) isCustomFileSystemConfig()              {}
-func (*UnknownUnionMember) isEventMetadata()                       {}
-func (*UnknownUnionMember) isMetricSpecification()                 {}
-func (*UnknownUnionMember) isOptimizationConfig()                  {}
-func (*UnknownUnionMember) isScalingPolicy()                       {}
-func (*UnknownUnionMember) isTrialComponentParameterValue()        {}
-func (*UnknownUnionMember) isWorkloadSpec()                        {}
+func (*UnknownUnionMember) isAIAdapterSource()                        {}
+func (*UnknownUnionMember) isAIBenchmarkTarget()                      {}
+func (*UnknownUnionMember) isAIDatasetConfig()                        {}
+func (*UnknownUnionMember) isAIModelSource()                          {}
+func (*UnknownUnionMember) isAutoMLProblemTypeConfig()                {}
+func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes()    {}
+func (*UnknownUnionMember) isCapacityReservationResourceAssociation() {}
+func (*UnknownUnionMember) isClusterInstanceStorageConfig()           {}
+func (*UnknownUnionMember) isCollectionConfig()                       {}
+func (*UnknownUnionMember) isCustomFileSystem()                       {}
+func (*UnknownUnionMember) isCustomFileSystemConfig()                 {}
+func (*UnknownUnionMember) isEventMetadata()                          {}
+func (*UnknownUnionMember) isMetricSpecification()                    {}
+func (*UnknownUnionMember) isOptimizationConfig()                     {}
+func (*UnknownUnionMember) isScalingPolicy()                          {}
+func (*UnknownUnionMember) isTrialComponentParameterValue()           {}
+func (*UnknownUnionMember) isWorkloadSpec()                           {}

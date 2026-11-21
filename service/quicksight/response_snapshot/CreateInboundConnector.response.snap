@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreatedTime":946684800,"InboundConnectorId":"__InboundConnectorId__","InboundConnectorStatus":"ENABLED","RequestId":"__RequestId__","Status":200,"TenantUrl":"__TenantUrl__"}

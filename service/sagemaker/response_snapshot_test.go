@@ -13800,6 +13800,41 @@ func TestCheckResponseSnapshot_DescribeAutoMLJobV2(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeCapacityReservation(t *testing.T) {
+	want := &DescribeCapacityReservationOutput{
+		CapacityReservation: &types.CapacityReservationDetail{
+			SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+			SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+			Owner:                    ptr.String("__Owner__"),
+			Status:                   types.CapacityReservationStatus("Scheduled"),
+			InstanceType:             ptr.String("__InstanceType__"),
+			AvailabilityZone:         ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:       ptr.String("__AvailabilityZoneId__"),
+			TotalInstanceCount:       ptr.Int32(1),
+			StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeCapacityReservation.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeCapacityReservation(context.Background(), &DescribeCapacityReservationInput{
+		SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeCapacityReservation.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 	want := &DescribeClusterOutput{
 		ClusterArn:     ptr.String("__ClusterArn__"),
@@ -22524,6 +22559,49 @@ func TestCheckResponseSnapshot_DescribeReservedCapacity(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeResourceAssociations(t *testing.T) {
+	want := &DescribeResourceAssociationsOutput{
+		SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+		SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+		ResourceAssociations: []types.CapacityReservationResourceAssociation{
+			&types.CapacityReservationResourceAssociationMemberHyperPodClusters{
+				Value: types.CapacityReservationHyperPodClustersAssociation{
+					Status:         types.CapacityReservationOptInStatus("Pending"),
+					FailureReason:  ptr.String("__FailureReason__"),
+					AssociatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			&types.CapacityReservationResourceAssociationMemberHyperPodClusters{
+				Value: types.CapacityReservationHyperPodClustersAssociation{
+					Status:         types.CapacityReservationOptInStatus("Pending"),
+					FailureReason:  ptr.String("__FailureReason__"),
+					AssociatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeResourceAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeResourceAssociations(context.Background(), &DescribeResourceAssociationsInput{
+		SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeResourceAssociations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeSpace(t *testing.T) {
 	want := &DescribeSpaceOutput{
 		DomainId:             ptr.String("__DomainId__"),
@@ -24209,6 +24287,65 @@ func TestCheckResponseSnapshot_ExtendTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetCapacityReservationUsage(t *testing.T) {
+	want := &GetCapacityReservationUsageOutput{
+		SMCapacityReservationId: ptr.String("__SMCapacityReservationId__"),
+		TotalInstanceCount:      ptr.Int32(1),
+		AvailableInstanceCount:  ptr.Int32(1),
+		LastRefreshTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		InstanceUsageSet: []types.CapacityReservationInstanceUsage{
+			{
+				AccountId:          ptr.String("__AccountId__"),
+				InUseInstanceCount: ptr.Int32(1),
+				ResourcesUsage: []types.CapacityReservationResourceUsage{
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+				},
+			},
+			{
+				AccountId:          ptr.String("__AccountId__"),
+				InUseInstanceCount: ptr.Int32(1),
+				ResourcesUsage: []types.CapacityReservationResourceUsage{
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCapacityReservationUsage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCapacityReservationUsage(context.Background(), &GetCapacityReservationUsageInput{
+		SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+		MaxResults:               ptr.Int32(1),
+		NextToken:                ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCapacityReservationUsage.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDeviceFleetReport(t *testing.T) {
 	want := &GetDeviceFleetReportOutput{
 		DeviceFleetArn:  ptr.String("__DeviceFleetArn__"),
@@ -25419,6 +25556,74 @@ func TestCheckResponseSnapshot_ListCandidatesForAutoMLJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListCandidatesForAutoMLJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCapacityReservations(t *testing.T) {
+	want := &ListCapacityReservationsOutput{
+		CapacityReservationSummaries: []types.CapacityReservationSummary{
+			{
+				SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+				SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+				Owner:                    ptr.String("__Owner__"),
+				Status:                   types.CapacityReservationStatus("Scheduled"),
+				InstanceType:             ptr.String("__InstanceType__"),
+				AvailabilityZone:         ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:       ptr.String("__AvailabilityZoneId__"),
+				TotalInstanceCount:       ptr.Int32(1),
+				StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreationTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+				SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+				Owner:                    ptr.String("__Owner__"),
+				Status:                   types.CapacityReservationStatus("Scheduled"),
+				InstanceType:             ptr.String("__InstanceType__"),
+				AvailabilityZone:         ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:       ptr.String("__AvailabilityZoneId__"),
+				TotalInstanceCount:       ptr.Int32(1),
+				StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreationTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCapacityReservations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCapacityReservations(context.Background(), &ListCapacityReservationsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Filters: []types.CapacityReservationFilter{
+			{
+				Name: types.CapacityReservationFilterName("Status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.CapacityReservationFilterName("Status"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCapacityReservations.response", err)
 	}
 }
 

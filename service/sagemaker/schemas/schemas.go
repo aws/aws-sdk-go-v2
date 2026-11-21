@@ -833,6 +833,11 @@ var DescribeAutoMLJobV2 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeAutoMLJobV2",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeCapacityReservation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeCapacityReservation",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeCluster = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeCluster",
@@ -1123,6 +1128,11 @@ var DescribeReservedCapacity = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeReservedCapacity",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeResourceAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeResourceAssociations",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeSpace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeSpace",
@@ -1211,6 +1221,11 @@ var EnableSagemakerServicecatalogPortfolio = smithy.NewSchema(smithy.ShapeID{
 var ExtendTrainingPlan = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ExtendTrainingPlan",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetCapacityReservationUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GetCapacityReservationUsage",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetDeviceFleetReport = smithy.NewSchema(smithy.ShapeID{
@@ -1311,6 +1326,11 @@ var ListAutoMLJobs = smithy.NewSchema(smithy.ShapeID{
 var ListCandidatesForAutoMLJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ListCandidatesForAutoMLJob",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListCapacityReservations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListCapacityReservations",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListClusterEvents = smithy.NewSchema(smithy.ShapeID{
@@ -5344,11 +5364,236 @@ var CapacityReservation_Arn *smithy.Schema
 
 var CapacityReservation_Type *smithy.Schema
 
+var _CapacityReservationArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationArn",
+}, smithy.ShapeTypeString, 0)
+
+var _CapacityReservationAvailabilityZoneId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationAvailabilityZoneId",
+}, smithy.ShapeTypeString, 0)
+
+var CapacityReservationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationDetail",
+}, smithy.ShapeTypeStructure, 11)
+var CapacityReservationDetail_SMCapacityReservationArn *smithy.Schema
+
+var CapacityReservationDetail_SMCapacityReservationId *smithy.Schema
+
+var CapacityReservationDetail_Owner *smithy.Schema
+
+var CapacityReservationDetail_Status *smithy.Schema
+
+var CapacityReservationDetail_InstanceType *smithy.Schema
+
+var CapacityReservationDetail_AvailabilityZone *smithy.Schema
+
+var CapacityReservationDetail_AvailabilityZoneId *smithy.Schema
+
+var CapacityReservationDetail_TotalInstanceCount *smithy.Schema
+
+var CapacityReservationDetail_StartTime *smithy.Schema
+
+var CapacityReservationDetail_EndTime *smithy.Schema
+
+var CapacityReservationDetail_CreationTime *smithy.Schema
+
+var CapacityReservationEndpointsAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationEndpointsAssociation",
+}, smithy.ShapeTypeStructure, 7)
+var CapacityReservationEndpointsAssociation_MlReservationId *smithy.Schema
+
+var CapacityReservationEndpointsAssociation_Status *smithy.Schema
+
+var CapacityReservationEndpointsAssociation_MatchCriteria *smithy.Schema
+
+var CapacityReservationEndpointsAssociation_EndpointSharing *smithy.Schema
+
+var CapacityReservationEndpointsAssociation_MlReservationArn *smithy.Schema
+
+var CapacityReservationEndpointsAssociation_FailureReason *smithy.Schema
+
+var CapacityReservationEndpointsAssociation_AssociatedTime *smithy.Schema
+
+var CapacityReservationEndpointSharing = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationEndpointSharing",
+}, smithy.ShapeTypeEnum, 2)
+var CapacityReservationEndpointSharing_SINGLE_ENDPOINT *smithy.Schema
+
+var CapacityReservationEndpointSharing_MULTIPLE_ENDPOINTS *smithy.Schema
+
+var CapacityReservationFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationFilter",
+}, smithy.ShapeTypeStructure, 2)
+var CapacityReservationFilter_Name *smithy.Schema
+
+var CapacityReservationFilter_Values *smithy.Schema
+
+var CapacityReservationFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationFilterName",
+}, smithy.ShapeTypeEnum, 1)
+var CapacityReservationFilterName_STATUS *smithy.Schema
+
+var _CapacityReservationFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationFilters",
+}, smithy.ShapeTypeList, 1)
+var _CapacityReservationFilters_member *smithy.Schema
+
+var _CapacityReservationFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _CapacityReservationFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _CapacityReservationFilterValues_member *smithy.Schema
+
+var CapacityReservationHyperPodClustersAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationHyperPodClustersAssociation",
+}, smithy.ShapeTypeStructure, 3)
+var CapacityReservationHyperPodClustersAssociation_Status *smithy.Schema
+
+var CapacityReservationHyperPodClustersAssociation_FailureReason *smithy.Schema
+
+var CapacityReservationHyperPodClustersAssociation_AssociatedTime *smithy.Schema
+
+var _CapacityReservationInstanceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationInstanceType",
+}, smithy.ShapeTypeString, 0)
+
+var CapacityReservationInstanceUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationInstanceUsage",
+}, smithy.ShapeTypeStructure, 3)
+var CapacityReservationInstanceUsage_AccountId *smithy.Schema
+
+var CapacityReservationInstanceUsage_InUseInstanceCount *smithy.Schema
+
+var CapacityReservationInstanceUsage_ResourcesUsage *smithy.Schema
+
+var _CapacityReservationInstanceUsageSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationInstanceUsageSet",
+}, smithy.ShapeTypeList, 1)
+var _CapacityReservationInstanceUsageSet_member *smithy.Schema
+
+var CapacityReservationMatchCriteria = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationMatchCriteria",
+}, smithy.ShapeTypeEnum, 2)
+var CapacityReservationMatchCriteria_OPEN *smithy.Schema
+
+var CapacityReservationMatchCriteria_TARGETED *smithy.Schema
+
+var _CapacityReservationMlReservationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationMlReservationId",
+}, smithy.ShapeTypeString, 0)
+
+var CapacityReservationOptInStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationOptInStatus",
+}, smithy.ShapeTypeEnum, 3)
+var CapacityReservationOptInStatus_PENDING *smithy.Schema
+
+var CapacityReservationOptInStatus_ACTIVE *smithy.Schema
+
+var CapacityReservationOptInStatus_INACTIVE *smithy.Schema
+
 var CapacityReservationPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "CapacityReservationPreference",
 }, smithy.ShapeTypeEnum, 1)
 var CapacityReservationPreference_CAPACITY_RESERVATIONS_ONLY *smithy.Schema
+
+var CapacityReservationResourceAssociation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationResourceAssociation",
+}, smithy.ShapeTypeUnion, 2)
+var CapacityReservationResourceAssociation_HyperPodClusters *smithy.Schema
+
+var CapacityReservationResourceAssociation_Endpoints *smithy.Schema
+
+var _CapacityReservationResourceAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationResourceAssociations",
+}, smithy.ShapeTypeList, 1)
+var _CapacityReservationResourceAssociations_member *smithy.Schema
+
+var CapacityReservationResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationResourceType",
+}, smithy.ShapeTypeEnum, 2)
+var CapacityReservationResourceType_HYPERPOD_CLUSTERS *smithy.Schema
+
+var CapacityReservationResourceType_ENDPOINTS *smithy.Schema
+
+var CapacityReservationResourceUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationResourceUsage",
+}, smithy.ShapeTypeStructure, 2)
+var CapacityReservationResourceUsage_ResourceType *smithy.Schema
+
+var CapacityReservationResourceUsage_InUseInstanceCount *smithy.Schema
+
+var _CapacityReservationResourceUsageSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationResourceUsageSet",
+}, smithy.ShapeTypeList, 1)
+var _CapacityReservationResourceUsageSet_member *smithy.Schema
+
+var CapacityReservationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationStatus",
+}, smithy.ShapeTypeEnum, 3)
+var CapacityReservationStatus_SCHEDULED *smithy.Schema
+
+var CapacityReservationStatus_ACTIVE *smithy.Schema
+
+var CapacityReservationStatus_EXPIRED *smithy.Schema
+
+var _CapacityReservationSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationSummaries",
+}, smithy.ShapeTypeList, 1)
+var _CapacityReservationSummaries_member *smithy.Schema
+
+var CapacityReservationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "CapacityReservationSummary",
+}, smithy.ShapeTypeStructure, 11)
+var CapacityReservationSummary_SMCapacityReservationArn *smithy.Schema
+
+var CapacityReservationSummary_SMCapacityReservationId *smithy.Schema
+
+var CapacityReservationSummary_Owner *smithy.Schema
+
+var CapacityReservationSummary_Status *smithy.Schema
+
+var CapacityReservationSummary_InstanceType *smithy.Schema
+
+var CapacityReservationSummary_AvailabilityZone *smithy.Schema
+
+var CapacityReservationSummary_AvailabilityZoneId *smithy.Schema
+
+var CapacityReservationSummary_TotalInstanceCount *smithy.Schema
+
+var CapacityReservationSummary_StartTime *smithy.Schema
+
+var CapacityReservationSummary_EndTime *smithy.Schema
+
+var CapacityReservationSummary_CreationTime *smithy.Schema
 
 var CapacityReservationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -21820,6 +22065,11 @@ var _S3Uri = smithy.NewSchema(smithy.ShapeID{
 	Name:      "S3Uri",
 }, smithy.ShapeTypeString, 0)
 
+var _SageMakerCapacityReservationId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "SageMakerCapacityReservationId",
+}, smithy.ShapeTypeString, 0)
+
 var SageMakerImageName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "SageMakerImageName",
@@ -22377,7 +22627,7 @@ var _SnsTopicArn = smithy.NewSchema(smithy.ShapeID{
 var SoftwareUpdateStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "SoftwareUpdateStatus",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var SoftwareUpdateStatus_PENDING *smithy.Schema
 
 var SoftwareUpdateStatus_IN_PROGRESS *smithy.Schema
@@ -22389,6 +22639,8 @@ var SoftwareUpdateStatus_FAILED *smithy.Schema
 var SoftwareUpdateStatus_ROLLBACK_IN_PROGRESS *smithy.Schema
 
 var SoftwareUpdateStatus_ROLLBACK_COMPLETE *smithy.Schema
+
+var SoftwareUpdateStatus_PARTIALLY_SUCCEEDED *smithy.Schema
 
 var SortActionsBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -29548,6 +29800,18 @@ var DescribeAutoMLJobV2Response_SecurityConfig *smithy.Schema
 
 var DescribeAutoMLJobV2Response_AutoMLComputeConfig *smithy.Schema
 
+var DescribeCapacityReservationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeCapacityReservationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeCapacityReservationRequest_SMCapacityReservationArn *smithy.Schema
+
+var DescribeCapacityReservationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeCapacityReservationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeCapacityReservationResponse_CapacityReservation *smithy.Schema
+
 var DescribeClusterEventRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeClusterEventRequest",
@@ -31632,6 +31896,28 @@ var DescribeReservedCapacityResponse_InUseInstanceCount *smithy.Schema
 
 var DescribeReservedCapacityResponse_UltraServerSummary *smithy.Schema
 
+var DescribeResourceAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeResourceAssociationsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeResourceAssociationsRequest_SMCapacityReservationArn *smithy.Schema
+
+var DescribeResourceAssociationsRequest_MaxResults *smithy.Schema
+
+var DescribeResourceAssociationsRequest_NextToken *smithy.Schema
+
+var DescribeResourceAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "DescribeResourceAssociationsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeResourceAssociationsResponse_SMCapacityReservationArn *smithy.Schema
+
+var DescribeResourceAssociationsResponse_SMCapacityReservationId *smithy.Schema
+
+var DescribeResourceAssociationsResponse_ResourceAssociations *smithy.Schema
+
+var DescribeResourceAssociationsResponse_NextToken *smithy.Schema
+
 var DescribeSpaceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DescribeSpaceRequest",
@@ -32150,6 +32436,32 @@ var ExtendTrainingPlanResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ExtendTrainingPlanResponse_TrainingPlanExtensions *smithy.Schema
 
+var GetCapacityReservationUsageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GetCapacityReservationUsageRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetCapacityReservationUsageRequest_SMCapacityReservationArn *smithy.Schema
+
+var GetCapacityReservationUsageRequest_MaxResults *smithy.Schema
+
+var GetCapacityReservationUsageRequest_NextToken *smithy.Schema
+
+var GetCapacityReservationUsageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "GetCapacityReservationUsageResponse",
+}, smithy.ShapeTypeStructure, 6)
+var GetCapacityReservationUsageResponse_SMCapacityReservationId *smithy.Schema
+
+var GetCapacityReservationUsageResponse_TotalInstanceCount *smithy.Schema
+
+var GetCapacityReservationUsageResponse_AvailableInstanceCount *smithy.Schema
+
+var GetCapacityReservationUsageResponse_LastRefreshTime *smithy.Schema
+
+var GetCapacityReservationUsageResponse_InstanceUsageSet *smithy.Schema
+
+var GetCapacityReservationUsageResponse_NextToken *smithy.Schema
+
 var GetDeviceFleetReportRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "GetDeviceFleetReportRequest",
@@ -32644,6 +32956,24 @@ var ListCandidatesForAutoMLJobResponse = smithy.NewSchema(smithy.ShapeID{
 var ListCandidatesForAutoMLJobResponse_Candidates *smithy.Schema
 
 var ListCandidatesForAutoMLJobResponse_NextToken *smithy.Schema
+
+var ListCapacityReservationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListCapacityReservationsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListCapacityReservationsRequest_MaxResults *smithy.Schema
+
+var ListCapacityReservationsRequest_NextToken *smithy.Schema
+
+var ListCapacityReservationsRequest_Filters *smithy.Schema
+
+var ListCapacityReservationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "ListCapacityReservationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListCapacityReservationsResponse_CapacityReservationSummaries *smithy.Schema
+
+var ListCapacityReservationsResponse_NextToken *smithy.Schema
 
 var ListClusterEventsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -40718,7 +41048,127 @@ func init() {
 
 	CapacityReservation_Type = CapacityReservation.AddMember("Type", CapacityReservationType)
 
+	CapacityReservationStatus_SCHEDULED = CapacityReservationStatus.AddMember("SCHEDULED", smithyprelude.Unit)
+
+	CapacityReservationStatus_ACTIVE = CapacityReservationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	CapacityReservationStatus_EXPIRED = CapacityReservationStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	CapacityReservationDetail_SMCapacityReservationArn = CapacityReservationDetail.AddMember("SMCapacityReservationArn", _CapacityReservationArn)
+
+	CapacityReservationDetail_SMCapacityReservationId = CapacityReservationDetail.AddMember("SMCapacityReservationId", _SageMakerCapacityReservationId)
+
+	CapacityReservationDetail_Owner = CapacityReservationDetail.AddMember("Owner", _AccountId)
+
+	CapacityReservationDetail_Status = CapacityReservationDetail.AddMember("Status", CapacityReservationStatus)
+
+	CapacityReservationDetail_InstanceType = CapacityReservationDetail.AddMember("InstanceType", _CapacityReservationInstanceType)
+
+	CapacityReservationDetail_AvailabilityZone = CapacityReservationDetail.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	CapacityReservationDetail_AvailabilityZoneId = CapacityReservationDetail.AddMember("AvailabilityZoneId", _CapacityReservationAvailabilityZoneId)
+
+	CapacityReservationDetail_TotalInstanceCount = CapacityReservationDetail.AddMember("TotalInstanceCount", _TotalInstanceCount)
+
+	CapacityReservationDetail_StartTime = CapacityReservationDetail.AddMember("StartTime", _Timestamp)
+
+	CapacityReservationDetail_EndTime = CapacityReservationDetail.AddMember("EndTime", _Timestamp)
+
+	CapacityReservationDetail_CreationTime = CapacityReservationDetail.AddMember("CreationTime", _Timestamp)
+
+	CapacityReservationOptInStatus_PENDING = CapacityReservationOptInStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	CapacityReservationOptInStatus_ACTIVE = CapacityReservationOptInStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	CapacityReservationOptInStatus_INACTIVE = CapacityReservationOptInStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	CapacityReservationMatchCriteria_OPEN = CapacityReservationMatchCriteria.AddMember("OPEN", smithyprelude.Unit)
+
+	CapacityReservationMatchCriteria_TARGETED = CapacityReservationMatchCriteria.AddMember("TARGETED", smithyprelude.Unit)
+
+	CapacityReservationEndpointSharing_SINGLE_ENDPOINT = CapacityReservationEndpointSharing.AddMember("SINGLE_ENDPOINT", smithyprelude.Unit)
+
+	CapacityReservationEndpointSharing_MULTIPLE_ENDPOINTS = CapacityReservationEndpointSharing.AddMember("MULTIPLE_ENDPOINTS", smithyprelude.Unit)
+
+	CapacityReservationEndpointsAssociation_MlReservationId = CapacityReservationEndpointsAssociation.AddMember("MlReservationId", _CapacityReservationMlReservationId)
+
+	CapacityReservationEndpointsAssociation_Status = CapacityReservationEndpointsAssociation.AddMember("Status", CapacityReservationOptInStatus)
+
+	CapacityReservationEndpointsAssociation_MatchCriteria = CapacityReservationEndpointsAssociation.AddMember("MatchCriteria", CapacityReservationMatchCriteria)
+
+	CapacityReservationEndpointsAssociation_EndpointSharing = CapacityReservationEndpointsAssociation.AddMember("EndpointSharing", CapacityReservationEndpointSharing)
+
+	CapacityReservationEndpointsAssociation_MlReservationArn = CapacityReservationEndpointsAssociation.AddMember("MlReservationArn", _MlReservationArn)
+
+	CapacityReservationEndpointsAssociation_FailureReason = CapacityReservationEndpointsAssociation.AddMember("FailureReason", _FailureReason)
+
+	CapacityReservationEndpointsAssociation_AssociatedTime = CapacityReservationEndpointsAssociation.AddMember("AssociatedTime", _Timestamp)
+
+	CapacityReservationFilterName_STATUS = CapacityReservationFilterName.AddMember("STATUS", smithyprelude.Unit)
+
+	_CapacityReservationFilterValues_member = _CapacityReservationFilterValues.AddMember("member", _CapacityReservationFilterValue)
+
+	CapacityReservationFilter_Name = CapacityReservationFilter.AddMember("Name", CapacityReservationFilterName)
+
+	CapacityReservationFilter_Values = CapacityReservationFilter.AddMember("Values", _CapacityReservationFilterValues)
+
+	_CapacityReservationFilters_member = _CapacityReservationFilters.AddMember("member", CapacityReservationFilter)
+
+	CapacityReservationHyperPodClustersAssociation_Status = CapacityReservationHyperPodClustersAssociation.AddMember("Status", CapacityReservationOptInStatus)
+
+	CapacityReservationHyperPodClustersAssociation_FailureReason = CapacityReservationHyperPodClustersAssociation.AddMember("FailureReason", _FailureReason)
+
+	CapacityReservationHyperPodClustersAssociation_AssociatedTime = CapacityReservationHyperPodClustersAssociation.AddMember("AssociatedTime", _Timestamp)
+
+	CapacityReservationResourceType_HYPERPOD_CLUSTERS = CapacityReservationResourceType.AddMember("HYPERPOD_CLUSTERS", smithyprelude.Unit)
+
+	CapacityReservationResourceType_ENDPOINTS = CapacityReservationResourceType.AddMember("ENDPOINTS", smithyprelude.Unit)
+
+	CapacityReservationResourceUsage_ResourceType = CapacityReservationResourceUsage.AddMember("ResourceType", CapacityReservationResourceType)
+
+	CapacityReservationResourceUsage_InUseInstanceCount = CapacityReservationResourceUsage.AddMember("InUseInstanceCount", _InUseInstanceCount)
+
+	_CapacityReservationResourceUsageSet_member = _CapacityReservationResourceUsageSet.AddMember("member", CapacityReservationResourceUsage)
+
+	CapacityReservationInstanceUsage_AccountId = CapacityReservationInstanceUsage.AddMember("AccountId", _AccountId)
+
+	CapacityReservationInstanceUsage_InUseInstanceCount = CapacityReservationInstanceUsage.AddMember("InUseInstanceCount", _InUseInstanceCount)
+
+	CapacityReservationInstanceUsage_ResourcesUsage = CapacityReservationInstanceUsage.AddMember("ResourcesUsage", _CapacityReservationResourceUsageSet)
+
+	_CapacityReservationInstanceUsageSet_member = _CapacityReservationInstanceUsageSet.AddMember("member", CapacityReservationInstanceUsage)
+
 	CapacityReservationPreference_CAPACITY_RESERVATIONS_ONLY = CapacityReservationPreference.AddMember("CAPACITY_RESERVATIONS_ONLY", smithyprelude.Unit)
+
+	CapacityReservationResourceAssociation_HyperPodClusters = CapacityReservationResourceAssociation.AddMember("HyperPodClusters", CapacityReservationHyperPodClustersAssociation)
+
+	CapacityReservationResourceAssociation_Endpoints = CapacityReservationResourceAssociation.AddMember("Endpoints", CapacityReservationEndpointsAssociation)
+
+	_CapacityReservationResourceAssociations_member = _CapacityReservationResourceAssociations.AddMember("member", CapacityReservationResourceAssociation)
+
+	CapacityReservationSummary_SMCapacityReservationArn = CapacityReservationSummary.AddMember("SMCapacityReservationArn", _CapacityReservationArn)
+
+	CapacityReservationSummary_SMCapacityReservationId = CapacityReservationSummary.AddMember("SMCapacityReservationId", _SageMakerCapacityReservationId)
+
+	CapacityReservationSummary_Owner = CapacityReservationSummary.AddMember("Owner", _AccountId)
+
+	CapacityReservationSummary_Status = CapacityReservationSummary.AddMember("Status", CapacityReservationStatus)
+
+	CapacityReservationSummary_InstanceType = CapacityReservationSummary.AddMember("InstanceType", _CapacityReservationInstanceType)
+
+	CapacityReservationSummary_AvailabilityZone = CapacityReservationSummary.AddMember("AvailabilityZone", _AvailabilityZone)
+
+	CapacityReservationSummary_AvailabilityZoneId = CapacityReservationSummary.AddMember("AvailabilityZoneId", _CapacityReservationAvailabilityZoneId)
+
+	CapacityReservationSummary_TotalInstanceCount = CapacityReservationSummary.AddMember("TotalInstanceCount", _TotalInstanceCount)
+
+	CapacityReservationSummary_StartTime = CapacityReservationSummary.AddMember("StartTime", _Timestamp)
+
+	CapacityReservationSummary_EndTime = CapacityReservationSummary.AddMember("EndTime", _Timestamp)
+
+	CapacityReservationSummary_CreationTime = CapacityReservationSummary.AddMember("CreationTime", _Timestamp)
+
+	_CapacityReservationSummaries_member = _CapacityReservationSummaries.AddMember("member", CapacityReservationSummary)
 
 	NodeUnavailabilityType_INSTANCE_COUNT = NodeUnavailabilityType.AddMember("INSTANCE_COUNT", smithyprelude.Unit)
 
@@ -41425,6 +41875,8 @@ func init() {
 	SoftwareUpdateStatus_ROLLBACK_IN_PROGRESS = SoftwareUpdateStatus.AddMember("ROLLBACK_IN_PROGRESS", smithyprelude.Unit)
 
 	SoftwareUpdateStatus_ROLLBACK_COMPLETE = SoftwareUpdateStatus.AddMember("ROLLBACK_COMPLETE", smithyprelude.Unit)
+
+	SoftwareUpdateStatus_PARTIALLY_SUCCEEDED = SoftwareUpdateStatus.AddMember("PARTIALLY_SUCCEEDED", smithyprelude.Unit)
 
 	ClusterSlurmNodeType_CONTROLLER = ClusterSlurmNodeType.AddMember("CONTROLLER", smithyprelude.Unit)
 
@@ -52126,6 +52578,10 @@ func init() {
 
 	DescribeAutoMLJobV2Response_AutoMLComputeConfig = DescribeAutoMLJobV2Response.AddMember("AutoMLComputeConfig", AutoMLComputeConfig)
 
+	DescribeCapacityReservationRequest_SMCapacityReservationArn = DescribeCapacityReservationRequest.AddMember("SMCapacityReservationArn", _CapacityReservationArn)
+
+	DescribeCapacityReservationResponse_CapacityReservation = DescribeCapacityReservationResponse.AddMember("CapacityReservation", CapacityReservationDetail)
+
 	DescribeClusterEventRequest_EventId = DescribeClusterEventRequest.AddMember("EventId", _EventId)
 
 	DescribeClusterEventRequest_ClusterName = DescribeClusterEventRequest.AddMember("ClusterName", _ClusterNameOrArn)
@@ -53746,6 +54202,20 @@ func init() {
 
 	DescribeReservedCapacityResponse_UltraServerSummary = DescribeReservedCapacityResponse.AddMember("UltraServerSummary", UltraServerSummary)
 
+	DescribeResourceAssociationsRequest_SMCapacityReservationArn = DescribeResourceAssociationsRequest.AddMember("SMCapacityReservationArn", _CapacityReservationArn)
+
+	DescribeResourceAssociationsRequest_MaxResults = DescribeResourceAssociationsRequest.AddMember("MaxResults", _MaxResults)
+
+	DescribeResourceAssociationsRequest_NextToken = DescribeResourceAssociationsRequest.AddMember("NextToken", _NextToken)
+
+	DescribeResourceAssociationsResponse_SMCapacityReservationArn = DescribeResourceAssociationsResponse.AddMember("SMCapacityReservationArn", _CapacityReservationArn)
+
+	DescribeResourceAssociationsResponse_SMCapacityReservationId = DescribeResourceAssociationsResponse.AddMember("SMCapacityReservationId", _SageMakerCapacityReservationId)
+
+	DescribeResourceAssociationsResponse_ResourceAssociations = DescribeResourceAssociationsResponse.AddMember("ResourceAssociations", _CapacityReservationResourceAssociations)
+
+	DescribeResourceAssociationsResponse_NextToken = DescribeResourceAssociationsResponse.AddMember("NextToken", _NextToken)
+
 	DescribeSpaceRequest_DomainId = DescribeSpaceRequest.AddMember("DomainId", _DomainId)
 
 	DescribeSpaceRequest_SpaceName = DescribeSpaceRequest.AddMember("SpaceName", _SpaceName)
@@ -54116,6 +54586,24 @@ func init() {
 
 	ExtendTrainingPlanResponse_TrainingPlanExtensions = ExtendTrainingPlanResponse.AddMember("TrainingPlanExtensions", _TrainingPlanExtensions)
 
+	GetCapacityReservationUsageRequest_SMCapacityReservationArn = GetCapacityReservationUsageRequest.AddMember("SMCapacityReservationArn", _CapacityReservationArn)
+
+	GetCapacityReservationUsageRequest_MaxResults = GetCapacityReservationUsageRequest.AddMember("MaxResults", _MaxResults)
+
+	GetCapacityReservationUsageRequest_NextToken = GetCapacityReservationUsageRequest.AddMember("NextToken", _NextToken)
+
+	GetCapacityReservationUsageResponse_SMCapacityReservationId = GetCapacityReservationUsageResponse.AddMember("SMCapacityReservationId", _SageMakerCapacityReservationId)
+
+	GetCapacityReservationUsageResponse_TotalInstanceCount = GetCapacityReservationUsageResponse.AddMember("TotalInstanceCount", _TotalInstanceCount)
+
+	GetCapacityReservationUsageResponse_AvailableInstanceCount = GetCapacityReservationUsageResponse.AddMember("AvailableInstanceCount", _AvailableInstanceCount)
+
+	GetCapacityReservationUsageResponse_LastRefreshTime = GetCapacityReservationUsageResponse.AddMember("LastRefreshTime", _Timestamp)
+
+	GetCapacityReservationUsageResponse_InstanceUsageSet = GetCapacityReservationUsageResponse.AddMember("InstanceUsageSet", _CapacityReservationInstanceUsageSet)
+
+	GetCapacityReservationUsageResponse_NextToken = GetCapacityReservationUsageResponse.AddMember("NextToken", _NextToken)
+
 	GetDeviceFleetReportRequest_DeviceFleetName = GetDeviceFleetReportRequest.AddMember("DeviceFleetName", _EntityName)
 
 	GetDeviceFleetReportResponse_DeviceFleetArn = GetDeviceFleetReportResponse.AddMember("DeviceFleetArn", _DeviceFleetArn)
@@ -54449,6 +54937,16 @@ func init() {
 	ListCandidatesForAutoMLJobResponse_Candidates = ListCandidatesForAutoMLJobResponse.AddMember("Candidates", _AutoMLCandidates)
 
 	ListCandidatesForAutoMLJobResponse_NextToken = ListCandidatesForAutoMLJobResponse.AddMember("NextToken", _NextToken)
+
+	ListCapacityReservationsRequest_MaxResults = ListCapacityReservationsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListCapacityReservationsRequest_NextToken = ListCapacityReservationsRequest.AddMember("NextToken", _NextToken)
+
+	ListCapacityReservationsRequest_Filters = ListCapacityReservationsRequest.AddMember("Filters", _CapacityReservationFilters)
+
+	ListCapacityReservationsResponse_CapacityReservationSummaries = ListCapacityReservationsResponse.AddMember("CapacityReservationSummaries", _CapacityReservationSummaries)
+
+	ListCapacityReservationsResponse_NextToken = ListCapacityReservationsResponse.AddMember("NextToken", _NextToken)
 
 	ListClusterEventsRequest_ClusterName = ListClusterEventsRequest.AddMember("ClusterName", _ClusterNameOrArn)
 

@@ -1741,6 +1741,86 @@ func (CandidateStepType) Values() []CandidateStepType {
 	}
 }
 
+type CapacityReservationEndpointSharing string
+
+// Enum values for CapacityReservationEndpointSharing
+const (
+	CapacityReservationEndpointSharingSingleEndpoint    CapacityReservationEndpointSharing = "SingleEndpoint"
+	CapacityReservationEndpointSharingMultipleEndpoints CapacityReservationEndpointSharing = "MultipleEndpoints"
+)
+
+// Values returns all known values for CapacityReservationEndpointSharing. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationEndpointSharing) Values() []CapacityReservationEndpointSharing {
+	return []CapacityReservationEndpointSharing{
+		"SingleEndpoint",
+		"MultipleEndpoints",
+	}
+}
+
+type CapacityReservationFilterName string
+
+// Enum values for CapacityReservationFilterName
+const (
+	CapacityReservationFilterNameStatus CapacityReservationFilterName = "Status"
+)
+
+// Values returns all known values for CapacityReservationFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationFilterName) Values() []CapacityReservationFilterName {
+	return []CapacityReservationFilterName{
+		"Status",
+	}
+}
+
+type CapacityReservationMatchCriteria string
+
+// Enum values for CapacityReservationMatchCriteria
+const (
+	CapacityReservationMatchCriteriaOpen     CapacityReservationMatchCriteria = "Open"
+	CapacityReservationMatchCriteriaTargeted CapacityReservationMatchCriteria = "Targeted"
+)
+
+// Values returns all known values for CapacityReservationMatchCriteria. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationMatchCriteria) Values() []CapacityReservationMatchCriteria {
+	return []CapacityReservationMatchCriteria{
+		"Open",
+		"Targeted",
+	}
+}
+
+type CapacityReservationOptInStatus string
+
+// Enum values for CapacityReservationOptInStatus
+const (
+	CapacityReservationOptInStatusPending  CapacityReservationOptInStatus = "Pending"
+	CapacityReservationOptInStatusActive   CapacityReservationOptInStatus = "Active"
+	CapacityReservationOptInStatusInactive CapacityReservationOptInStatus = "Inactive"
+)
+
+// Values returns all known values for CapacityReservationOptInStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationOptInStatus) Values() []CapacityReservationOptInStatus {
+	return []CapacityReservationOptInStatus{
+		"Pending",
+		"Active",
+		"Inactive",
+	}
+}
+
 type CapacityReservationPreference string
 
 // Enum values for CapacityReservationPreference
@@ -1756,6 +1836,47 @@ const (
 func (CapacityReservationPreference) Values() []CapacityReservationPreference {
 	return []CapacityReservationPreference{
 		"capacity-reservations-only",
+	}
+}
+
+type CapacityReservationResourceType string
+
+// Enum values for CapacityReservationResourceType
+const (
+	CapacityReservationResourceTypeHyperpodClusters CapacityReservationResourceType = "HyperPodClusters"
+	CapacityReservationResourceTypeEndpoints        CapacityReservationResourceType = "Endpoints"
+)
+
+// Values returns all known values for CapacityReservationResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationResourceType) Values() []CapacityReservationResourceType {
+	return []CapacityReservationResourceType{
+		"HyperPodClusters",
+		"Endpoints",
+	}
+}
+
+type CapacityReservationStatus string
+
+// Enum values for CapacityReservationStatus
+const (
+	CapacityReservationStatusScheduled CapacityReservationStatus = "Scheduled"
+	CapacityReservationStatusActive    CapacityReservationStatus = "Active"
+	CapacityReservationStatusExpired   CapacityReservationStatus = "Expired"
+)
+
+// Values returns all known values for CapacityReservationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityReservationStatus) Values() []CapacityReservationStatus {
+	return []CapacityReservationStatus{
+		"Scheduled",
+		"Active",
+		"Expired",
 	}
 }
 
@@ -9749,6 +9870,7 @@ const (
 	SoftwareUpdateStatusFailed             SoftwareUpdateStatus = "Failed"
 	SoftwareUpdateStatusRollbackInProgress SoftwareUpdateStatus = "RollbackInProgress"
 	SoftwareUpdateStatusRollbackComplete   SoftwareUpdateStatus = "RollbackComplete"
+	SoftwareUpdateStatusPartiallySucceeded SoftwareUpdateStatus = "PartiallySucceeded"
 )
 
 // Values returns all known values for SoftwareUpdateStatus. Note that this can be
@@ -9763,6 +9885,7 @@ func (SoftwareUpdateStatus) Values() []SoftwareUpdateStatus {
 		"Failed",
 		"RollbackInProgress",
 		"RollbackComplete",
+		"PartiallySucceeded",
 	}
 }
 

@@ -88,7 +88,6 @@ func (c *Client) GetIdentityContext(ctx context.Context, params *GetIdentityCont
 	return out, nil
 }
 
-// ///////////////////////// /////////////////////////
 type GetIdentityContextInput struct {
 
 	// The ID for the Amazon Web Services account that the user whose identity context

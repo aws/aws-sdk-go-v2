@@ -3310,6 +3310,26 @@ func (m *validateOpDescribeAutoMLJobV2) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCapacityReservation struct {
+}
+
+func (*validateOpDescribeCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeClusterEvent struct {
 }
 
@@ -4470,6 +4490,26 @@ func (m *validateOpDescribeReservedCapacity) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeResourceAssociations struct {
+}
+
+func (*validateOpDescribeResourceAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeResourceAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeResourceAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeResourceAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSpace struct {
 }
 
@@ -4790,6 +4830,26 @@ func (m *validateOpExtendTrainingPlan) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCapacityReservationUsage struct {
+}
+
+func (*validateOpGetCapacityReservationUsage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCapacityReservationUsage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCapacityReservationUsageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCapacityReservationUsageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDeviceFleetReport struct {
 }
 
@@ -4965,6 +5025,26 @@ func (m *validateOpListCandidatesForAutoMLJob) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCandidatesForAutoMLJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCapacityReservations struct {
+}
+
+func (*validateOpListCapacityReservations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCapacityReservations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCapacityReservationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCapacityReservationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7870,6 +7950,10 @@ func addOpDescribeAutoMLJobV2ValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeAutoMLJobV2{}, middleware.After)
 }
 
+func addOpDescribeCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCapacityReservation{}, middleware.After)
+}
+
 func addOpDescribeClusterEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeClusterEvent{}, middleware.After)
 }
@@ -8102,6 +8186,10 @@ func addOpDescribeReservedCapacityValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDescribeReservedCapacity{}, middleware.After)
 }
 
+func addOpDescribeResourceAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeResourceAssociations{}, middleware.After)
+}
+
 func addOpDescribeSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSpace{}, middleware.After)
 }
@@ -8166,6 +8254,10 @@ func addOpExtendTrainingPlanValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpExtendTrainingPlan{}, middleware.After)
 }
 
+func addOpGetCapacityReservationUsageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCapacityReservationUsage{}, middleware.After)
+}
+
 func addOpGetDeviceFleetReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDeviceFleetReport{}, middleware.After)
 }
@@ -8200,6 +8292,10 @@ func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListCandidatesForAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCandidatesForAutoMLJob{}, middleware.After)
+}
+
+func addOpListCapacityReservationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCapacityReservations{}, middleware.After)
 }
 
 func addOpListClusterEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -9888,6 +9984,41 @@ func validateCandidateGenerationConfig(v *types.CandidateGenerationConfig) error
 	if v.AlgorithmsConfig != nil {
 		if err := validateAutoMLAlgorithmsConfig(v.AlgorithmsConfig); err != nil {
 			invalidParams.AddNested("AlgorithmsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapacityReservationFilter(v *types.CapacityReservationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacityReservationFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapacityReservationFilters(v []types.CapacityReservationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacityReservationFilters"}
+	for i := range v {
+		if err := validateCapacityReservationFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -21545,6 +21676,21 @@ func validateOpDescribeAutoMLJobV2Input(v *DescribeAutoMLJobV2Input) error {
 	}
 }
 
+func validateOpDescribeCapacityReservationInput(v *DescribeCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCapacityReservationInput"}
+	if v.SMCapacityReservationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SMCapacityReservationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeClusterEventInput(v *DescribeClusterEventInput) error {
 	if v == nil {
 		return nil
@@ -22439,6 +22585,21 @@ func validateOpDescribeReservedCapacityInput(v *DescribeReservedCapacityInput) e
 	}
 }
 
+func validateOpDescribeResourceAssociationsInput(v *DescribeResourceAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeResourceAssociationsInput"}
+	if v.SMCapacityReservationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SMCapacityReservationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSpaceInput(v *DescribeSpaceInput) error {
 	if v == nil {
 		return nil
@@ -22694,6 +22855,21 @@ func validateOpExtendTrainingPlanInput(v *ExtendTrainingPlanInput) error {
 	}
 }
 
+func validateOpGetCapacityReservationUsageInput(v *GetCapacityReservationUsageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCapacityReservationUsageInput"}
+	if v.SMCapacityReservationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SMCapacityReservationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDeviceFleetReportInput(v *GetDeviceFleetReportInput) error {
 	if v == nil {
 		return nil
@@ -22843,6 +23019,23 @@ func validateOpListCandidatesForAutoMLJobInput(v *ListCandidatesForAutoMLJobInpu
 	invalidParams := smithy.InvalidParamsError{Context: "ListCandidatesForAutoMLJobInput"}
 	if v.AutoMLJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoMLJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCapacityReservationsInput(v *ListCapacityReservationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCapacityReservationsInput"}
+	if v.Filters != nil {
+		if err := validateCapacityReservationFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

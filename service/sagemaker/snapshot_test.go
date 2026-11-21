@@ -2042,6 +2042,18 @@ func TestCheckSnapshot_DescribeAutoMLJobV2(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCluster(context.Background(), nil, func(o *Options) {
@@ -2738,6 +2750,18 @@ func TestCheckSnapshot_DescribeReservedCapacity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeResourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeResourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeResourceAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSpace(context.Background(), nil, func(o *Options) {
@@ -2947,6 +2971,18 @@ func TestCheckSnapshot_ExtendTrainingPlan(t *testing.T) {
 	_, err := svc.ExtendTrainingPlan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ExtendTrainingPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityReservationUsage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3187,6 +3223,18 @@ func TestCheckSnapshot_ListCandidatesForAutoMLJob(t *testing.T) {
 	_, err := svc.ListCandidatesForAutoMLJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCandidatesForAutoMLJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCapacityReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapacityReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCapacityReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7249,6 +7297,18 @@ func TestUpdateSnapshot_DescribeAutoMLJobV2(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeCapacityReservation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCluster(context.Background(), nil, func(o *Options) {
@@ -7945,6 +8005,18 @@ func TestUpdateSnapshot_DescribeReservedCapacity(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeResourceAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeResourceAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeResourceAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSpace(context.Background(), nil, func(o *Options) {
@@ -8154,6 +8226,18 @@ func TestUpdateSnapshot_ExtendTrainingPlan(t *testing.T) {
 	_, err := svc.ExtendTrainingPlan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ExtendTrainingPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityReservationUsage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8394,6 +8478,18 @@ func TestUpdateSnapshot_ListCandidatesForAutoMLJob(t *testing.T) {
 	_, err := svc.ListCandidatesForAutoMLJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCandidatesForAutoMLJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCapacityReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapacityReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCapacityReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

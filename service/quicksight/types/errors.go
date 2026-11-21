@@ -1339,3 +1339,64 @@ func (v *UnsupportedUserEditionException) Deserialize(d smithy.ShapeDeserializer
 		return nil
 	})
 }
+
+// The input fails to satisfy the constraints specified by the service.
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RequestId *string
+	FieldList []ValidationExceptionField
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldList != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_FieldList, v.FieldList)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ValidationException_RequestId, *v.RequestId)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_FieldList:
+			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_FieldList, &v.FieldList)
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		case schemas.ValidationException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ValidationException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}

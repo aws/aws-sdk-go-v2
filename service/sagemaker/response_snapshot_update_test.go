@@ -6033,6 +6033,42 @@ func TestUpdateResponseSnapshot_DescribeAutoMLJobV2(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeCapacityReservation(t *testing.T) {
+	want := &DescribeCapacityReservationOutput{
+		CapacityReservation: &types.CapacityReservationDetail{
+			SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+			SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+			Owner:                    ptr.String("__Owner__"),
+			Status:                   types.CapacityReservationStatus("Scheduled"),
+			InstanceType:             ptr.String("__InstanceType__"),
+			AvailabilityZone:         ptr.String("__AvailabilityZone__"),
+			AvailabilityZoneId:       ptr.String("__AvailabilityZoneId__"),
+			TotalInstanceCount:       ptr.Int32(1),
+			StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CreationTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeCapacityReservation, schemas.DescribeCapacityReservationResponse, schemas.DescribeCapacityReservationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeCapacityReservation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 	want := &DescribeClusterOutput{
 		ClusterArn:     ptr.String("__ClusterArn__"),
@@ -14789,6 +14825,48 @@ func TestUpdateResponseSnapshot_DescribeReservedCapacity(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeResourceAssociations(t *testing.T) {
+	want := &DescribeResourceAssociationsOutput{
+		SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+		SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+		ResourceAssociations: []types.CapacityReservationResourceAssociation{
+			&types.CapacityReservationResourceAssociationMemberHyperPodClusters{
+				Value: types.CapacityReservationHyperPodClustersAssociation{
+					Status:         types.CapacityReservationOptInStatus("Pending"),
+					FailureReason:  ptr.String("__FailureReason__"),
+					AssociatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			&types.CapacityReservationResourceAssociationMemberHyperPodClusters{
+				Value: types.CapacityReservationHyperPodClustersAssociation{
+					Status:         types.CapacityReservationOptInStatus("Pending"),
+					FailureReason:  ptr.String("__FailureReason__"),
+					AssociatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeResourceAssociations, schemas.DescribeResourceAssociationsResponse, schemas.DescribeResourceAssociationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeResourceAssociations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeSpace(t *testing.T) {
 	want := &DescribeSpaceOutput{
 		DomainId:             ptr.String("__DomainId__"),
@@ -16489,6 +16567,64 @@ func TestUpdateResponseSnapshot_ExtendTrainingPlan(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetCapacityReservationUsage(t *testing.T) {
+	want := &GetCapacityReservationUsageOutput{
+		SMCapacityReservationId: ptr.String("__SMCapacityReservationId__"),
+		TotalInstanceCount:      ptr.Int32(1),
+		AvailableInstanceCount:  ptr.Int32(1),
+		LastRefreshTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		InstanceUsageSet: []types.CapacityReservationInstanceUsage{
+			{
+				AccountId:          ptr.String("__AccountId__"),
+				InUseInstanceCount: ptr.Int32(1),
+				ResourcesUsage: []types.CapacityReservationResourceUsage{
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+				},
+			},
+			{
+				AccountId:          ptr.String("__AccountId__"),
+				InUseInstanceCount: ptr.Int32(1),
+				ResourcesUsage: []types.CapacityReservationResourceUsage{
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+					{
+						ResourceType:       types.CapacityReservationResourceType("HyperPodClusters"),
+						InUseInstanceCount: ptr.Int32(1),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.GetCapacityReservationUsage, schemas.GetCapacityReservationUsageResponse, schemas.GetCapacityReservationUsageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCapacityReservationUsage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetDeviceFleetReport(t *testing.T) {
 	want := &GetDeviceFleetReportOutput{
 		DeviceFleetArn:  ptr.String("__DeviceFleetArn__"),
@@ -17602,6 +17738,58 @@ func TestUpdateResponseSnapshot_ListCandidatesForAutoMLJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListCandidatesForAutoMLJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListCapacityReservations(t *testing.T) {
+	want := &ListCapacityReservationsOutput{
+		CapacityReservationSummaries: []types.CapacityReservationSummary{
+			{
+				SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+				SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+				Owner:                    ptr.String("__Owner__"),
+				Status:                   types.CapacityReservationStatus("Scheduled"),
+				InstanceType:             ptr.String("__InstanceType__"),
+				AvailabilityZone:         ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:       ptr.String("__AvailabilityZoneId__"),
+				TotalInstanceCount:       ptr.Int32(1),
+				StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreationTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				SMCapacityReservationArn: ptr.String("__SMCapacityReservationArn__"),
+				SMCapacityReservationId:  ptr.String("__SMCapacityReservationId__"),
+				Owner:                    ptr.String("__Owner__"),
+				Status:                   types.CapacityReservationStatus("Scheduled"),
+				InstanceType:             ptr.String("__InstanceType__"),
+				AvailabilityZone:         ptr.String("__AvailabilityZone__"),
+				AvailabilityZoneId:       ptr.String("__AvailabilityZoneId__"),
+				TotalInstanceCount:       ptr.Int32(1),
+				StartTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreationTime:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.SageMaker)
+	opSchema := smithy.NewOperationSchema(schemas.ListCapacityReservations, schemas.ListCapacityReservationsResponse, schemas.ListCapacityReservationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListCapacityReservations.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
