@@ -1,3 +1,11 @@
+# Release (2026-11-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.140.0](service/quicksight/CHANGELOG.md#v11400-2026-11-21)
+  * **Feature**: Quicksight public SDK release for November 20
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.293.0](service/sagemaker/CHANGELOG.md#v12930-2026-11-21)
+  * **Feature**: Amazon SageMaker AI adds APIs to view capacity reservations and their usage.
+
 # Release (2026-11-20)
 
 ## General Highlights

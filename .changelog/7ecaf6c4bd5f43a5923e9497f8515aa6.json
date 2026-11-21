@@ -1,8 +1,0 @@
-{
-    "id": "7ecaf6c4-bd5f-43a5-923e-9497f8515aa6",
-    "type": "feature",
-    "description": "Amazon SageMaker AI adds APIs to view capacity reservations and their usage.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

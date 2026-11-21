@@ -1,3 +1,7 @@
+# v1.140.0 (2026-11-21)
+
+* **Feature**: Quicksight public SDK release for November 20
+
 # v1.139.2 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

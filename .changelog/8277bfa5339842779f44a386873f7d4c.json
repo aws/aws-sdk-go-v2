@@ -1,8 +1,0 @@
-{
-    "id": "8277bfa5-3398-4277-9f44-a386873f7d4c",
-    "type": "feature",
-    "description": "Quicksight public SDK release for November 20",
-    "modules": [
-        "service/quicksight"
-    ]
-}
