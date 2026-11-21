@@ -11,6 +11,7 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
+	"sync"
 	"testing"
 	"time"
 
@@ -645,6 +646,69 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 			_, err = creds.Retrieve(context.TODO())
 			tc.expectedError(t, err)
 		})
+	}
+}
+
+func TestLoadDefaultConfigIMDSClientsUseAppID(t *testing.T) {
+	restoreEnv := awstesting.StashEnv()
+	defer awstesting.PopEnv(restoreEnv)
+
+	const (
+		rolesPath    = "/latest/meta-data/iam/security-credentials/"
+		identityPath = "/latest/dynamic/instance-identity/document"
+	)
+
+	var mu sync.Mutex
+	userAgents := map[string]string{}
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		mu.Lock()
+		userAgents[r.URL.Path] = r.Header.Get("User-Agent")
+		mu.Unlock()
+
+		switch r.URL.Path {
+		case "/latest/api/token":
+			const ttlHeader = "X-Aws-Ec2-Metadata-Token-Ttl-Seconds"
+			w.Header().Set(ttlHeader, r.Header.Get(ttlHeader))
+			w.Write([]byte("validToken"))
+		case rolesPath:
+			w.Write([]byte("RoleName"))
+		case rolesPath + "RoleName":
+			w.Write([]byte(ec2MetadataResponse))
+		case identityPath:
+			w.Write([]byte(`{"region":"us-west-2"}`))
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer server.Close()
+
+	os.Setenv("AWS_EC2_METADATA_SERVICE_ENDPOINT", server.URL)
+
+	cfg, err := LoadDefaultConfig(context.TODO(),
+		WithAppID("myCoolApp"),
+		WithDefaultsMode(aws.DefaultsModeAuto),
+		WithSharedConfigFiles([]string{}),
+		WithSharedCredentialsFiles([]string{}),
+	)
+	if err != nil {
+		t.Fatalf("could not load config: %v", err)
+	}
+
+	if _, err := cfg.Credentials.Retrieve(context.TODO()); err != nil {
+		t.Fatalf("could not retrieve credentials: %v", err)
+	}
+
+	mu.Lock()
+	defer mu.Unlock()
+	for _, path := range []string{identityPath, rolesPath + "RoleName"} {
+		ua, ok := userAgents[path]
+		if !ok {
+			t.Fatalf("expect request to %v", path)
+		}
+		if a := "app/myCoolApp"; !strings.Contains(ua, a) {
+			t.Errorf("expect %v User-Agent to contain %v, got %q", path, a, ua)
+		}
 	}
 }
 
