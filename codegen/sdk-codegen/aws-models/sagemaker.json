@@ -8680,6 +8680,396 @@
                 "smithy.api#documentation": "<p>Information about the Capacity Reservation used by an instance or instance group.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CapacityReservationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a SageMaker Capacity Reservation.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]+:[0-9]{12}:sm-capacity-reservation/smcr-[0-9a-z]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationAvailabilityZoneId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of an Availability Zone, for example <code>use1-az1</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationDetail": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the SageMaker Capacity Reservation. SageMaker AI sets the status from the start and end times of the reservation. Valid values:</p> <dl> <dt>Scheduled</dt> <dd> <p>The current time is before <code>StartTime</code>.</p> </dd> <dt>Active</dt> <dd> <p>The current time is between <code>StartTime</code> and <code>EndTime</code>. You can use the reserved instances.</p> </dd> <dt>Expired</dt> <dd> <p>The current time is at or after <code>EndTime</code>.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The SageMaker AI instance type of the reserved instances, for example <code>ml.p5.48xlarge</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Availability Zone of the reserved instances, for example <code>us-east-1a</code>. Availability Zone names can map to different physical zones in different accounts. To identify the same zone across accounts, use <code>AvailabilityZoneId</code>.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationAvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the reserved instances, for example <code>use1-az1</code>. An Availability Zone ID identifies the same physical zone in every account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the reserved instances become available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation ends. This value is not returned if the reservation has no end time.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a SageMaker Capacity Reservation. A SageMaker Capacity Reservation reserves a number of instances of one instance type in one Availability Zone for a period of time.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationEndpointSharing": {
+            "type": "enum",
+            "members": {
+                "SINGLE_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SingleEndpoint"
+                    }
+                },
+                "MULTIPLE_ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultipleEndpoints"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Whether one endpoint or multiple endpoints can use an ML capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationEndpointsAssociation": {
+            "type": "structure",
+            "members": {
+                "MlReservationId": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationMlReservationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML capacity reservation. The name is the last part of the ML capacity reservation ARN.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationOptInStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the association. Valid values:</p> <dl> <dt>Pending</dt> <dd> <p>SageMaker AI is adding or removing the association.</p> </dd> <dt>Active</dt> <dd> <p>The resources are associated with the SageMaker Capacity Reservation and can use its instances.</p> </dd> <dt>Inactive</dt> <dd> <p>The resources are not associated with the SageMaker Capacity Reservation.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchCriteria": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationMatchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How endpoints in your account match the ML capacity reservation. Valid values:</p> <dl> <dt>Open</dt> <dd> <p>Endpoints in your account use the ML capacity reservation automatically when their instance type matches. You don't specify the ML capacity reservation ARN when you create the endpoint.</p> </dd> <dt>Targeted</dt> <dd> <p>An endpoint uses the ML capacity reservation only when you specify its ARN when you create or update the endpoint.</p> </dd> </dl>"
+                    }
+                },
+                "EndpointSharing": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationEndpointSharing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether one endpoint or multiple endpoints can use the ML capacity reservation. Valid values:</p> <dl> <dt>SingleEndpoint</dt> <dd> <p>Only one endpoint can use the ML capacity reservation.</p> </dd> <dt>MultipleEndpoints</dt> <dd> <p>Multiple endpoints can use the ML capacity reservation.</p> </dd> </dl>"
+                    }
+                },
+                "MlReservationArn": {
+                    "target": "com.amazonaws.sagemaker#MlReservationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML capacity reservation. Specify this ARN in <code>CreateEndpointConfig</code> to use the reserved instances for an endpoint. For a new ML capacity reservation, this value is returned when the status is <code>Active</code>.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the most recent attempt to add or remove the association failed. This value is returned only when the most recent attempt failed. After a failure to add the association, the status is <code>Inactive</code>. After a failure to remove the association, the status is <code>Active</code>.</p>"
+                    }
+                },
+                "AssociatedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when SageMaker AI started the current association. This time resets when you add the association again after it was removed or after it failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The association between the SageMaker AI endpoints in your account and a SageMaker Capacity Reservation, through one ML capacity reservation. To use the reserved instances for an endpoint, specify the ML capacity reservation ARN in the <code>MlReservationArn</code> field of <code>ProductionVariantCapacityReservationConfig</code> when you call <code>CreateEndpointConfig</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationFilterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the field to filter on. The only supported value is <code>Status</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationFilterValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The values to match. For the <code>Status</code> filter, valid values are <code>Scheduled</code>, <code>Active</code>, and <code>Expired</code>. Values are case sensitive. You can specify up to 10 values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for the <code>ListCapacityReservations</code> operation. A reservation matches the filter when its value for <code>Name</code> equals any of the values in <code>Values</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilterName": {
+            "type": "enum",
+            "members": {
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a field to filter SageMaker Capacity Reservations on.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A value to match in a SageMaker Capacity Reservation filter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(Scheduled|Active|Expired)$"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationHyperPodClustersAssociation": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationOptInStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the association. Valid values:</p> <dl> <dt>Pending</dt> <dd> <p>SageMaker AI is adding or removing the association.</p> </dd> <dt>Active</dt> <dd> <p>The resources are associated with the SageMaker Capacity Reservation and can use its instances.</p> </dd> <dt>Inactive</dt> <dd> <p>The resources are not associated with the SageMaker Capacity Reservation.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the most recent attempt to add or remove the association failed. This value is returned only when the most recent attempt failed. After a failure to add the association, the status is <code>Inactive</code>. After a failure to remove the association, the status is <code>Active</code>.</p>"
+                    }
+                },
+                "AssociatedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when SageMaker AI started the current association. This time resets when you add the association again after it was removed or after it failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The association between the SageMaker AI HyperPod clusters in your account and a SageMaker Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationInstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The SageMaker AI instance type of a SageMaker Capacity Reservation, for example <code>ml.p5.48xlarge</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationInstanceUsage": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that uses the instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InUseInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InUseInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances that the account uses, across all resource types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourcesUsage": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationResourceUsageSet",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The instance usage for each resource type that has instances in use in the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instances from a SageMaker Capacity Reservation that one account uses.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationInstanceUsageSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationInstanceUsage"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationMatchCriteria": {
+            "type": "enum",
+            "members": {
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Open"
+                    }
+                },
+                "TARGETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Targeted"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How endpoints match an ML capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationMlReservationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of an ML capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationOptInStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an association between resources and a SageMaker Capacity Reservation.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#CapacityReservationPreference": {
             "type": "enum",
             "members": {
@@ -8689,6 +9079,206 @@
                         "smithy.api#enumValue": "capacity-reservations-only"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceAssociation": {
+            "type": "union",
+            "members": {
+                "HyperPodClusters": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationHyperPodClustersAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association between the SageMaker AI HyperPod clusters in your account and the SageMaker Capacity Reservation. The association applies to all HyperPod clusters in your account.</p>"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationEndpointsAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association between the SageMaker AI endpoints in your account and the SageMaker Capacity Reservation, through one ML capacity reservation. The response includes one item for each ML capacity reservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An association between one type of resource in your account and a SageMaker Capacity Reservation. Each item contains exactly one member.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationResourceAssociation"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceType": {
+            "type": "enum",
+            "members": {
+                "HYPERPOD_CLUSTERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HyperPodClusters"
+                    }
+                },
+                "ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Endpoints"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A type of resource that uses instances from a SageMaker Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceUsage": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of resource that uses the instances. Valid values:</p> <dl> <dt>HyperPodClusters</dt> <dd> <p>SageMaker AI HyperPod clusters.</p> </dd> <dt>Endpoints</dt> <dd> <p>SageMaker AI endpoints.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InUseInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InUseInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances from the SageMaker Capacity Reservation that are in use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instances from a SageMaker Capacity Reservation that one resource type uses in an account.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceUsageSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationResourceUsage"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationStatus": {
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a SageMaker Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationSummary": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the SageMaker Capacity Reservation. SageMaker AI sets the status from the start and end times of the reservation. Valid values:</p> <dl> <dt>Scheduled</dt> <dd> <p>The current time is before <code>StartTime</code>.</p> </dd> <dt>Active</dt> <dd> <p>The current time is between <code>StartTime</code> and <code>EndTime</code>. You can use the reserved instances.</p> </dd> <dt>Expired</dt> <dd> <p>The current time is at or after <code>EndTime</code>.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The SageMaker AI instance type of the reserved instances, for example <code>ml.p5.48xlarge</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Availability Zone of the reserved instances, for example <code>us-east-1a</code>. Availability Zone names can map to different physical zones in different accounts. To identify the same zone across accounts, use <code>AvailabilityZoneId</code>.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationAvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the reserved instances, for example <code>use1-az1</code>. An Availability Zone ID identifies the same physical zone in every account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the reserved instances become available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation ends. This value is not returned if the reservation has no end time.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a SageMaker Capacity Reservation.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacityReservationType": {
@@ -28738,6 +29328,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DescribeCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeCapacityReservationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeCapacityReservationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about a SageMaker Capacity Reservation, such as its instance type, instance count, Availability Zone, and start and end times.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeCapacityReservationRequest": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation. The ARN has the format <code>arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeCapacityReservationResponse": {
+            "type": "structure",
+            "members": {
+                "CapacityReservation": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Details about the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DescribeCluster": {
             "type": "operation",
             "input": {
@@ -36339,6 +36978,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DescribeResourceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeResourceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeResourceAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the resources in your account that are associated with a SageMaker Capacity Reservation and the status of each association. Resources include SageMaker AI HyperPod clusters and SageMaker AI endpoints.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ResourceAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeResourceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation. The ARN has the format <code>arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If more results are available, the response includes a <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, the response includes a <code>NextToken</code> value. To retrieve the next set of results, use that token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeResourceAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceAssociations": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationResourceAssociations",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The associations between resources in your account and the SageMaker Capacity Reservation. The list is empty when your account has no associations with the reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker AI returns this token. To retrieve the next set of results, use this token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DescribeSpace": {
             "type": "operation",
             "input": {
@@ -43369,6 +44097,111 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The generative AI settings for the SageMaker Canvas application.</p> <p>Configure these settings for Canvas users starting chats with generative AI foundation models. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-fm-chat.html\"> Use generative AI with foundation models</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#GetCapacityReservationUsage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#GetCapacityReservationUsageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#GetCapacityReservationUsageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the number of instances in use from a SageMaker Capacity Reservation, for each account that uses them.</p> <p>SageMaker AI refreshes the usage counts periodically. The <code>LastRefreshTime</code> value shows when the counts were last refreshed.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "InstanceUsageSet",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GetCapacityReservationUsageRequest": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation. The ARN has the format <code>arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If more results are available, the response includes a <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, the response includes a <code>NextToken</code> value. To retrieve the next set of results, use that token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#GetCapacityReservationUsageResponse": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailableInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation that are not in use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastRefreshTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when SageMaker AI last refreshed the usage counts in this response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceUsageSet": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationInstanceUsageSet",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The instance usage for each account that uses instances from the SageMaker Capacity Reservation, sorted by account ID. Each account appears at most once across all pages. The list is empty when no instances are in use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker AI returns this token. To retrieve the next set of results, use this token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#GetDeviceFleetReport": {
@@ -53902,6 +54735,72 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListCapacityReservations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListCapacityReservationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListCapacityReservationsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the SageMaker Capacity Reservations in your account.</p> <p>An empty list is a valid response.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CapacityReservationSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListCapacityReservationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If more results are available, the response includes a <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, the response includes a <code>NextToken</code> value. To retrieve the next set of results, use that token in your next request.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only the reservations that match it. You can specify one filter. If you don't specify a filter, the response includes all reservations in your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListCapacityReservationsResponse": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationSummaries": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationSummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Summaries of the SageMaker Capacity Reservations in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker AI returns this token. To retrieve the next set of results, use this token in your next request.</p>"
                     }
                 }
             },
@@ -81087,6 +81986,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeAutoMLJobV2"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeCapacityReservation"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeCluster"
                 },
                 {
@@ -81261,6 +82163,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeReservedCapacity"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeResourceAssociations"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeSpace"
                 },
                 {
@@ -81313,6 +82218,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ExtendTrainingPlan"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#GetCapacityReservationUsage"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#GetDeviceFleetReport"
@@ -81373,6 +82281,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListCandidatesForAutoMLJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListCapacityReservations"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListClusterEvents"
@@ -83112,6 +84023,13 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#SageMakerCapacityReservationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of a SageMaker Capacity Reservation.</p>",
+                "smithy.api#pattern": "^smcr-[0-9a-z]{12}$"
+            }
+        },
         "com.amazonaws.sagemaker#SageMakerImageName": {
             "type": "enum",
             "members": {
@@ -84769,6 +85687,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RollbackComplete"
+                    }
+                },
+                "PARTIALLY_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartiallySucceeded"
                     }
                 }
             }
