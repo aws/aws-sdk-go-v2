@@ -906,12 +906,18 @@ func getReqRange(rng string) (int64, int64, error) {
 
 func getRespRange(rng string) (int64, int64, error) {
 	// rng format "bytes %d-%d/%d"
-	ranges := strings.Split(strings.Split(strings.Split(rng, " ")[1], "/")[0], "-")
-	start, err := strconv.ParseInt(ranges[0], 10, 64)
+	var rangeParts []string
+	if parts := strings.Split(rng, " "); len(parts) >= 2 {
+		rangeParts = strings.Split(strings.Split(parts[1], "/")[0], "-")
+	}
+	if len(rangeParts) != 2 {
+		return -1, -1, fmt.Errorf("invalid content range format %q, should be \"bytes start-end/total\" format", rng)
+	}
+	start, err := strconv.ParseInt(rangeParts[0], 10, 64)
 	if err != nil {
 		return -1, -1, fmt.Errorf("error when parsing response start: %v", err)
 	}
-	end, err := strconv.ParseInt(ranges[1], 10, 64)
+	end, err := strconv.ParseInt(rangeParts[1], 10, 64)
 	if err != nil {
 		return -1, -1, fmt.Errorf("error when parsing response end: %v", err)
 	}
