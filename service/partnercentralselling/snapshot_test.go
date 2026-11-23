@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateOpportunity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCustomerAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEngagement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEngagement(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCustomerAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteResourceSnapshotJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResourceSnapshotJob(context.Background(), nil, func(o *Options) {
@@ -206,6 +230,54 @@ func TestCheckSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomerAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCustomerAccountBulkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccountBulkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomerAccountBulkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCustomerAccountBulkJobReportUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccountBulkJobReportUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomerAccountBulkJobReportUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCustomerAccountStatistics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccountStatistics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCustomerAccountStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEngagement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEngagement(context.Background(), nil, func(o *Options) {
@@ -235,6 +307,18 @@ func TestCheckSnapshot_GetOpportunity(t *testing.T) {
 	_, err := svc.GetOpportunity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOpportunity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetOpportunityBulkJobReportUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOpportunityBulkJobReportUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOpportunityBulkJobReportUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,6 +374,30 @@ func TestCheckSnapshot_GetSellingSystemSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCustomerAccountBulkJobResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomerAccountBulkJobResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomerAccountBulkJobResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCustomerAccountBulkJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomerAccountBulkJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCustomerAccountBulkJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEngagementByAcceptingInvitationTasks(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEngagementByAcceptingInvitationTasks(context.Background(), nil, func(o *Options) {
@@ -307,6 +415,18 @@ func TestCheckSnapshot_ListEngagementFromOpportunityTasks(t *testing.T) {
 	_, err := svc.ListEngagementFromOpportunityTasks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEngagementFromOpportunityTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEngagementGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEngagementGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEngagementGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -367,6 +487,30 @@ func TestCheckSnapshot_ListOpportunities(t *testing.T) {
 	_, err := svc.ListOpportunities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListOpportunities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListOpportunityBulkJobResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOpportunityBulkJobResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOpportunityBulkJobResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListOpportunityBulkJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOpportunityBulkJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOpportunityBulkJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -470,6 +614,54 @@ func TestCheckSnapshot_RejectEngagementInvitation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SearchCustomerAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchCustomerAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchCustomerAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchEngagements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchEngagements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchEngagements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchOpportunities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchOpportunities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchOpportunities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartCustomerAccountBulkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCustomerAccountBulkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCustomerAccountBulkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartEngagementByAcceptingInvitationTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartEngagementByAcceptingInvitationTask(context.Background(), nil, func(o *Options) {
@@ -487,6 +679,18 @@ func TestCheckSnapshot_StartEngagementFromOpportunityTask(t *testing.T) {
 	_, err := svc.StartEngagementFromOpportunityTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartEngagementFromOpportunityTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartOpportunityBulkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOpportunityBulkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartOpportunityBulkJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +782,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCustomerAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEngagementContext(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEngagementContext(context.Background(), nil, func(o *Options) {
@@ -630,6 +846,18 @@ func TestUpdateSnapshot_AssociateOpportunity(t *testing.T) {
 	_, err := svc.AssociateOpportunity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateOpportunity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCustomerAccount")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -709,6 +937,18 @@ func TestUpdateSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCustomerAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteResourceSnapshotJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteResourceSnapshotJob(context.Background(), nil, func(o *Options) {
@@ -745,6 +985,54 @@ func TestUpdateSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomerAccount")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCustomerAccountBulkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccountBulkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomerAccountBulkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCustomerAccountBulkJobReportUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccountBulkJobReportUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomerAccountBulkJobReportUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCustomerAccountStatistics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCustomerAccountStatistics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCustomerAccountStatistics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEngagement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEngagement(context.Background(), nil, func(o *Options) {
@@ -774,6 +1062,18 @@ func TestUpdateSnapshot_GetOpportunity(t *testing.T) {
 	_, err := svc.GetOpportunity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOpportunity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetOpportunityBulkJobReportUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOpportunityBulkJobReportUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOpportunityBulkJobReportUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -829,6 +1129,30 @@ func TestUpdateSnapshot_GetSellingSystemSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCustomerAccountBulkJobResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomerAccountBulkJobResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomerAccountBulkJobResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCustomerAccountBulkJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCustomerAccountBulkJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCustomerAccountBulkJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEngagementByAcceptingInvitationTasks(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEngagementByAcceptingInvitationTasks(context.Background(), nil, func(o *Options) {
@@ -846,6 +1170,18 @@ func TestUpdateSnapshot_ListEngagementFromOpportunityTasks(t *testing.T) {
 	_, err := svc.ListEngagementFromOpportunityTasks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEngagementFromOpportunityTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEngagementGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEngagementGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEngagementGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -906,6 +1242,30 @@ func TestUpdateSnapshot_ListOpportunities(t *testing.T) {
 	_, err := svc.ListOpportunities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListOpportunities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListOpportunityBulkJobResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOpportunityBulkJobResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOpportunityBulkJobResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListOpportunityBulkJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOpportunityBulkJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOpportunityBulkJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1009,6 +1369,54 @@ func TestUpdateSnapshot_RejectEngagementInvitation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SearchCustomerAccounts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchCustomerAccounts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchCustomerAccounts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchEngagements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchEngagements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchEngagements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchOpportunities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchOpportunities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchOpportunities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCustomerAccountBulkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCustomerAccountBulkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCustomerAccountBulkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartEngagementByAcceptingInvitationTask(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartEngagementByAcceptingInvitationTask(context.Background(), nil, func(o *Options) {
@@ -1026,6 +1434,18 @@ func TestUpdateSnapshot_StartEngagementFromOpportunityTask(t *testing.T) {
 	_, err := svc.StartEngagementFromOpportunityTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartEngagementFromOpportunityTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartOpportunityBulkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOpportunityBulkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartOpportunityBulkJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1110,6 +1530,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCustomerAccount(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCustomerAccount(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCustomerAccount")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

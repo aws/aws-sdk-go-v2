@@ -1552,10 +1552,12 @@ var RelatedItemTypeFilter_custom *smithy.Schema
 var RelatedItemUpdateContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "RelatedItemUpdateContent",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var RelatedItemUpdateContent_comment *smithy.Schema
 
 var RelatedItemUpdateContent_custom *smithy.Schema
+
+var RelatedItemUpdateContent_sla *smithy.Schema
 
 var RequiredCaseRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -1782,6 +1784,18 @@ var _SlaType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
 	Name:      "SlaType",
 }, smithy.ShapeTypeString, 0)
+
+var SlaUpdateConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "SlaUpdateConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var SlaUpdateConfiguration_targetSlaMinutes *smithy.Schema
+
+var SlaUpdateContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectcases",
+	Name:      "SlaUpdateContent",
+}, smithy.ShapeTypeUnion, 1)
+var SlaUpdateContent_slaUpdateConfiguration *smithy.Schema
 
 var Sort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectcases",
@@ -3414,9 +3428,15 @@ func init() {
 
 	RelatedItemsConfiguration_custom = RelatedItemsConfiguration.AddMember("custom", smithyprelude.Boolean)
 
+	SlaUpdateConfiguration_targetSlaMinutes = SlaUpdateConfiguration.AddMember("targetSlaMinutes", _TargetSlaMinutes)
+
+	SlaUpdateContent_slaUpdateConfiguration = SlaUpdateContent.AddMember("slaUpdateConfiguration", SlaUpdateConfiguration)
+
 	RelatedItemUpdateContent_comment = RelatedItemUpdateContent.AddMember("comment", CommentUpdateContent)
 
 	RelatedItemUpdateContent_custom = RelatedItemUpdateContent.AddMember("custom", CustomUpdateContent)
+
+	RelatedItemUpdateContent_sla = RelatedItemUpdateContent.AddMember("sla", SlaUpdateContent)
 
 	RequiredField_fieldId = RequiredField.AddMember("fieldId", _FieldId)
 

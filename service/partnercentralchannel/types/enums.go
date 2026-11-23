@@ -2,13 +2,33 @@
 
 package types
 
+type AccountScope string
+
+// Enum values for AccountScope
+const (
+	AccountScopeEntireOrganization     AccountScope = "ENTIRE_ORGANIZATION"
+	AccountScopeSpecificMemberAccounts AccountScope = "SPECIFIC_MEMBER_ACCOUNTS"
+)
+
+// Values returns all known values for AccountScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountScope) Values() []AccountScope {
+	return []AccountScope{
+		"ENTIRE_ORGANIZATION",
+		"SPECIFIC_MEMBER_ACCOUNTS",
+	}
+}
+
 type AssociationType string
 
 // Enum values for AssociationType
 const (
-	AssociationTypeDownstreamSeller AssociationType = "DOWNSTREAM_SELLER"
-	AssociationTypeEndCustomer      AssociationType = "END_CUSTOMER"
-	AssociationTypeInternal         AssociationType = "INTERNAL"
+	AssociationTypeDownstreamSeller           AssociationType = "DOWNSTREAM_SELLER"
+	AssociationTypeEndCustomer                AssociationType = "END_CUSTOMER"
+	AssociationTypeInternal                   AssociationType = "INTERNAL"
+	AssociationTypeManagedServicesEndCustomer AssociationType = "MANAGED_SERVICES_END_CUSTOMER"
 )
 
 // Values returns all known values for AssociationType. Note that this can be
@@ -20,6 +40,49 @@ func (AssociationType) Values() []AssociationType {
 		"DOWNSTREAM_SELLER",
 		"END_CUSTOMER",
 		"INTERNAL",
+		"MANAGED_SERVICES_END_CUSTOMER",
+	}
+}
+
+type ChannelContractStatus string
+
+// Enum values for ChannelContractStatus
+const (
+	ChannelContractStatusPending  ChannelContractStatus = "PENDING"
+	ChannelContractStatusAccepted ChannelContractStatus = "ACCEPTED"
+	ChannelContractStatusExpired  ChannelContractStatus = "EXPIRED"
+	ChannelContractStatusCanceled ChannelContractStatus = "CANCELED"
+	ChannelContractStatusInactive ChannelContractStatus = "INACTIVE"
+)
+
+// Values returns all known values for ChannelContractStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelContractStatus) Values() []ChannelContractStatus {
+	return []ChannelContractStatus{
+		"PENDING",
+		"ACCEPTED",
+		"EXPIRED",
+		"CANCELED",
+		"INACTIVE",
+	}
+}
+
+type ChannelContractType string
+
+// Enum values for ChannelContractType
+const (
+	ChannelContractTypeManagedServicesAttestation ChannelContractType = "MANAGED_SERVICES_ATTESTATION"
+)
+
+// Values returns all known values for ChannelContractType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelContractType) Values() []ChannelContractType {
+	return []ChannelContractType{
+		"MANAGED_SERVICES_ATTESTATION",
 	}
 }
 
@@ -123,6 +186,56 @@ func (ListRelationshipsSortName) Values() []ListRelationshipsSortName {
 	}
 }
 
+type ManagedServicesAttestationTypeSortName string
+
+// Enum values for ManagedServicesAttestationTypeSortName
+const (
+	ManagedServicesAttestationTypeSortNameUpdatedAt ManagedServicesAttestationTypeSortName = "UpdatedAt"
+)
+
+// Values returns all known values for ManagedServicesAttestationTypeSortName.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedServicesAttestationTypeSortName) Values() []ManagedServicesAttestationTypeSortName {
+	return []ManagedServicesAttestationTypeSortName{
+		"UpdatedAt",
+	}
+}
+
+type ManagedServicesSupportedService string
+
+// Enum values for ManagedServicesSupportedService
+const (
+	ManagedServicesSupportedServiceMonitoring                                         ManagedServicesSupportedService = "MONITORING"
+	ManagedServicesSupportedServicePatching                                           ManagedServicesSupportedService = "PATCHING"
+	ManagedServicesSupportedServiceSecurity                                           ManagedServicesSupportedService = "SECURITY"
+	ManagedServicesSupportedServiceBackupAndDisasterRecovery                          ManagedServicesSupportedService = "BACKUP_AND_DISASTER_RECOVERY"
+	ManagedServicesSupportedServiceFinancialOperations                                ManagedServicesSupportedService = "FINANCIAL_OPERATIONS"
+	ManagedServicesSupportedServiceInfrastructureAsCodeAndAutomation                  ManagedServicesSupportedService = "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION"
+	ManagedServicesSupportedServiceWellArchitected                                    ManagedServicesSupportedService = "WELL_ARCHITECTED"
+	ManagedServicesSupportedServiceArtificialIntelligenceAndMachineLearningOperations ManagedServicesSupportedService = "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS"
+)
+
+// Values returns all known values for ManagedServicesSupportedService. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedServicesSupportedService) Values() []ManagedServicesSupportedService {
+	return []ManagedServicesSupportedService{
+		"MONITORING",
+		"PATCHING",
+		"SECURITY",
+		"BACKUP_AND_DISASTER_RECOVERY",
+		"FINANCIAL_OPERATIONS",
+		"INFRASTRUCTURE_AS_CODE_AND_AUTOMATION",
+		"WELL_ARCHITECTED",
+		"ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS",
+	}
+}
+
 type ParticipantType string
 
 // Enum values for ParticipantType
@@ -146,9 +259,10 @@ type Program string
 
 // Enum values for Program
 const (
-	ProgramSolutionProvider   Program = "SOLUTION_PROVIDER"
-	ProgramDistribution       Program = "DISTRIBUTION"
-	ProgramDistributionSeller Program = "DISTRIBUTION_SELLER"
+	ProgramSolutionProvider        Program = "SOLUTION_PROVIDER"
+	ProgramDistribution            Program = "DISTRIBUTION"
+	ProgramDistributionSeller      Program = "DISTRIBUTION_SELLER"
+	ProgramManagedServicesProvider Program = "MANAGED_SERVICES_PROVIDER"
 )
 
 // Values returns all known values for Program. Note that this can be expanded in
@@ -160,6 +274,7 @@ func (Program) Values() []Program {
 		"SOLUTION_PROVIDER",
 		"DISTRIBUTION",
 		"DISTRIBUTION_SELLER",
+		"MANAGED_SERVICES_PROVIDER",
 	}
 }
 
@@ -182,6 +297,26 @@ func (ProgramManagementAccountStatus) Values() []ProgramManagementAccountStatus 
 		"PENDING",
 		"ACTIVE",
 		"INACTIVE",
+	}
+}
+
+type ProgramManagementAccountType string
+
+// Enum values for ProgramManagementAccountType
+const (
+	ProgramManagementAccountTypeResaleBillingTransfer ProgramManagementAccountType = "RESALE_BILLING_TRANSFER"
+	ProgramManagementAccountTypeManagedServices       ProgramManagementAccountType = "MANAGED_SERVICES"
+)
+
+// Values returns all known values for ProgramManagementAccountType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProgramManagementAccountType) Values() []ProgramManagementAccountType {
+	return []ProgramManagementAccountType{
+		"RESALE_BILLING_TRANSFER",
+		"MANAGED_SERVICES",
 	}
 }
 

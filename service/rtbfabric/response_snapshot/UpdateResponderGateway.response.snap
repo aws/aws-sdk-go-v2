@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"clientRoutingPolicy":"AVAILABILITY_ZONE_AFFINITY","gatewayId":"__GatewayId__","status":"PENDING_CREATION"}
+{"clientRoutingPolicy":"AVAILABILITY_ZONE_AFFINITY","gatewayId":"__GatewayId__","status":"PENDING_CREATION","updateId":"__UpdateId__"}

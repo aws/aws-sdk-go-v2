@@ -110,9 +110,9 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 }
 func TestCheckResponseSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	want := &AssociateGlossaryTermsOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 		GlossaryTerms: []string{
 			"__Member__",
 			"__Member__",
@@ -15455,32 +15455,11 @@ func TestCheckResponseSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
-func TestCheckResponseSnapshot_DeleteAssetType(t *testing.T) {
-	want := &DeleteAssetTypeOutput{}
-	status, header, body, err := serdeRespReadSnapshot("DeleteAssetType.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.DeleteAssetType(context.Background(), &DeleteAssetTypeInput{
-		Identifier: ptr.String("__Identifier__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAssetType.response", err)
-	}
-}
-
 func TestCheckResponseSnapshot_DeleteAttachment(t *testing.T) {
 	want := &DeleteAttachmentOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAttachment.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -17424,9 +17403,9 @@ func TestCheckResponseSnapshot_DescribeIntegrations(t *testing.T) {
 
 func TestCheckResponseSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	want := &DisassociateGlossaryTermsOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 		GlossaryTerms: []string{
 			"__Member__",
 			"__Member__",
@@ -17511,9 +17490,9 @@ func TestCheckResponseSnapshot_GetAssetType(t *testing.T) {
 	want := &GetAssetTypeOutput{
 		Id:   ptr.String("__Id__"),
 		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
+		Forms: map[string]types.AssetTypeFormOutput{
 			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+				FormTypeId: ptr.String("__FormTypeId__"),
 			},
 		},
 	}
@@ -19739,15 +19718,21 @@ func TestCheckResponseSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
 	want := &GetDataCatalogExportConfigurationOutput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		Status:        types.ExportStatus("ENABLING"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		S3TablesConfiguration: &types.S3TablesConfigurationResult{
+			TableBucketArn: ptr.String("__TableBucketArn__"),
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
 		},
-		S3TableBucketArn: ptr.String("__S3TableBucketArn__"),
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Assets: &types.AssetsExportResult{
+			S3TablesExport: types.ExportSetting("ENABLED"),
+			S3TablesExportState: &types.S3TablesExportState{
+				Status: types.ExportStatus("ENABLING"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDataCatalogExportConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -39810,6 +39795,7 @@ func TestCheckResponseSnapshot_PutAsset(t *testing.T) {
 		Id:          ptr.String("__Id__"),
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		AssetTypeId: ptr.String("__AssetTypeId__"),
 		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Forms: map[string]types.AssetFormEntry{
 			"key0": {
@@ -39827,14 +39813,14 @@ func TestCheckResponseSnapshot_PutAsset(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.PutAsset(context.Background(), &PutAssetInput{
-		AssetTypeId: ptr.String("__AssetTypeId__"),
-		Identifier:  ptr.String("__Identifier__"),
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		Forms: map[string]types.AssetFormEntry{
+		AssetTypeIdentifier: ptr.String("__AssetTypeIdentifier__"),
+		Identifier:          ptr.String("__Identifier__"),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		Forms: map[string]types.AssetFormInput{
 			"key0": {
-				FormTypeId: ptr.String("__FormTypeId__"),
-				Content:    ptr.String("__Content__"),
+				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+				Content:            ptr.String("__Content__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -39847,46 +39833,11 @@ func TestCheckResponseSnapshot_PutAsset(t *testing.T) {
 	}
 }
 
-func TestCheckResponseSnapshot_PutAssetType(t *testing.T) {
-	want := &PutAssetTypeOutput{
-		Id:   ptr.String("__Id__"),
-		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
-			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
-		},
-	}
-	status, header, body, err := serdeRespReadSnapshot("PutAssetType.response")
-	if errors.Is(err, fs.ErrNotExist) {
-		t.Skip("no response snapshot fixture")
-	}
-	if err != nil {
-		t.Fatal(err)
-	}
-	svc := serdeRespClient(status, header, body)
-	got, err := svc.PutAssetType(context.Background(), &PutAssetTypeInput{
-		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
-			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
-		},
-		ClientToken: ptr.String("__ClientToken__"),
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := smithytesting.CompareValues(want, got); err != nil {
-		t.Errorf("response snapshot mismatch for %s: %v", "PutAssetType.response", err)
-	}
-}
-
 func TestCheckResponseSnapshot_PutAttachment(t *testing.T) {
 	want := &PutAttachmentOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 		AttachmentName:   ptr.String("__AttachmentName__"),
 		FormTypeId:       ptr.String("__FormTypeId__"),
 	}
@@ -39899,13 +39850,13 @@ func TestCheckResponseSnapshot_PutAttachment(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.PutAttachment(context.Background(), &PutAttachmentInput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
-		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
-		AttachmentName:   ptr.String("__AttachmentName__"),
-		Content:          ptr.String("__Content__"),
-		FormTypeId:       ptr.String("__FormTypeId__"),
-		ClientToken:      ptr.String("__ClientToken__"),
+		AssetIdentifier:    ptr.String("__AssetIdentifier__"),
+		IterableFormName:   ptr.String("__IterableFormName__"),
+		ItemIdentifier:     ptr.String("__ItemIdentifier__"),
+		AttachmentName:     ptr.String("__AttachmentName__"),
+		Content:            ptr.String("__Content__"),
+		FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+		ClientToken:        ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -39949,10 +39900,14 @@ func TestCheckResponseSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 
 func TestCheckResponseSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
 	want := &PutDataCatalogExportConfigurationOutput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		S3TablesConfiguration: &types.S3TablesConfiguration{
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Assets: &types.AssetsExport{
+			S3TablesExport: types.ExportSetting("ENABLED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PutDataCatalogExportConfiguration.response")
@@ -39964,12 +39919,16 @@ func TestCheckResponseSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.PutDataCatalogExportConfiguration(context.Background(), &PutDataCatalogExportConfigurationInput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
-		},
 		ClientToken: ptr.String("__ClientToken__"),
+		S3TablesConfiguration: &types.S3TablesConfiguration{
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Assets: &types.AssetsExport{
+			S3TablesExport: types.ExportSetting("ENABLED"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -41083,18 +41042,20 @@ func TestCheckResponseSnapshot_SearchAssets(t *testing.T) {
 	want := &SearchAssetsOutput{
 		Items: []types.SearchResultItem{
 			{
-				Id:               ptr.String("__Id__"),
-				AssetName:        ptr.String("__AssetName__"),
-				AssetDescription: ptr.String("__AssetDescription__"),
-				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				AssetTypeId:      ptr.String("__AssetTypeId__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssetTypeId: ptr.String("__AssetTypeId__"),
 			},
 			{
-				Id:               ptr.String("__Id__"),
-				AssetName:        ptr.String("__AssetName__"),
-				AssetDescription: ptr.String("__AssetDescription__"),
-				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				AssetTypeId:      ptr.String("__AssetTypeId__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssetTypeId: ptr.String("__AssetTypeId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -41119,8 +41080,8 @@ func TestCheckResponseSnapshot_SearchAssets(t *testing.T) {
 			Value: []types.SearchFilterClause{
 				&types.SearchFilterClauseMemberAttributeFilter{
 					Value: types.SearchAttributeFilter{
-						Attribute: ptr.String("__Attribute__"),
-						Operator:  types.SearchFilterOperator("equals"),
+						Attribute:  ptr.String("__Attribute__"),
+						Comparator: types.SearchFilterComparator("EQUALS"),
 						Value: &types.SearchFilterValueMemberStringValue{
 							Value: "__SearchFilterValueMemberStringValue__",
 						},
@@ -41128,8 +41089,8 @@ func TestCheckResponseSnapshot_SearchAssets(t *testing.T) {
 				},
 				&types.SearchFilterClauseMemberAttributeFilter{
 					Value: types.SearchAttributeFilter{
-						Attribute: ptr.String("__Attribute__"),
-						Operator:  types.SearchFilterOperator("equals"),
+						Attribute:  ptr.String("__Attribute__"),
+						Comparator: types.SearchFilterComparator("EQUALS"),
 						Value: &types.SearchFilterValueMemberStringValue{
 							Value: "__SearchFilterValueMemberStringValue__",
 						},

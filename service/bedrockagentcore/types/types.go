@@ -1050,6 +1050,157 @@ func (v *AvailableLimits) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Optional settings for an AWS Billing payment.
+type AwsBillingPaymentOptions struct {
+
+	// The agent's public key for Demonstrating Proof of Possession (DPoP), as
+	// described in RFC 9449. If you specify a key, the payment token is bound to it,
+	// and the seller can verify that the token is presented by the holder of the
+	// matching private key. If you don't specify a key, the payment token isn't bound
+	// to a key.
+	DpopJwk *DpopJwk
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsBillingPaymentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsBillingPaymentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsBillingPaymentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DpopJwk != nil {
+		s.WriteStruct(schemas.AwsBillingPaymentOptions_dpopJwk)
+		v.DpopJwk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AwsBillingPaymentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsBillingPaymentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsBillingPaymentOptions_dpopJwk:
+			v.DpopJwk = &DpopJwk{}
+			return v.DpopJwk.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The input for an AWS Billing x402 payment. The payment pays an AWS Marketplace
+// seller's x402 (HTTP 402) payment requirement and is billed to the AWS account
+// that owns the payment manager, through the payment manager's AWS Billing payment
+// connector.
+type AwsBillingX402PaymentInput struct {
+
+	// The seller's x402 payment requirement for AWS Billing, passed unchanged as a
+	// JSON object. The service reads the seller-signed quote token from
+	// extra.quoteToken and returns a ValidationException if it is missing or invalid.
+	// Any change to the quote token invalidates its signature.
+	//
+	// This member is required.
+	Payload document.Interface
+
+	// The x402 protocol version of the seller's HTTP 402 response, from its
+	// x402Version field. For example, 2 .
+	//
+	// This member is required.
+	Version *string
+
+	// Optional settings for the AWS Billing payment.
+	Options *AwsBillingPaymentOptions
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsBillingX402PaymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsBillingX402PaymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsBillingX402PaymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.AwsBillingX402PaymentInput_options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Payload != nil {
+		s.WriteDocument(schemas.AwsBillingX402PaymentInput_payload, &smithydocument.Opaque{Value: v.Payload})
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AwsBillingX402PaymentInput_version, *v.Version)
+	}
+}
+func (v *AwsBillingX402PaymentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsBillingX402PaymentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsBillingX402PaymentInput_options:
+			v.Options = &AwsBillingPaymentOptions{}
+			return v.Options.Deserialize(d)
+		case schemas.AwsBillingX402PaymentInput_payload:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.AwsBillingX402PaymentInput_payload, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Payload = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.AwsBillingX402PaymentInput_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AwsBillingX402PaymentInput_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// The output of an AWS Billing x402 payment.
+type AwsBillingX402PaymentOutput struct {
+
+	// The payment token, a signed JSON Web Token (JWT). Include it when you retry
+	// your request to the seller. Treat the payment token as a credential: don't log
+	// or share it.
+	//
+	// This member is required.
+	PaymentToken *string
+
+	// The x402 protocol version. This is the same value as the version in the request.
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsBillingX402PaymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsBillingX402PaymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsBillingX402PaymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentToken != nil {
+		s.WriteString(schemas.AwsBillingX402PaymentOutput_paymentToken, *v.PaymentToken)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.AwsBillingX402PaymentOutput_version, *v.Version)
+	}
+}
+func (v *AwsBillingX402PaymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsBillingX402PaymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsBillingX402PaymentOutput_paymentToken:
+			v.PaymentToken = new(string)
+			return d.ReadString(schemas.AwsBillingX402PaymentOutput_paymentToken, v.PaymentToken)
+		case schemas.AwsBillingX402PaymentOutput_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.AwsBillingX402PaymentOutput_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // Configuration for HTTP Basic Authentication using credentials stored in Amazon
 // Web Services Secrets Manager. The secret must contain a JSON object with
 // username and password string fields. Username allows alphanumeric characters
@@ -3942,6 +4093,81 @@ func (v *DomainFilter) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeDomainList(d, schemas.DomainFilter_exclude, &v.Exclude)
 		case schemas.DomainFilter_include:
 			return deserializeDomainList(d, schemas.DomainFilter_include, &v.Include)
+		}
+		return nil
+	})
+}
+
+// An elliptic curve public key in JSON Web Key (JWK) format, as described in RFC
+// 7518 section 6.2, used to bind a payment token to the agent.
+type DpopJwk struct {
+
+	// The elliptic curve of the key.
+	//
+	// This member is required.
+	Crv JwkEllipticCurve
+
+	// The key type. The only valid value is EC .
+	//
+	// This member is required.
+	Kty JwkKeyType
+
+	// The x-coordinate of the elliptic curve point, base64url-encoded.
+	//
+	// This member is required.
+	X *string
+
+	// The y-coordinate of the elliptic curve point, base64url-encoded.
+	//
+	// This member is required.
+	Y *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DpopJwk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DpopJwk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DpopJwk) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Crv != "" {
+		s.WriteString(schemas.DpopJwk_crv, string(v.Crv))
+	}
+	if v.Kty != "" {
+		s.WriteString(schemas.DpopJwk_kty, string(v.Kty))
+	}
+	if v.X != nil {
+		s.WriteString(schemas.DpopJwk_x, *v.X)
+	}
+	if v.Y != nil {
+		s.WriteString(schemas.DpopJwk_y, *v.Y)
+	}
+}
+func (v *DpopJwk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DpopJwk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DpopJwk_crv:
+			var ev string
+			if err := d.ReadString(schemas.DpopJwk_crv, &ev); err != nil {
+				return err
+			}
+			v.Crv = JwkEllipticCurve(ev)
+			return nil
+		case schemas.DpopJwk_kty:
+			var ev string
+			if err := d.ReadString(schemas.DpopJwk_kty, &ev); err != nil {
+				return err
+			}
+			v.Kty = JwkKeyType(ev)
+			return nil
+		case schemas.DpopJwk_x:
+			v.X = new(string)
+			return d.ReadString(schemas.DpopJwk_x, v.X)
+		case schemas.DpopJwk_y:
+			v.Y = new(string)
+			return d.ReadString(schemas.DpopJwk_y, v.Y)
 		}
 		return nil
 	})
@@ -12120,10 +12346,29 @@ func (v *PayloadTypeMemberJson) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	PaymentInputMemberAwsBillingX402
 //	PaymentInputMemberCryptoX402
 //	PaymentInputMemberMpp
 type PaymentInput interface {
 	isPaymentInput()
+}
+
+// Input for an AWS Billing x402 payment, which pays an AWS Marketplace seller's
+// quote and charges it to the AWS account that owns the payment manager.
+type PaymentInputMemberAwsBillingX402 struct {
+	Value AwsBillingX402PaymentInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInputMemberAwsBillingX402) isPaymentInput() {}
+func (v *PaymentInputMemberAwsBillingX402) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentInput_awsBillingX402)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PaymentInputMemberAwsBillingX402) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Input for a crypto X402 payment.
@@ -12439,10 +12684,28 @@ func (v *PaymentInstrumentSummary) Deserialize(d smithy.ShapeDeserializer) error
 //
 // The following types satisfy this interface:
 //
+//	PaymentOutputMemberAwsBillingX402
 //	PaymentOutputMemberCryptoX402
 //	PaymentOutputMemberMpp
 type PaymentOutput interface {
 	isPaymentOutput()
+}
+
+// Output from an AWS Billing x402 payment.
+type PaymentOutputMemberAwsBillingX402 struct {
+	Value AwsBillingX402PaymentOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentOutputMemberAwsBillingX402) isPaymentOutput() {}
+func (v *PaymentOutputMemberAwsBillingX402) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentOutput_awsBillingX402)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PaymentOutputMemberAwsBillingX402) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Output from a crypto X402 payment.

@@ -850,6 +850,26 @@ func (m *validateOpListFirewallDomains) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFirewallRuleDomains struct {
+}
+
+func (*validateOpListFirewallRuleDomains) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFirewallRuleDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFirewallRuleDomainsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFirewallRuleDomainsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFirewallRules struct {
 }
 
@@ -1358,6 +1378,10 @@ func addOpListFirewallDomainsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListFirewallDomains{}, middleware.After)
 }
 
+func addOpListFirewallRuleDomainsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFirewallRuleDomains{}, middleware.After)
+}
+
 func addOpListFirewallRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFirewallRules{}, middleware.After)
 }
@@ -1424,6 +1448,21 @@ func addOpUpdateResolverEndpointValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateResolverRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResolverRule{}, middleware.After)
+}
+
+func validateAutoAllowlistConfig(v *types.AutoAllowlistConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoAllowlistConfig"}
+	if v.InitialDataTimeframeHours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialDataTimeframeHours"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCreateFirewallRuleEntries(v []types.CreateFirewallRuleEntry) error {
@@ -1578,6 +1617,11 @@ func validateFirewallRuleType(v *types.FirewallRuleType) error {
 	if v.DnsThreatProtection != nil {
 		if err := validateDnsThreatProtectionRuleTypeConfig(v.DnsThreatProtection); err != nil {
 			invalidParams.AddNested("DnsThreatProtection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoAllowlist != nil {
+		if err := validateAutoAllowlistConfig(v.AutoAllowlist); err != nil {
+			invalidParams.AddNested("AutoAllowlist", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2500,6 +2544,21 @@ func validateOpListFirewallDomainsInput(v *ListFirewallDomainsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListFirewallDomainsInput"}
 	if v.FirewallDomainListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFirewallRuleDomainsInput(v *ListFirewallRuleDomainsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFirewallRuleDomainsInput"}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

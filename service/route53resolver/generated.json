@@ -52,6 +52,7 @@
         "api_op_ListFirewallConfigs.go",
         "api_op_ListFirewallDomainLists.go",
         "api_op_ListFirewallDomains.go",
+        "api_op_ListFirewallRuleDomains.go",
         "api_op_ListFirewallRuleGroupAssociations.go",
         "api_op_ListFirewallRuleGroups.go",
         "api_op_ListFirewallRuleTypes.go",

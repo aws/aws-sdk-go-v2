@@ -4046,12 +4046,13 @@ func (v *RelatedItemTypeFilterMemberSla) Deserialize(d smithy.ShapeDeserializer)
 }
 
 // Represents the content of a related item to be updated. This is a union type
-// that can contain either comment content or custom content.
+// that can contain comment content, custom content, or SLA content.
 //
 // The following types satisfy this interface:
 //
 //	RelatedItemUpdateContentMemberComment
 //	RelatedItemUpdateContentMemberCustom
+//	RelatedItemUpdateContentMemberSla
 type RelatedItemUpdateContent interface {
 	isRelatedItemUpdateContent()
 }
@@ -4088,6 +4089,21 @@ func (v *RelatedItemUpdateContentMemberCustom) Serialize(s smithy.ShapeSerialize
 }
 func (v *RelatedItemUpdateContentMemberCustom) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// Represents the content of an SLA to be updated.
+type RelatedItemUpdateContentMemberSla struct {
+	Value SlaUpdateContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemUpdateContentMemberSla) isRelatedItemUpdateContent() {}
+func (v *RelatedItemUpdateContentMemberSla) Serialize(s smithy.ShapeSerializer) {
+	serializeSlaUpdateContent(s, schemas.RelatedItemUpdateContent_sla, v.Value)
+}
+func (v *RelatedItemUpdateContentMemberSla) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeSlaUpdateContent(d, schemas.RelatedItemUpdateContent_sla, &v.Value)
 }
 
 // Required rule type, used to indicate whether a field is required. In the
@@ -4697,7 +4713,9 @@ type SlaInputConfiguration struct {
 	// This member is required.
 	Type SlaType
 
-	// Unique identifier of a field.
+	// Unique identifier of the case field that the SLA tracks. The field must be a
+	// single-select field, such as the system status field or a custom single-select
+	// field.
 	FieldId *string
 
 	// Represents a list of target field values for the fieldId specified in
@@ -4780,6 +4798,66 @@ func (v *SlaInputContentMemberSlaInputConfiguration) Serialize(s smithy.ShapeSer
 	s.CloseStruct()
 }
 func (v *SlaInputContentMemberSlaInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Represents the SLA configuration to update.
+type SlaUpdateConfiguration struct {
+
+	// New target duration in minutes within which an SLA should be completed. The new
+	// deadline is counted from when the SLA was created.
+	//
+	// This member is required.
+	TargetSlaMinutes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *SlaUpdateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlaUpdateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlaUpdateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetSlaMinutes != nil {
+		s.WriteInt64(schemas.SlaUpdateConfiguration_targetSlaMinutes, *v.TargetSlaMinutes)
+	}
+}
+func (v *SlaUpdateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlaUpdateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlaUpdateConfiguration_targetSlaMinutes:
+			v.TargetSlaMinutes = new(int64)
+			return d.ReadInt64(schemas.SlaUpdateConfiguration_targetSlaMinutes, v.TargetSlaMinutes)
+		}
+		return nil
+	})
+}
+
+// Represents the updated content of an SLA related item.
+//
+// The following types satisfy this interface:
+//
+//	SlaUpdateContentMemberSlaUpdateConfiguration
+type SlaUpdateContent interface {
+	isSlaUpdateContent()
+}
+
+// Represents the SLA configuration to update.
+type SlaUpdateContentMemberSlaUpdateConfiguration struct {
+	Value SlaUpdateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SlaUpdateContentMemberSlaUpdateConfiguration) isSlaUpdateContent() {}
+func (v *SlaUpdateContentMemberSlaUpdateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlaUpdateContent_slaUpdateConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SlaUpdateContentMemberSlaUpdateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -5176,5 +5254,6 @@ func (*UnknownUnionMember) isRelatedItemTypeFilter()     {}
 func (*UnknownUnionMember) isRelatedItemUpdateContent()  {}
 func (*UnknownUnionMember) isSection()                   {}
 func (*UnknownUnionMember) isSlaInputContent()           {}
+func (*UnknownUnionMember) isSlaUpdateContent()          {}
 func (*UnknownUnionMember) isTagFilter()                 {}
 func (*UnknownUnionMember) isUserUnion()                 {}

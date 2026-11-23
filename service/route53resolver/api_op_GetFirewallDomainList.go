@@ -53,6 +53,17 @@ type GetFirewallDomainListOutput struct {
 	// The domain list that you requested.
 	FirewallDomainList *types.FirewallDomainList
 
+	// For an AutoAllowlist domain list, the ID of the firewall rule group that
+	// contains the AutoAllowlist rule that owns this domain list. Present only when
+	// ManagedListType is AUTOALLOWLIST .
+	FirewallRuleGroupId *string
+
+	// For an AutoAllowlist domain list, the threat protection ID of the
+	// auto-allowlist rule that owns this domain list. Provide it to ListFirewallRuleDomainsto review the
+	// observed, allowed, and denied domains. Present only when ManagedListType is
+	// AUTOALLOWLIST .
+	FirewallThreatProtectionId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -71,6 +82,12 @@ func (v *GetFirewallDomainListOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.FirewallDomainList.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.GetFirewallDomainListResponse_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.GetFirewallDomainListResponse_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
 }
 func (v *GetFirewallDomainListOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFirewallDomainListResponse, func(s *smithy.Schema) error {
@@ -78,6 +95,12 @@ func (v *GetFirewallDomainListOutput) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.GetFirewallDomainListResponse_FirewallDomainList:
 			v.FirewallDomainList = &types.FirewallDomainList{}
 			return v.FirewallDomainList.Deserialize(d)
+		case schemas.GetFirewallDomainListResponse_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListResponse_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.GetFirewallDomainListResponse_FirewallThreatProtectionId:
+			v.FirewallThreatProtectionId = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListResponse_FirewallThreatProtectionId, v.FirewallThreatProtectionId)
 		}
 		return nil
 	})

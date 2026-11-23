@@ -56,6 +56,8 @@ type InvokeWithResponseStreamInput struct {
 
 	// Up to 3,583 bytes of base64-encoded data about the invoking client to pass to
 	// the function in the context object.
+	//
+	// ClientContext is logged to CloudTrail if you turn on data events.
 	ClientContext *string
 
 	// Use one of the following options:

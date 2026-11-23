@@ -350,6 +350,26 @@ func (m *validateOpRevokeResource) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRotateWebhookCredentials struct {
+}
+
+func (*validateOpRotateWebhookCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRotateWebhookCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RotateWebhookCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRotateWebhookCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -518,6 +538,10 @@ func addOpRevokeResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeResource{}, middleware.After)
 }
 
+func addOpRotateWebhookCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRotateWebhookCredentials{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -616,6 +640,11 @@ func validateEventSourceConfiguration(v types.EventSourceConfiguration) error {
 			invalidParams.AddNested("[PartnerEventsConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.EventSourceConfigurationMemberWebhookEventsConfiguration:
+		if err := validateWebhookEventsSourceConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[WebhookEventsConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -694,6 +723,11 @@ func validateInvokeConfiguration(v *types.InvokeConfiguration) error {
 			invalidParams.AddNested("EventBusV2Parameters", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MskParameters != nil {
+		if err := validateMskParameters(v.MskParameters); err != nil {
+			invalidParams.AddNested("MskParameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
 	}
@@ -711,6 +745,61 @@ func validateJsonataConfiguration(v *types.JsonataConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "JsonataConfiguration"}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMskHeader(v *types.MskHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MskHeader"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMskHeaderList(v []types.MskHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MskHeaderList"}
+	for i := range v {
+		if err := validateMskHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMskParameters(v *types.MskParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MskParameters"}
+	if v.TopicName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicName"))
+	}
+	if v.Headers != nil {
+		if err := validateMskHeaderList(v.Headers); err != nil {
+			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Connectivity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Connectivity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -907,6 +996,116 @@ func validateUpdateInvokeConfiguration(v *types.UpdateInvokeConfiguration) error
 		if err := validateEventBusV2Parameters(v.EventBusV2Parameters); err != nil {
 			invalidParams.AddNested("EventBusV2Parameters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.MskParameters != nil {
+		if err := validateMskParameters(v.MskParameters); err != nil {
+			invalidParams.AddNested("MskParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebhookAuthConfiguration(v types.WebhookAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebhookAuthConfiguration"}
+	switch uv := v.(type) {
+	case *types.WebhookAuthConfigurationMemberHmacAuthConfiguration:
+		if err := validateWebhookHmacAuthConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[HmacAuthConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.WebhookAuthConfigurationMemberStaticTokenAuthConfiguration:
+		if err := validateWebhookStaticTokenAuthConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[StaticTokenAuthConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebhookDeduplicationConfiguration(v *types.WebhookDeduplicationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebhookDeduplicationConfiguration"}
+	if len(v.DeduplicationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeduplicationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebhookEventsSourceConfiguration(v *types.WebhookEventsSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebhookEventsSourceConfiguration"}
+	if v.AuthConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthConfiguration"))
+	} else if v.AuthConfiguration != nil {
+		if err := validateWebhookAuthConfiguration(v.AuthConfiguration); err != nil {
+			invalidParams.AddNested("AuthConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DeduplicationConfiguration != nil {
+		if err := validateWebhookDeduplicationConfiguration(v.DeduplicationConfiguration); err != nil {
+			invalidParams.AddNested("DeduplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebhookHmacAuthConfiguration(v *types.WebhookHmacAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebhookHmacAuthConfiguration"}
+	if len(v.Algorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Algorithm"))
+	}
+	if len(v.Encoding) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Encoding"))
+	}
+	if v.SignatureHttpHeader == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SignatureHttpHeader"))
+	}
+	if len(v.SignedMessageComposition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SignedMessageComposition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebhookStaticTokenAuthConfiguration(v *types.WebhookStaticTokenAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebhookStaticTokenAuthConfiguration"}
+	if v.TokenHttpHeader == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenHttpHeader"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1229,6 +1428,21 @@ func validateOpRevokeResourceInput(v *RevokeResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeResourceInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRotateWebhookCredentialsInput(v *RotateWebhookCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RotateWebhookCredentialsInput"}
+	if v.EventSourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

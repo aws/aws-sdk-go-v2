@@ -474,6 +474,9 @@ func ExampleRelatedItemUpdateContent_outputUsage() {
 	case *types.RelatedItemUpdateContentMemberCustom:
 		_ = v.Value // Value is types.CustomUpdateContent
 
+	case *types.RelatedItemUpdateContentMemberSla:
+		_ = v.Value // Value is types.SlaUpdateContent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -483,6 +486,7 @@ func ExampleRelatedItemUpdateContent_outputUsage() {
 	}
 }
 
+var _ types.SlaUpdateContent
 var _ *types.CustomUpdateContent
 var _ *types.CommentUpdateContent
 
@@ -521,6 +525,24 @@ func ExampleSlaInputContent_outputUsage() {
 }
 
 var _ *types.SlaInputConfiguration
+
+func ExampleSlaUpdateContent_outputUsage() {
+	var union types.SlaUpdateContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SlaUpdateContentMemberSlaUpdateConfiguration:
+		_ = v.Value // Value is types.SlaUpdateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SlaUpdateConfiguration
 
 func ExampleTagFilter_outputUsage() {
 	var union types.TagFilter

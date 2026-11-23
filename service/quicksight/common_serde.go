@@ -72,6 +72,17 @@ func serializeClientCredentialsDetails(s smithy.ShapeSerializer, schema *smithy.
 	}
 }
 
+func serializeClientSecretConfigurationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ClientSecretConfigurationDetail) {
+	switch vv := v.(type) {
+	case *types.ClientSecretConfigurationDetailMemberIdp:
+		s.WriteUnion(schema, schemas.ClientSecretConfigurationDetail_Idp)
+		s.WriteStruct(schemas.ClientSecretConfigurationDetail_Idp)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeCustomPromptInput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.CustomPromptInput) {
 	switch vv := v.(type) {
 	case *types.CustomPromptInputMemberExistingPrompt:
@@ -333,6 +344,74 @@ func serializeGeocodePreferenceValue(s smithy.ShapeSerializer, schema *smithy.Sc
 	}
 }
 
+func serializeIdpAuthorizingConfigurationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v types.IdpAuthorizingConfigurationDetail) {
+	switch vv := v.(type) {
+	case *types.IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationDetail_ExternalIdpConfidentialAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationDetail_ExternalIdpConfidentialAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationDetail_ExternalIdpPublicAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationDetail_ExternalIdpPublicAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeIdpAuthorizingConfigurationDetailInput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.IdpAuthorizingConfigurationDetailInput) {
+	switch vv := v.(type) {
+	case *types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpConfidentialAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpConfidentialAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpPublicAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpPublicAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeIdpAuthorizingConfigurationDetailUpdateInput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.IdpAuthorizingConfigurationDetailUpdateInput) {
+	switch vv := v.(type) {
+	case *types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpConfidentialAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpConfidentialAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpPublicAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpPublicAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeIdpAuthorizingConfigurationSummaryDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v types.IdpAuthorizingConfigurationSummaryDetail) {
+	switch vv := v.(type) {
+	case *types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpConfidentialAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpConfidentialAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode:
+		s.WriteUnion(schema, schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpPublicAuthCode)
+		s.WriteStruct(schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpPublicAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeImageSource(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ImageSource) {
 	switch vv := v.(type) {
 	case *types.ImageSourceMemberPublicUrl:
@@ -386,6 +465,39 @@ func serializeProviderConfig(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	case *types.ProviderConfigMemberMicrosoftPurview:
 		s.WriteUnion(schema, schemas.ProviderConfig_MicrosoftPurview)
 		s.WriteStruct(schemas.ProviderConfig_MicrosoftPurview)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeQuickAuthenticationConfigurationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v types.QuickAuthenticationConfigurationDetail) {
+	switch vv := v.(type) {
+	case *types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode:
+		s.WriteUnion(schema, schemas.QuickAuthenticationConfigurationDetail_QuickManagedPublicAuthCode)
+		s.WriteStruct(schemas.QuickAuthenticationConfigurationDetail_QuickManagedPublicAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeQuickAuthenticationConfigurationDetailCreateOutput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.QuickAuthenticationConfigurationDetailCreateOutput) {
+	switch vv := v.(type) {
+	case *types.QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode:
+		s.WriteUnion(schema, schemas.QuickAuthenticationConfigurationDetailCreateOutput_QuickManagedPublicAuthCode)
+		s.WriteStruct(schemas.QuickAuthenticationConfigurationDetailCreateOutput_QuickManagedPublicAuthCode)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeQuickAuthenticationConfigurationDetailInput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.QuickAuthenticationConfigurationDetailInput) {
+	switch vv := v.(type) {
+	case *types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode:
+		s.WriteUnion(schema, schemas.QuickAuthenticationConfigurationDetailInput_QuickManagedPublicAuthCode)
+		s.WriteStruct(schemas.QuickAuthenticationConfigurationDetailInput_QuickManagedPublicAuthCode)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -607,6 +719,18 @@ func deserializeClientCredentialsDetails(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeClientSecretConfigurationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ClientSecretConfigurationDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ClientSecretConfigurationDetail_Idp:
+			vv := &types.ClientSecretConfigurationDetailMemberIdp{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeCustomPromptInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.CustomPromptInput) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -795,6 +919,70 @@ func deserializeGeocodePreferenceValue(d smithy.ShapeDeserializer, s *smithy.Sch
 	})
 }
 
+func deserializeIdpAuthorizingConfigurationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.IdpAuthorizingConfigurationDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.IdpAuthorizingConfigurationDetail_ExternalIdpConfidentialAuthCode:
+			vv := &types.IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.IdpAuthorizingConfigurationDetail_ExternalIdpPublicAuthCode:
+			vv := &types.IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeIdpAuthorizingConfigurationDetailInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.IdpAuthorizingConfigurationDetailInput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpConfidentialAuthCode:
+			vv := &types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpPublicAuthCode:
+			vv := &types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeIdpAuthorizingConfigurationDetailUpdateInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.IdpAuthorizingConfigurationDetailUpdateInput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpConfidentialAuthCode:
+			vv := &types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpPublicAuthCode:
+			vv := &types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeIdpAuthorizingConfigurationSummaryDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.IdpAuthorizingConfigurationSummaryDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpConfidentialAuthCode:
+			vv := &types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpPublicAuthCode:
+			vv := &types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeImageSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ImageSource) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -844,6 +1032,42 @@ func deserializeProviderConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		switch ms {
 		case schemas.ProviderConfig_MicrosoftPurview:
 			vv := &types.ProviderConfigMemberMicrosoftPurview{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeQuickAuthenticationConfigurationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.QuickAuthenticationConfigurationDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.QuickAuthenticationConfigurationDetail_QuickManagedPublicAuthCode:
+			vv := &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeQuickAuthenticationConfigurationDetailCreateOutput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.QuickAuthenticationConfigurationDetailCreateOutput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.QuickAuthenticationConfigurationDetailCreateOutput_QuickManagedPublicAuthCode:
+			vv := &types.QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeQuickAuthenticationConfigurationDetailInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.QuickAuthenticationConfigurationDetailInput) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.QuickAuthenticationConfigurationDetailInput_QuickManagedPublicAuthCode:
+			vv := &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -993,6 +1217,16 @@ func deserializeUserIndexCapacityFilter(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 		return nil
 	})
+}
+
+func serializeAccessControlApplicationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccessControlApplicationSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
 }
 
 func serializeActionConnectorSearchFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ActionConnectorSearchFilter) {
@@ -1763,6 +1997,14 @@ func serializeAuthorSpecifiedAggregations(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeAwsRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeAxisLabelOptionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AxisLabelOptions) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1811,6 +2053,34 @@ func serializeBatchDeleteKnowledgeBaseSuccessList(s smithy.ShapeSerializer, sche
 	s.CloseList()
 }
 
+func serializeBatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeBatchDeletePolicyAssignmentErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeletePolicyAssignmentError) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBatchDeletePolicyAssignmentSuccessList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeletePolicyAssignmentSuccess) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeBatchDescribeUserLimitsErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDescribeUserLimitsError) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1822,6 +2092,36 @@ func serializeBatchDescribeUserLimitsErrorList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeBatchDescribeUserLimitsRequestUsersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UserLimitsEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBatchPutPolicyAssignmentByPolicyRequestAssignmentsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PutAssignmentEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBatchPutPolicyAssignmentErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchPutPolicyAssignmentError) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBatchPutPolicyAssignmentSuccessList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchPutPolicyAssignmentSuccess) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -2605,6 +2905,16 @@ func serializeExplicitHierarchyColumnList(s smithy.ShapeSerializer, schema *smit
 	s.CloseList()
 }
 
+func serializeExternalIdpConfidentialClientSecretList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExternalIdpConfidentialClientSecret) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFailedKeyRegistrationEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FailedKeyRegistrationEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3123,6 +3433,42 @@ func serializeImageCustomActionOperationList(s smithy.ShapeSerializer, schema *s
 	s.CloseList()
 }
 
+func serializeInboundConnectorApplicationAssociationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InboundConnectorApplicationAssociationSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInboundConnectorAssociationArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeInboundConnectorSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InboundConnectorSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeInboundConnectorTypeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InboundConnectorType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeIngestions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Ingestion) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3180,6 +3526,16 @@ func serializeInvalidTopicReviewedAnswers(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeKeyRegistration(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RegisteredCustomerManagedKey) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeKnowledgeBaseRefreshScheduleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.KnowledgeBaseRefreshScheduleSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -3577,6 +3933,16 @@ func serializePluginVisualPropertiesList(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializePolicyPrincipalList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PolicyPrincipal) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePredefinedHierarchyColumnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ColumnIdentifier) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3639,6 +4005,14 @@ func serializeRadarChartValuesFieldList(s smithy.ShapeSerializer, schema *smithy
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRedirectUriList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -4741,6 +5115,16 @@ func serializeUniqueKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.CloseList()
 }
 
+func serializeUnmaterializedCalculatedColumnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UnmaterializedCalculatedColumn) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeUpdateAgentPermissionsRequestGrantPermissionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourcePermission) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -4871,6 +5255,16 @@ func serializeUserList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 	s.CloseList()
 }
 
+func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeVisualCustomActionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VisualCustomAction) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -4939,6 +5333,28 @@ func serializeWordCloudMeasureFieldList(s smithy.ShapeSerializer, schema *smithy
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func deserializeAccessControlApplicationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AccessControlApplicationSummary) error {
+	*v = make([]types.AccessControlApplicationSummary, 0)
+	var vv types.AccessControlApplicationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AccessControlApplicationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AccessControlApplicationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeActionConnectorSearchFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ActionConnectorSearchFilter) error {
@@ -6719,6 +7135,27 @@ func deserializeAuthorSpecifiedAggregations(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func deserializeAwsRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeAxisLabelOptionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AxisLabelOptions) error {
 	*v = make([]types.AxisLabelOptions, 0)
 	var vv types.AxisLabelOptions
@@ -6828,6 +7265,71 @@ func deserializeBatchDeleteKnowledgeBaseSuccessList(d smithy.ShapeDeserializer, 
 	})
 }
 
+func deserializeBatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBatchDeletePolicyAssignmentErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchDeletePolicyAssignmentError) error {
+	*v = make([]types.BatchDeletePolicyAssignmentError, 0)
+	var vv types.BatchDeletePolicyAssignmentError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchDeletePolicyAssignmentError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BatchDeletePolicyAssignmentError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBatchDeletePolicyAssignmentSuccessList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchDeletePolicyAssignmentSuccess) error {
+	*v = make([]types.BatchDeletePolicyAssignmentSuccess, 0)
+	var vv types.BatchDeletePolicyAssignmentSuccess
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchDeletePolicyAssignmentSuccess
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BatchDeletePolicyAssignmentSuccess{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeBatchDescribeUserLimitsErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchDescribeUserLimitsError) error {
 	*v = make([]types.BatchDescribeUserLimitsError, 0)
 	var vv types.BatchDescribeUserLimitsError
@@ -6863,6 +7365,72 @@ func deserializeBatchDescribeUserLimitsRequestUsersList(d smithy.ShapeDeserializ
 		}
 
 		vv = types.UserLimitsEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBatchPutPolicyAssignmentByPolicyRequestAssignmentsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PutAssignmentEntry) error {
+	*v = make([]types.PutAssignmentEntry, 0)
+	var vv types.PutAssignmentEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PutAssignmentEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PutAssignmentEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBatchPutPolicyAssignmentErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchPutPolicyAssignmentError) error {
+	*v = make([]types.BatchPutPolicyAssignmentError, 0)
+	var vv types.BatchPutPolicyAssignmentError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchPutPolicyAssignmentError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BatchPutPolicyAssignmentError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBatchPutPolicyAssignmentSuccessList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BatchPutPolicyAssignmentSuccess) error {
+	*v = make([]types.BatchPutPolicyAssignmentSuccess, 0)
+	var vv types.BatchPutPolicyAssignmentSuccess
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BatchPutPolicyAssignmentSuccess
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BatchPutPolicyAssignmentSuccess{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -8636,6 +9204,28 @@ func deserializeExplicitHierarchyColumnList(d smithy.ShapeDeserializer, s *smith
 	})
 }
 
+func deserializeExternalIdpConfidentialClientSecretList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExternalIdpConfidentialClientSecret) error {
+	*v = make([]types.ExternalIdpConfidentialClientSecret, 0)
+	var vv types.ExternalIdpConfidentialClientSecret
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ExternalIdpConfidentialClientSecret
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ExternalIdpConfidentialClientSecret{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFailedKeyRegistrationEntries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FailedKeyRegistrationEntry) error {
 	*v = make([]types.FailedKeyRegistrationEntry, 0)
 	var vv types.FailedKeyRegistrationEntry
@@ -9813,6 +10403,92 @@ func deserializeImageCustomActionOperationList(d smithy.ShapeDeserializer, s *sm
 	})
 }
 
+func deserializeInboundConnectorApplicationAssociationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InboundConnectorApplicationAssociationSummary) error {
+	*v = make([]types.InboundConnectorApplicationAssociationSummary, 0)
+	var vv types.InboundConnectorApplicationAssociationSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InboundConnectorApplicationAssociationSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InboundConnectorApplicationAssociationSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInboundConnectorAssociationArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInboundConnectorSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InboundConnectorSummary) error {
+	*v = make([]types.InboundConnectorSummary, 0)
+	var vv types.InboundConnectorSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InboundConnectorSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InboundConnectorSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInboundConnectorTypeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InboundConnectorType) error {
+	*v = make([]types.InboundConnectorType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InboundConnectorType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.InboundConnectorType(vv))
+		return nil
+	})
+}
+
 func deserializeIngestions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Ingestion) error {
 	*v = make([]types.Ingestion, 0)
 	var vv types.Ingestion
@@ -9956,6 +10632,28 @@ func deserializeKeyRegistration(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 		}
 
 		vv = types.RegisteredCustomerManagedKey{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeKnowledgeBaseRefreshScheduleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.KnowledgeBaseRefreshScheduleSummary) error {
+	*v = make([]types.KnowledgeBaseRefreshScheduleSummary, 0)
+	var vv types.KnowledgeBaseRefreshScheduleSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.KnowledgeBaseRefreshScheduleSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.KnowledgeBaseRefreshScheduleSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -10839,6 +11537,28 @@ func deserializePluginVisualPropertiesList(d smithy.ShapeDeserializer, s *smithy
 	})
 }
 
+func deserializePolicyPrincipalList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PolicyPrincipal) error {
+	*v = make([]types.PolicyPrincipal, 0)
+	var vv types.PolicyPrincipal
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PolicyPrincipal
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PolicyPrincipal{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePredefinedHierarchyColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ColumnIdentifier) error {
 	*v = make([]types.ColumnIdentifier, 0)
 	var vv types.ColumnIdentifier
@@ -10983,6 +11703,27 @@ func deserializeRadarChartValuesFieldList(d smithy.ShapeDeserializer, s *smithy.
 
 		vv = types.MeasureField{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRedirectUriList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -13497,6 +14238,28 @@ func deserializeUniqueKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 	})
 }
 
+func deserializeUnmaterializedCalculatedColumnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UnmaterializedCalculatedColumn) error {
+	*v = make([]types.UnmaterializedCalculatedColumn, 0)
+	var vv types.UnmaterializedCalculatedColumn
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.UnmaterializedCalculatedColumn
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.UnmaterializedCalculatedColumn{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeUpdateAgentPermissionsRequestGrantPermissionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourcePermission) error {
 	*v = make([]types.ResourcePermission, 0)
 	var vv types.ResourcePermission
@@ -13800,6 +14563,28 @@ func deserializeUserList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 	})
 }
 
+func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
+	var vv types.ValidationExceptionField
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ValidationExceptionField
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ValidationExceptionField{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeVisualCustomActionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.VisualCustomAction) error {
 	*v = make([]types.VisualCustomAction, 0)
 	var vv types.VisualCustomAction
@@ -14048,6 +14833,15 @@ func serializePhysicalTableMap(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
 		serializePhysicalTable(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
+func serializeRegionalSecretManagerArnMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
 }
@@ -14341,6 +15135,27 @@ func deserializePhysicalTableMap(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		if err := deserializePhysicalTable(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeRegionalSecretManagerArnMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
 		}
 

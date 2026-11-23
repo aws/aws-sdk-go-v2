@@ -367,6 +367,12 @@ type ClusterSlurmConfiguration struct {
 	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
 	CgroupCustomSettings []CgroupCustomSetting
 
+	// The job submit plugins to run on the cluster controller. Use job submit plugins
+	// to execute custom scripts during job submission and job modification to validate
+	// or modify the job's configuration. Custom scripts can accept or reject jobs
+	// based on their configuration or modify the configuration before job execution.
+	JobSubmitPlugins []JobSubmitPlugin
+
 	// The JWT authentication configuration for Slurm REST API access.
 	JwtAuth *JwtAuth
 
@@ -408,6 +414,9 @@ func (v *ClusterSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CgroupCustomSettings != nil {
 		serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, v.CgroupCustomSettings)
 	}
+	if v.JobSubmitPlugins != nil {
+		serializeJobSubmitPluginList(s, schemas.ClusterSlurmConfiguration_jobSubmitPlugins, v.JobSubmitPlugins)
+	}
 	if v.JwtAuth != nil {
 		s.WriteStruct(schemas.ClusterSlurmConfiguration_jwtAuth)
 		v.JwtAuth.SerializeMembers(s)
@@ -439,6 +448,8 @@ func (v *ClusterSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 			return v.AuthKey.Deserialize(d)
 		case schemas.ClusterSlurmConfiguration_cgroupCustomSettings:
 			return deserializeCgroupCustomSettings(d, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.ClusterSlurmConfiguration_jobSubmitPlugins:
+			return deserializeJobSubmitPluginList(d, schemas.ClusterSlurmConfiguration_jobSubmitPlugins, &v.JobSubmitPlugins)
 		case schemas.ClusterSlurmConfiguration_jwtAuth:
 			v.JwtAuth = &JwtAuth{}
 			return v.JwtAuth.Deserialize(d)
@@ -466,6 +477,12 @@ type ClusterSlurmConfigurationRequest struct {
 
 	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
 	CgroupCustomSettings []CgroupCustomSetting
+
+	// The job submit plugins to run on the cluster controller. Use job submit plugins
+	// to execute custom scripts during job submission and job modification to validate
+	// or modify the job's configuration. Custom scripts can accept or reject jobs
+	// based on their configuration or modify the configuration before job execution.
+	JobSubmitPlugins []JobSubmitPlugin
 
 	// The time (in seconds) before an idle node is scaled down.
 	//
@@ -500,6 +517,9 @@ func (v *ClusterSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerial
 	if v.CgroupCustomSettings != nil {
 		serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
 	}
+	if v.JobSubmitPlugins != nil {
+		serializeJobSubmitPluginList(s, schemas.ClusterSlurmConfigurationRequest_jobSubmitPlugins, v.JobSubmitPlugins)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
@@ -523,6 +543,8 @@ func (v *ClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserialize
 			return v.Accounting.Deserialize(d)
 		case schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings:
 			return deserializeCgroupCustomSettings(d, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.ClusterSlurmConfigurationRequest_jobSubmitPlugins:
+			return deserializeJobSubmitPluginList(d, schemas.ClusterSlurmConfigurationRequest_jobSubmitPlugins, &v.JobSubmitPlugins)
 		case schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
 			v.ScaleDownIdleTimeInSeconds = new(int32)
 			return d.ReadInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
@@ -731,6 +753,11 @@ type ComputeNodeGroup struct {
 	// The list of errors that occurred during compute node group provisioning.
 	ErrorInfo []ErrorInfo
 
+	// The instance health check settings of the compute node group. Instance health
+	// checks detect faults on instances in the compute node group and respond with the
+	// repair action that you choose.
+	InstanceHealthChecks *InstanceHealthChecks
+
 	// Indicates whether the compute node group uses a custom launch template or a
 	// launch template that PCS manages. The default value is CUSTOM .
 	//
@@ -824,6 +851,11 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceConfigs != nil {
 		serializeInstanceList(s, schemas.ComputeNodeGroup_instanceConfigs, v.InstanceConfigs)
 	}
+	if v.InstanceHealthChecks != nil {
+		s.WriteStruct(schemas.ComputeNodeGroup_instanceHealthChecks)
+		v.InstanceHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LaunchTemplateMode != "" {
 		s.WriteString(schemas.ComputeNodeGroup_launchTemplateMode, string(v.LaunchTemplateMode))
 	}
@@ -897,6 +929,9 @@ func (v *ComputeNodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ComputeNodeGroup_id, v.Id)
 		case schemas.ComputeNodeGroup_instanceConfigs:
 			return deserializeInstanceList(d, schemas.ComputeNodeGroup_instanceConfigs, &v.InstanceConfigs)
+		case schemas.ComputeNodeGroup_instanceHealthChecks:
+			v.InstanceHealthChecks = &InstanceHealthChecks{}
+			return v.InstanceHealthChecks.Deserialize(d)
 		case schemas.ComputeNodeGroup_launchTemplateMode:
 			var ev string
 			if err := d.ReadString(schemas.ComputeNodeGroup_launchTemplateMode, &ev); err != nil {
@@ -1253,6 +1288,125 @@ func (v *CustomLaunchTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The deep health check that runs each time an instance starts, including after a
+// reboot, before the compute node accepts jobs.
+type DeepHealthCheckOnStart struct {
+
+	// The deep health check profile to run. Each profile other than NONE runs NVIDIA
+	// Data Center GPU Manager (DCGM) diagnostics. More thorough profiles run more
+	// tests and add more time to instance launch. A profile other than NONE requires
+	// instance types with NVIDIA GPUs. This value is required when you specify onStart
+	// . There is no default value. Valid values:
+	//
+	//   - NONE – Turns off the deep health check. You can't specify repairAction with
+	//   this profile.
+	//
+	//   - QUICK – Runs basic GPU tests (DCGM diagnostics level 1). This profile adds
+	//   the least time to instance launch.
+	//
+	//   - MEDIUM – Runs extended GPU tests (DCGM diagnostics level 2).
+	//
+	//   - LONG – Runs GPU stress and diagnostic tests (DCGM diagnostics level 3). This
+	//   profile adds the most time to instance launch.
+	Profile DeepHealthCheckOnStartProfile
+
+	// The action that PCS takes when an instance fails the deep health check. You
+	// can't specify this value when profile is NONE . If you don't specify this value
+	// and profile isn't NONE , PCS uses AUTO . GetComputeNodeGroup doesn't return a
+	// repairAction that you didn't specify. Valid values:
+	//
+	//   - AUTO – PCS chooses the repair action based on the fault.
+	//
+	//   - REPLACE – Replaces the instance before it accepts jobs.
+	//
+	//   - ISOLATE – Stops new jobs on the instance and keeps the instance running
+	//   until you investigate.
+	//
+	//   - NONE – Records the fault in Slurm and leaves the instance available for jobs.
+	RepairAction DeepHealthCheckOnStartRepairAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeepHealthCheckOnStart) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeepHealthCheckOnStart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeepHealthCheckOnStart) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != "" {
+		s.WriteString(schemas.DeepHealthCheckOnStart_profile, string(v.Profile))
+	}
+	if v.RepairAction != "" {
+		s.WriteString(schemas.DeepHealthCheckOnStart_repairAction, string(v.RepairAction))
+	}
+}
+func (v *DeepHealthCheckOnStart) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeepHealthCheckOnStart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeepHealthCheckOnStart_profile:
+			var ev string
+			if err := d.ReadString(schemas.DeepHealthCheckOnStart_profile, &ev); err != nil {
+				return err
+			}
+			v.Profile = DeepHealthCheckOnStartProfile(ev)
+			return nil
+		case schemas.DeepHealthCheckOnStart_repairAction:
+			var ev string
+			if err := d.ReadString(schemas.DeepHealthCheckOnStart_repairAction, &ev); err != nil {
+				return err
+			}
+			v.RepairAction = DeepHealthCheckOnStartRepairAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The deep health check settings of a compute node group. Deep health checks test
+// the graphics processing units (GPUs) of an instance each time it starts,
+// including after a reboot, before it accepts jobs. Deep health checks with a
+// profile other than NONE require instance types with NVIDIA GPUs.
+type DeepHealthChecks struct {
+
+	// The deep health check to run each time an instance starts, including after a
+	// reboot, before the compute node accepts jobs. If the check fails after a reboot,
+	// PCS takes the same repairAction as at launch. For example, with REPLACE , PCS
+	// replaces the instance instead of returning it to service. If the compute node
+	// group has scripts in the nodeBootstrapped stage of nodeLifecycleActions , the
+	// deep health check runs after those scripts. If a script fails and its onError
+	// setting terminates the compute node, the deep health check doesn't run. This
+	// value is required when you specify deepHealthChecks .
+	OnStart *DeepHealthCheckOnStart
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeepHealthChecks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeepHealthChecks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeepHealthChecks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnStart != nil {
+		s.WriteStruct(schemas.DeepHealthChecks_onStart)
+		v.OnStart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeepHealthChecks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeepHealthChecks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeepHealthChecks_onStart:
+			v.OnStart = &DeepHealthCheckOnStart{}
+			return v.OnStart.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An endpoint available for interaction with the scheduler.
 type Endpoint struct {
 
@@ -1380,6 +1534,74 @@ func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The health monitoring settings of a compute node group. Health monitoring
+// continuously checks running instances for hardware and software faults.
+type HealthMonitoring struct {
+
+	// The health monitoring mode. This value is required when you specify
+	// healthMonitoring . There is no default value. Valid values:
+	//
+	//   - NONE – Turns off health monitoring. You can't specify repairAction with this
+	//   mode.
+	//
+	//   - STANDARD – Continuously checks running instances for hardware and software
+	//   faults.
+	Mode HealthMonitoringMode
+
+	// The action that PCS takes when health monitoring finds a fault on an instance.
+	// You can't specify this value when mode is NONE . If you don't specify this value
+	// and mode isn't NONE , PCS uses AUTO . GetComputeNodeGroup doesn't return a
+	// repairAction that you didn't specify. Valid values:
+	//
+	//   - AUTO – PCS chooses the repair action based on the fault.
+	//
+	//   - REPLACE – Replaces the instance after running jobs finish.
+	//
+	//   - ISOLATE – Stops new jobs on the instance and keeps the instance running
+	//   until you investigate.
+	//
+	//   - NONE – Records the fault in Slurm and leaves the instance available for jobs.
+	RepairAction HealthMonitoringRepairAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *HealthMonitoring) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthMonitoring)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthMonitoring) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.HealthMonitoring_mode, string(v.Mode))
+	}
+	if v.RepairAction != "" {
+		s.WriteString(schemas.HealthMonitoring_repairAction, string(v.RepairAction))
+	}
+}
+func (v *HealthMonitoring) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthMonitoring, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthMonitoring_mode:
+			var ev string
+			if err := d.ReadString(schemas.HealthMonitoring_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = HealthMonitoringMode(ev)
+			return nil
+		case schemas.HealthMonitoring_repairAction:
+			var ev string
+			if err := d.ReadString(schemas.HealthMonitoring_repairAction, &ev); err != nil {
+				return err
+			}
+			v.RepairAction = HealthMonitoringRepairAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An EC2 instance configuration PCS uses to launch compute nodes.
 type InstanceConfig struct {
 
@@ -1408,6 +1630,226 @@ func (v *InstanceConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InstanceConfig_instanceType:
 			v.InstanceType = new(string)
 			return d.ReadString(schemas.InstanceConfig_instanceType, v.InstanceType)
+		}
+		return nil
+	})
+}
+
+// The instance health check settings of a compute node group. Instance health
+// checks detect faults on instances in the compute node group and respond with the
+// repair action that you choose.
+type InstanceHealthChecks struct {
+
+	// The deep health check settings. Deep health checks test the graphics processing
+	// units (GPUs) of an instance each time it starts, including after a reboot,
+	// before it accepts jobs.
+	DeepHealthChecks *DeepHealthChecks
+
+	// The health monitoring settings. Health monitoring continuously checks running
+	// instances for hardware and software faults.
+	HealthMonitoring *HealthMonitoring
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceHealthChecks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceHealthChecks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceHealthChecks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeepHealthChecks != nil {
+		s.WriteStruct(schemas.InstanceHealthChecks_deepHealthChecks)
+		v.DeepHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthMonitoring != nil {
+		s.WriteStruct(schemas.InstanceHealthChecks_healthMonitoring)
+		v.HealthMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceHealthChecks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceHealthChecks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceHealthChecks_deepHealthChecks:
+			v.DeepHealthChecks = &DeepHealthChecks{}
+			return v.DeepHealthChecks.Deserialize(d)
+		case schemas.InstanceHealthChecks_healthMonitoring:
+			v.HealthMonitoring = &HealthMonitoring{}
+			return v.HealthMonitoring.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The instance health check settings to configure on a compute node group when
+// you create it. Specify healthMonitoring , deepHealthChecks , or both. You can't
+// specify an empty object ( {} ).
+type InstanceHealthChecksRequest struct {
+
+	// The deep health check settings. Deep health checks test the graphics processing
+	// units (GPUs) of an instance each time it starts, including after a reboot,
+	// before it accepts jobs. If you specify this object, it can't be empty.
+	DeepHealthChecks *DeepHealthChecks
+
+	// The health monitoring settings. Health monitoring continuously checks running
+	// instances for hardware and software faults. If you specify this object, it can't
+	// be empty.
+	HealthMonitoring *HealthMonitoring
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceHealthChecksRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceHealthChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceHealthChecksRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeepHealthChecks != nil {
+		s.WriteStruct(schemas.InstanceHealthChecksRequest_deepHealthChecks)
+		v.DeepHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthMonitoring != nil {
+		s.WriteStruct(schemas.InstanceHealthChecksRequest_healthMonitoring)
+		v.HealthMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceHealthChecksRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceHealthChecksRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceHealthChecksRequest_deepHealthChecks:
+			v.DeepHealthChecks = &DeepHealthChecks{}
+			return v.DeepHealthChecks.Deserialize(d)
+		case schemas.InstanceHealthChecksRequest_healthMonitoring:
+			v.HealthMonitoring = &HealthMonitoring{}
+			return v.HealthMonitoring.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A job submit plugin configuration, including its name, runtime language, and
+// script source.
+type JobSubmitPlugin struct {
+
+	// A unique name for the plugin. The name can be up to 64 characters long. Valid
+	// characters are letters, numbers, spaces, underscores ( _ ), and hyphens ( - ).
+	// The first character must be a letter or a number.
+	//
+	// This member is required.
+	Name *string
+
+	// The source location and integrity information for the script.
+	//
+	// This member is required.
+	ScriptSource *JobSubmitScriptSource
+
+	// The runtime language used to execute the custom script. Valid values:
+	//
+	//   - STARLARK – The script uses Starlark syntax.
+	//
+	// This member is required.
+	Type JobSubmitPluginType
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobSubmitPlugin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobSubmitPlugin)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobSubmitPlugin) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.JobSubmitPlugin_name, *v.Name)
+	}
+	if v.ScriptSource != nil {
+		s.WriteStruct(schemas.JobSubmitPlugin_scriptSource)
+		v.ScriptSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.JobSubmitPlugin_type, string(v.Type))
+	}
+}
+func (v *JobSubmitPlugin) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobSubmitPlugin, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobSubmitPlugin_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.JobSubmitPlugin_name, v.Name)
+		case schemas.JobSubmitPlugin_scriptSource:
+			v.ScriptSource = &JobSubmitScriptSource{}
+			return v.ScriptSource.Deserialize(d)
+		case schemas.JobSubmitPlugin_type:
+			var ev string
+			if err := d.ReadString(schemas.JobSubmitPlugin_type, &ev); err != nil {
+				return err
+			}
+			v.Type = JobSubmitPluginType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The source location and integrity information for the script.
+type JobSubmitScriptSource struct {
+
+	// The location of the script. Specify an Amazon S3 URI in the format
+	// s3://bucket-name/key .
+	//
+	// This member is required.
+	ScriptLocation *string
+
+	// The SHA-256 checksum of the script content, as a 64-character hexadecimal
+	// string. This value is optional. When specified, PCS uses this value to verify
+	// the integrity of the downloaded script.
+	Checksum *string
+
+	// The Amazon S3 version ID of the script. Use this value to pin the script to a
+	// specific version in a versioned Amazon S3 bucket.
+	S3VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *JobSubmitScriptSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobSubmitScriptSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobSubmitScriptSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.JobSubmitScriptSource_checksum, *v.Checksum)
+	}
+	if v.S3VersionId != nil {
+		s.WriteString(schemas.JobSubmitScriptSource_s3VersionId, *v.S3VersionId)
+	}
+	if v.ScriptLocation != nil {
+		s.WriteString(schemas.JobSubmitScriptSource_scriptLocation, *v.ScriptLocation)
+	}
+}
+func (v *JobSubmitScriptSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobSubmitScriptSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobSubmitScriptSource_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.JobSubmitScriptSource_checksum, v.Checksum)
+		case schemas.JobSubmitScriptSource_s3VersionId:
+			v.S3VersionId = new(string)
+			return d.ReadString(schemas.JobSubmitScriptSource_s3VersionId, v.S3VersionId)
+		case schemas.JobSubmitScriptSource_scriptLocation:
+			v.ScriptLocation = new(string)
+			return d.ReadString(schemas.JobSubmitScriptSource_scriptLocation, v.ScriptLocation)
 		}
 		return nil
 	})
@@ -2776,6 +3218,12 @@ type UpdateClusterSlurmConfigurationRequest struct {
 	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
 	CgroupCustomSettings []CgroupCustomSetting
 
+	// The job submit plugins to run on the cluster controller. Use job submit plugins
+	// to execute custom scripts during job submission and job modification to validate
+	// or modify the job's configuration. Custom scripts can accept or reject jobs
+	// based on their configuration or modify the configuration before job execution.
+	JobSubmitPlugins []JobSubmitPlugin
+
 	// The time (in seconds) before an idle node is scaled down.
 	//
 	// Default: 600
@@ -2809,6 +3257,9 @@ func (v *UpdateClusterSlurmConfigurationRequest) SerializeMembers(s smithy.Shape
 	if v.CgroupCustomSettings != nil {
 		serializeCgroupCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
 	}
+	if v.JobSubmitPlugins != nil {
+		serializeJobSubmitPluginList(s, schemas.UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins, v.JobSubmitPlugins)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
@@ -2832,6 +3283,8 @@ func (v *UpdateClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeser
 			return v.Accounting.Deserialize(d)
 		case schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings:
 			return deserializeCgroupCustomSettings(d, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, &v.CgroupCustomSettings)
+		case schemas.UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins:
+			return deserializeJobSubmitPluginList(d, schemas.UpdateClusterSlurmConfigurationRequest_jobSubmitPlugins, &v.JobSubmitPlugins)
 		case schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds:
 			v.ScaleDownIdleTimeInSeconds = new(int32)
 			return d.ReadInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
@@ -2897,6 +3350,58 @@ func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) Deserialize(d smithy.S
 			return d.ReadInt32(schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, v.ScaleDownIdleTimeInSeconds)
 		case schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings:
 			return deserializeSlurmCustomSettings(d, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, &v.SlurmCustomSettings)
+		}
+		return nil
+	})
+}
+
+// The instance health check settings to configure on a compute node group when
+// you update it. These settings replace all of the current instance health check
+// settings of the compute node group. Specify healthMonitoring , deepHealthChecks
+// , or both. You can't specify an empty object ( {} ).
+type UpdateInstanceHealthChecksRequest struct {
+
+	// The deep health check settings. Deep health checks test the graphics processing
+	// units (GPUs) of an instance each time it starts, including after a reboot,
+	// before it accepts jobs. If you specify this object, it can't be empty. If you
+	// omit this object, deep health checks are turned off.
+	DeepHealthChecks *DeepHealthChecks
+
+	// The health monitoring settings. Health monitoring continuously checks running
+	// instances for hardware and software faults. If you specify this object, it can't
+	// be empty. If you omit this object, health monitoring is turned off.
+	HealthMonitoring *HealthMonitoring
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateInstanceHealthChecksRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceHealthChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceHealthChecksRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeepHealthChecks != nil {
+		s.WriteStruct(schemas.UpdateInstanceHealthChecksRequest_deepHealthChecks)
+		v.DeepHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthMonitoring != nil {
+		s.WriteStruct(schemas.UpdateInstanceHealthChecksRequest_healthMonitoring)
+		v.HealthMonitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInstanceHealthChecksRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstanceHealthChecksRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInstanceHealthChecksRequest_deepHealthChecks:
+			v.DeepHealthChecks = &DeepHealthChecks{}
+			return v.DeepHealthChecks.Deserialize(d)
+		case schemas.UpdateInstanceHealthChecksRequest_healthMonitoring:
+			v.HealthMonitoring = &HealthMonitoring{}
+			return v.HealthMonitoring.Deserialize(d)
 		}
 		return nil
 	})

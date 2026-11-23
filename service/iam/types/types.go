@@ -549,6 +549,153 @@ func (v *ContextEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the trusted identity propagation context provider configuration for a
+// SAML or OpenID Connect (OIDC) identity provider. The context provider defines
+// how the subject is derived and how keys from the external identity provider's
+// assertion or token are mapped into trusted context keys.
+//
+// This data type is used as a request parameter in the [CreateOpenIDConnectProvider], [UpdateOpenIDConnectProvider], [CreateSAMLProvider], and [UpdateSAMLProvider] operations, and
+// as a response element in the [GetOpenIDConnectProvider]and [GetSAMLProvider] operations.
+//
+// [UpdateSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSAMLProvider.html
+// [CreateOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
+// [GetOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html
+// [UpdateOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateOpenIDConnectProvider.html
+// [CreateSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateSAMLProvider.html
+// [GetSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html
+type ContextProvider struct {
+
+	// The source key that is used to derive the subject for the injected trusted
+	// context. This value identifies the claim or attribute in the external identity
+	// provider's assertion or token that supplies the subject.
+	//
+	// The key can contain only ASCII letters (A-Z, a-z), numbers (0-9), single
+	// spaces, and the following characters: _ . : / = + - @ # . It can't start or end
+	// with a space or contain two spaces in a row.
+	//
+	// This member is required.
+	SubjectSourceKey *string
+
+	// A list of source-to-target key mappings that define how keys from the external
+	// identity provider's assertion or token are mapped into trusted context keys. You
+	// can specify from 0 to 10 mappings.
+	KeyDefinitionList []ContextProviderKeyDefinition
+
+	// The source key that supplies the subject type from the external identity
+	// provider's assertion or token.
+	//
+	// The key can contain only ASCII letters (A-Z, a-z), numbers (0-9), single
+	// spaces, and the following characters: _ . : / = + - @ # . It can't start or end
+	// with a space or contain two spaces in a row.
+	//
+	// This parameter is mutually exclusive with SubjectTypeValue . Specify either
+	// SubjectTypeSourceKey or SubjectTypeValue , but not both.
+	SubjectTypeSourceKey *string
+
+	// A static value for the subject type, such as user or workload .
+	//
+	// This parameter is optional and is mutually exclusive with SubjectTypeSourceKey .
+	// Specify either SubjectTypeValue or SubjectTypeSourceKey , but not both.
+	SubjectTypeValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextProvider) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextProvider)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextProvider) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyDefinitionList != nil {
+		serializekeyDefinitionListType(s, schemas.ContextProvider_KeyDefinitionList, v.KeyDefinitionList)
+	}
+	if v.SubjectSourceKey != nil {
+		s.WriteString(schemas.ContextProvider_SubjectSourceKey, *v.SubjectSourceKey)
+	}
+	if v.SubjectTypeSourceKey != nil {
+		s.WriteString(schemas.ContextProvider_SubjectTypeSourceKey, *v.SubjectTypeSourceKey)
+	}
+	if v.SubjectTypeValue != nil {
+		s.WriteString(schemas.ContextProvider_SubjectTypeValue, *v.SubjectTypeValue)
+	}
+}
+func (v *ContextProvider) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextProvider, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextProvider_KeyDefinitionList:
+			return deserializekeyDefinitionListType(d, schemas.ContextProvider_KeyDefinitionList, &v.KeyDefinitionList)
+		case schemas.ContextProvider_SubjectSourceKey:
+			v.SubjectSourceKey = new(string)
+			return d.ReadString(schemas.ContextProvider_SubjectSourceKey, v.SubjectSourceKey)
+		case schemas.ContextProvider_SubjectTypeSourceKey:
+			v.SubjectTypeSourceKey = new(string)
+			return d.ReadString(schemas.ContextProvider_SubjectTypeSourceKey, v.SubjectTypeSourceKey)
+		case schemas.ContextProvider_SubjectTypeValue:
+			v.SubjectTypeValue = new(string)
+			return d.ReadString(schemas.ContextProvider_SubjectTypeValue, v.SubjectTypeValue)
+		}
+		return nil
+	})
+}
+
+// Defines a single mapping from a source key in the external identity provider's
+// assertion or token to a target trusted context key.
+//
+// This data type is used as a member of the [ContextProvider] data type.
+//
+// [ContextProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+type ContextProviderKeyDefinition struct {
+
+	// The key in the external identity provider's assertion or token to read the
+	// value from.
+	//
+	// The key can contain only ASCII letters (A-Z, a-z), numbers (0-9), single
+	// spaces, and the following characters: _ . : / = + - @ # . It can't start or end
+	// with a space or contain two spaces in a row.
+	//
+	// This member is required.
+	SourceKey *string
+
+	// The trusted context key to map the source value into.
+	//
+	// The key can contain only ASCII letters (A-Z, a-z), numbers (0-9), single
+	// spaces, and the following characters: _ . : / = + - @ # . It can't start or end
+	// with a space or contain two spaces in a row.
+	TargetKey *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextProviderKeyDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextProviderKeyDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextProviderKeyDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceKey != nil {
+		s.WriteString(schemas.ContextProviderKeyDefinition_SourceKey, *v.SourceKey)
+	}
+	if v.TargetKey != nil {
+		s.WriteString(schemas.ContextProviderKeyDefinition_TargetKey, *v.TargetKey)
+	}
+}
+func (v *ContextProviderKeyDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextProviderKeyDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextProviderKeyDefinition_SourceKey:
+			v.SourceKey = new(string)
+			return d.ReadString(schemas.ContextProviderKeyDefinition_SourceKey, v.SourceKey)
+		case schemas.ContextProviderKeyDefinition_TargetKey:
+			v.TargetKey = new(string)
+			return d.ReadString(schemas.ContextProviderKeyDefinition_TargetKey, v.TargetKey)
+		}
+		return nil
+	})
+}
+
 // Contains information about the permissions being delegated in a delegation
 // request.
 type DelegationPermission struct {
@@ -2073,6 +2220,11 @@ type OpenIDConnectProviderListEntry struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
+	// Specifies whether trusted identity propagation is enabled for the OpenID
+	// Connect (OIDC) provider. This is true when an IAM Identity Center instance is
+	// associated with the provider.
+	IsTrustedIdentityPropagationEnabled bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2086,6 +2238,9 @@ func (v *OpenIDConnectProviderListEntry) SerializeMembers(s smithy.ShapeSerializ
 	if v.Arn != nil {
 		s.WriteString(schemas.OpenIDConnectProviderListEntry_Arn, *v.Arn)
 	}
+	if v.IsTrustedIdentityPropagationEnabled != false {
+		s.WriteBool(schemas.OpenIDConnectProviderListEntry_IsTrustedIdentityPropagationEnabled, v.IsTrustedIdentityPropagationEnabled)
+	}
 }
 func (v *OpenIDConnectProviderListEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenIDConnectProviderListEntry, func(s *smithy.Schema) error {
@@ -2093,6 +2248,8 @@ func (v *OpenIDConnectProviderListEntry) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.OpenIDConnectProviderListEntry_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.OpenIDConnectProviderListEntry_Arn, v.Arn)
+		case schemas.OpenIDConnectProviderListEntry_IsTrustedIdentityPropagationEnabled:
+			return d.ReadBool(schemas.OpenIDConnectProviderListEntry_IsTrustedIdentityPropagationEnabled, &v.IsTrustedIdentityPropagationEnabled)
 		}
 		return nil
 	})
@@ -4024,6 +4181,51 @@ func (v *RoleUsageType) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the key hashes that are associated with a SAML identity provider
+// issuer.
+//
+// This data type is used as a response element in the [GetSAMLProvider] operation.
+//
+// [GetSAMLProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html
+type SAMLKeyHashEntry struct {
+
+	// The issuer URL of the SAML identity provider that the key hashes are associated
+	// with.
+	IssuerURL *string
+
+	// The list of key hashes for the SAML identity provider issuer.
+	KeyHashes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SAMLKeyHashEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAMLKeyHashEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAMLKeyHashEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IssuerURL != nil {
+		s.WriteString(schemas.SAMLKeyHashEntry_IssuerURL, *v.IssuerURL)
+	}
+	if v.KeyHashes != nil {
+		serializeKeyHashListType(s, schemas.SAMLKeyHashEntry_KeyHashes, v.KeyHashes)
+	}
+}
+func (v *SAMLKeyHashEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAMLKeyHashEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAMLKeyHashEntry_IssuerURL:
+			v.IssuerURL = new(string)
+			return d.ReadString(schemas.SAMLKeyHashEntry_IssuerURL, v.IssuerURL)
+		case schemas.SAMLKeyHashEntry_KeyHashes:
+			return deserializeKeyHashListType(d, schemas.SAMLKeyHashEntry_KeyHashes, &v.KeyHashes)
+		}
+		return nil
+	})
+}
+
 // Contains the private keys for the SAML provider.
 //
 // This data type is used as a response element in the [GetSAMLProvider] operation.
@@ -4079,6 +4281,11 @@ type SAMLProviderListEntry struct {
 	// The date and time when the SAML provider was created.
 	CreateDate *time.Time
 
+	// Specifies whether trusted identity propagation is enabled for the SAML
+	// provider. This is true when an IAM Identity Center instance is associated with
+	// the provider.
+	IsTrustedIdentityPropagationEnabled bool
+
 	// The expiration date and time for the SAML provider.
 	ValidUntil *time.Time
 
@@ -4098,6 +4305,9 @@ func (v *SAMLProviderListEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateDate != nil {
 		s.WriteTime(schemas.SAMLProviderListEntry_CreateDate, *v.CreateDate)
 	}
+	if v.IsTrustedIdentityPropagationEnabled != false {
+		s.WriteBool(schemas.SAMLProviderListEntry_IsTrustedIdentityPropagationEnabled, v.IsTrustedIdentityPropagationEnabled)
+	}
 	if v.ValidUntil != nil {
 		s.WriteTime(schemas.SAMLProviderListEntry_ValidUntil, *v.ValidUntil)
 	}
@@ -4111,6 +4321,8 @@ func (v *SAMLProviderListEntry) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SAMLProviderListEntry_CreateDate:
 			v.CreateDate = new(time.Time)
 			return d.ReadTime(schemas.SAMLProviderListEntry_CreateDate, v.CreateDate)
+		case schemas.SAMLProviderListEntry_IsTrustedIdentityPropagationEnabled:
+			return d.ReadBool(schemas.SAMLProviderListEntry_IsTrustedIdentityPropagationEnabled, &v.IsTrustedIdentityPropagationEnabled)
 		case schemas.SAMLProviderListEntry_ValidUntil:
 			v.ValidUntil = new(time.Time)
 			return d.ReadTime(schemas.SAMLProviderListEntry_ValidUntil, v.ValidUntil)

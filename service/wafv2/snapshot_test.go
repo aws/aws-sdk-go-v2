@@ -314,6 +314,30 @@ func TestCheckSnapshot_GetDecryptedAPIKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEventActor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventActor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEventActor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetIPSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIPSet(context.Background(), nil, func(o *Options) {
@@ -523,6 +547,42 @@ func TestCheckSnapshot_ListAvailableManagedRuleGroupVersions(t *testing.T) {
 	_, err := svc.ListAvailableManagedRuleGroupVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAvailableManagedRuleGroupVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEventActors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventActors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEventActors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEventsByWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventsByWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEventsByWebACL")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,6 +1081,30 @@ func TestUpdateSnapshot_GetDecryptedAPIKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEventActor(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventActor(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEventActor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetIPSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetIPSet(context.Background(), nil, func(o *Options) {
@@ -1230,6 +1314,42 @@ func TestUpdateSnapshot_ListAvailableManagedRuleGroupVersions(t *testing.T) {
 	_, err := svc.ListAvailableManagedRuleGroupVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAvailableManagedRuleGroupVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEventActors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventActors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEventActors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEventsByWebACL(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventsByWebACL(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEventsByWebACL")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

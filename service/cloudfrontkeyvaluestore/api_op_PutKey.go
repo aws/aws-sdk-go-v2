@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a new key value pair or replaces the value of an existing key.
+// Creates a new key-value pair or replaces the value of an existing key.
 func (c *Client) PutKey(ctx context.Context, params *PutKeyInput, optFns ...func(*Options)) (*PutKeyOutput, error) {
 	if params == nil {
 		params = &PutKeyInput{}
@@ -25,11 +25,11 @@ func (c *Client) PutKey(ctx context.Context, params *PutKeyInput, optFns ...func
 	return out, nil
 }
 
-// A key value pair.
+// A key-value pair.
 type PutKeyInput struct {
 
-	// The current version (ETag) of the Key Value Store that you are putting keys
-	// into, which you can get using DescribeKeyValueStore.
+	// The current version ( ETag ) of the key value store that you are putting keys
+	// into, which you can get by using the DescribeKeyValueStore API operation.
 	//
 	// This member is required.
 	IfMatch *string
@@ -39,7 +39,7 @@ type PutKeyInput struct {
 	// This member is required.
 	Key *string
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
@@ -78,20 +78,20 @@ func (in *PutKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 }
 
-// Metadata information about a Key Value Store.
+// Metadata information about a key value store.
 type PutKeyOutput struct {
 
-	// The current version identifier of the Key Value Store after the successful put.
+	// The current version identifier of the key value store after the successful put.
 	//
 	// This member is required.
 	ETag *string
 
-	// Number of key value pairs in the Key Value Store after the successful put.
+	// Number of key-value pairs in the key value store after the successful put.
 	//
 	// This member is required.
 	ItemCount *int32
 
-	// Total size of the Key Value Store after the successful put, in bytes.
+	// Total size of the key value store after the successful put, in bytes.
 	//
 	// This member is required.
 	TotalSizeInBytes *int64

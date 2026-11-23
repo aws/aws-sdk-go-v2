@@ -79,6 +79,19 @@ type UpdateMicrovmImageInput struct {
 	// Lifecycle hook configuration for MicroVMs and MicroVM images.
 	Hooks *types.Hooks
 
+	// The customer managed Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key that encrypts the contents and metadata of your MicroVM image
+	// version. You must have permission to use the key. Specify the key in one of the
+	// following formats:
+	//
+	//   - Key ARN
+	//
+	//   - Alias ARN
+	//
+	// If you don't specify a key, your MicroVM image version uses an Amazon Web
+	// Services owned key.
+	KmsKeyIdentifier *string
+
 	// The logging configuration for build-time and runtime logs. Specify
 	// {"cloudWatch": {"logGroup": "..."}} to stream logs to a custom CloudWatch log
 	// group, or {"disabled": {}} to turn off logging.
@@ -134,6 +147,9 @@ func (v *UpdateMicrovmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ImageIdentifier != nil {
 		s.WriteString(schemas.UpdateMicrovmImageRequest_imageIdentifier, *v.ImageIdentifier)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateMicrovmImageRequest_kmsKeyIdentifier, *v.KmsKeyIdentifier)
 	}
 	if v.Logging != nil {
 		serializeLogging(s, schemas.UpdateMicrovmImageRequest_logging, v.Logging)
@@ -213,6 +229,12 @@ type UpdateMicrovmImageOutput struct {
 	// Lifecycle hook configuration for MicroVMs and MicroVM images.
 	Hooks *types.Hooks
 
+	// The customer managed Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key that encrypts the contents and metadata of your MicroVM image
+	// version. If you don't specify a key, your MicroVM image version uses an Amazon
+	// Web Services owned key.
+	KmsKeyIdentifier *string
+
 	// The latest active version of the MicroVM image.
 	LatestActiveImageVersion *string
 
@@ -281,6 +303,9 @@ func (v *UpdateMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageVersion != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_imageVersion, *v.ImageVersion)
 	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateMicrovmImageResponse_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
 	if v.LatestActiveImageVersion != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_latestActiveImageVersion, *v.LatestActiveImageVersion)
 	}
@@ -340,6 +365,9 @@ func (v *UpdateMicrovmImageOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.UpdateMicrovmImageResponse_imageVersion:
 			v.ImageVersion = new(string)
 			return d.ReadString(schemas.UpdateMicrovmImageResponse_imageVersion, v.ImageVersion)
+		case schemas.UpdateMicrovmImageResponse_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.UpdateMicrovmImageResponse_kmsKeyIdentifier, v.KmsKeyIdentifier)
 		case schemas.UpdateMicrovmImageResponse_latestActiveImageVersion:
 			v.LatestActiveImageVersion = new(string)
 			return d.ReadString(schemas.UpdateMicrovmImageResponse_latestActiveImageVersion, v.LatestActiveImageVersion)

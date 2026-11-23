@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateGlobalInferenceGateway
+
+{"Identifier":"__Identifier__","Routing":{"Weights":{"ErrorRate":1,"KVHeadroom":1,"QueueDepth":1,"RegionProximity":1}}}

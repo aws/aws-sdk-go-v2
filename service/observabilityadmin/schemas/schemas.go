@@ -1018,6 +1018,14 @@ var CentralizationRuleSummary_DestinationAccountId *smithy.Schema
 
 var CentralizationRuleSummary_DestinationRegion *smithy.Schema
 
+var CentralizeWithDataProtection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.observabilityadmin",
+	Name:      "CentralizeWithDataProtection",
+}, smithy.ShapeTypeEnum, 2)
+var CentralizeWithDataProtection_ENABLED *smithy.Schema
+
+var CentralizeWithDataProtection_DISABLED *smithy.Schema
+
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
 	Name:      "ClientToken",
@@ -1506,7 +1514,7 @@ var _LogsFilterString = smithy.NewSchema(smithy.ShapeID{
 var LogType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
 	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 9)
+}, smithy.ShapeTypeEnum, 12)
 var LogType_APPLICATION *smithy.Schema
 
 var LogType_USAGE *smithy.Schema
@@ -1524,6 +1532,12 @@ var LogType_ALB_ACCESS *smithy.Schema
 var LogType_ALB_CONNECTION *smithy.Schema
 
 var LogType_ALB_HEALTH_CHECK *smithy.Schema
+
+var LogType_FLOW *smithy.Schema
+
+var LogType_ALERT *smithy.Schema
+
+var LogType_TLS *smithy.Schema
 
 var _LogTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
@@ -1723,7 +1737,7 @@ var ResourceNotFoundException_ResourceType *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 23)
+}, smithy.ShapeTypeEnum, 25)
 var ResourceType_AWS_EC2_INSTANCE *smithy.Schema
 
 var ResourceType_AWS_EC2_VPC *smithy.Schema
@@ -1769,6 +1783,10 @@ var ResourceType_AWS_S3_BUCKET *smithy.Schema
 var ResourceType_AWS_BEDROCK_KNOWLEDGEBASE *smithy.Schema
 
 var ResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG *smithy.Schema
+
+var ResourceType_AWS_CLOUDWATCH_OMNI *smithy.Schema
+
+var ResourceType_AWS_NETWORK_FIREWALL_FIREWALL *smithy.Schema
 
 var _ResourceTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
@@ -1906,12 +1924,14 @@ var _SourceFilterString = smithy.NewSchema(smithy.ShapeID{
 var SourceLogsConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
 	Name:      "SourceLogsConfiguration",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var SourceLogsConfiguration_LogGroupSelectionCriteria *smithy.Schema
 
 var SourceLogsConfiguration_DataSourceSelectionCriteria *smithy.Schema
 
 var SourceLogsConfiguration_EncryptedLogGroupStrategy *smithy.Schema
+
+var SourceLogsConfiguration_CentralizeWithDataProtection *smithy.Schema
 
 var SourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.observabilityadmin",
@@ -3573,11 +3593,17 @@ func init() {
 
 	EncryptedLogGroupStrategy_SKIP = EncryptedLogGroupStrategy.AddMember("SKIP", smithyprelude.Unit)
 
+	CentralizeWithDataProtection_ENABLED = CentralizeWithDataProtection.AddMember("ENABLED", smithyprelude.Unit)
+
+	CentralizeWithDataProtection_DISABLED = CentralizeWithDataProtection.AddMember("DISABLED", smithyprelude.Unit)
+
 	SourceLogsConfiguration_LogGroupSelectionCriteria = SourceLogsConfiguration.AddMember("LogGroupSelectionCriteria", _LogsFilterString)
 
 	SourceLogsConfiguration_DataSourceSelectionCriteria = SourceLogsConfiguration.AddMember("DataSourceSelectionCriteria", _DataSourceFilterString)
 
 	SourceLogsConfiguration_EncryptedLogGroupStrategy = SourceLogsConfiguration.AddMember("EncryptedLogGroupStrategy", EncryptedLogGroupStrategy)
+
+	SourceLogsConfiguration_CentralizeWithDataProtection = SourceLogsConfiguration.AddMember("CentralizeWithDataProtection", CentralizeWithDataProtection)
 
 	SourceMetricsConfiguration_MetricsSelectionCriteria = SourceMetricsConfiguration.AddMember("MetricsSelectionCriteria", _MetricsFilterString)
 
@@ -3877,6 +3903,12 @@ func init() {
 
 	LogType_ALB_HEALTH_CHECK = LogType.AddMember("ALB_HEALTH_CHECK", smithyprelude.Unit)
 
+	LogType_FLOW = LogType.AddMember("FLOW", smithyprelude.Unit)
+
+	LogType_ALERT = LogType.AddMember("ALERT", smithyprelude.Unit)
+
+	LogType_TLS = LogType.AddMember("TLS", smithyprelude.Unit)
+
 	_LogTypes_member = _LogTypes.AddMember("member", LogType)
 
 	LogDeliveryParameters_LogTypes = LogDeliveryParameters.AddMember("LogTypes", _LogTypes)
@@ -3980,6 +4012,10 @@ func init() {
 	ResourceType_AWS_BEDROCK_KNOWLEDGEBASE = ResourceType.AddMember("AWS_BEDROCK_KNOWLEDGEBASE", smithyprelude.Unit)
 
 	ResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG = ResourceType.AddMember("AWS_XRAY_TRANSACTION_SEARCH_CONFIG", smithyprelude.Unit)
+
+	ResourceType_AWS_CLOUDWATCH_OMNI = ResourceType.AddMember("AWS_CLOUDWATCH_OMNI", smithyprelude.Unit)
+
+	ResourceType_AWS_NETWORK_FIREWALL_FIREWALL = ResourceType.AddMember("AWS_NETWORK_FIREWALL_FIREWALL", smithyprelude.Unit)
 
 	_ResourceTypes_member = _ResourceTypes.AddMember("member", ResourceType)
 

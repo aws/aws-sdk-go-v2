@@ -14,6 +14,11 @@ import (
 // You can change one or more settings by specifying these parameters and the new
 // values in the request.
 //
+// To change the VPC networking configuration of an Aurora PostgreSQL DB cluster,
+// see EnableVPCNetworking . To move an Aurora MySQL or Aurora PostgreSQL DB
+// cluster to a different DB subnet group, in the same VPC or a different VPC, see
+// DBSubnetGroupName .
+//
 // For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
 // User Guide.
 //
@@ -209,6 +214,78 @@ type ModifyDBClusterInput struct {
 	//   AllowMajorVersionUpgrade parameter for a major version upgrade only.
 	DBInstanceParameterGroupName *string
 
+	// The DB subnet group for the DB cluster.
+	//
+	// Specify this parameter for one of these purposes:
+	//
+	//   - To move an Aurora MySQL or Aurora PostgreSQL DB cluster that uses VPC
+	//   networking to a different DB subnet group. The new DB subnet group can be in the
+	//   same VPC or in a different VPC.
+	//
+	//   - To enable VPC networking for an Aurora PostgreSQL DB cluster that uses an
+	//   internet access gateway. Set EnableVPCNetworking to true and
+	//   EnableInternetAccessGateway to false .
+	//
+	// When you move a DB cluster to a different DB subnet group, you don't need to
+	// set EnableVPCNetworking . If you set it to false , Aurora rejects the request.
+	// Security groups in VpcSecurityGroupIds must belong to the VPC of the new DB
+	// subnet group. If you don't specify VpcSecurityGroupIds , the DB cluster uses the
+	// default security group of that VPC. If you don't specify NetworkType , the DB
+	// cluster uses IPV4 . Both defaults apply even if the DB cluster stays in the same
+	// VPC.
+	//
+	// An outage occurs during the move. The DB cluster uses VPC networking before,
+	// during, and after the move, and the move doesn't turn on an internet access
+	// gateway. If you specify the DB subnet group that the DB cluster already uses,
+	// the DB cluster isn't moved. The change is applied during the next maintenance
+	// window unless ApplyImmediately is enabled.
+	//
+	// Aurora rejects the move if the DB cluster:
+	//
+	//   - Is a member of an Aurora global database.
+	//
+	//   - Uses Aurora Limitless Database.
+	//
+	//   - Is a cross-Region or in-Region read replica, or is the source of one.
+	//   Aurora Replicas in the DB cluster don't block the move.
+	//
+	//   - Has enhanced binlog (Aurora MySQL), enhanced logical replication (Aurora
+	//   PostgreSQL), or Babelfish turned on.
+	//
+	//   - Is a target of an RDS Proxy.
+	//
+	//   - Is part of a blue/green deployment.
+	//
+	//   - Is the source of a zero-ETL integration.
+	//
+	//   - Has a database activity stream that isn't stopped.
+	//
+	// The move also fails if the DB cluster is switching to a different DB cluster
+	// parameter group, or if a change to enhanced binlog, enhanced logical
+	// replication, or Babelfish is pending in its DB cluster parameter group. Apply
+	// the change, and reboot if required, before you move the DB cluster.
+	//
+	// If the move fails, Aurora returns the DB cluster to its original DB subnet
+	// group and cancels the change. To try again, call ModifyDBCluster again.
+	//
+	// Aurora can't always return the DB cluster. If the move fails after Aurora
+	// starts to update the DB cluster endpoints, or if the rollback fails, the change
+	// doesn't complete. If Aurora can't restore the original network configuration,
+	// the DB instances in the DB cluster enter the incompatible-network state. In
+	// these cases, contact Amazon Web Services Support.
+	//
+	// Valid for Cluster Type: Aurora DB clusters only
+	//
+	// Default: If you don't specify this parameter when you enable VPC networking,
+	// the DB cluster uses the default DB subnet group for your Amazon Web Services
+	// account.
+	//
+	// Constraints: The DB subnet group must contain a subnet in each Availability
+	// Zone that the DB instances in the DB cluster are located in.
+	//
+	// Example: mydbsubnetgroup
+	DBSubnetGroupName *string
+
 	// Specifies the mode of Database Insights to enable for the DB cluster.
 	//
 	// If you change the value from standard to advanced , you must set the
@@ -292,6 +369,18 @@ type ModifyDBClusterInput struct {
 	// [IAM database authentication for MariaDB, MySQL, and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
+	// Specifies whether the DB cluster uses an internet access gateway. With an
+	// internet access gateway, you connect to the DB cluster over the internet without
+	// a VPC.
+	//
+	// Set to true together with EnableVPCNetworking set to false to move the DB
+	// cluster out of its VPC. Set to false together with EnableVPCNetworking set to
+	// true to move the DB cluster into a VPC. A DB cluster can't use VPC networking
+	// and an internet access gateway at the same time.
+	//
+	// Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+	EnableInternetAccessGateway *bool
+
 	// Specifies whether to enable Aurora Limitless Database. You must enable Aurora
 	// Limitless Database to create a DB shard group.
 	//
@@ -316,6 +405,27 @@ type ModifyDBClusterInput struct {
 	//
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
+
+	// Specifies whether VPC networking is enabled for the DB cluster. Set to false to
+	// disable VPC networking for the DB cluster.
+	//
+	// A DB cluster without VPC networking needs an internet access gateway and IAM
+	// database authentication. Set EnableInternetAccessGateway and
+	// EnableIAMDatabaseAuthentication to true , and set MasterUserAuthenticationType
+	// to iam-db-auth .
+	//
+	// Set to true to re-enable VPC networking for a DB cluster that uses an internet
+	// access gateway. You can also specify DBSubnetGroupName , VpcSecurityGroupIds ,
+	// and NetworkType .
+	//
+	// The change is applied during the next maintenance window unless ApplyImmediately
+	// is enabled.
+	//
+	// To move a DB cluster that already uses VPC networking to a different DB subnet
+	// group, you don't need to set this parameter. Specify DBSubnetGroupName instead.
+	//
+	// Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+	EnableVPCNetworking *bool
 
 	// The lifecycle type for this DB cluster.
 	//
@@ -512,6 +622,16 @@ type ModifyDBClusterInput struct {
 	// cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the
 	// IPv6 protocols ( DUAL ).
 	//
+	// If the subnets in the DB subnet group support only the IPv4 protocol, you can't
+	// set this parameter to DUAL .
+	//
+	// If you don't specify this parameter when you move the DB cluster to a different
+	// DB subnet group with DBSubnetGroupName , the DB cluster uses IPV4 , even if it
+	// currently uses DUAL . To keep dual-stack mode, specify DUAL . The new DB subnet
+	// group must support the network type.
+	//
+	// Don't specify it when you set EnableVPCNetworking to false .
+	//
 	// For more information, see [Working with a DB instance in a VPC] in the Amazon Aurora User Guide.
 	//
 	// Valid for Cluster Type: Aurora DB clusters only
@@ -689,6 +809,17 @@ type ModifyDBClusterInput struct {
 
 	// A list of EC2 VPC security groups to associate with this DB cluster.
 	//
+	// Valid only for DB clusters inside a VPC. For a DB cluster that uses an internet
+	// access gateway, specify this parameter only when you re-enable VPC networking.
+	// Set EnableVPCNetworking to true and EnableInternetAccessGateway to false .
+	//
+	// When you move the DB cluster to a different DB subnet group with
+	// DBSubnetGroupName , or re-enable VPC networking, the security groups must belong
+	// to the VPC of the DB subnet group. If you leave out this parameter in those
+	// requests, the DB cluster uses the default security group of that VPC, even for a
+	// move within the same VPC. To keep the current security groups, specify their
+	// IDs. If the VPC is a shared VPC, you must specify this parameter.
+	//
 	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	VpcSecurityGroupIds []string
 
@@ -749,6 +880,9 @@ func (v *ModifyDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DBInstanceParameterGroupName != nil {
 		s.WriteString(schemas.ModifyDBClusterMessage_DBInstanceParameterGroupName, *v.DBInstanceParameterGroupName)
 	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.ModifyDBClusterMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
 	if v.DatabaseInsightsMode != "" {
 		s.WriteString(schemas.ModifyDBClusterMessage_DatabaseInsightsMode, string(v.DatabaseInsightsMode))
 	}
@@ -770,6 +904,9 @@ func (v *ModifyDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableIAMDatabaseAuthentication != nil {
 		s.WriteBool(schemas.ModifyDBClusterMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
 	}
+	if v.EnableInternetAccessGateway != nil {
+		s.WriteBool(schemas.ModifyDBClusterMessage_EnableInternetAccessGateway, *v.EnableInternetAccessGateway)
+	}
 	if v.EnableLimitlessDatabase != nil {
 		s.WriteBool(schemas.ModifyDBClusterMessage_EnableLimitlessDatabase, *v.EnableLimitlessDatabase)
 	}
@@ -778,6 +915,9 @@ func (v *ModifyDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EnablePerformanceInsights != nil {
 		s.WriteBool(schemas.ModifyDBClusterMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.EnableVPCNetworking != nil {
+		s.WriteBool(schemas.ModifyDBClusterMessage_EnableVPCNetworking, *v.EnableVPCNetworking)
 	}
 	if v.EngineLifecycleSupport != nil {
 		s.WriteString(schemas.ModifyDBClusterMessage_EngineLifecycleSupport, *v.EngineLifecycleSupport)

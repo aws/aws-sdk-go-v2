@@ -1210,26 +1210,6 @@ func (m *validateOpDeleteAsset) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteAssetType struct {
-}
-
-func (*validateOpDeleteAssetType) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteAssetType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteAssetTypeInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteAssetTypeInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteAttachment struct {
 }
 
@@ -3830,26 +3810,6 @@ func (m *validateOpPutAsset) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpPutAssetType struct {
-}
-
-func (*validateOpPutAssetType) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpPutAssetType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*PutAssetTypeInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpPutAssetTypeInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpPutAttachment struct {
 }
 
@@ -3885,26 +3845,6 @@ func (m *validateOpPutDataCatalogEncryptionSettings) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutDataCatalogEncryptionSettingsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpPutDataCatalogExportConfiguration struct {
-}
-
-func (*validateOpPutDataCatalogExportConfiguration) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpPutDataCatalogExportConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*PutDataCatalogExportConfigurationInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpPutDataCatalogExportConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5530,10 +5470,6 @@ func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAsset{}, middleware.After)
 }
 
-func addOpDeleteAssetTypeValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteAssetType{}, middleware.After)
-}
-
 func addOpDeleteAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAttachment{}, middleware.After)
 }
@@ -6054,20 +5990,12 @@ func addOpPutAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAsset{}, middleware.After)
 }
 
-func addOpPutAssetTypeValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpPutAssetType{}, middleware.After)
-}
-
 func addOpPutAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAttachment{}, middleware.After)
 }
 
 func addOpPutDataCatalogEncryptionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDataCatalogEncryptionSettings{}, middleware.After)
-}
-
-func addOpPutDataCatalogExportConfigurationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpPutDataCatalogExportConfiguration{}, middleware.After)
 }
 
 func addOpPutDataQualityProfileAnnotationValidationMiddleware(stack *middleware.Stack) error {
@@ -6422,39 +6350,6 @@ func validateApplyMapping(v *types.ApplyMapping) error {
 	}
 	if v.Mapping == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Mapping"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAssetTypeFormReference(v *types.AssetTypeFormReference) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AssetTypeFormReference"}
-	if v.FormTypeIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FormTypeIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAssetTypeFormsMap(v map[string]types.AssetTypeFormReference) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AssetTypeFormsMap"}
-	for key := range v {
-		value := v[key]
-		if err := validateAssetTypeFormReference(&value); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10756,9 +10651,6 @@ func validateSearchAttributeFilter(v *types.SearchAttributeFilter) error {
 	if v.Attribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
 	}
-	if len(v.Operator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12684,21 +12576,6 @@ func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetInput"}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteAssetTypeInput(v *DeleteAssetTypeInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssetTypeInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
@@ -14928,9 +14805,6 @@ func validateOpPutAssetInput(v *PutAssetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAssetInput"}
-	if v.AssetTypeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssetTypeId"))
-	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
@@ -14939,28 +14813,6 @@ func validateOpPutAssetInput(v *PutAssetInput) error {
 	}
 	if v.Forms == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpPutAssetTypeInput(v *PutAssetTypeInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PutAssetTypeInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Forms == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
-	} else if v.Forms != nil {
-		if err := validateAssetTypeFormsMap(v.Forms); err != nil {
-			invalidParams.AddNested("Forms", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14983,9 +14835,6 @@ func validateOpPutAttachmentInput(v *PutAttachmentInput) error {
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
-	if v.FormTypeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FormTypeId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -15004,21 +14853,6 @@ func validateOpPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryption
 		if err := validateDataCatalogEncryptionSettings(v.DataCatalogEncryptionSettings); err != nil {
 			invalidParams.AddNested("DataCatalogEncryptionSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpPutDataCatalogExportConfigurationInput(v *PutDataCatalogExportConfigurationInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PutDataCatalogExportConfigurationInput"}
-	if len(v.ExportSetting) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ExportSetting"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

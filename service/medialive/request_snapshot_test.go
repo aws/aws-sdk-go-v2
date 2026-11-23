@@ -1344,7 +1344,9 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -1439,7 +1441,9 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -4415,7 +4419,8 @@ func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8107,7 +8112,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -8202,7 +8209,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -11172,8 +11181,9 @@ func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings:     nil,
-		SpecialRouterSettings: nil,
+		InferenceSettings:        nil,
+		SpecialRouterSettings:    nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13326,7 +13336,9 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -13421,7 +13433,9 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -16397,7 +16411,8 @@ func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -20089,7 +20104,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -20184,7 +20201,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -23154,8 +23173,9 @@ func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings:     nil,
-		SpecialRouterSettings: nil,
+		InferenceSettings:        nil,
+		SpecialRouterSettings:    nil,
+		JpegXsInputSpecification: nil,
 	}
 	body := &bytes.Buffer{}
 	method := ""

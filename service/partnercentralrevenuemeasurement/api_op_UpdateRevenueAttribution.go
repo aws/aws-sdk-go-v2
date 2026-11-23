@@ -50,6 +50,10 @@ type UpdateRevenueAttributionInput struct {
 	// A unique token to ensure idempotency of the update request.
 	ClientToken *string
 
+	// Full-replacement context map. Omit to leave the stored context unchanged; pass
+	// an empty map to clear it.
+	Context map[string]string
+
 	// The updated description of the revenue attribution.
 	Description *string
 
@@ -68,6 +72,9 @@ func (v *UpdateRevenueAttributionInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateRevenueAttributionInput_ClientToken, *v.ClientToken)
+	}
+	if v.Context != nil {
+		serializeRevenueAttributionContext(s, schemas.UpdateRevenueAttributionInput_Context, v.Context)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRevenueAttributionInput_Description, *v.Description)
@@ -97,6 +104,9 @@ type UpdateRevenueAttributionOutput struct {
 	// This member is required.
 	LastModifiedDate *time.Time
 
+	// The context stored on the revenue attribution after the update.
+	Context map[string]string
+
 	// The updated description of the revenue attribution.
 	Description *string
 
@@ -119,6 +129,9 @@ func (v *UpdateRevenueAttributionOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateRevenueAttributionOutput_Arn, *v.Arn)
 	}
+	if v.Context != nil {
+		serializeRevenueAttributionContext(s, schemas.UpdateRevenueAttributionOutput_Context, v.Context)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRevenueAttributionOutput_Description, *v.Description)
 	}
@@ -138,6 +151,8 @@ func (v *UpdateRevenueAttributionOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.UpdateRevenueAttributionOutput_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.UpdateRevenueAttributionOutput_Arn, v.Arn)
+		case schemas.UpdateRevenueAttributionOutput_Context:
+			return deserializeRevenueAttributionContext(d, schemas.UpdateRevenueAttributionOutput_Context, &v.Context)
 		case schemas.UpdateRevenueAttributionOutput_Description:
 			v.Description = new(string)
 			return d.ReadString(schemas.UpdateRevenueAttributionOutput_Description, v.Description)

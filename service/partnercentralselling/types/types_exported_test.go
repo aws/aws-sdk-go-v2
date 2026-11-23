@@ -5,12 +5,16 @@ package types_test
 import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	"time"
 )
 
 func ExampleEngagementContextPayload_outputUsage() {
 	var union types.EngagementContextPayload
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.EngagementContextPayloadMemberCustomerAccount:
+		_ = v.Value // Value is types.CustomerAccountContext
+
 	case *types.EngagementContextPayloadMemberCustomerProject:
 		_ = v.Value // Value is types.CustomerProjectsContext
 
@@ -31,12 +35,110 @@ func ExampleEngagementContextPayload_outputUsage() {
 
 var _ *types.CustomerProjectsContext
 var _ *types.ProspectingResult
+var _ *types.CustomerAccountContext
 var _ *types.LeadContext
+
+func ExampleEngagementSearchFilterValue_outputUsage() {
+	var union types.EngagementSearchFilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EngagementSearchFilterValueMemberDateValue:
+		_ = v.Value // Value is time.Time
+
+	case *types.EngagementSearchFilterValueMemberLongValue:
+		_ = v.Value // Value is int64
+
+	case *types.EngagementSearchFilterValueMemberStringListValue:
+		_ = v.Value // Value is []string
+
+	case *types.EngagementSearchFilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ *string
+var _ *int64
+var _ *time.Time
+
+func ExampleFilterValue_outputUsage() {
+	var union types.FilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FilterValueMemberDateValue:
+		_ = v.Value // Value is time.Time
+
+	case *types.FilterValueMemberLongValue:
+		_ = v.Value // Value is int64
+
+	case *types.FilterValueMemberStringListValue:
+		_ = v.Value // Value is []string
+
+	case *types.FilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ *string
+var _ *int64
+var _ *time.Time
+
+func ExampleOpportunitySearchFilterValue_outputUsage() {
+	var union types.OpportunitySearchFilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OpportunitySearchFilterValueMemberDateValue:
+		_ = v.Value // Value is time.Time
+
+	case *types.OpportunitySearchFilterValueMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.OpportunitySearchFilterValueMemberLongValue:
+		_ = v.Value // Value is int64
+
+	case *types.OpportunitySearchFilterValueMemberStringListValue:
+		_ = v.Value // Value is []string
+
+	case *types.OpportunitySearchFilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ *string
+var _ *int64
+var _ *float64
+var _ *time.Time
 
 func ExamplePayload_outputUsage() {
 	var union types.Payload
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PayloadMemberAccountPlanningInvitation:
+		_ = v.Value // Value is types.AccountPlanningInvitationPayload
+
 	case *types.PayloadMemberLeadInvitation:
 		_ = v.Value // Value is types.LeadInvitationPayload
 
@@ -53,6 +155,7 @@ func ExamplePayload_outputUsage() {
 }
 
 var _ *types.OpportunityInvitationPayload
+var _ *types.AccountPlanningInvitationPayload
 var _ *types.LeadInvitationPayload
 
 func ExampleReceiver_outputUsage() {

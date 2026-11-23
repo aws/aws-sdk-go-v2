@@ -3097,30 +3097,30 @@ func (SchemaVersionStatus) Values() []SchemaVersionStatus {
 	}
 }
 
-type SearchFilterOperator string
+type SearchFilterComparator string
 
-// Enum values for SearchFilterOperator
+// Enum values for SearchFilterComparator
 const (
-	SearchFilterOperatorEquals              SearchFilterOperator = "equals"
-	SearchFilterOperatorGreaterThan         SearchFilterOperator = "greaterThan"
-	SearchFilterOperatorGreaterThanOrEquals SearchFilterOperator = "greaterThanOrEquals"
-	SearchFilterOperatorLessThan            SearchFilterOperator = "lessThan"
-	SearchFilterOperatorLessThanOrEquals    SearchFilterOperator = "lessThanOrEquals"
-	SearchFilterOperatorNotExists           SearchFilterOperator = "notExists"
+	SearchFilterComparatorEquals              SearchFilterComparator = "EQUALS"
+	SearchFilterComparatorGreaterThan         SearchFilterComparator = "GREATER_THAN"
+	SearchFilterComparatorGreaterThanOrEquals SearchFilterComparator = "GREATER_THAN_OR_EQUALS"
+	SearchFilterComparatorLessThan            SearchFilterComparator = "LESS_THAN"
+	SearchFilterComparatorLessThanOrEquals    SearchFilterComparator = "LESS_THAN_OR_EQUALS"
+	SearchFilterComparatorNotExists           SearchFilterComparator = "NOT_EXISTS"
 )
 
-// Values returns all known values for SearchFilterOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
+// Values returns all known values for SearchFilterComparator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
 //
 // The ordering of this slice is not guaranteed to be stable across updates.
-func (SearchFilterOperator) Values() []SearchFilterOperator {
-	return []SearchFilterOperator{
-		"equals",
-		"greaterThan",
-		"greaterThanOrEquals",
-		"lessThan",
-		"lessThanOrEquals",
-		"notExists",
+func (SearchFilterComparator) Values() []SearchFilterComparator {
+	return []SearchFilterComparator{
+		"EQUALS",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUALS",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUALS",
+		"NOT_EXISTS",
 	}
 }
 

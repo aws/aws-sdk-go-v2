@@ -1400,6 +1400,13 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 					},
 				},
 			},
+			WebAuthnRedirection: &types.WebAuthnRedirection{
+				Enabled: ptr.Bool(true),
+				ProcessCompatibilityList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			AgentAccessConfig: &types.AgentAccessConfig{
 				Settings: []types.AgentAccessSetting{
 					{
@@ -1509,6 +1516,13 @@ func TestCheckResponseSnapshot_CreateStack(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+			},
+		},
+		WebAuthnRedirection: &types.WebAuthnRedirection{
+			Enabled: ptr.Bool(true),
+			ProcessCompatibilityList: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		AgentAccessConfig: &types.AgentAccessConfig{
@@ -3727,6 +3741,13 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 						},
 					},
 				},
+				WebAuthnRedirection: &types.WebAuthnRedirection{
+					Enabled: ptr.Bool(true),
+					ProcessCompatibilityList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
 				AgentAccessConfig: &types.AgentAccessConfig{
 					Settings: []types.AgentAccessSetting{
 						{
@@ -3837,6 +3858,13 @@ func TestCheckResponseSnapshot_DescribeStacks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+				},
+				WebAuthnRedirection: &types.WebAuthnRedirection{
+					Enabled: ptr.Bool(true),
+					ProcessCompatibilityList: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 				AgentAccessConfig: &types.AgentAccessConfig{
@@ -5642,6 +5670,13 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 					},
 				},
 			},
+			WebAuthnRedirection: &types.WebAuthnRedirection{
+				Enabled: ptr.Bool(true),
+				ProcessCompatibilityList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			AgentAccessConfig: &types.AgentAccessConfig{
 				Settings: []types.AgentAccessSetting{
 					{
@@ -5753,6 +5788,13 @@ func TestCheckResponseSnapshot_UpdateStack(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+			},
+		},
+		WebAuthnRedirection: &types.WebAuthnRedirection{
+			Enabled: ptr.Bool(true),
+			ProcessCompatibilityList: []string{
+				"__Member__",
+				"__Member__",
 			},
 		},
 		AgentAccessConfig: &types.AgentAccessConfigForUpdate{

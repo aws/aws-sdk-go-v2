@@ -787,6 +787,9 @@ func TestCheckRequestSnapshot_CreateStackSet(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3465,6 +3468,10 @@ func TestCheckRequestSnapshot_UpdateStackSet(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		UseAdminExecutionRole:     ptr.Bool(true),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4149,6 +4156,9 @@ func TestUpdateRequestSnapshot_CreateStackSet(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6827,6 +6837,10 @@ func TestUpdateRequestSnapshot_UpdateStackSet(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		UseAdminExecutionRole:     ptr.Bool(true),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

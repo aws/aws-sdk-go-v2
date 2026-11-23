@@ -1,5 +1,5 @@
 400
 Content-Type: application/x-amz-json-1.1
-X-Amz-Target: SageMaker.CreateClusterExtension
+X-Amz-Target: SageMaker.AddInferenceGateway
 
 {"__type":"ConflictException","Message":"__Message__"}

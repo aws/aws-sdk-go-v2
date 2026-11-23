@@ -1751,6 +1751,81 @@
                 "smithy.api#documentation": "<p>The available spending limits for a payment session.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#AwsBillingPaymentOptions": {
+            "type": "structure",
+            "members": {
+                "dpopJwk": {
+                    "target": "com.amazonaws.bedrockagentcore#DpopJwk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent's public key for Demonstrating Proof of Possession (DPoP), as described in RFC 9449. If you specify a key, the payment token is bound to it, and the seller can verify that the token is presented by the holder of the matching private key. If you don't specify a key, the payment token isn't bound to a key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Optional settings for an AWS Billing payment.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AwsBillingPaymentToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A payment token for an AWS Billing payment.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65536
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AwsBillingX402PaymentInput": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "com.amazonaws.bedrockagentcore#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The x402 protocol version of the seller's HTTP 402 response, from its <code>x402Version</code> field. For example, <code>2</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.bedrockagentcore#PaymentDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The seller's x402 payment requirement for AWS Billing, passed unchanged as a JSON object. The service reads the seller-signed quote token from <code>extra.quoteToken</code> and returns a <code>ValidationException</code> if it is missing or invalid. Any change to the quote token invalidates its signature.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.bedrockagentcore#AwsBillingPaymentOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional settings for the AWS Billing payment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for an AWS Billing x402 payment. The payment pays an AWS Marketplace seller's x402 (HTTP 402) payment requirement and is billed to the AWS account that owns the payment manager, through the payment manager's AWS Billing payment connector.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#AwsBillingX402PaymentOutput": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "com.amazonaws.bedrockagentcore#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The x402 protocol version. This is the same value as the <code>version</code> in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "paymentToken": {
+                    "target": "com.amazonaws.bedrockagentcore#AwsBillingPaymentToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment token, a signed JSON Web Token (JWT). Include it when you retry your request to the seller. Treat the payment token as a credential: don't log or share it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output of an AWS Billing x402 payment.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#BasicAuth": {
             "type": "structure",
             "members": {
@@ -5745,6 +5820,50 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#DpopJwk": {
+            "type": "structure",
+            "members": {
+                "kty": {
+                    "target": "com.amazonaws.bedrockagentcore#JwkKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key type. The only valid value is <code>EC</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "crv": {
+                    "target": "com.amazonaws.bedrockagentcore#JwkEllipticCurve",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elliptic curve of the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "x": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The x-coordinate of the elliptic curve point, base64url-encoded.</p>",
+                        "smithy.api#length": {
+                            "min": 43,
+                            "max": 128
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "y": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The y-coordinate of the elliptic curve point, base64url-encoded.</p>",
+                        "smithy.api#length": {
+                            "min": 43,
+                            "max": 128
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An elliptic curve public key in JSON Web Key (JWK) format, as described in RFC 7518 section 6.2, used to bind a payment token to the agent.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#DuplicateIdException": {
@@ -13709,6 +13828,46 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcore#JwkEllipticCurve": {
+            "type": "enum",
+            "members": {
+                "P256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "P-256"
+                    }
+                },
+                "P384": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "P-384"
+                    }
+                },
+                "P521": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "P-521"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The elliptic curve of a JSON Web Key.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#JwkKeyType": {
+            "type": "enum",
+            "members": {
+                "EC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The JSON Web Key type.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#JwtKeyId": {
             "type": "string",
             "traits": {
@@ -17199,6 +17358,12 @@
                 },
                 "mpp": {
                     "target": "com.amazonaws.bedrockagentcore#MppPaymentInput"
+                },
+                "awsBillingX402": {
+                    "target": "com.amazonaws.bedrockagentcore#AwsBillingX402PaymentInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input for an AWS Billing x402 payment, which pays an AWS Marketplace seller's quote and charges it to the AWS account that owns the payment manager.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17295,9 +17460,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 34,
-                    "max": 34
+                    "max": 35
                 },
-                "smithy.api#pattern": "^payment-instrument-[0-9a-zA-Z-]{15}$"
+                "smithy.api#pattern": "^(payment-instrument-[0-9a-zA-Z-]{15}|aws\\.agentcorepayments\\.awsbilling\\.v1)$"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentInstrumentResource": {
@@ -17474,6 +17639,12 @@
                 },
                 "mpp": {
                     "target": "com.amazonaws.bedrockagentcore#MppPaymentOutput"
+                },
+                "awsBillingX402": {
+                    "target": "com.amazonaws.bedrockagentcore#AwsBillingX402PaymentOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output from an AWS Billing x402 payment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17745,6 +17916,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MPP"
                     }
+                },
+                "AWS_BILLING_X402": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_BILLING_X402"
+                    }
                 }
             },
             "traits": {
@@ -17896,7 +18073,7 @@
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the payment instrument to use.</p>",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument to use. For the <code>CRYPTO_X402</code> and <code>MPP</code> payment types, specify the ID of a payment instrument that you created. For the <code>AWS_BILLING_X402</code> payment type, specify the service-managed instrument ID <code>aws.agentcorepayments.awsbilling.v1</code>. You don't create this instrument; it's available for any payment manager that has an AWS Billing payment connector.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17968,7 +18145,7 @@
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the payment instrument used.</p>",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument used. For the <code>AWS_BILLING_X402</code> payment type, this is the service-managed instrument ID <code>aws.agentcorepayments.awsbilling.v1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

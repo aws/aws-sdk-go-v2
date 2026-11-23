@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.GetCapacityReservationUsage
+
+{"AvailableInstanceCount":1,"InstanceUsageSet":[{"AccountId":"__AccountId__","InUseInstanceCount":1,"ResourcesUsage":[{"InUseInstanceCount":1,"ResourceType":"HyperPodClusters"},{"InUseInstanceCount":1,"ResourceType":"HyperPodClusters"}]},{"AccountId":"__AccountId__","InUseInstanceCount":1,"ResourcesUsage":[{"InUseInstanceCount":1,"ResourceType":"HyperPodClusters"},{"InUseInstanceCount":1,"ResourceType":"HyperPodClusters"}]}],"LastRefreshTime":946684800,"NextToken":"__NextToken__","SMCapacityReservationId":"__SMCapacityReservationId__","TotalInstanceCount":1}

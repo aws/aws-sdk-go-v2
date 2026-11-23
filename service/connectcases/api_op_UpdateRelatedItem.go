@@ -20,6 +20,11 @@ import (
 //     and remove fields from a custom related item. There's a quota for the number of
 //     fields allowed in a Custom type related item. See [Connect Customer Cases quotas].
 //
+//   - Sla - Update the target duration ( targetSlaMinutes ) of an SLA. The new
+//     deadline is counted from when the SLA was created. The SLA status is
+//     recalculated against the new deadline: an open SLA becomes Active or Overdue,
+//     and a completed SLA becomes Met or NotMet.
+//
 // Important things to know
 //
 //   - When updating a Custom related item, all existing and new fields, and their

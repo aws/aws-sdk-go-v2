@@ -107,6 +107,121 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_GetDeploymentConfiguration(t *testing.T) {
+	want := &GetDeploymentConfigurationOutput{
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDeploymentConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDeploymentConfiguration(context.Background(), &GetDeploymentConfigurationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDeploymentConfiguration.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetDeploymentConfigurationJob(t *testing.T) {
+	want := &GetDeploymentConfigurationJobOutput{
+		JobId: ptr.String("__JobId__"),
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+		Status:           types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ConfigurationArn: ptr.String("__ConfigurationArn__"),
+		EndedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorCode:        types.DeploymentConfigurationJobErrorCode("FULFILLMENT_URL_UNREACHABLE"),
+		Message:          ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDeploymentConfigurationJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDeploymentConfigurationJob(context.Background(), &GetDeploymentConfigurationJobInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
+		JobId:              ptr.String("__JobId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDeploymentConfigurationJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListDeploymentConfigurationJobs(t *testing.T) {
+	want := &ListDeploymentConfigurationJobsOutput{
+		Jobs: []types.DeploymentConfigurationJobSummary{
+			{
+				JobId:  ptr.String("__JobId__"),
+				Status: types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+				Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+					Value: types.DataAsAServiceConfigurationDetail{
+						FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				JobId:  ptr.String("__JobId__"),
+				Status: types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+				Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+					Value: types.DataAsAServiceConfigurationDetail{
+						FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListDeploymentConfigurationJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListDeploymentConfigurationJobs(context.Background(), &ListDeploymentConfigurationJobsInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListDeploymentConfigurationJobs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: map[string]string{
@@ -171,6 +286,47 @@ func TestCheckResponseSnapshot_PutDeploymentParameter(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartDeploymentConfigurationJob(t *testing.T) {
+	want := &StartDeploymentConfigurationJobOutput{
+		JobId: ptr.String("__JobId__"),
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+		Status:    types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartDeploymentConfigurationJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartDeploymentConfigurationJob(context.Background(), &StartDeploymentConfigurationJobInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartDeploymentConfigurationJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -232,8 +388,10 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.GetDeploymentConfiguration(context.Background(), &GetDeploymentConfigurationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -298,8 +456,10 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.GetDeploymentConfiguration(context.Background(), &GetDeploymentConfigurationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -325,8 +485,10 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.GetDeploymentConfiguration(context.Background(), &GetDeploymentConfigurationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -390,8 +552,10 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.GetDeploymentConfiguration(context.Background(), &GetDeploymentConfigurationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -418,8 +582,10 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.GetDeploymentConfiguration(context.Background(), &GetDeploymentConfigurationInput{
+		Catalog:            ptr.String("__Catalog__"),
+		ProductId:          ptr.String("__ProductId__"),
+		DeliveryOptionType: types.DeliveryOptionType("data-as-a-service"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

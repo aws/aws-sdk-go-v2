@@ -1,3 +1,7 @@
+# v1.53.1 (2026-11-23)
+
+* No change notes available for this release.
+
 # v1.53.0 (2026-11-12)
 
 * **Feature**: This release updates range of maxInQueueDepth and maxConcurrency limit from 10000 to 1000.

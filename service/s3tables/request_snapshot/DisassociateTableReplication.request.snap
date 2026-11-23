@@ -1,0 +1,3 @@
+PUT /table-replication/disassociate?tableArn=__TableArn__
+
+

@@ -37,7 +37,8 @@ type UpdateGlossaryInput struct {
 	// of the request.
 	ClientToken *string
 
-	// The updated description of the glossary.
+	// The new description. Omit it to keep the current description; set it to an
+	// empty string to clear it.
 	Description *string
 
 	// The updated name of the glossary.

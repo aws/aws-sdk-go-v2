@@ -105,6 +105,13 @@ type CreateScopeSnapshotOutput struct {
 	// A description of the scope.
 	ScopeDescription *string
 
+	// The specialized type of the scope, if the scope is built for one specific
+	// purpose. A scope with no specializedScopeType is a standard scope that you can
+	// associate with a deployment. A specialized scope can be used only for the
+	// purpose that its type defines and can't be associated with a deployment. This
+	// value is set when the scope is created and can't be changed.
+	SpecializedScopeType types.SpecializedScopeType
+
 	// A token used for optimistic concurrency control. Each read and write returns an
 	// updateToken . Provide the most recent value on your next update to detect and
 	// prevent conflicting concurrent modifications.
@@ -149,6 +156,9 @@ func (v *CreateScopeSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScopeName != nil {
 		s.WriteString(schemas.CreateScopeSnapshotOutput_scopeName, *v.ScopeName)
 	}
+	if v.SpecializedScopeType != "" {
+		s.WriteString(schemas.CreateScopeSnapshotOutput_specializedScopeType, string(v.SpecializedScopeType))
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateScopeSnapshotOutput_status, string(v.Status))
 	}
@@ -186,6 +196,13 @@ func (v *CreateScopeSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.CreateScopeSnapshotOutput_scopeName:
 			v.ScopeName = new(string)
 			return d.ReadString(schemas.CreateScopeSnapshotOutput_scopeName, v.ScopeName)
+		case schemas.CreateScopeSnapshotOutput_specializedScopeType:
+			var ev string
+			if err := d.ReadString(schemas.CreateScopeSnapshotOutput_specializedScopeType, &ev); err != nil {
+				return err
+			}
+			v.SpecializedScopeType = types.SpecializedScopeType(ev)
+			return nil
 		case schemas.CreateScopeSnapshotOutput_status:
 			var ev string
 			if err := d.ReadString(schemas.CreateScopeSnapshotOutput_status, &ev); err != nil {

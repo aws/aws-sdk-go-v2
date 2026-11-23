@@ -235,6 +235,18 @@ func TestCheckRequestSnapshot_CreateAutomationRule(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		Priority: ptr.String("__Priority__"),
 		RecommendedActionTypes: []types.RecommendedActionType{
@@ -443,6 +455,40 @@ func TestCheckRequestSnapshot_DeleteAutomationRule(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteOrganizationEnrollmentConfiguration(t *testing.T) {
+	input := &DeleteOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		ConfigurationTypes: []types.OrganizationEnrollmentConfigurationType{
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteOrganizationEnrollmentConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOrganizationEnrollmentConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DisassociateAccounts(t *testing.T) {
 	input := &DisassociateAccountsInput{
 		AccountIds: []string{
@@ -599,6 +645,10 @@ func TestCheckRequestSnapshot_ListAutomationEvents(t *testing.T) {
 				},
 			},
 		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		StartTimeInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		EndTimeExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		MaxResults:         ptr.Int32(1),
@@ -674,6 +724,10 @@ func TestCheckRequestSnapshot_ListAutomationEventSummaries(t *testing.T) {
 				},
 			},
 		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		StartDateInclusive: ptr.String("__StartDateInclusive__"),
 		EndDateExclusive:   ptr.String("__EndDateExclusive__"),
 		MaxResults:         ptr.Int32(1),
@@ -707,6 +761,18 @@ func TestCheckRequestSnapshot_ListAutomationRulePreview(t *testing.T) {
 		RuleType: types.RuleType("OrganizationRule"),
 		OrganizationScope: &types.OrganizationScope{
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -878,6 +944,18 @@ func TestCheckRequestSnapshot_ListAutomationRulePreviewSummaries(t *testing.T) {
 		RuleType: types.RuleType("OrganizationRule"),
 		OrganizationScope: &types.OrganizationScope{
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -1088,6 +1166,67 @@ func TestCheckRequestSnapshot_ListAutomationRules(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListOrganizationalUnits(t *testing.T) {
+	input := &ListOrganizationalUnitsInput{
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOrganizationalUnits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOrganizationalUnits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListOrganizationEnrollmentConfigurations(t *testing.T) {
+	input := &ListOrganizationEnrollmentConfigurationsInput{
+		TargetType: types.OrganizationTargetType("Account"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOrganizationEnrollmentConfigurations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOrganizationEnrollmentConfigurations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListRecommendedActions(t *testing.T) {
 	input := &ListRecommendedActionsInput{
 		Filters: []types.RecommendedActionFilter{
@@ -1105,6 +1244,10 @@ func TestCheckRequestSnapshot_ListRecommendedActions(t *testing.T) {
 					"__Member__",
 				},
 			},
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -1149,6 +1292,10 @@ func TestCheckRequestSnapshot_ListRecommendedActionSummaries(t *testing.T) {
 					"__Member__",
 				},
 			},
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -1199,6 +1346,37 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutOrganizationEnrollmentConfiguration(t *testing.T) {
+	input := &PutOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutOrganizationEnrollmentConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutOrganizationEnrollmentConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1341,6 +1519,18 @@ func TestCheckRequestSnapshot_UpdateAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -1582,6 +1772,18 @@ func TestUpdateRequestSnapshot_CreateAutomationRule(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		Priority: ptr.String("__Priority__"),
 		RecommendedActionTypes: []types.RecommendedActionType{
@@ -1790,6 +1992,40 @@ func TestUpdateRequestSnapshot_DeleteAutomationRule(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteOrganizationEnrollmentConfiguration(t *testing.T) {
+	input := &DeleteOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		ConfigurationTypes: []types.OrganizationEnrollmentConfigurationType{
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteOrganizationEnrollmentConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOrganizationEnrollmentConfiguration"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DisassociateAccounts(t *testing.T) {
 	input := &DisassociateAccountsInput{
 		AccountIds: []string{
@@ -1946,6 +2182,10 @@ func TestUpdateRequestSnapshot_ListAutomationEvents(t *testing.T) {
 				},
 			},
 		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		StartTimeInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		EndTimeExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		MaxResults:         ptr.Int32(1),
@@ -2021,6 +2261,10 @@ func TestUpdateRequestSnapshot_ListAutomationEventSummaries(t *testing.T) {
 				},
 			},
 		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		StartDateInclusive: ptr.String("__StartDateInclusive__"),
 		EndDateExclusive:   ptr.String("__EndDateExclusive__"),
 		MaxResults:         ptr.Int32(1),
@@ -2054,6 +2298,18 @@ func TestUpdateRequestSnapshot_ListAutomationRulePreview(t *testing.T) {
 		RuleType: types.RuleType("OrganizationRule"),
 		OrganizationScope: &types.OrganizationScope{
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -2225,6 +2481,18 @@ func TestUpdateRequestSnapshot_ListAutomationRulePreviewSummaries(t *testing.T) 
 		RuleType: types.RuleType("OrganizationRule"),
 		OrganizationScope: &types.OrganizationScope{
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -2435,6 +2703,67 @@ func TestUpdateRequestSnapshot_ListAutomationRules(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListOrganizationalUnits(t *testing.T) {
+	input := &ListOrganizationalUnitsInput{
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOrganizationalUnits(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOrganizationalUnits"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListOrganizationEnrollmentConfigurations(t *testing.T) {
+	input := &ListOrganizationEnrollmentConfigurationsInput{
+		TargetType: types.OrganizationTargetType("Account"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOrganizationEnrollmentConfigurations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOrganizationEnrollmentConfigurations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListRecommendedActions(t *testing.T) {
 	input := &ListRecommendedActionsInput{
 		Filters: []types.RecommendedActionFilter{
@@ -2452,6 +2781,10 @@ func TestUpdateRequestSnapshot_ListRecommendedActions(t *testing.T) {
 					"__Member__",
 				},
 			},
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -2496,6 +2829,10 @@ func TestUpdateRequestSnapshot_ListRecommendedActionSummaries(t *testing.T) {
 					"__Member__",
 				},
 			},
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -2546,6 +2883,37 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTagsForResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutOrganizationEnrollmentConfiguration(t *testing.T) {
+	input := &PutOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutOrganizationEnrollmentConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutOrganizationEnrollmentConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2688,6 +3056,18 @@ func TestUpdateRequestSnapshot_UpdateAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},

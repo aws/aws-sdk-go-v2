@@ -46,6 +46,34 @@ func serialize__listOf__stringMax256(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serialize__listOf__stringMin1Max256(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serialize__listOfAssessmentFinding(s smithy.ShapeSerializer, schema *smithy.Schema, v []AssessmentFinding) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serialize__listOfAssessmentInfo(s smithy.ShapeSerializer, schema *smithy.Schema, v []AssessmentInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serialize__listOfBrokerEBSVolumeInfo(s smithy.ShapeSerializer, schema *smithy.Schema, v []BrokerEBSVolumeInfo) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -296,6 +324,16 @@ func serialize__listOfTopicPartitionInfo(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serialize__listOfTopicReassignmentInfo(s smithy.ShapeSerializer, schema *smithy.Schema, v []TopicReassignmentInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serialize__listOfUnprocessedScramSecret(s smithy.ShapeSerializer, schema *smithy.Schema, v []UnprocessedScramSecret) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -423,6 +461,71 @@ func deserialize__listOf__stringMax256(d smithy.ShapeDeserializer, s *smithy.Sch
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserialize__listOf__stringMin1Max256(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserialize__listOfAssessmentFinding(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AssessmentFinding) error {
+	*v = make([]AssessmentFinding, 0)
+	var vv AssessmentFinding
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AssessmentFinding
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AssessmentFinding{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserialize__listOfAssessmentInfo(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AssessmentInfo) error {
+	*v = make([]AssessmentInfo, 0)
+	var vv AssessmentInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AssessmentInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AssessmentInfo{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -981,6 +1084,28 @@ func deserialize__listOfTopicPartitionInfo(d smithy.ShapeDeserializer, s *smithy
 	})
 }
 
+func deserialize__listOfTopicReassignmentInfo(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TopicReassignmentInfo) error {
+	*v = make([]TopicReassignmentInfo, 0)
+	var vv TopicReassignmentInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TopicReassignmentInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TopicReassignmentInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserialize__listOfUnprocessedScramSecret(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UnprocessedScramSecret) error {
 	*v = make([]UnprocessedScramSecret, 0)
 	var vv UnprocessedScramSecret
@@ -1047,6 +1172,15 @@ func deserialize__listOfVpcConnection(d smithy.ShapeDeserializer, s *smithy.Sche
 	})
 }
 
+func serialize__mapOf__integer(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]int32) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteInt32(schema.MapValue(), int32(vv))
+	}
+	s.CloseMap()
+}
+
 func serialize__mapOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1054,6 +1188,27 @@ func serialize__mapOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserialize__mapOf__integer(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]int32) error {
+	*v = make(map[string]int32)
+	var vv int32
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadInt32(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserialize__mapOf__string(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {

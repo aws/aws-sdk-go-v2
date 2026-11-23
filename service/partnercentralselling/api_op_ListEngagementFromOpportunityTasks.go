@@ -11,8 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Lists all in-progress, completed, or failed EngagementFromOpportunity tasks
-//
+// Lists all in-progress, completed, or failed EngagementFromOpportunity tasks
 // that were initiated by the caller's account.
 func (c *Client) ListEngagementFromOpportunityTasks(ctx context.Context, params *ListEngagementFromOpportunityTasksInput, optFns ...func(*Options)) (*ListEngagementFromOpportunityTasksOutput, error) {
 	if params == nil {
@@ -29,9 +28,11 @@ func (c *Client) ListEngagementFromOpportunityTasks(ctx context.Context, params 
 	return out, nil
 }
 
+// Contains the request parameters for the ListEngagementFromOpportunityTasks
+// operation.
 type ListEngagementFromOpportunityTasksInput struct {
 
-	//  Specifies the catalog related to the request. Valid values are:
+	// Specifies the catalog related to the request. Valid values are:
 	//
 	//   - AWS: Retrieves the request from the production AWS environment.
 	//
@@ -41,17 +42,17 @@ type ListEngagementFromOpportunityTasksInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  Filters tasks by the identifiers of the engagements they created or are
+	// Filters tasks by the identifiers of the engagements they created or are
 	// associated with.
 	EngagementIdentifier []string
 
-	//  Specifies the maximum number of results to return in a single page of the
+	// Specifies the maximum number of results to return in a single page of the
 	// response.Use this parameter to control the number of items returned in each
 	// request, which can be useful for performance tuning and managing large result
 	// sets.
 	MaxResults *int32
 
-	//  The token for requesting the next page of results. This value is obtained from
+	// The token for requesting the next page of results. This value is obtained from
 	// the NextToken field in the response of a previous call to this API. Use this
 	// parameter for pagination when the result set spans multiple pages.
 	NextToken *string
@@ -63,7 +64,7 @@ type ListEngagementFromOpportunityTasksInput struct {
 	// order the tasks based on specific attributes.
 	Sort *types.ListTasksSortBase
 
-	//  Filters tasks by their unique identifiers. Use this when you want to retrieve
+	// Filters tasks by their unique identifiers. Use this when you want to retrieve
 	// information about specific tasks.
 	TaskIdentifier []string
 
@@ -109,9 +110,11 @@ func (v *ListEngagementFromOpportunityTasksInput) SerializeMembers(s smithy.Shap
 	}
 }
 
+// Contains the response that the ListEngagementFromOpportunityTasks action
+// returns.
 type ListEngagementFromOpportunityTasksOutput struct {
 
-	//  A token used for pagination to retrieve the next page of results. If there are
+	// A token used for pagination to retrieve the next page of results. If there are
 	// more results available, this field will contain a token that can be used in a
 	// subsequent API call to retrieve the next page. If there are no more results,
 	// this field will be null or an empty string.
@@ -197,7 +200,7 @@ func (c *Client) addOperationListEngagementFromOpportunityTasksMiddlewares(stack
 // ListEngagementFromOpportunityTasksPaginatorOptions is the paginator options for
 // ListEngagementFromOpportunityTasks
 type ListEngagementFromOpportunityTasksPaginatorOptions struct {
-	//  Specifies the maximum number of results to return in a single page of the
+	// Specifies the maximum number of results to return in a single page of the
 	// response.Use this parameter to control the number of items returned in each
 	// request, which can be useful for performance tuning and managing large result
 	// sets.

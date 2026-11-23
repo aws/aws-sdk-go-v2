@@ -13,9 +13,10 @@ import (
 
 //	Initiates a rollback for a completed automation event.
 //
-// Management accounts and delegated administrators can only initiate a rollback
-// for events belonging to associated member accounts. You can associate a member
-// account using AssociateAccounts .
+// Management accounts and delegated administrators can initiate a rollback for
+// events belonging to member accounts that are associated using AssociateAccounts
+// or have an applicable organization enrollment configuration with
+// organizationRuleMode set to AnyAllowed .
 func (c *Client) RollbackAutomationEvent(ctx context.Context, params *RollbackAutomationEventInput, optFns ...func(*Options)) (*RollbackAutomationEventOutput, error) {
 	if params == nil {
 		params = &RollbackAutomationEventInput{}

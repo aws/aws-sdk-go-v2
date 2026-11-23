@@ -135,6 +135,37 @@ func TestCheckResponseSnapshot_AcceptChannelHandshake(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelChannelContract(t *testing.T) {
+	want := &CancelChannelContractOutput{
+		ChannelContractDetail: &types.CancelChannelContractDetail{
+			Id:                 ptr.String("__Id__"),
+			Arn:                ptr.String("__Arn__"),
+			Status:             types.ChannelContractStatus("PENDING"),
+			CancellationReason: ptr.String("__CancellationReason__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelChannelContract.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelChannelContract(context.Background(), &CancelChannelContractInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Reason:      ptr.String("__Reason__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelChannelContract.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CancelChannelHandshake(t *testing.T) {
 	want := &CancelChannelHandshakeOutput{
 		ChannelHandshakeDetail: &types.CancelChannelHandshakeDetail{
@@ -160,6 +191,70 @@ func TestCheckResponseSnapshot_CancelChannelHandshake(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CancelChannelHandshake.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateChannelContract(t *testing.T) {
+	want := &CreateChannelContractOutput{
+		ChannelContractDetail: &types.CreateChannelContractDetail{
+			Id:  ptr.String("__Id__"),
+			Arn: ptr.String("__Arn__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateChannelContract.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateChannelContract(context.Background(), &CreateChannelContractInput{
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Catalog:      ptr.String("__Catalog__"),
+		Payload: &types.ChannelContractPayloadMemberManagedServicesAttestationPayload{
+			Value: types.ManagedServicesAttestationPayload{
+				LegalEntityName:                    ptr.String("__LegalEntityName__"),
+				RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+				MemberAccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportedServices: []types.ManagedServicesSupportedService{
+					types.ManagedServicesSupportedService("MONITORING"),
+					types.ManagedServicesSupportedService("MONITORING"),
+				},
+				LegalEntityAddress: &types.Address{
+					City:          ptr.String("__City__"),
+					StateOrRegion: ptr.String("__StateOrRegion__"),
+					PostalCode:    ptr.String("__PostalCode__"),
+					CountryCode:   ptr.String("__CountryCode__"),
+					AddressLine:   ptr.String("__AddressLine__"),
+					AddressLine2:  ptr.String("__AddressLine2__"),
+				},
+				SignatoryName:  ptr.String("__SignatoryName__"),
+				SignatoryEmail: ptr.String("__SignatoryEmail__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateChannelContract.response", err)
 	}
 }
 
@@ -242,6 +337,7 @@ func TestCheckResponseSnapshot_CreateProgramManagementAccount(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Type: types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -292,6 +388,8 @@ func TestCheckResponseSnapshot_CreateRelationship(t *testing.T) {
 				ChargeAccountId: ptr.String("__ChargeAccountId__"),
 			},
 		},
+		AccountScope: types.AccountScope("ENTIRE_ORGANIZATION"),
+		StartDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -348,6 +446,66 @@ func TestCheckResponseSnapshot_DeleteRelationship(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetChannelContract(t *testing.T) {
+	want := &GetChannelContractOutput{
+		ChannelContractDetail: &types.ChannelContractDetail{
+			Id:                 ptr.String("__Id__"),
+			Arn:                ptr.String("__Arn__"),
+			Catalog:            ptr.String("__Catalog__"),
+			ContractType:       types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+			Status:             types.ChannelContractStatus("PENDING"),
+			CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RespondedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CancellationReason: ptr.String("__CancellationReason__"),
+			Details: &types.ChannelContractDetailsMemberManagedServicesAttestationDetails{
+				Value: types.ManagedServicesAttestationDetails{
+					LegalEntityName:                    ptr.String("__LegalEntityName__"),
+					RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+					ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+					MemberAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					SupportedServices: []types.ManagedServicesSupportedService{
+						types.ManagedServicesSupportedService("MONITORING"),
+						types.ManagedServicesSupportedService("MONITORING"),
+					},
+					SignatoryName:  ptr.String("__SignatoryName__"),
+					SignatoryEmail: ptr.String("__SignatoryEmail__"),
+					LegalEntityAddress: &types.Address{
+						City:          ptr.String("__City__"),
+						StateOrRegion: ptr.String("__StateOrRegion__"),
+						PostalCode:    ptr.String("__PostalCode__"),
+						CountryCode:   ptr.String("__CountryCode__"),
+						AddressLine:   ptr.String("__AddressLine__"),
+						AddressLine2:  ptr.String("__AddressLine2__"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetChannelContract.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetChannelContract(context.Background(), &GetChannelContractInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetChannelContract.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetRelationship(t *testing.T) {
 	want := &GetRelationshipOutput{
 		RelationshipDetail: &types.RelationshipDetail{
@@ -361,9 +519,12 @@ func TestCheckResponseSnapshot_GetRelationship(t *testing.T) {
 			DisplayName:                ptr.String("__DisplayName__"),
 			ResaleAccountModel:         types.ResaleAccountModel("DISTRIBUTOR"),
 			Sector:                     types.Sector("COMMERCIAL"),
+			AccountScope:               types.AccountScope("ENTIRE_ORGANIZATION"),
+			ChannelContractId:          ptr.String("__ChannelContractId__"),
 			CreatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRelationship.response")
@@ -384,6 +545,108 @@ func TestCheckResponseSnapshot_GetRelationship(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetRelationship.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListChannelContracts(t *testing.T) {
+	want := &ListChannelContractsOutput{
+		Items: []types.ChannelContractSummary{
+			{
+				Id:           ptr.String("__Id__"),
+				Arn:          ptr.String("__Arn__"),
+				Catalog:      ptr.String("__Catalog__"),
+				ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+				Status:       types.ChannelContractStatus("PENDING"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RespondedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Details: &types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails{
+					Value: types.ManagedServicesAttestationSummaryDetails{
+						LegalEntityName:                    ptr.String("__LegalEntityName__"),
+						RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+						ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+						MemberAccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SupportedServices: []types.ManagedServicesSupportedService{
+							types.ManagedServicesSupportedService("MONITORING"),
+							types.ManagedServicesSupportedService("MONITORING"),
+						},
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				Arn:          ptr.String("__Arn__"),
+				Catalog:      ptr.String("__Catalog__"),
+				ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+				Status:       types.ChannelContractStatus("PENDING"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RespondedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Details: &types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails{
+					Value: types.ManagedServicesAttestationSummaryDetails{
+						LegalEntityName:                    ptr.String("__LegalEntityName__"),
+						RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+						ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+						MemberAccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SupportedServices: []types.ManagedServicesSupportedService{
+							types.ManagedServicesSupportedService("MONITORING"),
+							types.ManagedServicesSupportedService("MONITORING"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListChannelContracts.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListChannelContracts(context.Background(), &ListChannelContractsInput{
+		Catalog:      ptr.String("__Catalog__"),
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Statuses: []types.ChannelContractStatus{
+			types.ChannelContractStatus("PENDING"),
+			types.ChannelContractStatus("PENDING"),
+		},
+		ContractTypeFilters: &types.ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters{
+			Value: types.ManagedServicesAttestationTypeFilters{
+				RelationshipIdentifiers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LegalEntityNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ContractTypeSort: &types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort{
+			Value: types.ManagedServicesAttestationTypeSort{
+				SortOrder: types.SortOrder("Ascending"),
+				SortBy:    types.ManagedServicesAttestationTypeSortName("UpdatedAt"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListChannelContracts.response", err)
 	}
 }
 
@@ -499,6 +762,7 @@ func TestCheckResponseSnapshot_ListProgramManagementAccounts(t *testing.T) {
 				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StartDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status:      types.ProgramManagementAccountStatus("PENDING"),
+				Type:        types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 			},
 			{
 				Id:          ptr.String("__Id__"),
@@ -512,6 +776,7 @@ func TestCheckResponseSnapshot_ListProgramManagementAccounts(t *testing.T) {
 				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StartDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status:      types.ProgramManagementAccountStatus("PENDING"),
+				Type:        types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -548,6 +813,7 @@ func TestCheckResponseSnapshot_ListProgramManagementAccounts(t *testing.T) {
 			SortBy:    types.ListProgramManagementAccountsSortName("UpdatedAt"),
 		},
 		NextToken: ptr.String("__NextToken__"),
+		Type:      types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -861,30 +1127,11 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{
-		HandshakeType:                types.HandshakeType("START_SERVICE_PERIOD"),
-		Catalog:                      ptr.String("__Catalog__"),
-		AssociatedResourceIdentifier: ptr.String("__AssociatedResourceIdentifier__"),
-		Payload: &types.ChannelHandshakePayloadMemberStartServicePeriodPayload{
-			Value: types.StartServicePeriodPayload{
-				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
-				Note:                               ptr.String("__Note__"),
-				ServicePeriodType:                  types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
-				MinimumNoticeDays:                  ptr.String("__MinimumNoticeDays__"),
-				EndDate:                            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			},
-		},
+	_, opErr := svc.CancelChannelContract(context.Background(), &CancelChannelContractInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Reason:      ptr.String("__Reason__"),
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -971,17 +1218,33 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannelHandshake(context.Background(), &CreateChannelHandshakeInput{
-		HandshakeType:                types.HandshakeType("START_SERVICE_PERIOD"),
-		Catalog:                      ptr.String("__Catalog__"),
-		AssociatedResourceIdentifier: ptr.String("__AssociatedResourceIdentifier__"),
-		Payload: &types.ChannelHandshakePayloadMemberStartServicePeriodPayload{
-			Value: types.StartServicePeriodPayload{
+	_, opErr := svc.CreateChannelContract(context.Background(), &CreateChannelContractInput{
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Catalog:      ptr.String("__Catalog__"),
+		Payload: &types.ChannelContractPayloadMemberManagedServicesAttestationPayload{
+			Value: types.ManagedServicesAttestationPayload{
+				LegalEntityName:                    ptr.String("__LegalEntityName__"),
+				RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
 				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
-				Note:                               ptr.String("__Note__"),
-				ServicePeriodType:                  types.ServicePeriodType("MINIMUM_NOTICE_PERIOD"),
-				MinimumNoticeDays:                  ptr.String("__MinimumNoticeDays__"),
-				EndDate:                            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				MemberAccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportedServices: []types.ManagedServicesSupportedService{
+					types.ManagedServicesSupportedService("MONITORING"),
+					types.ManagedServicesSupportedService("MONITORING"),
+				},
+				LegalEntityAddress: &types.Address{
+					City:          ptr.String("__City__"),
+					StateOrRegion: ptr.String("__StateOrRegion__"),
+					PostalCode:    ptr.String("__PostalCode__"),
+					CountryCode:   ptr.String("__CountryCode__"),
+					AddressLine:   ptr.String("__AddressLine__"),
+					AddressLine2:  ptr.String("__AddressLine2__"),
+				},
+				SignatoryName:  ptr.String("__SignatoryName__"),
+				SignatoryEmail: ptr.String("__SignatoryEmail__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),

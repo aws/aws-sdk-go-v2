@@ -218,6 +218,18 @@ func TestCheckSnapshot_DeleteTableReplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateTableReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateTableReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateTableReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNamespace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNamespace(context.Background(), nil, func(o *Options) {
@@ -894,6 +906,18 @@ func TestUpdateSnapshot_DeleteTableReplication(t *testing.T) {
 	_, err := svc.DeleteTableReplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTableReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateTableReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateTableReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateTableReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

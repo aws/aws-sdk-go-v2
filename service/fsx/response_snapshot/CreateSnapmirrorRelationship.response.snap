@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateSnapmirrorRelationship
+
+{"SnapmirrorRelationship":{"Destination":{"Path":"__Path__","VolumeId":"__VolumeId__"},"ExportedSnapshot":{"SnapshotId":"__SnapshotId__","SnapshotName":"__SnapshotName__"},"FileSystemId":"__FileSystemId__","Healthy":true,"LagTimeInMinutes":1,"Lifecycle":"CREATING","LifecycleTransitionReason":{"Message":"__Message__","OntapError":{"Code":"__Code__","Message":"__Message__"}},"ResourceARN":"__ResourceARN__","SnapmirrorPolicy":{"PolicyId":"__PolicyId__","PolicyName":"__PolicyName__"},"SnapmirrorRelationshipId":"__SnapmirrorRelationshipId__","Source":{"Path":"__Path__"},"State":"UNINITIALIZED","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ThrottleInKbps":1,"TransferSchedule":"__TransferSchedule__","TransferState":{"BytesTransferred":1,"Duration":"__Duration__","EndTime":946684800,"State":"__State__","Type":"__Type__"},"UUID":"__UUID__","UnhealthyReason":"__UnhealthyReason__"}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateStorageVirtualMachinePeer
+
+{"Applications":["SNAPMIRROR","SNAPMIRROR"],"ClientRequestToken":"__ClientRequestToken__","PeerSvmAlias":"__PeerSvmAlias__","State":"PEERED","StorageVirtualMachinePeerId":"__StorageVirtualMachinePeerId__"}

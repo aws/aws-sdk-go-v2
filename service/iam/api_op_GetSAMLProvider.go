@@ -68,11 +68,48 @@ type GetSAMLProviderOutput struct {
 	// Specifies the encryption setting for the SAML provider.
 	AssertionEncryptionMode types.AssertionEncryptionModeType
 
+	// The trusted identity propagation context provider configuration associated with
+	// the SAML provider. For more information, see [ContextProvider].
+	//
+	// This element is returned only when a trusted identity propagation context
+	// provider is configured for the SAML provider.
+	//
+	// [ContextProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+	ContextProvider *types.ContextProvider
+
 	// The date and time when the SAML provider was created.
 	CreateDate *time.Time
 
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance associated
+	// with the SAML provider.
+	//
+	// For the format, see [InstanceMetadata] in the IAM Identity Center API Reference.
+	//
+	// This element is returned only when an IAM Identity Center instance is
+	// associated with the SAML provider.
+	//
+	// [InstanceMetadata]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+	IdentityCenterInstanceArn *string
+
+	// The Amazon Resource Name (ARN) of the identity store that is resolved from the
+	// associated IAM Identity Center instance.
+	//
+	// For the format, see [InstanceMetadata] in the IAM Identity Center API Reference.
+	//
+	// This element is returned only when an IAM Identity Center instance is
+	// associated with the SAML provider.
+	//
+	// [InstanceMetadata]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+	IdentityStoreArn *string
+
 	// The private key metadata for the SAML provider.
 	PrivateKeyList []types.SAMLPrivateKey
+
+	// The key hashes associated with the SAML provider, grouped by identity provider
+	// issuer. For more information, see [SAMLKeyHashEntry].
+	//
+	// [SAMLKeyHashEntry]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_SAMLKeyHashEntry.html
+	SAMLKeyHashes []types.SAMLKeyHashEntry
 
 	// The XML metadata document that includes information about an identity provider.
 	SAMLMetadataDocument *string
@@ -106,11 +143,25 @@ func (v *GetSAMLProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssertionEncryptionMode != "" {
 		s.WriteString(schemas.GetSAMLProviderResponse_AssertionEncryptionMode, string(v.AssertionEncryptionMode))
 	}
+	if v.ContextProvider != nil {
+		s.WriteStruct(schemas.GetSAMLProviderResponse_ContextProvider)
+		v.ContextProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreateDate != nil {
 		s.WriteTime(schemas.GetSAMLProviderResponse_CreateDate, *v.CreateDate)
 	}
+	if v.IdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.GetSAMLProviderResponse_IdentityCenterInstanceArn, *v.IdentityCenterInstanceArn)
+	}
+	if v.IdentityStoreArn != nil {
+		s.WriteString(schemas.GetSAMLProviderResponse_IdentityStoreArn, *v.IdentityStoreArn)
+	}
 	if v.PrivateKeyList != nil {
 		serializeprivateKeyList(s, schemas.GetSAMLProviderResponse_PrivateKeyList, v.PrivateKeyList)
+	}
+	if v.SAMLKeyHashes != nil {
+		serializeSAMLKeyHashListType(s, schemas.GetSAMLProviderResponse_SAMLKeyHashes, v.SAMLKeyHashes)
 	}
 	if v.SAMLMetadataDocument != nil {
 		s.WriteString(schemas.GetSAMLProviderResponse_SAMLMetadataDocument, *v.SAMLMetadataDocument)
@@ -135,11 +186,22 @@ func (v *GetSAMLProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.AssertionEncryptionMode = types.AssertionEncryptionModeType(ev)
 			return nil
+		case schemas.GetSAMLProviderResponse_ContextProvider:
+			v.ContextProvider = &types.ContextProvider{}
+			return v.ContextProvider.Deserialize(d)
 		case schemas.GetSAMLProviderResponse_CreateDate:
 			v.CreateDate = new(time.Time)
 			return d.ReadTime(schemas.GetSAMLProviderResponse_CreateDate, v.CreateDate)
+		case schemas.GetSAMLProviderResponse_IdentityCenterInstanceArn:
+			v.IdentityCenterInstanceArn = new(string)
+			return d.ReadString(schemas.GetSAMLProviderResponse_IdentityCenterInstanceArn, v.IdentityCenterInstanceArn)
+		case schemas.GetSAMLProviderResponse_IdentityStoreArn:
+			v.IdentityStoreArn = new(string)
+			return d.ReadString(schemas.GetSAMLProviderResponse_IdentityStoreArn, v.IdentityStoreArn)
 		case schemas.GetSAMLProviderResponse_PrivateKeyList:
 			return deserializeprivateKeyList(d, schemas.GetSAMLProviderResponse_PrivateKeyList, &v.PrivateKeyList)
+		case schemas.GetSAMLProviderResponse_SAMLKeyHashes:
+			return deserializeSAMLKeyHashListType(d, schemas.GetSAMLProviderResponse_SAMLKeyHashes, &v.SAMLKeyHashes)
 		case schemas.GetSAMLProviderResponse_SAMLMetadataDocument:
 			v.SAMLMetadataDocument = new(string)
 			return d.ReadString(schemas.GetSAMLProviderResponse_SAMLMetadataDocument, v.SAMLMetadataDocument)

@@ -99,6 +99,13 @@ var DeleteTableReplication = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/table-replication",
 	Code: 204})
 
+var DisassociateTableReplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "DisassociateTableReplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/table-replication/disassociate",
+	Code: 200})
+
 var GetNamespace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "GetNamespace",
@@ -1732,6 +1739,17 @@ var DeleteTableReplicationRequest_tableArn *smithy.Schema
 
 var DeleteTableReplicationRequest_versionToken *smithy.Schema
 
+var DisassociateTableReplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "DisassociateTableReplicationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DisassociateTableReplicationRequest_tableArn *smithy.Schema
+
+var DisassociateTableReplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.s3tables",
+	Name:      "DisassociateTableReplicationResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var GetNamespaceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.s3tables",
 	Name:      "GetNamespaceRequest",
@@ -3110,6 +3128,8 @@ func init() {
 	DeleteTableReplicationRequest_tableArn = DeleteTableReplicationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
 
 	DeleteTableReplicationRequest_versionToken = DeleteTableReplicationRequest.AddMember("versionToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "versionToken"})
+
+	DisassociateTableReplicationRequest_tableArn = DisassociateTableReplicationRequest.AddMember("tableArn", _TableARN, &smithytraits.HTTPQuery{Name: "tableArn"})
 
 	GetNamespaceRequest_tableBucketARN = GetNamespaceRequest.AddMember("tableBucketARN", _TableBucketARN, &smithytraits.HTTPLabel{})
 

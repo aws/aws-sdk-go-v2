@@ -10,6 +10,105 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// An additional resource for a listing, with its type, display text, and URL.
+type AdditionalResource struct {
+
+	// The text to display for the resource.
+	//
+	// This member is required.
+	Text *string
+
+	// The type of the resource. Currently, the only value that the service returns is
+	// Link .
+	//
+	// This member is required.
+	Type *string
+
+	// The URL of the resource.
+	//
+	// This member is required.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AdditionalResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.AdditionalResource_Text, *v.Text)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.AdditionalResource_Type, *v.Type)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.AdditionalResource_Url, *v.Url)
+	}
+}
+func (v *AdditionalResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalResource_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.AdditionalResource_Text, v.Text)
+		case schemas.AdditionalResource_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AdditionalResource_Type, v.Type)
+		case schemas.AdditionalResource_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.AdditionalResource_Url, v.Url)
+		}
+		return nil
+	})
+}
+
+// A proposed set of additional resources for a listing.
+type AdditionalResourcesAlternative struct {
+
+	// Why this alternative is recommended.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The proposed additional resources.
+	//
+	// This member is required.
+	Value []AdditionalResource
+
+	noSmithyDocumentSerde
+}
+
+func (v *AdditionalResourcesAlternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalResourcesAlternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalResourcesAlternative) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rationale != nil {
+		s.WriteString(schemas.AdditionalResourcesAlternative_Rationale, *v.Rationale)
+	}
+	if v.Value != nil {
+		serializeAdditionalResourceList(s, schemas.AdditionalResourcesAlternative_Value, v.Value)
+	}
+}
+func (v *AdditionalResourcesAlternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalResourcesAlternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalResourcesAlternative_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.AdditionalResourcesAlternative_Rationale, v.Rationale)
+		case schemas.AdditionalResourcesAlternative_Value:
+			return deserializeAdditionalResourceList(d, schemas.AdditionalResourcesAlternative_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Object that allows filtering on entity id of an AMI product.
 type AmiProductEntityIdFilter struct {
 
@@ -522,6 +621,12 @@ type AssessmentTargetFilter struct {
 	// The unique ID of the entity whose assessments you want to list.
 	EntityId *string
 
+	// A list of up to 50 entity IDs whose assessments you want to list. The response
+	// includes only the latest published assessment of each entity. You must also
+	// specify FrameworkId in the request, and you can't combine EntityIds with
+	// EntityId or ChangeSetId .
+	EntityIds []string
+
 	noSmithyDocumentSerde
 }
 
@@ -538,6 +643,9 @@ func (v *AssessmentTargetFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntityId != nil {
 		s.WriteString(schemas.AssessmentTargetFilter_EntityId, *v.EntityId)
 	}
+	if v.EntityIds != nil {
+		serializeEntityIdList(s, schemas.AssessmentTargetFilter_EntityIds, v.EntityIds)
+	}
 }
 func (v *AssessmentTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssessmentTargetFilter, func(s *smithy.Schema) error {
@@ -548,6 +656,8 @@ func (v *AssessmentTargetFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AssessmentTargetFilter_EntityId:
 			v.EntityId = new(string)
 			return d.ReadString(schemas.AssessmentTargetFilter_EntityId, v.EntityId)
+		case schemas.AssessmentTargetFilter_EntityIds:
+			return deserializeEntityIdList(d, schemas.AssessmentTargetFilter_EntityIds, &v.EntityIds)
 		}
 		return nil
 	})
@@ -628,6 +738,49 @@ func (v *BatchDescribeErrorDetail) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.BatchDescribeErrorDetail_ErrorMessage:
 			v.ErrorMessage = new(string)
 			return d.ReadString(schemas.BatchDescribeErrorDetail_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
+// A proposed set of case studies for a solution.
+type CaseStudiesAlternative struct {
+
+	// Why this set of case studies fits the solution.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The proposed case studies.
+	//
+	// This member is required.
+	Value []ListingCaseStudy
+
+	noSmithyDocumentSerde
+}
+
+func (v *CaseStudiesAlternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CaseStudiesAlternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CaseStudiesAlternative) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rationale != nil {
+		s.WriteString(schemas.CaseStudiesAlternative_Rationale, *v.Rationale)
+	}
+	if v.Value != nil {
+		serializeCaseStudyList(s, schemas.CaseStudiesAlternative_Value, v.Value)
+	}
+}
+func (v *CaseStudiesAlternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CaseStudiesAlternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CaseStudiesAlternative_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.CaseStudiesAlternative_Rationale, v.Rationale)
+		case schemas.CaseStudiesAlternative_Value:
+			return deserializeCaseStudyList(d, schemas.CaseStudiesAlternative_Value, &v.Value)
 		}
 		return nil
 	})
@@ -1342,6 +1495,173 @@ func (v *ContainerSecuritySummary) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The proposed values for a listing field. Exactly one member is set, depending
+// on the field. The list in that member is empty if the status of the
+// recommendation is INSUFFICIENT_CONTEXT .
+//
+// The following types satisfy this interface:
+//
+//	ContentAlternativesMemberAdditionalResources
+//	ContentAlternativesMemberCaseStudies
+//	ContentAlternativesMemberText
+//	ContentAlternativesMemberTextList
+//	ContentAlternativesMemberUseCases
+type ContentAlternatives interface {
+	isContentAlternatives()
+}
+
+// The proposed values for AdditionalResources . You can have up to 3 alternatives.
+type ContentAlternativesMemberAdditionalResources struct {
+	Value []AdditionalResourcesAlternative
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentAlternativesMemberAdditionalResources) isContentAlternatives() {}
+func (v *ContentAlternativesMemberAdditionalResources) Serialize(s smithy.ShapeSerializer) {
+	serializeAdditionalResourcesAlternativeList(s, schemas.ContentAlternatives_AdditionalResources, v.Value)
+}
+func (v *ContentAlternativesMemberAdditionalResources) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAdditionalResourcesAlternativeList(d, schemas.ContentAlternatives_AdditionalResources, &v.Value)
+}
+
+// The proposed values for CaseStudies . You can have up to 3 alternatives.
+type ContentAlternativesMemberCaseStudies struct {
+	Value []CaseStudiesAlternative
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentAlternativesMemberCaseStudies) isContentAlternatives() {}
+func (v *ContentAlternativesMemberCaseStudies) Serialize(s smithy.ShapeSerializer) {
+	serializeCaseStudiesAlternativeList(s, schemas.ContentAlternatives_CaseStudies, v.Value)
+}
+func (v *ContentAlternativesMemberCaseStudies) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeCaseStudiesAlternativeList(d, schemas.ContentAlternatives_CaseStudies, &v.Value)
+}
+
+// The proposed values for a text field, such as ProductTitle or LongDescription .
+// You can have up to 3 alternatives.
+type ContentAlternativesMemberText struct {
+	Value []TextAlternative
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentAlternativesMemberText) isContentAlternatives() {}
+func (v *ContentAlternativesMemberText) Serialize(s smithy.ShapeSerializer) {
+	serializeTextAlternativeList(s, schemas.ContentAlternatives_Text, v.Value)
+}
+func (v *ContentAlternativesMemberText) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeTextAlternativeList(d, schemas.ContentAlternatives_Text, &v.Value)
+}
+
+// The proposed values for Highlights , SearchKeywords , or Categories . You can
+// have up to 3 alternatives.
+type ContentAlternativesMemberTextList struct {
+	Value []TextListAlternative
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentAlternativesMemberTextList) isContentAlternatives() {}
+func (v *ContentAlternativesMemberTextList) Serialize(s smithy.ShapeSerializer) {
+	serializeTextListAlternativeList(s, schemas.ContentAlternatives_TextList, v.Value)
+}
+func (v *ContentAlternativesMemberTextList) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeTextListAlternativeList(d, schemas.ContentAlternatives_TextList, &v.Value)
+}
+
+// The proposed values for UseCases . You can have up to 3 alternatives.
+type ContentAlternativesMemberUseCases struct {
+	Value []UseCasesAlternative
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentAlternativesMemberUseCases) isContentAlternatives() {}
+func (v *ContentAlternativesMemberUseCases) Serialize(s smithy.ShapeSerializer) {
+	serializeUseCasesAlternativeList(s, schemas.ContentAlternatives_UseCases, v.Value)
+}
+func (v *ContentAlternativesMemberUseCases) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeUseCasesAlternativeList(d, schemas.ContentAlternatives_UseCases, &v.Value)
+}
+
+// A recommendation for a listing field.
+type ContentRecommendation struct {
+
+	// The proposed values for the field, in ranked order.
+	//
+	// This member is required.
+	Alternatives ContentAlternatives
+
+	// The checklist of criteria for the field, in ranked order. It includes the
+	// criteria that the field passes and the criteria that it fails. The list is empty
+	// if there are none.
+	//
+	// This member is required.
+	Findings []ListingFinding
+
+	// Questions that you can answer to get a better recommendation. The list is empty
+	// if there are none.
+	//
+	// This member is required.
+	FollowUpQuestions []FollowUpQuestion
+
+	// The status of the recommendation. Valid values are:
+	//
+	//   - GENERATED - The service proposed values for the field.
+	//
+	//   - INSUFFICIENT_CONTEXT - The service couldn't propose a value. The follow-up
+	//   questions say what is missing.
+	//
+	// This member is required.
+	Status ContentRecommendationStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContentRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alternatives != nil {
+		serializeContentAlternatives(s, schemas.ContentRecommendation_Alternatives, v.Alternatives)
+	}
+	if v.Findings != nil {
+		serializeFindingList(s, schemas.ContentRecommendation_Findings, v.Findings)
+	}
+	if v.FollowUpQuestions != nil {
+		serializeFollowUpQuestionList(s, schemas.ContentRecommendation_FollowUpQuestions, v.FollowUpQuestions)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ContentRecommendation_Status, string(v.Status))
+	}
+}
+func (v *ContentRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentRecommendation_Alternatives:
+			return deserializeContentAlternatives(d, schemas.ContentRecommendation_Alternatives, &v.Alternatives)
+		case schemas.ContentRecommendation_Findings:
+			return deserializeFindingList(d, schemas.ContentRecommendation_Findings, &v.Findings)
+		case schemas.ContentRecommendation_FollowUpQuestions:
+			return deserializeFollowUpQuestionList(d, schemas.ContentRecommendation_FollowUpQuestions, &v.FollowUpQuestions)
+		case schemas.ContentRecommendation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ContentRecommendation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ContentRecommendationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The result of evaluating a single control as part of an assessment.
 type ControlAssessment struct {
 
@@ -1351,8 +1671,20 @@ type ControlAssessment struct {
 	// The unique ID of the control that was evaluated.
 	ControlId *string
 
+	// A summary of what the control produced, such as recommendations for the listing.
+	ControlSummary ControlSummary
+
 	// An array of ControlError objects associated with the control evaluation.
 	Errors []ControlError
+
+	// Where the result of the control came from. This value doesn't say whether the
+	// control passed. A control that you attested to can still have a result of PASS .
+	// Valid values are:
+	//
+	//   - AWS_VERIFIED - AWS evaluated the control.
+	//
+	//   - SELF_ATTESTED - You attested to the result of the control.
+	VerificationSource VerificationSource
 
 	noSmithyDocumentSerde
 }
@@ -1370,8 +1702,14 @@ func (v *ControlAssessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlId != nil {
 		s.WriteString(schemas.ControlAssessment_ControlId, *v.ControlId)
 	}
+	if v.ControlSummary != nil {
+		serializeControlSummary(s, schemas.ControlAssessment_ControlSummary, v.ControlSummary)
+	}
 	if v.Errors != nil {
 		serializeControlErrorList(s, schemas.ControlAssessment_Errors, v.Errors)
+	}
+	if v.VerificationSource != "" {
+		s.WriteString(schemas.ControlAssessment_VerificationSource, string(v.VerificationSource))
 	}
 }
 func (v *ControlAssessment) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1387,8 +1725,17 @@ func (v *ControlAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ControlAssessment_ControlId:
 			v.ControlId = new(string)
 			return d.ReadString(schemas.ControlAssessment_ControlId, v.ControlId)
+		case schemas.ControlAssessment_ControlSummary:
+			return deserializeControlSummary(d, schemas.ControlAssessment_ControlSummary, &v.ControlSummary)
 		case schemas.ControlAssessment_Errors:
 			return deserializeControlErrorList(d, schemas.ControlAssessment_Errors, &v.Errors)
+		case schemas.ControlAssessment_VerificationSource:
+			var ev string
+			if err := d.ReadString(schemas.ControlAssessment_VerificationSource, &ev); err != nil {
+				return err
+			}
+			v.VerificationSource = VerificationSource(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1441,6 +1788,81 @@ func (v *ControlError) Deserialize(d smithy.ShapeDeserializer) error {
 		}
 		return nil
 	})
+}
+
+// A control to run as part of an assessment, and the input to run it with.
+type ControlInput struct {
+
+	// The unique identifier of the control to run.
+	//
+	// This member is required.
+	ControlId *string
+
+	// Optional. The input for the control, as a JSON document. The fields that a
+	// control accepts depend on the control.
+	Input document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (v *ControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlId != nil {
+		s.WriteString(schemas.ControlInput_ControlId, *v.ControlId)
+	}
+	if v.Input != nil {
+		s.WriteDocument(schemas.ControlInput_Input, &smithydocument.Opaque{Value: v.Input})
+	}
+}
+func (v *ControlInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlInput_ControlId:
+			v.ControlId = new(string)
+			return d.ReadString(schemas.ControlInput_ControlId, v.ControlId)
+		case schemas.ControlInput_Input:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ControlInput_Input, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Input = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of what a control produced. Exactly one member is set, corresponding
+// to the kind of control.
+//
+// The following types satisfy this interface:
+//
+//	ControlSummaryMemberListingRecommendations
+type ControlSummary interface {
+	isControlSummary()
+}
+
+// The recommendations that a listing recommendations control produced for the
+// listing.
+type ControlSummaryMemberListingRecommendations struct {
+	Value ListingRecommendations
+
+	noSmithyDocumentSerde
+}
+
+func (*ControlSummaryMemberListingRecommendations) isControlSummary() {}
+func (v *ControlSummaryMemberListingRecommendations) Serialize(s smithy.ShapeSerializer) {
+	serializeListingRecommendations(s, schemas.ControlSummary_ListingRecommendations, v.Value)
+}
+func (v *ControlSummaryMemberListingRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeListingRecommendations(d, schemas.ControlSummary_ListingRecommendations, &v.Value)
 }
 
 // Object that allows filtering on entity id of a data product.
@@ -2844,6 +3266,134 @@ func (v *ExpressPrivateOfferConfigurationSummary) Deserialize(d smithy.ShapeDese
 	})
 }
 
+// A recommended AWS Marketplace feature for a listing.
+type FeatureRecommendation struct {
+
+	// What you should do. It might contain a link to the console.
+	//
+	// This member is required.
+	Action *string
+
+	// The feature that is recommended. Valid values are REQUEST_PRIVATE_OFFER ,
+	// REQUEST_A_DEMO , PROMOTIONAL_MEDIA , FREE_TRIAL , and QUICK_LAUNCH .
+	//
+	// This member is required.
+	FeatureId RecommendedFeatureId
+
+	// Why the feature is recommended.
+	//
+	// This member is required.
+	Rationale *string
+
+	// How much the recommendation blocks the listing. Valid values are BLOCKING and
+	// ADVISORY .
+	//
+	// This member is required.
+	Severity RecommendationSeverity
+
+	// Whether the listing has the feature. Valid values are:
+	//
+	//   - PASS - The listing already has the feature.
+	//
+	//   - FAIL - The feature is one to turn on.
+	//
+	// This member is required.
+	Status RecommendedFeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *FeatureRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.FeatureRecommendation_Action, *v.Action)
+	}
+	if v.FeatureId != "" {
+		s.WriteString(schemas.FeatureRecommendation_FeatureId, string(v.FeatureId))
+	}
+	if v.Rationale != nil {
+		s.WriteString(schemas.FeatureRecommendation_Rationale, *v.Rationale)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.FeatureRecommendation_Severity, string(v.Severity))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FeatureRecommendation_Status, string(v.Status))
+	}
+}
+func (v *FeatureRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureRecommendation_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.FeatureRecommendation_Action, v.Action)
+		case schemas.FeatureRecommendation_FeatureId:
+			var ev string
+			if err := d.ReadString(schemas.FeatureRecommendation_FeatureId, &ev); err != nil {
+				return err
+			}
+			v.FeatureId = RecommendedFeatureId(ev)
+			return nil
+		case schemas.FeatureRecommendation_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.FeatureRecommendation_Rationale, v.Rationale)
+		case schemas.FeatureRecommendation_Severity:
+			var ev string
+			if err := d.ReadString(schemas.FeatureRecommendation_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = RecommendationSeverity(ev)
+			return nil
+		case schemas.FeatureRecommendation_Status:
+			var ev string
+			if err := d.ReadString(schemas.FeatureRecommendation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecommendedFeatureStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The feature recommendations for a listing, for a product or a solution.
+type FeatureRecommendations struct {
+
+	// The recommended features, in ranked order. The list has at most one entry for
+	// each feature and up to 5 entries.
+	//
+	// This member is required.
+	Recommendations []FeatureRecommendation
+
+	noSmithyDocumentSerde
+}
+
+func (v *FeatureRecommendations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureRecommendations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureRecommendations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Recommendations != nil {
+		serializeFeatureRecommendationList(s, schemas.FeatureRecommendations_Recommendations, v.Recommendations)
+	}
+}
+func (v *FeatureRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureRecommendations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureRecommendations_Recommendations:
+			return deserializeFeatureRecommendationList(d, schemas.FeatureRecommendations_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
+
 // A filter object, used to optionally filter results from calls to the
 // ListEntities and ListChangeSets actions.
 type Filter struct {
@@ -2909,6 +3459,51 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A question that you can answer to get a better recommendation, and the reason
+// that it's asked.
+type FollowUpQuestion struct {
+
+	// Why the question is asked.
+	//
+	// This member is required.
+	Justification *string
+
+	// The question to answer.
+	//
+	// This member is required.
+	Question *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FollowUpQuestion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FollowUpQuestion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FollowUpQuestion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Justification != nil {
+		s.WriteString(schemas.FollowUpQuestion_Justification, *v.Justification)
+	}
+	if v.Question != nil {
+		s.WriteString(schemas.FollowUpQuestion_Question, *v.Question)
+	}
+}
+func (v *FollowUpQuestion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FollowUpQuestion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FollowUpQuestion_Justification:
+			v.Justification = new(string)
+			return d.ReadString(schemas.FollowUpQuestion_Justification, v.Justification)
+		case schemas.FollowUpQuestion_Question:
+			v.Question = new(string)
+			return d.ReadString(schemas.FollowUpQuestion_Question, v.Question)
+		}
+		return nil
+	})
+}
+
 // Framework-specific filters used to scope ListAssessments results. Set exactly
 // one member, corresponding to the framework you want to filter by.
 //
@@ -2962,6 +3557,8 @@ func (v *FrameworkFiltersMemberContainerSecurityFilters) Deserialize(d smithy.Sh
 //
 //	FrameworkSummaryMemberAMISecuritySummary
 //	FrameworkSummaryMemberContainerSecuritySummary
+//	FrameworkSummaryMemberListingQualitySummary
+//	FrameworkSummaryMemberListingRecommendationsSummary
 type FrameworkSummary interface {
 	isFrameworkSummary()
 }
@@ -2998,6 +3595,444 @@ func (v *FrameworkSummaryMemberContainerSecuritySummary) Serialize(s smithy.Shap
 }
 func (v *FrameworkSummaryMemberContainerSecuritySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// The details of the resource assessed under the Listing Quality framework.
+type FrameworkSummaryMemberListingQualitySummary struct {
+	Value ListingQualitySummary
+
+	noSmithyDocumentSerde
+}
+
+func (*FrameworkSummaryMemberListingQualitySummary) isFrameworkSummary() {}
+func (v *FrameworkSummaryMemberListingQualitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkSummary_ListingQualitySummary)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FrameworkSummaryMemberListingQualitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The details of the resource assessed under the Listing Recommendations
+// framework.
+type FrameworkSummaryMemberListingRecommendationsSummary struct {
+	Value ListingRecommendationsSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*FrameworkSummaryMemberListingRecommendationsSummary) isFrameworkSummary() {}
+func (v *FrameworkSummaryMemberListingRecommendationsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameworkSummary_ListingRecommendationsSummary)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FrameworkSummaryMemberListingRecommendationsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A recommended case study.
+type ListingCaseStudy struct {
+
+	// The ID of the case study entity. Identify a case study by this ID and not by
+	// Title , which you can edit.
+	//
+	// This member is required.
+	Id *string
+
+	// Why this case study was selected.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The title of the case study.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListingCaseStudy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingCaseStudy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingCaseStudy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListingCaseStudy_Id, *v.Id)
+	}
+	if v.Rationale != nil {
+		s.WriteString(schemas.ListingCaseStudy_Rationale, *v.Rationale)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ListingCaseStudy_Title, *v.Title)
+	}
+}
+func (v *ListingCaseStudy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingCaseStudy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingCaseStudy_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListingCaseStudy_Id, v.Id)
+		case schemas.ListingCaseStudy_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.ListingCaseStudy_Rationale, v.Rationale)
+		case schemas.ListingCaseStudy_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ListingCaseStudy_Title, v.Title)
+		}
+		return nil
+	})
+}
+
+// One row of the checklist of criteria for a listing field. A row is either a
+// criterion that the field already meets or advice for a criterion that it
+// doesn't.
+type ListingFinding struct {
+
+	// What you should do to meet the criterion.
+	//
+	// This member is required.
+	Action *string
+
+	// What the criterion asks for. The text is the same for every listing. The
+	// reasoning for a specific listing is in the rationale of the alternatives.
+	//
+	// This member is required.
+	Description *string
+
+	// How much the criterion blocks the listing. It is set on every row. For a row
+	// with a status of PASS , it is the weight of a criterion that is already met.
+	// Valid values are BLOCKING and ADVISORY .
+	//
+	// This member is required.
+	Severity RecommendationSeverity
+
+	// The result for the criterion. Valid values are:
+	//
+	//   - PASS - The criterion is met and no action is needed.
+	//
+	//   - FAIL - The criterion isn't met or wasn't scored.
+	//
+	// This value is different from the status of the content recommendation.
+	//
+	// This member is required.
+	Status ListingFindingStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListingFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.ListingFinding_Action, *v.Action)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListingFinding_Description, *v.Description)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.ListingFinding_Severity, string(v.Severity))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListingFinding_Status, string(v.Status))
+	}
+}
+func (v *ListingFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingFinding_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.ListingFinding_Action, v.Action)
+		case schemas.ListingFinding_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListingFinding_Description, v.Description)
+		case schemas.ListingFinding_Severity:
+			var ev string
+			if err := d.ReadString(schemas.ListingFinding_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = RecommendationSeverity(ev)
+			return nil
+		case schemas.ListingFinding_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListingFinding_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ListingFindingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The details of the resource assessed under the Listing Quality framework.
+type ListingQualitySummary struct {
+
+	// The quality tier of the listing. Valid values are NEEDS_IMPROVEMENT , BASIC ,
+	// STRONG , and EXCELLENT .
+	//
+	// This member is required.
+	Tier ListingQualityTier
+
+	// The revision of the entity that the tier was evaluated against. To check
+	// whether the tier is out of date, compare this value with the current revision of
+	// the entity.
+	EntityRevision *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListingQualitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingQualitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingQualitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRevision != nil {
+		s.WriteString(schemas.ListingQualitySummary_EntityRevision, *v.EntityRevision)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.ListingQualitySummary_Tier, string(v.Tier))
+	}
+}
+func (v *ListingQualitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingQualitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingQualitySummary_EntityRevision:
+			v.EntityRevision = new(string)
+			return d.ReadString(schemas.ListingQualitySummary_EntityRevision, v.EntityRevision)
+		case schemas.ListingQualitySummary_Tier:
+			var ev string
+			if err := d.ReadString(schemas.ListingQualitySummary_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = ListingQualityTier(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The recommendations that a listing recommendations control produced. Exactly
+// one member is set, corresponding to the control: content recommendations for a
+// product, content recommendations for a solution, or feature recommendations.
+//
+// The following types satisfy this interface:
+//
+//	ListingRecommendationsMemberFeatureRecommendations
+//	ListingRecommendationsMemberProductContentRecommendations
+//	ListingRecommendationsMemberSolutionContentRecommendations
+type ListingRecommendations interface {
+	isListingRecommendations()
+}
+
+// The recommendations for AWS Marketplace features to use with the listing, for a
+// product or a solution.
+type ListingRecommendationsMemberFeatureRecommendations struct {
+	Value FeatureRecommendations
+
+	noSmithyDocumentSerde
+}
+
+func (*ListingRecommendationsMemberFeatureRecommendations) isListingRecommendations() {}
+func (v *ListingRecommendationsMemberFeatureRecommendations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingRecommendations_FeatureRecommendations)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListingRecommendationsMemberFeatureRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The content recommendations for a product listing.
+type ListingRecommendationsMemberProductContentRecommendations struct {
+	Value ProductContentRecommendations
+
+	noSmithyDocumentSerde
+}
+
+func (*ListingRecommendationsMemberProductContentRecommendations) isListingRecommendations() {}
+func (v *ListingRecommendationsMemberProductContentRecommendations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingRecommendations_ProductContentRecommendations)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListingRecommendationsMemberProductContentRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The content recommendations for a solution listing.
+type ListingRecommendationsMemberSolutionContentRecommendations struct {
+	Value SolutionContentRecommendations
+
+	noSmithyDocumentSerde
+}
+
+func (*ListingRecommendationsMemberSolutionContentRecommendations) isListingRecommendations() {}
+func (v *ListingRecommendationsMemberSolutionContentRecommendations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingRecommendations_SolutionContentRecommendations)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListingRecommendationsMemberSolutionContentRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The details of the resource assessed under the Listing Recommendations
+// framework.
+type ListingRecommendationsSummary struct {
+
+	// The quality tier of the listing. Valid values are NEEDS_IMPROVEMENT , BASIC ,
+	// STRONG , and EXCELLENT .
+	//
+	// This member is required.
+	Tier ListingQualityTier
+
+	// The revision of the entity that the recommendations were generated against. To
+	// check whether the recommendations are out of date, compare this value with the
+	// current revision of the entity.
+	EntityRevision *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListingRecommendationsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingRecommendationsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingRecommendationsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRevision != nil {
+		s.WriteString(schemas.ListingRecommendationsSummary_EntityRevision, *v.EntityRevision)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.ListingRecommendationsSummary_Tier, string(v.Tier))
+	}
+}
+func (v *ListingRecommendationsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingRecommendationsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingRecommendationsSummary_EntityRevision:
+			v.EntityRevision = new(string)
+			return d.ReadString(schemas.ListingRecommendationsSummary_EntityRevision, v.EntityRevision)
+		case schemas.ListingRecommendationsSummary_Tier:
+			var ev string
+			if err := d.ReadString(schemas.ListingRecommendationsSummary_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = ListingQualityTier(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A use case from the AWS Marketplace use case taxonomy.
+type ListingUseCase struct {
+
+	// The group of the use case in the taxonomy.
+	//
+	// This member is required.
+	Group *string
+
+	// The unique identifier of the use case.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the use case.
+	//
+	// This member is required.
+	Name *string
+
+	// The rank of the use case. A rank of 1 is the strongest match. Valid values
+	// range from 1 to 5.
+	//
+	// This member is required.
+	Rank *int32
+
+	// Why this use case is recommended.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The subgroup of the use case in the taxonomy.
+	//
+	// This member is required.
+	Subgroup *string
+
+	// How the solution serves the use case.
+	UseCaseDetails *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListingUseCase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingUseCase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingUseCase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.ListingUseCase_Group, *v.Group)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListingUseCase_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListingUseCase_Name, *v.Name)
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.ListingUseCase_Rank, *v.Rank)
+	}
+	if v.Rationale != nil {
+		s.WriteString(schemas.ListingUseCase_Rationale, *v.Rationale)
+	}
+	if v.Subgroup != nil {
+		s.WriteString(schemas.ListingUseCase_Subgroup, *v.Subgroup)
+	}
+	if v.UseCaseDetails != nil {
+		s.WriteString(schemas.ListingUseCase_UseCaseDetails, *v.UseCaseDetails)
+	}
+}
+func (v *ListingUseCase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingUseCase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingUseCase_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.ListingUseCase_Group, v.Group)
+		case schemas.ListingUseCase_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListingUseCase_Id, v.Id)
+		case schemas.ListingUseCase_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListingUseCase_Name, v.Name)
+		case schemas.ListingUseCase_Rank:
+			v.Rank = new(int32)
+			return d.ReadInt32(schemas.ListingUseCase_Rank, v.Rank)
+		case schemas.ListingUseCase_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.ListingUseCase_Rationale, v.Rationale)
+		case schemas.ListingUseCase_Subgroup:
+			v.Subgroup = new(string)
+			return d.ReadString(schemas.ListingUseCase_Subgroup, v.Subgroup)
+		case schemas.ListingUseCase_UseCaseDetails:
+			v.UseCaseDetails = new(string)
+			return d.ReadString(schemas.ListingUseCase_UseCaseDetails, v.UseCaseDetails)
+		}
+		return nil
+	})
 }
 
 // The filter for machine learning product entity IDs.
@@ -3548,6 +4583,12 @@ type OfferFilters struct {
 	// Allows filtering on the State of an offer.
 	State *OfferStateFilter
 
+	// A filter that matches offers by the ID of the subsidiary authorization that
+	// they were created from.
+	//
+	// Not all offers have a SubsidiaryAuthorizationId .
+	SubsidiaryAuthorizationId *OfferSubsidiaryAuthorizationIdFilter
+
 	// Allows filtering on the TargetAgreementId of an offer.
 	TargetAgreementId *OfferTargetAgreementIdFilter
 
@@ -3622,6 +4663,11 @@ func (v *OfferFilters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.State.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SubsidiaryAuthorizationId != nil {
+		s.WriteStruct(schemas.OfferFilters_SubsidiaryAuthorizationId)
+		v.SubsidiaryAuthorizationId.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.TargetAgreementId != nil {
 		s.WriteStruct(schemas.OfferFilters_TargetAgreementId)
 		v.TargetAgreementId.SerializeMembers(s)
@@ -3674,6 +4720,9 @@ func (v *OfferFilters) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.OfferFilters_State:
 			v.State = &OfferStateFilter{}
 			return v.State.Deserialize(d)
+		case schemas.OfferFilters_SubsidiaryAuthorizationId:
+			v.SubsidiaryAuthorizationId = &OfferSubsidiaryAuthorizationIdFilter{}
+			return v.SubsidiaryAuthorizationId.Deserialize(d)
 		case schemas.OfferFilters_TargetAgreementId:
 			v.TargetAgreementId = &OfferTargetAgreementIdFilter{}
 			return v.TargetAgreementId.Deserialize(d)
@@ -4560,6 +5609,40 @@ func (v *OfferStateFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A filter that matches offers by the ID of the subsidiary authorization they
+// were created from.
+//
+// Not all offers have a SubsidiaryAuthorizationId .
+type OfferSubsidiaryAuthorizationIdFilter struct {
+
+	// A list of subsidiary authorization IDs to filter offers by. You can include up
+	// to 10 subsidiary authorization IDs in this list.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OfferSubsidiaryAuthorizationIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSubsidiaryAuthorizationIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSubsidiaryAuthorizationIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ValueList != nil {
+		serializeOfferSubsidiaryAuthorizationIdFilterValueList(s, schemas.OfferSubsidiaryAuthorizationIdFilter_ValueList, v.ValueList)
+	}
+}
+func (v *OfferSubsidiaryAuthorizationIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSubsidiaryAuthorizationIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSubsidiaryAuthorizationIdFilter_ValueList:
+			return deserializeOfferSubsidiaryAuthorizationIdFilterValueList(d, schemas.OfferSubsidiaryAuthorizationIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
 // Summarized information about an offer.
 type OfferSummary struct {
 
@@ -4589,6 +5672,10 @@ type OfferSummary struct {
 
 	// The status of the offer.
 	State OfferStateString
+
+	// The ID of the subsidiary authorization that the offer was created from. The ID
+	// begins with subauthz- followed by 13 alphanumeric characters.
+	SubsidiaryAuthorizationId *string
 
 	// The target agreement ID of the offer.
 	TargetAgreementId *string
@@ -4635,6 +5722,9 @@ func (v *OfferSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.State != "" {
 		s.WriteString(schemas.OfferSummary_State, string(v.State))
+	}
+	if v.SubsidiaryAuthorizationId != nil {
+		s.WriteString(schemas.OfferSummary_SubsidiaryAuthorizationId, *v.SubsidiaryAuthorizationId)
 	}
 	if v.TargetAgreementId != nil {
 		s.WriteString(schemas.OfferSummary_TargetAgreementId, *v.TargetAgreementId)
@@ -4683,6 +5773,9 @@ func (v *OfferSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.State = OfferStateString(ev)
 			return nil
+		case schemas.OfferSummary_SubsidiaryAuthorizationId:
+			v.SubsidiaryAuthorizationId = new(string)
+			return d.ReadString(schemas.OfferSummary_SubsidiaryAuthorizationId, v.SubsidiaryAuthorizationId)
 		case schemas.OfferSummary_TargetAgreementId:
 			v.TargetAgreementId = new(string)
 			return d.ReadString(schemas.OfferSummary_TargetAgreementId, v.TargetAgreementId)
@@ -4785,6 +5878,162 @@ func (v *OfferTargetingFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.OfferTargetingFilter_ValueList:
 			return deserializeOfferTargetingFilterValueList(d, schemas.OfferTargetingFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
+// The content recommendations for a product listing, with one member for each
+// listing field. A member is absent if nothing is recommended for that field.
+type ProductContentRecommendations struct {
+
+	// The sources that the recommendations are based on. You can have up to 5
+	// sources. The list is empty if there are none.
+	//
+	// This member is required.
+	Citations []RecommendationCitation
+
+	// The recommendation for the additional resources. Each alternative has up to 3
+	// resources.
+	AdditionalResources *ContentRecommendation
+
+	// The recommendation for the categories.
+	Categories *ContentRecommendation
+
+	// The recommendation for the highlights.
+	Highlights *ContentRecommendation
+
+	// The recommendation for the long description.
+	LongDescription *ContentRecommendation
+
+	// The recommendation for the product title.
+	ProductTitle *ContentRecommendation
+
+	// The recommendation for the search keywords.
+	SearchKeywords *ContentRecommendation
+
+	// The recommendation for the short description.
+	ShortDescription *ContentRecommendation
+
+	// The recommendation for the support description.
+	SupportDescription *ContentRecommendation
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProductContentRecommendations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductContentRecommendations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductContentRecommendations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalResources != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_AdditionalResources)
+		v.AdditionalResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Categories != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_Categories)
+		v.Categories.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Citations != nil {
+		serializeCitationList(s, schemas.ProductContentRecommendations_Citations, v.Citations)
+	}
+	if v.Highlights != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_Highlights)
+		v.Highlights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LongDescription != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_LongDescription)
+		v.LongDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductTitle != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_ProductTitle)
+		v.ProductTitle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchKeywords != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_SearchKeywords)
+		v.SearchKeywords.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShortDescription != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_ShortDescription)
+		v.ShortDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupportDescription != nil {
+		s.WriteStruct(schemas.ProductContentRecommendations_SupportDescription)
+		v.SupportDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProductContentRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductContentRecommendations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductContentRecommendations_AdditionalResources:
+			v.AdditionalResources = &ContentRecommendation{}
+			return v.AdditionalResources.Deserialize(d)
+		case schemas.ProductContentRecommendations_Categories:
+			v.Categories = &ContentRecommendation{}
+			return v.Categories.Deserialize(d)
+		case schemas.ProductContentRecommendations_Citations:
+			return deserializeCitationList(d, schemas.ProductContentRecommendations_Citations, &v.Citations)
+		case schemas.ProductContentRecommendations_Highlights:
+			v.Highlights = &ContentRecommendation{}
+			return v.Highlights.Deserialize(d)
+		case schemas.ProductContentRecommendations_LongDescription:
+			v.LongDescription = &ContentRecommendation{}
+			return v.LongDescription.Deserialize(d)
+		case schemas.ProductContentRecommendations_ProductTitle:
+			v.ProductTitle = &ContentRecommendation{}
+			return v.ProductTitle.Deserialize(d)
+		case schemas.ProductContentRecommendations_SearchKeywords:
+			v.SearchKeywords = &ContentRecommendation{}
+			return v.SearchKeywords.Deserialize(d)
+		case schemas.ProductContentRecommendations_ShortDescription:
+			v.ShortDescription = &ContentRecommendation{}
+			return v.ShortDescription.Deserialize(d)
+		case schemas.ProductContentRecommendations_SupportDescription:
+			v.SupportDescription = &ContentRecommendation{}
+			return v.SupportDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A source that the recommendations are based on.
+type RecommendationCitation struct {
+
+	// The HTTPS URL of the source.
+	//
+	// This member is required.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RecommendationCitation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationCitation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationCitation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Url != nil {
+		s.WriteString(schemas.RecommendationCitation_Url, *v.Url)
+	}
+}
+func (v *RecommendationCitation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationCitation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationCitation_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.RecommendationCitation_Url, v.Url)
 		}
 		return nil
 	})
@@ -6238,6 +7487,119 @@ func (v *SaaSProductVisibilityFilter) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// The content recommendations for a solution listing, with one member for each
+// listing field. A member is absent if nothing is recommended for that field.
+type SolutionContentRecommendations struct {
+
+	// The sources that the recommendations are based on. You can have up to 5
+	// sources. The list is empty if there are none.
+	//
+	// This member is required.
+	Citations []RecommendationCitation
+
+	// The recommendation for the additional resources. Each alternative has up to 8
+	// resources.
+	AdditionalResources *ContentRecommendation
+
+	// The recommendation for the case studies of the solution. Each alternative has
+	// up to 20 case studies.
+	CaseStudies *ContentRecommendation
+
+	// The recommendation for the integration details of the solution.
+	IntegrationDetails *ContentRecommendation
+
+	// The recommendation for the long description of the solution.
+	LongDescription *ContentRecommendation
+
+	// The recommendation for the value proposition of the solution.
+	ShortDescription *ContentRecommendation
+
+	// The recommendation for the external title of the solution.
+	Title *ContentRecommendation
+
+	// The recommendation for the use cases of the solution.
+	UseCases *ContentRecommendation
+
+	noSmithyDocumentSerde
+}
+
+func (v *SolutionContentRecommendations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SolutionContentRecommendations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SolutionContentRecommendations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalResources != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_AdditionalResources)
+		v.AdditionalResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaseStudies != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_CaseStudies)
+		v.CaseStudies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Citations != nil {
+		serializeCitationList(s, schemas.SolutionContentRecommendations_Citations, v.Citations)
+	}
+	if v.IntegrationDetails != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_IntegrationDetails)
+		v.IntegrationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LongDescription != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_LongDescription)
+		v.LongDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShortDescription != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_ShortDescription)
+		v.ShortDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_Title)
+		v.Title.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseCases != nil {
+		s.WriteStruct(schemas.SolutionContentRecommendations_UseCases)
+		v.UseCases.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SolutionContentRecommendations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SolutionContentRecommendations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SolutionContentRecommendations_AdditionalResources:
+			v.AdditionalResources = &ContentRecommendation{}
+			return v.AdditionalResources.Deserialize(d)
+		case schemas.SolutionContentRecommendations_CaseStudies:
+			v.CaseStudies = &ContentRecommendation{}
+			return v.CaseStudies.Deserialize(d)
+		case schemas.SolutionContentRecommendations_Citations:
+			return deserializeCitationList(d, schemas.SolutionContentRecommendations_Citations, &v.Citations)
+		case schemas.SolutionContentRecommendations_IntegrationDetails:
+			v.IntegrationDetails = &ContentRecommendation{}
+			return v.IntegrationDetails.Deserialize(d)
+		case schemas.SolutionContentRecommendations_LongDescription:
+			v.LongDescription = &ContentRecommendation{}
+			return v.LongDescription.Deserialize(d)
+		case schemas.SolutionContentRecommendations_ShortDescription:
+			v.ShortDescription = &ContentRecommendation{}
+			return v.ShortDescription.Deserialize(d)
+		case schemas.SolutionContentRecommendations_Title:
+			v.Title = &ContentRecommendation{}
+			return v.Title.Deserialize(d)
+		case schemas.SolutionContentRecommendations_UseCases:
+			v.UseCases = &ContentRecommendation{}
+			return v.UseCases.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object that contains two attributes, SortBy and SortOrder .
 type Sort struct {
 
@@ -6965,6 +8327,137 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A proposed text value for a listing field.
+type TextAlternative struct {
+
+	// Why this alternative is recommended.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The proposed text. The limit of the field itself, such as 255 characters for a
+	// title, applies.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TextAlternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextAlternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextAlternative) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rationale != nil {
+		s.WriteString(schemas.TextAlternative_Rationale, *v.Rationale)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.TextAlternative_Value, *v.Value)
+	}
+}
+func (v *TextAlternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextAlternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextAlternative_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.TextAlternative_Rationale, v.Rationale)
+		case schemas.TextAlternative_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.TextAlternative_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A proposed list of text values for a listing field.
+type TextListAlternative struct {
+
+	// Why this alternative is recommended.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The proposed list of text values. The list has 1–15 items.
+	//
+	// This member is required.
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TextListAlternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextListAlternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextListAlternative) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rationale != nil {
+		s.WriteString(schemas.TextListAlternative_Rationale, *v.Rationale)
+	}
+	if v.Value != nil {
+		serializeFieldTextList(s, schemas.TextListAlternative_Value, v.Value)
+	}
+}
+func (v *TextListAlternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextListAlternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextListAlternative_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.TextListAlternative_Rationale, v.Rationale)
+		case schemas.TextListAlternative_Value:
+			return deserializeFieldTextList(d, schemas.TextListAlternative_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
+// A proposed set of use cases for a solution.
+type UseCasesAlternative struct {
+
+	// Why this alternative is recommended.
+	//
+	// This member is required.
+	Rationale *string
+
+	// The proposed use cases, in ranked order.
+	//
+	// This member is required.
+	Value []ListingUseCase
+
+	noSmithyDocumentSerde
+}
+
+func (v *UseCasesAlternative) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UseCasesAlternative)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UseCasesAlternative) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rationale != nil {
+		s.WriteString(schemas.UseCasesAlternative_Rationale, *v.Rationale)
+	}
+	if v.Value != nil {
+		serializeUseCaseList(s, schemas.UseCasesAlternative_Value, v.Value)
+	}
+}
+func (v *UseCasesAlternative) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UseCasesAlternative, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UseCasesAlternative_Rationale:
+			v.Rationale = new(string)
+			return d.ReadString(schemas.UseCasesAlternative_Rationale, v.Rationale)
+		case schemas.UseCasesAlternative_Value:
+			return deserializeUseCaseList(d, schemas.UseCasesAlternative_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Detailed information about a single request field that failed validation,
 // including the field's location, the reason it failed, and a human-readable
 // message.
@@ -7062,7 +8555,10 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isEntityTypeFilters() {}
-func (*UnknownUnionMember) isEntityTypeSort()    {}
-func (*UnknownUnionMember) isFrameworkFilters()  {}
-func (*UnknownUnionMember) isFrameworkSummary()  {}
+func (*UnknownUnionMember) isContentAlternatives()    {}
+func (*UnknownUnionMember) isControlSummary()         {}
+func (*UnknownUnionMember) isEntityTypeFilters()      {}
+func (*UnknownUnionMember) isEntityTypeSort()         {}
+func (*UnknownUnionMember) isFrameworkFilters()       {}
+func (*UnknownUnionMember) isFrameworkSummary()       {}
+func (*UnknownUnionMember) isListingRecommendations() {}

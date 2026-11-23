@@ -139,6 +139,7 @@ const (
 	DeviceAttributeArn                 DeviceAttribute = "ARN"
 	DeviceAttributePlatform            DeviceAttribute = "PLATFORM"
 	DeviceAttributeFormFactor          DeviceAttribute = "FORM_FACTOR"
+	DeviceAttributeDeviceType          DeviceAttribute = "DEVICE_TYPE"
 	DeviceAttributeManufacturer        DeviceAttribute = "MANUFACTURER"
 	DeviceAttributeRemoteAccessEnabled DeviceAttribute = "REMOTE_ACCESS_ENABLED"
 	DeviceAttributeRemoteDebugEnabled  DeviceAttribute = "REMOTE_DEBUG_ENABLED"
@@ -160,6 +161,7 @@ func (DeviceAttribute) Values() []DeviceAttribute {
 		"ARN",
 		"PLATFORM",
 		"FORM_FACTOR",
+		"DEVICE_TYPE",
 		"MANUFACTURER",
 		"REMOTE_ACCESS_ENABLED",
 		"REMOTE_DEBUG_ENABLED",
@@ -206,6 +208,7 @@ const (
 	DeviceFilterAttributeModel               DeviceFilterAttribute = "MODEL"
 	DeviceFilterAttributeAvailability        DeviceFilterAttribute = "AVAILABILITY"
 	DeviceFilterAttributeFormFactor          DeviceFilterAttribute = "FORM_FACTOR"
+	DeviceFilterAttributeDeviceType          DeviceFilterAttribute = "DEVICE_TYPE"
 	DeviceFilterAttributeManufacturer        DeviceFilterAttribute = "MANUFACTURER"
 	DeviceFilterAttributeRemoteAccessEnabled DeviceFilterAttribute = "REMOTE_ACCESS_ENABLED"
 	DeviceFilterAttributeRemoteDebugEnabled  DeviceFilterAttribute = "REMOTE_DEBUG_ENABLED"
@@ -226,6 +229,7 @@ func (DeviceFilterAttribute) Values() []DeviceFilterAttribute {
 		"MODEL",
 		"AVAILABILITY",
 		"FORM_FACTOR",
+		"DEVICE_TYPE",
 		"MANUFACTURER",
 		"REMOTE_ACCESS_ENABLED",
 		"REMOTE_DEBUG_ENABLED",
@@ -289,6 +293,25 @@ func (DevicePoolType) Values() []DevicePoolType {
 	return []DevicePoolType{
 		"CURATED",
 		"PRIVATE",
+	}
+}
+
+type DeviceType string
+
+// Enum values for DeviceType
+const (
+	DeviceTypePhysical DeviceType = "PHYSICAL"
+	DeviceTypeVirtual  DeviceType = "VIRTUAL"
+)
+
+// Values returns all known values for DeviceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceType) Values() []DeviceType {
+	return []DeviceType{
+		"PHYSICAL",
+		"VIRTUAL",
 	}
 }
 

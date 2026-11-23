@@ -29,6 +29,13 @@ var AssociateOpportunity = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/AssociateOpportunity",
 	Code: 200})
 
+var CreateCustomerAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CreateCustomerAccount",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/CreateCustomerAccount",
+	Code: 200})
+
 var CreateEngagement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "CreateEngagement",
@@ -71,6 +78,13 @@ var CreateResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/CreateResourceSnapshotJob",
 	Code: 200})
 
+var DeleteCustomerAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "DeleteCustomerAccount",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/DeleteCustomerAccount",
+	Code: 200})
+
 var DeleteResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "DeleteResourceSnapshotJob",
@@ -92,6 +106,34 @@ var GetAwsOpportunitySummary = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/GetAwsOpportunitySummary",
 	Code: 200})
 
+var GetCustomerAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccount",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetCustomerAccount",
+	Code: 200})
+
+var GetCustomerAccountBulkJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountBulkJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetCustomerAccountBulkJob",
+	Code: 200})
+
+var GetCustomerAccountBulkJobReportUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountBulkJobReportUrl",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetCustomerAccountBulkJobReportUrl",
+	Code: 200})
+
+var GetCustomerAccountStatistics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountStatistics",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetCustomerAccountStatistics",
+	Code: 200})
+
 var GetEngagement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "GetEngagement",
@@ -111,6 +153,13 @@ var GetOpportunity = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetOpportunity",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetOpportunity",
+	Code: 200})
+
+var GetOpportunityBulkJobReportUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetOpportunityBulkJobReportUrl",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetOpportunityBulkJobReportUrl",
 	Code: 200})
 
 var GetProspectingFromEngagementTask = smithy.NewSchema(smithy.ShapeID{
@@ -141,6 +190,20 @@ var GetSellingSystemSettings = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/GetSellingSystemSettings",
 	Code: 200})
 
+var ListCustomerAccountBulkJobResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListCustomerAccountBulkJobResults",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListCustomerAccountBulkJobResults",
+	Code: 200})
+
+var ListCustomerAccountBulkJobs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListCustomerAccountBulkJobs",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListCustomerAccountBulkJobs",
+	Code: 200})
+
 var ListEngagementByAcceptingInvitationTasks = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "ListEngagementByAcceptingInvitationTasks",
@@ -153,6 +216,13 @@ var ListEngagementFromOpportunityTasks = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListEngagementFromOpportunityTasks",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagementFromOpportunityTasks",
+	Code: 200})
+
+var ListEngagementGroups = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListEngagementGroups",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListEngagementGroups",
 	Code: 200})
 
 var ListEngagementInvitations = smithy.NewSchema(smithy.ShapeID{
@@ -188,6 +258,20 @@ var ListOpportunities = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListOpportunities",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListOpportunities",
+	Code: 200})
+
+var ListOpportunityBulkJobResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListOpportunityBulkJobResults",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListOpportunityBulkJobResults",
+	Code: 200})
+
+var ListOpportunityBulkJobs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListOpportunityBulkJobs",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListOpportunityBulkJobs",
 	Code: 200})
 
 var ListOpportunityFromEngagementTasks = smithy.NewSchema(smithy.ShapeID{
@@ -246,6 +330,34 @@ var RejectEngagementInvitation = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/RejectEngagementInvitation",
 	Code: 200})
 
+var SearchCustomerAccounts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchCustomerAccounts",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/SearchCustomerAccounts",
+	Code: 200})
+
+var SearchEngagements = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchEngagements",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/SearchEngagements",
+	Code: 200})
+
+var SearchOpportunities = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchOpportunities",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/SearchOpportunities",
+	Code: 200})
+
+var StartCustomerAccountBulkJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "StartCustomerAccountBulkJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/StartCustomerAccountBulkJob",
+	Code: 200})
+
 var StartEngagementByAcceptingInvitationTask = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "StartEngagementByAcceptingInvitationTask",
@@ -258,6 +370,13 @@ var StartEngagementFromOpportunityTask = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartEngagementFromOpportunityTask",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartEngagementFromOpportunityTask",
+	Code: 200})
+
+var StartOpportunityBulkJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "StartOpportunityBulkJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/StartOpportunityBulkJob",
 	Code: 200})
 
 var StartOpportunityFromEngagementTask = smithy.NewSchema(smithy.ShapeID{
@@ -309,6 +428,13 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/UntagResource",
 	Code: 200})
 
+var UpdateCustomerAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "UpdateCustomerAccount",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/UpdateCustomerAccount",
+	Code: 200})
+
 var UpdateEngagementContext = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "UpdateEngagementContext",
@@ -342,8 +468,14 @@ var AccessDeniedException_Reason *smithy.Schema
 var AccessDeniedExceptionErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "AccessDeniedExceptionErrorCode",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 4)
 var AccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE *smithy.Schema
+
+var AccessDeniedExceptionErrorCode_SEARCH_OPPORTUNITIES_NOT_ENABLED *smithy.Schema
+
+var AccessDeniedExceptionErrorCode_SEARCH_OPPORTUNITIES_DATA_NOT_ROUTED_TO_DDB *smithy.Schema
+
+var AccessDeniedExceptionErrorCode_OPPORTUNITY_BULK_JOB_NOT_ENABLED *smithy.Schema
 
 var Account = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -362,6 +494,36 @@ var Account_AwsAccountId *smithy.Schema
 var Account_Address *smithy.Schema
 
 var Account_Duns *smithy.Schema
+
+var AccountCustomer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AccountCustomer",
+}, smithy.ShapeTypeStructure, 4)
+var AccountCustomer_Industry *smithy.Schema
+
+var AccountCustomer_CompanyName *smithy.Schema
+
+var AccountCustomer_WebsiteUrl *smithy.Schema
+
+var AccountCustomer_CountryCode *smithy.Schema
+
+var _AccountFilterStringList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AccountFilterStringList",
+}, smithy.ShapeTypeList, 1)
+var _AccountFilterStringList_member *smithy.Schema
+
+var AccountPlanningInvitationPayload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AccountPlanningInvitationPayload",
+}, smithy.ShapeTypeStructure, 4)
+var AccountPlanningInvitationPayload_AccountIdentifier *smithy.Schema
+
+var AccountPlanningInvitationPayload_Customer *smithy.Schema
+
+var AccountPlanningInvitationPayload_SenderContacts *smithy.Schema
+
+var AccountPlanningInvitationPayload_PreferredContact *smithy.Schema
 
 var AccountReceiver = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -384,6 +546,11 @@ var AccountSummary_CompanyName *smithy.Schema
 var AccountSummary_WebsiteUrl *smithy.Schema
 
 var AccountSummary_Address *smithy.Schema
+
+var _AccountWebsiteUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AccountWebsiteUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -415,6 +582,66 @@ var AddressSummary_PostalCode *smithy.Schema
 var AddressSummary_StateOrRegion *smithy.Schema
 
 var AddressSummary_CountryCode *smithy.Schema
+
+var AggregatableField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AggregatableField",
+}, smithy.ShapeTypeEnum, 11)
+var AggregatableField_ENRICHMENT_STATUS *smithy.Schema
+
+var AggregatableField_AWS_INDUSTRY *smithy.Schema
+
+var AggregatableField_SEGMENT *smithy.Schema
+
+var AggregatableField_REGION *smithy.Schema
+
+var AggregatableField_SOLUTION_CATEGORY *smithy.Schema
+
+var AggregatableField_ACCOUNT_PLANNING_QUALIFICATION *smithy.Schema
+
+var AggregatableField_PROGRAM_ELIGIBILITY *smithy.Schema
+
+var AggregatableField_MARKETPLACE_ENGAGEMENT_SCORE *smithy.Schema
+
+var AggregatableField_GEO *smithy.Schema
+
+var AggregatableField_COUNTRY *smithy.Schema
+
+var AggregatableField_SOLUTION_SCORE *smithy.Schema
+
+var _AggregatableFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AggregatableFieldList",
+}, smithy.ShapeTypeList, 1)
+var _AggregatableFieldList_member *smithy.Schema
+
+var AggregationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AggregationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var AggregationRequest_GroupBy *smithy.Schema
+
+var _AggregationRequestList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AggregationRequestList",
+}, smithy.ShapeTypeList, 1)
+var _AggregationRequestList_member *smithy.Schema
+
+var AggregationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AggregationResult",
+}, smithy.ShapeTypeStructure, 3)
+var AggregationResult_GroupBy *smithy.Schema
+
+var AggregationResult_Buckets *smithy.Schema
+
+var AggregationResult_OtherCount *smithy.Schema
+
+var _AggregationResultList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AggregationResultList",
+}, smithy.ShapeTypeList, 1)
+var _AggregationResultList_member *smithy.Schema
 
 var _Alias = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -570,6 +797,88 @@ var AwsClosedLostReason_SELF_SERVICE *smithy.Schema
 var AwsClosedLostReason_TECHNICAL_LIMITATIONS *smithy.Schema
 
 var AwsClosedLostReason_TERM_SHEET_IMPASSE *smithy.Schema
+
+var AwsEnrichment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AwsEnrichment",
+}, smithy.ShapeTypeStructure, 2)
+var AwsEnrichment_Customer *smithy.Schema
+
+var AwsEnrichment_Insights *smithy.Schema
+
+var AwsEnrichmentCustomer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AwsEnrichmentCustomer",
+}, smithy.ShapeTypeStructure, 12)
+var AwsEnrichmentCustomer_AccountName *smithy.Schema
+
+var AwsEnrichmentCustomer_Industry *smithy.Schema
+
+var AwsEnrichmentCustomer_SubIndustry *smithy.Schema
+
+var AwsEnrichmentCustomer_Sector *smithy.Schema
+
+var AwsEnrichmentCustomer_Segment *smithy.Schema
+
+var AwsEnrichmentCustomer_CompanySize *smithy.Schema
+
+var AwsEnrichmentCustomer_Region *smithy.Schema
+
+var AwsEnrichmentCustomer_SubRegion *smithy.Schema
+
+var AwsEnrichmentCustomer_Geo *smithy.Schema
+
+var AwsEnrichmentCustomer_Country *smithy.Schema
+
+var AwsEnrichmentCustomer_CustomerAccountPlanningQualification *smithy.Schema
+
+var AwsEnrichmentCustomer_EligiblePrograms *smithy.Schema
+
+var AwsEnrichmentCustomerSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AwsEnrichmentCustomerSummary",
+}, smithy.ShapeTypeStructure, 6)
+var AwsEnrichmentCustomerSummary_Industry *smithy.Schema
+
+var AwsEnrichmentCustomerSummary_AccountPlanningQualification *smithy.Schema
+
+var AwsEnrichmentCustomerSummary_EligiblePrograms *smithy.Schema
+
+var AwsEnrichmentCustomerSummary_Geo *smithy.Schema
+
+var AwsEnrichmentCustomerSummary_Country *smithy.Schema
+
+var AwsEnrichmentCustomerSummary_Segment *smithy.Schema
+
+var AwsEnrichmentInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AwsEnrichmentInsights",
+}, smithy.ShapeTypeStructure, 4)
+var AwsEnrichmentInsights_MarketplaceEngagementScore *smithy.Schema
+
+var AwsEnrichmentInsights_SolutionCategory *smithy.Schema
+
+var AwsEnrichmentInsights_SolutionScore *smithy.Schema
+
+var AwsEnrichmentInsights_SolutionSubCategory *smithy.Schema
+
+var AwsEnrichmentInsightsSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AwsEnrichmentInsightsSummary",
+}, smithy.ShapeTypeStructure, 3)
+var AwsEnrichmentInsightsSummary_MarketplaceEngagementScore *smithy.Schema
+
+var AwsEnrichmentInsightsSummary_SolutionCategory *smithy.Schema
+
+var AwsEnrichmentInsightsSummary_SolutionScore *smithy.Schema
+
+var AwsEnrichmentSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "AwsEnrichmentSummary",
+}, smithy.ShapeTypeStructure, 2)
+var AwsEnrichmentSummary_Customer *smithy.Schema
+
+var AwsEnrichmentSummary_Insights *smithy.Schema
 
 var AwsFundingUsed = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -766,7 +1075,7 @@ var AwsOpportunityStage_CLOSED_INCOMPLETE *smithy.Schema
 var AwsOpportunitySummaryFullView = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "AwsOpportunitySummaryFullView",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var AwsOpportunitySummaryFullView_RelatedOpportunityId *smithy.Schema
 
 var AwsOpportunitySummaryFullView_Origin *smithy.Schema
@@ -790,6 +1099,8 @@ var AwsOpportunitySummaryFullView_Customer *smithy.Schema
 var AwsOpportunitySummaryFullView_Project *smithy.Schema
 
 var AwsOpportunitySummaryFullView_CosellMotion *smithy.Schema
+
+var AwsOpportunitySummaryFullView_CosellMotionReason *smithy.Schema
 
 var AwsOpportunitySummaryFullView_SoftwareRevenue *smithy.Schema
 
@@ -912,6 +1223,143 @@ var AwsTeamMember_LastName *smithy.Schema
 
 var AwsTeamMember_BusinessTitle *smithy.Schema
 
+var BestOutreachWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BestOutreachWindow",
+}, smithy.ShapeTypeStructure, 3)
+var BestOutreachWindow_Day *smithy.Schema
+
+var BestOutreachWindow_StartTimeUtc *smithy.Schema
+
+var BestOutreachWindow_EndTimeUtc *smithy.Schema
+
+var _BestOutreachWindowList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BestOutreachWindowList",
+}, smithy.ShapeTypeList, 1)
+var _BestOutreachWindowList_member *smithy.Schema
+
+var Bucket = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "Bucket",
+}, smithy.ShapeTypeStructure, 2)
+var Bucket_Values *smithy.Schema
+
+var Bucket_Count *smithy.Schema
+
+var _BucketList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BucketList",
+}, smithy.ShapeTypeList, 1)
+var _BucketList_member *smithy.Schema
+
+var _BucketValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BucketValueList",
+}, smithy.ShapeTypeList, 1)
+var _BucketValueList_member *smithy.Schema
+
+var BulkFileFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkFileFormat",
+}, smithy.ShapeTypeEnum, 1)
+var BulkFileFormat_CSV *smithy.Schema
+
+var _BulkFileName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkFileName",
+}, smithy.ShapeTypeString, 0)
+
+var _BulkJobArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkJobArn",
+}, smithy.ShapeTypeString, 0)
+
+var _BulkJobArnOrIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkJobArnOrIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _BulkJobId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkJobId",
+}, smithy.ShapeTypeString, 0)
+
+var BulkJobResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkJobResult",
+}, smithy.ShapeTypeStructure, 5)
+var BulkJobResult_RequestId *smithy.Schema
+
+var BulkJobResult_Status *smithy.Schema
+
+var BulkJobResult_ResourceIdentifier *smithy.Schema
+
+var BulkJobResult_ErrorCode *smithy.Schema
+
+var BulkJobResult_ErrorMessage *smithy.Schema
+
+var _BulkJobResultList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkJobResultList",
+}, smithy.ShapeTypeList, 1)
+var _BulkJobResultList_member *smithy.Schema
+
+var BulkJobStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkJobStatus",
+}, smithy.ShapeTypeEnum, 4)
+var BulkJobStatus_SUBMITTED *smithy.Schema
+
+var BulkJobStatus_IN_PROGRESS *smithy.Schema
+
+var BulkJobStatus_COMPLETED *smithy.Schema
+
+var BulkJobStatus_FAILED *smithy.Schema
+
+var BulkOperationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkOperationType",
+}, smithy.ShapeTypeEnum, 2)
+var BulkOperationType_BULK_CREATE *smithy.Schema
+
+var BulkOperationType_BULK_UPDATE *smithy.Schema
+
+var BulkRecordStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkRecordStatus",
+}, smithy.ShapeTypeEnum, 2)
+var BulkRecordStatus_SUCCEEDED *smithy.Schema
+
+var BulkRecordStatus_FAILED *smithy.Schema
+
+var BulkReportStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkReportStatus",
+}, smithy.ShapeTypeEnum, 5)
+var BulkReportStatus_NOT_STARTED *smithy.Schema
+
+var BulkReportStatus_IN_PROGRESS *smithy.Schema
+
+var BulkReportStatus_AVAILABLE *smithy.Schema
+
+var BulkReportStatus_FAILED *smithy.Schema
+
+var BulkReportStatus_EXPIRED *smithy.Schema
+
+var BulkReportType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkReportType",
+}, smithy.ShapeTypeEnum, 2)
+var BulkReportType_FAILED_RECORDS *smithy.Schema
+
+var BulkReportType_ALL_RECORDS *smithy.Schema
+
+var _BulkReportUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "BulkReportUrl",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _CatalogIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "CatalogIdentifier",
@@ -946,6 +1394,19 @@ var Channel_TV *smithy.Schema
 var Channel_VIDEO *smithy.Schema
 
 var Channel_VIRTUAL_EVENT *smithy.Schema
+
+var _ChannelName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ChannelName",
+}, smithy.ShapeTypeString, 0)
+
+var ChannelRecommendation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ChannelRecommendation",
+}, smithy.ShapeTypeStructure, 2)
+var ChannelRecommendation_RecommendedChannel *smithy.Schema
+
+var ChannelRecommendation_BestOutreachWindows *smithy.Schema
 
 var _Channels = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -1057,6 +1518,16 @@ var Contact_BusinessTitle *smithy.Schema
 
 var Contact_Phone *smithy.Schema
 
+var ContactWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ContactWindow",
+}, smithy.ShapeTypeEnum, 3)
+var ContactWindow_MORNING *smithy.Schema
+
+var ContactWindow_AFTERNOON *smithy.Schema
+
+var ContactWindow_EVENING *smithy.Schema
+
 var _ContextIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "ContextIdentifier",
@@ -1067,6 +1538,11 @@ var _ContextIdentifiers = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ContextIdentifiers",
 }, smithy.ShapeTypeList, 1)
 var _ContextIdentifiers_member *smithy.Schema
+
+var _CosellMotion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CosellMotion",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var CountryCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -1926,6 +2402,147 @@ var Customer_Account *smithy.Schema
 
 var Customer_Contacts *smithy.Schema
 
+var _CustomerAccountArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountArn",
+}, smithy.ShapeTypeString, 0)
+
+var _CustomerAccountArnOrIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountArnOrIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var CustomerAccountBulkJobFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountBulkJobFilter",
+}, smithy.ShapeTypeStructure, 2)
+var CustomerAccountBulkJobFilter_Identifier *smithy.Schema
+
+var CustomerAccountBulkJobFilter_Status *smithy.Schema
+
+var CustomerAccountBulkJobSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountBulkJobSummary",
+}, smithy.ShapeTypeStructure, 12)
+var CustomerAccountBulkJobSummary_Arn *smithy.Schema
+
+var CustomerAccountBulkJobSummary_Id *smithy.Schema
+
+var CustomerAccountBulkJobSummary_Status *smithy.Schema
+
+var CustomerAccountBulkJobSummary_FileName *smithy.Schema
+
+var CustomerAccountBulkJobSummary_TotalRecords *smithy.Schema
+
+var CustomerAccountBulkJobSummary_ProcessedRecords *smithy.Schema
+
+var CustomerAccountBulkJobSummary_SuccessCount *smithy.Schema
+
+var CustomerAccountBulkJobSummary_FailureCount *smithy.Schema
+
+var CustomerAccountBulkJobSummary_DeletedCount *smithy.Schema
+
+var CustomerAccountBulkJobSummary_FailureReason *smithy.Schema
+
+var CustomerAccountBulkJobSummary_CreatedAt *smithy.Schema
+
+var CustomerAccountBulkJobSummary_CompletedAt *smithy.Schema
+
+var _CustomerAccountBulkJobSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountBulkJobSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _CustomerAccountBulkJobSummaryList_member *smithy.Schema
+
+var CustomerAccountContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountContext",
+}, smithy.ShapeTypeStructure, 2)
+var CustomerAccountContext_AccountIdentifier *smithy.Schema
+
+var CustomerAccountContext_Customer *smithy.Schema
+
+var CustomerAccountData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountData",
+}, smithy.ShapeTypeStructure, 8)
+var CustomerAccountData_CompanyName *smithy.Schema
+
+var CustomerAccountData_WebsiteUrl *smithy.Schema
+
+var CustomerAccountData_Duns *smithy.Schema
+
+var CustomerAccountData_Address *smithy.Schema
+
+var CustomerAccountData_Industry *smithy.Schema
+
+var CustomerAccountData_OtherIndustry *smithy.Schema
+
+var CustomerAccountData_Domain *smithy.Schema
+
+var CustomerAccountData_ParentCompanyName *smithy.Schema
+
+var CustomerAccountDetailsSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountDetailsSummary",
+}, smithy.ShapeTypeStructure, 1)
+var CustomerAccountDetailsSummary_CompanyName *smithy.Schema
+
+var CustomerAccountFailureReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountFailureReason",
+}, smithy.ShapeTypeEnum, 2)
+var CustomerAccountFailureReason_DUPLICATE_CUSTOMER_MATCH *smithy.Schema
+
+var CustomerAccountFailureReason_PROCESSING_ERROR *smithy.Schema
+
+var _CustomerAccountId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountId",
+}, smithy.ShapeTypeString, 0)
+
+var CustomerAccountSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountSort",
+}, smithy.ShapeTypeStructure, 2)
+var CustomerAccountSort_SortBy *smithy.Schema
+
+var CustomerAccountSort_SortOrder *smithy.Schema
+
+var CustomerAccountSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountSummary",
+}, smithy.ShapeTypeStructure, 9)
+var CustomerAccountSummary_Arn *smithy.Schema
+
+var CustomerAccountSummary_Id *smithy.Schema
+
+var CustomerAccountSummary_Catalog *smithy.Schema
+
+var CustomerAccountSummary_EnrichmentStatus *smithy.Schema
+
+var CustomerAccountSummary_PartnerAccountIdentifier *smithy.Schema
+
+var CustomerAccountSummary_CreatedDate *smithy.Schema
+
+var CustomerAccountSummary_LastModifiedDate *smithy.Schema
+
+var CustomerAccountSummary_CustomerAccount *smithy.Schema
+
+var CustomerAccountSummary_AwsEnrichment *smithy.Schema
+
+var _CustomerAccountSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _CustomerAccountSummaryList_member *smithy.Schema
+
+var _CustomerAccountTagList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CustomerAccountTagList",
+}, smithy.ShapeTypeList, 1)
+var _CustomerAccountTagList_member *smithy.Schema
+
 var _CustomerAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "CustomerAction",
@@ -1961,6 +2578,24 @@ var _DateTime = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DateTime",
 }, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
 
+var DayOfWeek = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "DayOfWeek",
+}, smithy.ShapeTypeEnum, 7)
+var DayOfWeek_MONDAY *smithy.Schema
+
+var DayOfWeek_TUESDAY *smithy.Schema
+
+var DayOfWeek_WEDNESDAY *smithy.Schema
+
+var DayOfWeek_THURSDAY *smithy.Schema
+
+var DayOfWeek_FRIDAY *smithy.Schema
+
+var DayOfWeek_SATURDAY *smithy.Schema
+
+var DayOfWeek_SUNDAY *smithy.Schema
+
 var DeliveryModel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "DeliveryModel",
@@ -1983,10 +2618,21 @@ var _DeliveryModels = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _DeliveryModels_member *smithy.Schema
 
+var _Domain = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "Domain",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var _DunsNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "DunsNumber",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _EligibleProgramList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EligibleProgramList",
+}, smithy.ShapeTypeList, 1)
+var _EligibleProgramList_member *smithy.Schema
 
 var _EligibleProgramsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2027,12 +2673,14 @@ var _EngagementContextIdentifier = smithy.NewSchema(smithy.ShapeID{
 var EngagementContextPayload = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "EngagementContextPayload",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var EngagementContextPayload_CustomerProject *smithy.Schema
 
 var EngagementContextPayload_Lead *smithy.Schema
 
 var EngagementContextPayload_ProspectingResult *smithy.Schema
+
+var EngagementContextPayload_CustomerAccount *smithy.Schema
 
 var _EngagementContexts = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2043,12 +2691,14 @@ var _EngagementContexts_member *smithy.Schema
 var EngagementContextType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "EngagementContextType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var EngagementContextType_CUSTOMER_PROJECT *smithy.Schema
 
 var EngagementContextType_LEAD *smithy.Schema
 
 var EngagementContextType_PROSPECTING_RESULT *smithy.Schema
+
+var EngagementContextType_CUSTOMER_ACCOUNT *smithy.Schema
 
 var _EngagementContextTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2093,6 +2743,74 @@ var _EngagementDescription = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EngagementDescription",
 }, smithy.ShapeTypeString, 0)
 
+var _EngagementGroupArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupArn",
+}, smithy.ShapeTypeString, 0)
+
+var _EngagementGroupArnOrIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupArnOrIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _EngagementGroupDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _EngagementGroupIdentifiers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupIdentifiers",
+}, smithy.ShapeTypeList, 1)
+var _EngagementGroupIdentifiers_member *smithy.Schema
+
+var _EngagementGroupName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupName",
+}, smithy.ShapeTypeString, 0)
+
+var EngagementGroupSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupSort",
+}, smithy.ShapeTypeStructure, 2)
+var EngagementGroupSort_SortBy *smithy.Schema
+
+var EngagementGroupSort_SortOrder *smithy.Schema
+
+var EngagementGroupSortName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupSortName",
+}, smithy.ShapeTypeEnum, 2)
+var EngagementGroupSortName_COUNT *smithy.Schema
+
+var EngagementGroupSortName_UPDATED_AT *smithy.Schema
+
+var _EngagementGroupSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupSummaries",
+}, smithy.ShapeTypeList, 1)
+var _EngagementGroupSummaries_member *smithy.Schema
+
+var EngagementGroupSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementGroupSummary",
+}, smithy.ShapeTypeStructure, 8)
+var EngagementGroupSummary_Id *smithy.Schema
+
+var EngagementGroupSummary_Arn *smithy.Schema
+
+var EngagementGroupSummary_Catalog *smithy.Schema
+
+var EngagementGroupSummary_Name *smithy.Schema
+
+var EngagementGroupSummary_Description *smithy.Schema
+
+var EngagementGroupSummary_Count *smithy.Schema
+
+var EngagementGroupSummary_ReadinessLevel *smithy.Schema
+
+var EngagementGroupSummary_UpdatedAt *smithy.Schema
+
 var _EngagementIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "EngagementIdentifier",
@@ -2134,10 +2852,12 @@ var _EngagementInvitationIdentifiers_member *smithy.Schema
 var EngagementInvitationPayloadType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "EngagementInvitationPayloadType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var EngagementInvitationPayloadType_OPPORTUNITY_INVITATION *smithy.Schema
 
 var EngagementInvitationPayloadType_LEAD_INVITATION *smithy.Schema
+
+var EngagementInvitationPayloadType_ACCOUNT_PLANNING_INVITATION *smithy.Schema
 
 var _EngagementInvitationsPayloadType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2271,6 +2991,228 @@ var _EngagementScoreLevel = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EngagementScoreLevel",
 }, smithy.ShapeTypeString, 0)
 
+var EngagementSearchFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchFilter",
+}, smithy.ShapeTypeStructure, 10)
+var EngagementSearchFilter_AndAllFilters *smithy.Schema
+
+var EngagementSearchFilter_OrAllFilters *smithy.Schema
+
+var EngagementSearchFilter_NotFilter *smithy.Schema
+
+var EngagementSearchFilter_EqualsTo *smithy.Schema
+
+var EngagementSearchFilter_ContainsAny *smithy.Schema
+
+var EngagementSearchFilter_ContainsAll *smithy.Schema
+
+var EngagementSearchFilter_GreaterThan *smithy.Schema
+
+var EngagementSearchFilter_GreaterThanOrEquals *smithy.Schema
+
+var EngagementSearchFilter_LessThan *smithy.Schema
+
+var EngagementSearchFilter_LessThanOrEquals *smithy.Schema
+
+var _EngagementSearchFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchFilterList",
+}, smithy.ShapeTypeList, 1)
+var _EngagementSearchFilterList_member *smithy.Schema
+
+var EngagementSearchFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchFilterName",
+}, smithy.ShapeTypeEnum, 29)
+var EngagementSearchFilterName_ENGAGEMENT_ID *smithy.Schema
+
+var EngagementSearchFilterName_TITLE *smithy.Schema
+
+var EngagementSearchFilterName_PARTNER_ID *smithy.Schema
+
+var EngagementSearchFilterName_CREATED_AT *smithy.Schema
+
+var EngagementSearchFilterName_LAST_MODIFIED_AT *smithy.Schema
+
+var EngagementSearchFilterName_MEMBER_COUNT *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_CUSTOMER_GEO *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_CUSTOMER_REGION *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_CUSTOMER_INDUSTRY *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_CUSTOMER_SEGMENT *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_CUSTOMER_COUNTRY *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_CUSTOMER_COMPANY_SIZE *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_INSIGHTS_MARKETPLACE_ENGAGEMENT_SCORE *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_INSIGHTS_SOLUTION_CATEGORY *smithy.Schema
+
+var EngagementSearchFilterName_PROSPECTING_INSIGHTS_SOLUTION_SUB_CATEGORY *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_QUALIFICATION_STATUS *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_READINESS_SCORE *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_CUSTOMER_INDUSTRY *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_CUSTOMER_COUNTRY_CODE *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_CUSTOMER_AWS_MATURITY *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_CUSTOMER_MARKET_SEGMENT *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_INTERACTIONS_SOURCE_TYPE *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_CUSTOMER_COMPANY_NAME *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_INTERACTIONS_CONTACT_FIRST_NAME *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_INTERACTIONS_CONTACT_LAST_NAME *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_INTERACTIONS_USECASE *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_INTERACTIONS_SOURCE_NAME *smithy.Schema
+
+var EngagementSearchFilterName_LEAD_INTERACTIONS_CONTACT_BUSINESS_TITLE *smithy.Schema
+
+var EngagementSearchFilterName_CONTEXT_TYPE *smithy.Schema
+
+var EngagementSearchFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchFilterValue",
+}, smithy.ShapeTypeUnion, 4)
+var EngagementSearchFilterValue_StringValue *smithy.Schema
+
+var EngagementSearchFilterValue_StringListValue *smithy.Schema
+
+var EngagementSearchFilterValue_LongValue *smithy.Schema
+
+var EngagementSearchFilterValue_DateValue *smithy.Schema
+
+var _EngagementSearchFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _EngagementSearchFilterValues_member *smithy.Schema
+
+var _EngagementSearchKeyword = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchKeyword",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var EngagementSearchPredicate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchPredicate",
+}, smithy.ShapeTypeStructure, 2)
+var EngagementSearchPredicate_Key *smithy.Schema
+
+var EngagementSearchPredicate_Value *smithy.Schema
+
+var EngagementSearchSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchSort",
+}, smithy.ShapeTypeStructure, 2)
+var EngagementSearchSort_SortBy *smithy.Schema
+
+var EngagementSearchSort_SortOrder *smithy.Schema
+
+var EngagementSearchSortName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchSortName",
+}, smithy.ShapeTypeEnum, 26)
+var EngagementSearchSortName_ENGAGEMENT_ID *smithy.Schema
+
+var EngagementSearchSortName_TITLE *smithy.Schema
+
+var EngagementSearchSortName_PARTNER_ID *smithy.Schema
+
+var EngagementSearchSortName_CREATED_AT *smithy.Schema
+
+var EngagementSearchSortName_LAST_MODIFIED_AT *smithy.Schema
+
+var EngagementSearchSortName_MEMBER_COUNT *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_CUSTOMER_GEO *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_CUSTOMER_REGION *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_CUSTOMER_INDUSTRY *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_CUSTOMER_SEGMENT *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_CUSTOMER_COUNTRY *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_CUSTOMER_COMPANY_SIZE *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_INSIGHTS_MARKETPLACE_ENGAGEMENT_SCORE *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_INSIGHTS_SOLUTION_CATEGORY *smithy.Schema
+
+var EngagementSearchSortName_PROSPECTING_INSIGHTS_SOLUTION_SUB_CATEGORY *smithy.Schema
+
+var EngagementSearchSortName_LEAD_QUALIFICATION_STATUS *smithy.Schema
+
+var EngagementSearchSortName_LEAD_READINESS_SCORE *smithy.Schema
+
+var EngagementSearchSortName_LEAD_CUSTOMER_INDUSTRY *smithy.Schema
+
+var EngagementSearchSortName_LEAD_CUSTOMER_COUNTRY_CODE *smithy.Schema
+
+var EngagementSearchSortName_LEAD_CUSTOMER_AWS_MATURITY *smithy.Schema
+
+var EngagementSearchSortName_LEAD_CUSTOMER_MARKET_SEGMENT *smithy.Schema
+
+var EngagementSearchSortName_LEAD_CUSTOMER_COMPANY_NAME *smithy.Schema
+
+var EngagementSearchSortName_LEAD_INTERACTIONS_CONTACT_FIRST_NAME *smithy.Schema
+
+var EngagementSearchSortName_LEAD_INTERACTIONS_CONTACT_LAST_NAME *smithy.Schema
+
+var EngagementSearchSortName_LEAD_INTERACTIONS_USECASE *smithy.Schema
+
+var EngagementSearchSortName_LEAD_INTERACTIONS_CONTACT_BUSINESS_TITLE *smithy.Schema
+
+var _EngagementSearchStringValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchStringValue",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var EngagementSearchSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchSummary",
+}, smithy.ShapeTypeStructure, 10)
+var EngagementSearchSummary_Id *smithy.Schema
+
+var EngagementSearchSummary_Arn *smithy.Schema
+
+var EngagementSearchSummary_Title *smithy.Schema
+
+var EngagementSearchSummary_Description *smithy.Schema
+
+var EngagementSearchSummary_CreatedAt *smithy.Schema
+
+var EngagementSearchSummary_CreatedBy *smithy.Schema
+
+var EngagementSearchSummary_MemberCount *smithy.Schema
+
+var EngagementSearchSummary_ModifiedAt *smithy.Schema
+
+var EngagementSearchSummary_ModifiedBy *smithy.Schema
+
+var EngagementSearchSummary_Contexts *smithy.Schema
+
+var _EngagementSearchSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EngagementSearchSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _EngagementSearchSummaryList_member *smithy.Schema
+
 var EngagementSort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "EngagementSort",
@@ -2331,6 +3273,23 @@ var EnrichmentContext_ProspectingResultAws *smithy.Schema
 
 var EnrichmentContext_LeadInsights *smithy.Schema
 
+var EnrichmentStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EnrichmentStatus",
+}, smithy.ShapeTypeEnum, 4)
+var EnrichmentStatus_PENDING *smithy.Schema
+
+var EnrichmentStatus_ENRICHED *smithy.Schema
+
+var EnrichmentStatus_NO_MATCH_FOUND *smithy.Schema
+
+var EnrichmentStatus_ACTION_REQUIRED *smithy.Schema
+
+var _EnrichmentValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "EnrichmentValue",
+}, smithy.ShapeTypeString, 0)
+
 var _EstimationUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "EstimationUrl",
@@ -2370,6 +3329,80 @@ var _ExpectedCustomerSpendList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ExpectedCustomerSpendList_member *smithy.Schema
 
+var _FileName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "FileName",
+}, smithy.ShapeTypeString, 0)
+
+var _FileUri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "FileUri",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var Filter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "Filter",
+}, smithy.ShapeTypeStructure, 10)
+var Filter_AndAllFilters *smithy.Schema
+
+var Filter_OrAllFilters *smithy.Schema
+
+var Filter_NotFilter *smithy.Schema
+
+var Filter_EqualsTo *smithy.Schema
+
+var Filter_ContainsAny *smithy.Schema
+
+var Filter_ContainsAll *smithy.Schema
+
+var Filter_GreaterThan *smithy.Schema
+
+var Filter_GreaterThanOrEquals *smithy.Schema
+
+var Filter_LessThan *smithy.Schema
+
+var Filter_LessThanOrEquals *smithy.Schema
+
+var FilterableField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "FilterableField",
+}, smithy.ShapeTypeEnum, 14)
+var FilterableField_ENRICHMENT_STATUS *smithy.Schema
+
+var FilterableField_COMPANY_NAME *smithy.Schema
+
+var FilterableField_AWS_INDUSTRY *smithy.Schema
+
+var FilterableField_ACCOUNT_PLANNING_QUALIFICATION *smithy.Schema
+
+var FilterableField_PROGRAM_ELIGIBILITY *smithy.Schema
+
+var FilterableField_IMPORT_ID *smithy.Schema
+
+var FilterableField_CREATED_DATE *smithy.Schema
+
+var FilterableField_LAST_MODIFIED_DATE *smithy.Schema
+
+var FilterableField_GEO *smithy.Schema
+
+var FilterableField_COUNTRY *smithy.Schema
+
+var FilterableField_SEGMENT *smithy.Schema
+
+var FilterableField_SOLUTION_CATEGORY *smithy.Schema
+
+var FilterableField_MARKETPLACE_ENGAGEMENT_SCORE *smithy.Schema
+
+var FilterableField_SOLUTION_SCORE *smithy.Schema
+
+var FilterCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "FilterCondition",
+}, smithy.ShapeTypeStructure, 2)
+var FilterCondition_Key *smithy.Schema
+
+var FilterCondition_Value *smithy.Schema
+
 var _FilterIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "FilterIdentifier",
@@ -2388,11 +3421,34 @@ var _FilterLifeCycleStage = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FilterLifeCycleStage_member *smithy.Schema
 
+var _FilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "FilterList",
+}, smithy.ShapeTypeList, 1)
+var _FilterList_member *smithy.Schema
+
 var _FilterStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "FilterStatus",
 }, smithy.ShapeTypeList, 1)
 var _FilterStatus_member *smithy.Schema
+
+var FilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "FilterValue",
+}, smithy.ShapeTypeUnion, 4)
+var FilterValue_StringValue *smithy.Schema
+
+var FilterValue_StringListValue *smithy.Schema
+
+var FilterValue_LongValue *smithy.Schema
+
+var FilterValue_DateValue *smithy.Schema
+
+var _GroupId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GroupId",
+}, smithy.ShapeTypeString, 0)
 
 var Industry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2516,6 +3572,27 @@ var InvolvementTypeChangeReason_TECHNICAL_COMPLEXITY *smithy.Schema
 
 var InvolvementTypeChangeReason_RISK_MITIGATION *smithy.Schema
 
+var Issue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "Issue",
+}, smithy.ShapeTypeStructure, 3)
+var Issue_Severity *smithy.Schema
+
+var Issue_Code *smithy.Schema
+
+var Issue_Message *smithy.Schema
+
+var _IssueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "IssueList",
+}, smithy.ShapeTypeList, 1)
+var _IssueList_member *smithy.Schema
+
+var _JobId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "JobId",
+}, smithy.ShapeTypeString, 0)
+
 var _JobTitle = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "JobTitle",
@@ -2606,8 +3683,10 @@ var _LeadIndustry = smithy.NewSchema(smithy.ShapeID{
 var LeadInsights = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "LeadInsights",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var LeadInsights_LeadReadinessScore *smithy.Schema
+
+var LeadInsights_ChannelRecommendation *smithy.Schema
 
 var LeadInteraction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2691,6 +3770,11 @@ var _LeadPhoneNumber = smithy.NewSchema(smithy.ShapeID{
 var _LeadQualificationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "LeadQualificationStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _LeadsNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "LeadsNextToken",
 }, smithy.ShapeTypeString, 0)
 
 var _LeadSourceId = smithy.NewSchema(smithy.ShapeID{
@@ -2887,6 +3971,11 @@ var MarketingSource_MARKETING_ACTIVITY *smithy.Schema
 
 var MarketingSource_NONE *smithy.Schema
 
+var _MaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "MaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _MemberCompanyName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "MemberCompanyName",
@@ -2937,10 +4026,49 @@ var NextStepsHistory_Value *smithy.Schema
 
 var NextStepsHistory_Time *smithy.Schema
 
+var _NextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "NextToken",
+}, smithy.ShapeTypeString, 0)
+
 var _OpportunityArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "OpportunityArn",
 }, smithy.ShapeTypeString, 0)
+
+var OpportunityBulkJobSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunityBulkJobSummary",
+}, smithy.ShapeTypeStructure, 12)
+var OpportunityBulkJobSummary_JobId *smithy.Schema
+
+var OpportunityBulkJobSummary_Status *smithy.Schema
+
+var OpportunityBulkJobSummary_TotalRecords *smithy.Schema
+
+var OpportunityBulkJobSummary_ProcessedRecords *smithy.Schema
+
+var OpportunityBulkJobSummary_SuccessCount *smithy.Schema
+
+var OpportunityBulkJobSummary_FailureCount *smithy.Schema
+
+var OpportunityBulkJobSummary_CreatedAt *smithy.Schema
+
+var OpportunityBulkJobSummary_StartedAt *smithy.Schema
+
+var OpportunityBulkJobSummary_CompletedAt *smithy.Schema
+
+var OpportunityBulkJobSummary_FailureReason *smithy.Schema
+
+var OpportunityBulkJobSummary_FileName *smithy.Schema
+
+var OpportunityBulkJobSummary_OperationType *smithy.Schema
+
+var _OpportunityBulkJobSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunityBulkJobSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _OpportunityBulkJobSummaryList_member *smithy.Schema
 
 var OpportunityEngagementInvitationSort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2970,7 +4098,7 @@ var _OpportunityIdentifiers_member *smithy.Schema
 var OpportunityInvitationPayload = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "OpportunityInvitationPayload",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var OpportunityInvitationPayload_SenderContacts *smithy.Schema
 
 var OpportunityInvitationPayload_ReceiverResponsibilities *smithy.Schema
@@ -2978,6 +4106,8 @@ var OpportunityInvitationPayload_ReceiverResponsibilities *smithy.Schema
 var OpportunityInvitationPayload_Customer *smithy.Schema
 
 var OpportunityInvitationPayload_Project *smithy.Schema
+
+var OpportunityInvitationPayload_OpportunityType *smithy.Schema
 
 var OpportunityOrigin = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -2994,6 +4124,320 @@ var OpportunityQuality = smithy.NewSchema(smithy.ShapeID{
 var OpportunityQuality_Score *smithy.Schema
 
 var OpportunityQuality_Trend *smithy.Schema
+
+var OpportunitySearchAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchAccount",
+}, smithy.ShapeTypeStructure, 4)
+var OpportunitySearchAccount_CompanyName *smithy.Schema
+
+var OpportunitySearchAccount_Industry *smithy.Schema
+
+var OpportunitySearchAccount_AwsAccountId *smithy.Schema
+
+var OpportunitySearchAccount_Address *smithy.Schema
+
+var OpportunitySearchAddress = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchAddress",
+}, smithy.ShapeTypeStructure, 1)
+var OpportunitySearchAddress_CountryCode *smithy.Schema
+
+var OpportunitySearchAwsSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchAwsSummary",
+}, smithy.ShapeTypeStructure, 3)
+var OpportunitySearchAwsSummary_Origin *smithy.Schema
+
+var OpportunitySearchAwsSummary_CosellMotion *smithy.Schema
+
+var OpportunitySearchAwsSummary_Insights *smithy.Schema
+
+var OpportunitySearchCustomer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchCustomer",
+}, smithy.ShapeTypeStructure, 1)
+var OpportunitySearchCustomer_Account *smithy.Schema
+
+var OpportunitySearchExpectedCustomerSpend = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchExpectedCustomerSpend",
+}, smithy.ShapeTypeStructure, 2)
+var OpportunitySearchExpectedCustomerSpend_Amount *smithy.Schema
+
+var OpportunitySearchExpectedCustomerSpend_CurrencyCode *smithy.Schema
+
+var _OpportunitySearchExpectedCustomerSpendList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchExpectedCustomerSpendList",
+}, smithy.ShapeTypeList, 1)
+var _OpportunitySearchExpectedCustomerSpendList_member *smithy.Schema
+
+var OpportunitySearchFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchFilter",
+}, smithy.ShapeTypeStructure, 10)
+var OpportunitySearchFilter_AndAllFilters *smithy.Schema
+
+var OpportunitySearchFilter_OrAllFilters *smithy.Schema
+
+var OpportunitySearchFilter_NotFilter *smithy.Schema
+
+var OpportunitySearchFilter_EqualsTo *smithy.Schema
+
+var OpportunitySearchFilter_ContainsAny *smithy.Schema
+
+var OpportunitySearchFilter_ContainsAll *smithy.Schema
+
+var OpportunitySearchFilter_GreaterThan *smithy.Schema
+
+var OpportunitySearchFilter_GreaterThanOrEquals *smithy.Schema
+
+var OpportunitySearchFilter_LessThan *smithy.Schema
+
+var OpportunitySearchFilter_LessThanOrEquals *smithy.Schema
+
+var _OpportunitySearchFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchFilterList",
+}, smithy.ShapeTypeList, 1)
+var _OpportunitySearchFilterList_member *smithy.Schema
+
+var OpportunitySearchFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchFilterName",
+}, smithy.ShapeTypeEnum, 24)
+var OpportunitySearchFilterName_OPPORTUNITY_ID *smithy.Schema
+
+var OpportunitySearchFilterName_STAGE *smithy.Schema
+
+var OpportunitySearchFilterName_REVIEW_STATUS *smithy.Schema
+
+var OpportunitySearchFilterName_CUSTOMER_COMPANY_NAME *smithy.Schema
+
+var OpportunitySearchFilterName_LAST_MODIFIED_DATE *smithy.Schema
+
+var OpportunitySearchFilterName_TARGET_CLOSE_DATE *smithy.Schema
+
+var OpportunitySearchFilterName_CREATED_DATE *smithy.Schema
+
+var OpportunitySearchFilterName_COUNTRY_CODE *smithy.Schema
+
+var OpportunitySearchFilterName_PARTNER_PROJECT_TITLE *smithy.Schema
+
+var OpportunitySearchFilterName_OPPORTUNITY_TYPE *smithy.Schema
+
+var OpportunitySearchFilterName_PARTNER_OPPORTUNITY_IDENTIFIER *smithy.Schema
+
+var OpportunitySearchFilterName_INDUSTRY *smithy.Schema
+
+var OpportunitySearchFilterName_AWS_ACCOUNT_ID *smithy.Schema
+
+var OpportunitySearchFilterName_APN_PROGRAMS *smithy.Schema
+
+var OpportunitySearchFilterName_ORIGIN *smithy.Schema
+
+var OpportunitySearchFilterName_TAGS *smithy.Schema
+
+var OpportunitySearchFilterName_NEXT_STEP *smithy.Schema
+
+var OpportunitySearchFilterName_OFFER_ID *smithy.Schema
+
+var OpportunitySearchFilterName_OFFER_SET_ID *smithy.Schema
+
+var OpportunitySearchFilterName_AWS_MARKETPLACE_SOLUTION *smithy.Schema
+
+var OpportunitySearchFilterName_COSELL_MOTION *smithy.Schema
+
+var OpportunitySearchFilterName_OPPORTUNITY_OWNER *smithy.Schema
+
+var OpportunitySearchFilterName_ESTIMATED_MRR *smithy.Schema
+
+var OpportunitySearchFilterName_ENGAGEMENT_SCORE *smithy.Schema
+
+var OpportunitySearchFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchFilterValue",
+}, smithy.ShapeTypeUnion, 5)
+var OpportunitySearchFilterValue_StringValue *smithy.Schema
+
+var OpportunitySearchFilterValue_StringListValue *smithy.Schema
+
+var OpportunitySearchFilterValue_LongValue *smithy.Schema
+
+var OpportunitySearchFilterValue_DoubleValue *smithy.Schema
+
+var OpportunitySearchFilterValue_DateValue *smithy.Schema
+
+var _OpportunitySearchFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _OpportunitySearchFilterValues_member *smithy.Schema
+
+var OpportunitySearchInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchInsights",
+}, smithy.ShapeTypeStructure, 2)
+var OpportunitySearchInsights_EngagementScore *smithy.Schema
+
+var OpportunitySearchInsights_OpportunityQuality *smithy.Schema
+
+var OpportunitySearchLifeCycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchLifeCycle",
+}, smithy.ShapeTypeStructure, 4)
+var OpportunitySearchLifeCycle_ReviewStatus *smithy.Schema
+
+var OpportunitySearchLifeCycle_Stage *smithy.Schema
+
+var OpportunitySearchLifeCycle_NextSteps *smithy.Schema
+
+var OpportunitySearchLifeCycle_TargetCloseDate *smithy.Schema
+
+var OpportunitySearchOpportunityQuality = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchOpportunityQuality",
+}, smithy.ShapeTypeStructure, 1)
+var OpportunitySearchOpportunityQuality_Score *smithy.Schema
+
+var OpportunitySearchPredicate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchPredicate",
+}, smithy.ShapeTypeStructure, 2)
+var OpportunitySearchPredicate_Key *smithy.Schema
+
+var OpportunitySearchPredicate_Value *smithy.Schema
+
+var OpportunitySearchProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchProject",
+}, smithy.ShapeTypeStructure, 3)
+var OpportunitySearchProject_Title *smithy.Schema
+
+var OpportunitySearchProject_ApnPrograms *smithy.Schema
+
+var OpportunitySearchProject_ExpectedCustomerSpend *smithy.Schema
+
+var OpportunitySearchRelatedEntityIdentifiers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchRelatedEntityIdentifiers",
+}, smithy.ShapeTypeStructure, 4)
+var OpportunitySearchRelatedEntityIdentifiers_AwsMarketplaceOffers *smithy.Schema
+
+var OpportunitySearchRelatedEntityIdentifiers_AwsMarketplaceOfferSets *smithy.Schema
+
+var OpportunitySearchRelatedEntityIdentifiers_AwsMarketplaceSolutions *smithy.Schema
+
+var OpportunitySearchRelatedEntityIdentifiers_Solutions *smithy.Schema
+
+var OpportunitySearchSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchSort",
+}, smithy.ShapeTypeStructure, 2)
+var OpportunitySearchSort_SortBy *smithy.Schema
+
+var OpportunitySearchSort_SortOrder *smithy.Schema
+
+var OpportunitySearchSortName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchSortName",
+}, smithy.ShapeTypeEnum, 23)
+var OpportunitySearchSortName_OPPORTUNITY_ID *smithy.Schema
+
+var OpportunitySearchSortName_STAGE *smithy.Schema
+
+var OpportunitySearchSortName_REVIEW_STATUS *smithy.Schema
+
+var OpportunitySearchSortName_CUSTOMER_COMPANY_NAME *smithy.Schema
+
+var OpportunitySearchSortName_LAST_MODIFIED_DATE *smithy.Schema
+
+var OpportunitySearchSortName_TARGET_CLOSE_DATE *smithy.Schema
+
+var OpportunitySearchSortName_CREATED_DATE *smithy.Schema
+
+var OpportunitySearchSortName_COUNTRY_CODE *smithy.Schema
+
+var OpportunitySearchSortName_PARTNER_PROJECT_TITLE *smithy.Schema
+
+var OpportunitySearchSortName_OPPORTUNITY_TYPE *smithy.Schema
+
+var OpportunitySearchSortName_PARTNER_OPPORTUNITY_IDENTIFIER *smithy.Schema
+
+var OpportunitySearchSortName_INDUSTRY *smithy.Schema
+
+var OpportunitySearchSortName_AWS_ACCOUNT_ID *smithy.Schema
+
+var OpportunitySearchSortName_ORIGIN *smithy.Schema
+
+var OpportunitySearchSortName_NEXT_STEP *smithy.Schema
+
+var OpportunitySearchSortName_COSELL_MOTION *smithy.Schema
+
+var OpportunitySearchSortName_OPPORTUNITY_OWNER *smithy.Schema
+
+var OpportunitySearchSortName_ENGAGEMENT_SCORE *smithy.Schema
+
+var OpportunitySearchSortName_ESTIMATED_MRR *smithy.Schema
+
+var OpportunitySearchSortName_TAGS *smithy.Schema
+
+var OpportunitySearchSortName_OFFER_ID *smithy.Schema
+
+var OpportunitySearchSortName_OFFER_SET_ID *smithy.Schema
+
+var OpportunitySearchSortName_APN_PROGRAMS *smithy.Schema
+
+var _OpportunitySearchSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchSummaries",
+}, smithy.ShapeTypeList, 1)
+var _OpportunitySearchSummaries_member *smithy.Schema
+
+var OpportunitySearchSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchSummary",
+}, smithy.ShapeTypeStructure, 12)
+var OpportunitySearchSummary_Id *smithy.Schema
+
+var OpportunitySearchSummary_LastModifiedDate *smithy.Schema
+
+var OpportunitySearchSummary_CreatedDate *smithy.Schema
+
+var OpportunitySearchSummary_OpportunityType *smithy.Schema
+
+var OpportunitySearchSummary_PartnerOpportunityIdentifier *smithy.Schema
+
+var OpportunitySearchSummary_LifeCycle *smithy.Schema
+
+var OpportunitySearchSummary_Customer *smithy.Schema
+
+var OpportunitySearchSummary_Project *smithy.Schema
+
+var OpportunitySearchSummary_Tags *smithy.Schema
+
+var OpportunitySearchSummary_RelatedEntityIdentifiers *smithy.Schema
+
+var OpportunitySearchSummary_OpportunityTeam *smithy.Schema
+
+var OpportunitySearchSummary_AwsOpportunitySummary *smithy.Schema
+
+var OpportunitySearchTeamMember = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchTeamMember",
+}, smithy.ShapeTypeStructure, 3)
+var OpportunitySearchTeamMember_FirstName *smithy.Schema
+
+var OpportunitySearchTeamMember_LastName *smithy.Schema
+
+var OpportunitySearchTeamMember_BusinessTitle *smithy.Schema
+
+var _OpportunitySearchTeamMembersList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "OpportunitySearchTeamMembersList",
+}, smithy.ShapeTypeList, 1)
+var _OpportunitySearchTeamMembersList_member *smithy.Schema
 
 var OpportunitySort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -3088,6 +4532,11 @@ var ParticipantType_SENDER *smithy.Schema
 
 var ParticipantType_RECEIVER *smithy.Schema
 
+var _PartnerAccountIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "PartnerAccountIdentifier",
+}, smithy.ShapeTypeString, 0)
+
 var _PartnerOpportunityTeamMembersList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "PartnerOpportunityTeamMembersList",
@@ -3097,10 +4546,12 @@ var _PartnerOpportunityTeamMembersList_member *smithy.Schema
 var Payload = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "Payload",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var Payload_OpportunityInvitation *smithy.Schema
 
 var Payload_LeadInvitation *smithy.Schema
+
+var Payload_AccountPlanningInvitation *smithy.Schema
 
 var PaymentFrequency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -3117,6 +4568,14 @@ var _PiiString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "PiiString",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var PreferredContactWindow = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "PreferredContactWindow",
+}, smithy.ShapeTypeStructure, 2)
+var PreferredContactWindow_Window *smithy.Schema
+
+var PreferredContactWindow_Timezone *smithy.Schema
 
 var PrimaryNeedFromAws = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -3395,6 +4854,16 @@ var _ProspectingTaskSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ProspectingTaskSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _ProspectingTaskSummaryList_member *smithy.Schema
+
+var ReadinessLevel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ReadinessLevel",
+}, smithy.ShapeTypeEnum, 3)
+var ReadinessLevel_SALES_READY *smithy.Schema
+
+var ReadinessLevel_MARKETING_READY *smithy.Schema
+
+var ReadinessLevel_LOW_POTENTIAL *smithy.Schema
 
 var ReasonCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -3713,6 +5182,41 @@ var SalesInvolvementType_FOR_VISIBILITY_ONLY *smithy.Schema
 
 var SalesInvolvementType_CO_SELL *smithy.Schema
 
+var _SearchAwsAccount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchAwsAccount",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _SearchCompanyName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchCompanyName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var SearchEngagementScore = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchEngagementScore",
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var SearchEngagementScore_HIGH *smithy.Schema
+
+var SearchEngagementScore_MEDIUM *smithy.Schema
+
+var SearchEngagementScore_LOW *smithy.Schema
+
+var _SearchFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchFilterValue",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _SearchKeyword = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchKeyword",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _SearchTeamMemberName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchTeamMemberName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
 var SenderContact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "SenderContact",
@@ -3830,6 +5334,20 @@ var SolutionStatus_ACTIVE *smithy.Schema
 var SolutionStatus_INACTIVE *smithy.Schema
 
 var SolutionStatus_DRAFT *smithy.Schema
+
+var SortableField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SortableField",
+}, smithy.ShapeTypeEnum, 5)
+var SortableField_COMPANY_NAME *smithy.Schema
+
+var SortableField_CREATED_DATE *smithy.Schema
+
+var SortableField_LAST_MODIFIED_DATE *smithy.Schema
+
+var SortableField_MARKETPLACE_ENGAGEMENT_SCORE *smithy.Schema
+
+var SortableField_SOLUTION_SCORE *smithy.Schema
 
 var SortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -4009,6 +5527,11 @@ var _UseCases = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _UseCases_member *smithy.Schema
 
+var _UtcTimeOfDay = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "UtcTimeOfDay",
+}, smithy.ShapeTypeString, 0)
+
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "ValidationException",
@@ -4110,6 +5633,36 @@ var AssociateOpportunityRequest_OpportunityIdentifier *smithy.Schema
 var AssociateOpportunityRequest_RelatedEntityType *smithy.Schema
 
 var AssociateOpportunityRequest_RelatedEntityIdentifier *smithy.Schema
+
+var CreateCustomerAccountRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CreateCustomerAccountRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateCustomerAccountRequest_Catalog *smithy.Schema
+
+var CreateCustomerAccountRequest_Account *smithy.Schema
+
+var CreateCustomerAccountRequest_PartnerAccountIdentifier *smithy.Schema
+
+var CreateCustomerAccountRequest_Tags *smithy.Schema
+
+var CreateCustomerAccountRequest_ClientToken *smithy.Schema
+
+var CreateCustomerAccountResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "CreateCustomerAccountResponse",
+}, smithy.ShapeTypeStructure, 6)
+var CreateCustomerAccountResponse_Arn *smithy.Schema
+
+var CreateCustomerAccountResponse_Id *smithy.Schema
+
+var CreateCustomerAccountResponse_Status *smithy.Schema
+
+var CreateCustomerAccountResponse_Catalog *smithy.Schema
+
+var CreateCustomerAccountResponse_PartnerAccountIdentifier *smithy.Schema
+
+var CreateCustomerAccountResponse_CreatedDate *smithy.Schema
 
 var CreateEngagementContextRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -4273,6 +5826,19 @@ var CreateResourceSnapshotResponse_Arn *smithy.Schema
 
 var CreateResourceSnapshotResponse_Revision *smithy.Schema
 
+var DeleteCustomerAccountRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "DeleteCustomerAccountRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteCustomerAccountRequest_Catalog *smithy.Schema
+
+var DeleteCustomerAccountRequest_Identifier *smithy.Schema
+
+var DeleteCustomerAccountResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "DeleteCustomerAccountResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var DeleteResourceSnapshotJobRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "DeleteResourceSnapshotJobRequest",
@@ -4304,7 +5870,7 @@ var GetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier *smithy.Schema
 var GetAwsOpportunitySummaryResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "GetAwsOpportunitySummaryResponse",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var GetAwsOpportunitySummaryResponse_RelatedOpportunityId *smithy.Schema
 
 var GetAwsOpportunitySummaryResponse_Origin *smithy.Schema
@@ -4329,9 +5895,131 @@ var GetAwsOpportunitySummaryResponse_Project *smithy.Schema
 
 var GetAwsOpportunitySummaryResponse_CosellMotion *smithy.Schema
 
+var GetAwsOpportunitySummaryResponse_CosellMotionReason *smithy.Schema
+
 var GetAwsOpportunitySummaryResponse_SoftwareRevenue *smithy.Schema
 
 var GetAwsOpportunitySummaryResponse_Catalog *smithy.Schema
+
+var GetCustomerAccountBulkJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountBulkJobRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetCustomerAccountBulkJobRequest_Catalog *smithy.Schema
+
+var GetCustomerAccountBulkJobRequest_Identifier *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountBulkJobResponse",
+}, smithy.ShapeTypeStructure, 12)
+var GetCustomerAccountBulkJobResponse_Arn *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_Id *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_Status *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_FileName *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_TotalRecords *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_ProcessedRecords *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_SuccessCount *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_FailureCount *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_DeletedCount *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_FailureReason *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_CreatedAt *smithy.Schema
+
+var GetCustomerAccountBulkJobResponse_CompletedAt *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountBulkJobReportUrlRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetCustomerAccountBulkJobReportUrlRequest_Catalog *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlRequest_Identifier *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlRequest_ReportType *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountBulkJobReportUrlResponse",
+}, smithy.ShapeTypeStructure, 5)
+var GetCustomerAccountBulkJobReportUrlResponse_ReportStatus *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlResponse_ReportType *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlResponse_Url *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlResponse_ExpiresAt *smithy.Schema
+
+var GetCustomerAccountBulkJobReportUrlResponse_FailureReason *smithy.Schema
+
+var GetCustomerAccountRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetCustomerAccountRequest_Catalog *smithy.Schema
+
+var GetCustomerAccountRequest_Identifier *smithy.Schema
+
+var GetCustomerAccountResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountResponse",
+}, smithy.ShapeTypeStructure, 14)
+var GetCustomerAccountResponse_Arn *smithy.Schema
+
+var GetCustomerAccountResponse_Id *smithy.Schema
+
+var GetCustomerAccountResponse_Catalog *smithy.Schema
+
+var GetCustomerAccountResponse_EnrichmentStatus *smithy.Schema
+
+var GetCustomerAccountResponse_PartnerAccountIdentifier *smithy.Schema
+
+var GetCustomerAccountResponse_CreatedDate *smithy.Schema
+
+var GetCustomerAccountResponse_LastModifiedDate *smithy.Schema
+
+var GetCustomerAccountResponse_Issues *smithy.Schema
+
+var GetCustomerAccountResponse_AwsEnrichment *smithy.Schema
+
+var GetCustomerAccountResponse_ReasonCode *smithy.Schema
+
+var GetCustomerAccountResponse_Message *smithy.Schema
+
+var GetCustomerAccountResponse_ExistingCustomerAccountArn *smithy.Schema
+
+var GetCustomerAccountResponse_Account *smithy.Schema
+
+var GetCustomerAccountResponse_Tags *smithy.Schema
+
+var GetCustomerAccountStatisticsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountStatisticsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var GetCustomerAccountStatisticsRequest_Catalog *smithy.Schema
+
+var GetCustomerAccountStatisticsRequest_Filter *smithy.Schema
+
+var GetCustomerAccountStatisticsRequest_Aggregations *smithy.Schema
+
+var GetCustomerAccountStatisticsRequest_IncludeMissing *smithy.Schema
+
+var GetCustomerAccountStatisticsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetCustomerAccountStatisticsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var GetCustomerAccountStatisticsResponse_TotalCount *smithy.Schema
+
+var GetCustomerAccountStatisticsResponse_Aggregations *smithy.Schema
 
 var GetEngagementRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -4412,6 +6100,34 @@ var GetEngagementResponse_ModifiedAt *smithy.Schema
 var GetEngagementResponse_ModifiedBy *smithy.Schema
 
 var GetEngagementResponse_Contexts *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetOpportunityBulkJobReportUrlRequest",
+}, smithy.ShapeTypeStructure, 4)
+var GetOpportunityBulkJobReportUrlRequest_Catalog *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlRequest_JobId *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlRequest_ReportFormat *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlRequest_ReportType *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "GetOpportunityBulkJobReportUrlResponse",
+}, smithy.ShapeTypeStructure, 6)
+var GetOpportunityBulkJobReportUrlResponse_ReportStatus *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlResponse_ReportType *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlResponse_ReportFormat *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlResponse_Url *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlResponse_ExpiresAt *smithy.Schema
+
+var GetOpportunityBulkJobReportUrlResponse_FailureReason *smithy.Schema
 
 var GetOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -4573,6 +6289,48 @@ var GetSellingSystemSettingsResponse_Catalog *smithy.Schema
 
 var GetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn *smithy.Schema
 
+var ListCustomerAccountBulkJobResultsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListCustomerAccountBulkJobResultsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListCustomerAccountBulkJobResultsRequest_Catalog *smithy.Schema
+
+var ListCustomerAccountBulkJobResultsRequest_Identifier *smithy.Schema
+
+var ListCustomerAccountBulkJobResultsRequest_Status *smithy.Schema
+
+var ListCustomerAccountBulkJobResultsRequest_MaxResults *smithy.Schema
+
+var ListCustomerAccountBulkJobResultsRequest_NextToken *smithy.Schema
+
+var ListCustomerAccountBulkJobResultsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListCustomerAccountBulkJobResultsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListCustomerAccountBulkJobResultsResponse_Results *smithy.Schema
+
+var ListCustomerAccountBulkJobResultsResponse_NextToken *smithy.Schema
+
+var ListCustomerAccountBulkJobsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListCustomerAccountBulkJobsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListCustomerAccountBulkJobsRequest_Catalog *smithy.Schema
+
+var ListCustomerAccountBulkJobsRequest_Filter *smithy.Schema
+
+var ListCustomerAccountBulkJobsRequest_MaxResults *smithy.Schema
+
+var ListCustomerAccountBulkJobsRequest_NextToken *smithy.Schema
+
+var ListCustomerAccountBulkJobsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListCustomerAccountBulkJobsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListCustomerAccountBulkJobsResponse_items *smithy.Schema
+
+var ListCustomerAccountBulkJobsResponse_NextToken *smithy.Schema
+
 var ListEngagementByAcceptingInvitationTasksRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "ListEngagementByAcceptingInvitationTasksRequest",
@@ -4628,6 +6386,30 @@ var ListEngagementFromOpportunityTasksResponse = smithy.NewSchema(smithy.ShapeID
 var ListEngagementFromOpportunityTasksResponse_TaskSummaries *smithy.Schema
 
 var ListEngagementFromOpportunityTasksResponse_NextToken *smithy.Schema
+
+var ListEngagementGroupsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListEngagementGroupsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListEngagementGroupsRequest_Catalog *smithy.Schema
+
+var ListEngagementGroupsRequest_ReadinessLevel *smithy.Schema
+
+var ListEngagementGroupsRequest_Sort *smithy.Schema
+
+var ListEngagementGroupsRequest_EngagementGroupIdentifiers *smithy.Schema
+
+var ListEngagementGroupsRequest_MaxResults *smithy.Schema
+
+var ListEngagementGroupsRequest_NextToken *smithy.Schema
+
+var ListEngagementGroupsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListEngagementGroupsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListEngagementGroupsResponse_EngagementGroupSummaries *smithy.Schema
+
+var ListEngagementGroupsResponse_NextToken *smithy.Schema
 
 var ListEngagementInvitationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -4768,6 +6550,50 @@ var ListOpportunitiesResponse = smithy.NewSchema(smithy.ShapeID{
 var ListOpportunitiesResponse_OpportunitySummaries *smithy.Schema
 
 var ListOpportunitiesResponse_NextToken *smithy.Schema
+
+var ListOpportunityBulkJobResultsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListOpportunityBulkJobResultsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListOpportunityBulkJobResultsRequest_Catalog *smithy.Schema
+
+var ListOpportunityBulkJobResultsRequest_MaxResults *smithy.Schema
+
+var ListOpportunityBulkJobResultsRequest_NextToken *smithy.Schema
+
+var ListOpportunityBulkJobResultsRequest_JobId *smithy.Schema
+
+var ListOpportunityBulkJobResultsRequest_Status *smithy.Schema
+
+var ListOpportunityBulkJobResultsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListOpportunityBulkJobResultsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListOpportunityBulkJobResultsResponse_Results *smithy.Schema
+
+var ListOpportunityBulkJobResultsResponse_NextToken *smithy.Schema
+
+var ListOpportunityBulkJobsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListOpportunityBulkJobsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListOpportunityBulkJobsRequest_Catalog *smithy.Schema
+
+var ListOpportunityBulkJobsRequest_MaxResults *smithy.Schema
+
+var ListOpportunityBulkJobsRequest_NextToken *smithy.Schema
+
+var ListOpportunityBulkJobsRequest_JobId *smithy.Schema
+
+var ListOpportunityBulkJobsRequest_Status *smithy.Schema
+
+var ListOpportunityBulkJobsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "ListOpportunityBulkJobsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListOpportunityBulkJobsResponse_OpportunityBulkJobSummaries *smithy.Schema
+
+var ListOpportunityBulkJobsResponse_NextToken *smithy.Schema
 
 var ListOpportunityFromEngagementTasksRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -4945,6 +6771,100 @@ var RejectEngagementInvitationRequest_Identifier *smithy.Schema
 
 var RejectEngagementInvitationRequest_RejectionReason *smithy.Schema
 
+var SearchCustomerAccountsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchCustomerAccountsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var SearchCustomerAccountsRequest_Catalog *smithy.Schema
+
+var SearchCustomerAccountsRequest_Filter *smithy.Schema
+
+var SearchCustomerAccountsRequest_Sort *smithy.Schema
+
+var SearchCustomerAccountsRequest_MaxResults *smithy.Schema
+
+var SearchCustomerAccountsRequest_NextToken *smithy.Schema
+
+var SearchCustomerAccountsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchCustomerAccountsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var SearchCustomerAccountsResponse_CustomerAccountSummaries *smithy.Schema
+
+var SearchCustomerAccountsResponse_NextToken *smithy.Schema
+
+var SearchEngagementsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchEngagementsRequest",
+}, smithy.ShapeTypeStructure, 7)
+var SearchEngagementsRequest_Catalog *smithy.Schema
+
+var SearchEngagementsRequest_Keyword *smithy.Schema
+
+var SearchEngagementsRequest_Filter *smithy.Schema
+
+var SearchEngagementsRequest_GroupId *smithy.Schema
+
+var SearchEngagementsRequest_Sort *smithy.Schema
+
+var SearchEngagementsRequest_MaxResults *smithy.Schema
+
+var SearchEngagementsRequest_NextToken *smithy.Schema
+
+var SearchEngagementsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchEngagementsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var SearchEngagementsResponse_EngagementSearchSummaries *smithy.Schema
+
+var SearchEngagementsResponse_NextToken *smithy.Schema
+
+var SearchOpportunitiesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchOpportunitiesRequest",
+}, smithy.ShapeTypeStructure, 6)
+var SearchOpportunitiesRequest_Catalog *smithy.Schema
+
+var SearchOpportunitiesRequest_MaxResults *smithy.Schema
+
+var SearchOpportunitiesRequest_NextToken *smithy.Schema
+
+var SearchOpportunitiesRequest_Keyword *smithy.Schema
+
+var SearchOpportunitiesRequest_Filter *smithy.Schema
+
+var SearchOpportunitiesRequest_Sort *smithy.Schema
+
+var SearchOpportunitiesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "SearchOpportunitiesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var SearchOpportunitiesResponse_OpportunitySearchSummaries *smithy.Schema
+
+var SearchOpportunitiesResponse_NextToken *smithy.Schema
+
+var StartCustomerAccountBulkJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "StartCustomerAccountBulkJobRequest",
+}, smithy.ShapeTypeStructure, 3)
+var StartCustomerAccountBulkJobRequest_Catalog *smithy.Schema
+
+var StartCustomerAccountBulkJobRequest_ClientToken *smithy.Schema
+
+var StartCustomerAccountBulkJobRequest_FileUri *smithy.Schema
+
+var StartCustomerAccountBulkJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "StartCustomerAccountBulkJobResponse",
+}, smithy.ShapeTypeStructure, 4)
+var StartCustomerAccountBulkJobResponse_Arn *smithy.Schema
+
+var StartCustomerAccountBulkJobResponse_Id *smithy.Schema
+
+var StartCustomerAccountBulkJobResponse_Status *smithy.Schema
+
+var StartCustomerAccountBulkJobResponse_CreatedAt *smithy.Schema
+
 var StartEngagementByAcceptingInvitationTaskRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "StartEngagementByAcceptingInvitationTaskRequest",
@@ -5016,6 +6936,24 @@ var StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId *smithy.Sch
 var StartEngagementFromOpportunityTaskResponse_EngagementId *smithy.Schema
 
 var StartEngagementFromOpportunityTaskResponse_EngagementInvitationId *smithy.Schema
+
+var StartOpportunityBulkJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "StartOpportunityBulkJobRequest",
+}, smithy.ShapeTypeStructure, 4)
+var StartOpportunityBulkJobRequest_Catalog *smithy.Schema
+
+var StartOpportunityBulkJobRequest_ClientToken *smithy.Schema
+
+var StartOpportunityBulkJobRequest_FileURI *smithy.Schema
+
+var StartOpportunityBulkJobRequest_FileFormat *smithy.Schema
+
+var StartOpportunityBulkJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "StartOpportunityBulkJobResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartOpportunityBulkJobResponse_JobId *smithy.Schema
 
 var StartOpportunityFromEngagementTaskRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
@@ -5141,6 +7079,38 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateCustomerAccountRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "UpdateCustomerAccountRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateCustomerAccountRequest_Catalog *smithy.Schema
+
+var UpdateCustomerAccountRequest_Identifier *smithy.Schema
+
+var UpdateCustomerAccountRequest_Account *smithy.Schema
+
+var UpdateCustomerAccountRequest_PartnerAccountIdentifier *smithy.Schema
+
+var UpdateCustomerAccountRequest_LastModifiedDate *smithy.Schema
+
+var UpdateCustomerAccountResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralselling",
+	Name:      "UpdateCustomerAccountResponse",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateCustomerAccountResponse_Arn *smithy.Schema
+
+var UpdateCustomerAccountResponse_Id *smithy.Schema
+
+var UpdateCustomerAccountResponse_Status *smithy.Schema
+
+var UpdateCustomerAccountResponse_Catalog *smithy.Schema
+
+var UpdateCustomerAccountResponse_PartnerAccountIdentifier *smithy.Schema
+
+var UpdateCustomerAccountResponse_CreatedDate *smithy.Schema
+
+var UpdateCustomerAccountResponse_LastModifiedDate *smithy.Schema
+
 var UpdateEngagementContextRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralselling",
 	Name:      "UpdateEngagementContextRequest",
@@ -5209,6 +7179,12 @@ var UpdateOpportunityResponse_LastModifiedDate *smithy.Schema
 // initialization cycles
 func init() {
 	AccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE = AccessDeniedExceptionErrorCode.AddMember("INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE", smithyprelude.Unit)
+
+	AccessDeniedExceptionErrorCode_SEARCH_OPPORTUNITIES_NOT_ENABLED = AccessDeniedExceptionErrorCode.AddMember("SEARCH_OPPORTUNITIES_NOT_ENABLED", smithyprelude.Unit)
+
+	AccessDeniedExceptionErrorCode_SEARCH_OPPORTUNITIES_DATA_NOT_ROUTED_TO_DDB = AccessDeniedExceptionErrorCode.AddMember("SEARCH_OPPORTUNITIES_DATA_NOT_ROUTED_TO_DDB", smithyprelude.Unit)
+
+	AccessDeniedExceptionErrorCode_OPPORTUNITY_BULK_JOB_NOT_ENABLED = AccessDeniedExceptionErrorCode.AddMember("OPPORTUNITY_BULK_JOB_NOT_ENABLED", smithyprelude.Unit)
 
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
 
@@ -5792,6 +7768,46 @@ func init() {
 
 	Account_Duns = Account.AddMember("Duns", _DunsNumber)
 
+	AccountCustomer_Industry = AccountCustomer.AddMember("Industry", _LeadIndustry)
+
+	AccountCustomer_CompanyName = AccountCustomer.AddMember("CompanyName", _CompanyName)
+
+	AccountCustomer_WebsiteUrl = AccountCustomer.AddMember("WebsiteUrl", _AccountWebsiteUrl)
+
+	AccountCustomer_CountryCode = AccountCustomer.AddMember("CountryCode", CountryCode)
+
+	_AccountFilterStringList_member = _AccountFilterStringList.AddMember("member", smithyprelude.String)
+
+	SenderContact_Email = SenderContact.AddMember("Email", _SenderContactEmail)
+
+	SenderContact_FirstName = SenderContact.AddMember("FirstName", _Name)
+
+	SenderContact_LastName = SenderContact.AddMember("LastName", _Name)
+
+	SenderContact_BusinessTitle = SenderContact.AddMember("BusinessTitle", _JobTitle)
+
+	SenderContact_Phone = SenderContact.AddMember("Phone", _PhoneNumber)
+
+	_SenderContactList_member = _SenderContactList.AddMember("member", SenderContact)
+
+	ContactWindow_MORNING = ContactWindow.AddMember("MORNING", smithyprelude.Unit)
+
+	ContactWindow_AFTERNOON = ContactWindow.AddMember("AFTERNOON", smithyprelude.Unit)
+
+	ContactWindow_EVENING = ContactWindow.AddMember("EVENING", smithyprelude.Unit)
+
+	PreferredContactWindow_Window = PreferredContactWindow.AddMember("Window", ContactWindow)
+
+	PreferredContactWindow_Timezone = PreferredContactWindow.AddMember("Timezone", smithyprelude.String)
+
+	AccountPlanningInvitationPayload_AccountIdentifier = AccountPlanningInvitationPayload.AddMember("AccountIdentifier", _CustomerAccountArnOrIdentifier)
+
+	AccountPlanningInvitationPayload_Customer = AccountPlanningInvitationPayload.AddMember("Customer", AccountCustomer)
+
+	AccountPlanningInvitationPayload_SenderContacts = AccountPlanningInvitationPayload.AddMember("SenderContacts", _SenderContactList)
+
+	AccountPlanningInvitationPayload_PreferredContact = AccountPlanningInvitationPayload.AddMember("PreferredContact", PreferredContactWindow)
+
 	AccountReceiver_Alias = AccountReceiver.AddMember("Alias", _Alias)
 
 	AccountReceiver_AwsAccountId = AccountReceiver.AddMember("AwsAccountId", _AwsAccount)
@@ -5813,6 +7829,50 @@ func init() {
 	AccountSummary_WebsiteUrl = AccountSummary.AddMember("WebsiteUrl", _WebsiteUrl)
 
 	AccountSummary_Address = AccountSummary.AddMember("Address", AddressSummary)
+
+	AggregatableField_ENRICHMENT_STATUS = AggregatableField.AddMember("ENRICHMENT_STATUS", smithyprelude.Unit)
+
+	AggregatableField_AWS_INDUSTRY = AggregatableField.AddMember("AWS_INDUSTRY", smithyprelude.Unit)
+
+	AggregatableField_SEGMENT = AggregatableField.AddMember("SEGMENT", smithyprelude.Unit)
+
+	AggregatableField_REGION = AggregatableField.AddMember("REGION", smithyprelude.Unit)
+
+	AggregatableField_SOLUTION_CATEGORY = AggregatableField.AddMember("SOLUTION_CATEGORY", smithyprelude.Unit)
+
+	AggregatableField_ACCOUNT_PLANNING_QUALIFICATION = AggregatableField.AddMember("ACCOUNT_PLANNING_QUALIFICATION", smithyprelude.Unit)
+
+	AggregatableField_PROGRAM_ELIGIBILITY = AggregatableField.AddMember("PROGRAM_ELIGIBILITY", smithyprelude.Unit)
+
+	AggregatableField_MARKETPLACE_ENGAGEMENT_SCORE = AggregatableField.AddMember("MARKETPLACE_ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	AggregatableField_GEO = AggregatableField.AddMember("GEO", smithyprelude.Unit)
+
+	AggregatableField_COUNTRY = AggregatableField.AddMember("COUNTRY", smithyprelude.Unit)
+
+	AggregatableField_SOLUTION_SCORE = AggregatableField.AddMember("SOLUTION_SCORE", smithyprelude.Unit)
+
+	_AggregatableFieldList_member = _AggregatableFieldList.AddMember("member", AggregatableField)
+
+	AggregationRequest_GroupBy = AggregationRequest.AddMember("GroupBy", _AggregatableFieldList)
+
+	_AggregationRequestList_member = _AggregationRequestList.AddMember("member", AggregationRequest)
+
+	_BucketValueList_member = _BucketValueList.AddMember("member", smithyprelude.String)
+
+	Bucket_Values = Bucket.AddMember("Values", _BucketValueList)
+
+	Bucket_Count = Bucket.AddMember("Count", smithyprelude.Integer)
+
+	_BucketList_member = _BucketList.AddMember("member", Bucket)
+
+	AggregationResult_GroupBy = AggregationResult.AddMember("GroupBy", _AggregatableFieldList)
+
+	AggregationResult_Buckets = AggregationResult.AddMember("Buckets", _BucketList)
+
+	AggregationResult_OtherCount = AggregationResult.AddMember("OtherCount", smithyprelude.Integer)
+
+	_AggregationResultList_member = _AggregationResultList.AddMember("member", AggregationResult)
 
 	_AmountMap_key = _AmountMap.AddMember("key", smithyprelude.String)
 
@@ -5929,6 +7989,66 @@ func init() {
 	AwsClosedLostReason_TECHNICAL_LIMITATIONS = AwsClosedLostReason.AddMember("TECHNICAL_LIMITATIONS", smithyprelude.Unit)
 
 	AwsClosedLostReason_TERM_SHEET_IMPASSE = AwsClosedLostReason.AddMember("TERM_SHEET_IMPASSE", smithyprelude.Unit)
+
+	_EligibleProgramList_member = _EligibleProgramList.AddMember("member", smithyprelude.String)
+
+	AwsEnrichmentCustomer_AccountName = AwsEnrichmentCustomer.AddMember("AccountName", smithyprelude.String)
+
+	AwsEnrichmentCustomer_Industry = AwsEnrichmentCustomer.AddMember("Industry", smithyprelude.String)
+
+	AwsEnrichmentCustomer_SubIndustry = AwsEnrichmentCustomer.AddMember("SubIndustry", smithyprelude.String)
+
+	AwsEnrichmentCustomer_Sector = AwsEnrichmentCustomer.AddMember("Sector", smithyprelude.String)
+
+	AwsEnrichmentCustomer_Segment = AwsEnrichmentCustomer.AddMember("Segment", smithyprelude.String)
+
+	AwsEnrichmentCustomer_CompanySize = AwsEnrichmentCustomer.AddMember("CompanySize", smithyprelude.String)
+
+	AwsEnrichmentCustomer_Region = AwsEnrichmentCustomer.AddMember("Region", smithyprelude.String)
+
+	AwsEnrichmentCustomer_SubRegion = AwsEnrichmentCustomer.AddMember("SubRegion", smithyprelude.String)
+
+	AwsEnrichmentCustomer_Geo = AwsEnrichmentCustomer.AddMember("Geo", smithyprelude.String)
+
+	AwsEnrichmentCustomer_Country = AwsEnrichmentCustomer.AddMember("Country", smithyprelude.String)
+
+	AwsEnrichmentCustomer_CustomerAccountPlanningQualification = AwsEnrichmentCustomer.AddMember("CustomerAccountPlanningQualification", smithyprelude.String)
+
+	AwsEnrichmentCustomer_EligiblePrograms = AwsEnrichmentCustomer.AddMember("EligiblePrograms", _EligibleProgramList)
+
+	AwsEnrichmentInsights_MarketplaceEngagementScore = AwsEnrichmentInsights.AddMember("MarketplaceEngagementScore", smithyprelude.String)
+
+	AwsEnrichmentInsights_SolutionCategory = AwsEnrichmentInsights.AddMember("SolutionCategory", smithyprelude.String)
+
+	AwsEnrichmentInsights_SolutionScore = AwsEnrichmentInsights.AddMember("SolutionScore", smithyprelude.String)
+
+	AwsEnrichmentInsights_SolutionSubCategory = AwsEnrichmentInsights.AddMember("SolutionSubCategory", smithyprelude.String)
+
+	AwsEnrichment_Customer = AwsEnrichment.AddMember("Customer", AwsEnrichmentCustomer)
+
+	AwsEnrichment_Insights = AwsEnrichment.AddMember("Insights", AwsEnrichmentInsights)
+
+	AwsEnrichmentCustomerSummary_Industry = AwsEnrichmentCustomerSummary.AddMember("Industry", smithyprelude.String)
+
+	AwsEnrichmentCustomerSummary_AccountPlanningQualification = AwsEnrichmentCustomerSummary.AddMember("AccountPlanningQualification", _EnrichmentValue)
+
+	AwsEnrichmentCustomerSummary_EligiblePrograms = AwsEnrichmentCustomerSummary.AddMember("EligiblePrograms", _EligibleProgramList)
+
+	AwsEnrichmentCustomerSummary_Geo = AwsEnrichmentCustomerSummary.AddMember("Geo", smithyprelude.String)
+
+	AwsEnrichmentCustomerSummary_Country = AwsEnrichmentCustomerSummary.AddMember("Country", smithyprelude.String)
+
+	AwsEnrichmentCustomerSummary_Segment = AwsEnrichmentCustomerSummary.AddMember("Segment", smithyprelude.String)
+
+	AwsEnrichmentInsightsSummary_MarketplaceEngagementScore = AwsEnrichmentInsightsSummary.AddMember("MarketplaceEngagementScore", smithyprelude.String)
+
+	AwsEnrichmentInsightsSummary_SolutionCategory = AwsEnrichmentInsightsSummary.AddMember("SolutionCategory", smithyprelude.String)
+
+	AwsEnrichmentInsightsSummary_SolutionScore = AwsEnrichmentInsightsSummary.AddMember("SolutionScore", smithyprelude.String)
+
+	AwsEnrichmentSummary_Customer = AwsEnrichmentSummary.AddMember("Customer", AwsEnrichmentCustomerSummary)
+
+	AwsEnrichmentSummary_Insights = AwsEnrichmentSummary.AddMember("Insights", AwsEnrichmentInsightsSummary)
 
 	AwsFundingUsed_YES = AwsFundingUsed.AddMember("YES", smithyprelude.Unit)
 
@@ -6546,11 +8666,79 @@ func init() {
 
 	AwsOpportunitySummaryFullView_CosellMotion = AwsOpportunitySummaryFullView.AddMember("CosellMotion", smithyprelude.String)
 
+	AwsOpportunitySummaryFullView_CosellMotionReason = AwsOpportunitySummaryFullView.AddMember("CosellMotionReason", smithyprelude.String)
+
 	AwsOpportunitySummaryFullView_SoftwareRevenue = AwsOpportunitySummaryFullView.AddMember("SoftwareRevenue", AwsSoftwareRevenue)
 
 	AwsSubmission_InvolvementType = AwsSubmission.AddMember("InvolvementType", SalesInvolvementType)
 
 	AwsSubmission_Visibility = AwsSubmission.AddMember("Visibility", Visibility)
+
+	DayOfWeek_MONDAY = DayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
+
+	DayOfWeek_TUESDAY = DayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
+
+	DayOfWeek_WEDNESDAY = DayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
+
+	DayOfWeek_THURSDAY = DayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
+
+	DayOfWeek_FRIDAY = DayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
+
+	DayOfWeek_SATURDAY = DayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
+
+	DayOfWeek_SUNDAY = DayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
+
+	BestOutreachWindow_Day = BestOutreachWindow.AddMember("Day", DayOfWeek)
+
+	BestOutreachWindow_StartTimeUtc = BestOutreachWindow.AddMember("StartTimeUtc", _UtcTimeOfDay)
+
+	BestOutreachWindow_EndTimeUtc = BestOutreachWindow.AddMember("EndTimeUtc", _UtcTimeOfDay)
+
+	_BestOutreachWindowList_member = _BestOutreachWindowList.AddMember("member", BestOutreachWindow)
+
+	BulkFileFormat_CSV = BulkFileFormat.AddMember("CSV", smithyprelude.Unit)
+
+	BulkRecordStatus_SUCCEEDED = BulkRecordStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	BulkRecordStatus_FAILED = BulkRecordStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	BulkJobResult_RequestId = BulkJobResult.AddMember("RequestId", smithyprelude.String)
+
+	BulkJobResult_Status = BulkJobResult.AddMember("Status", BulkRecordStatus)
+
+	BulkJobResult_ResourceIdentifier = BulkJobResult.AddMember("ResourceIdentifier", smithyprelude.String)
+
+	BulkJobResult_ErrorCode = BulkJobResult.AddMember("ErrorCode", smithyprelude.String)
+
+	BulkJobResult_ErrorMessage = BulkJobResult.AddMember("ErrorMessage", smithyprelude.String)
+
+	_BulkJobResultList_member = _BulkJobResultList.AddMember("member", BulkJobResult)
+
+	BulkJobStatus_SUBMITTED = BulkJobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
+
+	BulkJobStatus_IN_PROGRESS = BulkJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	BulkJobStatus_COMPLETED = BulkJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	BulkJobStatus_FAILED = BulkJobStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	BulkOperationType_BULK_CREATE = BulkOperationType.AddMember("BULK_CREATE", smithyprelude.Unit)
+
+	BulkOperationType_BULK_UPDATE = BulkOperationType.AddMember("BULK_UPDATE", smithyprelude.Unit)
+
+	BulkReportStatus_NOT_STARTED = BulkReportStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
+
+	BulkReportStatus_IN_PROGRESS = BulkReportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	BulkReportStatus_AVAILABLE = BulkReportStatus.AddMember("AVAILABLE", smithyprelude.Unit)
+
+	BulkReportStatus_FAILED = BulkReportStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	BulkReportStatus_EXPIRED = BulkReportStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	BulkReportType_FAILED_RECORDS = BulkReportType.AddMember("FAILED_RECORDS", smithyprelude.Unit)
+
+	BulkReportType_ALL_RECORDS = BulkReportType.AddMember("ALL_RECORDS", smithyprelude.Unit)
 
 	Channel_AWS_MARKETING_CENTRAL = Channel.AddMember("AWS_MARKETING_CENTRAL", smithyprelude.Unit)
 
@@ -6577,6 +8765,10 @@ func init() {
 	Channel_VIDEO = Channel.AddMember("VIDEO", smithyprelude.Unit)
 
 	Channel_VIRTUAL_EVENT = Channel.AddMember("VIRTUAL_EVENT", smithyprelude.Unit)
+
+	ChannelRecommendation_RecommendedChannel = ChannelRecommendation.AddMember("RecommendedChannel", _ChannelName)
+
+	ChannelRecommendation_BestOutreachWindows = ChannelRecommendation.AddMember("BestOutreachWindows", _BestOutreachWindowList)
 
 	_Channels_member = _Channels.AddMember("member", Channel)
 
@@ -6652,6 +8844,114 @@ func init() {
 
 	Customer_Contacts = Customer.AddMember("Contacts", _CustomerContactsList)
 
+	CustomerAccountBulkJobFilter_Identifier = CustomerAccountBulkJobFilter.AddMember("Identifier", _BulkJobArnOrIdentifier)
+
+	CustomerAccountBulkJobFilter_Status = CustomerAccountBulkJobFilter.AddMember("Status", BulkJobStatus)
+
+	CustomerAccountBulkJobSummary_Arn = CustomerAccountBulkJobSummary.AddMember("Arn", _BulkJobArn)
+
+	CustomerAccountBulkJobSummary_Id = CustomerAccountBulkJobSummary.AddMember("Id", _JobId)
+
+	CustomerAccountBulkJobSummary_Status = CustomerAccountBulkJobSummary.AddMember("Status", BulkJobStatus)
+
+	CustomerAccountBulkJobSummary_FileName = CustomerAccountBulkJobSummary.AddMember("FileName", _FileName)
+
+	CustomerAccountBulkJobSummary_TotalRecords = CustomerAccountBulkJobSummary.AddMember("TotalRecords", smithyprelude.Integer)
+
+	CustomerAccountBulkJobSummary_ProcessedRecords = CustomerAccountBulkJobSummary.AddMember("ProcessedRecords", smithyprelude.Integer)
+
+	CustomerAccountBulkJobSummary_SuccessCount = CustomerAccountBulkJobSummary.AddMember("SuccessCount", smithyprelude.Integer)
+
+	CustomerAccountBulkJobSummary_FailureCount = CustomerAccountBulkJobSummary.AddMember("FailureCount", smithyprelude.Integer)
+
+	CustomerAccountBulkJobSummary_DeletedCount = CustomerAccountBulkJobSummary.AddMember("DeletedCount", smithyprelude.Integer)
+
+	CustomerAccountBulkJobSummary_FailureReason = CustomerAccountBulkJobSummary.AddMember("FailureReason", smithyprelude.String)
+
+	CustomerAccountBulkJobSummary_CreatedAt = CustomerAccountBulkJobSummary.AddMember("CreatedAt", _DateTime)
+
+	CustomerAccountBulkJobSummary_CompletedAt = CustomerAccountBulkJobSummary.AddMember("CompletedAt", _DateTime)
+
+	_CustomerAccountBulkJobSummaryList_member = _CustomerAccountBulkJobSummaryList.AddMember("member", CustomerAccountBulkJobSummary)
+
+	CustomerAccountContext_AccountIdentifier = CustomerAccountContext.AddMember("AccountIdentifier", _CustomerAccountArnOrIdentifier)
+
+	CustomerAccountContext_Customer = CustomerAccountContext.AddMember("Customer", AccountCustomer)
+
+	CustomerAccountData_CompanyName = CustomerAccountData.AddMember("CompanyName", _Name)
+
+	CustomerAccountData_WebsiteUrl = CustomerAccountData.AddMember("WebsiteUrl", _WebsiteUrl)
+
+	CustomerAccountData_Duns = CustomerAccountData.AddMember("Duns", _DunsNumber)
+
+	CustomerAccountData_Address = CustomerAccountData.AddMember("Address", Address)
+
+	CustomerAccountData_Industry = CustomerAccountData.AddMember("Industry", smithyprelude.String)
+
+	CustomerAccountData_OtherIndustry = CustomerAccountData.AddMember("OtherIndustry", smithyprelude.String)
+
+	CustomerAccountData_Domain = CustomerAccountData.AddMember("Domain", _Domain)
+
+	CustomerAccountData_ParentCompanyName = CustomerAccountData.AddMember("ParentCompanyName", _Name)
+
+	CustomerAccountDetailsSummary_CompanyName = CustomerAccountDetailsSummary.AddMember("CompanyName", _Name)
+
+	CustomerAccountFailureReason_DUPLICATE_CUSTOMER_MATCH = CustomerAccountFailureReason.AddMember("DUPLICATE_CUSTOMER_MATCH", smithyprelude.Unit)
+
+	CustomerAccountFailureReason_PROCESSING_ERROR = CustomerAccountFailureReason.AddMember("PROCESSING_ERROR", smithyprelude.Unit)
+
+	SortableField_COMPANY_NAME = SortableField.AddMember("COMPANY_NAME", smithyprelude.Unit)
+
+	SortableField_CREATED_DATE = SortableField.AddMember("CREATED_DATE", smithyprelude.Unit)
+
+	SortableField_LAST_MODIFIED_DATE = SortableField.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
+
+	SortableField_MARKETPLACE_ENGAGEMENT_SCORE = SortableField.AddMember("MARKETPLACE_ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	SortableField_SOLUTION_SCORE = SortableField.AddMember("SOLUTION_SCORE", smithyprelude.Unit)
+
+	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
+
+	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
+
+	CustomerAccountSort_SortBy = CustomerAccountSort.AddMember("SortBy", SortableField)
+
+	CustomerAccountSort_SortOrder = CustomerAccountSort.AddMember("SortOrder", SortOrder)
+
+	EnrichmentStatus_PENDING = EnrichmentStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	EnrichmentStatus_ENRICHED = EnrichmentStatus.AddMember("ENRICHED", smithyprelude.Unit)
+
+	EnrichmentStatus_NO_MATCH_FOUND = EnrichmentStatus.AddMember("NO_MATCH_FOUND", smithyprelude.Unit)
+
+	EnrichmentStatus_ACTION_REQUIRED = EnrichmentStatus.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
+
+	CustomerAccountSummary_Arn = CustomerAccountSummary.AddMember("Arn", _CustomerAccountArn)
+
+	CustomerAccountSummary_Id = CustomerAccountSummary.AddMember("Id", _CustomerAccountId)
+
+	CustomerAccountSummary_Catalog = CustomerAccountSummary.AddMember("Catalog", _CatalogIdentifier)
+
+	CustomerAccountSummary_EnrichmentStatus = CustomerAccountSummary.AddMember("EnrichmentStatus", EnrichmentStatus)
+
+	CustomerAccountSummary_PartnerAccountIdentifier = CustomerAccountSummary.AddMember("PartnerAccountIdentifier", _PartnerAccountIdentifier)
+
+	CustomerAccountSummary_CreatedDate = CustomerAccountSummary.AddMember("CreatedDate", _DateTime)
+
+	CustomerAccountSummary_LastModifiedDate = CustomerAccountSummary.AddMember("LastModifiedDate", _DateTime)
+
+	CustomerAccountSummary_CustomerAccount = CustomerAccountSummary.AddMember("CustomerAccount", CustomerAccountDetailsSummary)
+
+	CustomerAccountSummary_AwsEnrichment = CustomerAccountSummary.AddMember("AwsEnrichment", AwsEnrichmentSummary)
+
+	_CustomerAccountSummaryList_member = _CustomerAccountSummaryList.AddMember("member", CustomerAccountSummary)
+
+	Tag_Key = Tag.AddMember("Key", _TagKey)
+
+	Tag_Value = Tag.AddMember("Value", _TagValue)
+
+	_CustomerAccountTagList_member = _CustomerAccountTagList.AddMember("member", Tag)
+
 	EngagementCustomer_Industry = EngagementCustomer.AddMember("Industry", Industry)
 
 	EngagementCustomer_CompanyName = EngagementCustomer.AddMember("CompanyName", _CompanyName)
@@ -6694,7 +8994,11 @@ func init() {
 
 	EngagementContextType_PROSPECTING_RESULT = EngagementContextType.AddMember("PROSPECTING_RESULT", smithyprelude.Unit)
 
+	EngagementContextType_CUSTOMER_ACCOUNT = EngagementContextType.AddMember("CUSTOMER_ACCOUNT", smithyprelude.Unit)
+
 	LeadInsights_LeadReadinessScore = LeadInsights.AddMember("LeadReadinessScore", smithyprelude.String)
+
+	LeadInsights_ChannelRecommendation = LeadInsights.AddMember("ChannelRecommendation", ChannelRecommendation)
 
 	LeadAddress_City = LeadAddress.AddMember("City", smithyprelude.String)
 
@@ -6804,6 +9108,8 @@ func init() {
 
 	EngagementContextPayload_ProspectingResult = EngagementContextPayload.AddMember("ProspectingResult", ProspectingResult)
 
+	EngagementContextPayload_CustomerAccount = EngagementContextPayload.AddMember("CustomerAccount", CustomerAccountContext)
+
 	EngagementContextDetails_Id = EngagementContextDetails.AddMember("Id", _EngagementContextIdentifier)
 
 	EngagementContextDetails_Type = EngagementContextDetails.AddMember("Type", EngagementContextType)
@@ -6814,6 +9120,40 @@ func init() {
 
 	_EngagementContextTypeList_member = _EngagementContextTypeList.AddMember("member", EngagementContextType)
 
+	_EngagementGroupIdentifiers_member = _EngagementGroupIdentifiers.AddMember("member", _EngagementGroupArnOrIdentifier)
+
+	EngagementGroupSortName_COUNT = EngagementGroupSortName.AddMember("COUNT", smithyprelude.Unit)
+
+	EngagementGroupSortName_UPDATED_AT = EngagementGroupSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
+
+	EngagementGroupSort_SortBy = EngagementGroupSort.AddMember("SortBy", EngagementGroupSortName)
+
+	EngagementGroupSort_SortOrder = EngagementGroupSort.AddMember("SortOrder", SortOrder)
+
+	ReadinessLevel_SALES_READY = ReadinessLevel.AddMember("SALES_READY", smithyprelude.Unit)
+
+	ReadinessLevel_MARKETING_READY = ReadinessLevel.AddMember("MARKETING_READY", smithyprelude.Unit)
+
+	ReadinessLevel_LOW_POTENTIAL = ReadinessLevel.AddMember("LOW_POTENTIAL", smithyprelude.Unit)
+
+	EngagementGroupSummary_Id = EngagementGroupSummary.AddMember("Id", _GroupId)
+
+	EngagementGroupSummary_Arn = EngagementGroupSummary.AddMember("Arn", _EngagementGroupArn)
+
+	EngagementGroupSummary_Catalog = EngagementGroupSummary.AddMember("Catalog", _CatalogIdentifier)
+
+	EngagementGroupSummary_Name = EngagementGroupSummary.AddMember("Name", _EngagementGroupName)
+
+	EngagementGroupSummary_Description = EngagementGroupSummary.AddMember("Description", _EngagementGroupDescription)
+
+	EngagementGroupSummary_Count = EngagementGroupSummary.AddMember("Count", smithyprelude.Integer)
+
+	EngagementGroupSummary_ReadinessLevel = EngagementGroupSummary.AddMember("ReadinessLevel", ReadinessLevel)
+
+	EngagementGroupSummary_UpdatedAt = EngagementGroupSummary.AddMember("UpdatedAt", _DateTime)
+
+	_EngagementGroupSummaries_member = _EngagementGroupSummaries.AddMember("member", EngagementGroupSummary)
+
 	_EngagementIdentifierList_member = _EngagementIdentifierList.AddMember("member", _EngagementIdentifier)
 
 	_EngagementIdentifiers_member = _EngagementIdentifiers.AddMember("member", _EngagementArnOrIdentifier)
@@ -6823,6 +9163,8 @@ func init() {
 	EngagementInvitationPayloadType_OPPORTUNITY_INVITATION = EngagementInvitationPayloadType.AddMember("OPPORTUNITY_INVITATION", smithyprelude.Unit)
 
 	EngagementInvitationPayloadType_LEAD_INVITATION = EngagementInvitationPayloadType.AddMember("LEAD_INVITATION", smithyprelude.Unit)
+
+	EngagementInvitationPayloadType_ACCOUNT_PLANNING_INVITATION = EngagementInvitationPayloadType.AddMember("ACCOUNT_PLANNING_INVITATION", smithyprelude.Unit)
 
 	_EngagementInvitationsPayloadType_member = _EngagementInvitationsPayloadType.AddMember("member", EngagementInvitationPayloadType)
 
@@ -6916,9 +9258,177 @@ func init() {
 
 	_EngagementResourceAssociationSummaryList_member = _EngagementResourceAssociationSummaryList.AddMember("member", EngagementResourceAssociationSummary)
 
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
+	_EngagementSearchFilterList_member = _EngagementSearchFilterList.AddMember("member", EngagementSearchFilter)
 
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
+	EngagementSearchFilterName_ENGAGEMENT_ID = EngagementSearchFilterName.AddMember("ENGAGEMENT_ID", smithyprelude.Unit)
+
+	EngagementSearchFilterName_TITLE = EngagementSearchFilterName.AddMember("TITLE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PARTNER_ID = EngagementSearchFilterName.AddMember("PARTNER_ID", smithyprelude.Unit)
+
+	EngagementSearchFilterName_CREATED_AT = EngagementSearchFilterName.AddMember("CREATED_AT", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LAST_MODIFIED_AT = EngagementSearchFilterName.AddMember("LAST_MODIFIED_AT", smithyprelude.Unit)
+
+	EngagementSearchFilterName_MEMBER_COUNT = EngagementSearchFilterName.AddMember("MEMBER_COUNT", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_CUSTOMER_GEO = EngagementSearchFilterName.AddMember("PROSPECTING_CUSTOMER_GEO", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_CUSTOMER_REGION = EngagementSearchFilterName.AddMember("PROSPECTING_CUSTOMER_REGION", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_CUSTOMER_INDUSTRY = EngagementSearchFilterName.AddMember("PROSPECTING_CUSTOMER_INDUSTRY", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_CUSTOMER_SEGMENT = EngagementSearchFilterName.AddMember("PROSPECTING_CUSTOMER_SEGMENT", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_CUSTOMER_COUNTRY = EngagementSearchFilterName.AddMember("PROSPECTING_CUSTOMER_COUNTRY", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_CUSTOMER_COMPANY_SIZE = EngagementSearchFilterName.AddMember("PROSPECTING_CUSTOMER_COMPANY_SIZE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_INSIGHTS_MARKETPLACE_ENGAGEMENT_SCORE = EngagementSearchFilterName.AddMember("PROSPECTING_INSIGHTS_MARKETPLACE_ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_INSIGHTS_SOLUTION_CATEGORY = EngagementSearchFilterName.AddMember("PROSPECTING_INSIGHTS_SOLUTION_CATEGORY", smithyprelude.Unit)
+
+	EngagementSearchFilterName_PROSPECTING_INSIGHTS_SOLUTION_SUB_CATEGORY = EngagementSearchFilterName.AddMember("PROSPECTING_INSIGHTS_SOLUTION_SUB_CATEGORY", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_QUALIFICATION_STATUS = EngagementSearchFilterName.AddMember("LEAD_QUALIFICATION_STATUS", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_READINESS_SCORE = EngagementSearchFilterName.AddMember("LEAD_READINESS_SCORE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_CUSTOMER_INDUSTRY = EngagementSearchFilterName.AddMember("LEAD_CUSTOMER_INDUSTRY", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_CUSTOMER_COUNTRY_CODE = EngagementSearchFilterName.AddMember("LEAD_CUSTOMER_COUNTRY_CODE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_CUSTOMER_AWS_MATURITY = EngagementSearchFilterName.AddMember("LEAD_CUSTOMER_AWS_MATURITY", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_CUSTOMER_MARKET_SEGMENT = EngagementSearchFilterName.AddMember("LEAD_CUSTOMER_MARKET_SEGMENT", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_INTERACTIONS_SOURCE_TYPE = EngagementSearchFilterName.AddMember("LEAD_INTERACTIONS_SOURCE_TYPE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_CUSTOMER_COMPANY_NAME = EngagementSearchFilterName.AddMember("LEAD_CUSTOMER_COMPANY_NAME", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_INTERACTIONS_CONTACT_FIRST_NAME = EngagementSearchFilterName.AddMember("LEAD_INTERACTIONS_CONTACT_FIRST_NAME", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_INTERACTIONS_CONTACT_LAST_NAME = EngagementSearchFilterName.AddMember("LEAD_INTERACTIONS_CONTACT_LAST_NAME", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_INTERACTIONS_USECASE = EngagementSearchFilterName.AddMember("LEAD_INTERACTIONS_USECASE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_INTERACTIONS_SOURCE_NAME = EngagementSearchFilterName.AddMember("LEAD_INTERACTIONS_SOURCE_NAME", smithyprelude.Unit)
+
+	EngagementSearchFilterName_LEAD_INTERACTIONS_CONTACT_BUSINESS_TITLE = EngagementSearchFilterName.AddMember("LEAD_INTERACTIONS_CONTACT_BUSINESS_TITLE", smithyprelude.Unit)
+
+	EngagementSearchFilterName_CONTEXT_TYPE = EngagementSearchFilterName.AddMember("CONTEXT_TYPE", smithyprelude.Unit)
+
+	_EngagementSearchFilterValues_member = _EngagementSearchFilterValues.AddMember("member", _EngagementSearchStringValue)
+
+	EngagementSearchFilterValue_StringValue = EngagementSearchFilterValue.AddMember("StringValue", _EngagementSearchStringValue)
+
+	EngagementSearchFilterValue_StringListValue = EngagementSearchFilterValue.AddMember("StringListValue", _EngagementSearchFilterValues)
+
+	EngagementSearchFilterValue_LongValue = EngagementSearchFilterValue.AddMember("LongValue", smithyprelude.Long)
+
+	EngagementSearchFilterValue_DateValue = EngagementSearchFilterValue.AddMember("DateValue", _DateTime)
+
+	EngagementSearchPredicate_Key = EngagementSearchPredicate.AddMember("Key", EngagementSearchFilterName)
+
+	EngagementSearchPredicate_Value = EngagementSearchPredicate.AddMember("Value", EngagementSearchFilterValue)
+
+	EngagementSearchFilter_AndAllFilters = EngagementSearchFilter.AddMember("AndAllFilters", _EngagementSearchFilterList)
+
+	EngagementSearchFilter_OrAllFilters = EngagementSearchFilter.AddMember("OrAllFilters", _EngagementSearchFilterList)
+
+	EngagementSearchFilter_NotFilter = EngagementSearchFilter.AddMember("NotFilter", EngagementSearchFilter)
+
+	EngagementSearchFilter_EqualsTo = EngagementSearchFilter.AddMember("EqualsTo", EngagementSearchPredicate)
+
+	EngagementSearchFilter_ContainsAny = EngagementSearchFilter.AddMember("ContainsAny", EngagementSearchPredicate)
+
+	EngagementSearchFilter_ContainsAll = EngagementSearchFilter.AddMember("ContainsAll", EngagementSearchPredicate)
+
+	EngagementSearchFilter_GreaterThan = EngagementSearchFilter.AddMember("GreaterThan", EngagementSearchPredicate)
+
+	EngagementSearchFilter_GreaterThanOrEquals = EngagementSearchFilter.AddMember("GreaterThanOrEquals", EngagementSearchPredicate)
+
+	EngagementSearchFilter_LessThan = EngagementSearchFilter.AddMember("LessThan", EngagementSearchPredicate)
+
+	EngagementSearchFilter_LessThanOrEquals = EngagementSearchFilter.AddMember("LessThanOrEquals", EngagementSearchPredicate)
+
+	EngagementSearchSortName_ENGAGEMENT_ID = EngagementSearchSortName.AddMember("ENGAGEMENT_ID", smithyprelude.Unit)
+
+	EngagementSearchSortName_TITLE = EngagementSearchSortName.AddMember("TITLE", smithyprelude.Unit)
+
+	EngagementSearchSortName_PARTNER_ID = EngagementSearchSortName.AddMember("PARTNER_ID", smithyprelude.Unit)
+
+	EngagementSearchSortName_CREATED_AT = EngagementSearchSortName.AddMember("CREATED_AT", smithyprelude.Unit)
+
+	EngagementSearchSortName_LAST_MODIFIED_AT = EngagementSearchSortName.AddMember("LAST_MODIFIED_AT", smithyprelude.Unit)
+
+	EngagementSearchSortName_MEMBER_COUNT = EngagementSearchSortName.AddMember("MEMBER_COUNT", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_CUSTOMER_GEO = EngagementSearchSortName.AddMember("PROSPECTING_CUSTOMER_GEO", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_CUSTOMER_REGION = EngagementSearchSortName.AddMember("PROSPECTING_CUSTOMER_REGION", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_CUSTOMER_INDUSTRY = EngagementSearchSortName.AddMember("PROSPECTING_CUSTOMER_INDUSTRY", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_CUSTOMER_SEGMENT = EngagementSearchSortName.AddMember("PROSPECTING_CUSTOMER_SEGMENT", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_CUSTOMER_COUNTRY = EngagementSearchSortName.AddMember("PROSPECTING_CUSTOMER_COUNTRY", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_CUSTOMER_COMPANY_SIZE = EngagementSearchSortName.AddMember("PROSPECTING_CUSTOMER_COMPANY_SIZE", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_INSIGHTS_MARKETPLACE_ENGAGEMENT_SCORE = EngagementSearchSortName.AddMember("PROSPECTING_INSIGHTS_MARKETPLACE_ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_INSIGHTS_SOLUTION_CATEGORY = EngagementSearchSortName.AddMember("PROSPECTING_INSIGHTS_SOLUTION_CATEGORY", smithyprelude.Unit)
+
+	EngagementSearchSortName_PROSPECTING_INSIGHTS_SOLUTION_SUB_CATEGORY = EngagementSearchSortName.AddMember("PROSPECTING_INSIGHTS_SOLUTION_SUB_CATEGORY", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_QUALIFICATION_STATUS = EngagementSearchSortName.AddMember("LEAD_QUALIFICATION_STATUS", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_READINESS_SCORE = EngagementSearchSortName.AddMember("LEAD_READINESS_SCORE", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_CUSTOMER_INDUSTRY = EngagementSearchSortName.AddMember("LEAD_CUSTOMER_INDUSTRY", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_CUSTOMER_COUNTRY_CODE = EngagementSearchSortName.AddMember("LEAD_CUSTOMER_COUNTRY_CODE", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_CUSTOMER_AWS_MATURITY = EngagementSearchSortName.AddMember("LEAD_CUSTOMER_AWS_MATURITY", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_CUSTOMER_MARKET_SEGMENT = EngagementSearchSortName.AddMember("LEAD_CUSTOMER_MARKET_SEGMENT", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_CUSTOMER_COMPANY_NAME = EngagementSearchSortName.AddMember("LEAD_CUSTOMER_COMPANY_NAME", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_INTERACTIONS_CONTACT_FIRST_NAME = EngagementSearchSortName.AddMember("LEAD_INTERACTIONS_CONTACT_FIRST_NAME", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_INTERACTIONS_CONTACT_LAST_NAME = EngagementSearchSortName.AddMember("LEAD_INTERACTIONS_CONTACT_LAST_NAME", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_INTERACTIONS_USECASE = EngagementSearchSortName.AddMember("LEAD_INTERACTIONS_USECASE", smithyprelude.Unit)
+
+	EngagementSearchSortName_LEAD_INTERACTIONS_CONTACT_BUSINESS_TITLE = EngagementSearchSortName.AddMember("LEAD_INTERACTIONS_CONTACT_BUSINESS_TITLE", smithyprelude.Unit)
+
+	EngagementSearchSort_SortBy = EngagementSearchSort.AddMember("SortBy", EngagementSearchSortName)
+
+	EngagementSearchSort_SortOrder = EngagementSearchSort.AddMember("SortOrder", SortOrder)
+
+	EngagementSearchSummary_Id = EngagementSearchSummary.AddMember("Id", _EngagementIdentifier)
+
+	EngagementSearchSummary_Arn = EngagementSearchSummary.AddMember("Arn", _EngagementArn)
+
+	EngagementSearchSummary_Title = EngagementSearchSummary.AddMember("Title", _EngagementTitle)
+
+	EngagementSearchSummary_Description = EngagementSearchSummary.AddMember("Description", _EngagementDescription)
+
+	EngagementSearchSummary_CreatedAt = EngagementSearchSummary.AddMember("CreatedAt", _DateTime)
+
+	EngagementSearchSummary_CreatedBy = EngagementSearchSummary.AddMember("CreatedBy", _AwsAccount)
+
+	EngagementSearchSummary_MemberCount = EngagementSearchSummary.AddMember("MemberCount", smithyprelude.Integer)
+
+	EngagementSearchSummary_ModifiedAt = EngagementSearchSummary.AddMember("ModifiedAt", _DateTime)
+
+	EngagementSearchSummary_ModifiedBy = EngagementSearchSummary.AddMember("ModifiedBy", _AwsAccount)
+
+	EngagementSearchSummary_Contexts = EngagementSearchSummary.AddMember("Contexts", _EngagementContexts)
+
+	_EngagementSearchSummaryList_member = _EngagementSearchSummaryList.AddMember("member", EngagementSearchSummary)
 
 	EngagementSortName_CreatedDate = EngagementSortName.AddMember("CreatedDate", smithyprelude.Unit)
 
@@ -6959,6 +9469,68 @@ func init() {
 	ExpectedContractDuration_Term = ExpectedContractDuration.AddMember("Term", ExpectedContractDurationTerm)
 
 	ExpectedContractDuration_Value = ExpectedContractDuration.AddMember("Value", smithyprelude.String)
+
+	_FilterList_member = _FilterList.AddMember("member", Filter)
+
+	FilterableField_ENRICHMENT_STATUS = FilterableField.AddMember("ENRICHMENT_STATUS", smithyprelude.Unit)
+
+	FilterableField_COMPANY_NAME = FilterableField.AddMember("COMPANY_NAME", smithyprelude.Unit)
+
+	FilterableField_AWS_INDUSTRY = FilterableField.AddMember("AWS_INDUSTRY", smithyprelude.Unit)
+
+	FilterableField_ACCOUNT_PLANNING_QUALIFICATION = FilterableField.AddMember("ACCOUNT_PLANNING_QUALIFICATION", smithyprelude.Unit)
+
+	FilterableField_PROGRAM_ELIGIBILITY = FilterableField.AddMember("PROGRAM_ELIGIBILITY", smithyprelude.Unit)
+
+	FilterableField_IMPORT_ID = FilterableField.AddMember("IMPORT_ID", smithyprelude.Unit)
+
+	FilterableField_CREATED_DATE = FilterableField.AddMember("CREATED_DATE", smithyprelude.Unit)
+
+	FilterableField_LAST_MODIFIED_DATE = FilterableField.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
+
+	FilterableField_GEO = FilterableField.AddMember("GEO", smithyprelude.Unit)
+
+	FilterableField_COUNTRY = FilterableField.AddMember("COUNTRY", smithyprelude.Unit)
+
+	FilterableField_SEGMENT = FilterableField.AddMember("SEGMENT", smithyprelude.Unit)
+
+	FilterableField_SOLUTION_CATEGORY = FilterableField.AddMember("SOLUTION_CATEGORY", smithyprelude.Unit)
+
+	FilterableField_MARKETPLACE_ENGAGEMENT_SCORE = FilterableField.AddMember("MARKETPLACE_ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	FilterableField_SOLUTION_SCORE = FilterableField.AddMember("SOLUTION_SCORE", smithyprelude.Unit)
+
+	FilterValue_StringValue = FilterValue.AddMember("StringValue", smithyprelude.String)
+
+	FilterValue_StringListValue = FilterValue.AddMember("StringListValue", _AccountFilterStringList)
+
+	FilterValue_LongValue = FilterValue.AddMember("LongValue", smithyprelude.Long)
+
+	FilterValue_DateValue = FilterValue.AddMember("DateValue", _DateTime)
+
+	FilterCondition_Key = FilterCondition.AddMember("Key", FilterableField)
+
+	FilterCondition_Value = FilterCondition.AddMember("Value", FilterValue)
+
+	Filter_AndAllFilters = Filter.AddMember("AndAllFilters", _FilterList)
+
+	Filter_OrAllFilters = Filter.AddMember("OrAllFilters", _FilterList)
+
+	Filter_NotFilter = Filter.AddMember("NotFilter", Filter)
+
+	Filter_EqualsTo = Filter.AddMember("EqualsTo", FilterCondition)
+
+	Filter_ContainsAny = Filter.AddMember("ContainsAny", FilterCondition)
+
+	Filter_ContainsAll = Filter.AddMember("ContainsAll", FilterCondition)
+
+	Filter_GreaterThan = Filter.AddMember("GreaterThan", FilterCondition)
+
+	Filter_GreaterThanOrEquals = Filter.AddMember("GreaterThanOrEquals", FilterCondition)
+
+	Filter_LessThan = Filter.AddMember("LessThan", FilterCondition)
+
+	Filter_LessThanOrEquals = Filter.AddMember("LessThanOrEquals", FilterCondition)
 
 	_FilterIdentifier_member = _FilterIdentifier.AddMember("member", _OpportunityIdentifier)
 
@@ -7002,18 +9574,6 @@ func init() {
 
 	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
 
-	SenderContact_Email = SenderContact.AddMember("Email", _SenderContactEmail)
-
-	SenderContact_FirstName = SenderContact.AddMember("FirstName", _Name)
-
-	SenderContact_LastName = SenderContact.AddMember("LastName", _Name)
-
-	SenderContact_BusinessTitle = SenderContact.AddMember("BusinessTitle", _JobTitle)
-
-	SenderContact_Phone = SenderContact.AddMember("Phone", _PhoneNumber)
-
-	_SenderContactList_member = _SenderContactList.AddMember("member", SenderContact)
-
 	ReceiverResponsibility_DISTRIBUTOR = ReceiverResponsibility.AddMember("DISTRIBUTOR", smithyprelude.Unit)
 
 	ReceiverResponsibility_RESELLER = ReceiverResponsibility.AddMember("RESELLER", smithyprelude.Unit)
@@ -7042,6 +9602,12 @@ func init() {
 
 	ProjectDetails_ExpectedCustomerSpend = ProjectDetails.AddMember("ExpectedCustomerSpend", _ExpectedCustomerSpendList)
 
+	OpportunityType_NET_NEW_BUSINESS = OpportunityType.AddMember("NET_NEW_BUSINESS", smithyprelude.Unit)
+
+	OpportunityType_FLAT_RENEWAL = OpportunityType.AddMember("FLAT_RENEWAL", smithyprelude.Unit)
+
+	OpportunityType_EXPANSION = OpportunityType.AddMember("EXPANSION", smithyprelude.Unit)
+
 	OpportunityInvitationPayload_SenderContacts = OpportunityInvitationPayload.AddMember("SenderContacts", _SenderContactList)
 
 	OpportunityInvitationPayload_ReceiverResponsibilities = OpportunityInvitationPayload.AddMember("ReceiverResponsibilities", _ReceiverResponsibilityList)
@@ -7049,6 +9615,8 @@ func init() {
 	OpportunityInvitationPayload_Customer = OpportunityInvitationPayload.AddMember("Customer", EngagementCustomer)
 
 	OpportunityInvitationPayload_Project = OpportunityInvitationPayload.AddMember("Project", ProjectDetails)
+
+	OpportunityInvitationPayload_OpportunityType = OpportunityInvitationPayload.AddMember("OpportunityType", OpportunityType)
 
 	LeadInvitationCustomer_Industry = LeadInvitationCustomer.AddMember("Industry", _LeadIndustry)
 
@@ -7080,6 +9648,8 @@ func init() {
 
 	Payload_LeadInvitation = Payload.AddMember("LeadInvitation", LeadInvitationPayload)
 
+	Payload_AccountPlanningInvitation = Payload.AddMember("AccountPlanningInvitation", AccountPlanningInvitationPayload)
+
 	Invitation_Message = Invitation.AddMember("Message", _InvitationMessage)
 
 	Invitation_Receiver = Invitation.AddMember("Receiver", Receiver)
@@ -7087,6 +9657,14 @@ func init() {
 	Invitation_Payload = Invitation.AddMember("Payload", Payload)
 
 	_InvitationStatusList_member = _InvitationStatusList.AddMember("member", InvitationStatus)
+
+	Issue_Severity = Issue.AddMember("Severity", smithyprelude.String)
+
+	Issue_Code = Issue.AddMember("Code", smithyprelude.String)
+
+	Issue_Message = Issue.AddMember("Message", smithyprelude.String)
+
+	_IssueList_member = _IssueList.AddMember("member", Issue)
 
 	LastModifiedDate_AfterLastModifiedDate = LastModifiedDate.AddMember("AfterLastModifiedDate", _DateTime)
 
@@ -7276,6 +9854,32 @@ func init() {
 
 	NationalSecurity_NO = NationalSecurity.AddMember("NO", smithyprelude.Unit)
 
+	OpportunityBulkJobSummary_JobId = OpportunityBulkJobSummary.AddMember("JobId", _BulkJobId)
+
+	OpportunityBulkJobSummary_Status = OpportunityBulkJobSummary.AddMember("Status", BulkJobStatus)
+
+	OpportunityBulkJobSummary_TotalRecords = OpportunityBulkJobSummary.AddMember("TotalRecords", smithyprelude.Integer)
+
+	OpportunityBulkJobSummary_ProcessedRecords = OpportunityBulkJobSummary.AddMember("ProcessedRecords", smithyprelude.Integer)
+
+	OpportunityBulkJobSummary_SuccessCount = OpportunityBulkJobSummary.AddMember("SuccessCount", smithyprelude.Integer)
+
+	OpportunityBulkJobSummary_FailureCount = OpportunityBulkJobSummary.AddMember("FailureCount", smithyprelude.Integer)
+
+	OpportunityBulkJobSummary_CreatedAt = OpportunityBulkJobSummary.AddMember("CreatedAt", _DateTime)
+
+	OpportunityBulkJobSummary_StartedAt = OpportunityBulkJobSummary.AddMember("StartedAt", _DateTime)
+
+	OpportunityBulkJobSummary_CompletedAt = OpportunityBulkJobSummary.AddMember("CompletedAt", _DateTime)
+
+	OpportunityBulkJobSummary_FailureReason = OpportunityBulkJobSummary.AddMember("FailureReason", smithyprelude.String)
+
+	OpportunityBulkJobSummary_FileName = OpportunityBulkJobSummary.AddMember("FileName", _BulkFileName)
+
+	OpportunityBulkJobSummary_OperationType = OpportunityBulkJobSummary.AddMember("OperationType", BulkOperationType)
+
+	_OpportunityBulkJobSummaryList_member = _OpportunityBulkJobSummaryList.AddMember("member", OpportunityBulkJobSummary)
+
 	OpportunityEngagementInvitationSortName_INVITATION_DATE = OpportunityEngagementInvitationSortName.AddMember("INVITATION_DATE", smithyprelude.Unit)
 
 	OpportunityEngagementInvitationSort_SortOrder = OpportunityEngagementInvitationSort.AddMember("SortOrder", SortOrder)
@@ -7283,6 +9887,236 @@ func init() {
 	OpportunityEngagementInvitationSort_SortBy = OpportunityEngagementInvitationSort.AddMember("SortBy", OpportunityEngagementInvitationSortName)
 
 	_OpportunityIdentifiers_member = _OpportunityIdentifiers.AddMember("member", _OpportunityIdentifier)
+
+	OpportunitySearchAddress_CountryCode = OpportunitySearchAddress.AddMember("CountryCode", CountryCode)
+
+	OpportunitySearchAccount_CompanyName = OpportunitySearchAccount.AddMember("CompanyName", _SearchCompanyName)
+
+	OpportunitySearchAccount_Industry = OpportunitySearchAccount.AddMember("Industry", Industry)
+
+	OpportunitySearchAccount_AwsAccountId = OpportunitySearchAccount.AddMember("AwsAccountId", _SearchAwsAccount)
+
+	OpportunitySearchAccount_Address = OpportunitySearchAccount.AddMember("Address", OpportunitySearchAddress)
+
+	SearchEngagementScore_HIGH = SearchEngagementScore.AddMember("HIGH", smithyprelude.Unit)
+
+	SearchEngagementScore_MEDIUM = SearchEngagementScore.AddMember("MEDIUM", smithyprelude.Unit)
+
+	SearchEngagementScore_LOW = SearchEngagementScore.AddMember("LOW", smithyprelude.Unit)
+
+	OpportunitySearchOpportunityQuality_Score = OpportunitySearchOpportunityQuality.AddMember("Score", smithyprelude.Integer)
+
+	OpportunitySearchInsights_EngagementScore = OpportunitySearchInsights.AddMember("EngagementScore", SearchEngagementScore)
+
+	OpportunitySearchInsights_OpportunityQuality = OpportunitySearchInsights.AddMember("OpportunityQuality", OpportunitySearchOpportunityQuality)
+
+	OpportunitySearchAwsSummary_Origin = OpportunitySearchAwsSummary.AddMember("Origin", OpportunityOrigin)
+
+	OpportunitySearchAwsSummary_CosellMotion = OpportunitySearchAwsSummary.AddMember("CosellMotion", _CosellMotion)
+
+	OpportunitySearchAwsSummary_Insights = OpportunitySearchAwsSummary.AddMember("Insights", OpportunitySearchInsights)
+
+	OpportunitySearchCustomer_Account = OpportunitySearchCustomer.AddMember("Account", OpportunitySearchAccount)
+
+	OpportunitySearchExpectedCustomerSpend_Amount = OpportunitySearchExpectedCustomerSpend.AddMember("Amount", _Amount)
+
+	OpportunitySearchExpectedCustomerSpend_CurrencyCode = OpportunitySearchExpectedCustomerSpend.AddMember("CurrencyCode", CurrencyCode)
+
+	_OpportunitySearchExpectedCustomerSpendList_member = _OpportunitySearchExpectedCustomerSpendList.AddMember("member", OpportunitySearchExpectedCustomerSpend)
+
+	_OpportunitySearchFilterList_member = _OpportunitySearchFilterList.AddMember("member", OpportunitySearchFilter)
+
+	OpportunitySearchFilterName_OPPORTUNITY_ID = OpportunitySearchFilterName.AddMember("OPPORTUNITY_ID", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_STAGE = OpportunitySearchFilterName.AddMember("STAGE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_REVIEW_STATUS = OpportunitySearchFilterName.AddMember("REVIEW_STATUS", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_CUSTOMER_COMPANY_NAME = OpportunitySearchFilterName.AddMember("CUSTOMER_COMPANY_NAME", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_LAST_MODIFIED_DATE = OpportunitySearchFilterName.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_TARGET_CLOSE_DATE = OpportunitySearchFilterName.AddMember("TARGET_CLOSE_DATE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_CREATED_DATE = OpportunitySearchFilterName.AddMember("CREATED_DATE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_COUNTRY_CODE = OpportunitySearchFilterName.AddMember("COUNTRY_CODE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_PARTNER_PROJECT_TITLE = OpportunitySearchFilterName.AddMember("PARTNER_PROJECT_TITLE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_OPPORTUNITY_TYPE = OpportunitySearchFilterName.AddMember("OPPORTUNITY_TYPE", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_PARTNER_OPPORTUNITY_IDENTIFIER = OpportunitySearchFilterName.AddMember("PARTNER_OPPORTUNITY_IDENTIFIER", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_INDUSTRY = OpportunitySearchFilterName.AddMember("INDUSTRY", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_AWS_ACCOUNT_ID = OpportunitySearchFilterName.AddMember("AWS_ACCOUNT_ID", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_APN_PROGRAMS = OpportunitySearchFilterName.AddMember("APN_PROGRAMS", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_ORIGIN = OpportunitySearchFilterName.AddMember("ORIGIN", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_TAGS = OpportunitySearchFilterName.AddMember("TAGS", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_NEXT_STEP = OpportunitySearchFilterName.AddMember("NEXT_STEP", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_OFFER_ID = OpportunitySearchFilterName.AddMember("OFFER_ID", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_OFFER_SET_ID = OpportunitySearchFilterName.AddMember("OFFER_SET_ID", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_AWS_MARKETPLACE_SOLUTION = OpportunitySearchFilterName.AddMember("AWS_MARKETPLACE_SOLUTION", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_COSELL_MOTION = OpportunitySearchFilterName.AddMember("COSELL_MOTION", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_OPPORTUNITY_OWNER = OpportunitySearchFilterName.AddMember("OPPORTUNITY_OWNER", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_ESTIMATED_MRR = OpportunitySearchFilterName.AddMember("ESTIMATED_MRR", smithyprelude.Unit)
+
+	OpportunitySearchFilterName_ENGAGEMENT_SCORE = OpportunitySearchFilterName.AddMember("ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	_OpportunitySearchFilterValues_member = _OpportunitySearchFilterValues.AddMember("member", _SearchFilterValue)
+
+	OpportunitySearchFilterValue_StringValue = OpportunitySearchFilterValue.AddMember("StringValue", _SearchFilterValue)
+
+	OpportunitySearchFilterValue_StringListValue = OpportunitySearchFilterValue.AddMember("StringListValue", _OpportunitySearchFilterValues)
+
+	OpportunitySearchFilterValue_LongValue = OpportunitySearchFilterValue.AddMember("LongValue", smithyprelude.Long)
+
+	OpportunitySearchFilterValue_DoubleValue = OpportunitySearchFilterValue.AddMember("DoubleValue", smithyprelude.Double)
+
+	OpportunitySearchFilterValue_DateValue = OpportunitySearchFilterValue.AddMember("DateValue", _DateTime)
+
+	OpportunitySearchPredicate_Key = OpportunitySearchPredicate.AddMember("Key", OpportunitySearchFilterName)
+
+	OpportunitySearchPredicate_Value = OpportunitySearchPredicate.AddMember("Value", OpportunitySearchFilterValue)
+
+	OpportunitySearchFilter_AndAllFilters = OpportunitySearchFilter.AddMember("AndAllFilters", _OpportunitySearchFilterList)
+
+	OpportunitySearchFilter_OrAllFilters = OpportunitySearchFilter.AddMember("OrAllFilters", _OpportunitySearchFilterList)
+
+	OpportunitySearchFilter_NotFilter = OpportunitySearchFilter.AddMember("NotFilter", OpportunitySearchFilter)
+
+	OpportunitySearchFilter_EqualsTo = OpportunitySearchFilter.AddMember("EqualsTo", OpportunitySearchPredicate)
+
+	OpportunitySearchFilter_ContainsAny = OpportunitySearchFilter.AddMember("ContainsAny", OpportunitySearchPredicate)
+
+	OpportunitySearchFilter_ContainsAll = OpportunitySearchFilter.AddMember("ContainsAll", OpportunitySearchPredicate)
+
+	OpportunitySearchFilter_GreaterThan = OpportunitySearchFilter.AddMember("GreaterThan", OpportunitySearchPredicate)
+
+	OpportunitySearchFilter_GreaterThanOrEquals = OpportunitySearchFilter.AddMember("GreaterThanOrEquals", OpportunitySearchPredicate)
+
+	OpportunitySearchFilter_LessThan = OpportunitySearchFilter.AddMember("LessThan", OpportunitySearchPredicate)
+
+	OpportunitySearchFilter_LessThanOrEquals = OpportunitySearchFilter.AddMember("LessThanOrEquals", OpportunitySearchPredicate)
+
+	OpportunitySearchLifeCycle_ReviewStatus = OpportunitySearchLifeCycle.AddMember("ReviewStatus", ReviewStatus)
+
+	OpportunitySearchLifeCycle_Stage = OpportunitySearchLifeCycle.AddMember("Stage", Stage)
+
+	OpportunitySearchLifeCycle_NextSteps = OpportunitySearchLifeCycle.AddMember("NextSteps", _PiiString)
+
+	OpportunitySearchLifeCycle_TargetCloseDate = OpportunitySearchLifeCycle.AddMember("TargetCloseDate", _Date)
+
+	OpportunitySearchProject_Title = OpportunitySearchProject.AddMember("Title", _PiiString)
+
+	OpportunitySearchProject_ApnPrograms = OpportunitySearchProject.AddMember("ApnPrograms", _ApnPrograms)
+
+	OpportunitySearchProject_ExpectedCustomerSpend = OpportunitySearchProject.AddMember("ExpectedCustomerSpend", _OpportunitySearchExpectedCustomerSpendList)
+
+	OpportunitySearchRelatedEntityIdentifiers_AwsMarketplaceOffers = OpportunitySearchRelatedEntityIdentifiers.AddMember("AwsMarketplaceOffers", _AwsMarketplaceOfferIdentifiers)
+
+	OpportunitySearchRelatedEntityIdentifiers_AwsMarketplaceOfferSets = OpportunitySearchRelatedEntityIdentifiers.AddMember("AwsMarketplaceOfferSets", _AwsMarketplaceOfferSetIdentifiers)
+
+	OpportunitySearchRelatedEntityIdentifiers_AwsMarketplaceSolutions = OpportunitySearchRelatedEntityIdentifiers.AddMember("AwsMarketplaceSolutions", _AwsMarketplaceSolutionIdentifiers)
+
+	OpportunitySearchRelatedEntityIdentifiers_Solutions = OpportunitySearchRelatedEntityIdentifiers.AddMember("Solutions", _SolutionIdentifiers)
+
+	OpportunitySearchSortName_OPPORTUNITY_ID = OpportunitySearchSortName.AddMember("OPPORTUNITY_ID", smithyprelude.Unit)
+
+	OpportunitySearchSortName_STAGE = OpportunitySearchSortName.AddMember("STAGE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_REVIEW_STATUS = OpportunitySearchSortName.AddMember("REVIEW_STATUS", smithyprelude.Unit)
+
+	OpportunitySearchSortName_CUSTOMER_COMPANY_NAME = OpportunitySearchSortName.AddMember("CUSTOMER_COMPANY_NAME", smithyprelude.Unit)
+
+	OpportunitySearchSortName_LAST_MODIFIED_DATE = OpportunitySearchSortName.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_TARGET_CLOSE_DATE = OpportunitySearchSortName.AddMember("TARGET_CLOSE_DATE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_CREATED_DATE = OpportunitySearchSortName.AddMember("CREATED_DATE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_COUNTRY_CODE = OpportunitySearchSortName.AddMember("COUNTRY_CODE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_PARTNER_PROJECT_TITLE = OpportunitySearchSortName.AddMember("PARTNER_PROJECT_TITLE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_OPPORTUNITY_TYPE = OpportunitySearchSortName.AddMember("OPPORTUNITY_TYPE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_PARTNER_OPPORTUNITY_IDENTIFIER = OpportunitySearchSortName.AddMember("PARTNER_OPPORTUNITY_IDENTIFIER", smithyprelude.Unit)
+
+	OpportunitySearchSortName_INDUSTRY = OpportunitySearchSortName.AddMember("INDUSTRY", smithyprelude.Unit)
+
+	OpportunitySearchSortName_AWS_ACCOUNT_ID = OpportunitySearchSortName.AddMember("AWS_ACCOUNT_ID", smithyprelude.Unit)
+
+	OpportunitySearchSortName_ORIGIN = OpportunitySearchSortName.AddMember("ORIGIN", smithyprelude.Unit)
+
+	OpportunitySearchSortName_NEXT_STEP = OpportunitySearchSortName.AddMember("NEXT_STEP", smithyprelude.Unit)
+
+	OpportunitySearchSortName_COSELL_MOTION = OpportunitySearchSortName.AddMember("COSELL_MOTION", smithyprelude.Unit)
+
+	OpportunitySearchSortName_OPPORTUNITY_OWNER = OpportunitySearchSortName.AddMember("OPPORTUNITY_OWNER", smithyprelude.Unit)
+
+	OpportunitySearchSortName_ENGAGEMENT_SCORE = OpportunitySearchSortName.AddMember("ENGAGEMENT_SCORE", smithyprelude.Unit)
+
+	OpportunitySearchSortName_ESTIMATED_MRR = OpportunitySearchSortName.AddMember("ESTIMATED_MRR", smithyprelude.Unit)
+
+	OpportunitySearchSortName_TAGS = OpportunitySearchSortName.AddMember("TAGS", smithyprelude.Unit)
+
+	OpportunitySearchSortName_OFFER_ID = OpportunitySearchSortName.AddMember("OFFER_ID", smithyprelude.Unit)
+
+	OpportunitySearchSortName_OFFER_SET_ID = OpportunitySearchSortName.AddMember("OFFER_SET_ID", smithyprelude.Unit)
+
+	OpportunitySearchSortName_APN_PROGRAMS = OpportunitySearchSortName.AddMember("APN_PROGRAMS", smithyprelude.Unit)
+
+	OpportunitySearchSort_SortBy = OpportunitySearchSort.AddMember("SortBy", OpportunitySearchSortName)
+
+	OpportunitySearchSort_SortOrder = OpportunitySearchSort.AddMember("SortOrder", SortOrder)
+
+	_TagList_member = _TagList.AddMember("member", Tag)
+
+	OpportunitySearchTeamMember_FirstName = OpportunitySearchTeamMember.AddMember("FirstName", _SearchTeamMemberName)
+
+	OpportunitySearchTeamMember_LastName = OpportunitySearchTeamMember.AddMember("LastName", _SearchTeamMemberName)
+
+	OpportunitySearchTeamMember_BusinessTitle = OpportunitySearchTeamMember.AddMember("BusinessTitle", _JobTitle)
+
+	_OpportunitySearchTeamMembersList_member = _OpportunitySearchTeamMembersList.AddMember("member", OpportunitySearchTeamMember)
+
+	OpportunitySearchSummary_Id = OpportunitySearchSummary.AddMember("Id", _OpportunityIdentifier)
+
+	OpportunitySearchSummary_LastModifiedDate = OpportunitySearchSummary.AddMember("LastModifiedDate", _DateTime)
+
+	OpportunitySearchSummary_CreatedDate = OpportunitySearchSummary.AddMember("CreatedDate", _DateTime)
+
+	OpportunitySearchSummary_OpportunityType = OpportunitySearchSummary.AddMember("OpportunityType", OpportunityType)
+
+	OpportunitySearchSummary_PartnerOpportunityIdentifier = OpportunitySearchSummary.AddMember("PartnerOpportunityIdentifier", smithyprelude.String)
+
+	OpportunitySearchSummary_LifeCycle = OpportunitySearchSummary.AddMember("LifeCycle", OpportunitySearchLifeCycle)
+
+	OpportunitySearchSummary_Customer = OpportunitySearchSummary.AddMember("Customer", OpportunitySearchCustomer)
+
+	OpportunitySearchSummary_Project = OpportunitySearchSummary.AddMember("Project", OpportunitySearchProject)
+
+	OpportunitySearchSummary_Tags = OpportunitySearchSummary.AddMember("Tags", _TagList)
+
+	OpportunitySearchSummary_RelatedEntityIdentifiers = OpportunitySearchSummary.AddMember("RelatedEntityIdentifiers", OpportunitySearchRelatedEntityIdentifiers)
+
+	OpportunitySearchSummary_OpportunityTeam = OpportunitySearchSummary.AddMember("OpportunityTeam", _OpportunitySearchTeamMembersList)
+
+	OpportunitySearchSummary_AwsOpportunitySummary = OpportunitySearchSummary.AddMember("AwsOpportunitySummary", OpportunitySearchAwsSummary)
+
+	_OpportunitySearchSummaries_member = _OpportunitySearchSummaries.AddMember("member", OpportunitySearchSummary)
 
 	OpportunitySortName_LAST_MODIFIEDDATE = OpportunitySortName.AddMember("LAST_MODIFIEDDATE", smithyprelude.Unit)
 
@@ -7297,12 +10131,6 @@ func init() {
 	OpportunitySort_SortOrder = OpportunitySort.AddMember("SortOrder", SortOrder)
 
 	OpportunitySort_SortBy = OpportunitySort.AddMember("SortBy", OpportunitySortName)
-
-	OpportunityType_NET_NEW_BUSINESS = OpportunityType.AddMember("NET_NEW_BUSINESS", smithyprelude.Unit)
-
-	OpportunityType_FLAT_RENEWAL = OpportunityType.AddMember("FLAT_RENEWAL", smithyprelude.Unit)
-
-	OpportunityType_EXPANSION = OpportunityType.AddMember("EXPANSION", smithyprelude.Unit)
 
 	ProjectSummary_DeliveryModels = ProjectSummary.AddMember("DeliveryModels", _DeliveryModels)
 
@@ -7564,13 +10392,7 @@ func init() {
 
 	SortObject_SortOrder = SortObject.AddMember("SortOrder", SortOrder)
 
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
 
 	TargetCloseDateFilter_AfterTargetCloseDate = TargetCloseDateFilter.AddMember("AfterTargetCloseDate", _Date)
 
@@ -7655,6 +10477,28 @@ func init() {
 	AssociateOpportunityRequest_RelatedEntityType = AssociateOpportunityRequest.AddMember("RelatedEntityType", RelatedEntityType)
 
 	AssociateOpportunityRequest_RelatedEntityIdentifier = AssociateOpportunityRequest.AddMember("RelatedEntityIdentifier", smithyprelude.String)
+
+	CreateCustomerAccountRequest_Catalog = CreateCustomerAccountRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	CreateCustomerAccountRequest_Account = CreateCustomerAccountRequest.AddMember("Account", CustomerAccountData)
+
+	CreateCustomerAccountRequest_PartnerAccountIdentifier = CreateCustomerAccountRequest.AddMember("PartnerAccountIdentifier", _PartnerAccountIdentifier)
+
+	CreateCustomerAccountRequest_Tags = CreateCustomerAccountRequest.AddMember("Tags", _CustomerAccountTagList)
+
+	CreateCustomerAccountRequest_ClientToken = CreateCustomerAccountRequest.AddMember("ClientToken", _ClientToken)
+
+	CreateCustomerAccountResponse_Arn = CreateCustomerAccountResponse.AddMember("Arn", _CustomerAccountArn)
+
+	CreateCustomerAccountResponse_Id = CreateCustomerAccountResponse.AddMember("Id", _CustomerAccountId)
+
+	CreateCustomerAccountResponse_Status = CreateCustomerAccountResponse.AddMember("Status", EnrichmentStatus)
+
+	CreateCustomerAccountResponse_Catalog = CreateCustomerAccountResponse.AddMember("Catalog", _CatalogIdentifier)
+
+	CreateCustomerAccountResponse_PartnerAccountIdentifier = CreateCustomerAccountResponse.AddMember("PartnerAccountIdentifier", _PartnerAccountIdentifier)
+
+	CreateCustomerAccountResponse_CreatedDate = CreateCustomerAccountResponse.AddMember("CreatedDate", _DateTime)
 
 	CreateEngagementContextRequest_Catalog = CreateEngagementContextRequest.AddMember("Catalog", _CatalogIdentifier)
 
@@ -7770,6 +10614,10 @@ func init() {
 
 	CreateResourceSnapshotResponse_Revision = CreateResourceSnapshotResponse.AddMember("Revision", _ResourceSnapshotRevision)
 
+	DeleteCustomerAccountRequest_Catalog = DeleteCustomerAccountRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	DeleteCustomerAccountRequest_Identifier = DeleteCustomerAccountRequest.AddMember("Identifier", _CustomerAccountArnOrIdentifier)
+
 	DeleteResourceSnapshotJobRequest_Catalog = DeleteResourceSnapshotJobRequest.AddMember("Catalog", _CatalogIdentifier)
 
 	DeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = DeleteResourceSnapshotJobRequest.AddMember("ResourceSnapshotJobIdentifier", _ResourceSnapshotJobIdentifier)
@@ -7810,9 +10658,99 @@ func init() {
 
 	GetAwsOpportunitySummaryResponse_CosellMotion = GetAwsOpportunitySummaryResponse.AddMember("CosellMotion", smithyprelude.String)
 
+	GetAwsOpportunitySummaryResponse_CosellMotionReason = GetAwsOpportunitySummaryResponse.AddMember("CosellMotionReason", smithyprelude.String)
+
 	GetAwsOpportunitySummaryResponse_SoftwareRevenue = GetAwsOpportunitySummaryResponse.AddMember("SoftwareRevenue", AwsSoftwareRevenue)
 
 	GetAwsOpportunitySummaryResponse_Catalog = GetAwsOpportunitySummaryResponse.AddMember("Catalog", _CatalogIdentifier)
+
+	GetCustomerAccountBulkJobRequest_Catalog = GetCustomerAccountBulkJobRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	GetCustomerAccountBulkJobRequest_Identifier = GetCustomerAccountBulkJobRequest.AddMember("Identifier", _BulkJobArnOrIdentifier)
+
+	GetCustomerAccountBulkJobResponse_Arn = GetCustomerAccountBulkJobResponse.AddMember("Arn", _BulkJobArn)
+
+	GetCustomerAccountBulkJobResponse_Id = GetCustomerAccountBulkJobResponse.AddMember("Id", _JobId)
+
+	GetCustomerAccountBulkJobResponse_Status = GetCustomerAccountBulkJobResponse.AddMember("Status", BulkJobStatus)
+
+	GetCustomerAccountBulkJobResponse_FileName = GetCustomerAccountBulkJobResponse.AddMember("FileName", _FileName)
+
+	GetCustomerAccountBulkJobResponse_TotalRecords = GetCustomerAccountBulkJobResponse.AddMember("TotalRecords", smithyprelude.Integer)
+
+	GetCustomerAccountBulkJobResponse_ProcessedRecords = GetCustomerAccountBulkJobResponse.AddMember("ProcessedRecords", smithyprelude.Integer)
+
+	GetCustomerAccountBulkJobResponse_SuccessCount = GetCustomerAccountBulkJobResponse.AddMember("SuccessCount", smithyprelude.Integer)
+
+	GetCustomerAccountBulkJobResponse_FailureCount = GetCustomerAccountBulkJobResponse.AddMember("FailureCount", smithyprelude.Integer)
+
+	GetCustomerAccountBulkJobResponse_DeletedCount = GetCustomerAccountBulkJobResponse.AddMember("DeletedCount", smithyprelude.Integer)
+
+	GetCustomerAccountBulkJobResponse_FailureReason = GetCustomerAccountBulkJobResponse.AddMember("FailureReason", smithyprelude.String)
+
+	GetCustomerAccountBulkJobResponse_CreatedAt = GetCustomerAccountBulkJobResponse.AddMember("CreatedAt", _DateTime)
+
+	GetCustomerAccountBulkJobResponse_CompletedAt = GetCustomerAccountBulkJobResponse.AddMember("CompletedAt", _DateTime)
+
+	GetCustomerAccountBulkJobReportUrlRequest_Catalog = GetCustomerAccountBulkJobReportUrlRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	GetCustomerAccountBulkJobReportUrlRequest_Identifier = GetCustomerAccountBulkJobReportUrlRequest.AddMember("Identifier", _BulkJobArnOrIdentifier)
+
+	GetCustomerAccountBulkJobReportUrlRequest_ReportType = GetCustomerAccountBulkJobReportUrlRequest.AddMember("ReportType", BulkReportType)
+
+	GetCustomerAccountBulkJobReportUrlResponse_ReportStatus = GetCustomerAccountBulkJobReportUrlResponse.AddMember("ReportStatus", BulkReportStatus)
+
+	GetCustomerAccountBulkJobReportUrlResponse_ReportType = GetCustomerAccountBulkJobReportUrlResponse.AddMember("ReportType", BulkReportType)
+
+	GetCustomerAccountBulkJobReportUrlResponse_Url = GetCustomerAccountBulkJobReportUrlResponse.AddMember("Url", _BulkReportUrl)
+
+	GetCustomerAccountBulkJobReportUrlResponse_ExpiresAt = GetCustomerAccountBulkJobReportUrlResponse.AddMember("ExpiresAt", _DateTime)
+
+	GetCustomerAccountBulkJobReportUrlResponse_FailureReason = GetCustomerAccountBulkJobReportUrlResponse.AddMember("FailureReason", smithyprelude.String)
+
+	GetCustomerAccountRequest_Catalog = GetCustomerAccountRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	GetCustomerAccountRequest_Identifier = GetCustomerAccountRequest.AddMember("Identifier", _CustomerAccountArnOrIdentifier)
+
+	GetCustomerAccountResponse_Arn = GetCustomerAccountResponse.AddMember("Arn", _CustomerAccountArn)
+
+	GetCustomerAccountResponse_Id = GetCustomerAccountResponse.AddMember("Id", _CustomerAccountId)
+
+	GetCustomerAccountResponse_Catalog = GetCustomerAccountResponse.AddMember("Catalog", _CatalogIdentifier)
+
+	GetCustomerAccountResponse_EnrichmentStatus = GetCustomerAccountResponse.AddMember("EnrichmentStatus", EnrichmentStatus)
+
+	GetCustomerAccountResponse_PartnerAccountIdentifier = GetCustomerAccountResponse.AddMember("PartnerAccountIdentifier", _PartnerAccountIdentifier)
+
+	GetCustomerAccountResponse_CreatedDate = GetCustomerAccountResponse.AddMember("CreatedDate", _DateTime)
+
+	GetCustomerAccountResponse_LastModifiedDate = GetCustomerAccountResponse.AddMember("LastModifiedDate", _DateTime)
+
+	GetCustomerAccountResponse_Issues = GetCustomerAccountResponse.AddMember("Issues", _IssueList)
+
+	GetCustomerAccountResponse_AwsEnrichment = GetCustomerAccountResponse.AddMember("AwsEnrichment", AwsEnrichment)
+
+	GetCustomerAccountResponse_ReasonCode = GetCustomerAccountResponse.AddMember("ReasonCode", CustomerAccountFailureReason)
+
+	GetCustomerAccountResponse_Message = GetCustomerAccountResponse.AddMember("Message", smithyprelude.String)
+
+	GetCustomerAccountResponse_ExistingCustomerAccountArn = GetCustomerAccountResponse.AddMember("ExistingCustomerAccountArn", _CustomerAccountArn)
+
+	GetCustomerAccountResponse_Account = GetCustomerAccountResponse.AddMember("Account", CustomerAccountData)
+
+	GetCustomerAccountResponse_Tags = GetCustomerAccountResponse.AddMember("Tags", _TagList)
+
+	GetCustomerAccountStatisticsRequest_Catalog = GetCustomerAccountStatisticsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	GetCustomerAccountStatisticsRequest_Filter = GetCustomerAccountStatisticsRequest.AddMember("Filter", Filter)
+
+	GetCustomerAccountStatisticsRequest_Aggregations = GetCustomerAccountStatisticsRequest.AddMember("Aggregations", _AggregationRequestList)
+
+	GetCustomerAccountStatisticsRequest_IncludeMissing = GetCustomerAccountStatisticsRequest.AddMember("IncludeMissing", smithyprelude.Boolean)
+
+	GetCustomerAccountStatisticsResponse_TotalCount = GetCustomerAccountStatisticsResponse.AddMember("TotalCount", smithyprelude.Integer)
+
+	GetCustomerAccountStatisticsResponse_Aggregations = GetCustomerAccountStatisticsResponse.AddMember("Aggregations", _AggregationResultList)
 
 	GetEngagementRequest_Catalog = GetEngagementRequest.AddMember("Catalog", _CatalogIdentifier)
 
@@ -7877,6 +10815,26 @@ func init() {
 	GetEngagementResponse_ModifiedBy = GetEngagementResponse.AddMember("ModifiedBy", _AwsAccount)
 
 	GetEngagementResponse_Contexts = GetEngagementResponse.AddMember("Contexts", _EngagementContexts)
+
+	GetOpportunityBulkJobReportUrlRequest_Catalog = GetOpportunityBulkJobReportUrlRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	GetOpportunityBulkJobReportUrlRequest_JobId = GetOpportunityBulkJobReportUrlRequest.AddMember("JobId", _BulkJobId)
+
+	GetOpportunityBulkJobReportUrlRequest_ReportFormat = GetOpportunityBulkJobReportUrlRequest.AddMember("ReportFormat", BulkFileFormat)
+
+	GetOpportunityBulkJobReportUrlRequest_ReportType = GetOpportunityBulkJobReportUrlRequest.AddMember("ReportType", BulkReportType)
+
+	GetOpportunityBulkJobReportUrlResponse_ReportStatus = GetOpportunityBulkJobReportUrlResponse.AddMember("ReportStatus", BulkReportStatus)
+
+	GetOpportunityBulkJobReportUrlResponse_ReportType = GetOpportunityBulkJobReportUrlResponse.AddMember("ReportType", BulkReportType)
+
+	GetOpportunityBulkJobReportUrlResponse_ReportFormat = GetOpportunityBulkJobReportUrlResponse.AddMember("ReportFormat", BulkFileFormat)
+
+	GetOpportunityBulkJobReportUrlResponse_Url = GetOpportunityBulkJobReportUrlResponse.AddMember("Url", _BulkReportUrl)
+
+	GetOpportunityBulkJobReportUrlResponse_ExpiresAt = GetOpportunityBulkJobReportUrlResponse.AddMember("ExpiresAt", _DateTime)
+
+	GetOpportunityBulkJobReportUrlResponse_FailureReason = GetOpportunityBulkJobReportUrlResponse.AddMember("FailureReason", smithyprelude.String)
 
 	GetOpportunityRequest_Catalog = GetOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
 
@@ -7998,6 +10956,32 @@ func init() {
 
 	GetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = GetSellingSystemSettingsResponse.AddMember("ResourceSnapshotJobRoleArn", _ResourceSnapshotJobRoleArn)
 
+	ListCustomerAccountBulkJobResultsRequest_Catalog = ListCustomerAccountBulkJobResultsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	ListCustomerAccountBulkJobResultsRequest_Identifier = ListCustomerAccountBulkJobResultsRequest.AddMember("Identifier", _BulkJobArnOrIdentifier)
+
+	ListCustomerAccountBulkJobResultsRequest_Status = ListCustomerAccountBulkJobResultsRequest.AddMember("Status", BulkRecordStatus)
+
+	ListCustomerAccountBulkJobResultsRequest_MaxResults = ListCustomerAccountBulkJobResultsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListCustomerAccountBulkJobResultsRequest_NextToken = ListCustomerAccountBulkJobResultsRequest.AddMember("NextToken", _NextToken)
+
+	ListCustomerAccountBulkJobResultsResponse_Results = ListCustomerAccountBulkJobResultsResponse.AddMember("Results", _BulkJobResultList)
+
+	ListCustomerAccountBulkJobResultsResponse_NextToken = ListCustomerAccountBulkJobResultsResponse.AddMember("NextToken", _NextToken)
+
+	ListCustomerAccountBulkJobsRequest_Catalog = ListCustomerAccountBulkJobsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	ListCustomerAccountBulkJobsRequest_Filter = ListCustomerAccountBulkJobsRequest.AddMember("Filter", CustomerAccountBulkJobFilter)
+
+	ListCustomerAccountBulkJobsRequest_MaxResults = ListCustomerAccountBulkJobsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListCustomerAccountBulkJobsRequest_NextToken = ListCustomerAccountBulkJobsRequest.AddMember("NextToken", _NextToken)
+
+	ListCustomerAccountBulkJobsResponse_items = ListCustomerAccountBulkJobsResponse.AddMember("items", _CustomerAccountBulkJobSummaryList)
+
+	ListCustomerAccountBulkJobsResponse_NextToken = ListCustomerAccountBulkJobsResponse.AddMember("NextToken", _NextToken)
+
 	ListEngagementByAcceptingInvitationTasksRequest_MaxResults = ListEngagementByAcceptingInvitationTasksRequest.AddMember("MaxResults", smithyprelude.Integer)
 
 	ListEngagementByAcceptingInvitationTasksRequest_NextToken = ListEngagementByAcceptingInvitationTasksRequest.AddMember("NextToken", smithyprelude.String)
@@ -8037,6 +11021,22 @@ func init() {
 	ListEngagementFromOpportunityTasksResponse_TaskSummaries = ListEngagementFromOpportunityTasksResponse.AddMember("TaskSummaries", _ListEngagementFromOpportunityTaskSummaries)
 
 	ListEngagementFromOpportunityTasksResponse_NextToken = ListEngagementFromOpportunityTasksResponse.AddMember("NextToken", smithyprelude.String)
+
+	ListEngagementGroupsRequest_Catalog = ListEngagementGroupsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	ListEngagementGroupsRequest_ReadinessLevel = ListEngagementGroupsRequest.AddMember("ReadinessLevel", ReadinessLevel)
+
+	ListEngagementGroupsRequest_Sort = ListEngagementGroupsRequest.AddMember("Sort", EngagementGroupSort)
+
+	ListEngagementGroupsRequest_EngagementGroupIdentifiers = ListEngagementGroupsRequest.AddMember("EngagementGroupIdentifiers", _EngagementGroupIdentifiers)
+
+	ListEngagementGroupsRequest_MaxResults = ListEngagementGroupsRequest.AddMember("MaxResults", _PageSize)
+
+	ListEngagementGroupsRequest_NextToken = ListEngagementGroupsRequest.AddMember("NextToken", _LeadsNextToken)
+
+	ListEngagementGroupsResponse_EngagementGroupSummaries = ListEngagementGroupsResponse.AddMember("EngagementGroupSummaries", _EngagementGroupSummaries)
+
+	ListEngagementGroupsResponse_NextToken = ListEngagementGroupsResponse.AddMember("NextToken", _LeadsNextToken)
 
 	ListEngagementInvitationsRequest_Catalog = ListEngagementInvitationsRequest.AddMember("Catalog", _CatalogIdentifier)
 
@@ -8137,6 +11137,34 @@ func init() {
 	ListOpportunitiesResponse_OpportunitySummaries = ListOpportunitiesResponse.AddMember("OpportunitySummaries", _OpportunitySummaries)
 
 	ListOpportunitiesResponse_NextToken = ListOpportunitiesResponse.AddMember("NextToken", smithyprelude.String)
+
+	ListOpportunityBulkJobResultsRequest_Catalog = ListOpportunityBulkJobResultsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	ListOpportunityBulkJobResultsRequest_MaxResults = ListOpportunityBulkJobResultsRequest.AddMember("MaxResults", _PageSize)
+
+	ListOpportunityBulkJobResultsRequest_NextToken = ListOpportunityBulkJobResultsRequest.AddMember("NextToken", smithyprelude.String)
+
+	ListOpportunityBulkJobResultsRequest_JobId = ListOpportunityBulkJobResultsRequest.AddMember("JobId", _BulkJobId)
+
+	ListOpportunityBulkJobResultsRequest_Status = ListOpportunityBulkJobResultsRequest.AddMember("Status", BulkRecordStatus)
+
+	ListOpportunityBulkJobResultsResponse_Results = ListOpportunityBulkJobResultsResponse.AddMember("Results", _BulkJobResultList)
+
+	ListOpportunityBulkJobResultsResponse_NextToken = ListOpportunityBulkJobResultsResponse.AddMember("NextToken", smithyprelude.String)
+
+	ListOpportunityBulkJobsRequest_Catalog = ListOpportunityBulkJobsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	ListOpportunityBulkJobsRequest_MaxResults = ListOpportunityBulkJobsRequest.AddMember("MaxResults", _PageSize)
+
+	ListOpportunityBulkJobsRequest_NextToken = ListOpportunityBulkJobsRequest.AddMember("NextToken", smithyprelude.String)
+
+	ListOpportunityBulkJobsRequest_JobId = ListOpportunityBulkJobsRequest.AddMember("JobId", _BulkJobId)
+
+	ListOpportunityBulkJobsRequest_Status = ListOpportunityBulkJobsRequest.AddMember("Status", BulkJobStatus)
+
+	ListOpportunityBulkJobsResponse_OpportunityBulkJobSummaries = ListOpportunityBulkJobsResponse.AddMember("OpportunityBulkJobSummaries", _OpportunityBulkJobSummaryList)
+
+	ListOpportunityBulkJobsResponse_NextToken = ListOpportunityBulkJobsResponse.AddMember("NextToken", smithyprelude.String)
 
 	ListOpportunityFromEngagementTasksRequest_MaxResults = ListOpportunityFromEngagementTasksRequest.AddMember("MaxResults", smithyprelude.Integer)
 
@@ -8254,6 +11282,68 @@ func init() {
 
 	RejectEngagementInvitationRequest_RejectionReason = RejectEngagementInvitationRequest.AddMember("RejectionReason", _RejectionReasonString)
 
+	SearchCustomerAccountsRequest_Catalog = SearchCustomerAccountsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	SearchCustomerAccountsRequest_Filter = SearchCustomerAccountsRequest.AddMember("Filter", Filter)
+
+	SearchCustomerAccountsRequest_Sort = SearchCustomerAccountsRequest.AddMember("Sort", CustomerAccountSort)
+
+	SearchCustomerAccountsRequest_MaxResults = SearchCustomerAccountsRequest.AddMember("MaxResults", smithyprelude.Integer)
+
+	SearchCustomerAccountsRequest_NextToken = SearchCustomerAccountsRequest.AddMember("NextToken", _NextToken)
+
+	SearchCustomerAccountsResponse_CustomerAccountSummaries = SearchCustomerAccountsResponse.AddMember("CustomerAccountSummaries", _CustomerAccountSummaryList)
+
+	SearchCustomerAccountsResponse_NextToken = SearchCustomerAccountsResponse.AddMember("NextToken", _NextToken)
+
+	SearchEngagementsRequest_Catalog = SearchEngagementsRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	SearchEngagementsRequest_Keyword = SearchEngagementsRequest.AddMember("Keyword", _EngagementSearchKeyword)
+
+	SearchEngagementsRequest_Filter = SearchEngagementsRequest.AddMember("Filter", EngagementSearchFilter)
+
+	SearchEngagementsRequest_GroupId = SearchEngagementsRequest.AddMember("GroupId", _GroupId)
+
+	SearchEngagementsRequest_Sort = SearchEngagementsRequest.AddMember("Sort", EngagementSearchSort)
+
+	SearchEngagementsRequest_MaxResults = SearchEngagementsRequest.AddMember("MaxResults", _PageSize)
+
+	SearchEngagementsRequest_NextToken = SearchEngagementsRequest.AddMember("NextToken", _LeadsNextToken)
+
+	SearchEngagementsResponse_EngagementSearchSummaries = SearchEngagementsResponse.AddMember("EngagementSearchSummaries", _EngagementSearchSummaryList)
+
+	SearchEngagementsResponse_NextToken = SearchEngagementsResponse.AddMember("NextToken", _LeadsNextToken)
+
+	SearchOpportunitiesRequest_Catalog = SearchOpportunitiesRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	SearchOpportunitiesRequest_MaxResults = SearchOpportunitiesRequest.AddMember("MaxResults", _PageSize)
+
+	SearchOpportunitiesRequest_NextToken = SearchOpportunitiesRequest.AddMember("NextToken", smithyprelude.String)
+
+	SearchOpportunitiesRequest_Keyword = SearchOpportunitiesRequest.AddMember("Keyword", _SearchKeyword)
+
+	SearchOpportunitiesRequest_Filter = SearchOpportunitiesRequest.AddMember("Filter", OpportunitySearchFilter)
+
+	SearchOpportunitiesRequest_Sort = SearchOpportunitiesRequest.AddMember("Sort", OpportunitySearchSort)
+
+	SearchOpportunitiesResponse_OpportunitySearchSummaries = SearchOpportunitiesResponse.AddMember("OpportunitySearchSummaries", _OpportunitySearchSummaries)
+
+	SearchOpportunitiesResponse_NextToken = SearchOpportunitiesResponse.AddMember("NextToken", smithyprelude.String)
+
+	StartCustomerAccountBulkJobRequest_Catalog = StartCustomerAccountBulkJobRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	StartCustomerAccountBulkJobRequest_ClientToken = StartCustomerAccountBulkJobRequest.AddMember("ClientToken", _ClientToken)
+
+	StartCustomerAccountBulkJobRequest_FileUri = StartCustomerAccountBulkJobRequest.AddMember("FileUri", _FileUri)
+
+	StartCustomerAccountBulkJobResponse_Arn = StartCustomerAccountBulkJobResponse.AddMember("Arn", _BulkJobArn)
+
+	StartCustomerAccountBulkJobResponse_Id = StartCustomerAccountBulkJobResponse.AddMember("Id", _JobId)
+
+	StartCustomerAccountBulkJobResponse_Status = StartCustomerAccountBulkJobResponse.AddMember("Status", BulkJobStatus)
+
+	StartCustomerAccountBulkJobResponse_CreatedAt = StartCustomerAccountBulkJobResponse.AddMember("CreatedAt", _DateTime)
+
 	StartEngagementByAcceptingInvitationTaskRequest_Catalog = StartEngagementByAcceptingInvitationTaskRequest.AddMember("Catalog", _CatalogIdentifier)
 
 	StartEngagementByAcceptingInvitationTaskRequest_ClientToken = StartEngagementByAcceptingInvitationTaskRequest.AddMember("ClientToken", _ClientToken)
@@ -8309,6 +11399,16 @@ func init() {
 	StartEngagementFromOpportunityTaskResponse_EngagementId = StartEngagementFromOpportunityTaskResponse.AddMember("EngagementId", _EngagementIdentifier)
 
 	StartEngagementFromOpportunityTaskResponse_EngagementInvitationId = StartEngagementFromOpportunityTaskResponse.AddMember("EngagementInvitationId", _EngagementInvitationIdentifier)
+
+	StartOpportunityBulkJobRequest_Catalog = StartOpportunityBulkJobRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	StartOpportunityBulkJobRequest_ClientToken = StartOpportunityBulkJobRequest.AddMember("ClientToken", _ClientToken)
+
+	StartOpportunityBulkJobRequest_FileURI = StartOpportunityBulkJobRequest.AddMember("FileURI", _FileUri)
+
+	StartOpportunityBulkJobRequest_FileFormat = StartOpportunityBulkJobRequest.AddMember("FileFormat", BulkFileFormat)
+
+	StartOpportunityBulkJobResponse_JobId = StartOpportunityBulkJobResponse.AddMember("JobId", _BulkJobId)
 
 	StartOpportunityFromEngagementTaskRequest_Catalog = StartOpportunityFromEngagementTaskRequest.AddMember("Catalog", _CatalogIdentifier)
 
@@ -8387,6 +11487,30 @@ func init() {
 	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
 
 	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
+
+	UpdateCustomerAccountRequest_Catalog = UpdateCustomerAccountRequest.AddMember("Catalog", _CatalogIdentifier)
+
+	UpdateCustomerAccountRequest_Identifier = UpdateCustomerAccountRequest.AddMember("Identifier", _CustomerAccountArnOrIdentifier)
+
+	UpdateCustomerAccountRequest_Account = UpdateCustomerAccountRequest.AddMember("Account", CustomerAccountData)
+
+	UpdateCustomerAccountRequest_PartnerAccountIdentifier = UpdateCustomerAccountRequest.AddMember("PartnerAccountIdentifier", _PartnerAccountIdentifier)
+
+	UpdateCustomerAccountRequest_LastModifiedDate = UpdateCustomerAccountRequest.AddMember("LastModifiedDate", _DateTime)
+
+	UpdateCustomerAccountResponse_Arn = UpdateCustomerAccountResponse.AddMember("Arn", _CustomerAccountArn)
+
+	UpdateCustomerAccountResponse_Id = UpdateCustomerAccountResponse.AddMember("Id", _CustomerAccountId)
+
+	UpdateCustomerAccountResponse_Status = UpdateCustomerAccountResponse.AddMember("Status", EnrichmentStatus)
+
+	UpdateCustomerAccountResponse_Catalog = UpdateCustomerAccountResponse.AddMember("Catalog", _CatalogIdentifier)
+
+	UpdateCustomerAccountResponse_PartnerAccountIdentifier = UpdateCustomerAccountResponse.AddMember("PartnerAccountIdentifier", _PartnerAccountIdentifier)
+
+	UpdateCustomerAccountResponse_CreatedDate = UpdateCustomerAccountResponse.AddMember("CreatedDate", _DateTime)
+
+	UpdateCustomerAccountResponse_LastModifiedDate = UpdateCustomerAccountResponse.AddMember("LastModifiedDate", _DateTime)
 
 	UpdateEngagementContextRequest_Catalog = UpdateEngagementContextRequest.AddMember("Catalog", _CatalogIdentifier)
 

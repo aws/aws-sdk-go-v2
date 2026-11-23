@@ -775,6 +775,124 @@ func awsRestxml_serializeOpDocumentCreateHealthCheckInput(v *CreateHealthCheckIn
 	return nil
 }
 
+type awsRestxml_serializeOpCreateHealthCheckSource struct {
+}
+
+func (*awsRestxml_serializeOpCreateHealthCheckSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpCreateHealthCheckSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateHealthCheckSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/healthchecksource")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "CreateHealthCheckSourceRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
+	if err := awsRestxml_serializeOpDocumentCreateHealthCheckSourceInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsCreateHealthCheckSourceInput(v *CreateHealthCheckSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentCreateHealthCheckSourceInput(v *CreateHealthCheckSourceInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.CallerReference != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "CallerReference",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.CallerReference)
+	}
+	if v.HealthCheckSourceConfig != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "HealthCheckSourceConfig",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentHealthCheckSourceConfig(v.HealthCheckSourceConfig, el); err != nil {
+			return err
+		}
+	}
+	if v.Tags != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Tags",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentTagList(v.Tags, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpCreateHostedZone struct {
 }
 
@@ -864,6 +982,19 @@ func awsRestxml_serializeOpDocumentCreateHostedZoneInput(v *CreateHostedZoneInpu
 		el := value.MemberElement(root)
 		el.String(*v.CallerReference)
 	}
+	if v.ChangeGuardrails != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChangeGuardrails",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentChangeGuardrails(v.ChangeGuardrails, el); err != nil {
+			return err
+		}
+	}
 	if v.DelegationSetId != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -874,6 +1005,17 @@ func awsRestxml_serializeOpDocumentCreateHostedZoneInput(v *CreateHostedZoneInpu
 		}
 		el := value.MemberElement(root)
 		el.String(*v.DelegationSetId)
+	}
+	if v.EnablePublicDNSFallback != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EnablePublicDNSFallback",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.EnablePublicDNSFallback)
 	}
 	if v.HostedZoneConfig != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2052,6 +2194,77 @@ func awsRestxml_serializeOpHttpBindingsDeleteHealthCheckInput(v *DeleteHealthChe
 	}
 	if v.HealthCheckId != nil {
 		if err := encoder.SetURI("HealthCheckId").String(*v.HealthCheckId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpDeleteHealthCheckSource struct {
+}
+
+func (*awsRestxml_serializeOpDeleteHealthCheckSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpDeleteHealthCheckSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteHealthCheckSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/healthchecksource/{HealthCheckSourceId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsDeleteHealthCheckSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsDeleteHealthCheckSourceInput(v *DeleteHealthCheckSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HealthCheckSourceId == nil || len(*v.HealthCheckSourceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckSourceId must not be empty")}
+	}
+	if v.HealthCheckSourceId != nil {
+		if err := encoder.SetURI("HealthCheckSourceId").String(*v.HealthCheckSourceId); err != nil {
 			return err
 		}
 	}
@@ -3522,6 +3735,77 @@ func awsRestxml_serializeOpHttpBindingsGetHealthCheckLastFailureReasonInput(v *G
 	return nil
 }
 
+type awsRestxml_serializeOpGetHealthCheckSource struct {
+}
+
+func (*awsRestxml_serializeOpGetHealthCheckSource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetHealthCheckSource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetHealthCheckSourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/healthchecksource/{HealthCheckSourceId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetHealthCheckSourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetHealthCheckSourceInput(v *GetHealthCheckSourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HealthCheckSourceId == nil || len(*v.HealthCheckSourceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckSourceId must not be empty")}
+	}
+	if v.HealthCheckSourceId != nil {
+		if err := encoder.SetURI("HealthCheckSourceId").String(*v.HealthCheckSourceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpGetHealthCheckStatus struct {
 }
 
@@ -3657,6 +3941,86 @@ func awsRestxml_serializeOpHttpBindingsGetHostedZoneInput(v *GetHostedZoneInput,
 	}
 	if v.Id != nil {
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpGetHostedZoneChangeBatch struct {
+}
+
+func (*awsRestxml_serializeOpGetHostedZoneChangeBatch) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetHostedZoneChangeBatch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetHostedZoneChangeBatchInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/hostedzone/{HostedZoneId}/changebatches/{ChangeId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetHostedZoneChangeBatchInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetHostedZoneChangeBatchInput(v *GetHostedZoneChangeBatchInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChangeId == nil || len(*v.ChangeId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChangeId must not be empty")}
+	}
+	if v.ChangeId != nil {
+		if err := encoder.SetURI("ChangeId").String(*v.ChangeId); err != nil {
+			return err
+		}
+	}
+
+	if v.HostedZoneId == nil || len(*v.HostedZoneId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
+	if v.HostedZoneId != nil {
+		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
 			return err
 		}
 	}
@@ -4613,6 +4977,250 @@ func awsRestxml_serializeOpHttpBindingsListHealthChecksInput(v *ListHealthChecks
 	return nil
 }
 
+type awsRestxml_serializeOpListHealthChecksBySource struct {
+}
+
+func (*awsRestxml_serializeOpListHealthChecksBySource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpListHealthChecksBySource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListHealthChecksBySourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/healthchecks/source/{HealthCheckSourceId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsListHealthChecksBySourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsListHealthChecksBySourceInput(v *ListHealthChecksBySourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HealthCheckSourceId == nil || len(*v.HealthCheckSourceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HealthCheckSourceId must not be empty")}
+	}
+	if v.HealthCheckSourceId != nil {
+		if err := encoder.SetURI("HealthCheckSourceId").String(*v.HealthCheckSourceId); err != nil {
+			return err
+		}
+	}
+
+	if v.Marker != nil {
+		encoder.SetQuery("marker").String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		encoder.SetQuery("maxitems").Integer(*v.MaxItems)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpListHealthCheckSources struct {
+}
+
+func (*awsRestxml_serializeOpListHealthCheckSources) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpListHealthCheckSources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListHealthCheckSourcesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/healthchecksource")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsListHealthCheckSourcesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsListHealthCheckSourcesInput(v *ListHealthCheckSourcesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxresults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nexttoken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpListHostedZoneChangeBatches struct {
+}
+
+func (*awsRestxml_serializeOpListHostedZoneChangeBatches) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpListHostedZoneChangeBatches) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListHostedZoneChangeBatchesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/hostedzone/{HostedZoneId}/changebatches")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsListHostedZoneChangeBatchesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsListHostedZoneChangeBatchesInput(v *ListHostedZoneChangeBatchesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HostedZoneId == nil || len(*v.HostedZoneId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
+	if v.HostedZoneId != nil {
+		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxresults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nexttoken").String(*v.NextToken)
+	}
+
+	if len(v.SortOrder) > 0 {
+		encoder.SetQuery("sortorder").String(string(v.SortOrder))
+	}
+
+	if v.StartAfterChangeId != nil {
+		encoder.SetQuery("startafterchangeid").String(*v.StartAfterChangeId)
+	}
+
+	if v.SubmittedAfter != nil {
+		encoder.SetQuery("submittedafter").String(*v.SubmittedAfter)
+	}
+
+	if v.SubmittedBefore != nil {
+		encoder.SetQuery("submittedbefore").String(*v.SubmittedBefore)
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpListHostedZones struct {
 }
 
@@ -4912,6 +5520,105 @@ func awsRestxml_serializeOpHttpBindingsListQueryLoggingConfigsInput(v *ListQuery
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nexttoken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpListResourceRecordSetChanges struct {
+}
+
+func (*awsRestxml_serializeOpListResourceRecordSetChanges) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpListResourceRecordSetChanges) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListResourceRecordSetChangesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/hostedzone/{HostedZoneId}/rrsetchanges")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsListResourceRecordSetChangesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsListResourceRecordSetChangesInput(v *ListResourceRecordSetChangesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HostedZoneId == nil || len(*v.HostedZoneId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
+	if v.HostedZoneId != nil {
+		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxresults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nexttoken").String(*v.NextToken)
+	}
+
+	if v.RecordName != nil {
+		encoder.SetQuery("recordname").String(*v.RecordName)
+	}
+
+	if len(v.RecordType) > 0 {
+		encoder.SetQuery("recordtype").String(string(v.RecordType))
+	}
+
+	if len(v.SortOrder) > 0 {
+		encoder.SetQuery("sortorder").String(string(v.SortOrder))
+	}
+
+	if v.SubmittedAfter != nil {
+		encoder.SetQuery("submittedafter").String(*v.SubmittedAfter)
+	}
+
+	if v.SubmittedBefore != nil {
+		encoder.SetQuery("submittedbefore").String(*v.SubmittedBefore)
 	}
 
 	return nil
@@ -6065,6 +6772,17 @@ func awsRestxml_serializeOpDocumentUpdateHealthCheckInput(v *UpdateHealthCheckIn
 		el := value.MemberElement(root)
 		el.String(*v.FullyQualifiedDomainName)
 	}
+	if v.HealthCheckSourceId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "HealthCheckSourceId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.HealthCheckSourceId)
+	}
 	if v.HealthCheckVersion != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -6378,6 +7096,30 @@ func awsRestxml_serializeOpHttpBindingsUpdateHostedZoneFeaturesInput(v *UpdateHo
 
 func awsRestxml_serializeOpDocumentUpdateHostedZoneFeaturesInput(v *UpdateHostedZoneFeaturesInput, value smithyxml.Value) error {
 	defer value.Close()
+	if v.ChangeGuardrails != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ChangeGuardrails",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentChangeGuardrails(v.ChangeGuardrails, el); err != nil {
+			return err
+		}
+	}
+	if v.DryRun {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DryRun",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.DryRun)
+	}
 	if v.EnableAcceleratedRecovery != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -6388,6 +7130,133 @@ func awsRestxml_serializeOpDocumentUpdateHostedZoneFeaturesInput(v *UpdateHosted
 		}
 		el := value.MemberElement(root)
 		el.Boolean(*v.EnableAcceleratedRecovery)
+	}
+	if v.EnablePublicDNSFallback != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EnablePublicDNSFallback",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.EnablePublicDNSFallback)
+	}
+	return nil
+}
+
+type awsRestxml_serializeOpUpdateHostedZoneTier struct {
+}
+
+func (*awsRestxml_serializeOpUpdateHostedZoneTier) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpUpdateHostedZoneTier) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateHostedZoneTierInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2013-04-01/hostedzone/{HostedZoneId}/tier")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsUpdateHostedZoneTierInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "UpdateHostedZoneTierRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
+	if err := awsRestxml_serializeOpDocumentUpdateHostedZoneTierInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsUpdateHostedZoneTierInput(v *UpdateHostedZoneTierInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.HostedZoneId == nil || len(*v.HostedZoneId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HostedZoneId must not be empty")}
+	}
+	if v.HostedZoneId != nil {
+		if err := encoder.SetURI("HostedZoneId").String(*v.HostedZoneId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentUpdateHostedZoneTierInput(v *UpdateHostedZoneTierInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.DryRun {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DryRun",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.DryRun)
+	}
+	if len(v.HostedZoneTier) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "HostedZoneTier",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.HostedZoneTier))
 	}
 	return nil
 }
@@ -6698,6 +7567,33 @@ func awsRestxml_serializeDocumentAliasTarget(v *types.AliasTarget, value smithyx
 	return nil
 }
 
+func awsRestxml_serializeDocumentAZAffinity(v *types.AZAffinity, value smithyxml.Value) error {
+	defer value.Close()
+	if v.LocationId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "LocationId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.LocationId)
+	}
+	if len(v.LocationType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "LocationType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.LocationType))
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentChange(v *types.Change, value smithyxml.Value) error {
 	defer value.Close()
 	if len(v.Action) > 0 {
@@ -6752,6 +7648,55 @@ func awsRestxml_serializeDocumentChangeBatch(v *types.ChangeBatch, value smithyx
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Comment)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentChangeGuardrail(v *types.ChangeGuardrail, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.Name) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Name",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Name))
+	}
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentChangeGuardrails(v []types.ChangeGuardrail, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ChangeGuardrail",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentChangeGuardrail(&v[i], am); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -7066,6 +8011,17 @@ func awsRestxml_serializeDocumentHealthCheckConfig(v *types.HealthCheckConfig, v
 		el := value.MemberElement(root)
 		el.Boolean(*v.EnableSNI)
 	}
+	if len(v.EndpointType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EndpointType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.EndpointType))
+	}
 	if v.FailureThreshold != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -7087,6 +8043,17 @@ func awsRestxml_serializeDocumentHealthCheckConfig(v *types.HealthCheckConfig, v
 		}
 		el := value.MemberElement(root)
 		el.String(*v.FullyQualifiedDomainName)
+	}
+	if v.HealthCheckSourceId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "HealthCheckSourceId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.HealthCheckSourceId)
 	}
 	if v.HealthThreshold != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -7245,6 +8212,35 @@ func awsRestxml_serializeDocumentHealthCheckRegionList(v []types.HealthCheckRegi
 	return nil
 }
 
+func awsRestxml_serializeDocumentHealthCheckSourceConfig(v *types.HealthCheckSourceConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.SubnetConfigurationList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SubnetConfigurationList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentSubnetConfigurationList(v.SubnetConfigurationList, el); err != nil {
+			return err
+		}
+	}
+	if v.VpcId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "VpcId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.VpcId)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentHostedZoneConfig(v *types.HostedZoneConfig, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Comment != nil {
@@ -7257,6 +8253,17 @@ func awsRestxml_serializeDocumentHostedZoneConfig(v *types.HostedZoneConfig, val
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Comment)
+	}
+	if len(v.HostedZoneTier) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "HostedZoneTier",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.HostedZoneTier))
 	}
 	if v.PrivateZone {
 		rootAttr := []smithyxml.Attr{}
@@ -7342,6 +8349,19 @@ func awsRestxml_serializeDocumentResourceRecordSet(v *types.ResourceRecordSet, v
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentAliasTarget(v.AliasTarget, el); err != nil {
+			return err
+		}
+	}
+	if v.AZAffinity != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AZAffinity",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAZAffinity(v.AZAffinity, el); err != nil {
 			return err
 		}
 	}
@@ -7613,6 +8633,88 @@ func awsRestxml_serializeDocumentResourceRecordSetProtectionKeyBatch(v []types.R
 	for i := range v {
 		am := array.Member()
 		if err := awsRestxml_serializeDocumentResourceRecordSetProtectionKey(&v[i], am); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentSecurityGroupIdList(v []string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "SecurityGroupId",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		am.String(v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentSubnetConfiguration(v *types.SubnetConfiguration, value smithyxml.Value) error {
+	defer value.Close()
+	if v.AvailabilityZoneId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AvailabilityZoneId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.AvailabilityZoneId)
+	}
+	if v.SecurityGroupIdList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SecurityGroupIdList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentSecurityGroupIdList(v.SecurityGroupIdList, el); err != nil {
+			return err
+		}
+	}
+	if v.SubnetId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "SubnetId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.SubnetId)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentSubnetConfigurationList(v []types.SubnetConfiguration, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "SubnetConfiguration",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentSubnetConfiguration(&v[i], am); err != nil {
 			return err
 		}
 	}

@@ -96,6 +96,11 @@ type UpdateProfileInput struct {
 	// credentials.
 	SessionPolicy *string
 
+	// The trusted identity propagation (TIP) settings for the profile. The settings
+	// that you specify replace the current settings, and a field that you omit returns
+	// to its default. If you omit this parameter, the TIP settings don't change.
+	TipConfiguration *types.TipConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -130,6 +135,11 @@ func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionPolicy != nil {
 		s.WriteString(schemas.UpdateProfileRequest_sessionPolicy, *v.SessionPolicy)
 	}
+	if v.TipConfiguration != nil {
+		s.WriteStruct(schemas.UpdateProfileRequest_tipConfiguration)
+		v.TipConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *UpdateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateProfileRequest, func(s *smithy.Schema) error {
@@ -156,6 +166,9 @@ func (v *UpdateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateProfileRequest_sessionPolicy:
 			v.SessionPolicy = new(string)
 			return d.ReadString(schemas.UpdateProfileRequest_sessionPolicy, v.SessionPolicy)
+		case schemas.UpdateProfileRequest_tipConfiguration:
+			v.TipConfiguration = &types.TipConfiguration{}
+			return v.TipConfiguration.Deserialize(d)
 		}
 		return nil
 	})

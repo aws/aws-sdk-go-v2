@@ -93,6 +93,54 @@ func (ComputeNodeGroupStatus) Values() []ComputeNodeGroupStatus {
 	}
 }
 
+type DeepHealthCheckOnStartProfile string
+
+// Enum values for DeepHealthCheckOnStartProfile
+const (
+	DeepHealthCheckOnStartProfileNone   DeepHealthCheckOnStartProfile = "NONE"
+	DeepHealthCheckOnStartProfileQuick  DeepHealthCheckOnStartProfile = "QUICK"
+	DeepHealthCheckOnStartProfileMedium DeepHealthCheckOnStartProfile = "MEDIUM"
+	DeepHealthCheckOnStartProfileLong   DeepHealthCheckOnStartProfile = "LONG"
+)
+
+// Values returns all known values for DeepHealthCheckOnStartProfile. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeepHealthCheckOnStartProfile) Values() []DeepHealthCheckOnStartProfile {
+	return []DeepHealthCheckOnStartProfile{
+		"NONE",
+		"QUICK",
+		"MEDIUM",
+		"LONG",
+	}
+}
+
+type DeepHealthCheckOnStartRepairAction string
+
+// Enum values for DeepHealthCheckOnStartRepairAction
+const (
+	DeepHealthCheckOnStartRepairActionAuto    DeepHealthCheckOnStartRepairAction = "AUTO"
+	DeepHealthCheckOnStartRepairActionReplace DeepHealthCheckOnStartRepairAction = "REPLACE"
+	DeepHealthCheckOnStartRepairActionIsolate DeepHealthCheckOnStartRepairAction = "ISOLATE"
+	DeepHealthCheckOnStartRepairActionNone    DeepHealthCheckOnStartRepairAction = "NONE"
+)
+
+// Values returns all known values for DeepHealthCheckOnStartRepairAction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeepHealthCheckOnStartRepairAction) Values() []DeepHealthCheckOnStartRepairAction {
+	return []DeepHealthCheckOnStartRepairAction{
+		"AUTO",
+		"REPLACE",
+		"ISOLATE",
+		"NONE",
+	}
+}
+
 type EndpointType string
 
 // Enum values for EndpointType
@@ -130,6 +178,66 @@ func (ExecutionPolicy) Values() []ExecutionPolicy {
 	return []ExecutionPolicy{
 		"FIRST_BOOT_ONLY",
 		"EVERY_BOOT",
+	}
+}
+
+type HealthMonitoringMode string
+
+// Enum values for HealthMonitoringMode
+const (
+	HealthMonitoringModeNone     HealthMonitoringMode = "NONE"
+	HealthMonitoringModeStandard HealthMonitoringMode = "STANDARD"
+)
+
+// Values returns all known values for HealthMonitoringMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HealthMonitoringMode) Values() []HealthMonitoringMode {
+	return []HealthMonitoringMode{
+		"NONE",
+		"STANDARD",
+	}
+}
+
+type HealthMonitoringRepairAction string
+
+// Enum values for HealthMonitoringRepairAction
+const (
+	HealthMonitoringRepairActionAuto    HealthMonitoringRepairAction = "AUTO"
+	HealthMonitoringRepairActionReplace HealthMonitoringRepairAction = "REPLACE"
+	HealthMonitoringRepairActionIsolate HealthMonitoringRepairAction = "ISOLATE"
+	HealthMonitoringRepairActionNone    HealthMonitoringRepairAction = "NONE"
+)
+
+// Values returns all known values for HealthMonitoringRepairAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HealthMonitoringRepairAction) Values() []HealthMonitoringRepairAction {
+	return []HealthMonitoringRepairAction{
+		"AUTO",
+		"REPLACE",
+		"ISOLATE",
+		"NONE",
+	}
+}
+
+type JobSubmitPluginType string
+
+// Enum values for JobSubmitPluginType
+const (
+	JobSubmitPluginTypeStarlark JobSubmitPluginType = "STARLARK"
+)
+
+// Values returns all known values for JobSubmitPluginType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobSubmitPluginType) Values() []JobSubmitPluginType {
+	return []JobSubmitPluginType{
+		"STARLARK",
 	}
 }
 

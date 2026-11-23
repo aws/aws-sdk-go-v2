@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"discoveryConfiguration":{"arn":"__Arn__","createdAt":946684800,"discoverySources":["API_GATEWAY","API_GATEWAY"],"excludedResources":["__Member__","__Member__"],"features":["AI_DISCOVERY","AI_DISCOVERY"],"status":"DISABLED","updatedAt":946684800},"tags":{"key0":"__Value__"}}

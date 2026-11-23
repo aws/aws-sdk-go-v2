@@ -11,13 +11,13 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the description of specific Amazon FSx for OpenZFS snapshots, if a
-// SnapshotIds value is provided. Otherwise, this operation returns all snapshots
-// owned by your Amazon Web Services account in the Amazon Web Services Region of
-// the endpoint that you're calling.
+// Returns the description of specific Amazon FSx for OpenZFS and Amazon FSx for
+// NetApp ONTAP snapshots, if a SnapshotIds value is provided. Otherwise, this
+// operation returns all snapshots owned by your Amazon Web Services account in the
+// Amazon Web Services Region of the endpoint that you're calling.
 //
 // When retrieving all snapshots, you can optionally specify the MaxResults
-// parameter to limit the number of snapshots in a response. If more backups
+// parameter to limit the number of snapshots in a response. If more snapshots
 // remain, Amazon FSx returns a NextToken value in the response. In this case,
 // send a later request with the NextToken request parameter set to the value of
 // NextToken from the last response.
@@ -33,7 +33,7 @@ import (
 //     descriptions while still including a NextToken value.
 //
 //   - The order of snapshots returned in the response of one DescribeSnapshots
-//     call and the order of backups returned across the responses of a multi-call
+//     call and the order of snapshots returned across the responses of a multi-call
 //     iteration is unspecified.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
@@ -69,8 +69,11 @@ type DescribeSnapshotsInput struct {
 	// request, where the previous NextToken value left off.
 	NextToken *string
 
-	// The IDs of the snapshots that you want to retrieve. This parameter value
-	// overrides any filters. If any IDs aren't found, a SnapshotNotFound error occurs.
+	// The IDs of the snapshots that you want to retrieve. You can include snapshots
+	// of Amazon FSx for OpenZFS and Amazon FSx for NetApp ONTAP volumes in the same
+	// request. If you also specify Filters , only snapshots that match both the IDs
+	// and the filters are returned. If any IDs aren't found, or if a filter excludes
+	// any of them, a SnapshotNotFound error occurs.
 	SnapshotIds []string
 
 	noSmithyDocumentSerde

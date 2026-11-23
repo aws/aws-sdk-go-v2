@@ -1622,7 +1622,7 @@ var MemoryDBInstanceDetails_SizeFlexEligible *smithy.Schema
 var Metric = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
 	Name:      "Metric",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 12)
 var Metric_BLENDED_COST *smithy.Schema
 
 var Metric_UNBLENDED_COST *smithy.Schema
@@ -1636,6 +1636,16 @@ var Metric_NET_AMORTIZED_COST *smithy.Schema
 var Metric_USAGE_QUANTITY *smithy.Schema
 
 var Metric_NORMALIZED_USAGE_AMOUNT *smithy.Schema
+
+var Metric_LIST_COST *smithy.Schema
+
+var Metric_CONTRACTED_COST *smithy.Schema
+
+var Metric_BILLED_COST *smithy.Schema
+
+var Metric_PUBLIC_EQUIVALENT_BILLED_COST *smithy.Schema
+
+var Metric_PUBLIC_ON_DEMAND_COST *smithy.Schema
 
 var _MetricAmount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.costexplorer",
@@ -5078,6 +5088,16 @@ func init() {
 	Metric_USAGE_QUANTITY = Metric.AddMember("USAGE_QUANTITY", smithyprelude.Unit)
 
 	Metric_NORMALIZED_USAGE_AMOUNT = Metric.AddMember("NORMALIZED_USAGE_AMOUNT", smithyprelude.Unit)
+
+	Metric_LIST_COST = Metric.AddMember("LIST_COST", smithyprelude.Unit)
+
+	Metric_CONTRACTED_COST = Metric.AddMember("CONTRACTED_COST", smithyprelude.Unit)
+
+	Metric_BILLED_COST = Metric.AddMember("BILLED_COST", smithyprelude.Unit)
+
+	Metric_PUBLIC_EQUIVALENT_BILLED_COST = Metric.AddMember("PUBLIC_EQUIVALENT_BILLED_COST", smithyprelude.Unit)
+
+	Metric_PUBLIC_ON_DEMAND_COST = Metric.AddMember("PUBLIC_ON_DEMAND_COST", smithyprelude.Unit)
 
 	_MetricNames_member = _MetricNames.AddMember("member", _MetricName)
 

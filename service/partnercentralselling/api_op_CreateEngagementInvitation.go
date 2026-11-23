@@ -11,9 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	This action creates an invitation from a sender to a single receiver to join
-//
-// an engagement.
+// This action creates an invitation from a sender to a single receiver to join an
+// engagement.
 func (c *Client) CreateEngagementInvitation(ctx context.Context, params *CreateEngagementInvitationInput, optFns ...func(*Options)) (*CreateEngagementInvitationOutput, error) {
 	if params == nil {
 		params = &CreateEngagementInvitationInput{}
@@ -29,28 +28,29 @@ func (c *Client) CreateEngagementInvitation(ctx context.Context, params *CreateE
 	return out, nil
 }
 
+// Contains the request parameters for the CreateEngagementInvitation operation.
 type CreateEngagementInvitationInput struct {
 
-	//  Specifies the catalog related to the engagement. Accepted values are AWS and
+	// Specifies the catalog related to the engagement. Accepted values are AWS and
 	// Sandbox , which determine the environment in which the engagement is managed.
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Specifies a unique, client-generated UUID to ensure that the request is
-	// handled exactly once. This token helps prevent duplicate invitation creations.
+	// Specifies a unique, client-generated UUID to ensure that the request is handled
+	// exactly once. This token helps prevent duplicate invitation creations.
 	//
 	// This member is required.
 	ClientToken *string
 
-	//  The unique identifier of the Engagement associated with the invitation. This
+	// The unique identifier of the Engagement associated with the invitation. This
 	// parameter ensures the invitation is created within the correct Engagement
 	// context.
 	//
 	// This member is required.
 	EngagementIdentifier *string
 
-	//  The Invitation object all information necessary to initiate an engagement
+	// The Invitation object all information necessary to initiate an engagement
 	// invitation to a partner. It contains a personalized message from the sender, the
 	// invitation's receiver, and a payload. The Payload can be the
 	// OpportunityInvitation , which includes detailed structures for sender contacts,
@@ -87,15 +87,16 @@ func (v *CreateEngagementInvitationInput) SerializeMembers(s smithy.ShapeSeriali
 	}
 }
 
+// Contains the response that the CreateEngagementInvitation action returns.
 type CreateEngagementInvitationOutput struct {
 
-	//  The Amazon Resource Name (ARN) that uniquely identifies the engagement
+	// The Amazon Resource Name (ARN) that uniquely identifies the engagement
 	// invitation.
 	//
 	// This member is required.
 	Arn *string
 
-	//  Unique identifier assigned to the newly created engagement invitation.
+	// Unique identifier assigned to the newly created engagement invitation.
 	//
 	// This member is required.
 	Id *string

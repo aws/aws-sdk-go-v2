@@ -28,6 +28,7 @@ func (c *Client) GetEngagement(ctx context.Context, params *GetEngagementInput, 
 	return out, nil
 }
 
+// Contains the request parameters for the GetEngagement operation.
 type GetEngagementInput struct {
 
 	// Specifies the catalog related to the engagement request. Valid values are AWS
@@ -59,6 +60,7 @@ func (v *GetEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the GetEngagement action returns.
 type GetEngagementOutput struct {
 
 	// The Amazon Resource Name (ARN) of the engagement retrieved.

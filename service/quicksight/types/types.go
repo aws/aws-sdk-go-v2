@@ -11,6 +11,348 @@ import (
 	"time"
 )
 
+// An access control application. It defines how an external client signs in to
+// Quick Sight with OAuth 2.0. Client secret values are never included.
+type AccessControlApplication struct {
+
+	// The ID of the access control application.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The ARN of the access control application.
+	//
+	// This member is required.
+	Arn *string
+
+	// The authentication protocol that the access control application uses.
+	//
+	// This member is required.
+	AuthenticationType AccessControlApplicationAuthenticationType
+
+	// The time when the access control application was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The time when the access control application was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the access control application.
+	//
+	// This member is required.
+	Name *string
+
+	// The Quick Sight namespace that the access control application belongs to.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The status of the access control application.
+	//
+	// This member is required.
+	Status AccessControlApplicationStatus
+
+	// The tenant URL of the access control application. This URL hosts the OAuth 2.0
+	// and OpenID Connect endpoints for the application, such as /authorize , /token ,
+	// /.well-known/openid-configuration , and /jwks .
+	//
+	// This member is required.
+	TenantUrl *string
+
+	// The description of the access control application.
+	Description *string
+
+	// The ARN of the Amazon Web Services IAM Identity Center application that Quick
+	// Sight manages for this access control application. This value is present when
+	// the IdpAuthorizingType is IDC_AUTH_CODE , or when a trusted token issuer is
+	// configured.
+	IdcApplicationArn *string
+
+	// The identity provider configuration of the access control application. Client
+	// secret values are never included.
+	IdpAuthorizingConfiguration *IdpAuthorizingConfig
+
+	// The Quick Sight authentication configuration of the access control application.
+	// Client secret values are never included.
+	QuickAuthenticationConfiguration *QuickAuthenticationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccessControlApplication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessControlApplication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessControlApplication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.AccessControlApplication_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.AccessControlApplication_Arn, *v.Arn)
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.AccessControlApplication_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.AccessControlApplication_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AccessControlApplication_Description, *v.Description)
+	}
+	if v.IdcApplicationArn != nil {
+		s.WriteString(schemas.AccessControlApplication_IdcApplicationArn, *v.IdcApplicationArn)
+	}
+	if v.IdpAuthorizingConfiguration != nil {
+		s.WriteStruct(schemas.AccessControlApplication_IdpAuthorizingConfiguration)
+		v.IdpAuthorizingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.AccessControlApplication_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AccessControlApplication_Name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.AccessControlApplication_Namespace, *v.Namespace)
+	}
+	if v.QuickAuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.AccessControlApplication_QuickAuthenticationConfiguration)
+		v.QuickAuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AccessControlApplication_Status, string(v.Status))
+	}
+	if v.TenantUrl != nil {
+		s.WriteString(schemas.AccessControlApplication_TenantUrl, *v.TenantUrl)
+	}
+}
+func (v *AccessControlApplication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessControlApplication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessControlApplication_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.AccessControlApplication_ApplicationId, v.ApplicationId)
+		case schemas.AccessControlApplication_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AccessControlApplication_Arn, v.Arn)
+		case schemas.AccessControlApplication_AuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.AccessControlApplication_AuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = AccessControlApplicationAuthenticationType(ev)
+			return nil
+		case schemas.AccessControlApplication_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.AccessControlApplication_CreatedTime, v.CreatedTime)
+		case schemas.AccessControlApplication_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AccessControlApplication_Description, v.Description)
+		case schemas.AccessControlApplication_IdcApplicationArn:
+			v.IdcApplicationArn = new(string)
+			return d.ReadString(schemas.AccessControlApplication_IdcApplicationArn, v.IdcApplicationArn)
+		case schemas.AccessControlApplication_IdpAuthorizingConfiguration:
+			v.IdpAuthorizingConfiguration = &IdpAuthorizingConfig{}
+			return v.IdpAuthorizingConfiguration.Deserialize(d)
+		case schemas.AccessControlApplication_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.AccessControlApplication_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AccessControlApplication_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccessControlApplication_Name, v.Name)
+		case schemas.AccessControlApplication_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.AccessControlApplication_Namespace, v.Namespace)
+		case schemas.AccessControlApplication_QuickAuthenticationConfiguration:
+			v.QuickAuthenticationConfiguration = &QuickAuthenticationConfig{}
+			return v.QuickAuthenticationConfiguration.Deserialize(d)
+		case schemas.AccessControlApplication_Status:
+			var ev string
+			if err := d.ReadString(schemas.AccessControlApplication_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AccessControlApplicationStatus(ev)
+			return nil
+		case schemas.AccessControlApplication_TenantUrl:
+			v.TenantUrl = new(string)
+			return d.ReadString(schemas.AccessControlApplication_TenantUrl, v.TenantUrl)
+		}
+		return nil
+	})
+}
+
+// A summary of an access control application, including its ID, ARN, name,
+// namespace, authentication type, status, and timestamps.
+type AccessControlApplicationSummary struct {
+
+	// The ID of the access control application.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The ARN of the access control application.
+	//
+	// This member is required.
+	Arn *string
+
+	// The authentication protocol that the access control application uses.
+	//
+	// This member is required.
+	AuthenticationType AccessControlApplicationAuthenticationType
+
+	// The time when the access control application was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The time when the access control application was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the access control application.
+	//
+	// This member is required.
+	Name *string
+
+	// The Quick Sight namespace that the access control application belongs to.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The status of the access control application.
+	//
+	// This member is required.
+	Status AccessControlApplicationStatus
+
+	// The tenant URL of the access control application. This URL hosts the OAuth 2.0
+	// and OpenID Connect endpoints for the application, such as /authorize , /token ,
+	// /.well-known/openid-configuration , and /jwks .
+	//
+	// This member is required.
+	TenantUrl *string
+
+	// The description of the access control application.
+	Description *string
+
+	// A summary of the identity provider configuration of the access control
+	// application, without client secret information.
+	IdpAuthorizingConfiguration *IdpAuthorizingConfigSummary
+
+	// The Quick Sight authentication configuration of the access control application.
+	// Client secret values are never included.
+	QuickAuthenticationConfiguration *QuickAuthenticationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (v *AccessControlApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessControlApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessControlApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.AccessControlApplicationSummary_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.AccessControlApplicationSummary_Arn, *v.Arn)
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.AccessControlApplicationSummary_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.AccessControlApplicationSummary_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AccessControlApplicationSummary_Description, *v.Description)
+	}
+	if v.IdpAuthorizingConfiguration != nil {
+		s.WriteStruct(schemas.AccessControlApplicationSummary_IdpAuthorizingConfiguration)
+		v.IdpAuthorizingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.AccessControlApplicationSummary_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AccessControlApplicationSummary_Name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.AccessControlApplicationSummary_Namespace, *v.Namespace)
+	}
+	if v.QuickAuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.AccessControlApplicationSummary_QuickAuthenticationConfiguration)
+		v.QuickAuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AccessControlApplicationSummary_Status, string(v.Status))
+	}
+	if v.TenantUrl != nil {
+		s.WriteString(schemas.AccessControlApplicationSummary_TenantUrl, *v.TenantUrl)
+	}
+}
+func (v *AccessControlApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessControlApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessControlApplicationSummary_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.AccessControlApplicationSummary_ApplicationId, v.ApplicationId)
+		case schemas.AccessControlApplicationSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AccessControlApplicationSummary_Arn, v.Arn)
+		case schemas.AccessControlApplicationSummary_AuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.AccessControlApplicationSummary_AuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = AccessControlApplicationAuthenticationType(ev)
+			return nil
+		case schemas.AccessControlApplicationSummary_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.AccessControlApplicationSummary_CreatedTime, v.CreatedTime)
+		case schemas.AccessControlApplicationSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AccessControlApplicationSummary_Description, v.Description)
+		case schemas.AccessControlApplicationSummary_IdpAuthorizingConfiguration:
+			v.IdpAuthorizingConfiguration = &IdpAuthorizingConfigSummary{}
+			return v.IdpAuthorizingConfiguration.Deserialize(d)
+		case schemas.AccessControlApplicationSummary_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.AccessControlApplicationSummary_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AccessControlApplicationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AccessControlApplicationSummary_Name, v.Name)
+		case schemas.AccessControlApplicationSummary_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.AccessControlApplicationSummary_Namespace, v.Namespace)
+		case schemas.AccessControlApplicationSummary_QuickAuthenticationConfiguration:
+			v.QuickAuthenticationConfiguration = &QuickAuthenticationConfig{}
+			return v.QuickAuthenticationConfiguration.Deserialize(d)
+		case schemas.AccessControlApplicationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AccessControlApplicationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AccessControlApplicationStatus(ev)
+			return nil
+		case schemas.AccessControlApplicationSummary_TenantUrl:
+			v.TenantUrl = new(string)
+			return d.ReadString(schemas.AccessControlApplicationSummary_TenantUrl, v.TenantUrl)
+		}
+		return nil
+	})
+}
+
 // The access control settings for a knowledge base. Use this structure to enable
 // or disable document-level access control lists (ACLs) that filter query results
 // based on the permissions from the source data connector.
@@ -8208,6 +8550,108 @@ func (v *BatchDeleteKnowledgeBaseSuccess) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
+// A principal that a BatchDeletePolicyAssignmentByPolicy request couldn't remove
+// the policy from.
+type BatchDeletePolicyAssignmentError struct {
+
+	// The reason the entry failed. Possible values:
+	//
+	//   - ValidationException – The entry is not valid.
+	//
+	//   - ResourceNotFoundException – The principal doesn't exist.
+	//
+	//   - ConflictException – The principal has a different policy of the same type,
+	//   or the assignment changed while this request was being processed.
+	//
+	//   - ThrottlingException – The entry was throttled. You can retry this entry.
+	//
+	//   - InternalFailureException – An internal error occurred.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A description of the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The ARN of the principal.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchDeletePolicyAssignmentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeletePolicyAssignmentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeletePolicyAssignmentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchDeletePolicyAssignmentError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchDeletePolicyAssignmentError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.BatchDeletePolicyAssignmentError_PrincipalArn, *v.PrincipalArn)
+	}
+}
+func (v *BatchDeletePolicyAssignmentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeletePolicyAssignmentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeletePolicyAssignmentError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchDeletePolicyAssignmentError_ErrorCode, v.ErrorCode)
+		case schemas.BatchDeletePolicyAssignmentError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchDeletePolicyAssignmentError_ErrorMessage, v.ErrorMessage)
+		case schemas.BatchDeletePolicyAssignmentError_PrincipalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.BatchDeletePolicyAssignmentError_PrincipalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
+
+// A principal that no longer has the policy after a
+// BatchDeletePolicyAssignmentByPolicy request, including a principal that didn't
+// have the policy.
+type BatchDeletePolicyAssignmentSuccess struct {
+
+	// The ARN of the principal.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchDeletePolicyAssignmentSuccess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeletePolicyAssignmentSuccess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeletePolicyAssignmentSuccess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.BatchDeletePolicyAssignmentSuccess_PrincipalArn, *v.PrincipalArn)
+	}
+}
+func (v *BatchDeletePolicyAssignmentSuccess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeletePolicyAssignmentSuccess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeletePolicyAssignmentSuccess_PrincipalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.BatchDeletePolicyAssignmentSuccess_PrincipalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
+
 // Information about a user whose limits could not be described in a batch
 // operation.
 type BatchDescribeUserLimitsError struct {
@@ -8275,6 +8719,129 @@ func (v *BatchDescribeUserLimitsError) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.BatchDescribeUserLimitsError_userName:
 			v.UserName = new(string)
 			return d.ReadString(schemas.BatchDescribeUserLimitsError_userName, v.UserName)
+		}
+		return nil
+	})
+}
+
+// A principal that a BatchPutPolicyAssignmentByPolicy request couldn't assign the
+// policy to.
+type BatchPutPolicyAssignmentError struct {
+
+	// The reason the entry failed. Possible values:
+	//
+	//   - ValidationException – The entry is not valid.
+	//
+	//   - ResourceNotFoundException – The principal doesn't exist, or the policy was
+	//   deleted while the request was being processed.
+	//
+	//   - ConflictException – The principal doesn't have the existing policy that you
+	//   specified, or the assignment changed since the revision that you specified.
+	//
+	//   - ThrottlingException – The entry was throttled. You can retry this entry.
+	//
+	//   - InternalFailureException – An internal error occurred.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// A description of the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The ARN of the principal.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchPutPolicyAssignmentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutPolicyAssignmentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutPolicyAssignmentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchPutPolicyAssignmentError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchPutPolicyAssignmentError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.BatchPutPolicyAssignmentError_PrincipalArn, *v.PrincipalArn)
+	}
+}
+func (v *BatchPutPolicyAssignmentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutPolicyAssignmentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutPolicyAssignmentError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchPutPolicyAssignmentError_ErrorCode, v.ErrorCode)
+		case schemas.BatchPutPolicyAssignmentError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchPutPolicyAssignmentError_ErrorMessage, v.ErrorMessage)
+		case schemas.BatchPutPolicyAssignmentError_PrincipalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.BatchPutPolicyAssignmentError_PrincipalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
+
+// A principal that a BatchPutPolicyAssignmentByPolicy request assigned the policy
+// to.
+type BatchPutPolicyAssignmentSuccess struct {
+
+	// The ARN of the principal.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	// The revision of the assignment after this request.
+	//
+	// This member is required.
+	Revision *int64
+
+	// The ARN of the policy that this assignment replaced. This value is absent if
+	// the principal had no policy of this type before the request.
+	ReplacedPolicyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchPutPolicyAssignmentSuccess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutPolicyAssignmentSuccess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutPolicyAssignmentSuccess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.BatchPutPolicyAssignmentSuccess_PrincipalArn, *v.PrincipalArn)
+	}
+	if v.ReplacedPolicyArn != nil {
+		s.WriteString(schemas.BatchPutPolicyAssignmentSuccess_ReplacedPolicyArn, *v.ReplacedPolicyArn)
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.BatchPutPolicyAssignmentSuccess_Revision, *v.Revision)
+	}
+}
+func (v *BatchPutPolicyAssignmentSuccess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutPolicyAssignmentSuccess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutPolicyAssignmentSuccess_PrincipalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.BatchPutPolicyAssignmentSuccess_PrincipalArn, v.PrincipalArn)
+		case schemas.BatchPutPolicyAssignmentSuccess_ReplacedPolicyArn:
+			v.ReplacedPolicyArn = new(string)
+			return d.ReadString(schemas.BatchPutPolicyAssignmentSuccess_ReplacedPolicyArn, v.ReplacedPolicyArn)
+		case schemas.BatchPutPolicyAssignmentSuccess_Revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.BatchPutPolicyAssignmentSuccess_Revision, v.Revision)
 		}
 		return nil
 	})
@@ -10254,6 +10821,11 @@ type Capabilities struct {
 	// The ability to create and update Linear actions.
 	CreateAndUpdateLinearAction CapabilityState
 
+	// The ability to create and update local Model Context Protocol (MCP) server
+	// configurations. Denying this capability does not by itself deny use of
+	// previously configured local MCP servers.
+	CreateAndUpdateLocalMCPAction CapabilityState
+
 	// The ability to create and update Model Context Protocol actions.
 	CreateAndUpdateMCPAction CapabilityState
 
@@ -10747,6 +11319,11 @@ type Capabilities struct {
 
 	// The ability to perform actions using Linear connectors.
 	LinearAction CapabilityState
+
+	// The ability to create, update, and use local Model Context Protocol (MCP)
+	// actions. This capability includes CreateAndUpdateLocalMCPAction and
+	// UseLocalMCPAction .
+	LocalMCPAction CapabilityState
 
 	// The ability to perform actions using Model Context Protocol connectors.
 	MCPAction CapabilityState
@@ -11847,6 +12424,10 @@ type Capabilities struct {
 	// The ability to use Linear actions.
 	UseLinearAction CapabilityState
 
+	// The ability to start local Model Context Protocol (MCP) servers and use their
+	// actions, including actions from previously configured local MCP servers.
+	UseLocalMCPAction CapabilityState
+
 	// The ability to use Model Context Protocol actions.
 	UseMCPAction CapabilityState
 
@@ -12301,6 +12882,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateAndUpdateLinearAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateLinearAction, string(v.CreateAndUpdateLinearAction))
 	}
+	if v.CreateAndUpdateLocalMCPAction != "" {
+		s.WriteString(schemas.Capabilities_CreateAndUpdateLocalMCPAction, string(v.CreateAndUpdateLocalMCPAction))
+	}
 	if v.CreateAndUpdateMCPAction != "" {
 		s.WriteString(schemas.Capabilities_CreateAndUpdateMCPAction, string(v.CreateAndUpdateMCPAction))
 	}
@@ -12729,6 +13313,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.LinearAction != "" {
 		s.WriteString(schemas.Capabilities_LinearAction, string(v.LinearAction))
+	}
+	if v.LocalMCPAction != "" {
+		s.WriteString(schemas.Capabilities_LocalMCPAction, string(v.LocalMCPAction))
 	}
 	if v.MCPAction != "" {
 		s.WriteString(schemas.Capabilities_MCPAction, string(v.MCPAction))
@@ -13636,6 +14223,9 @@ func (v *Capabilities) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UseLinearAction != "" {
 		s.WriteString(schemas.Capabilities_UseLinearAction, string(v.UseLinearAction))
 	}
+	if v.UseLocalMCPAction != "" {
+		s.WriteString(schemas.Capabilities_UseLocalMCPAction, string(v.UseLocalMCPAction))
+	}
 	if v.UseMCPAction != "" {
 		s.WriteString(schemas.Capabilities_UseMCPAction, string(v.UseMCPAction))
 	}
@@ -14349,6 +14939,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CreateAndUpdateLinearAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_CreateAndUpdateLocalMCPAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_CreateAndUpdateLocalMCPAction, &ev); err != nil {
+				return err
+			}
+			v.CreateAndUpdateLocalMCPAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_CreateAndUpdateMCPAction:
 			var ev string
@@ -15350,6 +15947,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.LinearAction = CapabilityState(ev)
+			return nil
+		case schemas.Capabilities_LocalMCPAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_LocalMCPAction, &ev); err != nil {
+				return err
+			}
+			v.LocalMCPAction = CapabilityState(ev)
 			return nil
 		case schemas.Capabilities_MCPAction:
 			var ev string
@@ -17465,6 +18069,13 @@ func (v *Capabilities) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UseLinearAction = CapabilityState(ev)
 			return nil
+		case schemas.Capabilities_UseLocalMCPAction:
+			var ev string
+			if err := d.ReadString(schemas.Capabilities_UseLocalMCPAction, &ev); err != nil {
+				return err
+			}
+			v.UseLocalMCPAction = CapabilityState(ev)
+			return nil
 		case schemas.Capabilities_UseMCPAction:
 			var ev string
 			if err := d.ReadString(schemas.Capabilities_UseMCPAction, &ev); err != nil {
@@ -18685,6 +19296,81 @@ func (v *ClientCredentialsGrantMetadata) Deserialize(d smithy.ShapeDeserializer)
 		}
 		return nil
 	})
+}
+
+// The configuration of a new client secret that your IdP provides.
+type ClientSecretConfiguration struct {
+
+	// The source of the client secret. The only valid value is IDP_PROVIDED : your IdP
+	// issued the secret value.
+	//
+	// This member is required.
+	ClientSecretSourceType ClientSecretSourceType
+
+	// The details of the client secret. This is required when the
+	// ClientSecretSourceType is IDP_PROVIDED .
+	ClientSecretConfigurationDetail ClientSecretConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientSecretConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSecretConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSecretConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSecretConfigurationDetail != nil {
+		serializeClientSecretConfigurationDetail(s, schemas.ClientSecretConfiguration_ClientSecretConfigurationDetail, v.ClientSecretConfigurationDetail)
+	}
+	if v.ClientSecretSourceType != "" {
+		s.WriteString(schemas.ClientSecretConfiguration_ClientSecretSourceType, string(v.ClientSecretSourceType))
+	}
+}
+func (v *ClientSecretConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSecretConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSecretConfiguration_ClientSecretConfigurationDetail:
+			return deserializeClientSecretConfigurationDetail(d, schemas.ClientSecretConfiguration_ClientSecretConfigurationDetail, &v.ClientSecretConfigurationDetail)
+		case schemas.ClientSecretConfiguration_ClientSecretSourceType:
+			var ev string
+			if err := d.ReadString(schemas.ClientSecretConfiguration_ClientSecretSourceType, &ev); err != nil {
+				return err
+			}
+			v.ClientSecretSourceType = ClientSecretSourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The details of an IdP-provided client secret. Required when
+// ClientSecretSourceType is IDP_PROVIDED .
+//
+// The following types satisfy this interface:
+//
+//	ClientSecretConfigurationDetailMemberIdp
+type ClientSecretConfigurationDetail interface {
+	isClientSecretConfigurationDetail()
+}
+
+// An IdP-provided client secret, with the Amazon Web Services Secrets Manager
+// secret ARN for each Region.
+type ClientSecretConfigurationDetailMemberIdp struct {
+	Value IdpClientSecretInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ClientSecretConfigurationDetailMemberIdp) isClientSecretConfigurationDetail() {}
+func (v *ClientSecretConfigurationDetailMemberIdp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSecretConfigurationDetail_Idp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ClientSecretConfigurationDetailMemberIdp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The cluster marker that is a part of the cluster marker configuration.
@@ -25552,6 +26238,10 @@ type DataSet struct {
 	// The semantic model configuration associated with this dataset.
 	SemanticModelConfiguration *SemanticModelConfiguration
 
+	// The unmaterialized calculated columns associated with this dataset. You can
+	// only use this with the new data preparation experience.
+	UnmaterializedCalculatedColumns []UnmaterializedCalculatedColumn
+
 	// The usage of the dataset.
 	UseAs DataSetUseAs
 
@@ -25637,6 +26327,9 @@ func (v *DataSet) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SemanticModelConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.UnmaterializedCalculatedColumns != nil {
+		serializeUnmaterializedCalculatedColumnList(s, schemas.DataSet_UnmaterializedCalculatedColumns, v.UnmaterializedCalculatedColumns)
+	}
 	if v.UseAs != "" {
 		s.WriteString(schemas.DataSet_UseAs, string(v.UseAs))
 	}
@@ -25700,6 +26393,8 @@ func (v *DataSet) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DataSet_SemanticModelConfiguration:
 			v.SemanticModelConfiguration = &SemanticModelConfiguration{}
 			return v.SemanticModelConfiguration.Deserialize(d)
+		case schemas.DataSet_UnmaterializedCalculatedColumns:
+			return deserializeUnmaterializedCalculatedColumnList(d, schemas.DataSet_UnmaterializedCalculatedColumns, &v.UnmaterializedCalculatedColumns)
 		case schemas.DataSet_UseAs:
 			var ev string
 			if err := d.ReadString(schemas.DataSet_UseAs, &ev); err != nil {
@@ -32093,6 +32788,328 @@ func (v *ExportWithHiddenFieldsOption) Deserialize(d smithy.ShapeDeserializer) e
 			}
 			v.AvailabilityStatus = DashboardBehavior(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration for an external OpenID Connect IdP that uses the
+// authorization code flow with a confidential client. Client secret values are
+// never included.
+type ExternalIdpConfidentialAuthCodeAuthorizingConfig struct {
+
+	// The OAuth 2.0 client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The issuer URL of the external OpenID Connect IdP.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	// The client secrets of the confidential client, with the Amazon Web Services
+	// Secrets Manager ARN for each Region. Secret values are never included.
+	ClientSecrets []ExternalIdpConfidentialClientSecret
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientId, *v.ClientId)
+	}
+	if v.ClientSecrets != nil {
+		serializeExternalIdpConfidentialClientSecretList(s, schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientSecrets, v.ClientSecrets)
+	}
+	if v.IssuerUrl != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_IssuerUrl, *v.IssuerUrl)
+	}
+}
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientId, v.ClientId)
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientSecrets:
+			return deserializeExternalIdpConfidentialClientSecretList(d, schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientSecrets, &v.ClientSecrets)
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_IssuerUrl:
+			v.IssuerUrl = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfig_IssuerUrl, v.IssuerUrl)
+		}
+		return nil
+	})
+}
+
+// The configuration for an external OpenID Connect IdP that uses a confidential
+// client. Provide the first client secret here. To add or remove client secrets
+// later, use CreateAccessControlApplicationSecret and
+// DeleteAccessControlApplicationSecret .
+type ExternalIdpConfidentialAuthCodeAuthorizingConfigInput struct {
+
+	// The OAuth 2.0 client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The first client secret of the confidential client.
+	//
+	// This member is required.
+	ClientSecret *IdpClientSecretInput
+
+	// The issuer URL of the external OpenID Connect IdP.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteStruct(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientSecret)
+		v.ClientSecret.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IssuerUrl != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_IssuerUrl, *v.IssuerUrl)
+	}
+}
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientId, v.ClientId)
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientSecret:
+			v.ClientSecret = &IdpClientSecretInput{}
+			return v.ClientSecret.Deserialize(d)
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_IssuerUrl:
+			v.IssuerUrl = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_IssuerUrl, v.IssuerUrl)
+		}
+		return nil
+	})
+}
+
+// A summary of the configuration for an external OpenID Connect IdP that uses a
+// confidential client.
+type ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary struct {
+
+	// The OAuth 2.0 client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The issuer URL of the external OpenID Connect IdP.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_ClientId, *v.ClientId)
+	}
+	if v.IssuerUrl != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_IssuerUrl, *v.IssuerUrl)
+	}
+}
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_ClientId, v.ClientId)
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_IssuerUrl:
+			v.IssuerUrl = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_IssuerUrl, v.IssuerUrl)
+		}
+		return nil
+	})
+}
+
+// The external IdP settings to update for a confidential client.
+type ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput struct {
+
+	// The OAuth 2.0 client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The issuer URL of the external OpenID Connect IdP.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_ClientId, *v.ClientId)
+	}
+	if v.IssuerUrl != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_IssuerUrl, *v.IssuerUrl)
+	}
+}
+func (v *ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_ClientId, v.ClientId)
+		case schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_IssuerUrl:
+			v.IssuerUrl = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_IssuerUrl, v.IssuerUrl)
+		}
+		return nil
+	})
+}
+
+// A client secret of a confidential external IdP client. Secret values are never
+// included.
+type ExternalIdpConfidentialClientSecret struct {
+
+	// The ID of the client secret.
+	//
+	// This member is required.
+	ClientSecretId *string
+
+	// The time when the client secret was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The description of the client secret.
+	Description *string
+
+	// The ARN of the Amazon Web Services Secrets Manager secret that holds the client
+	// secret, for each Region.
+	RegionalSecretManagerArns map[string]string
+
+	// The time when the secret's Region ARNs were last updated. This value is present
+	// only after you call UpdateAccessControlApplicationSecret .
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExternalIdpConfidentialClientSecret) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalIdpConfidentialClientSecret)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalIdpConfidentialClientSecret) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSecretId != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialClientSecret_ClientSecretId, *v.ClientSecretId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ExternalIdpConfidentialClientSecret_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ExternalIdpConfidentialClientSecret_Description, *v.Description)
+	}
+	if v.RegionalSecretManagerArns != nil {
+		serializeRegionalSecretManagerArnMap(s, schemas.ExternalIdpConfidentialClientSecret_RegionalSecretManagerArns, v.RegionalSecretManagerArns)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ExternalIdpConfidentialClientSecret_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ExternalIdpConfidentialClientSecret) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalIdpConfidentialClientSecret, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalIdpConfidentialClientSecret_ClientSecretId:
+			v.ClientSecretId = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialClientSecret_ClientSecretId, v.ClientSecretId)
+		case schemas.ExternalIdpConfidentialClientSecret_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExternalIdpConfidentialClientSecret_CreatedAt, v.CreatedAt)
+		case schemas.ExternalIdpConfidentialClientSecret_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ExternalIdpConfidentialClientSecret_Description, v.Description)
+		case schemas.ExternalIdpConfidentialClientSecret_RegionalSecretManagerArns:
+			return deserializeRegionalSecretManagerArnMap(d, schemas.ExternalIdpConfidentialClientSecret_RegionalSecretManagerArns, &v.RegionalSecretManagerArns)
+		case schemas.ExternalIdpConfidentialClientSecret_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExternalIdpConfidentialClientSecret_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The configuration for an external OpenID Connect IdP that uses the
+// authorization code flow with PKCE and a public client.
+type ExternalIdpPublicAuthCodeAuthorizingConfig struct {
+
+	// The OAuth 2.0 client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The issuer URL of the external OpenID Connect IdP.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExternalIdpPublicAuthCodeAuthorizingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalIdpPublicAuthCodeAuthorizingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalIdpPublicAuthCodeAuthorizingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.ExternalIdpPublicAuthCodeAuthorizingConfig_ClientId, *v.ClientId)
+	}
+	if v.IssuerUrl != nil {
+		s.WriteString(schemas.ExternalIdpPublicAuthCodeAuthorizingConfig_IssuerUrl, *v.IssuerUrl)
+	}
+}
+func (v *ExternalIdpPublicAuthCodeAuthorizingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalIdpPublicAuthCodeAuthorizingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalIdpPublicAuthCodeAuthorizingConfig_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ExternalIdpPublicAuthCodeAuthorizingConfig_ClientId, v.ClientId)
+		case schemas.ExternalIdpPublicAuthCodeAuthorizingConfig_IssuerUrl:
+			v.IssuerUrl = new(string)
+			return d.ReadString(schemas.ExternalIdpPublicAuthCodeAuthorizingConfig_IssuerUrl, v.IssuerUrl)
 		}
 		return nil
 	})
@@ -42015,6 +43032,41 @@ func (v *IAMPolicyAssignmentSummary) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// A trusted token issuer configuration. When you provide it, Quick Sight
+// authenticates the user with the external IdP and then exchanges the token with
+// IAM Identity Center through the specified trusted token issuer.
+type IdcTrustedTokenIssuerConfig struct {
+
+	// The ARN of the trusted token issuer in IAM Identity Center.
+	//
+	// This member is required.
+	IdcTrustedTokenIssuerArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdcTrustedTokenIssuerConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdcTrustedTokenIssuerConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdcTrustedTokenIssuerConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdcTrustedTokenIssuerArn != nil {
+		s.WriteString(schemas.IdcTrustedTokenIssuerConfig_IdcTrustedTokenIssuerArn, *v.IdcTrustedTokenIssuerArn)
+	}
+}
+func (v *IdcTrustedTokenIssuerConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdcTrustedTokenIssuerConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdcTrustedTokenIssuerConfig_IdcTrustedTokenIssuerArn:
+			v.IdcTrustedTokenIssuerArn = new(string)
+			return d.ReadString(schemas.IdcTrustedTokenIssuerConfig_IdcTrustedTokenIssuerArn, v.IdcTrustedTokenIssuerArn)
+		}
+		return nil
+	})
+}
+
 // The definition for the identifier.
 type Identifier struct {
 
@@ -42075,6 +43127,473 @@ func (v *IdentityCenterConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.IdentityCenterConfiguration_EnableIdentityPropagation:
 			v.EnableIdentityPropagation = new(bool)
 			return d.ReadBool(schemas.IdentityCenterConfiguration_EnableIdentityPropagation, v.EnableIdentityPropagation)
+		}
+		return nil
+	})
+}
+
+// The identity provider configuration of an access control application.
+type IdpAuthorizingConfig struct {
+
+	// How users of the access control application are authenticated.
+	//
+	// This member is required.
+	IdpAuthorizingType IdpAuthorizingType
+
+	// A trusted token issuer configuration. When you provide it, Quick Sight
+	// authenticates the user with the external IdP and then exchanges the token with
+	// IAM Identity Center through the specified trusted token issuer. You can't change
+	// it after the application is created.
+	IdcTrustedTokenIssuerConfiguration *IdcTrustedTokenIssuerConfig
+
+	// The details of the external IdP configuration. This is present when the
+	// IdpAuthorizingType is EXTERNAL_IDP_PUBLIC_AUTH_CODE or
+	// EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE .
+	IdpAuthorizingConfigurationDetail IdpAuthorizingConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdpAuthorizingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdpAuthorizingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdcTrustedTokenIssuerConfiguration != nil {
+		s.WriteStruct(schemas.IdpAuthorizingConfig_IdcTrustedTokenIssuerConfiguration)
+		v.IdcTrustedTokenIssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdpAuthorizingConfigurationDetail != nil {
+		serializeIdpAuthorizingConfigurationDetail(s, schemas.IdpAuthorizingConfig_IdpAuthorizingConfigurationDetail, v.IdpAuthorizingConfigurationDetail)
+	}
+	if v.IdpAuthorizingType != "" {
+		s.WriteString(schemas.IdpAuthorizingConfig_IdpAuthorizingType, string(v.IdpAuthorizingType))
+	}
+}
+func (v *IdpAuthorizingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdpAuthorizingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdpAuthorizingConfig_IdcTrustedTokenIssuerConfiguration:
+			v.IdcTrustedTokenIssuerConfiguration = &IdcTrustedTokenIssuerConfig{}
+			return v.IdcTrustedTokenIssuerConfiguration.Deserialize(d)
+		case schemas.IdpAuthorizingConfig_IdpAuthorizingConfigurationDetail:
+			return deserializeIdpAuthorizingConfigurationDetail(d, schemas.IdpAuthorizingConfig_IdpAuthorizingConfigurationDetail, &v.IdpAuthorizingConfigurationDetail)
+		case schemas.IdpAuthorizingConfig_IdpAuthorizingType:
+			var ev string
+			if err := d.ReadString(schemas.IdpAuthorizingConfig_IdpAuthorizingType, &ev); err != nil {
+				return err
+			}
+			v.IdpAuthorizingType = IdpAuthorizingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The identity provider configuration for a new access control application.
+type IdpAuthorizingConfigInput struct {
+
+	// How users of the access control application are authenticated.
+	//
+	// This member is required.
+	IdpAuthorizingType IdpAuthorizingType
+
+	// A trusted token issuer configuration. When you provide it, Quick Sight
+	// authenticates the user with the external IdP and then exchanges the token with
+	// IAM Identity Center through the specified trusted token issuer. You can't change
+	// it after the application is created.
+	//
+	// This is required when the application uses an external IdP and its namespace
+	// uses IAM Identity Center.
+	IdcTrustedTokenIssuerConfiguration *IdcTrustedTokenIssuerConfig
+
+	// The details of the external IdP configuration. This is present when the
+	// IdpAuthorizingType is EXTERNAL_IDP_PUBLIC_AUTH_CODE or
+	// EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE .
+	IdpAuthorizingConfigurationDetailInput IdpAuthorizingConfigurationDetailInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdpAuthorizingConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdpAuthorizingConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdcTrustedTokenIssuerConfiguration != nil {
+		s.WriteStruct(schemas.IdpAuthorizingConfigInput_IdcTrustedTokenIssuerConfiguration)
+		v.IdcTrustedTokenIssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdpAuthorizingConfigurationDetailInput != nil {
+		serializeIdpAuthorizingConfigurationDetailInput(s, schemas.IdpAuthorizingConfigInput_IdpAuthorizingConfigurationDetailInput, v.IdpAuthorizingConfigurationDetailInput)
+	}
+	if v.IdpAuthorizingType != "" {
+		s.WriteString(schemas.IdpAuthorizingConfigInput_IdpAuthorizingType, string(v.IdpAuthorizingType))
+	}
+}
+func (v *IdpAuthorizingConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdpAuthorizingConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdpAuthorizingConfigInput_IdcTrustedTokenIssuerConfiguration:
+			v.IdcTrustedTokenIssuerConfiguration = &IdcTrustedTokenIssuerConfig{}
+			return v.IdcTrustedTokenIssuerConfiguration.Deserialize(d)
+		case schemas.IdpAuthorizingConfigInput_IdpAuthorizingConfigurationDetailInput:
+			return deserializeIdpAuthorizingConfigurationDetailInput(d, schemas.IdpAuthorizingConfigInput_IdpAuthorizingConfigurationDetailInput, &v.IdpAuthorizingConfigurationDetailInput)
+		case schemas.IdpAuthorizingConfigInput_IdpAuthorizingType:
+			var ev string
+			if err := d.ReadString(schemas.IdpAuthorizingConfigInput_IdpAuthorizingType, &ev); err != nil {
+				return err
+			}
+			v.IdpAuthorizingType = IdpAuthorizingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of the identity provider configuration of an access control
+// application.
+type IdpAuthorizingConfigSummary struct {
+
+	// How users of the access control application are authenticated.
+	//
+	// This member is required.
+	IdpAuthorizingType IdpAuthorizingType
+
+	// A trusted token issuer configuration. When you provide it, Quick Sight
+	// authenticates the user with the external IdP and then exchanges the token with
+	// IAM Identity Center through the specified trusted token issuer. You can't change
+	// it after the application is created.
+	IdcTrustedTokenIssuerConfiguration *IdcTrustedTokenIssuerConfig
+
+	// The details of the external IdP configuration. This is present when the
+	// IdpAuthorizingType is EXTERNAL_IDP_PUBLIC_AUTH_CODE or
+	// EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE .
+	IdpAuthorizingConfigurationSummaryDetail IdpAuthorizingConfigurationSummaryDetail
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdpAuthorizingConfigSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdpAuthorizingConfigSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdcTrustedTokenIssuerConfiguration != nil {
+		s.WriteStruct(schemas.IdpAuthorizingConfigSummary_IdcTrustedTokenIssuerConfiguration)
+		v.IdcTrustedTokenIssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdpAuthorizingConfigurationSummaryDetail != nil {
+		serializeIdpAuthorizingConfigurationSummaryDetail(s, schemas.IdpAuthorizingConfigSummary_IdpAuthorizingConfigurationSummaryDetail, v.IdpAuthorizingConfigurationSummaryDetail)
+	}
+	if v.IdpAuthorizingType != "" {
+		s.WriteString(schemas.IdpAuthorizingConfigSummary_IdpAuthorizingType, string(v.IdpAuthorizingType))
+	}
+}
+func (v *IdpAuthorizingConfigSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdpAuthorizingConfigSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdpAuthorizingConfigSummary_IdcTrustedTokenIssuerConfiguration:
+			v.IdcTrustedTokenIssuerConfiguration = &IdcTrustedTokenIssuerConfig{}
+			return v.IdcTrustedTokenIssuerConfiguration.Deserialize(d)
+		case schemas.IdpAuthorizingConfigSummary_IdpAuthorizingConfigurationSummaryDetail:
+			return deserializeIdpAuthorizingConfigurationSummaryDetail(d, schemas.IdpAuthorizingConfigSummary_IdpAuthorizingConfigurationSummaryDetail, &v.IdpAuthorizingConfigurationSummaryDetail)
+		case schemas.IdpAuthorizingConfigSummary_IdpAuthorizingType:
+			var ev string
+			if err := d.ReadString(schemas.IdpAuthorizingConfigSummary_IdpAuthorizingType, &ev); err != nil {
+				return err
+			}
+			v.IdpAuthorizingType = IdpAuthorizingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The identity provider settings to update. To manage client secrets, use the
+// client secret operations instead.
+type IdpAuthorizingConfigUpdateInput struct {
+
+	// How users of the access control application are authenticated.
+	//
+	// This member is required.
+	IdpAuthorizingType IdpAuthorizingType
+
+	// A trusted token issuer configuration. When you provide it, Quick Sight
+	// authenticates the user with the external IdP and then exchanges the token with
+	// IAM Identity Center through the specified trusted token issuer. You can't change
+	// it after the application is created.
+	IdcTrustedTokenIssuerConfiguration *IdcTrustedTokenIssuerConfig
+
+	// The details of the external IdP configuration. This is present when the
+	// IdpAuthorizingType is EXTERNAL_IDP_PUBLIC_AUTH_CODE or
+	// EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE .
+	IdpAuthorizingConfigurationDetailInput IdpAuthorizingConfigurationDetailUpdateInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdpAuthorizingConfigUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigUpdateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdpAuthorizingConfigUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdcTrustedTokenIssuerConfiguration != nil {
+		s.WriteStruct(schemas.IdpAuthorizingConfigUpdateInput_IdcTrustedTokenIssuerConfiguration)
+		v.IdcTrustedTokenIssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdpAuthorizingConfigurationDetailInput != nil {
+		serializeIdpAuthorizingConfigurationDetailUpdateInput(s, schemas.IdpAuthorizingConfigUpdateInput_IdpAuthorizingConfigurationDetailInput, v.IdpAuthorizingConfigurationDetailInput)
+	}
+	if v.IdpAuthorizingType != "" {
+		s.WriteString(schemas.IdpAuthorizingConfigUpdateInput_IdpAuthorizingType, string(v.IdpAuthorizingType))
+	}
+}
+func (v *IdpAuthorizingConfigUpdateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdpAuthorizingConfigUpdateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdpAuthorizingConfigUpdateInput_IdcTrustedTokenIssuerConfiguration:
+			v.IdcTrustedTokenIssuerConfiguration = &IdcTrustedTokenIssuerConfig{}
+			return v.IdcTrustedTokenIssuerConfiguration.Deserialize(d)
+		case schemas.IdpAuthorizingConfigUpdateInput_IdpAuthorizingConfigurationDetailInput:
+			return deserializeIdpAuthorizingConfigurationDetailUpdateInput(d, schemas.IdpAuthorizingConfigUpdateInput_IdpAuthorizingConfigurationDetailInput, &v.IdpAuthorizingConfigurationDetailInput)
+		case schemas.IdpAuthorizingConfigUpdateInput_IdpAuthorizingType:
+			var ev string
+			if err := d.ReadString(schemas.IdpAuthorizingConfigUpdateInput_IdpAuthorizingType, &ev); err != nil {
+				return err
+			}
+			v.IdpAuthorizingType = IdpAuthorizingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The details of the identity provider configuration.
+//
+// The following types satisfy this interface:
+//
+//	IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode
+//	IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode
+type IdpAuthorizingConfigurationDetail interface {
+	isIdpAuthorizingConfigurationDetail()
+}
+
+// The configuration for an external IdP with a confidential client.
+type IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode struct {
+	Value ExternalIdpConfidentialAuthCodeAuthorizingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode) isIdpAuthorizingConfigurationDetail() {
+}
+func (v *IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationDetail_ExternalIdpConfidentialAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for an external IdP with a public client.
+type IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode struct {
+	Value ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode) isIdpAuthorizingConfigurationDetail() {
+}
+func (v *IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationDetail_ExternalIdpPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The details of the identity provider configuration.
+//
+// The following types satisfy this interface:
+//
+//	IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode
+//	IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode
+type IdpAuthorizingConfigurationDetailInput interface {
+	isIdpAuthorizingConfigurationDetailInput()
+}
+
+// The configuration for an external IdP with a confidential client.
+type IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode struct {
+	Value ExternalIdpConfidentialAuthCodeAuthorizingConfigInput
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode) isIdpAuthorizingConfigurationDetailInput() {
+}
+func (v *IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpConfidentialAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for an external IdP with a public client.
+type IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode struct {
+	Value ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode) isIdpAuthorizingConfigurationDetailInput() {
+}
+func (v *IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailInput_ExternalIdpPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The identity provider details to update.
+//
+// The following types satisfy this interface:
+//
+//	IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode
+//	IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode
+type IdpAuthorizingConfigurationDetailUpdateInput interface {
+	isIdpAuthorizingConfigurationDetailUpdateInput()
+}
+
+// The configuration for an external IdP with a confidential client.
+type IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode struct {
+	Value ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode) isIdpAuthorizingConfigurationDetailUpdateInput() {
+}
+func (v *IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpConfidentialAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for an external IdP with a public client.
+type IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode struct {
+	Value ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode) isIdpAuthorizingConfigurationDetailUpdateInput() {
+}
+func (v *IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A summary of the identity provider configuration details.
+//
+// The following types satisfy this interface:
+//
+//	IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode
+//	IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode
+type IdpAuthorizingConfigurationSummaryDetail interface {
+	isIdpAuthorizingConfigurationSummaryDetail()
+}
+
+// The configuration for an external IdP with a confidential client.
+type IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode struct {
+	Value ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode) isIdpAuthorizingConfigurationSummaryDetail() {
+}
+func (v *IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpConfidentialAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for an external IdP with a public client.
+type IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode struct {
+	Value ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode) isIdpAuthorizingConfigurationSummaryDetail() {
+}
+func (v *IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpAuthorizingConfigurationSummaryDetail_ExternalIdpPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An IdP-provided client secret that you store in Amazon Web Services Secrets
+// Manager.
+type IdpClientSecretInput struct {
+
+	// The ARN of the Amazon Web Services Secrets Manager secret that holds the client
+	// secret, for each Region.
+	//
+	// This member is required.
+	RegionalSecretManagerArns map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *IdpClientSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdpClientSecretInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdpClientSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionalSecretManagerArns != nil {
+		serializeRegionalSecretManagerArnMap(s, schemas.IdpClientSecretInput_RegionalSecretManagerArns, v.RegionalSecretManagerArns)
+	}
+}
+func (v *IdpClientSecretInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdpClientSecretInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdpClientSecretInput_RegionalSecretManagerArns:
+			return deserializeRegionalSecretManagerArnMap(d, schemas.IdpClientSecretInput_RegionalSecretManagerArns, &v.RegionalSecretManagerArns)
 		}
 		return nil
 	})
@@ -42732,6 +44251,344 @@ func (v *ImportTableOperationSource) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.ImportTableOperationSource_SourceTableId:
 			v.SourceTableId = new(string)
 			return d.ReadString(schemas.ImportTableOperationSource_SourceTableId, v.SourceTableId)
+		}
+		return nil
+	})
+}
+
+// An inbound connector. To read or change the access control applications that
+// are associated with the connector, use
+// ListInboundConnectorApplicationAssociations and
+// UpdateInboundConnectorApplicationAssociations .
+type InboundConnector struct {
+
+	// The ARN of the inbound connector.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time when the inbound connector was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The configuration of the inbound connector.
+	//
+	// This member is required.
+	InboundConnectorConfiguration *InboundConnectorConfig
+
+	// The ID of the inbound connector.
+	//
+	// This member is required.
+	InboundConnectorId *string
+
+	// The time when the inbound connector was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the inbound connector.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the inbound connector.
+	//
+	// This member is required.
+	Status InboundConnectorStatus
+
+	// The endpoint URL that clients use to reach Quick Sight through the inbound
+	// connector.
+	//
+	// This member is required.
+	TenantUrl *string
+
+	// The description of the inbound connector.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InboundConnector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InboundConnector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InboundConnector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InboundConnector_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.InboundConnector_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InboundConnector_Description, *v.Description)
+	}
+	if v.InboundConnectorConfiguration != nil {
+		s.WriteStruct(schemas.InboundConnector_InboundConnectorConfiguration)
+		v.InboundConnectorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InboundConnectorId != nil {
+		s.WriteString(schemas.InboundConnector_InboundConnectorId, *v.InboundConnectorId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.InboundConnector_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InboundConnector_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InboundConnector_Status, string(v.Status))
+	}
+	if v.TenantUrl != nil {
+		s.WriteString(schemas.InboundConnector_TenantUrl, *v.TenantUrl)
+	}
+}
+func (v *InboundConnector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InboundConnector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InboundConnector_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InboundConnector_Arn, v.Arn)
+		case schemas.InboundConnector_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.InboundConnector_CreatedTime, v.CreatedTime)
+		case schemas.InboundConnector_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InboundConnector_Description, v.Description)
+		case schemas.InboundConnector_InboundConnectorConfiguration:
+			v.InboundConnectorConfiguration = &InboundConnectorConfig{}
+			return v.InboundConnectorConfiguration.Deserialize(d)
+		case schemas.InboundConnector_InboundConnectorId:
+			v.InboundConnectorId = new(string)
+			return d.ReadString(schemas.InboundConnector_InboundConnectorId, v.InboundConnectorId)
+		case schemas.InboundConnector_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.InboundConnector_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.InboundConnector_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InboundConnector_Name, v.Name)
+		case schemas.InboundConnector_Status:
+			var ev string
+			if err := d.ReadString(schemas.InboundConnector_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InboundConnectorStatus(ev)
+			return nil
+		case schemas.InboundConnector_TenantUrl:
+			v.TenantUrl = new(string)
+			return d.ReadString(schemas.InboundConnector_TenantUrl, v.TenantUrl)
+		}
+		return nil
+	})
+}
+
+// An association between an inbound connector and an access control application.
+type InboundConnectorApplicationAssociationSummary struct {
+
+	// The ARN of the associated access control application.
+	//
+	// This member is required.
+	AccessControlApplicationArn *string
+
+	// The time when the association was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *InboundConnectorApplicationAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InboundConnectorApplicationAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InboundConnectorApplicationAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlApplicationArn != nil {
+		s.WriteString(schemas.InboundConnectorApplicationAssociationSummary_AccessControlApplicationArn, *v.AccessControlApplicationArn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.InboundConnectorApplicationAssociationSummary_CreatedTime, *v.CreatedTime)
+	}
+}
+func (v *InboundConnectorApplicationAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InboundConnectorApplicationAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InboundConnectorApplicationAssociationSummary_AccessControlApplicationArn:
+			v.AccessControlApplicationArn = new(string)
+			return d.ReadString(schemas.InboundConnectorApplicationAssociationSummary_AccessControlApplicationArn, v.AccessControlApplicationArn)
+		case schemas.InboundConnectorApplicationAssociationSummary_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.InboundConnectorApplicationAssociationSummary_CreatedTime, v.CreatedTime)
+		}
+		return nil
+	})
+}
+
+// The configuration of an inbound connector, including its type.
+type InboundConnectorConfig struct {
+
+	// The type of the inbound connector. You can't change the type after the
+	// connector is created.
+	//
+	// This member is required.
+	InboundConnectorType InboundConnectorType
+
+	noSmithyDocumentSerde
+}
+
+func (v *InboundConnectorConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InboundConnectorConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InboundConnectorConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InboundConnectorType != "" {
+		s.WriteString(schemas.InboundConnectorConfig_InboundConnectorType, string(v.InboundConnectorType))
+	}
+}
+func (v *InboundConnectorConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InboundConnectorConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InboundConnectorConfig_InboundConnectorType:
+			var ev string
+			if err := d.ReadString(schemas.InboundConnectorConfig_InboundConnectorType, &ev); err != nil {
+				return err
+			}
+			v.InboundConnectorType = InboundConnectorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A summary of an inbound connector, including its ID, ARN, name, status, tenant
+// URL, configuration, and timestamps.
+type InboundConnectorSummary struct {
+
+	// The ARN of the inbound connector.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time when the inbound connector was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The configuration of the inbound connector.
+	//
+	// This member is required.
+	InboundConnectorConfiguration *InboundConnectorConfig
+
+	// The ID of the inbound connector.
+	//
+	// This member is required.
+	InboundConnectorId *string
+
+	// The time when the inbound connector was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the inbound connector.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the inbound connector.
+	//
+	// This member is required.
+	Status InboundConnectorStatus
+
+	// The endpoint URL that clients use to reach Quick Sight through the inbound
+	// connector.
+	//
+	// This member is required.
+	TenantUrl *string
+
+	// The description of the inbound connector.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InboundConnectorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InboundConnectorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InboundConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.InboundConnectorSummary_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.InboundConnectorSummary_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InboundConnectorSummary_Description, *v.Description)
+	}
+	if v.InboundConnectorConfiguration != nil {
+		s.WriteStruct(schemas.InboundConnectorSummary_InboundConnectorConfiguration)
+		v.InboundConnectorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InboundConnectorId != nil {
+		s.WriteString(schemas.InboundConnectorSummary_InboundConnectorId, *v.InboundConnectorId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.InboundConnectorSummary_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InboundConnectorSummary_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InboundConnectorSummary_Status, string(v.Status))
+	}
+	if v.TenantUrl != nil {
+		s.WriteString(schemas.InboundConnectorSummary_TenantUrl, *v.TenantUrl)
+	}
+}
+func (v *InboundConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InboundConnectorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InboundConnectorSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.InboundConnectorSummary_Arn, v.Arn)
+		case schemas.InboundConnectorSummary_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.InboundConnectorSummary_CreatedTime, v.CreatedTime)
+		case schemas.InboundConnectorSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InboundConnectorSummary_Description, v.Description)
+		case schemas.InboundConnectorSummary_InboundConnectorConfiguration:
+			v.InboundConnectorConfiguration = &InboundConnectorConfig{}
+			return v.InboundConnectorConfiguration.Deserialize(d)
+		case schemas.InboundConnectorSummary_InboundConnectorId:
+			v.InboundConnectorId = new(string)
+			return d.ReadString(schemas.InboundConnectorSummary_InboundConnectorId, v.InboundConnectorId)
+		case schemas.InboundConnectorSummary_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.InboundConnectorSummary_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.InboundConnectorSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InboundConnectorSummary_Name, v.Name)
+		case schemas.InboundConnectorSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.InboundConnectorSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = InboundConnectorStatus(ev)
+			return nil
+		case schemas.InboundConnectorSummary_TenantUrl:
+			v.TenantUrl = new(string)
+			return d.ReadString(schemas.InboundConnectorSummary_TenantUrl, v.TenantUrl)
 		}
 		return nil
 	})
@@ -44464,6 +46321,200 @@ func (v *KnowledgeBaseIngestionSummary) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.KnowledgeBaseIngestionSummary_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.KnowledgeBaseIngestionSummary_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Specifies how often a knowledge base refresh schedule runs and, for weekly or
+// monthly schedules, which day the refresh runs.
+type KnowledgeBaseRefreshFrequency struct {
+
+	// The interval at which the schedule refreshes the knowledge base. Valid values
+	// include:
+	//
+	//   - DAILY – The schedule refreshes the knowledge base once each day.
+	//
+	//   - WEEKLY – The schedule refreshes the knowledge base once each week, on the
+	//   day that you specify in RefreshOnDay.DayOfWeek .
+	//
+	//   - MONTHLY – The schedule refreshes the knowledge base once each month, on the
+	//   day that you specify in RefreshOnDay.DayOfMonth .
+	//
+	//   - HOURLY – The schedule refreshes the knowledge base once each hour. Available
+	//   only if your account is enabled for hourly refresh. Otherwise, the request fails
+	//   with an InvalidParameterValueException .
+	//
+	// For DAILY , WEEKLY , and MONTHLY intervals, the service chooses the time of day
+	// at which the refresh runs. You can't specify the time of day.
+	//
+	// This member is required.
+	Interval KbRefreshInterval
+
+	// The day on which the refresh runs. This parameter is required for a WEEKLY or
+	// MONTHLY interval: specify the day of the week for WEEKLY or the day of the
+	// month for MONTHLY . If you don't specify it for one of these intervals, the
+	// request fails. This parameter isn't used for a DAILY or HOURLY interval.
+	RefreshOnDay *KnowledgeBaseScheduleRefreshOnEntity
+
+	noSmithyDocumentSerde
+}
+
+func (v *KnowledgeBaseRefreshFrequency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseRefreshFrequency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnowledgeBaseRefreshFrequency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Interval != "" {
+		s.WriteString(schemas.KnowledgeBaseRefreshFrequency_Interval, string(v.Interval))
+	}
+	if v.RefreshOnDay != nil {
+		s.WriteStruct(schemas.KnowledgeBaseRefreshFrequency_RefreshOnDay)
+		v.RefreshOnDay.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KnowledgeBaseRefreshFrequency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnowledgeBaseRefreshFrequency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnowledgeBaseRefreshFrequency_Interval:
+			var ev string
+			if err := d.ReadString(schemas.KnowledgeBaseRefreshFrequency_Interval, &ev); err != nil {
+				return err
+			}
+			v.Interval = KbRefreshInterval(ev)
+			return nil
+		case schemas.KnowledgeBaseRefreshFrequency_RefreshOnDay:
+			v.RefreshOnDay = &KnowledgeBaseScheduleRefreshOnEntity{}
+			return v.RefreshOnDay.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A summary of a knowledge base refresh schedule, including its identifier,
+// frequency, start time, and state. The DescribeKnowledgeBaseRefreshSchedule and
+// ListKnowledgeBaseRefreshSchedules operations return this summary.
+type KnowledgeBaseRefreshScheduleSummary struct {
+
+	// The frequency configuration for the refresh schedule. The frequency
+	// configuration specifies how often the schedule runs and, for weekly or monthly
+	// schedules, the day on which it runs.
+	//
+	// This member is required.
+	ScheduleFrequency *KnowledgeBaseRefreshFrequency
+
+	// The unique identifier for the refresh schedule.
+	//
+	// This member is required.
+	ScheduleId *string
+
+	// The date and time, in ISO 8601 format, after which the schedule can start
+	// refreshing the knowledge base.
+	StartTime *time.Time
+
+	// The current state of the refresh schedule. A schedule that isn't ENABLED
+	// doesn't run refreshes.
+	State ScheduleState
+
+	noSmithyDocumentSerde
+}
+
+func (v *KnowledgeBaseRefreshScheduleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseRefreshScheduleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnowledgeBaseRefreshScheduleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleFrequency != nil {
+		s.WriteStruct(schemas.KnowledgeBaseRefreshScheduleSummary_ScheduleFrequency)
+		v.ScheduleFrequency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleId != nil {
+		s.WriteString(schemas.KnowledgeBaseRefreshScheduleSummary_ScheduleId, *v.ScheduleId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.KnowledgeBaseRefreshScheduleSummary_StartTime, *v.StartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.KnowledgeBaseRefreshScheduleSummary_State, string(v.State))
+	}
+}
+func (v *KnowledgeBaseRefreshScheduleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnowledgeBaseRefreshScheduleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnowledgeBaseRefreshScheduleSummary_ScheduleFrequency:
+			v.ScheduleFrequency = &KnowledgeBaseRefreshFrequency{}
+			return v.ScheduleFrequency.Deserialize(d)
+		case schemas.KnowledgeBaseRefreshScheduleSummary_ScheduleId:
+			v.ScheduleId = new(string)
+			return d.ReadString(schemas.KnowledgeBaseRefreshScheduleSummary_ScheduleId, v.ScheduleId)
+		case schemas.KnowledgeBaseRefreshScheduleSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.KnowledgeBaseRefreshScheduleSummary_StartTime, v.StartTime)
+		case schemas.KnowledgeBaseRefreshScheduleSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.KnowledgeBaseRefreshScheduleSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduleState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The day on which the refresh runs. Specify one of the following:
+//
+//   - DayOfWeek – For a weekly schedule.
+//
+//   - DayOfMonth – For a monthly schedule.
+type KnowledgeBaseScheduleRefreshOnEntity struct {
+
+	// The day of the month on which a monthly refresh runs. Valid values include:
+	//
+	//   - 1 through 28 – The refresh runs on that day of each month.
+	//
+	//   - LAST_DAY_OF_MONTH – The refresh runs on the last day of each month.
+	DayOfMonth *string
+
+	// The day of the week on which a weekly refresh runs.
+	DayOfWeek KbDayOfWeek
+
+	noSmithyDocumentSerde
+}
+
+func (v *KnowledgeBaseScheduleRefreshOnEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KnowledgeBaseScheduleRefreshOnEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KnowledgeBaseScheduleRefreshOnEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteString(schemas.KnowledgeBaseScheduleRefreshOnEntity_DayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.KnowledgeBaseScheduleRefreshOnEntity_DayOfWeek, string(v.DayOfWeek))
+	}
+}
+func (v *KnowledgeBaseScheduleRefreshOnEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KnowledgeBaseScheduleRefreshOnEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KnowledgeBaseScheduleRefreshOnEntity_DayOfMonth:
+			v.DayOfMonth = new(string)
+			return d.ReadString(schemas.KnowledgeBaseScheduleRefreshOnEntity_DayOfMonth, v.DayOfMonth)
+		case schemas.KnowledgeBaseScheduleRefreshOnEntity_DayOfWeek:
+			var ev string
+			if err := d.ReadString(schemas.KnowledgeBaseScheduleRefreshOnEntity_DayOfWeek, &ev); err != nil {
+				return err
+			}
+			v.DayOfWeek = KbDayOfWeek(ev)
+			return nil
 		}
 		return nil
 	})
@@ -52299,10 +54350,9 @@ type Permission struct {
 	// This member is required.
 	Actions []string
 
-	// The Amazon Resource Name (ARN) of the principal. This can be an Amazon Quick
-	// user, group or namespace associated with the flow. Namespace principal can only
-	// be set as a viewer and will grant everyone in the same namespace viewer
-	// permissions.
+	// The Amazon Resource Name (ARN) of the principal. This can be an Quick user,
+	// group or namespace associated with the flow. Namespace principal can only be set
+	// as a viewer and will grant everyone in the same namespace viewer permissions.
 	//
 	// This member is required.
 	Principal *string
@@ -54721,6 +56771,70 @@ func (v *PluginVisualTableQuerySort) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// A principal that a governance policy is assigned to.
+type PolicyPrincipal struct {
+
+	// The ARN of the user, group, or account.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	// The type of the principal.
+	PrincipalType PrincipalType
+
+	// The current revision of the assignment.
+	Revision *int64
+
+	// The date and time that the assignment was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *PolicyPrincipal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyPrincipal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyPrincipal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.PolicyPrincipal_PrincipalArn, *v.PrincipalArn)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.PolicyPrincipal_PrincipalType, string(v.PrincipalType))
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.PolicyPrincipal_Revision, *v.Revision)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.PolicyPrincipal_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *PolicyPrincipal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyPrincipal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyPrincipal_PrincipalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.PolicyPrincipal_PrincipalArn, v.PrincipalArn)
+		case schemas.PolicyPrincipal_PrincipalType:
+			var ev string
+			if err := d.ReadString(schemas.PolicyPrincipal_PrincipalType, &ev); err != nil {
+				return err
+			}
+			v.PrincipalType = PrincipalType(ev)
+			return nil
+		case schemas.PolicyPrincipal_Revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.PolicyPrincipal_Revision, v.Revision)
+		case schemas.PolicyPrincipal_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PolicyPrincipal_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The parameters for PostgreSQL.
 type PostgreSqlParameters struct {
 
@@ -55049,6 +57163,62 @@ func (v *ProviderConfigMemberMicrosoftPurview) Deserialize(d smithy.ShapeDeseria
 	return v.Value.Deserialize(d)
 }
 
+// A principal to assign a policy to in a BatchPutPolicyAssignmentByPolicy request.
+type PutAssignmentEntry struct {
+
+	// The ARN of the user, group, or account to assign the policy to.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	// The ARN of the policy that you expect the principal to have before this
+	// request. If the principal has a different policy of the same type, or no policy
+	// of that type, this entry fails with a ConflictException error code and makes no
+	// change.
+	ExistingPolicyArn *string
+
+	// The revision of the assignment from your most recent read. If the assignment
+	// has changed since that revision, this entry fails with a ConflictException
+	// error code.
+	Revision *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *PutAssignmentEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAssignmentEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAssignmentEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExistingPolicyArn != nil {
+		s.WriteString(schemas.PutAssignmentEntry_ExistingPolicyArn, *v.ExistingPolicyArn)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.PutAssignmentEntry_PrincipalArn, *v.PrincipalArn)
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.PutAssignmentEntry_Revision, *v.Revision)
+	}
+}
+func (v *PutAssignmentEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAssignmentEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAssignmentEntry_ExistingPolicyArn:
+			v.ExistingPolicyArn = new(string)
+			return d.ReadString(schemas.PutAssignmentEntry_ExistingPolicyArn, v.ExistingPolicyArn)
+		case schemas.PutAssignmentEntry_PrincipalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.PutAssignmentEntry_PrincipalArn, v.PrincipalArn)
+		case schemas.PutAssignmentEntry_Revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.PutAssignmentEntry_Revision, v.Revision)
+		}
+		return nil
+	})
+}
+
 // The QA result that is made from the DashboardVisual or GeneratedAnswer .
 type QAResult struct {
 
@@ -55259,6 +57429,301 @@ func (v *QueueInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.QueueInfo_WaitingOnIngestion:
 			v.WaitingOnIngestion = new(string)
 			return d.ReadString(schemas.QueueInfo_WaitingOnIngestion, v.WaitingOnIngestion)
+		}
+		return nil
+	})
+}
+
+// The Quick Sight authentication configuration of an access control application.
+type QuickAuthenticationConfig struct {
+
+	// How the external client authenticates to Quick Sight.
+	//
+	// This member is required.
+	QuickAuthenticationType QuickAuthenticationType
+
+	// The details of the Quick Sight authentication configuration.
+	QuickAuthenticationConfigurationDetail QuickAuthenticationConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuickAuthenticationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickAuthenticationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuickAuthenticationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickAuthenticationConfigurationDetail != nil {
+		serializeQuickAuthenticationConfigurationDetail(s, schemas.QuickAuthenticationConfig_QuickAuthenticationConfigurationDetail, v.QuickAuthenticationConfigurationDetail)
+	}
+	if v.QuickAuthenticationType != "" {
+		s.WriteString(schemas.QuickAuthenticationConfig_QuickAuthenticationType, string(v.QuickAuthenticationType))
+	}
+}
+func (v *QuickAuthenticationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuickAuthenticationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuickAuthenticationConfig_QuickAuthenticationConfigurationDetail:
+			return deserializeQuickAuthenticationConfigurationDetail(d, schemas.QuickAuthenticationConfig_QuickAuthenticationConfigurationDetail, &v.QuickAuthenticationConfigurationDetail)
+		case schemas.QuickAuthenticationConfig_QuickAuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.QuickAuthenticationConfig_QuickAuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.QuickAuthenticationType = QuickAuthenticationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The Quick Sight authentication configuration that is returned when an access
+// control application is created.
+type QuickAuthenticationConfigCreateOutput struct {
+
+	// How the external client authenticates to Quick Sight.
+	//
+	// This member is required.
+	QuickAuthenticationType QuickAuthenticationType
+
+	// The details of the Quick Sight authentication configuration.
+	QuickAuthenticationConfigurationDetailCreateOutput QuickAuthenticationConfigurationDetailCreateOutput
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuickAuthenticationConfigCreateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickAuthenticationConfigCreateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuickAuthenticationConfigCreateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickAuthenticationConfigurationDetailCreateOutput != nil {
+		serializeQuickAuthenticationConfigurationDetailCreateOutput(s, schemas.QuickAuthenticationConfigCreateOutput_QuickAuthenticationConfigurationDetailCreateOutput, v.QuickAuthenticationConfigurationDetailCreateOutput)
+	}
+	if v.QuickAuthenticationType != "" {
+		s.WriteString(schemas.QuickAuthenticationConfigCreateOutput_QuickAuthenticationType, string(v.QuickAuthenticationType))
+	}
+}
+func (v *QuickAuthenticationConfigCreateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuickAuthenticationConfigCreateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuickAuthenticationConfigCreateOutput_QuickAuthenticationConfigurationDetailCreateOutput:
+			return deserializeQuickAuthenticationConfigurationDetailCreateOutput(d, schemas.QuickAuthenticationConfigCreateOutput_QuickAuthenticationConfigurationDetailCreateOutput, &v.QuickAuthenticationConfigurationDetailCreateOutput)
+		case schemas.QuickAuthenticationConfigCreateOutput_QuickAuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.QuickAuthenticationConfigCreateOutput_QuickAuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.QuickAuthenticationType = QuickAuthenticationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The Quick Sight authentication configuration for an access control application.
+type QuickAuthenticationConfigInput struct {
+
+	// How the external client authenticates to Quick Sight.
+	//
+	// This member is required.
+	QuickAuthenticationType QuickAuthenticationType
+
+	// The details of the Quick Sight authentication configuration.
+	QuickAuthenticationConfigurationDetailInput QuickAuthenticationConfigurationDetailInput
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuickAuthenticationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickAuthenticationConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuickAuthenticationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickAuthenticationConfigurationDetailInput != nil {
+		serializeQuickAuthenticationConfigurationDetailInput(s, schemas.QuickAuthenticationConfigInput_QuickAuthenticationConfigurationDetailInput, v.QuickAuthenticationConfigurationDetailInput)
+	}
+	if v.QuickAuthenticationType != "" {
+		s.WriteString(schemas.QuickAuthenticationConfigInput_QuickAuthenticationType, string(v.QuickAuthenticationType))
+	}
+}
+func (v *QuickAuthenticationConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuickAuthenticationConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuickAuthenticationConfigInput_QuickAuthenticationConfigurationDetailInput:
+			return deserializeQuickAuthenticationConfigurationDetailInput(d, schemas.QuickAuthenticationConfigInput_QuickAuthenticationConfigurationDetailInput, &v.QuickAuthenticationConfigurationDetailInput)
+		case schemas.QuickAuthenticationConfigInput_QuickAuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.QuickAuthenticationConfigInput_QuickAuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.QuickAuthenticationType = QuickAuthenticationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The details of the Quick Sight authentication configuration.
+//
+// The following types satisfy this interface:
+//
+//	QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode
+type QuickAuthenticationConfigurationDetail interface {
+	isQuickAuthenticationConfigurationDetail()
+}
+
+// The configuration of a Quick Sight-managed public client.
+type QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode struct {
+	Value QuickManagedPublicAuthCodeQuickAuthenticationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode) isQuickAuthenticationConfigurationDetail() {
+}
+func (v *QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickAuthenticationConfigurationDetail_QuickManagedPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The details of the Quick Sight authentication configuration that is returned
+// when an access control application is created.
+//
+// The following types satisfy this interface:
+//
+//	QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode
+type QuickAuthenticationConfigurationDetailCreateOutput interface {
+	isQuickAuthenticationConfigurationDetailCreateOutput()
+}
+
+// The configuration of a Quick Sight-managed public client.
+type QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode struct {
+	Value QuickManagedPublicAuthCodeQuickAuthenticationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode) isQuickAuthenticationConfigurationDetailCreateOutput() {
+}
+func (v *QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickAuthenticationConfigurationDetailCreateOutput_QuickManagedPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The details of the Quick Sight authentication configuration. Provide redirect
+// URIs.
+//
+// The following types satisfy this interface:
+//
+//	QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode
+type QuickAuthenticationConfigurationDetailInput interface {
+	isQuickAuthenticationConfigurationDetailInput()
+}
+
+// The configuration of a Quick Sight-managed public client.
+type QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode struct {
+	Value QuickManagedAuthCodeQuickAuthenticationConfigInput
+
+	noSmithyDocumentSerde
+}
+
+func (*QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode) isQuickAuthenticationConfigurationDetailInput() {
+}
+func (v *QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickAuthenticationConfigurationDetailInput_QuickManagedPublicAuthCode)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for a Quick Sight-managed client. You provide the redirect
+// URIs, and Quick Sight generates the client ID.
+type QuickManagedAuthCodeQuickAuthenticationConfigInput struct {
+
+	// The OAuth 2.0 redirect URIs of the client.
+	//
+	// This member is required.
+	RedirectUris []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuickManagedAuthCodeQuickAuthenticationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickManagedAuthCodeQuickAuthenticationConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuickManagedAuthCodeQuickAuthenticationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RedirectUris != nil {
+		serializeRedirectUriList(s, schemas.QuickManagedAuthCodeQuickAuthenticationConfigInput_RedirectUris, v.RedirectUris)
+	}
+}
+func (v *QuickManagedAuthCodeQuickAuthenticationConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuickManagedAuthCodeQuickAuthenticationConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuickManagedAuthCodeQuickAuthenticationConfigInput_RedirectUris:
+			return deserializeRedirectUriList(d, schemas.QuickManagedAuthCodeQuickAuthenticationConfigInput_RedirectUris, &v.RedirectUris)
+		}
+		return nil
+	})
+}
+
+// The configuration of a Quick Sight-managed public client that uses PKCE.
+type QuickManagedPublicAuthCodeQuickAuthenticationConfig struct {
+
+	// The OAuth 2.0 client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The OAuth 2.0 redirect URIs of the client.
+	//
+	// This member is required.
+	RedirectUris []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuickManagedPublicAuthCodeQuickAuthenticationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuickManagedPublicAuthCodeQuickAuthenticationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig_ClientId, *v.ClientId)
+	}
+	if v.RedirectUris != nil {
+		serializeRedirectUriList(s, schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig_RedirectUris, v.RedirectUris)
+	}
+}
+func (v *QuickManagedPublicAuthCodeQuickAuthenticationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig_ClientId, v.ClientId)
+		case schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig_RedirectUris:
+			return deserializeRedirectUriList(d, schemas.QuickManagedPublicAuthCodeQuickAuthenticationConfig_RedirectUris, &v.RedirectUris)
 		}
 		return nil
 	})
@@ -56653,6 +59118,15 @@ type RedshiftParameters struct {
 	// Cluster ID. This field can be blank if the Host and Port are provided.
 	ClusterId *string
 
+	// The federated database to use for table and schema discovery. Specify the exact
+	// database name returned by SHOW DATABASES , such as
+	// producer_database@catalog_name . This value must differ from Database , which
+	// specifies the database used for the connection.
+	//
+	// For UpdateDataSource , omit this parameter to keep the current catalog, or
+	// specify an empty string to clear the configured catalog.
+	FederatedCatalog *string
+
 	// Host. This field can be blank if ClusterId is provided.
 	Host *string
 
@@ -56688,6 +59162,9 @@ func (v *RedshiftParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Database != nil {
 		s.WriteString(schemas.RedshiftParameters_Database, *v.Database)
 	}
+	if v.FederatedCatalog != nil {
+		s.WriteString(schemas.RedshiftParameters_FederatedCatalog, *v.FederatedCatalog)
+	}
 	if v.Host != nil {
 		s.WriteString(schemas.RedshiftParameters_Host, *v.Host)
 	}
@@ -56714,6 +59191,9 @@ func (v *RedshiftParameters) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RedshiftParameters_Database:
 			v.Database = new(string)
 			return d.ReadString(schemas.RedshiftParameters_Database, v.Database)
+		case schemas.RedshiftParameters_FederatedCatalog:
+			v.FederatedCatalog = new(string)
+			return d.ReadString(schemas.RedshiftParameters_FederatedCatalog, v.FederatedCatalog)
 		case schemas.RedshiftParameters_Host:
 			v.Host = new(string)
 			return d.ReadString(schemas.RedshiftParameters_Host, v.Host)
@@ -57872,8 +60352,7 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 
 	// The configuration details for providing each Amazon Quick Sight console
 	// embedding experience. This can be used along with custom permissions to restrict
-	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Amazon Quick User
-	// Guide.
+	// access to certain features. For more information, see [Customizing Access to the Amazon Quick Sight Console]in the Quick User Guide.
 	//
 	// Use [GenerateEmbedUrlForRegisteredUser] where you want to provide an authoring portal that allows users to create
 	// data sources, datasets, analyses, and dashboards. The users who accesses an
@@ -57881,20 +60360,20 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// security cohort. If you want to restrict permissions to some of these features,
 	// add a custom permissions profile to the user with the [UpdateUser]API operation. Use the [RegisterUser]
 	// API operation to add a new user with a custom permission profile attached. For
-	// more information, see the following sections in the Amazon Quick User Guide:
+	// more information, see the following sections in the Quick User Guide:
 	//
 	// [Embedding the Full Functionality of the Amazon Quick Sight Console for Authenticated Users]
 	//
-	// [Customizing Access to the Amazon Quick Console]
+	// [Customizing Access to the Quick Console]
 	//
 	// For more information about the high-level steps for embedding and for an
-	// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
+	// interactive demo of the ways you can customize embedding, visit the [Quick Developer Portal].
 	//
-	// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+	// [Customizing Access to the Quick Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [Customizing Access to the Amazon Quick Sight Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [Embedding the Full Functionality of the Amazon Quick Sight Console for Authenticated Users]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html
+	// [Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 	// [UpdateUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html
-	// [Customizing Access to the Amazon Quick Console]: https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html
 	// [GenerateEmbedUrlForRegisteredUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html
 	// [RegisterUser]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html
 	QuickSightConsole *RegisteredUserQuickSightConsoleEmbeddingConfiguration
@@ -63225,7 +65704,7 @@ type SnapshotAnonymousUser struct {
 	//
 	// These are not the tags that are used for Amazon Web Services resource tagging.
 	// For more information on row level security in Amazon Quick Sight, see [Using Row-Level Security (RLS) with Tags]in the
-	// Amazon Quick User Guide.
+	// Quick User Guide.
 	//
 	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	RowLevelPermissionTags []SessionTag
@@ -74660,6 +77139,88 @@ func (v *UniqueValuesComputation) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// A calculated column that is not materialized in the prepared data. The column
+// is computed at analysis time and can use aggregate expressions.
+type UnmaterializedCalculatedColumn struct {
+
+	// A unique ID to identify the unmaterialized calculated column.
+	//
+	// This member is required.
+	ColumnId *string
+
+	// The name of the unmaterialized calculated column.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// An expression that defines the unmaterialized calculated column.
+	//
+	// This member is required.
+	Expression *string
+
+	// The sub data type of the unmaterialized calculated column.
+	SubType ColumnDataSubType
+
+	// The data type of the unmaterialized calculated column.
+	Type ColumnDataType
+
+	noSmithyDocumentSerde
+}
+
+func (v *UnmaterializedCalculatedColumn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnmaterializedCalculatedColumn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnmaterializedCalculatedColumn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnId != nil {
+		s.WriteString(schemas.UnmaterializedCalculatedColumn_ColumnId, *v.ColumnId)
+	}
+	if v.ColumnName != nil {
+		s.WriteString(schemas.UnmaterializedCalculatedColumn_ColumnName, *v.ColumnName)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.UnmaterializedCalculatedColumn_Expression, *v.Expression)
+	}
+	if v.SubType != "" {
+		s.WriteString(schemas.UnmaterializedCalculatedColumn_SubType, string(v.SubType))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UnmaterializedCalculatedColumn_Type, string(v.Type))
+	}
+}
+func (v *UnmaterializedCalculatedColumn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnmaterializedCalculatedColumn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnmaterializedCalculatedColumn_ColumnId:
+			v.ColumnId = new(string)
+			return d.ReadString(schemas.UnmaterializedCalculatedColumn_ColumnId, v.ColumnId)
+		case schemas.UnmaterializedCalculatedColumn_ColumnName:
+			v.ColumnName = new(string)
+			return d.ReadString(schemas.UnmaterializedCalculatedColumn_ColumnName, v.ColumnName)
+		case schemas.UnmaterializedCalculatedColumn_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.UnmaterializedCalculatedColumn_Expression, v.Expression)
+		case schemas.UnmaterializedCalculatedColumn_SubType:
+			var ev string
+			if err := d.ReadString(schemas.UnmaterializedCalculatedColumn_SubType, &ev); err != nil {
+				return err
+			}
+			v.SubType = ColumnDataSubType(ev)
+			return nil
+		case schemas.UnmaterializedCalculatedColumn_Type:
+			var ev string
+			if err := d.ReadString(schemas.UnmaterializedCalculatedColumn_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ColumnDataType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A transform operation that converts columns into rows, normalizing the data
 // structure.
 type UnpivotOperation struct {
@@ -75415,6 +77976,50 @@ func (v *UserNameOrEmailFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UserNameOrEmailFilter_prefix:
 			v.Prefix = new(string)
 			return d.ReadString(schemas.UserNameOrEmailFilter_prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
+// A request field that failed validation.
+type ValidationExceptionField struct {
+
+	// A message that describes why the field failed validation.
+	//
+	// This member is required.
+	Message *string
+
+	// The name of the field that failed validation.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
 		}
 		return nil
 	})
@@ -78263,19 +80868,27 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAuthenticationMetadata()                       {}
-func (*UnknownUnionMember) isAuthorizationCodeGrantCredentialsDetails()     {}
-func (*UnknownUnionMember) isClientCredentialsDetails()                     {}
-func (*UnknownUnionMember) isCustomPromptInput()                            {}
-func (*UnknownUnionMember) isDataSourceParameters()                         {}
-func (*UnknownUnionMember) isGeocodePreferenceValue()                       {}
-func (*UnknownUnionMember) isImageSource()                                  {}
-func (*UnknownUnionMember) isPhysicalTable()                                {}
-func (*UnknownUnionMember) isProviderConfig()                               {}
-func (*UnknownUnionMember) isReadAuthenticationMetadata()                   {}
-func (*UnknownUnionMember) isReadAuthorizationCodeGrantCredentialsDetails() {}
-func (*UnknownUnionMember) isReadClientCredentialsDetails()                 {}
-func (*UnknownUnionMember) isSpaceQuickSightResourceDetails()               {}
-func (*UnknownUnionMember) isTransformOperation()                           {}
-func (*UnknownUnionMember) isUserIdentifier()                               {}
-func (*UnknownUnionMember) isUserIndexCapacityFilter()                      {}
+func (*UnknownUnionMember) isAuthenticationMetadata()                             {}
+func (*UnknownUnionMember) isAuthorizationCodeGrantCredentialsDetails()           {}
+func (*UnknownUnionMember) isClientCredentialsDetails()                           {}
+func (*UnknownUnionMember) isClientSecretConfigurationDetail()                    {}
+func (*UnknownUnionMember) isCustomPromptInput()                                  {}
+func (*UnknownUnionMember) isDataSourceParameters()                               {}
+func (*UnknownUnionMember) isGeocodePreferenceValue()                             {}
+func (*UnknownUnionMember) isIdpAuthorizingConfigurationDetail()                  {}
+func (*UnknownUnionMember) isIdpAuthorizingConfigurationDetailInput()             {}
+func (*UnknownUnionMember) isIdpAuthorizingConfigurationDetailUpdateInput()       {}
+func (*UnknownUnionMember) isIdpAuthorizingConfigurationSummaryDetail()           {}
+func (*UnknownUnionMember) isImageSource()                                        {}
+func (*UnknownUnionMember) isPhysicalTable()                                      {}
+func (*UnknownUnionMember) isProviderConfig()                                     {}
+func (*UnknownUnionMember) isQuickAuthenticationConfigurationDetail()             {}
+func (*UnknownUnionMember) isQuickAuthenticationConfigurationDetailCreateOutput() {}
+func (*UnknownUnionMember) isQuickAuthenticationConfigurationDetailInput()        {}
+func (*UnknownUnionMember) isReadAuthenticationMetadata()                         {}
+func (*UnknownUnionMember) isReadAuthorizationCodeGrantCredentialsDetails()       {}
+func (*UnknownUnionMember) isReadClientCredentialsDetails()                       {}
+func (*UnknownUnionMember) isSpaceQuickSightResourceDetails()                     {}
+func (*UnknownUnionMember) isTransformOperation()                                 {}
+func (*UnknownUnionMember) isUserIdentifier()                                     {}
+func (*UnknownUnionMember) isUserIndexCapacityFilter()                            {}

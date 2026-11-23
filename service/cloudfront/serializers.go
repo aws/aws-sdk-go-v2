@@ -1005,6 +1005,19 @@ func awsRestxml_serializeOpDocumentCreateConnectionGroupInput(v *CreateConnectio
 			return err
 		}
 	}
+	if v.ViewerFallback != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ViewerFallback",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentViewerFallback(v.ViewerFallback, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1332,6 +1345,17 @@ func awsRestxml_serializeOpDocumentCreateDistributionTenantInput(v *CreateDistri
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Name)
+	}
+	if len(v.OnDomainTakeover) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OnDomainTakeover",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OnDomainTakeover))
 	}
 	if v.Parameters != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -12536,6 +12560,19 @@ func awsRestxml_serializeOpDocumentUpdateConnectionGroupInput(v *UpdateConnectio
 		el := value.MemberElement(root)
 		el.Boolean(*v.Ipv6Enabled)
 	}
+	if v.ViewerFallback != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ViewerFallback",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentViewerFallback(v.ViewerFallback, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -12906,6 +12943,17 @@ func awsRestxml_serializeOpDocumentUpdateDistributionTenantInput(v *UpdateDistri
 		if err := awsRestxml_serializeDocumentManagedCertificateRequest(v.ManagedCertificateRequest, el); err != nil {
 			return err
 		}
+	}
+	if len(v.OnDomainTakeover) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OnDomainTakeover",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OnDomainTakeover))
 	}
 	if v.Parameters != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -15946,6 +15994,17 @@ func awsRestxml_serializeDocumentCustomOriginConfig(v *types.CustomOriginConfig,
 		el := value.MemberElement(root)
 		el.String(string(v.IpAddressType))
 	}
+	if len(v.OriginHttpVersion) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginHttpVersion",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OriginHttpVersion))
+	}
 	if v.OriginKeepaliveTimeout != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -16639,6 +16698,17 @@ func awsRestxml_serializeDocumentDomainItem(v *types.DomainItem, value smithyxml
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Domain)
+	}
+	if len(v.ServeOn) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ServeOn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ServeOn))
 	}
 	return nil
 }
@@ -20580,6 +20650,22 @@ func awsRestxml_serializeDocumentViewerCertificate(v *types.ViewerCertificate, v
 	return nil
 }
 
+func awsRestxml_serializeDocumentViewerFallback(v *types.ViewerFallback, value smithyxml.Value) error {
+	defer value.Close()
+	if v.DistributionId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DistributionId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.DistributionId)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentViewerMtlsConfig(v *types.ViewerMtlsConfig, value smithyxml.Value) error {
 	defer value.Close()
 	if len(v.Mode) > 0 {
@@ -20611,6 +20697,17 @@ func awsRestxml_serializeDocumentViewerMtlsConfig(v *types.ViewerMtlsConfig, val
 
 func awsRestxml_serializeDocumentVpcOriginConfig(v *types.VpcOriginConfig, value smithyxml.Value) error {
 	defer value.Close()
+	if len(v.OriginHttpVersion) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OriginHttpVersion",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.OriginHttpVersion))
+	}
 	if v.OriginKeepaliveTimeout != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

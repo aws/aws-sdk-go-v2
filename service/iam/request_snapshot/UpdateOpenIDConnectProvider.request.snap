@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateOpenIDConnectProvider&ContextProvider.KeyDefinitionList.member.1.SourceKey=__SourceKey__&ContextProvider.KeyDefinitionList.member.1.TargetKey=__TargetKey__&ContextProvider.KeyDefinitionList.member.2.SourceKey=__SourceKey__&ContextProvider.KeyDefinitionList.member.2.TargetKey=__TargetKey__&ContextProvider.SubjectSourceKey=__SubjectSourceKey__&ContextProvider.SubjectTypeSourceKey=__SubjectTypeSourceKey__&ContextProvider.SubjectTypeValue=__SubjectTypeValue__&IdentityCenterInstanceArn=__IdentityCenterInstanceArn__&OpenIDConnectProviderArn=__OpenIDConnectProviderArn__&RemoveContextProvider=true&RemoveIdentityCenterInstance=true&Version=2010-05-08

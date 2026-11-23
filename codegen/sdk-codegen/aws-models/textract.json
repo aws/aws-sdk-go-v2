@@ -925,6 +925,152 @@
                 }
             }
         },
+        "com.amazonaws.textract#BlueprintArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-iso|-iso-[a-z]|-us-gov):textract:[a-zA-Z0-9-]*:(aws|[0-9]{12}):blueprint/(public-[a-zA-Z0-9-_]{1,30}|[a-zA-Z0-9-]{12,36})$"
+            }
+        },
+        "com.amazonaws.textract#BlueprintFilter": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint to filter by.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter used to limit results to a specific blueprint, and optionally a specific\n         version.</p>"
+            }
+        },
+        "com.amazonaws.textract#BlueprintItem": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint. If omitted, the latest version is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a blueprint, and optionally a specific blueprint version, with a project for\n         custom output extraction.</p>"
+            }
+        },
+        "com.amazonaws.textract#BlueprintItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#BlueprintItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.textract#BlueprintName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.textract#BlueprintSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><À-ÖØ-Üßà-öø-üẞ¿¡Œ-œ°£¥₹€§©ª®™¹±-µ✓⑆-⑉฿₽₱₦₣₩₫₺\\u4E00-\\u9FFF\\u3040-\\u309F\\u30A0-\\u30FF\\uAC00-\\uD7AF\\u3400-\\u4DBF]+$"
+            }
+        },
+        "com.amazonaws.textract#BlueprintSummary": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintName": {
+                    "target": "com.amazonaws.textract#BlueprintName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint.</p>"
+                    }
+                },
+                "ResourceOwner": {
+                    "target": "com.amazonaws.textract#ResourceOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the blueprint is owned by your account or provided by Amazon Textract.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the blueprint was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the blueprint was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a blueprint, returned in the results of <code>ListBlueprints</code>.</p>"
+            }
+        },
+        "com.amazonaws.textract#BlueprintSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#BlueprintSummary"
+            }
+        },
+        "com.amazonaws.textract#BlueprintVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
         "com.amazonaws.textract#BoundingBox": {
             "type": "structure",
             "members": {
@@ -959,6 +1105,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The bounding box around the detected page, text, key-value pair, table, table cell, or\n         selection element on a document page. The <code>left</code> (x-coordinate) and\n            <code>top</code> (y-coordinate) are coordinates that represent the top and left sides of\n         the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p>\n         <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall\n         document page size. For example, if the input image is 700 x 200 pixels, and the top-left\n         coordinate of the bounding box is 350 x 50 pixels, the API returns a <code>left</code>\n         value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p>\n         <p>The <code>width</code> and <code>height</code> values represent the dimensions of the\n         bounding box as a ratio of the overall document page dimension. For example, if the\n         document page size is 700 x 200 pixels, and the bounding box width is 70 pixels, the width\n         returned is 0.1. </p>"
+            }
+        },
+        "com.amazonaws.textract#BoundingBoxConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.textract#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to return bounding box geometry, or <code>DISABLED</code> to\n         omit it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls whether bounding box geometry is returned in the extraction output.</p>"
             }
         },
         "com.amazonaws.textract#ClientRequestToken": {
@@ -1242,6 +1403,333 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#CreateBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#CreateBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#CreateBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a blueprint that defines the schema Amazon Textract uses to extract structured\n         data from a document during a document insights job. A blueprint describes the fields\n         to extract and how to normalize them.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#CreateBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.textract#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation\n         completes no more than one time. If you use the same token for a request that matches a\n         previous request, the service ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "BlueprintName": {
+                    "target": "com.amazonaws.textract#BlueprintName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.textract#BlueprintSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema of the blueprint, which defines the fields to extract and their expected\n         structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.textract#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption configuration used to encrypt the blueprint at rest.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) to assign to the blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#CreateBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint that was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#CreateBlueprintVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#CreateBlueprintVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#CreateBlueprintVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new, immutable version of an existing blueprint so that projects can pin to a\n         specific version.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#CreateBlueprintVersionRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint to create a new version of.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.textract#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation\n         completes no more than one time. If you use the same token for a request that matches a\n         previous request, the service ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#CreateBlueprintVersionResponse": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint that was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#CreateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#CreateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#CreateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a project that groups the configuration used to run document insights jobs.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#CreateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.textract#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation\n         completes no more than one time. If you use the same token for a request that matches a\n         previous request, the service ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.textract#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectDescription": {
+                    "target": "com.amazonaws.textract#ProjectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the project.</p>"
+                    }
+                },
+                "ExtractionConfiguration": {
+                    "target": "com.amazonaws.textract#ExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls how Amazon Textract extracts content from the document,\n         including bounding boxes, granularity, and output format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GenerativeConfiguration": {
+                    "target": "com.amazonaws.textract#GenerativeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls generative capabilities such as summarization and figure\n         captioning.</p>"
+                    }
+                },
+                "CustomConfiguration": {
+                    "target": "com.amazonaws.textract#CustomConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that associates blueprints with the project for custom output\n         extraction.</p>"
+                    }
+                },
+                "SplitterConfiguration": {
+                    "target": "com.amazonaws.textract#SplitterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls whether multi-document packets are split into individual\n         documents.</p>"
+                    }
+                },
+                "SensitiveDataConfiguration": {
+                    "target": "com.amazonaws.textract#SensitiveDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls detection and redaction of sensitive data, such as\n         personally identifiable information (PII).</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.textract#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption configuration used to encrypt the project at rest. If you don't\n         specify a value, Amazon Textract encrypts the project using an AWS owned key.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) to assign to the project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#CreateProjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.textract#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the project, indicating whether creation completed successfully or\n         failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#CustomConfiguration": {
+            "type": "structure",
+            "members": {
+                "Blueprints": {
+                    "target": "com.amazonaws.textract#BlueprintItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blueprints used to extract custom structured output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FallbackBlueprints": {
+                    "target": "com.amazonaws.textract#FallbackBlueprintItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blueprint used when a document does not match any of the primary blueprints. Requires\n         at least one blueprint in <code>Blueprints</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates blueprints with a project to produce custom structured output. A fallback\n         blueprint can be supplied for documents that do not match a primary blueprint.</p>"
+            }
+        },
         "com.amazonaws.textract#DateTime": {
             "type": "timestamp"
         },
@@ -1368,6 +1856,125 @@
             }
         },
         "com.amazonaws.textract#DeleteAdapterVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#DeleteBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#DeleteBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a blueprint, or a specific version of a blueprint.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint to delete. If omitted, the entire blueprint and all of its\n         versions are deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteBlueprintResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#DeleteProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#DeleteProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a project.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#DeleteProjectResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -1589,6 +2196,57 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.textract#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "KmsKeyId": {
+                    "target": "com.amazonaws.textract#EncryptionKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AWS KMS key to use for encryption. This can be a key ID, key ARN,\n         alias name, or alias ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsEncryptionContext": {
+                    "target": "com.amazonaws.textract#KmsEncryptionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of key-value pairs that Amazon Textract includes as the AWS KMS encryption context\n         when encrypting and decrypting the resource.</p>\n         <p>On <code>UpdateProject</code> and <code>UpdateBlueprint</code>, this member is the one\n         exception to replacing a supplied configuration whole. If you omit it, the stored encryption\n         context is kept. To clear a custom encryption context, specify an empty map\n         (<code>{}</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the AWS Key Management Service (AWS KMS) key and encryption context used to encrypt a resource at\n         rest. When omitted, Amazon Textract encrypts the resource using an AWS owned key.</p>"
+            }
+        },
+        "com.amazonaws.textract#EncryptionContextKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.textract#EncryptionContextValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^.*\\S.*$"
+            }
+        },
+        "com.amazonaws.textract#EncryptionKmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2047})?$"
+            }
+        },
         "com.amazonaws.textract#EntityType": {
             "type": "enum",
             "members": {
@@ -1657,6 +2315,12 @@
         "com.amazonaws.textract#ErrorCode": {
             "type": "string"
         },
+        "com.amazonaws.textract#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.textract#ErrorType": {
+            "type": "string"
+        },
         "com.amazonaws.textract#EvaluationMetric": {
             "type": "structure",
             "members": {
@@ -1684,6 +2348,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The evaluation metrics (F1 score, Precision, and Recall) for an adapter version.</p>"
+            }
+        },
+        "com.amazonaws.textract#EventBridgeConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.textract#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to send events to an event bus, or <code>DISABLED</code> to\n         not send them.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Event bus settings for a job.</p>"
             }
         },
         "com.amazonaws.textract#ExpenseCurrency": {
@@ -1883,10 +2562,112 @@
                 "smithy.api#documentation": "<p>Contains information extracted by an analysis operation after using StartLendingAnalysis.</p>"
             }
         },
+        "com.amazonaws.textract#ExtractionConfiguration": {
+            "type": "structure",
+            "members": {
+                "BoundingBox": {
+                    "target": "com.amazonaws.textract#BoundingBoxConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether bounding box geometry is included in the extraction output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Granularity": {
+                    "target": "com.amazonaws.textract#ExtractionGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the granularity levels at which content is extracted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputFormat": {
+                    "target": "com.amazonaws.textract#OutputFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the format of the extraction output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how Amazon Textract extracts content from a document, including whether bounding\n         boxes are returned, the granularity of extraction, and the output format.</p>"
+            }
+        },
+        "com.amazonaws.textract#ExtractionGranularity": {
+            "type": "structure",
+            "members": {
+                "Types": {
+                    "target": "com.amazonaws.textract#ExtractionGranularityTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The granularity levels at which Amazon Textract extracts content, from the whole document\n         down to individual lines of text. Each type can appear only once.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the granularity levels at which Amazon Textract extracts content from a\n         document.</p>"
+            }
+        },
+        "com.amazonaws.textract#ExtractionGranularityType": {
+            "type": "enum",
+            "members": {
+                "DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT"
+                    }
+                },
+                "PAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAGE"
+                    }
+                },
+                "ELEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELEMENT"
+                    }
+                },
+                "WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORD"
+                    }
+                },
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#ExtractionGranularityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#ExtractionGranularityType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.textract#ExtractionList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.textract#Extraction"
+            }
+        },
+        "com.amazonaws.textract#FallbackBlueprintItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#BlueprintItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.textract#FeatureType": {
@@ -1930,6 +2711,21 @@
                 "target": "com.amazonaws.textract#FeatureType"
             }
         },
+        "com.amazonaws.textract#FigureCaptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.textract#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to produce figure captions, or <code>DISABLED</code> to omit\n         them.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls whether generative captions are produced for figures detected in the\n         document.</p>"
+            }
+        },
         "com.amazonaws.textract#Float": {
             "type": "float",
             "traits": {
@@ -1943,6 +2739,26 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.textract#GenerativeConfiguration": {
+            "type": "structure",
+            "members": {
+                "Summarization": {
+                    "target": "com.amazonaws.textract#SummarizationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether a generative summary of the document is produced. If you omit it, no\n         summary is produced.</p>"
+                    }
+                },
+                "FigureCaption": {
+                    "target": "com.amazonaws.textract#FigureCaptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether generative captions are produced for figures detected in the\n         document. If you omit it, no figure captions are produced.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls the generative capabilities applied during a document insights job, such\n         as summarization and figure captioning.</p>"
             }
         },
         "com.amazonaws.textract#Geometry": {
@@ -2199,6 +3015,120 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#GetBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a blueprint, including its schema, encryption settings, and\n         timestamps.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint to retrieve. If omitted, the latest version is\n         returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#GetBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintName": {
+                    "target": "com.amazonaws.textract#BlueprintName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlueprintVersion": {
+                    "target": "com.amazonaws.textract#BlueprintVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the blueprint.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.textract#BlueprintSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema of the blueprint, which defines the fields to extract and their expected\n         structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.textract#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AWS KMS key used to encrypt the blueprint.</p>"
+                    }
+                },
+                "KmsEncryptionContext": {
+                    "target": "com.amazonaws.textract#KmsEncryptionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption context used when encrypting the blueprint.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the blueprint was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the blueprint was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.textract#GetDocumentAnalysis": {
             "type": "operation",
             "input": {
@@ -2307,6 +3237,86 @@
                     "target": "com.amazonaws.textract#String",
                     "traits": {
                         "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#GetDocumentInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetDocumentInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetDocumentInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidJobIdException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the status and results of a document insights job that was started by\n         <a>StartDocumentInsights</a>.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetDocumentInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.textract#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the document insights job to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#GetDocumentInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.textract#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the document insights job, indicating whether it is\n         still running, has completed, or has failed. When the job has failed, inspect\n         <code>ErrorType</code> and <code>ErrorMessage</code> for details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfiguration": {
+                    "target": "com.amazonaws.textract#OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where the analysis results are written.</p>"
+                    }
+                },
+                "ErrorType": {
+                    "target": "com.amazonaws.textract#ErrorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of error that caused the job to fail. Present only when the job status is a\n         failure state.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.textract#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the error that caused the job to fail. Present only when\n         the job status is a failure state.</p>"
                     }
                 }
             },
@@ -2750,6 +3760,138 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#GetProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of a project, including its configuration, status, and timestamps.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#GetProjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.textract#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectDescription": {
+                    "target": "com.amazonaws.textract#ProjectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the project.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.textract#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the project, indicating whether it was created successfully or\n         failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionConfiguration": {
+                    "target": "com.amazonaws.textract#ExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls how Amazon Textract extracts content from the document,\n         including bounding boxes, granularity, and output format.</p>"
+                    }
+                },
+                "GenerativeConfiguration": {
+                    "target": "com.amazonaws.textract#GenerativeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls generative capabilities such as summarization and figure\n         captioning.</p>"
+                    }
+                },
+                "CustomConfiguration": {
+                    "target": "com.amazonaws.textract#CustomConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that associates blueprints with the project for custom output\n         extraction.</p>"
+                    }
+                },
+                "SplitterConfiguration": {
+                    "target": "com.amazonaws.textract#SplitterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls whether multi-document packets are split into individual\n         documents.</p>"
+                    }
+                },
+                "SensitiveDataConfiguration": {
+                    "target": "com.amazonaws.textract#SensitiveDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls detection and redaction of sensitive data, such as\n         personally identifiable information (PII).</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.textract#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption configuration used to encrypt the project at rest.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the project was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.textract#HumanLoopActivationOutput": {
             "type": "structure",
             "members": {
@@ -2967,6 +4109,31 @@
                 }
             }
         },
+        "com.amazonaws.textract#InputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3Uri": {
+                    "target": "com.amazonaws.textract#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the input document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location of the input document for a document insights job.</p>"
+            }
+        },
+        "com.amazonaws.textract#IntelligencePaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.textract#InternalServerError": {
             "type": "structure",
             "members": {
@@ -3042,6 +4209,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.textract#JobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-iso|-iso-[a-z]|-us-gov):textract:[a-zA-Z0-9-]*:[0-9]{12}:job/[a-zA-Z0-9-_]+$"
+            }
+        },
         "com.amazonaws.textract#JobId": {
             "type": "string",
             "traits": {
@@ -3099,6 +4276,21 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+            }
+        },
+        "com.amazonaws.textract#KmsEncryptionContext": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.textract#EncryptionContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.textract#EncryptionContextValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.textract#LendingDetection": {
@@ -3487,6 +4679,188 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#ListBlueprints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#ListBlueprintsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#ListBlueprintsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the blueprints that are available to the caller, with optional filtering by\n         project and resource owner. The results are paginated. If the response includes a\n         <code>NextToken</code> value, pass it in a subsequent call to retrieve the next page of\n         results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Blueprints",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.textract#ListBlueprintsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.textract#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of blueprints to return in each page of results. If you don't specify\n         a value, the service selects a default page size. Use the <code>NextToken</code> value in\n         the response to retrieve any remaining results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#IntelligencePaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a previous call to <code>ListBlueprints</code>. Use it\n         to retrieve the next page of results.</p>"
+                    }
+                },
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a blueprint to filter the results by.</p>"
+                    }
+                },
+                "ProjectFilter": {
+                    "target": "com.amazonaws.textract#ProjectFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that limits the results to blueprints associated with the specified\n         project.</p>"
+                    }
+                },
+                "ResourceOwner": {
+                    "target": "com.amazonaws.textract#ResourceOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that limits the results to blueprints owned by your account or to blueprints\n         provided by Amazon Textract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#ListBlueprintsResponse": {
+            "type": "structure",
+            "members": {
+                "Blueprints": {
+                    "target": "com.amazonaws.textract#BlueprintSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of blueprint summaries that match the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#IntelligencePaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to use in a subsequent call to <code>ListBlueprints</code> to\n         retrieve the next page of results. This value is <code>null</code> when there are no more\n         results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#ListProjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#ListProjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#ListProjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the projects that are available to the caller, with optional filtering by\n         blueprint. The results are paginated. If the response includes a <code>NextToken</code>\n         value, pass it in a subsequent call to retrieve the next page of results.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Projects",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.textract#ListProjectsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.textract#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of projects to return in each page of results. If you don't specify a\n         value, the service selects a default page size. Use the <code>NextToken</code> value in the\n         response to retrieve any remaining results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#IntelligencePaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token returned from a previous call to <code>ListProjects</code>. Use it to\n         retrieve the next page of results.</p>"
+                    }
+                },
+                "BlueprintFilter": {
+                    "target": "com.amazonaws.textract#BlueprintFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that limits the results to projects associated with the specified\n         blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#ListProjectsResponse": {
+            "type": "structure",
+            "members": {
+                "Projects": {
+                    "target": "com.amazonaws.textract#ProjectSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of project summaries that match the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#IntelligencePaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to use in a subsequent call to <code>ListProjects</code> to retrieve\n         the next page of results. This value is <code>null</code> when there are no more results to\n         return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.textract#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -3607,6 +4981,36 @@
                 "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Textract publishes the completion status of\n         an asynchronous document operation. </p>"
             }
         },
+        "com.amazonaws.textract#NotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "EventBridgeConfiguration": {
+                    "target": "com.amazonaws.textract#EventBridgeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event bus settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Notification settings for a job.</p>"
+            }
+        },
+        "com.amazonaws.textract#OutputAdditionalFileFormat": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.textract#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to produce an additional file format, or\n         <code>DISABLED</code> to omit it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls whether an additional file format is produced alongside the primary extraction\n         output.</p>"
+            }
+        },
         "com.amazonaws.textract#OutputConfig": {
             "type": "structure",
             "members": {
@@ -3626,6 +5030,346 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sets whether or not your output will go to a user created bucket. Used to set the name\n         of the bucket, and the prefix on the output file.</p>\n         <p>\n            <code>OutputConfig</code> is an optional parameter which lets you adjust where your\n         output will be placed. By default, Amazon Textract will store the results internally and can\n         only be accessed by the Get API operations. With <code>OutputConfig</code> enabled, you can\n         set the name of the bucket the output will be sent to the file prefix of the results where\n         you can download your results. Additionally, you can set the <code>KMSKeyID</code>\n         parameter to a customer master key (CMK) to encrypt your output. Without this parameter set\n         Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>\n         <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account \n         is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after \n         the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\"> Managing AI services opt-out policy. </a>\n         </p>\n         <p>For more information on data privacy,\n         see the <a href=\"https://aws.amazon.com/compliance/data-privacy-faq/\">Data Privacy\n            FAQ</a>.</p>"
+            }
+        },
+        "com.amazonaws.textract#OutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3Uri": {
+                    "target": "com.amazonaws.textract#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where the analysis results are written.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location where the results of a document insights job are\n         written.</p>"
+            }
+        },
+        "com.amazonaws.textract#OutputFormat": {
+            "type": "structure",
+            "members": {
+                "AdditionalFileFormat": {
+                    "target": "com.amazonaws.textract#OutputAdditionalFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls whether an additional file format is produced alongside the primary\n         output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TextFormat": {
+                    "target": "com.amazonaws.textract#OutputTextFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the text formats produced in the extraction output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls the format of the extraction output, including the text format and any\n         additional file formats.</p>"
+            }
+        },
+        "com.amazonaws.textract#OutputTextFormat": {
+            "type": "structure",
+            "members": {
+                "Types": {
+                    "target": "com.amazonaws.textract#OutputTextFormatTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text formats produced in the extraction output. Each type can appear only once, and\n         <code>CSV</code> can't be the only type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the text formats produced in the extraction output.</p>"
+            }
+        },
+        "com.amazonaws.textract#OutputTextFormatType": {
+            "type": "enum",
+            "members": {
+                "PLAIN_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT"
+                    }
+                },
+                "MARKDOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MARKDOWN"
+                    }
+                },
+                "HTML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTML"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#OutputTextFormatTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#OutputTextFormatType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.textract#PIIEntitiesConfiguration": {
+            "type": "structure",
+            "members": {
+                "PiiEntityTypes": {
+                    "target": "com.amazonaws.textract#PIIEntityTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of PII entity types to detect. Each type can appear only once.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedactionMaskMode": {
+                    "target": "com.amazonaws.textract#PIIRedactionMaskMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How detected PII is masked in the redacted output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies which personally identifiable information (PII) entity types to detect and how\n         to mask them.</p>"
+            }
+        },
+        "com.amazonaws.textract#PIIEntityType": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDRESS"
+                    }
+                },
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "PHONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME"
+                    }
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "DRIVER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVER_ID"
+                    }
+                },
+                "LICENSE_PLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LICENSE_PLATE"
+                    }
+                },
+                "VEHICLE_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_CVV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_CVV"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_EXPIRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_EXPIRY"
+                    }
+                },
+                "CREDIT_DEBIT_CARD_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CARD_NUMBER"
+                    }
+                },
+                "PIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PIN"
+                    }
+                },
+                "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "SWIFT_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SWIFT_CODE"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "MAC_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_ADDRESS"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                },
+                "AWS_ACCESS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_ACCESS_KEY"
+                    }
+                },
+                "AWS_SECRET_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SECRET_KEY"
+                    }
+                },
+                "US_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "US_BANK_ROUTING_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_BANK_ROUTING_NUMBER"
+                    }
+                },
+                "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "US_PASSPORT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_PASSPORT_NUMBER"
+                    }
+                },
+                "US_SOCIAL_SECURITY_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_SOCIAL_SECURITY_NUMBER"
+                    }
+                },
+                "CA_HEALTH_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_HEALTH_NUMBER"
+                    }
+                },
+                "CA_SOCIAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_SOCIAL_INSURANCE_NUMBER"
+                    }
+                },
+                "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+                    }
+                },
+                "UK_NATIONAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_NATIONAL_INSURANCE_NUMBER"
+                    }
+                },
+                "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#PIIEntityTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#PIIEntityType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.textract#PIIRedactionMaskMode": {
+            "type": "enum",
+            "members": {
+                "PII": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PII"
+                    }
+                },
+                "ENTITY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTITY_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#PageClassification": {
@@ -3733,6 +5477,108 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.textract#Prediction"
+            }
+        },
+        "com.amazonaws.textract#ProjectArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws(|-cn|-iso|-iso-[a-z]|-us-gov):textract:[a-zA-Z0-9-]*:(aws|[0-9]{12}):project/[a-zA-Z0-9-]{12,36}$"
+            }
+        },
+        "com.amazonaws.textract#ProjectDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s!\"\\#\\$%'&\\(\\)\\*\\+\\,\\-\\./:;=\\?@\\[\\\\\\]\\^_`\\{\\|\\}~><À-ÖØ-Üßà-öø-üẞ¿¡Œ-œ°£¥₹€§©ª®™¹±-µ✓⑆-⑉฿₽₱₦₣₩₫₺]*$"
+            }
+        },
+        "com.amazonaws.textract#ProjectFilter": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project to filter by.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter used to limit results to a specific project.</p>"
+            }
+        },
+        "com.amazonaws.textract#ProjectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.textract#ProjectStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#ProjectSummary": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.textract#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.textract#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the project was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a project, returned in the results of <code>ListProjects</code>.</p>"
+            }
+        },
+        "com.amazonaws.textract#ProjectSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#ProjectSummary"
             }
         },
         "com.amazonaws.textract#ProvisionedThroughputExceededException": {
@@ -3934,6 +5780,23 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.textract#ResourceOwner": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.textract#RoleArn": {
             "type": "string",
             "traits": {
@@ -4000,6 +5863,16 @@
                 "smithy.api#pattern": "\\S"
             }
         },
+        "com.amazonaws.textract#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+            }
+        },
         "com.amazonaws.textract#SNSTopicArn": {
             "type": "string",
             "traits": {
@@ -4023,6 +5896,50 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NOT_SELECTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#SensitiveDataConfiguration": {
+            "type": "structure",
+            "members": {
+                "DetectionMode": {
+                    "target": "com.amazonaws.textract#SensitiveDataDetectionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detection mode. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DETECTION</code> - Only detects sensitive data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DETECTION_AND_REDACTION</code> - Detects and redacts sensitive data in the\n               output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - Does not detect sensitive data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PiiEntitiesConfiguration": {
+                    "target": "com.amazonaws.textract#PIIEntitiesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that specifies which PII entity types to detect and how to mask\n         them. If you omit it, Amazon Textract detects all PII entity types (<code>ALL</code>) and\n         masks them with <code>ENTITY_TYPE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls detection and redaction of sensitive data, such as personally identifiable\n         information (PII), in the output.</p>"
+            }
+        },
+        "com.amazonaws.textract#SensitiveDataDetectionMode": {
+            "type": "enum",
+            "members": {
+                "DETECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETECTION"
+                    }
+                },
+                "DETECTION_AND_REDACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETECTION_AND_REDACTION"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
                 }
             }
@@ -4089,6 +6006,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.textract#SplitDocument"
+            }
+        },
+        "com.amazonaws.textract#SplitterConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.textract#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to split multi-document packets, or <code>DISABLED</code> to\n         treat the input as a single document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls whether a multi-document packet is split into individual documents before\n         analysis.</p>"
             }
         },
         "com.amazonaws.textract#StartDocumentAnalysis": {
@@ -4209,6 +6141,108 @@
                     "target": "com.amazonaws.textract#JobId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the document text detection job. Use <code>JobId</code> to identify\n         the job in a subsequent call to <code>GetDocumentAnalysis</code>. A <code>JobId</code> value \n         is only valid for 7 days.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#StartDocumentInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#StartDocumentInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#StartDocumentInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an asynchronous job that analyzes a document using the configuration defined by a\n         project or a set of blueprints. Use <a>GetDocumentInsights</a> to\n         retrieve the results of the job.</p>"
+            }
+        },
+        "com.amazonaws.textract#StartDocumentInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "InputConfiguration": {
+                    "target": "com.amazonaws.textract#InputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the input document to analyze.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputConfiguration": {
+                    "target": "com.amazonaws.textract#OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where the analysis results are written.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project whose configuration is used to analyze the\n         document.</p>"
+                    }
+                },
+                "Blueprints": {
+                    "target": "com.amazonaws.textract#BlueprintItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blueprints used to extract custom structured output from the document.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.textract#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption configuration used to encrypt the analysis output. If you don't\n         specify a value, Amazon Textract encrypts the output using an AWS owned key.</p>"
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.textract#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification settings for the job.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.textract#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags (key-value pairs) to assign to the document insights job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#StartDocumentInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.textract#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the document insights job that was\n         started. Use it with <a>GetDocumentInsights</a> to retrieve the\n         results.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -4536,6 +6570,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.textract#State": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.textract#StatusMessage": {
             "type": "string"
         },
@@ -4546,6 +6597,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.textract#String"
+            }
+        },
+        "com.amazonaws.textract#SummarizationConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.textract#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>ENABLED</code> to produce a summary, or <code>DISABLED</code> to omit\n         it.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls whether a generative summary of the document is produced.</p>"
             }
         },
         "com.amazonaws.textract#SynthesizedJsonHumanLoopActivationConditionsEvaluationResults": {
@@ -4565,7 +6631,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.textract#TagKeyList": {
@@ -4709,10 +6775,25 @@
                     "target": "com.amazonaws.textract#CreateAdapterVersion"
                 },
                 {
+                    "target": "com.amazonaws.textract#CreateBlueprint"
+                },
+                {
+                    "target": "com.amazonaws.textract#CreateBlueprintVersion"
+                },
+                {
+                    "target": "com.amazonaws.textract#CreateProject"
+                },
+                {
                     "target": "com.amazonaws.textract#DeleteAdapter"
                 },
                 {
                     "target": "com.amazonaws.textract#DeleteAdapterVersion"
+                },
+                {
+                    "target": "com.amazonaws.textract#DeleteBlueprint"
+                },
+                {
+                    "target": "com.amazonaws.textract#DeleteProject"
                 },
                 {
                     "target": "com.amazonaws.textract#DetectDocumentText"
@@ -4724,7 +6805,13 @@
                     "target": "com.amazonaws.textract#GetAdapterVersion"
                 },
                 {
+                    "target": "com.amazonaws.textract#GetBlueprint"
+                },
+                {
                     "target": "com.amazonaws.textract#GetDocumentAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.textract#GetDocumentInsights"
                 },
                 {
                     "target": "com.amazonaws.textract#GetDocumentTextDetection"
@@ -4739,16 +6826,28 @@
                     "target": "com.amazonaws.textract#GetLendingAnalysisSummary"
                 },
                 {
+                    "target": "com.amazonaws.textract#GetProject"
+                },
+                {
                     "target": "com.amazonaws.textract#ListAdapters"
                 },
                 {
                     "target": "com.amazonaws.textract#ListAdapterVersions"
                 },
                 {
+                    "target": "com.amazonaws.textract#ListBlueprints"
+                },
+                {
+                    "target": "com.amazonaws.textract#ListProjects"
+                },
+                {
                     "target": "com.amazonaws.textract#ListTagsForResource"
                 },
                 {
                     "target": "com.amazonaws.textract#StartDocumentAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.textract#StartDocumentInsights"
                 },
                 {
                     "target": "com.amazonaws.textract#StartDocumentTextDetection"
@@ -4767,6 +6866,12 @@
                 },
                 {
                     "target": "com.amazonaws.textract#UpdateAdapter"
+                },
+                {
+                    "target": "com.amazonaws.textract#UpdateBlueprint"
+                },
+                {
+                    "target": "com.amazonaws.textract#UpdateProject"
                 }
             ],
             "traits": {
@@ -6028,6 +8133,201 @@
                     "target": "com.amazonaws.textract#AutoUpdate",
                     "traits": {
                         "smithy.api#documentation": "<p>The auto-update status of the adapter that has been updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#UpdateBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#UpdateBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing blueprint, replacing its schema and, optionally, its encryption\n         configuration.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.textract#BlueprintSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated schema of the blueprint, which defines the fields to extract and their\n         expected structure.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.textract#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption configuration used to encrypt the blueprint at rest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "BlueprintArn": {
+                    "target": "com.amazonaws.textract#BlueprintArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the blueprint that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#UpdateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#UpdateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of an existing project. If you omit a configuration, UpdateProject leaves it unchanged.\n         A configuration that you supply replaces the stored one, so include every setting that you want to keep.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectDescription": {
+                    "target": "com.amazonaws.textract#ProjectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the project.</p>"
+                    }
+                },
+                "ExtractionConfiguration": {
+                    "target": "com.amazonaws.textract#ExtractionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls how Amazon Textract extracts content from the document,\n         including bounding boxes, granularity, and output format. Replaces the stored extraction\n         configuration.</p>"
+                    }
+                },
+                "GenerativeConfiguration": {
+                    "target": "com.amazonaws.textract#GenerativeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls generative capabilities such as summarization and figure\n         captioning. Replaces the stored generative configuration, so a capability that you omit is\n         turned off.</p>"
+                    }
+                },
+                "CustomConfiguration": {
+                    "target": "com.amazonaws.textract#CustomConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that associates blueprints with the project for custom output\n         extraction. Replaces the stored custom configuration. To disable custom \n         configuration, specify an empty <code>Blueprints</code> list.</p>"
+                    }
+                },
+                "SplitterConfiguration": {
+                    "target": "com.amazonaws.textract#SplitterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls whether multi-document packets are split into individual\n         documents. Replaces the stored splitter configuration.</p>"
+                    }
+                },
+                "SensitiveDataConfiguration": {
+                    "target": "com.amazonaws.textract#SensitiveDataConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls detection and redaction of sensitive data, such as\n         personally identifiable information (PII). Replaces the stored sensitive data configuration.\n         To turn off detection, set <code>DetectionMode</code> to <code>DISABLED</code>.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.textract#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS KMS encryption configuration used to encrypt the project at rest.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.textract#UpdateProjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.textract#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.textract#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the project after the update.</p>"
                     }
                 }
             },

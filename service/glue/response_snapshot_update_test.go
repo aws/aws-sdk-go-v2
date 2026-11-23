@@ -144,9 +144,9 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 }
 func TestUpdateResponseSnapshot_AssociateGlossaryTerms(t *testing.T) {
 	want := &AssociateGlossaryTermsOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 		GlossaryTerms: []string{
 			"__Member__",
 			"__Member__",
@@ -10941,33 +10941,11 @@ func TestUpdateResponseSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_DeleteAssetType(t *testing.T) {
-	want := &DeleteAssetTypeOutput{}
-	proto := awsjson.New11(schemas.AWSGlue)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteAssetType, schemas.DeleteAssetTypeResponse, schemas.DeleteAssetTypeResponse)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("DeleteAssetType.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_DeleteAttachment(t *testing.T) {
 	want := &DeleteAttachmentOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteAttachment, schemas.DeleteAttachmentResponse, schemas.DeleteAttachmentResponse)
@@ -12879,9 +12857,9 @@ func TestUpdateResponseSnapshot_DescribeIntegrations(t *testing.T) {
 
 func TestUpdateResponseSnapshot_DisassociateGlossaryTerms(t *testing.T) {
 	want := &DisassociateGlossaryTermsOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 		GlossaryTerms: []string{
 			"__Member__",
 			"__Member__",
@@ -12961,9 +12939,9 @@ func TestUpdateResponseSnapshot_GetAssetType(t *testing.T) {
 	want := &GetAssetTypeOutput{
 		Id:   ptr.String("__Id__"),
 		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
+		Forms: map[string]types.AssetTypeFormOutput{
 			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+				FormTypeId: ptr.String("__FormTypeId__"),
 			},
 		},
 	}
@@ -15156,15 +15134,21 @@ func TestUpdateResponseSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
 	want := &GetDataCatalogExportConfigurationOutput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		Status:        types.ExportStatus("ENABLING"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		S3TablesConfiguration: &types.S3TablesConfigurationResult{
+			TableBucketArn: ptr.String("__TableBucketArn__"),
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
 		},
-		S3TableBucketArn: ptr.String("__S3TableBucketArn__"),
-		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Assets: &types.AssetsExportResult{
+			S3TablesExport: types.ExportSetting("ENABLED"),
+			S3TablesExportState: &types.S3TablesExportState{
+				Status: types.ExportStatus("ENABLING"),
+			},
+		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
 	opSchema := smithy.NewOperationSchema(schemas.GetDataCatalogExportConfiguration, schemas.GetDataCatalogExportConfigurationOutput, schemas.GetDataCatalogExportConfigurationOutput)
@@ -34357,6 +34341,7 @@ func TestUpdateResponseSnapshot_PutAsset(t *testing.T) {
 		Id:          ptr.String("__Id__"),
 		Name:        ptr.String("__Name__"),
 		Description: ptr.String("__Description__"),
+		AssetTypeId: ptr.String("__AssetTypeId__"),
 		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Forms: map[string]types.AssetFormEntry{
 			"key0": {
@@ -34385,41 +34370,11 @@ func TestUpdateResponseSnapshot_PutAsset(t *testing.T) {
 	}
 }
 
-func TestUpdateResponseSnapshot_PutAssetType(t *testing.T) {
-	want := &PutAssetTypeOutput{
-		Id:   ptr.String("__Id__"),
-		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
-			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
-		},
-	}
-	proto := awsjson.New11(schemas.AWSGlue)
-	opSchema := smithy.NewOperationSchema(schemas.PutAssetType, schemas.PutAssetTypeResponse, schemas.PutAssetTypeResponse)
-	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
-	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
-		t.Fatal(err)
-	}
-	built := req.Build(context.Background())
-	var body []byte
-	if built.Body != nil {
-		b, err := io.ReadAll(built.Body)
-		if err != nil {
-			t.Fatal(err)
-		}
-		body = b
-	}
-	if err := serdeRespWriteSnapshot("PutAssetType.response", 200, built.Header, body); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateResponseSnapshot_PutAttachment(t *testing.T) {
 	want := &PutAttachmentOutput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
+		AssetId:          ptr.String("__AssetId__"),
 		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
+		ItemId:           ptr.String("__ItemId__"),
 		AttachmentName:   ptr.String("__AttachmentName__"),
 		FormTypeId:       ptr.String("__FormTypeId__"),
 	}
@@ -34467,10 +34422,14 @@ func TestUpdateResponseSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 
 func TestUpdateResponseSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
 	want := &PutDataCatalogExportConfigurationOutput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+		S3TablesConfiguration: &types.S3TablesConfiguration{
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Assets: &types.AssetsExport{
+			S3TablesExport: types.ExportSetting("ENABLED"),
 		},
 	}
 	proto := awsjson.New11(schemas.AWSGlue)
@@ -34828,18 +34787,20 @@ func TestUpdateResponseSnapshot_SearchAssets(t *testing.T) {
 	want := &SearchAssetsOutput{
 		Items: []types.SearchResultItem{
 			{
-				Id:               ptr.String("__Id__"),
-				AssetName:        ptr.String("__AssetName__"),
-				AssetDescription: ptr.String("__AssetDescription__"),
-				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				AssetTypeId:      ptr.String("__AssetTypeId__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssetTypeId: ptr.String("__AssetTypeId__"),
 			},
 			{
-				Id:               ptr.String("__Id__"),
-				AssetName:        ptr.String("__AssetName__"),
-				AssetDescription: ptr.String("__AssetDescription__"),
-				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				AssetTypeId:      ptr.String("__AssetTypeId__"),
+				Id:          ptr.String("__Id__"),
+				Name:        ptr.String("__Name__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AssetTypeId: ptr.String("__AssetTypeId__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

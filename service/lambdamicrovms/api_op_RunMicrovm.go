@@ -56,6 +56,14 @@ type RunMicrovmInput struct {
 	// The list of ingress network connectors to configure for the MicroVM.
 	IngressNetworkConnectors []string
 
+	// The customer managed Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key that encrypts your MicroVM configuration at rest. To use this
+	// operation, you must have permission to use the key. Specify the key ARN or the
+	// alias ARN.
+	//
+	// If you don't specify a key, your MicroVM uses an Amazon Web Services owned key.
+	KmsKeyIdentifier *string
+
 	// The logging configuration for this MicroVM instance. Specify {"cloudWatch":
 	// {"logGroup": "..."}} to stream application logs to a custom CloudWatch log
 	// group, or {"disabled": {}} to turn off logging.
@@ -102,6 +110,9 @@ func (v *RunMicrovmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.IngressNetworkConnectors != nil {
 		serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.RunMicrovmRequest_kmsKeyIdentifier, *v.KmsKeyIdentifier)
 	}
 	if v.Logging != nil {
 		serializeLogging(s, schemas.RunMicrovmRequest_logging, v.Logging)
@@ -164,6 +175,11 @@ type RunMicrovmOutput struct {
 	// The list of ingress network connectors configured for the MicroVM.
 	IngressNetworkConnectors []string
 
+	// The customer managed Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key that encrypts your MicroVM configuration at rest. If you don't
+	// specify a key, your MicroVM uses an Amazon Web Services owned key.
+	KmsKeyIdentifier *string
+
 	// The reason for why the MicroVM is in the current state.
 	StateReason *string
 
@@ -206,6 +222,9 @@ func (v *RunMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IngressNetworkConnectors != nil {
 		serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
 	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.RunMicrovmResponse_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
 	if v.MaximumDurationInSeconds != nil {
 		s.WriteInt32(schemas.RunMicrovmResponse_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
 	}
@@ -247,6 +266,9 @@ func (v *RunMicrovmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.RunMicrovmResponse_imageVersion, v.ImageVersion)
 		case schemas.RunMicrovmResponse_ingressNetworkConnectors:
 			return deserializeNetworkConnectorList(d, schemas.RunMicrovmResponse_ingressNetworkConnectors, &v.IngressNetworkConnectors)
+		case schemas.RunMicrovmResponse_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.RunMicrovmResponse_kmsKeyIdentifier, v.KmsKeyIdentifier)
 		case schemas.RunMicrovmResponse_maximumDurationInSeconds:
 			v.MaximumDurationInSeconds = new(int32)
 			return d.ReadInt32(schemas.RunMicrovmResponse_maximumDurationInSeconds, v.MaximumDurationInSeconds)

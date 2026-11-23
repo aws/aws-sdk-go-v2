@@ -6,13 +6,150 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/schemas"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
+
+// Contains the deployment configuration settings for the Data as a Service
+// delivery option, including the fulfillment URL that AWS Marketplace redirects
+// buyers to after they subscribe.
+type DataAsAServiceConfigurationDetail struct {
+
+	// The HTTPS URL that AWS Marketplace redirects buyers to after they subscribe to
+	// the product. The value must be a valid URI that uses the HTTPS scheme. Maximum
+	// length: 2,048 characters.
+	//
+	// This member is required.
+	FulfillmentUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DataAsAServiceConfigurationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataAsAServiceConfigurationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataAsAServiceConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FulfillmentUrl != nil {
+		s.WriteString(schemas.DataAsAServiceConfigurationDetail_fulfillmentUrl, *v.FulfillmentUrl)
+	}
+}
+func (v *DataAsAServiceConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataAsAServiceConfigurationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataAsAServiceConfigurationDetail_fulfillmentUrl:
+			v.FulfillmentUrl = new(string)
+			return d.ReadString(schemas.DataAsAServiceConfigurationDetail_fulfillmentUrl, v.FulfillmentUrl)
+		}
+		return nil
+	})
+}
+
+// The deployment configuration. Exactly one member must be set, and it must match
+// the delivery option type.
+//
+// The following types satisfy this interface:
+//
+//	DeploymentConfigurationDetailMemberDataAsAService
+type DeploymentConfigurationDetail interface {
+	isDeploymentConfigurationDetail()
+}
+
+// The deployment configuration settings for the Data as a Service delivery
+// option, including the fulfillment URL that AWS Marketplace redirects buyers to
+// after they subscribe.
+type DeploymentConfigurationDetailMemberDataAsAService struct {
+	Value DataAsAServiceConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentConfigurationDetailMemberDataAsAService) isDeploymentConfigurationDetail() {}
+func (v *DeploymentConfigurationDetailMemberDataAsAService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentConfigurationDetail_dataAsAService)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DeploymentConfigurationDetailMemberDataAsAService) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains summary information about a deployment configuration job, including
+// its identifier, status, configuration, and creation time.
+type DeploymentConfigurationJobSummary struct {
+
+	// The deployment configuration submitted with the job.
+	//
+	// This member is required.
+	Configuration DeploymentConfigurationDetail
+
+	// The date and time when the job was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the deployment configuration job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The status of the deployment configuration job.
+	//
+	// This member is required.
+	Status DeploymentConfigurationJobStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *DeploymentConfigurationJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentConfigurationJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeploymentConfigurationJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		serializeDeploymentConfigurationDetail(s, schemas.DeploymentConfigurationJobSummary_configuration, v.Configuration)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeploymentConfigurationJobSummary_createdAt, *v.CreatedAt)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DeploymentConfigurationJobSummary_jobId, *v.JobId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeploymentConfigurationJobSummary_status, string(v.Status))
+	}
+}
+func (v *DeploymentConfigurationJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeploymentConfigurationJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeploymentConfigurationJobSummary_configuration:
+			return deserializeDeploymentConfigurationDetail(d, schemas.DeploymentConfigurationJobSummary_configuration, &v.Configuration)
+		case schemas.DeploymentConfigurationJobSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeploymentConfigurationJobSummary_createdAt, v.CreatedAt)
+		case schemas.DeploymentConfigurationJobSummary_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DeploymentConfigurationJobSummary_jobId, v.JobId)
+		case schemas.DeploymentConfigurationJobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DeploymentConfigurationJobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DeploymentConfigurationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // The shape containing the requested deployment parameter name and secretString.
 //
 // To support AWS CloudFormation dynamic references to this resource using Quick
-// Launch, this value must match a parameter defined in the CloudFormation
-// templated provided to buyers.
+// Launch, this value must match a parameter defined in the CloudFormation template
+// provided to buyers.
 type DeploymentParameterInput struct {
 
 	// The desired name of the deployment parameter. This is the identifier on which
@@ -60,3 +197,14 @@ func (v *DeploymentParameterInput) Deserialize(d smithy.ShapeDeserializer) error
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDeploymentConfigurationDetail() {}

@@ -27,6 +27,7 @@ func (c *Client) RejectEngagementInvitation(ctx context.Context, params *RejectE
 	return out, nil
 }
 
+// Contains the request parameters for the RejectEngagementInvitation operation.
 type RejectEngagementInvitationInput struct {
 
 	// This is the catalog that's associated with the engagement invitation.

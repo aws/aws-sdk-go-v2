@@ -1,0 +1,5 @@
+PATCH /products/__ProductId__/apipages/__ProductApiPageId__
+
+Content-Type: application/json
+
+{"displayContent":{"none":{}},"tryItState":"ENABLED"}

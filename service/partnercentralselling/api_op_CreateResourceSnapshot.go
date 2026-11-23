@@ -11,8 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	This action allows you to create an immutable snapshot of a specific resource,
-//
+// This action allows you to create an immutable snapshot of a specific resource,
 // such as an opportunity, within the context of an engagement. The snapshot
 // captures a subset of the resource's data based on the schema defined by the
 // provided template.
@@ -31,34 +30,35 @@ func (c *Client) CreateResourceSnapshot(ctx context.Context, params *CreateResou
 	return out, nil
 }
 
+// Contains the request parameters for the CreateResourceSnapshot operation.
 type CreateResourceSnapshotInput struct {
 
-	//  Specifies the catalog where the snapshot is created. Valid values are AWS and
+	// Specifies the catalog where the snapshot is created. Valid values are AWS and
 	// Sandbox .
 	//
 	// This member is required.
 	Catalog *string
 
-	//  Specifies a unique, client-generated UUID to ensure that the request is
-	// handled exactly once. This token helps prevent duplicate snapshot creations.
+	// Specifies a unique, client-generated UUID to ensure that the request is handled
+	// exactly once. This token helps prevent duplicate snapshot creations.
 	//
 	// This member is required.
 	ClientToken *string
 
-	//  The unique identifier of the engagement associated with this snapshot. This
+	// The unique identifier of the engagement associated with this snapshot. This
 	// field links the snapshot to a specific engagement context.
 	//
 	// This member is required.
 	EngagementIdentifier *string
 
-	//  The unique identifier of the specific resource to be snapshotted. The format
+	// The unique identifier of the specific resource to be snapshotted. The format
 	// and constraints of this identifier depend on the ResourceType specified. For
 	// example: For Opportunity type, it will be an opportunity ID.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	//  The name of the template that defines the schema for the snapshot. This
+	// The name of the template that defines the schema for the snapshot. This
 	// template determines which subset of the resource data will be included in the
 	// snapshot. Must correspond to an existing and valid template for the specified
 	// ResourceType .
@@ -66,7 +66,7 @@ type CreateResourceSnapshotInput struct {
 	// This member is required.
 	ResourceSnapshotTemplateIdentifier *string
 
-	//  Specifies the type of resource for which the snapshot is being created. This
+	// Specifies the type of resource for which the snapshot is being created. This
 	// field determines the structure and content of the snapshot. Must be one of the
 	// supported resource types, such as: Opportunity .
 	//
@@ -103,13 +103,14 @@ func (v *CreateResourceSnapshotInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 }
 
+// Contains the response that the CreateResourceSnapshot action returns.
 type CreateResourceSnapshotOutput struct {
 
-	//  Specifies the Amazon Resource Name (ARN) that uniquely identifies the snapshot
+	// Specifies the Amazon Resource Name (ARN) that uniquely identifies the snapshot
 	// created.
 	Arn *string
 
-	//  Specifies the revision number of the created snapshot. This field provides
+	// Specifies the revision number of the created snapshot. This field provides
 	// important information about the snapshot's place in the sequence of snapshots
 	// for the given resource.
 	Revision *int32

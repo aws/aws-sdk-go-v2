@@ -76,6 +76,21 @@ type RequestCertificateInput struct {
 	// [Amazon Web Services Private Certificate Authority]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html
 	CertificateAuthorityArn *string
 
+	// The Extended Key Usage profile of the certificate. You can specify this
+	// parameter only when RootHierarchyType is N2_AMAZON_MANAGED or
+	// N2_SFG2_AMAZON_MANAGED . If you specify CertificateUsage with any other root
+	// hierarchy type, or without RootHierarchyType , the request fails with a
+	// ValidationException .
+	//
+	//   - CLIENT_AND_SERVER_AUTH authenticates both the client and the server. Valid
+	//   for both N2 root hierarchy types.
+	//
+	//   - CLIENT_AUTH_ONLY authenticates only the client. Valid only for
+	//   N2_AMAZON_MANAGED .
+	//
+	// Default: CLIENT_AND_SERVER_AUTH
+	CertificateUsage types.CertificateUsage
+
 	// The domain name that you want ACM to use to send you emails so that you can
 	// validate domain ownership.
 	DomainValidationOptions []types.DomainValidationOption
@@ -124,9 +139,9 @@ type RequestCertificateInput struct {
 
 	// You can use this parameter to specify whether to export your certificate.
 	//
-	// Certificate transparency logging opt-out is no longer available. All public
-	// certificates are recorded in a certificate transparency log. For more
-	// information, see [Certificate Transparency Logging].
+	// Certificate transparency logging opt-out is no longer available. ACM records
+	// all public certificates other than Amazon N2 certificates in a certificate
+	// transparency log. For more information, see [Certificate Transparency Logging].
 	//
 	// You can export public ACM certificates to use with Amazon Web Services services
 	// as well as outside the Amazon Web Services Cloud. For more information, see [Certificate Manager exportable public certificate].
@@ -134,6 +149,37 @@ type RequestCertificateInput struct {
 	// [Certificate Manager exportable public certificate]: https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html
 	// [Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
 	Options *types.CertificateOptions
+
+	// The root hierarchy from which ACM issues the certificate. Specify one of the
+	// following values to request an Amazon N2 certificate:
+	//
+	//   - N2_AMAZON_MANAGED – An Amazon N2 certificate that chains to an Amazon N2
+	//   root. The maximum validity period, which is also the default, is 395 days.
+	//
+	//   - N2_SFG2_AMAZON_MANAGED – An Amazon N2 certificate that chains to an Amazon
+	//   N2 root cross-signed by Starfield G2. The maximum validity period, which is also
+	//   the default, is 98 days.
+	//
+	// You cannot specify RootHierarchyType together with CertificateAuthorityArn .
+	//
+	// If you omit this parameter, ACM issues a standard public certificate. A request
+	// that specifies any value other than N2_AMAZON_MANAGED or N2_SFG2_AMAZON_MANAGED
+	// fails with a ValidationException .
+	//
+	// An Amazon N2 certificate request must specify a ValidationMethod of DNS . Amazon
+	// N2 certificates are not recorded in a certificate transparency log.
+	//
+	// A request for a validity period longer than the maximum fails with a
+	// ValidationException .
+	//
+	// Algorithms supported for an N2 certificate request include:
+	//
+	//   - RSA_2048
+	//
+	//   - EC_prime256v1
+	//
+	//   - EC_secp384r1
+	RootHierarchyType types.RootHierarchyType
 
 	// Additional FQDNs to be included in the Subject Alternative Name extension of
 	// the ACM certificate. For example, add the name www.example.net to a certificate
@@ -184,6 +230,9 @@ func (v *RequestCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateAuthorityArn != nil {
 		s.WriteString(schemas.RequestCertificateRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
 	}
+	if v.CertificateUsage != "" {
+		s.WriteString(schemas.RequestCertificateRequest_CertificateUsage, string(v.CertificateUsage))
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.RequestCertificateRequest_DomainName, *v.DomainName)
 	}
@@ -203,6 +252,9 @@ func (v *RequestCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.RequestCertificateRequest_Options)
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.RootHierarchyType != "" {
+		s.WriteString(schemas.RequestCertificateRequest_RootHierarchyType, string(v.RootHierarchyType))
 	}
 	if v.SubjectAlternativeNames != nil {
 		serializeDomainList(s, schemas.RequestCertificateRequest_SubjectAlternativeNames, v.SubjectAlternativeNames)

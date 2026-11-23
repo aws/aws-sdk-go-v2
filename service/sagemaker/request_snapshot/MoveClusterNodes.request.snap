@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.MoveClusterNodes
+
+{"ClientToken":"__ClientToken__","InstanceCount":1,"NodeIds":["__Member__","__Member__"],"NodeLogicalIds":["__Member__","__Member__"],"SourceClusterArn":"__SourceClusterArn__","SourceInstanceGroupName":"__SourceInstanceGroupName__","TargetClusterArn":"__TargetClusterArn__","TargetInstanceGroupName":"__TargetInstanceGroupName__"}

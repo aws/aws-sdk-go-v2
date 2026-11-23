@@ -55,7 +55,7 @@ func (v *AddReservedInstanceAction) Deserialize(d smithy.ShapeDeserializer) erro
 type AddSavingsPlanAction struct {
 
 	//  The hourly commitment, in the same currency of the savingsPlanOfferingId . This
-	// is a value between 0.001 and 1 million. You cannot specify more than five digits
+	// is a value between 0.001 and 1 million. You can't specify more than five digits
 	// after the decimal point.
 	Commitment *float64
 
@@ -2644,6 +2644,311 @@ func (v *FilterTimestamp) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FilterTimestamp_beforeTimestamp:
 			v.BeforeTimestamp = new(time.Time)
 			return d.ReadTime(schemas.FilterTimestamp_beforeTimestamp, v.BeforeTimestamp)
+		}
+		return nil
+	})
+}
+
+// Represents a usage line that couldn't be priced.
+type GetUsageLinesEstimatedCostError struct {
+
+	//  The code associated with the error.
+	//
+	// This member is required.
+	ErrorCode GetUsageLinesEstimatedCostErrorCode
+
+	//  The message that describes the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	//  The key of the usage line in the request that couldn't be priced.
+	//
+	// This member is required.
+	Key *string
+
+	//  The operation of the usage line that couldn't be priced.
+	//
+	// This member is required.
+	Operation *string
+
+	//  The Amazon Web Services service code of the usage line that couldn't be
+	// priced.
+	//
+	// This member is required.
+	ServiceCode *string
+
+	//  The usage type of the usage line that couldn't be priced.
+	//
+	// This member is required.
+	UsageType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GetUsageLinesEstimatedCostError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageLinesEstimatedCostError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageLinesEstimatedCostError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostError_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostError_errorMessage, *v.ErrorMessage)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostError_key, *v.Key)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostError_operation, *v.Operation)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostError_serviceCode, *v.ServiceCode)
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostError_usageType, *v.UsageType)
+	}
+}
+func (v *GetUsageLinesEstimatedCostError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageLinesEstimatedCostError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageLinesEstimatedCostError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.GetUsageLinesEstimatedCostError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = GetUsageLinesEstimatedCostErrorCode(ev)
+			return nil
+		case schemas.GetUsageLinesEstimatedCostError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostError_errorMessage, v.ErrorMessage)
+		case schemas.GetUsageLinesEstimatedCostError_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostError_key, v.Key)
+		case schemas.GetUsageLinesEstimatedCostError_operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostError_operation, v.Operation)
+		case schemas.GetUsageLinesEstimatedCostError_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostError_serviceCode, v.ServiceCode)
+		case schemas.GetUsageLinesEstimatedCostError_usageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostError_usageType, v.UsageType)
+		}
+		return nil
+	})
+}
+
+// Represents the estimated cost of the usage amount for a usage line.
+type GetUsageLinesEstimatedCostEstimatedCost struct {
+
+	//  The estimated cost for the given usage amount.
+	Cost *float64
+
+	//  The currency of the estimated cost.
+	Currency CurrencyCode
+
+	//  The usage amount that was priced.
+	UsageAmount *float64
+
+	//  The unit of the usage amount, for example Hrs or GB-Mo .
+	UsageUnit *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GetUsageLinesEstimatedCostEstimatedCost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageLinesEstimatedCostEstimatedCost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageLinesEstimatedCostEstimatedCost) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cost != nil {
+		s.WriteFloat64(schemas.GetUsageLinesEstimatedCostEstimatedCost_cost, *v.Cost)
+	}
+	if v.Currency != "" {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostEstimatedCost_currency, string(v.Currency))
+	}
+	if v.UsageAmount != nil {
+		s.WriteFloat64(schemas.GetUsageLinesEstimatedCostEstimatedCost_usageAmount, *v.UsageAmount)
+	}
+	if v.UsageUnit != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostEstimatedCost_usageUnit, *v.UsageUnit)
+	}
+}
+func (v *GetUsageLinesEstimatedCostEstimatedCost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageLinesEstimatedCostEstimatedCost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageLinesEstimatedCostEstimatedCost_cost:
+			v.Cost = new(float64)
+			return d.ReadFloat64(schemas.GetUsageLinesEstimatedCostEstimatedCost_cost, v.Cost)
+		case schemas.GetUsageLinesEstimatedCostEstimatedCost_currency:
+			var ev string
+			if err := d.ReadString(schemas.GetUsageLinesEstimatedCostEstimatedCost_currency, &ev); err != nil {
+				return err
+			}
+			v.Currency = CurrencyCode(ev)
+			return nil
+		case schemas.GetUsageLinesEstimatedCostEstimatedCost_usageAmount:
+			v.UsageAmount = new(float64)
+			return d.ReadFloat64(schemas.GetUsageLinesEstimatedCostEstimatedCost_usageAmount, v.UsageAmount)
+		case schemas.GetUsageLinesEstimatedCostEstimatedCost_usageUnit:
+			v.UsageUnit = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostEstimatedCost_usageUnit, v.UsageUnit)
+		}
+		return nil
+	})
+}
+
+// Represents a usage line that you want to estimate.
+type GetUsageLinesEstimatedCostInput struct {
+
+	//  The usage amount to price for the usage line in the usage type's pricing unit.
+	// This value must be 0 or greater.
+	//
+	// This member is required.
+	Amount *float64
+
+	//  A unique identifier for the usage line in the request. Use the key to match
+	// the usage line with its result in lineItems or errors in the response.
+	//
+	// This member is required.
+	Key *string
+
+	//  The operation of the usage line, for example RunInstances .
+	//
+	// This member is required.
+	Operation *string
+
+	//  The Amazon Web Services service code of the usage line, for example AmazonEC2 .
+	//
+	// This member is required.
+	ServiceCode *string
+
+	//  The usage type of the usage line, for example BoxUsage:t3.micro .
+	//
+	// This member is required.
+	UsageType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GetUsageLinesEstimatedCostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageLinesEstimatedCostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageLinesEstimatedCostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteFloat64(schemas.GetUsageLinesEstimatedCostInput_amount, *v.Amount)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostInput_key, *v.Key)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostInput_operation, *v.Operation)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostInput_serviceCode, *v.ServiceCode)
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostInput_usageType, *v.UsageType)
+	}
+}
+func (v *GetUsageLinesEstimatedCostInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageLinesEstimatedCostInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageLinesEstimatedCostInput_amount:
+			v.Amount = new(float64)
+			return d.ReadFloat64(schemas.GetUsageLinesEstimatedCostInput_amount, v.Amount)
+		case schemas.GetUsageLinesEstimatedCostInput_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostInput_key, v.Key)
+		case schemas.GetUsageLinesEstimatedCostInput_operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostInput_operation, v.Operation)
+		case schemas.GetUsageLinesEstimatedCostInput_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostInput_serviceCode, v.ServiceCode)
+		case schemas.GetUsageLinesEstimatedCostInput_usageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostInput_usageType, v.UsageType)
+		}
+		return nil
+	})
+}
+
+// Represents the estimated cost of a usage line that was priced.
+type GetUsageLinesEstimatedCostLineItem struct {
+
+	//  The key of the usage line in the request.
+	//
+	// This member is required.
+	Key *string
+
+	//  The estimated cost of the usage amount in the request.
+	EstimatedCost *GetUsageLinesEstimatedCostEstimatedCost
+
+	//  The operation of the usage line.
+	Operation *string
+
+	//  The Amazon Web Services service code of the usage line.
+	ServiceCode *string
+
+	//  The usage type of the usage line.
+	UsageType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GetUsageLinesEstimatedCostLineItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageLinesEstimatedCostLineItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageLinesEstimatedCostLineItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedCost != nil {
+		s.WriteStruct(schemas.GetUsageLinesEstimatedCostLineItem_estimatedCost)
+		v.EstimatedCost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostLineItem_key, *v.Key)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostLineItem_operation, *v.Operation)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostLineItem_serviceCode, *v.ServiceCode)
+	}
+	if v.UsageType != nil {
+		s.WriteString(schemas.GetUsageLinesEstimatedCostLineItem_usageType, *v.UsageType)
+	}
+}
+func (v *GetUsageLinesEstimatedCostLineItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageLinesEstimatedCostLineItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageLinesEstimatedCostLineItem_estimatedCost:
+			v.EstimatedCost = &GetUsageLinesEstimatedCostEstimatedCost{}
+			return v.EstimatedCost.Deserialize(d)
+		case schemas.GetUsageLinesEstimatedCostLineItem_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostLineItem_key, v.Key)
+		case schemas.GetUsageLinesEstimatedCostLineItem_operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostLineItem_operation, v.Operation)
+		case schemas.GetUsageLinesEstimatedCostLineItem_serviceCode:
+			v.ServiceCode = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostLineItem_serviceCode, v.ServiceCode)
+		case schemas.GetUsageLinesEstimatedCostLineItem_usageType:
+			v.UsageType = new(string)
+			return d.ReadString(schemas.GetUsageLinesEstimatedCostLineItem_usageType, v.UsageType)
 		}
 		return nil
 	})

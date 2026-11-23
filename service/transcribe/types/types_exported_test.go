@@ -36,3 +36,25 @@ var _ *types.NonTalkTimeFilter
 var _ *types.SentimentFilter
 var _ *types.TranscriptFilter
 var _ *types.InterruptionFilter
+
+func ExampleSyncMedia_outputUsage() {
+	var union types.SyncMedia
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SyncMediaMemberMediaBytes:
+		_ = v.Value // Value is []byte
+
+	case *types.SyncMediaMemberMediaFileUri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte

@@ -12,7 +12,7 @@ import (
 
 //	Delete usage that you have created in a Workload estimate. You can only delete
 //
-// usage that you had added and cannot model deletion (or removal) of a existing
+// usage that you had added and can't model deletion (or removal) of a existing
 // usage. If you want model removal of an existing usage, see [BatchUpdateWorkloadEstimateUsage].
 //
 // The BatchDeleteWorkloadEstimateUsage operation doesn't have its own IAM
@@ -69,7 +69,7 @@ func (v *BatchDeleteWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeS
 
 type BatchDeleteWorkloadEstimateUsageOutput struct {
 
-	//  Returns the list of errors reason and the usage item keys that cannot be
+	//  Returns the list of errors reason and the usage item keys that can't be
 	// deleted from the Workload estimate.
 	Errors []types.BatchDeleteWorkloadEstimateUsageError
 

@@ -47,6 +47,7 @@ func (c *Client) ListOpportunities(ctx context.Context, params *ListOpportunitie
 	return out, nil
 }
 
+// Contains the request parameters for the ListOpportunities operation.
 type ListOpportunitiesInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string
@@ -160,6 +161,7 @@ func (v *ListOpportunitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the ListOpportunities action returns.
 type ListOpportunitiesOutput struct {
 
 	// An array that contains minimal details for opportunities that match the request

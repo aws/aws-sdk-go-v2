@@ -1,3 +1,7 @@
+# v1.54.0 (2026-11-20)
+
+* **Feature**: Add support for the use of virtual devices on Device Farm.
+
 # v1.53.0 (2026-11-10)
 
 * **Feature**: Adds the NONE insights type to disable insights generation for a run, a testPackageArn field in run details, and a new artifact type for device connect command logs.

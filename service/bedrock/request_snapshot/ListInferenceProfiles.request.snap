@@ -1,3 +1,3 @@
-GET /inference-profiles?maxResults=1&nextToken=__NextToken__&type=SYSTEM_DEFINED
+GET /inference-profiles?maxResults=1&nextToken=__NextToken__&projectIdentifier=__ProjectIdentifier__&type=SYSTEM_DEFINED
 
 

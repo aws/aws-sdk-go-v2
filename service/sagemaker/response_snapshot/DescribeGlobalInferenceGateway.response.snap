@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeGlobalInferenceGateway
+
+{"Arn":"__Arn__","CreationTime":946684800,"EndpointUrl":"__EndpointUrl__","ExecutionRoleArn":"__ExecutionRoleArn__","FailureReason":"__FailureReason__","Id":"__Id__","Name":"__Name__","Routing":{"Weights":{"ErrorRate":1,"KVHeadroom":1,"QueueDepth":1,"RegionProximity":1}},"Status":"CREATING","VpcEndpointServiceName":"__VpcEndpointServiceName__"}

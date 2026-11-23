@@ -21,6 +21,28 @@ func (AcceptRuleBehavior) Values() []AcceptRuleBehavior {
 	}
 }
 
+type AssetOwnershipTransferStatus string
+
+// Enum values for AssetOwnershipTransferStatus
+const (
+	AssetOwnershipTransferStatusInProgress AssetOwnershipTransferStatus = "IN_PROGRESS"
+	AssetOwnershipTransferStatusSucceeded  AssetOwnershipTransferStatus = "SUCCEEDED"
+	AssetOwnershipTransferStatusFailed     AssetOwnershipTransferStatus = "FAILED"
+)
+
+// Values returns all known values for AssetOwnershipTransferStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetOwnershipTransferStatus) Values() []AssetOwnershipTransferStatus {
+	return []AssetOwnershipTransferStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type AttributeEntityType string
 
 // Enum values for AttributeEntityType
@@ -1672,6 +1694,23 @@ func (ProjectDesignation) Values() []ProjectDesignation {
 		"CONTRIBUTOR",
 		"PROJECT_CATALOG_STEWARD",
 		"USER_CREATED_DESIGNATION",
+	}
+}
+
+type ProjectProfileAction string
+
+// Enum values for ProjectProfileAction
+const (
+	ProjectProfileActionDisassociate ProjectProfileAction = "DISASSOCIATE"
+)
+
+// Values returns all known values for ProjectProfileAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectProfileAction) Values() []ProjectProfileAction {
+	return []ProjectProfileAction{
+		"DISASSOCIATE",
 	}
 }
 

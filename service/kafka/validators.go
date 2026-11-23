@@ -50,6 +50,26 @@ func (m *validateOpBatchDisassociateScramSecret) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAssessment struct {
+}
+
+func (*validateOpCreateAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateChannel struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpCreateVpcConnection) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAssessment struct {
+}
+
+func (*validateOpDeleteAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteChannel struct {
 }
 
@@ -325,6 +365,26 @@ func (m *validateOpDeleteVpcConnection) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteVpcConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAssessment struct {
+}
+
+func (*validateOpDescribeAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssessmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +590,26 @@ func (m *validateOpDescribeTopicPartitions) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTopicReassignment struct {
+}
+
+func (*validateOpDescribeTopicReassignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTopicReassignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTopicReassignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTopicReassignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeVpcConnection struct {
 }
 
@@ -585,6 +665,46 @@ func (m *validateOpGetClusterPolicy) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetClusterPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssessmentFindings struct {
+}
+
+func (*validateOpListAssessmentFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssessmentFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssessmentFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssessmentFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssessments struct {
+}
+
+func (*validateOpListAssessments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssessments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssessmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssessmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +870,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTopicReassignments struct {
+}
+
+func (*validateOpListTopicReassignments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTopicReassignments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTopicReassignmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTopicReassignmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTopics struct {
 }
 
@@ -825,6 +965,46 @@ func (m *validateOpRejectClientVpcConnection) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRejectClientVpcConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTopicReassignment struct {
+}
+
+func (*validateOpStartTopicReassignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTopicReassignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTopicReassignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTopicReassignmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopTopicReassignment struct {
+}
+
+func (*validateOpStopTopicReassignment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopTopicReassignment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopTopicReassignmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopTopicReassignmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1158,6 +1338,10 @@ func addOpBatchDisassociateScramSecretValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpBatchDisassociateScramSecret{}, middleware.After)
 }
 
+func addOpCreateAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAssessment{}, middleware.After)
+}
+
 func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
 }
@@ -1186,6 +1370,10 @@ func addOpCreateVpcConnectionValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateVpcConnection{}, middleware.After)
 }
 
+func addOpDeleteAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssessment{}, middleware.After)
+}
+
 func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
 }
@@ -1212,6 +1400,10 @@ func addOpDeleteTopicValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVpcConnection{}, middleware.After)
+}
+
+func addOpDescribeAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssessment{}, middleware.After)
 }
 
 func addOpDescribeChannelValidationMiddleware(stack *middleware.Stack) error {
@@ -1254,6 +1446,10 @@ func addOpDescribeTopicPartitionsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeTopicPartitions{}, middleware.After)
 }
 
+func addOpDescribeTopicReassignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTopicReassignment{}, middleware.After)
+}
+
 func addOpDescribeVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeVpcConnection{}, middleware.After)
 }
@@ -1264,6 +1460,14 @@ func addOpGetBootstrapBrokersValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetClusterPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetClusterPolicy{}, middleware.After)
+}
+
+func addOpListAssessmentFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssessmentFindings{}, middleware.After)
+}
+
+func addOpListAssessmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssessments{}, middleware.After)
 }
 
 func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
@@ -1298,6 +1502,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListTopicReassignmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTopicReassignments{}, middleware.After)
+}
+
 func addOpListTopicsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTopics{}, middleware.After)
 }
@@ -1312,6 +1520,14 @@ func addOpRebootBrokerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRejectClientVpcConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectClientVpcConnection{}, middleware.After)
+}
+
+func addOpStartTopicReassignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTopicReassignment{}, middleware.After)
+}
+
+func addOpStopTopicReassignmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopTopicReassignment{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2579,6 +2795,24 @@ func validateOpBatchDisassociateScramSecretInput(v *BatchDisassociateScramSecret
 	}
 }
 
+func validateOpCreateAssessmentInput(v *CreateAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentInput"}
+	if len(v.AssessmentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentType"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	if v == nil {
 		return nil
@@ -2803,6 +3037,24 @@ func validateOpCreateVpcConnectionInput(v *CreateVpcConnectionInput) error {
 	}
 }
 
+func validateOpDeleteAssessmentInput(v *DeleteAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssessmentInput"}
+	if v.AssessmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentArn"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
 	if v == nil {
 		return nil
@@ -2906,6 +3158,24 @@ func validateOpDeleteVpcConnectionInput(v *DeleteVpcConnectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcConnectionInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAssessmentInput(v *DescribeAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssessmentInput"}
+	if v.AssessmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentArn"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3076,6 +3346,24 @@ func validateOpDescribeTopicPartitionsInput(v *DescribeTopicPartitionsInput) err
 	}
 }
 
+func validateOpDescribeTopicReassignmentInput(v *DescribeTopicReassignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTopicReassignmentInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.TopicReassignmentOperationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicReassignmentOperationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeVpcConnectionInput(v *DescribeVpcConnectionInput) error {
 	if v == nil {
 		return nil
@@ -3111,6 +3399,39 @@ func validateOpGetClusterPolicyInput(v *GetClusterPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetClusterPolicyInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssessmentFindingsInput(v *ListAssessmentFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssessmentFindingsInput"}
+	if v.AssessmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentArn"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssessmentsInput(v *ListAssessmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssessmentsInput"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
@@ -3241,6 +3562,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListTopicReassignmentsInput(v *ListTopicReassignmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTopicReassignmentsInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTopicsInput(v *ListTopicsInput) error {
 	if v == nil {
 		return nil
@@ -3302,6 +3638,45 @@ func validateOpRejectClientVpcConnectionInput(v *RejectClientVpcConnectionInput)
 	}
 	if v.VpcConnectionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcConnectionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTopicReassignmentInput(v *StartTopicReassignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTopicReassignmentInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.TargetInstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetInstanceType"))
+	}
+	if v.TopicsToInclude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicsToInclude"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopTopicReassignmentInput(v *StopTopicReassignmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopTopicReassignmentInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.TopicReassignmentOperationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicReassignmentOperationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

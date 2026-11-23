@@ -22,6 +22,13 @@ var BatchDisassociateScramSecret = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/clusters/{ClusterArn}/scram-secrets",
 	Code: 200})
 
+var CreateAssessment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "CreateAssessment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/clusters/{ClusterArn}/assessments",
+	Code: 200})
+
 var CreateChannel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "CreateChannel",
@@ -71,6 +78,13 @@ var CreateVpcConnection = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/vpc-connection",
 	Code: 200})
 
+var DeleteAssessment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DeleteAssessment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/clusters/{ClusterArn}/assessments/{AssessmentArn}",
+	Code: 200})
+
 var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "DeleteChannel",
@@ -118,6 +132,13 @@ var DeleteVpcConnection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteVpcConnection",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/vpc-connection/{Arn}",
+	Code: 200})
+
+var DescribeAssessment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DescribeAssessment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/clusters/{ClusterArn}/assessments/{AssessmentArn}",
 	Code: 200})
 
 var DescribeChannel = smithy.NewSchema(smithy.ShapeID{
@@ -190,6 +211,13 @@ var DescribeTopicPartitions = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/clusters/{ClusterArn}/topics/{TopicName}/partitions",
 	Code: 200})
 
+var DescribeTopicReassignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DescribeTopicReassignment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/clusters/{ClusterArn}/topic-reassignments/{TopicReassignmentOperationArn}",
+	Code: 200})
+
 var DescribeVpcConnection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "DescribeVpcConnection",
@@ -216,6 +244,20 @@ var GetCompatibleKafkaVersions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetCompatibleKafkaVersions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/compatible-kafka-versions",
+	Code: 200})
+
+var ListAssessmentFindings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListAssessmentFindings",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/clusters/{ClusterArn}/assessments/{AssessmentArn}/findings",
+	Code: 200})
+
+var ListAssessments = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListAssessments",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/clusters/{ClusterArn}/assessments",
 	Code: 200})
 
 var ListChannels = smithy.NewSchema(smithy.ShapeID{
@@ -309,6 +351,13 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/tags/{ResourceArn}",
 	Code: 200})
 
+var ListTopicReassignments = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListTopicReassignments",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/clusters/{ClusterArn}/topic-reassignments",
+	Code: 200})
+
 var ListTopics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ListTopics",
@@ -342,6 +391,20 @@ var RejectClientVpcConnection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RejectClientVpcConnection",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/clusters/{ClusterArn}/client-vpc-connection",
+	Code: 200})
+
+var StartTopicReassignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "StartTopicReassignment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/clusters/{ClusterArn}/topic-reassignments",
+	Code: 200})
+
+var StopTopicReassignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "StopTopicReassignment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/clusters/{ClusterArn}/topic-reassignments/{TopicReassignmentOperationArn}/stop",
 	Code: 200})
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -498,6 +561,11 @@ var ___integerMin1Max16384 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__integerMin1Max16384",
 }, smithy.ShapeTypeInteger, 0)
 
+var ___integerMin1Max500 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__integerMin1Max500",
+}, smithy.ShapeTypeInteger, 0)
+
 var ___listOf__double = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "__listOf__double",
@@ -527,6 +595,24 @@ var ___listOf__stringMax256 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__listOf__stringMax256",
 }, smithy.ShapeTypeList, 1)
 var ___listOf__stringMax256_member *smithy.Schema
+
+var ___listOf__stringMin1Max256 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__listOf__stringMin1Max256",
+}, smithy.ShapeTypeList, 1)
+var ___listOf__stringMin1Max256_member *smithy.Schema
+
+var ___listOfAssessmentFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__listOfAssessmentFinding",
+}, smithy.ShapeTypeList, 1)
+var ___listOfAssessmentFinding_member *smithy.Schema
+
+var ___listOfAssessmentInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__listOfAssessmentInfo",
+}, smithy.ShapeTypeList, 1)
+var ___listOfAssessmentInfo_member *smithy.Schema
 
 var ___listOfBrokerEBSVolumeInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -678,6 +764,12 @@ var ___listOfTopicPartitionInfo = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var ___listOfTopicPartitionInfo_member *smithy.Schema
 
+var ___listOfTopicReassignmentInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__listOfTopicReassignmentInfo",
+}, smithy.ShapeTypeList, 1)
+var ___listOfTopicReassignmentInfo_member *smithy.Schema
+
 var ___listOfUnprocessedScramSecret = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "__listOfUnprocessedScramSecret",
@@ -701,6 +793,14 @@ var ___long = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__long",
 }, smithy.ShapeTypeLong, 0)
 
+var ___mapOf__integer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__mapOf__integer",
+}, smithy.ShapeTypeMap, 2)
+var ___mapOf__integer_key *smithy.Schema
+
+var ___mapOf__integer_value *smithy.Schema
+
 var ___mapOf__string = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "__mapOf__string",
@@ -717,6 +817,11 @@ var ___string = smithy.NewSchema(smithy.ShapeID{
 var ___stringMax1024 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "__stringMax1024",
+}, smithy.ShapeTypeString, 0)
+
+var ___stringMax2048 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__stringMax2048",
 }, smithy.ShapeTypeString, 0)
 
 var ___stringMax249 = smithy.NewSchema(smithy.ShapeID{
@@ -739,14 +844,19 @@ var ___stringMin1Max128Pattern09AZaZ09AZaZ0 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__stringMin1Max128Pattern09AZaZ09AZaZ0",
 }, smithy.ShapeTypeString, 0)
 
+var ___stringMin1Max256 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "__stringMin1Max256",
+}, smithy.ShapeTypeString, 0)
+
 var ___stringMin1Max64 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "__stringMin1Max64",
 }, smithy.ShapeTypeString, 0)
 
-var ___stringMin5Max32 = smithy.NewSchema(smithy.ShapeID{
+var ___stringMin5Max64 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
-	Name:      "__stringMin5Max32",
+	Name:      "__stringMin5Max64",
 }, smithy.ShapeTypeString, 0)
 
 var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
@@ -767,6 +877,76 @@ var ApacheKafkaCluster = smithy.NewSchema(smithy.ShapeID{
 var ApacheKafkaCluster_ApacheKafkaClusterId *smithy.Schema
 
 var ApacheKafkaCluster_BootstrapBrokerString *smithy.Schema
+
+var AssessmentFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "AssessmentFinding",
+}, smithy.ShapeTypeStructure, 6)
+var AssessmentFinding_Category *smithy.Schema
+
+var AssessmentFinding_FindingId *smithy.Schema
+
+var AssessmentFinding_Message *smithy.Schema
+
+var AssessmentFinding_Remediation *smithy.Schema
+
+var AssessmentFinding_Resource *smithy.Schema
+
+var AssessmentFinding_Severity *smithy.Schema
+
+var AssessmentInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "AssessmentInfo",
+}, smithy.ShapeTypeStructure, 6)
+var AssessmentInfo_AssessmentArn *smithy.Schema
+
+var AssessmentInfo_AssessmentType *smithy.Schema
+
+var AssessmentInfo_ClusterArn *smithy.Schema
+
+var AssessmentInfo_CreationTime *smithy.Schema
+
+var AssessmentInfo_Status *smithy.Schema
+
+var AssessmentInfo_Tags *smithy.Schema
+
+var AssessmentParameters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "AssessmentParameters",
+}, smithy.ShapeTypeStructure, 1)
+var AssessmentParameters_TargetInstanceType *smithy.Schema
+
+var AssessmentStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "AssessmentStatus",
+}, smithy.ShapeTypeEnum, 4)
+var AssessmentStatus_IN_PROGRESS *smithy.Schema
+
+var AssessmentStatus_COMPLETE *smithy.Schema
+
+var AssessmentStatus_FAILED *smithy.Schema
+
+var AssessmentStatus_DELETING *smithy.Schema
+
+var AssessmentSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "AssessmentSummary",
+}, smithy.ShapeTypeStructure, 5)
+var AssessmentSummary_ByCategory *smithy.Schema
+
+var AssessmentSummary_BySeverity *smithy.Schema
+
+var AssessmentSummary_FindingsCapped *smithy.Schema
+
+var AssessmentSummary_HasBlockingFindings *smithy.Schema
+
+var AssessmentSummary_TotalFindings *smithy.Schema
+
+var AssessmentType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "AssessmentType",
+}, smithy.ShapeTypeEnum, 1)
+var AssessmentType_UPDATE_BROKER_TYPE *smithy.Schema
 
 var AuthorizerLogs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -842,10 +1022,12 @@ var BrokerNodeGroupInfo_ZoneIds *smithy.Schema
 var BrokerNodeInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "BrokerNodeInfo",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var BrokerNodeInfo_AttachedENIId *smithy.Schema
 
 var BrokerNodeInfo_BrokerId *smithy.Schema
+
+var BrokerNodeInfo_BrokerNodeType *smithy.Schema
 
 var BrokerNodeInfo_ClientSubnet *smithy.Schema
 
@@ -854,6 +1036,14 @@ var BrokerNodeInfo_ClientVpcIpAddress *smithy.Schema
 var BrokerNodeInfo_CurrentBrokerSoftwareInfo *smithy.Schema
 
 var BrokerNodeInfo_Endpoints *smithy.Schema
+
+var BrokerNodeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "BrokerNodeType",
+}, smithy.ShapeTypeEnum, 2)
+var BrokerNodeType_STANDARD *smithy.Schema
+
+var BrokerNodeType_EXPRESS *smithy.Schema
 
 var BrokerSoftwareInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -864,6 +1054,14 @@ var BrokerSoftwareInfo_ConfigurationArn *smithy.Schema
 var BrokerSoftwareInfo_ConfigurationRevision *smithy.Schema
 
 var BrokerSoftwareInfo_KafkaVersion *smithy.Schema
+
+var BrokerTypeUpgradeInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "BrokerTypeUpgradeInfo",
+}, smithy.ShapeTypeStructure, 2)
+var BrokerTypeUpgradeInfo_TopicReassignmentMode *smithy.Schema
+
+var BrokerTypeUpgradeInfo_TopicReassignmentOperationArn *smithy.Schema
 
 var Catalog = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -1059,7 +1257,9 @@ var ClusterInfo_CustomerActionStatus *smithy.Schema
 var ClusterOperationInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ClusterOperationInfo",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
+var ClusterOperationInfo_BrokerTypeUpgradeInfo *smithy.Schema
+
 var ClusterOperationInfo_ClientRequestId *smithy.Schema
 
 var ClusterOperationInfo_ClusterArn *smithy.Schema
@@ -1125,7 +1325,9 @@ var ClusterOperationV2_Serverless *smithy.Schema
 var ClusterOperationV2Provisioned = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ClusterOperationV2Provisioned",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
+var ClusterOperationV2Provisioned_BrokerTypeUpgradeInfo *smithy.Schema
+
 var ClusterOperationV2Provisioned_OperationSteps *smithy.Schema
 
 var ClusterOperationV2Provisioned_SourceClusterInfo *smithy.Schema
@@ -1397,6 +1599,38 @@ var ErrorInfo = smithy.NewSchema(smithy.ShapeID{
 var ErrorInfo_ErrorCode *smithy.Schema
 
 var ErrorInfo_ErrorString *smithy.Schema
+
+var FindingCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "FindingCategory",
+}, smithy.ShapeTypeEnum, 5)
+var FindingCategory_INFRASTRUCTURE *smithy.Schema
+
+var FindingCategory_BROKER_CONFIGURATION *smithy.Schema
+
+var FindingCategory_TOPIC_CONFIGURATION *smithy.Schema
+
+var FindingCategory_CAPACITY *smithy.Schema
+
+var FindingCategory_HEALTH *smithy.Schema
+
+var FindingRemediation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "FindingRemediation",
+}, smithy.ShapeTypeStructure, 2)
+var FindingRemediation_Action *smithy.Schema
+
+var FindingRemediation_DocumentationUrl *smithy.Schema
+
+var FindingSeverity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "FindingSeverity",
+}, smithy.ShapeTypeEnum, 3)
+var FindingSeverity_ERROR *smithy.Schema
+
+var FindingSeverity_WARNING *smithy.Schema
+
+var FindingSeverity_INFO *smithy.Schema
 
 var Firehose = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -2303,7 +2537,7 @@ var TopicExistsException_Message *smithy.Schema
 var TopicInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "TopicInfo",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var TopicInfo_TopicArn *smithy.Schema
 
 var TopicInfo_TopicName *smithy.Schema
@@ -2313,6 +2547,8 @@ var TopicInfo_ReplicationFactor *smithy.Schema
 var TopicInfo_PartitionCount *smithy.Schema
 
 var TopicInfo_OutOfSyncReplicaCount *smithy.Schema
+
+var TopicInfo_ReplicaIds *smithy.Schema
 
 var TopicPartitionInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -2325,6 +2561,54 @@ var TopicPartitionInfo_Leader *smithy.Schema
 var TopicPartitionInfo_Replicas *smithy.Schema
 
 var TopicPartitionInfo_Isr *smithy.Schema
+
+var TopicReassignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "TopicReassignment",
+}, smithy.ShapeTypeEnum, 2)
+var TopicReassignment_AUTO *smithy.Schema
+
+var TopicReassignment_MANUAL *smithy.Schema
+
+var TopicReassignmentInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "TopicReassignmentInfo",
+}, smithy.ShapeTypeStructure, 6)
+var TopicReassignmentInfo_CompletedTopics *smithy.Schema
+
+var TopicReassignmentInfo_CreationTime *smithy.Schema
+
+var TopicReassignmentInfo_Status *smithy.Schema
+
+var TopicReassignmentInfo_TargetInstanceType *smithy.Schema
+
+var TopicReassignmentInfo_TopicReassignmentOperationArn *smithy.Schema
+
+var TopicReassignmentInfo_TotalTopics *smithy.Schema
+
+var TopicReassignmentMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "TopicReassignmentMode",
+}, smithy.ShapeTypeEnum, 2)
+var TopicReassignmentMode_AUTO *smithy.Schema
+
+var TopicReassignmentMode_MANUAL *smithy.Schema
+
+var TopicReassignmentStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "TopicReassignmentStatus",
+}, smithy.ShapeTypeEnum, 6)
+var TopicReassignmentStatus_PENDING *smithy.Schema
+
+var TopicReassignmentStatus_IN_PROGRESS *smithy.Schema
+
+var TopicReassignmentStatus_STOPPING *smithy.Schema
+
+var TopicReassignmentStatus_COMPLETE *smithy.Schema
+
+var TopicReassignmentStatus_FAILED *smithy.Schema
+
+var TopicReassignmentStatus_STOPPED *smithy.Schema
 
 var TopicReplication = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -2592,6 +2876,32 @@ var BatchDisassociateScramSecretResponse_ClusterArn *smithy.Schema
 
 var BatchDisassociateScramSecretResponse_UnprocessedScramSecrets *smithy.Schema
 
+var CreateAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "CreateAssessmentRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CreateAssessmentRequest_AssessmentParameters *smithy.Schema
+
+var CreateAssessmentRequest_AssessmentType *smithy.Schema
+
+var CreateAssessmentRequest_ClusterArn *smithy.Schema
+
+var CreateAssessmentRequest_Tags *smithy.Schema
+
+var CreateAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "CreateAssessmentResponse",
+}, smithy.ShapeTypeStructure, 5)
+var CreateAssessmentResponse_AssessmentArn *smithy.Schema
+
+var CreateAssessmentResponse_AssessmentType *smithy.Schema
+
+var CreateAssessmentResponse_ClusterArn *smithy.Schema
+
+var CreateAssessmentResponse_CreationTime *smithy.Schema
+
+var CreateAssessmentResponse_Status *smithy.Schema
+
 var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "CreateChannelRequest",
@@ -2798,6 +3108,22 @@ var CreateVpcConnectionResponse_CreationTime *smithy.Schema
 
 var CreateVpcConnectionResponse_Tags *smithy.Schema
 
+var DeleteAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DeleteAssessmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteAssessmentRequest_AssessmentArn *smithy.Schema
+
+var DeleteAssessmentRequest_ClusterArn *smithy.Schema
+
+var DeleteAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DeleteAssessmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteAssessmentResponse_AssessmentArn *smithy.Schema
+
+var DeleteAssessmentResponse_Status *smithy.Schema
+
 var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "DeleteChannelRequest",
@@ -2902,6 +3228,38 @@ var DeleteVpcConnectionResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteVpcConnectionResponse_VpcConnectionArn *smithy.Schema
 
 var DeleteVpcConnectionResponse_State *smithy.Schema
+
+var DescribeAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DescribeAssessmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeAssessmentRequest_AssessmentArn *smithy.Schema
+
+var DescribeAssessmentRequest_ClusterArn *smithy.Schema
+
+var DescribeAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DescribeAssessmentResponse",
+}, smithy.ShapeTypeStructure, 10)
+var DescribeAssessmentResponse_AssessmentArn *smithy.Schema
+
+var DescribeAssessmentResponse_AssessmentParameters *smithy.Schema
+
+var DescribeAssessmentResponse_AssessmentType *smithy.Schema
+
+var DescribeAssessmentResponse_ClusterArn *smithy.Schema
+
+var DescribeAssessmentResponse_CompletionTime *smithy.Schema
+
+var DescribeAssessmentResponse_CreationTime *smithy.Schema
+
+var DescribeAssessmentResponse_Status *smithy.Schema
+
+var DescribeAssessmentResponse_StatusMessage *smithy.Schema
+
+var DescribeAssessmentResponse_Summary *smithy.Schema
+
+var DescribeAssessmentResponse_Tags *smithy.Schema
 
 var DescribeChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -3084,7 +3442,7 @@ var DescribeTopicRequest_TopicName *smithy.Schema
 var DescribeTopicResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "DescribeTopicResponse",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var DescribeTopicResponse_TopicArn *smithy.Schema
 
 var DescribeTopicResponse_TopicName *smithy.Schema
@@ -3096,6 +3454,8 @@ var DescribeTopicResponse_PartitionCount *smithy.Schema
 var DescribeTopicResponse_Configs *smithy.Schema
 
 var DescribeTopicResponse_Status *smithy.Schema
+
+var DescribeTopicResponse_ReplicaIds *smithy.Schema
 
 var DescribeTopicPartitionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -3116,6 +3476,44 @@ var DescribeTopicPartitionsResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeTopicPartitionsResponse_Partitions *smithy.Schema
 
 var DescribeTopicPartitionsResponse_NextToken *smithy.Schema
+
+var DescribeTopicReassignmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DescribeTopicReassignmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeTopicReassignmentRequest_ClusterArn *smithy.Schema
+
+var DescribeTopicReassignmentRequest_TopicReassignmentOperationArn *smithy.Schema
+
+var DescribeTopicReassignmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "DescribeTopicReassignmentResponse",
+}, smithy.ShapeTypeStructure, 13)
+var DescribeTopicReassignmentResponse_ClusterArn *smithy.Schema
+
+var DescribeTopicReassignmentResponse_CompletedTopics *smithy.Schema
+
+var DescribeTopicReassignmentResponse_CreationTime *smithy.Schema
+
+var DescribeTopicReassignmentResponse_ErrorInfo *smithy.Schema
+
+var DescribeTopicReassignmentResponse_LastUpdateTime *smithy.Schema
+
+var DescribeTopicReassignmentResponse_MigratedPartitions *smithy.Schema
+
+var DescribeTopicReassignmentResponse_Status *smithy.Schema
+
+var DescribeTopicReassignmentResponse_TargetInstanceType *smithy.Schema
+
+var DescribeTopicReassignmentResponse_TopicReassignmentOperationArn *smithy.Schema
+
+var DescribeTopicReassignmentResponse_TopicsToExclude *smithy.Schema
+
+var DescribeTopicReassignmentResponse_TopicsToInclude *smithy.Schema
+
+var DescribeTopicReassignmentResponse_TotalPartitions *smithy.Schema
+
+var DescribeTopicReassignmentResponse_TotalTopics *smithy.Schema
 
 var DescribeVpcConnectionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -3208,6 +3606,50 @@ var GetCompatibleKafkaVersionsResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetCompatibleKafkaVersionsResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions *smithy.Schema
+
+var ListAssessmentFindingsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListAssessmentFindingsRequest",
+}, smithy.ShapeTypeStructure, 6)
+var ListAssessmentFindingsRequest_AssessmentArn *smithy.Schema
+
+var ListAssessmentFindingsRequest_Category *smithy.Schema
+
+var ListAssessmentFindingsRequest_ClusterArn *smithy.Schema
+
+var ListAssessmentFindingsRequest_MaxResults *smithy.Schema
+
+var ListAssessmentFindingsRequest_NextToken *smithy.Schema
+
+var ListAssessmentFindingsRequest_Severity *smithy.Schema
+
+var ListAssessmentFindingsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListAssessmentFindingsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAssessmentFindingsResponse_Findings *smithy.Schema
+
+var ListAssessmentFindingsResponse_NextToken *smithy.Schema
+
+var ListAssessmentsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListAssessmentsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListAssessmentsRequest_AssessmentType *smithy.Schema
+
+var ListAssessmentsRequest_ClusterArn *smithy.Schema
+
+var ListAssessmentsRequest_MaxResults *smithy.Schema
+
+var ListAssessmentsRequest_NextToken *smithy.Schema
+
+var ListAssessmentsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListAssessmentsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListAssessmentsResponse_Assessments *smithy.Schema
+
+var ListAssessmentsResponse_NextToken *smithy.Schema
 
 var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -3437,6 +3879,26 @@ var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ListTagsForResourceResponse_Tags *smithy.Schema
 
+var ListTopicReassignmentsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListTopicReassignmentsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListTopicReassignmentsRequest_ClusterArn *smithy.Schema
+
+var ListTopicReassignmentsRequest_MaxResults *smithy.Schema
+
+var ListTopicReassignmentsRequest_NextToken *smithy.Schema
+
+var ListTopicReassignmentsRequest_StatusFilter *smithy.Schema
+
+var ListTopicReassignmentsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "ListTopicReassignmentsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListTopicReassignmentsResponse_NextToken *smithy.Schema
+
+var ListTopicReassignmentsResponse_Reassignments *smithy.Schema
+
 var ListTopicsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "ListTopicsRequest",
@@ -3518,6 +3980,46 @@ var RejectClientVpcConnectionResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RejectClientVpcConnectionResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var StartTopicReassignmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "StartTopicReassignmentRequest",
+}, smithy.ShapeTypeStructure, 5)
+var StartTopicReassignmentRequest_ClientToken *smithy.Schema
+
+var StartTopicReassignmentRequest_ClusterArn *smithy.Schema
+
+var StartTopicReassignmentRequest_TargetInstanceType *smithy.Schema
+
+var StartTopicReassignmentRequest_TopicsToExclude *smithy.Schema
+
+var StartTopicReassignmentRequest_TopicsToInclude *smithy.Schema
+
+var StartTopicReassignmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "StartTopicReassignmentResponse",
+}, smithy.ShapeTypeStructure, 3)
+var StartTopicReassignmentResponse_ClusterArn *smithy.Schema
+
+var StartTopicReassignmentResponse_Status *smithy.Schema
+
+var StartTopicReassignmentResponse_TopicReassignmentOperationArn *smithy.Schema
+
+var StopTopicReassignmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "StopTopicReassignmentRequest",
+}, smithy.ShapeTypeStructure, 2)
+var StopTopicReassignmentRequest_ClusterArn *smithy.Schema
+
+var StopTopicReassignmentRequest_TopicReassignmentOperationArn *smithy.Schema
+
+var StopTopicReassignmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafka",
+	Name:      "StopTopicReassignmentResponse",
+}, smithy.ShapeTypeStructure, 2)
+var StopTopicReassignmentResponse_Status *smithy.Schema
+
+var StopTopicReassignmentResponse_TopicReassignmentOperationArn *smithy.Schema
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "TagResourceRequest",
@@ -3573,12 +4075,14 @@ var UpdateBrokerStorageResponse_ClusterOperationArn *smithy.Schema
 var UpdateBrokerTypeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
 	Name:      "UpdateBrokerTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateBrokerTypeRequest_ClusterArn *smithy.Schema
 
 var UpdateBrokerTypeRequest_CurrentVersion *smithy.Schema
 
 var UpdateBrokerTypeRequest_TargetInstanceType *smithy.Schema
+
+var UpdateBrokerTypeRequest_TopicReassignment *smithy.Schema
 
 var UpdateBrokerTypeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafka",
@@ -3831,6 +4335,70 @@ func init() {
 
 	___listOf__stringMax256_member = ___listOf__stringMax256.AddMember("member", ___stringMax256)
 
+	___listOf__stringMin1Max256_member = ___listOf__stringMin1Max256.AddMember("member", ___stringMin1Max256)
+
+	FindingCategory_INFRASTRUCTURE = FindingCategory.AddMember("INFRASTRUCTURE", smithyprelude.Unit)
+
+	FindingCategory_BROKER_CONFIGURATION = FindingCategory.AddMember("BROKER_CONFIGURATION", smithyprelude.Unit)
+
+	FindingCategory_TOPIC_CONFIGURATION = FindingCategory.AddMember("TOPIC_CONFIGURATION", smithyprelude.Unit)
+
+	FindingCategory_CAPACITY = FindingCategory.AddMember("CAPACITY", smithyprelude.Unit)
+
+	FindingCategory_HEALTH = FindingCategory.AddMember("HEALTH", smithyprelude.Unit)
+
+	FindingRemediation_Action = FindingRemediation.AddMember("Action", ___string, &smithytraits.JSONName{Name: "action"})
+
+	FindingRemediation_DocumentationUrl = FindingRemediation.AddMember("DocumentationUrl", ___stringMax2048, &smithytraits.JSONName{Name: "documentationUrl"})
+
+	FindingSeverity_ERROR = FindingSeverity.AddMember("ERROR", smithyprelude.Unit)
+
+	FindingSeverity_WARNING = FindingSeverity.AddMember("WARNING", smithyprelude.Unit)
+
+	FindingSeverity_INFO = FindingSeverity.AddMember("INFO", smithyprelude.Unit)
+
+	AssessmentFinding_Category = AssessmentFinding.AddMember("Category", FindingCategory, &smithytraits.JSONName{Name: "category"})
+
+	AssessmentFinding_FindingId = AssessmentFinding.AddMember("FindingId", ___string, &smithytraits.JSONName{Name: "findingId"})
+
+	AssessmentFinding_Message = AssessmentFinding.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
+
+	AssessmentFinding_Remediation = AssessmentFinding.AddMember("Remediation", FindingRemediation, &smithytraits.JSONName{Name: "remediation"})
+
+	AssessmentFinding_Resource = AssessmentFinding.AddMember("Resource", ___string, &smithytraits.JSONName{Name: "resource"})
+
+	AssessmentFinding_Severity = AssessmentFinding.AddMember("Severity", FindingSeverity, &smithytraits.JSONName{Name: "severity"})
+
+	___listOfAssessmentFinding_member = ___listOfAssessmentFinding.AddMember("member", AssessmentFinding)
+
+	AssessmentType_UPDATE_BROKER_TYPE = AssessmentType.AddMember("UPDATE_BROKER_TYPE", smithyprelude.Unit)
+
+	AssessmentStatus_IN_PROGRESS = AssessmentStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	AssessmentStatus_COMPLETE = AssessmentStatus.AddMember("COMPLETE", smithyprelude.Unit)
+
+	AssessmentStatus_FAILED = AssessmentStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	AssessmentStatus_DELETING = AssessmentStatus.AddMember("DELETING", smithyprelude.Unit)
+
+	___mapOf__string_key = ___mapOf__string.AddMember("key", ___string)
+
+	___mapOf__string_value = ___mapOf__string.AddMember("value", ___string)
+
+	AssessmentInfo_AssessmentArn = AssessmentInfo.AddMember("AssessmentArn", ___stringMax2048, &smithytraits.JSONName{Name: "assessmentArn"})
+
+	AssessmentInfo_AssessmentType = AssessmentInfo.AddMember("AssessmentType", AssessmentType, &smithytraits.JSONName{Name: "assessmentType"})
+
+	AssessmentInfo_ClusterArn = AssessmentInfo.AddMember("ClusterArn", ___stringMax2048, &smithytraits.JSONName{Name: "clusterArn"})
+
+	AssessmentInfo_CreationTime = AssessmentInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
+
+	AssessmentInfo_Status = AssessmentInfo.AddMember("Status", AssessmentStatus, &smithytraits.JSONName{Name: "status"})
+
+	AssessmentInfo_Tags = AssessmentInfo.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
+
+	___listOfAssessmentInfo_member = ___listOfAssessmentInfo.AddMember("member", AssessmentInfo)
+
 	ProvisionedThroughput_Enabled = ProvisionedThroughput.AddMember("Enabled", ___boolean, &smithytraits.JSONName{Name: "enabled"})
 
 	ProvisionedThroughput_VolumeThroughput = ProvisionedThroughput.AddMember("VolumeThroughput", ___integer, &smithytraits.JSONName{Name: "volumeThroughput"})
@@ -3927,10 +4495,6 @@ func init() {
 
 	StateInfo_Message = StateInfo.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
 
-	___mapOf__string_key = ___mapOf__string.AddMember("key", ___string)
-
-	___mapOf__string_value = ___mapOf__string.AddMember("value", ___string)
-
 	BrokerAZDistribution_DEFAULT = BrokerAZDistribution.AddMember("DEFAULT", smithyprelude.Unit)
 
 	EBSStorageInfo_ProvisionedThroughput = EBSStorageInfo.AddMember("ProvisionedThroughput", ProvisionedThroughput, &smithytraits.JSONName{Name: "provisionedThroughput"})
@@ -3971,7 +4535,7 @@ func init() {
 
 	BrokerNodeGroupInfo_ClientSubnets = BrokerNodeGroupInfo.AddMember("ClientSubnets", ___listOf__string, &smithytraits.JSONName{Name: "clientSubnets"})
 
-	BrokerNodeGroupInfo_InstanceType = BrokerNodeGroupInfo.AddMember("InstanceType", ___stringMin5Max32, &smithytraits.JSONName{Name: "instanceType"})
+	BrokerNodeGroupInfo_InstanceType = BrokerNodeGroupInfo.AddMember("InstanceType", ___stringMin5Max64, &smithytraits.JSONName{Name: "instanceType"})
 
 	BrokerNodeGroupInfo_SecurityGroups = BrokerNodeGroupInfo.AddMember("SecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "securityGroups"})
 
@@ -4209,6 +4773,14 @@ func init() {
 
 	___listOfClusterInfo_member = ___listOfClusterInfo.AddMember("member", ClusterInfo)
 
+	TopicReassignmentMode_AUTO = TopicReassignmentMode.AddMember("AUTO", smithyprelude.Unit)
+
+	TopicReassignmentMode_MANUAL = TopicReassignmentMode.AddMember("MANUAL", smithyprelude.Unit)
+
+	BrokerTypeUpgradeInfo_TopicReassignmentMode = BrokerTypeUpgradeInfo.AddMember("TopicReassignmentMode", TopicReassignmentMode, &smithytraits.JSONName{Name: "topicReassignmentMode"})
+
+	BrokerTypeUpgradeInfo_TopicReassignmentOperationArn = BrokerTypeUpgradeInfo.AddMember("TopicReassignmentOperationArn", ___stringMax2048, &smithytraits.JSONName{Name: "topicReassignmentOperationArn"})
+
 	ErrorInfo_ErrorCode = ErrorInfo.AddMember("ErrorCode", ___string, &smithytraits.JSONName{Name: "errorCode"})
 
 	ErrorInfo_ErrorString = ErrorInfo.AddMember("ErrorString", ___string, &smithytraits.JSONName{Name: "errorString"})
@@ -4247,7 +4819,7 @@ func init() {
 
 	MutableClusterInfo_LoggingInfo = MutableClusterInfo.AddMember("LoggingInfo", LoggingInfo, &smithytraits.JSONName{Name: "loggingInfo"})
 
-	MutableClusterInfo_InstanceType = MutableClusterInfo.AddMember("InstanceType", ___stringMin5Max32, &smithytraits.JSONName{Name: "instanceType"})
+	MutableClusterInfo_InstanceType = MutableClusterInfo.AddMember("InstanceType", ___string, &smithytraits.JSONName{Name: "instanceType"})
 
 	MutableClusterInfo_ClientAuthentication = MutableClusterInfo.AddMember("ClientAuthentication", ClientAuthentication, &smithytraits.JSONName{Name: "clientAuthentication"})
 
@@ -4276,6 +4848,8 @@ func init() {
 	VpcConnectionInfo_UserIdentity = VpcConnectionInfo.AddMember("UserIdentity", UserIdentity, &smithytraits.JSONName{Name: "userIdentity"})
 
 	VpcConnectionInfo_CreationTime = VpcConnectionInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
+
+	ClusterOperationInfo_BrokerTypeUpgradeInfo = ClusterOperationInfo.AddMember("BrokerTypeUpgradeInfo", BrokerTypeUpgradeInfo, &smithytraits.JSONName{Name: "brokerTypeUpgradeInfo"})
 
 	ClusterOperationInfo_ClientRequestId = ClusterOperationInfo.AddMember("ClientRequestId", ___string, &smithytraits.JSONName{Name: "clientRequestId"})
 
@@ -4487,9 +5061,15 @@ func init() {
 
 	___listOfKafkaVersion_member = ___listOfKafkaVersion.AddMember("member", KafkaVersion)
 
+	BrokerNodeType_STANDARD = BrokerNodeType.AddMember("STANDARD", smithyprelude.Unit)
+
+	BrokerNodeType_EXPRESS = BrokerNodeType.AddMember("EXPRESS", smithyprelude.Unit)
+
 	BrokerNodeInfo_AttachedENIId = BrokerNodeInfo.AddMember("AttachedENIId", ___string, &smithytraits.JSONName{Name: "attachedENIId"})
 
 	BrokerNodeInfo_BrokerId = BrokerNodeInfo.AddMember("BrokerId", ___double, &smithytraits.JSONName{Name: "brokerId"})
+
+	BrokerNodeInfo_BrokerNodeType = BrokerNodeInfo.AddMember("BrokerNodeType", BrokerNodeType, &smithytraits.JSONName{Name: "brokerNodeType"})
 
 	BrokerNodeInfo_ClientSubnet = BrokerNodeInfo.AddMember("ClientSubnet", ___string, &smithytraits.JSONName{Name: "clientSubnet"})
 
@@ -4673,6 +5253,8 @@ func init() {
 
 	TopicInfo_OutOfSyncReplicaCount = TopicInfo.AddMember("OutOfSyncReplicaCount", ___integer, &smithytraits.JSONName{Name: "outOfSyncReplicaCount"})
 
+	TopicInfo_ReplicaIds = TopicInfo.AddMember("ReplicaIds", ___listOf__integer, &smithytraits.JSONName{Name: "replicaIds"})
+
 	___listOfTopicInfo_member = ___listOfTopicInfo.AddMember("member", TopicInfo)
 
 	TopicPartitionInfo_Partition = TopicPartitionInfo.AddMember("Partition", ___integer, &smithytraits.JSONName{Name: "partition"})
@@ -4684,6 +5266,32 @@ func init() {
 	TopicPartitionInfo_Isr = TopicPartitionInfo.AddMember("Isr", ___listOf__integer, &smithytraits.JSONName{Name: "isr"})
 
 	___listOfTopicPartitionInfo_member = ___listOfTopicPartitionInfo.AddMember("member", TopicPartitionInfo)
+
+	TopicReassignmentStatus_PENDING = TopicReassignmentStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	TopicReassignmentStatus_IN_PROGRESS = TopicReassignmentStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	TopicReassignmentStatus_STOPPING = TopicReassignmentStatus.AddMember("STOPPING", smithyprelude.Unit)
+
+	TopicReassignmentStatus_COMPLETE = TopicReassignmentStatus.AddMember("COMPLETE", smithyprelude.Unit)
+
+	TopicReassignmentStatus_FAILED = TopicReassignmentStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	TopicReassignmentStatus_STOPPED = TopicReassignmentStatus.AddMember("STOPPED", smithyprelude.Unit)
+
+	TopicReassignmentInfo_CompletedTopics = TopicReassignmentInfo.AddMember("CompletedTopics", ___integer, &smithytraits.JSONName{Name: "completedTopics"})
+
+	TopicReassignmentInfo_CreationTime = TopicReassignmentInfo.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
+
+	TopicReassignmentInfo_Status = TopicReassignmentInfo.AddMember("Status", TopicReassignmentStatus, &smithytraits.JSONName{Name: "status"})
+
+	TopicReassignmentInfo_TargetInstanceType = TopicReassignmentInfo.AddMember("TargetInstanceType", ___string, &smithytraits.JSONName{Name: "targetInstanceType"})
+
+	TopicReassignmentInfo_TopicReassignmentOperationArn = TopicReassignmentInfo.AddMember("TopicReassignmentOperationArn", ___stringMax2048, &smithytraits.JSONName{Name: "topicReassignmentOperationArn"})
+
+	TopicReassignmentInfo_TotalTopics = TopicReassignmentInfo.AddMember("TotalTopics", ___integer, &smithytraits.JSONName{Name: "totalTopics"})
+
+	___listOfTopicReassignmentInfo_member = ___listOfTopicReassignmentInfo.AddMember("member", TopicReassignmentInfo)
 
 	UnprocessedScramSecret_ErrorCode = UnprocessedScramSecret.AddMember("ErrorCode", ___string, &smithytraits.JSONName{Name: "errorCode"})
 
@@ -4707,6 +5315,22 @@ func init() {
 
 	___listOfVpcConnection_member = ___listOfVpcConnection.AddMember("member", VpcConnection)
 
+	___mapOf__integer_key = ___mapOf__integer.AddMember("key", ___string)
+
+	___mapOf__integer_value = ___mapOf__integer.AddMember("value", ___integer)
+
+	AssessmentParameters_TargetInstanceType = AssessmentParameters.AddMember("TargetInstanceType", ___stringMax256, &smithytraits.JSONName{Name: "targetInstanceType"})
+
+	AssessmentSummary_ByCategory = AssessmentSummary.AddMember("ByCategory", ___mapOf__integer, &smithytraits.JSONName{Name: "byCategory"})
+
+	AssessmentSummary_BySeverity = AssessmentSummary.AddMember("BySeverity", ___mapOf__integer, &smithytraits.JSONName{Name: "bySeverity"})
+
+	AssessmentSummary_FindingsCapped = AssessmentSummary.AddMember("FindingsCapped", ___boolean, &smithytraits.JSONName{Name: "findingsCapped"})
+
+	AssessmentSummary_HasBlockingFindings = AssessmentSummary.AddMember("HasBlockingFindings", ___boolean, &smithytraits.JSONName{Name: "hasBlockingFindings"})
+
+	AssessmentSummary_TotalFindings = AssessmentSummary.AddMember("TotalFindings", ___integer, &smithytraits.JSONName{Name: "totalFindings"})
+
 	BadRequestException_InvalidParameter = BadRequestException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
 
 	BadRequestException_Message = BadRequestException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
@@ -4728,6 +5352,8 @@ func init() {
 	ClusterConnectivityException_InvalidParameter = ClusterConnectivityException.AddMember("InvalidParameter", ___string, &smithytraits.JSONName{Name: "invalidParameter"})
 
 	ClusterConnectivityException_Message = ClusterConnectivityException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
+
+	ClusterOperationV2Provisioned_BrokerTypeUpgradeInfo = ClusterOperationV2Provisioned.AddMember("BrokerTypeUpgradeInfo", BrokerTypeUpgradeInfo, &smithytraits.JSONName{Name: "brokerTypeUpgradeInfo"})
 
 	ClusterOperationV2Provisioned_OperationSteps = ClusterOperationV2Provisioned.AddMember("OperationSteps", ___listOfClusterOperationStep, &smithytraits.JSONName{Name: "operationSteps"})
 
@@ -4953,6 +5579,10 @@ func init() {
 
 	TopicExistsException_Message = TopicExistsException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
 
+	TopicReassignment_AUTO = TopicReassignment.AddMember("AUTO", smithyprelude.Unit)
+
+	TopicReassignment_MANUAL = TopicReassignment.AddMember("MANUAL", smithyprelude.Unit)
+
 	TopicReplicationUpdate_CopyAccessControlListsForTopics = TopicReplicationUpdate.AddMember("CopyAccessControlListsForTopics", ___boolean, &smithytraits.JSONName{Name: "copyAccessControlListsForTopics"})
 
 	TopicReplicationUpdate_CopyTopicConfigurations = TopicReplicationUpdate.AddMember("CopyTopicConfigurations", ___boolean, &smithytraits.JSONName{Name: "copyTopicConfigurations"})
@@ -4994,6 +5624,24 @@ func init() {
 	BatchDisassociateScramSecretResponse_ClusterArn = BatchDisassociateScramSecretResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
 
 	BatchDisassociateScramSecretResponse_UnprocessedScramSecrets = BatchDisassociateScramSecretResponse.AddMember("UnprocessedScramSecrets", ___listOfUnprocessedScramSecret, &smithytraits.JSONName{Name: "unprocessedScramSecrets"})
+
+	CreateAssessmentRequest_AssessmentParameters = CreateAssessmentRequest.AddMember("AssessmentParameters", AssessmentParameters, &smithytraits.JSONName{Name: "assessmentParameters"})
+
+	CreateAssessmentRequest_AssessmentType = CreateAssessmentRequest.AddMember("AssessmentType", AssessmentType, &smithytraits.JSONName{Name: "assessmentType"})
+
+	CreateAssessmentRequest_ClusterArn = CreateAssessmentRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	CreateAssessmentRequest_Tags = CreateAssessmentRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
+
+	CreateAssessmentResponse_AssessmentArn = CreateAssessmentResponse.AddMember("AssessmentArn", ___stringMax2048, &smithytraits.JSONName{Name: "assessmentArn"})
+
+	CreateAssessmentResponse_AssessmentType = CreateAssessmentResponse.AddMember("AssessmentType", AssessmentType, &smithytraits.JSONName{Name: "assessmentType"})
+
+	CreateAssessmentResponse_ClusterArn = CreateAssessmentResponse.AddMember("ClusterArn", ___stringMax2048, &smithytraits.JSONName{Name: "clusterArn"})
+
+	CreateAssessmentResponse_CreationTime = CreateAssessmentResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
+
+	CreateAssessmentResponse_Status = CreateAssessmentResponse.AddMember("Status", AssessmentStatus, &smithytraits.JSONName{Name: "status"})
 
 	CreateChannelRequest_ChannelName = CreateChannelRequest.AddMember("ChannelName", ___string, &smithytraits.JSONName{Name: "channelName"})
 
@@ -5145,6 +5793,14 @@ func init() {
 
 	CreateVpcConnectionResponse_Tags = CreateVpcConnectionResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 
+	DeleteAssessmentRequest_AssessmentArn = DeleteAssessmentRequest.AddMember("AssessmentArn", ___string, &smithytraits.HTTPLabel{})
+
+	DeleteAssessmentRequest_ClusterArn = DeleteAssessmentRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	DeleteAssessmentResponse_AssessmentArn = DeleteAssessmentResponse.AddMember("AssessmentArn", ___stringMax2048, &smithytraits.JSONName{Name: "assessmentArn"})
+
+	DeleteAssessmentResponse_Status = DeleteAssessmentResponse.AddMember("Status", AssessmentStatus, &smithytraits.JSONName{Name: "status"})
+
 	DeleteChannelRequest_ChannelArn = DeleteChannelRequest.AddMember("ChannelArn", ___string, &smithytraits.HTTPLabel{})
 
 	DeleteChannelRequest_ClusterArn = DeleteChannelRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
@@ -5192,6 +5848,30 @@ func init() {
 	DeleteVpcConnectionResponse_VpcConnectionArn = DeleteVpcConnectionResponse.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
 
 	DeleteVpcConnectionResponse_State = DeleteVpcConnectionResponse.AddMember("State", VpcConnectionState, &smithytraits.JSONName{Name: "state"})
+
+	DescribeAssessmentRequest_AssessmentArn = DescribeAssessmentRequest.AddMember("AssessmentArn", ___string, &smithytraits.HTTPLabel{})
+
+	DescribeAssessmentRequest_ClusterArn = DescribeAssessmentRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	DescribeAssessmentResponse_AssessmentArn = DescribeAssessmentResponse.AddMember("AssessmentArn", ___stringMax2048, &smithytraits.JSONName{Name: "assessmentArn"})
+
+	DescribeAssessmentResponse_AssessmentParameters = DescribeAssessmentResponse.AddMember("AssessmentParameters", AssessmentParameters, &smithytraits.JSONName{Name: "assessmentParameters"})
+
+	DescribeAssessmentResponse_AssessmentType = DescribeAssessmentResponse.AddMember("AssessmentType", AssessmentType, &smithytraits.JSONName{Name: "assessmentType"})
+
+	DescribeAssessmentResponse_ClusterArn = DescribeAssessmentResponse.AddMember("ClusterArn", ___stringMax2048, &smithytraits.JSONName{Name: "clusterArn"})
+
+	DescribeAssessmentResponse_CompletionTime = DescribeAssessmentResponse.AddMember("CompletionTime", ___timestampIso8601, &smithytraits.JSONName{Name: "completionTime"})
+
+	DescribeAssessmentResponse_CreationTime = DescribeAssessmentResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
+
+	DescribeAssessmentResponse_Status = DescribeAssessmentResponse.AddMember("Status", AssessmentStatus, &smithytraits.JSONName{Name: "status"})
+
+	DescribeAssessmentResponse_StatusMessage = DescribeAssessmentResponse.AddMember("StatusMessage", ___string, &smithytraits.JSONName{Name: "statusMessage"})
+
+	DescribeAssessmentResponse_Summary = DescribeAssessmentResponse.AddMember("Summary", AssessmentSummary, &smithytraits.JSONName{Name: "summary"})
+
+	DescribeAssessmentResponse_Tags = DescribeAssessmentResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 
 	DescribeChannelRequest_ChannelArn = DescribeChannelRequest.AddMember("ChannelArn", ___string, &smithytraits.HTTPLabel{})
 
@@ -5315,6 +5995,8 @@ func init() {
 
 	DescribeTopicResponse_Status = DescribeTopicResponse.AddMember("Status", TopicState, &smithytraits.JSONName{Name: "status"})
 
+	DescribeTopicResponse_ReplicaIds = DescribeTopicResponse.AddMember("ReplicaIds", ___listOf__integer, &smithytraits.JSONName{Name: "replicaIds"})
+
 	DescribeTopicPartitionsRequest_ClusterArn = DescribeTopicPartitionsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
 
 	DescribeTopicPartitionsRequest_TopicName = DescribeTopicPartitionsRequest.AddMember("TopicName", ___string, &smithytraits.HTTPLabel{})
@@ -5326,6 +6008,36 @@ func init() {
 	DescribeTopicPartitionsResponse_Partitions = DescribeTopicPartitionsResponse.AddMember("Partitions", ___listOfTopicPartitionInfo, &smithytraits.JSONName{Name: "partitions"})
 
 	DescribeTopicPartitionsResponse_NextToken = DescribeTopicPartitionsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
+
+	DescribeTopicReassignmentRequest_ClusterArn = DescribeTopicReassignmentRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	DescribeTopicReassignmentRequest_TopicReassignmentOperationArn = DescribeTopicReassignmentRequest.AddMember("TopicReassignmentOperationArn", ___string, &smithytraits.HTTPLabel{})
+
+	DescribeTopicReassignmentResponse_ClusterArn = DescribeTopicReassignmentResponse.AddMember("ClusterArn", ___stringMax2048, &smithytraits.JSONName{Name: "clusterArn"})
+
+	DescribeTopicReassignmentResponse_CompletedTopics = DescribeTopicReassignmentResponse.AddMember("CompletedTopics", ___integer, &smithytraits.JSONName{Name: "completedTopics"})
+
+	DescribeTopicReassignmentResponse_CreationTime = DescribeTopicReassignmentResponse.AddMember("CreationTime", ___timestampIso8601, &smithytraits.JSONName{Name: "creationTime"})
+
+	DescribeTopicReassignmentResponse_ErrorInfo = DescribeTopicReassignmentResponse.AddMember("ErrorInfo", ErrorInfo, &smithytraits.JSONName{Name: "errorInfo"})
+
+	DescribeTopicReassignmentResponse_LastUpdateTime = DescribeTopicReassignmentResponse.AddMember("LastUpdateTime", ___timestampIso8601, &smithytraits.JSONName{Name: "lastUpdateTime"})
+
+	DescribeTopicReassignmentResponse_MigratedPartitions = DescribeTopicReassignmentResponse.AddMember("MigratedPartitions", ___integer, &smithytraits.JSONName{Name: "migratedPartitions"})
+
+	DescribeTopicReassignmentResponse_Status = DescribeTopicReassignmentResponse.AddMember("Status", TopicReassignmentStatus, &smithytraits.JSONName{Name: "status"})
+
+	DescribeTopicReassignmentResponse_TargetInstanceType = DescribeTopicReassignmentResponse.AddMember("TargetInstanceType", ___string, &smithytraits.JSONName{Name: "targetInstanceType"})
+
+	DescribeTopicReassignmentResponse_TopicReassignmentOperationArn = DescribeTopicReassignmentResponse.AddMember("TopicReassignmentOperationArn", ___stringMax2048, &smithytraits.JSONName{Name: "topicReassignmentOperationArn"})
+
+	DescribeTopicReassignmentResponse_TopicsToExclude = DescribeTopicReassignmentResponse.AddMember("TopicsToExclude", ___listOf__string, &smithytraits.JSONName{Name: "topicsToExclude"})
+
+	DescribeTopicReassignmentResponse_TopicsToInclude = DescribeTopicReassignmentResponse.AddMember("TopicsToInclude", ___listOf__string, &smithytraits.JSONName{Name: "topicsToInclude"})
+
+	DescribeTopicReassignmentResponse_TotalPartitions = DescribeTopicReassignmentResponse.AddMember("TotalPartitions", ___integer, &smithytraits.JSONName{Name: "totalPartitions"})
+
+	DescribeTopicReassignmentResponse_TotalTopics = DescribeTopicReassignmentResponse.AddMember("TotalTopics", ___integer, &smithytraits.JSONName{Name: "totalTopics"})
 
 	DescribeVpcConnectionRequest_Arn = DescribeVpcConnectionRequest.AddMember("Arn", ___string, &smithytraits.HTTPLabel{})
 
@@ -5386,6 +6098,34 @@ func init() {
 	GetCompatibleKafkaVersionsRequest_ClusterArn = GetCompatibleKafkaVersionsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPQuery{Name: "clusterArn"})
 
 	GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions = GetCompatibleKafkaVersionsResponse.AddMember("CompatibleKafkaVersions", ___listOfCompatibleKafkaVersion, &smithytraits.JSONName{Name: "compatibleKafkaVersions"})
+
+	ListAssessmentFindingsRequest_AssessmentArn = ListAssessmentFindingsRequest.AddMember("AssessmentArn", ___string, &smithytraits.HTTPLabel{})
+
+	ListAssessmentFindingsRequest_Category = ListAssessmentFindingsRequest.AddMember("Category", ___string, &smithytraits.HTTPQuery{Name: "category"})
+
+	ListAssessmentFindingsRequest_ClusterArn = ListAssessmentFindingsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	ListAssessmentFindingsRequest_MaxResults = ListAssessmentFindingsRequest.AddMember("MaxResults", ___integerMin1Max500, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAssessmentFindingsRequest_NextToken = ListAssessmentFindingsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAssessmentFindingsRequest_Severity = ListAssessmentFindingsRequest.AddMember("Severity", ___string, &smithytraits.HTTPQuery{Name: "severity"})
+
+	ListAssessmentFindingsResponse_Findings = ListAssessmentFindingsResponse.AddMember("Findings", ___listOfAssessmentFinding, &smithytraits.JSONName{Name: "findings"})
+
+	ListAssessmentFindingsResponse_NextToken = ListAssessmentFindingsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
+
+	ListAssessmentsRequest_AssessmentType = ListAssessmentsRequest.AddMember("AssessmentType", ___string, &smithytraits.HTTPQuery{Name: "assessmentType"})
+
+	ListAssessmentsRequest_ClusterArn = ListAssessmentsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	ListAssessmentsRequest_MaxResults = ListAssessmentsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAssessmentsRequest_NextToken = ListAssessmentsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAssessmentsResponse_Assessments = ListAssessmentsResponse.AddMember("Assessments", ___listOfAssessmentInfo, &smithytraits.JSONName{Name: "assessments"})
+
+	ListAssessmentsResponse_NextToken = ListAssessmentsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
 
 	ListChannelsRequest_ClusterArn = ListChannelsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
 
@@ -5511,6 +6251,18 @@ func init() {
 
 	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
 
+	ListTopicReassignmentsRequest_ClusterArn = ListTopicReassignmentsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	ListTopicReassignmentsRequest_MaxResults = ListTopicReassignmentsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTopicReassignmentsRequest_NextToken = ListTopicReassignmentsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListTopicReassignmentsRequest_StatusFilter = ListTopicReassignmentsRequest.AddMember("StatusFilter", ___string, &smithytraits.HTTPQuery{Name: "statusFilter"})
+
+	ListTopicReassignmentsResponse_NextToken = ListTopicReassignmentsResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
+
+	ListTopicReassignmentsResponse_Reassignments = ListTopicReassignmentsResponse.AddMember("Reassignments", ___listOfTopicReassignmentInfo, &smithytraits.JSONName{Name: "reassignments"})
+
 	ListTopicsRequest_ClusterArn = ListTopicsRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
 
 	ListTopicsRequest_MaxResults = ListTopicsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
@@ -5551,6 +6303,30 @@ func init() {
 
 	RejectClientVpcConnectionRequest_VpcConnectionArn = RejectClientVpcConnectionRequest.AddMember("VpcConnectionArn", ___string, &smithytraits.JSONName{Name: "vpcConnectionArn"})
 
+	StartTopicReassignmentRequest_ClientToken = StartTopicReassignmentRequest.AddMember("ClientToken", ___stringMin1Max64, &smithytraits.JSONName{Name: "clientToken"})
+
+	StartTopicReassignmentRequest_ClusterArn = StartTopicReassignmentRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	StartTopicReassignmentRequest_TargetInstanceType = StartTopicReassignmentRequest.AddMember("TargetInstanceType", ___stringMin1Max256, &smithytraits.JSONName{Name: "targetInstanceType"})
+
+	StartTopicReassignmentRequest_TopicsToExclude = StartTopicReassignmentRequest.AddMember("TopicsToExclude", ___listOf__stringMin1Max256, &smithytraits.JSONName{Name: "topicsToExclude"})
+
+	StartTopicReassignmentRequest_TopicsToInclude = StartTopicReassignmentRequest.AddMember("TopicsToInclude", ___listOf__stringMin1Max256, &smithytraits.JSONName{Name: "topicsToInclude"})
+
+	StartTopicReassignmentResponse_ClusterArn = StartTopicReassignmentResponse.AddMember("ClusterArn", ___stringMax2048, &smithytraits.JSONName{Name: "clusterArn"})
+
+	StartTopicReassignmentResponse_Status = StartTopicReassignmentResponse.AddMember("Status", TopicReassignmentStatus, &smithytraits.JSONName{Name: "status"})
+
+	StartTopicReassignmentResponse_TopicReassignmentOperationArn = StartTopicReassignmentResponse.AddMember("TopicReassignmentOperationArn", ___stringMax2048, &smithytraits.JSONName{Name: "topicReassignmentOperationArn"})
+
+	StopTopicReassignmentRequest_ClusterArn = StopTopicReassignmentRequest.AddMember("ClusterArn", ___string, &smithytraits.HTTPLabel{})
+
+	StopTopicReassignmentRequest_TopicReassignmentOperationArn = StopTopicReassignmentRequest.AddMember("TopicReassignmentOperationArn", ___string, &smithytraits.HTTPLabel{})
+
+	StopTopicReassignmentResponse_Status = StopTopicReassignmentResponse.AddMember("Status", TopicReassignmentStatus, &smithytraits.JSONName{Name: "status"})
+
+	StopTopicReassignmentResponse_TopicReassignmentOperationArn = StopTopicReassignmentResponse.AddMember("TopicReassignmentOperationArn", ___stringMax2048, &smithytraits.JSONName{Name: "topicReassignmentOperationArn"})
+
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
 
 	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", ___mapOf__string, &smithytraits.JSONName{Name: "tags"})
@@ -5584,6 +6360,8 @@ func init() {
 	UpdateBrokerTypeRequest_CurrentVersion = UpdateBrokerTypeRequest.AddMember("CurrentVersion", ___string, &smithytraits.JSONName{Name: "currentVersion"})
 
 	UpdateBrokerTypeRequest_TargetInstanceType = UpdateBrokerTypeRequest.AddMember("TargetInstanceType", ___string, &smithytraits.JSONName{Name: "targetInstanceType"})
+
+	UpdateBrokerTypeRequest_TopicReassignment = UpdateBrokerTypeRequest.AddMember("TopicReassignment", TopicReassignment, &smithytraits.JSONName{Name: "topicReassignment"})
 
 	UpdateBrokerTypeResponse_ClusterArn = UpdateBrokerTypeResponse.AddMember("ClusterArn", ___string, &smithytraits.JSONName{Name: "clusterArn"})
 

@@ -107,6 +107,15 @@ type CreateHostedZoneInput struct {
 	// This member is required.
 	Name *string
 
+	// Specify the optional Change Guardrails to turn on for the hosted zone. Each
+	// entry specifies the name and status of a guardrail. For the guardrail names and
+	// statuses, see ChangeGuardrail .
+	//
+	// Route 53 turns on the guardrails that the tier of the hosted zone includes, so
+	// you don't need to specify them. If you turn on a guardrail that the tier doesn't
+	// offer, Route 53 returns an InvalidInput error.
+	ChangeGuardrails []types.ChangeGuardrail
+
 	// If you want to associate a reusable delegation set with this hosted zone, the
 	// ID that Amazon Route 53 assigned to the reusable delegation set when you created
 	// it. For more information about reusable delegation sets, see [CreateReusableDelegationSet].
@@ -118,6 +127,19 @@ type CreateHostedZoneInput struct {
 	//
 	// [CreateReusableDelegationSet]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html
 	DelegationSetId *string
+
+	// Specifies whether to enable public DNS fallback for the hosted zone. When
+	// public DNS fallback is enabled and a query for a domain name in the private
+	// hosted zone matches no existing name ( NXDOMAIN ), Route 53 retries the query
+	// against public DNS instead of returning a negative response. Fallback does not
+	// occur when the name exists but has no record of the requested type.
+	//
+	// Set to true to enable public DNS fallback, or false to disable it. The default
+	// is false .
+	//
+	// Public DNS fallback is supported only for private hosted zones. If you specify
+	// true for a public hosted zone, the request fails with an InvalidInput error.
+	EnablePublicDNSFallback *bool
 
 	// (Optional) A complex type that contains the following optional values:
 	//

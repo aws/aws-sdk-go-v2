@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"apiId":{"identifierParts":{"method":"__Method__","path":"__Path__","resourceArn":"__ResourceArn__"}},"apiUrl":"__ApiUrl__","operationName":"__OperationName__","productApiPageArn":"__ProductApiPageArn__","productApiPageId":"__ProductApiPageId__","status":"AVAILABLE","statusException":{"exception":"INTERNAL_FAILURE","message":"__Message__"},"tryItState":"ENABLED","updatedAt":946684800},{"apiId":{"identifierParts":{"method":"__Method__","path":"__Path__","resourceArn":"__ResourceArn__"}},"apiUrl":"__ApiUrl__","operationName":"__OperationName__","productApiPageArn":"__ProductApiPageArn__","productApiPageId":"__ProductApiPageId__","status":"AVAILABLE","statusException":{"exception":"INTERNAL_FAILURE","message":"__Message__"},"tryItState":"ENABLED","updatedAt":946684800}],"nextToken":"__NextToken__"}

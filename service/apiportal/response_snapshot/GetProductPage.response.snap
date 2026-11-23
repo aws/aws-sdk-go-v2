@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"displayContent":{"body":"__Body__","title":"__Title__"},"productPageArn":"__ProductPageArn__","productPageId":"__ProductPageId__","tags":{"key0":"__Value__"},"updatedAt":946684800}

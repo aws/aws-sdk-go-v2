@@ -1,0 +1,5 @@
+POST /governance-policy-mgmt/accounts/__AccountId__/policy-assignments/batch-put
+
+Content-Type: application/json
+
+{"Assignments":[{"ExistingPolicyArn":"__ExistingPolicyArn__","PrincipalArn":"__PrincipalArn__","Revision":1},{"ExistingPolicyArn":"__ExistingPolicyArn__","PrincipalArn":"__PrincipalArn__","Revision":1}],"PolicyArn":"__PolicyArn__"}

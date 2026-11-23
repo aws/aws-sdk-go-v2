@@ -142,6 +142,38 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_ArchiveProject(t *testing.T) {
+	want := &ArchiveProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.ArchiveProjectResponse, schemas.ArchiveProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ArchiveProject.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
 	want := &BatchDeleteAdvancedPromptOptimizationJobOutput{
 		Errors: []types.BatchDeleteAdvancedPromptOptimizationJobError{
@@ -682,6 +714,38 @@ func TestUpdateResponseSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateProject(t *testing.T) {
+	want := &CreateProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectResponse, schemas.CreateProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateProject.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreatePromptRouter(t *testing.T) {
 	want := &CreatePromptRouterOutput{
 		PromptRouterArn: ptr.String("__PromptRouterArn__"),
@@ -726,6 +790,28 @@ func TestUpdateResponseSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateProvisionedModelThroughput.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteAccountDataRetentionStorage(t *testing.T) {
+	want := &DeleteAccountDataRetentionStorageOutput{}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAccountDataRetentionStorage, schemas.DeleteAccountDataRetentionStorageResponse, schemas.DeleteAccountDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteAccountDataRetentionStorage.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -994,6 +1080,50 @@ func TestUpdateResponseSnapshot_DeleteModelInvocationLoggingConfiguration(t *tes
 	}
 }
 
+func TestUpdateResponseSnapshot_DeleteOrganizationDataRetentionStorage(t *testing.T) {
+	want := &DeleteOrganizationDataRetentionStorageOutput{}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteOrganizationDataRetentionStorage, schemas.DeleteOrganizationDataRetentionStorageResponse, schemas.DeleteOrganizationDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteOrganizationDataRetentionStorage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteProjectDataRetentionStorage(t *testing.T) {
+	want := &DeleteProjectDataRetentionStorageOutput{}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteProjectDataRetentionStorage, schemas.DeleteProjectDataRetentionStorageResponse, schemas.DeleteProjectDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteProjectDataRetentionStorage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeletePromptRouter(t *testing.T) {
 	want := &DeletePromptRouterOutput{}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
@@ -1183,6 +1313,40 @@ func TestUpdateResponseSnapshot_GetAccountDataRetention(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetAccountDataRetention.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAccountDataRetentionStorage(t *testing.T) {
+	want := &GetAccountDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetAccountDataRetentionStorage, schemas.GetAccountDataRetentionStorageResponse, schemas.GetAccountDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAccountDataRetentionStorage.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2771,6 +2935,107 @@ func TestUpdateResponseSnapshot_GetModelInvocationLoggingConfiguration(t *testin
 	}
 }
 
+func TestUpdateResponseSnapshot_GetOrganizationDataRetentionStorage(t *testing.T) {
+	want := &GetOrganizationDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetOrganizationDataRetentionStorage, schemas.GetOrganizationDataRetentionStorageResponse, schemas.GetOrganizationDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetOrganizationDataRetentionStorage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetProject(t *testing.T) {
+	want := &GetProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetProject, schemas.GetProjectResponse, schemas.GetProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetProject.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetProjectDataRetentionStorage(t *testing.T) {
+	want := &GetProjectDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+		ProjectArn:     ptr.String("__ProjectArn__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetProjectDataRetentionStorage, schemas.GetProjectDataRetentionStorageResponse, schemas.GetProjectDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetProjectDataRetentionStorage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetPromptRouter(t *testing.T) {
 	want := &GetPromptRouterOutput{
 		PromptRouterName: ptr.String("__PromptRouterName__"),
@@ -2871,6 +3136,120 @@ func TestUpdateResponseSnapshot_GetResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetTrustedAccessProgram(t *testing.T) {
+	want := &GetTrustedAccessProgramOutput{
+		ProgramId:        ptr.String("__ProgramId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ProviderName:     ptr.String("__ProviderName__"),
+		DetailsUrl:       ptr.String("__DetailsUrl__"),
+		EnrollmentUrl:    ptr.String("__EnrollmentUrl__"),
+		Status:           types.TrustedAccessProgramStatus("requestable"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		Source:           types.TrustedAccessProgramScope("organization"),
+		EligibilityScope: types.TrustedAccessProgramScope("organization"),
+		ResolvedFor: &types.TrustedAccessResolutionContext{
+			AccountId:  ptr.String("__AccountId__"),
+			ProjectArn: ptr.String("__ProjectArn__"),
+		},
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetTrustedAccessProgram, schemas.GetTrustedAccessProgramResponse, schemas.GetTrustedAccessProgramResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetTrustedAccessProgram.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	want := &GetTrustedAccessProgramAccountEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetTrustedAccessProgramAccountEnrollment, schemas.GetTrustedAccessProgramAccountEnrollmentResponse, schemas.GetTrustedAccessProgramAccountEnrollmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetTrustedAccessProgramAccountEnrollment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	want := &GetTrustedAccessProgramOrganizationEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetTrustedAccessProgramOrganizationEnrollment, schemas.GetTrustedAccessProgramOrganizationEnrollmentResponse, schemas.GetTrustedAccessProgramOrganizationEnrollmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetTrustedAccessProgramOrganizationEnrollment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	want := &GetTrustedAccessProgramProjectEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.GetTrustedAccessProgramProjectEnrollment, schemas.GetTrustedAccessProgramProjectEnrollmentResponse, schemas.GetTrustedAccessProgramProjectEnrollmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetTrustedAccessProgramProjectEnrollment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4460,6 +4839,54 @@ func TestUpdateResponseSnapshot_ListModelInvocationJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListProjects(t *testing.T) {
+	want := &ListProjectsOutput{
+		ProjectSummaries: []types.ProjectSummary{
+			{
+				Id:         ptr.String("__Id__"),
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.ProjectStatus("active"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DataRetention: &types.ProjectDataRetention{
+					Mode: types.DataRetentionMode("default"),
+				},
+			},
+			{
+				Id:         ptr.String("__Id__"),
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.ProjectStatus("active"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DataRetention: &types.ProjectDataRetention{
+					Mode: types.DataRetentionMode("default"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.ListProjects, schemas.ListProjectsResponse, schemas.ListProjectsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListProjects.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListPromptRouters(t *testing.T) {
 	want := &ListPromptRoutersOutput{
 		PromptRouterSummaries: []types.PromptRouterSummary{
@@ -4619,6 +5046,68 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListTrustedAccessPrograms(t *testing.T) {
+	want := &ListTrustedAccessProgramsOutput{
+		ProgramSummaries: []types.TrustedAccessProgramSummary{
+			{
+				ProgramId:        ptr.String("__ProgramId__"),
+				Name:             ptr.String("__Name__"),
+				Description:      ptr.String("__Description__"),
+				ProviderName:     ptr.String("__ProviderName__"),
+				DetailsUrl:       ptr.String("__DetailsUrl__"),
+				EnrollmentUrl:    ptr.String("__EnrollmentUrl__"),
+				Status:           types.TrustedAccessProgramStatus("requestable"),
+				StatusReason:     ptr.String("__StatusReason__"),
+				Source:           types.TrustedAccessProgramScope("organization"),
+				EligibilityScope: types.TrustedAccessProgramScope("organization"),
+				ResolvedFor: &types.TrustedAccessResolutionContext{
+					AccountId:  ptr.String("__AccountId__"),
+					ProjectArn: ptr.String("__ProjectArn__"),
+				},
+				OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ProgramId:        ptr.String("__ProgramId__"),
+				Name:             ptr.String("__Name__"),
+				Description:      ptr.String("__Description__"),
+				ProviderName:     ptr.String("__ProviderName__"),
+				DetailsUrl:       ptr.String("__DetailsUrl__"),
+				EnrollmentUrl:    ptr.String("__EnrollmentUrl__"),
+				Status:           types.TrustedAccessProgramStatus("requestable"),
+				StatusReason:     ptr.String("__StatusReason__"),
+				Source:           types.TrustedAccessProgramScope("organization"),
+				EligibilityScope: types.TrustedAccessProgramScope("organization"),
+				ResolvedFor: &types.TrustedAccessResolutionContext{
+					AccountId:  ptr.String("__AccountId__"),
+					ProjectArn: ptr.String("__ProjectArn__"),
+				},
+				OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.ListTrustedAccessPrograms, schemas.ListTrustedAccessProgramsResponse, schemas.ListTrustedAccessProgramsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListTrustedAccessPrograms.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutAccountDataRetention(t *testing.T) {
 	want := &PutAccountDataRetentionOutput{
 		Mode:      types.DataRetentionMode("default"),
@@ -4640,6 +5129,40 @@ func TestUpdateResponseSnapshot_PutAccountDataRetention(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutAccountDataRetention.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutAccountDataRetentionStorage(t *testing.T) {
+	want := &PutAccountDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.PutAccountDataRetentionStorage, schemas.PutAccountDataRetentionStorageResponse, schemas.PutAccountDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutAccountDataRetentionStorage.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4692,6 +5215,75 @@ func TestUpdateResponseSnapshot_PutModelInvocationLoggingConfiguration(t *testin
 	}
 }
 
+func TestUpdateResponseSnapshot_PutOrganizationDataRetentionStorage(t *testing.T) {
+	want := &PutOrganizationDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.PutOrganizationDataRetentionStorage, schemas.PutOrganizationDataRetentionStorageResponse, schemas.PutOrganizationDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutOrganizationDataRetentionStorage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutProjectDataRetentionStorage(t *testing.T) {
+	want := &PutProjectDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+		ProjectArn:     ptr.String("__ProjectArn__"),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.PutProjectDataRetentionStorage, schemas.PutProjectDataRetentionStorageResponse, schemas.PutProjectDataRetentionStorageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutProjectDataRetentionStorage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	want := &PutResourcePolicyOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -4712,6 +5304,81 @@ func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	want := &PutTrustedAccessProgramAccountEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.PutTrustedAccessProgramAccountEnrollment, schemas.PutTrustedAccessProgramAccountEnrollmentResponse, schemas.PutTrustedAccessProgramAccountEnrollmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutTrustedAccessProgramAccountEnrollment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	want := &PutTrustedAccessProgramOrganizationEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.PutTrustedAccessProgramOrganizationEnrollment, schemas.PutTrustedAccessProgramOrganizationEnrollmentResponse, schemas.PutTrustedAccessProgramOrganizationEnrollmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutTrustedAccessProgramOrganizationEnrollment.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	want := &PutTrustedAccessProgramProjectEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.PutTrustedAccessProgramProjectEnrollment, schemas.PutTrustedAccessProgramProjectEnrollmentResponse, schemas.PutTrustedAccessProgramProjectEnrollmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutTrustedAccessProgramProjectEnrollment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4834,6 +5501,96 @@ func TestUpdateResponseSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *tes
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartAutomatedReasoningPolicyTestWorkflow.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartTrustedAccessProgramAccountApplication(t *testing.T) {
+	want := &StartTrustedAccessProgramAccountApplicationOutput{
+		Result: &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{
+			Value: types.TrustedAccessProgramProviderHandoff{
+				EnrollmentUrl:             ptr.String("__EnrollmentUrl__"),
+				ApplicationToken:          ptr.String("__ApplicationToken__"),
+				ApplicationTokenExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.StartTrustedAccessProgramAccountApplication, schemas.StartTrustedAccessProgramAccountApplicationResponse, schemas.StartTrustedAccessProgramAccountApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartTrustedAccessProgramAccountApplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartTrustedAccessProgramOrganizationApplication(t *testing.T) {
+	want := &StartTrustedAccessProgramOrganizationApplicationOutput{
+		Result: &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{
+			Value: types.TrustedAccessProgramProviderHandoff{
+				EnrollmentUrl:             ptr.String("__EnrollmentUrl__"),
+				ApplicationToken:          ptr.String("__ApplicationToken__"),
+				ApplicationTokenExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.StartTrustedAccessProgramOrganizationApplication, schemas.StartTrustedAccessProgramOrganizationApplicationResponse, schemas.StartTrustedAccessProgramOrganizationApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartTrustedAccessProgramOrganizationApplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartTrustedAccessProgramProjectApplication(t *testing.T) {
+	want := &StartTrustedAccessProgramProjectApplicationOutput{
+		Result: &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{
+			Value: types.TrustedAccessProgramProviderHandoff{
+				EnrollmentUrl:             ptr.String("__EnrollmentUrl__"),
+				ApplicationToken:          ptr.String("__ApplicationToken__"),
+				ApplicationTokenExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.StartTrustedAccessProgramProjectApplication, schemas.StartTrustedAccessProgramProjectApplicationResponse, schemas.StartTrustedAccessProgramProjectApplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartTrustedAccessProgramProjectApplication.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5151,6 +5908,38 @@ func TestUpdateResponseSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateProject(t *testing.T) {
+	want := &UpdateProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectResponse, schemas.UpdateProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateProject.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 	want := &UpdateProvisionedModelThroughputOutput{}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
@@ -5178,7 +5967,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
-	opSchema := smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -5203,7 +5992,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
-	opSchema := smithy.NewOperationSchema(schemas.BatchDeleteEvaluationJob, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -5228,7 +6017,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
-	opSchema := smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -5278,7 +6067,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
-	opSchema := smithy.NewOperationSchema(schemas.BatchDeleteEvaluationJob, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -5353,7 +6142,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
-	opSchema := smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -5404,7 +6193,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonBedrockControlPlaneService)
-	opSchema := smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.ArchiveProject, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

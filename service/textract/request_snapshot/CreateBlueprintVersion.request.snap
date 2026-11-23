@@ -1,0 +1,7 @@
+POST /service/Textract/operation/CreateBlueprintVersion
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿lBlueprintArnp__BlueprintArn__rClientRequestTokenv__ClientRequestToken__ÿ

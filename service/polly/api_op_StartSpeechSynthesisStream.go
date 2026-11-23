@@ -24,6 +24,17 @@ import (
 //
 // [SynthesizeSpeech]
 //
+// To use a custom voice, specify its ID in VoiceId . The voice must be in active
+// status. If the voice is in pending or failed status, the request fails with
+// ConflictException . If no custom voice with the specified ID exists in your
+// account and Region, the request fails with ResourceNotFoundException . If the
+// custom voice uses a customer managed key, you need kms:Decrypt permission on
+// the key. If you disabled the key or scheduled it for deletion, the request fails
+// with ValidationException . If you don't have permission to use the key, the
+// request fails with AccessDeniedException . If Amazon Web Services KMS throttles
+// Amazon Polly's request to use the key, the request fails with
+// ThrottlingException .
+//
 // [SynthesizeSpeech]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html
 func (c *Client) StartSpeechSynthesisStream(ctx context.Context, params *StartSpeechSynthesisStreamInput, optFns ...func(*Options)) (*StartSpeechSynthesisStreamOutput, error) {
 	if params == nil {
@@ -56,8 +67,9 @@ type StartSpeechSynthesisStreamInput struct {
 	// This member is required.
 	OutputFormat types.OutputFormat
 
-	// The voice to use in synthesis. To get a list of available voice IDs, use the [DescribeVoices]
-	// operation.
+	// The voice ID to use for the synthesis. To get a list of available voice IDs,
+	// use the [DescribeVoices]operation. To use a custom voice, specify the voice ID that CreateVoice
+	// returned, for example, vc-9a8fa85dd3 . You can't specify the ARN of a voice.
 	//
 	// [DescribeVoices]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
 	//

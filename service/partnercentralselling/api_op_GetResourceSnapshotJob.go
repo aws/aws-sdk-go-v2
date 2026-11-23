@@ -27,6 +27,7 @@ func (c *Client) GetResourceSnapshotJob(ctx context.Context, params *GetResource
 	return out, nil
 }
 
+// Contains the request parameters for the GetResourceSnapshotJob operation.
 type GetResourceSnapshotJobInput struct {
 
 	// Specifies the catalog related to the request. Valid values are:
@@ -63,6 +64,7 @@ func (v *GetResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 }
 
+// Contains the response that the GetResourceSnapshotJob action returns.
 type GetResourceSnapshotJobOutput struct {
 
 	// The catalog in which the snapshot job was created. This will match the Catalog

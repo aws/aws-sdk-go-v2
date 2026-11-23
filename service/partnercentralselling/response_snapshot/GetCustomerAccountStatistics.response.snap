@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.GetCustomerAccountStatistics
+
+{"Aggregations":[{"Buckets":[{"Count":1,"Values":["__Member__","__Member__"]},{"Count":1,"Values":["__Member__","__Member__"]}],"GroupBy":["ENRICHMENT_STATUS","ENRICHMENT_STATUS"],"OtherCount":1},{"Buckets":[{"Count":1,"Values":["__Member__","__Member__"]},{"Count":1,"Values":["__Member__","__Member__"]}],"GroupBy":["ENRICHMENT_STATUS","ENRICHMENT_STATUS"],"OtherCount":1}],"TotalCount":1}

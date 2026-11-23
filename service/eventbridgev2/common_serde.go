@@ -22,6 +22,52 @@ func serializeEventSourceConfiguration(s smithy.ShapeSerializer, schema *smithy.
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.EventSourceConfigurationMemberWebhookEventsConfiguration:
+		s.WriteUnion(schema, schemas.EventSourceConfiguration_WebhookEventsConfiguration)
+		s.WriteStruct(schemas.EventSourceConfiguration_WebhookEventsConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeWebhookAuthConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.WebhookAuthConfiguration) {
+	switch vv := v.(type) {
+	case *types.WebhookAuthConfigurationMemberBasicHttpAuthConfiguration:
+		s.WriteUnion(schema, schemas.WebhookAuthConfiguration_BasicHttpAuthConfiguration)
+		s.WriteStruct(schemas.WebhookAuthConfiguration_BasicHttpAuthConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.WebhookAuthConfigurationMemberHmacAuthConfiguration:
+		s.WriteUnion(schema, schemas.WebhookAuthConfiguration_HmacAuthConfiguration)
+		s.WriteStruct(schemas.WebhookAuthConfiguration_HmacAuthConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.WebhookAuthConfigurationMemberStaticTokenAuthConfiguration:
+		s.WriteUnion(schema, schemas.WebhookAuthConfiguration_StaticTokenAuthConfiguration)
+		s.WriteStruct(schemas.WebhookAuthConfiguration_StaticTokenAuthConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeWebhookCredential(s smithy.ShapeSerializer, schema *smithy.Schema, v types.WebhookCredential) {
+	switch vv := v.(type) {
+	case *types.WebhookCredentialMemberBasicHttpPassword:
+		s.WriteUnion(schema, schemas.WebhookCredential_BasicHttpPassword)
+		s.WriteString(schemas.WebhookCredential_BasicHttpPassword, vv.Value)
+		s.CloseUnion()
+	case *types.WebhookCredentialMemberHmacSecretValue:
+		s.WriteUnion(schema, schemas.WebhookCredential_HmacSecretValue)
+		s.WriteString(schemas.WebhookCredential_HmacSecretValue, vv.Value)
+		s.CloseUnion()
+	case *types.WebhookCredentialMemberStaticTokenSecretValue:
+		s.WriteUnion(schema, schemas.WebhookCredential_StaticTokenSecretValue)
+		s.WriteString(schemas.WebhookCredential_StaticTokenSecretValue, vv.Value)
+		s.CloseUnion()
 	}
 }
 
@@ -34,6 +80,50 @@ func deserializeEventSourceConfiguration(d smithy.ShapeDeserializer, s *smithy.S
 			return vv.Deserialize(d)
 		case schemas.EventSourceConfiguration_PartnerEventsConfiguration:
 			vv := &types.EventSourceConfigurationMemberPartnerEventsConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EventSourceConfiguration_WebhookEventsConfiguration:
+			vv := &types.EventSourceConfigurationMemberWebhookEventsConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeWebhookAuthConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.WebhookAuthConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.WebhookAuthConfiguration_BasicHttpAuthConfiguration:
+			vv := &types.WebhookAuthConfigurationMemberBasicHttpAuthConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.WebhookAuthConfiguration_HmacAuthConfiguration:
+			vv := &types.WebhookAuthConfigurationMemberHmacAuthConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.WebhookAuthConfiguration_StaticTokenAuthConfiguration:
+			vv := &types.WebhookAuthConfigurationMemberStaticTokenAuthConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeWebhookCredential(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.WebhookCredential) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.WebhookCredential_BasicHttpPassword:
+			vv := &types.WebhookCredentialMemberBasicHttpPassword{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.WebhookCredential_HmacSecretValue:
+			vv := &types.WebhookCredentialMemberHmacSecretValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.WebhookCredential_StaticTokenSecretValue:
+			vv := &types.WebhookCredentialMemberStaticTokenSecretValue{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -62,6 +152,16 @@ func serializeEventSourceSummaryList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Filter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMskHeaderList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MskHeader) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -155,6 +255,14 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 	s.CloseList()
 }
 
+func serializeWebhookMetadataHttpHeaderList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func deserializeEventBusSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventBusSummary) error {
 	*v = make([]types.EventBusSummary, 0)
 	var vv types.EventBusSummary
@@ -212,6 +320,28 @@ func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 		}
 
 		vv = types.Filter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMskHeaderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MskHeader) error {
+	*v = make([]types.MskHeader, 0)
+	var vv types.MskHeader
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MskHeader
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MskHeader{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -396,6 +526,27 @@ func deserializeSubscriberSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWebhookMetadataHttpHeaderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {

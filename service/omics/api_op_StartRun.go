@@ -126,7 +126,7 @@ type StartRunInput struct {
 
 	// Engine-specific settings for the workflow run. Use this field to specify
 	// configuration options that are specific to the workflow engine (for example,
-	// Nextflow profiles).
+	// Nextflow profiles, Nextflow runtime configuration).
 	EngineSettings document.Interface
 
 	// A log level for the run.
@@ -148,8 +148,23 @@ type StartRunInput struct {
 	// Parameters for the run. The run needs all required parameters and can include
 	// optional parameters. The run cannot include any parameters that are not defined
 	// in the parameter template. To retrieve parameters from the run, use the GetRun
-	// API operation.
+	// API operation. To supply the parameters in a file in S3 instead, use
+	// parametersUri . Specify either parameters or parametersUri , not both.
 	Parameters document.Interface
+
+	// The S3 URI of a JSON file that contains the run parameters. Use this field
+	// instead of parameters when your parameters are too large for the request.
+	// Specify either parameters or parametersUri , not both.
+	//
+	// Amazon Web Services HealthOmics validates the file after StartRun returns. If
+	// the file isn't valid, Amazon Web Services HealthOmics fails the run with the
+	// failure reason INVALID_RUN_PARAMETERS . For more information about permissions,
+	// limits, and other requirements, see [Amazon Web Services HealthOmics run inputs]and [Amazon Web Services HealthOmics service quotas] in the Amazon Web Services HealthOmics
+	// User Guide.
+	//
+	// [Amazon Web Services HealthOmics run inputs]: https://docs.aws.amazon.com/omics/latest/dev/workflows-run-inputs.html
+	// [Amazon Web Services HealthOmics service quotas]: https://docs.aws.amazon.com/omics/latest/dev/fixed-quotas.html
+	ParametersUri *string
 
 	// Use the run priority (highest: 1) to establish the order of runs in a run group
 	// when you start a run. If multiple runs share the same priority, the run that was
@@ -160,6 +175,11 @@ type StartRunInput struct {
 	//
 	// [Run priority]: https://docs.aws.amazon.com/omics/latest/dev/creating-run-groups.html#run-priority
 	Priority *int32
+
+	// Specifies whether the workflow run that this request starts can read inputs
+	// from Amazon S3 buckets that use Requester Pays. Your account pays the request
+	// and data transfer charges for those reads. The default is false .
+	RequesterPaysEnabled *bool
 
 	// The retention mode for the run. The default value is RETAIN .
 	//
@@ -277,11 +297,17 @@ func (v *StartRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Parameters != nil {
 		s.WriteDocument(schemas.StartRunRequest_parameters, &smithydocument.Opaque{Value: v.Parameters})
 	}
+	if v.ParametersUri != nil {
+		s.WriteString(schemas.StartRunRequest_parametersUri, *v.ParametersUri)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.StartRunRequest_priority, *v.Priority)
 	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.StartRunRequest_requestId, *v.RequestId)
+	}
+	if v.RequesterPaysEnabled != nil {
+		s.WriteBool(schemas.StartRunRequest_requesterPaysEnabled, *v.RequesterPaysEnabled)
 	}
 	if v.RetentionMode != "" {
 		s.WriteString(schemas.StartRunRequest_retentionMode, string(v.RetentionMode))

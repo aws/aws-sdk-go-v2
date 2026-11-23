@@ -28,6 +28,7 @@ func (c *Client) UpdateEngagementContext(ctx context.Context, params *UpdateEnga
 	return out, nil
 }
 
+// Contains the request parameters for the UpdateEngagementContext operation.
 type UpdateEngagementContextInput struct {
 
 	// Specifies the catalog associated with the engagement context update request.
@@ -98,6 +99,7 @@ func (v *UpdateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer
 	}
 }
 
+// Contains the response that the UpdateEngagementContext action returns.
 type UpdateEngagementContextOutput struct {
 
 	// The unique identifier of the engagement context that was updated.

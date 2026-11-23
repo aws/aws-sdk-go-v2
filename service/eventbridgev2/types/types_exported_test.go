@@ -17,6 +17,9 @@ func ExampleEventSourceConfiguration_outputUsage() {
 	case *types.EventSourceConfigurationMemberPartnerEventsConfiguration:
 		_ = v.Value // Value is types.PartnerEventsSourceConfiguration
 
+	case *types.EventSourceConfigurationMemberWebhookEventsConfiguration:
+		_ = v.Value // Value is types.WebhookEventsSourceConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -28,3 +31,54 @@ func ExampleEventSourceConfiguration_outputUsage() {
 
 var _ *types.PartnerEventsSourceConfiguration
 var _ *types.AwsServiceEventsSourceConfiguration
+var _ *types.WebhookEventsSourceConfiguration
+
+func ExampleWebhookAuthConfiguration_outputUsage() {
+	var union types.WebhookAuthConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WebhookAuthConfigurationMemberBasicHttpAuthConfiguration:
+		_ = v.Value // Value is types.WebhookBasicHttpAuthConfiguration
+
+	case *types.WebhookAuthConfigurationMemberHmacAuthConfiguration:
+		_ = v.Value // Value is types.WebhookHmacAuthConfiguration
+
+	case *types.WebhookAuthConfigurationMemberStaticTokenAuthConfiguration:
+		_ = v.Value // Value is types.WebhookStaticTokenAuthConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WebhookHmacAuthConfiguration
+var _ *types.WebhookStaticTokenAuthConfiguration
+var _ *types.WebhookBasicHttpAuthConfiguration
+
+func ExampleWebhookCredential_outputUsage() {
+	var union types.WebhookCredential
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WebhookCredentialMemberBasicHttpPassword:
+		_ = v.Value // Value is string
+
+	case *types.WebhookCredentialMemberHmacSecretValue:
+		_ = v.Value // Value is string
+
+	case *types.WebhookCredentialMemberStaticTokenSecretValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string

@@ -1,3 +1,7 @@
+# v1.219.0 (2026-11-19)
+
+* **Feature**: Amazon Connect adds voicemail support, with new reference types, file use case types, contact details, and a voicemail task contact subtype for managing voicemail recordings and transcripts.
+
 # v1.218.0 (2026-11-17)
 
 * **Feature**: Evaluation forms can now adapt to each contact. Questions and sections can be shown or hidden, and single-select answers can be set automatically, based on answers to other questions, contact data (Contact Lens categories, sentiment, agent, queue, contact attributes and more).

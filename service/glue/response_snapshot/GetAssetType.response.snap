@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSGlue.GetAssetType
 
-{"Forms":{"key0":{"FormTypeIdentifier":"__FormTypeIdentifier__"}},"Id":"__Id__","Name":"__Name__"}
+{"Forms":{"key0":{"FormTypeId":"__FormTypeId__"}},"Id":"__Id__","Name":"__Name__"}

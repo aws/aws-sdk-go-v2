@@ -915,6 +915,7 @@ const (
 	StackAttributeAccessEndpoints                StackAttribute = "ACCESS_ENDPOINTS"
 	StackAttributeStreamingExperienceSettings    StackAttribute = "STREAMING_EXPERIENCE_SETTINGS"
 	StackAttributeContentRedirection             StackAttribute = "CONTENT_REDIRECTION"
+	StackAttributeWebAuthnRedirection            StackAttribute = "WEB_AUTHN_REDIRECTION"
 	StackAttributeAgentAccessConfig              StackAttribute = "AGENT_ACCESS_CONFIG"
 	StackAttributeStorageConnectorAuthentication StackAttribute = "STORAGE_CONNECTOR_AUTHENTICATION"
 	StackAttributeAgentAccessConfigKmsKeyArn     StackAttribute = "AGENT_ACCESS_CONFIG_KMS_KEY_ARN"
@@ -939,6 +940,7 @@ func (StackAttribute) Values() []StackAttribute {
 		"ACCESS_ENDPOINTS",
 		"STREAMING_EXPERIENCE_SETTINGS",
 		"CONTENT_REDIRECTION",
+		"WEB_AUTHN_REDIRECTION",
 		"AGENT_ACCESS_CONFIG",
 		"STORAGE_CONNECTOR_AUTHENTICATION",
 		"AGENT_ACCESS_CONFIG_KMS_KEY_ARN",

@@ -1,0 +1,6 @@
+400
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿f__typesValidationExceptioniFieldListŸ¿dCodeoVALUE_TOO_SHORTgFieldIdk__FieldId__gMessagek__Message__dNameh__Name__ÿ¿dCodeoVALUE_TOO_SHORTgFieldIdk__FieldId__gMessagek__Message__dNameh__Name__ÿÿgMessagek__Message__fReasonwFIELD_VALIDATION_FAILEDÿ

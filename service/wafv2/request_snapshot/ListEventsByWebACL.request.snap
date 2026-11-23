@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.ListEventsByWebACL
+
+{"ApiPatternFilters":[{"Domains":["__Member__","__Member__"],"Method":"__Method__","PathPattern":"__PathPattern__","Port":1},{"Domains":["__Member__","__Member__"],"Method":"__Method__","PathPattern":"__PathPattern__","Port":1}],"Filters":[{"Name":"EVENT_CATEGORY","Values":["__Member__","__Member__"]},{"Name":"EVENT_CATEGORY","Values":["__Member__","__Member__"]}],"Include":["TIMELINE","TIMELINE"],"Limit":1,"NextMarker":"__NextMarker__","Scope":"CLOUDFRONT","SortBy":"START_TIME","SortOrder":"ASC","TimeWindow":{"EndTime":946684800,"StartTime":946684800},"WebAclArn":"__WebAclArn__"}

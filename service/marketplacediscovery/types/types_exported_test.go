@@ -69,6 +69,52 @@ var _ *types.ContainerFulfillmentOption
 var _ *types.SageMakerModelFulfillmentOption
 var _ *types.CloudFormationFulfillmentOption
 
+func ExampleListingAttributeResults_outputUsage() {
+	var union types.ListingAttributeResults
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ListingAttributeResultsMemberCaseStudy:
+		_ = v.Value // Value is types.CaseStudy
+
+	case *types.ListingAttributeResultsMemberSpecializationDetail:
+		_ = v.Value // Value is types.SpecializationDetail
+
+	case *types.ListingAttributeResultsMemberTrustCenterCertification:
+		_ = v.Value // Value is types.TrustCenterCertificationAttribute
+
+	case *types.ListingAttributeResultsMemberTrustCenterControl:
+		_ = v.Value // Value is types.TrustCenterControl
+
+	case *types.ListingAttributeResultsMemberTrustCenterDocument:
+		_ = v.Value // Value is types.TrustCenterDocumentAttribute
+
+	case *types.ListingAttributeResultsMemberTrustCenterFaq:
+		_ = v.Value // Value is types.TrustCenterFaqAttribute
+
+	case *types.ListingAttributeResultsMemberTrustCenterSource:
+		_ = v.Value // Value is types.TrustCenterSource
+
+	case *types.ListingAttributeResultsMemberTrustCenterUpdate:
+		_ = v.Value // Value is types.TrustCenterUpdateAttribute
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TrustCenterDocumentAttribute
+var _ *types.CaseStudy
+var _ *types.TrustCenterControl
+var _ *types.TrustCenterCertificationAttribute
+var _ *types.TrustCenterUpdateAttribute
+var _ types.SpecializationDetail
+var _ *types.TrustCenterSource
+var _ *types.TrustCenterFaqAttribute
+
 func ExampleOfferTerm_outputUsage() {
 	var union types.OfferTerm
 	// type switches can be used to check the union value
@@ -178,6 +224,46 @@ func ExamplePromotionalMedia_outputUsage() {
 
 var _ *types.PromotionalEmbeddedImage
 var _ *types.PromotionalEmbeddedVideo
+
+func ExampleSaasDeploymentTemplate_outputUsage() {
+	var union types.SaasDeploymentTemplate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SaasDeploymentTemplateMemberCloudFormationDeploymentTemplate:
+		_ = v.Value // Value is types.SaasCloudFormationDeploymentTemplate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SaasCloudFormationDeploymentTemplate
+
+func ExampleSpecializationDetail_outputUsage() {
+	var union types.SpecializationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SpecializationDetailMemberSpecialization:
+		_ = v.Value // Value is types.Specialization
+
+	case *types.SpecializationDetailMemberSpecializationCategory:
+		_ = v.Value // Value is types.SpecializationCategory
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SpecializationCategory
+var _ *types.Specialization
 
 func ExampleTermTemplate_outputUsage() {
 	var union types.TermTemplate

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateSnapmirrorRelationship
+
+{"ClientRequestToken":"__ClientRequestToken__","PolicyId":"__PolicyId__","SnapmirrorRelationshipId":"__SnapmirrorRelationshipId__","State":"SNAPMIRRORED","ThrottleInKbps":1,"TransferSchedule":"__TransferSchedule__"}

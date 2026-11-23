@@ -4380,6 +4380,11 @@ type Stack struct {
 	// sessions. By default these actions are enabled.
 	UserSettings []UserSetting
 
+	// Configuration for WebAuthn redirection between the streaming session and the
+	// user's local device. Use ProcessCompatibilityList to specify which processes can
+	// use WebAuthn redirection on Windows fleets.
+	WebAuthnRedirection *WebAuthnRedirection
+
 	noSmithyDocumentSerde
 }
 
@@ -4449,6 +4454,11 @@ func (v *Stack) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UserSettings != nil {
 		serializeUserSettingList(s, schemas.Stack_UserSettings, v.UserSettings)
 	}
+	if v.WebAuthnRedirection != nil {
+		s.WriteStruct(schemas.Stack_WebAuthnRedirection)
+		v.WebAuthnRedirection.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *Stack) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Stack, func(s *smithy.Schema) error {
@@ -4503,6 +4513,9 @@ func (v *Stack) Deserialize(d smithy.ShapeDeserializer) error {
 			return v.StreamingExperienceSettings.Deserialize(d)
 		case schemas.Stack_UserSettings:
 			return deserializeUserSettingList(d, schemas.Stack_UserSettings, &v.UserSettings)
+		case schemas.Stack_WebAuthnRedirection:
+			v.WebAuthnRedirection = &WebAuthnRedirection{}
+			return v.WebAuthnRedirection.Deserialize(d)
 		}
 		return nil
 	})
@@ -5337,6 +5350,51 @@ func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeSecurityGroupIdList(d, schemas.VpcConfig_SecurityGroupIds, &v.SecurityGroupIds)
 		case schemas.VpcConfig_SubnetIds:
 			return deserializeSubnetIdList(d, schemas.VpcConfig_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
+// Describes the WebAuthn redirection configuration for a stack. With WebAuthn
+// redirection, your users can complete passkey and security-key authentication
+// from a streaming session by using an authenticator attached to their local
+// device.
+type WebAuthnRedirection struct {
+
+	// Specifies whether WebAuthn redirection is enabled for the stack.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The list of process executable names for which you enable WebAuthn redirection.
+	// For example, chrome.exe.
+	ProcessCompatibilityList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WebAuthnRedirection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebAuthnRedirection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebAuthnRedirection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.WebAuthnRedirection_Enabled, *v.Enabled)
+	}
+	if v.ProcessCompatibilityList != nil {
+		serializeProcessCompatibilityList(s, schemas.WebAuthnRedirection_ProcessCompatibilityList, v.ProcessCompatibilityList)
+	}
+}
+func (v *WebAuthnRedirection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebAuthnRedirection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebAuthnRedirection_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.WebAuthnRedirection_Enabled, v.Enabled)
+		case schemas.WebAuthnRedirection_ProcessCompatibilityList:
+			return deserializeProcessCompatibilityList(d, schemas.WebAuthnRedirection_ProcessCompatibilityList, &v.ProcessCompatibilityList)
 		}
 		return nil
 	})

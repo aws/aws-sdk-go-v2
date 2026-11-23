@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/assets/__Identifier__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","targetProjectIdentifier":"__TargetProjectIdentifier__"}

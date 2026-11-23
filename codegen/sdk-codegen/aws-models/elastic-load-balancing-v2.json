@@ -1026,6 +1026,124 @@
                 "target": "com.amazonaws.elasticloadbalancingv2#Cipher"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilter": {
+            "type": "structure",
+            "members": {
+                "Field": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterField",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The client certificate field to match. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>subject-cn</code> – The common name in the certificate subject.</p>\n            </li>\n            <li>\n               <p>\n                  <code>subject-ou</code> – The organizational unit in the certificate subject.</p>\n            </li>\n            <li>\n               <p>\n                  <code>san-dns</code> – A DNS name in the subject alternative name (SAN).</p>\n            </li>\n            <li>\n               <p>\n                  <code>san-uri</code> – A URI in the subject alternative name (SAN).</p>\n            </li>\n         </ul>\n         <p>If the client certificate doesn't contain the field, the filter doesn't match. If the\n      field has multiple values, the filter matches if it matches any one of the values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterAction",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The action to take when the client certificate matches the filter. The only supported\n      action is <code>accept</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchType": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterMatchType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The match type. The possible values are <code>exact</code> and\n      <code>prefix</code>.</p>\n         <p>For the <code>subject-cn</code>, <code>subject-ou</code>, and <code>san-dns</code>\n      fields, matching is case-insensitive. For the <code>san-uri</code> field, the scheme and host\n      are matched case-insensitively, and the rest of the URI is matched case-sensitively.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The value to match. The value must be 1–256 printable ASCII characters.</p>\n         <p>If the field is <code>san-uri</code>, the value must begin with a letter. Before the\n      first colon, the value can contain only letters, digits, plus signs (+), hyphens (-), or\n      periods (.). If the match type is <code>exact</code>, the value must contain a colon. For\n      example, <code>spiffe://example.com/workload</code> is a valid value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a client certificate identity filter.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterAction": {
+            "type": "enum",
+            "members": {
+                "ACCEPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "accept"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterField": {
+            "type": "enum",
+            "members": {
+                "SUBJECT_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "subject-cn"
+                    }
+                },
+                "SUBJECT_OU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "subject-ou"
+                    }
+                },
+                "SAN_DNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "san-dns"
+                    }
+                },
+                "SAN_URI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "san-uri"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterMatchType": {
+            "type": "enum",
+            "members": {
+                "EXACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "exact"
+                    }
+                },
+                "PREFIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prefix"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#ConditionFieldName": {
             "type": "string",
             "traits": {
@@ -1243,7 +1361,7 @@
                 "MutualAuthentication": {
                     "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>[HTTPS listeners] The mutual authentication configuration information.</p>"
+                        "smithy.api#documentation": "<p>[HTTPS and TLS listeners] The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -1931,7 +2049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a trust store.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/mutual-authentication.html\">Mutual TLS for Application Load Balancers</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a trust store.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/mutual-authentication.html\">Mutual TLS for Application Load Balancers</a>\n      or <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/mutual-authentication.html\">Mutual TLS for Network Load Balancers</a>.</p>"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#CreateTrustStoreInput": {
@@ -2910,6 +3028,34 @@
                 },
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeLoadBalancersSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    },
+                    {
+                        "id": "DescribeLoadBalancersFailure",
+                        "params": {
+                            "LoadBalancerArns": [
+                                "fake_load_balancer"
+                            ]
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
                 ],
                 "smithy.waiters#waitable": {
                     "LoadBalancerAvailable": {
@@ -7272,7 +7418,7 @@
                 "MutualAuthentication": {
                     "target": "com.amazonaws.elasticloadbalancingv2#MutualAuthenticationAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>[HTTPS listeners] The mutual authentication configuration information.</p>"
+                        "smithy.api#documentation": "<p>[HTTPS and TLS listeners] The mutual authentication configuration information.</p>"
                     }
                 }
             },
@@ -7962,7 +8108,7 @@
                 "Mode": {
                     "target": "com.amazonaws.elasticloadbalancingv2#Mode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client certificate handling method. Options are <code>off</code>, \n      <code>passthrough</code> or <code>verify</code>. The default value is \n      <code>off</code>.</p>"
+                        "smithy.api#documentation": "<p>The client certificate handling method. The default value is <code>off</code>.</p>\n         <p>[Application Load Balancers] The possible values are <code>off</code>,\n      <code>passthrough</code>, and <code>verify</code>.</p>\n         <p>[Network Load Balancers] The possible values are <code>off</code> and\n      <code>verify</code>.</p>"
                     }
                 },
                 "TrustStoreArn": {
@@ -7987,6 +8133,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#AdvertiseTrustStoreCaNamesEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether trust store CA certificate names are advertised.</p>"
+                    }
+                },
+                "ClientCertificateIdentityFilters": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ClientCertificateIdentityFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Network Load Balancers] The client certificate identity filters. The load balancer\n      admits a connection only if the client certificate matches at least one filter. If you\n      don't specify any filters, the load balancer admits every client certificate that passes\n      trust store validation and revocation checks.</p>\n         <p>You can specify filters only when the mode is <code>verify</code>. You can specify up\n      to 100 filters per listener.</p>"
                     }
                 }
             },

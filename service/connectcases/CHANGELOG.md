@@ -1,3 +1,7 @@
+# v1.54.0 (2026-11-19)
+
+* **Feature**: This release adds support for SLAs that track any single-select field, including custom fields, and for updating the target duration of an SLA with the UpdateRelatedItem API.
+
 # v1.53.0 (2026-11-17)
 
 * **Feature**: PutCaseEventConfiguration now supports an optional autoIncludeFields attribute on case event included data. Set it to All, System, or Custom to automatically include a category of case fields in case event data, combined as a union with any fields you list explicitly.

@@ -13,7 +13,11 @@ import (
 //	Retrieves multiple discoverable registry records by ID from a single registry.
 //
 // Records that cannot be retrieved are reported individually in the errors list
-// rather than failing the entire request.
+// rather than failing the entire request. For each skill record that has a skill
+// package, the operation also returns artifact . It contains a short-lived
+// download URL and a SHA-256 checksum for the package of the record's latest
+// approved revision. If the registry can't create a download URL for a package,
+// the whole request fails.
 func (c *Client) BatchGetDiscoverableRegistryRecord(ctx context.Context, params *BatchGetDiscoverableRegistryRecordInput, optFns ...func(*Options)) (*BatchGetDiscoverableRegistryRecordOutput, error) {
 	if params == nil {
 		params = &BatchGetDiscoverableRegistryRecordInput{}

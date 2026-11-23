@@ -28,6 +28,7 @@ func (c *Client) AcceptEngagementInvitation(ctx context.Context, params *AcceptE
 	return out, nil
 }
 
+// Contains the request parameters for the AcceptEngagementInvitation operation.
 type AcceptEngagementInvitationInput struct {
 
 	// The CatalogType parameter specifies the catalog associated with the engagement
@@ -37,8 +38,8 @@ type AcceptEngagementInvitationInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  The Identifier parameter in the AcceptEngagementInvitationRequest specifies
-	// the unique identifier of the EngagementInvitation to be accepted. Providing the
+	// The Identifier parameter in the AcceptEngagementInvitationRequest specifies the
+	// unique identifier of the EngagementInvitation to be accepted. Providing the
 	// correct identifier ensures that the intended invitation is accepted.
 	//
 	// This member is required.

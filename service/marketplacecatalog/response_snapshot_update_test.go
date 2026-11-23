@@ -247,6 +247,7 @@ func TestUpdateResponseSnapshot_DescribeAssessment(t *testing.T) {
 			{
 				ControlId:               ptr.String("__ControlId__"),
 				ControlAssessmentResult: types.ControlAssessmentResult("PASS"),
+				VerificationSource:      types.VerificationSource("AWS_VERIFIED"),
 				Errors: []types.ControlError{
 					{
 						Code:    ptr.String("__Code__"),
@@ -277,10 +278,337 @@ func TestUpdateResponseSnapshot_DescribeAssessment(t *testing.T) {
 						},
 					},
 				},
+				ControlSummary: &types.ControlSummaryMemberListingRecommendations{
+					Value: &types.ListingRecommendationsMemberProductContentRecommendations{
+						Value: types.ProductContentRecommendations{
+							ProductTitle: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							ShortDescription: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							LongDescription: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							SupportDescription: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							Highlights: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							SearchKeywords: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							Categories: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							AdditionalResources: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							Citations: []types.RecommendationCitation{
+								{
+									Url: ptr.String("__Url__"),
+								},
+								{
+									Url: ptr.String("__Url__"),
+								},
+							},
+						},
+					},
+				},
 			},
 			{
 				ControlId:               ptr.String("__ControlId__"),
 				ControlAssessmentResult: types.ControlAssessmentResult("PASS"),
+				VerificationSource:      types.VerificationSource("AWS_VERIFIED"),
 				Errors: []types.ControlError{
 					{
 						Code:    ptr.String("__Code__"),
@@ -307,6 +635,332 @@ func TestUpdateResponseSnapshot_DescribeAssessment(t *testing.T) {
 							{
 								Name:  ptr.String("__Name__"),
 								Value: ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				ControlSummary: &types.ControlSummaryMemberListingRecommendations{
+					Value: &types.ListingRecommendationsMemberProductContentRecommendations{
+						Value: types.ProductContentRecommendations{
+							ProductTitle: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							ShortDescription: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							LongDescription: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							SupportDescription: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							Highlights: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							SearchKeywords: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							Categories: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							AdditionalResources: &types.ContentRecommendation{
+								Status: types.ContentRecommendationStatus("GENERATED"),
+								Alternatives: &types.ContentAlternativesMemberText{
+									Value: []types.TextAlternative{
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+										{
+											Value:     ptr.String("__Value__"),
+											Rationale: ptr.String("__Rationale__"),
+										},
+									},
+								},
+								FollowUpQuestions: []types.FollowUpQuestion{
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+									{
+										Question:      ptr.String("__Question__"),
+										Justification: ptr.String("__Justification__"),
+									},
+								},
+								Findings: []types.ListingFinding{
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+									{
+										Action:      ptr.String("__Action__"),
+										Description: ptr.String("__Description__"),
+										Severity:    types.RecommendationSeverity("BLOCKING"),
+										Status:      types.ListingFindingStatus("PASS"),
+									},
+								},
+							},
+							Citations: []types.RecommendationCitation{
+								{
+									Url: ptr.String("__Url__"),
+								},
+								{
+									Url: ptr.String("__Url__"),
+								},
 							},
 						},
 					},
@@ -601,11 +1255,12 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 					Visibility:   types.SaaSProductVisibilityString("Limited"),
 				},
 				OfferSummary: &types.OfferSummary{
-					Name:                  ptr.String("__Name__"),
-					ProductId:             ptr.String("__ProductId__"),
-					ResaleAuthorizationId: ptr.String("__ResaleAuthorizationId__"),
-					ReleaseDate:           ptr.String("__ReleaseDate__"),
-					AvailabilityEndDate:   ptr.String("__AvailabilityEndDate__"),
+					Name:                      ptr.String("__Name__"),
+					ProductId:                 ptr.String("__ProductId__"),
+					ResaleAuthorizationId:     ptr.String("__ResaleAuthorizationId__"),
+					SubsidiaryAuthorizationId: ptr.String("__SubsidiaryAuthorizationId__"),
+					ReleaseDate:               ptr.String("__ReleaseDate__"),
+					AvailabilityEndDate:       ptr.String("__AvailabilityEndDate__"),
 					BuyerAccounts: []string{
 						"__Member__",
 						"__Member__",
@@ -687,11 +1342,12 @@ func TestUpdateResponseSnapshot_ListEntities(t *testing.T) {
 					Visibility:   types.SaaSProductVisibilityString("Limited"),
 				},
 				OfferSummary: &types.OfferSummary{
-					Name:                  ptr.String("__Name__"),
-					ProductId:             ptr.String("__ProductId__"),
-					ResaleAuthorizationId: ptr.String("__ResaleAuthorizationId__"),
-					ReleaseDate:           ptr.String("__ReleaseDate__"),
-					AvailabilityEndDate:   ptr.String("__AvailabilityEndDate__"),
+					Name:                      ptr.String("__Name__"),
+					ProductId:                 ptr.String("__ProductId__"),
+					ResaleAuthorizationId:     ptr.String("__ResaleAuthorizationId__"),
+					SubsidiaryAuthorizationId: ptr.String("__SubsidiaryAuthorizationId__"),
+					ReleaseDate:               ptr.String("__ReleaseDate__"),
+					AvailabilityEndDate:       ptr.String("__AvailabilityEndDate__"),
 					BuyerAccounts: []string{
 						"__Member__",
 						"__Member__",
@@ -824,6 +1480,30 @@ func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("PutResourcePolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartAssessment(t *testing.T) {
+	want := &StartAssessmentOutput{
+		AssessmentId: ptr.String("__AssessmentId__"),
+	}
+	proto := restjson1.New(schemas.AWSMPSeymour)
+	opSchema := smithy.NewOperationSchema(schemas.StartAssessment, schemas.StartAssessmentResponse, schemas.StartAssessmentResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartAssessment.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1027,7 +1707,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AWSMPSeymour)
-	opSchema := smithy.NewOperationSchema(schemas.StartChangeSet, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.StartAssessment, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

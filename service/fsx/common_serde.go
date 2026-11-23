@@ -35,6 +35,14 @@ func serializeAliases(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 	s.CloseList()
 }
 
+func serializeAllowedSvmIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeAlternateDNSNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -52,6 +60,42 @@ func serializeBackupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeBackups(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Backup) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeClusterPeerFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClusterPeerFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeClusterPeerFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeClusterPeerIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeClusterPeers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClusterPeer) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -289,6 +333,14 @@ func serializeOpenZFSUserAndGroupQuotas(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializePeerAddresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeRepositoryDnsIps(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -357,6 +409,88 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeSnapmirrorPolicies(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapmirrorPolicy) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorPolicyFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapmirrorPolicyFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorPolicyFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorPolicyIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorPolicyRetentionRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapmirrorPolicyRetentionRule) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorRelationshipFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapmirrorRelationshipFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorRelationshipFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorRelationshipIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapmirrorRelationships(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapmirrorRelationship) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSnapshotFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapshotFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -379,6 +513,52 @@ func serializeSnapshotIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapshotPolicies(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapshotPolicy) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapshotPolicyFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapshotPolicyFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSnapshotPolicyFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapshotPolicyIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSnapshotPolicyScheduleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SnapshotPolicySchedule) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -415,6 +595,50 @@ func serializeStorageVirtualMachineIds(s smithy.ShapeSerializer, schema *smithy.
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeStorageVirtualMachinePeerApplications(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StorageVirtualMachinePeerApplication) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeStorageVirtualMachinePeerFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StorageVirtualMachinePeerFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeStorageVirtualMachinePeerFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeStorageVirtualMachinePeerIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeStorageVirtualMachinePeers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StorageVirtualMachinePeer) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -580,6 +804,27 @@ func deserializeAliases(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 	})
 }
 
+func deserializeAllowedSvmIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeAlternateDNSNames(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -635,6 +880,92 @@ func deserializeBackups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 		}
 
 		vv = types.Backup{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClusterPeerFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClusterPeerFilter) error {
+	*v = make([]types.ClusterPeerFilter, 0)
+	var vv types.ClusterPeerFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClusterPeerFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClusterPeerFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClusterPeerFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClusterPeerIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClusterPeers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClusterPeer) error {
+	*v = make([]types.ClusterPeer, 0)
+	var vv types.ClusterPeer
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClusterPeer
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClusterPeer{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1200,6 +1531,27 @@ func deserializeOpenZFSUserAndGroupQuotas(d smithy.ShapeDeserializer, s *smithy.
 	})
 }
 
+func deserializePeerAddresses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRepositoryDnsIps(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1370,6 +1722,200 @@ func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeSnapmirrorPolicies(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapmirrorPolicy) error {
+	*v = make([]types.SnapmirrorPolicy, 0)
+	var vv types.SnapmirrorPolicy
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapmirrorPolicy
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapmirrorPolicy{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorPolicyFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapmirrorPolicyFilter) error {
+	*v = make([]types.SnapmirrorPolicyFilter, 0)
+	var vv types.SnapmirrorPolicyFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapmirrorPolicyFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapmirrorPolicyFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorPolicyFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorPolicyIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorPolicyRetentionRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapmirrorPolicyRetentionRule) error {
+	*v = make([]types.SnapmirrorPolicyRetentionRule, 0)
+	var vv types.SnapmirrorPolicyRetentionRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapmirrorPolicyRetentionRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapmirrorPolicyRetentionRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorRelationshipFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapmirrorRelationshipFilter) error {
+	*v = make([]types.SnapmirrorRelationshipFilter, 0)
+	var vv types.SnapmirrorRelationshipFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapmirrorRelationshipFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapmirrorRelationshipFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorRelationshipFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorRelationshipIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapmirrorRelationships(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapmirrorRelationship) error {
+	*v = make([]types.SnapmirrorRelationship, 0)
+	var vv types.SnapmirrorRelationship
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapmirrorRelationship
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapmirrorRelationship{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSnapshotFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapshotFilter) error {
 	*v = make([]types.SnapshotFilter, 0)
 	var vv types.SnapshotFilter
@@ -1426,6 +1972,114 @@ func deserializeSnapshotIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotPolicies(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapshotPolicy) error {
+	*v = make([]types.SnapshotPolicy, 0)
+	var vv types.SnapshotPolicy
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapshotPolicy
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapshotPolicy{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotPolicyFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapshotPolicyFilter) error {
+	*v = make([]types.SnapshotPolicyFilter, 0)
+	var vv types.SnapshotPolicyFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapshotPolicyFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapshotPolicyFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotPolicyFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotPolicyIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSnapshotPolicyScheduleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SnapshotPolicySchedule) error {
+	*v = make([]types.SnapshotPolicySchedule, 0)
+	var vv types.SnapshotPolicySchedule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SnapshotPolicySchedule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SnapshotPolicySchedule{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1512,6 +2166,113 @@ func deserializeStorageVirtualMachineIds(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeStorageVirtualMachinePeerApplications(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StorageVirtualMachinePeerApplication) error {
+	*v = make([]types.StorageVirtualMachinePeerApplication, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StorageVirtualMachinePeerApplication
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.StorageVirtualMachinePeerApplication(vv))
+		return nil
+	})
+}
+
+func deserializeStorageVirtualMachinePeerFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StorageVirtualMachinePeerFilter) error {
+	*v = make([]types.StorageVirtualMachinePeerFilter, 0)
+	var vv types.StorageVirtualMachinePeerFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StorageVirtualMachinePeerFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.StorageVirtualMachinePeerFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeStorageVirtualMachinePeerFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeStorageVirtualMachinePeerIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeStorageVirtualMachinePeers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.StorageVirtualMachinePeer) error {
+	*v = make([]types.StorageVirtualMachinePeer, 0)
+	var vv types.StorageVirtualMachinePeer
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.StorageVirtualMachinePeer
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.StorageVirtualMachinePeer{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

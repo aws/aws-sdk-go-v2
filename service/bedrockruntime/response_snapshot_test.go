@@ -1971,6 +1971,7 @@ func TestCheckResponseSnapshot_Converse(t *testing.T) {
 			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
 			Trace:               types.GuardrailTrace("enabled"),
 		},
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
 		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 		PromptVariables: map[string]types.PromptVariableValues{
 			"key0": &types.PromptVariableValuesMemberText{
@@ -2242,6 +2243,7 @@ func TestCheckResponseSnapshot_InvokeModel(t *testing.T) {
 		PerformanceConfigLatency: types.PerformanceConfigLatency("standard"),
 		ServiceTier:              types.ServiceTierType("priority"),
 		RequestMetadata:          ptr.String("__RequestMetadata__"),
+		ProjectIdentifier:        ptr.String("__ProjectIdentifier__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2601,6 +2603,7 @@ func TestCheckResponseSnapshot_Error_ModelErrorException(t *testing.T) {
 			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
 			Trace:               types.GuardrailTrace("enabled"),
 		},
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
 		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 		PromptVariables: map[string]types.PromptVariableValues{
 			"key0": &types.PromptVariableValuesMemberText{
@@ -2733,6 +2736,7 @@ func TestCheckResponseSnapshot_Error_ModelNotReadyException(t *testing.T) {
 			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
 			Trace:               types.GuardrailTrace("enabled"),
 		},
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
 		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 		PromptVariables: map[string]types.PromptVariableValues{
 			"key0": &types.PromptVariableValuesMemberText{
@@ -2865,6 +2869,7 @@ func TestCheckResponseSnapshot_Error_ModelTimeoutException(t *testing.T) {
 			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
 			Trace:               types.GuardrailTrace("enabled"),
 		},
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
 		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 		PromptVariables: map[string]types.PromptVariableValues{
 			"key0": &types.PromptVariableValuesMemberText{

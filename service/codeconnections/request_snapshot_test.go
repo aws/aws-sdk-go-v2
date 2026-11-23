@@ -206,7 +206,8 @@ func TestCheckRequestSnapshot_CreateConnection(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		HostArn: ptr.String("__HostArn__"),
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -662,8 +663,8 @@ func TestCheckRequestSnapshot_GetSyncConfiguration(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListConnections(t *testing.T) {
 	input := &ListConnectionsInput{
-		ProviderTypeFilter: types.ProviderType("Bitbucket"),
 		HostArnFilter:      ptr.String("__HostArnFilter__"),
+		ProviderTypeFilter: types.ProviderType("Bitbucket"),
 		MaxResults:         1,
 		NextToken:          ptr.String("__NextToken__"),
 	}
@@ -1046,7 +1047,8 @@ func TestUpdateRequestSnapshot_CreateConnection(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		HostArn: ptr.String("__HostArn__"),
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1502,8 +1504,8 @@ func TestUpdateRequestSnapshot_GetSyncConfiguration(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListConnections(t *testing.T) {
 	input := &ListConnectionsInput{
-		ProviderTypeFilter: types.ProviderType("Bitbucket"),
 		HostArnFilter:      ptr.String("__HostArnFilter__"),
+		ProviderTypeFilter: types.ProviderType("Bitbucket"),
 		MaxResults:         1,
 		NextToken:          ptr.String("__NextToken__"),
 	}

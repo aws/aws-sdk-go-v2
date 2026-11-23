@@ -94,6 +94,9 @@ type DeleteChannelOutput struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
+	// Specification of JPEG XS inputs for this channel
+	JpegXsInputSpecification *types.JpegXsInputSpecification
+
 	// Linked Channel Settings for this channel.
 	LinkedChannelSettings *types.DescribeLinkedChannelSettings
 
@@ -188,6 +191,11 @@ func (v *DeleteChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.JpegXsInputSpecification != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_JpegXsInputSpecification)
+		v.JpegXsInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.LinkedChannelSettings != nil {
 		s.WriteStruct(schemas.DeleteChannelResponse_LinkedChannelSettings)
 		v.LinkedChannelSettings.SerializeMembers(s)
@@ -267,6 +275,9 @@ func (v *DeleteChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeleteChannelResponse_InputSpecification:
 			v.InputSpecification = &types.InputSpecification{}
 			return v.InputSpecification.Deserialize(d)
+		case schemas.DeleteChannelResponse_JpegXsInputSpecification:
+			v.JpegXsInputSpecification = &types.JpegXsInputSpecification{}
+			return v.JpegXsInputSpecification.Deserialize(d)
 		case schemas.DeleteChannelResponse_LinkedChannelSettings:
 			v.LinkedChannelSettings = &types.DescribeLinkedChannelSettings{}
 			return v.LinkedChannelSettings.Deserialize(d)

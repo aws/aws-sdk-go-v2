@@ -1844,6 +1844,65 @@ func (v *AutonomousDatabasePeerSummary) Deserialize(d smithy.ShapeDeserializer) 
 	})
 }
 
+// A summary of a refreshable clone of an Autonomous Database.
+type AutonomousDatabaseRefreshableCloneSummary struct {
+
+	// The Amazon Resource Name (ARN) of the refreshable clone Autonomous Database.
+	AutonomousDatabaseArn *string
+
+	// The unique identifier of the refreshable clone Autonomous Database.
+	AutonomousDatabaseId *string
+
+	// The Oracle Cloud Identifier (OCID) of the refreshable clone Autonomous Database.
+	Ocid *string
+
+	// The Amazon Web Services Region where the refreshable clone Autonomous Database
+	// is located.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutonomousDatabaseRefreshableCloneSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutonomousDatabaseRefreshableCloneSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutonomousDatabaseRefreshableCloneSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseArn != nil {
+		s.WriteString(schemas.AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseArn, *v.AutonomousDatabaseArn)
+	}
+	if v.AutonomousDatabaseId != nil {
+		s.WriteString(schemas.AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseId, *v.AutonomousDatabaseId)
+	}
+	if v.Ocid != nil {
+		s.WriteString(schemas.AutonomousDatabaseRefreshableCloneSummary_ocid, *v.Ocid)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AutonomousDatabaseRefreshableCloneSummary_region, *v.Region)
+	}
+}
+func (v *AutonomousDatabaseRefreshableCloneSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutonomousDatabaseRefreshableCloneSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseArn:
+			v.AutonomousDatabaseArn = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseArn, v.AutonomousDatabaseArn)
+		case schemas.AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseId:
+			v.AutonomousDatabaseId = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseId, v.AutonomousDatabaseId)
+		case schemas.AutonomousDatabaseRefreshableCloneSummary_ocid:
+			v.Ocid = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseRefreshableCloneSummary_ocid, v.Ocid)
+		case schemas.AutonomousDatabaseRefreshableCloneSummary_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AutonomousDatabaseRefreshableCloneSummary_region, v.Region)
+		}
+		return nil
+	})
+}
+
 // A summary of an Autonomous Database.
 type AutonomousDatabaseSummary struct {
 

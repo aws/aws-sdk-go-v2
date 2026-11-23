@@ -31,6 +31,27 @@ func (BusState) Values() []BusState {
 	}
 }
 
+type ConnectivityState string
+
+// Enum values for ConnectivityState
+const (
+	ConnectivityStateProvisioning    ConnectivityState = "PROVISIONING"
+	ConnectivityStateProvisionFailed ConnectivityState = "PROVISION_FAILED"
+	ConnectivityStateActive          ConnectivityState = "ACTIVE"
+)
+
+// Values returns all known values for ConnectivityState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectivityState) Values() []ConnectivityState {
+	return []ConnectivityState{
+		"PROVISIONING",
+		"PROVISION_FAILED",
+		"ACTIVE",
+	}
+}
+
 type DeduplicationType string
 
 // Enum values for DeduplicationType
@@ -83,6 +104,7 @@ type EventSourceType string
 const (
 	EventSourceTypeAwsServiceEvents EventSourceType = "AWS_SERVICE_EVENTS"
 	EventSourceTypePartnerEvents    EventSourceType = "PARTNER_EVENTS"
+	EventSourceTypeWebhookEvents    EventSourceType = "WEBHOOK_EVENTS"
 )
 
 // Values returns all known values for EventSourceType. Note that this can be
@@ -93,6 +115,7 @@ func (EventSourceType) Values() []EventSourceType {
 	return []EventSourceType{
 		"AWS_SERVICE_EVENTS",
 		"PARTNER_EVENTS",
+		"WEBHOOK_EVENTS",
 	}
 }
 
@@ -190,6 +213,69 @@ func (LogLevel) Values() []LogLevel {
 		"OFF",
 		"ERROR",
 		"INFO",
+	}
+}
+
+type MskAcks string
+
+// Enum values for MskAcks
+const (
+	MskAcksAll    MskAcks = "ALL"
+	MskAcksLeader MskAcks = "LEADER"
+)
+
+// Values returns all known values for MskAcks. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MskAcks) Values() []MskAcks {
+	return []MskAcks{
+		"ALL",
+		"LEADER",
+	}
+}
+
+type MskCompression string
+
+// Enum values for MskCompression
+const (
+	MskCompressionNone   MskCompression = "NONE"
+	MskCompressionGzip   MskCompression = "GZIP"
+	MskCompressionSnappy MskCompression = "SNAPPY"
+	MskCompressionLz4    MskCompression = "LZ4"
+	MskCompressionZstd   MskCompression = "ZSTD"
+)
+
+// Values returns all known values for MskCompression. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MskCompression) Values() []MskCompression {
+	return []MskCompression{
+		"NONE",
+		"GZIP",
+		"SNAPPY",
+		"LZ4",
+		"ZSTD",
+	}
+}
+
+type MskConnectivity string
+
+// Enum values for MskConnectivity
+const (
+	MskConnectivityPublic  MskConnectivity = "PUBLIC"
+	MskConnectivityPrivate MskConnectivity = "PRIVATE"
+)
+
+// Values returns all known values for MskConnectivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MskConnectivity) Values() []MskConnectivity {
+	return []MskConnectivity{
+		"PUBLIC",
+		"PRIVATE",
 	}
 }
 
@@ -355,5 +441,102 @@ func (TransformerType) Values() []TransformerType {
 		"RAW",
 		"WITH_METADATA",
 		"JSONATA",
+	}
+}
+
+type WebhookDeduplicationType string
+
+// Enum values for WebhookDeduplicationType
+const (
+	// Duplicates are detected by a hash of the event content.
+	WebhookDeduplicationTypeContentBased WebhookDeduplicationType = "CONTENT_BASED"
+)
+
+// Values returns all known values for WebhookDeduplicationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookDeduplicationType) Values() []WebhookDeduplicationType {
+	return []WebhookDeduplicationType{
+		"CONTENT_BASED",
+	}
+}
+
+type WebhookHmacAlgorithm string
+
+// Enum values for WebhookHmacAlgorithm
+const (
+	WebhookHmacAlgorithmSha256 WebhookHmacAlgorithm = "SHA256"
+	WebhookHmacAlgorithmSha1   WebhookHmacAlgorithm = "SHA1"
+)
+
+// Values returns all known values for WebhookHmacAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookHmacAlgorithm) Values() []WebhookHmacAlgorithm {
+	return []WebhookHmacAlgorithm{
+		"SHA256",
+		"SHA1",
+	}
+}
+
+type WebhookHmacEncoding string
+
+// Enum values for WebhookHmacEncoding
+const (
+	WebhookHmacEncodingHex    WebhookHmacEncoding = "HEX"
+	WebhookHmacEncodingBase64 WebhookHmacEncoding = "BASE64"
+)
+
+// Values returns all known values for WebhookHmacEncoding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookHmacEncoding) Values() []WebhookHmacEncoding {
+	return []WebhookHmacEncoding{
+		"HEX",
+		"BASE64",
+	}
+}
+
+type WebhookSecretEncoding string
+
+// Enum values for WebhookSecretEncoding
+const (
+	WebhookSecretEncodingRaw    WebhookSecretEncoding = "RAW"
+	WebhookSecretEncodingBase64 WebhookSecretEncoding = "BASE64"
+)
+
+// Values returns all known values for WebhookSecretEncoding. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookSecretEncoding) Values() []WebhookSecretEncoding {
+	return []WebhookSecretEncoding{
+		"RAW",
+		"BASE64",
+	}
+}
+
+type WebhookSignedMessageComposition string
+
+// Enum values for WebhookSignedMessageComposition
+const (
+	WebhookSignedMessageCompositionBody                         WebhookSignedMessageComposition = "BODY"
+	WebhookSignedMessageCompositionTimestampDotBody             WebhookSignedMessageComposition = "TIMESTAMP_DOT_BODY"
+	WebhookSignedMessageCompositionMessageIdDotTimestampDotBody WebhookSignedMessageComposition = "MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY"
+)
+
+// Values returns all known values for WebhookSignedMessageComposition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookSignedMessageComposition) Values() []WebhookSignedMessageComposition {
+	return []WebhookSignedMessageComposition{
+		"BODY",
+		"TIMESTAMP_DOT_BODY",
+		"MESSAGE_ID_DOT_TIMESTAMP_DOT_BODY",
 	}
 }

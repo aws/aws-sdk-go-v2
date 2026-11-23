@@ -28,6 +28,7 @@
         "api_op_PutRawEvents.go",
         "api_op_PutResourcePolicy.go",
         "api_op_RevokeResource.go",
+        "api_op_RotateWebhookCredentials.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateEventBus.go",

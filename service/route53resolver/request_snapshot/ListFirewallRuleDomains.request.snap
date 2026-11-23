@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.ListFirewallRuleDomains
+
+{"FirewallDomainListId":"__FirewallDomainListId__","FirewallRuleGroupId":"__FirewallRuleGroupId__","FirewallThreatProtectionId":"__FirewallThreatProtectionId__","MaxResults":1,"NextToken":"__NextToken__","QueryOptions":{"DomainNameFilter":"__DomainNameFilter__","DomainStatus":"OBSERVED","SortBy":"TIME_ADDED","SortOrder":"ASC"}}

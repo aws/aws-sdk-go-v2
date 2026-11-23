@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"associationCount":1,"createdAt":946684800,"identifierType":"DOMAIN","pendingAssociationApprovalCount":1,"publisherArn":"__PublisherArn__","status":"ACTION_REQUIRED","value":{"domain":"__IdentifierMemberDomain__"}},{"associationCount":1,"createdAt":946684800,"identifierType":"DOMAIN","pendingAssociationApprovalCount":1,"publisherArn":"__PublisherArn__","status":"ACTION_REQUIRED","value":{"domain":"__IdentifierMemberDomain__"}}],"nextToken":"__NextToken__"}

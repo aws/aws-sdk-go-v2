@@ -34,14 +34,14 @@ type GetMarketplaceRevenueShareInput struct {
 	// This member is required.
 	Catalog types.CatalogName
 
-	// The AWS Marketplace product identifier of the revenue share to retrieve.
+	// The marketplace revenue share to retrieve, by ID (mrs-...) or ARN.
 	//
 	// This member is required.
-	ProductId *string
+	Identifier *string
 
 	// The revision of the marketplace revenue share to retrieve. Omit to return the
 	// latest revision.
-	Revision *int32
+	Revision *string
 
 	noSmithyDocumentSerde
 }
@@ -56,11 +56,11 @@ func (v *GetMarketplaceRevenueShareInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Catalog != "" {
 		s.WriteString(schemas.GetMarketplaceRevenueShareInput_Catalog, string(v.Catalog))
 	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareInput_ProductId, *v.ProductId)
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareInput_Identifier, *v.Identifier)
 	}
 	if v.Revision != nil {
-		s.WriteInt32(schemas.GetMarketplaceRevenueShareInput_Revision, *v.Revision)
+		s.WriteString(schemas.GetMarketplaceRevenueShareInput_Revision, *v.Revision)
 	}
 }
 
@@ -76,34 +76,54 @@ type GetMarketplaceRevenueShareOutput struct {
 	// This member is required.
 	Catalog types.CatalogName
 
-	// The AWS Marketplace product identifier of the revenue share.
+	// The date when the marketplace revenue share was created.
 	//
 	// This member is required.
-	ProductId *string
-
-	// The date when the marketplace revenue share was created.
 	CreatedDate *time.Time
 
+	// The unique identifier of the marketplace revenue share, short ID form (mrs-...).
+	//
+	// This member is required.
+	Id *string
+
 	// The date when the marketplace revenue share was last modified.
+	//
+	// This member is required.
 	LastModifiedDate *time.Time
 
-	// The latest revision number of the marketplace revenue share.
-	LatestRevision *int32
+	// The latest revision of the marketplace revenue share.
+	//
+	// This member is required.
+	LatestRevision *string
 
-	// The AWS Marketplace product code.
-	ProductCode *string
+	// The products in the marketplace revenue share, each with its typed account
+	// lists and full account IDs. Empty when the share is closed.
+	//
+	// This member is required.
+	Products []types.MarketplaceRevenueShareProductDetail
 
-	// The display name of the AWS Marketplace product.
-	ProductName *string
-
-	// The revision number of the retrieved marketplace revenue share.
-	Revision *int32
+	// The revision of the retrieved marketplace revenue share.
+	//
+	// This member is required.
+	Revision *string
 
 	// The number of active allocations under this marketplace revenue share.
+	//
+	// This member is required.
 	TotalActiveMarketplaceRevenueShareAllocationCount *int32
 
 	// The total number of allocations under this marketplace revenue share.
+	//
+	// This member is required.
 	TotalMarketplaceRevenueShareAllocationCount *int32
+
+	// The date from which this share is effective, derived from the earliest ACTIVE
+	// allocation start date (YYYY-MM-DD). Absent when no ACTIVE allocation remains.
+	EffectiveFrom *string
+
+	// The date until which this share is effective, derived from the latest ACTIVE
+	// allocation end date (YYYY-MM-DD). Absent when no ACTIVE allocation remains.
+	EffectiveUntil *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -127,23 +147,26 @@ func (v *GetMarketplaceRevenueShareOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.GetMarketplaceRevenueShareOutput_CreatedDate, *v.CreatedDate)
 	}
+	if v.EffectiveFrom != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_EffectiveFrom, *v.EffectiveFrom)
+	}
+	if v.EffectiveUntil != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_EffectiveUntil, *v.EffectiveUntil)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_Id, *v.Id)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.GetMarketplaceRevenueShareOutput_LastModifiedDate, *v.LastModifiedDate)
 	}
 	if v.LatestRevision != nil {
-		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_LatestRevision, *v.LatestRevision)
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_LatestRevision, *v.LatestRevision)
 	}
-	if v.ProductCode != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_ProductCode, *v.ProductCode)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_ProductId, *v.ProductId)
-	}
-	if v.ProductName != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_ProductName, *v.ProductName)
+	if v.Products != nil {
+		serializeMarketplaceRevenueShareProductDetailList(s, schemas.GetMarketplaceRevenueShareOutput_Products, v.Products)
 	}
 	if v.Revision != nil {
-		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_Revision, *v.Revision)
+		s.WriteString(schemas.GetMarketplaceRevenueShareOutput_Revision, *v.Revision)
 	}
 	if v.TotalActiveMarketplaceRevenueShareAllocationCount != nil {
 		s.WriteInt32(schemas.GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount, *v.TotalActiveMarketplaceRevenueShareAllocationCount)
@@ -168,24 +191,26 @@ func (v *GetMarketplaceRevenueShareOutput) Deserialize(d smithy.ShapeDeserialize
 		case schemas.GetMarketplaceRevenueShareOutput_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.GetMarketplaceRevenueShareOutput_CreatedDate, v.CreatedDate)
+		case schemas.GetMarketplaceRevenueShareOutput_EffectiveFrom:
+			v.EffectiveFrom = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_EffectiveFrom, v.EffectiveFrom)
+		case schemas.GetMarketplaceRevenueShareOutput_EffectiveUntil:
+			v.EffectiveUntil = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_EffectiveUntil, v.EffectiveUntil)
+		case schemas.GetMarketplaceRevenueShareOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_Id, v.Id)
 		case schemas.GetMarketplaceRevenueShareOutput_LastModifiedDate:
 			v.LastModifiedDate = new(time.Time)
 			return d.ReadTime(schemas.GetMarketplaceRevenueShareOutput_LastModifiedDate, v.LastModifiedDate)
 		case schemas.GetMarketplaceRevenueShareOutput_LatestRevision:
-			v.LatestRevision = new(int32)
-			return d.ReadInt32(schemas.GetMarketplaceRevenueShareOutput_LatestRevision, v.LatestRevision)
-		case schemas.GetMarketplaceRevenueShareOutput_ProductCode:
-			v.ProductCode = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_ProductCode, v.ProductCode)
-		case schemas.GetMarketplaceRevenueShareOutput_ProductId:
-			v.ProductId = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_ProductId, v.ProductId)
-		case schemas.GetMarketplaceRevenueShareOutput_ProductName:
-			v.ProductName = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_ProductName, v.ProductName)
+			v.LatestRevision = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_LatestRevision, v.LatestRevision)
+		case schemas.GetMarketplaceRevenueShareOutput_Products:
+			return deserializeMarketplaceRevenueShareProductDetailList(d, schemas.GetMarketplaceRevenueShareOutput_Products, &v.Products)
 		case schemas.GetMarketplaceRevenueShareOutput_Revision:
-			v.Revision = new(int32)
-			return d.ReadInt32(schemas.GetMarketplaceRevenueShareOutput_Revision, v.Revision)
+			v.Revision = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareOutput_Revision, v.Revision)
 		case schemas.GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount:
 			v.TotalActiveMarketplaceRevenueShareAllocationCount = new(int32)
 			return d.ReadInt32(schemas.GetMarketplaceRevenueShareOutput_TotalActiveMarketplaceRevenueShareAllocationCount, v.TotalActiveMarketplaceRevenueShareAllocationCount)

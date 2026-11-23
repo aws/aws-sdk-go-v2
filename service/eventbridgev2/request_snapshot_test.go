@@ -357,6 +357,24 @@ func TestCheckRequestSnapshot_CreateSubscriber(t *testing.T) {
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
 			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
+			},
 			TargetArn: ptr.String("__TargetArn__"),
 		},
 		Description: ptr.String("__Description__"),
@@ -973,6 +991,37 @@ func TestCheckRequestSnapshot_RevokeResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RotateWebhookCredentials(t *testing.T) {
+	input := &RotateWebhookCredentialsInput{
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		Credential: &types.WebhookCredentialMemberStaticTokenSecretValue{
+			Value: "__WebhookCredentialMemberStaticTokenSecretValue__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RotateWebhookCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RotateWebhookCredentials"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -1190,6 +1239,24 @@ func TestCheckRequestSnapshot_UpdateSubscriber(t *testing.T) {
 				DeduplicationConfiguration: &types.DeduplicationConfiguration{
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
+			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
 			},
 		},
 		FilterConfiguration: &types.FilterConfiguration{
@@ -1413,6 +1480,24 @@ func TestUpdateRequestSnapshot_CreateSubscriber(t *testing.T) {
 				DeduplicationConfiguration: &types.DeduplicationConfiguration{
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
+			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
 			},
 			TargetArn: ptr.String("__TargetArn__"),
 		},
@@ -2030,6 +2115,37 @@ func TestUpdateRequestSnapshot_RevokeResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_RotateWebhookCredentials(t *testing.T) {
+	input := &RotateWebhookCredentialsInput{
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		Credential: &types.WebhookCredentialMemberStaticTokenSecretValue{
+			Value: "__WebhookCredentialMemberStaticTokenSecretValue__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RotateWebhookCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RotateWebhookCredentials"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -2247,6 +2363,24 @@ func TestUpdateRequestSnapshot_UpdateSubscriber(t *testing.T) {
 				DeduplicationConfiguration: &types.DeduplicationConfiguration{
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
+			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
 			},
 		},
 		FilterConfiguration: &types.FilterConfiguration{

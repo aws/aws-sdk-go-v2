@@ -2402,6 +2402,61 @@ func validateNewRelicServiceDetails(v *types.NewRelicServiceDetails) error {
 	}
 }
 
+func validateOrgSourceDeploymentState(v *types.OrgSourceDeploymentState) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrgSourceDeploymentState"}
+	if v.Issues != nil {
+		if err := validateOrgSourceIssueList(v.Issues); err != nil {
+			invalidParams.AddNested("Issues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrgSourceIssue(v *types.OrgSourceIssue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrgSourceIssue"}
+	if len(v.ReasonCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReasonCode"))
+	}
+	if v.AccountCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountCount"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrgSourceIssueList(v []types.OrgSourceIssue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrgSourceIssueList"}
+	for i := range v {
+		if err := validateOrgSourceIssue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePagerDutyAuthorizationConfig(v types.PagerDutyAuthorizationConfig) error {
 	if v == nil {
 		return nil
@@ -2929,6 +2984,11 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 			invalidParams.AddNested("[sourceAws]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ServiceConfigurationMemberSourceAwsOrg:
+		if err := validateSourceAwsOrgConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[sourceAwsOrg]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3191,6 +3251,48 @@ func validateSourceAwsConfiguration(v *types.SourceAwsConfiguration) error {
 	}
 	if v.AssumableRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssumableRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceAwsOrgConfiguration(v *types.SourceAwsOrgConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceAwsOrgConfiguration"}
+	if len(v.AccountType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountType"))
+	}
+	if v.OrganizationalUnit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationalUnit"))
+	} else if v.OrganizationalUnit != nil {
+		if err := validateSourceAwsOrgUnit(v.OrganizationalUnit); err != nil {
+			invalidParams.AddNested("OrganizationalUnit", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentState != nil {
+		if err := validateOrgSourceDeploymentState(v.DeploymentState); err != nil {
+			invalidParams.AddNested("DeploymentState", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceAwsOrgUnit(v *types.SourceAwsOrgUnit) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceAwsOrgUnit"}
+	if v.OrganizationalUnitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationalUnitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

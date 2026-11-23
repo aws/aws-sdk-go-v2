@@ -1,3 +1,7 @@
+# v1.86.0 (2026-11-19)
+
+* **Feature**: Adds parameters to support custom execution roles for service-managed stack sets to CreateStackSet, UpdateStackSet, and DescribeStackSet, enabling the use of Macros, Transforms, and Nested Stacks.
+
 # v1.85.0 (2026-11-18)
 
 * **Feature**: AWS CloudFormation StackSets now provides stage-by-stage progress for deployments that span thousands of accounts and AWS Regions, which enables you to see where each deployment stands while it runs

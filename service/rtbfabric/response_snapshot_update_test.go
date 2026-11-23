@@ -245,7 +245,25 @@ func TestUpdateResponseSnapshot_AcceptLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
-		LinkId:           ptr.String("__LinkId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkId: ptr.String("__LinkId__"),
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.AcceptLink, schemas.AcceptLinkResponse, schemas.AcceptLinkResponse)
@@ -423,7 +441,25 @@ func TestUpdateResponseSnapshot_CreateLink(t *testing.T) {
 				},
 			},
 		},
-		ConnectivityType:   types.ConnectivityType("DEFAULT"),
+		ConnectivityType: types.ConnectivityType("DEFAULT"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		LinkId:             ptr.String("__LinkId__"),
 		CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
 	}
@@ -734,6 +770,76 @@ func TestUpdateResponseSnapshot_DisassociateCertificate(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetAvailableModule(t *testing.T) {
+	want := &GetAvailableModuleOutput{
+		ModuleId:             ptr.String("__ModuleId__"),
+		ModuleArn:            ptr.String("__ModuleArn__"),
+		ModuleName:           ptr.String("__ModuleName__"),
+		Description:          ptr.String("__Description__"),
+		SubscriptionType:     types.SubscriptionType("MARKETPLACE"),
+		SubscriptionStatus:   types.SubscriptionStatus("ACTIVE"),
+		MarketplaceProductId: ptr.String("__MarketplaceProductId__"),
+		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.GetAvailableModule, schemas.GetAvailableModuleResponse, schemas.GetAvailableModuleResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAvailableModule.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetAvailableModuleVersion(t *testing.T) {
+	want := &GetAvailableModuleVersionOutput{
+		ModuleId:         ptr.String("__ModuleId__"),
+		Version:          ptr.String("__Version__"),
+		ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+		Status:           types.ModuleVersionStatus("CREATING"),
+		Permissions: []types.ModulePermission{
+			types.ModulePermission("READ_REQUEST_BODY"),
+			types.ModulePermission("READ_REQUEST_BODY"),
+		},
+		ConfigurableActions: []types.ConfigurableAction{
+			types.ConfigurableAction("FILTER"),
+			types.ConfigurableAction("FILTER"),
+		},
+		ConfigurationSchema: ptr.String("__ConfigurationSchema__"),
+		ReleaseNotes:        ptr.String("__ReleaseNotes__"),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.GetAvailableModuleVersion, schemas.GetAvailableModuleVersionResponse, schemas.GetAvailableModuleVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetAvailableModuleVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetCertificateAssociation(t *testing.T) {
 	want := &GetCertificateAssociationOutput{
 		GatewayId:         ptr.String("__GatewayId__"),
@@ -741,6 +847,24 @@ func TestUpdateResponseSnapshot_GetCertificateAssociation(t *testing.T) {
 		Status:            types.CertificateAssociationStatus("PENDING_ASSOCIATION"),
 		AssociatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.GetCertificateAssociation, schemas.GetCertificateAssociationResponse, schemas.GetCertificateAssociationResponse)
@@ -869,6 +993,89 @@ func TestUpdateResponseSnapshot_GetInboundExternalLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LockToken: ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.GetInboundExternalLink, schemas.GetInboundExternalLinkResponse, schemas.GetInboundExternalLinkResponse)
@@ -994,12 +1201,95 @@ func TestUpdateResponseSnapshot_GetLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
-		LinkId:           ptr.String("__LinkId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkId: ptr.String("__LinkId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
 		HttpResponderAllowed: ptr.Bool(true),
 		TimeoutInMillis:      ptr.Int64(1),
+		LockToken:            ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkResponse, schemas.GetLinkResponse)
@@ -1043,6 +1333,24 @@ func TestUpdateResponseSnapshot_GetLinkRoutingRule(t *testing.T) {
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	proto := restjson1.New(schemas.RTBFabric)
@@ -1172,6 +1480,89 @@ func TestUpdateResponseSnapshot_GetOutboundExternalLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LockToken: ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.GetOutboundExternalLink, schemas.GetOutboundExternalLinkResponse, schemas.GetOutboundExternalLinkResponse)
@@ -1200,7 +1591,25 @@ func TestUpdateResponseSnapshot_GetRequesterGateway(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		VpcId:       ptr.String("__VpcId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		VpcId: ptr.String("__VpcId__"),
 		SubnetIds: []string{
 			"__Member__",
 			"__Member__",
@@ -1251,9 +1660,27 @@ func TestUpdateResponseSnapshot_GetResponderGateway(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		DomainName:  ptr.String("__DomainName__"),
-		Port:        ptr.Int32(1),
-		Protocol:    types.Protocol("HTTP"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DomainName: ptr.String("__DomainName__"),
+		Port:       ptr.Int32(1),
+		Protocol:   types.Protocol("HTTP"),
 		ListenerConfig: &types.ListenerConfig{
 			Protocols: []types.Protocol{
 				types.Protocol("HTTP"),
@@ -1316,6 +1743,177 @@ func TestUpdateResponseSnapshot_GetResponderGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetUpdate(t *testing.T) {
+	want := &GetUpdateOutput{
+		Update: &types.Update{
+			UpdateId: ptr.String("__UpdateId__"),
+			Type:     types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+			Status:   types.UpdateStatus("IN_PROGRESS"),
+			Target: &types.UpdateTargetMemberGateway{
+				Value: types.Unit{},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Parameters: &types.UpdateParametersMemberResponderGatewayConfig{
+				Value: types.ResponderGatewayConfigParameters{
+					Description:         ptr.String("__Description__"),
+					ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
+					DomainName:          ptr.String("__DomainName__"),
+					Port:                ptr.Int32(1),
+					Protocol:            types.Protocol("HTTP"),
+					ListenerConfig: &types.ListenerConfig{
+						Protocols: []types.Protocol{
+							types.Protocol("HTTP"),
+							types.Protocol("HTTP"),
+						},
+					},
+					TrustStoreConfiguration: &types.TrustStoreConfiguration{
+						CertificateAuthorityCertificates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ManagedEndpointConfiguration: &types.ManagedEndpointConfigurationMemberAutoScalingGroups{
+						Value: types.AutoScalingGroupsConfiguration{
+							AutoScalingGroupNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn: ptr.String("__RoleArn__"),
+							HealthCheckConfig: &types.HealthCheckConfig{
+								Port:                    ptr.Int32(1),
+								Path:                    ptr.String("__Path__"),
+								Protocol:                types.Protocol("HTTP"),
+								TimeoutMs:               ptr.Int32(1),
+								IntervalSeconds:         ptr.Int32(1),
+								StatusCodeMatcher:       ptr.String("__StatusCodeMatcher__"),
+								HealthyThresholdCount:   ptr.Int32(1),
+								UnhealthyThresholdCount: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			ErrorDetails: []types.ErrorDetail{
+				{
+					Code:    types.ErrorCode("VPC_NOT_FOUND"),
+					Message: ptr.String("__Message__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Code:    types.ErrorCode("VPC_NOT_FOUND"),
+					Message: ptr.String("__Message__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.GetUpdate, schemas.GetUpdateResponse, schemas.GetUpdateResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetUpdate.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListAvailableModuleVersions(t *testing.T) {
+	want := &ListAvailableModuleVersionsOutput{
+		ModuleId: ptr.String("__ModuleId__"),
+		Versions: []types.AvailableModuleVersionSummary{
+			{
+				Version:          ptr.String("__Version__"),
+				ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+				Status:           types.ModuleVersionStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Version:          ptr.String("__Version__"),
+				ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+				Status:           types.ModuleVersionStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.ListAvailableModuleVersions, schemas.ListAvailableModuleVersionsResponse, schemas.ListAvailableModuleVersionsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAvailableModuleVersions.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListAvailableModules(t *testing.T) {
+	want := &ListAvailableModulesOutput{
+		Modules: []types.AvailableModuleSummary{
+			{
+				ModuleId:             ptr.String("__ModuleId__"),
+				ModuleArn:            ptr.String("__ModuleArn__"),
+				ModuleName:           ptr.String("__ModuleName__"),
+				SubscriptionType:     types.SubscriptionType("MARKETPLACE"),
+				SubscriptionStatus:   types.SubscriptionStatus("ACTIVE"),
+				MarketplaceProductId: ptr.String("__MarketplaceProductId__"),
+			},
+			{
+				ModuleId:             ptr.String("__ModuleId__"),
+				ModuleArn:            ptr.String("__ModuleArn__"),
+				ModuleName:           ptr.String("__ModuleName__"),
+				SubscriptionType:     types.SubscriptionType("MARKETPLACE"),
+				SubscriptionStatus:   types.SubscriptionStatus("ACTIVE"),
+				MarketplaceProductId: ptr.String("__MarketplaceProductId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.ListAvailableModules, schemas.ListAvailableModulesResponse, schemas.ListAvailableModulesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAvailableModules.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListCertificateAssociations(t *testing.T) {
 	want := &ListCertificateAssociationsOutput{
 		CertificateAssociations: []types.CertificateAssociationSummary{
@@ -1374,6 +1972,24 @@ func TestUpdateResponseSnapshot_ListLinkRoutingRules(t *testing.T) {
 				Status:    types.RuleStatus("CREATION_IN_PROGRESS"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				RuleId:   ptr.String("__RuleId__"),
@@ -1392,6 +2008,24 @@ func TestUpdateResponseSnapshot_ListLinkRoutingRules(t *testing.T) {
 				Status:    types.RuleStatus("CREATION_IN_PROGRESS"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1522,7 +2156,25 @@ func TestUpdateResponseSnapshot_ListLinks(t *testing.T) {
 					},
 				},
 				ConnectivityType: types.ConnectivityType("DEFAULT"),
-				LinkId:           ptr.String("__LinkId__"),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				LinkId: ptr.String("__LinkId__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1631,7 +2283,25 @@ func TestUpdateResponseSnapshot_ListLinks(t *testing.T) {
 					},
 				},
 				ConnectivityType: types.ConnectivityType("DEFAULT"),
-				LinkId:           ptr.String("__LinkId__"),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				LinkId: ptr.String("__LinkId__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1742,6 +2412,71 @@ func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListUpdates(t *testing.T) {
+	want := &ListUpdatesOutput{
+		Updates: []types.UpdateSummary{
+			{
+				UpdateId:  ptr.String("__UpdateId__"),
+				Type:      types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+				Status:    types.UpdateStatus("IN_PROGRESS"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				UpdateId:  ptr.String("__UpdateId__"),
+				Type:      types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+				Status:    types.UpdateStatus("IN_PROGRESS"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.ListUpdates, schemas.ListUpdatesResponse, schemas.ListUpdatesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListUpdates.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_PutLinkFlows(t *testing.T) {
+	want := &PutLinkFlowsOutput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Status:    types.LinkStatus("PENDING_CREATION"),
+		UpdateId:  ptr.String("__UpdateId__"),
+	}
+	proto := restjson1.New(schemas.RTBFabric)
+	opSchema := smithy.NewOperationSchema(schemas.PutLinkFlows, schemas.PutLinkFlowsResponse, schemas.PutLinkFlowsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("PutLinkFlows.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RejectLink(t *testing.T) {
 	want := &RejectLinkOutput{
 		GatewayId:     ptr.String("__GatewayId__"),
@@ -1846,7 +2581,25 @@ func TestUpdateResponseSnapshot_RejectLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
-		LinkId:           ptr.String("__LinkId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkId: ptr.String("__LinkId__"),
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.RejectLink, schemas.RejectLinkResponse, schemas.RejectLinkResponse)
@@ -1914,8 +2667,9 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestUpdateResponseSnapshot_UpdateLink(t *testing.T) {
 	want := &UpdateLinkOutput{
-		LinkId: ptr.String("__LinkId__"),
-		Status: types.LinkStatus("PENDING_CREATION"),
+		LinkId:   ptr.String("__LinkId__"),
+		Status:   types.LinkStatus("PENDING_CREATION"),
+		UpdateId: ptr.String("__UpdateId__"),
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLink, schemas.UpdateLinkResponse, schemas.UpdateLinkResponse)
@@ -1942,6 +2696,7 @@ func TestUpdateResponseSnapshot_UpdateLinkModuleFlow(t *testing.T) {
 		GatewayId: ptr.String("__GatewayId__"),
 		LinkId:    ptr.String("__LinkId__"),
 		Status:    types.LinkStatus("PENDING_CREATION"),
+		UpdateId:  ptr.String("__UpdateId__"),
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLinkModuleFlow, schemas.UpdateLinkModuleFlowResponse, schemas.UpdateLinkModuleFlowResponse)
@@ -1968,6 +2723,7 @@ func TestUpdateResponseSnapshot_UpdateLinkRoutingRule(t *testing.T) {
 		RuleId:    ptr.String("__RuleId__"),
 		Status:    types.RuleStatus("CREATION_IN_PROGRESS"),
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdateId:  ptr.String("__UpdateId__"),
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateLinkRoutingRule, schemas.UpdateLinkRoutingRuleResponse, schemas.UpdateLinkRoutingRuleResponse)
@@ -2019,6 +2775,7 @@ func TestUpdateResponseSnapshot_UpdateResponderGateway(t *testing.T) {
 		GatewayId:           ptr.String("__GatewayId__"),
 		Status:              types.ResponderGatewayStatus("PENDING_CREATION"),
 		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
+		UpdateId:            ptr.String("__UpdateId__"),
 	}
 	proto := restjson1.New(schemas.RTBFabric)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateResponderGateway, schemas.UpdateResponderGatewayResponse, schemas.UpdateResponderGatewayResponse)

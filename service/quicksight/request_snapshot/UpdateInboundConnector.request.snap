@@ -1,0 +1,5 @@
+PATCH /accounts/__AwsAccountId__/inbound-connectors/__InboundConnectorId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","InboundConnectorConfiguration":{"InboundConnectorType":"QUICK_DESKTOP"},"InboundConnectorStatus":"ENABLED","Name":"__Name__"}

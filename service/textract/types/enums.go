@@ -161,6 +161,31 @@ func (EntityType) Values() []EntityType {
 	}
 }
 
+type ExtractionGranularityType string
+
+// Enum values for ExtractionGranularityType
+const (
+	ExtractionGranularityTypeDocument ExtractionGranularityType = "DOCUMENT"
+	ExtractionGranularityTypePage     ExtractionGranularityType = "PAGE"
+	ExtractionGranularityTypeElement  ExtractionGranularityType = "ELEMENT"
+	ExtractionGranularityTypeWord     ExtractionGranularityType = "WORD"
+	ExtractionGranularityTypeLine     ExtractionGranularityType = "LINE"
+)
+
+// Values returns all known values for ExtractionGranularityType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtractionGranularityType) Values() []ExtractionGranularityType {
+	return []ExtractionGranularityType{
+		"DOCUMENT",
+		"PAGE",
+		"ELEMENT",
+		"WORD",
+		"LINE",
+	}
+}
+
 type FeatureType string
 
 // Enum values for FeatureType
@@ -209,6 +234,146 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type OutputTextFormatType string
+
+// Enum values for OutputTextFormatType
+const (
+	OutputTextFormatTypePlainText OutputTextFormatType = "PLAIN_TEXT"
+	OutputTextFormatTypeMarkdown  OutputTextFormatType = "MARKDOWN"
+	OutputTextFormatTypeHtml      OutputTextFormatType = "HTML"
+	OutputTextFormatTypeCsv       OutputTextFormatType = "CSV"
+)
+
+// Values returns all known values for OutputTextFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutputTextFormatType) Values() []OutputTextFormatType {
+	return []OutputTextFormatType{
+		"PLAIN_TEXT",
+		"MARKDOWN",
+		"HTML",
+		"CSV",
+	}
+}
+
+type PIIEntityType string
+
+// Enum values for PIIEntityType
+const (
+	PIIEntityTypeAll                                 PIIEntityType = "ALL"
+	PIIEntityTypeAddress                             PIIEntityType = "ADDRESS"
+	PIIEntityTypeAge                                 PIIEntityType = "AGE"
+	PIIEntityTypeName                                PIIEntityType = "NAME"
+	PIIEntityTypeEmail                               PIIEntityType = "EMAIL"
+	PIIEntityTypePhone                               PIIEntityType = "PHONE"
+	PIIEntityTypeUsername                            PIIEntityType = "USERNAME"
+	PIIEntityTypePassword                            PIIEntityType = "PASSWORD"
+	PIIEntityTypeDriverId                            PIIEntityType = "DRIVER_ID"
+	PIIEntityTypeLicensePlate                        PIIEntityType = "LICENSE_PLATE"
+	PIIEntityTypeVehicleIdentificationNumber         PIIEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+	PIIEntityTypeCreditDebitCardCvv                  PIIEntityType = "CREDIT_DEBIT_CARD_CVV"
+	PIIEntityTypeCreditDebitCardExpiry               PIIEntityType = "CREDIT_DEBIT_CARD_EXPIRY"
+	PIIEntityTypeCreditDebitCardNumber               PIIEntityType = "CREDIT_DEBIT_CARD_NUMBER"
+	PIIEntityTypePin                                 PIIEntityType = "PIN"
+	PIIEntityTypeInternationalBankAccountNumber      PIIEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	PIIEntityTypeSwiftCode                           PIIEntityType = "SWIFT_CODE"
+	PIIEntityTypeIpAddress                           PIIEntityType = "IP_ADDRESS"
+	PIIEntityTypeMacAddress                          PIIEntityType = "MAC_ADDRESS"
+	PIIEntityTypeUrl                                 PIIEntityType = "URL"
+	PIIEntityTypeAwsAccessKey                        PIIEntityType = "AWS_ACCESS_KEY"
+	PIIEntityTypeAwsSecretKey                        PIIEntityType = "AWS_SECRET_KEY"
+	PIIEntityTypeUsBankAccountNumber                 PIIEntityType = "US_BANK_ACCOUNT_NUMBER"
+	PIIEntityTypeUsBankRoutingNumber                 PIIEntityType = "US_BANK_ROUTING_NUMBER"
+	PIIEntityTypeUsIndividualTaxIdentificationNumber PIIEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	PIIEntityTypeUsPassportNumber                    PIIEntityType = "US_PASSPORT_NUMBER"
+	PIIEntityTypeUsSocialSecurityNumber              PIIEntityType = "US_SOCIAL_SECURITY_NUMBER"
+	PIIEntityTypeCaHealthNumber                      PIIEntityType = "CA_HEALTH_NUMBER"
+	PIIEntityTypeCaSocialInsuranceNumber             PIIEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	PIIEntityTypeUkNationalHealthServiceNumber       PIIEntityType = "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+	PIIEntityTypeUkNationalInsuranceNumber           PIIEntityType = "UK_NATIONAL_INSURANCE_NUMBER"
+	PIIEntityTypeUkUniqueTaxpayerReferenceNumber     PIIEntityType = "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+)
+
+// Values returns all known values for PIIEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PIIEntityType) Values() []PIIEntityType {
+	return []PIIEntityType{
+		"ALL",
+		"ADDRESS",
+		"AGE",
+		"NAME",
+		"EMAIL",
+		"PHONE",
+		"USERNAME",
+		"PASSWORD",
+		"DRIVER_ID",
+		"LICENSE_PLATE",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+		"CREDIT_DEBIT_CARD_CVV",
+		"CREDIT_DEBIT_CARD_EXPIRY",
+		"CREDIT_DEBIT_CARD_NUMBER",
+		"PIN",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"SWIFT_CODE",
+		"IP_ADDRESS",
+		"MAC_ADDRESS",
+		"URL",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"US_BANK_ACCOUNT_NUMBER",
+		"US_BANK_ROUTING_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"US_PASSPORT_NUMBER",
+		"US_SOCIAL_SECURITY_NUMBER",
+		"CA_HEALTH_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		"UK_NATIONAL_INSURANCE_NUMBER",
+		"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+	}
+}
+
+type PIIRedactionMaskMode string
+
+// Enum values for PIIRedactionMaskMode
+const (
+	PIIRedactionMaskModePii        PIIRedactionMaskMode = "PII"
+	PIIRedactionMaskModeEntityType PIIRedactionMaskMode = "ENTITY_TYPE"
+)
+
+// Values returns all known values for PIIRedactionMaskMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PIIRedactionMaskMode) Values() []PIIRedactionMaskMode {
+	return []PIIRedactionMaskMode{
+		"PII",
+		"ENTITY_TYPE",
+	}
+}
+
+type ProjectStatus string
+
+// Enum values for ProjectStatus
+const (
+	ProjectStatusCompleted ProjectStatus = "COMPLETED"
+	ProjectStatusFailed    ProjectStatus = "FAILED"
+)
+
+// Values returns all known values for ProjectStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectStatus) Values() []ProjectStatus {
+	return []ProjectStatus{
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type RelationshipType string
 
 // Enum values for RelationshipType
@@ -242,6 +407,25 @@ func (RelationshipType) Values() []RelationshipType {
 	}
 }
 
+type ResourceOwner string
+
+// Enum values for ResourceOwner
+const (
+	ResourceOwnerAccount ResourceOwner = "ACCOUNT"
+	ResourceOwnerService ResourceOwner = "SERVICE"
+)
+
+// Values returns all known values for ResourceOwner. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceOwner) Values() []ResourceOwner {
+	return []ResourceOwner{
+		"ACCOUNT",
+		"SERVICE",
+	}
+}
+
 type SelectionStatus string
 
 // Enum values for SelectionStatus
@@ -258,6 +442,46 @@ func (SelectionStatus) Values() []SelectionStatus {
 	return []SelectionStatus{
 		"SELECTED",
 		"NOT_SELECTED",
+	}
+}
+
+type SensitiveDataDetectionMode string
+
+// Enum values for SensitiveDataDetectionMode
+const (
+	SensitiveDataDetectionModeDetection             SensitiveDataDetectionMode = "DETECTION"
+	SensitiveDataDetectionModeDetectionAndRedaction SensitiveDataDetectionMode = "DETECTION_AND_REDACTION"
+	SensitiveDataDetectionModeDisabled              SensitiveDataDetectionMode = "DISABLED"
+)
+
+// Values returns all known values for SensitiveDataDetectionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SensitiveDataDetectionMode) Values() []SensitiveDataDetectionMode {
+	return []SensitiveDataDetectionMode{
+		"DETECTION",
+		"DETECTION_AND_REDACTION",
+		"DISABLED",
+	}
+}
+
+type State string
+
+// Enum values for State
+const (
+	StateEnabled  State = "ENABLED"
+	StateDisabled State = "DISABLED"
+)
+
+// Values returns all known values for State. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

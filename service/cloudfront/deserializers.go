@@ -24220,6 +24220,9 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("ContinuousDeploymentPolicyInUse", errorCode):
 		return awsRestxml_deserializeErrorContinuousDeploymentPolicyInUse(response, errorBody)
 
+	case strings.EqualFold("EntityLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorEntityLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("EntityNotFound", errorCode):
 		return awsRestxml_deserializeErrorEntityNotFound(response, errorBody)
 
@@ -25123,6 +25126,9 @@ func awsRestxml_deserializeOpErrorUpdateDomainAssociation(response *smithyhttp.R
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
 
+	case strings.EqualFold("EntityLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorEntityLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("EntityNotFound", errorCode):
 		return awsRestxml_deserializeErrorEntityNotFound(response, errorBody)
 
@@ -25131,6 +25137,9 @@ func awsRestxml_deserializeOpErrorUpdateDomainAssociation(response *smithyhttp.R
 
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("InvalidAssociation", errorCode):
+		return awsRestxml_deserializeErrorInvalidAssociation(response, errorBody)
 
 	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
 		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
@@ -38725,6 +38734,12 @@ func awsRestxml_deserializeDocumentConnectionGroup(v **types.ConnectionGroup, de
 				return err
 			}
 
+		case strings.EqualFold("ViewerFallback", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentViewerFallback(&sv.ViewerFallback, nodeDecoder); err != nil {
+				return err
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -38916,6 +38931,12 @@ func awsRestxml_deserializeDocumentConnectionGroupSummary(v **types.ConnectionGr
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ViewerFallback", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentViewerFallback(&sv.ViewerFallback, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:
@@ -40411,6 +40432,19 @@ func awsRestxml_deserializeDocumentCustomOriginConfig(v **types.CustomOriginConf
 			{
 				xtv := string(val)
 				sv.IpAddressType = types.IpAddressType(xtv)
+			}
+
+		case strings.EqualFold("OriginHttpVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.OriginHttpVersion = types.OriginHttpVersion(xtv)
 			}
 
 		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
@@ -42980,6 +43014,19 @@ func awsRestxml_deserializeDocumentDomainResult(v **types.DomainResult, decoder 
 			{
 				xtv := string(val)
 				sv.Domain = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ServeOn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ServeOn = types.ServeOn(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -62874,6 +62921,55 @@ func awsRestxml_deserializeDocumentViewerCertificate(v **types.ViewerCertificate
 	return nil
 }
 
+func awsRestxml_deserializeDocumentViewerFallback(v **types.ViewerFallback, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ViewerFallback
+	if *v == nil {
+		sv = &types.ViewerFallback{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DistributionId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DistributionId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentViewerMtlsConfig(v **types.ViewerMtlsConfig, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -63079,6 +63175,19 @@ func awsRestxml_deserializeDocumentVpcOriginConfig(v **types.VpcOriginConfig, de
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("OriginHttpVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.OriginHttpVersion = types.OriginHttpVersion(xtv)
+			}
+
 		case strings.EqualFold("OriginKeepaliveTimeout", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

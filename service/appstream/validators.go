@@ -2276,6 +2276,21 @@ func validateUserStackAssociationList(v []types.UserStackAssociation) error {
 	}
 }
 
+func validateWebAuthnRedirection(v *types.WebAuthnRedirection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebAuthnRedirection"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateAppBlockBuilderAppBlockInput(v *AssociateAppBlockBuilderAppBlockInput) error {
 	if v == nil {
 		return nil
@@ -2727,6 +2742,11 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 	if v.ContentRedirection != nil {
 		if err := validateContentRedirection(v.ContentRedirection); err != nil {
 			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WebAuthnRedirection != nil {
+		if err := validateWebAuthnRedirection(v.WebAuthnRedirection); err != nil {
+			invalidParams.AddNested("WebAuthnRedirection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AgentAccessConfig != nil {
@@ -3682,6 +3702,11 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 	if v.ContentRedirection != nil {
 		if err := validateContentRedirection(v.ContentRedirection); err != nil {
 			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WebAuthnRedirection != nil {
+		if err := validateWebAuthnRedirection(v.WebAuthnRedirection); err != nil {
+			invalidParams.AddNested("WebAuthnRedirection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AgentAccessConfig != nil {

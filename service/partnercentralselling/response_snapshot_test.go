@@ -182,6 +182,62 @@ func TestCheckResponseSnapshot_AssociateOpportunity(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateCustomerAccount(t *testing.T) {
+	want := &CreateCustomerAccountOutput{
+		Arn:                      ptr.String("__Arn__"),
+		Id:                       ptr.String("__Id__"),
+		Status:                   types.EnrichmentStatus("PENDING"),
+		Catalog:                  ptr.String("__Catalog__"),
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateCustomerAccount.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCustomerAccount(context.Background(), &CreateCustomerAccountInput{
+		Catalog: ptr.String("__Catalog__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCustomerAccount.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateEngagement(t *testing.T) {
 	want := &CreateEngagementOutput{
 		Id:         ptr.String("__Id__"),
@@ -368,6 +424,7 @@ func TestCheckResponseSnapshot_CreateEngagementInvitation(t *testing.T) {
 							},
 						},
 					},
+					OpportunityType: types.OpportunityType("Net New Business"),
 				},
 			},
 		},
@@ -622,6 +679,28 @@ func TestCheckResponseSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateResourceSnapshotJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteCustomerAccount(t *testing.T) {
+	want := &DeleteCustomerAccountOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCustomerAccount.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCustomerAccount(context.Background(), &DeleteCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCustomerAccount.response", err)
 	}
 }
 
@@ -897,7 +976,8 @@ func TestCheckResponseSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 			},
 			AwsPartition: types.AwsPartition("aws-eusc"),
 		},
-		CosellMotion: ptr.String("__CosellMotion__"),
+		CosellMotion:       ptr.String("__CosellMotion__"),
+		CosellMotionReason: ptr.String("__CosellMotionReason__"),
 		SoftwareRevenue: &types.AwsSoftwareRevenue{
 			Value: &types.MonetaryValue{
 				Amount:       ptr.String("__Amount__"),
@@ -926,6 +1006,305 @@ func TestCheckResponseSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAwsOpportunitySummary.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomerAccount(t *testing.T) {
+	want := &GetCustomerAccountOutput{
+		Arn:                      ptr.String("__Arn__"),
+		Id:                       ptr.String("__Id__"),
+		Catalog:                  ptr.String("__Catalog__"),
+		EnrichmentStatus:         types.EnrichmentStatus("PENDING"),
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Issues: []types.Issue{
+			{
+				Severity: ptr.String("__Severity__"),
+				Code:     ptr.String("__Code__"),
+				Message:  ptr.String("__Message__"),
+			},
+			{
+				Severity: ptr.String("__Severity__"),
+				Code:     ptr.String("__Code__"),
+				Message:  ptr.String("__Message__"),
+			},
+		},
+		AwsEnrichment: &types.AwsEnrichment{
+			Customer: &types.AwsEnrichmentCustomer{
+				AccountName:                          ptr.String("__AccountName__"),
+				Industry:                             ptr.String("__Industry__"),
+				SubIndustry:                          ptr.String("__SubIndustry__"),
+				Sector:                               ptr.String("__Sector__"),
+				Segment:                              ptr.String("__Segment__"),
+				CompanySize:                          ptr.String("__CompanySize__"),
+				Region:                               ptr.String("__Region__"),
+				SubRegion:                            ptr.String("__SubRegion__"),
+				Geo:                                  ptr.String("__Geo__"),
+				Country:                              ptr.String("__Country__"),
+				CustomerAccountPlanningQualification: ptr.String("__CustomerAccountPlanningQualification__"),
+				EligiblePrograms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Insights: &types.AwsEnrichmentInsights{
+				MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+				SolutionCategory:           ptr.String("__SolutionCategory__"),
+				SolutionScore:              ptr.String("__SolutionScore__"),
+				SolutionSubCategory:        ptr.String("__SolutionSubCategory__"),
+			},
+		},
+		ReasonCode:                 types.CustomerAccountFailureReason("DUPLICATE_CUSTOMER_MATCH"),
+		Message:                    ptr.String("__Message__"),
+		ExistingCustomerAccountArn: ptr.String("__ExistingCustomerAccountArn__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomerAccount.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomerAccount(context.Background(), &GetCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomerAccount.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomerAccountBulkJob(t *testing.T) {
+	want := &GetCustomerAccountBulkJobOutput{
+		Arn:              ptr.String("__Arn__"),
+		Id:               ptr.String("__Id__"),
+		Status:           types.BulkJobStatus("SUBMITTED"),
+		FileName:         ptr.String("__FileName__"),
+		TotalRecords:     ptr.Int32(1),
+		ProcessedRecords: ptr.Int32(1),
+		SuccessCount:     ptr.Int32(1),
+		FailureCount:     ptr.Int32(1),
+		DeletedCount:     1,
+		FailureReason:    ptr.String("__FailureReason__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomerAccountBulkJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomerAccountBulkJob(context.Background(), &GetCustomerAccountBulkJobInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomerAccountBulkJob.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomerAccountBulkJobReportUrl(t *testing.T) {
+	want := &GetCustomerAccountBulkJobReportUrlOutput{
+		ReportStatus:  types.BulkReportStatus("NOT_STARTED"),
+		ReportType:    types.BulkReportType("FAILED_RECORDS"),
+		Url:           ptr.String("__Url__"),
+		ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomerAccountBulkJobReportUrl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomerAccountBulkJobReportUrl(context.Background(), &GetCustomerAccountBulkJobReportUrlInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		ReportType: types.BulkReportType("FAILED_RECORDS"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomerAccountBulkJobReportUrl.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCustomerAccountStatistics(t *testing.T) {
+	want := &GetCustomerAccountStatisticsOutput{
+		TotalCount: ptr.Int32(1),
+		Aggregations: []types.AggregationResult{
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+				Buckets: []types.Bucket{
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+				},
+				OtherCount: ptr.Int32(1),
+			},
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+				Buckets: []types.Bucket{
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+				},
+				OtherCount: ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCustomerAccountStatistics.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCustomerAccountStatistics(context.Background(), &GetCustomerAccountStatisticsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.Filter{
+			AndAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+		},
+		Aggregations: []types.AggregationRequest{
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+			},
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+			},
+		},
+		IncludeMissing: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCustomerAccountStatistics.response", err)
 	}
 }
 
@@ -1070,6 +1449,7 @@ func TestCheckResponseSnapshot_GetEngagementInvitation(t *testing.T) {
 						},
 					},
 				},
+				OpportunityType: types.OpportunityType("Net New Business"),
 			},
 		},
 		InvitationMessage:     ptr.String("__InvitationMessage__"),
@@ -1111,6 +1491,21 @@ func TestCheckResponseSnapshot_GetEngagementInvitation(t *testing.T) {
 			},
 			LeadInsights: &types.LeadInsights{
 				LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+				ChannelRecommendation: &types.ChannelRecommendation{
+					RecommendedChannel: ptr.String("__RecommendedChannel__"),
+					BestOutreachWindows: []types.BestOutreachWindow{
+						{
+							Day:          types.DayOfWeek("MONDAY"),
+							StartTimeUtc: ptr.String("__StartTimeUtc__"),
+							EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+						},
+						{
+							Day:          types.DayOfWeek("MONDAY"),
+							StartTimeUtc: ptr.String("__StartTimeUtc__"),
+							EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+						},
+					},
+				},
 			},
 		},
 	}
@@ -1325,6 +1720,37 @@ func TestCheckResponseSnapshot_GetOpportunity(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetOpportunity.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetOpportunityBulkJobReportUrl(t *testing.T) {
+	want := &GetOpportunityBulkJobReportUrlOutput{
+		ReportStatus:  types.BulkReportStatus("NOT_STARTED"),
+		ReportType:    types.BulkReportType("FAILED_RECORDS"),
+		ReportFormat:  types.BulkFileFormat("CSV"),
+		Url:           ptr.String("__Url__"),
+		ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetOpportunityBulkJobReportUrl.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetOpportunityBulkJobReportUrl(context.Background(), &GetOpportunityBulkJobReportUrlInput{
+		Catalog:      ptr.String("__Catalog__"),
+		JobId:        ptr.String("__JobId__"),
+		ReportFormat: types.BulkFileFormat("CSV"),
+		ReportType:   types.BulkReportType("FAILED_RECORDS"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetOpportunityBulkJobReportUrl.response", err)
 	}
 }
 
@@ -1593,6 +2019,108 @@ func TestCheckResponseSnapshot_GetSellingSystemSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListCustomerAccountBulkJobResults(t *testing.T) {
+	want := &ListCustomerAccountBulkJobResultsOutput{
+		Results: []types.BulkJobResult{
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCustomerAccountBulkJobResults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCustomerAccountBulkJobResults(context.Background(), &ListCustomerAccountBulkJobResultsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Status:     types.BulkRecordStatus("SUCCEEDED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCustomerAccountBulkJobResults.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCustomerAccountBulkJobs(t *testing.T) {
+	want := &ListCustomerAccountBulkJobsOutput{
+		Items: []types.CustomerAccountBulkJobSummary{
+			{
+				Arn:              ptr.String("__Arn__"),
+				Id:               ptr.String("__Id__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				FileName:         ptr.String("__FileName__"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				DeletedCount:     1,
+				FailureReason:    ptr.String("__FailureReason__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:              ptr.String("__Arn__"),
+				Id:               ptr.String("__Id__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				FileName:         ptr.String("__FileName__"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				DeletedCount:     1,
+				FailureReason:    ptr.String("__FailureReason__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCustomerAccountBulkJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCustomerAccountBulkJobs(context.Background(), &ListCustomerAccountBulkJobsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.CustomerAccountBulkJobFilter{
+			Identifier: ptr.String("__Identifier__"),
+			Status:     types.BulkJobStatus("SUBMITTED"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCustomerAccountBulkJobs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListEngagementByAcceptingInvitationTasks(t *testing.T) {
 	want := &ListEngagementByAcceptingInvitationTasksOutput{
 		TaskSummaries: []types.ListEngagementByAcceptingInvitationTaskSummary{
@@ -1730,6 +2258,62 @@ func TestCheckResponseSnapshot_ListEngagementFromOpportunityTasks(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListEngagementFromOpportunityTasks.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListEngagementGroups(t *testing.T) {
+	want := &ListEngagementGroupsOutput{
+		EngagementGroupSummaries: []types.EngagementGroupSummary{
+			{
+				Id:             ptr.String("__Id__"),
+				Arn:            ptr.String("__Arn__"),
+				Catalog:        ptr.String("__Catalog__"),
+				Name:           ptr.String("__Name__"),
+				Description:    ptr.String("__Description__"),
+				Count:          ptr.Int32(1),
+				ReadinessLevel: types.ReadinessLevel("SalesReady"),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:             ptr.String("__Id__"),
+				Arn:            ptr.String("__Arn__"),
+				Catalog:        ptr.String("__Catalog__"),
+				Name:           ptr.String("__Name__"),
+				Description:    ptr.String("__Description__"),
+				Count:          ptr.Int32(1),
+				ReadinessLevel: types.ReadinessLevel("SalesReady"),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEngagementGroups.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEngagementGroups(context.Background(), &ListEngagementGroupsInput{
+		Catalog:        ptr.String("__Catalog__"),
+		ReadinessLevel: types.ReadinessLevel("SalesReady"),
+		Sort: &types.EngagementGroupSort{
+			SortBy:    types.EngagementGroupSortName("Count"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		EngagementGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEngagementGroups.response", err)
 	}
 }
 
@@ -2158,6 +2742,106 @@ func TestCheckResponseSnapshot_ListOpportunities(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListOpportunityBulkJobResults(t *testing.T) {
+	want := &ListOpportunityBulkJobResultsOutput{
+		Results: []types.BulkJobResult{
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListOpportunityBulkJobResults.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListOpportunityBulkJobResults(context.Background(), &ListOpportunityBulkJobResultsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		JobId:      ptr.String("__JobId__"),
+		Status:     types.BulkRecordStatus("SUCCEEDED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListOpportunityBulkJobResults.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListOpportunityBulkJobs(t *testing.T) {
+	want := &ListOpportunityBulkJobsOutput{
+		OpportunityBulkJobSummaries: []types.OpportunityBulkJobSummary{
+			{
+				JobId:            ptr.String("__JobId__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FailureReason:    ptr.String("__FailureReason__"),
+				FileName:         ptr.String("__FileName__"),
+				OperationType:    types.BulkOperationType("BULK_CREATE"),
+			},
+			{
+				JobId:            ptr.String("__JobId__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FailureReason:    ptr.String("__FailureReason__"),
+				FileName:         ptr.String("__FileName__"),
+				OperationType:    types.BulkOperationType("BULK_CREATE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListOpportunityBulkJobs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListOpportunityBulkJobs(context.Background(), &ListOpportunityBulkJobsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		JobId:      ptr.String("__JobId__"),
+		Status:     types.BulkJobStatus("SUBMITTED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListOpportunityBulkJobs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListOpportunityFromEngagementTasks(t *testing.T) {
 	want := &ListOpportunityFromEngagementTasksOutput{
 		TaskSummaries: []types.ListOpportunityFromEngagementTaskSummary{
@@ -2534,6 +3218,631 @@ func TestCheckResponseSnapshot_RejectEngagementInvitation(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SearchCustomerAccounts(t *testing.T) {
+	want := &SearchCustomerAccountsOutput{
+		CustomerAccountSummaries: []types.CustomerAccountSummary{
+			{
+				Arn:                      ptr.String("__Arn__"),
+				Id:                       ptr.String("__Id__"),
+				Catalog:                  ptr.String("__Catalog__"),
+				EnrichmentStatus:         types.EnrichmentStatus("PENDING"),
+				PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+				CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerAccount: &types.CustomerAccountDetailsSummary{
+					CompanyName: ptr.String("__CompanyName__"),
+				},
+				AwsEnrichment: &types.AwsEnrichmentSummary{
+					Customer: &types.AwsEnrichmentCustomerSummary{
+						Industry:                     ptr.String("__Industry__"),
+						AccountPlanningQualification: ptr.String("__AccountPlanningQualification__"),
+						EligiblePrograms: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Geo:     ptr.String("__Geo__"),
+						Country: ptr.String("__Country__"),
+						Segment: ptr.String("__Segment__"),
+					},
+					Insights: &types.AwsEnrichmentInsightsSummary{
+						MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+						SolutionCategory:           ptr.String("__SolutionCategory__"),
+						SolutionScore:              ptr.String("__SolutionScore__"),
+					},
+				},
+			},
+			{
+				Arn:                      ptr.String("__Arn__"),
+				Id:                       ptr.String("__Id__"),
+				Catalog:                  ptr.String("__Catalog__"),
+				EnrichmentStatus:         types.EnrichmentStatus("PENDING"),
+				PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+				CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerAccount: &types.CustomerAccountDetailsSummary{
+					CompanyName: ptr.String("__CompanyName__"),
+				},
+				AwsEnrichment: &types.AwsEnrichmentSummary{
+					Customer: &types.AwsEnrichmentCustomerSummary{
+						Industry:                     ptr.String("__Industry__"),
+						AccountPlanningQualification: ptr.String("__AccountPlanningQualification__"),
+						EligiblePrograms: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Geo:     ptr.String("__Geo__"),
+						Country: ptr.String("__Country__"),
+						Segment: ptr.String("__Segment__"),
+					},
+					Insights: &types.AwsEnrichmentInsightsSummary{
+						MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+						SolutionCategory:           ptr.String("__SolutionCategory__"),
+						SolutionScore:              ptr.String("__SolutionScore__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchCustomerAccounts.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchCustomerAccounts(context.Background(), &SearchCustomerAccountsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.Filter{
+			AndAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+		},
+		Sort: &types.CustomerAccountSort{
+			SortBy:    types.SortableField("COMPANY_NAME"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchCustomerAccounts.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SearchEngagements(t *testing.T) {
+	want := &SearchEngagementsOutput{
+		EngagementSearchSummaries: []types.EngagementSearchSummary{
+			{
+				Id:          ptr.String("__Id__"),
+				Arn:         ptr.String("__Arn__"),
+				Title:       ptr.String("__Title__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				MemberCount: ptr.Int32(1),
+				ModifiedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModifiedBy:  ptr.String("__ModifiedBy__"),
+				Contexts: []types.EngagementContextDetails{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				Arn:         ptr.String("__Arn__"),
+				Title:       ptr.String("__Title__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				MemberCount: ptr.Int32(1),
+				ModifiedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModifiedBy:  ptr.String("__ModifiedBy__"),
+				Contexts: []types.EngagementContextDetails{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchEngagements.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchEngagements(context.Background(), &SearchEngagementsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Keyword: ptr.String("__Keyword__"),
+		Filter: &types.EngagementSearchFilter{
+			AndAllFilters: []types.EngagementSearchFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.EngagementSearchFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+		},
+		GroupId: ptr.String("__GroupId__"),
+		Sort: &types.EngagementSearchSort{
+			SortBy:    types.EngagementSearchSortName("EngagementId"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchEngagements.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SearchOpportunities(t *testing.T) {
+	want := &SearchOpportunitiesOutput{
+		OpportunitySearchSummaries: []types.OpportunitySearchSummary{
+			{
+				Id:                           ptr.String("__Id__"),
+				LastModifiedDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OpportunityType:              types.OpportunityType("Net New Business"),
+				PartnerOpportunityIdentifier: ptr.String("__PartnerOpportunityIdentifier__"),
+				LifeCycle: &types.OpportunitySearchLifeCycle{
+					ReviewStatus:    types.ReviewStatus("Pending Submission"),
+					Stage:           types.Stage("Prospect"),
+					NextSteps:       ptr.String("__NextSteps__"),
+					TargetCloseDate: ptr.String("__TargetCloseDate__"),
+				},
+				Customer: &types.OpportunitySearchCustomer{
+					Account: &types.OpportunitySearchAccount{
+						CompanyName:  ptr.String("__CompanyName__"),
+						Industry:     types.Industry("Aerospace"),
+						AwsAccountId: ptr.String("__AwsAccountId__"),
+						Address: &types.OpportunitySearchAddress{
+							CountryCode: types.CountryCode("US"),
+						},
+					},
+				},
+				Project: &types.OpportunitySearchProject{
+					Title: ptr.String("__Title__"),
+					ApnPrograms: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExpectedCustomerSpend: []types.OpportunitySearchExpectedCustomerSpend{
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RelatedEntityIdentifiers: &types.OpportunitySearchRelatedEntityIdentifiers{
+					AwsMarketplaceOffers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceOfferSets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceSolutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Solutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				OpportunityTeam: []types.OpportunitySearchTeamMember{
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+				},
+				AwsOpportunitySummary: &types.OpportunitySearchAwsSummary{
+					Origin:       types.OpportunityOrigin("AWS Referral"),
+					CosellMotion: ptr.String("__CosellMotion__"),
+					Insights: &types.OpportunitySearchInsights{
+						EngagementScore: types.SearchEngagementScore("High"),
+						OpportunityQuality: &types.OpportunitySearchOpportunityQuality{
+							Score: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			{
+				Id:                           ptr.String("__Id__"),
+				LastModifiedDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OpportunityType:              types.OpportunityType("Net New Business"),
+				PartnerOpportunityIdentifier: ptr.String("__PartnerOpportunityIdentifier__"),
+				LifeCycle: &types.OpportunitySearchLifeCycle{
+					ReviewStatus:    types.ReviewStatus("Pending Submission"),
+					Stage:           types.Stage("Prospect"),
+					NextSteps:       ptr.String("__NextSteps__"),
+					TargetCloseDate: ptr.String("__TargetCloseDate__"),
+				},
+				Customer: &types.OpportunitySearchCustomer{
+					Account: &types.OpportunitySearchAccount{
+						CompanyName:  ptr.String("__CompanyName__"),
+						Industry:     types.Industry("Aerospace"),
+						AwsAccountId: ptr.String("__AwsAccountId__"),
+						Address: &types.OpportunitySearchAddress{
+							CountryCode: types.CountryCode("US"),
+						},
+					},
+				},
+				Project: &types.OpportunitySearchProject{
+					Title: ptr.String("__Title__"),
+					ApnPrograms: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExpectedCustomerSpend: []types.OpportunitySearchExpectedCustomerSpend{
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RelatedEntityIdentifiers: &types.OpportunitySearchRelatedEntityIdentifiers{
+					AwsMarketplaceOffers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceOfferSets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceSolutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Solutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				OpportunityTeam: []types.OpportunitySearchTeamMember{
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+				},
+				AwsOpportunitySummary: &types.OpportunitySearchAwsSummary{
+					Origin:       types.OpportunityOrigin("AWS Referral"),
+					CosellMotion: ptr.String("__CosellMotion__"),
+					Insights: &types.OpportunitySearchInsights{
+						EngagementScore: types.SearchEngagementScore("High"),
+						OpportunityQuality: &types.OpportunitySearchOpportunityQuality{
+							Score: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchOpportunities.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchOpportunities(context.Background(), &SearchOpportunitiesInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Keyword:    ptr.String("__Keyword__"),
+		Filter: &types.OpportunitySearchFilter{
+			AndAllFilters: []types.OpportunitySearchFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.OpportunitySearchFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+		},
+		Sort: &types.OpportunitySearchSort{
+			SortBy:    types.OpportunitySearchSortName("OpportunityId"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchOpportunities.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartCustomerAccountBulkJob(t *testing.T) {
+	want := &StartCustomerAccountBulkJobOutput{
+		Arn:       ptr.String("__Arn__"),
+		Id:        ptr.String("__Id__"),
+		Status:    types.BulkJobStatus("SUBMITTED"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartCustomerAccountBulkJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartCustomerAccountBulkJob(context.Background(), &StartCustomerAccountBulkJobInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FileUri:     ptr.String("__FileUri__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartCustomerAccountBulkJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartEngagementByAcceptingInvitationTask(t *testing.T) {
 	want := &StartEngagementByAcceptingInvitationTaskOutput{
 		TaskId:                 ptr.String("__TaskId__"),
@@ -2622,6 +3931,32 @@ func TestCheckResponseSnapshot_StartEngagementFromOpportunityTask(t *testing.T) 
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartEngagementFromOpportunityTask.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartOpportunityBulkJob(t *testing.T) {
+	want := &StartOpportunityBulkJobOutput{
+		JobId: ptr.String("__JobId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartOpportunityBulkJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartOpportunityBulkJob(context.Background(), &StartOpportunityBulkJobInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FileURI:     ptr.String("__FileURI__"),
+		FileFormat:  types.BulkFileFormat("CSV"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartOpportunityBulkJob.response", err)
 	}
 }
 
@@ -2833,6 +4168,54 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateCustomerAccount(t *testing.T) {
+	want := &UpdateCustomerAccountOutput{
+		Arn:                      ptr.String("__Arn__"),
+		Id:                       ptr.String("__Id__"),
+		Status:                   types.EnrichmentStatus("PENDING"),
+		Catalog:                  ptr.String("__Catalog__"),
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCustomerAccount.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCustomerAccount(context.Background(), &UpdateCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCustomerAccount.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateEngagementContext(t *testing.T) {
 	want := &UpdateEngagementContextOutput{
 		EngagementId:             ptr.String("__EngagementId__"),
@@ -2888,6 +4271,21 @@ func TestCheckResponseSnapshot_UpdateEngagementContext(t *testing.T) {
 				},
 				Insights: &types.LeadInsights{
 					LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+					ChannelRecommendation: &types.ChannelRecommendation{
+						RecommendedChannel: ptr.String("__RecommendedChannel__"),
+						BestOutreachWindows: []types.BestOutreachWindow{
+							{
+								Day:          types.DayOfWeek("MONDAY"),
+								StartTimeUtc: ptr.String("__StartTimeUtc__"),
+								EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+							},
+							{
+								Day:          types.DayOfWeek("MONDAY"),
+								StartTimeUtc: ptr.String("__StartTimeUtc__"),
+								EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+							},
+						},
+					},
 				},
 			},
 		},
@@ -3175,51 +4573,36 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateEngagement(context.Background(), &CreateEngagementInput{
-		Catalog:     ptr.String("__Catalog__"),
-		ClientToken: ptr.String("__ClientToken__"),
-		Title:       ptr.String("__Title__"),
-		Description: ptr.String("__Description__"),
-		Contexts: []types.EngagementContextDetails{
+	_, opErr := svc.CreateCustomerAccount(context.Background(), &CreateCustomerAccountInput{
+		Catalog: ptr.String("__Catalog__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		Tags: []types.Tag{
 			{
-				Id:   ptr.String("__Id__"),
-				Type: types.EngagementContextType("CustomerProject"),
-				Payload: &types.EngagementContextPayloadMemberCustomerProject{
-					Value: types.CustomerProjectsContext{
-						Customer: &types.EngagementCustomer{
-							Industry:    types.Industry("Aerospace"),
-							CompanyName: ptr.String("__CompanyName__"),
-							WebsiteUrl:  ptr.String("__WebsiteUrl__"),
-							CountryCode: types.CountryCode("US"),
-						},
-						Project: &types.EngagementCustomerProjectDetails{
-							Title:                ptr.String("__Title__"),
-							BusinessProblem:      ptr.String("__BusinessProblem__"),
-							TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
-						},
-					},
-				},
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
 			},
 			{
-				Id:   ptr.String("__Id__"),
-				Type: types.EngagementContextType("CustomerProject"),
-				Payload: &types.EngagementContextPayloadMemberCustomerProject{
-					Value: types.CustomerProjectsContext{
-						Customer: &types.EngagementCustomer{
-							Industry:    types.Industry("Aerospace"),
-							CompanyName: ptr.String("__CompanyName__"),
-							WebsiteUrl:  ptr.String("__WebsiteUrl__"),
-							CountryCode: types.CountryCode("US"),
-						},
-						Project: &types.EngagementCustomerProjectDetails{
-							Title:                ptr.String("__Title__"),
-							BusinessProblem:      ptr.String("__BusinessProblem__"),
-							TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
-						},
-					},
-				},
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
 			},
 		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

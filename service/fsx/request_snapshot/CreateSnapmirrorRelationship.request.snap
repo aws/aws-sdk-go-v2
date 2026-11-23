@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateSnapmirrorRelationship
+
+{"ClientRequestToken":"__ClientRequestToken__","Destination":{"VolumeId":"__VolumeId__"},"PolicyId":"__PolicyId__","Source":{"Path":"__Path__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ThrottleInKbps":1,"TransferSchedule":"__TransferSchedule__"}

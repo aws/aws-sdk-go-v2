@@ -1,3 +1,7 @@
+# v1.65.0 (2026-11-19)
+
+* **Feature**: Network Load Balancer now supports mutual TLS (mTLS), letting you authenticate client certificates before granting access. You can configure a trust store of certificate authorities on your Network Load Balancer, which will then verify the client certificate on each inbound connection.
+
 # v1.64.1 (2026-11-18)
 
 * **Documentation**: This release adds support for the keyExchange field in CloudTrail tlsDetails, enabling customers to distinguish classical from post-quantum hybrid key exchange for TLS connections on Application Load Balancers.

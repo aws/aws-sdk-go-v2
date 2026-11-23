@@ -524,6 +524,16 @@ func serialize__listOfQueueTransition(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serialize__listOfRectangle(s smithy.ShapeSerializer, schema *smithy.Schema, v []Rectangle) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serialize__listOfServiceOverride(s smithy.ShapeSerializer, schema *smithy.Schema, v []ServiceOverride) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1787,6 +1797,28 @@ func deserialize__listOfQueueTransition(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		vv = QueueTransition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserialize__listOfRectangle(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Rectangle) error {
+	*v = make([]Rectangle, 0)
+	var vv Rectangle
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Rectangle
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Rectangle{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

@@ -432,6 +432,20 @@ func TestCheckResponseSnapshot_CreateListener(t *testing.T) {
 					IgnoreClientCertificateExpiry: ptr.Bool(true),
 					TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 					AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+					ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+					},
 				},
 			},
 			{
@@ -630,6 +644,20 @@ func TestCheckResponseSnapshot_CreateListener(t *testing.T) {
 					IgnoreClientCertificateExpiry: ptr.Bool(true),
 					TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 					AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+					ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+					},
 				},
 			},
 		},
@@ -847,6 +875,20 @@ func TestCheckResponseSnapshot_CreateListener(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -2865,6 +2907,20 @@ func TestCheckResponseSnapshot_DescribeListeners(t *testing.T) {
 					IgnoreClientCertificateExpiry: ptr.Bool(true),
 					TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 					AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+					ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+					},
 				},
 			},
 			{
@@ -3063,6 +3119,20 @@ func TestCheckResponseSnapshot_DescribeListeners(t *testing.T) {
 					IgnoreClientCertificateExpiry: ptr.Bool(true),
 					TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 					AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+					ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+					},
 				},
 			},
 		},
@@ -4879,6 +4949,20 @@ func TestCheckResponseSnapshot_ModifyListener(t *testing.T) {
 					IgnoreClientCertificateExpiry: ptr.Bool(true),
 					TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 					AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+					ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+					},
 				},
 			},
 			{
@@ -5077,6 +5161,20 @@ func TestCheckResponseSnapshot_ModifyListener(t *testing.T) {
 					IgnoreClientCertificateExpiry: ptr.Bool(true),
 					TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 					AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+					ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+						{
+							Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+							Action:    types.ClientCertificateIdentityFilterAction("accept"),
+							MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+							Value:     ptr.String("__Value__"),
+						},
+					},
 				},
 			},
 		},
@@ -5284,6 +5382,20 @@ func TestCheckResponseSnapshot_ModifyListener(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if err != nil {
@@ -7925,6 +8037,20 @@ func TestCheckResponseSnapshot_Error_ALPNPolicyNotSupportedException(t *testing.
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -8492,6 +8618,20 @@ func TestCheckResponseSnapshot_Error_DuplicateListenerException(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -8973,6 +9113,20 @@ func TestCheckResponseSnapshot_Error_IncompatibleProtocolsException(t *testing.T
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -9275,6 +9429,20 @@ func TestCheckResponseSnapshot_Error_InvalidConfigurationRequestException(t *tes
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -9506,6 +9674,20 @@ func TestCheckResponseSnapshot_Error_InvalidLoadBalancerActionException(t *testi
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -10813,6 +10995,20 @@ func TestCheckResponseSnapshot_Error_SSLPolicyNotFoundException(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -11113,6 +11309,20 @@ func TestCheckResponseSnapshot_Error_TargetGroupAssociationLimitException(t *tes
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -11384,6 +11594,20 @@ func TestCheckResponseSnapshot_Error_TooManyActionsException(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -11652,6 +11876,20 @@ func TestCheckResponseSnapshot_Error_TooManyListenersException(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -11952,6 +12190,20 @@ func TestCheckResponseSnapshot_Error_TooManyRegistrationsForTargetIdException(t 
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -13023,6 +13275,20 @@ func TestCheckResponseSnapshot_Error_TooManyTargetsException(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -13335,6 +13601,20 @@ func TestCheckResponseSnapshot_Error_TooManyUniqueTargetGroupsPerLoadBalancerExc
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -13661,6 +13941,20 @@ func TestCheckResponseSnapshot_Error_TrustStoreNotReadyException(t *testing.T) {
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {
@@ -13892,6 +14186,20 @@ func TestCheckResponseSnapshot_Error_UnsupportedProtocolException(t *testing.T) 
 			IgnoreClientCertificateExpiry: ptr.Bool(true),
 			TrustStoreAssociationStatus:   types.TrustStoreAssociationStatusEnum("active"),
 			AdvertiseTrustStoreCaNames:    types.AdvertiseTrustStoreCaNamesEnum("on"),
+			ClientCertificateIdentityFilters: []types.ClientCertificateIdentityFilter{
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+				{
+					Field:     types.ClientCertificateIdentityFilterField("subject-cn"),
+					Action:    types.ClientCertificateIdentityFilterAction("accept"),
+					MatchType: types.ClientCertificateIdentityFilterMatchType("exact"),
+					Value:     ptr.String("__Value__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {

@@ -104,6 +104,31 @@ func (CleanUpStrategy) Values() []CleanUpStrategy {
 	}
 }
 
+type CodeRemediationJobStatus string
+
+// Enum values for CodeRemediationJobStatus
+const (
+	CodeRemediationJobStatusInProgress       CodeRemediationJobStatus = "IN_PROGRESS"
+	CodeRemediationJobStatusCompleted        CodeRemediationJobStatus = "COMPLETED"
+	CodeRemediationJobStatusFailed           CodeRemediationJobStatus = "FAILED"
+	CodeRemediationJobStatusNoChangeRequired CodeRemediationJobStatus = "NO_CHANGE_REQUIRED"
+	CodeRemediationJobStatusUnknown          CodeRemediationJobStatus = "UNKNOWN"
+)
+
+// Values returns all known values for CodeRemediationJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CodeRemediationJobStatus) Values() []CodeRemediationJobStatus {
+	return []CodeRemediationJobStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"NO_CHANGE_REQUIRED",
+		"UNKNOWN",
+	}
+}
+
 type CodeRemediationStrategy string
 
 // Enum values for CodeRemediationStrategy

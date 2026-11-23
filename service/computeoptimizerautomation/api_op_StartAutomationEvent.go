@@ -15,9 +15,10 @@ import (
 //
 // action.
 //
-// Management accounts and delegated administrators can only initiate recommended
-// actions for associated member accounts. You can associate a member account using
-// AssociateAccounts .
+// Management accounts and delegated administrators can initiate recommended
+// actions for member accounts that are associated using AssociateAccounts or have
+// an applicable organization enrollment configuration with organizationRuleMode
+// set to AnyAllowed .
 func (c *Client) StartAutomationEvent(ctx context.Context, params *StartAutomationEventInput, optFns ...func(*Options)) (*StartAutomationEventOutput, error) {
 	if params == nil {
 		params = &StartAutomationEventInput{}

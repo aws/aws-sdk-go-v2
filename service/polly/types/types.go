@@ -62,6 +62,54 @@ func (v *CloseStreamEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The customer managed key that encrypts your custom voice. If you don't specify
+// a key, Amazon Polly encrypts the voice with an Amazon Web Services owned key.
+type CustomerManagedEncryption struct {
+
+	// The Amazon Resource Name (ARN) of the key. The key must be a symmetric
+	// encryption key in the same Amazon Web Services Region as the voice. To create
+	// the voice, you need kms:DescribeKey , kms:GenerateDataKey , and kms:Decrypt
+	// permissions on the key. To synthesize speech with the voice, you need
+	// kms:Decrypt permission on the key.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	// The key-value pairs that Amazon Polly includes as the encryption context when
+	// it encrypts or decrypts the voice with the key. You can use these pairs in key
+	// policy conditions. Don't use keys that start with aws: , which are reserved.
+	EncryptionContext map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomerManagedEncryption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerManagedEncryption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerManagedEncryption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionContext != nil {
+		serializeEncryptionContext(s, schemas.CustomerManagedEncryption_EncryptionContext, v.EncryptionContext)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CustomerManagedEncryption_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *CustomerManagedEncryption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerManagedEncryption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerManagedEncryption_EncryptionContext:
+			return deserializeEncryptionContext(d, schemas.CustomerManagedEncryption_EncryptionContext, &v.EncryptionContext)
+		case schemas.CustomerManagedEncryption_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CustomerManagedEncryption_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
 // Configuration that controls when synthesized audio data is sent on the output
 // stream.
 type FlushStreamConfiguration struct {
@@ -260,6 +308,104 @@ func (v *LexiconDescription) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LexiconDescription_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.LexiconDescription_Name, v.Name)
+		}
+		return nil
+	})
+}
+
+// A recording of the speaker whose voice you want to create. The recording
+// specifies its audio format and its audio source.
+type Recording struct {
+
+	// The audio source of the recording. Specify either an Amazon S3 object or the
+	// audio data.
+	//
+	// This member is required.
+	Data *RecordingData
+
+	// The audio format of the recording: wav , flac , ogg_vorbis , or mp3 . The format
+	// must match the audio data.
+	//
+	// This member is required.
+	Format AudioFormat
+
+	noSmithyDocumentSerde
+}
+
+func (v *Recording) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recording)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recording) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteStruct(schemas.Recording_Data)
+		v.Data.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.Recording_Format, string(v.Format))
+	}
+}
+func (v *Recording) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recording, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recording_Data:
+			v.Data = &RecordingData{}
+			return v.Data.Deserialize(d)
+		case schemas.Recording_Format:
+			var ev string
+			if err := d.ReadString(schemas.Recording_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = AudioFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The audio source of a recording. In a CreateVoice request, specify exactly one
+// of S3Url and Bytes . In a response, a recording that Amazon Polly read from
+// Amazon S3 includes its S3Url . A recording that you passed as Bytes includes
+// neither field, because Amazon Polly doesn't return the audio.
+type RecordingData struct {
+
+	// The audio data, passed directly in the request. The data must be in the format
+	// that Format specifies and can be up to 5 MB. Amazon Polly doesn't store the
+	// audio after it creates the voice, and doesn't return this field in responses.
+	Bytes []byte
+
+	// The Amazon S3 URL of the audio object, in the form s3://bucket/key . You need
+	// s3:GetObject permission on the object.
+	S3Url *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RecordingData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordingData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordingData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.RecordingData_Bytes, v.Bytes)
+	}
+	if v.S3Url != nil {
+		s.WriteString(schemas.RecordingData_S3Url, *v.S3Url)
+	}
+}
+func (v *RecordingData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordingData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordingData_Bytes:
+			return d.ReadBlob(schemas.RecordingData_Bytes, &v.Bytes)
+		case schemas.RecordingData_S3Url:
+			v.S3Url = new(string)
+			return d.ReadString(schemas.RecordingData_S3Url, v.S3Url)
 		}
 		return nil
 	})
@@ -740,7 +886,10 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// Description of the voice.
+// Describes a voice. Amazon Polly provides voices, and you can create custom
+// voices with CreateVoice . Origin indicates whether Amazon Polly provides the
+// voice or you created it. DescribeVoices returns a subset of the fields for each
+// voice. GetVoice returns all fields of a custom voice.
 type Voice struct {
 
 	// Additional codes for languages available for the specified voice in addition to
@@ -751,11 +900,25 @@ type Voice struct {
 	// Indian English and Hindi, this parameter would show the code hi-IN .
 	AdditionalLanguageCodes []LanguageCode
 
-	// Gender of the voice.
+	// The Amazon Resource Name (ARN) of a custom voice, in the form
+	// arn:partition:polly:region:account-id:voice/voice-id . CreateVoice and GetVoice
+	// return this field. Voices that Amazon Polly provides don't have an ARN.
+	Arn *string
+
+	// The date and time when you created the custom voice. Voices that Amazon Polly
+	// provides don't include this field.
+	CreationTime *time.Time
+
+	// The customer managed key that encrypts your custom voice. CreateVoice and
+	// GetVoice return this field if you specified a key in CreateVoice .
+	CustomerManagedEncryption *CustomerManagedEncryption
+
+	// The gender of the voice. Custom voices don't include this field.
 	Gender Gender
 
-	// Amazon Polly assigned voice ID. This is the ID that you specify when calling
-	// the SynthesizeSpeech operation.
+	// The voice ID that Amazon Polly assigns. You specify this ID when you call the
+	// SynthesizeSpeech operation. For a custom voice, Amazon Polly assigns an ID that
+	// consists of vc- followed by hexadecimal characters, for example, vc-9a8fa85dd3 .
 	Id VoiceId
 
 	// Language code of the voice.
@@ -764,13 +927,41 @@ type Voice struct {
 	// Human readable name of the language in English.
 	LanguageName *string
 
-	// Name of the voice (for example, Salli, Kendra, etc.). This provides a human
-	// readable voice name that you might display in your application.
+	// The name of the voice, for example, Salli or Kendra. The name is
+	// human-readable, and you might display it in your application. For a custom
+	// voice, this is the Name that you specified in CreateVoice .
 	Name *string
+
+	// Indicates who provides the voice. The origin is one of the following:
+	//
+	// aws A voice that Amazon Polly provides.
+	//
+	// customer A custom voice that you created with CreateVoice .
+	Origin VoiceOrigin
+
+	// The status of a custom voice. Voices that Amazon Polly provides don't include
+	// this field. The status is one of the following:
+	//
+	// pending Amazon Polly is creating the voice.
+	//
+	// active The voice is ready for speech synthesis.
+	//
+	// failed Amazon Polly couldn't create the voice. StatusReason describes why.
+	Status VoiceStatus
+
+	// Additional information about the status of a custom voice. When the status is
+	// failed , this field describes why Amazon Polly couldn't create the voice.
+	StatusReason *string
 
 	// Specifies which engines ( standard , neural , long-form or generative ) are
 	// supported by a given voice.
 	SupportedEngines []Engine
+
+	// The data from which you created the custom voice. CreateVoice and GetVoice
+	// return this field. The response doesn't include the audio: a recording that
+	// Amazon Polly read from Amazon S3 includes its S3Url , and a recording that you
+	// passed as Bytes has no fields in Data .
+	VoiceCreationData *VoiceCreationData
 
 	noSmithyDocumentSerde
 }
@@ -784,6 +975,17 @@ func (v *Voice) Serialize(s smithy.ShapeSerializer) {
 func (v *Voice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalLanguageCodes != nil {
 		serializeLanguageCodeList(s, schemas.Voice_AdditionalLanguageCodes, v.AdditionalLanguageCodes)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Voice_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Voice_CreationTime, *v.CreationTime)
+	}
+	if v.CustomerManagedEncryption != nil {
+		s.WriteStruct(schemas.Voice_CustomerManagedEncryption)
+		v.CustomerManagedEncryption.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Gender != "" {
 		s.WriteString(schemas.Voice_Gender, string(v.Gender))
@@ -800,8 +1002,22 @@ func (v *Voice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Voice_Name, *v.Name)
 	}
+	if v.Origin != "" {
+		s.WriteString(schemas.Voice_Origin, string(v.Origin))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Voice_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.Voice_StatusReason, *v.StatusReason)
+	}
 	if v.SupportedEngines != nil {
 		serializeEngineList(s, schemas.Voice_SupportedEngines, v.SupportedEngines)
+	}
+	if v.VoiceCreationData != nil {
+		s.WriteStruct(schemas.Voice_VoiceCreationData)
+		v.VoiceCreationData.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 func (v *Voice) Deserialize(d smithy.ShapeDeserializer) error {
@@ -809,6 +1025,15 @@ func (v *Voice) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.Voice_AdditionalLanguageCodes:
 			return deserializeLanguageCodeList(d, schemas.Voice_AdditionalLanguageCodes, &v.AdditionalLanguageCodes)
+		case schemas.Voice_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Voice_Arn, v.Arn)
+		case schemas.Voice_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Voice_CreationTime, v.CreationTime)
+		case schemas.Voice_CustomerManagedEncryption:
+			v.CustomerManagedEncryption = &CustomerManagedEncryption{}
+			return v.CustomerManagedEncryption.Deserialize(d)
 		case schemas.Voice_Gender:
 			var ev string
 			if err := d.ReadString(schemas.Voice_Gender, &ev); err != nil {
@@ -836,8 +1061,61 @@ func (v *Voice) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Voice_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Voice_Name, v.Name)
+		case schemas.Voice_Origin:
+			var ev string
+			if err := d.ReadString(schemas.Voice_Origin, &ev); err != nil {
+				return err
+			}
+			v.Origin = VoiceOrigin(ev)
+			return nil
+		case schemas.Voice_Status:
+			var ev string
+			if err := d.ReadString(schemas.Voice_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = VoiceStatus(ev)
+			return nil
+		case schemas.Voice_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.Voice_StatusReason, v.StatusReason)
 		case schemas.Voice_SupportedEngines:
 			return deserializeEngineList(d, schemas.Voice_SupportedEngines, &v.SupportedEngines)
+		case schemas.Voice_VoiceCreationData:
+			v.VoiceCreationData = &VoiceCreationData{}
+			return v.VoiceCreationData.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The audio that you provide to create a custom voice.
+type VoiceCreationData struct {
+
+	// The recordings of the speaker. Each recording specifies its audio format and
+	// its audio source.
+	//
+	// This member is required.
+	Recordings []Recording
+
+	noSmithyDocumentSerde
+}
+
+func (v *VoiceCreationData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoiceCreationData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoiceCreationData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Recordings != nil {
+		serializeRecordingList(s, schemas.VoiceCreationData_Recordings, v.Recordings)
+	}
+}
+func (v *VoiceCreationData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoiceCreationData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoiceCreationData_Recordings:
+			return deserializeRecordingList(d, schemas.VoiceCreationData_Recordings, &v.Recordings)
 		}
 		return nil
 	})

@@ -30,20 +30,18 @@ func (c *Client) PutDataCatalogExportConfiguration(ctx context.Context, params *
 
 type PutDataCatalogExportConfigurationInput struct {
 
-	// The export setting for the data catalog. Specify ENABLED to start exporting
-	// catalog metadata to S3 Tables, or DISABLED to stop exporting. This field is
-	// required.
-	//
-	// This member is required.
-	ExportSetting types.ExportSetting
+	// The export setting for asset metadata. Set S3TablesExport to ENABLED to start
+	// exporting asset metadata to S3 Tables, or to DISABLED to stop exporting.
+	Assets *types.AssetsExport
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 
-	// The encryption configuration for the exported data. If not specified, the
-	// default encryption settings are used.
-	EncryptionConfiguration *types.ExportEncryptionConfiguration
+	// The S3 Tables configuration for the export. The encryption configuration
+	// applies only when Glue creates the table bucket that holds the exported catalog
+	// metadata. If not specified, the default encryption settings are used.
+	S3TablesConfiguration *types.S3TablesConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -55,16 +53,18 @@ func (v *PutDataCatalogExportConfigurationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *PutDataCatalogExportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assets != nil {
+		s.WriteStruct(schemas.PutDataCatalogExportConfigurationInput_Assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.PutDataCatalogExportConfigurationInput_ClientToken, *v.ClientToken)
 	}
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.PutDataCatalogExportConfigurationInput_EncryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
+	if v.S3TablesConfiguration != nil {
+		s.WriteStruct(schemas.PutDataCatalogExportConfigurationInput_S3TablesConfiguration)
+		v.S3TablesConfiguration.SerializeMembers(s)
 		s.CloseStruct()
-	}
-	if v.ExportSetting != "" {
-		s.WriteString(schemas.PutDataCatalogExportConfigurationInput_ExportSetting, string(v.ExportSetting))
 	}
 }
 
@@ -72,11 +72,11 @@ func (v *PutDataCatalogExportConfigurationInput) SerializeMembers(s smithy.Shape
 // operation.
 type PutDataCatalogExportConfigurationOutput struct {
 
-	// The encryption configuration for the exported data.
-	EncryptionConfiguration *types.ExportEncryptionConfiguration
+	// The export setting for asset metadata.
+	Assets *types.AssetsExport
 
-	// The export setting for the data catalog.
-	ExportSetting types.ExportSetting
+	// The S3 Tables configuration for the export.
+	S3TablesConfiguration *types.S3TablesConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,28 +91,26 @@ func (v *PutDataCatalogExportConfigurationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *PutDataCatalogExportConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EncryptionConfiguration != nil {
-		s.WriteStruct(schemas.PutDataCatalogExportConfigurationOutput_EncryptionConfiguration)
-		v.EncryptionConfiguration.SerializeMembers(s)
+	if v.Assets != nil {
+		s.WriteStruct(schemas.PutDataCatalogExportConfigurationOutput_Assets)
+		v.Assets.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	if v.ExportSetting != "" {
-		s.WriteString(schemas.PutDataCatalogExportConfigurationOutput_ExportSetting, string(v.ExportSetting))
+	if v.S3TablesConfiguration != nil {
+		s.WriteStruct(schemas.PutDataCatalogExportConfigurationOutput_S3TablesConfiguration)
+		v.S3TablesConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 func (v *PutDataCatalogExportConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutDataCatalogExportConfigurationOutput, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.PutDataCatalogExportConfigurationOutput_EncryptionConfiguration:
-			v.EncryptionConfiguration = &types.ExportEncryptionConfiguration{}
-			return v.EncryptionConfiguration.Deserialize(d)
-		case schemas.PutDataCatalogExportConfigurationOutput_ExportSetting:
-			var ev string
-			if err := d.ReadString(schemas.PutDataCatalogExportConfigurationOutput_ExportSetting, &ev); err != nil {
-				return err
-			}
-			v.ExportSetting = types.ExportSetting(ev)
-			return nil
+		case schemas.PutDataCatalogExportConfigurationOutput_Assets:
+			v.Assets = &types.AssetsExport{}
+			return v.Assets.Deserialize(d)
+		case schemas.PutDataCatalogExportConfigurationOutput_S3TablesConfiguration:
+			v.S3TablesConfiguration = &types.S3TablesConfiguration{}
+			return v.S3TablesConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -138,9 +136,6 @@ func (c *Client) addOperationPutDataCatalogExportConfigurationMiddlewares(stack 
 		return err
 	}
 	if err = addIdempotencyToken_opPutDataCatalogExportConfigurationMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addOpPutDataCatalogExportConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

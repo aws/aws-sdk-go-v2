@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"domainChallenge":{"recordName":"__RecordName__","recordValue":"__RecordValue__"},"identifierType":"DOMAIN","publisherArn":"__PublisherArn__","status":"ACTION_REQUIRED","statusReason":"__StatusReason__","tags":{"key0":"__Value__"},"updatedAt":946684800,"value":{"domain":"__IdentifierMemberDomain__"}}

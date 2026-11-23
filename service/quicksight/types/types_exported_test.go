@@ -81,6 +81,24 @@ func ExampleClientCredentialsDetails_outputUsage() {
 
 var _ *types.ClientCredentialsGrantDetails
 
+func ExampleClientSecretConfigurationDetail_outputUsage() {
+	var union types.ClientSecretConfigurationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ClientSecretConfigurationDetailMemberIdp:
+		_ = v.Value // Value is types.IdpClientSecretInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.IdpClientSecretInput
+
 func ExampleCustomPromptInput_outputUsage() {
 	var union types.CustomPromptInput
 	// type switches can be used to check the union value
@@ -287,6 +305,94 @@ func ExampleGeocodePreferenceValue_outputUsage() {
 var _ *types.GeocoderHierarchy
 var _ *types.Coordinate
 
+func ExampleIdpAuthorizingConfigurationDetail_outputUsage() {
+	var union types.IdpAuthorizingConfigurationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IdpAuthorizingConfigurationDetailMemberExternalIdpConfidentialAuthCode:
+		_ = v.Value // Value is types.ExternalIdpConfidentialAuthCodeAuthorizingConfig
+
+	case *types.IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode:
+		_ = v.Value // Value is types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalIdpConfidentialAuthCodeAuthorizingConfig
+var _ *types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+func ExampleIdpAuthorizingConfigurationDetailInput_outputUsage() {
+	var union types.IdpAuthorizingConfigurationDetailInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpConfidentialAuthCode:
+		_ = v.Value // Value is types.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput
+
+	case *types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode:
+		_ = v.Value // Value is types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalIdpConfidentialAuthCodeAuthorizingConfigInput
+var _ *types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+func ExampleIdpAuthorizingConfigurationDetailUpdateInput_outputUsage() {
+	var union types.IdpAuthorizingConfigurationDetailUpdateInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpConfidentialAuthCode:
+		_ = v.Value // Value is types.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput
+
+	case *types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode:
+		_ = v.Value // Value is types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput
+var _ *types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+func ExampleIdpAuthorizingConfigurationSummaryDetail_outputUsage() {
+	var union types.IdpAuthorizingConfigurationSummaryDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpConfidentialAuthCode:
+		_ = v.Value // Value is types.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary
+
+	case *types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode:
+		_ = v.Value // Value is types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary
+var _ *types.ExternalIdpPublicAuthCodeAuthorizingConfig
+
 func ExampleImageSource_outputUsage() {
 	var union types.ImageSource
 	// type switches can be used to check the union value
@@ -359,6 +465,60 @@ func ExampleProviderConfig_outputUsage() {
 }
 
 var _ *types.MicrosoftPurviewProviderConfig
+
+func ExampleQuickAuthenticationConfigurationDetail_outputUsage() {
+	var union types.QuickAuthenticationConfigurationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode:
+		_ = v.Value // Value is types.QuickManagedPublicAuthCodeQuickAuthenticationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.QuickManagedPublicAuthCodeQuickAuthenticationConfig
+
+func ExampleQuickAuthenticationConfigurationDetailCreateOutput_outputUsage() {
+	var union types.QuickAuthenticationConfigurationDetailCreateOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode:
+		_ = v.Value // Value is types.QuickManagedPublicAuthCodeQuickAuthenticationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.QuickManagedPublicAuthCodeQuickAuthenticationConfig
+
+func ExampleQuickAuthenticationConfigurationDetailInput_outputUsage() {
+	var union types.QuickAuthenticationConfigurationDetailInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode:
+		_ = v.Value // Value is types.QuickManagedAuthCodeQuickAuthenticationConfigInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.QuickManagedAuthCodeQuickAuthenticationConfigInput
 
 func ExampleReadAuthenticationMetadata_outputUsage() {
 	var union types.ReadAuthenticationMetadata

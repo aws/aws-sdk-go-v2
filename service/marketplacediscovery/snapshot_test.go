@@ -134,6 +134,18 @@ func TestCheckSnapshot_ListFulfillmentOptions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListListingAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListListingAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListListingAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPurchaseOptions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPurchaseOptions(context.Background(), nil, func(o *Options) {
@@ -234,6 +246,18 @@ func TestUpdateSnapshot_ListFulfillmentOptions(t *testing.T) {
 	_, err := svc.ListFulfillmentOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFulfillmentOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListListingAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListListingAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListListingAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

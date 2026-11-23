@@ -103,5 +103,9 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.UnsupportedUserEditionException,
 			New:    func() any { return &types.UnsupportedUserEditionException{} },
 		},
+		"com.amazonaws.quicksight#ValidationException": {
+			Schema: schemas.ValidationException,
+			New:    func() any { return &types.ValidationException{} },
+		},
 	},
 }

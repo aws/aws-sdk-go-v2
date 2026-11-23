@@ -70,6 +70,26 @@ func (m *validateOpAssociateOpportunity) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomerAccount struct {
+}
+
+func (*validateOpCreateCustomerAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomerAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomerAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomerAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEngagementContext struct {
 }
 
@@ -190,6 +210,26 @@ func (m *validateOpCreateResourceSnapshotJob) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCustomerAccount struct {
+}
+
+func (*validateOpDeleteCustomerAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomerAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomerAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomerAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResourceSnapshotJob struct {
 }
 
@@ -250,6 +290,86 @@ func (m *validateOpGetAwsOpportunitySummary) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCustomerAccountBulkJob struct {
+}
+
+func (*validateOpGetCustomerAccountBulkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomerAccountBulkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomerAccountBulkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomerAccountBulkJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomerAccountBulkJobReportUrl struct {
+}
+
+func (*validateOpGetCustomerAccountBulkJobReportUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomerAccountBulkJobReportUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomerAccountBulkJobReportUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomerAccountBulkJobReportUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomerAccount struct {
+}
+
+func (*validateOpGetCustomerAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomerAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomerAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomerAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomerAccountStatistics struct {
+}
+
+func (*validateOpGetCustomerAccountStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomerAccountStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomerAccountStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomerAccountStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEngagement struct {
 }
 
@@ -285,6 +405,26 @@ func (m *validateOpGetEngagementInvitation) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEngagementInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetOpportunityBulkJobReportUrl struct {
+}
+
+func (*validateOpGetOpportunityBulkJobReportUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOpportunityBulkJobReportUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOpportunityBulkJobReportUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOpportunityBulkJobReportUrlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +530,46 @@ func (m *validateOpGetSellingSystemSettings) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCustomerAccountBulkJobResults struct {
+}
+
+func (*validateOpListCustomerAccountBulkJobResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomerAccountBulkJobResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomerAccountBulkJobResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomerAccountBulkJobResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCustomerAccountBulkJobs struct {
+}
+
+func (*validateOpListCustomerAccountBulkJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomerAccountBulkJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomerAccountBulkJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomerAccountBulkJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEngagementByAcceptingInvitationTasks struct {
 }
 
@@ -425,6 +605,26 @@ func (m *validateOpListEngagementFromOpportunityTasks) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEngagementFromOpportunityTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEngagementGroups struct {
+}
+
+func (*validateOpListEngagementGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEngagementGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEngagementGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEngagementGroupsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -525,6 +725,46 @@ func (m *validateOpListOpportunities) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListOpportunitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOpportunityBulkJobResults struct {
+}
+
+func (*validateOpListOpportunityBulkJobResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOpportunityBulkJobResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOpportunityBulkJobResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOpportunityBulkJobResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOpportunityBulkJobs struct {
+}
+
+func (*validateOpListOpportunityBulkJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOpportunityBulkJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOpportunityBulkJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOpportunityBulkJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +930,86 @@ func (m *validateOpRejectEngagementInvitation) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchCustomerAccounts struct {
+}
+
+func (*validateOpSearchCustomerAccounts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchCustomerAccounts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchCustomerAccountsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchCustomerAccountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchEngagements struct {
+}
+
+func (*validateOpSearchEngagements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchEngagements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchEngagementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchEngagementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchOpportunities struct {
+}
+
+func (*validateOpSearchOpportunities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchOpportunities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchOpportunitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchOpportunitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartCustomerAccountBulkJob struct {
+}
+
+func (*validateOpStartCustomerAccountBulkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCustomerAccountBulkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCustomerAccountBulkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCustomerAccountBulkJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartEngagementByAcceptingInvitationTask struct {
 }
 
@@ -725,6 +1045,26 @@ func (m *validateOpStartEngagementFromOpportunityTask) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartEngagementFromOpportunityTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartOpportunityBulkJob struct {
+}
+
+func (*validateOpStartOpportunityBulkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOpportunityBulkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOpportunityBulkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOpportunityBulkJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +1210,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCustomerAccount struct {
+}
+
+func (*validateOpUpdateCustomerAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomerAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomerAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomerAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEngagementContext struct {
 }
 
@@ -922,6 +1282,10 @@ func addOpAssociateOpportunityValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAssociateOpportunity{}, middleware.After)
 }
 
+func addOpCreateCustomerAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomerAccount{}, middleware.After)
+}
+
 func addOpCreateEngagementContextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEngagementContext{}, middleware.After)
 }
@@ -946,6 +1310,10 @@ func addOpCreateResourceSnapshotJobValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateResourceSnapshotJob{}, middleware.After)
 }
 
+func addOpDeleteCustomerAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomerAccount{}, middleware.After)
+}
+
 func addOpDeleteResourceSnapshotJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResourceSnapshotJob{}, middleware.After)
 }
@@ -958,12 +1326,32 @@ func addOpGetAwsOpportunitySummaryValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetAwsOpportunitySummary{}, middleware.After)
 }
 
+func addOpGetCustomerAccountBulkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomerAccountBulkJob{}, middleware.After)
+}
+
+func addOpGetCustomerAccountBulkJobReportUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomerAccountBulkJobReportUrl{}, middleware.After)
+}
+
+func addOpGetCustomerAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomerAccount{}, middleware.After)
+}
+
+func addOpGetCustomerAccountStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomerAccountStatistics{}, middleware.After)
+}
+
 func addOpGetEngagementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEngagement{}, middleware.After)
 }
 
 func addOpGetEngagementInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEngagementInvitation{}, middleware.After)
+}
+
+func addOpGetOpportunityBulkJobReportUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOpportunityBulkJobReportUrl{}, middleware.After)
 }
 
 func addOpGetOpportunityValidationMiddleware(stack *middleware.Stack) error {
@@ -986,12 +1374,24 @@ func addOpGetSellingSystemSettingsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetSellingSystemSettings{}, middleware.After)
 }
 
+func addOpListCustomerAccountBulkJobResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomerAccountBulkJobResults{}, middleware.After)
+}
+
+func addOpListCustomerAccountBulkJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomerAccountBulkJobs{}, middleware.After)
+}
+
 func addOpListEngagementByAcceptingInvitationTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEngagementByAcceptingInvitationTasks{}, middleware.After)
 }
 
 func addOpListEngagementFromOpportunityTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEngagementFromOpportunityTasks{}, middleware.After)
+}
+
+func addOpListEngagementGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEngagementGroups{}, middleware.After)
 }
 
 func addOpListEngagementInvitationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1012,6 +1412,14 @@ func addOpListEngagementsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListOpportunitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListOpportunities{}, middleware.After)
+}
+
+func addOpListOpportunityBulkJobResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOpportunityBulkJobResults{}, middleware.After)
+}
+
+func addOpListOpportunityBulkJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOpportunityBulkJobs{}, middleware.After)
 }
 
 func addOpListOpportunityFromEngagementTasksValidationMiddleware(stack *middleware.Stack) error {
@@ -1046,12 +1454,32 @@ func addOpRejectEngagementInvitationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpRejectEngagementInvitation{}, middleware.After)
 }
 
+func addOpSearchCustomerAccountsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchCustomerAccounts{}, middleware.After)
+}
+
+func addOpSearchEngagementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchEngagements{}, middleware.After)
+}
+
+func addOpSearchOpportunitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchOpportunities{}, middleware.After)
+}
+
+func addOpStartCustomerAccountBulkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCustomerAccountBulkJob{}, middleware.After)
+}
+
 func addOpStartEngagementByAcceptingInvitationTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartEngagementByAcceptingInvitationTask{}, middleware.After)
 }
 
 func addOpStartEngagementFromOpportunityTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartEngagementFromOpportunityTask{}, middleware.After)
+}
+
+func addOpStartOpportunityBulkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOpportunityBulkJob{}, middleware.After)
 }
 
 func addOpStartOpportunityFromEngagementTaskValidationMiddleware(stack *middleware.Stack) error {
@@ -1082,6 +1510,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateCustomerAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomerAccount{}, middleware.After)
+}
+
 func addOpUpdateEngagementContextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEngagementContext{}, middleware.After)
 }
@@ -1105,6 +1537,43 @@ func validateAccount(v *types.Account) error {
 	}
 }
 
+func validateAccountCustomer(v *types.AccountCustomer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountCustomer"}
+	if v.CompanyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompanyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAccountPlanningInvitationPayload(v *types.AccountPlanningInvitationPayload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountPlanningInvitationPayload"}
+	if v.Customer != nil {
+		if err := validateAccountCustomer(v.Customer); err != nil {
+			invalidParams.AddNested("Customer", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SenderContacts != nil {
+		if err := validateSenderContactList(v.SenderContacts); err != nil {
+			invalidParams.AddNested("SenderContacts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAccountReceiver(v *types.AccountReceiver) error {
 	if v == nil {
 		return nil
@@ -1112,6 +1581,38 @@ func validateAccountReceiver(v *types.AccountReceiver) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AccountReceiver"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationRequest(v *types.AggregationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationRequest"}
+	if v.GroupBy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationRequestList(v []types.AggregationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationRequestList"}
+	for i := range v {
+		if err := validateAggregationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1159,6 +1660,64 @@ func validateAwsSubmission(v *types.AwsSubmission) error {
 	}
 }
 
+func validateBestOutreachWindow(v *types.BestOutreachWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BestOutreachWindow"}
+	if len(v.Day) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Day"))
+	}
+	if v.StartTimeUtc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeUtc"))
+	}
+	if v.EndTimeUtc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimeUtc"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBestOutreachWindowList(v []types.BestOutreachWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BestOutreachWindowList"}
+	for i := range v {
+		if err := validateBestOutreachWindow(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelRecommendation(v *types.ChannelRecommendation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelRecommendation"}
+	if v.RecommendedChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendedChannel"))
+	}
+	if v.BestOutreachWindows != nil {
+		if err := validateBestOutreachWindowList(v.BestOutreachWindows); err != nil {
+			invalidParams.AddNested("BestOutreachWindows", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomer(v *types.Customer) error {
 	if v == nil {
 		return nil
@@ -1167,6 +1726,73 @@ func validateCustomer(v *types.Customer) error {
 	if v.Account != nil {
 		if err := validateAccount(v.Account); err != nil {
 			invalidParams.AddNested("Account", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomerAccountContext(v *types.CustomerAccountContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerAccountContext"}
+	if v.Customer != nil {
+		if err := validateAccountCustomer(v.Customer); err != nil {
+			invalidParams.AddNested("Customer", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomerAccountData(v *types.CustomerAccountData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerAccountData"}
+	if v.CompanyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompanyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomerAccountSort(v *types.CustomerAccountSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerAccountSort"}
+	if len(v.SortBy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortBy"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomerAccountTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerAccountTagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1224,6 +1850,11 @@ func validateEngagementContextPayload(v types.EngagementContextPayload) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EngagementContextPayload"}
 	switch uv := v.(type) {
+	case *types.EngagementContextPayloadMemberCustomerAccount:
+		if err := validateCustomerAccountContext(&uv.Value); err != nil {
+			invalidParams.AddNested("[CustomerAccount]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.EngagementContextPayloadMemberCustomerProject:
 		if err := validateCustomerProjectsContext(&uv.Value); err != nil {
 			invalidParams.AddNested("[CustomerProject]", err.(smithy.InvalidParamsError))
@@ -1296,6 +1927,139 @@ func validateEngagementCustomerProjectDetails(v *types.EngagementCustomerProject
 	}
 	if v.TargetCompletionDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetCompletionDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEngagementGroupSort(v *types.EngagementGroupSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EngagementGroupSort"}
+	if len(v.SortBy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortBy"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEngagementSearchFilter(v *types.EngagementSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EngagementSearchFilter"}
+	if v.AndAllFilters != nil {
+		if err := validateEngagementSearchFilterList(v.AndAllFilters); err != nil {
+			invalidParams.AddNested("AndAllFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrAllFilters != nil {
+		if err := validateEngagementSearchFilterList(v.OrAllFilters); err != nil {
+			invalidParams.AddNested("OrAllFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotFilter != nil {
+		if err := validateEngagementSearchFilter(v.NotFilter); err != nil {
+			invalidParams.AddNested("NotFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EqualsTo != nil {
+		if err := validateEngagementSearchPredicate(v.EqualsTo); err != nil {
+			invalidParams.AddNested("EqualsTo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainsAny != nil {
+		if err := validateEngagementSearchPredicate(v.ContainsAny); err != nil {
+			invalidParams.AddNested("ContainsAny", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainsAll != nil {
+		if err := validateEngagementSearchPredicate(v.ContainsAll); err != nil {
+			invalidParams.AddNested("ContainsAll", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreaterThan != nil {
+		if err := validateEngagementSearchPredicate(v.GreaterThan); err != nil {
+			invalidParams.AddNested("GreaterThan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreaterThanOrEquals != nil {
+		if err := validateEngagementSearchPredicate(v.GreaterThanOrEquals); err != nil {
+			invalidParams.AddNested("GreaterThanOrEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LessThan != nil {
+		if err := validateEngagementSearchPredicate(v.LessThan); err != nil {
+			invalidParams.AddNested("LessThan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LessThanOrEquals != nil {
+		if err := validateEngagementSearchPredicate(v.LessThanOrEquals); err != nil {
+			invalidParams.AddNested("LessThanOrEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEngagementSearchFilterList(v []types.EngagementSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EngagementSearchFilterList"}
+	for i := range v {
+		if err := validateEngagementSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEngagementSearchPredicate(v *types.EngagementSearchPredicate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EngagementSearchPredicate"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEngagementSearchSort(v *types.EngagementSearchSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EngagementSearchSort"}
+	if len(v.SortBy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortBy"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1378,6 +2142,103 @@ func validateExpectedCustomerSpendList(v []types.ExpectedCustomerSpend) error {
 	}
 }
 
+func validateFilter(v *types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if v.AndAllFilters != nil {
+		if err := validateFilterList(v.AndAllFilters); err != nil {
+			invalidParams.AddNested("AndAllFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrAllFilters != nil {
+		if err := validateFilterList(v.OrAllFilters); err != nil {
+			invalidParams.AddNested("OrAllFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotFilter != nil {
+		if err := validateFilter(v.NotFilter); err != nil {
+			invalidParams.AddNested("NotFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EqualsTo != nil {
+		if err := validateFilterCondition(v.EqualsTo); err != nil {
+			invalidParams.AddNested("EqualsTo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainsAny != nil {
+		if err := validateFilterCondition(v.ContainsAny); err != nil {
+			invalidParams.AddNested("ContainsAny", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainsAll != nil {
+		if err := validateFilterCondition(v.ContainsAll); err != nil {
+			invalidParams.AddNested("ContainsAll", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreaterThan != nil {
+		if err := validateFilterCondition(v.GreaterThan); err != nil {
+			invalidParams.AddNested("GreaterThan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreaterThanOrEquals != nil {
+		if err := validateFilterCondition(v.GreaterThanOrEquals); err != nil {
+			invalidParams.AddNested("GreaterThanOrEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LessThan != nil {
+		if err := validateFilterCondition(v.LessThan); err != nil {
+			invalidParams.AddNested("LessThan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LessThanOrEquals != nil {
+		if err := validateFilterCondition(v.LessThanOrEquals); err != nil {
+			invalidParams.AddNested("LessThanOrEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterCondition(v *types.FilterCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterCondition"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterList(v []types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
+	for i := range v {
+		if err := validateFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInvitation(v *types.Invitation) error {
 	if v == nil {
 		return nil
@@ -1436,6 +2297,11 @@ func validateLeadContext(v *types.LeadContext) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LeadContext"}
+	if v.Insights != nil {
+		if err := validateLeadInsights(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Customer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Customer"))
 	} else if v.Customer != nil {
@@ -1464,6 +2330,23 @@ func validateLeadCustomer(v *types.LeadCustomer) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LeadCustomer"}
 	if v.CompanyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompanyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLeadInsights(v *types.LeadInsights) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LeadInsights"}
+	if v.ChannelRecommendation != nil {
+		if err := validateChannelRecommendation(v.ChannelRecommendation); err != nil {
+			invalidParams.AddNested("ChannelRecommendation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1704,6 +2587,121 @@ func validateOpportunityInvitationPayload(v *types.OpportunityInvitationPayload)
 	}
 }
 
+func validateOpportunitySearchFilter(v *types.OpportunitySearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpportunitySearchFilter"}
+	if v.AndAllFilters != nil {
+		if err := validateOpportunitySearchFilterList(v.AndAllFilters); err != nil {
+			invalidParams.AddNested("AndAllFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrAllFilters != nil {
+		if err := validateOpportunitySearchFilterList(v.OrAllFilters); err != nil {
+			invalidParams.AddNested("OrAllFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotFilter != nil {
+		if err := validateOpportunitySearchFilter(v.NotFilter); err != nil {
+			invalidParams.AddNested("NotFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EqualsTo != nil {
+		if err := validateOpportunitySearchPredicate(v.EqualsTo); err != nil {
+			invalidParams.AddNested("EqualsTo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainsAny != nil {
+		if err := validateOpportunitySearchPredicate(v.ContainsAny); err != nil {
+			invalidParams.AddNested("ContainsAny", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainsAll != nil {
+		if err := validateOpportunitySearchPredicate(v.ContainsAll); err != nil {
+			invalidParams.AddNested("ContainsAll", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreaterThan != nil {
+		if err := validateOpportunitySearchPredicate(v.GreaterThan); err != nil {
+			invalidParams.AddNested("GreaterThan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreaterThanOrEquals != nil {
+		if err := validateOpportunitySearchPredicate(v.GreaterThanOrEquals); err != nil {
+			invalidParams.AddNested("GreaterThanOrEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LessThan != nil {
+		if err := validateOpportunitySearchPredicate(v.LessThan); err != nil {
+			invalidParams.AddNested("LessThan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LessThanOrEquals != nil {
+		if err := validateOpportunitySearchPredicate(v.LessThanOrEquals); err != nil {
+			invalidParams.AddNested("LessThanOrEquals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpportunitySearchFilterList(v []types.OpportunitySearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpportunitySearchFilterList"}
+	for i := range v {
+		if err := validateOpportunitySearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpportunitySearchPredicate(v *types.OpportunitySearchPredicate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpportunitySearchPredicate"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpportunitySearchSort(v *types.OpportunitySearchSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpportunitySearchSort"}
+	if len(v.SortBy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortBy"))
+	}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpportunitySort(v *types.OpportunitySort) error {
 	if v == nil {
 		return nil
@@ -1728,6 +2726,11 @@ func validatePayload(v types.Payload) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Payload"}
 	switch uv := v.(type) {
+	case *types.PayloadMemberAccountPlanningInvitation:
+		if err := validateAccountPlanningInvitationPayload(&uv.Value); err != nil {
+			invalidParams.AddNested("[AccountPlanningInvitation]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.PayloadMemberLeadInvitation:
 		if err := validateLeadInvitationPayload(&uv.Value); err != nil {
 			invalidParams.AddNested("[LeadInvitation]", err.(smithy.InvalidParamsError))
@@ -1976,6 +2979,11 @@ func validateUpdateLeadContext(v *types.UpdateLeadContext) error {
 			invalidParams.AddNested("Interaction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Insights != nil {
+		if err := validateLeadInsights(v.Insights); err != nil {
+			invalidParams.AddNested("Insights", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2042,6 +3050,33 @@ func validateOpAssociateOpportunityInput(v *AssociateOpportunityInput) error {
 	}
 	if v.RelatedEntityIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelatedEntityIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomerAccountInput(v *CreateCustomerAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomerAccountInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	} else if v.Account != nil {
+		if err := validateCustomerAccountData(v.Account); err != nil {
+			invalidParams.AddNested("Account", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateCustomerAccountTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2240,6 +3275,24 @@ func validateOpCreateResourceSnapshotJobInput(v *CreateResourceSnapshotJobInput)
 	}
 }
 
+func validateOpDeleteCustomerAccountInput(v *DeleteCustomerAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomerAccountInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResourceSnapshotJobInput(v *DeleteResourceSnapshotJobInput) error {
 	if v == nil {
 		return nil
@@ -2300,6 +3353,85 @@ func validateOpGetAwsOpportunitySummaryInput(v *GetAwsOpportunitySummaryInput) e
 	}
 }
 
+func validateOpGetCustomerAccountBulkJobInput(v *GetCustomerAccountBulkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomerAccountBulkJobInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomerAccountBulkJobReportUrlInput(v *GetCustomerAccountBulkJobReportUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomerAccountBulkJobReportUrlInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomerAccountInput(v *GetCustomerAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomerAccountInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomerAccountStatisticsInput(v *GetCustomerAccountStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomerAccountStatisticsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Filter != nil {
+		if err := validateFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Aggregations != nil {
+		if err := validateAggregationRequestList(v.Aggregations); err != nil {
+			invalidParams.AddNested("Aggregations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEngagementInput(v *GetEngagementInput) error {
 	if v == nil {
 		return nil
@@ -2328,6 +3460,27 @@ func validateOpGetEngagementInvitationInput(v *GetEngagementInvitationInput) err
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetOpportunityBulkJobReportUrlInput(v *GetOpportunityBulkJobReportUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOpportunityBulkJobReportUrlInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if len(v.ReportFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2432,6 +3585,39 @@ func validateOpGetSellingSystemSettingsInput(v *GetSellingSystemSettingsInput) e
 	}
 }
 
+func validateOpListCustomerAccountBulkJobResultsInput(v *ListCustomerAccountBulkJobResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomerAccountBulkJobResultsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomerAccountBulkJobsInput(v *ListCustomerAccountBulkJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomerAccountBulkJobsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEngagementByAcceptingInvitationTasksInput(v *ListEngagementByAcceptingInvitationTasksInput) error {
 	if v == nil {
 		return nil
@@ -2464,6 +3650,26 @@ func validateOpListEngagementFromOpportunityTasksInput(v *ListEngagementFromOppo
 	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEngagementGroupsInput(v *ListEngagementGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEngagementGroupsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Sort != nil {
+		if err := validateEngagementGroupSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2560,6 +3766,39 @@ func validateOpListOpportunitiesInput(v *ListOpportunitiesInput) error {
 		if err := validateOpportunitySort(v.Sort); err != nil {
 			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOpportunityBulkJobResultsInput(v *ListOpportunityBulkJobResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOpportunityBulkJobResultsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOpportunityBulkJobsInput(v *ListOpportunityBulkJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOpportunityBulkJobsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2709,6 +3948,102 @@ func validateOpRejectEngagementInvitationInput(v *RejectEngagementInvitationInpu
 	}
 }
 
+func validateOpSearchCustomerAccountsInput(v *SearchCustomerAccountsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchCustomerAccountsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Filter != nil {
+		if err := validateFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sort != nil {
+		if err := validateCustomerAccountSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchEngagementsInput(v *SearchEngagementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchEngagementsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Filter != nil {
+		if err := validateEngagementSearchFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sort != nil {
+		if err := validateEngagementSearchSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchOpportunitiesInput(v *SearchOpportunitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchOpportunitiesInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Filter != nil {
+		if err := validateOpportunitySearchFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sort != nil {
+		if err := validateOpportunitySearchSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCustomerAccountBulkJobInput(v *StartCustomerAccountBulkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCustomerAccountBulkJobInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.FileUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartEngagementByAcceptingInvitationTaskInput(v *StartEngagementByAcceptingInvitationTaskInput) error {
 	if v == nil {
 		return nil
@@ -2760,6 +4095,30 @@ func validateOpStartEngagementFromOpportunityTaskInput(v *StartEngagementFromOpp
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartOpportunityBulkJobInput(v *StartOpportunityBulkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOpportunityBulkJobInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.FileURI == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileURI"))
+	}
+	if len(v.FileFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2910,6 +4269,34 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomerAccountInput(v *UpdateCustomerAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomerAccountInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	} else if v.Account != nil {
+		if err := validateCustomerAccountData(v.Account); err != nil {
+			invalidParams.AddNested("Account", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LastModifiedDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastModifiedDate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

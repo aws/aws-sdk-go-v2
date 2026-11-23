@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.ListFirewallRuleDomains
+
+{"Domains":[{"AddedTime":"__AddedTime__","DomainName":"__DomainName__","DomainStatus":"OBSERVED","Last24HourRequests":1,"TotalRequests":1},{"AddedTime":"__AddedTime__","DomainName":"__DomainName__","DomainStatus":"OBSERVED","Last24HourRequests":1,"TotalRequests":1}],"NextToken":"__NextToken__"}

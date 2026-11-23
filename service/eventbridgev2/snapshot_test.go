@@ -302,6 +302,18 @@ func TestCheckSnapshot_RevokeResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RotateWebhookCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RotateWebhookCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RotateWebhookCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -594,6 +606,18 @@ func TestUpdateSnapshot_RevokeResource(t *testing.T) {
 	_, err := svc.RevokeResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RevokeResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RotateWebhookCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RotateWebhookCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RotateWebhookCredentials")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

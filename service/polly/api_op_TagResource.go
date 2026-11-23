@@ -30,8 +30,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to which to add tags. Currently,
-	// the only supported resource is an Amazon Polly lexicon.
+	// The Amazon Resource Name (ARN) of the resource to add tags to. You can tag
+	// Amazon Polly lexicons and custom voices.
 	//
 	// This member is required.
 	ResourceArn *string

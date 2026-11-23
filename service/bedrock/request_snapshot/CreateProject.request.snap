@@ -1,0 +1,5 @@
+POST /projects
+
+Content-Type: application/json
+
+{"dataRetention":{"mode":"default"},"name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

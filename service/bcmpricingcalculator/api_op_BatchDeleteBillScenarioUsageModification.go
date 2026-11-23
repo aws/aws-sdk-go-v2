@@ -12,7 +12,7 @@ import (
 
 //	Delete usage that you have created in a Bill Scenario. You can only delete
 //
-// usage that you had added and cannot model deletion (or removal) of a existing
+// usage that you had added and can't model deletion (or removal) of a existing
 // usage. If you want model removal of an existing usage, see [BatchUpdateBillScenarioUsageModification].
 //
 // The BatchDeleteBillScenarioUsageModification operation doesn't have its own IAM
@@ -68,7 +68,7 @@ func (v *BatchDeleteBillScenarioUsageModificationInput) SerializeMembers(s smith
 
 type BatchDeleteBillScenarioUsageModificationOutput struct {
 
-	//  Returns the list of errors reason and the usage item keys that cannot be
+	//  Returns the list of errors reason and the usage item keys that can't be
 	// deleted from the Bill Scenario.
 	Errors []types.BatchDeleteBillScenarioUsageModificationError
 

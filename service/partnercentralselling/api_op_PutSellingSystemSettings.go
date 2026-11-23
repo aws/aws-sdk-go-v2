@@ -26,6 +26,7 @@ func (c *Client) PutSellingSystemSettings(ctx context.Context, params *PutSellin
 	return out, nil
 }
 
+// Contains the request parameters for the PutSellingSystemSettings operation.
 type PutSellingSystemSettingsInput struct {
 
 	// Specifies the catalog in which the settings will be updated. Acceptable values
@@ -55,6 +56,7 @@ func (v *PutSellingSystemSettingsInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 }
 
+// Contains the response that the PutSellingSystemSettings action returns.
 type PutSellingSystemSettingsOutput struct {
 
 	// Specifies the catalog in which the settings are defined. Acceptable values

@@ -5,6 +5,7 @@ package networkfirewall
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -48,6 +49,19 @@ type AssociateFirewallPolicyInput struct {
 	// You must specify the ARN or the name, and you can specify both.
 	FirewallName *string
 
+	// The type of firewall that the request targets. Network Firewall supports the
+	// following firewall types:
+	//
+	//   - IGW_FIREWALL - An internet gateway firewall, which Amazon Web Services
+	//   Network Security Manager creates and manages for a VPC.
+	//
+	//   - FIREWALL - A standard Network Firewall firewall.
+	//
+	// If you specify the firewall ARN, the type must match the resource type in the
+	// ARN. If you specify only the firewall name, Network Firewall uses this value to
+	// identify the firewall. If you don't specify a type, the default is FIREWALL .
+	FirewallType types.FirewallType
+
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the
 	// state of the firewall resource at the time of the request.
@@ -82,6 +96,9 @@ func (v *AssociateFirewallPolicyInput) SerializeMembers(s smithy.ShapeSerializer
 	}
 	if v.FirewallPolicyArn != nil {
 		s.WriteString(schemas.AssociateFirewallPolicyRequest_FirewallPolicyArn, *v.FirewallPolicyArn)
+	}
+	if v.FirewallType != "" {
+		s.WriteString(schemas.AssociateFirewallPolicyRequest_FirewallType, string(v.FirewallType))
 	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.AssociateFirewallPolicyRequest_UpdateToken, *v.UpdateToken)

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.SearchEngagements
+
+{"Catalog":"__Catalog__","Filter":{"AndAllFilters":[{},{}],"ContainsAll":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"ContainsAny":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"EqualsTo":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"GreaterThan":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"GreaterThanOrEquals":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"LessThan":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"LessThanOrEquals":{"Key":"EngagementId","Value":{"StringValue":"__EngagementSearchFilterValueMemberStringValue__"}},"OrAllFilters":[{},{}]},"GroupId":"__GroupId__","Keyword":"__Keyword__","MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"EngagementId","SortOrder":"ASCENDING"}}

@@ -893,6 +893,12 @@ type MicrovmImageVersionSummary struct {
 	// Lifecycle hook configuration for MicroVMs and MicroVM images.
 	Hooks *Hooks
 
+	// The customer managed Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key that encrypts the contents and metadata of your MicroVM image
+	// version. If you don't specify a key, your MicroVM image version uses an Amazon
+	// Web Services owned key.
+	KmsKeyIdentifier *string
+
 	// The logging configuration for this version.
 	Logging Logging
 
@@ -959,6 +965,9 @@ func (v *MicrovmImageVersionSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ImageVersion != nil {
 		s.WriteString(schemas.MicrovmImageVersionSummary_imageVersion, *v.ImageVersion)
 	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.MicrovmImageVersionSummary_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
 	if v.Logging != nil {
 		serializeLogging(s, schemas.MicrovmImageVersionSummary_logging, v.Logging)
 	}
@@ -1018,6 +1027,9 @@ func (v *MicrovmImageVersionSummary) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.MicrovmImageVersionSummary_imageVersion:
 			v.ImageVersion = new(string)
 			return d.ReadString(schemas.MicrovmImageVersionSummary_imageVersion, v.ImageVersion)
+		case schemas.MicrovmImageVersionSummary_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.MicrovmImageVersionSummary_kmsKeyIdentifier, v.KmsKeyIdentifier)
 		case schemas.MicrovmImageVersionSummary_logging:
 			return deserializeLogging(d, schemas.MicrovmImageVersionSummary_logging, &v.Logging)
 		case schemas.MicrovmImageVersionSummary_resources:

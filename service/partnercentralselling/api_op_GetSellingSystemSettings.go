@@ -26,6 +26,7 @@ func (c *Client) GetSellingSystemSettings(ctx context.Context, params *GetSellin
 	return out, nil
 }
 
+// Contains the request parameters for the GetSellingSystemSettings operation.
 type GetSellingSystemSettingsInput struct {
 
 	// Specifies the catalog in which the settings are defined. Acceptable values
@@ -49,6 +50,7 @@ func (v *GetSellingSystemSettingsInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 }
 
+// Contains the response that the GetSellingSystemSettings action returns.
 type GetSellingSystemSettingsOutput struct {
 
 	// Specifies the catalog in which the settings are defined. Acceptable values

@@ -234,6 +234,7 @@ func TestUpdateResponseSnapshot_CreateAgentSpace(t *testing.T) {
 			Preferences: map[string]bool{
 				"key0": true,
 			},
+			AwsSourceMode: types.AwsSourceMode("standalone"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -792,6 +793,7 @@ func TestUpdateResponseSnapshot_GetAgentSpace(t *testing.T) {
 			Preferences: map[string]bool{
 				"key0": true,
 			},
+			AwsSourceMode: types.AwsSourceMode("standalone"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1246,6 +1248,7 @@ func TestUpdateResponseSnapshot_ListAgentSpaces(t *testing.T) {
 				Preferences: map[string]bool{
 					"key0": true,
 				},
+				AwsSourceMode: types.AwsSourceMode("standalone"),
 			},
 			{
 				Name:         ptr.String("__Name__"),
@@ -1258,6 +1261,7 @@ func TestUpdateResponseSnapshot_ListAgentSpaces(t *testing.T) {
 				Preferences: map[string]bool{
 					"key0": true,
 				},
+				AwsSourceMode: types.AwsSourceMode("standalone"),
 			},
 		},
 	}
@@ -2289,6 +2293,7 @@ func TestUpdateResponseSnapshot_UpdateAgentSpace(t *testing.T) {
 			Preferences: map[string]bool{
 				"key0": true,
 			},
+			AwsSourceMode: types.AwsSourceMode("standalone"),
 		},
 	}
 	proto := restjson1.New(schemas.DevOpsAgent)

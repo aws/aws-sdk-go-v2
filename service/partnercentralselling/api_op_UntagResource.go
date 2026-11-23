@@ -25,6 +25,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	return out, nil
 }
 
+// Contains the request parameters for the UntagResource operation.
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you want to untag.
@@ -56,6 +57,8 @@ func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response of the UntagResource operation. The response has no
+// members.
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

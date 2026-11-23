@@ -11,11 +11,12 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Lists the recommended actions based that match specified filters.
+//	Lists the recommended actions that match the specified filters.
 //
 // Management accounts and delegated administrators can retrieve recommended
-// actions that include associated member accounts. You can associate a member
-// account using AssociateAccounts .
+// actions for member accounts that are associated using AssociateAccounts or have
+// an applicable organization enrollment configuration with organizationRuleMode
+// set to AnyAllowed .
 func (c *Client) ListRecommendedActions(ctx context.Context, params *ListRecommendedActionsInput, optFns ...func(*Options)) (*ListRecommendedActionsOutput, error) {
 	if params == nil {
 		params = &ListRecommendedActionsInput{}
@@ -36,13 +37,19 @@ type ListRecommendedActionsInput struct {
 	//  The filters to apply to the list of recommended actions.
 	Filters []types.RecommendedActionFilter
 
-	// The maximum number of recommended actions to return in a single response. Valid
-	// range is 1-1000.
+	// The maximum number of recommended actions to return in a single response. If
+	// you don't specify a value, the default is 100.
 	MaxResults *int32
 
 	// A token used for pagination to retrieve the next set of results when the
 	// response is truncated.
 	NextToken *string
+
+	//  The organizational unit (OU) or organization root IDs to use to filter the
+	// results. The response includes recommended actions for accounts in the specified
+	// OUs and their child OUs. Only the management account or a delegated
+	// administrator can specify this parameter.
+	OrganizationalUnitIds []string
 
 	noSmithyDocumentSerde
 }
@@ -62,6 +69,9 @@ func (v *ListRecommendedActionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendedActionsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIds(s, schemas.ListRecommendedActionsRequest_organizationalUnitIds, v.OrganizationalUnitIds)
 	}
 }
 
@@ -153,8 +163,8 @@ func (c *Client) addOperationListRecommendedActionsMiddlewares(stack *middleware
 // ListRecommendedActionsPaginatorOptions is the paginator options for
 // ListRecommendedActions
 type ListRecommendedActionsPaginatorOptions struct {
-	// The maximum number of recommended actions to return in a single response. Valid
-	// range is 1-1000.
+	// The maximum number of recommended actions to return in a single response. If
+	// you don't specify a value, the default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

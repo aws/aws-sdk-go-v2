@@ -180,6 +180,9 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "ap-east-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{
 				Hostname:          "s3-control.ap-northeast-1.amazonaws.com",
@@ -350,6 +353,15 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "ap-southeast-4",
 				},
 			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-6",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-7",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{
@@ -657,6 +669,9 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "me-south-1",
 				},
 			},
+			endpoints.EndpointKey{
+				Region: "mx-central-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{

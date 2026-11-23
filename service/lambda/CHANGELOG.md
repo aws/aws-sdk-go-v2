@@ -1,3 +1,7 @@
+# v1.118.0 (2026-11-19)
+
+* **Feature**: Increase function timeout limit to 30 minutes for Lambda Event Functions.
+
 # v1.117.0 (2026-11-17)
 
 * **Feature**: AWS Lambda durable functions now supports pausing, resuming, and deleting durable executions with the new PauseDurableExecution, ResumeDurableExecution, and DeleteDurableExecution APIs.

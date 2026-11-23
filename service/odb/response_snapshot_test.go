@@ -3086,6 +3086,45 @@ func TestCheckResponseSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAutonomousDatabaseRefreshableClones(t *testing.T) {
+	want := &ListAutonomousDatabaseRefreshableClonesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		AutonomousDatabaseRefreshableClones: []types.AutonomousDatabaseRefreshableCloneSummary{
+			{
+				AutonomousDatabaseId:  ptr.String("__AutonomousDatabaseId__"),
+				AutonomousDatabaseArn: ptr.String("__AutonomousDatabaseArn__"),
+				Ocid:                  ptr.String("__Ocid__"),
+				Region:                ptr.String("__Region__"),
+			},
+			{
+				AutonomousDatabaseId:  ptr.String("__AutonomousDatabaseId__"),
+				AutonomousDatabaseArn: ptr.String("__AutonomousDatabaseArn__"),
+				Ocid:                  ptr.String("__Ocid__"),
+				Region:                ptr.String("__Region__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAutonomousDatabaseRefreshableClones.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAutonomousDatabaseRefreshableClones(context.Background(), &ListAutonomousDatabaseRefreshableClonesInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAutonomousDatabaseRefreshableClones.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAutonomousDatabaseVersions(t *testing.T) {
 	want := &ListAutonomousDatabaseVersionsOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -5599,6 +5638,34 @@ func TestCheckResponseSnapshot_StartAutonomousDatabase(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartAutonomousDatabase.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartAutonomousDatabaseRefresh(t *testing.T) {
+	want := &StartAutonomousDatabaseRefreshOutput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		DisplayName:          ptr.String("__DisplayName__"),
+		Status:               types.AutonomousDatabaseResourceStatus("AVAILABLE"),
+		StatusReason:         ptr.String("__StatusReason__"),
+		RefreshableStatus:    types.RefreshableStatus("REFRESHING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartAutonomousDatabaseRefresh.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartAutonomousDatabaseRefresh(context.Background(), &StartAutonomousDatabaseRefreshInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		TimeOfRefreshCutoff:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartAutonomousDatabaseRefresh.response", err)
 	}
 }
 

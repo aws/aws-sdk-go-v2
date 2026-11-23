@@ -8,11 +8,25 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var CreateVoice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CreateVoice",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/voices",
+	Code: 200})
+
 var DeleteLexicon = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "DeleteLexicon",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/lexicons/{Name}",
+	Code: 200})
+
+var DeleteVoice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "DeleteVoice",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/voices/{VoiceId}",
 	Code: 200})
 
 var DescribeVoices = smithy.NewSchema(smithy.ShapeID{
@@ -34,6 +48,13 @@ var GetSpeechSynthesisTask = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSpeechSynthesisTask",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/synthesisTasks/{TaskId}",
+	Code: 200})
+
+var GetVoice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "GetVoice",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/voices/{VoiceId}",
 	Code: 200})
 
 var ListLexicons = smithy.NewSchema(smithy.ShapeID{
@@ -106,6 +127,15 @@ var _Parrot_v1 = smithy.NewSchema(smithy.ShapeID{
 
 var Parrot_v1 = smithy.NewServiceSchema(_Parrot_v1, "2016-06-10")
 
+var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "AccessDeniedException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 403},
+	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
+		StatusCode: 403})
+var AccessDeniedException_Message *smithy.Schema
+
 var _Alphabet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "Alphabet",
@@ -127,6 +157,18 @@ var AudioEvent = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AudioEvent_AudioChunk *smithy.Schema
 
+var AudioFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "AudioFormat",
+}, smithy.ShapeTypeEnum, 4)
+var AudioFormat_WAV *smithy.Schema
+
+var AudioFormat_FLAC *smithy.Schema
+
+var AudioFormat_OGG_VORBIS *smithy.Schema
+
+var AudioFormat_MP3 *smithy.Schema
+
 var _AudioStream = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "AudioStream",
@@ -137,10 +179,26 @@ var _AvailabilityErrorMessage = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AvailabilityErrorMessage",
 }, smithy.ShapeTypeString, 0)
 
+var _ClientToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ClientToken",
+}, smithy.ShapeTypeString, 0)
+
 var CloseStreamEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "CloseStreamEvent",
 }, smithy.ShapeTypeStructure, 0)
+
+var ConflictException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ConflictException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 409})
+var ConflictException_message *smithy.Schema
+
+var ConflictException_resourceId *smithy.Schema
+
+var ConflictException_resourceType *smithy.Schema
 
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -157,10 +215,64 @@ var _CoralAvailabilityThrottlingReason = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CoralAvailabilityThrottlingReason",
 }, smithy.ShapeTypeString, 0)
 
+var CustomerManagedEncryption = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CustomerManagedEncryption",
+}, smithy.ShapeTypeStructure, 2)
+var CustomerManagedEncryption_KmsKeyArn *smithy.Schema
+
+var CustomerManagedEncryption_EncryptionContext *smithy.Schema
+
+var _CustomVoiceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CustomVoiceId",
+}, smithy.ShapeTypeString, 0)
+
+var CustomVoiceLanguageCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CustomVoiceLanguageCode",
+}, smithy.ShapeTypeEnum, 7)
+var CustomVoiceLanguageCode_DE_DE *smithy.Schema
+
+var CustomVoiceLanguageCode_EN_US *smithy.Schema
+
+var CustomVoiceLanguageCode_ES_US *smithy.Schema
+
+var CustomVoiceLanguageCode_FR_FR *smithy.Schema
+
+var CustomVoiceLanguageCode_HI_IN *smithy.Schema
+
+var CustomVoiceLanguageCode_IT_IT *smithy.Schema
+
+var CustomVoiceLanguageCode_PT_BR *smithy.Schema
+
+var _CustomVoiceName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CustomVoiceName",
+}, smithy.ShapeTypeString, 0)
+
 var _DateTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "DateTime",
 }, smithy.ShapeTypeTimestamp, 0)
+
+var _EncryptionContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "EncryptionContext",
+}, smithy.ShapeTypeMap, 2)
+var _EncryptionContext_key *smithy.Schema
+
+var _EncryptionContext_value *smithy.Schema
+
+var _EncryptionContextKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "EncryptionContextKey",
+}, smithy.ShapeTypeString, 0)
+
+var _EncryptionContextValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "EncryptionContextValue",
+}, smithy.ShapeTypeString, 0)
 
 var Engine = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -283,6 +395,11 @@ var InvalidTaskIdException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var InvalidTaskIdException_message *smithy.Schema
+
+var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "KmsKeyArn",
+}, smithy.ShapeTypeString, 0)
 
 var LanguageCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -540,10 +657,39 @@ var _OutputUri = smithy.NewSchema(smithy.ShapeID{
 var QuotaCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "QuotaCode",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var QuotaCode_INPUT_STREAM_INBOUND_EVENT_TIMEOUT *smithy.Schema
 
 var QuotaCode_INPUT_STREAM_TIMEOUT *smithy.Schema
+
+var QuotaCode_CUSTOM_VOICE_MAX_COUNT *smithy.Schema
+
+var Recording = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "Recording",
+}, smithy.ShapeTypeStructure, 2)
+var Recording_Format *smithy.Schema
+
+var Recording_Data *smithy.Schema
+
+var _RecordingBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "RecordingBytes",
+}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
+
+var RecordingData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "RecordingData",
+}, smithy.ShapeTypeStructure, 2)
+var RecordingData_S3Url *smithy.Schema
+
+var RecordingData_Bytes *smithy.Schema
+
+var _RecordingList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "RecordingList",
+}, smithy.ShapeTypeList, 1)
+var _RecordingList_member *smithy.Schema
 
 var _RequestCharacters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -569,8 +715,15 @@ var ResourceNotFoundException_resourceType *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var ResourceType_LEXICON *smithy.Schema
+
+var ResourceType_VOICE *smithy.Schema
+
+var _S3Url = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "S3Url",
+}, smithy.ShapeTypeString, 0)
 
 var _SampleRate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -582,6 +735,11 @@ var ServiceCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServiceCode",
 }, smithy.ShapeTypeEnum, 1)
 var ServiceCode_POLLY *smithy.Schema
+
+var _ServiceErrorMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "ServiceErrorMessage",
+}, smithy.ShapeTypeString, 0)
 
 var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -659,6 +817,11 @@ var StartSpeechSynthesisStreamEventStream_ServiceQuotaExceededException *smithy.
 var StartSpeechSynthesisStreamEventStream_ServiceFailureException *smithy.Schema
 
 var StartSpeechSynthesisStreamEventStream_ThrottlingException *smithy.Schema
+
+var _StatusReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "StatusReason",
+}, smithy.ShapeTypeString, 0)
 
 var StreamClosedEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -758,6 +921,11 @@ var _TaskStatusReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "TaskStatusReason",
 }, smithy.ShapeTypeString, 0)
+
+var _TermsAccepted = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "TermsAccepted",
+}, smithy.ShapeTypeBoolean, 0)
 
 var _Text = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -873,7 +1041,7 @@ var _ValidationExceptionFieldName = smithy.NewSchema(smithy.ShapeID{
 var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 6)
 var ValidationExceptionReason_UNSUPPORTED_OPERATION *smithy.Schema
 
 var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
@@ -882,10 +1050,16 @@ var ValidationExceptionReason_OTHER *smithy.Schema
 
 var ValidationExceptionReason_INVALID_INBOUND_EVENT *smithy.Schema
 
+var ValidationExceptionReason_KMS_KEY_NOT_FOUND *smithy.Schema
+
+var ValidationExceptionReason_KMS_KEY_UNUSABLE *smithy.Schema
+
 var Voice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "Voice",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 14)
+var Voice_Arn *smithy.Schema
+
 var Voice_Gender *smithy.Schema
 
 var Voice_Id *smithy.Schema
@@ -896,9 +1070,32 @@ var Voice_LanguageName *smithy.Schema
 
 var Voice_Name *smithy.Schema
 
+var Voice_Origin *smithy.Schema
+
+var Voice_Status *smithy.Schema
+
+var Voice_StatusReason *smithy.Schema
+
 var Voice_AdditionalLanguageCodes *smithy.Schema
 
 var Voice_SupportedEngines *smithy.Schema
+
+var Voice_VoiceCreationData *smithy.Schema
+
+var Voice_CustomerManagedEncryption *smithy.Schema
+
+var Voice_CreationTime *smithy.Schema
+
+var _VoiceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "VoiceArn",
+}, smithy.ShapeTypeString, 0)
+
+var VoiceCreationData = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "VoiceCreationData",
+}, smithy.ShapeTypeStructure, 1)
+var VoiceCreationData_Recordings *smithy.Schema
 
 var VoiceId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -1147,6 +1344,48 @@ var _VoiceName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VoiceName",
 }, smithy.ShapeTypeString, 0)
 
+var VoiceOrigin = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "VoiceOrigin",
+}, smithy.ShapeTypeEnum, 2)
+var VoiceOrigin_AWS *smithy.Schema
+
+var VoiceOrigin_CUSTOMER *smithy.Schema
+
+var VoiceStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "VoiceStatus",
+}, smithy.ShapeTypeEnum, 3)
+var VoiceStatus_PENDING *smithy.Schema
+
+var VoiceStatus_ACTIVE *smithy.Schema
+
+var VoiceStatus_FAILED *smithy.Schema
+
+var CreateVoiceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CreateVoiceInput",
+}, smithy.ShapeTypeStructure, 7)
+var CreateVoiceInput_Name *smithy.Schema
+
+var CreateVoiceInput_LanguageCode *smithy.Schema
+
+var CreateVoiceInput_TermsAccepted *smithy.Schema
+
+var CreateVoiceInput_VoiceCreationData *smithy.Schema
+
+var CreateVoiceInput_CustomerManagedEncryption *smithy.Schema
+
+var CreateVoiceInput_Tags *smithy.Schema
+
+var CreateVoiceInput_ClientToken *smithy.Schema
+
+var CreateVoiceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "CreateVoiceOutput",
+}, smithy.ShapeTypeStructure, 1)
+var CreateVoiceOutput_Voice *smithy.Schema
+
 var DeleteLexiconInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "DeleteLexiconInput",
@@ -1156,6 +1395,17 @@ var DeleteLexiconInput_Name *smithy.Schema
 var DeleteLexiconOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
 	Name:      "DeleteLexiconOutput",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteVoiceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "DeleteVoiceInput",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteVoiceInput_VoiceId *smithy.Schema
+
+var DeleteVoiceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "DeleteVoiceOutput",
 }, smithy.ShapeTypeStructure, 0)
 
 var DescribeVoicesInput = smithy.NewSchema(smithy.ShapeID{
@@ -1203,6 +1453,18 @@ var GetSpeechSynthesisTaskOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetSpeechSynthesisTaskOutput",
 }, smithy.ShapeTypeStructure, 1)
 var GetSpeechSynthesisTaskOutput_SynthesisTask *smithy.Schema
+
+var GetVoiceInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "GetVoiceInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetVoiceInput_VoiceId *smithy.Schema
+
+var GetVoiceOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.polly",
+	Name:      "GetVoiceOutput",
+}, smithy.ShapeTypeStructure, 1)
+var GetVoiceOutput_Voice *smithy.Schema
 
 var ListLexiconsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.polly",
@@ -1382,7 +1644,49 @@ var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ServiceErrorMessage)
+
 	AudioEvent_AudioChunk = AudioEvent.AddMember("AudioChunk", _AudioChunk, &smithytraits.EventPayload{})
+
+	AudioFormat_WAV = AudioFormat.AddMember("WAV", smithyprelude.Unit)
+
+	AudioFormat_FLAC = AudioFormat.AddMember("FLAC", smithyprelude.Unit)
+
+	AudioFormat_OGG_VORBIS = AudioFormat.AddMember("OGG_VORBIS", smithyprelude.Unit)
+
+	AudioFormat_MP3 = AudioFormat.AddMember("MP3", smithyprelude.Unit)
+
+	ResourceType_LEXICON = ResourceType.AddMember("LEXICON", smithyprelude.Unit)
+
+	ResourceType_VOICE = ResourceType.AddMember("VOICE", smithyprelude.Unit)
+
+	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
+
+	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
+
+	ConflictException_resourceType = ConflictException.AddMember("resourceType", ResourceType)
+
+	_EncryptionContext_key = _EncryptionContext.AddMember("key", _EncryptionContextKey)
+
+	_EncryptionContext_value = _EncryptionContext.AddMember("value", _EncryptionContextValue)
+
+	CustomerManagedEncryption_KmsKeyArn = CustomerManagedEncryption.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	CustomerManagedEncryption_EncryptionContext = CustomerManagedEncryption.AddMember("EncryptionContext", _EncryptionContext)
+
+	CustomVoiceLanguageCode_DE_DE = CustomVoiceLanguageCode.AddMember("DE_DE", smithyprelude.Unit)
+
+	CustomVoiceLanguageCode_EN_US = CustomVoiceLanguageCode.AddMember("EN_US", smithyprelude.Unit)
+
+	CustomVoiceLanguageCode_ES_US = CustomVoiceLanguageCode.AddMember("ES_US", smithyprelude.Unit)
+
+	CustomVoiceLanguageCode_FR_FR = CustomVoiceLanguageCode.AddMember("FR_FR", smithyprelude.Unit)
+
+	CustomVoiceLanguageCode_HI_IN = CustomVoiceLanguageCode.AddMember("HI_IN", smithyprelude.Unit)
+
+	CustomVoiceLanguageCode_IT_IT = CustomVoiceLanguageCode.AddMember("IT_IT", smithyprelude.Unit)
+
+	CustomVoiceLanguageCode_PT_BR = CustomVoiceLanguageCode.AddMember("PT_BR", smithyprelude.Unit)
 
 	Engine_STANDARD = Engine.AddMember("STANDARD", smithyprelude.Unit)
 
@@ -1560,7 +1864,17 @@ func init() {
 
 	QuotaCode_INPUT_STREAM_TIMEOUT = QuotaCode.AddMember("INPUT_STREAM_TIMEOUT", smithyprelude.Unit)
 
-	ResourceType_LEXICON = ResourceType.AddMember("LEXICON", smithyprelude.Unit)
+	QuotaCode_CUSTOM_VOICE_MAX_COUNT = QuotaCode.AddMember("CUSTOM_VOICE_MAX_COUNT", smithyprelude.Unit)
+
+	RecordingData_S3Url = RecordingData.AddMember("S3Url", _S3Url)
+
+	RecordingData_Bytes = RecordingData.AddMember("Bytes", _RecordingBytes)
+
+	Recording_Format = Recording.AddMember("Format", AudioFormat)
+
+	Recording_Data = Recording.AddMember("Data", RecordingData)
+
+	_RecordingList_member = _RecordingList.AddMember("member", Recording)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
 
@@ -1613,6 +1927,10 @@ func init() {
 	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
 
 	ValidationExceptionReason_INVALID_INBOUND_EVENT = ValidationExceptionReason.AddMember("INVALID_INBOUND_EVENT", smithyprelude.Unit)
+
+	ValidationExceptionReason_KMS_KEY_NOT_FOUND = ValidationExceptionReason.AddMember("KMS_KEY_NOT_FOUND", smithyprelude.Unit)
+
+	ValidationExceptionReason_KMS_KEY_UNUSABLE = ValidationExceptionReason.AddMember("KMS_KEY_UNUSABLE", smithyprelude.Unit)
 
 	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _ValidationExceptionFieldName)
 
@@ -1936,6 +2254,20 @@ func init() {
 
 	UnsupportedPlsLanguageException_message = UnsupportedPlsLanguageException.AddMember("message", _ErrorMessage)
 
+	VoiceOrigin_AWS = VoiceOrigin.AddMember("AWS", smithyprelude.Unit)
+
+	VoiceOrigin_CUSTOMER = VoiceOrigin.AddMember("CUSTOMER", smithyprelude.Unit)
+
+	VoiceStatus_PENDING = VoiceStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	VoiceStatus_ACTIVE = VoiceStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	VoiceStatus_FAILED = VoiceStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	VoiceCreationData_Recordings = VoiceCreationData.AddMember("Recordings", _RecordingList)
+
+	Voice_Arn = Voice.AddMember("Arn", _VoiceArn)
+
 	Voice_Gender = Voice.AddMember("Gender", Gender)
 
 	Voice_Id = Voice.AddMember("Id", VoiceId)
@@ -1946,13 +2278,43 @@ func init() {
 
 	Voice_Name = Voice.AddMember("Name", _VoiceName)
 
+	Voice_Origin = Voice.AddMember("Origin", VoiceOrigin)
+
+	Voice_Status = Voice.AddMember("Status", VoiceStatus)
+
+	Voice_StatusReason = Voice.AddMember("StatusReason", _StatusReason)
+
 	Voice_AdditionalLanguageCodes = Voice.AddMember("AdditionalLanguageCodes", _LanguageCodeList)
 
 	Voice_SupportedEngines = Voice.AddMember("SupportedEngines", _EngineList)
 
+	Voice_VoiceCreationData = Voice.AddMember("VoiceCreationData", VoiceCreationData)
+
+	Voice_CustomerManagedEncryption = Voice.AddMember("CustomerManagedEncryption", CustomerManagedEncryption)
+
+	Voice_CreationTime = Voice.AddMember("CreationTime", _DateTime)
+
 	_VoiceList_member = _VoiceList.AddMember("member", Voice)
 
+	CreateVoiceInput_Name = CreateVoiceInput.AddMember("Name", _CustomVoiceName)
+
+	CreateVoiceInput_LanguageCode = CreateVoiceInput.AddMember("LanguageCode", CustomVoiceLanguageCode)
+
+	CreateVoiceInput_TermsAccepted = CreateVoiceInput.AddMember("TermsAccepted", _TermsAccepted)
+
+	CreateVoiceInput_VoiceCreationData = CreateVoiceInput.AddMember("VoiceCreationData", VoiceCreationData)
+
+	CreateVoiceInput_CustomerManagedEncryption = CreateVoiceInput.AddMember("CustomerManagedEncryption", CustomerManagedEncryption)
+
+	CreateVoiceInput_Tags = CreateVoiceInput.AddMember("Tags", _TagMap)
+
+	CreateVoiceInput_ClientToken = CreateVoiceInput.AddMember("ClientToken", _ClientToken)
+
+	CreateVoiceOutput_Voice = CreateVoiceOutput.AddMember("Voice", Voice)
+
 	DeleteLexiconInput_Name = DeleteLexiconInput.AddMember("Name", _LexiconName, &smithytraits.HTTPLabel{})
+
+	DeleteVoiceInput_VoiceId = DeleteVoiceInput.AddMember("VoiceId", _CustomVoiceId, &smithytraits.HTTPLabel{})
 
 	DescribeVoicesInput_Engine = DescribeVoicesInput.AddMember("Engine", Engine, &smithytraits.HTTPQuery{Name: "Engine"})
 
@@ -1975,6 +2337,10 @@ func init() {
 	GetSpeechSynthesisTaskInput_TaskId = GetSpeechSynthesisTaskInput.AddMember("TaskId", _TaskId, &smithytraits.HTTPLabel{})
 
 	GetSpeechSynthesisTaskOutput_SynthesisTask = GetSpeechSynthesisTaskOutput.AddMember("SynthesisTask", SynthesisTask)
+
+	GetVoiceInput_VoiceId = GetVoiceInput.AddMember("VoiceId", _CustomVoiceId, &smithytraits.HTTPLabel{})
+
+	GetVoiceOutput_Voice = GetVoiceOutput.AddMember("Voice", Voice)
 
 	ListLexiconsInput_NextToken = ListLexiconsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
 

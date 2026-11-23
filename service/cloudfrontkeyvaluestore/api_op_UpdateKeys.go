@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Puts or Deletes multiple key value pairs in a single, all-or-nothing operation.
+// Puts or deletes multiple key-value pairs in a single, all-or-nothing operation.
 func (c *Client) UpdateKeys(ctx context.Context, params *UpdateKeysInput, optFns ...func(*Options)) (*UpdateKeysOutput, error) {
 	if params == nil {
 		params = &UpdateKeysInput{}
@@ -28,13 +28,13 @@ func (c *Client) UpdateKeys(ctx context.Context, params *UpdateKeysInput, optFns
 
 type UpdateKeysInput struct {
 
-	// The current version (ETag) of the Key Value Store that you are updating keys
-	// of, which you can get using DescribeKeyValueStore.
+	// The current version ( ETag ) of the key value store that you are updating keys
+	// of, which you can get by using the DescribeKeyValueStore API operation.
 	//
 	// This member is required.
 	IfMatch *string
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
@@ -42,7 +42,7 @@ type UpdateKeysInput struct {
 	// List of keys to delete.
 	Deletes []types.DeleteKeyRequestListItem
 
-	// List of key value pairs to put.
+	// List of key-value pairs to put.
 	Puts []types.PutKeyRequestListItem
 
 	noSmithyDocumentSerde
@@ -74,21 +74,21 @@ func (in *UpdateKeysInput) bindEndpointParams(p *EndpointParameters) {
 
 }
 
-// Metadata information about a Key Value Store.
+// Metadata information about a key value store.
 type UpdateKeysOutput struct {
 
-	// The current version identifier of the Key Value Store after the successful
+	// The current version identifier of the key value store after the successful
 	// update.
 	//
 	// This member is required.
 	ETag *string
 
-	// Number of key value pairs in the Key Value Store after the successful update.
+	// Number of key-value pairs in the key value store after the successful update.
 	//
 	// This member is required.
 	ItemCount *int32
 
-	// Total size of the Key Value Store after the successful update, in bytes.
+	// Total size of the key value store after the successful update, in bytes.
 	//
 	// This member is required.
 	TotalSizeInBytes *int64

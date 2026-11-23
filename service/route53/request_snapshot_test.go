@@ -338,6 +338,10 @@ func TestCheckRequestSnapshot_ChangeResourceRecordSets(t *testing.T) {
 							},
 							Bias: ptr.Int32(1),
 						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
 					},
 				},
 				{
@@ -383,6 +387,10 @@ func TestCheckRequestSnapshot_ChangeResourceRecordSets(t *testing.T) {
 								Longitude: ptr.String("__Longitude__"),
 							},
 							Bias: ptr.Int32(1),
+						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
 						},
 					},
 				},
@@ -513,6 +521,8 @@ func TestCheckRequestSnapshot_CreateHealthCheck(t *testing.T) {
 			},
 			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+			EndpointType:                 types.EndpointType("PUBLIC"),
+			HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -538,6 +548,64 @@ func TestCheckRequestSnapshot_CreateHealthCheck(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateHealthCheckSource(t *testing.T) {
+	input := &CreateHealthCheckSourceInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetConfigurationList: []types.SubnetConfiguration{
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateHealthCheckSource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateHealthCheckSource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateHostedZone(t *testing.T) {
 	input := &CreateHostedZoneInput{
 		Name: ptr.String("__Name__"),
@@ -547,10 +615,22 @@ func TestCheckRequestSnapshot_CreateHostedZone(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -899,6 +979,33 @@ func TestCheckRequestSnapshot_DeleteHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHealthCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	input := &DeleteHealthCheckSourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteHealthCheckSource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHealthCheckSource"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1435,6 +1542,33 @@ func TestCheckRequestSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetHealthCheckSource(t *testing.T) {
+	input := &GetHealthCheckSourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetHealthCheckSource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHealthCheckSource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetHealthCheckStatus(t *testing.T) {
 	input := &GetHealthCheckStatusInput{
 		HealthCheckId: ptr.String("__HealthCheckId__"),
@@ -1485,6 +1619,34 @@ func TestCheckRequestSnapshot_GetHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHostedZone"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetHostedZoneChangeBatch(t *testing.T) {
+	input := &GetHostedZoneChangeBatchInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeId:     ptr.String("__ChangeId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetHostedZoneChangeBatch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHostedZoneChangeBatch"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1849,6 +2011,96 @@ func TestCheckRequestSnapshot_ListHealthChecks(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListHealthChecksBySource(t *testing.T) {
+	input := &ListHealthChecksBySourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+		Marker:              ptr.String("__Marker__"),
+		MaxItems:            ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListHealthChecksBySource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHealthChecksBySource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListHealthCheckSources(t *testing.T) {
+	input := &ListHealthCheckSourcesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListHealthCheckSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHealthCheckSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListHostedZoneChangeBatches(t *testing.T) {
+	input := &ListHostedZoneChangeBatchesInput{
+		HostedZoneId:       ptr.String("__HostedZoneId__"),
+		SubmittedAfter:     ptr.String("__SubmittedAfter__"),
+		SubmittedBefore:    ptr.String("__SubmittedBefore__"),
+		StartAfterChangeId: ptr.String("__StartAfterChangeId__"),
+		SortOrder:          types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListHostedZoneChangeBatches(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHostedZoneChangeBatches"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListHostedZones(t *testing.T) {
 	input := &ListHostedZonesInput{
 		Marker:          ptr.String("__Marker__"),
@@ -1963,6 +2215,40 @@ func TestCheckRequestSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueryLoggingConfigs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListResourceRecordSetChanges(t *testing.T) {
+	input := &ListResourceRecordSetChangesInput{
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+		RecordName:      ptr.String("__RecordName__"),
+		RecordType:      types.RRType("SOA"),
+		SubmittedAfter:  ptr.String("__SubmittedAfter__"),
+		SubmittedBefore: ptr.String("__SubmittedBefore__"),
+		SortOrder:       types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourceRecordSetChanges(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourceRecordSetChanges"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2357,6 +2643,7 @@ func TestCheckRequestSnapshot_UpdateHealthCheck(t *testing.T) {
 			types.ResettableElementName("FullyQualifiedDomainName"),
 			types.ResettableElementName("FullyQualifiedDomainName"),
 		},
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2413,6 +2700,18 @@ func TestCheckRequestSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 	input := &UpdateHostedZoneFeaturesInput{
 		HostedZoneId:              ptr.String("__HostedZoneId__"),
 		EnableAcceleratedRecovery: ptr.Bool(true),
+		EnablePublicDNSFallback:   ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
+		DryRun: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2433,6 +2732,35 @@ func TestCheckRequestSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHostedZoneFeatures"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateHostedZoneTier(t *testing.T) {
+	input := &UpdateHostedZoneTierInput{
+		HostedZoneId:   ptr.String("__HostedZoneId__"),
+		HostedZoneTier: types.HostedZoneTier("STANDARD"),
+		DryRun:         true,
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateHostedZoneTier(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHostedZoneTier"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2651,6 +2979,10 @@ func TestUpdateRequestSnapshot_ChangeResourceRecordSets(t *testing.T) {
 							},
 							Bias: ptr.Int32(1),
 						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
+						},
 					},
 				},
 				{
@@ -2696,6 +3028,10 @@ func TestUpdateRequestSnapshot_ChangeResourceRecordSets(t *testing.T) {
 								Longitude: ptr.String("__Longitude__"),
 							},
 							Bias: ptr.Int32(1),
+						},
+						AZAffinity: &types.AZAffinity{
+							LocationType: types.AZAffinityLocationType("AvailabilityZone"),
+							LocationId:   ptr.String("__LocationId__"),
 						},
 					},
 				},
@@ -2826,6 +3162,8 @@ func TestUpdateRequestSnapshot_CreateHealthCheck(t *testing.T) {
 			},
 			InsufficientDataHealthStatus: types.InsufficientDataHealthStatus("Healthy"),
 			RoutingControlArn:            ptr.String("__RoutingControlArn__"),
+			EndpointType:                 types.EndpointType("PUBLIC"),
+			HealthCheckSourceId:          ptr.String("__HealthCheckSourceId__"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -2851,6 +3189,64 @@ func TestUpdateRequestSnapshot_CreateHealthCheck(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateHealthCheckSource(t *testing.T) {
+	input := &CreateHealthCheckSourceInput{
+		CallerReference: ptr.String("__CallerReference__"),
+		HealthCheckSourceConfig: &types.HealthCheckSourceConfig{
+			VpcId: ptr.String("__VpcId__"),
+			SubnetConfigurationList: []types.SubnetConfiguration{
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					SubnetId:           ptr.String("__SubnetId__"),
+					AvailabilityZoneId: ptr.String("__AvailabilityZoneId__"),
+					SecurityGroupIdList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateHealthCheckSource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateHealthCheckSource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateHostedZone(t *testing.T) {
 	input := &CreateHostedZoneInput{
 		Name: ptr.String("__Name__"),
@@ -2860,10 +3256,22 @@ func TestUpdateRequestSnapshot_CreateHostedZone(t *testing.T) {
 		},
 		CallerReference: ptr.String("__CallerReference__"),
 		HostedZoneConfig: &types.HostedZoneConfig{
-			Comment:     ptr.String("__Comment__"),
-			PrivateZone: true,
+			Comment:        ptr.String("__Comment__"),
+			PrivateZone:    true,
+			HostedZoneTier: types.HostedZoneTier("STANDARD"),
 		},
-		DelegationSetId: ptr.String("__DelegationSetId__"),
+		DelegationSetId:         ptr.String("__DelegationSetId__"),
+		EnablePublicDNSFallback: ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3212,6 +3620,33 @@ func TestUpdateRequestSnapshot_DeleteHealthCheck(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHealthCheck"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	input := &DeleteHealthCheckSourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteHealthCheckSource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteHealthCheckSource"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3748,6 +4183,33 @@ func TestUpdateRequestSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetHealthCheckSource(t *testing.T) {
+	input := &GetHealthCheckSourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetHealthCheckSource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHealthCheckSource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetHealthCheckStatus(t *testing.T) {
 	input := &GetHealthCheckStatusInput{
 		HealthCheckId: ptr.String("__HealthCheckId__"),
@@ -3798,6 +4260,34 @@ func TestUpdateRequestSnapshot_GetHostedZone(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHostedZone"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetHostedZoneChangeBatch(t *testing.T) {
+	input := &GetHostedZoneChangeBatchInput{
+		HostedZoneId: ptr.String("__HostedZoneId__"),
+		ChangeId:     ptr.String("__ChangeId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetHostedZoneChangeBatch(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetHostedZoneChangeBatch"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4162,6 +4652,96 @@ func TestUpdateRequestSnapshot_ListHealthChecks(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListHealthChecksBySource(t *testing.T) {
+	input := &ListHealthChecksBySourceInput{
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
+		Marker:              ptr.String("__Marker__"),
+		MaxItems:            ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListHealthChecksBySource(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHealthChecksBySource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListHealthCheckSources(t *testing.T) {
+	input := &ListHealthCheckSourcesInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListHealthCheckSources(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHealthCheckSources"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListHostedZoneChangeBatches(t *testing.T) {
+	input := &ListHostedZoneChangeBatchesInput{
+		HostedZoneId:       ptr.String("__HostedZoneId__"),
+		SubmittedAfter:     ptr.String("__SubmittedAfter__"),
+		SubmittedBefore:    ptr.String("__SubmittedBefore__"),
+		StartAfterChangeId: ptr.String("__StartAfterChangeId__"),
+		SortOrder:          types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListHostedZoneChangeBatches(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListHostedZoneChangeBatches"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListHostedZones(t *testing.T) {
 	input := &ListHostedZonesInput{
 		Marker:          ptr.String("__Marker__"),
@@ -4276,6 +4856,40 @@ func TestUpdateRequestSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListQueryLoggingConfigs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListResourceRecordSetChanges(t *testing.T) {
+	input := &ListResourceRecordSetChangesInput{
+		HostedZoneId:    ptr.String("__HostedZoneId__"),
+		RecordName:      ptr.String("__RecordName__"),
+		RecordType:      types.RRType("SOA"),
+		SubmittedAfter:  ptr.String("__SubmittedAfter__"),
+		SubmittedBefore: ptr.String("__SubmittedBefore__"),
+		SortOrder:       types.ChangeHistorySortOrder("ASCENDING"),
+		MaxResults:      ptr.Int32(1),
+		NextToken:       ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListResourceRecordSetChanges(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListResourceRecordSetChanges"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4670,6 +5284,7 @@ func TestUpdateRequestSnapshot_UpdateHealthCheck(t *testing.T) {
 			types.ResettableElementName("FullyQualifiedDomainName"),
 			types.ResettableElementName("FullyQualifiedDomainName"),
 		},
+		HealthCheckSourceId: ptr.String("__HealthCheckSourceId__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4726,6 +5341,18 @@ func TestUpdateRequestSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 	input := &UpdateHostedZoneFeaturesInput{
 		HostedZoneId:              ptr.String("__HostedZoneId__"),
 		EnableAcceleratedRecovery: ptr.Bool(true),
+		EnablePublicDNSFallback:   ptr.Bool(true),
+		ChangeGuardrails: []types.ChangeGuardrail{
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+			{
+				Name:   types.ChangeGuardrailName("NS_FORMAT_CHECK"),
+				Status: types.ChangeGuardrailStatus("ENABLED"),
+			},
+		},
+		DryRun: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4746,6 +5373,35 @@ func TestUpdateRequestSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHostedZoneFeatures"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateHostedZoneTier(t *testing.T) {
+	input := &UpdateHostedZoneTierInput{
+		HostedZoneId:   ptr.String("__HostedZoneId__"),
+		HostedZoneTier: types.HostedZoneTier("STANDARD"),
+		DryRun:         true,
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateHostedZoneTier(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateHostedZoneTier"); err != nil {
 		t.Fatal(err)
 	}
 }

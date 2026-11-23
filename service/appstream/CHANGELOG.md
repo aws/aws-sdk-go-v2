@@ -1,3 +1,7 @@
+# v1.76.0 (2026-11-19)
+
+* **Feature**: Enable stack-level WebAuthn redirection to relay passkey and security-key authentication from a WorkSpaces Applications streaming session to the user's local device.
+
 # v1.75.0 (2026-11-17)
 
 * **Feature**: Adds support for In-Session SmartCard Redirection for Windows Multi-Session fleets

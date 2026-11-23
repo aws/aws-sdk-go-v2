@@ -207,6 +207,35 @@ func TestUpdateResponseSnapshot_AssociateOpportunity(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateCustomerAccount(t *testing.T) {
+	want := &CreateCustomerAccountOutput{
+		Arn:                      ptr.String("__Arn__"),
+		Id:                       ptr.String("__Id__"),
+		Status:                   types.EnrichmentStatus("PENDING"),
+		Catalog:                  ptr.String("__Catalog__"),
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.CreateCustomerAccount, schemas.CreateCustomerAccountResponse, schemas.CreateCustomerAccountResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateCustomerAccount.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CreateEngagement(t *testing.T) {
 	want := &CreateEngagementOutput{
 		Id:         ptr.String("__Id__"),
@@ -357,6 +386,28 @@ func TestUpdateResponseSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateResourceSnapshotJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteCustomerAccount(t *testing.T) {
+	want := &DeleteCustomerAccountOutput{}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteCustomerAccount, schemas.DeleteCustomerAccountResponse, schemas.DeleteCustomerAccountResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteCustomerAccount.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -631,7 +682,8 @@ func TestUpdateResponseSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 			},
 			AwsPartition: types.AwsPartition("aws-eusc"),
 		},
-		CosellMotion: ptr.String("__CosellMotion__"),
+		CosellMotion:       ptr.String("__CosellMotion__"),
+		CosellMotionReason: ptr.String("__CosellMotionReason__"),
 		SoftwareRevenue: &types.AwsSoftwareRevenue{
 			Value: &types.MonetaryValue{
 				Amount:       ptr.String("__Amount__"),
@@ -659,6 +711,237 @@ func TestUpdateResponseSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetAwsOpportunitySummary.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetCustomerAccount(t *testing.T) {
+	want := &GetCustomerAccountOutput{
+		Arn:                      ptr.String("__Arn__"),
+		Id:                       ptr.String("__Id__"),
+		Catalog:                  ptr.String("__Catalog__"),
+		EnrichmentStatus:         types.EnrichmentStatus("PENDING"),
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Issues: []types.Issue{
+			{
+				Severity: ptr.String("__Severity__"),
+				Code:     ptr.String("__Code__"),
+				Message:  ptr.String("__Message__"),
+			},
+			{
+				Severity: ptr.String("__Severity__"),
+				Code:     ptr.String("__Code__"),
+				Message:  ptr.String("__Message__"),
+			},
+		},
+		AwsEnrichment: &types.AwsEnrichment{
+			Customer: &types.AwsEnrichmentCustomer{
+				AccountName:                          ptr.String("__AccountName__"),
+				Industry:                             ptr.String("__Industry__"),
+				SubIndustry:                          ptr.String("__SubIndustry__"),
+				Sector:                               ptr.String("__Sector__"),
+				Segment:                              ptr.String("__Segment__"),
+				CompanySize:                          ptr.String("__CompanySize__"),
+				Region:                               ptr.String("__Region__"),
+				SubRegion:                            ptr.String("__SubRegion__"),
+				Geo:                                  ptr.String("__Geo__"),
+				Country:                              ptr.String("__Country__"),
+				CustomerAccountPlanningQualification: ptr.String("__CustomerAccountPlanningQualification__"),
+				EligiblePrograms: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			Insights: &types.AwsEnrichmentInsights{
+				MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+				SolutionCategory:           ptr.String("__SolutionCategory__"),
+				SolutionScore:              ptr.String("__SolutionScore__"),
+				SolutionSubCategory:        ptr.String("__SolutionSubCategory__"),
+			},
+		},
+		ReasonCode:                 types.CustomerAccountFailureReason("DUPLICATE_CUSTOMER_MATCH"),
+		Message:                    ptr.String("__Message__"),
+		ExistingCustomerAccountArn: ptr.String("__ExistingCustomerAccountArn__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.GetCustomerAccount, schemas.GetCustomerAccountResponse, schemas.GetCustomerAccountResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCustomerAccount.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetCustomerAccountBulkJob(t *testing.T) {
+	want := &GetCustomerAccountBulkJobOutput{
+		Arn:              ptr.String("__Arn__"),
+		Id:               ptr.String("__Id__"),
+		Status:           types.BulkJobStatus("SUBMITTED"),
+		FileName:         ptr.String("__FileName__"),
+		TotalRecords:     ptr.Int32(1),
+		ProcessedRecords: ptr.Int32(1),
+		SuccessCount:     ptr.Int32(1),
+		FailureCount:     ptr.Int32(1),
+		DeletedCount:     1,
+		FailureReason:    ptr.String("__FailureReason__"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.GetCustomerAccountBulkJob, schemas.GetCustomerAccountBulkJobResponse, schemas.GetCustomerAccountBulkJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCustomerAccountBulkJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetCustomerAccountBulkJobReportUrl(t *testing.T) {
+	want := &GetCustomerAccountBulkJobReportUrlOutput{
+		ReportStatus:  types.BulkReportStatus("NOT_STARTED"),
+		ReportType:    types.BulkReportType("FAILED_RECORDS"),
+		Url:           ptr.String("__Url__"),
+		ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.GetCustomerAccountBulkJobReportUrl, schemas.GetCustomerAccountBulkJobReportUrlResponse, schemas.GetCustomerAccountBulkJobReportUrlResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCustomerAccountBulkJobReportUrl.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetCustomerAccountStatistics(t *testing.T) {
+	want := &GetCustomerAccountStatisticsOutput{
+		TotalCount: ptr.Int32(1),
+		Aggregations: []types.AggregationResult{
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+				Buckets: []types.Bucket{
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+				},
+				OtherCount: ptr.Int32(1),
+			},
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+				Buckets: []types.Bucket{
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+					{
+						Values: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Count: ptr.Int32(1),
+					},
+				},
+				OtherCount: ptr.Int32(1),
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.GetCustomerAccountStatistics, schemas.GetCustomerAccountStatisticsResponse, schemas.GetCustomerAccountStatisticsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCustomerAccountStatistics.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -804,6 +1087,7 @@ func TestUpdateResponseSnapshot_GetEngagementInvitation(t *testing.T) {
 						},
 					},
 				},
+				OpportunityType: types.OpportunityType("Net New Business"),
 			},
 		},
 		InvitationMessage:     ptr.String("__InvitationMessage__"),
@@ -845,6 +1129,21 @@ func TestUpdateResponseSnapshot_GetEngagementInvitation(t *testing.T) {
 			},
 			LeadInsights: &types.LeadInsights{
 				LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+				ChannelRecommendation: &types.ChannelRecommendation{
+					RecommendedChannel: ptr.String("__RecommendedChannel__"),
+					BestOutreachWindows: []types.BestOutreachWindow{
+						{
+							Day:          types.DayOfWeek("MONDAY"),
+							StartTimeUtc: ptr.String("__StartTimeUtc__"),
+							EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+						},
+						{
+							Day:          types.DayOfWeek("MONDAY"),
+							StartTimeUtc: ptr.String("__StartTimeUtc__"),
+							EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+						},
+					},
+				},
 			},
 		},
 	}
@@ -1058,6 +1357,35 @@ func TestUpdateResponseSnapshot_GetOpportunity(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetOpportunity.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetOpportunityBulkJobReportUrl(t *testing.T) {
+	want := &GetOpportunityBulkJobReportUrlOutput{
+		ReportStatus:  types.BulkReportStatus("NOT_STARTED"),
+		ReportType:    types.BulkReportType("FAILED_RECORDS"),
+		ReportFormat:  types.BulkFileFormat("CSV"),
+		Url:           ptr.String("__Url__"),
+		ExpiresAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason: ptr.String("__FailureReason__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.GetOpportunityBulkJobReportUrl, schemas.GetOpportunityBulkJobReportUrlResponse, schemas.GetOpportunityBulkJobReportUrlResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetOpportunityBulkJobReportUrl.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1324,6 +1652,100 @@ func TestUpdateResponseSnapshot_GetSellingSystemSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListCustomerAccountBulkJobResults(t *testing.T) {
+	want := &ListCustomerAccountBulkJobResultsOutput{
+		Results: []types.BulkJobResult{
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.ListCustomerAccountBulkJobResults, schemas.ListCustomerAccountBulkJobResultsResponse, schemas.ListCustomerAccountBulkJobResultsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListCustomerAccountBulkJobResults.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListCustomerAccountBulkJobs(t *testing.T) {
+	want := &ListCustomerAccountBulkJobsOutput{
+		Items: []types.CustomerAccountBulkJobSummary{
+			{
+				Arn:              ptr.String("__Arn__"),
+				Id:               ptr.String("__Id__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				FileName:         ptr.String("__FileName__"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				DeletedCount:     1,
+				FailureReason:    ptr.String("__FailureReason__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Arn:              ptr.String("__Arn__"),
+				Id:               ptr.String("__Id__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				FileName:         ptr.String("__FileName__"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				DeletedCount:     1,
+				FailureReason:    ptr.String("__FailureReason__"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.ListCustomerAccountBulkJobs, schemas.ListCustomerAccountBulkJobsResponse, schemas.ListCustomerAccountBulkJobsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListCustomerAccountBulkJobs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListEngagementByAcceptingInvitationTasks(t *testing.T) {
 	want := &ListEngagementByAcceptingInvitationTasksOutput{
 		TaskSummaries: []types.ListEngagementByAcceptingInvitationTaskSummary{
@@ -1418,6 +1840,52 @@ func TestUpdateResponseSnapshot_ListEngagementFromOpportunityTasks(t *testing.T)
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListEngagementFromOpportunityTasks.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListEngagementGroups(t *testing.T) {
+	want := &ListEngagementGroupsOutput{
+		EngagementGroupSummaries: []types.EngagementGroupSummary{
+			{
+				Id:             ptr.String("__Id__"),
+				Arn:            ptr.String("__Arn__"),
+				Catalog:        ptr.String("__Catalog__"),
+				Name:           ptr.String("__Name__"),
+				Description:    ptr.String("__Description__"),
+				Count:          ptr.Int32(1),
+				ReadinessLevel: types.ReadinessLevel("SalesReady"),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Id:             ptr.String("__Id__"),
+				Arn:            ptr.String("__Arn__"),
+				Catalog:        ptr.String("__Catalog__"),
+				Name:           ptr.String("__Name__"),
+				Description:    ptr.String("__Description__"),
+				Count:          ptr.Int32(1),
+				ReadinessLevel: types.ReadinessLevel("SalesReady"),
+				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.ListEngagementGroups, schemas.ListEngagementGroupsResponse, schemas.ListEngagementGroupsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListEngagementGroups.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1760,6 +2228,100 @@ func TestUpdateResponseSnapshot_ListOpportunities(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListOpportunityBulkJobResults(t *testing.T) {
+	want := &ListOpportunityBulkJobResultsOutput{
+		Results: []types.BulkJobResult{
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+			{
+				RequestId:          ptr.String("__RequestId__"),
+				Status:             types.BulkRecordStatus("SUCCEEDED"),
+				ResourceIdentifier: ptr.String("__ResourceIdentifier__"),
+				ErrorCode:          ptr.String("__ErrorCode__"),
+				ErrorMessage:       ptr.String("__ErrorMessage__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.ListOpportunityBulkJobResults, schemas.ListOpportunityBulkJobResultsResponse, schemas.ListOpportunityBulkJobResultsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListOpportunityBulkJobResults.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListOpportunityBulkJobs(t *testing.T) {
+	want := &ListOpportunityBulkJobsOutput{
+		OpportunityBulkJobSummaries: []types.OpportunityBulkJobSummary{
+			{
+				JobId:            ptr.String("__JobId__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FailureReason:    ptr.String("__FailureReason__"),
+				FileName:         ptr.String("__FileName__"),
+				OperationType:    types.BulkOperationType("BULK_CREATE"),
+			},
+			{
+				JobId:            ptr.String("__JobId__"),
+				Status:           types.BulkJobStatus("SUBMITTED"),
+				TotalRecords:     ptr.Int32(1),
+				ProcessedRecords: ptr.Int32(1),
+				SuccessCount:     ptr.Int32(1),
+				FailureCount:     ptr.Int32(1),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				FailureReason:    ptr.String("__FailureReason__"),
+				FileName:         ptr.String("__FileName__"),
+				OperationType:    types.BulkOperationType("BULK_CREATE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.ListOpportunityBulkJobs, schemas.ListOpportunityBulkJobsResponse, schemas.ListOpportunityBulkJobsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListOpportunityBulkJobs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListOpportunityFromEngagementTasks(t *testing.T) {
 	want := &ListOpportunityFromEngagementTasksOutput{
 		TaskSummaries: []types.ListOpportunityFromEngagementTaskSummary{
@@ -2062,6 +2624,453 @@ func TestUpdateResponseSnapshot_RejectEngagementInvitation(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_SearchCustomerAccounts(t *testing.T) {
+	want := &SearchCustomerAccountsOutput{
+		CustomerAccountSummaries: []types.CustomerAccountSummary{
+			{
+				Arn:                      ptr.String("__Arn__"),
+				Id:                       ptr.String("__Id__"),
+				Catalog:                  ptr.String("__Catalog__"),
+				EnrichmentStatus:         types.EnrichmentStatus("PENDING"),
+				PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+				CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerAccount: &types.CustomerAccountDetailsSummary{
+					CompanyName: ptr.String("__CompanyName__"),
+				},
+				AwsEnrichment: &types.AwsEnrichmentSummary{
+					Customer: &types.AwsEnrichmentCustomerSummary{
+						Industry:                     ptr.String("__Industry__"),
+						AccountPlanningQualification: ptr.String("__AccountPlanningQualification__"),
+						EligiblePrograms: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Geo:     ptr.String("__Geo__"),
+						Country: ptr.String("__Country__"),
+						Segment: ptr.String("__Segment__"),
+					},
+					Insights: &types.AwsEnrichmentInsightsSummary{
+						MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+						SolutionCategory:           ptr.String("__SolutionCategory__"),
+						SolutionScore:              ptr.String("__SolutionScore__"),
+					},
+				},
+			},
+			{
+				Arn:                      ptr.String("__Arn__"),
+				Id:                       ptr.String("__Id__"),
+				Catalog:                  ptr.String("__Catalog__"),
+				EnrichmentStatus:         types.EnrichmentStatus("PENDING"),
+				PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+				CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CustomerAccount: &types.CustomerAccountDetailsSummary{
+					CompanyName: ptr.String("__CompanyName__"),
+				},
+				AwsEnrichment: &types.AwsEnrichmentSummary{
+					Customer: &types.AwsEnrichmentCustomerSummary{
+						Industry:                     ptr.String("__Industry__"),
+						AccountPlanningQualification: ptr.String("__AccountPlanningQualification__"),
+						EligiblePrograms: []string{
+							"__Member__",
+							"__Member__",
+						},
+						Geo:     ptr.String("__Geo__"),
+						Country: ptr.String("__Country__"),
+						Segment: ptr.String("__Segment__"),
+					},
+					Insights: &types.AwsEnrichmentInsightsSummary{
+						MarketplaceEngagementScore: ptr.String("__MarketplaceEngagementScore__"),
+						SolutionCategory:           ptr.String("__SolutionCategory__"),
+						SolutionScore:              ptr.String("__SolutionScore__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.SearchCustomerAccounts, schemas.SearchCustomerAccountsResponse, schemas.SearchCustomerAccountsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SearchCustomerAccounts.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SearchEngagements(t *testing.T) {
+	want := &SearchEngagementsOutput{
+		EngagementSearchSummaries: []types.EngagementSearchSummary{
+			{
+				Id:          ptr.String("__Id__"),
+				Arn:         ptr.String("__Arn__"),
+				Title:       ptr.String("__Title__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				MemberCount: ptr.Int32(1),
+				ModifiedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModifiedBy:  ptr.String("__ModifiedBy__"),
+				Contexts: []types.EngagementContextDetails{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Id:          ptr.String("__Id__"),
+				Arn:         ptr.String("__Arn__"),
+				Title:       ptr.String("__Title__"),
+				Description: ptr.String("__Description__"),
+				CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedBy:   ptr.String("__CreatedBy__"),
+				MemberCount: ptr.Int32(1),
+				ModifiedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ModifiedBy:  ptr.String("__ModifiedBy__"),
+				Contexts: []types.EngagementContextDetails{
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+					{
+						Id:   ptr.String("__Id__"),
+						Type: types.EngagementContextType("CustomerProject"),
+						Payload: &types.EngagementContextPayloadMemberCustomerProject{
+							Value: types.CustomerProjectsContext{
+								Customer: &types.EngagementCustomer{
+									Industry:    types.Industry("Aerospace"),
+									CompanyName: ptr.String("__CompanyName__"),
+									WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+									CountryCode: types.CountryCode("US"),
+								},
+								Project: &types.EngagementCustomerProjectDetails{
+									Title:                ptr.String("__Title__"),
+									BusinessProblem:      ptr.String("__BusinessProblem__"),
+									TargetCompletionDate: ptr.String("__TargetCompletionDate__"),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.SearchEngagements, schemas.SearchEngagementsResponse, schemas.SearchEngagementsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SearchEngagements.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SearchOpportunities(t *testing.T) {
+	want := &SearchOpportunitiesOutput{
+		OpportunitySearchSummaries: []types.OpportunitySearchSummary{
+			{
+				Id:                           ptr.String("__Id__"),
+				LastModifiedDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OpportunityType:              types.OpportunityType("Net New Business"),
+				PartnerOpportunityIdentifier: ptr.String("__PartnerOpportunityIdentifier__"),
+				LifeCycle: &types.OpportunitySearchLifeCycle{
+					ReviewStatus:    types.ReviewStatus("Pending Submission"),
+					Stage:           types.Stage("Prospect"),
+					NextSteps:       ptr.String("__NextSteps__"),
+					TargetCloseDate: ptr.String("__TargetCloseDate__"),
+				},
+				Customer: &types.OpportunitySearchCustomer{
+					Account: &types.OpportunitySearchAccount{
+						CompanyName:  ptr.String("__CompanyName__"),
+						Industry:     types.Industry("Aerospace"),
+						AwsAccountId: ptr.String("__AwsAccountId__"),
+						Address: &types.OpportunitySearchAddress{
+							CountryCode: types.CountryCode("US"),
+						},
+					},
+				},
+				Project: &types.OpportunitySearchProject{
+					Title: ptr.String("__Title__"),
+					ApnPrograms: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExpectedCustomerSpend: []types.OpportunitySearchExpectedCustomerSpend{
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RelatedEntityIdentifiers: &types.OpportunitySearchRelatedEntityIdentifiers{
+					AwsMarketplaceOffers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceOfferSets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceSolutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Solutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				OpportunityTeam: []types.OpportunitySearchTeamMember{
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+				},
+				AwsOpportunitySummary: &types.OpportunitySearchAwsSummary{
+					Origin:       types.OpportunityOrigin("AWS Referral"),
+					CosellMotion: ptr.String("__CosellMotion__"),
+					Insights: &types.OpportunitySearchInsights{
+						EngagementScore: types.SearchEngagementScore("High"),
+						OpportunityQuality: &types.OpportunitySearchOpportunityQuality{
+							Score: ptr.Int32(1),
+						},
+					},
+				},
+			},
+			{
+				Id:                           ptr.String("__Id__"),
+				LastModifiedDate:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				OpportunityType:              types.OpportunityType("Net New Business"),
+				PartnerOpportunityIdentifier: ptr.String("__PartnerOpportunityIdentifier__"),
+				LifeCycle: &types.OpportunitySearchLifeCycle{
+					ReviewStatus:    types.ReviewStatus("Pending Submission"),
+					Stage:           types.Stage("Prospect"),
+					NextSteps:       ptr.String("__NextSteps__"),
+					TargetCloseDate: ptr.String("__TargetCloseDate__"),
+				},
+				Customer: &types.OpportunitySearchCustomer{
+					Account: &types.OpportunitySearchAccount{
+						CompanyName:  ptr.String("__CompanyName__"),
+						Industry:     types.Industry("Aerospace"),
+						AwsAccountId: ptr.String("__AwsAccountId__"),
+						Address: &types.OpportunitySearchAddress{
+							CountryCode: types.CountryCode("US"),
+						},
+					},
+				},
+				Project: &types.OpportunitySearchProject{
+					Title: ptr.String("__Title__"),
+					ApnPrograms: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExpectedCustomerSpend: []types.OpportunitySearchExpectedCustomerSpend{
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+						{
+							Amount:       ptr.String("__Amount__"),
+							CurrencyCode: types.CurrencyCode("USD"),
+						},
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				RelatedEntityIdentifiers: &types.OpportunitySearchRelatedEntityIdentifiers{
+					AwsMarketplaceOffers: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceOfferSets: []string{
+						"__Member__",
+						"__Member__",
+					},
+					AwsMarketplaceSolutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Solutions: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				OpportunityTeam: []types.OpportunitySearchTeamMember{
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+					{
+						FirstName:     ptr.String("__FirstName__"),
+						LastName:      ptr.String("__LastName__"),
+						BusinessTitle: ptr.String("__BusinessTitle__"),
+					},
+				},
+				AwsOpportunitySummary: &types.OpportunitySearchAwsSummary{
+					Origin:       types.OpportunityOrigin("AWS Referral"),
+					CosellMotion: ptr.String("__CosellMotion__"),
+					Insights: &types.OpportunitySearchInsights{
+						EngagementScore: types.SearchEngagementScore("High"),
+						OpportunityQuality: &types.OpportunitySearchOpportunityQuality{
+							Score: ptr.Int32(1),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.SearchOpportunities, schemas.SearchOpportunitiesResponse, schemas.SearchOpportunitiesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SearchOpportunities.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartCustomerAccountBulkJob(t *testing.T) {
+	want := &StartCustomerAccountBulkJobOutput{
+		Arn:       ptr.String("__Arn__"),
+		Id:        ptr.String("__Id__"),
+		Status:    types.BulkJobStatus("SUBMITTED"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.StartCustomerAccountBulkJob, schemas.StartCustomerAccountBulkJobResponse, schemas.StartCustomerAccountBulkJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartCustomerAccountBulkJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartEngagementByAcceptingInvitationTask(t *testing.T) {
 	want := &StartEngagementByAcceptingInvitationTaskOutput{
 		TaskId:                 ptr.String("__TaskId__"),
@@ -2123,6 +3132,30 @@ func TestUpdateResponseSnapshot_StartEngagementFromOpportunityTask(t *testing.T)
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartEngagementFromOpportunityTask.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartOpportunityBulkJob(t *testing.T) {
+	want := &StartOpportunityBulkJobOutput{
+		JobId: ptr.String("__JobId__"),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.StartOpportunityBulkJob, schemas.StartOpportunityBulkJobResponse, schemas.StartOpportunityBulkJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartOpportunityBulkJob.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2304,6 +3337,36 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateCustomerAccount(t *testing.T) {
+	want := &UpdateCustomerAccountOutput{
+		Arn:                      ptr.String("__Arn__"),
+		Id:                       ptr.String("__Id__"),
+		Status:                   types.EnrichmentStatus("PENDING"),
+		Catalog:                  ptr.String("__Catalog__"),
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		CreatedDate:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCustomerAccount, schemas.UpdateCustomerAccountResponse, schemas.UpdateCustomerAccountResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCustomerAccount.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateEngagementContext(t *testing.T) {
 	want := &UpdateEngagementContextOutput{
 		EngagementId:             ptr.String("__EngagementId__"),
@@ -2462,7 +3525,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.AWSPartnerCentralSelling)
-	opSchema := smithy.NewOperationSchema(schemas.CreateEngagement, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateCustomerAccount, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

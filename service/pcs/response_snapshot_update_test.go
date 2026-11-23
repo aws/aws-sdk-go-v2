@@ -187,6 +187,26 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 						ParameterValue: ptr.String("__ParameterValue__"),
 					},
 				},
+				JobSubmitPlugins: []types.JobSubmitPlugin{
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+				},
 				AuthKey: &types.SlurmAuthKey{
 					SecretArn:     ptr.String("__SecretArn__"),
 					SecretVersion: ptr.String("__SecretVersion__"),
@@ -391,6 +411,18 @@ func TestUpdateResponseSnapshot_CreateComputeNodeGroup(t *testing.T) {
 					},
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
 			},
 			ErrorInfo: []types.ErrorInfo{
 				{
@@ -598,6 +630,26 @@ func TestUpdateResponseSnapshot_GetCluster(t *testing.T) {
 						ParameterValue: ptr.String("__ParameterValue__"),
 					},
 				},
+				JobSubmitPlugins: []types.JobSubmitPlugin{
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+				},
 				AuthKey: &types.SlurmAuthKey{
 					SecretArn:     ptr.String("__SecretArn__"),
 					SecretVersion: ptr.String("__SecretVersion__"),
@@ -802,6 +854,18 @@ func TestUpdateResponseSnapshot_GetComputeNodeGroup(t *testing.T) {
 					},
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
 			},
 			ErrorInfo: []types.ErrorInfo{
 				{
@@ -1142,6 +1206,18 @@ func TestUpdateResponseSnapshot_RegisterComputeNodeGroupInstance(t *testing.T) {
 			ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
 		},
 		SchedulerVersion: ptr.String("__SchedulerVersion__"),
+		InstanceHealthChecks: &types.InstanceHealthChecks{
+			HealthMonitoring: &types.HealthMonitoring{
+				Mode:         types.HealthMonitoringMode("NONE"),
+				RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+			},
+			DeepHealthChecks: &types.DeepHealthChecks{
+				OnStart: &types.DeepHealthCheckOnStart{
+					Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+					RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+				},
+			},
+		},
 	}
 	proto := awsjson.New10(schemas.AWSParallelComputingService)
 	opSchema := smithy.NewOperationSchema(schemas.RegisterComputeNodeGroupInstance, schemas.RegisterComputeNodeGroupInstanceResponse, schemas.RegisterComputeNodeGroupInstanceResponse)
@@ -1251,6 +1327,26 @@ func TestUpdateResponseSnapshot_UpdateCluster(t *testing.T) {
 					{
 						ParameterName:  ptr.String("__ParameterName__"),
 						ParameterValue: ptr.String("__ParameterValue__"),
+					},
+				},
+				JobSubmitPlugins: []types.JobSubmitPlugin{
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						Type: types.JobSubmitPluginType("STARLARK"),
+						ScriptSource: &types.JobSubmitScriptSource{
+							ScriptLocation: ptr.String("__ScriptLocation__"),
+							S3VersionId:    ptr.String("__S3VersionId__"),
+							Checksum:       ptr.String("__Checksum__"),
+						},
 					},
 				},
 				AuthKey: &types.SlurmAuthKey{
@@ -1457,6 +1553,18 @@ func TestUpdateResponseSnapshot_UpdateComputeNodeGroup(t *testing.T) {
 					},
 				},
 				ScriptCachingPolicy: types.ScriptCachingPolicy("CACHE_ONCE"),
+			},
+			InstanceHealthChecks: &types.InstanceHealthChecks{
+				HealthMonitoring: &types.HealthMonitoring{
+					Mode:         types.HealthMonitoringMode("NONE"),
+					RepairAction: types.HealthMonitoringRepairAction("AUTO"),
+				},
+				DeepHealthChecks: &types.DeepHealthChecks{
+					OnStart: &types.DeepHealthCheckOnStart{
+						Profile:      types.DeepHealthCheckOnStartProfile("NONE"),
+						RepairAction: types.DeepHealthCheckOnStartRepairAction("AUTO"),
+					},
+				},
 			},
 			ErrorInfo: []types.ErrorInfo{
 				{

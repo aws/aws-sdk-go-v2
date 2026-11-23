@@ -2,6 +2,35 @@
 
 package types
 
+type BadRequestExceptionReason string
+
+// Enum values for BadRequestExceptionReason
+const (
+	BadRequestExceptionReasonAudioTooLong            BadRequestExceptionReason = "audioTooLong"
+	BadRequestExceptionReasonAudioTooShort           BadRequestExceptionReason = "audioTooShort"
+	BadRequestExceptionReasonUnsupportedAudioFormat  BadRequestExceptionReason = "unsupportedAudioFormat"
+	BadRequestExceptionReasonUnsupportedChannelCount BadRequestExceptionReason = "unsupportedChannelCount"
+	BadRequestExceptionReasonInvalidAudio            BadRequestExceptionReason = "invalidAudio"
+	BadRequestExceptionReasonAudioFileTooLarge       BadRequestExceptionReason = "audioFileTooLarge"
+	BadRequestExceptionReasonMediaDownloadFailed     BadRequestExceptionReason = "mediaDownloadFailed"
+)
+
+// Values returns all known values for BadRequestExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BadRequestExceptionReason) Values() []BadRequestExceptionReason {
+	return []BadRequestExceptionReason{
+		"audioTooLong",
+		"audioTooShort",
+		"unsupportedAudioFormat",
+		"unsupportedChannelCount",
+		"invalidAudio",
+		"audioFileTooLarge",
+		"mediaDownloadFailed",
+	}
+}
+
 type BaseModelName string
 
 // Enum values for BaseModelName
@@ -375,6 +404,23 @@ func (LanguageCode) Values() []LanguageCode {
 		"wo-SN",
 		"zh-HK",
 		"zu-ZA",
+	}
+}
+
+type LanguageDetectionMode string
+
+// Enum values for LanguageDetectionMode
+const (
+	LanguageDetectionModeIdentifyLanguage LanguageDetectionMode = "IDENTIFY_LANGUAGE"
+)
+
+// Values returns all known values for LanguageDetectionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LanguageDetectionMode) Values() []LanguageDetectionMode {
+	return []LanguageDetectionMode{
+		"IDENTIFY_LANGUAGE",
 	}
 }
 
@@ -763,6 +809,106 @@ func (SubtitleFormat) Values() []SubtitleFormat {
 	return []SubtitleFormat{
 		"vtt",
 		"srt",
+	}
+}
+
+type SyncLanguage string
+
+// Enum values for SyncLanguage
+const (
+	SyncLanguageEn   SyncLanguage = "en"
+	SyncLanguageEs   SyncLanguage = "es"
+	SyncLanguageFr   SyncLanguage = "fr"
+	SyncLanguageIt   SyncLanguage = "it"
+	SyncLanguageDe   SyncLanguage = "de"
+	SyncLanguageJa   SyncLanguage = "ja"
+	SyncLanguagePt   SyncLanguage = "pt"
+	SyncLanguageKo   SyncLanguage = "ko"
+	SyncLanguageZhCn SyncLanguage = "zh-CN"
+	SyncLanguageZhTw SyncLanguage = "zh-TW"
+	SyncLanguageZhHk SyncLanguage = "zh-HK"
+)
+
+// Values returns all known values for SyncLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyncLanguage) Values() []SyncLanguage {
+	return []SyncLanguage{
+		"en",
+		"es",
+		"fr",
+		"it",
+		"de",
+		"ja",
+		"pt",
+		"ko",
+		"zh-CN",
+		"zh-TW",
+		"zh-HK",
+	}
+}
+
+type SyncLanguageCode string
+
+// Enum values for SyncLanguageCode
+const (
+	SyncLanguageCodeEnUs SyncLanguageCode = "en-US"
+	SyncLanguageCodeEnAb SyncLanguageCode = "en-AB"
+	SyncLanguageCodeEnAu SyncLanguageCode = "en-AU"
+	SyncLanguageCodeEnGb SyncLanguageCode = "en-GB"
+	SyncLanguageCodeEnIe SyncLanguageCode = "en-IE"
+	SyncLanguageCodeEnIn SyncLanguageCode = "en-IN"
+	SyncLanguageCodeEnWl SyncLanguageCode = "en-WL"
+	SyncLanguageCodeEnZa SyncLanguageCode = "en-ZA"
+	SyncLanguageCodeEnNz SyncLanguageCode = "en-NZ"
+	SyncLanguageCodeEsUs SyncLanguageCode = "es-US"
+	SyncLanguageCodeEsEs SyncLanguageCode = "es-ES"
+	SyncLanguageCodeEsMx SyncLanguageCode = "es-MX"
+	SyncLanguageCodeFrFr SyncLanguageCode = "fr-FR"
+	SyncLanguageCodeFrCa SyncLanguageCode = "fr-CA"
+	SyncLanguageCodeItIt SyncLanguageCode = "it-IT"
+	SyncLanguageCodeDeDe SyncLanguageCode = "de-DE"
+	SyncLanguageCodeDeCh SyncLanguageCode = "de-CH"
+	SyncLanguageCodeJaJp SyncLanguageCode = "ja-JP"
+	SyncLanguageCodePtBr SyncLanguageCode = "pt-BR"
+	SyncLanguageCodePtPt SyncLanguageCode = "pt-PT"
+	SyncLanguageCodeZhCn SyncLanguageCode = "zh-CN"
+	SyncLanguageCodeZhTw SyncLanguageCode = "zh-TW"
+	SyncLanguageCodeZhHk SyncLanguageCode = "zh-HK"
+	SyncLanguageCodeKoKr SyncLanguageCode = "ko-KR"
+)
+
+// Values returns all known values for SyncLanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyncLanguageCode) Values() []SyncLanguageCode {
+	return []SyncLanguageCode{
+		"en-US",
+		"en-AB",
+		"en-AU",
+		"en-GB",
+		"en-IE",
+		"en-IN",
+		"en-WL",
+		"en-ZA",
+		"en-NZ",
+		"es-US",
+		"es-ES",
+		"es-MX",
+		"fr-FR",
+		"fr-CA",
+		"it-IT",
+		"de-DE",
+		"de-CH",
+		"ja-JP",
+		"pt-BR",
+		"pt-PT",
+		"zh-CN",
+		"zh-TW",
+		"zh-HK",
+		"ko-KR",
 	}
 }
 

@@ -39,13 +39,15 @@ type UpdateEnrollmentConfigurationInput struct {
 	//   and you must enable the rules you want to run. You must wait at least 24 hours
 	//   after opting out to opt in again.
 	//
-	// The Pending and Failed options cannot be used to update the enrollment status
-	// of an account. They are returned in the response of a request to update the
+	// The Pending and Failed options can't be used to update the enrollment status of
+	// an account. They are returned in the response of a request to update the
 	// enrollment status of an account.
 	//
-	// If you are a member account, your account must be disassociated from your
-	// organization’s management account before you can disable Automation. Contact
-	// your administrator to make this change.
+	// If you are a member account, you can't disable Automation while an organization
+	// enrollment configuration applies. If no organization enrollment configuration
+	// applies, you also can't disable Automation while your organization rule mode is
+	// AnyAllowed . Ask your administrator to delete the organization enrollment
+	// configuration or disassociate your account, as applicable.
 	//
 	// This member is required.
 	Status types.EnrollmentStatus

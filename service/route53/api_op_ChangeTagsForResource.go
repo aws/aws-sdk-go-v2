@@ -8,7 +8,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Adds, edits, or deletes tags for a health check or a hosted zone.
+// Adds, edits, or deletes tags for a health check, a health check source, or a
+// hosted zone.
 //
 // For information about using tags for cost allocation, see [Using Cost Allocation Tags] in the Billing and
 // Cost Management User Guide.
@@ -42,16 +43,19 @@ type ChangeTagsForResourceInput struct {
 	//
 	//   - The resource type for health checks is healthcheck .
 	//
+	//   - The resource type for health check sources is healthchecksource .
+	//
 	//   - The resource type for hosted zones is hostedzone .
 	//
 	// This member is required.
 	ResourceType types.TagResourceType
 
 	// A complex type that contains a list of the tags that you want to add to the
-	// specified health check or hosted zone and/or the tags that you want to edit
-	// Value for.
+	// specified health check, health check source, or hosted zone and/or the tags that
+	// you want to edit Value for.
 	//
-	// You can add a maximum of 10 tags to a health check or a hosted zone.
+	// You can add a maximum of 10 tags to a health check, a health check source, or a
+	// hosted zone.
 	AddTags []types.Tag
 
 	// A complex type that contains a list of the tags that you want to delete from

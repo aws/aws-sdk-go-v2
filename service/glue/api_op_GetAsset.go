@@ -118,7 +118,7 @@ func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		serializeAssetFormMap(s, schemas.GetAssetOutput_Forms, v.Forms)
 	}
 	if v.GlossaryTerms != nil {
-		serializeGlossaryTermIdList(s, schemas.GetAssetOutput_GlossaryTerms, v.GlossaryTerms)
+		serializeGlossaryTermIdOutputList(s, schemas.GetAssetOutput_GlossaryTerms, v.GlossaryTerms)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAssetOutput_Id, *v.Id)
@@ -150,7 +150,7 @@ func (v *GetAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetAssetOutput_Forms:
 			return deserializeAssetFormMap(d, schemas.GetAssetOutput_Forms, &v.Forms)
 		case schemas.GetAssetOutput_GlossaryTerms:
-			return deserializeGlossaryTermIdList(d, schemas.GetAssetOutput_GlossaryTerms, &v.GlossaryTerms)
+			return deserializeGlossaryTermIdOutputList(d, schemas.GetAssetOutput_GlossaryTerms, &v.GlossaryTerms)
 		case schemas.GetAssetOutput_Id:
 			v.Id = new(string)
 			return d.ReadString(schemas.GetAssetOutput_Id, v.Id)

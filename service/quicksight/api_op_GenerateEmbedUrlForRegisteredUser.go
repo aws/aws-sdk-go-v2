@@ -10,10 +10,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Generates an embed URL that you can use to embed an Amazon Quick experience in
-// your website. This action can be used for any type of user registered in an
-// Amazon Quick account. Before you use this action, make sure that you have
-// configured the relevant Amazon Quick resource and permissions.
+// Generates an embed URL that you can use to embed an Quick experience in your
+// website. This action can be used for any type of user registered in an Quick
+// account. Before you use this action, make sure that you have configured the
+// relevant Quick resource and permissions.
 //
 // The following rules apply to the generated URL:
 //
@@ -28,15 +28,15 @@ import (
 //	(maximum). The default session duration is 10 hours.
 //
 //	- You are charged only when the URL is used or there is interaction with
-//	Amazon Quick.
+//	Quick.
 //
-// For more information, see [Embedded Analytics] in the Amazon Quick User Guide.
+// For more information, see [Embedded Analytics] in the Quick User Guide.
 //
 // For more information about the high-level steps for embedding and for an
-// interactive demo of the ways you can customize embedding, visit the [Amazon Quick Developer Portal].
+// interactive demo of the ways you can customize embedding, visit the [Quick Developer Portal].
 //
 // [Embedded Analytics]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
-// [Amazon Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Quick Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
 // [SessionLifetimeInMinutes]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes
 func (c *Client) GenerateEmbedUrlForRegisteredUser(ctx context.Context, params *GenerateEmbedUrlForRegisteredUserInput, optFns ...func(*Options)) (*GenerateEmbedUrlForRegisteredUserOutput, error) {
 	if params == nil {

@@ -1354,6 +1354,44 @@ func (v *AuthorizingClaimMatchValueType) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// The configuration for an AWS Billing payment connector. Payments made through
+// an AWS Billing payment connector are charged to the AWS account that owns the
+// payment manager, and appear on that account's AWS bill as AWS Marketplace
+// charges.
+type AwsBillingConnectorConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Marketplace service-linked role in
+	// the account that owns the payment manager. The service sets this value when it
+	// creates the connector.
+	//
+	// This member is required.
+	IamRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsBillingConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsBillingConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsBillingConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.AwsBillingConnectorConfiguration_iamRoleArn, *v.IamRoleArn)
+	}
+}
+func (v *AwsBillingConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsBillingConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsBillingConnectorConfiguration_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.AwsBillingConnectorConfiguration_iamRoleArn, v.IamRoleArn)
+		}
+		return nil
+	})
+}
+
 // A rate limit definition within a batch put request. If you provide a rateLimitId
 // , the service uses it for upsert matching against existing rate limits.
 type BatchPutLimitEntry struct {
@@ -4085,6 +4123,50 @@ func (v *ContentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The CPU configuration for capacity provider instances, including nested
+// virtualization.
+type CpuOptions struct {
+
+	// Specifies whether your agents can use hardware virtualization on their
+	// instances. The following values are possible:
+	//
+	//   - ENABLED – Your agents can use hardware virtualization on their instances. To
+	//   use this value, choose the LINUX_X86_64 operating system and instance types
+	//   that support nested virtualization.
+	//
+	//   - DISABLED – Your agents can't use hardware virtualization on their instances.
+	//   This is the default.
+	NestedVirtualization NestedVirtualization
+
+	noSmithyDocumentSerde
+}
+
+func (v *CpuOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CpuOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CpuOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NestedVirtualization != "" {
+		s.WriteString(schemas.CpuOptions_nestedVirtualization, string(v.NestedVirtualization))
+	}
+}
+func (v *CpuOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CpuOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CpuOptions_nestedVirtualization:
+			var ev string
+			if err := d.ReadString(schemas.CpuOptions_nestedVirtualization, &ev); err != nil {
+				return err
+			}
+			v.NestedVirtualization = NestedVirtualization(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A credential provider for gateway authentication. This structure contains the
 // configuration for authenticating with the target endpoint.
 //
@@ -4226,15 +4308,36 @@ func (v *CredentialRotationConfigMemberCoinbaseCDP) Deserialize(d smithy.ShapeDe
 	return v.Value.Deserialize(d)
 }
 
-// The credential provider configuration for a payment connector. Specifies the
-// payment provider type and its associated credential provider.
+// The configuration for a payment connector. Specifies the payment provider type
+// and either its associated credential provider or, for an AWS Billing payment
+// connector, its billing configuration.
 //
 // The following types satisfy this interface:
 //
+//	CredentialsProviderConfigurationMemberAwsBilling
 //	CredentialsProviderConfigurationMemberCoinbaseCDP
 //	CredentialsProviderConfigurationMemberStripePrivy
 type CredentialsProviderConfiguration interface {
 	isCredentialsProviderConfiguration()
+}
+
+// The configuration for an AWS Billing payment connector. The service sets this
+// configuration when it creates the connector and returns it in responses. Don't
+// specify it when you create an AWS Billing payment connector.
+type CredentialsProviderConfigurationMemberAwsBilling struct {
+	Value AwsBillingConnectorConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsProviderConfigurationMemberAwsBilling) isCredentialsProviderConfiguration() {}
+func (v *CredentialsProviderConfigurationMemberAwsBilling) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialsProviderConfiguration_awsBilling)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CredentialsProviderConfigurationMemberAwsBilling) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The credential provider configuration for a Coinbase CDP payment connector.
@@ -8123,6 +8226,24 @@ type GatewayInterceptorConfiguration struct {
 	// the input to the interceptor is constructed
 	InputConfiguration *InterceptorInputConfiguration
 
+	// Specifies how the interceptor processes streamed target responses. You can set
+	// this field only on an interceptor that includes the RESPONSE interception
+	// point. Valid values include:
+	//
+	//   - BUFFERED - The gateway collects the complete target response and then
+	//   invokes the interceptor once. This is the default.
+	//
+	//   - STREAM - The gateway sends a streamed target response to the interceptor in
+	//   batches of events and returns each processed batch to the client as soon as it's
+	//   ready. Non-streamed responses still use BUFFERED processing. If you specify
+	//   STREAM , you must also specify responseStreamingConfiguration , and the input
+	//   configuration can't exclude the response body.
+	ResponseInterceptionMode ResponseInterceptionMode
+
+	// Specifies the batching settings for a streamed response. Specify this field
+	// only when responseInterceptionMode is STREAM . You must specify it for STREAM .
+	ResponseStreamingConfiguration *ResponseStreamingConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -8144,6 +8265,14 @@ func (v *GatewayInterceptorConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.Interceptor != nil {
 		serializeInterceptorConfiguration(s, schemas.GatewayInterceptorConfiguration_interceptor, v.Interceptor)
 	}
+	if v.ResponseInterceptionMode != "" {
+		s.WriteString(schemas.GatewayInterceptorConfiguration_responseInterceptionMode, string(v.ResponseInterceptionMode))
+	}
+	if v.ResponseStreamingConfiguration != nil {
+		s.WriteStruct(schemas.GatewayInterceptorConfiguration_responseStreamingConfiguration)
+		v.ResponseStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *GatewayInterceptorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GatewayInterceptorConfiguration, func(s *smithy.Schema) error {
@@ -8155,6 +8284,16 @@ func (v *GatewayInterceptorConfiguration) Deserialize(d smithy.ShapeDeserializer
 			return deserializeGatewayInterceptionPoints(d, schemas.GatewayInterceptorConfiguration_interceptionPoints, &v.InterceptionPoints)
 		case schemas.GatewayInterceptorConfiguration_interceptor:
 			return deserializeInterceptorConfiguration(d, schemas.GatewayInterceptorConfiguration_interceptor, &v.Interceptor)
+		case schemas.GatewayInterceptorConfiguration_responseInterceptionMode:
+			var ev string
+			if err := d.ReadString(schemas.GatewayInterceptorConfiguration_responseInterceptionMode, &ev); err != nil {
+				return err
+			}
+			v.ResponseInterceptionMode = ResponseInterceptionMode(ev)
+			return nil
+		case schemas.GatewayInterceptorConfiguration_responseStreamingConfiguration:
+			v.ResponseStreamingConfiguration = &ResponseStreamingConfiguration{}
+			return v.ResponseStreamingConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -13407,6 +13546,10 @@ type LaunchParameters struct {
 	// The Capacity Reservation targeting option for the instances.
 	CapacityReservationSpecification *CapacityReservationSpecification
 
+	// The central processing unit (CPU) options for the instances that the capacity
+	// provider launches.
+	CpuOptions *CpuOptions
+
 	// The block device mappings for instance store (ephemeral) volumes. You can
 	// specify up to five mappings.
 	EphemeralVolumes []EphemeralBlockDeviceMapping
@@ -13444,6 +13587,11 @@ func (v *LaunchParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CapacityReservationSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.CpuOptions != nil {
+		s.WriteStruct(schemas.LaunchParameters_cpuOptions)
+		v.CpuOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EphemeralVolumes != nil {
 		serializeEphemeralBlockDeviceMappingList(s, schemas.LaunchParameters_ephemeralVolumes, v.EphemeralVolumes)
 	}
@@ -13477,6 +13625,9 @@ func (v *LaunchParameters) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LaunchParameters_capacityReservationSpecification:
 			v.CapacityReservationSpecification = &CapacityReservationSpecification{}
 			return v.CapacityReservationSpecification.Deserialize(d)
+		case schemas.LaunchParameters_cpuOptions:
+			v.CpuOptions = &CpuOptions{}
+			return v.CpuOptions.Deserialize(d)
 		case schemas.LaunchParameters_ephemeralVolumes:
 			return deserializeEphemeralBlockDeviceMappingList(d, schemas.LaunchParameters_ephemeralVolumes, &v.EphemeralVolumes)
 		case schemas.LaunchParameters_instanceProfileArn:
@@ -20335,6 +20486,41 @@ func (v *ResourceLocationMemberS3) Serialize(s smithy.ShapeSerializer) {
 }
 func (v *ResourceLocationMemberS3) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// Specifies the settings that the gateway uses to send a streamed target response
+// to the interceptor in batches.
+type ResponseStreamingConfiguration struct {
+
+	// Specifies the maximum number of response events that the gateway sends to the
+	// interceptor in one invocation. The interceptor's output for the first batch
+	// determines the status code and headers of the response. The gateway ignores the
+	// status code and headers that the interceptor returns for later batches.
+	MaxEventsPerInvocation *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResponseStreamingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseStreamingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseStreamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxEventsPerInvocation != nil {
+		s.WriteInt32(schemas.ResponseStreamingConfiguration_maxEventsPerInvocation, *v.MaxEventsPerInvocation)
+	}
+}
+func (v *ResponseStreamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseStreamingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseStreamingConfiguration_maxEventsPerInvocation:
+			v.MaxEventsPerInvocation = new(int32)
+			return d.ReadInt32(schemas.ResponseStreamingConfiguration_maxEventsPerInvocation, v.MaxEventsPerInvocation)
+		}
+		return nil
+	})
 }
 
 // The configuration for the root volume of a capacity provider instance. Specify

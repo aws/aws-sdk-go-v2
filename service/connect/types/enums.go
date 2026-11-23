@@ -2291,6 +2291,10 @@ const (
 	FileUseCaseTypeEmailMessagePlainTextRedacted FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
 	FileUseCaseTypeAttachment                    FileUseCaseType = "ATTACHMENT"
 	FileUseCaseTypeVoiceRecording                FileUseCaseType = "VOICE_RECORDING"
+	FileUseCaseTypeVoicemailRecording            FileUseCaseType = "VOICEMAIL_RECORDING"
+	FileUseCaseTypeVoicemailRecordingRedacted    FileUseCaseType = "VOICEMAIL_RECORDING_REDACTED"
+	FileUseCaseTypeVoicemailAnalysis             FileUseCaseType = "VOICEMAIL_ANALYSIS"
+	FileUseCaseTypeVoicemailAnalysisRedacted     FileUseCaseType = "VOICEMAIL_ANALYSIS_REDACTED"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -2306,6 +2310,10 @@ func (FileUseCaseType) Values() []FileUseCaseType {
 		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"ATTACHMENT",
 		"VOICE_RECORDING",
+		"VOICEMAIL_RECORDING",
+		"VOICEMAIL_RECORDING_REDACTED",
+		"VOICEMAIL_ANALYSIS",
+		"VOICEMAIL_ANALYSIS_REDACTED",
 	}
 }
 
@@ -4601,6 +4609,10 @@ const (
 	ReferenceTypeEmailMessagePlainText         ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT"
 	ReferenceTypeEmailMessagePlainTextRedacted ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
 	ReferenceTypeEmailMessageRedacted          ReferenceType = "EMAIL_MESSAGE_REDACTED"
+	ReferenceTypeVoicemailRecording            ReferenceType = "VOICEMAIL_RECORDING"
+	ReferenceTypeVoicemailRecordingRedacted    ReferenceType = "VOICEMAIL_RECORDING_REDACTED"
+	ReferenceTypeVoicemailAnalysis             ReferenceType = "VOICEMAIL_ANALYSIS"
+	ReferenceTypeVoicemailAnalysisRedacted     ReferenceType = "VOICEMAIL_ANALYSIS_REDACTED"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -4620,6 +4632,10 @@ func (ReferenceType) Values() []ReferenceType {
 		"EMAIL_MESSAGE_PLAIN_TEXT",
 		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"EMAIL_MESSAGE_REDACTED",
+		"VOICEMAIL_RECORDING",
+		"VOICEMAIL_RECORDING_REDACTED",
+		"VOICEMAIL_ANALYSIS",
+		"VOICEMAIL_ANALYSIS_REDACTED",
 	}
 }
 

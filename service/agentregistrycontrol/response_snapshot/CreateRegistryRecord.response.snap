@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"recordArn":"__RecordArn__","status":"DRAFT"}
+{"authorizationData":{"oauth2":{"authorizationAttemptId":"__AuthorizationAttemptId__","authorizationUrl":"__AuthorizationUrl__","expiresAt":"2000-01-01T00:00:00Z","userId":"__UserId__"}},"recordArn":"__RecordArn__","status":"DRAFT"}

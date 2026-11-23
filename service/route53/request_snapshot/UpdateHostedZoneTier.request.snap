@@ -1,0 +1,5 @@
+POST /2013-04-01/hostedzone/__HostedZoneId__/tier
+
+Content-Type: application/xml
+
+<UpdateHostedZoneTierRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><DryRun>true</DryRun><HostedZoneTier>STANDARD</HostedZoneTier></UpdateHostedZoneTierRequest>

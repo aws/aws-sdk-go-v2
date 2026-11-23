@@ -11,6 +11,12 @@ import (
 )
 
 // Publishes events to an event bus.
+//
+// The total size of all event entries in a request must not exceed 1 MB
+// (1,048,576 bytes). The limit applies to the request as a whole, not to
+// individual entries. If you exceed the limit, the request fails with
+// InvalidInputException and the service publishes none of the entries in the
+// request.
 func (c *Client) PutEvents(ctx context.Context, params *PutEventsInput, optFns ...func(*Options)) (*PutEventsOutput, error) {
 	if params == nil {
 		params = &PutEventsInput{}

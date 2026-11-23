@@ -430,6 +430,18 @@ func ExampleReferenceSummary_outputUsage() {
 	case *types.ReferenceSummaryMemberUrl:
 		_ = v.Value // Value is types.UrlReference
 
+	case *types.ReferenceSummaryMemberVoicemailAnalysis:
+		_ = v.Value // Value is types.VoicemailAnalysisReference
+
+	case *types.ReferenceSummaryMemberVoicemailAnalysisRedacted:
+		_ = v.Value // Value is types.VoicemailAnalysisReference
+
+	case *types.ReferenceSummaryMemberVoicemailRecording:
+		_ = v.Value // Value is types.VoicemailRecordingReference
+
+	case *types.ReferenceSummaryMemberVoicemailRecordingRedacted:
+		_ = v.Value // Value is types.VoicemailRecordingReference
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -445,8 +457,10 @@ var _ *types.EmailMessageReference
 var _ *types.NumberReference
 var _ *types.StringReference
 var _ *types.ContactAnalysisReference
+var _ *types.VoicemailRecordingReference
 var _ *types.DateReference
 var _ *types.EmailReference
+var _ *types.VoicemailAnalysisReference
 
 func ExampleServiceQuotaExceededExceptionReason_outputUsage() {
 	var union types.ServiceQuotaExceededExceptionReason

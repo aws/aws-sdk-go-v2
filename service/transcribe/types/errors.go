@@ -8,13 +8,17 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Your request didn't pass one or more validation tests. This can occur when the
-// entity you're trying to delete doesn't exist or if it's in a non-terminal state
-// (such as IN PROGRESS ). See the exception message field for more information.
+// Your request didn't pass one or more validation tests. This can occur when a
+// parameter has an invalid value, when you combine parameters in a way that isn't
+// supported, when the entity you're trying to delete doesn't exist, or if it's in
+// a non-terminal state (such as IN PROGRESS ). See the exception message field for
+// more information.
 type BadRequestException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	Reason BadRequestExceptionReason
 
 	noSmithyDocumentSerde
 }
@@ -45,6 +49,9 @@ func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.BadRequestException_Message, *v.Message)
 	}
+	if v.Reason != "" {
+		s.WriteString(schemas.BadRequestException_Reason, string(v.Reason))
+	}
 }
 func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
@@ -52,6 +59,13 @@ func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.BadRequestException_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		case schemas.BadRequestException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.BadRequestException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = BadRequestExceptionReason(ev)
+			return nil
 		}
 		return nil
 	})

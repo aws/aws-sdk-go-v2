@@ -4700,7 +4700,7 @@ var _ConnectionTypeList_member *smithy.Schema
 var Contact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 50)
+}, smithy.ShapeTypeStructure, 51)
 var Contact_Arn *smithy.Schema
 
 var Contact_Id *smithy.Schema
@@ -4800,6 +4800,8 @@ var Contact_NextContacts *smithy.Schema
 var Contact_GlobalResiliencyMetadata *smithy.Schema
 
 var Contact_ContactLens *smithy.Schema
+
+var Contact_VoicemailInfo *smithy.Schema
 
 var ContactAnalysis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -9249,7 +9251,7 @@ var FileStatusType_DRAFTING *smithy.Schema
 var FileUseCaseType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "FileUseCaseType",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 11)
 var FileUseCaseType_CONTACT_ANALYSIS *smithy.Schema
 
 var FileUseCaseType_EMAIL_MESSAGE *smithy.Schema
@@ -9263,6 +9265,14 @@ var FileUseCaseType_EMAIL_MESSAGE_PLAIN_TEXT_REDACTED *smithy.Schema
 var FileUseCaseType_ATTACHMENT *smithy.Schema
 
 var FileUseCaseType_VOICE_RECORDING *smithy.Schema
+
+var FileUseCaseType_VOICEMAIL_RECORDING *smithy.Schema
+
+var FileUseCaseType_VOICEMAIL_RECORDING_REDACTED *smithy.Schema
+
+var FileUseCaseType_VOICEMAIL_ANALYSIS *smithy.Schema
+
+var FileUseCaseType_VOICEMAIL_ANALYSIS_REDACTED *smithy.Schema
 
 var _FilterId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -11599,6 +11609,11 @@ var NumberCondition_MinValue *smithy.Schema
 var NumberCondition_MaxValue *smithy.Schema
 
 var NumberCondition_ComparisonType *smithy.Schema
+
+var _NumberOfVoicemails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "NumberOfVoicemails",
+}, smithy.ShapeTypeInteger, 0)
 
 var NumberReference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14235,7 +14250,7 @@ var _ReferenceStatusReason = smithy.NewSchema(smithy.ShapeID{
 var ReferenceSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReferenceSummary",
-}, smithy.ShapeTypeUnion, 11)
+}, smithy.ShapeTypeUnion, 15)
 var ReferenceSummary_Url *smithy.Schema
 
 var ReferenceSummary_Attachment *smithy.Schema
@@ -14258,6 +14273,14 @@ var ReferenceSummary_Email *smithy.Schema
 
 var ReferenceSummary_ContactAnalysis *smithy.Schema
 
+var ReferenceSummary_VoicemailRecording *smithy.Schema
+
+var ReferenceSummary_VoicemailRecordingRedacted *smithy.Schema
+
+var ReferenceSummary_VoicemailAnalysis *smithy.Schema
+
+var ReferenceSummary_VoicemailAnalysisRedacted *smithy.Schema
+
 var _ReferenceSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReferenceSummaryList",
@@ -14267,7 +14290,7 @@ var _ReferenceSummaryList_member *smithy.Schema
 var ReferenceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReferenceType",
-}, smithy.ShapeTypeEnum, 11)
+}, smithy.ShapeTypeEnum, 15)
 var ReferenceType_URL *smithy.Schema
 
 var ReferenceType_ATTACHMENT *smithy.Schema
@@ -14289,6 +14312,14 @@ var ReferenceType_EMAIL_MESSAGE_PLAIN_TEXT *smithy.Schema
 var ReferenceType_EMAIL_MESSAGE_PLAIN_TEXT_REDACTED *smithy.Schema
 
 var ReferenceType_EMAIL_MESSAGE_REDACTED *smithy.Schema
+
+var ReferenceType_VOICEMAIL_RECORDING *smithy.Schema
+
+var ReferenceType_VOICEMAIL_RECORDING_REDACTED *smithy.Schema
+
+var ReferenceType_VOICEMAIL_ANALYSIS *smithy.Schema
+
+var ReferenceType_VOICEMAIL_ANALYSIS_REDACTED *smithy.Schema
 
 var _ReferenceTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -17653,6 +17684,36 @@ var VoiceEnhancementMode_VOICE_ISOLATION *smithy.Schema
 var VoiceEnhancementMode_NOISE_SUPPRESSION *smithy.Schema
 
 var VoiceEnhancementMode_NONE *smithy.Schema
+
+var VoicemailAnalysisReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "VoicemailAnalysisReference",
+}, smithy.ShapeTypeStructure, 4)
+var VoicemailAnalysisReference_Name *smithy.Schema
+
+var VoicemailAnalysisReference_Value *smithy.Schema
+
+var VoicemailAnalysisReference_Status *smithy.Schema
+
+var VoicemailAnalysisReference_Arn *smithy.Schema
+
+var VoicemailInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "VoicemailInfo",
+}, smithy.ShapeTypeStructure, 1)
+var VoicemailInfo_NumberOfVoicemails *smithy.Schema
+
+var VoicemailRecordingReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "VoicemailRecordingReference",
+}, smithy.ShapeTypeStructure, 4)
+var VoicemailRecordingReference_Name *smithy.Schema
+
+var VoicemailRecordingReference_Value *smithy.Schema
+
+var VoicemailRecordingReference_Status *smithy.Schema
+
+var VoicemailRecordingReference_Arn *smithy.Schema
 
 var VoiceRecordingConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -26294,6 +26355,14 @@ func init() {
 
 	FileUseCaseType_VOICE_RECORDING = FileUseCaseType.AddMember("VOICE_RECORDING", smithyprelude.Unit)
 
+	FileUseCaseType_VOICEMAIL_RECORDING = FileUseCaseType.AddMember("VOICEMAIL_RECORDING", smithyprelude.Unit)
+
+	FileUseCaseType_VOICEMAIL_RECORDING_REDACTED = FileUseCaseType.AddMember("VOICEMAIL_RECORDING_REDACTED", smithyprelude.Unit)
+
+	FileUseCaseType_VOICEMAIL_ANALYSIS = FileUseCaseType.AddMember("VOICEMAIL_ANALYSIS", smithyprelude.Unit)
+
+	FileUseCaseType_VOICEMAIL_ANALYSIS_REDACTED = FileUseCaseType.AddMember("VOICEMAIL_ANALYSIS_REDACTED", smithyprelude.Unit)
+
 	AttachedFile_CreationTime = AttachedFile.AddMember("CreationTime", _ISO8601Datetime)
 
 	AttachedFile_FileArn = AttachedFile.AddMember("FileArn", _ARN)
@@ -27782,6 +27851,8 @@ func init() {
 
 	ContactLens_ConversationalAnalytics = ContactLens.AddMember("ConversationalAnalytics", ConversationalAnalytics)
 
+	VoicemailInfo_NumberOfVoicemails = VoicemailInfo.AddMember("NumberOfVoicemails", _NumberOfVoicemails)
+
 	Contact_Arn = Contact.AddMember("Arn", _ARN)
 
 	Contact_Id = Contact.AddMember("Id", _ContactId)
@@ -27881,6 +27952,8 @@ func init() {
 	Contact_GlobalResiliencyMetadata = Contact.AddMember("GlobalResiliencyMetadata", GlobalResiliencyMetadata)
 
 	Contact_ContactLens = Contact.AddMember("ContactLens", ContactLens)
+
+	Contact_VoicemailInfo = Contact.AddMember("VoicemailInfo", VoicemailInfo)
 
 	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
 
@@ -28321,6 +28394,14 @@ func init() {
 	ReferenceType_EMAIL_MESSAGE_PLAIN_TEXT_REDACTED = ReferenceType.AddMember("EMAIL_MESSAGE_PLAIN_TEXT_REDACTED", smithyprelude.Unit)
 
 	ReferenceType_EMAIL_MESSAGE_REDACTED = ReferenceType.AddMember("EMAIL_MESSAGE_REDACTED", smithyprelude.Unit)
+
+	ReferenceType_VOICEMAIL_RECORDING = ReferenceType.AddMember("VOICEMAIL_RECORDING", smithyprelude.Unit)
+
+	ReferenceType_VOICEMAIL_RECORDING_REDACTED = ReferenceType.AddMember("VOICEMAIL_RECORDING_REDACTED", smithyprelude.Unit)
+
+	ReferenceType_VOICEMAIL_ANALYSIS = ReferenceType.AddMember("VOICEMAIL_ANALYSIS", smithyprelude.Unit)
+
+	ReferenceType_VOICEMAIL_ANALYSIS_REDACTED = ReferenceType.AddMember("VOICEMAIL_ANALYSIS_REDACTED", smithyprelude.Unit)
 
 	Reference_Value = Reference.AddMember("Value", _ReferenceValue)
 
@@ -32078,6 +32159,22 @@ func init() {
 
 	StringReference_Value = StringReference.AddMember("Value", _ReferenceValue)
 
+	VoicemailRecordingReference_Name = VoicemailRecordingReference.AddMember("Name", _ReferenceKey)
+
+	VoicemailRecordingReference_Value = VoicemailRecordingReference.AddMember("Value", _ReferenceValue)
+
+	VoicemailRecordingReference_Status = VoicemailRecordingReference.AddMember("Status", ReferenceStatus)
+
+	VoicemailRecordingReference_Arn = VoicemailRecordingReference.AddMember("Arn", _ARN)
+
+	VoicemailAnalysisReference_Name = VoicemailAnalysisReference.AddMember("Name", _ReferenceKey)
+
+	VoicemailAnalysisReference_Value = VoicemailAnalysisReference.AddMember("Value", _ReferenceValue)
+
+	VoicemailAnalysisReference_Status = VoicemailAnalysisReference.AddMember("Status", ReferenceStatus)
+
+	VoicemailAnalysisReference_Arn = VoicemailAnalysisReference.AddMember("Arn", _ARN)
+
 	ReferenceSummary_Url = ReferenceSummary.AddMember("Url", UrlReference)
 
 	ReferenceSummary_Attachment = ReferenceSummary.AddMember("Attachment", AttachmentReference)
@@ -32099,6 +32196,14 @@ func init() {
 	ReferenceSummary_Email = ReferenceSummary.AddMember("Email", EmailReference)
 
 	ReferenceSummary_ContactAnalysis = ReferenceSummary.AddMember("ContactAnalysis", ContactAnalysisReference)
+
+	ReferenceSummary_VoicemailRecording = ReferenceSummary.AddMember("VoicemailRecording", VoicemailRecordingReference)
+
+	ReferenceSummary_VoicemailRecordingRedacted = ReferenceSummary.AddMember("VoicemailRecordingRedacted", VoicemailRecordingReference)
+
+	ReferenceSummary_VoicemailAnalysis = ReferenceSummary.AddMember("VoicemailAnalysis", VoicemailAnalysisReference)
+
+	ReferenceSummary_VoicemailAnalysisRedacted = ReferenceSummary.AddMember("VoicemailAnalysisRedacted", VoicemailAnalysisReference)
 
 	_ReferenceSummaryList_member = _ReferenceSummaryList.AddMember("member", ReferenceSummary)
 

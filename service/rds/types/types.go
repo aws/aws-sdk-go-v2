@@ -1149,6 +1149,12 @@ type ClusterPendingModifiedValues struct {
 	// (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
+	// Indicates whether the DB cluster will use an internet access gateway after a
+	// pending networking change completes.
+	//
+	// Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+	InternetAccessGatewayEnabled *bool
+
 	// The Provisioned IOPS (I/O operations per second) value. This setting is only
 	// for non-Aurora Multi-AZ DB clusters.
 	Iops *int32
@@ -1165,6 +1171,13 @@ type ClusterPendingModifiedValues struct {
 
 	// The storage type for the DB cluster.
 	StorageType *string
+
+	// Indicates whether the DB cluster will use VPC networking after a pending
+	// networking change completes. For a pending move to a different DB subnet group,
+	// the value is true .
+	//
+	// Valid for Cluster Type: Aurora DB clusters only
+	VPCNetworkingEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -1196,6 +1209,9 @@ func (v *ClusterPendingModifiedValues) SerializeMembers(s smithy.ShapeSerializer
 	if v.IAMDatabaseAuthenticationEnabled != nil {
 		s.WriteBool(schemas.ClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled, *v.IAMDatabaseAuthenticationEnabled)
 	}
+	if v.InternetAccessGatewayEnabled != nil {
+		s.WriteBool(schemas.ClusterPendingModifiedValues_InternetAccessGatewayEnabled, *v.InternetAccessGatewayEnabled)
+	}
 	if v.Iops != nil {
 		s.WriteInt32(schemas.ClusterPendingModifiedValues_Iops, *v.Iops)
 	}
@@ -1214,6 +1230,9 @@ func (v *ClusterPendingModifiedValues) SerializeMembers(s smithy.ShapeSerializer
 	}
 	if v.StorageType != nil {
 		s.WriteString(schemas.ClusterPendingModifiedValues_StorageType, *v.StorageType)
+	}
+	if v.VPCNetworkingEnabled != nil {
+		s.WriteBool(schemas.ClusterPendingModifiedValues_VPCNetworkingEnabled, *v.VPCNetworkingEnabled)
 	}
 }
 func (v *ClusterPendingModifiedValues) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1237,6 +1256,9 @@ func (v *ClusterPendingModifiedValues) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.ClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled:
 			v.IAMDatabaseAuthenticationEnabled = new(bool)
 			return d.ReadBool(schemas.ClusterPendingModifiedValues_IAMDatabaseAuthenticationEnabled, v.IAMDatabaseAuthenticationEnabled)
+		case schemas.ClusterPendingModifiedValues_InternetAccessGatewayEnabled:
+			v.InternetAccessGatewayEnabled = new(bool)
+			return d.ReadBool(schemas.ClusterPendingModifiedValues_InternetAccessGatewayEnabled, v.InternetAccessGatewayEnabled)
 		case schemas.ClusterPendingModifiedValues_Iops:
 			v.Iops = new(int32)
 			return d.ReadInt32(schemas.ClusterPendingModifiedValues_Iops, v.Iops)
@@ -1252,6 +1274,9 @@ func (v *ClusterPendingModifiedValues) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.ClusterPendingModifiedValues_StorageType:
 			v.StorageType = new(string)
 			return d.ReadString(schemas.ClusterPendingModifiedValues_StorageType, v.StorageType)
+		case schemas.ClusterPendingModifiedValues_VPCNetworkingEnabled:
+			v.VPCNetworkingEnabled = new(bool)
+			return d.ReadBool(schemas.ClusterPendingModifiedValues_VPCNetworkingEnabled, v.VPCNetworkingEnabled)
 		}
 		return nil
 	})
@@ -2124,8 +2149,7 @@ type DBCluster struct {
 	// Indicates whether the DB cluster has internet-based connectivity enabled
 	// through an internet access gateway.
 	//
-	// This setting is applicable only for Aurora PostgreSQL clusters created through
-	// express configuration.
+	// Valid for Cluster Type: Aurora PostgreSQL DB clusters only
 	InternetAccessGatewayEnabled *bool
 
 	// The Provisioned IOPS (I/O operations per second) value.
@@ -2356,10 +2380,10 @@ type DBCluster struct {
 	//   - [last] - Usually reserved for production environments.
 	UpgradeRolloutOrder UpgradeRolloutOrder
 
-	// Indicates whether the DB cluster uses VPC-based networking.
+	// Indicates whether the DB cluster uses VPC-based networking. The value is false
+	// only for an Aurora PostgreSQL DB cluster without VPC networking.
 	//
-	// This setting is applicable only for Aurora PostgreSQL clusters created through
-	// express configuration.
+	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	VPCNetworkingEnabled *bool
 
 	// The list of VPC security groups that the DB cluster belongs to.
@@ -5038,6 +5062,17 @@ type DBInstance struct {
 	// Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string
 
+	// Specifies the connection endpoint for the DB instance that currently has the
+	// primary role.
+	//
+	// This endpoint points to the new primary DB instance after a switchover, so you
+	// don't have to connect to a different DNS name.
+	//
+	// A read replica reports the same primary endpoint as the DB instance it
+	// replicates from. When you promote a read replica, it reports its own primary
+	// endpoint.
+	PrimaryEndpoint *PrimaryEndpoint
+
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature
@@ -5178,6 +5213,10 @@ type DBInstance struct {
 	//
 	//   - [last] - Usually reserved for production environments.
 	UpgradeRolloutOrder UpgradeRolloutOrder
+
+	// Indicates whether the DB instance uses VPC networking. For a DB instance in an
+	// Aurora PostgreSQL DB cluster without VPC networking, the value is false .
+	VPCNetworkingEnabled *bool
 
 	// The list of Amazon EC2 VPC security groups that the DB instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
@@ -5417,6 +5456,11 @@ func (v *DBInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PreferredMaintenanceWindow != nil {
 		s.WriteString(schemas.DBInstance_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
 	}
+	if v.PrimaryEndpoint != nil {
+		s.WriteStruct(schemas.DBInstance_PrimaryEndpoint)
+		v.PrimaryEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ProcessorFeatures != nil {
 		serializeProcessorFeatureList(s, schemas.DBInstance_ProcessorFeatures, v.ProcessorFeatures)
 	}
@@ -5482,6 +5526,9 @@ func (v *DBInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UpgradeRolloutOrder != "" {
 		s.WriteString(schemas.DBInstance_UpgradeRolloutOrder, string(v.UpgradeRolloutOrder))
+	}
+	if v.VPCNetworkingEnabled != nil {
+		s.WriteBool(schemas.DBInstance_VPCNetworkingEnabled, *v.VPCNetworkingEnabled)
 	}
 	if v.VpcSecurityGroups != nil {
 		serializeVpcSecurityGroupMembershipList(s, schemas.DBInstance_VpcSecurityGroups, v.VpcSecurityGroups)
@@ -5715,6 +5762,9 @@ func (v *DBInstance) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DBInstance_PreferredMaintenanceWindow:
 			v.PreferredMaintenanceWindow = new(string)
 			return d.ReadString(schemas.DBInstance_PreferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		case schemas.DBInstance_PrimaryEndpoint:
+			v.PrimaryEndpoint = &PrimaryEndpoint{}
+			return v.PrimaryEndpoint.Deserialize(d)
 		case schemas.DBInstance_ProcessorFeatures:
 			return deserializeProcessorFeatureList(d, schemas.DBInstance_ProcessorFeatures, &v.ProcessorFeatures)
 		case schemas.DBInstance_PromotionTier:
@@ -5788,6 +5838,9 @@ func (v *DBInstance) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.UpgradeRolloutOrder = UpgradeRolloutOrder(ev)
 			return nil
+		case schemas.DBInstance_VPCNetworkingEnabled:
+			v.VPCNetworkingEnabled = new(bool)
+			return d.ReadBool(schemas.DBInstance_VPCNetworkingEnabled, v.VPCNetworkingEnabled)
 		case schemas.DBInstance_VpcSecurityGroups:
 			return deserializeVpcSecurityGroupMembershipList(d, schemas.DBInstance_VpcSecurityGroups, &v.VpcSecurityGroups)
 		}
@@ -12346,6 +12399,50 @@ func (v *PerformanceIssueDetails) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.PerformanceIssueDetails_StartTime:
 			v.StartTime = new(time.Time)
 			return d.ReadTime(schemas.PerformanceIssueDetails_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
+// Contains the information you need to connect to the DB instance that currently
+// has the primary role. The endpoint stays the same when the primary role moves to
+// another DB instance, so you don't have to connect to a different DNS name after
+// a switchover.
+type PrimaryEndpoint struct {
+
+	// Specifies the DNS address of the DB instance that currently has the primary
+	// role. This address doesn't change when the DB instance is renamed.
+	Address *string
+
+	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+	HostedZoneId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PrimaryEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrimaryEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrimaryEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.PrimaryEndpoint_Address, *v.Address)
+	}
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.PrimaryEndpoint_HostedZoneId, *v.HostedZoneId)
+	}
+}
+func (v *PrimaryEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrimaryEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrimaryEndpoint_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.PrimaryEndpoint_Address, v.Address)
+		case schemas.PrimaryEndpoint_HostedZoneId:
+			v.HostedZoneId = new(string)
+			return d.ReadString(schemas.PrimaryEndpoint_HostedZoneId, v.HostedZoneId)
 		}
 		return nil
 	})

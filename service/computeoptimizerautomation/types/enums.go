@@ -2,6 +2,25 @@
 
 package types
 
+type AutoEnrollMemberAccounts string
+
+// Enum values for AutoEnrollMemberAccounts
+const (
+	AutoEnrollMemberAccountsAll  AutoEnrollMemberAccounts = "All"
+	AutoEnrollMemberAccountsNone AutoEnrollMemberAccounts = "None"
+)
+
+// Values returns all known values for AutoEnrollMemberAccounts. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoEnrollMemberAccounts) Values() []AutoEnrollMemberAccounts {
+	return []AutoEnrollMemberAccounts{
+		"All",
+		"None",
+	}
+}
+
 type AutomationEventFilterName string
 
 // Enum values for AutomationEventFilterName
@@ -190,6 +209,44 @@ func (EventType) Values() []EventType {
 	}
 }
 
+type OrganizationEnrollmentConfigurationStatus string
+
+// Enum values for OrganizationEnrollmentConfigurationStatus
+const (
+	OrganizationEnrollmentConfigurationStatusActive   OrganizationEnrollmentConfigurationStatus = "Active"
+	OrganizationEnrollmentConfigurationStatusInactive OrganizationEnrollmentConfigurationStatus = "Inactive"
+)
+
+// Values returns all known values for OrganizationEnrollmentConfigurationStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationEnrollmentConfigurationStatus) Values() []OrganizationEnrollmentConfigurationStatus {
+	return []OrganizationEnrollmentConfigurationStatus{
+		"Active",
+		"Inactive",
+	}
+}
+
+type OrganizationEnrollmentConfigurationType string
+
+// Enum values for OrganizationEnrollmentConfigurationType
+const (
+	OrganizationEnrollmentConfigurationTypeOrganizationRuleMode OrganizationEnrollmentConfigurationType = "OrganizationRuleMode"
+)
+
+// Values returns all known values for OrganizationEnrollmentConfigurationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationEnrollmentConfigurationType) Values() []OrganizationEnrollmentConfigurationType {
+	return []OrganizationEnrollmentConfigurationType{
+		"OrganizationRuleMode",
+	}
+}
+
 type OrganizationRuleMode string
 
 // Enum values for OrganizationRuleMode
@@ -206,6 +263,49 @@ func (OrganizationRuleMode) Values() []OrganizationRuleMode {
 	return []OrganizationRuleMode{
 		"AnyAllowed",
 		"NoneAllowed",
+	}
+}
+
+type OrganizationRuleModeSourceType string
+
+// Enum values for OrganizationRuleModeSourceType
+const (
+	OrganizationRuleModeSourceTypeApplied   OrganizationRuleModeSourceType = "Applied"
+	OrganizationRuleModeSourceTypeInherited OrganizationRuleModeSourceType = "Inherited"
+	OrganizationRuleModeSourceTypeDirect    OrganizationRuleModeSourceType = "Direct"
+	OrganizationRuleModeSourceTypeDefault   OrganizationRuleModeSourceType = "Default"
+)
+
+// Values returns all known values for OrganizationRuleModeSourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationRuleModeSourceType) Values() []OrganizationRuleModeSourceType {
+	return []OrganizationRuleModeSourceType{
+		"Applied",
+		"Inherited",
+		"Direct",
+		"Default",
+	}
+}
+
+type OrganizationTargetType string
+
+// Enum values for OrganizationTargetType
+const (
+	OrganizationTargetTypeAccount            OrganizationTargetType = "Account"
+	OrganizationTargetTypeOrganizationalUnit OrganizationTargetType = "OrganizationalUnit"
+)
+
+// Values returns all known values for OrganizationTargetType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationTargetType) Values() []OrganizationTargetType {
+	return []OrganizationTargetType{
+		"Account",
+		"OrganizationalUnit",
 	}
 }
 

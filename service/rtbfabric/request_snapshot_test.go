@@ -838,6 +838,61 @@ func TestCheckRequestSnapshot_DisassociateCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetAvailableModule(t *testing.T) {
+	input := &GetAvailableModuleInput{
+		ModuleId: ptr.String("__ModuleId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAvailableModule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAvailableModule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAvailableModuleVersion(t *testing.T) {
+	input := &GetAvailableModuleVersionInput{
+		ModuleId: ptr.String("__ModuleId__"),
+		Version:  ptr.String("__Version__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAvailableModuleVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAvailableModuleVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetCertificateAssociation(t *testing.T) {
 	input := &GetCertificateAssociationInput{
 		GatewayId:         ptr.String("__GatewayId__"),
@@ -1033,6 +1088,93 @@ func TestCheckRequestSnapshot_GetResponderGateway(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetUpdate(t *testing.T) {
+	input := &GetUpdateInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		UpdateId:  ptr.String("__UpdateId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUpdate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAvailableModules(t *testing.T) {
+	input := &ListAvailableModulesInput{
+		SubscriptionType: types.SubscriptionType("MARKETPLACE"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAvailableModules(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailableModules"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAvailableModuleVersions(t *testing.T) {
+	input := &ListAvailableModuleVersionsInput{
+		ModuleId:   ptr.String("__ModuleId__"),
+		Status:     types.ModuleVersionStatus("CREATING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAvailableModuleVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailableModuleVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListCertificateAssociations(t *testing.T) {
 	input := &ListCertificateAssociationsInput{
 		GatewayId:  ptr.String("__GatewayId__"),
@@ -1204,6 +1346,133 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListUpdates(t *testing.T) {
+	input := &ListUpdatesInput{
+		GatewayId:  ptr.String("__GatewayId__"),
+		LinkId:     ptr.String("__LinkId__"),
+		RuleId:     ptr.String("__RuleId__"),
+		Type:       types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+		Status:     types.UpdateStatus("IN_PROGRESS"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListUpdates(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListUpdates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutLinkFlows(t *testing.T) {
+	input := &PutLinkFlowsInput{
+		GatewayId:   ptr.String("__GatewayId__"),
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		LockToken:   ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutLinkFlows(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutLinkFlows"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RejectLink(t *testing.T) {
 	input := &RejectLinkInput{
 		GatewayId: ptr.String("__GatewayId__"),
@@ -1306,6 +1575,7 @@ func TestCheckRequestSnapshot_UpdateLink(t *testing.T) {
 			},
 		},
 		TimeoutInMillis: ptr.Int64(1),
+		ClientToken:     ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1408,6 +1678,7 @@ func TestCheckRequestSnapshot_UpdateLinkRoutingRule(t *testing.T) {
 			},
 			QueryStringExists: ptr.String("__QueryStringExists__"),
 		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2157,6 +2428,61 @@ func TestUpdateRequestSnapshot_DisassociateCertificate(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAvailableModule(t *testing.T) {
+	input := &GetAvailableModuleInput{
+		ModuleId: ptr.String("__ModuleId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAvailableModule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAvailableModule"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAvailableModuleVersion(t *testing.T) {
+	input := &GetAvailableModuleVersionInput{
+		ModuleId: ptr.String("__ModuleId__"),
+		Version:  ptr.String("__Version__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAvailableModuleVersion(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAvailableModuleVersion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetCertificateAssociation(t *testing.T) {
 	input := &GetCertificateAssociationInput{
 		GatewayId:         ptr.String("__GatewayId__"),
@@ -2352,6 +2678,93 @@ func TestUpdateRequestSnapshot_GetResponderGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetUpdate(t *testing.T) {
+	input := &GetUpdateInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		UpdateId:  ptr.String("__UpdateId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUpdate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAvailableModules(t *testing.T) {
+	input := &ListAvailableModulesInput{
+		SubscriptionType: types.SubscriptionType("MARKETPLACE"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAvailableModules(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailableModules"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAvailableModuleVersions(t *testing.T) {
+	input := &ListAvailableModuleVersionsInput{
+		ModuleId:   ptr.String("__ModuleId__"),
+		Status:     types.ModuleVersionStatus("CREATING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAvailableModuleVersions(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailableModuleVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListCertificateAssociations(t *testing.T) {
 	input := &ListCertificateAssociationsInput{
 		GatewayId:  ptr.String("__GatewayId__"),
@@ -2523,6 +2936,133 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListUpdates(t *testing.T) {
+	input := &ListUpdatesInput{
+		GatewayId:  ptr.String("__GatewayId__"),
+		LinkId:     ptr.String("__LinkId__"),
+		RuleId:     ptr.String("__RuleId__"),
+		Type:       types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+		Status:     types.UpdateStatus("IN_PROGRESS"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListUpdates(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListUpdates"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutLinkFlows(t *testing.T) {
+	input := &PutLinkFlowsInput{
+		GatewayId:   ptr.String("__GatewayId__"),
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		LockToken:   ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutLinkFlows(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutLinkFlows"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RejectLink(t *testing.T) {
 	input := &RejectLinkInput{
 		GatewayId: ptr.String("__GatewayId__"),
@@ -2625,6 +3165,7 @@ func TestUpdateRequestSnapshot_UpdateLink(t *testing.T) {
 			},
 		},
 		TimeoutInMillis: ptr.Int64(1),
+		ClientToken:     ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2727,6 +3268,7 @@ func TestUpdateRequestSnapshot_UpdateLinkRoutingRule(t *testing.T) {
 			},
 			QueryStringExists: ptr.String("__QueryStringExists__"),
 		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

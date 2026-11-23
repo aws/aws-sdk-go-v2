@@ -1316,6 +1316,20 @@ var _CodeLocationList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _CodeLocationList_member *smithy.Schema
 
+var CodeRemediationJobStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "CodeRemediationJobStatus",
+}, smithy.ShapeTypeEnum, 5)
+var CodeRemediationJobStatus_IN_PROGRESS *smithy.Schema
+
+var CodeRemediationJobStatus_COMPLETED *smithy.Schema
+
+var CodeRemediationJobStatus_FAILED *smithy.Schema
+
+var CodeRemediationJobStatus_NO_CHANGE_REQUIRED *smithy.Schema
+
+var CodeRemediationJobStatus_UNKNOWN *smithy.Schema
+
 var CodeRemediationStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "CodeRemediationStrategy",
@@ -1337,12 +1351,18 @@ var CodeRemediationTask_taskDetails *smithy.Schema
 var CodeRemediationTaskDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "CodeRemediationTaskDetails",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 6)
 var CodeRemediationTaskDetails_repoName *smithy.Schema
 
 var CodeRemediationTaskDetails_codeDiffLink *smithy.Schema
 
 var CodeRemediationTaskDetails_pullRequestLink *smithy.Schema
+
+var CodeRemediationTaskDetails_status *smithy.Schema
+
+var CodeRemediationTaskDetails_statusCode *smithy.Schema
+
+var CodeRemediationTaskDetails_statusReason *smithy.Schema
 
 var _CodeRemediationTaskDetailsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -7025,6 +7045,16 @@ func init() {
 
 	_CodeLocationList_member = _CodeLocationList.AddMember("member", CodeLocation)
 
+	CodeRemediationJobStatus_IN_PROGRESS = CodeRemediationJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	CodeRemediationJobStatus_COMPLETED = CodeRemediationJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	CodeRemediationJobStatus_FAILED = CodeRemediationJobStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	CodeRemediationJobStatus_NO_CHANGE_REQUIRED = CodeRemediationJobStatus.AddMember("NO_CHANGE_REQUIRED", smithyprelude.Unit)
+
+	CodeRemediationJobStatus_UNKNOWN = CodeRemediationJobStatus.AddMember("UNKNOWN", smithyprelude.Unit)
+
 	CodeRemediationStrategy_AUTOMATIC = CodeRemediationStrategy.AddMember("AUTOMATIC", smithyprelude.Unit)
 
 	CodeRemediationStrategy_DISABLED = CodeRemediationStrategy.AddMember("DISABLED", smithyprelude.Unit)
@@ -7040,6 +7070,12 @@ func init() {
 	CodeRemediationTaskDetails_codeDiffLink = CodeRemediationTaskDetails.AddMember("codeDiffLink", smithyprelude.String)
 
 	CodeRemediationTaskDetails_pullRequestLink = CodeRemediationTaskDetails.AddMember("pullRequestLink", smithyprelude.String)
+
+	CodeRemediationTaskDetails_status = CodeRemediationTaskDetails.AddMember("status", CodeRemediationJobStatus)
+
+	CodeRemediationTaskDetails_statusCode = CodeRemediationTaskDetails.AddMember("statusCode", smithyprelude.String)
+
+	CodeRemediationTaskDetails_statusReason = CodeRemediationTaskDetails.AddMember("statusReason", smithyprelude.String)
 
 	_CodeRemediationTaskDetailsList_member = _CodeRemediationTaskDetailsList.AddMember("member", CodeRemediationTaskDetails)
 

@@ -14,13 +14,12 @@ import (
 // Initiates a point-in-time recovery of a user pool to a time in the past that
 // you specify. This operation is the first step of a recovery and doesn't change
 // your user pool data. Amazon Cognito pauses write operations in the user pool and
-// generates a recovery preview when capacity is available in the Amazon Web
-// Services Region, so the preview might not be available immediately. The preview
-// shows the number of entities that the recovery creates, updates, and deletes. To
-// check the status of the recovery and review the preview, make a request. When
-// the status is PREVIEW_GENERATED , apply the recovery with a request or discard
-// it with a request. The time that it takes to generate the recovery preview
-// doesn't depend on the size of your user pool.
+// generates a recovery preview, which might not be available immediately. The
+// preview shows the number of entities that the recovery creates, updates, and
+// deletes. To check the status of the recovery and review the preview, make a
+// request. When the status is PREVIEW_GENERATED , apply the recovery with a
+// request or discard it with a request. The time that it takes to generate the
+// recovery preview doesn't depend on the size of your user pool.
 //
 // Point-in-time recovery is a disaster recovery feature. Use it to recover from
 // accidental or unauthorized changes that affect your user data, for example the
@@ -30,7 +29,7 @@ import (
 //
 // While a recovery is in progress, Amazon Cognito blocks operations that write to
 // the user pool, for example user sign-up, user creation, and attribute updates.
-// Sign-in and read operations continue to work, with the following exceptions.
+// Sign-in and read operations continue to work, with the following exceptions:
 //
 //   - Users who must set a new password, set up MFA, or respond to a TOTP MFA
 //     challenge can't complete sign-in. Sign-in with the NEW_PASSWORD_REQUIRED ,
@@ -46,7 +45,7 @@ import (
 // If you don't start or cancel the recovery within 24 hours after you initiate
 // it, the recovery preview expires. Amazon Cognito then resumes write operations
 // and doesn't change your user pool data. The 24-hour period includes the time
-// that Amazon Cognito waits for available capacity.
+// that Amazon Cognito takes to generate the recovery preview.
 //
 // A point-in-time recovery restores user data, including user profiles and
 // attributes, group memberships, passwords, MFA settings, and passkeys. It doesn't
@@ -54,7 +53,7 @@ import (
 // encryption settings, or multi-Region replication settings. Users who changed
 // their password after the recovery point keep their current password.
 //
-// The following requirements and limits apply to point-in-time recovery.
+// The following requirements and limits apply to point-in-time recovery:
 //
 //   - Your user pool must be on the Essentials or Plus [feature plan]. With the Essentials
 //     feature plan, you can recover your user pool to a point in time up to 1 day in

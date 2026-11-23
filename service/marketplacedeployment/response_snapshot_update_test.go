@@ -24,6 +24,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
 
 func serdeRespCreatePath(path string) (*os.File, error) {
@@ -140,6 +141,115 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_GetDeploymentConfiguration(t *testing.T) {
+	want := &GetDeploymentConfigurationOutput{
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfiguration, schemas.GetDeploymentConfigurationResponse, schemas.GetDeploymentConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDeploymentConfiguration.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDeploymentConfigurationJob(t *testing.T) {
+	want := &GetDeploymentConfigurationJobOutput{
+		JobId: ptr.String("__JobId__"),
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+		Status:           types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ConfigurationArn: ptr.String("__ConfigurationArn__"),
+		EndedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorCode:        types.DeploymentConfigurationJobErrorCode("FULFILLMENT_URL_UNREACHABLE"),
+		Message:          ptr.String("__Message__"),
+	}
+	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfigurationJob, schemas.GetDeploymentConfigurationJobResponse, schemas.GetDeploymentConfigurationJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDeploymentConfigurationJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListDeploymentConfigurationJobs(t *testing.T) {
+	want := &ListDeploymentConfigurationJobsOutput{
+		Jobs: []types.DeploymentConfigurationJobSummary{
+			{
+				JobId:  ptr.String("__JobId__"),
+				Status: types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+				Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+					Value: types.DataAsAServiceConfigurationDetail{
+						FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				JobId:  ptr.String("__JobId__"),
+				Status: types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+				Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+					Value: types.DataAsAServiceConfigurationDetail{
+						FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+					},
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
+	opSchema := smithy.NewOperationSchema(schemas.ListDeploymentConfigurationJobs, schemas.ListDeploymentConfigurationJobsResponse, schemas.ListDeploymentConfigurationJobsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListDeploymentConfigurationJobs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: map[string]string{
@@ -195,6 +305,37 @@ func TestUpdateResponseSnapshot_PutDeploymentParameter(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartDeploymentConfigurationJob(t *testing.T) {
+	want := &StartDeploymentConfigurationJobOutput{
+		JobId: ptr.String("__JobId__"),
+		Configuration: &types.DeploymentConfigurationDetailMemberDataAsAService{
+			Value: types.DataAsAServiceConfigurationDetail{
+				FulfillmentUrl: ptr.String("__FulfillmentUrl__"),
+			},
+		},
+		Status:    types.DeploymentConfigurationJobStatus("IN_PROGRESS"),
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
+	opSchema := smithy.NewOperationSchema(schemas.StartDeploymentConfigurationJob, schemas.StartDeploymentConfigurationJobResponse, schemas.StartDeploymentConfigurationJobResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartDeploymentConfigurationJob.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
@@ -244,7 +385,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfiguration, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -295,7 +436,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfiguration, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -320,7 +461,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfiguration, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -370,7 +511,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfiguration, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -396,7 +537,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		FieldName: ptr.String("__FieldName__"),
 	}
 	proto := restjson1.New(schemas.AWSMPDeploymentParametersService)
-	opSchema := smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.GetDeploymentConfiguration, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

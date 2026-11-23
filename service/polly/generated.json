@@ -11,10 +11,13 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_CreateVoice.go",
         "api_op_DeleteLexicon.go",
+        "api_op_DeleteVoice.go",
         "api_op_DescribeVoices.go",
         "api_op_GetLexicon.go",
         "api_op_GetSpeechSynthesisTask.go",
+        "api_op_GetVoice.go",
         "api_op_ListLexicons.go",
         "api_op_ListSpeechSynthesisTasks.go",
         "api_op_ListTagsForResource.go",

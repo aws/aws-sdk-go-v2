@@ -35,6 +35,9 @@ import (
 // configuration provides a cluster with a writer instance and feature specific
 // values set to all other input parameters of this API.
 //
+// To create an Aurora PostgreSQL DB cluster without VPC networking, see
+// EnableVPCNetworking .
+//
 // You can use the AssociatedRoles parameter to associate one or more Amazon Web
 // Services Identity and Access Management (IAM) roles with an Aurora DB cluster.
 // Each associated role lets the DB cluster access other Amazon Web Services on
@@ -233,6 +236,9 @@ type CreateDBClusterInput struct {
 	//
 	// This setting is required to create a Multi-AZ DB cluster.
 	//
+	// Valid only for DB clusters inside a VPC. Don't specify it when you set
+	// EnableVPCNetworking to false .
+	//
 	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// Constraints:
@@ -351,6 +357,19 @@ type CreateDBClusterInput struct {
 	// [IAM database authentication for MariaDB, MySQL, and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
+	// Specifies whether the DB cluster uses an internet access gateway. With an
+	// internet access gateway, you connect to the DB cluster over the internet without
+	// a VPC.
+	//
+	// Set to true only when you set EnableVPCNetworking to false . A DB cluster can't
+	// use VPC networking and an internet access gateway at the same time.
+	//
+	// Default: false . With WithExpressConfiguration , the default is true . To create
+	// a DB cluster with express configuration in a VPC, set this parameter to false .
+	//
+	// Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+	EnableInternetAccessGateway *bool
+
 	// Specifies whether to enable Aurora Limitless Database. You must enable Aurora
 	// Limitless Database to create a DB shard group.
 	//
@@ -374,6 +393,19 @@ type CreateDBClusterInput struct {
 	//
 	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
+
+	// Specifies whether VPC networking is enabled for the DB cluster. Set to false to
+	// create a DB cluster without VPC networking.
+	//
+	// A DB cluster without VPC networking needs an internet access gateway and IAM
+	// database authentication. Set EnableInternetAccessGateway and
+	// EnableIAMDatabaseAuthentication to true , and set MasterUserAuthenticationType
+	// to iam-db-auth .
+	//
+	// Default: true . With WithExpressConfiguration , the default is false .
+	//
+	// Valid for Cluster Type: Aurora PostgreSQL DB clusters only
+	EnableVPCNetworking *bool
 
 	// The lifecycle type for this DB cluster.
 	//
@@ -634,6 +666,8 @@ type CreateDBClusterInput struct {
 	//
 	// For more information, see [Working with a DB instance in a VPC] in the Amazon Aurora User Guide.
 	//
+	// Don't specify it when you set EnableVPCNetworking to false .
+	//
 	// Valid for Cluster Type: Aurora DB clusters only
 	//
 	// Valid Values: IPV4 | DUAL
@@ -880,12 +914,27 @@ type CreateDBClusterInput struct {
 
 	// A list of EC2 VPC security groups to associate with this DB cluster.
 	//
+	// Valid only for DB clusters inside a VPC. Don't specify it when you set
+	// EnableVPCNetworking to false .
+	//
 	// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	VpcSecurityGroupIds []string
 
 	// Specifies to create an Aurora DB Cluster with express configuration in seconds.
 	// Express configuration provides a cluster with a writer instance and feature
 	// specific values set to all other input parameters of this API.
+	//
+	// By default, a DB cluster with express configuration doesn't use VPC networking.
+	// You connect to it over the internet through an internet access gateway.
+	//
+	// To create the DB cluster in a VPC instead, set EnableVPCNetworking to true and
+	// EnableInternetAccessGateway to false . You can also specify DBSubnetGroupName ,
+	// VpcSecurityGroupIds , and NetworkType . If you don't specify DBSubnetGroupName ,
+	// the DB cluster uses the default DB subnet group for your Amazon Web Services
+	// account, in your default VPC.
+	//
+	// A DB cluster with express configuration in a VPC takes longer to become
+	// available than one without VPC networking.
 	//
 	// Valid for Cluster Type: Aurora DB clusters
 	WithExpressConfiguration *bool
@@ -979,6 +1028,9 @@ func (v *CreateDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableIAMDatabaseAuthentication != nil {
 		s.WriteBool(schemas.CreateDBClusterMessage_EnableIAMDatabaseAuthentication, *v.EnableIAMDatabaseAuthentication)
 	}
+	if v.EnableInternetAccessGateway != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableInternetAccessGateway, *v.EnableInternetAccessGateway)
+	}
 	if v.EnableLimitlessDatabase != nil {
 		s.WriteBool(schemas.CreateDBClusterMessage_EnableLimitlessDatabase, *v.EnableLimitlessDatabase)
 	}
@@ -987,6 +1039,9 @@ func (v *CreateDBClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.EnablePerformanceInsights != nil {
 		s.WriteBool(schemas.CreateDBClusterMessage_EnablePerformanceInsights, *v.EnablePerformanceInsights)
+	}
+	if v.EnableVPCNetworking != nil {
+		s.WriteBool(schemas.CreateDBClusterMessage_EnableVPCNetworking, *v.EnableVPCNetworking)
 	}
 	if v.Engine != nil {
 		s.WriteString(schemas.CreateDBClusterMessage_Engine, *v.Engine)

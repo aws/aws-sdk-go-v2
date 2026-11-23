@@ -163,6 +163,16 @@ type GetTagsInput struct {
 	//
 	//   - NormalizedUsageAmount
 	//
+	//   - BilledCost
+	//
+	//   - ContractedCost
+	//
+	//   - ListCost
+	//
+	//   - PublicEquivalentBilledCost
+	//
+	//   - PublicOnDemandCost
+	//
 	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	//
 	// When you use SortBy , NextPageToken and SearchString aren't supported.

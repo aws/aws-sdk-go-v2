@@ -8,7 +8,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+//	The request is denied because you don't have sufficient permissions to perform
+//
+// this operation. Verify that you have the required permissions and try again.
 type AccessDeniedException struct {
 	Message *string
 
@@ -55,9 +57,9 @@ func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-//	The request could not be processed because of conflict in the current state of
+//	The request couldn't be processed because the resource is in a conflicting
 //
-// the resource.
+// state. Verify the resource's current state and retry the request.
 type ConflictException struct {
 	Message *string
 
@@ -223,7 +225,7 @@ func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// The specified resource was not found.
+// The specified resource wasn't found.
 type ResourceNotFoundException struct {
 	Message *string
 

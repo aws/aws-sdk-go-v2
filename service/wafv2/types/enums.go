@@ -54,12 +54,13 @@ type AssociatedResourceType string
 
 // Enum values for AssociatedResourceType
 const (
-	AssociatedResourceTypeCloudfront             AssociatedResourceType = "CLOUDFRONT"
-	AssociatedResourceTypeApiGateway             AssociatedResourceType = "API_GATEWAY"
-	AssociatedResourceTypeCognitoUserPool        AssociatedResourceType = "COGNITO_USER_POOL"
-	AssociatedResourceTypeAppRunnerService       AssociatedResourceType = "APP_RUNNER_SERVICE"
-	AssociatedResourceTypeVerifiedAccessInstance AssociatedResourceType = "VERIFIED_ACCESS_INSTANCE"
-	AssociatedResourceTypeAgentcoreGateway       AssociatedResourceType = "AGENTCORE_GATEWAY"
+	AssociatedResourceTypeCloudfront              AssociatedResourceType = "CLOUDFRONT"
+	AssociatedResourceTypeApiGateway              AssociatedResourceType = "API_GATEWAY"
+	AssociatedResourceTypeCognitoUserPool         AssociatedResourceType = "COGNITO_USER_POOL"
+	AssociatedResourceTypeAppRunnerService        AssociatedResourceType = "APP_RUNNER_SERVICE"
+	AssociatedResourceTypeVerifiedAccessInstance  AssociatedResourceType = "VERIFIED_ACCESS_INSTANCE"
+	AssociatedResourceTypeAgentcoreGateway        AssociatedResourceType = "AGENTCORE_GATEWAY"
+	AssociatedResourceTypeApplicationLoadBalancer AssociatedResourceType = "APPLICATION_LOAD_BALANCER"
 )
 
 // Values returns all known values for AssociatedResourceType. Note that this can
@@ -74,6 +75,7 @@ func (AssociatedResourceType) Values() []AssociatedResourceType {
 		"APP_RUNNER_SERVICE",
 		"VERIFIED_ACCESS_INSTANCE",
 		"AGENTCORE_GATEWAY",
+		"APPLICATION_LOAD_BALANCER",
 	}
 }
 
@@ -145,6 +147,27 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 		"LT",
 		"GE",
 		"GT",
+	}
+}
+
+type Confidence string
+
+// Enum values for Confidence
+const (
+	ConfidenceLow    Confidence = "LOW"
+	ConfidenceMedium Confidence = "MEDIUM"
+	ConfidenceHigh   Confidence = "HIGH"
+)
+
+// Values returns all known values for Confidence. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Confidence) Values() []Confidence {
+	return []Confidence{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
 	}
 }
 
@@ -754,6 +777,120 @@ func (DataProtectionAction) Values() []DataProtectionAction {
 	}
 }
 
+type EventActorSortBy string
+
+// Enum values for EventActorSortBy
+const (
+	EventActorSortByEventCount EventActorSortBy = "EVENT_COUNT"
+)
+
+// Values returns all known values for EventActorSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventActorSortBy) Values() []EventActorSortBy {
+	return []EventActorSortBy{
+		"EVENT_COUNT",
+	}
+}
+
+type EventCategory string
+
+// Enum values for EventCategory
+const (
+	EventCategoryApiSecurity EventCategory = "API_SECURITY"
+)
+
+// Values returns all known values for EventCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventCategory) Values() []EventCategory {
+	return []EventCategory{
+		"API_SECURITY",
+	}
+}
+
+type EventFilterKey string
+
+// Enum values for EventFilterKey
+const (
+	EventFilterKeyEventCategory EventFilterKey = "EVENT_CATEGORY"
+	EventFilterKeyResourceArn   EventFilterKey = "RESOURCE_ARN"
+)
+
+// Values returns all known values for EventFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventFilterKey) Values() []EventFilterKey {
+	return []EventFilterKey{
+		"EVENT_CATEGORY",
+		"RESOURCE_ARN",
+	}
+}
+
+type EventIncludeField string
+
+// Enum values for EventIncludeField
+const (
+	EventIncludeFieldTimeline EventIncludeField = "TIMELINE"
+)
+
+// Values returns all known values for EventIncludeField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventIncludeField) Values() []EventIncludeField {
+	return []EventIncludeField{
+		"TIMELINE",
+	}
+}
+
+type EventSortBy string
+
+// Enum values for EventSortBy
+const (
+	EventSortByStartTime  EventSortBy = "START_TIME"
+	EventSortByEndTime    EventSortBy = "END_TIME"
+	EventSortByConfidence EventSortBy = "CONFIDENCE"
+)
+
+// Values returns all known values for EventSortBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSortBy) Values() []EventSortBy {
+	return []EventSortBy{
+		"START_TIME",
+		"END_TIME",
+		"CONFIDENCE",
+	}
+}
+
+type EventStatus string
+
+// Enum values for EventStatus
+const (
+	EventStatusEventStarted    EventStatus = "EVENT_STARTED"
+	EventStatusEventInProgress EventStatus = "EVENT_IN_PROGRESS"
+	EventStatusEventCompleted  EventStatus = "EVENT_COMPLETED"
+	EventStatusEventEnded      EventStatus = "EVENT_ENDED"
+)
+
+// Values returns all known values for EventStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventStatus) Values() []EventStatus {
+	return []EventStatus{
+		"EVENT_STARTED",
+		"EVENT_IN_PROGRESS",
+		"EVENT_COMPLETED",
+		"EVENT_ENDED",
+	}
+}
+
 type FailureReason string
 
 // Enum values for FailureReason
@@ -1187,6 +1324,8 @@ const (
 	ParameterExceptionFieldPaymentNetwork                        ParameterExceptionField = "PAYMENT_NETWORK"
 	ParameterExceptionFieldPreParseTextTransformation            ParameterExceptionField = "PRE_PARSE_TEXT_TRANSFORMATION"
 	ParameterExceptionFieldChallengeJavascriptSdkInjectionConfig ParameterExceptionField = "CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG"
+	ParameterExceptionFieldBedrockGuardrails                     ParameterExceptionField = "BEDROCK_GUARDRAILS"
+	ParameterExceptionFieldRoleArn                               ParameterExceptionField = "ROLE_ARN"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -1273,6 +1412,8 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"PAYMENT_NETWORK",
 		"PRE_PARSE_TEXT_TRANSFORMATION",
 		"CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG",
+		"BEDROCK_GUARDRAILS",
+		"ROLE_ARN",
 	}
 }
 
@@ -1594,6 +1735,7 @@ type SizeInspectionLimit string
 
 // Enum values for SizeInspectionLimit
 const (
+	SizeInspectionLimitKb8  SizeInspectionLimit = "KB_8"
 	SizeInspectionLimitKb16 SizeInspectionLimit = "KB_16"
 	SizeInspectionLimitKb32 SizeInspectionLimit = "KB_32"
 	SizeInspectionLimitKb48 SizeInspectionLimit = "KB_48"
@@ -1606,6 +1748,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SizeInspectionLimit) Values() []SizeInspectionLimit {
 	return []SizeInspectionLimit{
+		"KB_8",
 		"KB_16",
 		"KB_32",
 		"KB_48",

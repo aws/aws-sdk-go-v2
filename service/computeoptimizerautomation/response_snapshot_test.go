@@ -155,6 +155,18 @@ func TestCheckResponseSnapshot_CreateAutomationRule(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		Priority: ptr.String("__Priority__"),
 		RecommendedActionTypes: []types.RecommendedActionType{
@@ -326,6 +338,18 @@ func TestCheckResponseSnapshot_CreateAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -516,6 +540,34 @@ func TestCheckResponseSnapshot_DeleteAutomationRule(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteOrganizationEnrollmentConfiguration(t *testing.T) {
+	want := &DeleteOrganizationEnrollmentConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteOrganizationEnrollmentConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteOrganizationEnrollmentConfiguration(context.Background(), &DeleteOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		ConfigurationTypes: []types.OrganizationEnrollmentConfigurationType{
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteOrganizationEnrollmentConfiguration.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DisassociateAccounts(t *testing.T) {
 	want := &DisassociateAccountsOutput{
 		AccountIds: []string{
@@ -604,6 +656,18 @@ func TestCheckResponseSnapshot_GetAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -789,6 +853,7 @@ func TestCheckResponseSnapshot_GetEnrollmentConfiguration(t *testing.T) {
 		StatusReason:         ptr.String("__StatusReason__"),
 		OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
 		LastUpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		OrganizationEnrollmentConfigurationStatus: types.OrganizationEnrollmentConfigurationStatus("Active"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetEnrollmentConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -814,6 +879,10 @@ func TestCheckResponseSnapshot_ListAccounts(t *testing.T) {
 				AccountId:            ptr.String("__AccountId__"),
 				Status:               types.EnrollmentStatus("Active"),
 				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
 				StatusReason:         ptr.String("__StatusReason__"),
 				LastUpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -821,6 +890,10 @@ func TestCheckResponseSnapshot_ListAccounts(t *testing.T) {
 				AccountId:            ptr.String("__AccountId__"),
 				Status:               types.EnrollmentStatus("Active"),
 				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
 				StatusReason:         ptr.String("__StatusReason__"),
 				LastUpdatedTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -987,6 +1060,10 @@ func TestCheckResponseSnapshot_ListAutomationEventSummaries(t *testing.T) {
 				},
 			},
 		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		StartDateInclusive: ptr.String("__StartDateInclusive__"),
 		EndDateExclusive:   ptr.String("__EndDateExclusive__"),
 		MaxResults:         ptr.Int32(1),
@@ -1074,6 +1151,10 @@ func TestCheckResponseSnapshot_ListAutomationEvents(t *testing.T) {
 					"__Member__",
 				},
 			},
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
 		},
 		StartTimeInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		EndTimeExclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1204,6 +1285,18 @@ func TestCheckResponseSnapshot_ListAutomationRulePreview(t *testing.T) {
 		RuleType: types.RuleType("OrganizationRule"),
 		OrganizationScope: &types.OrganizationScope{
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -1400,6 +1493,18 @@ func TestCheckResponseSnapshot_ListAutomationRulePreviewSummaries(t *testing.T) 
 				"__Member__",
 				"__Member__",
 			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		RecommendedActionTypes: []types.RecommendedActionType{
 			types.RecommendedActionType("SnapshotAndDeleteUnattachedEbsVolume"),
@@ -1565,6 +1670,18 @@ func TestCheckResponseSnapshot_ListAutomationRules(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedOrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
 				},
 				Priority: ptr.String("__Priority__"),
 				RecommendedActionTypes: []types.RecommendedActionType{
@@ -1591,6 +1708,18 @@ func TestCheckResponseSnapshot_ListAutomationRules(t *testing.T) {
 				OrganizationConfiguration: &types.OrganizationConfiguration{
 					RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 					AccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					OrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedOrganizationalUnitIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ExcludedAccountIds: []string{
 						"__Member__",
 						"__Member__",
 					},
@@ -1648,6 +1777,91 @@ func TestCheckResponseSnapshot_ListAutomationRules(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListOrganizationEnrollmentConfigurations(t *testing.T) {
+	want := &ListOrganizationEnrollmentConfigurationsOutput{
+		OrganizationEnrollmentConfigurations: []types.OrganizationEnrollmentConfiguration{
+			{
+				TargetId:             ptr.String("__TargetId__"),
+				TargetType:           types.OrganizationTargetType("Account"),
+				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+			},
+			{
+				TargetId:             ptr.String("__TargetId__"),
+				TargetType:           types.OrganizationTargetType("Account"),
+				OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListOrganizationEnrollmentConfigurations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListOrganizationEnrollmentConfigurations(context.Background(), &ListOrganizationEnrollmentConfigurationsInput{
+		TargetType: types.OrganizationTargetType("Account"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListOrganizationEnrollmentConfigurations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListOrganizationalUnits(t *testing.T) {
+	want := &ListOrganizationalUnitsOutput{
+		OrganizationalUnits: []types.OrganizationalUnitInfo{
+			{
+				OrganizationalUnitId:     ptr.String("__OrganizationalUnitId__"),
+				AutoEnrollMemberAccounts: types.AutoEnrollMemberAccounts("All"),
+				OrganizationRuleMode:     types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
+			},
+			{
+				OrganizationalUnitId:     ptr.String("__OrganizationalUnitId__"),
+				AutoEnrollMemberAccounts: types.AutoEnrollMemberAccounts("All"),
+				OrganizationRuleMode:     types.OrganizationRuleMode("AnyAllowed"),
+				OrganizationRuleModeSource: &types.OrganizationRuleModeSource{
+					SourceType:     types.OrganizationRuleModeSourceType("Applied"),
+					SourceTargetId: ptr.String("__SourceTargetId__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListOrganizationalUnits.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListOrganizationalUnits(context.Background(), &ListOrganizationalUnitsInput{
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListOrganizationalUnits.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListRecommendedActionSummaries(t *testing.T) {
 	want := &ListRecommendedActionSummariesOutput{
 		RecommendedActionSummaries: []types.RecommendedActionSummary{
@@ -1702,6 +1916,10 @@ func TestCheckResponseSnapshot_ListRecommendedActionSummaries(t *testing.T) {
 					"__Member__",
 				},
 			},
+		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
 		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
@@ -1843,6 +2061,10 @@ func TestCheckResponseSnapshot_ListRecommendedActions(t *testing.T) {
 				},
 			},
 		},
+		OrganizationalUnitIds: []string{
+			"__Member__",
+			"__Member__",
+		},
 		MaxResults: ptr.Int32(1),
 		NextToken:  ptr.String("__NextToken__"),
 	})
@@ -1883,6 +2105,31 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListTagsForResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutOrganizationEnrollmentConfiguration(t *testing.T) {
+	want := &PutOrganizationEnrollmentConfigurationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("PutOrganizationEnrollmentConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutOrganizationEnrollmentConfiguration(context.Background(), &PutOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		OrganizationRuleMode: types.OrganizationRuleMode("AnyAllowed"),
+		ClientToken:          ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutOrganizationEnrollmentConfiguration.response", err)
 	}
 }
 
@@ -2007,6 +2254,18 @@ func TestCheckResponseSnapshot_UpdateAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -2174,6 +2433,18 @@ func TestCheckResponseSnapshot_UpdateAutomationRule(t *testing.T) {
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},
@@ -2385,6 +2656,40 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "AccessDeniedException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteOrganizationEnrollmentConfiguration(context.Background(), &DeleteOrganizationEnrollmentConfigurationInput{
+		Target: &types.OrganizationTargetMemberAccountId{
+			Value: "__OrganizationTargetMemberAccountId__",
+		},
+		ConfigurationTypes: []types.OrganizationEnrollmentConfigurationType{
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+			types.OrganizationEnrollmentConfigurationType("OrganizationRuleMode"),
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
 	}
 }
 
@@ -2627,6 +2932,18 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
 		},
 		Priority: ptr.String("__Priority__"),
 		RecommendedActionTypes: []types.RecommendedActionType{
@@ -2814,6 +3131,18 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		OrganizationConfiguration: &types.OrganizationConfiguration{
 			RuleApplyOrder: types.RuleApplyOrder("BeforeAccountRules"),
 			AccountIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			OrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedOrganizationalUnitIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			ExcludedAccountIds: []string{
 				"__Member__",
 				"__Member__",
 			},

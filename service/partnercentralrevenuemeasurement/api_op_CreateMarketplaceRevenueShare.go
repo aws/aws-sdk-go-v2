@@ -35,10 +35,11 @@ type CreateMarketplaceRevenueShareInput struct {
 	// This member is required.
 	Catalog types.CatalogName
 
-	// The AWS Marketplace product identifier for this revenue share.
+	// The products in the marketplace revenue share, each with its typed account
+	// lists. 1 to 25 products.
 	//
 	// This member is required.
-	ProductId *string
+	Products []types.MarketplaceRevenueShareProductEntry
 
 	// A unique token to ensure idempotency of the create request.
 	ClientToken *string
@@ -62,11 +63,11 @@ func (v *CreateMarketplaceRevenueShareInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateMarketplaceRevenueShareInput_ClientToken, *v.ClientToken)
 	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.CreateMarketplaceRevenueShareInput_ProductId, *v.ProductId)
+	if v.Products != nil {
+		serializeMarketplaceRevenueShareProductEntryList(s, schemas.CreateMarketplaceRevenueShareInput_Products, v.Products)
 	}
 	if v.Tags != nil {
-		serializeMarketplaceRevenueShareTagList(s, schemas.CreateMarketplaceRevenueShareInput_Tags, v.Tags)
+		serializeTagList(s, schemas.CreateMarketplaceRevenueShareInput_Tags, v.Tags)
 	}
 }
 
@@ -77,28 +78,37 @@ type CreateMarketplaceRevenueShareOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The AWS Marketplace product identifier of the newly created revenue share.
+	// The catalog that the marketplace revenue share belongs to.
 	//
 	// This member is required.
-	ProductId *string
-
-	// The catalog that the marketplace revenue share belongs to.
 	Catalog types.CatalogName
 
 	// The date when the marketplace revenue share was created.
+	//
+	// This member is required.
 	CreatedDate *time.Time
 
+	// The unique identifier of the newly created marketplace revenue share, short ID
+	// form (mrs-...).
+	//
+	// This member is required.
+	Id *string
+
 	// The date when the marketplace revenue share was last modified.
+	//
+	// This member is required.
 	LastModifiedDate *time.Time
 
-	// The AWS Marketplace product code.
-	ProductCode *string
+	// The products in the newly created marketplace revenue share, each with per-type
+	// account counts.
+	//
+	// This member is required.
+	Products []types.MarketplaceRevenueShareProductSummary
 
-	// The display name of the AWS Marketplace product.
-	ProductName *string
-
-	// The revision number of the newly created marketplace revenue share.
-	Revision *int32
+	// The revision of the newly created marketplace revenue share.
+	//
+	// This member is required.
+	Revision *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -122,20 +132,17 @@ func (v *CreateMarketplaceRevenueShareOutput) SerializeMembers(s smithy.ShapeSer
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.CreateMarketplaceRevenueShareOutput_CreatedDate, *v.CreatedDate)
 	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_Id, *v.Id)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.CreateMarketplaceRevenueShareOutput_LastModifiedDate, *v.LastModifiedDate)
 	}
-	if v.ProductCode != nil {
-		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_ProductCode, *v.ProductCode)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_ProductId, *v.ProductId)
-	}
-	if v.ProductName != nil {
-		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_ProductName, *v.ProductName)
+	if v.Products != nil {
+		serializeMarketplaceRevenueShareProductSummaryList(s, schemas.CreateMarketplaceRevenueShareOutput_Products, v.Products)
 	}
 	if v.Revision != nil {
-		s.WriteInt32(schemas.CreateMarketplaceRevenueShareOutput_Revision, *v.Revision)
+		s.WriteString(schemas.CreateMarketplaceRevenueShareOutput_Revision, *v.Revision)
 	}
 }
 func (v *CreateMarketplaceRevenueShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
@@ -154,21 +161,17 @@ func (v *CreateMarketplaceRevenueShareOutput) Deserialize(d smithy.ShapeDeserial
 		case schemas.CreateMarketplaceRevenueShareOutput_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.CreateMarketplaceRevenueShareOutput_CreatedDate, v.CreatedDate)
+		case schemas.CreateMarketplaceRevenueShareOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateMarketplaceRevenueShareOutput_Id, v.Id)
 		case schemas.CreateMarketplaceRevenueShareOutput_LastModifiedDate:
 			v.LastModifiedDate = new(time.Time)
 			return d.ReadTime(schemas.CreateMarketplaceRevenueShareOutput_LastModifiedDate, v.LastModifiedDate)
-		case schemas.CreateMarketplaceRevenueShareOutput_ProductCode:
-			v.ProductCode = new(string)
-			return d.ReadString(schemas.CreateMarketplaceRevenueShareOutput_ProductCode, v.ProductCode)
-		case schemas.CreateMarketplaceRevenueShareOutput_ProductId:
-			v.ProductId = new(string)
-			return d.ReadString(schemas.CreateMarketplaceRevenueShareOutput_ProductId, v.ProductId)
-		case schemas.CreateMarketplaceRevenueShareOutput_ProductName:
-			v.ProductName = new(string)
-			return d.ReadString(schemas.CreateMarketplaceRevenueShareOutput_ProductName, v.ProductName)
+		case schemas.CreateMarketplaceRevenueShareOutput_Products:
+			return deserializeMarketplaceRevenueShareProductSummaryList(d, schemas.CreateMarketplaceRevenueShareOutput_Products, &v.Products)
 		case schemas.CreateMarketplaceRevenueShareOutput_Revision:
-			v.Revision = new(int32)
-			return d.ReadInt32(schemas.CreateMarketplaceRevenueShareOutput_Revision, v.Revision)
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateMarketplaceRevenueShareOutput_Revision, v.Revision)
 		}
 		return nil
 	})

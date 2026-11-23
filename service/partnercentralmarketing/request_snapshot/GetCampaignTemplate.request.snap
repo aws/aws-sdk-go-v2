@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/GetCampaignTemplate
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gCatalogcAWSjIdentifiern__Identifier__ÿ

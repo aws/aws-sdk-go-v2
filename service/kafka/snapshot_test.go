@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
@@ -170,6 +182,18 @@ func TestCheckSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
@@ -247,6 +271,18 @@ func TestCheckSnapshot_DeleteVpcConnection(t *testing.T) {
 	_, err := svc.DeleteVpcConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVpcConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAssessment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -374,6 +410,18 @@ func TestCheckSnapshot_DescribeTopicPartitions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTopicReassignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTopicReassignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTopicReassignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeVpcConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVpcConnection(context.Background(), nil, func(o *Options) {
@@ -415,6 +463,30 @@ func TestCheckSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	_, err := svc.GetCompatibleKafkaVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetCompatibleKafkaVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssessmentFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssessmentFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssessmentFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssessments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssessments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssessments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +650,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTopicReassignments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTopicReassignments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTopicReassignments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTopics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTopics(context.Background(), nil, func(o *Options) {
@@ -631,6 +715,30 @@ func TestCheckSnapshot_RejectClientVpcConnection(t *testing.T) {
 	_, err := svc.RejectClientVpcConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RejectClientVpcConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTopicReassignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTopicReassignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTopicReassignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopTopicReassignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTopicReassignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopTopicReassignment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +961,18 @@ func TestUpdateSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
@@ -937,6 +1057,18 @@ func TestUpdateSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
@@ -1014,6 +1146,18 @@ func TestUpdateSnapshot_DeleteVpcConnection(t *testing.T) {
 	_, err := svc.DeleteVpcConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVpcConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAssessment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1141,6 +1285,18 @@ func TestUpdateSnapshot_DescribeTopicPartitions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTopicReassignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTopicReassignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTopicReassignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeVpcConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVpcConnection(context.Background(), nil, func(o *Options) {
@@ -1182,6 +1338,30 @@ func TestUpdateSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	_, err := svc.GetCompatibleKafkaVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetCompatibleKafkaVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssessmentFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssessmentFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssessmentFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssessments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssessments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssessments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1345,6 +1525,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTopicReassignments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTopicReassignments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTopicReassignments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTopics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTopics(context.Background(), nil, func(o *Options) {
@@ -1398,6 +1590,30 @@ func TestUpdateSnapshot_RejectClientVpcConnection(t *testing.T) {
 	_, err := svc.RejectClientVpcConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RejectClientVpcConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTopicReassignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTopicReassignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTopicReassignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopTopicReassignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopTopicReassignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopTopicReassignment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

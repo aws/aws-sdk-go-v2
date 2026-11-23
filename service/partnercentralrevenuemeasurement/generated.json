@@ -25,6 +25,7 @@
         "api_op_StartRevenueAttributionAllocationsTask.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateMarketplaceRevenueShare.go",
         "api_op_UpdateMarketplaceRevenueShareAllocation.go",
         "api_op_UpdateRevenueAttribution.go",
         "auth.go",

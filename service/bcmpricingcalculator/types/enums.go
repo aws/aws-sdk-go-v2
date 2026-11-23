@@ -225,6 +225,30 @@ func (CurrencyCode) Values() []CurrencyCode {
 	}
 }
 
+type GetUsageLinesEstimatedCostErrorCode string
+
+// Enum values for GetUsageLinesEstimatedCostErrorCode
+const (
+	GetUsageLinesEstimatedCostErrorCodeBadRequest          GetUsageLinesEstimatedCostErrorCode = "BAD_REQUEST"
+	GetUsageLinesEstimatedCostErrorCodeNotFound            GetUsageLinesEstimatedCostErrorCode = "NOT_FOUND"
+	GetUsageLinesEstimatedCostErrorCodeConflict            GetUsageLinesEstimatedCostErrorCode = "CONFLICT"
+	GetUsageLinesEstimatedCostErrorCodeInternalServerError GetUsageLinesEstimatedCostErrorCode = "INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for GetUsageLinesEstimatedCostErrorCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GetUsageLinesEstimatedCostErrorCode) Values() []GetUsageLinesEstimatedCostErrorCode {
+	return []GetUsageLinesEstimatedCostErrorCode{
+		"BAD_REQUEST",
+		"NOT_FOUND",
+		"CONFLICT",
+		"INTERNAL_SERVER_ERROR",
+	}
+}
+
 type GroupSharingPreferenceEnum string
 
 // Enum values for GroupSharingPreferenceEnum

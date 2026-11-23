@@ -24,6 +24,57 @@ func (BatchGetDiscoverableRegistryRecordErrorCode) Values() []BatchGetDiscoverab
 	}
 }
 
+type BotCategory string
+
+// Enum values for BotCategory
+const (
+	BotCategoryAdvertising           BotCategory = "advertising"
+	BotCategoryArchiver              BotCategory = "archiver"
+	BotCategoryContentFetcher        BotCategory = "content_fetcher"
+	BotCategoryEmailClient           BotCategory = "email_client"
+	BotCategoryHttpLibrary           BotCategory = "http_library"
+	BotCategoryLinkChecker           BotCategory = "link_checker"
+	BotCategoryMiscellaneous         BotCategory = "miscellaneous"
+	BotCategoryMonitoring            BotCategory = "monitoring"
+	BotCategoryPagePreview           BotCategory = "page_preview"
+	BotCategoryScrapingFramework     BotCategory = "scraping_framework"
+	BotCategorySearchEngine          BotCategory = "search_engine"
+	BotCategorySecurity              BotCategory = "security"
+	BotCategorySeo                   BotCategory = "seo"
+	BotCategorySocialMedia           BotCategory = "social_media"
+	BotCategoryAiTraining            BotCategory = "ai_training"
+	BotCategoryAiSearch              BotCategory = "ai_search"
+	BotCategoryAiAssistant           BotCategory = "ai_assistant"
+	BotCategoryAiContentOptimization BotCategory = "ai_content_optimization"
+)
+
+// Values returns all known values for BotCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BotCategory) Values() []BotCategory {
+	return []BotCategory{
+		"advertising",
+		"archiver",
+		"content_fetcher",
+		"email_client",
+		"http_library",
+		"link_checker",
+		"miscellaneous",
+		"monitoring",
+		"page_preview",
+		"scraping_framework",
+		"search_engine",
+		"security",
+		"seo",
+		"social_media",
+		"ai_training",
+		"ai_search",
+		"ai_assistant",
+		"ai_content_optimization",
+	}
+}
+
 type RecordType string
 
 // Enum values for RecordType
@@ -33,6 +84,7 @@ const (
 	RecordTypeCustom  RecordType = "CUSTOM"
 	RecordTypeSkill   RecordType = "SKILL"
 	RecordTypeGateway RecordType = "GATEWAY"
+	RecordTypeWebBot  RecordType = "WEB_BOT"
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
@@ -46,6 +98,7 @@ func (RecordType) Values() []RecordType {
 		"CUSTOM",
 		"SKILL",
 		"GATEWAY",
+		"WEB_BOT",
 	}
 }
 
@@ -73,15 +126,17 @@ type RegistryRecordStatus string
 
 // Enum values for RegistryRecordStatus
 const (
-	RegistryRecordStatusDraft           RegistryRecordStatus = "DRAFT"
-	RegistryRecordStatusPendingApproval RegistryRecordStatus = "PENDING_APPROVAL"
-	RegistryRecordStatusApproved        RegistryRecordStatus = "APPROVED"
-	RegistryRecordStatusRejected        RegistryRecordStatus = "REJECTED"
-	RegistryRecordStatusDeprecated      RegistryRecordStatus = "DEPRECATED"
-	RegistryRecordStatusCreating        RegistryRecordStatus = "CREATING"
-	RegistryRecordStatusUpdating        RegistryRecordStatus = "UPDATING"
-	RegistryRecordStatusCreateFailed    RegistryRecordStatus = "CREATE_FAILED"
-	RegistryRecordStatusUpdateFailed    RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusDraft             RegistryRecordStatus = "DRAFT"
+	RegistryRecordStatusPendingApproval   RegistryRecordStatus = "PENDING_APPROVAL"
+	RegistryRecordStatusApproved          RegistryRecordStatus = "APPROVED"
+	RegistryRecordStatusRejected          RegistryRecordStatus = "REJECTED"
+	RegistryRecordStatusDeprecated        RegistryRecordStatus = "DEPRECATED"
+	RegistryRecordStatusCreating          RegistryRecordStatus = "CREATING"
+	RegistryRecordStatusUpdating          RegistryRecordStatus = "UPDATING"
+	RegistryRecordStatusCreateFailed      RegistryRecordStatus = "CREATE_FAILED"
+	RegistryRecordStatusUpdateFailed      RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusCreatePendingAuth RegistryRecordStatus = "CREATE_PENDING_AUTH"
+	RegistryRecordStatusUpdatePendingAuth RegistryRecordStatus = "UPDATE_PENDING_AUTH"
 )
 
 // Values returns all known values for RegistryRecordStatus. Note that this can be
@@ -99,6 +154,37 @@ func (RegistryRecordStatus) Values() []RegistryRecordStatus {
 		"UPDATING",
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
+		"CREATE_PENDING_AUTH",
+		"UPDATE_PENDING_AUTH",
+	}
+}
+
+type SearchType string
+
+// Enum values for SearchType
+const (
+	//  Combines keyword ranking and semantic ranking. Use this type when a query
+	// mixes specific terms with a natural language description.
+	SearchTypeHybrid SearchType = "HYBRID"
+	//  Ranks records by semantic similarity to the query. Use this type for natural
+	// language descriptions of a task. Returns the most similar records even when none
+	// of them closely matches the query.
+	SearchTypeSemantic SearchType = "SEMANTIC"
+	//  Ranks records by keyword match between the query terms and the record name,
+	// description, descriptors, and custom metadata text values. Use this type for
+	// queries built from specific terms, such as tool names or API names.
+	SearchTypeKeyword SearchType = "KEYWORD"
+)
+
+// Values returns all known values for SearchType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchType) Values() []SearchType {
+	return []SearchType{
+		"HYBRID",
+		"SEMANTIC",
+		"KEYWORD",
 	}
 }
 
@@ -111,6 +197,7 @@ const (
 	ValidationExceptionReasonIdempotentParameterMismatchException ValidationExceptionReason = "IdempotentParameterMismatchException"
 	ValidationExceptionReasonRootEventInOtherSession              ValidationExceptionReason = "EventInOtherSession"
 	ValidationExceptionReasonResourceConflict                     ValidationExceptionReason = "ResourceConflict"
+	ValidationExceptionReasonUnsupportedInRegion                  ValidationExceptionReason = "UnsupportedInRegion"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -124,5 +211,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"IdempotentParameterMismatchException",
 		"EventInOtherSession",
 		"ResourceConflict",
+		"UnsupportedInRegion",
 	}
 }

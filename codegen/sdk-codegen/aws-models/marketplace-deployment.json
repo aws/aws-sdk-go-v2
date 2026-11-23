@@ -6,7 +6,16 @@
             "version": "2023-01-25",
             "operations": [
                 {
+                    "target": "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationJob"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ListDeploymentConfigurationJobs"
+                },
+                {
                     "target": "com.amazonaws.marketplacedeployment#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#StartDeploymentConfigurationJob"
                 },
                 {
                     "target": "com.amazonaws.marketplacedeployment#TagResource"
@@ -16,6 +25,9 @@
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfiguration"
+                },
                 {
                     "target": "com.amazonaws.marketplacedeployment#DeploymentParameter"
                 }
@@ -31,7 +43,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>The AWS Marketplace Deployment Service supports the Quick Launch experience, which is a deployment option for software as a service (SaaS) products. \n      Quick Launch simplifies and reduces the time, resources, and steps required to configure, deploy, and launch a products. \n      The AWS Marketplace Deployment Service provides sellers with a secure method for passing deployment parameters, such as \n      API keys and external IDs, to buyers during the Quick Launch experience.</p>",
+                "smithy.api#documentation": "<p>The AWS Marketplace Deployment Service supports the Quick Launch experience, which is a deployment option for software as a service (SaaS) products. Quick Launch simplifies and reduces the time, resources, and steps required to configure, deploy, and launch a product. The AWS Marketplace Deployment Service provides sellers with a secure method for passing deployment parameters, such as API keys and external IDs, to buyers during the Quick Launch experience.</p> <p>You can also use the AWS Marketplace Deployment Service to publish deployment configurations. A deployment configuration defines how buyers access a product's delivery option after they subscribe. For example, for the Data as a Service delivery option, it specifies the seller's fulfillment URL.</p>",
                 "smithy.api#title": "AWS Marketplace Deployment Service",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -902,6 +914,211 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.marketplacedeployment#DataAsAServiceConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "fulfillmentUrl": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationFulfillmentUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS URL that AWS Marketplace redirects buyers to after they subscribe to the product. The value must be a valid URI that uses the HTTPS scheme. Maximum length: 2,048 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the deployment configuration settings for the Data as a Service delivery option, including the fulfillment URL that AWS Marketplace redirects buyers to after they subscribe.</p>"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeliveryOptionType": {
+            "type": "enum",
+            "members": {
+                "DATA_AS_A_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Data as a Service delivery option.</p>",
+                        "smithy.api#enumValue": "data-as-a-service"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The delivery option type of a deployment configuration.</p>"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfiguration": {
+            "type": "resource",
+            "identifiers": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplacedeployment#Catalog"
+                },
+                "productId": {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceId"
+                },
+                "deliveryOptionType": {
+                    "target": "com.amazonaws.marketplacedeployment#DeliveryOptionType"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.marketplacedeployment#GetDeploymentConfiguration"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "DeploymentConfiguration:catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}"
+                }
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationDetail": {
+            "type": "union",
+            "members": {
+                "dataAsAService": {
+                    "target": "com.amazonaws.marketplacedeployment#DataAsAServiceConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration settings for the Data as a Service delivery option, including the fulfillment URL that AWS Marketplace redirects buyers to after they subscribe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deployment configuration. Exactly one member must be set, and it must match the delivery option type.</p>"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationFulfillmentUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTPS URL that conforms to RFC 3986.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobErrorCode": {
+            "type": "enum",
+            "members": {
+                "FULFILLMENT_URL_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Marketplace couldn't reach the fulfillment URL when it validated the deployment configuration. The URL returned no HTTP response, for example because of a Domain Name System (DNS) failure, a refused connection, an untrusted or mismatched Transport Layer Security (TLS) certificate, or a timeout. Verify that the fulfillment URL is publicly reachable over HTTPS and responding, and then start a new job.</p>",
+                        "smithy.api#enumValue": "FULFILLMENT_URL_UNREACHABLE"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An internal error occurred. Start a new job.</p>",
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "ENDPOINT_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fulfillment URL isn't a valid absolute HTTPS URL, or it points to a network location that AWS Marketplace doesn't allow, such as a private or loopback address. Correct the fulfillment URL, and then start a new job. A new job with the same URL fails again.</p>",
+                        "smithy.api#enumValue": "ENDPOINT_INVALID"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error code that describes why a deployment configuration job failed.</p>"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job is running.</p>",
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job finished, and its configuration is now the active deployment configuration.</p>",
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job failed. The active deployment configuration didn't change. For details, see <code>errorCode</code> and <code>message</code>.</p>",
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a deployment configuration job.</p>"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobSummary"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobSummary": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deployment configuration job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment configuration job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration submitted with the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a deployment configuration job, including its identifier, status, configuration, and creation time.</p>"
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.marketplacedeployment#DeploymentConfigurationNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.marketplacedeployment#DeploymentParameter": {
             "type": "resource",
             "identifiers": {
@@ -943,7 +1160,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The shape containing the requested deployment parameter name and secretString.</p>\n         <note>\n            <p>To support AWS CloudFormation dynamic references to this resource using Quick Launch,\n        this value must match a parameter defined in the CloudFormation templated provided to\n        buyers.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The shape containing the requested deployment parameter name and secretString.</p> <note> <p>To support AWS CloudFormation dynamic references to this resource using Quick Launch, this value must match a parameter defined in the CloudFormation template provided to buyers.</p> </note>"
             }
         },
         "com.amazonaws.marketplacedeployment#DeploymentParameterName": {
@@ -966,6 +1183,368 @@
                 "smithy.api#pattern": "^dp-[a-zA-Z0-9]+$"
             }
         },
+        "com.amazonaws.marketplacedeployment#GetDeploymentConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacedeployment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the active deployment configuration for a product and delivery option. The active deployment configuration is the configuration from the most recent successful deployment configuration job. The seller that owns the product and buyers entitled to the product can call this operation.</p> <p>If the product and delivery option have no active deployment configuration, the operation returns a <code>ResourceNotFoundException</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get the active deployment configuration",
+                        "documentation": "Returns only the current active configuration for the owning seller or an entitled buyer.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service"
+                        },
+                        "output": {
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get active configuration fails when none exists",
+                        "documentation": "If the product and delivery option have no active deployment configuration, the operation returns a ResourceNotFoundException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#ResourceNotFoundException",
+                            "content": {
+                                "message": "No active deployment configuration exists for this product and delivery option."
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get active configuration fails for an unauthorized caller",
+                        "documentation": "If the caller is neither the seller of the product nor a buyer entitled to it, the operation returns an AccessDeniedException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#AccessDeniedException",
+                            "content": {
+                                "message": "The caller is not authorized to view this deployment configuration."
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacedeployment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of a deployment configuration job. Only the seller that started the job can call this operation.</p> <p>If the job doesn't belong to the product and delivery option in the request path, the operation returns a <code>ResourceNotFoundException</code>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get a succeeded job",
+                        "documentation": "A succeeded job includes endedAt and the ARN of the deployment configuration that it published.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "jobId": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+                        },
+                        "output": {
+                            "jobId": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            },
+                            "status": "SUCCEEDED",
+                            "createdAt": "2026-09-18T08:52:46.397Z",
+                            "configurationArn": "arn:aws:aws-marketplace:us-east-1:123456789012:DeploymentConfiguration:catalogs/AWSMarketplace/products/product-1234/delivery-options/data-as-a-service",
+                            "endedAt": "2026-09-18T08:53:10.001Z"
+                        }
+                    },
+                    {
+                        "title": "Get a failed job",
+                        "documentation": "A failed job includes errorCode, message, and endedAt.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "jobId": "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c"
+                        },
+                        "output": {
+                            "jobId": "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c",
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            },
+                            "status": "FAILED",
+                            "createdAt": "2026-09-18T08:52:46.397Z",
+                            "endedAt": "2026-09-18T08:53:05.221Z",
+                            "errorCode": "FULFILLMENT_URL_UNREACHABLE",
+                            "message": "The fulfillment URL could not be reached. Verify the endpoint is publicly reachable over HTTPS and responding."
+                        }
+                    },
+                    {
+                        "title": "Get job fails when the job isn't found",
+                        "documentation": "If the job doesn't exist, or doesn't belong to the product and delivery option in the request path, the operation returns a ResourceNotFoundException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "jobId": "abcd1234abcd1234abcd1234abcd1234"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#ResourceNotFoundException",
+                            "content": {
+                                "message": "The requested Deployment Configuration job could not be found."
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get job fails for a caller that didn't start the job",
+                        "documentation": "If the job exists but the caller isn't the seller that started it, the operation returns an AccessDeniedException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "jobId": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#AccessDeniedException",
+                            "content": {
+                                "message": "You are not authorized to view Deployment Configuration jobs for this Product."
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get job fails for a caller not authorized for the product",
+                        "documentation": "When the job does not exist and the caller is not authorized for the product, the result is AccessDeniedException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "jobId": "abcd1234abcd1234abcd1234abcd1234"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#AccessDeniedException",
+                            "content": {
+                                "message": "You are not authorized to view Deployment Configuration jobs for this Product."
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration/jobs/{jobId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationJobRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplacedeployment#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code> </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "productId": {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS Marketplace product, for example <code>prod-1234567890abc</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deliveryOptionType": {
+                    "target": "com.amazonaws.marketplacedeployment#DeliveryOptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delivery option type of the deployment configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deployment configuration job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deployment configuration job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration submitted with the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment configuration job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "configurationArn": {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deployment configuration. This field is present only when the job status is <code>SUCCEEDED</code>.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job reached the <code>SUCCEEDED</code> or <code>FAILED</code> status.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that describes why the job failed. This field is present only when the job status is <code>FAILED</code>.</p>"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes why the job failed. This field is present only when the job status is <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplacedeployment#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code> </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "productId": {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS Marketplace product, for example <code>prod-1234567890abc</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deliveryOptionType": {
+                    "target": "com.amazonaws.marketplacedeployment#DeliveryOptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delivery option type of the deployment configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#GetDeploymentConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The active deployment configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplacedeployment#InternalServerException": {
             "type": "structure",
             "members": {
@@ -981,6 +1560,176 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#ListDeploymentConfigurationJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacedeployment#ListDeploymentConfigurationJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacedeployment#ListDeploymentConfigurationJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacedeployment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the deployment configuration jobs that you started for a product and delivery option, ordered from newest to oldest. Results are paginated. Use the <code>nextToken</code> parameter to retrieve additional results.</p> <p>If you haven't started any jobs for the product and delivery option, the operation returns an empty <code>jobs</code> list.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List jobs, newest first",
+                        "documentation": "Returns the caller's jobs ordered by newest createdAt first, with an optional nextToken when more pages exist.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "maxResults": 20
+                        },
+                        "output": {
+                            "jobs": [
+                                {
+                                    "jobId": "9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c",
+                                    "status": "FAILED",
+                                    "configuration": {
+                                        "dataAsAService": {
+                                            "fulfillmentUrl": "https://example.com/daas/register"
+                                        }
+                                    },
+                                    "createdAt": "2026-09-18T09:10:00.000Z"
+                                },
+                                {
+                                    "jobId": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+                                    "status": "SUCCEEDED",
+                                    "configuration": {
+                                        "dataAsAService": {
+                                            "fulfillmentUrl": "https://example.com/daas/register"
+                                        }
+                                    },
+                                    "createdAt": "2026-09-18T08:52:46.397Z"
+                                }
+                            ],
+                            "nextToken": "b3BhcXVlLXBhZ2luYXRpb24tY3Vyc29y"
+                        }
+                    },
+                    {
+                        "title": "List jobs returns an empty list when an authorized seller has no jobs",
+                        "documentation": "When the caller is authorized for the product and has not started any jobs, the result is an empty jobs list with no nextToken.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service"
+                        },
+                        "output": {
+                            "jobs": []
+                        }
+                    },
+                    {
+                        "title": "List jobs fails for a caller not authorized for the product",
+                        "documentation": "If the caller isn't authorized for the product, the operation returns an AccessDeniedException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service"
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#AccessDeniedException",
+                            "content": {
+                                "message": "You are not authorized to view Deployment Configuration jobs for this Product."
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration/jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "jobs"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#ListDeploymentConfigurationJobsRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplacedeployment#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code> </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "productId": {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS Marketplace product, for example <code>prod-1234567890abc</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deliveryOptionType": {
+                    "target": "com.amazonaws.marketplacedeployment#DeliveryOptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delivery option type of the deployment configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationMaxResults",
+                    "traits": {
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>The maximum number of jobs to return in a single page. Valid values are 1 through 100. The default is 20.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results. Use the value returned in the previous response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#ListDeploymentConfigurationJobsResponse": {
+            "type": "structure",
+            "members": {
+                "jobs": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of deployment configuration job summaries, ordered from newest to oldest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results. This value is absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.marketplacedeployment#ListTagsForResource": {
@@ -1009,8 +1758,8 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to list all tags on a DeploymentParameter resource",
-                "smithy.api#documentation": "<p>Lists all tags that have been added to a deployment parameter resource.</p>",
+                "aws.iam#actionPermissionDescription": "Grants permission to list all tags on a DeploymentParameter or DeploymentConfiguration resource",
+                "smithy.api#documentation": "<p>Lists all tags that have been added to a resource.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Listing tags for a deployment parameter",
@@ -1040,7 +1789,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the deployment parameter resource you want to list tags on.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource you want to list tags on.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1161,7 +1910,7 @@
                 "catalog": {
                     "target": "com.amazonaws.marketplacedeployment#Catalog",
                     "traits": {
-                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code> </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1184,7 +1933,7 @@
                 "deploymentParameter": {
                     "target": "com.amazonaws.marketplacedeployment#DeploymentParameterInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment parameter targeted to the acceptor of an agreement for which to create the AWS Secret Manager resource.</p>",
+                        "smithy.api#documentation": "<p>The deployment parameter targeted to the acceptor of an agreement for which to create the AWS Secrets Manager resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1204,7 +1953,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.marketplacedeployment#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for deployment parameters. A unique identifier for the new version.</p>\n         <note>\n            <p>This field is not required if you're calling using an AWS SDK. Otherwise, a\n          <code>clientToken</code> must be provided with the request.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The idempotency token for deployment parameters. A unique identifier for the new version.</p> <note> <p>This field is not required if you're calling using an AWS SDK. Otherwise, a <code>clientToken</code> must be provided with the request.</p> </note>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1310,6 +2059,199 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.marketplacedeployment#StartDeploymentConfigurationJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacedeployment#StartDeploymentConfigurationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacedeployment#StartDeploymentConfigurationJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacedeployment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacedeployment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a job that publishes a deployment configuration for a product and delivery option. The job runs asynchronously. Use <code>GetDeploymentConfigurationJob</code> to track its status. When the job reaches the <code>SUCCEEDED</code> status, its configuration becomes the active deployment configuration for the product and delivery option.</p> <p>The populated member of <code>configuration</code> must match the <code>deliveryOptionType</code> in the request path.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Start a Data-as-a-Service deployment configuration job",
+                        "documentation": "Starts a job that publishes a Data-as-a-Service deployment configuration. The job starts in the IN_PROGRESS status. Call GetDeploymentConfigurationJob to check when it reaches SUCCEEDED or FAILED.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            },
+                            "clientToken": "some-unique-uuid-between-32-and-64-characters"
+                        },
+                        "output": {
+                            "jobId": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            },
+                            "status": "IN_PROGRESS",
+                            "createdAt": "2026-09-18T08:52:46.397Z"
+                        }
+                    },
+                    {
+                        "title": "Start fails when the product or catalog doesn't exist",
+                        "documentation": "If the product or catalog doesn't exist, the operation returns a ResourceNotFoundException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-does-not-exist",
+                            "deliveryOptionType": "data-as-a-service",
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            }
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#ResourceNotFoundException",
+                            "content": {
+                                "message": "The requested product could not be found."
+                            }
+                        }
+                    },
+                    {
+                        "title": "Start fails when the caller is not the product seller",
+                        "documentation": "If the caller isn't the seller of the product, the operation returns an AccessDeniedException.",
+                        "input": {
+                            "catalog": "AWSMarketplace",
+                            "productId": "product-1234",
+                            "deliveryOptionType": "data-as-a-service",
+                            "configuration": {
+                                "dataAsAService": {
+                                    "fulfillmentUrl": "https://example.com/daas/register"
+                                }
+                            }
+                        },
+                        "error": {
+                            "shapeId": "com.amazonaws.marketplacedeployment#AccessDeniedException",
+                            "content": {
+                                "message": "The caller is not authorized to publish a deployment configuration for this product."
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration/jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacedeployment#StartDeploymentConfigurationJobRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.marketplacedeployment#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog related to the request. Fixed value: <code>AWSMarketplace</code> </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "productId": {
+                    "target": "com.amazonaws.marketplacedeployment#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS Marketplace product, for example <code>prod-1234567890abc</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deliveryOptionType": {
+                    "target": "com.amazonaws.marketplacedeployment#DeliveryOptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delivery option type of the deployment configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration to publish.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.marketplacedeployment#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs, where each pair represents a tag to apply to the deployment configuration. Only the request that creates the deployment configuration can apply tags. If the deployment configuration already exists, a request that includes one or more tags fails with a <code>ValidationException</code>. To change tags on an existing deployment configuration, use <code>TagResource</code> and <code>UntagResource</code>.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.marketplacedeployment#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry a request with the same token and the same input, the service returns the original job instead of starting a new one. If you reuse a token with different input, the request fails with a <code>ConflictException</code>.</p> <note> <p>This field is not required if you're calling using an AWS SDK. Otherwise, a <code>clientToken</code> must be provided with the request.</p> </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.marketplacedeployment#StartDeploymentConfigurationJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deployment configuration job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration submitted with the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.marketplacedeployment#DeploymentConfigurationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment configuration job. The value is <code>IN_PROGRESS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job was created.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.marketplacedeployment#StringList": {
             "type": "list",
             "member": {
@@ -1355,7 +2297,7 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to add or overwrite one or more tags for the specified DeploymentParameter resource",
+                "aws.iam#actionPermissionDescription": "Grants permission to add or overwrite one or more tags for the specified DeploymentParameter or DeploymentConfiguration resource",
                 "smithy.api#documentation": "<p>Tags a resource.</p>",
                 "smithy.api#examples": [
                     {
@@ -1488,7 +2430,7 @@
                 }
             ],
             "traits": {
-                "aws.iam#actionPermissionDescription": "Grants permission to disassociate one or more tags from the specified DeploymentParameter resource",
+                "aws.iam#actionPermissionDescription": "Grants permission to disassociate one or more tags from the specified DeploymentParameter or DeploymentConfiguration resource",
                 "smithy.api#documentation": "<p>Removes a tag or list of tags from a resource.</p>",
                 "smithy.api#examples": [
                     {

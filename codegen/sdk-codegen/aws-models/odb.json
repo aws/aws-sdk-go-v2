@@ -1588,6 +1588,44 @@
                 "smithy.api#documentation": "<p>A summary of a peer database of an Autonomous Database.</p>"
             }
         },
+        "com.amazonaws.odb#AutonomousDatabaseRefreshableCloneList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#AutonomousDatabaseRefreshableCloneSummary"
+            }
+        },
+        "com.amazonaws.odb#AutonomousDatabaseRefreshableCloneSummary": {
+            "type": "structure",
+            "members": {
+                "autonomousDatabaseId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the refreshable clone Autonomous Database.</p>"
+                    }
+                },
+                "autonomousDatabaseArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the refreshable clone Autonomous Database.</p>"
+                    }
+                },
+                "ocid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle Cloud Identifier (OCID) of the refreshable clone Autonomous Database.</p>"
+                    }
+                },
+                "region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the refreshable clone Autonomous Database is located.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a refreshable clone of an Autonomous Database.</p>"
+            }
+        },
         "com.amazonaws.odb#AutonomousDatabaseResource": {
             "type": "resource",
             "identifiers": {
@@ -1627,6 +1665,9 @@
                     "target": "com.amazonaws.odb#ListAutonomousDatabasePeers"
                 },
                 {
+                    "target": "com.amazonaws.odb#ListAutonomousDatabaseRefreshableClones"
+                },
+                {
                     "target": "com.amazonaws.odb#RebootAutonomousDatabase"
                 },
                 {
@@ -1637,6 +1678,9 @@
                 },
                 {
                     "target": "com.amazonaws.odb#StartAutonomousDatabase"
+                },
+                {
+                    "target": "com.amazonaws.odb#StartAutonomousDatabaseRefresh"
                 },
                 {
                     "target": "com.amazonaws.odb#StopAutonomousDatabase"
@@ -12364,6 +12408,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#ListAutonomousDatabaseRefreshableClones": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#ListAutonomousDatabaseRefreshableClonesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#ListAutonomousDatabaseRefreshableClonesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the refreshable clones of the specified Autonomous Database.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "autonomousDatabaseRefreshableClones"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.odb#ListAutonomousDatabaseRefreshableClonesInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8192
+                        }
+                    }
+                },
+                "autonomousDatabaseId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the source Autonomous Database whose refreshable clones you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#ListAutonomousDatabaseRefreshableClonesOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>"
+                    }
+                },
+                "autonomousDatabaseRefreshableClones": {
+                    "target": "com.amazonaws.odb#AutonomousDatabaseRefreshableCloneList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of refreshable clones for the Autonomous Database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#ListAutonomousDatabaseVersions": {
             "type": "operation",
             "input": {
@@ -17601,6 +17740,104 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional information about the status of the Autonomous Database after the start operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#StartAutonomousDatabaseRefresh": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#StartAutonomousDatabaseRefreshInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#StartAutonomousDatabaseRefreshOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a refresh of the specified refreshable clone Autonomous Database with data from its source database. The refresh runs asynchronously. To track its progress, check the <code>refreshableStatus</code> of the Autonomous Database.</p>"
+            }
+        },
+        "com.amazonaws.odb#StartAutonomousDatabaseRefreshInput": {
+            "type": "structure",
+            "members": {
+                "autonomousDatabaseId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the refreshable clone Autonomous Database to refresh.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeOfRefreshCutoff": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time up to which the refreshable clone Autonomous Database is refreshed from its source database. Data committed on the source database after this time isn't applied to the refreshable clone. The time must be at least 1 minute and at most 7 days in the past, and later than the clone's last refresh point.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#AutonomousDatabaseResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.odb#StartAutonomousDatabaseRefreshOutput": {
+            "type": "structure",
+            "members": {
+                "autonomousDatabaseId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the refreshable clone Autonomous Database that is being refreshed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the Autonomous Database.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#AutonomousDatabaseResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Autonomous Database.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the current status of the Autonomous Database.</p>"
+                    }
+                },
+                "refreshableStatus": {
+                    "target": "com.amazonaws.odb#RefreshableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The refresh status of the refreshable clone Autonomous Database.</p>"
                     }
                 }
             },

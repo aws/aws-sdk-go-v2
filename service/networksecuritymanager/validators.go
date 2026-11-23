@@ -490,6 +490,26 @@ func (m *validateOpListDeploymentSnapshots) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEntityCoverages struct {
+}
+
+func (*validateOpListEntityCoverages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEntityCoverages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEntityCoveragesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEntityCoveragesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPolicySnapshots struct {
 }
 
@@ -505,6 +525,26 @@ func (m *validateOpListPolicySnapshots) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPolicySnapshotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListProtectedResourceCoverages struct {
+}
+
+func (*validateOpListProtectedResourceCoverages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProtectedResourceCoverages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProtectedResourceCoveragesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProtectedResourceCoveragesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -886,8 +926,16 @@ func addOpListDeploymentSnapshotsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpListDeploymentSnapshots{}, middleware.After)
 }
 
+func addOpListEntityCoveragesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEntityCoverages{}, middleware.After)
+}
+
 func addOpListPolicySnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPolicySnapshots{}, middleware.After)
+}
+
+func addOpListProtectedResourceCoveragesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProtectedResourceCoverages{}, middleware.After)
 }
 
 func addOpListResourceAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -958,6 +1006,23 @@ func validateDeploymentConfiguration(v *types.DeploymentConfiguration) error {
 	}
 }
 
+func validateIgwFirewallConfig(v *types.IgwFirewallConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IgwFirewallConfig"}
+	if v.SubnetConnectivityOverrides != nil {
+		if err := validateSubnetConnectivityOverrideList(v.SubnetConnectivityOverrides); err != nil {
+			invalidParams.AddNested("SubnetConnectivityOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePolicyConfiguration(v *types.PolicyConfiguration) error {
 	if v == nil {
 		return nil
@@ -966,6 +1031,11 @@ func validatePolicyConfiguration(v *types.PolicyConfiguration) error {
 	if v.WafConfig != nil {
 		if err := validateWafConfig(v.WafConfig); err != nil {
 			invalidParams.AddNested("WafConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IgwFirewallConfig != nil {
+		if err := validateIgwFirewallConfig(v.IgwFirewallConfig); err != nil {
+			invalidParams.AddNested("IgwFirewallConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1076,6 +1146,41 @@ func validateScopeReferenceList(v []types.ScopeReference) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ScopeReferenceList"}
 	for i := range v {
 		if err := validateScopeReference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubnetConnectivityOverride(v *types.SubnetConnectivityOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubnetConnectivityOverride"}
+	if len(v.ConnectivityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectivityType"))
+	}
+	if v.Scopes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scopes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubnetConnectivityOverrideList(v []types.SubnetConnectivityOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubnetConnectivityOverrideList"}
+	for i := range v {
+		if err := validateSubnetConnectivityOverride(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1530,6 +1635,21 @@ func validateOpListDeploymentSnapshotsInput(v *ListDeploymentSnapshotsInput) err
 	}
 }
 
+func validateOpListEntityCoveragesInput(v *ListEntityCoveragesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEntityCoveragesInput"}
+	if v.EntityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPolicySnapshotsInput(v *ListPolicySnapshotsInput) error {
 	if v == nil {
 		return nil
@@ -1537,6 +1657,21 @@ func validateOpListPolicySnapshotsInput(v *ListPolicySnapshotsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListPolicySnapshotsInput"}
 	if v.PolicyIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProtectedResourceCoveragesInput(v *ListProtectedResourceCoveragesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProtectedResourceCoveragesInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

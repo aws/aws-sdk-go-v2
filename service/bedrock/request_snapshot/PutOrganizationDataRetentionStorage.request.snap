@@ -1,0 +1,5 @@
+PUT /v1/data_retention/organization-storage/anthropic
+
+Content-Type: application/json
+
+{"storageConfiguration":{"kmsKeyArn":"__KmsKeyArn__","s3BucketArn":"__S3BucketArn__","s3BucketOwner":"__S3BucketOwner__"},"storageDestination":"customer_managed"}

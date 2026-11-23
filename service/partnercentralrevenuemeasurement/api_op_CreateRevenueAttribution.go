@@ -48,6 +48,9 @@ type CreateRevenueAttributionInput struct {
 	// A unique token to ensure idempotency of the create request.
 	ClientToken *string
 
+	// Program-defined key-value attributes for the revenue attribution.
+	Context map[string]string
+
 	// A description of the revenue attribution.
 	Description *string
 
@@ -73,6 +76,9 @@ func (v *CreateRevenueAttributionInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRevenueAttributionInput_ClientToken, *v.ClientToken)
+	}
+	if v.Context != nil {
+		serializeRevenueAttributionContext(s, schemas.CreateRevenueAttributionInput_Context, v.Context)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRevenueAttributionInput_Description, *v.Description)
@@ -108,6 +114,9 @@ type CreateRevenueAttributionOutput struct {
 	// This member is required.
 	TenancyModel types.TenancyModel
 
+	// Program-defined key-value attributes for the revenue attribution.
+	Context map[string]string
+
 	// The description of the revenue attribution.
 	Description *string
 
@@ -136,6 +145,9 @@ func (v *CreateRevenueAttributionOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateRevenueAttributionOutput_Arn, *v.Arn)
 	}
+	if v.Context != nil {
+		serializeRevenueAttributionContext(s, schemas.CreateRevenueAttributionOutput_Context, v.Context)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateRevenueAttributionOutput_Description, *v.Description)
 	}
@@ -163,6 +175,8 @@ func (v *CreateRevenueAttributionOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.CreateRevenueAttributionOutput_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.CreateRevenueAttributionOutput_Arn, v.Arn)
+		case schemas.CreateRevenueAttributionOutput_Context:
+			return deserializeRevenueAttributionContext(d, schemas.CreateRevenueAttributionOutput_Context, &v.Context)
 		case schemas.CreateRevenueAttributionOutput_Description:
 			v.Description = new(string)
 			return d.ReadString(schemas.CreateRevenueAttributionOutput_Description, v.Description)

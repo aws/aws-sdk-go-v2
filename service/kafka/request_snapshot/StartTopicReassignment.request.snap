@@ -1,0 +1,5 @@
+POST /v1/clusters/__ClusterArn__/topic-reassignments
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","targetInstanceType":"__TargetInstanceType__","topicsToExclude":["__Member__","__Member__"],"topicsToInclude":["__Member__","__Member__"]}

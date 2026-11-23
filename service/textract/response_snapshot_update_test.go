@@ -2500,6 +2500,80 @@ func TestUpdateResponseSnapshot_CreateAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateBlueprint(t *testing.T) {
+	want := &CreateBlueprintOutput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBlueprint, schemas.CreateBlueprintResponse, schemas.CreateBlueprintResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateBlueprint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateBlueprintVersion(t *testing.T) {
+	want := &CreateBlueprintVersionOutput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.CreateBlueprintVersion, schemas.CreateBlueprintVersionResponse, schemas.CreateBlueprintVersionResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateBlueprintVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateProject(t *testing.T) {
+	want := &CreateProjectOutput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Status:     types.ProjectStatus("COMPLETED"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectResponse, schemas.CreateProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateProject.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteAdapter(t *testing.T) {
 	want := &DeleteAdapterOutput{}
 	proto := rpcv2.NewCBOR(schemas.Textract)
@@ -2540,6 +2614,50 @@ func TestUpdateResponseSnapshot_DeleteAdapterVersion(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteAdapterVersion.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteBlueprint(t *testing.T) {
+	want := &DeleteBlueprintOutput{}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteBlueprint, schemas.DeleteBlueprintResponse, schemas.DeleteBlueprintResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteBlueprint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteProject(t *testing.T) {
+	want := &DeleteProjectOutput{}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteProject, schemas.DeleteProjectResponse, schemas.DeleteProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteProject.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2803,6 +2921,39 @@ func TestUpdateResponseSnapshot_GetAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetBlueprint(t *testing.T) {
+	want := &GetBlueprintOutput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintName:    ptr.String("__BlueprintName__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		Schema:           ptr.String("__Schema__"),
+		KmsKeyId:         ptr.String("__KmsKeyId__"),
+		KmsEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.GetBlueprint, schemas.GetBlueprintResponse, schemas.GetBlueprintResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetBlueprint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetDocumentAnalysis(t *testing.T) {
 	want := &GetDocumentAnalysisOutput{
 		DocumentMetadata: &types.DocumentMetadata{
@@ -2967,6 +3118,35 @@ func TestUpdateResponseSnapshot_GetDocumentAnalysis(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetDocumentAnalysis.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetDocumentInsights(t *testing.T) {
+	want := &GetDocumentInsightsOutput{
+		Status: types.JobStatus("IN_PROGRESS"),
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		ErrorType:    ptr.String("__ErrorType__"),
+		ErrorMessage: ptr.String("__ErrorMessage__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.GetDocumentInsights, schemas.GetDocumentInsightsResponse, schemas.GetDocumentInsightsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetDocumentInsights.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10198,6 +10378,106 @@ func TestUpdateResponseSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetProject(t *testing.T) {
+	want := &GetProjectOutput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		Status:             types.ProjectStatus("COMPLETED"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.GetProject, schemas.GetProjectResponse, schemas.GetProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetProject.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListAdapterVersions(t *testing.T) {
 	want := &ListAdapterVersionsOutput{
 		AdapterVersions: []types.AdapterVersionOverview{
@@ -10290,6 +10570,86 @@ func TestUpdateResponseSnapshot_ListAdapters(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListBlueprints(t *testing.T) {
+	want := &ListBlueprintsOutput{
+		Blueprints: []types.BlueprintSummary{
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintName:    ptr.String("__BlueprintName__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				ResourceOwner:    types.ResourceOwner("ACCOUNT"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintName:    ptr.String("__BlueprintName__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				ResourceOwner:    types.ResourceOwner("ACCOUNT"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.ListBlueprints, schemas.ListBlueprintsResponse, schemas.ListBlueprintsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListBlueprints.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListProjects(t *testing.T) {
+	want := &ListProjectsOutput{
+		Projects: []types.ProjectSummary{
+			{
+				ProjectArn:       ptr.String("__ProjectArn__"),
+				ProjectName:      ptr.String("__ProjectName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ProjectArn:       ptr.String("__ProjectArn__"),
+				ProjectName:      ptr.String("__ProjectName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.ListProjects, schemas.ListProjectsResponse, schemas.ListProjectsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListProjects.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: map[string]string{
@@ -10336,6 +10696,30 @@ func TestUpdateResponseSnapshot_StartDocumentAnalysis(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartDocumentAnalysis.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartDocumentInsights(t *testing.T) {
+	want := &StartDocumentInsightsOutput{
+		JobArn: ptr.String("__JobArn__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.StartDocumentInsights, schemas.StartDocumentInsightsResponse, schemas.StartDocumentInsightsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartDocumentInsights.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10484,6 +10868,55 @@ func TestUpdateResponseSnapshot_UpdateAdapter(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateAdapter.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateBlueprint(t *testing.T) {
+	want := &UpdateBlueprintOutput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateBlueprint, schemas.UpdateBlueprintResponse, schemas.UpdateBlueprintResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateBlueprint.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateProject(t *testing.T) {
+	want := &UpdateProjectOutput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Status:     types.ProjectStatus("COMPLETED"),
+	}
+	proto := rpcv2.NewCBOR(schemas.Textract)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectResponse, schemas.UpdateProjectResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateProject.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

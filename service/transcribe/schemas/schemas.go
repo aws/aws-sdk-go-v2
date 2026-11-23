@@ -274,6 +274,13 @@ var TagResource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/tags/{ResourceArn}",
 	Code: 200})
 
+var TranscribeAudio = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "TranscribeAudio",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/synctranscriptions",
+	Code: 200})
+
 var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "UntagResource",
@@ -338,9 +345,29 @@ var AbsoluteTimeRange_Last *smithy.Schema
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
+
+var BadRequestException_Reason *smithy.Schema
+
+var BadRequestExceptionReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "BadRequestExceptionReason",
+}, smithy.ShapeTypeEnum, 7)
+var BadRequestExceptionReason_AUDIO_TOO_LONG *smithy.Schema
+
+var BadRequestExceptionReason_AUDIO_TOO_SHORT *smithy.Schema
+
+var BadRequestExceptionReason_UNSUPPORTED_AUDIO_FORMAT *smithy.Schema
+
+var BadRequestExceptionReason_UNSUPPORTED_CHANNEL_COUNT *smithy.Schema
+
+var BadRequestExceptionReason_INVALID_AUDIO *smithy.Schema
+
+var BadRequestExceptionReason_AUDIO_FILE_TOO_LARGE *smithy.Schema
+
+var BadRequestExceptionReason_MEDIA_DOWNLOAD_FAILED *smithy.Schema
 
 var BaseModelName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -589,6 +616,11 @@ var _DateTime = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DateTime",
 }, smithy.ShapeTypeTimestamp, 0)
 
+var _Double = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "Double",
+}, smithy.ShapeTypeDouble, 0)
+
 var _DurationInSeconds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "DurationInSeconds",
@@ -650,6 +682,11 @@ var InterruptionFilter_AbsoluteTimeRange *smithy.Schema
 var InterruptionFilter_RelativeTimeRange *smithy.Schema
 
 var InterruptionFilter_Negate *smithy.Schema
+
+var _ItemId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "ItemId",
+}, smithy.ShapeTypeInteger, 0)
 
 var JobExecutionSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -924,6 +961,12 @@ var _LanguageCodeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _LanguageCodeList_member *smithy.Schema
 
+var LanguageDetectionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "LanguageDetectionMode",
+}, smithy.ShapeTypeEnum, 1)
+var LanguageDetectionMode_IDENTIFY_LANGUAGE *smithy.Schema
+
 var LanguageIdSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "LanguageIdSettings",
@@ -1001,6 +1044,11 @@ var Media = smithy.NewSchema(smithy.ShapeID{
 var Media_MediaFileUri *smithy.Schema
 
 var Media_RedactedMediaFileUri *smithy.Schema
+
+var _MediaBytesBlob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "MediaBytesBlob",
+}, smithy.ShapeTypeBlob, 0)
 
 var MediaFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -1341,6 +1389,16 @@ var NotFoundException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 404})
 var NotFoundException_Message *smithy.Schema
 
+var _NumberOfChannels = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "NumberOfChannels",
+}, smithy.ShapeTypeInteger, 0)
+
+var _NumberOfSpeakers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "NumberOfSpeakers",
+}, smithy.ShapeTypeInteger, 0)
+
 var _OutputBucketName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "OutputBucketName",
@@ -1630,6 +1688,158 @@ var Summarization = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var Summarization_GenerateAbstractiveSummary *smithy.Schema
 
+var SyncItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncItem",
+}, smithy.ShapeTypeStructure, 9)
+var SyncItem_Id *smithy.Schema
+
+var SyncItem_Content *smithy.Schema
+
+var SyncItem_StartTime *smithy.Schema
+
+var SyncItem_EndTime *smithy.Schema
+
+var SyncItem_LanguageCode *smithy.Schema
+
+var SyncItem_ChannelLabel *smithy.Schema
+
+var SyncItem_SpeakerLabel *smithy.Schema
+
+var SyncItem_VocabularyFilterMatch *smithy.Schema
+
+var SyncItem_Redactions *smithy.Schema
+
+var _SyncItemList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncItemList",
+}, smithy.ShapeTypeList, 1)
+var _SyncItemList_member *smithy.Schema
+
+var SyncLanguage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncLanguage",
+}, smithy.ShapeTypeEnum, 11)
+var SyncLanguage_EN *smithy.Schema
+
+var SyncLanguage_ES *smithy.Schema
+
+var SyncLanguage_FR *smithy.Schema
+
+var SyncLanguage_IT *smithy.Schema
+
+var SyncLanguage_DE *smithy.Schema
+
+var SyncLanguage_JA *smithy.Schema
+
+var SyncLanguage_PT *smithy.Schema
+
+var SyncLanguage_KO *smithy.Schema
+
+var SyncLanguage_ZH_CN *smithy.Schema
+
+var SyncLanguage_ZH_TW *smithy.Schema
+
+var SyncLanguage_ZH_HK *smithy.Schema
+
+var SyncLanguageCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncLanguageCode",
+}, smithy.ShapeTypeEnum, 24)
+var SyncLanguageCode_EN_US *smithy.Schema
+
+var SyncLanguageCode_EN_AB *smithy.Schema
+
+var SyncLanguageCode_EN_AU *smithy.Schema
+
+var SyncLanguageCode_EN_GB *smithy.Schema
+
+var SyncLanguageCode_EN_IE *smithy.Schema
+
+var SyncLanguageCode_EN_IN *smithy.Schema
+
+var SyncLanguageCode_EN_WL *smithy.Schema
+
+var SyncLanguageCode_EN_ZA *smithy.Schema
+
+var SyncLanguageCode_EN_NZ *smithy.Schema
+
+var SyncLanguageCode_ES_US *smithy.Schema
+
+var SyncLanguageCode_ES_ES *smithy.Schema
+
+var SyncLanguageCode_ES_MX *smithy.Schema
+
+var SyncLanguageCode_FR_FR *smithy.Schema
+
+var SyncLanguageCode_FR_CA *smithy.Schema
+
+var SyncLanguageCode_IT_IT *smithy.Schema
+
+var SyncLanguageCode_DE_DE *smithy.Schema
+
+var SyncLanguageCode_DE_CH *smithy.Schema
+
+var SyncLanguageCode_JA_JP *smithy.Schema
+
+var SyncLanguageCode_PT_BR *smithy.Schema
+
+var SyncLanguageCode_PT_PT *smithy.Schema
+
+var SyncLanguageCode_ZH_CN *smithy.Schema
+
+var SyncLanguageCode_ZH_TW *smithy.Schema
+
+var SyncLanguageCode_ZH_HK *smithy.Schema
+
+var SyncLanguageCode_KO_KR *smithy.Schema
+
+var SyncLanguageCodeItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncLanguageCodeItem",
+}, smithy.ShapeTypeStructure, 2)
+var SyncLanguageCodeItem_LanguageCode *smithy.Schema
+
+var SyncLanguageCodeItem_DurationInSeconds *smithy.Schema
+
+var _SyncLanguageCodeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncLanguageCodeList",
+}, smithy.ShapeTypeList, 1)
+var _SyncLanguageCodeList_member *smithy.Schema
+
+var _SyncLanguageOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncLanguageOptions",
+}, smithy.ShapeTypeList, 1)
+var _SyncLanguageOptions_member *smithy.Schema
+
+var SyncMedia = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncMedia",
+}, smithy.ShapeTypeUnion, 2)
+var SyncMedia_MediaBytes *smithy.Schema
+
+var SyncMedia_MediaFileUri *smithy.Schema
+
+var SyncOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncOutputConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var SyncOutputConfiguration_OutputMediaFileUri *smithy.Schema
+
+var SyncRedaction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncRedaction",
+}, smithy.ShapeTypeStructure, 1)
+var SyncRedaction_Type *smithy.Schema
+
+var _SyncRedactionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "SyncRedactionList",
+}, smithy.ShapeTypeList, 1)
+var _SyncRedactionList_member *smithy.Schema
+
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "Tag",
@@ -1693,6 +1903,30 @@ var _TranscribeArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "TranscribeArn",
 }, smithy.ShapeTypeString, 0)
+
+var TranscribeAudioMetadata = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "TranscribeAudioMetadata",
+}, smithy.ShapeTypeStructure, 6)
+var TranscribeAudioMetadata_LanguageCode *smithy.Schema
+
+var TranscribeAudioMetadata_LanguageCodes *smithy.Schema
+
+var TranscribeAudioMetadata_MediaFormat *smithy.Schema
+
+var TranscribeAudioMetadata_MediaSampleRateHertz *smithy.Schema
+
+var TranscribeAudioMetadata_SpeakersCount *smithy.Schema
+
+var TranscribeAudioMetadata_NumberOfChannels *smithy.Schema
+
+var TranscribeAudioResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "TranscribeAudioResults",
+}, smithy.ShapeTypeStructure, 2)
+var TranscribeAudioResults_Transcript *smithy.Schema
+
+var TranscribeAudioResults_Items *smithy.Schema
 
 var Transcript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -1833,6 +2067,16 @@ var TranscriptionJobSummary_LanguageCodes *smithy.Schema
 
 var TranscriptionJobSummary_ToxicityDetection *smithy.Schema
 
+var TranscriptResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "TranscriptResponse",
+}, smithy.ShapeTypeStructure, 3)
+var TranscriptResponse_Metadata *smithy.Schema
+
+var TranscriptResponse_Results *smithy.Schema
+
+var TranscriptResponse_RedactedResults *smithy.Schema
+
 var Type = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "Type",
@@ -1851,6 +2095,22 @@ var _Vocabularies = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Vocabularies",
 }, smithy.ShapeTypeList, 1)
 var _Vocabularies_member *smithy.Schema
+
+var VocabularyFilterEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularyFilterEntry",
+}, smithy.ShapeTypeStructure, 3)
+var VocabularyFilterEntry_Language *smithy.Schema
+
+var VocabularyFilterEntry_VocabularyFilterName *smithy.Schema
+
+var VocabularyFilterEntry_Words *smithy.Schema
+
+var _VocabularyFilterEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularyFilterEntryList",
+}, smithy.ShapeTypeList, 1)
+var _VocabularyFilterEntryList_member *smithy.Schema
 
 var VocabularyFilterInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -1883,6 +2143,14 @@ var _VocabularyFilters = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _VocabularyFilters_member *smithy.Schema
 
+var VocabularyFilterSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularyFilterSettings",
+}, smithy.ShapeTypeStructure, 2)
+var VocabularyFilterSettings_VocabularyFilterMethod *smithy.Schema
+
+var VocabularyFilterSettings_Filters *smithy.Schema
+
 var VocabularyInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "VocabularyInfo",
@@ -1900,6 +2168,36 @@ var _VocabularyName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VocabularyName",
 }, smithy.ShapeTypeString, 0)
 
+var VocabularyPhrase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularyPhrase",
+}, smithy.ShapeTypeStructure, 2)
+var VocabularyPhrase_Text *smithy.Schema
+
+var VocabularyPhrase_DisplayAs *smithy.Schema
+
+var _VocabularyPhraseList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularyPhraseList",
+}, smithy.ShapeTypeList, 1)
+var _VocabularyPhraseList_member *smithy.Schema
+
+var VocabularySettingsEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularySettingsEntry",
+}, smithy.ShapeTypeStructure, 3)
+var VocabularySettingsEntry_Language *smithy.Schema
+
+var VocabularySettingsEntry_VocabularyName *smithy.Schema
+
+var VocabularySettingsEntry_Phrases *smithy.Schema
+
+var _VocabularySettingsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularySettingsList",
+}, smithy.ShapeTypeList, 1)
+var _VocabularySettingsList_member *smithy.Schema
+
 var VocabularyState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "VocabularyState",
@@ -1909,6 +2207,11 @@ var VocabularyState_PENDING *smithy.Schema
 var VocabularyState_READY *smithy.Schema
 
 var VocabularyState_FAILED *smithy.Schema
+
+var _VocabularyText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "VocabularyText",
+}, smithy.ShapeTypeString, 0)
 
 var _Word = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
@@ -2618,6 +2921,40 @@ var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var TranscribeAudioRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "TranscribeAudioRequest",
+}, smithy.ShapeTypeStructure, 11)
+var TranscribeAudioRequest_Media *smithy.Schema
+
+var TranscribeAudioRequest_Language *smithy.Schema
+
+var TranscribeAudioRequest_LanguageDetectionMode *smithy.Schema
+
+var TranscribeAudioRequest_LanguageOptions *smithy.Schema
+
+var TranscribeAudioRequest_ChannelIdentification *smithy.Schema
+
+var TranscribeAudioRequest_ShowSpeakerLabels *smithy.Schema
+
+var TranscribeAudioRequest_MaxSpeakerLabels *smithy.Schema
+
+var TranscribeAudioRequest_VocabularySettings *smithy.Schema
+
+var TranscribeAudioRequest_VocabularyFilterSettings *smithy.Schema
+
+var TranscribeAudioRequest_ContentRedaction *smithy.Schema
+
+var TranscribeAudioRequest_OutputConfiguration *smithy.Schema
+
+var TranscribeAudioResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.transcribe",
+	Name:      "TranscribeAudioResponse",
+}, smithy.ShapeTypeStructure, 2)
+var TranscribeAudioResponse_OutputConfiguration *smithy.Schema
+
+var TranscribeAudioResponse_TranscriptResponse *smithy.Schema
+
 var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.transcribe",
 	Name:      "UntagResourceRequest",
@@ -2752,7 +3089,23 @@ func init() {
 
 	AbsoluteTimeRange_Last = AbsoluteTimeRange.AddMember("Last", _TimestampMilliseconds)
 
+	BadRequestExceptionReason_AUDIO_TOO_LONG = BadRequestExceptionReason.AddMember("AUDIO_TOO_LONG", smithyprelude.Unit)
+
+	BadRequestExceptionReason_AUDIO_TOO_SHORT = BadRequestExceptionReason.AddMember("AUDIO_TOO_SHORT", smithyprelude.Unit)
+
+	BadRequestExceptionReason_UNSUPPORTED_AUDIO_FORMAT = BadRequestExceptionReason.AddMember("UNSUPPORTED_AUDIO_FORMAT", smithyprelude.Unit)
+
+	BadRequestExceptionReason_UNSUPPORTED_CHANNEL_COUNT = BadRequestExceptionReason.AddMember("UNSUPPORTED_CHANNEL_COUNT", smithyprelude.Unit)
+
+	BadRequestExceptionReason_INVALID_AUDIO = BadRequestExceptionReason.AddMember("INVALID_AUDIO", smithyprelude.Unit)
+
+	BadRequestExceptionReason_AUDIO_FILE_TOO_LARGE = BadRequestExceptionReason.AddMember("AUDIO_FILE_TOO_LARGE", smithyprelude.Unit)
+
+	BadRequestExceptionReason_MEDIA_DOWNLOAD_FAILED = BadRequestExceptionReason.AddMember("MEDIA_DOWNLOAD_FAILED", smithyprelude.Unit)
+
 	BadRequestException_Message = BadRequestException.AddMember("Message", _FailureReason)
+
+	BadRequestException_Reason = BadRequestException.AddMember("Reason", BadRequestExceptionReason)
 
 	BaseModelName_NARROW_BAND = BaseModelName.AddMember("NARROW_BAND", smithyprelude.Unit)
 
@@ -3366,6 +3719,8 @@ func init() {
 
 	_LanguageCodeList_member = _LanguageCodeList.AddMember("member", LanguageCodeItem)
 
+	LanguageDetectionMode_IDENTIFY_LANGUAGE = LanguageDetectionMode.AddMember("IDENTIFY_LANGUAGE", smithyprelude.Unit)
+
 	ModelStatus_IN_PROGRESS = ModelStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
 
 	ModelStatus_FAILED = ModelStatus.AddMember("FAILED", smithyprelude.Unit)
@@ -3618,6 +3973,114 @@ func init() {
 
 	SubtitlesOutput_OutputStartIndex = SubtitlesOutput.AddMember("OutputStartIndex", _SubtitleOutputStartIndex)
 
+	SyncLanguageCode_EN_US = SyncLanguageCode.AddMember("EN_US", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_AB = SyncLanguageCode.AddMember("EN_AB", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_AU = SyncLanguageCode.AddMember("EN_AU", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_GB = SyncLanguageCode.AddMember("EN_GB", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_IE = SyncLanguageCode.AddMember("EN_IE", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_IN = SyncLanguageCode.AddMember("EN_IN", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_WL = SyncLanguageCode.AddMember("EN_WL", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_ZA = SyncLanguageCode.AddMember("EN_ZA", smithyprelude.Unit)
+
+	SyncLanguageCode_EN_NZ = SyncLanguageCode.AddMember("EN_NZ", smithyprelude.Unit)
+
+	SyncLanguageCode_ES_US = SyncLanguageCode.AddMember("ES_US", smithyprelude.Unit)
+
+	SyncLanguageCode_ES_ES = SyncLanguageCode.AddMember("ES_ES", smithyprelude.Unit)
+
+	SyncLanguageCode_ES_MX = SyncLanguageCode.AddMember("ES_MX", smithyprelude.Unit)
+
+	SyncLanguageCode_FR_FR = SyncLanguageCode.AddMember("FR_FR", smithyprelude.Unit)
+
+	SyncLanguageCode_FR_CA = SyncLanguageCode.AddMember("FR_CA", smithyprelude.Unit)
+
+	SyncLanguageCode_IT_IT = SyncLanguageCode.AddMember("IT_IT", smithyprelude.Unit)
+
+	SyncLanguageCode_DE_DE = SyncLanguageCode.AddMember("DE_DE", smithyprelude.Unit)
+
+	SyncLanguageCode_DE_CH = SyncLanguageCode.AddMember("DE_CH", smithyprelude.Unit)
+
+	SyncLanguageCode_JA_JP = SyncLanguageCode.AddMember("JA_JP", smithyprelude.Unit)
+
+	SyncLanguageCode_PT_BR = SyncLanguageCode.AddMember("PT_BR", smithyprelude.Unit)
+
+	SyncLanguageCode_PT_PT = SyncLanguageCode.AddMember("PT_PT", smithyprelude.Unit)
+
+	SyncLanguageCode_ZH_CN = SyncLanguageCode.AddMember("ZH_CN", smithyprelude.Unit)
+
+	SyncLanguageCode_ZH_TW = SyncLanguageCode.AddMember("ZH_TW", smithyprelude.Unit)
+
+	SyncLanguageCode_ZH_HK = SyncLanguageCode.AddMember("ZH_HK", smithyprelude.Unit)
+
+	SyncLanguageCode_KO_KR = SyncLanguageCode.AddMember("KO_KR", smithyprelude.Unit)
+
+	SyncRedaction_Type = SyncRedaction.AddMember("Type", PiiEntityType)
+
+	_SyncRedactionList_member = _SyncRedactionList.AddMember("member", SyncRedaction)
+
+	SyncItem_Id = SyncItem.AddMember("Id", _ItemId)
+
+	SyncItem_Content = SyncItem.AddMember("Content", _String)
+
+	SyncItem_StartTime = SyncItem.AddMember("StartTime", _Double)
+
+	SyncItem_EndTime = SyncItem.AddMember("EndTime", _Double)
+
+	SyncItem_LanguageCode = SyncItem.AddMember("LanguageCode", SyncLanguageCode)
+
+	SyncItem_ChannelLabel = SyncItem.AddMember("ChannelLabel", _String)
+
+	SyncItem_SpeakerLabel = SyncItem.AddMember("SpeakerLabel", _String)
+
+	SyncItem_VocabularyFilterMatch = SyncItem.AddMember("VocabularyFilterMatch", _Boolean)
+
+	SyncItem_Redactions = SyncItem.AddMember("Redactions", _SyncRedactionList)
+
+	_SyncItemList_member = _SyncItemList.AddMember("member", SyncItem)
+
+	SyncLanguage_EN = SyncLanguage.AddMember("EN", smithyprelude.Unit)
+
+	SyncLanguage_ES = SyncLanguage.AddMember("ES", smithyprelude.Unit)
+
+	SyncLanguage_FR = SyncLanguage.AddMember("FR", smithyprelude.Unit)
+
+	SyncLanguage_IT = SyncLanguage.AddMember("IT", smithyprelude.Unit)
+
+	SyncLanguage_DE = SyncLanguage.AddMember("DE", smithyprelude.Unit)
+
+	SyncLanguage_JA = SyncLanguage.AddMember("JA", smithyprelude.Unit)
+
+	SyncLanguage_PT = SyncLanguage.AddMember("PT", smithyprelude.Unit)
+
+	SyncLanguage_KO = SyncLanguage.AddMember("KO", smithyprelude.Unit)
+
+	SyncLanguage_ZH_CN = SyncLanguage.AddMember("ZH_CN", smithyprelude.Unit)
+
+	SyncLanguage_ZH_TW = SyncLanguage.AddMember("ZH_TW", smithyprelude.Unit)
+
+	SyncLanguage_ZH_HK = SyncLanguage.AddMember("ZH_HK", smithyprelude.Unit)
+
+	SyncLanguageCodeItem_LanguageCode = SyncLanguageCodeItem.AddMember("LanguageCode", SyncLanguageCode)
+
+	SyncLanguageCodeItem_DurationInSeconds = SyncLanguageCodeItem.AddMember("DurationInSeconds", _DurationInSeconds)
+
+	_SyncLanguageCodeList_member = _SyncLanguageCodeList.AddMember("member", SyncLanguageCodeItem)
+
+	_SyncLanguageOptions_member = _SyncLanguageOptions.AddMember("member", SyncLanguage)
+
+	SyncMedia_MediaBytes = SyncMedia.AddMember("MediaBytes", _MediaBytesBlob)
+
+	SyncMedia_MediaFileUri = SyncMedia.AddMember("MediaFileUri", _Uri)
+
+	SyncOutputConfiguration_OutputMediaFileUri = SyncOutputConfiguration.AddMember("OutputMediaFileUri", _Uri)
+
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
 	ToxicityCategory_ALL = ToxicityCategory.AddMember("ALL", smithyprelude.Unit)
@@ -3627,6 +4090,22 @@ func init() {
 	ToxicityDetectionSettings_ToxicityCategories = ToxicityDetectionSettings.AddMember("ToxicityCategories", _ToxicityCategories)
 
 	_ToxicityDetection_member = _ToxicityDetection.AddMember("member", ToxicityDetectionSettings)
+
+	TranscribeAudioMetadata_LanguageCode = TranscribeAudioMetadata.AddMember("LanguageCode", SyncLanguageCode)
+
+	TranscribeAudioMetadata_LanguageCodes = TranscribeAudioMetadata.AddMember("LanguageCodes", _SyncLanguageCodeList)
+
+	TranscribeAudioMetadata_MediaFormat = TranscribeAudioMetadata.AddMember("MediaFormat", MediaFormat)
+
+	TranscribeAudioMetadata_MediaSampleRateHertz = TranscribeAudioMetadata.AddMember("MediaSampleRateHertz", _MediaSampleRateHertz)
+
+	TranscribeAudioMetadata_SpeakersCount = TranscribeAudioMetadata.AddMember("SpeakersCount", _NumberOfSpeakers)
+
+	TranscribeAudioMetadata_NumberOfChannels = TranscribeAudioMetadata.AddMember("NumberOfChannels", _NumberOfChannels)
+
+	TranscribeAudioResults_Transcript = TranscribeAudioResults.AddMember("Transcript", _String)
+
+	TranscribeAudioResults_Items = TranscribeAudioResults.AddMember("Items", _SyncItemList)
 
 	TranscriptionJob_TranscriptionJobName = TranscriptionJob.AddMember("TranscriptionJobName", _TranscriptionJobName)
 
@@ -3708,6 +4187,12 @@ func init() {
 
 	_TranscriptionJobSummaries_member = _TranscriptionJobSummaries.AddMember("member", TranscriptionJobSummary)
 
+	TranscriptResponse_Metadata = TranscriptResponse.AddMember("Metadata", TranscribeAudioMetadata)
+
+	TranscriptResponse_Results = TranscriptResponse.AddMember("Results", TranscribeAudioResults)
+
+	TranscriptResponse_RedactedResults = TranscriptResponse.AddMember("RedactedResults", TranscribeAudioResults)
+
 	VocabularyState_PENDING = VocabularyState.AddMember("PENDING", smithyprelude.Unit)
 
 	VocabularyState_READY = VocabularyState.AddMember("READY", smithyprelude.Unit)
@@ -3724,6 +4209,16 @@ func init() {
 
 	_Vocabularies_member = _Vocabularies.AddMember("member", VocabularyInfo)
 
+	_Words_member = _Words.AddMember("member", _Word)
+
+	VocabularyFilterEntry_Language = VocabularyFilterEntry.AddMember("Language", SyncLanguage)
+
+	VocabularyFilterEntry_VocabularyFilterName = VocabularyFilterEntry.AddMember("VocabularyFilterName", _VocabularyFilterName)
+
+	VocabularyFilterEntry_Words = VocabularyFilterEntry.AddMember("Words", _Words)
+
+	_VocabularyFilterEntryList_member = _VocabularyFilterEntryList.AddMember("member", VocabularyFilterEntry)
+
 	VocabularyFilterInfo_VocabularyFilterName = VocabularyFilterInfo.AddMember("VocabularyFilterName", _VocabularyFilterName)
 
 	VocabularyFilterInfo_LanguageCode = VocabularyFilterInfo.AddMember("LanguageCode", LanguageCode)
@@ -3732,7 +4227,23 @@ func init() {
 
 	_VocabularyFilters_member = _VocabularyFilters.AddMember("member", VocabularyFilterInfo)
 
-	_Words_member = _Words.AddMember("member", _Word)
+	VocabularyFilterSettings_VocabularyFilterMethod = VocabularyFilterSettings.AddMember("VocabularyFilterMethod", VocabularyFilterMethod)
+
+	VocabularyFilterSettings_Filters = VocabularyFilterSettings.AddMember("Filters", _VocabularyFilterEntryList)
+
+	VocabularyPhrase_Text = VocabularyPhrase.AddMember("Text", _VocabularyText)
+
+	VocabularyPhrase_DisplayAs = VocabularyPhrase.AddMember("DisplayAs", _VocabularyText)
+
+	_VocabularyPhraseList_member = _VocabularyPhraseList.AddMember("member", VocabularyPhrase)
+
+	VocabularySettingsEntry_Language = VocabularySettingsEntry.AddMember("Language", SyncLanguage)
+
+	VocabularySettingsEntry_VocabularyName = VocabularySettingsEntry.AddMember("VocabularyName", _VocabularyName)
+
+	VocabularySettingsEntry_Phrases = VocabularySettingsEntry.AddMember("Phrases", _VocabularyPhraseList)
+
+	_VocabularySettingsList_member = _VocabularySettingsList.AddMember("member", VocabularySettingsEntry)
 
 	CreateCallAnalyticsCategoryRequest_CategoryName = CreateCallAnalyticsCategoryRequest.AddMember("CategoryName", _CategoryName, &smithytraits.HTTPLabel{})
 
@@ -4151,6 +4662,32 @@ func init() {
 	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TranscribeArn, &smithytraits.HTTPLabel{})
 
 	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
+
+	TranscribeAudioRequest_Media = TranscribeAudioRequest.AddMember("Media", SyncMedia)
+
+	TranscribeAudioRequest_Language = TranscribeAudioRequest.AddMember("Language", SyncLanguage)
+
+	TranscribeAudioRequest_LanguageDetectionMode = TranscribeAudioRequest.AddMember("LanguageDetectionMode", LanguageDetectionMode)
+
+	TranscribeAudioRequest_LanguageOptions = TranscribeAudioRequest.AddMember("LanguageOptions", _SyncLanguageOptions)
+
+	TranscribeAudioRequest_ChannelIdentification = TranscribeAudioRequest.AddMember("ChannelIdentification", _Boolean)
+
+	TranscribeAudioRequest_ShowSpeakerLabels = TranscribeAudioRequest.AddMember("ShowSpeakerLabels", _Boolean)
+
+	TranscribeAudioRequest_MaxSpeakerLabels = TranscribeAudioRequest.AddMember("MaxSpeakerLabels", _MaxSpeakers)
+
+	TranscribeAudioRequest_VocabularySettings = TranscribeAudioRequest.AddMember("VocabularySettings", _VocabularySettingsList)
+
+	TranscribeAudioRequest_VocabularyFilterSettings = TranscribeAudioRequest.AddMember("VocabularyFilterSettings", VocabularyFilterSettings)
+
+	TranscribeAudioRequest_ContentRedaction = TranscribeAudioRequest.AddMember("ContentRedaction", ContentRedaction)
+
+	TranscribeAudioRequest_OutputConfiguration = TranscribeAudioRequest.AddMember("OutputConfiguration", SyncOutputConfiguration)
+
+	TranscribeAudioResponse_OutputConfiguration = TranscribeAudioResponse.AddMember("OutputConfiguration", SyncOutputConfiguration)
+
+	TranscribeAudioResponse_TranscriptResponse = TranscribeAudioResponse.AddMember("TranscriptResponse", TranscriptResponse)
 
 	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TranscribeArn, &smithytraits.HTTPLabel{})
 

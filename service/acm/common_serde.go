@@ -42,6 +42,10 @@ func serializeAcmCertificateMetadataFilter(s smithy.ShapeSerializer, schema *smi
 		s.WriteUnion(schema, schemas.AcmCertificateMetadataFilter_RenewalStatus)
 		s.WriteString(schemas.AcmCertificateMetadataFilter_RenewalStatus, string(vv.Value))
 		s.CloseUnion()
+	case *types.AcmCertificateMetadataFilterMemberRootHierarchyType:
+		s.WriteUnion(schema, schemas.AcmCertificateMetadataFilter_RootHierarchyType)
+		s.WriteString(schemas.AcmCertificateMetadataFilter_RootHierarchyType, string(vv.Value))
+		s.CloseUnion()
 	case *types.AcmCertificateMetadataFilterMemberStatus:
 		s.WriteUnion(schema, schemas.AcmCertificateMetadataFilter_Status)
 		s.WriteString(schemas.AcmCertificateMetadataFilter_Status, string(vv.Value))
@@ -289,6 +293,10 @@ func deserializeAcmCertificateMetadataFilter(d smithy.ShapeDeserializer, s *smit
 			return vv.Deserialize(d)
 		case schemas.AcmCertificateMetadataFilter_RenewalStatus:
 			vv := &types.AcmCertificateMetadataFilterMemberRenewalStatus{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AcmCertificateMetadataFilter_RootHierarchyType:
+			vv := &types.AcmCertificateMetadataFilterMemberRootHierarchyType{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.AcmCertificateMetadataFilter_Status:
@@ -741,6 +749,14 @@ func serializeKeyUsageNames(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializePublicKeyAlgorithmList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PublicKeyAlgorithm) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRootHierarchyTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RootHierarchyType) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1338,6 +1354,27 @@ func deserializePublicKeyAlgorithmList(d smithy.ShapeDeserializer, s *smithy.Sch
 		}
 
 		*v = append(*v, types.PublicKeyAlgorithm(vv))
+		return nil
+	})
+}
+
+func deserializeRootHierarchyTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RootHierarchyType) error {
+	*v = make([]types.RootHierarchyType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RootHierarchyType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RootHierarchyType(vv))
 		return nil
 	})
 }

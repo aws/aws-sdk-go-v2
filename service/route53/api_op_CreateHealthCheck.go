@@ -25,9 +25,13 @@ import (
 // You can associate health checks with failover resource record sets in a private
 // hosted zone. Note the following:
 //
-//   - Route 53 health checkers are outside the VPC. To check the health of an
-//     endpoint within a VPC by IP address, you must assign a public IP address to the
-//     instance in the VPC.
+//   - For a public health check, Route 53 health checkers are outside the VPC. To
+//     check the health of an endpoint within a VPC by IP address, you must assign a
+//     public IP address to the instance in the VPC.
+//
+//   - To check the health of an endpoint within a VPC by using a private IP
+//     address, use a private endpoint health check ( EndpointType of PRIVATE ). For
+//     more information, see CreateHealthCheckSource .
 //
 //   - You can configure a health checker to check the health of an external
 //     resource that the instance relies on, such as a database server.

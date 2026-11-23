@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateBackup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateClusterPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateClusterPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateClusterPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataRepositoryAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataRepositoryAssociation(context.Background(), nil, func(o *Options) {
@@ -194,6 +206,30 @@ func TestCheckSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSnapmirrorPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSnapmirrorPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSnapmirrorPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateSnapmirrorRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSnapmirrorRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSnapmirrorRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSnapshot(context.Background(), nil, func(o *Options) {
@@ -206,11 +242,35 @@ func TestCheckSnapshot_CreateSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSnapshotPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSnapshotPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSnapshotPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateStorageVirtualMachine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateStorageVirtualMachine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateStorageVirtualMachinePeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStorageVirtualMachinePeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateStorageVirtualMachinePeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +314,18 @@ func TestCheckSnapshot_DeleteBackup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteClusterPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClusterPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteClusterPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDataRepositoryAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataRepositoryAssociation(context.Background(), nil, func(o *Options) {
@@ -290,6 +362,30 @@ func TestCheckSnapshot_DeleteFileSystem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSnapmirrorPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSnapmirrorPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSnapmirrorPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSnapmirrorRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSnapmirrorRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSnapmirrorRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteSnapshot(context.Background(), nil, func(o *Options) {
@@ -302,11 +398,35 @@ func TestCheckSnapshot_DeleteSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSnapshotPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSnapshotPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSnapshotPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteStorageVirtualMachine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteStorageVirtualMachine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteStorageVirtualMachinePeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteStorageVirtualMachinePeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteStorageVirtualMachinePeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -331,6 +451,18 @@ func TestCheckSnapshot_DescribeBackups(t *testing.T) {
 	_, err := svc.DescribeBackups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeBackups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeClusterPeers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterPeers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeClusterPeers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -422,11 +554,59 @@ func TestCheckSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeSnapmirrorPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSnapmirrorPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSnapmirrorPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSnapmirrorRelationships(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSnapmirrorRelationships(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSnapmirrorRelationships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeSnapshotPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSnapshotPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSnapshotPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSnapshots(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeSnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeStorageVirtualMachinePeers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeStorageVirtualMachinePeers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeStorageVirtualMachinePeers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -554,6 +734,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateClusterPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateClusterPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateClusterPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataRepositoryAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataRepositoryAssociation(context.Background(), nil, func(o *Options) {
@@ -602,6 +794,30 @@ func TestCheckSnapshot_UpdateSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateSnapmirrorPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSnapmirrorPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSnapmirrorPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateSnapmirrorRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSnapmirrorRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSnapmirrorRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSnapshot(context.Background(), nil, func(o *Options) {
@@ -614,11 +830,35 @@ func TestCheckSnapshot_UpdateSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateSnapshotPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSnapshotPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSnapshotPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateStorageVirtualMachine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateStorageVirtualMachine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateStorageVirtualMachinePeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStorageVirtualMachinePeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateStorageVirtualMachinePeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -709,6 +949,18 @@ func TestUpdateSnapshot_CreateBackup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateClusterPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateClusterPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateClusterPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataRepositoryAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataRepositoryAssociation(context.Background(), nil, func(o *Options) {
@@ -769,6 +1021,30 @@ func TestUpdateSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSnapmirrorPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSnapmirrorPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSnapmirrorPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateSnapmirrorRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSnapmirrorRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSnapmirrorRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSnapshot(context.Background(), nil, func(o *Options) {
@@ -781,11 +1057,35 @@ func TestUpdateSnapshot_CreateSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSnapshotPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSnapshotPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSnapshotPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateStorageVirtualMachine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateStorageVirtualMachine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateStorageVirtualMachinePeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStorageVirtualMachinePeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateStorageVirtualMachinePeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -829,6 +1129,18 @@ func TestUpdateSnapshot_DeleteBackup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteClusterPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteClusterPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteClusterPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDataRepositoryAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDataRepositoryAssociation(context.Background(), nil, func(o *Options) {
@@ -865,6 +1177,30 @@ func TestUpdateSnapshot_DeleteFileSystem(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSnapmirrorPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSnapmirrorPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSnapmirrorPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSnapmirrorRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSnapmirrorRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSnapmirrorRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteSnapshot(context.Background(), nil, func(o *Options) {
@@ -877,11 +1213,35 @@ func TestUpdateSnapshot_DeleteSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSnapshotPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSnapshotPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSnapshotPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteStorageVirtualMachine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteStorageVirtualMachine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteStorageVirtualMachinePeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteStorageVirtualMachinePeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteStorageVirtualMachinePeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -906,6 +1266,18 @@ func TestUpdateSnapshot_DescribeBackups(t *testing.T) {
 	_, err := svc.DescribeBackups(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeBackups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeClusterPeers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeClusterPeers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeClusterPeers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -997,11 +1369,59 @@ func TestUpdateSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeSnapmirrorPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSnapmirrorPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSnapmirrorPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSnapmirrorRelationships(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSnapmirrorRelationships(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSnapmirrorRelationships")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeSnapshotPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSnapshotPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSnapshotPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSnapshots(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeSnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeStorageVirtualMachinePeers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeStorageVirtualMachinePeers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeStorageVirtualMachinePeers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1129,6 +1549,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateClusterPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateClusterPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateClusterPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateDataRepositoryAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataRepositoryAssociation(context.Background(), nil, func(o *Options) {
@@ -1177,6 +1609,30 @@ func TestUpdateSnapshot_UpdateSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateSnapmirrorPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSnapmirrorPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSnapmirrorPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSnapmirrorRelationship(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSnapmirrorRelationship(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSnapmirrorRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSnapshot(context.Background(), nil, func(o *Options) {
@@ -1189,11 +1645,35 @@ func TestUpdateSnapshot_UpdateSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateSnapshotPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSnapshotPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSnapshotPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateStorageVirtualMachine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStorageVirtualMachine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateStorageVirtualMachinePeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateStorageVirtualMachinePeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateStorageVirtualMachinePeer")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

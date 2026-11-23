@@ -4,6 +4,7 @@ package rtbfabric
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
 	smithy "github.com/aws/smithy-go"
@@ -40,6 +41,10 @@ type UpdateLinkInput struct {
 	// This member is required.
 	LinkId *string
 
+	// A unique, case-sensitive identifier for the request. The SDK generates one when
+	// you don't.
+	ClientToken *string
+
 	// Settings for the application logs.
 	LogSettings *types.LinkLogSettings
 
@@ -56,6 +61,9 @@ func (v *UpdateLinkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLinkRequest_clientToken, *v.ClientToken)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.UpdateLinkRequest_gatewayId, *v.GatewayId)
 	}
@@ -84,6 +92,11 @@ type UpdateLinkOutput struct {
 	// This member is required.
 	Status types.LinkStatus
 
+	// The ID of the update this call started.
+	//
+	// This member is required.
+	UpdateId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -103,6 +116,9 @@ func (v *UpdateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateLinkResponse_status, string(v.Status))
 	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.UpdateLinkResponse_updateId, *v.UpdateId)
+	}
 }
 func (v *UpdateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateLinkResponse, func(s *smithy.Schema) error {
@@ -117,6 +133,9 @@ func (v *UpdateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = types.LinkStatus(ev)
 			return nil
+		case schemas.UpdateLinkResponse_updateId:
+			v.UpdateId = new(string)
+			return d.ReadString(schemas.UpdateLinkResponse_updateId, v.UpdateId)
 		}
 		return nil
 	})
@@ -141,6 +160,9 @@ func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateLinkMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLinkValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,4 +182,37 @@ func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateLink struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateLink) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateLink) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateLinkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateLinkInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateLinkMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateLink{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/inbound-connectors/__InboundConnectorId__/associations
+
+Content-Type: application/json
+
+{"AssociateAccessControlApplications":["__Member__","__Member__"],"DisassociateAccessControlApplications":["__Member__","__Member__"]}

@@ -73,10 +73,10 @@ func (v *DeleteAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 type DeleteAttachmentOutput struct {
 
 	// The unique identifier of the asset.
-	AssetIdentifier *string
+	AssetId *string
 
 	// The identifier of the item within the iterable form, if applicable.
-	ItemIdentifier *string
+	ItemId *string
 
 	// The name of the iterable form, if the deletion targets an item.
 	IterableFormName *string
@@ -94,11 +94,11 @@ func (v *DeleteAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetIdentifier != nil {
-		s.WriteString(schemas.DeleteAttachmentResponse_AssetIdentifier, *v.AssetIdentifier)
+	if v.AssetId != nil {
+		s.WriteString(schemas.DeleteAttachmentResponse_AssetId, *v.AssetId)
 	}
-	if v.ItemIdentifier != nil {
-		s.WriteString(schemas.DeleteAttachmentResponse_ItemIdentifier, *v.ItemIdentifier)
+	if v.ItemId != nil {
+		s.WriteString(schemas.DeleteAttachmentResponse_ItemId, *v.ItemId)
 	}
 	if v.IterableFormName != nil {
 		s.WriteString(schemas.DeleteAttachmentResponse_IterableFormName, *v.IterableFormName)
@@ -107,12 +107,12 @@ func (v *DeleteAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DeleteAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteAttachmentResponse, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.DeleteAttachmentResponse_AssetIdentifier:
-			v.AssetIdentifier = new(string)
-			return d.ReadString(schemas.DeleteAttachmentResponse_AssetIdentifier, v.AssetIdentifier)
-		case schemas.DeleteAttachmentResponse_ItemIdentifier:
-			v.ItemIdentifier = new(string)
-			return d.ReadString(schemas.DeleteAttachmentResponse_ItemIdentifier, v.ItemIdentifier)
+		case schemas.DeleteAttachmentResponse_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.DeleteAttachmentResponse_AssetId, v.AssetId)
+		case schemas.DeleteAttachmentResponse_ItemId:
+			v.ItemId = new(string)
+			return d.ReadString(schemas.DeleteAttachmentResponse_ItemId, v.ItemId)
 		case schemas.DeleteAttachmentResponse_IterableFormName:
 			v.IterableFormName = new(string)
 			return d.ReadString(schemas.DeleteAttachmentResponse_IterableFormName, v.IterableFormName)

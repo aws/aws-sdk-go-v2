@@ -5,6 +5,7 @@ package kafka
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -38,11 +39,21 @@ type UpdateBrokerTypeInput struct {
 	// This member is required.
 	CurrentVersion *string
 
-	// The Amazon MSK broker type that you want all of the brokers in this cluster to
-	// be.
+	// The type of Amazon EC2 instances to use for Kafka brokers. For in-place
+	// upgrades to Express, use the composite format to initiate mixed mode, the
+	// Express instance type to complete the upgrade, or the Standard instance type to
+	// rollback.
 	//
 	// This member is required.
 	TargetInstanceType *string
+
+	// Controls automatic topic reassignment when entering mixed broker mode. When set
+	// to AUTO, MSK automatically reassigns all topics to the target broker type after
+	// adding new brokers. When set to MANUAL (default), customers manage topic
+	// reassignment using the StartTopicReassignment API. Only valid when
+	// targetInstanceType is a composite mixed-mode value. Must be set to MANUAL before
+	// completing the upgrade or rolling back.
+	TopicReassignment types.TopicReassignment
 
 	noSmithyDocumentSerde
 }
@@ -62,6 +73,9 @@ func (v *UpdateBrokerTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TargetInstanceType != nil {
 		s.WriteString(schemas.UpdateBrokerTypeRequest_TargetInstanceType, *v.TargetInstanceType)
+	}
+	if v.TopicReassignment != "" {
+		s.WriteString(schemas.UpdateBrokerTypeRequest_TopicReassignment, string(v.TopicReassignment))
 	}
 }
 

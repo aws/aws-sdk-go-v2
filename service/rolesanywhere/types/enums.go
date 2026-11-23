@@ -59,6 +59,63 @@ func (NotificationEvent) Values() []NotificationEvent {
 	}
 }
 
+type TipStatus string
+
+// Enum values for TipStatus
+const (
+	TipStatusEnabled  TipStatus = "ENABLED"
+	TipStatusDisabled TipStatus = "DISABLED"
+)
+
+// Values returns all known values for TipStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TipStatus) Values() []TipStatus {
+	return []TipStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type TipSubjectSource string
+
+// Enum values for TipSubjectSource
+const (
+	TipSubjectSourceX509SANUri    TipSubjectSource = "x509SAN/URI"
+	TipSubjectSourceX509SubjectCn TipSubjectSource = "x509Subject/CN"
+)
+
+// Values returns all known values for TipSubjectSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TipSubjectSource) Values() []TipSubjectSource {
+	return []TipSubjectSource{
+		"x509SAN/URI",
+		"x509Subject/CN",
+	}
+}
+
+type TipSubjectType string
+
+// Enum values for TipSubjectType
+const (
+	TipSubjectTypeUser     TipSubjectType = "user"
+	TipSubjectTypeWorkload TipSubjectType = "workload"
+)
+
+// Values returns all known values for TipSubjectType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TipSubjectType) Values() []TipSubjectType {
+	return []TipSubjectType{
+		"user",
+		"workload",
+	}
+}
+
 type TrustAnchorType string
 
 // Enum values for TrustAnchorType

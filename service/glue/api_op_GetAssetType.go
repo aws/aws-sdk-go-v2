@@ -51,7 +51,7 @@ func (v *GetAssetTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 type GetAssetTypeOutput struct {
 
 	// The forms that make up the asset type, keyed by form name.
-	Forms map[string]types.AssetTypeFormReference
+	Forms map[string]types.AssetTypeFormOutput
 
 	// The identifier of the asset type.
 	Id *string
@@ -73,7 +73,7 @@ func (v *GetAssetTypeOutput) Serialize(s smithy.ShapeSerializer) {
 
 func (v *GetAssetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Forms != nil {
-		serializeAssetTypeFormsMap(s, schemas.GetAssetTypeResponse_Forms, v.Forms)
+		serializeAssetTypeFormOutputMap(s, schemas.GetAssetTypeResponse_Forms, v.Forms)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAssetTypeResponse_Id, *v.Id)
@@ -86,7 +86,7 @@ func (v *GetAssetTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAssetTypeResponse, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.GetAssetTypeResponse_Forms:
-			return deserializeAssetTypeFormsMap(d, schemas.GetAssetTypeResponse_Forms, &v.Forms)
+			return deserializeAssetTypeFormOutputMap(d, schemas.GetAssetTypeResponse_Forms, &v.Forms)
 		case schemas.GetAssetTypeResponse_Id:
 			v.Id = new(string)
 			return d.ReadString(schemas.GetAssetTypeResponse_Id, v.Id)

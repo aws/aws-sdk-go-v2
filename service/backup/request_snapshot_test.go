@@ -4085,6 +4085,9 @@ func TestCheckRequestSnapshot_UpdateRegionSettings(t *testing.T) {
 		ResourceTypeManagementPreference: map[string]bool{
 			"key0": true,
 		},
+		ResourceTypeOptInIncremental: map[string]bool{
+			"key0": true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8199,6 +8202,9 @@ func TestUpdateRequestSnapshot_UpdateRegionSettings(t *testing.T) {
 			"key0": true,
 		},
 		ResourceTypeManagementPreference: map[string]bool{
+			"key0": true,
+		},
+		ResourceTypeOptInIncremental: map[string]bool{
 			"key0": true,
 		},
 	}

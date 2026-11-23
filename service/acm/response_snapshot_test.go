@@ -686,6 +686,8 @@ func TestCheckResponseSnapshot_DescribeCertificate(t *testing.T) {
 			CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 			AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
 			AcmeAccountId:            ptr.String("__AcmeAccountId__"),
+			CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+			RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeCertificate.response")
@@ -1221,6 +1223,8 @@ func TestCheckResponseSnapshot_ListCertificates(t *testing.T) {
 				RevokedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ManagedBy:                types.CertificateManagedBy("CLOUDFRONT"),
 				CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
+				CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+				RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 			},
 			{
 				CertificateArn: ptr.String("__CertificateArn__"),
@@ -1253,6 +1257,8 @@ func TestCheckResponseSnapshot_ListCertificates(t *testing.T) {
 				RevokedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ManagedBy:                types.CertificateManagedBy("CLOUDFRONT"),
 				CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
+				CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+				RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 			},
 		},
 	}
@@ -1272,6 +1278,10 @@ func TestCheckResponseSnapshot_ListCertificates(t *testing.T) {
 		CertificateKeyPairOrigins: []types.CertificateKeyPairOrigin{
 			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 			types.CertificateKeyPairOrigin("AWS_MANAGED"),
+		},
+		RootHierarchyTypes: []types.RootHierarchyType{
+			types.RootHierarchyType("N2_AMAZON_MANAGED"),
+			types.RootHierarchyType("N2_AMAZON_MANAGED"),
 		},
 		Includes: &types.Filters{
 			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
@@ -1488,8 +1498,10 @@ func TestCheckResponseSnapshot_RequestCertificate(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		KeyAlgorithm: types.KeyAlgorithm("RSA_1024"),
-		ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+		KeyAlgorithm:      types.KeyAlgorithm("RSA_1024"),
+		ManagedBy:         types.CertificateManagedBy("CLOUDFRONT"),
+		CertificateUsage:  types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+		RootHierarchyType: types.RootHierarchyType("N2_AMAZON_MANAGED"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1752,6 +1764,8 @@ func TestCheckResponseSnapshot_SearchCertificates(t *testing.T) {
 						CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 						AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
 						AcmeAccountId:            ptr.String("__AcmeAccountId__"),
+						CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+						RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 					},
 				},
 			},
@@ -1915,6 +1929,8 @@ func TestCheckResponseSnapshot_SearchCertificates(t *testing.T) {
 						CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 						AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
 						AcmeAccountId:            ptr.String("__AcmeAccountId__"),
+						CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+						RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 					},
 				},
 			},
@@ -2360,8 +2376,10 @@ func TestCheckResponseSnapshot_Error_InvalidDomainValidationOptionsException(t *
 				Value: ptr.String("__Value__"),
 			},
 		},
-		KeyAlgorithm: types.KeyAlgorithm("RSA_1024"),
-		ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+		KeyAlgorithm:      types.KeyAlgorithm("RSA_1024"),
+		ManagedBy:         types.CertificateManagedBy("CLOUDFRONT"),
+		CertificateUsage:  types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+		RootHierarchyType: types.RootHierarchyType("N2_AMAZON_MANAGED"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -4,15 +4,22 @@ package route53
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/smithy-go/middleware"
 )
 
 // Updates the features configuration for a hosted zone. This operation allows you
 // to enable or disable specific features for your hosted zone, such as accelerated
-// recovery.
+// recovery and public DNS fallback.
 //
 // Accelerated recovery enables you to update DNS records in your public hosted
 // zone even when the us-east-1 region is unavailable.
+//
+// Public DNS fallback enables Route 53 to retry a query against public DNS when a
+// query for a domain name in a private hosted zone matches no existing name (
+// NXDOMAIN ). Fallback does not occur when the name exists but has no record of
+// the requested type. Public DNS fallback is supported only for private hosted
+// zones.
 func (c *Client) UpdateHostedZoneFeatures(ctx context.Context, params *UpdateHostedZoneFeaturesInput, optFns ...func(*Options)) (*UpdateHostedZoneFeaturesOutput, error) {
 	if params == nil {
 		params = &UpdateHostedZoneFeaturesInput{}
@@ -36,9 +43,38 @@ type UpdateHostedZoneFeaturesInput struct {
 	// This member is required.
 	HostedZoneId *string
 
+	// Specify the Change Guardrails to turn on or off for the hosted zone. Each entry
+	// specifies the name of a guardrail and one of the following statuses:
+	//
+	//   - ENABLED : Turns on the guardrail.
+	//
+	//   - DISABLED : Turns off the guardrail.
+	//
+	// Guardrails that aren't in the request keep their current status.
+	//
+	// You can turn on an optional guardrail only if the tier of the hosted zone
+	// offers it. You can't turn off a guardrail that the tier includes, such as
+	// NS_FORMAT_CHECK . In either case, Route 53 returns an InvalidInput error.
+	ChangeGuardrails []types.ChangeGuardrail
+
+	// Specifies whether to validate the request without changing any features. Route
+	// 53 returns the same errors as for a real request, but doesn't change the hosted
+	// zone. The default is false .
+	DryRun bool
+
 	// Specifies whether to enable accelerated recovery for the hosted zone. Set to
 	// true to enable accelerated recovery, or false to disable it.
 	EnableAcceleratedRecovery *bool
+
+	// Specifies whether to enable public DNS fallback for the hosted zone. Set to true
+	// to enable public DNS fallback, or false to disable it.
+	//
+	// Public DNS fallback applies to the entire hosted zone and to all VPCs that are
+	// associated with it. To check whether a change has propagated, call GetHostedZone
+	// and review PublicDNSFallbackStatus in the response.
+	//
+	// Public DNS fallback is supported only for private hosted zones.
+	EnablePublicDNSFallback *bool
 
 	noSmithyDocumentSerde
 }

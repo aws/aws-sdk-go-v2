@@ -1413,6 +1413,8 @@ func TestCheckResponseSnapshot_CreateDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -1645,7 +1647,9 @@ func TestCheckResponseSnapshot_CreateDBCluster(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -1855,6 +1859,10 @@ func TestCheckResponseSnapshot_CreateDBInstance(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -2187,6 +2195,7 @@ func TestCheckResponseSnapshot_CreateDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDBInstance.response")
@@ -2363,6 +2372,10 @@ func TestCheckResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -2695,6 +2708,7 @@ func TestCheckResponseSnapshot_CreateDBInstanceReadReplica(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDBInstanceReadReplica.response")
@@ -4162,6 +4176,8 @@ func TestCheckResponseSnapshot_DeleteDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -4492,6 +4508,10 @@ func TestCheckResponseSnapshot_DeleteDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -4826,6 +4846,7 @@ func TestCheckResponseSnapshot_DeleteDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteDBInstance.response")
@@ -6599,6 +6620,8 @@ func TestCheckResponseSnapshot_DescribeDBClusters(t *testing.T) {
 						CAIdentifier: ptr.String("__CAIdentifier__"),
 						ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+					VPCNetworkingEnabled:         ptr.Bool(true),
+					InternetAccessGatewayEnabled: ptr.Bool(true),
 				},
 				EngineMode: ptr.String("__EngineMode__"),
 				ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -6843,6 +6866,8 @@ func TestCheckResponseSnapshot_DescribeDBClusters(t *testing.T) {
 						CAIdentifier: ptr.String("__CAIdentifier__"),
 						ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+					VPCNetworkingEnabled:         ptr.Bool(true),
+					InternetAccessGatewayEnabled: ptr.Bool(true),
 				},
 				EngineMode: ptr.String("__EngineMode__"),
 				ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -7507,6 +7532,10 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 					Port:         ptr.Int32(1),
 					HostedZoneId: ptr.String("__HostedZoneId__"),
 				},
+				PrimaryEndpoint: &types.PrimaryEndpoint{
+					Address:      ptr.String("__Address__"),
+					HostedZoneId: ptr.String("__HostedZoneId__"),
+				},
 				AllocatedStorage:      ptr.Int32(1),
 				InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -7839,6 +7868,7 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 				StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 				StorageOperationPercentProgress: ptr.Int32(1),
 				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+				VPCNetworkingEnabled:            ptr.Bool(true),
 			},
 			{
 				DBInstanceIdentifier: ptr.String("__DBInstanceIdentifier__"),
@@ -7852,6 +7882,10 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 					Port:         ptr.Int32(1),
 					HostedZoneId: ptr.String("__HostedZoneId__"),
 				},
+				PrimaryEndpoint: &types.PrimaryEndpoint{
+					Address:      ptr.String("__Address__"),
+					HostedZoneId: ptr.String("__HostedZoneId__"),
+				},
 				AllocatedStorage:      ptr.Int32(1),
 				InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -8184,6 +8218,7 @@ func TestCheckResponseSnapshot_DescribeDBInstances(t *testing.T) {
 				StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 				StorageOperationPercentProgress: ptr.Int32(1),
 				DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+				VPCNetworkingEnabled:            ptr.Bool(true),
 			},
 		},
 	}
@@ -12751,6 +12786,8 @@ func TestCheckResponseSnapshot_FailoverDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -13452,6 +13489,8 @@ func TestCheckResponseSnapshot_ModifyDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -13637,6 +13676,9 @@ func TestCheckResponseSnapshot_ModifyDBCluster(t *testing.T) {
 		CACertificateIdentifier:            ptr.String("__CACertificateIdentifier__"),
 		MasterUserAuthenticationType:       types.MasterUserAuthenticationType("password"),
 		EngineLifecycleSupport:             ptr.String("__EngineLifecycleSupport__"),
+		EnableInternetAccessGateway:        ptr.Bool(true),
+		EnableVPCNetworking:                ptr.Bool(true),
+		DBSubnetGroupName:                  ptr.String("__DBSubnetGroupName__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -13812,6 +13854,10 @@ func TestCheckResponseSnapshot_ModifyDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -14146,6 +14192,7 @@ func TestCheckResponseSnapshot_ModifyDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyDBInstance.response")
@@ -15655,6 +15702,10 @@ func TestCheckResponseSnapshot_PromoteReadReplica(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -15987,6 +16038,7 @@ func TestCheckResponseSnapshot_PromoteReadReplica(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("PromoteReadReplica.response")
@@ -16180,6 +16232,8 @@ func TestCheckResponseSnapshot_PromoteReadReplicaDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -16507,6 +16561,8 @@ func TestCheckResponseSnapshot_RebootDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -16643,6 +16699,10 @@ func TestCheckResponseSnapshot_RebootDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -16977,6 +17037,7 @@ func TestCheckResponseSnapshot_RebootDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RebootDBInstance.response")
@@ -17547,6 +17608,8 @@ func TestCheckResponseSnapshot_RestoreDBClusterFromS3(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -17909,6 +17972,8 @@ func TestCheckResponseSnapshot_RestoreDBClusterFromSnapshot(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -18284,6 +18349,8 @@ func TestCheckResponseSnapshot_RestoreDBClusterToPointInTime(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -18528,6 +18595,10 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -18860,6 +18931,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromDBSnapshot(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBInstanceFromDBSnapshot.response")
@@ -19014,6 +19086,10 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -19346,6 +19422,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceFromS3(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBInstanceFromS3.response")
@@ -19506,6 +19583,10 @@ func TestCheckResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -19838,6 +19919,7 @@ func TestCheckResponseSnapshot_RestoreDBInstanceToPointInTime(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("RestoreDBInstanceToPointInTime.response")
@@ -20213,6 +20295,8 @@ func TestCheckResponseSnapshot_StartDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -20349,6 +20433,10 @@ func TestCheckResponseSnapshot_StartDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -20683,6 +20771,7 @@ func TestCheckResponseSnapshot_StartDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartDBInstance.response")
@@ -21031,6 +21120,8 @@ func TestCheckResponseSnapshot_StopDBCluster(t *testing.T) {
 					CAIdentifier: ptr.String("__CAIdentifier__"),
 					ValidTill:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
+				VPCNetworkingEnabled:         ptr.Bool(true),
+				InternetAccessGatewayEnabled: ptr.Bool(true),
 			},
 			EngineMode: ptr.String("__EngineMode__"),
 			ScalingConfigurationInfo: &types.ScalingConfigurationInfo{
@@ -21167,6 +21258,10 @@ func TestCheckResponseSnapshot_StopDBInstance(t *testing.T) {
 			Endpoint: &types.Endpoint{
 				Address:      ptr.String("__Address__"),
 				Port:         ptr.Int32(1),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
 			AllocatedStorage:      ptr.Int32(1),
@@ -21501,6 +21596,7 @@ func TestCheckResponseSnapshot_StopDBInstance(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopDBInstance.response")
@@ -21773,6 +21869,10 @@ func TestCheckResponseSnapshot_SwitchoverReadReplica(t *testing.T) {
 				Port:         ptr.Int32(1),
 				HostedZoneId: ptr.String("__HostedZoneId__"),
 			},
+			PrimaryEndpoint: &types.PrimaryEndpoint{
+				Address:      ptr.String("__Address__"),
+				HostedZoneId: ptr.String("__HostedZoneId__"),
+			},
 			AllocatedStorage:      ptr.Int32(1),
 			InstanceCreateTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			PreferredBackupWindow: ptr.String("__PreferredBackupWindow__"),
@@ -22105,6 +22205,7 @@ func TestCheckResponseSnapshot_SwitchoverReadReplica(t *testing.T) {
 			StorageOperationStatus:          ptr.String("__StorageOperationStatus__"),
 			StorageOperationPercentProgress: ptr.Int32(1),
 			DBCapacityReservationIdentifier: ptr.String("__DBCapacityReservationIdentifier__"),
+			VPCNetworkingEnabled:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("SwitchoverReadReplica.response")
@@ -23326,7 +23427,9 @@ func TestCheckResponseSnapshot_Error_DBClusterAlreadyExistsFault(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -25397,7 +25500,9 @@ func TestCheckResponseSnapshot_Error_DBSubnetGroupDoesNotCoverEnoughAZs(t *testi
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -25703,7 +25808,9 @@ func TestCheckResponseSnapshot_Error_DBSubnetGroupNotFoundFault(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -26109,7 +26216,9 @@ func TestCheckResponseSnapshot_Error_DomainNotFoundFault(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -26471,7 +26580,9 @@ func TestCheckResponseSnapshot_Error_GlobalClusterNotFoundFault(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -27021,7 +27132,9 @@ func TestCheckResponseSnapshot_Error_InsufficientStorageClusterCapacityFault(t *
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -27931,7 +28044,9 @@ func TestCheckResponseSnapshot_Error_InvalidDBSubnetGroupFault(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -28088,7 +28203,9 @@ func TestCheckResponseSnapshot_Error_InvalidDBSubnetGroupStateFault(t *testing.T
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -28398,7 +28515,9 @@ func TestCheckResponseSnapshot_Error_InvalidGlobalClusterStateFault(t *testing.T
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -28895,7 +29014,9 @@ func TestCheckResponseSnapshot_Error_InvalidSubnet(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -29052,7 +29173,9 @@ func TestCheckResponseSnapshot_Error_InvalidVPCNetworkStateFault(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -29294,7 +29417,9 @@ func TestCheckResponseSnapshot_Error_NetworkTypeNotSupported(t *testing.T) {
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -30470,6 +30595,9 @@ func TestCheckResponseSnapshot_Error_StorageTypeNotAvailableFault(t *testing.T) 
 		CACertificateIdentifier:            ptr.String("__CACertificateIdentifier__"),
 		MasterUserAuthenticationType:       types.MasterUserAuthenticationType("password"),
 		EngineLifecycleSupport:             ptr.String("__EngineLifecycleSupport__"),
+		EnableInternetAccessGateway:        ptr.Bool(true),
+		EnableVPCNetworking:                ptr.Bool(true),
+		DBSubnetGroupName:                  ptr.String("__DBSubnetGroupName__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -30614,7 +30742,9 @@ func TestCheckResponseSnapshot_Error_StorageTypeNotSupportedFault(t *testing.T) 
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),
@@ -31218,7 +31348,9 @@ func TestCheckResponseSnapshot_Error_VpcEncryptionControlViolationException(t *t
 			},
 		},
 		MasterUserAuthenticationType: types.MasterUserAuthenticationType("password"),
+		EnableVPCNetworking:          ptr.Bool(true),
 		WithExpressConfiguration:     ptr.Bool(true),
+		EnableInternetAccessGateway:  ptr.Bool(true),
 		AssociatedRoles: []types.DBClusterAssociatedRole{
 			{
 				RoleArn:     ptr.String("__RoleArn__"),

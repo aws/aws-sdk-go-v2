@@ -35,13 +35,18 @@ type ListMarketplaceRevenueSharesInput struct {
 	// This member is required.
 	Catalog types.CatalogName
 
-	// Filter results to only include marketplace revenue shares created after this
-	// timestamp.
+	// Filter results to marketplace revenue shares created at or after this timestamp
+	// (inclusive).
 	CreatedAfter *time.Time
 
-	// Filter results to only include marketplace revenue shares created before this
-	// timestamp.
+	// Filter results to marketplace revenue shares created before this timestamp
+	// (exclusive).
 	CreatedBefore *time.Time
+
+	// Filter results to only include these marketplace revenue shares, by ID or ARN.
+	// 1 to 100 identifiers. When several filters are sent, a share must match all of
+	// them.
+	Identifiers []string
 
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
@@ -50,10 +55,13 @@ type ListMarketplaceRevenueSharesInput struct {
 	// retrieve the next page.
 	NextToken *string
 
-	// Filter results to only include shares with these product codes.
+	// Filter results to the marketplace revenue shares that contain a product with
+	// any of these product codes. 1 to 10 product codes.
 	ProductCodes []string
 
-	// Filter results to only include shares with these product identifiers.
+	// Filter results to the marketplace revenue shares that contain any of these
+	// products. 1 to 10 product IDs or product ARNs. Shares the caller does not own
+	// are never returned.
 	ProductIds []string
 
 	// The field to sort marketplace revenue shares by.
@@ -80,6 +88,9 @@ func (v *ListMarketplaceRevenueSharesInput) SerializeMembers(s smithy.ShapeSeria
 	}
 	if v.CreatedBefore != nil {
 		s.WriteTime(schemas.ListMarketplaceRevenueSharesInput_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.Identifiers != nil {
+		serializeMarketplaceRevenueShareIdentifierList(s, schemas.ListMarketplaceRevenueSharesInput_Identifiers, v.Identifiers)
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListMarketplaceRevenueSharesInput_MaxResults, *v.MaxResults)

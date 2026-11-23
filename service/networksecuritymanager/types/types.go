@@ -1113,12 +1113,13 @@ func (v *DeploymentWarningEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Describes why a firewall is out of sync. Exactly one of missingFirewall or
-// invalidFirewall is set.
+// Describes why a firewall is out of sync. Exactly one of missingFirewall ,
+// invalidFirewall , or invalidResource contains a value.
 //
 // The following types satisfy this interface:
 //
 //	FirewallSyncReasonMemberInvalidFirewall
+//	FirewallSyncReasonMemberInvalidResource
 //	FirewallSyncReasonMemberMissingFirewall
 type FirewallSyncReason interface {
 	isFirewallSyncReason()
@@ -1142,6 +1143,24 @@ func (v *FirewallSyncReasonMemberInvalidFirewall) Deserialize(d smithy.ShapeDese
 	return v.Value.Deserialize(d)
 }
 
+// A map of related resources whose configuration does not match the intended
+// configuration, grouped by resource type. Each entry lists the resources of that
+// type that are out of sync. For example, subnets whose connectivity type differs
+// from the connectivity type that the policy specifies.
+type FirewallSyncReasonMemberInvalidResource struct {
+	Value map[string][]InvalidResourceIssue
+
+	noSmithyDocumentSerde
+}
+
+func (*FirewallSyncReasonMemberInvalidResource) isFirewallSyncReason() {}
+func (v *FirewallSyncReasonMemberInvalidResource) Serialize(s smithy.ShapeSerializer) {
+	serializeInvalidResourcesByType(s, schemas.FirewallSyncReason_invalidResource, v.Value)
+}
+func (v *FirewallSyncReasonMemberInvalidResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeInvalidResourcesByType(d, schemas.FirewallSyncReason_invalidResource, &v.Value)
+}
+
 // Indicates that an expected firewall is missing. The value describes the missing
 // firewall.
 type FirewallSyncReasonMemberMissingFirewall struct {
@@ -1156,6 +1175,73 @@ func (v *FirewallSyncReasonMemberMissingFirewall) Serialize(s smithy.ShapeSerial
 }
 func (v *FirewallSyncReasonMemberMissingFirewall) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadString(schemas.FirewallSyncReason_missingFirewall, &v.Value)
+}
+
+// Policy configuration settings for Network Firewall automated internet firewall
+// policies.
+type IgwFirewallConfig struct {
+
+	// The default internet connectivity treatment that AWS Network Security Manager
+	// applies to subnets in scope, unless a subnet connectivity override applies.
+	// Required for Network Firewall automated internet firewall policies. Valid
+	// values:
+	//
+	//   - flexible – Sets the connectivity for each network interface in the subnet
+	//   based on whether it is associated with a public IP address. A network interface
+	//   with a public IP address gets bidirectional internet connectivity. A network
+	//   interface without a public IP address gets outbound-only connectivity. All
+	//   traffic is inspected against your firewall rules.
+	//
+	//   - bidirectional – Provides bidirectional internet connectivity to every
+	//   network interface that has a public IP association. Any network interface
+	//   without a public IP cannot communicate with the internet unless a NAT device is
+	//   explicitly inserted in the path. All inbound and outbound traffic is inspected
+	//   against your firewall rules.
+	//
+	//   - outbound-only – Provides egress-only connectivity for all network interfaces
+	//   in the subnet. All outbound traffic and inbound responses are inspected against
+	//   your firewall rules. Unsolicited inbound connections are dropped. For IPv4
+	//   traffic, the Network Firewall automated internet firewall performs NAT.
+	DefaultSubnetConnectivity DefaultSubnetConnectivity
+
+	// An ordered list of overrides that apply a different connectivity treatment to
+	// the subnets that a scope selects. When a subnet matches more than one override,
+	// the first matching override in the list applies. You can specify at most one
+	// override for each connectivity type.
+	SubnetConnectivityOverrides []SubnetConnectivityOverride
+
+	noSmithyDocumentSerde
+}
+
+func (v *IgwFirewallConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IgwFirewallConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IgwFirewallConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultSubnetConnectivity != "" {
+		s.WriteString(schemas.IgwFirewallConfig_defaultSubnetConnectivity, string(v.DefaultSubnetConnectivity))
+	}
+	if v.SubnetConnectivityOverrides != nil {
+		serializeSubnetConnectivityOverrideList(s, schemas.IgwFirewallConfig_subnetConnectivityOverrides, v.SubnetConnectivityOverrides)
+	}
+}
+func (v *IgwFirewallConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IgwFirewallConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IgwFirewallConfig_defaultSubnetConnectivity:
+			var ev string
+			if err := d.ReadString(schemas.IgwFirewallConfig_defaultSubnetConnectivity, &ev); err != nil {
+				return err
+			}
+			v.DefaultSubnetConnectivity = DefaultSubnetConnectivity(ev)
+			return nil
+		case schemas.IgwFirewallConfig_subnetConnectivityOverrides:
+			return deserializeSubnetConnectivityOverrideList(d, schemas.IgwFirewallConfig_subnetConnectivityOverrides, &v.SubnetConnectivityOverrides)
+		}
+		return nil
+	})
 }
 
 // Details about the ways in which a firewall's configuration differs from the
@@ -1225,6 +1311,57 @@ func (v *InvalidFirewallReasons) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeConfigurationIssueList(d, schemas.InvalidFirewallReasons_unexpectedAppendableConfigurationValues, &v.UnexpectedAppendableConfigurationValues)
 		case schemas.InvalidFirewallReasons_unexpectedMergeableConfigurationValues:
 			return deserializeConfigurationIssueList(d, schemas.InvalidFirewallReasons_unexpectedMergeableConfigurationValues, &v.UnexpectedMergeableConfigurationValues)
+		}
+		return nil
+	})
+}
+
+// Describes a single related resource whose configuration does not match the
+// intended configuration.
+type InvalidResourceIssue struct {
+
+	// The current attribute value on the resource.
+	ActualValue *string
+
+	// The attribute value that the policy configuration requires, such as the
+	// connectivity type for a subnet.
+	ExpectedValue *string
+
+	// The identifier of the resource, such as a subnet ARN.
+	ResourceId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InvalidResourceIssue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidResourceIssue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidResourceIssue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualValue != nil {
+		s.WriteString(schemas.InvalidResourceIssue_actualValue, *v.ActualValue)
+	}
+	if v.ExpectedValue != nil {
+		s.WriteString(schemas.InvalidResourceIssue_expectedValue, *v.ExpectedValue)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.InvalidResourceIssue_resourceId, *v.ResourceId)
+	}
+}
+func (v *InvalidResourceIssue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidResourceIssue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidResourceIssue_actualValue:
+			v.ActualValue = new(string)
+			return d.ReadString(schemas.InvalidResourceIssue_actualValue, v.ActualValue)
+		case schemas.InvalidResourceIssue_expectedValue:
+			v.ExpectedValue = new(string)
+			return d.ReadString(schemas.InvalidResourceIssue_expectedValue, v.ExpectedValue)
+		case schemas.InvalidResourceIssue_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.InvalidResourceIssue_resourceId, v.ResourceId)
 		}
 		return nil
 	})
@@ -1360,10 +1497,15 @@ type PolicyConfiguration struct {
 	RemediationEnabled bool
 
 	// Specifies whether AWS Network Security Manager automatically removes the
-	// resources it created when they are no longer needed. Default: false .
+	// resources it created when they are no longer needed. This member is required,
+	// and the only supported value is true .
 	//
 	// This member is required.
 	ResourcesCleanUp bool
+
+	// Policy settings for Network Firewall automated internet firewall policies.
+	// Specify these settings only for this policy type.
+	IgwFirewallConfig *IgwFirewallConfig
 
 	// AWS WAF-specific policy settings. This is populated only for AWS WAF policies.
 	WafConfig *WafConfig
@@ -1378,6 +1520,11 @@ func (v *PolicyConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PolicyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IgwFirewallConfig != nil {
+		s.WriteStruct(schemas.PolicyConfiguration_igwFirewallConfig)
+		v.IgwFirewallConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	s.WriteBool(schemas.PolicyConfiguration_remediationEnabled, v.RemediationEnabled)
 	s.WriteBool(schemas.PolicyConfiguration_resourcesCleanUp, v.ResourcesCleanUp)
 	if v.WafConfig != nil {
@@ -1389,6 +1536,9 @@ func (v *PolicyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *PolicyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.PolicyConfiguration_igwFirewallConfig:
+			v.IgwFirewallConfig = &IgwFirewallConfig{}
+			return v.IgwFirewallConfig.Deserialize(d)
 		case schemas.PolicyConfiguration_remediationEnabled:
 			return d.ReadBool(schemas.PolicyConfiguration_remediationEnabled, &v.RemediationEnabled)
 		case schemas.PolicyConfiguration_resourcesCleanUp:
@@ -1688,6 +1838,132 @@ func (v *ResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ResourceType = ServiceResourceType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Describes how an AWS Network Security Manager entity covers a protected
+// resource.
+type ResourceCoverageSummary struct {
+
+	// Specifies whether the entity contributes to the effective configuration of the
+	// resource for its firewall type. For firewall types that combine policies, such
+	// as AWS WAF and AWS Shield Advanced, every policy that covers the resource is
+	// IN_EFFECT . For firewall types that apply a single policy, only the
+	// highest-priority policy is IN_EFFECT and the others are SUPERSEDED .
+	CoverageStatus CoverageStatus
+
+	// The Amazon Resource Names (ARNs) of the deployments through which the entity
+	// covers the resource.
+	DeploymentArns []string
+
+	// The Amazon Resource Name (ARN) of the entity that covers the resource.
+	EntityArn *string
+
+	// The type of the entity that covers the resource, such as Policy .
+	EntityType ServiceResourceType
+
+	// The firewall type of the policy that covers the resource. This is present when
+	// entityType is Policy .
+	FirewallType PolicyFirewallType
+
+	// The Amazon Resource Name (ARN) of the protected resource.
+	ResourceArn *string
+
+	// The AWS account ID that owns the protected resource. This can differ from the
+	// account that owns the entity.
+	ResourceOwnerAccountId *string
+
+	// The type of the protected resource, in AWS CloudFormation format.
+	ResourceType ScopeResourceType
+
+	// The time when AWS Network Security Manager last evaluated the coverage.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResourceCoverageSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceCoverageSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceCoverageSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoverageStatus != "" {
+		s.WriteString(schemas.ResourceCoverageSummary_coverageStatus, string(v.CoverageStatus))
+	}
+	if v.DeploymentArns != nil {
+		serializeDeploymentArnSet(s, schemas.ResourceCoverageSummary_deploymentArns, v.DeploymentArns)
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.ResourceCoverageSummary_entityArn, *v.EntityArn)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.ResourceCoverageSummary_entityType, string(v.EntityType))
+	}
+	if v.FirewallType != "" {
+		s.WriteString(schemas.ResourceCoverageSummary_firewallType, string(v.FirewallType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceCoverageSummary_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceOwnerAccountId != nil {
+		s.WriteString(schemas.ResourceCoverageSummary_resourceOwnerAccountId, *v.ResourceOwnerAccountId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResourceCoverageSummary_resourceType, string(v.ResourceType))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ResourceCoverageSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ResourceCoverageSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceCoverageSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceCoverageSummary_coverageStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResourceCoverageSummary_coverageStatus, &ev); err != nil {
+				return err
+			}
+			v.CoverageStatus = CoverageStatus(ev)
+			return nil
+		case schemas.ResourceCoverageSummary_deploymentArns:
+			return deserializeDeploymentArnSet(d, schemas.ResourceCoverageSummary_deploymentArns, &v.DeploymentArns)
+		case schemas.ResourceCoverageSummary_entityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.ResourceCoverageSummary_entityArn, v.EntityArn)
+		case schemas.ResourceCoverageSummary_entityType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceCoverageSummary_entityType, &ev); err != nil {
+				return err
+			}
+			v.EntityType = ServiceResourceType(ev)
+			return nil
+		case schemas.ResourceCoverageSummary_firewallType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceCoverageSummary_firewallType, &ev); err != nil {
+				return err
+			}
+			v.FirewallType = PolicyFirewallType(ev)
+			return nil
+		case schemas.ResourceCoverageSummary_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceCoverageSummary_resourceArn, v.ResourceArn)
+		case schemas.ResourceCoverageSummary_resourceOwnerAccountId:
+			v.ResourceOwnerAccountId = new(string)
+			return d.ReadString(schemas.ResourceCoverageSummary_resourceOwnerAccountId, v.ResourceOwnerAccountId)
+		case schemas.ResourceCoverageSummary_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.ResourceCoverageSummary_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ScopeResourceType(ev)
+			return nil
+		case schemas.ResourceCoverageSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceCoverageSummary_updatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -2281,6 +2557,13 @@ type ScopeSummary struct {
 	// The name of the scope.
 	ScopeName *string
 
+	// The specialized type of the scope, if the scope is built for one specific
+	// purpose. A scope with no specializedScopeType is a standard scope that you can
+	// associate with a deployment. A specialized scope can be used only for the
+	// purpose that its type defines and can't be associated with a deployment. This
+	// value is set when the scope is created and can't be changed.
+	SpecializedScopeType SpecializedScopeType
+
 	// The current status of the resource: DRAFT (unpublished, editable), ACTIVE
 	// (published, in use), or DISABLED (deactivated; changes cannot be published
 	// until the resource is re-enabled).
@@ -2315,6 +2598,9 @@ func (v *ScopeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScopeName != nil {
 		s.WriteString(schemas.ScopeSummary_scopeName, *v.ScopeName)
 	}
+	if v.SpecializedScopeType != "" {
+		s.WriteString(schemas.ScopeSummary_specializedScopeType, string(v.SpecializedScopeType))
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ScopeSummary_status, string(v.Status))
 	}
@@ -2340,6 +2626,13 @@ func (v *ScopeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ScopeSummary_scopeName:
 			v.ScopeName = new(string)
 			return d.ReadString(schemas.ScopeSummary_scopeName, v.ScopeName)
+		case schemas.ScopeSummary_specializedScopeType:
+			var ev string
+			if err := d.ReadString(schemas.ScopeSummary_specializedScopeType, &ev); err != nil {
+				return err
+			}
+			v.SpecializedScopeType = SpecializedScopeType(ev)
+			return nil
 		case schemas.ScopeSummary_status:
 			var ev string
 			if err := d.ReadString(schemas.ScopeSummary_status, &ev); err != nil {
@@ -2353,6 +2646,82 @@ func (v *ScopeSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ScopeSummary_version:
 			v.Version = new(string)
 			return d.ReadString(schemas.ScopeSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// An override that applies a connectivity treatment to the subnets that a scope
+// selects, instead of the policy's defaultSubnetConnectivity .
+type SubnetConnectivityOverride struct {
+
+	// The connectivity treatment to apply to the selected subnets. You select both
+	// the override value as well as the subnets they apply to. The Network Firewall
+	// automated internet firewall applies the override value to the specified subnets,
+	// and applies the default connectivity to the rest of the subnets. Valid values:
+	//
+	//   - flexible – Sets the connectivity for each network interface in the subnet
+	//   based on whether it is associated with a public IP address. A network interface
+	//   with a public IP address gets bidirectional internet connectivity. A network
+	//   interface without a public IP address gets outbound-only connectivity. All
+	//   traffic is inspected against your firewall rules.
+	//
+	//   - bidirectional – Provides bidirectional internet connectivity to every
+	//   network interface that has a public IP association. Any network interface
+	//   without a public IP cannot communicate with the internet unless a NAT device is
+	//   explicitly inserted in the path. All inbound and outbound traffic is inspected
+	//   against your firewall rules.
+	//
+	//   - outbound-only – Provides egress-only connectivity for all network interfaces
+	//   in the subnet. All outbound traffic and inbound responses are inspected against
+	//   your firewall rules. Unsolicited inbound connections are dropped. For IPv4
+	//   traffic, the Network Firewall automated internet firewall performs NAT.
+	//
+	//   - exclude – The Network Firewall automated internet firewall doesn't inspect
+	//   traffic for the selected subnets. The subnets bypass the firewall entirely, and
+	//   their traffic passes directly through the internet gateway. You can specify this
+	//   value only in an override, not as the defaultSubnetConnectivity .
+	//
+	// This member is required.
+	ConnectivityType SubnetConnectivity
+
+	// A list that contains the Amazon Resource Name (ARN) of the scope that selects
+	// the subnets to override. The list must contain exactly one scope ARN. The
+	// deployment determines which accounts are in scope, and the referenced scope
+	// selects subnets within those accounts.
+	//
+	// This member is required.
+	Scopes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubnetConnectivityOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubnetConnectivityOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubnetConnectivityOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectivityType != "" {
+		s.WriteString(schemas.SubnetConnectivityOverride_connectivityType, string(v.ConnectivityType))
+	}
+	if v.Scopes != nil {
+		serializeSubnetConnectivityScopeArnList(s, schemas.SubnetConnectivityOverride_scopes, v.Scopes)
+	}
+}
+func (v *SubnetConnectivityOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubnetConnectivityOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubnetConnectivityOverride_connectivityType:
+			var ev string
+			if err := d.ReadString(schemas.SubnetConnectivityOverride_connectivityType, &ev); err != nil {
+				return err
+			}
+			v.ConnectivityType = SubnetConnectivity(ev)
+			return nil
+		case schemas.SubnetConnectivityOverride_scopes:
+			return deserializeSubnetConnectivityScopeArnList(d, schemas.SubnetConnectivityOverride_scopes, &v.Scopes)
 		}
 		return nil
 	})
@@ -2428,6 +2797,13 @@ type TemplateSummary struct {
 	// (published, in use).
 	Status EntityStatus
 
+	// The owner of the template. Valid values:
+	//
+	//   - CUSTOMER – The template is in your account.
+	//
+	//   - AWS – The template is an AWS managed template.
+	TemplateOwner TemplateOwner
+
 	// The time when the resource was last updated. For a snapshot, this is the time
 	// when the snapshot was created.
 	UpdatedAt *time.Time
@@ -2462,6 +2838,9 @@ func (v *TemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.TemplateSummary_templateName, *v.TemplateName)
+	}
+	if v.TemplateOwner != "" {
+		s.WriteString(schemas.TemplateSummary_templateOwner, string(v.TemplateOwner))
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.TemplateSummary_updatedAt, *v.UpdatedAt)
@@ -2499,6 +2878,13 @@ func (v *TemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TemplateSummary_templateName:
 			v.TemplateName = new(string)
 			return d.ReadString(schemas.TemplateSummary_templateName, v.TemplateName)
+		case schemas.TemplateSummary_templateOwner:
+			var ev string
+			if err := d.ReadString(schemas.TemplateSummary_templateOwner, &ev); err != nil {
+				return err
+			}
+			v.TemplateOwner = TemplateOwner(ev)
+			return nil
 		case schemas.TemplateSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.TemplateSummary_updatedAt, v.UpdatedAt)

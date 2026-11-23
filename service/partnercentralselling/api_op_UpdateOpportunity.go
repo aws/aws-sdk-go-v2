@@ -35,6 +35,7 @@ func (c *Client) UpdateOpportunity(ctx context.Context, params *UpdateOpportunit
 	return out, nil
 }
 
+// Contains the request parameters for the UpdateOpportunity operation.
 type UpdateOpportunityInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string
@@ -193,6 +194,7 @@ func (v *UpdateOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the UpdateOpportunity action returns.
 type UpdateOpportunityOutput struct {
 
 	// Read-only, system generated Opportunity unique identifier.
