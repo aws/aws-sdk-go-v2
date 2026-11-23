@@ -7076,6 +7076,12 @@
                         "smithy.api#enumValue": "AWS_CONFIG_SLREC"
                     }
                 },
+                "AWS_CONFIG_AZURE_SLREC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_CONFIG_AZURE_SLREC"
+                    }
+                },
                 "SLACK": {
                     "target": "smithy.api#Unit",
                     "traits": {
